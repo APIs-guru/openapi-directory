@@ -295,12 +295,12 @@ paths:
     servers:
       - url: https://sync.twilio.com
     x-twilio:
-      className: document_permission
       defaultOutputProperties:
         - identity
         - read
         - write
         - manage
+      mountName: document_permissions
       parent: /Services/{ServiceSid}/Documents
       pathType: list
   "/v1/Services/{ServiceSid}/Documents/{DocumentSid}/Permissions/{Identity}":
@@ -423,12 +423,12 @@ paths:
     servers:
       - url: https://sync.twilio.com
     x-twilio:
-      className: document_permission
       defaultOutputProperties:
         - identity
         - read
         - write
         - manage
+      mountName: document_permissions
       parent: /Services/{ServiceSid}/Documents
       pathType: instance
   "/v1/Services/{ServiceSid}/Documents/{Sid}":
@@ -633,11 +633,11 @@ paths:
     servers:
       - url: https://sync.twilio.com
     x-twilio:
-      className: sync_list
       defaultOutputProperties:
         - sid
         - unique_name
         - revision
+      mountName: sync_lists
       parent: /Services
       pathType: list
   "/v1/Services/{ServiceSid}/Lists/{ListSid}/Items":
@@ -770,11 +770,11 @@ paths:
     servers:
       - url: https://sync.twilio.com
     x-twilio:
-      className: sync_list_item
       defaultOutputProperties:
         - index
         - revision
         - created_by
+      mountName: sync_list_items
       parent: /Services/{ServiceSid}/Lists
       pathType: list
   "/v1/Services/{ServiceSid}/Lists/{ListSid}/Items/{Index}":
@@ -905,11 +905,11 @@ paths:
     servers:
       - url: https://sync.twilio.com
     x-twilio:
-      className: sync_list_item
       defaultOutputProperties:
         - index
         - revision
         - created_by
+      mountName: sync_list_items
       parent: /Services/{ServiceSid}/Lists
       pathType: instance
   "/v1/Services/{ServiceSid}/Lists/{ListSid}/Permissions":
@@ -978,12 +978,12 @@ paths:
     servers:
       - url: https://sync.twilio.com
     x-twilio:
-      className: sync_list_permission
       defaultOutputProperties:
         - identity
         - read
         - write
         - manage
+      mountName: sync_list_permissions
       parent: /Services/{ServiceSid}/Lists
       pathType: list
   "/v1/Services/{ServiceSid}/Lists/{ListSid}/Permissions/{Identity}":
@@ -1106,12 +1106,12 @@ paths:
     servers:
       - url: https://sync.twilio.com
     x-twilio:
-      className: sync_list_permission
       defaultOutputProperties:
         - identity
         - read
         - write
         - manage
+      mountName: sync_list_permissions
       parent: /Services/{ServiceSid}/Lists
       pathType: instance
   "/v1/Services/{ServiceSid}/Lists/{Sid}":
@@ -1209,11 +1209,11 @@ paths:
     servers:
       - url: https://sync.twilio.com
     x-twilio:
-      className: sync_list
       defaultOutputProperties:
         - sid
         - unique_name
         - revision
+      mountName: sync_lists
       parent: /Services
       pathType: instance
   "/v1/Services/{ServiceSid}/Maps":
@@ -1313,11 +1313,11 @@ paths:
     servers:
       - url: https://sync.twilio.com
     x-twilio:
-      className: sync_map
       defaultOutputProperties:
         - sid
         - unique_name
         - revision
+      mountName: sync_maps
       parent: /Services
       pathType: list
   "/v1/Services/{ServiceSid}/Maps/{MapSid}/Items":
@@ -1454,11 +1454,11 @@ paths:
     servers:
       - url: https://sync.twilio.com
     x-twilio:
-      className: sync_map_item
       defaultOutputProperties:
         - key
         - revision
         - created_by
+      mountName: sync_map_items
       parent: /Services/{ServiceSid}/Maps
       pathType: list
   "/v1/Services/{ServiceSid}/Maps/{MapSid}/Items/{Key}":
@@ -1589,11 +1589,11 @@ paths:
     servers:
       - url: https://sync.twilio.com
     x-twilio:
-      className: sync_map_item
       defaultOutputProperties:
         - key
         - revision
         - created_by
+      mountName: sync_map_items
       parent: /Services/{ServiceSid}/Maps
       pathType: instance
   "/v1/Services/{ServiceSid}/Maps/{MapSid}/Permissions":
@@ -1662,12 +1662,12 @@ paths:
     servers:
       - url: https://sync.twilio.com
     x-twilio:
-      className: sync_map_permission
       defaultOutputProperties:
         - identity
         - read
         - write
         - manage
+      mountName: sync_map_permissions
       parent: /Services/{ServiceSid}/Maps
       pathType: list
   "/v1/Services/{ServiceSid}/Maps/{MapSid}/Permissions/{Identity}":
@@ -1790,12 +1790,12 @@ paths:
     servers:
       - url: https://sync.twilio.com
     x-twilio:
-      className: sync_map_permission
       defaultOutputProperties:
         - identity
         - read
         - write
         - manage
+      mountName: sync_map_permissions
       parent: /Services/{ServiceSid}/Maps
       pathType: instance
   "/v1/Services/{ServiceSid}/Maps/{Sid}":
@@ -1893,11 +1893,11 @@ paths:
     servers:
       - url: https://sync.twilio.com
     x-twilio:
-      className: sync_map
       defaultOutputProperties:
         - sid
         - unique_name
         - revision
+      mountName: sync_maps
       parent: /Services
       pathType: instance
   "/v1/Services/{ServiceSid}/Streams":
@@ -1994,11 +1994,11 @@ paths:
     servers:
       - url: https://sync.twilio.com
     x-twilio:
-      className: sync_stream
       defaultOutputProperties:
         - sid
         - unique_name
         - created_by
+      mountName: sync_streams
       parent: /Services
       pathType: list
   "/v1/Services/{ServiceSid}/Streams/{Sid}":
@@ -2093,11 +2093,11 @@ paths:
     servers:
       - url: https://sync.twilio.com
     x-twilio:
-      className: sync_stream
       defaultOutputProperties:
         - sid
         - unique_name
         - created_by
+      mountName: sync_streams
       parent: /Services
       pathType: instance
   "/v1/Services/{ServiceSid}/Streams/{StreamSid}/Messages":
@@ -2143,9 +2143,9 @@ paths:
     servers:
       - url: https://sync.twilio.com
     x-twilio:
-      className: stream_message
       defaultOutputProperties:
         - sid
+      mountName: stream_messages
       parent: /Services/{ServiceSid}/Streams
       pathType: list
   "/v1/Services/{Sid}":

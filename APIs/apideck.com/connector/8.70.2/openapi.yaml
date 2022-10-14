@@ -275,7 +275,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Connector API
-  version: 8.66.1
+  version: 8.70.2
   x-apideck-api: connector
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -971,6 +971,8 @@ components:
                 description: Name of the resource in the Connector's API (downstream)
                 example: Accounts
                 type: string
+              pagination:
+                $ref: "#/components/schemas/PaginationCoverage"
               pagination_supported:
                 description: Indicates if pagination (cursor and limit parameters) is supported on the list endpoint of the resource.
                 type: boolean
@@ -1306,6 +1308,8 @@ components:
           description: Name of the resource (plural)
           example: Companies
           type: string
+        pagination:
+          $ref: "#/components/schemas/PaginationCoverage"
         pagination_supported:
           description: Indicates if pagination (cursor and limit parameters) is supported on the list endpoint of the resource.
           type: boolean
@@ -1643,6 +1647,23 @@ components:
           type: string
       type: object
       x-apideck-schema-id: NotFound
+    PaginationCoverage:
+      properties:
+        limit_support:
+          description: Indicates whether the connector supports changing the page size by using the limit parameter.
+          type: boolean
+        mode:
+          description: How pagination is implemented on this connector. Native mode means Apideck is using the pagination parameters of the connector. With virtual pagination, the connector does not support pagination, but Apideck emulates it.
+          enum:
+            - native
+            - virtual
+          example: native
+          type: string
+        paging_support:
+          description: Indicates whether the connector supports paging through results using the cursor parameter.
+          type: boolean
+      type: object
+      x-apideck-schema-id: ConnectorResource
     PaymentRequiredResponse:
       properties:
         detail:
@@ -1816,6 +1837,7 @@ components:
         - hris
         - pos
         - project-management
+        - expense-management
       example: crm
       type: string
       x-apideck-enum-id: unifies_api

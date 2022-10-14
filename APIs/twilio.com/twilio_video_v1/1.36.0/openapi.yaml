@@ -404,6 +404,7 @@ paths:
         - friendly_name
         - aws_storage_enabled
         - encryption_enabled
+      mountName: composition_settings
       pathType: instance
   /v1/Compositions:
     description: Recording compositions
@@ -699,6 +700,7 @@ paths:
         - friendly_name
         - aws_storage_enabled
         - encryption_enabled
+      mountName: recording_settings
       pathType: instance
   /v1/Recordings:
     description: Single-track, single-media recordings

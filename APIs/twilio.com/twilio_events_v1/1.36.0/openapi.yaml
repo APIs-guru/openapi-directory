@@ -398,9 +398,9 @@ paths:
     servers:
       - url: https://events.twilio.com
     x-twilio:
-      className: sink_test
       defaultOutputProperties:
         - result
+      mountName: sink_test
       parent: /Sinks
       pathType: list
   "/v1/Sinks/{Sid}/Validate":
@@ -444,9 +444,9 @@ paths:
     servers:
       - url: https://events.twilio.com
     x-twilio:
-      className: sink_validate
       defaultOutputProperties:
         - result
+      mountName: sink_validate
       parent: /Sinks
       pathType: list
   /v1/Subscriptions:
@@ -928,11 +928,11 @@ paths:
     servers:
       - url: https://events.twilio.com
     x-twilio:
-      className: event_type
       defaultOutputProperties:
         - type
         - schema_id
         - description
+      mountName: event_types
       pathType: list
   "/v1/Types/{Type}":
     description: Event Types available
@@ -960,11 +960,11 @@ paths:
     servers:
       - url: https://events.twilio.com
     x-twilio:
-      className: event_type
       defaultOutputProperties:
         - type
         - schema_id
         - description
+      mountName: event_types
       pathType: instance
 components:
   schemas:

@@ -303,8 +303,8 @@ paths:
     servers:
       - url: https://numbers.twilio.com
     x-twilio:
-      className: bundle_copy
       defaultOutputProperties: []
+      mountName: bundle_copies
       parent: /RegulatoryCompliance/Bundles
       pathType: list
   "/v2/RegulatoryCompliance/Bundles/{BundleSid}/Evaluations":

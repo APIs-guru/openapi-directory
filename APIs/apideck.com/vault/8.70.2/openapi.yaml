@@ -164,7 +164,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Vault API
-  version: 8.66.1
+  version: 8.70.2
   x-apideck-api: vault
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -1284,6 +1284,7 @@ paths:
                   session_length: '30m',
                   show_logs: true,
                   show_suggestions: false,
+                  show_sidebar: true,
                   auto_redirect: false
                 },
                 theme: {
@@ -2972,9 +2973,14 @@ components:
               description: Configure [Vault](/apis/vault/reference#section/Get-Started) to show the logs page. Defaults to `true`.
               title: Show logs
               type: boolean
+            show_sidebar:
+              default: true
+              description: Configure [Vault](/apis/vault/reference#section/Get-Started) to show the sidebar. Defaults to `true`.
+              title: Show sidebar
+              type: boolean
             show_suggestions:
               default: false
-              description: Configure [Vault](/apis/vault/reference#section/Get-Started) to show the suggestions page. Defaults to `true`.
+              description: Configure [Vault](/apis/vault/reference#section/Get-Started) to show the suggestions page. Defaults to `false`.
               title: Show suggestions
               type: boolean
             unified_apis:
@@ -3123,6 +3129,7 @@ components:
         - hris
         - pos
         - project-management
+        - expense-management
       example: crm
       type: string
       x-apideck-enum-id: unifies_api
@@ -3233,6 +3240,7 @@ x-webhooks:
       summary: Connection Callable
       tags:
         - Webhook Events
+      x-apideck-event-type: vault.connection.callable
   ConnectionCreated:
     post:
       description: Connection Created
@@ -3255,6 +3263,7 @@ x-webhooks:
       summary: Connection Created
       tags:
         - Webhook Events
+      x-apideck-event-type: vault.connection.created
   ConnectionDeleted:
     post:
       description: Connection Deleted
@@ -3277,6 +3286,7 @@ x-webhooks:
       summary: Connection Deleted
       tags:
         - Webhook Events
+      x-apideck-event-type: vault.connection.deleted
   ConnectionUpdated:
     post:
       description: Connection Updated
@@ -3299,6 +3309,7 @@ x-webhooks:
       summary: Connection Updated
       tags:
         - Webhook Events
+      x-apideck-event-type: vault.connection.updated
   TokenRefreshFailed:
     post:
       description: Attempt to refresh the connections access_token failed.
@@ -3321,4 +3332,5 @@ x-webhooks:
       summary: Token Refresh Failed
       tags:
         - Webhook Events
+      x-apideck-event-type: vault.connection.token_refresh.failed
   x-sdk-exclude: true

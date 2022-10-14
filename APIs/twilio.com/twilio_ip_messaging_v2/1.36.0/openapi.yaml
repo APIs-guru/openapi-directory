@@ -2451,12 +2451,12 @@ paths:
     servers:
       - url: https://ip-messaging.twilio.com
     x-twilio:
-      className: user_binding
       defaultOutputProperties:
         - sid
         - endpoint
         - identity
         - binding_type
+      mountName: user_bindings
       parent: /Services/{ServiceSid}/Users
       pathType: list
   "/v2/Services/{ServiceSid}/Users/{UserSid}/Bindings/{Sid}":
@@ -2538,12 +2538,12 @@ paths:
     servers:
       - url: https://ip-messaging.twilio.com
     x-twilio:
-      className: user_binding
       defaultOutputProperties:
         - sid
         - endpoint
         - identity
         - binding_type
+      mountName: user_bindings
       parent: /Services/{ServiceSid}/Users
       pathType: instance
   "/v2/Services/{ServiceSid}/Users/{UserSid}/Channels":
@@ -2615,10 +2615,10 @@ paths:
     servers:
       - url: https://ip-messaging.twilio.com
     x-twilio:
-      className: user_channel
       defaultOutputProperties:
         - channel_sid
         - status
+      mountName: user_channels
       parent: /Services/{ServiceSid}/Users
       pathType: list
   "/v2/Services/{ServiceSid}/Users/{UserSid}/Channels/{ChannelSid}":
@@ -2749,10 +2749,10 @@ paths:
     servers:
       - url: https://ip-messaging.twilio.com
     x-twilio:
-      className: user_channel
       defaultOutputProperties:
         - channel_sid
         - status
+      mountName: user_channels
       parent: /Services/{ServiceSid}/Users
       pathType: instance
   "/v2/Services/{Sid}":

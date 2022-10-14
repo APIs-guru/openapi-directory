@@ -1315,10 +1315,10 @@ paths:
     servers:
       - url: https://supersim.twilio.com
     x-twilio:
-      className: sim_ip_address
       defaultOutputProperties:
         - ip_address
         - ip_address_version
+      mountName: sim_ip_addresses
       parent: /Sims
       pathType: list
   /v1/SmsCommands:

@@ -2908,11 +2908,11 @@ paths:
     servers:
       - url: https://taskrouter.twilio.com
     x-twilio:
-      className: worker_channel
       defaultOutputProperties:
         - sid
         - task_channel_sid
         - task_channel_unique_name
+      mountName: worker_channels
       parent: /Workspaces/{WorkspaceSid}/Workers
       pathType: list
   "/v1/Workspaces/{WorkspaceSid}/Workers/{WorkerSid}/Channels/{Sid}":
@@ -3011,11 +3011,11 @@ paths:
     servers:
       - url: https://taskrouter.twilio.com
     x-twilio:
-      className: worker_channel
       defaultOutputProperties:
         - sid
         - task_channel_sid
         - task_channel_unique_name
+      mountName: worker_channels
       parent: /Workspaces/{WorkspaceSid}/Workers
       pathType: instance
   "/v1/Workspaces/{WorkspaceSid}/Workers/{WorkerSid}/Reservations":

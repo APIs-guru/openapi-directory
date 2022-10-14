@@ -156,12 +156,12 @@ paths:
     servers:
       - url: https://autopilot.twilio.com
     x-twilio:
-      className: restore_assistant
       defaultOutputProperties:
         - account_sid
         - sid
         - unique_name
         - friendly_name
+      mountName: restore_assistant
       pathType: list
   "/v1/Assistants/{AssistantSid}/Defaults":
     description: "TODO: Resource-level docs"
@@ -1455,6 +1455,7 @@ paths:
       className: task_actions
       defaultOutputProperties:
         - data
+      mountName: task_actions
       parent: /Assistants/{AssistantSid}/Tasks
       pathType: instance
   "/v1/Assistants/{AssistantSid}/Tasks/{TaskSid}/Fields":

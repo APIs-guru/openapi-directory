@@ -130,13 +130,13 @@ paths:
     servers:
       - url: https://verify.twilio.com
     x-twilio:
-      className: verification_attempt
       defaultOutputProperties:
         - sid
         - date_created
         - date_updated
         - conversion_status
         - channel
+      mountName: verification_attempts
       pathType: list
   /v2/Attempts/Summary:
     description: "TODO: Resource-level docs"
@@ -195,12 +195,12 @@ paths:
     servers:
       - url: https://verify.twilio.com
     x-twilio:
-      className: verification_attempts_summary
       defaultOutputProperties:
         - total_attempts
         - total_converted
         - total_unconverted
         - conversion_rate_percentage
+      mountName: verification_attempts_summary
       pathType: instance
   "/v2/Attempts/{Sid}":
     description: "TODO: Resource-level docs"
@@ -231,13 +231,13 @@ paths:
     servers:
       - url: https://verify.twilio.com
     x-twilio:
-      className: verification_attempt
       defaultOutputProperties:
         - sid
         - date_created
         - date_updated
         - conversion_status
         - channel
+      mountName: verification_attempts
       pathType: instance
   "/v2/Forms/{FormType}":
     description: "TODO: Resource-level docs"
@@ -300,10 +300,10 @@ paths:
     servers:
       - url: https://verify.twilio.com
     x-twilio:
-      className: safelist
       defaultOutputProperties:
         - sid
         - phone_number
+      mountName: safelist
       pathType: list
   "/v2/SafeList/Numbers/{PhoneNumber}":
     delete:
@@ -348,10 +348,10 @@ paths:
     servers:
       - url: https://verify.twilio.com
     x-twilio:
-      className: safelist
       defaultOutputProperties:
         - sid
         - phone_number
+      mountName: safelist
       pathType: instance
   /v2/Services:
     description: "TODO: Resource-level docs"
@@ -1286,7 +1286,7 @@ paths:
       x-maturity:
         - Beta
       x-twilio:
-        className: new_factor
+        mountName: new_factors
     servers:
       - url: https://verify.twilio.com
     x-twilio:
@@ -2266,6 +2266,7 @@ paths:
         - status
         - valid
         - date_created
+      mountName: verification_checks
       parent: /Services
       pathType: list
   "/v2/Services/{ServiceSid}/Verifications":

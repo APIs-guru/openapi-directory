@@ -164,9 +164,9 @@ paths:
     servers:
       - url: https://studio.twilio.com
     x-twilio:
-      className: flow_validate
       defaultOutputProperties:
         - valid
+      mountName: flow_validate
       pathType: list
   "/v2/Flows/{FlowSid}/Executions":
     description: Executions of Studio flows
@@ -331,9 +331,9 @@ paths:
     servers:
       - url: https://studio.twilio.com
     x-twilio:
-      className: execution_context
       defaultOutputProperties:
         - context
+      mountName: execution_context
       parent: /Flows/{FlowSid}/Executions
       pathType: instance
   "/v2/Flows/{FlowSid}/Executions/{ExecutionSid}/Steps":
@@ -519,6 +519,7 @@ paths:
       className: execution_step_context
       defaultOutputProperties:
         - context
+      mountName: step_context
       parent: /Flows/{FlowSid}/Executions/{ExecutionSid}/Steps
       pathType: instance
   "/v2/Flows/{FlowSid}/Executions/{Sid}":

@@ -288,12 +288,12 @@ paths:
     servers:
       - url: https://serverless.twilio.com
     x-twilio:
-      className: asset_version
       defaultOutputProperties:
         - sid
         - path
         - visibility
         - date_created
+      mountName: asset_versions
       parent: /Services/{ServiceSid}/Assets
       pathType: list
   "/v1/Services/{ServiceSid}/Assets/{AssetSid}/Versions/{Sid}":
@@ -340,12 +340,12 @@ paths:
     servers:
       - url: https://serverless.twilio.com
     x-twilio:
-      className: asset_version
       defaultOutputProperties:
         - sid
         - path
         - visibility
         - date_created
+      mountName: asset_versions
       parent: /Services/{ServiceSid}/Assets
       pathType: instance
   "/v1/Services/{ServiceSid}/Assets/{Sid}":
@@ -675,10 +675,10 @@ paths:
     servers:
       - url: https://serverless.twilio.com
     x-twilio:
-      className: build_status
       defaultOutputProperties:
         - sid
         - status
+      mountName: build_status
       parent: /Services/{ServiceSid}/Builds
       pathType: instance
   "/v1/Services/{ServiceSid}/Environments":
@@ -1585,12 +1585,12 @@ paths:
     servers:
       - url: https://serverless.twilio.com
     x-twilio:
-      className: function_version
       defaultOutputProperties:
         - sid
         - path
         - visibility
         - date_created
+      mountName: function_versions
       parent: /Services/{ServiceSid}/Functions
       pathType: list
   "/v1/Services/{ServiceSid}/Functions/{FunctionSid}/Versions/{Sid}":
@@ -1637,12 +1637,12 @@ paths:
     servers:
       - url: https://serverless.twilio.com
     x-twilio:
-      className: function_version
       defaultOutputProperties:
         - sid
         - path
         - visibility
         - date_created
+      mountName: function_versions
       parent: /Services/{ServiceSid}/Functions
       pathType: instance
   "/v1/Services/{ServiceSid}/Functions/{FunctionSid}/Versions/{Sid}/Content":
@@ -1689,10 +1689,10 @@ paths:
     servers:
       - url: https://serverless.twilio.com
     x-twilio:
-      className: function_version_content
       defaultOutputProperties:
         - sid
         - content
+      mountName: function_version_content
       parent: /Services/{ServiceSid}/Functions/{FunctionSid}/Versions
       pathType: instance
   "/v1/Services/{ServiceSid}/Functions/{Sid}":

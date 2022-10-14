@@ -166,6 +166,11 @@ paths:
           required: true
           schema:
             type: string
+        - description: Optional. If `true` and the message is not found, a new message is created and `updateMask` is ignored. The specified message ID must be [client-assigned](https://developers.google.com/chat/api/guides/crudl/messages#name_a_created_message) or the request fails.
+          in: query
+          name: allowMissing
+          schema:
+            type: boolean
         - description: "Required. The field paths to update. Separate multiple values with commas. Currently supported field paths: - text - cards (Requires [service account authentication](/chat/api/guides/auth/service-accounts).) - cards_v2 "
           in: query
           name: updateMask
@@ -213,6 +218,11 @@ paths:
               schema:
                 $ref: "#/components/schemas/ListMembershipsResponse"
           description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/chat.memberships
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.memberships
       tags:
         - spaces
     parameters:
@@ -248,6 +258,11 @@ paths:
           in: path
           name: parent
           required: true
+          schema:
+            type: string
+        - description: Optional. A custom name for a Chat message assigned at creation. Must start with `client-` and contain only lowercase letters, numbers, and hyphens up to 63 characters in length. Specify this field to get, update, or delete the message with the specified value. For example usage, see [Name a created message](https://developers.google.com/chat/api/guides/crudl/messages#name_a_created_message).
+          in: query
+          name: messageId
           schema:
             type: string
         - description: Optional. A unique request ID for this message. Specifying an existing request ID returns the message created with that ID instead of creating a new message.
@@ -295,6 +310,11 @@ paths:
           in: path
           name: parent
           required: true
+          schema:
+            type: string
+        - description: Optional. A custom name for a Chat message assigned at creation. Must start with `client-` and contain only lowercase letters, numbers, and hyphens up to 63 characters in length. Specify this field to get, update, or delete the message with the specified value. For example usage, see [Name a created message](https://developers.google.com/chat/api/guides/crudl/messages#name_a_created_message).
+          in: query
+          name: messageId
           schema:
             type: string
         - description: Optional. A unique request ID for this message. Specifying an existing request ID returns the message created with that ID instead of creating a new message.
@@ -1567,6 +1587,9 @@ components:
           items:
             $ref: "#/components/schemas/CardWithId"
           type: array
+        clientAssignedMessageId:
+          description: A custom name for a Chat message assigned at creation. Must start with `client-` and contain only lowercase letters, numbers, and hyphens up to 63 characters in length. Specify this field to get, update, or delete the message with the specified value. For example usage, see [Name a created message](https://developers.google.com/chat/api/guides/crudl/messages#name_a_created_message).
+          type: string
         createTime:
           description: Output only. The time at which the message was created in Google Chat server.
           format: google-datetime
@@ -1834,3 +1857,21 @@ components:
           $ref: "#/components/schemas/TextParagraph"
           description: Display a text paragraph in this widget.
       type: object
+  securitySchemes:
+    Oauth2:
+      description: Oauth 2.0 implicit authentication
+      flows:
+        implicit:
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
+          scopes:
+            https://www.googleapis.com/auth/chat.memberships: View, add, and remove members from conversations in Google Chat
+      type: oauth2
+    Oauth2c:
+      description: Oauth 2.0 authorizationCode authentication
+      flows:
+        authorizationCode:
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
+          scopes:
+            https://www.googleapis.com/auth/chat.memberships: View, add, and remove members from conversations in Google Chat
+          tokenUrl: https://accounts.google.com/o/oauth2/token
+      type: oauth2

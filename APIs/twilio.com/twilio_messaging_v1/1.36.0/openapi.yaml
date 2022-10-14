@@ -243,10 +243,10 @@ paths:
     servers:
       - url: https://messaging.twilio.com
     x-twilio:
-      className: external_campaign
       defaultOutputProperties:
         - campaign_id
         - messaging_service_sid
+      mountName: external_campaign
       pathType: list
   /v1/Services/Usecases:
     description: Use Case resource. Fetch possible use cases for a Messaging Service.
@@ -394,11 +394,11 @@ paths:
     servers:
       - url: https://messaging.twilio.com
     x-twilio:
-      className: us_app_to_person
       defaultOutputProperties:
         - brand_registration_sid
         - campaign_status
         - date_created
+      mountName: us_app_to_person
       parent: /Services
       pathType: list
   "/v1/Services/{MessagingServiceSid}/Compliance/Usa2p/Usecases":
@@ -438,9 +438,9 @@ paths:
     servers:
       - url: https://messaging.twilio.com
     x-twilio:
-      className: us_app_to_person_usecase
       defaultOutputProperties:
         - us_app_to_person_usecases
+      mountName: us_app_to_person_usecases
       parent: /Services
       pathType: list
   "/v1/Services/{MessagingServiceSid}/Compliance/Usa2p/{Sid}":
@@ -510,11 +510,11 @@ paths:
     servers:
       - url: https://messaging.twilio.com
     x-twilio:
-      className: us_app_to_person
       defaultOutputProperties:
         - brand_registration_sid
         - campaign_status
         - date_created
+      mountName: us_app_to_person
       parent: /Services
       pathType: instance
   "/v1/Services/{ServiceSid}/AlphaSenders":
@@ -1368,10 +1368,10 @@ paths:
     servers:
       - url: https://messaging.twilio.com
     x-twilio:
-      className: tollfree_verification
       defaultOutputProperties:
         - sid
         - date_created
+      mountName: tollfree_verifications
       pathType: list
   "/v1/Tollfree/Verifications/{Sid}":
     description: A Messaging resource to add and fetch Tollfree Verifications.
@@ -1402,10 +1402,10 @@ paths:
     servers:
       - url: https://messaging.twilio.com
     x-twilio:
-      className: tollfree_verification
       defaultOutputProperties:
         - sid
         - date_created
+      mountName: tollfree_verifications
       pathType: instance
   /v1/a2p/BrandRegistrations:
     description: A Messaging Service resource to add and fetch Brand Registrations.
@@ -1619,7 +1619,6 @@ paths:
     servers:
       - url: https://messaging.twilio.com
     x-twilio:
-      className: brand_vetting
       defaultOutputProperties:
         - account_sid
         - brand_sid
@@ -1628,6 +1627,7 @@ paths:
         - date_updated
         - vetting_status
         - vetting_class
+      mountName: brand_vettings
       parent: /a2p/BrandRegistrations
       pathType: list
   "/v1/a2p/BrandRegistrations/{BrandSid}/Vettings/{BrandVettingSid}":
@@ -1668,7 +1668,6 @@ paths:
     servers:
       - url: https://messaging.twilio.com
     x-twilio:
-      className: brand_vetting
       defaultOutputProperties:
         - account_sid
         - brand_sid
@@ -1677,6 +1676,7 @@ paths:
         - date_updated
         - vetting_status
         - vetting_class
+      mountName: brand_vettings
       parent: /a2p/BrandRegistrations
       pathType: instance
   "/v1/a2p/BrandRegistrations/{Sid}":
