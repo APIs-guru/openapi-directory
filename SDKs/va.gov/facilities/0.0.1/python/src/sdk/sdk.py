@@ -46,7 +46,7 @@ class SDK:
                 out = utils.unmarshal_json(r.text, Optional[shared.GeoFacilitiesResponse])
                 res.geo_facilities_response = out
             if utils.match_content_type(content_type, "text/csv"):
-                res.body = r.content
+                res.get_all_facilities_200_text_csv_string = r.content
         elif r.status_code == 401:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GenericError])

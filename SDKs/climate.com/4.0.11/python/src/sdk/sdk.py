@@ -1049,8 +1049,7 @@ class SDK:
         if r.status_code == 201:
             res.headers = r.headers
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.created_upload = out
+                res.created_upload = r.content
         elif r.status_code == 400:
             res.headers = r.headers
             if utils.match_content_type(content_type, "application/json"):

@@ -36,13 +36,13 @@ class SDK:
         res = operations.GetResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/xml"):
-                res.body = r.content
+                res.mbus_data = r.content
         elif r.status_code == 400:
             if utils.match_content_type(content_type, "text/plain"):
-                res.body = r.content
+                res.text_error = r.content
         elif r.status_code == 404:
             if utils.match_content_type(content_type, "text/plain"):
-                res.body = r.content
+                res.text_error = r.content
 
         return res
 
@@ -62,13 +62,13 @@ class SDK:
         res = operations.GetMultiResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/xml"):
-                res.body = r.content
+                res.mbus_data = r.content
         elif r.status_code == 400:
             if utils.match_content_type(content_type, "text/plain"):
-                res.body = r.content
+                res.text_error = r.content
         elif r.status_code == 404:
             if utils.match_content_type(content_type, "text/plain"):
-                res.body = r.content
+                res.text_error = r.content
 
         return res
 
@@ -92,7 +92,7 @@ class SDK:
                 res.hat = out
         elif r.status_code == 404:
             if utils.match_content_type(content_type, "text/plain"):
-                res.body = r.content
+                res.text_error = r.content
 
         return res
 
@@ -114,7 +114,7 @@ class SDK:
             pass
         elif r.status_code == 404:
             if utils.match_content_type(content_type, "text/plain"):
-                res.body = r.content
+                res.text_error = r.content
 
         return res
 
@@ -136,7 +136,7 @@ class SDK:
             pass
         elif r.status_code == 404:
             if utils.match_content_type(content_type, "text/plain"):
-                res.body = r.content
+                res.text_error = r.content
 
         return res
 
@@ -156,10 +156,10 @@ class SDK:
         res = operations.MbusAPIResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "text/x-yaml"):
-                res.body = r.content
+                res.yaml = r.content
         elif r.status_code == 404:
             if utils.match_content_type(content_type, "text/plain"):
-                res.body = r.content
+                res.text_error = r.content
 
         return res
 
@@ -179,13 +179,13 @@ class SDK:
         res = operations.ScanResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "text/plain"):
-                res.body = r.content
+                res.slaves = r.content
         elif r.status_code == 400:
             if utils.match_content_type(content_type, "text/plain"):
-                res.body = r.content
+                res.text_error = r.content
         elif r.status_code == 404:
             if utils.match_content_type(content_type, "text/plain"):
-                res.body = r.content
+                res.text_error = r.content
 
         return res
 

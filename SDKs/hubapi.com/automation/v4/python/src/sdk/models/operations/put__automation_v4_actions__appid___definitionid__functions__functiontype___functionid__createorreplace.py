@@ -24,7 +24,7 @@ class PutAutomationV4ActionsAppIDDefinitionIDFunctionsFunctionTypeFunctionIDCrea
 @dataclass
 class PutAutomationV4ActionsAppIDDefinitionIDFunctionsFunctionTypeFunctionIDCreateOrReplaceRequest:
     path_params: PutAutomationV4ActionsAppIDDefinitionIDFunctionsFunctionTypeFunctionIDCreateOrReplacePathParams = field(default=None)
-    request: bytes = field(default=None, metadata={'request': { 'media_type': 'text/plain' }})
+    request: str = field(default=None, metadata={'request': { 'media_type': 'text/plain' }})
     security: PutAutomationV4ActionsAppIDDefinitionIDFunctionsFunctionTypeFunctionIDCreateOrReplaceSecurity = field(default=None)
     
 

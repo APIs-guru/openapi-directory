@@ -1,6 +1,5 @@
 import warnings
 import requests
-from typing import Optional
 from sdk.models import operations
 from . import utils
 
@@ -37,8 +36,7 @@ class SDK:
         res = operations.AllFaresResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.all_fares_200_application_json_string = out
+                res.all_fares_200_application_json_string = r.content
 
         return res
 
@@ -60,8 +58,7 @@ class SDK:
         res = operations.AutoCheckInResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.auto_check_in_200_application_json_string = out
+                res.auto_check_in_200_application_json_string = r.content
 
         return res
 
@@ -82,8 +79,7 @@ class SDK:
         res = operations.BaggageTripAndContactResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.baggage_trip_and_contact_200_application_json_string = out
+                res.baggage_trip_and_contact_200_application_json_string = r.content
 
         return res
 
@@ -105,8 +101,7 @@ class SDK:
         res = operations.BestFaresResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.best_fares_200_application_json_string = out
+                res.best_fares_200_application_json_string = r.content
 
         return res
 
@@ -128,8 +123,7 @@ class SDK:
         res = operations.DeepLinksResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.deep_links_200_application_json_string = out
+                res.deep_links_200_application_json_string = r.content
 
         return res
 
@@ -151,8 +145,7 @@ class SDK:
         res = operations.FaresResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.fares_200_application_json_string = out
+                res.fares_200_application_json_string = r.content
 
         return res
 
@@ -174,8 +167,7 @@ class SDK:
         res = operations.FaresSubscriptionsResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.fares_subscriptions_200_application_json_string = out
+                res.fares_subscriptions_200_application_json_string = r.content
 
         return res
 
@@ -197,8 +189,7 @@ class SDK:
         res = operations.LhDeepLinksFfpResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.lh_deep_links_ffp_200_application_json_string = out
+                res.lh_deep_links_ffp_200_application_json_string = r.content
 
         return res
 
@@ -220,8 +211,7 @@ class SDK:
         res = operations.LhDeepLinksItcoResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.lh_deep_links_itco_200_application_json_string = out
+                res.lh_deep_links_itco_200_application_json_string = r.content
 
         return res
 
@@ -243,8 +233,7 @@ class SDK:
         res = operations.LowestFaresResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.lowest_fares_200_application_json_string = out
+                res.lowest_fares_200_application_json_string = r.content
 
         return res
 
@@ -266,8 +255,7 @@ class SDK:
         res = operations.OndRouteResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.ond_route_200_application_json_string = out
+                res.ond_route_200_application_json_string = r.content
 
         return res
 
@@ -289,8 +277,7 @@ class SDK:
         res = operations.OndStatusResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.ond_status_200_application_json_string = out
+                res.ond_status_200_application_json_string = r.content
 
         return res
 
@@ -311,8 +298,7 @@ class SDK:
         res = operations.OrdersResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.orders_200_application_json_string = out
+                res.orders_200_application_json_string = r.content
 
         return res
 
@@ -334,8 +320,7 @@ class SDK:
         res = operations.PriceOffersResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.price_offers_200_application_json_string = out
+                res.price_offers_200_application_json_string = r.content
 
         return res
 
@@ -357,8 +342,7 @@ class SDK:
         res = operations.SeatDetailsResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.seat_details_200_application_json_string = out
+                res.seat_details_200_application_json_string = r.content
 
         return res
 
@@ -380,8 +364,7 @@ class SDK:
         res = operations.TopOndResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.top_ond_200_application_json_string = out
+                res.top_ond_200_application_json_string = r.content
 
         return res
 

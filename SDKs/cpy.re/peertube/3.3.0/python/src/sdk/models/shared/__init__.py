@@ -8,6 +8,8 @@ from .followstate_enum import *
 from .jobtype_enum import *
 from .nsfw_enum import *
 from .nsfwpolicy_enum import *
+from .oauthtoken_password import *
+from .oauthtoken_refresh_token import *
 from .predefinedabusereasons_enum import *
 from .security import *
 from .skipcount_enum import *

@@ -85,10 +85,10 @@ class SDK:
         res = operations.GetIPIpv4TxtResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "text/plain"):
-                res.body = r.content
+                res.date_time_text_response = r.content
         else:
             if utils.match_content_type(content_type, "text/plain"):
-                res.body = r.content
+                res.error_text_response = r.content
 
         return res
 
@@ -108,10 +108,10 @@ class SDK:
         res = operations.GetIPTxtResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "text/plain"):
-                res.body = r.content
+                res.date_time_text_response = r.content
         else:
             if utils.match_content_type(content_type, "text/plain"):
-                res.body = r.content
+                res.error_text_response = r.content
 
         return res
 
@@ -227,10 +227,10 @@ class SDK:
         res = operations.GetTimezoneAreaLocationRegionTxtResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "text/plain"):
-                res.body = r.content
+                res.date_time_text_response = r.content
         else:
             if utils.match_content_type(content_type, "text/plain"):
-                res.body = r.content
+                res.error_text_response = r.content
 
         return res
 
@@ -250,10 +250,10 @@ class SDK:
         res = operations.GetTimezoneAreaLocationTxtResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "text/plain"):
-                res.body = r.content
+                res.date_time_text_response = r.content
         else:
             if utils.match_content_type(content_type, "text/plain"):
-                res.body = r.content
+                res.error_text_response = r.content
 
         return res
 
@@ -273,10 +273,10 @@ class SDK:
         res = operations.GetTimezoneAreaTxtResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "text/plain"):
-                res.body = r.content
+                res.list_text_response = r.content
         else:
             if utils.match_content_type(content_type, "text/plain"):
-                res.body = r.content
+                res.error_text_response = r.content
 
         return res
 
@@ -296,7 +296,7 @@ class SDK:
         res = operations.GetTimezoneTxtResponse(status_code=r.status_code, content_type=content_type)
         if True:
             if utils.match_content_type(content_type, "text/plain"):
-                res.body = r.content
+                res.list_text_response = r.content
 
         return res
 

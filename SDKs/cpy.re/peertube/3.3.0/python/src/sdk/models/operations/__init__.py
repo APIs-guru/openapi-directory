@@ -65,6 +65,7 @@ from .getliveid import *
 from .getmirroredvideos import *
 from .getmyabuses import *
 from .getoauthclient import *
+from .getoauthtoken import *
 from .getplaylistprivacypolicies import *
 from .getplaylists import *
 from .getplugin import *

@@ -22,8 +22,8 @@ class MarkdownRenderRequest:
 
 @dataclass
 class MarkdownRenderResponse:
-    body: bytes = field(default=None)
     content_type: str = field(default=None)
     headers: dict[str, List[str]] = field(default=None)
     status_code: int = field(default=None)
+    markdown_render_200_text_html_string: Optional[str] = field(default=None)
     

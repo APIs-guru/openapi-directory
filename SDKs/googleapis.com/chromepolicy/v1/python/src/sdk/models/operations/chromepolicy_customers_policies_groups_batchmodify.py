@@ -33,7 +33,7 @@ class ChromepolicyCustomersPoliciesGroupsBatchModifySecurity:
 class ChromepolicyCustomersPoliciesGroupsBatchModifyRequest:
     path_params: ChromepolicyCustomersPoliciesGroupsBatchModifyPathParams = field(default=None)
     query_params: ChromepolicyCustomersPoliciesGroupsBatchModifyQueryParams = field(default=None)
-    request: Optional[shared.GoogleChromePolicyV1BatchModifyGroupPoliciesRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: Optional[shared.GoogleChromePolicyVersionsV1BatchModifyGroupPoliciesRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     security: ChromepolicyCustomersPoliciesGroupsBatchModifySecurity = field(default=None)
     
 

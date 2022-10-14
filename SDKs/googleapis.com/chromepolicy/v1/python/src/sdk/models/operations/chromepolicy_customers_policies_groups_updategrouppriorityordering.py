@@ -33,7 +33,7 @@ class ChromepolicyCustomersPoliciesGroupsUpdateGroupPriorityOrderingSecurity:
 class ChromepolicyCustomersPoliciesGroupsUpdateGroupPriorityOrderingRequest:
     path_params: ChromepolicyCustomersPoliciesGroupsUpdateGroupPriorityOrderingPathParams = field(default=None)
     query_params: ChromepolicyCustomersPoliciesGroupsUpdateGroupPriorityOrderingQueryParams = field(default=None)
-    request: Optional[shared.GoogleChromePolicyV1UpdateGroupPriorityOrderingRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: Optional[shared.GoogleChromePolicyVersionsV1UpdateGroupPriorityOrderingRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     security: ChromepolicyCustomersPoliciesGroupsUpdateGroupPriorityOrderingSecurity = field(default=None)
     
 

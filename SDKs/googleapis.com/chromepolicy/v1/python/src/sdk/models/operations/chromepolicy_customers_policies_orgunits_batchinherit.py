@@ -33,7 +33,7 @@ class ChromepolicyCustomersPoliciesOrgunitsBatchInheritSecurity:
 class ChromepolicyCustomersPoliciesOrgunitsBatchInheritRequest:
     path_params: ChromepolicyCustomersPoliciesOrgunitsBatchInheritPathParams = field(default=None)
     query_params: ChromepolicyCustomersPoliciesOrgunitsBatchInheritQueryParams = field(default=None)
-    request: Optional[shared.GoogleChromePolicyV1BatchInheritOrgUnitPoliciesRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: Optional[shared.GoogleChromePolicyVersionsV1BatchInheritOrgUnitPoliciesRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     security: ChromepolicyCustomersPoliciesOrgunitsBatchInheritSecurity = field(default=None)
     
 

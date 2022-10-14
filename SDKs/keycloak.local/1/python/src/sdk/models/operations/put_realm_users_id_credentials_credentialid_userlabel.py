@@ -12,7 +12,7 @@ class PutRealmUsersIDCredentialsCredentialIDUserLabelPathParams:
 @dataclass
 class PutRealmUsersIDCredentialsCredentialIDUserLabelRequest:
     path_params: PutRealmUsersIDCredentialsCredentialIDUserLabelPathParams = field(default=None)
-    request: bytes = field(default=None, metadata={'request': { 'media_type': 'text/plain' }})
+    request: str = field(default=None, metadata={'request': { 'media_type': 'text/plain' }})
     
 
 @dataclass

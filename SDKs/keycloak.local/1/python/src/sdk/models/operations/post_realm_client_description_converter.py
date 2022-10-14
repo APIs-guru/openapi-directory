@@ -11,7 +11,7 @@ class PostRealmClientDescriptionConverterPathParams:
 @dataclass
 class PostRealmClientDescriptionConverterRequest:
     path_params: PostRealmClientDescriptionConverterPathParams = field(default=None)
-    request: bytes = field(default=None, metadata={'request': { 'media_type': 'text/plain' }})
+    request: str = field(default=None, metadata={'request': { 'media_type': 'text/plain' }})
     
 
 @dataclass

@@ -170,13 +170,13 @@ class SDK:
         res = operations.GetFileFromURIIDResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/pdf"):
-                res.body = r.content
+                res.get_file_from_uri_id_200_application_pdf_string = r.content
             if utils.match_content_type(content_type, "image/jpeg"):
-                res.body = r.content
+                res.get_file_from_uri_id_200_image_jpeg_string = r.content
             if utils.match_content_type(content_type, "image/jpg"):
-                res.body = r.content
+                res.get_file_from_uri_id_200_image_jpg_string = r.content
             if utils.match_content_type(content_type, "image/png"):
-                res.body = r.content
+                res.get_file_from_uri_id_200_image_png_string = r.content
         elif r.status_code == 400:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetFileFromURIID400ApplicationJSON])
@@ -197,6 +197,82 @@ class SDK:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[Any])
                 res.get_file_from_uri_id_503_application_json_one_of = out
+
+        return res
+
+    
+    
+    def get_list_of_documents_provided_by_an_issuer_id(self, request: operations.GetListOfDocumentsProvidedByAnIssuerIDRequest) -> operations.GetListOfDocumentsProvidedByAnIssuerIDResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/oauth2/1/pull/doctype"
+        
+        req_content_type, data, form = utils.serialize_request_body(request)
+        headers = {}
+        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
+            headers = {"content-type": req_content_type}
+        client = utils.configure_security_client(request.security)
+        
+
+        r = client.request("POST", url, data=data, files=form, headers=headers)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.GetListOfDocumentsProvidedByAnIssuerIDResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.DocTypeResponse])
+                res.doc_type_response = out
+        elif r.status_code == 400:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[operations.GetListOfDocumentsProvidedByAnIssuerID400ApplicationJSON])
+                res.get_list_of_documents_provided_by_an_issuer_id_400_application_json_object = out
+        elif r.status_code == 401:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[operations.GetListOfDocumentsProvidedByAnIssuerID401ApplicationJSON])
+                res.get_list_of_documents_provided_by_an_issuer_id_401_application_json_object = out
+        elif r.status_code == 500:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[operations.GetListOfDocumentsProvidedByAnIssuerID500ApplicationJSON])
+                res.get_list_of_documents_provided_by_an_issuer_id_500_application_json_object = out
+
+        return res
+
+    
+    
+    def get_list_of_issuers_id(self, request: operations.GetListOfIssuersIDRequest) -> operations.GetListOfIssuersIDResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/oauth2/1/pull/issuers"
+        
+        req_content_type, data, form = utils.serialize_request_body(request)
+        headers = {}
+        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
+            headers = {"content-type": req_content_type}
+        client = utils.configure_security_client(request.security)
+        
+
+        r = client.request("POST", url, data=data, files=form, headers=headers)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.GetListOfIssuersIDResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.IssuerResponse])
+                res.issuer_response = out
+        elif r.status_code == 400:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[operations.GetListOfIssuersID400ApplicationJSON])
+                res.get_list_of_issuers_id_400_application_json_object = out
+        elif r.status_code == 401:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[operations.GetListOfIssuersID401ApplicationJSON])
+                res.get_list_of_issuers_id_401_application_json_object = out
+        elif r.status_code == 500:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[operations.GetListOfIssuersID500ApplicationJSON])
+                res.get_list_of_issuers_id_500_application_json_object = out
 
         return res
 
@@ -329,6 +405,44 @@ class SDK:
 
     
     
+    def get_search_parameters_for_a_document_id(self, request: operations.GetSearchParametersForADocumentIDRequest) -> operations.GetSearchParametersForADocumentIDResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/oauth2/1/pull/parameters"
+        
+        req_content_type, data, form = utils.serialize_request_body(request)
+        headers = {}
+        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
+            headers = {"content-type": req_content_type}
+        client = utils.configure_security_client(request.security)
+        
+
+        r = client.request("POST", url, data=data, files=form, headers=headers)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.GetSearchParametersForADocumentIDResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[List[shared.SearchParametersResponse]])
+                res.search_parameters_response = out
+        elif r.status_code == 400:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[operations.GetSearchParametersForADocumentID400ApplicationJSON])
+                res.get_search_parameters_for_a_document_id_400_application_json_object = out
+        elif r.status_code == 401:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[operations.GetSearchParametersForADocumentID401ApplicationJSON])
+                res.get_search_parameters_for_a_document_id_401_application_json_object = out
+        elif r.status_code == 500:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[operations.GetSearchParametersForADocumentID500ApplicationJSON])
+                res.get_search_parameters_for_a_document_id_500_application_json_object = out
+
+        return res
+
+    
+    
     def get_statistics_id(self, request: operations.GetStatisticsIDRequest) -> operations.GetStatisticsIDResponse:
         warnings.simplefilter("ignore")
 
@@ -399,6 +513,48 @@ class SDK:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[Any])
                 res.get_e_aadhaar_data_in_xml_format_id_503_application_json_one_of = out
+
+        return res
+
+    
+    
+    def pull_document_id(self, request: operations.PullDocumentIDRequest) -> operations.PullDocumentIDResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/oauth2/1/pull/pulldocument"
+        
+        req_content_type, data, form = utils.serialize_request_body(request)
+        headers = {}
+        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
+            headers = {"content-type": req_content_type}
+        client = utils.configure_security_client(request.security)
+        
+
+        r = client.request("POST", url, data=data, files=form, headers=headers)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.PullDocumentIDResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[Any])
+                res.sample = out
+        elif r.status_code == 400:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[Any])
+                res.pull_document_id_400_application_json_one_of = out
+        elif r.status_code == 401:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[operations.PullDocumentID401ApplicationJSON])
+                res.pull_document_id_401_application_json_object = out
+        elif r.status_code == 404:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[operations.PullDocumentID404ApplicationJSON])
+                res.pull_document_id_404_application_json_object = out
+        elif r.status_code == 500:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[Any])
+                res.pull_document_id_500_application_json_one_of = out
 
         return res
 

@@ -24,7 +24,7 @@ class ReposUploadReleaseAssetRequest:
     server_url: Optional[str] = field(default=None)
     path_params: ReposUploadReleaseAssetPathParams = field(default=None)
     query_params: ReposUploadReleaseAssetQueryParams = field(default=None)
-    request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': '*/*' }})
+    request: Optional[str] = field(default=None, metadata={'request': { 'media_type': '*/*' }})
     
 
 @dataclass

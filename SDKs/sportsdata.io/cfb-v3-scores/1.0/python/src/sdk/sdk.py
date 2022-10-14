@@ -124,8 +124,7 @@ class SDK:
         res = operations.CurrentSeasontypeResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.current_seasontype_200_application_json_string = out
+                res.current_seasontype_200_application_json_string = r.content
 
         return res
 

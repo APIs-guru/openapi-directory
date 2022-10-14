@@ -24,21 +24,9 @@ class SasportalNodesNodesDevicesCreateSignedQueryParams:
     
 
 @dataclass
-class SasportalNodesNodesDevicesCreateSignedSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    
-
-@dataclass
-class SasportalNodesNodesDevicesCreateSignedSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    
-
-@dataclass
 class SasportalNodesNodesDevicesCreateSignedSecurity:
-    option1: Optional[SasportalNodesNodesDevicesCreateSignedSecurityOption1] = field(default=None, metadata={'security': { 'option': True }})
-    option2: Optional[SasportalNodesNodesDevicesCreateSignedSecurityOption2] = field(default=None, metadata={'security': { 'option': True }})
+    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass

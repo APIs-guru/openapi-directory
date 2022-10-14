@@ -2554,6 +2554,40 @@ class SDK:
 
     
     
+    def post_webhook_as_slack_message(self, request: operations.PostWebhookAsSlackMessageRequest) -> operations.PostWebhookAsSlackMessageResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/webhooks/incoming/{webhookId}", request.path_params)
+        
+        req_content_type, data, form = utils.serialize_request_body(request)
+        headers = {}
+        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
+            headers = {"content-type": req_content_type}
+        if data is None and form is None:
+           raise Exception('request body is required')
+        
+        client = self.client
+
+        r = client.request("POST", url, data=data, files=form, headers=headers)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.PostWebhookAsSlackMessageResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            pass
+        elif r.status_code == 400:
+            pass
+        elif r.status_code == 401:
+            pass
+        elif r.status_code == 500:
+            pass
+        elif r.status_code == 503:
+            pass
+
+        return res
+
+    
+    
     def remove_label(self, request: operations.RemoveLabelRequest) -> operations.RemoveLabelResponse:
         warnings.simplefilter("ignore")
 

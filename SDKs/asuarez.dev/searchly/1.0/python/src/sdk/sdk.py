@@ -46,7 +46,7 @@ class SDK:
                 res.api_response_similarity = out
         else:
             if utils.match_content_type(content_type, "application/text"):
-                res.body = r.content
+                res.src_searchly_api_v1_controllers_similarity_by_content_default_application_text_string = r.content
 
         return res
 
@@ -71,7 +71,7 @@ class SDK:
                 res.api_response_similarity = out
         else:
             if utils.match_content_type(content_type, "application/text"):
-                res.body = r.content
+                res.src_searchly_api_v1_controllers_similarity_by_song_default_application_text_string = r.content
 
         return res
 
@@ -96,7 +96,7 @@ class SDK:
                 res.api_response_song = out
         else:
             if utils.match_content_type(content_type, "application/text"):
-                res.body = r.content
+                res.src_searchly_api_v1_controllers_song_search_default_application_text_string = r.content
 
         return res
 

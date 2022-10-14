@@ -1787,7 +1787,7 @@ class SDK:
             if utils.match_content_type(content_type, "application/xml; charset=utf-8"):
                 res.body = r.content
             if utils.match_content_type(content_type, "text/plain; charset=utf-8"):
-                res.body = r.content
+                res.post_request_id_cmd_equal_diff_200_text_plain_string = r.content
         elif r.status_code == 401:
             if utils.match_content_type(content_type, "application/xml; charset=utf-8"):
                 res.body = r.content

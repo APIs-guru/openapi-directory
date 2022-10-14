@@ -115,3 +115,30 @@ class SDK:
         return res
 
     
+    
+    def post_well_known_mercure(self, request: operations.PostWellKnownMercureRequest) -> operations.PostWellKnownMercureResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/.well-known/mercure"
+        
+        req_content_type, data, form = utils.serialize_request_body(request)
+        headers = {}
+        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
+            headers = {"content-type": req_content_type}
+        client = self.client
+
+        r = client.request("POST", url, data=data, files=form, headers=headers)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.PostWellKnownMercureResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            pass
+        elif r.status_code == 400:
+            pass
+        elif r.status_code == 401:
+            pass
+
+        return res
+
+    

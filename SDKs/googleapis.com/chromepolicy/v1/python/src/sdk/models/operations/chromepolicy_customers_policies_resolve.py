@@ -45,13 +45,13 @@ class ChromepolicyCustomersPoliciesResolveSecurity:
 class ChromepolicyCustomersPoliciesResolveRequest:
     path_params: ChromepolicyCustomersPoliciesResolvePathParams = field(default=None)
     query_params: ChromepolicyCustomersPoliciesResolveQueryParams = field(default=None)
-    request: Optional[shared.GoogleChromePolicyV1ResolveRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: Optional[shared.GoogleChromePolicyVersionsV1ResolveRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     security: ChromepolicyCustomersPoliciesResolveSecurity = field(default=None)
     
 
 @dataclass
 class ChromepolicyCustomersPoliciesResolveResponse:
     content_type: str = field(default=None)
-    google_chrome_policy_v1_resolve_response: Optional[shared.GoogleChromePolicyV1ResolveResponse] = field(default=None)
+    google_chrome_policy_versions_v1_resolve_response: Optional[shared.GoogleChromePolicyVersionsV1ResolveResponse] = field(default=None)
     status_code: int = field(default=None)
     

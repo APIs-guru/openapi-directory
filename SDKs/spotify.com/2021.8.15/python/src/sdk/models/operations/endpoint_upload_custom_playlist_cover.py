@@ -23,7 +23,7 @@ class EndpointUploadCustomPlaylistCoverSecurity:
 class EndpointUploadCustomPlaylistCoverRequest:
     path_params: EndpointUploadCustomPlaylistCoverPathParams = field(default=None)
     headers: EndpointUploadCustomPlaylistCoverHeaders = field(default=None)
-    request: bytes = field(default=None, metadata={'request': { 'media_type': 'image/jpeg' }})
+    request: str = field(default=None, metadata={'request': { 'media_type': 'image/jpeg' }})
     security: EndpointUploadCustomPlaylistCoverSecurity = field(default=None)
     
 

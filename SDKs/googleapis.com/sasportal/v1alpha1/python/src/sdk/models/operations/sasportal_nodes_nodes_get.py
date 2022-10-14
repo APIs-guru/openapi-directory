@@ -24,21 +24,9 @@ class SasportalNodesNodesGetQueryParams:
     
 
 @dataclass
-class SasportalNodesNodesGetSecurityOption1:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    
-
-@dataclass
-class SasportalNodesNodesGetSecurityOption2:
-    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
-    
-
-@dataclass
 class SasportalNodesNodesGetSecurity:
-    option1: Optional[SasportalNodesNodesGetSecurityOption1] = field(default=None, metadata={'security': { 'option': True }})
-    option2: Optional[SasportalNodesNodesGetSecurityOption2] = field(default=None, metadata={'security': { 'option': True }})
+    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
     
 
 @dataclass

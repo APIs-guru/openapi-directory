@@ -209,7 +209,7 @@ class SDK:
         res = operations.GetHeartbeatResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "text/plain"):
-                res.body = r.content
+                res.get_heartbeat_200_text_plain_string = r.content
 
         return res
 
@@ -266,7 +266,7 @@ class SDK:
         res = operations.GetPrometheusMetricsResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "text/plain"):
-                res.body = r.content
+                res.get_prometheus_metrics_200_text_plain_string = r.content
 
         return res
 

@@ -45,13 +45,13 @@ class ChromepolicyCustomersPoliciesGroupsListGroupPriorityOrderingSecurity:
 class ChromepolicyCustomersPoliciesGroupsListGroupPriorityOrderingRequest:
     path_params: ChromepolicyCustomersPoliciesGroupsListGroupPriorityOrderingPathParams = field(default=None)
     query_params: ChromepolicyCustomersPoliciesGroupsListGroupPriorityOrderingQueryParams = field(default=None)
-    request: Optional[shared.GoogleChromePolicyV1ListGroupPriorityOrderingRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: Optional[shared.GoogleChromePolicyVersionsV1ListGroupPriorityOrderingRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     security: ChromepolicyCustomersPoliciesGroupsListGroupPriorityOrderingSecurity = field(default=None)
     
 
 @dataclass
 class ChromepolicyCustomersPoliciesGroupsListGroupPriorityOrderingResponse:
     content_type: str = field(default=None)
-    google_chrome_policy_v1_list_group_priority_ordering_response: Optional[shared.GoogleChromePolicyV1ListGroupPriorityOrderingResponse] = field(default=None)
+    google_chrome_policy_versions_v1_list_group_priority_ordering_response: Optional[shared.GoogleChromePolicyVersionsV1ListGroupPriorityOrderingResponse] = field(default=None)
     status_code: int = field(default=None)
     

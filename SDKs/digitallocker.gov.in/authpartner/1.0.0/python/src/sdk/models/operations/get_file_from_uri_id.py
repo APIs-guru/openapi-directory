@@ -43,8 +43,11 @@ class GetFileFromURIID404ApplicationJSON:
 
 @dataclass
 class GetFileFromURIIDResponse:
-    body: bytes = field(default=None)
     content_type: str = field(default=None)
+    get_file_from_uri_id_200_application_pdf_string: Optional[str] = field(default=None)
+    get_file_from_uri_id_200_image_jpeg_string: Optional[str] = field(default=None)
+    get_file_from_uri_id_200_image_jpg_string: Optional[str] = field(default=None)
+    get_file_from_uri_id_200_image_png_string: Optional[str] = field(default=None)
     get_file_from_uri_id_400_application_json_object: Optional[GetFileFromURIID400ApplicationJSON] = field(default=None)
     get_file_from_uri_id_401_application_json_object: Optional[GetFileFromURIID401ApplicationJSON] = field(default=None)
     get_file_from_uri_id_404_application_json_object: Optional[GetFileFromURIID404ApplicationJSON] = field(default=None)

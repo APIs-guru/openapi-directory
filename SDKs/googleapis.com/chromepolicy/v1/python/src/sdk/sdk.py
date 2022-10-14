@@ -95,8 +95,8 @@ class SDK:
         res = operations.ChromepolicyCustomersPoliciesGroupsListGroupPriorityOrderingResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[shared.GoogleChromePolicyV1ListGroupPriorityOrderingResponse])
-                res.google_chrome_policy_v1_list_group_priority_ordering_response = out
+                out = utils.unmarshal_json(r.text, Optional[shared.GoogleChromePolicyVersionsV1ListGroupPriorityOrderingResponse])
+                res.google_chrome_policy_versions_v1_list_group_priority_ordering_response = out
 
         return res
 
@@ -311,8 +311,8 @@ class SDK:
         res = operations.ChromepolicyCustomersPoliciesResolveResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[shared.GoogleChromePolicyV1ResolveResponse])
-                res.google_chrome_policy_v1_resolve_response = out
+                out = utils.unmarshal_json(r.text, Optional[shared.GoogleChromePolicyVersionsV1ResolveResponse])
+                res.google_chrome_policy_versions_v1_resolve_response = out
 
         return res
 

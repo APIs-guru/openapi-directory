@@ -45,8 +45,8 @@ class GetDatasetExport500ApplicationJSON:
 
 @dataclass
 class GetDatasetExportResponse:
-    body: bytes = field(default=None)
     content_type: str = field(default=None)
+    get_dataset_export_200_text_plain_string: Optional[str] = field(default=None)
     get_dataset_export_400_application_json_object: Optional[GetDatasetExport400ApplicationJSON] = field(default=None)
     get_dataset_export_401_application_json_object: Optional[GetDatasetExport401ApplicationJSON] = field(default=None)
     get_dataset_export_404_application_json_object: Optional[GetDatasetExport404ApplicationJSON] = field(default=None)

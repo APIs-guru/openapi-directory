@@ -77,6 +77,7 @@ from .likespaceitem import *
 from .moderateconversation import *
 from .pinaconversation import *
 from .pintopic import *
+from .postwebhookasslackmessage import *
 from .removelabel import *
 from .removemoderators import *
 from .removeparticipantcommunity import *

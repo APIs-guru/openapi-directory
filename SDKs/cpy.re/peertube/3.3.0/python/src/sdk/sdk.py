@@ -2065,6 +2065,35 @@ class SDK:
 
     
     
+    def get_o_auth_token(self, request: operations.GetOAuthTokenRequest) -> operations.GetOAuthTokenResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = base_url.removesuffix("/") + "/users/token"
+        
+        req_content_type, data, form = utils.serialize_request_body(request)
+        headers = {}
+        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
+            headers = {"content-type": req_content_type}
+        client = self.client
+
+        r = client.request("POST", url, data=data, files=form, headers=headers)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.GetOAuthTokenResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[operations.GetOAuthToken200ApplicationJSON])
+                res.get_o_auth_token_200_application_json_object = out
+        elif r.status_code == 400:
+            pass
+        elif r.status_code == 401:
+            pass
+
+        return res
+
+    
+    
     def get_playlist_privacy_policies(self) -> operations.GetPlaylistPrivacyPoliciesResponse:
         warnings.simplefilter("ignore")
 
@@ -2493,8 +2522,7 @@ class SDK:
         res = operations.GetVideoDescResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.get_video_desc_200_application_json_string = out
+                res.get_video_desc_200_application_json_string = r.content
 
         return res
 

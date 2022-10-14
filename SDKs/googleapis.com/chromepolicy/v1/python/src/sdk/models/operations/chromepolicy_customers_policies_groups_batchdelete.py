@@ -33,7 +33,7 @@ class ChromepolicyCustomersPoliciesGroupsBatchDeleteSecurity:
 class ChromepolicyCustomersPoliciesGroupsBatchDeleteRequest:
     path_params: ChromepolicyCustomersPoliciesGroupsBatchDeletePathParams = field(default=None)
     query_params: ChromepolicyCustomersPoliciesGroupsBatchDeleteQueryParams = field(default=None)
-    request: Optional[shared.GoogleChromePolicyV1BatchDeleteGroupPoliciesRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: Optional[shared.GoogleChromePolicyVersionsV1BatchDeleteGroupPoliciesRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     security: ChromepolicyCustomersPoliciesGroupsBatchDeleteSecurity = field(default=None)
     
 

@@ -80,10 +80,9 @@ class SDK:
         res = operations.ContactsGetResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.contacts_get_200_application_json_string = out
+                res.contacts_get_200_application_json_string = r.content
             if utils.match_content_type(content_type, "text/csv"):
-                res.body = r.content
+                res.contacts_get_200_text_csv_string = r.content
 
         return res
 
@@ -104,10 +103,9 @@ class SDK:
         res = operations.ContactsPostResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.contacts_post_200_application_json_string = out
+                res.contacts_post_200_application_json_string = r.content
             if utils.match_content_type(content_type, "text/plain"):
-                res.body = r.content
+                res.contacts_post_200_text_plain_string = r.content
 
         return res
 
@@ -236,7 +234,7 @@ class SDK:
         res = operations.StatusResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "text/plain"):
-                res.body = r.content
+                res.status_200_text_plain_string = r.content
 
         return res
 
@@ -279,7 +277,7 @@ class SDK:
         res = operations.VoiceResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "text/plain"):
-                res.body = r.content
+                res.voice_200_text_plain_string = r.content
 
         return res
 

@@ -132,51 +132,49 @@ class SDK:
         res = operations.DeleteTeamsTeamIDMembershipsUserIDResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.delete_teams_team_id_memberships_user_id_200_application_json_string = out
+                res.delete_teams_team_id_memberships_user_id_200_application_json_string = r.content
             if utils.match_content_type(content_type, "text/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.delete_teams_team_id_memberships_user_id_200_text_json_string = out
+                res.delete_teams_team_id_memberships_user_id_200_text_json_string = r.content
             if utils.match_content_type(content_type, "text/plain"):
-                res.body = r.content
+                res.delete_teams_team_id_memberships_user_id_200_text_plain_string = r.content
         elif r.status_code == 204:
             pass
         elif r.status_code == 400:
-            if utils.match_content_type(content_type, "text/plain"):
-                res.body = r.content
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ErrorResponseContent])
                 res.error_response_content = out
             if utils.match_content_type(content_type, "text/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ErrorResponseContent])
                 res.error_response_content = out
+            if utils.match_content_type(content_type, "text/plain"):
+                res.body = r.content
         elif r.status_code == 403:
-            if utils.match_content_type(content_type, "text/plain"):
-                res.body = r.content
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ErrorResponseContent])
                 res.error_response_content = out
             if utils.match_content_type(content_type, "text/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ErrorResponseContent])
                 res.error_response_content = out
+            if utils.match_content_type(content_type, "text/plain"):
+                res.body = r.content
         elif r.status_code == 404:
-            if utils.match_content_type(content_type, "text/plain"):
-                res.body = r.content
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ErrorResponseContent])
                 res.error_response_content = out
             if utils.match_content_type(content_type, "text/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ErrorResponseContent])
                 res.error_response_content = out
+            if utils.match_content_type(content_type, "text/plain"):
+                res.body = r.content
         elif r.status_code == 500:
-            if utils.match_content_type(content_type, "text/plain"):
-                res.body = r.content
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ErrorResponseContent])
                 res.error_response_content = out
             if utils.match_content_type(content_type, "text/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ErrorResponseContent])
                 res.error_response_content = out
+            if utils.match_content_type(content_type, "text/plain"):
+                res.body = r.content
 
         return res
 
@@ -3128,40 +3126,38 @@ class SDK:
         res = operations.GetWebhookByIDResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.get_webhook_by_id_200_application_json_string = out
+                res.get_webhook_by_id_200_application_json_string = r.content
             if utils.match_content_type(content_type, "text/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.get_webhook_by_id_200_text_json_string = out
+                res.get_webhook_by_id_200_text_json_string = r.content
             if utils.match_content_type(content_type, "text/plain"):
-                res.body = r.content
+                res.get_webhook_by_id_200_text_plain_string = r.content
         elif r.status_code == 400:
-            if utils.match_content_type(content_type, "text/plain"):
-                res.body = r.content
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ErrorResponseContent])
                 res.error_response_content = out
             if utils.match_content_type(content_type, "text/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ErrorResponseContent])
                 res.error_response_content = out
+            if utils.match_content_type(content_type, "text/plain"):
+                res.body = r.content
         elif r.status_code == 404:
-            if utils.match_content_type(content_type, "text/plain"):
-                res.body = r.content
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ErrorResponseContent])
                 res.error_response_content = out
             if utils.match_content_type(content_type, "text/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ErrorResponseContent])
                 res.error_response_content = out
+            if utils.match_content_type(content_type, "text/plain"):
+                res.body = r.content
         elif r.status_code == 500:
-            if utils.match_content_type(content_type, "text/plain"):
-                res.body = r.content
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ErrorResponseContent])
                 res.error_response_content = out
             if utils.match_content_type(content_type, "text/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ErrorResponseContent])
                 res.error_response_content = out
+            if utils.match_content_type(content_type, "text/plain"):
+                res.body = r.content
 
         return res
 
@@ -4393,40 +4389,38 @@ class SDK:
         res = operations.PostTeamsTeamIDMembershipsResendInviteMailResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.post_teams_team_id_memberships_resend_invite_mail_200_application_json_string = out
+                res.post_teams_team_id_memberships_resend_invite_mail_200_application_json_string = r.content
             if utils.match_content_type(content_type, "text/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.post_teams_team_id_memberships_resend_invite_mail_200_text_json_string = out
+                res.post_teams_team_id_memberships_resend_invite_mail_200_text_json_string = r.content
             if utils.match_content_type(content_type, "text/plain"):
-                res.body = r.content
+                res.post_teams_team_id_memberships_resend_invite_mail_200_text_plain_string = r.content
         elif r.status_code == 403:
-            if utils.match_content_type(content_type, "text/plain"):
-                res.body = r.content
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ErrorResponseContent])
                 res.error_response_content = out
             if utils.match_content_type(content_type, "text/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ErrorResponseContent])
                 res.error_response_content = out
+            if utils.match_content_type(content_type, "text/plain"):
+                res.body = r.content
         elif r.status_code == 404:
-            if utils.match_content_type(content_type, "text/plain"):
-                res.body = r.content
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ErrorResponseContent])
                 res.error_response_content = out
             if utils.match_content_type(content_type, "text/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ErrorResponseContent])
                 res.error_response_content = out
+            if utils.match_content_type(content_type, "text/plain"):
+                res.body = r.content
         elif r.status_code == 500:
-            if utils.match_content_type(content_type, "text/plain"):
-                res.body = r.content
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ErrorResponseContent])
                 res.error_response_content = out
             if utils.match_content_type(content_type, "text/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ErrorResponseContent])
                 res.error_response_content = out
+            if utils.match_content_type(content_type, "text/plain"):
+                res.body = r.content
 
         return res
 
@@ -4959,31 +4953,29 @@ class SDK:
         res = operations.PostWebhooksResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.post_webhooks_201_application_json_string = out
+                res.post_webhooks_201_application_json_string = r.content
             if utils.match_content_type(content_type, "text/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.post_webhooks_201_text_json_string = out
+                res.post_webhooks_201_text_json_string = r.content
             if utils.match_content_type(content_type, "text/plain"):
-                res.body = r.content
+                res.post_webhooks_201_text_plain_string = r.content
         elif r.status_code == 400:
-            if utils.match_content_type(content_type, "text/plain"):
-                res.body = r.content
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ErrorResponseContent])
                 res.error_response_content = out
             if utils.match_content_type(content_type, "text/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ErrorResponseContent])
                 res.error_response_content = out
+            if utils.match_content_type(content_type, "text/plain"):
+                res.body = r.content
         elif r.status_code == 500:
-            if utils.match_content_type(content_type, "text/plain"):
-                res.body = r.content
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ErrorResponseContent])
                 res.error_response_content = out
             if utils.match_content_type(content_type, "text/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ErrorResponseContent])
                 res.error_response_content = out
+            if utils.match_content_type(content_type, "text/plain"):
+                res.body = r.content
 
         return res
 

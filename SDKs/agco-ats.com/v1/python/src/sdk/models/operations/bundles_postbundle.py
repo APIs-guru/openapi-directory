@@ -22,7 +22,9 @@ class BundlesPostBundleResponse:
     api_models_api_error: Optional[shared.APIModelsAPIError] = field(default=None)
     body: bytes = field(default=None)
     bundles_post_bundle_200_application_json_string: Optional[str] = field(default=None)
+    bundles_post_bundle_200_application_xml_string: Optional[str] = field(default=None)
     bundles_post_bundle_200_text_json_string: Optional[str] = field(default=None)
+    bundles_post_bundle_200_text_xml_string: Optional[str] = field(default=None)
     content_type: str = field(default=None)
     status_code: int = field(default=None)
     
