@@ -14,8 +14,8 @@ type ToolsShareFileMultipartFormData struct {
 }
 
 type ToolsShareFileRequests struct {
-	ApplicationOctetStream []byte                           `request:"mediaType=application/octet-stream"`
-	Object                 *ToolsShareFileMultipartFormData `request:"mediaType=multipart/form-data"`
+	BinaryString []byte                           `request:"mediaType=application/octet-stream"`
+	Object       *ToolsShareFileMultipartFormData `request:"mediaType=multipart/form-data"`
 }
 
 type ToolsShareFileSecurity struct {

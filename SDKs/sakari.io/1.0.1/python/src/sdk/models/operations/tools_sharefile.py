@@ -16,7 +16,7 @@ class ToolsShareFileMultipartFormData:
 
 @dataclass
 class ToolsShareFileRequests:
-    application_octet_stream: bytes = field(default=None, metadata={'request': { 'media_type': 'application/octet-stream' }})
+    binary_string: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'application/octet-stream' }})
     object: Optional[ToolsShareFileMultipartFormData] = field(default=None, metadata={'request': { 'media_type': 'multipart/form-data' }})
     
 

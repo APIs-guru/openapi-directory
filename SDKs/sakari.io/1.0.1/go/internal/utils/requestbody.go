@@ -98,12 +98,17 @@ func serializeContentType(fieldName string, mediaType string, val reflect.Value)
 			return nil, "", err
 		}
 	default:
-		if val.Kind() != reflect.Slice && val.Kind() != reflect.Array && val.Type() != reflect.TypeOf([]byte(nil)) {
+		switch {
+		case val.Type().Kind() == reflect.String:
+			if _, err := buf.WriteString(val.String()); err != nil {
+				return nil, "", err
+			}
+		case val.Type() == reflect.TypeOf([]byte(nil)):
+			if _, err := buf.Write(val.Bytes()); err != nil {
+				return nil, "", err
+			}
+		default:
 			return nil, "", fmt.Errorf("invalid request body type %s for mediaType %s", val.Type(), mediaType)
-		}
-
-		if _, err := buf.Write(val.Bytes()); err != nil {
-			return nil, "", err
 		}
 	}
 
