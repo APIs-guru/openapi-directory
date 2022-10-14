@@ -26,10 +26,10 @@ type GetAllFacilitiesRequest struct {
 }
 
 type GetAllFacilitiesResponse struct {
-	APIError              *shared.APIError
-	Body                  []byte
-	ContentType           string
-	GenericError          *shared.GenericError
-	GeoFacilitiesResponse *shared.GeoFacilitiesResponse
-	StatusCode            int64
+	APIError                         *shared.APIError
+	ContentType                      string
+	GenericError                     *shared.GenericError
+	GeoFacilitiesResponse            *shared.GeoFacilitiesResponse
+	StatusCode                       int64
+	GetAllFacilities200TextCsvString *string
 }

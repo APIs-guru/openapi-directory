@@ -95,12 +95,12 @@ func (s *SDK) BrowseIndexTerms(ctx context.Context, request operations.BrowseInd
 
 			res.ErskineMaySearchErskineMayIndexTermSearchResult = out
 		case utils.MatchContentType(contentType, `text/plain`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -148,12 +148,12 @@ func (s *SDK) GetAPIIndexTermIndexTermID(ctx context.Context, request operations
 
 			res.ErskineMayIndexTerm = out
 		case utils.MatchContentType(contentType, `text/plain`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 400:
 	case httpRes.StatusCode == 404:
@@ -203,12 +203,12 @@ func (s *SDK) GetAPIPart(ctx context.Context) (*operations.GetAPIPartResponse, e
 
 			res.ErskineMayParts = out
 		case utils.MatchContentType(contentType, `text/plain`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -256,12 +256,12 @@ func (s *SDK) GetAPIPartPartNumber(ctx context.Context, request operations.GetAP
 
 			res.ErskineMayPart = out
 		case utils.MatchContentType(contentType, `text/plain`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 400:
 	case httpRes.StatusCode == 404:
@@ -311,12 +311,12 @@ func (s *SDK) GetAPISectionSectionID(ctx context.Context, request operations.Get
 
 			res.ErskineMaySectionDetail = out
 		case utils.MatchContentType(contentType, `text/plain`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 400:
 	case httpRes.StatusCode == 404:
@@ -366,12 +366,12 @@ func (s *SDK) Get(ctx context.Context, request operations.GetRequest) (*operatio
 
 			res.ErskineMayChapterOverview = out
 		case utils.MatchContentType(contentType, `text/plain`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 400:
 	case httpRes.StatusCode == 404:
@@ -423,12 +423,12 @@ func (s *SDK) GetIndexTermSearchResults(ctx context.Context, request operations.
 
 			res.ErskineMaySearchErskineMayIndexTermSearchResult = out
 		case utils.MatchContentType(contentType, `text/plain`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -478,12 +478,12 @@ func (s *SDK) GetParagraphSearchResults(ctx context.Context, request operations.
 
 			res.ErskineMaySearchErskineMayParagraphSearchResult = out
 		case utils.MatchContentType(contentType, `text/plain`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -531,12 +531,12 @@ func (s *SDK) GetParagraphSectionID(ctx context.Context, request operations.GetP
 
 			res.ErskineMaySectionOverview = out
 		case utils.MatchContentType(contentType, `text/plain`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 400:
 	case httpRes.StatusCode == 404:
@@ -588,12 +588,12 @@ func (s *SDK) GetSectionSearchResults(ctx context.Context, request operations.Ge
 
 			res.ErskineMaySearchErskineMaySectionSearchResult = out
 		case utils.MatchContentType(contentType, `text/plain`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -641,12 +641,12 @@ func (s *SDK) Navigate(ctx context.Context, request operations.NavigateRequest) 
 
 			res.ErskineMaySectionOverview = out
 		case utils.MatchContentType(contentType, `text/plain`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 400:
 	case httpRes.StatusCode == 404:

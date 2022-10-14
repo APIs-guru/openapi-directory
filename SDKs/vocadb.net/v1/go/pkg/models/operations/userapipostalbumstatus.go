@@ -33,10 +33,13 @@ type UserAPIPostAlbumStatusRequest struct {
 }
 
 type UserAPIPostAlbumStatusResponse struct {
-	Body                                            []byte
-	ContentType                                     string
-	StatusCode                                      int64
-	UserAPIPostAlbumStatus200ApplicationJSONString  *string
-	UserAPIPostAlbumStatus200ApplicationJsonpString *string
-	UserAPIPostAlbumStatus200TextJSONString         *string
+	ContentType                                          string
+	StatusCode                                           int64
+	UserAPIPostAlbumStatus200ApplicationJSONString       *string
+	UserAPIPostAlbumStatus200ApplicationJavascriptString *string
+	UserAPIPostAlbumStatus200ApplicationJsonpString      *string
+	UserAPIPostAlbumStatus200ApplicationXMLString        *string
+	UserAPIPostAlbumStatus200TextJSONString              *string
+	UserAPIPostAlbumStatus200TextJavascriptString        *string
+	UserAPIPostAlbumStatus200TextXMLString               *string
 }

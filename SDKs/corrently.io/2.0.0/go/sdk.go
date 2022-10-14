@@ -3,6 +3,7 @@ package sdk
 import (
 	"context"
 	"fmt"
+	"io"
 	"net/http"
 	"openapi/internal/utils"
 	"openapi/pkg/models/operations"
@@ -573,12 +574,13 @@ func (s *SDK) QuittungComit(ctx context.Context, request operations.QuittungComi
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.QuittungComit200ApplicationJSONString = out
+			out := string(data)
+			res.QuittungComit200ApplicationJSONString = &out
 		}
 	}
 
@@ -621,12 +623,13 @@ func (s *SDK) QuittungCreate(ctx context.Context, request operations.QuittungCre
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.QuittungCreate200ApplicationJSONString = out
+			out := string(data)
+			res.QuittungCreate200ApplicationJSONString = &out
 		}
 	}
 
@@ -666,12 +669,13 @@ func (s *SDK) QuittungPrepare(ctx context.Context, request operations.QuittungPr
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.QuittungPrepare200ApplicationJSONString = out
+			out := string(data)
+			res.QuittungPrepare200ApplicationJSONString = &out
 		}
 	}
 

@@ -25,7 +25,7 @@ type PutAutomationV4ActionsAppIDDefinitionIDFunctionsFunctionTypeFunctionIDCreat
 
 type PutAutomationV4ActionsAppIDDefinitionIDFunctionsFunctionTypeFunctionIDCreateOrReplaceRequest struct {
 	PathParams PutAutomationV4ActionsAppIDDefinitionIDFunctionsFunctionTypeFunctionIDCreateOrReplacePathParams
-	Request    []byte `request:"mediaType=text/plain"`
+	Request    string `request:"mediaType=text/plain"`
 	Security   PutAutomationV4ActionsAppIDDefinitionIDFunctionsFunctionTypeFunctionIDCreateOrReplaceSecurity
 }
 

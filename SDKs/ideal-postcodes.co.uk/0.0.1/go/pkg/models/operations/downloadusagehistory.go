@@ -26,8 +26,8 @@ type DownloadUsageHistoryRequest struct {
 }
 
 type DownloadUsageHistoryResponse struct {
-	Body                []byte
-	ContentType         string
-	ErrorResponseSchema *shared.ErrorResponseSchema
-	StatusCode          int64
+	ContentType                          string
+	DownloadUsageHistory200TextCsvString *string
+	ErrorResponseSchema                  *shared.ErrorResponseSchema
+	StatusCode                           int64
 }

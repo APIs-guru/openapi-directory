@@ -296,12 +296,12 @@ func (s *SDK) GetCompanyEmployeesEmployeeIDProfilePictureWidth(ctx context.Conte
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `image/png`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetCompanyEmployeesEmployeeIDProfilePictureWidth200ImagePngBinaryString = data
+			res.GetCompanyEmployeesEmployeeIDProfilePictureWidth200ImagePngBinaryString = out
 		}
 	}
 

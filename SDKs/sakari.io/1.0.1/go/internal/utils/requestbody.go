@@ -98,6 +98,8 @@ func serializeContentType(fieldName string, mediaType string, val reflect.Value)
 			return nil, "", err
 		}
 	default:
+		val = reflect.Indirect(val)
+
 		switch {
 		case val.Type().Kind() == reflect.String:
 			if _, err := buf.WriteString(val.String()); err != nil {

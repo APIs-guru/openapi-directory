@@ -21,5 +21,6 @@ type PostWebhooksResponse struct {
 	ErrorResponseContent                 *shared.ErrorResponseContent
 	PostWebhooks201ApplicationJSONString *string
 	PostWebhooks201TextJSONString        *string
+	PostWebhooks201TextPlainString       *string
 	StatusCode                           int64
 }

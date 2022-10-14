@@ -181,7 +181,8 @@ func (s *SDK) GetIPIpv4Txt(ctx context.Context, request operations.GetIPIpv4TxtR
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			out := string(data)
+			res.DateTimeTextResponse = &out
 		}
 	default:
 		switch {
@@ -191,7 +192,8 @@ func (s *SDK) GetIPIpv4Txt(ctx context.Context, request operations.GetIPIpv4TxtR
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			out := string(data)
+			res.ErrorTextResponse = &out
 		}
 	}
 
@@ -230,7 +232,8 @@ func (s *SDK) GetIPTxt(ctx context.Context) (*operations.GetIPTxtResponse, error
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			out := string(data)
+			res.DateTimeTextResponse = &out
 		}
 	default:
 		switch {
@@ -240,7 +243,8 @@ func (s *SDK) GetIPTxt(ctx context.Context) (*operations.GetIPTxtResponse, error
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			out := string(data)
+			res.ErrorTextResponse = &out
 		}
 	}
 
@@ -465,7 +469,8 @@ func (s *SDK) GetTimezoneAreaLocationRegionTxt(ctx context.Context, request oper
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			out := string(data)
+			res.DateTimeTextResponse = &out
 		}
 	default:
 		switch {
@@ -475,7 +480,8 @@ func (s *SDK) GetTimezoneAreaLocationRegionTxt(ctx context.Context, request oper
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			out := string(data)
+			res.ErrorTextResponse = &out
 		}
 	}
 
@@ -514,7 +520,8 @@ func (s *SDK) GetTimezoneAreaLocationTxt(ctx context.Context, request operations
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			out := string(data)
+			res.DateTimeTextResponse = &out
 		}
 	default:
 		switch {
@@ -524,7 +531,8 @@ func (s *SDK) GetTimezoneAreaLocationTxt(ctx context.Context, request operations
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			out := string(data)
+			res.ErrorTextResponse = &out
 		}
 	}
 
@@ -563,7 +571,8 @@ func (s *SDK) GetTimezoneAreaTxt(ctx context.Context, request operations.GetTime
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			out := string(data)
+			res.ListTextResponse = &out
 		}
 	default:
 		switch {
@@ -573,7 +582,8 @@ func (s *SDK) GetTimezoneAreaTxt(ctx context.Context, request operations.GetTime
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			out := string(data)
+			res.ErrorTextResponse = &out
 		}
 	}
 
@@ -612,7 +622,8 @@ func (s *SDK) GetTimezoneTxt(ctx context.Context) (*operations.GetTimezoneTxtRes
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			out := string(data)
+			res.ListTextResponse = &out
 		}
 	}
 

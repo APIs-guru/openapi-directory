@@ -95,12 +95,12 @@ func (s *SDK) GetInventory(ctx context.Context, request operations.GetInventoryR
 
 			res.GetInventory200ApplicationJSONObject = out
 		case utils.MatchContentType(contentType, `application/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -275,12 +275,12 @@ func (s *SDK) UpdateBulkInventory(ctx context.Context, request operations.Update
 
 			res.UpdateBulkInventory200ApplicationJSONObject = out
 		case utils.MatchContentType(contentType, `application/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -332,12 +332,12 @@ func (s *SDK) UpdateInventoryForAnItem(ctx context.Context, request operations.U
 
 			res.UpdateInventoryForAnItem200ApplicationJSONObject = out
 		case utils.MatchContentType(contentType, `application/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 

@@ -160,24 +160,24 @@ func (s *SDK) GetV4LayersAsAppliedActivityIDContents(ctx context.Context, reques
 
 		switch {
 		case utils.MatchContentType(contentType, `application/octet-stream`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 206:
 		res.Headers = httpRes.Header
 
 		switch {
 		case utils.MatchContentType(contentType, `application/octet-stream`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 304:
 		res.Headers = httpRes.Header
@@ -388,24 +388,24 @@ func (s *SDK) GetV4LayersAsHarvestedActivityIDContents(ctx context.Context, requ
 
 		switch {
 		case utils.MatchContentType(contentType, `application/octet-stream`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 206:
 		res.Headers = httpRes.Header
 
 		switch {
 		case utils.MatchContentType(contentType, `application/octet-stream`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 304:
 		res.Headers = httpRes.Header
@@ -616,24 +616,24 @@ func (s *SDK) GetV4LayersAsPlantedActivityIDContents(ctx context.Context, reques
 
 		switch {
 		case utils.MatchContentType(contentType, `application/octet-stream`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 206:
 		res.Headers = httpRes.Header
 
 		switch {
 		case utils.MatchContentType(contentType, `application/octet-stream`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 304:
 		res.Headers = httpRes.Header
@@ -1020,24 +1020,24 @@ func (s *SDK) GetV4LayersScoutingObservationsScoutingObservationIDAttachmentsAtt
 
 		switch {
 		case utils.MatchContentType(contentType, `image/jpeg`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 206:
 		res.Headers = httpRes.Header
 
 		switch {
 		case utils.MatchContentType(contentType, `image/jpeg`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 400:
 		res.Headers = httpRes.Header
@@ -2247,12 +2247,13 @@ func (s *SDK) PostUpload(ctx context.Context, request operations.PostUploadReque
 
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.CreatedUpload = out
+			out := string(data)
+			res.CreatedUpload = &out
 		}
 	case httpRes.StatusCode == 400:
 		res.Headers = httpRes.Header

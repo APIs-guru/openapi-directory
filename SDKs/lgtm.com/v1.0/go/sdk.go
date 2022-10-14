@@ -314,7 +314,8 @@ func (s *SDK) GetAlerts(ctx context.Context, request operations.GetAlertsRequest
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			out := string(data)
+			res.GetAlerts200TextCsvString = &out
 		}
 	}
 
@@ -751,12 +752,12 @@ func (s *SDK) GetProjectConfig(ctx context.Context, request operations.GetProjec
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/x-yaml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 400:
 		switch {
@@ -1212,12 +1213,12 @@ func (s *SDK) SetProjectConfig(ctx context.Context, request operations.SetProjec
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/x-yaml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 

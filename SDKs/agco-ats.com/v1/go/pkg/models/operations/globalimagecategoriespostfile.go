@@ -21,6 +21,8 @@ type GlobalImageCategoriesPostFileResponse struct {
 	Body                                                  []byte
 	ContentType                                           string
 	GlobalImageCategoriesPostFile200ApplicationJSONString *string
+	GlobalImageCategoriesPostFile200ApplicationXMLString  *string
 	GlobalImageCategoriesPostFile200TextJSONString        *string
+	GlobalImageCategoriesPostFile200TextXMLString         *string
 	StatusCode                                            int64
 }

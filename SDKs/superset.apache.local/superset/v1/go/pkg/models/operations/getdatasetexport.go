@@ -34,8 +34,8 @@ type GetDatasetExport500ApplicationJSON struct {
 }
 
 type GetDatasetExportResponse struct {
-	Body                                     []byte
 	ContentType                              string
+	GetDatasetExport200TextPlainString       *string
 	GetDatasetExport400ApplicationJSONObject *GetDatasetExport400ApplicationJSON
 	GetDatasetExport401ApplicationJSONObject *GetDatasetExport401ApplicationJSON
 	GetDatasetExport404ApplicationJSONObject *GetDatasetExport404ApplicationJSON

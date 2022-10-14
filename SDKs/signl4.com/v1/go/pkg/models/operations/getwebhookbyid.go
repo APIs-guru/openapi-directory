@@ -18,5 +18,6 @@ type GetWebhookByIDResponse struct {
 	ErrorResponseContent                   *shared.ErrorResponseContent
 	GetWebhookByID200ApplicationJSONString *string
 	GetWebhookByID200TextJSONString        *string
+	GetWebhookByID200TextPlainString       *string
 	StatusCode                             int64
 }

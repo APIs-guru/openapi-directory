@@ -9,8 +9,8 @@ type StoryIDAnalyticsRequest struct {
 }
 
 type StoryIDAnalyticsResponse struct {
-	Body                                 []byte
 	ContentType                          string
+	LoginButton                          *string
 	StatusCode                           int64
 	ProblemDetail                        *interface{}
 	RevealJsPresenationWithAnalyticsData *string

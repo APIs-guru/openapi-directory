@@ -16,8 +16,8 @@ type ContactsGetRequest struct {
 }
 
 type ContactsGetResponse struct {
-	Body                                []byte
 	ContactsGet200ApplicationJSONString *string
+	ContactsGet200TextCsvString         *string
 	ContentType                         string
 	StatusCode                          int64
 }

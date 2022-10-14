@@ -25,8 +25,9 @@ type GetMappingValuesKey200ApplicationJSON struct {
 }
 
 type GetMappingValuesKeyResponse struct {
-	Body                                        []byte
 	ContentType                                 string
 	GetMappingValuesKey200ApplicationJSONObject *GetMappingValuesKey200ApplicationJSON
+	GetMappingValuesKey400WildcardString        *string
+	GetMappingValuesKey500WildcardString        *string
 	StatusCode                                  int64
 }

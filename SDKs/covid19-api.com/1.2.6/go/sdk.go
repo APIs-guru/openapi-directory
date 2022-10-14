@@ -87,12 +87,12 @@ func (s *SDK) GetDailyReportAllCountries(ctx context.Context, request operations
 
 			res.GetDailyReportAllCountries200ApplicationJSONObjects = out
 		case utils.MatchContentType(contentType, `application/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -135,12 +135,12 @@ func (s *SDK) GetDailyReportByCountryCode(ctx context.Context, request operation
 
 			res.GetDailyReportByCountryCode200ApplicationJSONObjects = out
 		case utils.MatchContentType(contentType, `application/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -183,12 +183,12 @@ func (s *SDK) GetDailyReportByCountryName(ctx context.Context, request operation
 
 			res.GetDailyReportByCountryName200ApplicationJSONObjects = out
 		case utils.MatchContentType(contentType, `application/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -231,12 +231,12 @@ func (s *SDK) GetDailyReportTotals(ctx context.Context, request operations.GetDa
 
 			res.GetDailyReportTotals200ApplicationJSONObjects = out
 		case utils.MatchContentType(contentType, `application/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -279,12 +279,12 @@ func (s *SDK) GetLatestAllCountries(ctx context.Context, request operations.GetL
 
 			res.GetLatestAllCountries200ApplicationJSONObjects = out
 		case utils.MatchContentType(contentType, `application/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -327,12 +327,12 @@ func (s *SDK) GetLatestCountryDataByCode(ctx context.Context, request operations
 
 			res.GetLatestCountryDataByCode200ApplicationJSONObjects = out
 		case utils.MatchContentType(contentType, `application/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -375,12 +375,12 @@ func (s *SDK) GetLatestCountryDataByName(ctx context.Context, request operations
 
 			res.GetLatestCountryDataByName200ApplicationJSONObjects = out
 		case utils.MatchContentType(contentType, `application/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -423,12 +423,12 @@ func (s *SDK) GetLatestTotals(ctx context.Context, request operations.GetLatestT
 
 			res.GetLatestTotals200ApplicationJSONObjects = out
 		case utils.MatchContentType(contentType, `application/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -471,12 +471,12 @@ func (s *SDK) GetListOfCountries(ctx context.Context, request operations.GetList
 
 			res.GetListOfCountries200ApplicationJSONObjects = out
 		case utils.MatchContentType(contentType, `application/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 

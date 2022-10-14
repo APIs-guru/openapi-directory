@@ -1,7 +1,8 @@
 package operations
 
 type GetCrxdeStatusResponse struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+	ContentType                      string
+	StatusCode                       int64
+	GetCrxdeStatus200PlainTextString *string
+	GetCrxdeStatus404PlainTextString *string
 }

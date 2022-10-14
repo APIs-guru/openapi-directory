@@ -39,7 +39,7 @@ type OpenSearchRequest struct {
 }
 
 type OpenSearchResponse struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+	ContentType                               string
+	StatusCode                                int64
+	OpenSearch200ApplicationAtomPlusXMLString *string
 }

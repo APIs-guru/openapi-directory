@@ -23,6 +23,7 @@ type DeleteTeamsTeamIDMembershipsUserIDResponse struct {
 	ContentType                                                string
 	DeleteTeamsTeamIDMembershipsUserID200ApplicationJSONString *string
 	DeleteTeamsTeamIDMembershipsUserID200TextJSONString        *string
+	DeleteTeamsTeamIDMembershipsUserID200TextPlainString       *string
 	ErrorResponseContent                                       *shared.ErrorResponseContent
 	StatusCode                                                 int64
 }

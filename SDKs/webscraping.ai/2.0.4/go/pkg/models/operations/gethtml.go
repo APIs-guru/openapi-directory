@@ -17,9 +17,9 @@ type GetHTMLRequest struct {
 }
 
 type GetHTMLResponse struct {
-	Body        []byte
-	ContentType string
-	Error       *shared.Error
-	PageError   *shared.PageError
-	StatusCode  int64
+	ContentType              string
+	Error                    *shared.Error
+	PageError                *shared.PageError
+	StatusCode               int64
+	GetHTML200TextHTMLString *string
 }

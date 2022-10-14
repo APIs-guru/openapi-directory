@@ -236,12 +236,12 @@ func (s *SDK) ExportAdvisories(ctx context.Context, request operations.ExportAdv
 
 			res.ControllersAdvisoryInlineItems = out
 		case utils.MatchContentType(contentType, `text/csv`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -284,12 +284,12 @@ func (s *SDK) ExportAdvisorySystems(ctx context.Context, request operations.Expo
 
 			res.ControllersSystemInlineItems = out
 		case utils.MatchContentType(contentType, `text/csv`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -373,12 +373,12 @@ func (s *SDK) ExportPackages(ctx context.Context, request operations.ExportPacka
 
 			res.ControllersPackageItems = out
 		case utils.MatchContentType(contentType, `text/csv`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -421,12 +421,12 @@ func (s *SDK) ExportSystemAdvisories(ctx context.Context, request operations.Exp
 
 			res.ControllersSystemAdvisoriesDbLookups = out
 		case utils.MatchContentType(contentType, `text/csv`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -510,12 +510,12 @@ func (s *SDK) ExportSystems(ctx context.Context, request operations.ExportSystem
 
 			res.ControllersSystemInlineItems = out
 		case utils.MatchContentType(contentType, `text/csv`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 

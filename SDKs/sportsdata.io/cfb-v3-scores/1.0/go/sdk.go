@@ -3,6 +3,7 @@ package sdk
 import (
 	"context"
 	"fmt"
+	"io"
 	"net/http"
 	"openapi/internal/utils"
 	"openapi/pkg/models/operations"
@@ -242,12 +243,13 @@ func (s *SDK) CurrentSeasontype(ctx context.Context, request operations.CurrentS
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.CurrentSeasontype200ApplicationJSONString = out
+			out := string(data)
+			res.CurrentSeasontype200ApplicationJSONString = &out
 		}
 	}
 

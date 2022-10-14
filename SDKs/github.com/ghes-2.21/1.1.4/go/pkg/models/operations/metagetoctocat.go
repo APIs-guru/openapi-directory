@@ -9,7 +9,7 @@ type MetaGetOctocatRequest struct {
 }
 
 type MetaGetOctocatResponse struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+	ContentType                                     string
+	StatusCode                                      int64
+	MetaGetOctocat200ApplicationOctocatStreamString *string
 }

@@ -152,12 +152,12 @@ func (s *SDK) PriceBulkUploads(ctx context.Context, request operations.PriceBulk
 
 			res.PriceBulkUploads200ApplicationJSONObject = out
 		case utils.MatchContentType(contentType, `application/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -207,12 +207,12 @@ func (s *SDK) UpdatePrice(ctx context.Context, request operations.UpdatePriceReq
 
 			res.UpdatePrice200ApplicationJSONObject = out
 		case utils.MatchContentType(contentType, `application/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 

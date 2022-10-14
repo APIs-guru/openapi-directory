@@ -9,7 +9,8 @@ type PingUserRequest struct {
 }
 
 type PingUserResponse struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+	Body                       []byte
+	ContentType                string
+	StatusCode                 int64
+	PingUser200TextPlainString *string
 }

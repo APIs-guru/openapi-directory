@@ -3013,12 +3013,12 @@ func (s *SDK) GetArtistImage(ctx context.Context, request operations.GetArtistIm
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `image/*`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetArtistImage200ImageWildcardBinaryString = data
+			res.GetArtistImage200ImageWildcardBinaryString = out
 		}
 	case httpRes.StatusCode == 404:
 		switch {
@@ -3133,12 +3133,12 @@ func (s *SDK) GetAttachment(ctx context.Context, request operations.GetAttachmen
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/octet-stream`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetAttachment200ApplicationOctetStreamBinaryString = data
+			res.GetAttachment200ApplicationOctetStreamBinaryString = out
 		}
 	case httpRes.StatusCode == 404:
 		switch {
@@ -3198,12 +3198,12 @@ func (s *SDK) GetAudioStream(ctx context.Context, request operations.GetAudioStr
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `audio/*`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetAudioStream200AudioWildcardBinaryString = data
+			res.GetAudioStream200AudioWildcardBinaryString = out
 		}
 	}
 
@@ -3239,12 +3239,12 @@ func (s *SDK) GetAudioStreamByContainer(ctx context.Context, request operations.
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `audio/*`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetAudioStreamByContainer200AudioWildcardBinaryString = data
+			res.GetAudioStreamByContainer200AudioWildcardBinaryString = out
 		}
 	}
 
@@ -3335,12 +3335,12 @@ func (s *SDK) GetBitrateTestBytes(ctx context.Context, request operations.GetBit
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/octet-stream`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetBitrateTestBytes200ApplicationOctetStreamBinaryString = data
+			res.GetBitrateTestBytes200ApplicationOctetStreamBinaryString = out
 		}
 	case httpRes.StatusCode == 400:
 		switch {
@@ -3366,12 +3366,12 @@ func (s *SDK) GetBitrateTestBytes(ctx context.Context, request operations.GetBit
 
 			res.ProblemDetails = out
 		case utils.MatchContentType(contentType, `application/octet-stream`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 401:
 	case httpRes.StatusCode == 403:
@@ -3535,33 +3535,37 @@ func (s *SDK) GetBrandingCSS(ctx context.Context) (*operations.GetBrandingCSSRes
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetBrandingCSS200ApplicationJSONString = out
+			out := string(data)
+			res.GetBrandingCSS200ApplicationJSONString = &out
 		case utils.MatchContentType(contentType, `application/json; profile="CamelCase"`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetBrandingCSS200ApplicationJSONString = out
+			out := string(data)
+			res.GetBrandingCSS200ApplicationJSONString = &out
 		case utils.MatchContentType(contentType, `application/json; profile="PascalCase"`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetBrandingCSS200ApplicationJSONString = out
+			out := string(data)
+			res.GetBrandingCSS200ApplicationJSONString = &out
 		case utils.MatchContentType(contentType, `text/css`):
 			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			out := string(data)
+			res.GetBrandingCSS200TextCSSString = &out
 		}
 	case httpRes.StatusCode == 204:
 	}
@@ -3596,33 +3600,37 @@ func (s *SDK) GetBrandingCSS2(ctx context.Context) (*operations.GetBrandingCSS2R
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetBrandingCSS2200ApplicationJSONString = out
+			out := string(data)
+			res.GetBrandingCSS2200ApplicationJSONString = &out
 		case utils.MatchContentType(contentType, `application/json; profile="CamelCase"`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetBrandingCSS2200ApplicationJSONString = out
+			out := string(data)
+			res.GetBrandingCSS2200ApplicationJSONString = &out
 		case utils.MatchContentType(contentType, `application/json; profile="PascalCase"`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetBrandingCSS2200ApplicationJSONString = out
+			out := string(data)
+			res.GetBrandingCSS2200ApplicationJSONString = &out
 		case utils.MatchContentType(contentType, `text/css`):
 			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			out := string(data)
+			res.GetBrandingCSS2200TextCSSString = &out
 		}
 	case httpRes.StatusCode == 204:
 	}
@@ -4127,12 +4135,12 @@ func (s *SDK) GetConnectionManager(ctx context.Context, request operations.GetCo
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetConnectionManager200TextXMLBinaryString = data
+			res.GetConnectionManager200TextXMLBinaryString = out
 		}
 	case httpRes.StatusCode == 503:
 	}
@@ -4167,12 +4175,12 @@ func (s *SDK) GetConnectionManager2(ctx context.Context, request operations.GetC
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetConnectionManager2200TextXMLBinaryString = data
+			res.GetConnectionManager2200TextXMLBinaryString = out
 		}
 	case httpRes.StatusCode == 503:
 	}
@@ -4207,12 +4215,12 @@ func (s *SDK) GetConnectionManager3(ctx context.Context, request operations.GetC
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetConnectionManager3200TextXMLBinaryString = data
+			res.GetConnectionManager3200TextXMLBinaryString = out
 		}
 	case httpRes.StatusCode == 503:
 	}
@@ -4247,12 +4255,12 @@ func (s *SDK) GetContentDirectory(ctx context.Context, request operations.GetCon
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetContentDirectory200TextXMLBinaryString = data
+			res.GetContentDirectory200TextXMLBinaryString = out
 		}
 	case httpRes.StatusCode == 503:
 	}
@@ -4287,12 +4295,12 @@ func (s *SDK) GetContentDirectory2(ctx context.Context, request operations.GetCo
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetContentDirectory2200TextXMLBinaryString = data
+			res.GetContentDirectory2200TextXMLBinaryString = out
 		}
 	case httpRes.StatusCode == 503:
 	}
@@ -4327,12 +4335,12 @@ func (s *SDK) GetContentDirectory3(ctx context.Context, request operations.GetCo
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetContentDirectory3200TextXMLBinaryString = data
+			res.GetContentDirectory3200TextXMLBinaryString = out
 		}
 	case httpRes.StatusCode == 503:
 	}
@@ -4613,19 +4621,19 @@ func (s *SDK) GetDashboardConfigurationPage(ctx context.Context, request operati
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/x-javascript`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetDashboardConfigurationPage200ApplicationXJavascriptBinaryString = data
+			res.GetDashboardConfigurationPage200ApplicationXJavascriptBinaryString = out
 		case utils.MatchContentType(contentType, `text/html`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetDashboardConfigurationPage200TextHTMLBinaryString = data
+			res.GetDashboardConfigurationPage200TextHTMLBinaryString = out
 		}
 	case httpRes.StatusCode == 404:
 		switch {
@@ -4960,12 +4968,12 @@ func (s *SDK) GetDescriptionXML(ctx context.Context, request operations.GetDescr
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetDescriptionXML200TextXMLBinaryString = data
+			res.GetDescriptionXML200TextXMLBinaryString = out
 		}
 	case httpRes.StatusCode == 503:
 	}
@@ -5000,12 +5008,12 @@ func (s *SDK) GetDescriptionXML2(ctx context.Context, request operations.GetDesc
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetDescriptionXML2200TextXMLBinaryString = data
+			res.GetDescriptionXML2200TextXMLBinaryString = out
 		}
 	case httpRes.StatusCode == 503:
 	}
@@ -5373,19 +5381,19 @@ func (s *SDK) GetDownload(ctx context.Context, request operations.GetDownloadReq
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `audio/*`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetDownload200AudioWildcardBinaryString = data
+			res.GetDownload200AudioWildcardBinaryString = out
 		case utils.MatchContentType(contentType, `video/*`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetDownload200VideoWildcardBinaryString = data
+			res.GetDownload200VideoWildcardBinaryString = out
 		}
 	case httpRes.StatusCode == 401:
 	case httpRes.StatusCode == 403:
@@ -5715,12 +5723,12 @@ func (s *SDK) GetFallbackFont(ctx context.Context, request operations.GetFallbac
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `font/*`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetFallbackFont200FontWildcardBinaryString = data
+			res.GetFallbackFont200FontWildcardBinaryString = out
 		}
 	case httpRes.StatusCode == 401:
 	case httpRes.StatusCode == 403:
@@ -5811,19 +5819,19 @@ func (s *SDK) GetFile(ctx context.Context, request operations.GetFileRequest) (*
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `audio/*`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetFile200AudioWildcardBinaryString = data
+			res.GetFile200AudioWildcardBinaryString = out
 		case utils.MatchContentType(contentType, `video/*`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetFile200VideoWildcardBinaryString = data
+			res.GetFile200VideoWildcardBinaryString = out
 		}
 	case httpRes.StatusCode == 401:
 	case httpRes.StatusCode == 403:
@@ -5993,12 +6001,12 @@ func (s *SDK) GetGeneralImage(ctx context.Context, request operations.GetGeneral
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `image/*`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetGeneralImage200ImageWildcardBinaryString = data
+			res.GetGeneralImage200ImageWildcardBinaryString = out
 		}
 	case httpRes.StatusCode == 404:
 		switch {
@@ -6024,12 +6032,12 @@ func (s *SDK) GetGeneralImage(ctx context.Context, request operations.GetGeneral
 
 			res.ProblemDetails = out
 		case utils.MatchContentType(contentType, `application/octet-stream`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -6177,12 +6185,12 @@ func (s *SDK) GetGenreImage(ctx context.Context, request operations.GetGenreImag
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `image/*`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetGenreImage200ImageWildcardBinaryString = data
+			res.GetGenreImage200ImageWildcardBinaryString = out
 		}
 	case httpRes.StatusCode == 404:
 		switch {
@@ -6242,12 +6250,12 @@ func (s *SDK) GetGenreImageByIndex(ctx context.Context, request operations.GetGe
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `image/*`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetGenreImageByIndex200ImageWildcardBinaryString = data
+			res.GetGenreImageByIndex200ImageWildcardBinaryString = out
 		}
 	case httpRes.StatusCode == 404:
 		switch {
@@ -6496,12 +6504,12 @@ func (s *SDK) GetHlsAudioSegment(ctx context.Context, request operations.GetHlsA
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `audio/*`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetHlsAudioSegment200AudioWildcardBinaryString = data
+			res.GetHlsAudioSegment200AudioWildcardBinaryString = out
 		}
 	case httpRes.StatusCode == 401:
 	case httpRes.StatusCode == 403:
@@ -6537,12 +6545,12 @@ func (s *SDK) GetHlsAudioSegmentLegacyAac(ctx context.Context, request operation
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `audio/*`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetHlsAudioSegmentLegacyAac200AudioWildcardBinaryString = data
+			res.GetHlsAudioSegmentLegacyAac200AudioWildcardBinaryString = out
 		}
 	}
 
@@ -6576,12 +6584,12 @@ func (s *SDK) GetHlsAudioSegmentLegacyMp3(ctx context.Context, request operation
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `audio/*`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetHlsAudioSegmentLegacyMp3200AudioWildcardBinaryString = data
+			res.GetHlsAudioSegmentLegacyMp3200AudioWildcardBinaryString = out
 		}
 	}
 
@@ -6615,12 +6623,12 @@ func (s *SDK) GetHlsPlaylistLegacy(ctx context.Context, request operations.GetHl
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/x-mpegURL`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetHlsPlaylistLegacy200ApplicationXMpegurlBinaryString = data
+			res.GetHlsPlaylistLegacy200ApplicationXMpegurlBinaryString = out
 		}
 	case httpRes.StatusCode == 401:
 	case httpRes.StatusCode == 403:
@@ -6658,12 +6666,12 @@ func (s *SDK) GetHlsVideoSegment(ctx context.Context, request operations.GetHlsV
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `video/*`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetHlsVideoSegment200VideoWildcardBinaryString = data
+			res.GetHlsVideoSegment200VideoWildcardBinaryString = out
 		}
 	case httpRes.StatusCode == 401:
 	case httpRes.StatusCode == 403:
@@ -6699,12 +6707,12 @@ func (s *SDK) GetHlsVideoSegmentLegacy(ctx context.Context, request operations.G
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `video/*`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetHlsVideoSegmentLegacy200VideoWildcardBinaryString = data
+			res.GetHlsVideoSegmentLegacy200VideoWildcardBinaryString = out
 		}
 	case httpRes.StatusCode == 404:
 		switch {
@@ -6762,12 +6770,12 @@ func (s *SDK) GetIcon(ctx context.Context, request operations.GetIconRequest) (*
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `image/*`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetIcon200ImageWildcardBinaryString = data
+			res.GetIcon200ImageWildcardBinaryString = out
 		}
 	case httpRes.StatusCode == 404:
 		switch {
@@ -6826,12 +6834,12 @@ func (s *SDK) GetIconID(ctx context.Context, request operations.GetIconIDRequest
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `image/*`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetIconID200ImageWildcardBinaryString = data
+			res.GetIconID200ImageWildcardBinaryString = out
 		}
 	case httpRes.StatusCode == 404:
 		switch {
@@ -7458,12 +7466,12 @@ func (s *SDK) GetItemImage(ctx context.Context, request operations.GetItemImageR
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `image/*`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetItemImage200ImageWildcardBinaryString = data
+			res.GetItemImage200ImageWildcardBinaryString = out
 		}
 	case httpRes.StatusCode == 404:
 		switch {
@@ -7523,12 +7531,12 @@ func (s *SDK) GetItemImage2(ctx context.Context, request operations.GetItemImage
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `image/*`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetItemImage2200ImageWildcardBinaryString = data
+			res.GetItemImage2200ImageWildcardBinaryString = out
 		}
 	case httpRes.StatusCode == 404:
 		switch {
@@ -7588,12 +7596,12 @@ func (s *SDK) GetItemImageByIndex(ctx context.Context, request operations.GetIte
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `image/*`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetItemImageByIndex200ImageWildcardBinaryString = data
+			res.GetItemImageByIndex200ImageWildcardBinaryString = out
 		}
 	case httpRes.StatusCode == 404:
 		switch {
@@ -8129,12 +8137,12 @@ func (s *SDK) GetLiveHlsStream(ctx context.Context, request operations.GetLiveHl
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/x-mpegURL`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetLiveHlsStream200ApplicationXMpegurlBinaryString = data
+			res.GetLiveHlsStream200ApplicationXMpegurlBinaryString = out
 		}
 	case httpRes.StatusCode == 401:
 	case httpRes.StatusCode == 403:
@@ -8170,12 +8178,12 @@ func (s *SDK) GetLiveRecordingFile(ctx context.Context, request operations.GetLi
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `video/*`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetLiveRecordingFile200VideoWildcardBinaryString = data
+			res.GetLiveRecordingFile200VideoWildcardBinaryString = out
 		}
 	case httpRes.StatusCode == 404:
 		switch {
@@ -8233,12 +8241,12 @@ func (s *SDK) GetLiveStreamFile(ctx context.Context, request operations.GetLiveS
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `video/*`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetLiveStreamFile200VideoWildcardBinaryString = data
+			res.GetLiveStreamFile200VideoWildcardBinaryString = out
 		}
 	case httpRes.StatusCode == 404:
 		switch {
@@ -8634,12 +8642,12 @@ func (s *SDK) GetLogFile(ctx context.Context, request operations.GetLogFileReque
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `text/plain`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetLogFile200TextPlainBinaryString = data
+			res.GetLogFile200TextPlainBinaryString = out
 		}
 	case httpRes.StatusCode == 401:
 	case httpRes.StatusCode == 403:
@@ -8677,12 +8685,12 @@ func (s *SDK) GetMasterHlsAudioPlaylist(ctx context.Context, request operations.
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/x-mpegURL`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetMasterHlsAudioPlaylist200ApplicationXMpegurlBinaryString = data
+			res.GetMasterHlsAudioPlaylist200ApplicationXMpegurlBinaryString = out
 		}
 	case httpRes.StatusCode == 401:
 	case httpRes.StatusCode == 403:
@@ -8720,12 +8728,12 @@ func (s *SDK) GetMasterHlsVideoPlaylist(ctx context.Context, request operations.
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/x-mpegURL`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetMasterHlsVideoPlaylist200ApplicationXMpegurlBinaryString = data
+			res.GetMasterHlsVideoPlaylist200ApplicationXMpegurlBinaryString = out
 		}
 	case httpRes.StatusCode == 401:
 	case httpRes.StatusCode == 403:
@@ -8818,12 +8826,12 @@ func (s *SDK) GetMediaInfoImage(ctx context.Context, request operations.GetMedia
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `image/*`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetMediaInfoImage200ImageWildcardBinaryString = data
+			res.GetMediaInfoImage200ImageWildcardBinaryString = out
 		}
 	case httpRes.StatusCode == 404:
 		switch {
@@ -8849,12 +8857,12 @@ func (s *SDK) GetMediaInfoImage(ctx context.Context, request operations.GetMedia
 
 			res.ProblemDetails = out
 		case utils.MatchContentType(contentType, `application/octet-stream`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -8943,12 +8951,12 @@ func (s *SDK) GetMediaReceiverRegistrar(ctx context.Context, request operations.
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetMediaReceiverRegistrar200TextXMLBinaryString = data
+			res.GetMediaReceiverRegistrar200TextXMLBinaryString = out
 		}
 	case httpRes.StatusCode == 503:
 	}
@@ -8983,12 +8991,12 @@ func (s *SDK) GetMediaReceiverRegistrar2(ctx context.Context, request operations
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetMediaReceiverRegistrar2200TextXMLBinaryString = data
+			res.GetMediaReceiverRegistrar2200TextXMLBinaryString = out
 		}
 	case httpRes.StatusCode == 503:
 	}
@@ -9023,12 +9031,12 @@ func (s *SDK) GetMediaReceiverRegistrar3(ctx context.Context, request operations
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetMediaReceiverRegistrar3200TextXMLBinaryString = data
+			res.GetMediaReceiverRegistrar3200TextXMLBinaryString = out
 		}
 	case httpRes.StatusCode == 503:
 	}
@@ -9450,12 +9458,12 @@ func (s *SDK) GetMusicGenreImage(ctx context.Context, request operations.GetMusi
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `image/*`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetMusicGenreImage200ImageWildcardBinaryString = data
+			res.GetMusicGenreImage200ImageWildcardBinaryString = out
 		}
 	case httpRes.StatusCode == 404:
 		switch {
@@ -9515,12 +9523,12 @@ func (s *SDK) GetMusicGenreImageByIndex(ctx context.Context, request operations.
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `image/*`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetMusicGenreImageByIndex200ImageWildcardBinaryString = data
+			res.GetMusicGenreImageByIndex200ImageWildcardBinaryString = out
 		}
 	case httpRes.StatusCode == 404:
 		switch {
@@ -10186,26 +10194,29 @@ func (s *SDK) GetParentPath(ctx context.Context, request operations.GetParentPat
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetParentPath200ApplicationJSONString = out
+			out := string(data)
+			res.GetParentPath200ApplicationJSONString = &out
 		case utils.MatchContentType(contentType, `application/json; profile="CamelCase"`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetParentPath200ApplicationJSONString = out
+			out := string(data)
+			res.GetParentPath200ApplicationJSONString = &out
 		case utils.MatchContentType(contentType, `application/json; profile="PascalCase"`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetParentPath200ApplicationJSONString = out
+			out := string(data)
+			res.GetParentPath200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 401:
 	case httpRes.StatusCode == 403:
@@ -10434,12 +10445,12 @@ func (s *SDK) GetPersonImage(ctx context.Context, request operations.GetPersonIm
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `image/*`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetPersonImage200ImageWildcardBinaryString = data
+			res.GetPersonImage200ImageWildcardBinaryString = out
 		}
 	case httpRes.StatusCode == 404:
 		switch {
@@ -10499,12 +10510,12 @@ func (s *SDK) GetPersonImageByIndex(ctx context.Context, request operations.GetP
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `image/*`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetPersonImageByIndex200ImageWildcardBinaryString = data
+			res.GetPersonImageByIndex200ImageWildcardBinaryString = out
 		}
 	case httpRes.StatusCode == 404:
 		switch {
@@ -10738,26 +10749,29 @@ func (s *SDK) GetPingSystem(ctx context.Context) (*operations.GetPingSystemRespo
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetPingSystem200ApplicationJSONString = out
+			out := string(data)
+			res.GetPingSystem200ApplicationJSONString = &out
 		case utils.MatchContentType(contentType, `application/json; profile="CamelCase"`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetPingSystem200ApplicationJSONString = out
+			out := string(data)
+			res.GetPingSystem200ApplicationJSONString = &out
 		case utils.MatchContentType(contentType, `application/json; profile="PascalCase"`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetPingSystem200ApplicationJSONString = out
+			out := string(data)
+			res.GetPingSystem200ApplicationJSONString = &out
 		}
 	}
 
@@ -11631,12 +11645,12 @@ func (s *SDK) GetRatingImage(ctx context.Context, request operations.GetRatingIm
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `image/*`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetRatingImage200ImageWildcardBinaryString = data
+			res.GetRatingImage200ImageWildcardBinaryString = out
 		}
 	case httpRes.StatusCode == 404:
 		switch {
@@ -11662,12 +11676,12 @@ func (s *SDK) GetRatingImage(ctx context.Context, request operations.GetRatingIm
 
 			res.ProblemDetails = out
 		case utils.MatchContentType(contentType, `application/octet-stream`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -12155,12 +12169,12 @@ func (s *SDK) GetRemoteImage(ctx context.Context, request operations.GetRemoteIm
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `image/*`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetRemoteImage200ImageWildcardBinaryString = data
+			res.GetRemoteImage200ImageWildcardBinaryString = out
 		}
 	case httpRes.StatusCode == 404:
 		switch {
@@ -12186,12 +12200,12 @@ func (s *SDK) GetRemoteImage(ctx context.Context, request operations.GetRemoteIm
 
 			res.ProblemDetails = out
 		case utils.MatchContentType(contentType, `application/octet-stream`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -12387,12 +12401,12 @@ func (s *SDK) GetRemoteSearchImage(ctx context.Context, request operations.GetRe
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `image/*`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetRemoteSearchImage200ImageWildcardBinaryString = data
+			res.GetRemoteSearchImage200ImageWildcardBinaryString = out
 		}
 	case httpRes.StatusCode == 401:
 	case httpRes.StatusCode == 403:
@@ -12428,12 +12442,12 @@ func (s *SDK) GetRemoteSubtitles(ctx context.Context, request operations.GetRemo
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `text/*`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetRemoteSubtitles200TextWildcardBinaryString = data
+			res.GetRemoteSubtitles200TextWildcardBinaryString = out
 		}
 	case httpRes.StatusCode == 401:
 	case httpRes.StatusCode == 403:
@@ -13634,12 +13648,12 @@ func (s *SDK) GetStudioImage(ctx context.Context, request operations.GetStudioIm
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `image/*`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetStudioImage200ImageWildcardBinaryString = data
+			res.GetStudioImage200ImageWildcardBinaryString = out
 		}
 	case httpRes.StatusCode == 404:
 		switch {
@@ -13699,12 +13713,12 @@ func (s *SDK) GetStudioImageByIndex(ctx context.Context, request operations.GetS
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `image/*`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetStudioImageByIndex200ImageWildcardBinaryString = data
+			res.GetStudioImageByIndex200ImageWildcardBinaryString = out
 		}
 	case httpRes.StatusCode == 404:
 		switch {
@@ -13821,12 +13835,12 @@ func (s *SDK) GetSubtitle(ctx context.Context, request operations.GetSubtitleReq
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `text/*`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetSubtitle200TextWildcardBinaryString = data
+			res.GetSubtitle200TextWildcardBinaryString = out
 		}
 	}
 
@@ -13862,12 +13876,12 @@ func (s *SDK) GetSubtitlePlaylist(ctx context.Context, request operations.GetSub
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/x-mpegURL`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetSubtitlePlaylist200ApplicationXMpegurlBinaryString = data
+			res.GetSubtitlePlaylist200ApplicationXMpegurlBinaryString = out
 		}
 	case httpRes.StatusCode == 401:
 	case httpRes.StatusCode == 403:
@@ -13905,12 +13919,12 @@ func (s *SDK) GetSubtitleWithTicks(ctx context.Context, request operations.GetSu
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `text/*`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetSubtitleWithTicks200TextWildcardBinaryString = data
+			res.GetSubtitleWithTicks200TextWildcardBinaryString = out
 		}
 	}
 
@@ -14702,12 +14716,12 @@ func (s *SDK) GetUniversalAudioStream(ctx context.Context, request operations.Ge
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `audio/*`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetUniversalAudioStream200AudioWildcardBinaryString = data
+			res.GetUniversalAudioStream200AudioWildcardBinaryString = out
 		}
 	case httpRes.StatusCode == 302:
 	case httpRes.StatusCode == 401:
@@ -14882,12 +14896,12 @@ func (s *SDK) GetUserImage(ctx context.Context, request operations.GetUserImageR
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `image/*`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetUserImage200ImageWildcardBinaryString = data
+			res.GetUserImage200ImageWildcardBinaryString = out
 		}
 	case httpRes.StatusCode == 404:
 		switch {
@@ -14947,12 +14961,12 @@ func (s *SDK) GetUserImageByIndex(ctx context.Context, request operations.GetUse
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `image/*`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetUserImageByIndex200ImageWildcardBinaryString = data
+			res.GetUserImageByIndex200ImageWildcardBinaryString = out
 		}
 	case httpRes.StatusCode == 404:
 		switch {
@@ -15177,12 +15191,12 @@ func (s *SDK) GetVariantHlsAudioPlaylist(ctx context.Context, request operations
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/x-mpegURL`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetVariantHlsAudioPlaylist200ApplicationXMpegurlBinaryString = data
+			res.GetVariantHlsAudioPlaylist200ApplicationXMpegurlBinaryString = out
 		}
 	case httpRes.StatusCode == 401:
 	case httpRes.StatusCode == 403:
@@ -15220,12 +15234,12 @@ func (s *SDK) GetVariantHlsVideoPlaylist(ctx context.Context, request operations
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/x-mpegURL`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetVariantHlsVideoPlaylist200ApplicationXMpegurlBinaryString = data
+			res.GetVariantHlsVideoPlaylist200ApplicationXMpegurlBinaryString = out
 		}
 	case httpRes.StatusCode == 401:
 	case httpRes.StatusCode == 403:
@@ -15263,12 +15277,12 @@ func (s *SDK) GetVideoStream(ctx context.Context, request operations.GetVideoStr
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `video/*`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetVideoStream200VideoWildcardBinaryString = data
+			res.GetVideoStream200VideoWildcardBinaryString = out
 		}
 	}
 
@@ -15304,12 +15318,12 @@ func (s *SDK) GetVideoStreamByContainer(ctx context.Context, request operations.
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `video/*`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetVideoStreamByContainer200VideoWildcardBinaryString = data
+			res.GetVideoStreamByContainer200VideoWildcardBinaryString = out
 		}
 	}
 
@@ -15593,12 +15607,12 @@ func (s *SDK) HeadArtistImage(ctx context.Context, request operations.HeadArtist
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `image/*`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.HeadArtistImage200ImageWildcardBinaryString = data
+			res.HeadArtistImage200ImageWildcardBinaryString = out
 		}
 	case httpRes.StatusCode == 404:
 		switch {
@@ -15658,12 +15672,12 @@ func (s *SDK) HeadAudioStream(ctx context.Context, request operations.HeadAudioS
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `audio/*`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.HeadAudioStream200AudioWildcardBinaryString = data
+			res.HeadAudioStream200AudioWildcardBinaryString = out
 		}
 	}
 
@@ -15699,12 +15713,12 @@ func (s *SDK) HeadAudioStreamByContainer(ctx context.Context, request operations
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `audio/*`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.HeadAudioStreamByContainer200AudioWildcardBinaryString = data
+			res.HeadAudioStreamByContainer200AudioWildcardBinaryString = out
 		}
 	}
 
@@ -15740,12 +15754,12 @@ func (s *SDK) HeadGenreImage(ctx context.Context, request operations.HeadGenreIm
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `image/*`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.HeadGenreImage200ImageWildcardBinaryString = data
+			res.HeadGenreImage200ImageWildcardBinaryString = out
 		}
 	case httpRes.StatusCode == 404:
 		switch {
@@ -15805,12 +15819,12 @@ func (s *SDK) HeadGenreImageByIndex(ctx context.Context, request operations.Head
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `image/*`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.HeadGenreImageByIndex200ImageWildcardBinaryString = data
+			res.HeadGenreImageByIndex200ImageWildcardBinaryString = out
 		}
 	case httpRes.StatusCode == 404:
 		switch {
@@ -15870,12 +15884,12 @@ func (s *SDK) HeadItemImage(ctx context.Context, request operations.HeadItemImag
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `image/*`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.HeadItemImage200ImageWildcardBinaryString = data
+			res.HeadItemImage200ImageWildcardBinaryString = out
 		}
 	case httpRes.StatusCode == 404:
 		switch {
@@ -15935,12 +15949,12 @@ func (s *SDK) HeadItemImage2(ctx context.Context, request operations.HeadItemIma
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `image/*`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.HeadItemImage2200ImageWildcardBinaryString = data
+			res.HeadItemImage2200ImageWildcardBinaryString = out
 		}
 	case httpRes.StatusCode == 404:
 		switch {
@@ -16000,12 +16014,12 @@ func (s *SDK) HeadItemImageByIndex(ctx context.Context, request operations.HeadI
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `image/*`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.HeadItemImageByIndex200ImageWildcardBinaryString = data
+			res.HeadItemImageByIndex200ImageWildcardBinaryString = out
 		}
 	case httpRes.StatusCode == 404:
 		switch {
@@ -16065,12 +16079,12 @@ func (s *SDK) HeadMasterHlsAudioPlaylist(ctx context.Context, request operations
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/x-mpegURL`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.HeadMasterHlsAudioPlaylist200ApplicationXMpegurlBinaryString = data
+			res.HeadMasterHlsAudioPlaylist200ApplicationXMpegurlBinaryString = out
 		}
 	case httpRes.StatusCode == 401:
 	case httpRes.StatusCode == 403:
@@ -16108,12 +16122,12 @@ func (s *SDK) HeadMasterHlsVideoPlaylist(ctx context.Context, request operations
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/x-mpegURL`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.HeadMasterHlsVideoPlaylist200ApplicationXMpegurlBinaryString = data
+			res.HeadMasterHlsVideoPlaylist200ApplicationXMpegurlBinaryString = out
 		}
 	case httpRes.StatusCode == 401:
 	case httpRes.StatusCode == 403:
@@ -16151,12 +16165,12 @@ func (s *SDK) HeadMusicGenreImage(ctx context.Context, request operations.HeadMu
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `image/*`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.HeadMusicGenreImage200ImageWildcardBinaryString = data
+			res.HeadMusicGenreImage200ImageWildcardBinaryString = out
 		}
 	case httpRes.StatusCode == 404:
 		switch {
@@ -16216,12 +16230,12 @@ func (s *SDK) HeadMusicGenreImageByIndex(ctx context.Context, request operations
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `image/*`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.HeadMusicGenreImageByIndex200ImageWildcardBinaryString = data
+			res.HeadMusicGenreImageByIndex200ImageWildcardBinaryString = out
 		}
 	case httpRes.StatusCode == 404:
 		switch {
@@ -16281,12 +16295,12 @@ func (s *SDK) HeadPersonImage(ctx context.Context, request operations.HeadPerson
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `image/*`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.HeadPersonImage200ImageWildcardBinaryString = data
+			res.HeadPersonImage200ImageWildcardBinaryString = out
 		}
 	case httpRes.StatusCode == 404:
 		switch {
@@ -16346,12 +16360,12 @@ func (s *SDK) HeadPersonImageByIndex(ctx context.Context, request operations.Hea
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `image/*`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.HeadPersonImageByIndex200ImageWildcardBinaryString = data
+			res.HeadPersonImageByIndex200ImageWildcardBinaryString = out
 		}
 	case httpRes.StatusCode == 404:
 		switch {
@@ -16411,12 +16425,12 @@ func (s *SDK) HeadStudioImage(ctx context.Context, request operations.HeadStudio
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `image/*`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.HeadStudioImage200ImageWildcardBinaryString = data
+			res.HeadStudioImage200ImageWildcardBinaryString = out
 		}
 	case httpRes.StatusCode == 404:
 		switch {
@@ -16476,12 +16490,12 @@ func (s *SDK) HeadStudioImageByIndex(ctx context.Context, request operations.Hea
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `image/*`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.HeadStudioImageByIndex200ImageWildcardBinaryString = data
+			res.HeadStudioImageByIndex200ImageWildcardBinaryString = out
 		}
 	case httpRes.StatusCode == 404:
 		switch {
@@ -16541,12 +16555,12 @@ func (s *SDK) HeadUniversalAudioStream(ctx context.Context, request operations.H
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `audio/*`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.HeadUniversalAudioStream200AudioWildcardBinaryString = data
+			res.HeadUniversalAudioStream200AudioWildcardBinaryString = out
 		}
 	case httpRes.StatusCode == 302:
 	case httpRes.StatusCode == 401:
@@ -16585,12 +16599,12 @@ func (s *SDK) HeadUserImage(ctx context.Context, request operations.HeadUserImag
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `image/*`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.HeadUserImage200ImageWildcardBinaryString = data
+			res.HeadUserImage200ImageWildcardBinaryString = out
 		}
 	case httpRes.StatusCode == 404:
 		switch {
@@ -16650,12 +16664,12 @@ func (s *SDK) HeadUserImageByIndex(ctx context.Context, request operations.HeadU
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `image/*`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.HeadUserImageByIndex200ImageWildcardBinaryString = data
+			res.HeadUserImageByIndex200ImageWildcardBinaryString = out
 		}
 	case httpRes.StatusCode == 404:
 		switch {
@@ -16715,12 +16729,12 @@ func (s *SDK) HeadVideoStream(ctx context.Context, request operations.HeadVideoS
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `video/*`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.HeadVideoStream200VideoWildcardBinaryString = data
+			res.HeadVideoStream200VideoWildcardBinaryString = out
 		}
 	}
 
@@ -16756,12 +16770,12 @@ func (s *SDK) HeadVideoStreamByContainer(ctx context.Context, request operations
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `video/*`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.HeadVideoStreamByContainer200VideoWildcardBinaryString = data
+			res.HeadVideoStreamByContainer200VideoWildcardBinaryString = out
 		}
 	}
 
@@ -17600,26 +17614,29 @@ func (s *SDK) PostPingSystem(ctx context.Context) (*operations.PostPingSystemRes
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.PostPingSystem200ApplicationJSONString = out
+			out := string(data)
+			res.PostPingSystem200ApplicationJSONString = &out
 		case utils.MatchContentType(contentType, `application/json; profile="CamelCase"`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.PostPingSystem200ApplicationJSONString = out
+			out := string(data)
+			res.PostPingSystem200ApplicationJSONString = &out
 		case utils.MatchContentType(contentType, `application/json; profile="PascalCase"`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.PostPingSystem200ApplicationJSONString = out
+			out := string(data)
+			res.PostPingSystem200ApplicationJSONString = &out
 		}
 	}
 
@@ -17874,12 +17891,12 @@ func (s *SDK) ProcessConnectionManagerControlRequest(ctx context.Context, reques
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ProcessConnectionManagerControlRequest200TextXMLBinaryString = data
+			res.ProcessConnectionManagerControlRequest200TextXMLBinaryString = out
 		}
 	case httpRes.StatusCode == 503:
 	}
@@ -17914,12 +17931,12 @@ func (s *SDK) ProcessContentDirectoryControlRequest(ctx context.Context, request
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ProcessContentDirectoryControlRequest200TextXMLBinaryString = data
+			res.ProcessContentDirectoryControlRequest200TextXMLBinaryString = out
 		}
 	case httpRes.StatusCode == 503:
 	}
@@ -17954,12 +17971,12 @@ func (s *SDK) ProcessMediaReceiverRegistrarControlRequest(ctx context.Context, r
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ProcessMediaReceiverRegistrarControlRequest200TextXMLBinaryString = data
+			res.ProcessMediaReceiverRegistrarControlRequest200TextXMLBinaryString = out
 		}
 	case httpRes.StatusCode == 503:
 	}

@@ -10,7 +10,8 @@ type ScanRequest struct {
 }
 
 type ScanResponse struct {
-	Body        []byte
 	ContentType string
 	StatusCode  int64
+	Slaves      *string
+	TextError   *string
 }

@@ -118,12 +118,12 @@ func (s *SDK) KeysAPICustom(ctx context.Context, request operations.KeysAPICusto
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/octet-stream`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.KeysAPICustom200ApplicationOctetStreamBinaryString = data
+			res.KeysAPICustom200ApplicationOctetStreamBinaryString = out
 		}
 	}
 

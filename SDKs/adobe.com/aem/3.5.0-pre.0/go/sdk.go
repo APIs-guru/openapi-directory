@@ -148,12 +148,13 @@ func (s *SDK) GetAemHealthCheck(ctx context.Context, request operations.GetAemHe
 	default:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetAemHealthCheckDefaultApplicationJSONString = out
+			out := string(data)
+			res.GetAemHealthCheckDefaultApplicationJSONString = &out
 		}
 	}
 
@@ -256,12 +257,13 @@ func (s *SDK) GetAgents(ctx context.Context, request operations.GetAgentsRequest
 	default:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetAgentsDefaultApplicationJSONString = out
+			out := string(data)
+			res.GetAgentsDefaultApplicationJSONString = &out
 		}
 	}
 
@@ -295,12 +297,12 @@ func (s *SDK) GetAuthorizableKeystore(ctx context.Context, request operations.Ge
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `text/plain`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	default:
 		switch {
@@ -310,7 +312,8 @@ func (s *SDK) GetAuthorizableKeystore(ctx context.Context, request operations.Ge
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			out := string(data)
+			res.GetAuthorizableKeystoreDefaultTextPlainString = &out
 		}
 	}
 
@@ -349,7 +352,8 @@ func (s *SDK) GetConfigMgr(ctx context.Context) (*operations.GetConfigMgrRespons
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			out := string(data)
+			res.GetConfigMgr200TextXMLString = &out
 		}
 	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
 	}
@@ -389,7 +393,8 @@ func (s *SDK) GetCrxdeStatus(ctx context.Context) (*operations.GetCrxdeStatusRes
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			out := string(data)
+			res.GetCrxdeStatus200PlainTextString = &out
 		}
 	case httpRes.StatusCode == 404:
 		switch {
@@ -399,7 +404,8 @@ func (s *SDK) GetCrxdeStatus(ctx context.Context) (*operations.GetCrxdeStatusRes
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			out := string(data)
+			res.GetCrxdeStatus404PlainTextString = &out
 		}
 	}
 
@@ -443,12 +449,13 @@ func (s *SDK) GetInstallStatus(ctx context.Context) (*operations.GetInstallStatu
 	default:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetInstallStatusDefaultApplicationJSONString = out
+			out := string(data)
+			res.GetInstallStatusDefaultApplicationJSONString = &out
 		}
 	}
 
@@ -482,12 +489,12 @@ func (s *SDK) GetKeystore(ctx context.Context, request operations.GetKeystoreReq
 	default:
 		switch {
 		case utils.MatchContentType(contentType, `application/octet-stream`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetKeystoreDefaultApplicationOctetStreamBinaryString = data
+			res.GetKeystoreDefaultApplicationOctetStreamBinaryString = out
 		}
 	}
 
@@ -526,7 +533,8 @@ func (s *SDK) GetLoginPage(ctx context.Context) (*operations.GetLoginPageRespons
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			out := string(data)
+			res.GetLoginPageDefaultTextHTMLString = &out
 		}
 	}
 
@@ -590,12 +598,12 @@ func (s *SDK) GetPackage(ctx context.Context, request operations.GetPackageReque
 	default:
 		switch {
 		case utils.MatchContentType(contentType, `application/octet-stream`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetPackageDefaultApplicationOctetStreamBinaryString = data
+			res.GetPackageDefaultApplicationOctetStreamBinaryString = out
 		}
 	}
 
@@ -629,12 +637,13 @@ func (s *SDK) GetPackageFilter(ctx context.Context, request operations.GetPackag
 	default:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetPackageFilterDefaultApplicationJSONString = out
+			out := string(data)
+			res.GetPackageFilterDefaultApplicationJSONString = &out
 		}
 	}
 
@@ -673,7 +682,8 @@ func (s *SDK) GetPackageManagerServlet(ctx context.Context) (*operations.GetPack
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			out := string(data)
+			res.GetPackageManagerServlet404TextHTMLString = &out
 		}
 	case httpRes.StatusCode == 405:
 		switch {
@@ -683,7 +693,8 @@ func (s *SDK) GetPackageManagerServlet(ctx context.Context) (*operations.GetPack
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			out := string(data)
+			res.GetPackageManagerServlet405TextHTMLString = &out
 		}
 	}
 
@@ -719,12 +730,13 @@ func (s *SDK) GetQuery(ctx context.Context, request operations.GetQueryRequest) 
 	default:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetQueryDefaultApplicationJSONString = out
+			out := string(data)
+			res.GetQueryDefaultApplicationJSONString = &out
 		}
 	}
 
@@ -758,12 +770,12 @@ func (s *SDK) GetTruststore(ctx context.Context) (*operations.GetTruststoreRespo
 	default:
 		switch {
 		case utils.MatchContentType(contentType, `application/octet-stream`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetTruststoreDefaultApplicationOctetStreamBinaryString = data
+			res.GetTruststoreDefaultApplicationOctetStreamBinaryString = out
 		}
 	}
 
@@ -807,12 +819,13 @@ func (s *SDK) GetTruststoreInfo(ctx context.Context) (*operations.GetTruststoreI
 	default:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetTruststoreInfoDefaultApplicationJSONString = out
+			out := string(data)
+			res.GetTruststoreInfoDefaultApplicationJSONString = &out
 		}
 	}
 
@@ -886,12 +899,12 @@ func (s *SDK) PostAuthorizableKeystore(ctx context.Context, request operations.P
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `text/plain`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	default:
 		switch {
@@ -901,7 +914,8 @@ func (s *SDK) PostAuthorizableKeystore(ctx context.Context, request operations.P
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			out := string(data)
+			res.PostAuthorizableKeystoreDefaultTextPlainString = &out
 		}
 	}
 
@@ -942,7 +956,8 @@ func (s *SDK) PostAuthorizables(ctx context.Context, request operations.PostAuth
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			out := string(data)
+			res.PostAuthorizablesDefaultTextHTMLString = &out
 		}
 	}
 
@@ -1433,7 +1448,8 @@ func (s *SDK) PostPackageService(ctx context.Context, request operations.PostPac
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			out := string(data)
+			res.PostPackageServiceDefaultTextXMLString = &out
 		}
 	}
 
@@ -1475,12 +1491,13 @@ func (s *SDK) PostPackageServiceJSON(ctx context.Context, request operations.Pos
 	default:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.PostPackageServiceJSONDefaultApplicationJSONString = out
+			out := string(data)
+			res.PostPackageServiceJSONDefaultApplicationJSONString = &out
 		}
 	}
 
@@ -1516,12 +1533,13 @@ func (s *SDK) PostPackageUpdate(ctx context.Context, request operations.PostPack
 	default:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.PostPackageUpdateDefaultApplicationJSONString = out
+			out := string(data)
+			res.PostPackageUpdateDefaultApplicationJSONString = &out
 		}
 	}
 
@@ -1589,12 +1607,13 @@ func (s *SDK) PostQuery(ctx context.Context, request operations.PostQueryRequest
 	default:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.PostQueryDefaultApplicationJSONString = out
+			out := string(data)
+			res.PostQueryDefaultApplicationJSONString = &out
 		}
 	}
 
@@ -1630,12 +1649,12 @@ func (s *SDK) PostSamlConfiguration(ctx context.Context, request operations.Post
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `text/plain`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 302:
 		switch {
@@ -1645,7 +1664,8 @@ func (s *SDK) PostSamlConfiguration(ctx context.Context, request operations.Post
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			out := string(data)
+			res.PostSamlConfiguration302TextPlainString = &out
 		}
 	default:
 		switch {
@@ -1655,7 +1675,8 @@ func (s *SDK) PostSamlConfiguration(ctx context.Context, request operations.Post
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			out := string(data)
+			res.PostSamlConfigurationDefaultTextPlainString = &out
 		}
 	}
 
@@ -1696,7 +1717,8 @@ func (s *SDK) PostSetPassword(ctx context.Context, request operations.PostSetPas
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			out := string(data)
+			res.PostSetPasswordDefaultTextPlainString = &out
 		}
 	}
 
@@ -1775,7 +1797,8 @@ func (s *SDK) PostTruststore(ctx context.Context, request operations.PostTrustst
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			out := string(data)
+			res.PostTruststoreDefaultTextPlainString = &out
 		}
 	}
 
@@ -1820,7 +1843,8 @@ func (s *SDK) PostTruststorePkcs12(ctx context.Context, request operations.PostT
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			out := string(data)
+			res.PostTruststorePkcs12DefaultTextPlainString = &out
 		}
 	}
 
@@ -1867,7 +1891,8 @@ func (s *SDK) SslSetup(ctx context.Context, request operations.SslSetupRequest) 
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			out := string(data)
+			res.SslSetupDefaultTextPlainString = &out
 		}
 	}
 

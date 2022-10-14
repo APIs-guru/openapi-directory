@@ -180,12 +180,12 @@ func (s *SDK) GetCertificateDataInXMLFormatFromURIID(ctx context.Context, reques
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 400:
 		switch {
@@ -349,28 +349,32 @@ func (s *SDK) GetFileFromURIID(ctx context.Context, request operations.GetFileFr
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			out := string(data)
+			res.GetFileFromURIID200ApplicationPdfString = &out
 		case utils.MatchContentType(contentType, `image/jpeg`):
 			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			out := string(data)
+			res.GetFileFromURIID200ImageJpegString = &out
 		case utils.MatchContentType(contentType, `image/jpg`):
 			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			out := string(data)
+			res.GetFileFromURIID200ImageJpgString = &out
 		case utils.MatchContentType(contentType, `image/png`):
 			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			out := string(data)
+			res.GetFileFromURIID200ImagePngString = &out
 		}
 	case httpRes.StatusCode == 400:
 		switch {
@@ -1010,12 +1014,12 @@ func (s *SDK) GetEAadhaarDataInXMLFormatID(ctx context.Context, request operatio
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 401:
 		switch {

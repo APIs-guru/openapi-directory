@@ -38,8 +38,8 @@ type GetDashboardExport500ApplicationJSON struct {
 }
 
 type GetDashboardExportResponse struct {
-	Body                                       []byte
 	ContentType                                string
+	GetDashboardExport200TextPlainString       *string
 	GetDashboardExport400ApplicationJSONObject *GetDashboardExport400ApplicationJSON
 	GetDashboardExport401ApplicationJSONObject *GetDashboardExport401ApplicationJSON
 	GetDashboardExport404ApplicationJSONObject *GetDashboardExport404ApplicationJSON

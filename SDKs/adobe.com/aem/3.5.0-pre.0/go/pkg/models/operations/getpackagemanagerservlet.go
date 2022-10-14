@@ -1,7 +1,8 @@
 package operations
 
 type GetPackageManagerServletResponse struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+	ContentType                               string
+	StatusCode                                int64
+	GetPackageManagerServlet404TextHTMLString *string
+	GetPackageManagerServlet405TextHTMLString *string
 }

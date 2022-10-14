@@ -16,7 +16,7 @@ type CreateQueryJobSecurity struct {
 
 type CreateQueryJobRequest struct {
 	QueryParams CreateQueryJobQueryParams
-	Request     []byte `request:"mediaType=text/plain"`
+	Request     string `request:"mediaType=text/plain"`
 	Security    CreateQueryJobSecurity
 }
 

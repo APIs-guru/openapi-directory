@@ -378,12 +378,12 @@ func (s *SDK) GetFileContent(ctx context.Context, request operations.GetFileCont
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/octet-stream`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetFileContent200ApplicationOctetStreamBinaryString = data
+			res.GetFileContent200ApplicationOctetStreamBinaryString = out
 		}
 	}
 

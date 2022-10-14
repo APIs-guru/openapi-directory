@@ -24,9 +24,9 @@ type GetAlertsRequest struct {
 }
 
 type GetAlertsResponse struct {
-	Body                                       []byte
 	ContentType                                string
 	StatusCode                                 int64
 	GetAlerts200ApplicationJSONObject          map[string]interface{}
 	GetAlerts200ApplicationSarifPlusJSONObject map[string]interface{}
+	GetAlerts200TextCsvString                  *string
 }

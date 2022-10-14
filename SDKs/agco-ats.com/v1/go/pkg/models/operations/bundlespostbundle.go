@@ -20,7 +20,9 @@ type BundlesPostBundleResponse struct {
 	APIModelsAPIError                         *shared.APIModelsAPIError
 	Body                                      []byte
 	BundlesPostBundle200ApplicationJSONString *string
+	BundlesPostBundle200ApplicationXMLString  *string
 	BundlesPostBundle200TextJSONString        *string
+	BundlesPostBundle200TextXMLString         *string
 	ContentType                               string
 	StatusCode                                int64
 }

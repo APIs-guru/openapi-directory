@@ -14,7 +14,7 @@ type PostTruststorePkcs12Request struct {
 }
 
 type PostTruststorePkcs12Response struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+	ContentType                                string
+	StatusCode                                 int64
+	PostTruststorePkcs12DefaultTextPlainString *string
 }

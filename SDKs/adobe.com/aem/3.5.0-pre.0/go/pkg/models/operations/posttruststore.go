@@ -23,7 +23,7 @@ type PostTruststoreRequest struct {
 }
 
 type PostTruststoreResponse struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+	ContentType                          string
+	StatusCode                           int64
+	PostTruststoreDefaultTextPlainString *string
 }

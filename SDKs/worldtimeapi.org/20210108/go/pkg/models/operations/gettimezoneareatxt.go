@@ -9,7 +9,8 @@ type GetTimezoneAreaTxtRequest struct {
 }
 
 type GetTimezoneAreaTxtResponse struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+	ContentType       string
+	ErrorTextResponse *string
+	ListTextResponse  *string
+	StatusCode        int64
 }

@@ -11,7 +11,8 @@ type GetRequest struct {
 }
 
 type GetResponse struct {
-	Body        []byte
 	ContentType string
 	StatusCode  int64
+	MbusData    *string
+	TextError   *string
 }

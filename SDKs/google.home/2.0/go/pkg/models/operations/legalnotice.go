@@ -1,7 +1,7 @@
 package operations
 
 type LegalNoticeResponse struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+	ContentType                   string
+	LegalNotice200TextPlainString *string
+	StatusCode                    int64
 }

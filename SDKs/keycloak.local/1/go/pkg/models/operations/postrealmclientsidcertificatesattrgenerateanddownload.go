@@ -16,7 +16,7 @@ type PostRealmClientsIDCertificatesAttrGenerateAndDownloadRequest struct {
 }
 
 type PostRealmClientsIDCertificatesAttrGenerateAndDownloadResponse struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+	ContentType                                                                              string
+	PostRealmClientsIDCertificatesAttrGenerateAndDownload2XxApplicationOctetStreamByteString *string
+	StatusCode                                                                               int64
 }

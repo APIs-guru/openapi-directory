@@ -3,6 +3,7 @@ package sdk
 import (
 	"context"
 	"fmt"
+	"io"
 	"net/http"
 	"openapi/internal/utils"
 	"openapi/pkg/models/operations"
@@ -461,12 +462,13 @@ func (s *SDK) GetResourcesMediaIDContent(ctx context.Context, request operations
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetResourcesMediaIDContent200ApplicationJSONString = out
+			out := string(data)
+			res.GetResourcesMediaIDContent200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	case httpRes.StatusCode == 500:
@@ -504,12 +506,13 @@ func (s *SDK) GetResourcesMediaIDEmbedJSON(ctx context.Context, request operatio
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetResourcesMediaIDEmbedJSON200ApplicationJSONString = out
+			out := string(data)
+			res.GetResourcesMediaIDEmbedJSON200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	case httpRes.StatusCode == 500:
@@ -1223,12 +1226,13 @@ func (s *SDK) GetResourcesTagsIDSyndicateFormat(ctx context.Context, request ope
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetResourcesTagsIDSyndicateFormat200ApplicationJSONString = out
+			out := string(data)
+			res.GetResourcesTagsIDSyndicateFormat200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	case httpRes.StatusCode == 500:

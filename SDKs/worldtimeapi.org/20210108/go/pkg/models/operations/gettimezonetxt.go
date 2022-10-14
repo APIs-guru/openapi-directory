@@ -1,7 +1,7 @@
 package operations
 
 type GetTimezoneTxtResponse struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+	ContentType      string
+	ListTextResponse *string
+	StatusCode       int64
 }

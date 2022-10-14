@@ -85,7 +85,8 @@ func (s *SDK) Facets(ctx context.Context, request operations.FacetsRequest) (*op
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			out := string(data)
+			res.Facets200ApplicationNsidcfacetsPlusXMLString = &out
 		}
 	case httpRes.StatusCode == 400:
 	case httpRes.StatusCode == 500:
@@ -123,12 +124,13 @@ func (s *SDK) ID(ctx context.Context, request operations.IDRequest) (*operations
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/x-suggestions+json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ID200ApplicationXSuggestionsPlusJSONString = out
+			out := string(data)
+			res.ID200ApplicationXSuggestionsPlusJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	case httpRes.StatusCode == 500:
@@ -171,7 +173,8 @@ func (s *SDK) OpenSearch(ctx context.Context, request operations.OpenSearchReque
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			out := string(data)
+			res.OpenSearch200ApplicationAtomPlusXMLString = &out
 		}
 	case httpRes.StatusCode == 400:
 	case httpRes.StatusCode == 500:
@@ -212,7 +215,8 @@ func (s *SDK) OpensearchDescription(ctx context.Context) (*operations.Opensearch
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			out := string(data)
+			res.OpensearchDescription200ApplicationOpensearchdescriptionPlusXMLString = &out
 		}
 	}
 
