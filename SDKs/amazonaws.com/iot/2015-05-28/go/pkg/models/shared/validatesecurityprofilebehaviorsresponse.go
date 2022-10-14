@@ -1,6 +1,6 @@
 package shared
 
 type ValidateSecurityProfileBehaviorsResponse struct {
-	Valid            *bool             `json:"valid"`
-	ValidationErrors []ValidationError `json:"validationErrors"`
+	Valid            *bool             `json:"valid,omitempty"`
+	ValidationErrors []ValidationError `json:"validationErrors,omitempty"`
 }

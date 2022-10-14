@@ -12,15 +12,15 @@ const (
 )
 
 type TraceSpan struct {
-	Attributes              *Attributes            `json:"attributes"`
-	ChildSpanCount          *int32                 `json:"childSpanCount"`
-	DisplayName             *TruncatableString     `json:"displayName"`
-	EndTime                 *string                `json:"endTime"`
-	Name                    *string                `json:"name"`
-	ParentSpanID            *string                `json:"parentSpanId"`
-	SameProcessAsParentSpan *bool                  `json:"sameProcessAsParentSpan"`
-	SpanID                  *string                `json:"spanId"`
-	SpanKind                *TraceSpanSpanKindEnum `json:"spanKind"`
-	StartTime               *string                `json:"startTime"`
-	Status                  *Status                `json:"status"`
+	Attributes              *Attributes            `json:"attributes,omitempty"`
+	ChildSpanCount          *int32                 `json:"childSpanCount,omitempty"`
+	DisplayName             *TruncatableString     `json:"displayName,omitempty"`
+	EndTime                 *string                `json:"endTime,omitempty"`
+	Name                    *string                `json:"name,omitempty"`
+	ParentSpanID            *string                `json:"parentSpanId,omitempty"`
+	SameProcessAsParentSpan *bool                  `json:"sameProcessAsParentSpan,omitempty"`
+	SpanID                  *string                `json:"spanId,omitempty"`
+	SpanKind                *TraceSpanSpanKindEnum `json:"spanKind,omitempty"`
+	StartTime               *string                `json:"startTime,omitempty"`
+	Status                  *Status                `json:"status,omitempty"`
 }

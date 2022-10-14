@@ -2,8 +2,8 @@ package shared
 
 type ListConfigurationsRequest struct {
 	ConfigurationType ConfigurationItemTypeEnum `json:"configurationType"`
-	Filters           []Filter                  `json:"filters"`
-	MaxResults        *int64                    `json:"maxResults"`
-	NextToken         *string                   `json:"nextToken"`
-	OrderBy           []OrderByElement          `json:"orderBy"`
+	Filters           []Filter                  `json:"filters,omitempty"`
+	MaxResults        *int64                    `json:"maxResults,omitempty"`
+	NextToken         *string                   `json:"nextToken,omitempty"`
+	OrderBy           []OrderByElement          `json:"orderBy,omitempty"`
 }

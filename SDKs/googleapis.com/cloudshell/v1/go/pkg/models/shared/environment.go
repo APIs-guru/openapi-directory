@@ -11,13 +11,13 @@ const (
 )
 
 type Environment struct {
-	DockerImage *string               `json:"dockerImage"`
-	ID          *string               `json:"id"`
-	Name        *string               `json:"name"`
-	PublicKeys  []string              `json:"publicKeys"`
-	SSHHost     *string               `json:"sshHost"`
-	SSHPort     *int32                `json:"sshPort"`
-	SSHUsername *string               `json:"sshUsername"`
-	State       *EnvironmentStateEnum `json:"state"`
-	WebHost     *string               `json:"webHost"`
+	DockerImage *string               `json:"dockerImage,omitempty"`
+	ID          *string               `json:"id,omitempty"`
+	Name        *string               `json:"name,omitempty"`
+	PublicKeys  []string              `json:"publicKeys,omitempty"`
+	SSHHost     *string               `json:"sshHost,omitempty"`
+	SSHPort     *int32                `json:"sshPort,omitempty"`
+	SSHUsername *string               `json:"sshUsername,omitempty"`
+	State       *EnvironmentStateEnum `json:"state,omitempty"`
+	WebHost     *string               `json:"webHost,omitempty"`
 }

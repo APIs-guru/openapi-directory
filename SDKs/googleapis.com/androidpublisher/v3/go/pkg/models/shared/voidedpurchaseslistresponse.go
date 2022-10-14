@@ -1,7 +1,7 @@
 package shared
 
 type VoidedPurchasesListResponse struct {
-	PageInfo        *PageInfo        `json:"pageInfo"`
-	TokenPagination *TokenPagination `json:"tokenPagination"`
-	VoidedPurchases []VoidedPurchase `json:"voidedPurchases"`
+	PageInfo        *PageInfo        `json:"pageInfo,omitempty"`
+	TokenPagination *TokenPagination `json:"tokenPagination,omitempty"`
+	VoidedPurchases []VoidedPurchase `json:"voidedPurchases,omitempty"`
 }

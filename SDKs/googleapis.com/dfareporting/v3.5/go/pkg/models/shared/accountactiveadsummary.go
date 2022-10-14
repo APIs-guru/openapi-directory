@@ -14,9 +14,9 @@ const (
 )
 
 type AccountActiveAdSummary struct {
-	AccountID          *string                                       `json:"accountId"`
-	ActiveAds          *string                                       `json:"activeAds"`
-	ActiveAdsLimitTier *AccountActiveAdSummaryActiveAdsLimitTierEnum `json:"activeAdsLimitTier"`
-	AvailableAds       *string                                       `json:"availableAds"`
-	Kind               *string                                       `json:"kind"`
+	AccountID          *string                                       `json:"accountId,omitempty"`
+	ActiveAds          *string                                       `json:"activeAds,omitempty"`
+	ActiveAdsLimitTier *AccountActiveAdSummaryActiveAdsLimitTierEnum `json:"activeAdsLimitTier,omitempty"`
+	AvailableAds       *string                                       `json:"availableAds,omitempty"`
+	Kind               *string                                       `json:"kind,omitempty"`
 }

@@ -5,12 +5,12 @@ import (
 )
 
 type BotAliasMetadata struct {
-	BotName          *string                   `json:"botName"`
-	BotVersion       *string                   `json:"botVersion"`
-	Checksum         *string                   `json:"checksum"`
-	ConversationLogs *ConversationLogsResponse `json:"conversationLogs"`
-	CreatedDate      *time.Time                `json:"createdDate"`
-	Description      *string                   `json:"description"`
-	LastUpdatedDate  *time.Time                `json:"lastUpdatedDate"`
-	Name             *string                   `json:"name"`
+	BotName          *string                   `json:"botName,omitempty"`
+	BotVersion       *string                   `json:"botVersion,omitempty"`
+	Checksum         *string                   `json:"checksum,omitempty"`
+	ConversationLogs *ConversationLogsResponse `json:"conversationLogs,omitempty"`
+	CreatedDate      *time.Time                `json:"createdDate,omitempty"`
+	Description      *string                   `json:"description,omitempty"`
+	LastUpdatedDate  *time.Time                `json:"lastUpdatedDate,omitempty"`
+	Name             *string                   `json:"name,omitempty"`
 }

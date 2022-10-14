@@ -44,13 +44,13 @@ type FrontPortTypeType struct {
 }
 
 type FrontPort struct {
-	Cable            *NestedCable      `json:"cable"`
-	Description      *string           `json:"description"`
+	Cable            *NestedCable      `json:"cable,omitempty"`
+	Description      *string           `json:"description,omitempty"`
 	Device           NestedDevice      `json:"device"`
-	ID               *int64            `json:"id"`
+	ID               *int64            `json:"id,omitempty"`
 	Name             string            `json:"name"`
 	RearPort         FrontPortRearPort `json:"rear_port"`
-	RearPortPosition *int64            `json:"rear_port_position"`
-	Tags             []string          `json:"tags"`
+	RearPortPosition *int64            `json:"rear_port_position,omitempty"`
+	Tags             []string          `json:"tags,omitempty"`
 	Type             FrontPortTypeType `json:"type"`
 }

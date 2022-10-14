@@ -11,9 +11,9 @@ const (
 )
 
 type VideoFormat struct {
-	FileType      *VideoFormatFileTypeEnum `json:"fileType"`
-	ID            *int32                   `json:"id"`
-	Kind          *string                  `json:"kind"`
-	Resolution    *Size                    `json:"resolution"`
-	TargetBitRate *int32                   `json:"targetBitRate"`
+	FileType      *VideoFormatFileTypeEnum `json:"fileType,omitempty"`
+	ID            *int32                   `json:"id,omitempty"`
+	Kind          *string                  `json:"kind,omitempty"`
+	Resolution    *Size                    `json:"resolution,omitempty"`
+	TargetBitRate *int32                   `json:"targetBitRate,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type DescribeAccountPreferencesResponse struct {
-	NextToken            *string               `json:"NextToken"`
-	ResourceIDPreference *ResourceIDPreference `json:"ResourceIdPreference"`
+	NextToken            *string               `json:"NextToken,omitempty"`
+	ResourceIDPreference *ResourceIDPreference `json:"ResourceIdPreference,omitempty"`
 }

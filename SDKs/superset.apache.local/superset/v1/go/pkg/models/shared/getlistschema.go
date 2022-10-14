@@ -25,11 +25,11 @@ const (
 )
 
 type GetListSchema struct {
-	Columns        []string                         `json:"columns"`
-	Filters        []GetListSchemaFilters           `json:"filters"`
-	Keys           []GetListSchemaKeysEnum          `json:"keys"`
-	OrderColumn    *string                          `json:"order_column"`
-	OrderDirection *GetListSchemaOrderDirectionEnum `json:"order_direction"`
-	Page           *int64                           `json:"page"`
-	PageSize       *int64                           `json:"page_size"`
+	Columns        []string                         `json:"columns,omitempty"`
+	Filters        []GetListSchemaFilters           `json:"filters,omitempty"`
+	Keys           []GetListSchemaKeysEnum          `json:"keys,omitempty"`
+	OrderColumn    *string                          `json:"order_column,omitempty"`
+	OrderDirection *GetListSchemaOrderDirectionEnum `json:"order_direction,omitempty"`
+	Page           *int64                           `json:"page,omitempty"`
+	PageSize       *int64                           `json:"page_size,omitempty"`
 }

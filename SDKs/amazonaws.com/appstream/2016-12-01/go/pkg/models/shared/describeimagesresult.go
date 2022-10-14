@@ -1,6 +1,6 @@
 package shared
 
 type DescribeImagesResult struct {
-	Images    []Image `json:"Images"`
-	NextToken *string `json:"NextToken"`
+	Images    []Image `json:"Images,omitempty"`
+	NextToken *string `json:"NextToken,omitempty"`
 }

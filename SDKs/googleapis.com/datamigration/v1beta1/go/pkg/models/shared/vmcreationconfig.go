@@ -1,7 +1,7 @@
 package shared
 
 type VMCreationConfig struct {
-	Subnet        *string `json:"subnet"`
-	VMMachineType *string `json:"vmMachineType"`
-	VMZone        *string `json:"vmZone"`
+	Subnet        *string `json:"subnet,omitempty"`
+	VMMachineType *string `json:"vmMachineType,omitempty"`
+	VMZone        *string `json:"vmZone,omitempty"`
 }

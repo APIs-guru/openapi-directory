@@ -1,7 +1,7 @@
 package shared
 
 type RoutingStrategy struct {
-	FleetID *string                  `json:"FleetId"`
-	Message *string                  `json:"Message"`
-	Type    *RoutingStrategyTypeEnum `json:"Type"`
+	FleetID *string                  `json:"FleetId,omitempty"`
+	Message *string                  `json:"Message,omitempty"`
+	Type    *RoutingStrategyTypeEnum `json:"Type,omitempty"`
 }

@@ -1,10 +1,10 @@
 package shared
 
 type ResendConfirmationCodeRequest struct {
-	AnalyticsMetadata *AnalyticsMetadataType `json:"AnalyticsMetadata"`
+	AnalyticsMetadata *AnalyticsMetadataType `json:"AnalyticsMetadata,omitempty"`
 	ClientID          string                 `json:"ClientId"`
-	ClientMetadata    map[string]string      `json:"ClientMetadata"`
-	SecretHash        *string                `json:"SecretHash"`
-	UserContextData   *UserContextDataType   `json:"UserContextData"`
+	ClientMetadata    map[string]string      `json:"ClientMetadata,omitempty"`
+	SecretHash        *string                `json:"SecretHash,omitempty"`
+	UserContextData   *UserContextDataType   `json:"UserContextData,omitempty"`
 	Username          string                 `json:"Username"`
 }

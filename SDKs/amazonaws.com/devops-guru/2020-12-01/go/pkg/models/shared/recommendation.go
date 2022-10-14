@@ -1,10 +1,10 @@
 package shared
 
 type Recommendation struct {
-	Description      *string                        `json:"Description"`
-	Link             *string                        `json:"Link"`
-	Name             *string                        `json:"Name"`
-	Reason           *string                        `json:"Reason"`
-	RelatedAnomalies []RecommendationRelatedAnomaly `json:"RelatedAnomalies"`
-	RelatedEvents    []RecommendationRelatedEvent   `json:"RelatedEvents"`
+	Description      *string                        `json:"Description,omitempty"`
+	Link             *string                        `json:"Link,omitempty"`
+	Name             *string                        `json:"Name,omitempty"`
+	Reason           *string                        `json:"Reason,omitempty"`
+	RelatedAnomalies []RecommendationRelatedAnomaly `json:"RelatedAnomalies,omitempty"`
+	RelatedEvents    []RecommendationRelatedEvent   `json:"RelatedEvents,omitempty"`
 }

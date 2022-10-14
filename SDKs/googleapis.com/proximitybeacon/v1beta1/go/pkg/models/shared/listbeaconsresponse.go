@@ -1,7 +1,7 @@
 package shared
 
 type ListBeaconsResponse struct {
-	Beacons       []Beacon `json:"beacons"`
-	NextPageToken *string  `json:"nextPageToken"`
-	TotalCount    *string  `json:"totalCount"`
+	Beacons       []Beacon `json:"beacons,omitempty"`
+	NextPageToken *string  `json:"nextPageToken,omitempty"`
+	TotalCount    *string  `json:"totalCount,omitempty"`
 }

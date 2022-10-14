@@ -19,7 +19,7 @@ type DeletedNodeSummary struct {
 	Name                  string                     `json:"name"`
 	ParentID              int64                      `json:"parentId"`
 	ParentPath            string                     `json:"parentPath"`
-	TimestampCreation     *time.Time                 `json:"timestampCreation"`
-	TimestampModification *time.Time                 `json:"timestampModification"`
+	TimestampCreation     *time.Time                 `json:"timestampCreation,omitempty"`
+	TimestampModification *time.Time                 `json:"timestampModification,omitempty"`
 	Type                  DeletedNodeSummaryTypeEnum `json:"type"`
 }

@@ -5,11 +5,11 @@ import (
 )
 
 type WorldGenerationJobSummary struct {
-	Arn                 *string                       `json:"arn"`
-	CreatedAt           *time.Time                    `json:"createdAt"`
-	FailedWorldCount    *int64                        `json:"failedWorldCount"`
-	Status              *WorldGenerationJobStatusEnum `json:"status"`
-	SucceededWorldCount *int64                        `json:"succeededWorldCount"`
-	Template            *string                       `json:"template"`
-	WorldCount          *WorldCount                   `json:"worldCount"`
+	Arn                 *string                       `json:"arn,omitempty"`
+	CreatedAt           *time.Time                    `json:"createdAt,omitempty"`
+	FailedWorldCount    *int64                        `json:"failedWorldCount,omitempty"`
+	Status              *WorldGenerationJobStatusEnum `json:"status,omitempty"`
+	SucceededWorldCount *int64                        `json:"succeededWorldCount,omitempty"`
+	Template            *string                       `json:"template,omitempty"`
+	WorldCount          *WorldCount                   `json:"worldCount,omitempty"`
 }

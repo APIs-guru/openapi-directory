@@ -5,10 +5,10 @@ import (
 )
 
 type BotSummary struct {
-	BotID               *string        `json:"botId"`
-	BotName             *string        `json:"botName"`
-	BotStatus           *BotStatusEnum `json:"botStatus"`
-	Description         *string        `json:"description"`
-	LastUpdatedDateTime *time.Time     `json:"lastUpdatedDateTime"`
-	LatestBotVersion    *string        `json:"latestBotVersion"`
+	BotID               *string        `json:"botId,omitempty"`
+	BotName             *string        `json:"botName,omitempty"`
+	BotStatus           *BotStatusEnum `json:"botStatus,omitempty"`
+	Description         *string        `json:"description,omitempty"`
+	LastUpdatedDateTime *time.Time     `json:"lastUpdatedDateTime,omitempty"`
+	LatestBotVersion    *string        `json:"latestBotVersion,omitempty"`
 }

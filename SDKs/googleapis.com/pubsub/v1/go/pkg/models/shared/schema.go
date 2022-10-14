@@ -9,9 +9,9 @@ const (
 )
 
 type Schema struct {
-	Definition         *string         `json:"definition"`
-	Name               *string         `json:"name"`
-	RevisionCreateTime *string         `json:"revisionCreateTime"`
-	RevisionID         *string         `json:"revisionId"`
-	Type               *SchemaTypeEnum `json:"type"`
+	Definition         *string         `json:"definition,omitempty"`
+	Name               *string         `json:"name,omitempty"`
+	RevisionCreateTime *string         `json:"revisionCreateTime,omitempty"`
+	RevisionID         *string         `json:"revisionId,omitempty"`
+	Type               *SchemaTypeEnum `json:"type,omitempty"`
 }

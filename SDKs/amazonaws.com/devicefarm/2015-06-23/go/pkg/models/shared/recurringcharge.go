@@ -1,6 +1,6 @@
 package shared
 
 type RecurringCharge struct {
-	Cost      *MonetaryAmount               `json:"cost"`
-	Frequency *RecurringChargeFrequencyEnum `json:"frequency"`
+	Cost      *MonetaryAmount               `json:"cost,omitempty"`
+	Frequency *RecurringChargeFrequencyEnum `json:"frequency,omitempty"`
 }

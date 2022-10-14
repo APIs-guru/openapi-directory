@@ -22,7 +22,7 @@ const (
 
 type AssociateWebsiteAuthorizationProviderRequestBody struct {
 	AuthorizationProviderType AssociateWebsiteAuthorizationProviderRequestBodyAuthorizationProviderTypeEnum `json:"AuthorizationProviderType"`
-	DomainName                *string                                                                       `json:"DomainName"`
+	DomainName                *string                                                                       `json:"DomainName,omitempty"`
 	FleetArn                  string                                                                        `json:"FleetArn"`
 }
 

@@ -1,16 +1,16 @@
 package operations
 
 type PostDriversRequestBodyAddress struct {
-	City            *string `json:"city"`
-	Country         *string `json:"country"`
-	PostalCode      *string `json:"postalCode"`
-	StreetAndNumber *string `json:"streetAndNumber"`
+	City            *string `json:"city,omitempty"`
+	Country         *string `json:"country,omitempty"`
+	PostalCode      *string `json:"postalCode,omitempty"`
+	StreetAndNumber *string `json:"streetAndNumber,omitempty"`
 }
 
 type PostDriversRequestBodyPhone struct {
-	Home   *string `json:"home"`
-	Mobile *string `json:"mobile"`
-	Work   *string `json:"work"`
+	Home   *string `json:"home,omitempty"`
+	Mobile *string `json:"mobile,omitempty"`
+	Work   *string `json:"work,omitempty"`
 }
 
 type PostDriversRequestBodySourceEnum string
@@ -23,12 +23,12 @@ const (
 )
 
 type PostDriversRequestBody struct {
-	Active    *bool                            `json:"active"`
-	Address   *PostDriversRequestBodyAddress   `json:"address"`
-	Email     *string                          `json:"email"`
+	Active    *bool                            `json:"active,omitempty"`
+	Address   *PostDriversRequestBodyAddress   `json:"address,omitempty"`
+	Email     *string                          `json:"email,omitempty"`
 	Firstname string                           `json:"firstname"`
 	Lastname  string                           `json:"lastname"`
-	Phone     *PostDriversRequestBodyPhone     `json:"phone"`
+	Phone     *PostDriversRequestBodyPhone     `json:"phone,omitempty"`
 	Source    PostDriversRequestBodySourceEnum `json:"source"`
 }
 
@@ -37,9 +37,9 @@ type PostDriversRequest struct {
 }
 
 type PostDrivers200ApplicationJSON struct {
-	Message *string                `json:"message"`
-	Ok      *bool                  `json:"ok"`
-	Result  map[string]interface{} `json:"result"`
+	Message *string                `json:"message,omitempty"`
+	Ok      *bool                  `json:"ok,omitempty"`
+	Result  map[string]interface{} `json:"result,omitempty"`
 }
 
 type PostDriversResponse struct {

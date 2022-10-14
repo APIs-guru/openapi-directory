@@ -16,19 +16,19 @@ type StartIncidentHeaders struct {
 }
 
 type StartIncidentRequestBodyTriggerDetails struct {
-	RawData    *string    `json:"rawData"`
-	Source     *string    `json:"source"`
-	Timestamp  *time.Time `json:"timestamp"`
-	TriggerArn *string    `json:"triggerArn"`
+	RawData    *string    `json:"rawData,omitempty"`
+	Source     *string    `json:"source,omitempty"`
+	Timestamp  *time.Time `json:"timestamp,omitempty"`
+	TriggerArn *string    `json:"triggerArn,omitempty"`
 }
 
 type StartIncidentRequestBody struct {
-	ClientToken     *string                                 `json:"clientToken"`
-	Impact          *int64                                  `json:"impact"`
-	RelatedItems    []shared.RelatedItem                    `json:"relatedItems"`
+	ClientToken     *string                                 `json:"clientToken,omitempty"`
+	Impact          *int64                                  `json:"impact,omitempty"`
+	RelatedItems    []shared.RelatedItem                    `json:"relatedItems,omitempty"`
 	ResponsePlanArn string                                  `json:"responsePlanArn"`
-	Title           *string                                 `json:"title"`
-	TriggerDetails  *StartIncidentRequestBodyTriggerDetails `json:"triggerDetails"`
+	Title           *string                                 `json:"title,omitempty"`
+	TriggerDetails  *StartIncidentRequestBodyTriggerDetails `json:"triggerDetails,omitempty"`
 }
 
 type StartIncidentRequest struct {

@@ -2,9 +2,9 @@ package shared
 
 type CreateOntapVolumeConfiguration struct {
 	JunctionPath             string             `json:"JunctionPath"`
-	SecurityStyle            *SecurityStyleEnum `json:"SecurityStyle"`
+	SecurityStyle            *SecurityStyleEnum `json:"SecurityStyle,omitempty"`
 	SizeInMegabytes          int64              `json:"SizeInMegabytes"`
 	StorageEfficiencyEnabled bool               `json:"StorageEfficiencyEnabled"`
 	StorageVirtualMachineID  string             `json:"StorageVirtualMachineId"`
-	TieringPolicy            *TieringPolicy     `json:"TieringPolicy"`
+	TieringPolicy            *TieringPolicy     `json:"TieringPolicy,omitempty"`
 }

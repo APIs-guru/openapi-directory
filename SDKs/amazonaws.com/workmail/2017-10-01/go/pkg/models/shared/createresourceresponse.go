@@ -1,5 +1,5 @@
 package shared
 
 type CreateResourceResponse struct {
-	ResourceID *string `json:"ResourceId"`
+	ResourceID *string `json:"ResourceId,omitempty"`
 }

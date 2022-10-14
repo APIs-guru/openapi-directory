@@ -1,5 +1,5 @@
 package shared
 
 type ExpirationPolicy struct {
-	TTL *string `json:"ttl"`
+	TTL *string `json:"ttl,omitempty"`
 }

@@ -1,9 +1,9 @@
 package shared
 
 type Protection struct {
-	HealthCheckIds []string `json:"HealthCheckIds"`
-	ID             *string  `json:"Id"`
-	Name           *string  `json:"Name"`
-	ProtectionArn  *string  `json:"ProtectionArn"`
-	ResourceArn    *string  `json:"ResourceArn"`
+	HealthCheckIds []string `json:"HealthCheckIds,omitempty"`
+	ID             *string  `json:"Id,omitempty"`
+	Name           *string  `json:"Name,omitempty"`
+	ProtectionArn  *string  `json:"ProtectionArn,omitempty"`
+	ResourceArn    *string  `json:"ResourceArn,omitempty"`
 }

@@ -1,7 +1,7 @@
 package shared
 
 type ListingStructurePolicy struct {
-	CategoryID          *string `json:"categoryId"`
-	CategoryTreeID      *string `json:"categoryTreeId"`
-	VariationsSupported *bool   `json:"variationsSupported"`
+	CategoryID          *string `json:"categoryId,omitempty"`
+	CategoryTreeID      *string `json:"categoryTreeId,omitempty"`
+	VariationsSupported *bool   `json:"variationsSupported,omitempty"`
 }

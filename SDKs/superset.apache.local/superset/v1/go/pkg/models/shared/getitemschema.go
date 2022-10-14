@@ -11,6 +11,6 @@ const (
 )
 
 type GetItemSchema struct {
-	Columns []string                `json:"columns"`
-	Keys    []GetItemSchemaKeysEnum `json:"keys"`
+	Columns []string                `json:"columns,omitempty"`
+	Keys    []GetItemSchemaKeysEnum `json:"keys,omitempty"`
 }

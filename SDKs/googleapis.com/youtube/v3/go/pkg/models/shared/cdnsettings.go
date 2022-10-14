@@ -31,9 +31,9 @@ const (
 )
 
 type CdnSettings struct {
-	Format        *string                       `json:"format"`
-	FrameRate     *CdnSettingsFrameRateEnum     `json:"frameRate"`
-	IngestionInfo *IngestionInfo                `json:"ingestionInfo"`
-	IngestionType *CdnSettingsIngestionTypeEnum `json:"ingestionType"`
-	Resolution    *CdnSettingsResolutionEnum    `json:"resolution"`
+	Format        *string                       `json:"format,omitempty"`
+	FrameRate     *CdnSettingsFrameRateEnum     `json:"frameRate,omitempty"`
+	IngestionInfo *IngestionInfo                `json:"ingestionInfo,omitempty"`
+	IngestionType *CdnSettingsIngestionTypeEnum `json:"ingestionType,omitempty"`
+	Resolution    *CdnSettingsResolutionEnum    `json:"resolution,omitempty"`
 }

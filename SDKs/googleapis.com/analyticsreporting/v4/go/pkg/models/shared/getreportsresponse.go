@@ -1,7 +1,7 @@
 package shared
 
 type GetReportsResponse struct {
-	QueryCost               *int32                   `json:"queryCost"`
-	Reports                 []Report                 `json:"reports"`
-	ResourceQuotasRemaining *ResourceQuotasRemaining `json:"resourceQuotasRemaining"`
+	QueryCost               *int32                   `json:"queryCost,omitempty"`
+	Reports                 []Report                 `json:"reports,omitempty"`
+	ResourceQuotasRemaining *ResourceQuotasRemaining `json:"resourceQuotasRemaining,omitempty"`
 }

@@ -5,10 +5,10 @@ import (
 )
 
 type DatasetSummary struct {
-	CreationTime         *time.Time       `json:"CreationTime"`
-	DatasetArn           *string          `json:"DatasetArn"`
-	DatasetName          *string          `json:"DatasetName"`
-	DatasetType          *DatasetTypeEnum `json:"DatasetType"`
-	Domain               *DomainEnum      `json:"Domain"`
-	LastModificationTime *time.Time       `json:"LastModificationTime"`
+	CreationTime         *time.Time       `json:"CreationTime,omitempty"`
+	DatasetArn           *string          `json:"DatasetArn,omitempty"`
+	DatasetName          *string          `json:"DatasetName,omitempty"`
+	DatasetType          *DatasetTypeEnum `json:"DatasetType,omitempty"`
+	Domain               *DomainEnum      `json:"Domain,omitempty"`
+	LastModificationTime *time.Time       `json:"LastModificationTime,omitempty"`
 }

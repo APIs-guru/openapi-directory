@@ -1,12 +1,12 @@
 package shared
 
 type ImportJobResource struct {
-	DefineSegment     *bool      `json:"DefineSegment"`
-	ExternalID        *string    `json:"ExternalId"`
+	DefineSegment     *bool      `json:"DefineSegment,omitempty"`
+	ExternalID        *string    `json:"ExternalId,omitempty"`
 	Format            FormatEnum `json:"Format"`
-	RegisterEndpoints *bool      `json:"RegisterEndpoints"`
+	RegisterEndpoints *bool      `json:"RegisterEndpoints,omitempty"`
 	RoleArn           string     `json:"RoleArn"`
 	S3URL             string     `json:"S3Url"`
-	SegmentID         *string    `json:"SegmentId"`
-	SegmentName       *string    `json:"SegmentName"`
+	SegmentID         *string    `json:"SegmentId,omitempty"`
+	SegmentName       *string    `json:"SegmentName,omitempty"`
 }

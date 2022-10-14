@@ -28,10 +28,10 @@ const (
 )
 
 type Business struct {
-	BusinessCenter             *bool                                   `json:"businessCenter"`
-	BusinessCenterException    *BusinessBusinessCenterExceptionEnum    `json:"businessCenterException"`
-	MeetingRooms               *bool                                   `json:"meetingRooms"`
-	MeetingRoomsCount          *int32                                  `json:"meetingRoomsCount"`
-	MeetingRoomsCountException *BusinessMeetingRoomsCountExceptionEnum `json:"meetingRoomsCountException"`
-	MeetingRoomsException      *BusinessMeetingRoomsExceptionEnum      `json:"meetingRoomsException"`
+	BusinessCenter             *bool                                   `json:"businessCenter,omitempty"`
+	BusinessCenterException    *BusinessBusinessCenterExceptionEnum    `json:"businessCenterException,omitempty"`
+	MeetingRooms               *bool                                   `json:"meetingRooms,omitempty"`
+	MeetingRoomsCount          *int32                                  `json:"meetingRoomsCount,omitempty"`
+	MeetingRoomsCountException *BusinessMeetingRoomsCountExceptionEnum `json:"meetingRoomsCountException,omitempty"`
+	MeetingRoomsException      *BusinessMeetingRoomsExceptionEnum      `json:"meetingRoomsException,omitempty"`
 }

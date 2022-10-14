@@ -5,12 +5,12 @@ import (
 )
 
 type GetDeviceFleetReportResponse struct {
-	AgentVersions   []AgentVersion    `json:"AgentVersions"`
-	Description     *string           `json:"Description"`
+	AgentVersions   []AgentVersion    `json:"AgentVersions,omitempty"`
+	Description     *string           `json:"Description,omitempty"`
 	DeviceFleetArn  string            `json:"DeviceFleetArn"`
 	DeviceFleetName string            `json:"DeviceFleetName"`
-	DeviceStats     *DeviceStats      `json:"DeviceStats"`
-	ModelStats      []EdgeModelStat   `json:"ModelStats"`
-	OutputConfig    *EdgeOutputConfig `json:"OutputConfig"`
-	ReportGenerated *time.Time        `json:"ReportGenerated"`
+	DeviceStats     *DeviceStats      `json:"DeviceStats,omitempty"`
+	ModelStats      []EdgeModelStat   `json:"ModelStats,omitempty"`
+	OutputConfig    *EdgeOutputConfig `json:"OutputConfig,omitempty"`
+	ReportGenerated *time.Time        `json:"ReportGenerated,omitempty"`
 }

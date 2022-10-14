@@ -10,11 +10,11 @@ const (
 )
 
 type GoogleCloudDialogflowV2beta1Environment struct {
-	AgentVersion         *string                                           `json:"agentVersion"`
-	Description          *string                                           `json:"description"`
-	Fulfillment          *GoogleCloudDialogflowV2beta1Fulfillment          `json:"fulfillment"`
-	Name                 *string                                           `json:"name"`
-	State                *GoogleCloudDialogflowV2beta1EnvironmentStateEnum `json:"state"`
-	TextToSpeechSettings *GoogleCloudDialogflowV2beta1TextToSpeechSettings `json:"textToSpeechSettings"`
-	UpdateTime           *string                                           `json:"updateTime"`
+	AgentVersion         *string                                           `json:"agentVersion,omitempty"`
+	Description          *string                                           `json:"description,omitempty"`
+	Fulfillment          *GoogleCloudDialogflowV2beta1Fulfillment          `json:"fulfillment,omitempty"`
+	Name                 *string                                           `json:"name,omitempty"`
+	State                *GoogleCloudDialogflowV2beta1EnvironmentStateEnum `json:"state,omitempty"`
+	TextToSpeechSettings *GoogleCloudDialogflowV2beta1TextToSpeechSettings `json:"textToSpeechSettings,omitempty"`
+	UpdateTime           *string                                           `json:"updateTime,omitempty"`
 }

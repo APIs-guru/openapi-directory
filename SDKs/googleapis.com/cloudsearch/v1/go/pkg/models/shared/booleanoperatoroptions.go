@@ -1,5 +1,5 @@
 package shared
 
 type BooleanOperatorOptions struct {
-	OperatorName *string `json:"operatorName"`
+	OperatorName *string `json:"operatorName,omitempty"`
 }

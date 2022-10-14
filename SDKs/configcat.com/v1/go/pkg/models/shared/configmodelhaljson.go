@@ -1,48 +1,48 @@
 package shared
 
 type ConfigModelHaljsonEmbeddedProductEmbeddedOrganizationLinks struct {
-	Members  *string `json:"members"`
-	Products *string `json:"products"`
+	Members  *string `json:"members,omitempty"`
+	Products *string `json:"products,omitempty"`
 }
 
 type ConfigModelHaljsonEmbeddedProductEmbeddedOrganization struct {
-	Links          *ConfigModelHaljsonEmbeddedProductEmbeddedOrganizationLinks `json:"_links"`
-	Name           *string                                                     `json:"name"`
-	OrganizationID *string                                                     `json:"organizationId"`
+	Links          *ConfigModelHaljsonEmbeddedProductEmbeddedOrganizationLinks `json:"_links,omitempty"`
+	Name           *string                                                     `json:"name,omitempty"`
+	OrganizationID *string                                                     `json:"organizationId,omitempty"`
 }
 
 type ConfigModelHaljsonEmbeddedProductEmbedded struct {
-	Organization *ConfigModelHaljsonEmbeddedProductEmbeddedOrganization `json:"organization"`
+	Organization *ConfigModelHaljsonEmbeddedProductEmbeddedOrganization `json:"organization,omitempty"`
 }
 
 type ConfigModelHaljsonEmbeddedProductLinks struct {
-	Configs          *string `json:"configs"`
-	Environments     *string `json:"environments"`
-	Members          *string `json:"members"`
-	PermissionGroups *string `json:"permission-groups"`
-	Self             *string `json:"self"`
-	Tags             *string `json:"tags"`
+	Configs          *string `json:"configs,omitempty"`
+	Environments     *string `json:"environments,omitempty"`
+	Members          *string `json:"members,omitempty"`
+	PermissionGroups *string `json:"permission-groups,omitempty"`
+	Self             *string `json:"self,omitempty"`
+	Tags             *string `json:"tags,omitempty"`
 }
 
 type ConfigModelHaljsonEmbeddedProduct struct {
-	Embedded  *ConfigModelHaljsonEmbeddedProductEmbedded `json:"_embedded"`
-	Links     *ConfigModelHaljsonEmbeddedProductLinks    `json:"_links"`
-	Name      *string                                    `json:"name"`
-	ProductID *string                                    `json:"productId"`
+	Embedded  *ConfigModelHaljsonEmbeddedProductEmbedded `json:"_embedded,omitempty"`
+	Links     *ConfigModelHaljsonEmbeddedProductLinks    `json:"_links,omitempty"`
+	Name      *string                                    `json:"name,omitempty"`
+	ProductID *string                                    `json:"productId,omitempty"`
 }
 
 type ConfigModelHaljsonEmbedded struct {
-	Product *ConfigModelHaljsonEmbeddedProduct `json:"product"`
+	Product *ConfigModelHaljsonEmbeddedProduct `json:"product,omitempty"`
 }
 
 type ConfigModelHaljsonLinks struct {
-	Self     *string `json:"self"`
-	Settings *string `json:"settings"`
+	Self     *string `json:"self,omitempty"`
+	Settings *string `json:"settings,omitempty"`
 }
 
 type ConfigModelHaljson struct {
-	Embedded *ConfigModelHaljsonEmbedded `json:"_embedded"`
-	Links    *ConfigModelHaljsonLinks    `json:"_links"`
-	ConfigID *string                     `json:"configId"`
-	Name     *string                     `json:"name"`
+	Embedded *ConfigModelHaljsonEmbedded `json:"_embedded,omitempty"`
+	Links    *ConfigModelHaljsonLinks    `json:"_links,omitempty"`
+	ConfigID *string                     `json:"configId,omitempty"`
+	Name     *string                     `json:"name,omitempty"`
 }

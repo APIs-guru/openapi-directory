@@ -15,8 +15,8 @@ type PhoneNumberValidateHeaders struct {
 }
 
 type PhoneNumberValidateRequestBodyNumberValidateRequest struct {
-	IsoCountryCode *string `json:"IsoCountryCode"`
-	PhoneNumber    *string `json:"PhoneNumber"`
+	IsoCountryCode *string `json:"IsoCountryCode,omitempty"`
+	PhoneNumber    *string `json:"PhoneNumber,omitempty"`
 }
 
 type PhoneNumberValidateRequestBody struct {

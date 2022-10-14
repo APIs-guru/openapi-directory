@@ -5,6 +5,6 @@ import (
 )
 
 type CreateImageBuilderStreamingURLResult struct {
-	Expires      *time.Time `json:"Expires"`
-	StreamingURL *string    `json:"StreamingURL"`
+	Expires      *time.Time `json:"Expires,omitempty"`
+	StreamingURL *string    `json:"StreamingURL,omitempty"`
 }

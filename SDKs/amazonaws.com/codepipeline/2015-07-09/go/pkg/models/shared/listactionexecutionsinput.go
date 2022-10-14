@@ -1,8 +1,8 @@
 package shared
 
 type ListActionExecutionsInput struct {
-	Filter       *ActionExecutionFilter `json:"filter"`
-	MaxResults   *int64                 `json:"maxResults"`
-	NextToken    *string                `json:"nextToken"`
+	Filter       *ActionExecutionFilter `json:"filter,omitempty"`
+	MaxResults   *int64                 `json:"maxResults,omitempty"`
+	NextToken    *string                `json:"nextToken,omitempty"`
 	PipelineName string                 `json:"pipelineName"`
 }

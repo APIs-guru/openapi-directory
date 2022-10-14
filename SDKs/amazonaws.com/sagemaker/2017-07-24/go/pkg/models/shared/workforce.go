@@ -5,12 +5,12 @@ import (
 )
 
 type Workforce struct {
-	CognitoConfig   *CognitoConfig         `json:"CognitoConfig"`
-	CreateDate      *time.Time             `json:"CreateDate"`
-	LastUpdatedDate *time.Time             `json:"LastUpdatedDate"`
-	OidcConfig      *OidcConfigForResponse `json:"OidcConfig"`
-	SourceIPConfig  *SourceIPConfig        `json:"SourceIpConfig"`
-	SubDomain       *string                `json:"SubDomain"`
+	CognitoConfig   *CognitoConfig         `json:"CognitoConfig,omitempty"`
+	CreateDate      *time.Time             `json:"CreateDate,omitempty"`
+	LastUpdatedDate *time.Time             `json:"LastUpdatedDate,omitempty"`
+	OidcConfig      *OidcConfigForResponse `json:"OidcConfig,omitempty"`
+	SourceIPConfig  *SourceIPConfig        `json:"SourceIpConfig,omitempty"`
+	SubDomain       *string                `json:"SubDomain,omitempty"`
 	WorkforceArn    string                 `json:"WorkforceArn"`
 	WorkforceName   string                 `json:"WorkforceName"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type ConditionStepMetadata struct {
-	Outcome *ConditionOutcomeEnum `json:"Outcome"`
+	Outcome *ConditionOutcomeEnum `json:"Outcome,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type DescribeConnectionsResponse struct {
-	Connections []Connection `json:"Connections"`
-	Marker      *string      `json:"Marker"`
+	Connections []Connection `json:"Connections,omitempty"`
+	Marker      *string      `json:"Marker,omitempty"`
 }

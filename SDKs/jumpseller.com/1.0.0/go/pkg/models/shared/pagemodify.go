@@ -1,5 +1,5 @@
 package shared
 
 type PageModify struct {
-	Page *PageModifyFields `json:"page"`
+	Page *PageModifyFields `json:"page,omitempty"`
 }

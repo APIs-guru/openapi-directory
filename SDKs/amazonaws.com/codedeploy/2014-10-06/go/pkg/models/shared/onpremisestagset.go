@@ -1,5 +1,5 @@
 package shared
 
 type OnPremisesTagSet struct {
-	OnPremisesTagSetList [][]TagFilter `json:"onPremisesTagSetList"`
+	OnPremisesTagSetList [][]TagFilter `json:"onPremisesTagSetList,omitempty"`
 }

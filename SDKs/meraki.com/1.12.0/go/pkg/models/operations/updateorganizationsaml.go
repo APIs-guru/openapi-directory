@@ -5,7 +5,7 @@ type UpdateOrganizationSamlPathParams struct {
 }
 
 type UpdateOrganizationSamlRequestBody struct {
-	Enabled *bool `json:"enabled"`
+	Enabled *bool `json:"enabled,omitempty"`
 }
 
 type UpdateOrganizationSamlRequest struct {

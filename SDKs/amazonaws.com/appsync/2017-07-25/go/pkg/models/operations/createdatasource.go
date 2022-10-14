@@ -19,30 +19,30 @@ type CreateDataSourceHeaders struct {
 }
 
 type CreateDataSourceRequestBodyDynamodbConfig struct {
-	AwsRegion            *string                 `json:"awsRegion"`
-	DeltaSyncConfig      *shared.DeltaSyncConfig `json:"deltaSyncConfig"`
-	TableName            *string                 `json:"tableName"`
-	UseCallerCredentials *bool                   `json:"useCallerCredentials"`
-	Versioned            *bool                   `json:"versioned"`
+	AwsRegion            *string                 `json:"awsRegion,omitempty"`
+	DeltaSyncConfig      *shared.DeltaSyncConfig `json:"deltaSyncConfig,omitempty"`
+	TableName            *string                 `json:"tableName,omitempty"`
+	UseCallerCredentials *bool                   `json:"useCallerCredentials,omitempty"`
+	Versioned            *bool                   `json:"versioned,omitempty"`
 }
 
 type CreateDataSourceRequestBodyElasticsearchConfig struct {
-	AwsRegion *string `json:"awsRegion"`
-	Endpoint  *string `json:"endpoint"`
+	AwsRegion *string `json:"awsRegion,omitempty"`
+	Endpoint  *string `json:"endpoint,omitempty"`
 }
 
 type CreateDataSourceRequestBodyHTTPConfig struct {
-	AuthorizationConfig *shared.AuthorizationConfig `json:"authorizationConfig"`
-	Endpoint            *string                     `json:"endpoint"`
+	AuthorizationConfig *shared.AuthorizationConfig `json:"authorizationConfig,omitempty"`
+	Endpoint            *string                     `json:"endpoint,omitempty"`
 }
 
 type CreateDataSourceRequestBodyLambdaConfig struct {
-	LambdaFunctionArn *string `json:"lambdaFunctionArn"`
+	LambdaFunctionArn *string `json:"lambdaFunctionArn,omitempty"`
 }
 
 type CreateDataSourceRequestBodyRelationalDatabaseConfig struct {
-	RdsHTTPEndpointConfig        *shared.RdsHTTPEndpointConfig            `json:"rdsHttpEndpointConfig"`
-	RelationalDatabaseSourceType *shared.RelationalDatabaseSourceTypeEnum `json:"relationalDatabaseSourceType"`
+	RdsHTTPEndpointConfig        *shared.RdsHTTPEndpointConfig            `json:"rdsHttpEndpointConfig,omitempty"`
+	RelationalDatabaseSourceType *shared.RelationalDatabaseSourceTypeEnum `json:"relationalDatabaseSourceType,omitempty"`
 }
 
 type CreateDataSourceRequestBodyTypeEnum string
@@ -57,14 +57,14 @@ const (
 )
 
 type CreateDataSourceRequestBody struct {
-	Description              *string                                              `json:"description"`
-	DynamodbConfig           *CreateDataSourceRequestBodyDynamodbConfig           `json:"dynamodbConfig"`
-	ElasticsearchConfig      *CreateDataSourceRequestBodyElasticsearchConfig      `json:"elasticsearchConfig"`
-	HTTPConfig               *CreateDataSourceRequestBodyHTTPConfig               `json:"httpConfig"`
-	LambdaConfig             *CreateDataSourceRequestBodyLambdaConfig             `json:"lambdaConfig"`
+	Description              *string                                              `json:"description,omitempty"`
+	DynamodbConfig           *CreateDataSourceRequestBodyDynamodbConfig           `json:"dynamodbConfig,omitempty"`
+	ElasticsearchConfig      *CreateDataSourceRequestBodyElasticsearchConfig      `json:"elasticsearchConfig,omitempty"`
+	HTTPConfig               *CreateDataSourceRequestBodyHTTPConfig               `json:"httpConfig,omitempty"`
+	LambdaConfig             *CreateDataSourceRequestBodyLambdaConfig             `json:"lambdaConfig,omitempty"`
 	Name                     string                                               `json:"name"`
-	RelationalDatabaseConfig *CreateDataSourceRequestBodyRelationalDatabaseConfig `json:"relationalDatabaseConfig"`
-	ServiceRoleArn           *string                                              `json:"serviceRoleArn"`
+	RelationalDatabaseConfig *CreateDataSourceRequestBodyRelationalDatabaseConfig `json:"relationalDatabaseConfig,omitempty"`
+	ServiceRoleArn           *string                                              `json:"serviceRoleArn,omitempty"`
 	Type                     CreateDataSourceRequestBodyTypeEnum                  `json:"type"`
 }
 

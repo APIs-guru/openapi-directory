@@ -37,8 +37,8 @@ type HooksPostRequest struct {
 }
 
 type HooksPost200ApplicationJSON struct {
-	ID      *int64 `json:"id"`
-	Success *bool  `json:"success"`
+	ID      *int64 `json:"id,omitempty"`
+	Success *bool  `json:"success,omitempty"`
 }
 
 type HooksPostResponse struct {

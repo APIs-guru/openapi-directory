@@ -1,7 +1,7 @@
 package shared
 
 type ListCertificateMapEntriesResponse struct {
-	CertificateMapEntries []CertificateMapEntry `json:"certificateMapEntries"`
-	NextPageToken         *string               `json:"nextPageToken"`
-	Unreachable           []string              `json:"unreachable"`
+	CertificateMapEntries []CertificateMapEntry `json:"certificateMapEntries,omitempty"`
+	NextPageToken         *string               `json:"nextPageToken,omitempty"`
+	Unreachable           []string              `json:"unreachable,omitempty"`
 }

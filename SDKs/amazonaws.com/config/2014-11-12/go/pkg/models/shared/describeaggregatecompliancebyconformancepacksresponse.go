@@ -1,6 +1,6 @@
 package shared
 
 type DescribeAggregateComplianceByConformancePacksResponse struct {
-	AggregateComplianceByConformancePacks []AggregateComplianceByConformancePack `json:"AggregateComplianceByConformancePacks"`
-	NextToken                             *string                                `json:"NextToken"`
+	AggregateComplianceByConformancePacks []AggregateComplianceByConformancePack `json:"AggregateComplianceByConformancePacks,omitempty"`
+	NextToken                             *string                                `json:"NextToken,omitempty"`
 }

@@ -12,7 +12,7 @@ const (
 )
 
 type Metric struct {
-	Alias          *string                   `json:"alias"`
-	Expression     *string                   `json:"expression"`
-	FormattingType *MetricFormattingTypeEnum `json:"formattingType"`
+	Alias          *string                   `json:"alias,omitempty"`
+	Expression     *string                   `json:"expression,omitempty"`
+	FormattingType *MetricFormattingTypeEnum `json:"formattingType,omitempty"`
 }

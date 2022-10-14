@@ -1,7 +1,7 @@
 package shared
 
 type GetAccuracyMetricsResponse struct {
-	AutoMlOverrideStrategy     *AutoMlOverrideStrategyEnum `json:"AutoMLOverrideStrategy"`
-	OptimizationMetric         *OptimizationMetricEnum     `json:"OptimizationMetric"`
-	PredictorEvaluationResults []EvaluationResult          `json:"PredictorEvaluationResults"`
+	AutoMlOverrideStrategy     *AutoMlOverrideStrategyEnum `json:"AutoMLOverrideStrategy,omitempty"`
+	OptimizationMetric         *OptimizationMetricEnum     `json:"OptimizationMetric,omitempty"`
+	PredictorEvaluationResults []EvaluationResult          `json:"PredictorEvaluationResults,omitempty"`
 }

@@ -20,7 +20,7 @@ type UpdateDatabaseClusterRequest struct {
 type UpdateDatabaseCluster401ApplicationJSON struct {
 	ID        string  `json:"id"`
 	Message   string  `json:"message"`
-	RequestID *string `json:"request_id"`
+	RequestID *string `json:"request_id,omitempty"`
 }
 
 type UpdateDatabaseClusterResponse struct {

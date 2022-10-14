@@ -1,8 +1,8 @@
 package shared
 
 type RangeReservation struct {
-	IPPrefixLength                *int32       `json:"ipPrefixLength"`
-	RequestedRanges               []string     `json:"requestedRanges"`
-	SecondaryRangeIPPrefixLengths []int32      `json:"secondaryRangeIpPrefixLengths"`
-	SubnetworkCandidates          []Subnetwork `json:"subnetworkCandidates"`
+	IPPrefixLength                *int32       `json:"ipPrefixLength,omitempty"`
+	RequestedRanges               []string     `json:"requestedRanges,omitempty"`
+	SecondaryRangeIPPrefixLengths []int32      `json:"secondaryRangeIpPrefixLengths,omitempty"`
+	SubnetworkCandidates          []Subnetwork `json:"subnetworkCandidates,omitempty"`
 }

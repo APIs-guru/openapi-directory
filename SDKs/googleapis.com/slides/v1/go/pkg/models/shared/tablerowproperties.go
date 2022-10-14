@@ -1,5 +1,5 @@
 package shared
 
 type TableRowProperties struct {
-	MinRowHeight *Dimension `json:"minRowHeight"`
+	MinRowHeight *Dimension `json:"minRowHeight,omitempty"`
 }

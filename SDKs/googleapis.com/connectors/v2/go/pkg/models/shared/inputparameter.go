@@ -51,9 +51,9 @@ const (
 )
 
 type InputParameter struct {
-	DataType     *InputParameterDataTypeEnum `json:"dataType"`
-	DefaultValue *interface{}                `json:"defaultValue"`
-	Description  *string                     `json:"description"`
-	Name         *string                     `json:"name"`
-	Nullable     *bool                       `json:"nullable"`
+	DataType     *InputParameterDataTypeEnum `json:"dataType,omitempty"`
+	DefaultValue *interface{}                `json:"defaultValue,omitempty"`
+	Description  *string                     `json:"description,omitempty"`
+	Name         *string                     `json:"name,omitempty"`
+	Nullable     *bool                       `json:"nullable,omitempty"`
 }

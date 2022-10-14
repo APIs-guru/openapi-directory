@@ -5,7 +5,7 @@ type PostLoadBalancersIDActionsChangeProtectionPathParams struct {
 }
 
 type PostLoadBalancersIDActionsChangeProtectionRequestBody struct {
-	Delete *bool `json:"delete"`
+	Delete *bool `json:"delete,omitempty"`
 }
 
 type PostLoadBalancersIDActionsChangeProtectionRequest struct {

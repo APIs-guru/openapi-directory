@@ -1,5 +1,5 @@
 package shared
 
 type CreateRelationalDatabaseFromSnapshotResult struct {
-	Operations []Operation `json:"operations"`
+	Operations []Operation `json:"operations,omitempty"`
 }

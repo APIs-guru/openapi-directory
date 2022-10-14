@@ -1,7 +1,7 @@
 package shared
 
 type ListFundingAccountsResponse struct {
-	Content []FundingAccountResponse `json:"content"`
-	Links   []interface{}            `json:"links"`
-	Page    *interface{}             `json:"page"`
+	Content []FundingAccountResponse `json:"content,omitempty"`
+	Links   []interface{}            `json:"links,omitempty"`
+	Page    *interface{}             `json:"page,omitempty"`
 }

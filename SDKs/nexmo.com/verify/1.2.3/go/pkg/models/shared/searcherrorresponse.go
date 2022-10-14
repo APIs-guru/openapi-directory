@@ -11,7 +11,7 @@ const (
 )
 
 type SearchErrorResponse struct {
-	ErrorText *string                        `json:"error_text"`
-	RequestID *string                        `json:"request_id"`
-	Status    *SearchErrorResponseStatusEnum `json:"status"`
+	ErrorText *string                        `json:"error_text,omitempty"`
+	RequestID *string                        `json:"request_id,omitempty"`
+	Status    *SearchErrorResponseStatusEnum `json:"status,omitempty"`
 }

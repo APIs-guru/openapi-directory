@@ -17,8 +17,8 @@ const (
 )
 
 type EmbeddedObjectBorder struct {
-	Color         *OptionalColor                         `json:"color"`
-	DashStyle     *EmbeddedObjectBorderDashStyleEnum     `json:"dashStyle"`
-	PropertyState *EmbeddedObjectBorderPropertyStateEnum `json:"propertyState"`
-	Width         *Dimension                             `json:"width"`
+	Color         *OptionalColor                         `json:"color,omitempty"`
+	DashStyle     *EmbeddedObjectBorderDashStyleEnum     `json:"dashStyle,omitempty"`
+	PropertyState *EmbeddedObjectBorderPropertyStateEnum `json:"propertyState,omitempty"`
+	Width         *Dimension                             `json:"width,omitempty"`
 }

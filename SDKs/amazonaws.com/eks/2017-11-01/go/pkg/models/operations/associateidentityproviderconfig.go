@@ -19,20 +19,20 @@ type AssociateIdentityProviderConfigHeaders struct {
 }
 
 type AssociateIdentityProviderConfigRequestBodyOidc struct {
-	ClientID                   *string           `json:"clientId"`
-	GroupsClaim                *string           `json:"groupsClaim"`
-	GroupsPrefix               *string           `json:"groupsPrefix"`
-	IdentityProviderConfigName *string           `json:"identityProviderConfigName"`
-	IssuerURL                  *string           `json:"issuerUrl"`
-	RequiredClaims             map[string]string `json:"requiredClaims"`
-	UsernameClaim              *string           `json:"usernameClaim"`
-	UsernamePrefix             *string           `json:"usernamePrefix"`
+	ClientID                   *string           `json:"clientId,omitempty"`
+	GroupsClaim                *string           `json:"groupsClaim,omitempty"`
+	GroupsPrefix               *string           `json:"groupsPrefix,omitempty"`
+	IdentityProviderConfigName *string           `json:"identityProviderConfigName,omitempty"`
+	IssuerURL                  *string           `json:"issuerUrl,omitempty"`
+	RequiredClaims             map[string]string `json:"requiredClaims,omitempty"`
+	UsernameClaim              *string           `json:"usernameClaim,omitempty"`
+	UsernamePrefix             *string           `json:"usernamePrefix,omitempty"`
 }
 
 type AssociateIdentityProviderConfigRequestBody struct {
-	ClientRequestToken *string                                        `json:"clientRequestToken"`
+	ClientRequestToken *string                                        `json:"clientRequestToken,omitempty"`
 	Oidc               AssociateIdentityProviderConfigRequestBodyOidc `json:"oidc"`
-	Tags               map[string]string                              `json:"tags"`
+	Tags               map[string]string                              `json:"tags,omitempty"`
 }
 
 type AssociateIdentityProviderConfigRequest struct {

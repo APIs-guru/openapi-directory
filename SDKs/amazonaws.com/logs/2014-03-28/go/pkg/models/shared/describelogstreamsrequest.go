@@ -1,10 +1,10 @@
 package shared
 
 type DescribeLogStreamsRequest struct {
-	Descending          *bool        `json:"descending"`
-	Limit               *int64       `json:"limit"`
+	Descending          *bool        `json:"descending,omitempty"`
+	Limit               *int64       `json:"limit,omitempty"`
 	LogGroupName        string       `json:"logGroupName"`
-	LogStreamNamePrefix *string      `json:"logStreamNamePrefix"`
-	NextToken           *string      `json:"nextToken"`
-	OrderBy             *OrderByEnum `json:"orderBy"`
+	LogStreamNamePrefix *string      `json:"logStreamNamePrefix,omitempty"`
+	NextToken           *string      `json:"nextToken,omitempty"`
+	OrderBy             *OrderByEnum `json:"orderBy,omitempty"`
 }

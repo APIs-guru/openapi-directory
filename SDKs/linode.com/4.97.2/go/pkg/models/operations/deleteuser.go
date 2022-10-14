@@ -27,7 +27,7 @@ type DeleteUserRequest struct {
 }
 
 type DeleteUserDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type DeleteUserResponse struct {

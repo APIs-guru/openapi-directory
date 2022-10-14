@@ -10,9 +10,9 @@ const (
 )
 
 type ActivityContentDetailsSocial struct {
-	Author       *string                               `json:"author"`
-	ImageURL     *string                               `json:"imageUrl"`
-	ReferenceURL *string                               `json:"referenceUrl"`
-	ResourceID   *ResourceID                           `json:"resourceId"`
-	Type         *ActivityContentDetailsSocialTypeEnum `json:"type"`
+	Author       *string                               `json:"author,omitempty"`
+	ImageURL     *string                               `json:"imageUrl,omitempty"`
+	ReferenceURL *string                               `json:"referenceUrl,omitempty"`
+	ResourceID   *ResourceID                           `json:"resourceId,omitempty"`
+	Type         *ActivityContentDetailsSocialTypeEnum `json:"type,omitempty"`
 }

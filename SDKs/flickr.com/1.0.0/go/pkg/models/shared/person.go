@@ -1,101 +1,101 @@
 package shared
 
 type PersonDescription struct {
-	Content *string `json:"_content"`
+	Content *string `json:"_content,omitempty"`
 }
 
 type PersonDisableKeyboardShortcuts struct {
-	Content *string `json:"_content"`
+	Content *string `json:"_content,omitempty"`
 }
 
 type PersonLocation struct {
-	Content *string `json:"_content"`
+	Content *string `json:"_content,omitempty"`
 }
 
 type PersonMboxSha1sum struct {
-	Content *string `json:"_content"`
+	Content *string `json:"_content,omitempty"`
 }
 
 type PersonMobileurl struct {
-	Content *string `json:"_content"`
+	Content *string `json:"_content,omitempty"`
 }
 
 type PersonPhotosCount struct {
-	Content *string `json:"_content"`
+	Content *string `json:"_content,omitempty"`
 }
 
 type PersonPhotosFirstdate struct {
-	Content *string `json:"_content"`
+	Content *string `json:"_content,omitempty"`
 }
 
 type PersonPhotosFirstdatetaken struct {
-	Content *string `json:"_content"`
+	Content *string `json:"_content,omitempty"`
 }
 
 type PersonPhotosViews struct {
-	Content *string `json:"_content"`
+	Content *string `json:"_content,omitempty"`
 }
 
 type PersonPhotos struct {
-	Count          *PersonPhotosCount          `json:"count"`
-	Firstdate      *PersonPhotosFirstdate      `json:"firstdate"`
-	Firstdatetaken *PersonPhotosFirstdatetaken `json:"firstdatetaken"`
-	Views          *PersonPhotosViews          `json:"views"`
+	Count          *PersonPhotosCount          `json:"count,omitempty"`
+	Firstdate      *PersonPhotosFirstdate      `json:"firstdate,omitempty"`
+	Firstdatetaken *PersonPhotosFirstdatetaken `json:"firstdatetaken,omitempty"`
+	Views          *PersonPhotosViews          `json:"views,omitempty"`
 }
 
 type PersonPhotosurl struct {
-	Content *string `json:"_content"`
+	Content *string `json:"_content,omitempty"`
 }
 
 type PersonProfileurl struct {
-	Content *string `json:"_content"`
+	Content *string `json:"_content,omitempty"`
 }
 
 type PersonRealname struct {
-	Content *string `json:"_content"`
+	Content *string `json:"_content,omitempty"`
 }
 
 type PersonTimezone struct {
-	Label      *string `json:"label"`
-	Offset     *string `json:"offset"`
-	TimezoneID *string `json:"timezone_id"`
+	Label      *string `json:"label,omitempty"`
+	Offset     *string `json:"offset,omitempty"`
+	TimezoneID *string `json:"timezone_id,omitempty"`
 }
 
 type PersonUnreadMessages struct {
-	Content *string `json:"_content"`
+	Content *string `json:"_content,omitempty"`
 }
 
 type PersonUsername struct {
-	Content *string `json:"_content"`
+	Content *string `json:"_content,omitempty"`
 }
 
 type Person struct {
-	CanBuyPro                *bool                           `json:"can_buy_pro"`
-	Cover                    *Cover                          `json:"cover"`
-	Coverphoto               *PhotoUrLs                      `json:"coverphoto"`
-	CoverphotoFarm           *string                         `json:"coverphoto_farm"`
-	CoverphotoServer         *string                         `json:"coverphoto_server"`
-	Description              *PersonDescription              `json:"description"`
-	DisableKeyboardShortcuts *PersonDisableKeyboardShortcuts `json:"disable_keyboard_shortcuts"`
-	Expire                   *bool                           `json:"expire"`
-	HasStats                 *bool                           `json:"has_stats"`
-	Iconfarm                 *string                         `json:"iconfarm"`
-	Iconserver               *string                         `json:"iconserver"`
-	ID                       *string                         `json:"id"`
-	IsAdFree                 *bool                           `json:"is_ad_free"`
-	Ispro                    *bool                           `json:"ispro"`
-	Location                 *PersonLocation                 `json:"location"`
-	MboxSha1sum              *PersonMboxSha1sum              `json:"mbox_sha1sum"`
-	Mobileurl                *PersonMobileurl                `json:"mobileurl"`
-	Nsid                     *string                         `json:"nsid"`
-	PathAlias                *string                         `json:"path_alias"`
-	Photos                   *PersonPhotos                   `json:"photos"`
-	Photosurl                *PersonPhotosurl                `json:"photosurl"`
-	Profileurl               *PersonProfileurl               `json:"profileurl"`
-	Realname                 *PersonRealname                 `json:"realname"`
-	Timezone                 *PersonTimezone                 `json:"timezone"`
-	UnreadMessages           *PersonUnreadMessages           `json:"unread_messages"`
-	UserSecret               *string                         `json:"user_secret"`
-	Username                 *PersonUsername                 `json:"username"`
-	Yintl                    *string                         `json:"yintl"`
+	CanBuyPro                *bool                           `json:"can_buy_pro,omitempty"`
+	Cover                    *Cover                          `json:"cover,omitempty"`
+	Coverphoto               *PhotoUrLs                      `json:"coverphoto,omitempty"`
+	CoverphotoFarm           *string                         `json:"coverphoto_farm,omitempty"`
+	CoverphotoServer         *string                         `json:"coverphoto_server,omitempty"`
+	Description              *PersonDescription              `json:"description,omitempty"`
+	DisableKeyboardShortcuts *PersonDisableKeyboardShortcuts `json:"disable_keyboard_shortcuts,omitempty"`
+	Expire                   *bool                           `json:"expire,omitempty"`
+	HasStats                 *bool                           `json:"has_stats,omitempty"`
+	Iconfarm                 *string                         `json:"iconfarm,omitempty"`
+	Iconserver               *string                         `json:"iconserver,omitempty"`
+	ID                       *string                         `json:"id,omitempty"`
+	IsAdFree                 *bool                           `json:"is_ad_free,omitempty"`
+	Ispro                    *bool                           `json:"ispro,omitempty"`
+	Location                 *PersonLocation                 `json:"location,omitempty"`
+	MboxSha1sum              *PersonMboxSha1sum              `json:"mbox_sha1sum,omitempty"`
+	Mobileurl                *PersonMobileurl                `json:"mobileurl,omitempty"`
+	Nsid                     *string                         `json:"nsid,omitempty"`
+	PathAlias                *string                         `json:"path_alias,omitempty"`
+	Photos                   *PersonPhotos                   `json:"photos,omitempty"`
+	Photosurl                *PersonPhotosurl                `json:"photosurl,omitempty"`
+	Profileurl               *PersonProfileurl               `json:"profileurl,omitempty"`
+	Realname                 *PersonRealname                 `json:"realname,omitempty"`
+	Timezone                 *PersonTimezone                 `json:"timezone,omitempty"`
+	UnreadMessages           *PersonUnreadMessages           `json:"unread_messages,omitempty"`
+	UserSecret               *string                         `json:"user_secret,omitempty"`
+	Username                 *PersonUsername                 `json:"username,omitempty"`
+	Yintl                    *string                         `json:"yintl,omitempty"`
 }

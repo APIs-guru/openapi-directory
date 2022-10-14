@@ -1,6 +1,6 @@
 package shared
 
 type Activity struct {
-	CombinedEvent *Event  `json:"combinedEvent"`
-	SingleEvents  []Event `json:"singleEvents"`
+	CombinedEvent *Event  `json:"combinedEvent,omitempty"`
+	SingleEvents  []Event `json:"singleEvents,omitempty"`
 }

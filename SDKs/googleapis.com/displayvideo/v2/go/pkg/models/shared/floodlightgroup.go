@@ -10,11 +10,11 @@ const (
 )
 
 type FloodlightGroup struct {
-	ActiveViewConfig  *ActiveViewVideoViewabilityMetricConfig `json:"activeViewConfig"`
-	CustomVariables   map[string]interface{}                  `json:"customVariables"`
-	DisplayName       *string                                 `json:"displayName"`
-	FloodlightGroupID *string                                 `json:"floodlightGroupId"`
-	LookbackWindow    *LookbackWindow                         `json:"lookbackWindow"`
-	Name              *string                                 `json:"name"`
-	WebTagType        *FloodlightGroupWebTagTypeEnum          `json:"webTagType"`
+	ActiveViewConfig  *ActiveViewVideoViewabilityMetricConfig `json:"activeViewConfig,omitempty"`
+	CustomVariables   map[string]interface{}                  `json:"customVariables,omitempty"`
+	DisplayName       *string                                 `json:"displayName,omitempty"`
+	FloodlightGroupID *string                                 `json:"floodlightGroupId,omitempty"`
+	LookbackWindow    *LookbackWindow                         `json:"lookbackWindow,omitempty"`
+	Name              *string                                 `json:"name,omitempty"`
+	WebTagType        *FloodlightGroupWebTagTypeEnum          `json:"webTagType,omitempty"`
 }

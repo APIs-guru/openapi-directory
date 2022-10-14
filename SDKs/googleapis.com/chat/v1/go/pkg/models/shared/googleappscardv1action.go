@@ -8,8 +8,8 @@ const (
 )
 
 type GoogleAppsCardV1Action struct {
-	Function      *string                                  `json:"function"`
-	LoadIndicator *GoogleAppsCardV1ActionLoadIndicatorEnum `json:"loadIndicator"`
-	Parameters    []GoogleAppsCardV1ActionParameter        `json:"parameters"`
-	PersistValues *bool                                    `json:"persistValues"`
+	Function      *string                                  `json:"function,omitempty"`
+	LoadIndicator *GoogleAppsCardV1ActionLoadIndicatorEnum `json:"loadIndicator,omitempty"`
+	Parameters    []GoogleAppsCardV1ActionParameter        `json:"parameters,omitempty"`
+	PersistValues *bool                                    `json:"persistValues,omitempty"`
 }

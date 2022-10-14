@@ -10,23 +10,23 @@ type CreateReplicaPathParams struct {
 }
 
 type CreateReplicaRequestBodyConnection struct {
-	Database *string `json:"database"`
-	Host     *string `json:"host"`
-	Password *string `json:"password"`
-	Port     *int64  `json:"port"`
-	Ssl      *bool   `json:"ssl"`
-	URI      *string `json:"uri"`
-	User     *string `json:"user"`
+	Database *string `json:"database,omitempty"`
+	Host     *string `json:"host,omitempty"`
+	Password *string `json:"password,omitempty"`
+	Port     *int64  `json:"port,omitempty"`
+	Ssl      *bool   `json:"ssl,omitempty"`
+	URI      *string `json:"uri,omitempty"`
+	User     *string `json:"user,omitempty"`
 }
 
 type CreateReplicaRequestBodyPrivateConnection struct {
-	Database *string `json:"database"`
-	Host     *string `json:"host"`
-	Password *string `json:"password"`
-	Port     *int64  `json:"port"`
-	Ssl      *bool   `json:"ssl"`
-	URI      *string `json:"uri"`
-	User     *string `json:"user"`
+	Database *string `json:"database,omitempty"`
+	Host     *string `json:"host,omitempty"`
+	Password *string `json:"password,omitempty"`
+	Port     *int64  `json:"port,omitempty"`
+	Ssl      *bool   `json:"ssl,omitempty"`
+	URI      *string `json:"uri,omitempty"`
+	User     *string `json:"user,omitempty"`
 }
 
 type CreateReplicaRequestBodyStatusEnum string
@@ -40,15 +40,15 @@ const (
 )
 
 type CreateReplicaRequestBody struct {
-	Connection         *CreateReplicaRequestBodyConnection        `json:"connection"`
-	CreatedAt          *time.Time                                 `json:"created_at"`
+	Connection         *CreateReplicaRequestBodyConnection        `json:"connection,omitempty"`
+	CreatedAt          *time.Time                                 `json:"created_at,omitempty"`
 	Name               string                                     `json:"name"`
-	PrivateConnection  *CreateReplicaRequestBodyPrivateConnection `json:"private_connection"`
-	PrivateNetworkUUID *string                                    `json:"private_network_uuid"`
-	Region             *string                                    `json:"region"`
+	PrivateConnection  *CreateReplicaRequestBodyPrivateConnection `json:"private_connection,omitempty"`
+	PrivateNetworkUUID *string                                    `json:"private_network_uuid,omitempty"`
+	Region             *string                                    `json:"region,omitempty"`
 	Size               string                                     `json:"size"`
-	Status             *CreateReplicaRequestBodyStatusEnum        `json:"status"`
-	Tags               []string                                   `json:"tags"`
+	Status             *CreateReplicaRequestBodyStatusEnum        `json:"status,omitempty"`
+	Tags               []string                                   `json:"tags,omitempty"`
 }
 
 type CreateReplicaRequest struct {
@@ -57,13 +57,13 @@ type CreateReplicaRequest struct {
 }
 
 type CreateReplica201ApplicationJSON struct {
-	Replica *shared.Onev21databases1Percent7BdatabaseClusterUUIDPercent7D1replicasGetResponses200ContentApplication1jsonSchemaPropertiesReplicasItems `json:"replica"`
+	Replica *shared.Onev21databases1Percent7BdatabaseClusterUUIDPercent7D1replicasGetResponses200ContentApplication1jsonSchemaPropertiesReplicasItems `json:"replica,omitempty"`
 }
 
 type CreateReplica401ApplicationJSON struct {
 	ID        string  `json:"id"`
 	Message   string  `json:"message"`
-	RequestID *string `json:"request_id"`
+	RequestID *string `json:"request_id,omitempty"`
 }
 
 type CreateReplicaResponse struct {

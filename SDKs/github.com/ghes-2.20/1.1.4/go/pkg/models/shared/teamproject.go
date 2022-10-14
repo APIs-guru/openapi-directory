@@ -16,10 +16,10 @@ type TeamProject struct {
 	Name                   string                 `json:"name"`
 	NodeID                 string                 `json:"node_id"`
 	Number                 int64                  `json:"number"`
-	OrganizationPermission *string                `json:"organization_permission"`
+	OrganizationPermission *string                `json:"organization_permission,omitempty"`
 	OwnerURL               string                 `json:"owner_url"`
 	Permissions            TeamProjectPermissions `json:"permissions"`
-	Private                *bool                  `json:"private"`
+	Private                *bool                  `json:"private,omitempty"`
 	State                  string                 `json:"state"`
 	UpdatedAt              string                 `json:"updated_at"`
 	URL                    string                 `json:"url"`

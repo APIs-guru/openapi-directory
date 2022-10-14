@@ -144,14 +144,14 @@ const (
 )
 
 type SynthesizeSpeechRequestBody struct {
-	Engine          *SynthesizeSpeechRequestBodyEngineEnum       `json:"Engine"`
-	LanguageCode    *SynthesizeSpeechRequestBodyLanguageCodeEnum `json:"LanguageCode"`
-	LexiconNames    []string                                     `json:"LexiconNames"`
+	Engine          *SynthesizeSpeechRequestBodyEngineEnum       `json:"Engine,omitempty"`
+	LanguageCode    *SynthesizeSpeechRequestBodyLanguageCodeEnum `json:"LanguageCode,omitempty"`
+	LexiconNames    []string                                     `json:"LexiconNames,omitempty"`
 	OutputFormat    SynthesizeSpeechRequestBodyOutputFormatEnum  `json:"OutputFormat"`
-	SampleRate      *string                                      `json:"SampleRate"`
-	SpeechMarkTypes []shared.SpeechMarkTypeEnum                  `json:"SpeechMarkTypes"`
+	SampleRate      *string                                      `json:"SampleRate,omitempty"`
+	SpeechMarkTypes []shared.SpeechMarkTypeEnum                  `json:"SpeechMarkTypes,omitempty"`
 	Text            string                                       `json:"Text"`
-	TextType        *SynthesizeSpeechRequestBodyTextTypeEnum     `json:"TextType"`
+	TextType        *SynthesizeSpeechRequestBodyTextTypeEnum     `json:"TextType,omitempty"`
 	VoiceID         SynthesizeSpeechRequestBodyVoiceIDEnum       `json:"VoiceId"`
 }
 

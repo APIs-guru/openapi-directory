@@ -9,7 +9,7 @@ const (
 )
 
 type Manifest struct {
-	FileName   *string           `json:"fileName"`
-	MuxStreams []string          `json:"muxStreams"`
-	Type       *ManifestTypeEnum `json:"type"`
+	FileName   *string           `json:"fileName,omitempty"`
+	MuxStreams []string          `json:"muxStreams,omitempty"`
+	Type       *ManifestTypeEnum `json:"type,omitempty"`
 }

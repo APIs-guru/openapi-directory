@@ -22,8 +22,8 @@ const (
 )
 
 type XSS struct {
-	AttackVector        *XSSAttackVectorEnum `json:"attackVector"`
-	ErrorMessage        *string              `json:"errorMessage"`
-	StackTraces         []string             `json:"stackTraces"`
-	StoredXSSSeedingURL *string              `json:"storedXssSeedingUrl"`
+	AttackVector        *XSSAttackVectorEnum `json:"attackVector,omitempty"`
+	ErrorMessage        *string              `json:"errorMessage,omitempty"`
+	StackTraces         []string             `json:"stackTraces,omitempty"`
+	StoredXSSSeedingURL *string              `json:"storedXssSeedingUrl,omitempty"`
 }

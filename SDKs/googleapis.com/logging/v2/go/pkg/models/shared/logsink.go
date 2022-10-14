@@ -9,16 +9,16 @@ const (
 )
 
 type LogSink struct {
-	BigqueryOptions     *BigQueryOptions                `json:"bigqueryOptions"`
-	CreateTime          *string                         `json:"createTime"`
-	Description         *string                         `json:"description"`
-	Destination         *string                         `json:"destination"`
-	Disabled            *bool                           `json:"disabled"`
-	Exclusions          []LogExclusion                  `json:"exclusions"`
-	Filter              *string                         `json:"filter"`
-	IncludeChildren     *bool                           `json:"includeChildren"`
-	Name                *string                         `json:"name"`
-	OutputVersionFormat *LogSinkOutputVersionFormatEnum `json:"outputVersionFormat"`
-	UpdateTime          *string                         `json:"updateTime"`
-	WriterIdentity      *string                         `json:"writerIdentity"`
+	BigqueryOptions     *BigQueryOptions                `json:"bigqueryOptions,omitempty"`
+	CreateTime          *string                         `json:"createTime,omitempty"`
+	Description         *string                         `json:"description,omitempty"`
+	Destination         *string                         `json:"destination,omitempty"`
+	Disabled            *bool                           `json:"disabled,omitempty"`
+	Exclusions          []LogExclusion                  `json:"exclusions,omitempty"`
+	Filter              *string                         `json:"filter,omitempty"`
+	IncludeChildren     *bool                           `json:"includeChildren,omitempty"`
+	Name                *string                         `json:"name,omitempty"`
+	OutputVersionFormat *LogSinkOutputVersionFormatEnum `json:"outputVersionFormat,omitempty"`
+	UpdateTime          *string                         `json:"updateTime,omitempty"`
+	WriterIdentity      *string                         `json:"writerIdentity,omitempty"`
 }

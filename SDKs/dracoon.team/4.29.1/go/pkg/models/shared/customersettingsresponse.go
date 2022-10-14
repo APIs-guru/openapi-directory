@@ -1,8 +1,8 @@
 package shared
 
 type CustomerSettingsResponse struct {
-	HomeRoomParentID   *int64  `json:"homeRoomParentId"`
-	HomeRoomParentName *string `json:"homeRoomParentName"`
-	HomeRoomQuota      *int64  `json:"homeRoomQuota"`
+	HomeRoomParentID   *int64  `json:"homeRoomParentId,omitempty"`
+	HomeRoomParentName *string `json:"homeRoomParentName,omitempty"`
+	HomeRoomQuota      *int64  `json:"homeRoomQuota,omitempty"`
 	HomeRoomsActive    bool    `json:"homeRoomsActive"`
 }

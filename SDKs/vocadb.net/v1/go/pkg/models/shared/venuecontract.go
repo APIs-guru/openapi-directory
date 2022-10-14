@@ -10,15 +10,15 @@ const (
 )
 
 type VenueContract struct {
-	AdditionalNames    *string                   `json:"additionalNames"`
-	Address            *string                   `json:"address"`
-	AddressCountryCode *string                   `json:"addressCountryCode"`
-	Coordinates        *OptionalGeoPointContract `json:"coordinates"`
-	Deleted            *bool                     `json:"deleted"`
-	Description        *string                   `json:"description"`
-	ID                 *int32                    `json:"id"`
-	Name               *string                   `json:"name"`
-	Status             *VenueContractStatusEnum  `json:"status"`
-	Version            *int32                    `json:"version"`
-	WebLinks           []WebLinkContract         `json:"webLinks"`
+	AdditionalNames    *string                   `json:"additionalNames,omitempty"`
+	Address            *string                   `json:"address,omitempty"`
+	AddressCountryCode *string                   `json:"addressCountryCode,omitempty"`
+	Coordinates        *OptionalGeoPointContract `json:"coordinates,omitempty"`
+	Deleted            *bool                     `json:"deleted,omitempty"`
+	Description        *string                   `json:"description,omitempty"`
+	ID                 *int32                    `json:"id,omitempty"`
+	Name               *string                   `json:"name,omitempty"`
+	Status             *VenueContractStatusEnum  `json:"status,omitempty"`
+	Version            *int32                    `json:"version,omitempty"`
+	WebLinks           []WebLinkContract         `json:"webLinks,omitempty"`
 }

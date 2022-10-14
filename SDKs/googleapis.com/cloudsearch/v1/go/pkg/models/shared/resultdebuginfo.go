@@ -1,5 +1,5 @@
 package shared
 
 type ResultDebugInfo struct {
-	FormattedDebugInfo *string `json:"formattedDebugInfo"`
+	FormattedDebugInfo *string `json:"formattedDebugInfo,omitempty"`
 }

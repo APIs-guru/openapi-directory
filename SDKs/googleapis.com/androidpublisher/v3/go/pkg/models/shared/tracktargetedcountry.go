@@ -1,5 +1,5 @@
 package shared
 
 type TrackTargetedCountry struct {
-	CountryCode *string `json:"countryCode"`
+	CountryCode *string `json:"countryCode,omitempty"`
 }

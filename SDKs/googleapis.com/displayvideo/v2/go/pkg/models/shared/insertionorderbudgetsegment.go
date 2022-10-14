@@ -1,8 +1,8 @@
 package shared
 
 type InsertionOrderBudgetSegment struct {
-	BudgetAmountMicros *string    `json:"budgetAmountMicros"`
-	CampaignBudgetID   *string    `json:"campaignBudgetId"`
-	DateRange          *DateRange `json:"dateRange"`
-	Description        *string    `json:"description"`
+	BudgetAmountMicros *string    `json:"budgetAmountMicros,omitempty"`
+	CampaignBudgetID   *string    `json:"campaignBudgetId,omitempty"`
+	DateRange          *DateRange `json:"dateRange,omitempty"`
+	Description        *string    `json:"description,omitempty"`
 }

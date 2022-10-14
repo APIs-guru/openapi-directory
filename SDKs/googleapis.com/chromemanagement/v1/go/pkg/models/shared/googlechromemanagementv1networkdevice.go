@@ -10,10 +10,10 @@ const (
 )
 
 type GoogleChromeManagementV1NetworkDevice struct {
-	Iccid      *string                                        `json:"iccid"`
-	Imei       *string                                        `json:"imei"`
-	MacAddress *string                                        `json:"macAddress"`
-	Mdn        *string                                        `json:"mdn"`
-	Meid       *string                                        `json:"meid"`
-	Type       *GoogleChromeManagementV1NetworkDeviceTypeEnum `json:"type"`
+	Iccid      *string                                        `json:"iccid,omitempty"`
+	Imei       *string                                        `json:"imei,omitempty"`
+	MacAddress *string                                        `json:"macAddress,omitempty"`
+	Mdn        *string                                        `json:"mdn,omitempty"`
+	Meid       *string                                        `json:"meid,omitempty"`
+	Type       *GoogleChromeManagementV1NetworkDeviceTypeEnum `json:"type,omitempty"`
 }

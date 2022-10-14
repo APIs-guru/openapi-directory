@@ -40,11 +40,11 @@ const (
 )
 
 type GoogleAppsScriptTypeProcess struct {
-	Duration        *string                                         `json:"duration"`
-	FunctionName    *string                                         `json:"functionName"`
-	ProcessStatus   *GoogleAppsScriptTypeProcessProcessStatusEnum   `json:"processStatus"`
-	ProcessType     *GoogleAppsScriptTypeProcessProcessTypeEnum     `json:"processType"`
-	ProjectName     *string                                         `json:"projectName"`
-	StartTime       *string                                         `json:"startTime"`
-	UserAccessLevel *GoogleAppsScriptTypeProcessUserAccessLevelEnum `json:"userAccessLevel"`
+	Duration        *string                                         `json:"duration,omitempty"`
+	FunctionName    *string                                         `json:"functionName,omitempty"`
+	ProcessStatus   *GoogleAppsScriptTypeProcessProcessStatusEnum   `json:"processStatus,omitempty"`
+	ProcessType     *GoogleAppsScriptTypeProcessProcessTypeEnum     `json:"processType,omitempty"`
+	ProjectName     *string                                         `json:"projectName,omitempty"`
+	StartTime       *string                                         `json:"startTime,omitempty"`
+	UserAccessLevel *GoogleAppsScriptTypeProcessUserAccessLevelEnum `json:"userAccessLevel,omitempty"`
 }

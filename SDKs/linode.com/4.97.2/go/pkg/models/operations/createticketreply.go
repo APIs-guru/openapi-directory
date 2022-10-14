@@ -28,7 +28,7 @@ type CreateTicketReplyRequest struct {
 }
 
 type CreateTicketReplyDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type CreateTicketReplyResponse struct {

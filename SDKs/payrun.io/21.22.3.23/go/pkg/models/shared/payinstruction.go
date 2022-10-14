@@ -5,12 +5,12 @@ import (
 )
 
 type PayInstructionPayInstructionPayInstruction struct {
-	Description *string    `json:"Description"`
-	EndDate     *time.Time `json:"EndDate"`
-	PayLineTag  *string    `json:"PayLineTag"`
-	StartDate   *time.Time `json:"StartDate"`
+	Description *string    `json:"Description,omitempty"`
+	EndDate     *time.Time `json:"EndDate,omitempty"`
+	PayLineTag  *string    `json:"PayLineTag,omitempty"`
+	StartDate   *time.Time `json:"StartDate,omitempty"`
 }
 
 type PayInstruction struct {
-	PayInstruction *PayInstructionPayInstructionPayInstruction `json:"PayInstruction"`
+	PayInstruction *PayInstructionPayInstructionPayInstruction `json:"PayInstruction,omitempty"`
 }

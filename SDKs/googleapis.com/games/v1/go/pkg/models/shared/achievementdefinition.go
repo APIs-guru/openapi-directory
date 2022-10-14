@@ -18,17 +18,17 @@ const (
 )
 
 type AchievementDefinition struct {
-	AchievementType          *AchievementDefinitionAchievementTypeEnum `json:"achievementType"`
-	Description              *string                                   `json:"description"`
-	ExperiencePoints         *string                                   `json:"experiencePoints"`
-	FormattedTotalSteps      *string                                   `json:"formattedTotalSteps"`
-	ID                       *string                                   `json:"id"`
-	InitialState             *AchievementDefinitionInitialStateEnum    `json:"initialState"`
-	IsRevealedIconURLDefault *bool                                     `json:"isRevealedIconUrlDefault"`
-	IsUnlockedIconURLDefault *bool                                     `json:"isUnlockedIconUrlDefault"`
-	Kind                     *string                                   `json:"kind"`
-	Name                     *string                                   `json:"name"`
-	RevealedIconURL          *string                                   `json:"revealedIconUrl"`
-	TotalSteps               *int32                                    `json:"totalSteps"`
-	UnlockedIconURL          *string                                   `json:"unlockedIconUrl"`
+	AchievementType          *AchievementDefinitionAchievementTypeEnum `json:"achievementType,omitempty"`
+	Description              *string                                   `json:"description,omitempty"`
+	ExperiencePoints         *string                                   `json:"experiencePoints,omitempty"`
+	FormattedTotalSteps      *string                                   `json:"formattedTotalSteps,omitempty"`
+	ID                       *string                                   `json:"id,omitempty"`
+	InitialState             *AchievementDefinitionInitialStateEnum    `json:"initialState,omitempty"`
+	IsRevealedIconURLDefault *bool                                     `json:"isRevealedIconUrlDefault,omitempty"`
+	IsUnlockedIconURLDefault *bool                                     `json:"isUnlockedIconUrlDefault,omitempty"`
+	Kind                     *string                                   `json:"kind,omitempty"`
+	Name                     *string                                   `json:"name,omitempty"`
+	RevealedIconURL          *string                                   `json:"revealedIconUrl,omitempty"`
+	TotalSteps               *int32                                    `json:"totalSteps,omitempty"`
+	UnlockedIconURL          *string                                   `json:"unlockedIconUrl,omitempty"`
 }

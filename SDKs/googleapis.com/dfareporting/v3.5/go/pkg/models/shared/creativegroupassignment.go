@@ -8,6 +8,6 @@ const (
 )
 
 type CreativeGroupAssignment struct {
-	CreativeGroupID     *string                                         `json:"creativeGroupId"`
-	CreativeGroupNumber *CreativeGroupAssignmentCreativeGroupNumberEnum `json:"creativeGroupNumber"`
+	CreativeGroupID     *string                                         `json:"creativeGroupId,omitempty"`
+	CreativeGroupNumber *CreativeGroupAssignmentCreativeGroupNumberEnum `json:"creativeGroupNumber,omitempty"`
 }

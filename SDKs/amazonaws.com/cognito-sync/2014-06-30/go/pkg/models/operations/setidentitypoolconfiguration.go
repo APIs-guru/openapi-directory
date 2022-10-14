@@ -19,19 +19,19 @@ type SetIdentityPoolConfigurationHeaders struct {
 }
 
 type SetIdentityPoolConfigurationRequestBodyCognitoStreams struct {
-	RoleArn         *string                     `json:"RoleArn"`
-	StreamName      *string                     `json:"StreamName"`
-	StreamingStatus *shared.StreamingStatusEnum `json:"StreamingStatus"`
+	RoleArn         *string                     `json:"RoleArn,omitempty"`
+	StreamName      *string                     `json:"StreamName,omitempty"`
+	StreamingStatus *shared.StreamingStatusEnum `json:"StreamingStatus,omitempty"`
 }
 
 type SetIdentityPoolConfigurationRequestBodyPushSync struct {
-	ApplicationArns []string `json:"ApplicationArns"`
-	RoleArn         *string  `json:"RoleArn"`
+	ApplicationArns []string `json:"ApplicationArns,omitempty"`
+	RoleArn         *string  `json:"RoleArn,omitempty"`
 }
 
 type SetIdentityPoolConfigurationRequestBody struct {
-	CognitoStreams *SetIdentityPoolConfigurationRequestBodyCognitoStreams `json:"CognitoStreams"`
-	PushSync       *SetIdentityPoolConfigurationRequestBodyPushSync       `json:"PushSync"`
+	CognitoStreams *SetIdentityPoolConfigurationRequestBodyCognitoStreams `json:"CognitoStreams,omitempty"`
+	PushSync       *SetIdentityPoolConfigurationRequestBodyPushSync       `json:"PushSync,omitempty"`
 }
 
 type SetIdentityPoolConfigurationRequest struct {

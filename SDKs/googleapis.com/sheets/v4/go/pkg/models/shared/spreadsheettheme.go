@@ -1,6 +1,6 @@
 package shared
 
 type SpreadsheetTheme struct {
-	PrimaryFontFamily *string          `json:"primaryFontFamily"`
-	ThemeColors       []ThemeColorPair `json:"themeColors"`
+	PrimaryFontFamily *string          `json:"primaryFontFamily,omitempty"`
+	ThemeColors       []ThemeColorPair `json:"themeColors,omitempty"`
 }

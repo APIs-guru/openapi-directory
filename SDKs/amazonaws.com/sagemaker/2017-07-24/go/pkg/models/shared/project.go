@@ -5,14 +5,14 @@ import (
 )
 
 type Project struct {
-	CreatedBy                               *UserContext                             `json:"CreatedBy"`
-	CreationTime                            *time.Time                               `json:"CreationTime"`
-	ProjectArn                              *string                                  `json:"ProjectArn"`
-	ProjectDescription                      *string                                  `json:"ProjectDescription"`
-	ProjectID                               *string                                  `json:"ProjectId"`
-	ProjectName                             *string                                  `json:"ProjectName"`
-	ProjectStatus                           *ProjectStatusEnum                       `json:"ProjectStatus"`
-	ServiceCatalogProvisionedProductDetails *ServiceCatalogProvisionedProductDetails `json:"ServiceCatalogProvisionedProductDetails"`
-	ServiceCatalogProvisioningDetails       *ServiceCatalogProvisioningDetails       `json:"ServiceCatalogProvisioningDetails"`
-	Tags                                    []Tag                                    `json:"Tags"`
+	CreatedBy                               *UserContext                             `json:"CreatedBy,omitempty"`
+	CreationTime                            *time.Time                               `json:"CreationTime,omitempty"`
+	ProjectArn                              *string                                  `json:"ProjectArn,omitempty"`
+	ProjectDescription                      *string                                  `json:"ProjectDescription,omitempty"`
+	ProjectID                               *string                                  `json:"ProjectId,omitempty"`
+	ProjectName                             *string                                  `json:"ProjectName,omitempty"`
+	ProjectStatus                           *ProjectStatusEnum                       `json:"ProjectStatus,omitempty"`
+	ServiceCatalogProvisionedProductDetails *ServiceCatalogProvisionedProductDetails `json:"ServiceCatalogProvisionedProductDetails,omitempty"`
+	ServiceCatalogProvisioningDetails       *ServiceCatalogProvisioningDetails       `json:"ServiceCatalogProvisioningDetails,omitempty"`
+	Tags                                    []Tag                                    `json:"Tags,omitempty"`
 }

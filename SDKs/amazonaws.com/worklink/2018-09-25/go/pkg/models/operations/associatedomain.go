@@ -12,7 +12,7 @@ type AssociateDomainHeaders struct {
 
 type AssociateDomainRequestBody struct {
 	AcmCertificateArn string  `json:"AcmCertificateArn"`
-	DisplayName       *string `json:"DisplayName"`
+	DisplayName       *string `json:"DisplayName,omitempty"`
 	DomainName        string  `json:"DomainName"`
 	FleetArn          string  `json:"FleetArn"`
 }

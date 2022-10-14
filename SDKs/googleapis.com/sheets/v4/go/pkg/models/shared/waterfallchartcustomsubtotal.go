@@ -1,7 +1,7 @@
 package shared
 
 type WaterfallChartCustomSubtotal struct {
-	DataIsSubtotal *bool   `json:"dataIsSubtotal"`
-	Label          *string `json:"label"`
-	SubtotalIndex  *int32  `json:"subtotalIndex"`
+	DataIsSubtotal *bool   `json:"dataIsSubtotal,omitempty"`
+	Label          *string `json:"label,omitempty"`
+	SubtotalIndex  *int32  `json:"subtotalIndex,omitempty"`
 }

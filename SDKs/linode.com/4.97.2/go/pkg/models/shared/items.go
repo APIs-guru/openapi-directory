@@ -8,6 +8,6 @@ const (
 )
 
 type Items struct {
-	Size *int64         `json:"size"`
-	Type *ItemsTypeEnum `json:"type"`
+	Size *int64         `json:"size,omitempty"`
+	Type *ItemsTypeEnum `json:"type,omitempty"`
 }

@@ -24,9 +24,9 @@ const (
 )
 
 type BatchUpdateValuesByDataFilterRequest struct {
-	Data                         []DataFilterValueRange                                                `json:"data"`
-	IncludeValuesInResponse      *bool                                                                 `json:"includeValuesInResponse"`
-	ResponseDateTimeRenderOption *BatchUpdateValuesByDataFilterRequestResponseDateTimeRenderOptionEnum `json:"responseDateTimeRenderOption"`
-	ResponseValueRenderOption    *BatchUpdateValuesByDataFilterRequestResponseValueRenderOptionEnum    `json:"responseValueRenderOption"`
-	ValueInputOption             *BatchUpdateValuesByDataFilterRequestValueInputOptionEnum             `json:"valueInputOption"`
+	Data                         []DataFilterValueRange                                                `json:"data,omitempty"`
+	IncludeValuesInResponse      *bool                                                                 `json:"includeValuesInResponse,omitempty"`
+	ResponseDateTimeRenderOption *BatchUpdateValuesByDataFilterRequestResponseDateTimeRenderOptionEnum `json:"responseDateTimeRenderOption,omitempty"`
+	ResponseValueRenderOption    *BatchUpdateValuesByDataFilterRequestResponseValueRenderOptionEnum    `json:"responseValueRenderOption,omitempty"`
+	ValueInputOption             *BatchUpdateValuesByDataFilterRequestValueInputOptionEnum             `json:"valueInputOption,omitempty"`
 }

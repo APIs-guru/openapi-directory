@@ -1,7 +1,7 @@
 package shared
 
 type Aliases struct {
-	Aliases []interface{} `json:"aliases"`
-	Etag    *string       `json:"etag"`
-	Kind    *string       `json:"kind"`
+	Aliases []interface{} `json:"aliases,omitempty"`
+	Etag    *string       `json:"etag,omitempty"`
+	Kind    *string       `json:"kind,omitempty"`
 }

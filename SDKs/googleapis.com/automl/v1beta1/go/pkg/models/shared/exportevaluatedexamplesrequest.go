@@ -1,5 +1,5 @@
 package shared
 
 type ExportEvaluatedExamplesRequest struct {
-	OutputConfig *ExportEvaluatedExamplesOutputConfig `json:"outputConfig"`
+	OutputConfig *ExportEvaluatedExamplesOutputConfig `json:"outputConfig,omitempty"`
 }

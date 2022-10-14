@@ -12,14 +12,14 @@ const (
 )
 
 type Consent struct {
-	ConsentArtifact    *string                                     `json:"consentArtifact"`
-	ExpireTime         *string                                     `json:"expireTime"`
-	Metadata           map[string]string                           `json:"metadata"`
-	Name               *string                                     `json:"name"`
-	Policies           []GoogleCloudHealthcareV1beta1ConsentPolicy `json:"policies"`
-	RevisionCreateTime *string                                     `json:"revisionCreateTime"`
-	RevisionID         *string                                     `json:"revisionId"`
-	State              *ConsentStateEnum                           `json:"state"`
-	TTL                *string                                     `json:"ttl"`
-	UserID             *string                                     `json:"userId"`
+	ConsentArtifact    *string                                     `json:"consentArtifact,omitempty"`
+	ExpireTime         *string                                     `json:"expireTime,omitempty"`
+	Metadata           map[string]string                           `json:"metadata,omitempty"`
+	Name               *string                                     `json:"name,omitempty"`
+	Policies           []GoogleCloudHealthcareV1beta1ConsentPolicy `json:"policies,omitempty"`
+	RevisionCreateTime *string                                     `json:"revisionCreateTime,omitempty"`
+	RevisionID         *string                                     `json:"revisionId,omitempty"`
+	State              *ConsentStateEnum                           `json:"state,omitempty"`
+	TTL                *string                                     `json:"ttl,omitempty"`
+	UserID             *string                                     `json:"userId,omitempty"`
 }

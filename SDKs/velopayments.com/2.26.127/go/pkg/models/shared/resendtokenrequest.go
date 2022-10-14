@@ -9,5 +9,5 @@ const (
 
 type ResendTokenRequest struct {
 	TokenType        ResendTokenRequestTokenTypeEnum `json:"tokenType"`
-	VerificationCode *string                         `json:"verificationCode"`
+	VerificationCode *string                         `json:"verificationCode,omitempty"`
 }

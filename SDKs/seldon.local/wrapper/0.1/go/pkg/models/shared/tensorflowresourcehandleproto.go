@@ -1,9 +1,9 @@
 package shared
 
 type TensorflowResourceHandleProto struct {
-	Container     *string `json:"container"`
-	Device        *string `json:"device"`
-	HashCode      *string `json:"hash_code"`
-	MaybeTypeName *string `json:"maybe_type_name"`
-	Name          *string `json:"name"`
+	Container     *string `json:"container,omitempty"`
+	Device        *string `json:"device,omitempty"`
+	HashCode      *string `json:"hash_code,omitempty"`
+	MaybeTypeName *string `json:"maybe_type_name,omitempty"`
+	Name          *string `json:"name,omitempty"`
 }

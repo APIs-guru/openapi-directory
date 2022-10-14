@@ -20,7 +20,7 @@ type CreateWebhookHeaders struct {
 
 type CreateWebhookRequestBody struct {
 	BranchName  string  `json:"branchName"`
-	Description *string `json:"description"`
+	Description *string `json:"description,omitempty"`
 }
 
 type CreateWebhookRequest struct {

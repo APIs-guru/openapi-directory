@@ -1,6 +1,6 @@
 package shared
 
 type TimeSeriesDescriptor struct {
-	LabelDescriptors []LabelDescriptor `json:"labelDescriptors"`
-	PointDescriptors []ValueDescriptor `json:"pointDescriptors"`
+	LabelDescriptors []LabelDescriptor `json:"labelDescriptors,omitempty"`
+	PointDescriptors []ValueDescriptor `json:"pointDescriptors,omitempty"`
 }

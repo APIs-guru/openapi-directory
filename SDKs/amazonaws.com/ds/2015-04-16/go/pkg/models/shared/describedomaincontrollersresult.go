@@ -1,6 +1,6 @@
 package shared
 
 type DescribeDomainControllersResult struct {
-	DomainControllers []DomainController `json:"DomainControllers"`
-	NextToken         *string            `json:"NextToken"`
+	DomainControllers []DomainController `json:"DomainControllers,omitempty"`
+	NextToken         *string            `json:"NextToken,omitempty"`
 }

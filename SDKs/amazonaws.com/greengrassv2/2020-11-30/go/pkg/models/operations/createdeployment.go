@@ -15,24 +15,24 @@ type CreateDeploymentHeaders struct {
 }
 
 type CreateDeploymentRequestBodyDeploymentPolicies struct {
-	ComponentUpdatePolicy         *shared.DeploymentComponentUpdatePolicy         `json:"componentUpdatePolicy"`
-	ConfigurationValidationPolicy *shared.DeploymentConfigurationValidationPolicy `json:"configurationValidationPolicy"`
-	FailureHandlingPolicy         *shared.DeploymentFailureHandlingPolicyEnum     `json:"failureHandlingPolicy"`
+	ComponentUpdatePolicy         *shared.DeploymentComponentUpdatePolicy         `json:"componentUpdatePolicy,omitempty"`
+	ConfigurationValidationPolicy *shared.DeploymentConfigurationValidationPolicy `json:"configurationValidationPolicy,omitempty"`
+	FailureHandlingPolicy         *shared.DeploymentFailureHandlingPolicyEnum     `json:"failureHandlingPolicy,omitempty"`
 }
 
 type CreateDeploymentRequestBodyIotJobConfiguration struct {
-	AbortConfig                *shared.IoTJobAbortConfig             `json:"abortConfig"`
-	JobExecutionsRolloutConfig *shared.IoTJobExecutionsRolloutConfig `json:"jobExecutionsRolloutConfig"`
-	TimeoutConfig              *shared.IoTJobTimeoutConfig           `json:"timeoutConfig"`
+	AbortConfig                *shared.IoTJobAbortConfig             `json:"abortConfig,omitempty"`
+	JobExecutionsRolloutConfig *shared.IoTJobExecutionsRolloutConfig `json:"jobExecutionsRolloutConfig,omitempty"`
+	TimeoutConfig              *shared.IoTJobTimeoutConfig           `json:"timeoutConfig,omitempty"`
 }
 
 type CreateDeploymentRequestBody struct {
-	ClientToken         *string                                            `json:"clientToken"`
-	Components          map[string]shared.ComponentDeploymentSpecification `json:"components"`
-	DeploymentName      *string                                            `json:"deploymentName"`
-	DeploymentPolicies  *CreateDeploymentRequestBodyDeploymentPolicies     `json:"deploymentPolicies"`
-	IotJobConfiguration *CreateDeploymentRequestBodyIotJobConfiguration    `json:"iotJobConfiguration"`
-	Tags                map[string]string                                  `json:"tags"`
+	ClientToken         *string                                            `json:"clientToken,omitempty"`
+	Components          map[string]shared.ComponentDeploymentSpecification `json:"components,omitempty"`
+	DeploymentName      *string                                            `json:"deploymentName,omitempty"`
+	DeploymentPolicies  *CreateDeploymentRequestBodyDeploymentPolicies     `json:"deploymentPolicies,omitempty"`
+	IotJobConfiguration *CreateDeploymentRequestBodyIotJobConfiguration    `json:"iotJobConfiguration,omitempty"`
+	Tags                map[string]string                                  `json:"tags,omitempty"`
 	TargetArn           string                                             `json:"targetArn"`
 }
 

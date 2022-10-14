@@ -1,11 +1,11 @@
 package shared
 
 type AvailabilityInputModel struct {
-	Fri *WeekDayInputModel `json:"fri"`
-	Mon *WeekDayInputModel `json:"mon"`
-	Sat *WeekDayInputModel `json:"sat"`
-	Sun *WeekDayInputModel `json:"sun"`
-	Thu *WeekDayInputModel `json:"thu"`
-	Tue *WeekDayInputModel `json:"tue"`
-	Wed *WeekDayInputModel `json:"wed"`
+	Fri *WeekDayInputModel `json:"fri,omitempty"`
+	Mon *WeekDayInputModel `json:"mon,omitempty"`
+	Sat *WeekDayInputModel `json:"sat,omitempty"`
+	Sun *WeekDayInputModel `json:"sun,omitempty"`
+	Thu *WeekDayInputModel `json:"thu,omitempty"`
+	Tue *WeekDayInputModel `json:"tue,omitempty"`
+	Wed *WeekDayInputModel `json:"wed,omitempty"`
 }

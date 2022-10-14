@@ -1,11 +1,11 @@
 package shared
 
 type ComplianceNote struct {
-	CisBenchmark     *CisBenchmark       `json:"cisBenchmark"`
-	Description      *string             `json:"description"`
-	Rationale        *string             `json:"rationale"`
-	Remediation      *string             `json:"remediation"`
-	ScanInstructions *string             `json:"scanInstructions"`
-	Title            *string             `json:"title"`
-	Version          []ComplianceVersion `json:"version"`
+	CisBenchmark     *CisBenchmark       `json:"cisBenchmark,omitempty"`
+	Description      *string             `json:"description,omitempty"`
+	Rationale        *string             `json:"rationale,omitempty"`
+	Remediation      *string             `json:"remediation,omitempty"`
+	ScanInstructions *string             `json:"scanInstructions,omitempty"`
+	Title            *string             `json:"title,omitempty"`
+	Version          []ComplianceVersion `json:"version,omitempty"`
 }

@@ -32,8 +32,8 @@ const (
 )
 
 type UpdateNetworkApplianceTrafficShapingUplinkSelectionRequestBodyVpnTrafficUplinkPreferencesPerformanceClass struct {
-	BuiltinPerformanceClassName *UpdateNetworkApplianceTrafficShapingUplinkSelectionRequestBodyVpnTrafficUplinkPreferencesPerformanceClassBuiltinPerformanceClassNameEnum `json:"builtinPerformanceClassName"`
-	CustomPerformanceClassID    *string                                                                                                                                   `json:"customPerformanceClassId"`
+	BuiltinPerformanceClassName *UpdateNetworkApplianceTrafficShapingUplinkSelectionRequestBodyVpnTrafficUplinkPreferencesPerformanceClassBuiltinPerformanceClassNameEnum `json:"builtinPerformanceClassName,omitempty"`
+	CustomPerformanceClassID    *string                                                                                                                                   `json:"customPerformanceClassId,omitempty"`
 	Type                        UpdateNetworkApplianceTrafficShapingUplinkSelectionRequestBodyVpnTrafficUplinkPreferencesPerformanceClassTypeEnum                         `json:"type"`
 }
 
@@ -56,12 +56,12 @@ const (
 )
 
 type UpdateNetworkApplianceTrafficShapingUplinkSelectionRequestBodyVpnTrafficUplinkPreferencesTrafficFiltersValueDestination struct {
-	Cidr    *string `json:"cidr"`
-	Fqdn    *string `json:"fqdn"`
-	Host    *int64  `json:"host"`
-	Network *string `json:"network"`
-	Port    *string `json:"port"`
-	Vlan    *int64  `json:"vlan"`
+	Cidr    *string `json:"cidr,omitempty"`
+	Fqdn    *string `json:"fqdn,omitempty"`
+	Host    *int64  `json:"host,omitempty"`
+	Network *string `json:"network,omitempty"`
+	Port    *string `json:"port,omitempty"`
+	Vlan    *int64  `json:"vlan,omitempty"`
 }
 
 type UpdateNetworkApplianceTrafficShapingUplinkSelectionRequestBodyVpnTrafficUplinkPreferencesTrafficFiltersValueProtocolEnum string
@@ -74,18 +74,18 @@ const (
 )
 
 type UpdateNetworkApplianceTrafficShapingUplinkSelectionRequestBodyVpnTrafficUplinkPreferencesTrafficFiltersValueSource struct {
-	Cidr    *string `json:"cidr"`
-	Host    *int64  `json:"host"`
-	Network *string `json:"network"`
-	Port    *string `json:"port"`
-	Vlan    *int64  `json:"vlan"`
+	Cidr    *string `json:"cidr,omitempty"`
+	Host    *int64  `json:"host,omitempty"`
+	Network *string `json:"network,omitempty"`
+	Port    *string `json:"port,omitempty"`
+	Vlan    *int64  `json:"vlan,omitempty"`
 }
 
 type UpdateNetworkApplianceTrafficShapingUplinkSelectionRequestBodyVpnTrafficUplinkPreferencesTrafficFiltersValue struct {
-	Destination *UpdateNetworkApplianceTrafficShapingUplinkSelectionRequestBodyVpnTrafficUplinkPreferencesTrafficFiltersValueDestination  `json:"destination"`
-	ID          *string                                                                                                                   `json:"id"`
-	Protocol    *UpdateNetworkApplianceTrafficShapingUplinkSelectionRequestBodyVpnTrafficUplinkPreferencesTrafficFiltersValueProtocolEnum `json:"protocol"`
-	Source      *UpdateNetworkApplianceTrafficShapingUplinkSelectionRequestBodyVpnTrafficUplinkPreferencesTrafficFiltersValueSource       `json:"source"`
+	Destination *UpdateNetworkApplianceTrafficShapingUplinkSelectionRequestBodyVpnTrafficUplinkPreferencesTrafficFiltersValueDestination  `json:"destination,omitempty"`
+	ID          *string                                                                                                                   `json:"id,omitempty"`
+	Protocol    *UpdateNetworkApplianceTrafficShapingUplinkSelectionRequestBodyVpnTrafficUplinkPreferencesTrafficFiltersValueProtocolEnum `json:"protocol,omitempty"`
+	Source      *UpdateNetworkApplianceTrafficShapingUplinkSelectionRequestBodyVpnTrafficUplinkPreferencesTrafficFiltersValueSource       `json:"source,omitempty"`
 }
 
 type UpdateNetworkApplianceTrafficShapingUplinkSelectionRequestBodyVpnTrafficUplinkPreferencesTrafficFilters struct {
@@ -94,8 +94,8 @@ type UpdateNetworkApplianceTrafficShapingUplinkSelectionRequestBodyVpnTrafficUpl
 }
 
 type UpdateNetworkApplianceTrafficShapingUplinkSelectionRequestBodyVpnTrafficUplinkPreferences struct {
-	FailOverCriterion *UpdateNetworkApplianceTrafficShapingUplinkSelectionRequestBodyVpnTrafficUplinkPreferencesFailOverCriterionEnum `json:"failOverCriterion"`
-	PerformanceClass  *UpdateNetworkApplianceTrafficShapingUplinkSelectionRequestBodyVpnTrafficUplinkPreferencesPerformanceClass      `json:"performanceClass"`
+	FailOverCriterion *UpdateNetworkApplianceTrafficShapingUplinkSelectionRequestBodyVpnTrafficUplinkPreferencesFailOverCriterionEnum `json:"failOverCriterion,omitempty"`
+	PerformanceClass  *UpdateNetworkApplianceTrafficShapingUplinkSelectionRequestBodyVpnTrafficUplinkPreferencesPerformanceClass      `json:"performanceClass,omitempty"`
 	PreferredUplink   UpdateNetworkApplianceTrafficShapingUplinkSelectionRequestBodyVpnTrafficUplinkPreferencesPreferredUplinkEnum    `json:"preferredUplink"`
 	TrafficFilters    []UpdateNetworkApplianceTrafficShapingUplinkSelectionRequestBodyVpnTrafficUplinkPreferencesTrafficFilters       `json:"trafficFilters"`
 }
@@ -114,8 +114,8 @@ const (
 )
 
 type UpdateNetworkApplianceTrafficShapingUplinkSelectionRequestBodyWanTrafficUplinkPreferencesTrafficFiltersValueDestination struct {
-	Cidr *string `json:"cidr"`
-	Port *string `json:"port"`
+	Cidr *string `json:"cidr,omitempty"`
+	Port *string `json:"port,omitempty"`
 }
 
 type UpdateNetworkApplianceTrafficShapingUplinkSelectionRequestBodyWanTrafficUplinkPreferencesTrafficFiltersValueProtocolEnum string
@@ -127,15 +127,15 @@ const (
 )
 
 type UpdateNetworkApplianceTrafficShapingUplinkSelectionRequestBodyWanTrafficUplinkPreferencesTrafficFiltersValueSource struct {
-	Cidr *string `json:"cidr"`
-	Host *int64  `json:"host"`
-	Port *string `json:"port"`
-	Vlan *int64  `json:"vlan"`
+	Cidr *string `json:"cidr,omitempty"`
+	Host *int64  `json:"host,omitempty"`
+	Port *string `json:"port,omitempty"`
+	Vlan *int64  `json:"vlan,omitempty"`
 }
 
 type UpdateNetworkApplianceTrafficShapingUplinkSelectionRequestBodyWanTrafficUplinkPreferencesTrafficFiltersValue struct {
 	Destination UpdateNetworkApplianceTrafficShapingUplinkSelectionRequestBodyWanTrafficUplinkPreferencesTrafficFiltersValueDestination   `json:"destination"`
-	Protocol    *UpdateNetworkApplianceTrafficShapingUplinkSelectionRequestBodyWanTrafficUplinkPreferencesTrafficFiltersValueProtocolEnum `json:"protocol"`
+	Protocol    *UpdateNetworkApplianceTrafficShapingUplinkSelectionRequestBodyWanTrafficUplinkPreferencesTrafficFiltersValueProtocolEnum `json:"protocol,omitempty"`
 	Source      UpdateNetworkApplianceTrafficShapingUplinkSelectionRequestBodyWanTrafficUplinkPreferencesTrafficFiltersValueSource        `json:"source"`
 }
 
@@ -150,11 +150,11 @@ type UpdateNetworkApplianceTrafficShapingUplinkSelectionRequestBodyWanTrafficUpl
 }
 
 type UpdateNetworkApplianceTrafficShapingUplinkSelectionRequestBody struct {
-	ActiveActiveAutoVpnEnabled  *bool                                                                                       `json:"activeActiveAutoVpnEnabled"`
-	DefaultUplink               *UpdateNetworkApplianceTrafficShapingUplinkSelectionRequestBodyDefaultUplinkEnum            `json:"defaultUplink"`
-	LoadBalancingEnabled        *bool                                                                                       `json:"loadBalancingEnabled"`
-	VpnTrafficUplinkPreferences []UpdateNetworkApplianceTrafficShapingUplinkSelectionRequestBodyVpnTrafficUplinkPreferences `json:"vpnTrafficUplinkPreferences"`
-	WanTrafficUplinkPreferences []UpdateNetworkApplianceTrafficShapingUplinkSelectionRequestBodyWanTrafficUplinkPreferences `json:"wanTrafficUplinkPreferences"`
+	ActiveActiveAutoVpnEnabled  *bool                                                                                       `json:"activeActiveAutoVpnEnabled,omitempty"`
+	DefaultUplink               *UpdateNetworkApplianceTrafficShapingUplinkSelectionRequestBodyDefaultUplinkEnum            `json:"defaultUplink,omitempty"`
+	LoadBalancingEnabled        *bool                                                                                       `json:"loadBalancingEnabled,omitempty"`
+	VpnTrafficUplinkPreferences []UpdateNetworkApplianceTrafficShapingUplinkSelectionRequestBodyVpnTrafficUplinkPreferences `json:"vpnTrafficUplinkPreferences,omitempty"`
+	WanTrafficUplinkPreferences []UpdateNetworkApplianceTrafficShapingUplinkSelectionRequestBodyWanTrafficUplinkPreferences `json:"wanTrafficUplinkPreferences,omitempty"`
 }
 
 type UpdateNetworkApplianceTrafficShapingUplinkSelectionRequest struct {

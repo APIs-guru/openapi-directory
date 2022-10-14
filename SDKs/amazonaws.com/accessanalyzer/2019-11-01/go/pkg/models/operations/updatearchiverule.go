@@ -20,7 +20,7 @@ type UpdateArchiveRuleHeaders struct {
 }
 
 type UpdateArchiveRuleRequestBody struct {
-	ClientToken *string                     `json:"clientToken"`
+	ClientToken *string                     `json:"clientToken,omitempty"`
 	Filter      map[string]shared.Criterion `json:"filter"`
 }
 

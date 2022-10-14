@@ -16,7 +16,7 @@ type GetWorkspacesRequest struct {
 }
 
 type GetWorkspaces200ApplicationJSON struct {
-	Data []shared.WorkspaceCompact `json:"data"`
+	Data []shared.WorkspaceCompact `json:"data,omitempty"`
 }
 
 type GetWorkspacesResponse struct {

@@ -46,21 +46,21 @@ type UpdateNetworkApplianceVlanRequestBodyReservedIPRanges struct {
 }
 
 type UpdateNetworkApplianceVlanRequestBody struct {
-	ApplianceIP            *string                                                 `json:"applianceIp"`
-	DhcpBootFilename       *string                                                 `json:"dhcpBootFilename"`
-	DhcpBootNextServer     *string                                                 `json:"dhcpBootNextServer"`
-	DhcpBootOptionsEnabled *bool                                                   `json:"dhcpBootOptionsEnabled"`
-	DhcpHandling           *UpdateNetworkApplianceVlanRequestBodyDhcpHandlingEnum  `json:"dhcpHandling"`
-	DhcpLeaseTime          *UpdateNetworkApplianceVlanRequestBodyDhcpLeaseTimeEnum `json:"dhcpLeaseTime"`
-	DhcpOptions            []UpdateNetworkApplianceVlanRequestBodyDhcpOptions      `json:"dhcpOptions"`
-	DhcpRelayServerIps     []string                                                `json:"dhcpRelayServerIps"`
-	DNSNameservers         *string                                                 `json:"dnsNameservers"`
-	FixedIPAssignments     map[string]interface{}                                  `json:"fixedIpAssignments"`
-	GroupPolicyID          *string                                                 `json:"groupPolicyId"`
-	Name                   *string                                                 `json:"name"`
-	ReservedIPRanges       []UpdateNetworkApplianceVlanRequestBodyReservedIPRanges `json:"reservedIpRanges"`
-	Subnet                 *string                                                 `json:"subnet"`
-	VpnNatSubnet           *string                                                 `json:"vpnNatSubnet"`
+	ApplianceIP            *string                                                 `json:"applianceIp,omitempty"`
+	DhcpBootFilename       *string                                                 `json:"dhcpBootFilename,omitempty"`
+	DhcpBootNextServer     *string                                                 `json:"dhcpBootNextServer,omitempty"`
+	DhcpBootOptionsEnabled *bool                                                   `json:"dhcpBootOptionsEnabled,omitempty"`
+	DhcpHandling           *UpdateNetworkApplianceVlanRequestBodyDhcpHandlingEnum  `json:"dhcpHandling,omitempty"`
+	DhcpLeaseTime          *UpdateNetworkApplianceVlanRequestBodyDhcpLeaseTimeEnum `json:"dhcpLeaseTime,omitempty"`
+	DhcpOptions            []UpdateNetworkApplianceVlanRequestBodyDhcpOptions      `json:"dhcpOptions,omitempty"`
+	DhcpRelayServerIps     []string                                                `json:"dhcpRelayServerIps,omitempty"`
+	DNSNameservers         *string                                                 `json:"dnsNameservers,omitempty"`
+	FixedIPAssignments     map[string]interface{}                                  `json:"fixedIpAssignments,omitempty"`
+	GroupPolicyID          *string                                                 `json:"groupPolicyId,omitempty"`
+	Name                   *string                                                 `json:"name,omitempty"`
+	ReservedIPRanges       []UpdateNetworkApplianceVlanRequestBodyReservedIPRanges `json:"reservedIpRanges,omitempty"`
+	Subnet                 *string                                                 `json:"subnet,omitempty"`
+	VpnNatSubnet           *string                                                 `json:"vpnNatSubnet,omitempty"`
 }
 
 type UpdateNetworkApplianceVlanRequest struct {

@@ -1,5 +1,5 @@
 package shared
 
 type Market struct {
-	ID *string `json:"id"`
+	ID *string `json:"id,omitempty"`
 }

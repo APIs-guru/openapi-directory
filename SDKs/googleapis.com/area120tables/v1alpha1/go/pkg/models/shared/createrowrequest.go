@@ -8,7 +8,7 @@ const (
 )
 
 type CreateRowRequest struct {
-	Parent *string                   `json:"parent"`
-	Row    *Row                      `json:"row"`
-	View   *CreateRowRequestViewEnum `json:"view"`
+	Parent *string                   `json:"parent,omitempty"`
+	Row    *Row                      `json:"row,omitempty"`
+	View   *CreateRowRequestViewEnum `json:"view,omitempty"`
 }

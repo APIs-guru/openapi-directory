@@ -63,179 +63,179 @@ type GetLegalSearchRequest struct {
 }
 
 type GetLegalSearchDefaultApplicationJSONAdminFinesCommissionVotes struct {
-	Action   *string    `json:"action"`
-	VoteDate *time.Time `json:"vote_date"`
+	Action   *string    `json:"action,omitempty"`
+	VoteDate *time.Time `json:"vote_date,omitempty"`
 }
 
 type GetLegalSearchDefaultApplicationJSONAdminFinesDocuments struct {
-	Category     *string    `json:"category"`
-	Description  *string    `json:"description"`
-	DocumentDate *time.Time `json:"document_date"`
-	DocumentID   *int64     `json:"document_id"`
-	Length       *int64     `json:"length"`
-	URL          *string    `json:"url"`
+	Category     *string    `json:"category,omitempty"`
+	Description  *string    `json:"description,omitempty"`
+	DocumentDate *time.Time `json:"document_date,omitempty"`
+	DocumentID   *int64     `json:"document_id,omitempty"`
+	Length       *int64     `json:"length,omitempty"`
+	URL          *string    `json:"url,omitempty"`
 }
 
 type GetLegalSearchDefaultApplicationJSONAdminFines struct {
-	ChallengeOutcome          *string                                                         `json:"challenge_outcome"`
-	ChallengeReceiptDate      *time.Time                                                      `json:"challenge_receipt_date"`
-	CheckAmount               *float64                                                        `json:"check_amount"`
-	CommissionVotes           []GetLegalSearchDefaultApplicationJSONAdminFinesCommissionVotes `json:"commission_votes"`
-	CommitteeID               *string                                                         `json:"committee_id"`
-	DocID                     *string                                                         `json:"doc_id"`
-	DocumentHighlights        map[string]interface{}                                          `json:"document_highlights"`
-	Documents                 []GetLegalSearchDefaultApplicationJSONAdminFinesDocuments       `json:"documents"`
-	FinalDeterminationAmount  *float64                                                        `json:"final_determination_amount"`
-	FinalDeterminationDate    *time.Time                                                      `json:"final_determination_date"`
-	Highlights                []string                                                        `json:"highlights"`
-	Name                      *string                                                         `json:"name"`
-	No                        *string                                                         `json:"no"`
-	PetitionCourtDecisionDate *time.Time                                                      `json:"petition_court_decision_date"`
-	PetitionCourtFilingDate   *time.Time                                                      `json:"petition_court_filing_date"`
-	ReasonToBelieveActionDate *time.Time                                                      `json:"reason_to_believe_action_date"`
-	ReasonToBelieveFineAmount *float64                                                        `json:"reason_to_believe_fine_amount"`
-	ReportType                *string                                                         `json:"report_type"`
-	ReportYear                *string                                                         `json:"report_year"`
-	TreasuryReferralAmount    *float64                                                        `json:"treasury_referral_amount"`
-	TreasuryReferralDate      *time.Time                                                      `json:"treasury_referral_date"`
-	URL                       *string                                                         `json:"url"`
+	ChallengeOutcome          *string                                                         `json:"challenge_outcome,omitempty"`
+	ChallengeReceiptDate      *time.Time                                                      `json:"challenge_receipt_date,omitempty"`
+	CheckAmount               *float64                                                        `json:"check_amount,omitempty"`
+	CommissionVotes           []GetLegalSearchDefaultApplicationJSONAdminFinesCommissionVotes `json:"commission_votes,omitempty"`
+	CommitteeID               *string                                                         `json:"committee_id,omitempty"`
+	DocID                     *string                                                         `json:"doc_id,omitempty"`
+	DocumentHighlights        map[string]interface{}                                          `json:"document_highlights,omitempty"`
+	Documents                 []GetLegalSearchDefaultApplicationJSONAdminFinesDocuments       `json:"documents,omitempty"`
+	FinalDeterminationAmount  *float64                                                        `json:"final_determination_amount,omitempty"`
+	FinalDeterminationDate    *time.Time                                                      `json:"final_determination_date,omitempty"`
+	Highlights                []string                                                        `json:"highlights,omitempty"`
+	Name                      *string                                                         `json:"name,omitempty"`
+	No                        *string                                                         `json:"no,omitempty"`
+	PetitionCourtDecisionDate *time.Time                                                      `json:"petition_court_decision_date,omitempty"`
+	PetitionCourtFilingDate   *time.Time                                                      `json:"petition_court_filing_date,omitempty"`
+	ReasonToBelieveActionDate *time.Time                                                      `json:"reason_to_believe_action_date,omitempty"`
+	ReasonToBelieveFineAmount *float64                                                        `json:"reason_to_believe_fine_amount,omitempty"`
+	ReportType                *string                                                         `json:"report_type,omitempty"`
+	ReportYear                *string                                                         `json:"report_year,omitempty"`
+	TreasuryReferralAmount    *float64                                                        `json:"treasury_referral_amount,omitempty"`
+	TreasuryReferralDate      *time.Time                                                      `json:"treasury_referral_date,omitempty"`
+	URL                       *string                                                         `json:"url,omitempty"`
 }
 
 type GetLegalSearchDefaultApplicationJSONAdrsCommissionVotes struct {
-	Action   *string    `json:"action"`
-	VoteDate *time.Time `json:"vote_date"`
+	Action   *string    `json:"action,omitempty"`
+	VoteDate *time.Time `json:"vote_date,omitempty"`
 }
 
 type GetLegalSearchDefaultApplicationJSONAdrsDispositionsCitations struct {
-	Text  *string `json:"text"`
-	Title *string `json:"title"`
-	Type  *string `json:"type"`
-	URL   *string `json:"url"`
+	Text  *string `json:"text,omitempty"`
+	Title *string `json:"title,omitempty"`
+	Type  *string `json:"type,omitempty"`
+	URL   *string `json:"url,omitempty"`
 }
 
 type GetLegalSearchDefaultApplicationJSONAdrsDispositions struct {
-	Citations   []GetLegalSearchDefaultApplicationJSONAdrsDispositionsCitations `json:"citations"`
-	Disposition *string                                                         `json:"disposition"`
-	Penalty     *float64                                                        `json:"penalty"`
-	Respondent  *string                                                         `json:"respondent"`
+	Citations   []GetLegalSearchDefaultApplicationJSONAdrsDispositionsCitations `json:"citations,omitempty"`
+	Disposition *string                                                         `json:"disposition,omitempty"`
+	Penalty     *float64                                                        `json:"penalty,omitempty"`
+	Respondent  *string                                                         `json:"respondent,omitempty"`
 }
 
 type GetLegalSearchDefaultApplicationJSONAdrsDocuments struct {
-	Category     *string    `json:"category"`
-	Description  *string    `json:"description"`
-	DocumentDate *time.Time `json:"document_date"`
-	DocumentID   *int64     `json:"document_id"`
-	Length       *int64     `json:"length"`
-	URL          *string    `json:"url"`
+	Category     *string    `json:"category,omitempty"`
+	Description  *string    `json:"description,omitempty"`
+	DocumentDate *time.Time `json:"document_date,omitempty"`
+	DocumentID   *int64     `json:"document_id,omitempty"`
+	Length       *int64     `json:"length,omitempty"`
+	URL          *string    `json:"url,omitempty"`
 }
 
 type GetLegalSearchDefaultApplicationJSONAdrsParticipants struct {
-	Citations map[string]interface{} `json:"citations"`
-	Name      *string                `json:"name"`
-	Role      *string                `json:"role"`
+	Citations map[string]interface{} `json:"citations,omitempty"`
+	Name      *string                `json:"name,omitempty"`
+	Role      *string                `json:"role,omitempty"`
 }
 
 type GetLegalSearchDefaultApplicationJSONAdrs struct {
-	CloseDate          *time.Time                                                `json:"close_date"`
-	CommissionVotes    []GetLegalSearchDefaultApplicationJSONAdrsCommissionVotes `json:"commission_votes"`
-	Dispositions       []GetLegalSearchDefaultApplicationJSONAdrsDispositions    `json:"dispositions"`
-	DocID              *string                                                   `json:"doc_id"`
-	DocumentHighlights map[string]interface{}                                    `json:"document_highlights"`
-	Documents          []GetLegalSearchDefaultApplicationJSONAdrsDocuments       `json:"documents"`
-	ElectionCycles     *int64                                                    `json:"election_cycles"`
-	Highlights         []string                                                  `json:"highlights"`
-	Name               *string                                                   `json:"name"`
-	No                 *string                                                   `json:"no"`
-	OpenDate           *time.Time                                                `json:"open_date"`
-	Participants       []GetLegalSearchDefaultApplicationJSONAdrsParticipants    `json:"participants"`
-	Respondents        []string                                                  `json:"respondents"`
-	Subjects           []string                                                  `json:"subjects"`
-	URL                *string                                                   `json:"url"`
+	CloseDate          *time.Time                                                `json:"close_date,omitempty"`
+	CommissionVotes    []GetLegalSearchDefaultApplicationJSONAdrsCommissionVotes `json:"commission_votes,omitempty"`
+	Dispositions       []GetLegalSearchDefaultApplicationJSONAdrsDispositions    `json:"dispositions,omitempty"`
+	DocID              *string                                                   `json:"doc_id,omitempty"`
+	DocumentHighlights map[string]interface{}                                    `json:"document_highlights,omitempty"`
+	Documents          []GetLegalSearchDefaultApplicationJSONAdrsDocuments       `json:"documents,omitempty"`
+	ElectionCycles     *int64                                                    `json:"election_cycles,omitempty"`
+	Highlights         []string                                                  `json:"highlights,omitempty"`
+	Name               *string                                                   `json:"name,omitempty"`
+	No                 *string                                                   `json:"no,omitempty"`
+	OpenDate           *time.Time                                                `json:"open_date,omitempty"`
+	Participants       []GetLegalSearchDefaultApplicationJSONAdrsParticipants    `json:"participants,omitempty"`
+	Respondents        []string                                                  `json:"respondents,omitempty"`
+	Subjects           []string                                                  `json:"subjects,omitempty"`
+	URL                *string                                                   `json:"url,omitempty"`
 }
 
 type GetLegalSearchDefaultApplicationJSONAdvisoryOpinionsAoCitations struct {
-	Name *string `json:"name"`
-	No   *string `json:"no"`
+	Name *string `json:"name,omitempty"`
+	No   *string `json:"no,omitempty"`
 }
 
 type GetLegalSearchDefaultApplicationJSONAdvisoryOpinionsAosCitedBy struct {
-	Name *string `json:"name"`
-	No   *string `json:"no"`
+	Name *string `json:"name,omitempty"`
+	No   *string `json:"no,omitempty"`
 }
 
 type GetLegalSearchDefaultApplicationJSONAdvisoryOpinionsDocuments struct {
-	Category    *string    `json:"category"`
-	Date        *time.Time `json:"date"`
-	Description *string    `json:"description"`
-	DocumentID  *int64     `json:"document_id"`
-	URL         *string    `json:"url"`
+	Category    *string    `json:"category,omitempty"`
+	Date        *time.Time `json:"date,omitempty"`
+	Description *string    `json:"description,omitempty"`
+	DocumentID  *int64     `json:"document_id,omitempty"`
+	URL         *string    `json:"url,omitempty"`
 }
 
 type GetLegalSearchDefaultApplicationJSONAdvisoryOpinionsEntities struct {
-	Name *string `json:"name"`
-	Role *string `json:"role"`
-	Type *string `json:"type"`
+	Name *string `json:"name,omitempty"`
+	Role *string `json:"role,omitempty"`
+	Type *string `json:"type,omitempty"`
 }
 
 type GetLegalSearchDefaultApplicationJSONAdvisoryOpinionsRegulatoryCitations struct {
-	Part    *int64 `json:"part"`
-	Section *int64 `json:"section"`
-	Title   *int64 `json:"title"`
+	Part    *int64 `json:"part,omitempty"`
+	Section *int64 `json:"section,omitempty"`
+	Title   *int64 `json:"title,omitempty"`
 }
 
 type GetLegalSearchDefaultApplicationJSONAdvisoryOpinionsStatutoryCitations struct {
-	Section *string `json:"section"`
-	Title   *int64  `json:"title"`
+	Section *string `json:"section,omitempty"`
+	Title   *int64  `json:"title,omitempty"`
 }
 
 type GetLegalSearchDefaultApplicationJSONAdvisoryOpinions struct {
-	AoCitations         []GetLegalSearchDefaultApplicationJSONAdvisoryOpinionsAoCitations         `json:"ao_citations"`
-	AosCitedBy          []GetLegalSearchDefaultApplicationJSONAdvisoryOpinionsAosCitedBy          `json:"aos_cited_by"`
-	CommenterNames      []string                                                                  `json:"commenter_names"`
-	DocumentHighlights  map[string]interface{}                                                    `json:"document_highlights"`
-	Documents           []GetLegalSearchDefaultApplicationJSONAdvisoryOpinionsDocuments           `json:"documents"`
-	Entities            []GetLegalSearchDefaultApplicationJSONAdvisoryOpinionsEntities            `json:"entities"`
-	Highlights          []string                                                                  `json:"highlights"`
-	IsPending           *bool                                                                     `json:"is_pending"`
-	IssueDate           *time.Time                                                                `json:"issue_date"`
-	Name                *string                                                                   `json:"name"`
-	No                  *string                                                                   `json:"no"`
-	RegulatoryCitations []GetLegalSearchDefaultApplicationJSONAdvisoryOpinionsRegulatoryCitations `json:"regulatory_citations"`
-	RepresentativeNames []string                                                                  `json:"representative_names"`
-	RequestDate         *time.Time                                                                `json:"request_date"`
-	RequestorNames      []string                                                                  `json:"requestor_names"`
-	RequestorTypes      []string                                                                  `json:"requestor_types"`
-	Status              *string                                                                   `json:"status"`
-	StatutoryCitations  []GetLegalSearchDefaultApplicationJSONAdvisoryOpinionsStatutoryCitations  `json:"statutory_citations"`
-	Summary             *string                                                                   `json:"summary"`
+	AoCitations         []GetLegalSearchDefaultApplicationJSONAdvisoryOpinionsAoCitations         `json:"ao_citations,omitempty"`
+	AosCitedBy          []GetLegalSearchDefaultApplicationJSONAdvisoryOpinionsAosCitedBy          `json:"aos_cited_by,omitempty"`
+	CommenterNames      []string                                                                  `json:"commenter_names,omitempty"`
+	DocumentHighlights  map[string]interface{}                                                    `json:"document_highlights,omitempty"`
+	Documents           []GetLegalSearchDefaultApplicationJSONAdvisoryOpinionsDocuments           `json:"documents,omitempty"`
+	Entities            []GetLegalSearchDefaultApplicationJSONAdvisoryOpinionsEntities            `json:"entities,omitempty"`
+	Highlights          []string                                                                  `json:"highlights,omitempty"`
+	IsPending           *bool                                                                     `json:"is_pending,omitempty"`
+	IssueDate           *time.Time                                                                `json:"issue_date,omitempty"`
+	Name                *string                                                                   `json:"name,omitempty"`
+	No                  *string                                                                   `json:"no,omitempty"`
+	RegulatoryCitations []GetLegalSearchDefaultApplicationJSONAdvisoryOpinionsRegulatoryCitations `json:"regulatory_citations,omitempty"`
+	RepresentativeNames []string                                                                  `json:"representative_names,omitempty"`
+	RequestDate         *time.Time                                                                `json:"request_date,omitempty"`
+	RequestorNames      []string                                                                  `json:"requestor_names,omitempty"`
+	RequestorTypes      []string                                                                  `json:"requestor_types,omitempty"`
+	Status              *string                                                                   `json:"status,omitempty"`
+	StatutoryCitations  []GetLegalSearchDefaultApplicationJSONAdvisoryOpinionsStatutoryCitations  `json:"statutory_citations,omitempty"`
+	Summary             *string                                                                   `json:"summary,omitempty"`
 }
 
 type GetLegalSearchDefaultApplicationJSONMursCommissionVotes struct {
-	Action   *string    `json:"action"`
-	VoteDate *time.Time `json:"vote_date"`
+	Action   *string    `json:"action,omitempty"`
+	VoteDate *time.Time `json:"vote_date,omitempty"`
 }
 
 type GetLegalSearchDefaultApplicationJSONMursDispositionsCitations struct {
-	Text  *string `json:"text"`
-	Title *string `json:"title"`
-	Type  *string `json:"type"`
-	URL   *string `json:"url"`
+	Text  *string `json:"text,omitempty"`
+	Title *string `json:"title,omitempty"`
+	Type  *string `json:"type,omitempty"`
+	URL   *string `json:"url,omitempty"`
 }
 
 type GetLegalSearchDefaultApplicationJSONMursDispositions struct {
-	Citations   []GetLegalSearchDefaultApplicationJSONMursDispositionsCitations `json:"citations"`
-	Disposition *string                                                         `json:"disposition"`
-	Penalty     *float64                                                        `json:"penalty"`
-	Respondent  *string                                                         `json:"respondent"`
+	Citations   []GetLegalSearchDefaultApplicationJSONMursDispositionsCitations `json:"citations,omitempty"`
+	Disposition *string                                                         `json:"disposition,omitempty"`
+	Penalty     *float64                                                        `json:"penalty,omitempty"`
+	Respondent  *string                                                         `json:"respondent,omitempty"`
 }
 
 type GetLegalSearchDefaultApplicationJSONMursDocuments struct {
-	Category     *string    `json:"category"`
-	Description  *string    `json:"description"`
-	DocumentDate *time.Time `json:"document_date"`
-	DocumentID   *int64     `json:"document_id"`
-	Length       *int64     `json:"length"`
-	URL          *string    `json:"url"`
+	Category     *string    `json:"category,omitempty"`
+	Description  *string    `json:"description,omitempty"`
+	DocumentDate *time.Time `json:"document_date,omitempty"`
+	DocumentID   *int64     `json:"document_id,omitempty"`
+	Length       *int64     `json:"length,omitempty"`
+	URL          *string    `json:"url,omitempty"`
 }
 
 type GetLegalSearchDefaultApplicationJSONMursMurTypeEnum string
@@ -246,64 +246,64 @@ const (
 )
 
 type GetLegalSearchDefaultApplicationJSONMursParticipants struct {
-	Citations map[string]interface{} `json:"citations"`
-	Name      *string                `json:"name"`
-	Role      *string                `json:"role"`
+	Citations map[string]interface{} `json:"citations,omitempty"`
+	Name      *string                `json:"name,omitempty"`
+	Role      *string                `json:"role,omitempty"`
 }
 
 type GetLegalSearchDefaultApplicationJSONMurs struct {
-	CloseDate          *time.Time                                                `json:"close_date"`
-	CommissionVotes    []GetLegalSearchDefaultApplicationJSONMursCommissionVotes `json:"commission_votes"`
-	Dispositions       []GetLegalSearchDefaultApplicationJSONMursDispositions    `json:"dispositions"`
-	DocID              *string                                                   `json:"doc_id"`
-	DocumentHighlights map[string]interface{}                                    `json:"document_highlights"`
-	Documents          []GetLegalSearchDefaultApplicationJSONMursDocuments       `json:"documents"`
-	ElectionCycles     *int64                                                    `json:"election_cycles"`
-	Highlights         []string                                                  `json:"highlights"`
-	MurType            *GetLegalSearchDefaultApplicationJSONMursMurTypeEnum      `json:"mur_type"`
-	Name               *string                                                   `json:"name"`
-	No                 *string                                                   `json:"no"`
-	OpenDate           *time.Time                                                `json:"open_date"`
-	Participants       []GetLegalSearchDefaultApplicationJSONMursParticipants    `json:"participants"`
-	Respondents        []string                                                  `json:"respondents"`
-	Subjects           []string                                                  `json:"subjects"`
-	URL                *string                                                   `json:"url"`
+	CloseDate          *time.Time                                                `json:"close_date,omitempty"`
+	CommissionVotes    []GetLegalSearchDefaultApplicationJSONMursCommissionVotes `json:"commission_votes,omitempty"`
+	Dispositions       []GetLegalSearchDefaultApplicationJSONMursDispositions    `json:"dispositions,omitempty"`
+	DocID              *string                                                   `json:"doc_id,omitempty"`
+	DocumentHighlights map[string]interface{}                                    `json:"document_highlights,omitempty"`
+	Documents          []GetLegalSearchDefaultApplicationJSONMursDocuments       `json:"documents,omitempty"`
+	ElectionCycles     *int64                                                    `json:"election_cycles,omitempty"`
+	Highlights         []string                                                  `json:"highlights,omitempty"`
+	MurType            *GetLegalSearchDefaultApplicationJSONMursMurTypeEnum      `json:"mur_type,omitempty"`
+	Name               *string                                                   `json:"name,omitempty"`
+	No                 *string                                                   `json:"no,omitempty"`
+	OpenDate           *time.Time                                                `json:"open_date,omitempty"`
+	Participants       []GetLegalSearchDefaultApplicationJSONMursParticipants    `json:"participants,omitempty"`
+	Respondents        []string                                                  `json:"respondents,omitempty"`
+	Subjects           []string                                                  `json:"subjects,omitempty"`
+	URL                *string                                                   `json:"url,omitempty"`
 }
 
 type GetLegalSearchDefaultApplicationJSONRegulations struct {
-	DocID              *string                `json:"doc_id"`
-	DocumentHighlights map[string]interface{} `json:"document_highlights"`
-	Highlights         []string               `json:"highlights"`
-	Name               *string                `json:"name"`
-	No                 *string                `json:"no"`
-	URL                *string                `json:"url"`
+	DocID              *string                `json:"doc_id,omitempty"`
+	DocumentHighlights map[string]interface{} `json:"document_highlights,omitempty"`
+	Highlights         []string               `json:"highlights,omitempty"`
+	Name               *string                `json:"name,omitempty"`
+	No                 *string                `json:"no,omitempty"`
+	URL                *string                `json:"url,omitempty"`
 }
 
 type GetLegalSearchDefaultApplicationJSONStatutes struct {
-	Chapter            *string                `json:"chapter"`
-	DocID              *string                `json:"doc_id"`
-	DocumentHighlights map[string]interface{} `json:"document_highlights"`
-	Highlights         []string               `json:"highlights"`
-	Name               *string                `json:"name"`
-	No                 *string                `json:"no"`
-	Title              *string                `json:"title"`
-	URL                *string                `json:"url"`
+	Chapter            *string                `json:"chapter,omitempty"`
+	DocID              *string                `json:"doc_id,omitempty"`
+	DocumentHighlights map[string]interface{} `json:"document_highlights,omitempty"`
+	Highlights         []string               `json:"highlights,omitempty"`
+	Name               *string                `json:"name,omitempty"`
+	No                 *string                `json:"no,omitempty"`
+	Title              *string                `json:"title,omitempty"`
+	URL                *string                `json:"url,omitempty"`
 }
 
 type GetLegalSearchDefaultApplicationJSON struct {
-	AdminFines            []GetLegalSearchDefaultApplicationJSONAdminFines       `json:"admin_fines"`
-	Adrs                  []GetLegalSearchDefaultApplicationJSONAdrs             `json:"adrs"`
-	AdvisoryOpinions      []GetLegalSearchDefaultApplicationJSONAdvisoryOpinions `json:"advisory_opinions"`
-	Murs                  []GetLegalSearchDefaultApplicationJSONMurs             `json:"murs"`
-	Regulations           []GetLegalSearchDefaultApplicationJSONRegulations      `json:"regulations"`
-	Statutes              []GetLegalSearchDefaultApplicationJSONStatutes         `json:"statutes"`
-	TotalAdminFines       *int64                                                 `json:"total_admin_fines"`
-	TotalAdrs             *int64                                                 `json:"total_adrs"`
-	TotalAdvisoryOpinions *int64                                                 `json:"total_advisory_opinions"`
-	TotalAll              *int64                                                 `json:"total_all"`
-	TotalMurs             *int64                                                 `json:"total_murs"`
-	TotalRegulations      *int64                                                 `json:"total_regulations"`
-	TotalStatutes         *int64                                                 `json:"total_statutes"`
+	AdminFines            []GetLegalSearchDefaultApplicationJSONAdminFines       `json:"admin_fines,omitempty"`
+	Adrs                  []GetLegalSearchDefaultApplicationJSONAdrs             `json:"adrs,omitempty"`
+	AdvisoryOpinions      []GetLegalSearchDefaultApplicationJSONAdvisoryOpinions `json:"advisory_opinions,omitempty"`
+	Murs                  []GetLegalSearchDefaultApplicationJSONMurs             `json:"murs,omitempty"`
+	Regulations           []GetLegalSearchDefaultApplicationJSONRegulations      `json:"regulations,omitempty"`
+	Statutes              []GetLegalSearchDefaultApplicationJSONStatutes         `json:"statutes,omitempty"`
+	TotalAdminFines       *int64                                                 `json:"total_admin_fines,omitempty"`
+	TotalAdrs             *int64                                                 `json:"total_adrs,omitempty"`
+	TotalAdvisoryOpinions *int64                                                 `json:"total_advisory_opinions,omitempty"`
+	TotalAll              *int64                                                 `json:"total_all,omitempty"`
+	TotalMurs             *int64                                                 `json:"total_murs,omitempty"`
+	TotalRegulations      *int64                                                 `json:"total_regulations,omitempty"`
+	TotalStatutes         *int64                                                 `json:"total_statutes,omitempty"`
 }
 
 type GetLegalSearchResponse struct {

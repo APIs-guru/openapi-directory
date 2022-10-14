@@ -10,5 +10,5 @@ const (
 )
 
 type NetworkSettings struct {
-	IngressTrafficAllowed *NetworkSettingsIngressTrafficAllowedEnum `json:"ingressTrafficAllowed"`
+	IngressTrafficAllowed *NetworkSettingsIngressTrafficAllowedEnum `json:"ingressTrafficAllowed,omitempty"`
 }

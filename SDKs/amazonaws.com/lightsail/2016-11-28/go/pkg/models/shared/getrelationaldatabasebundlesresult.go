@@ -1,6 +1,6 @@
 package shared
 
 type GetRelationalDatabaseBundlesResult struct {
-	Bundles       []RelationalDatabaseBundle `json:"bundles"`
-	NextPageToken *string                    `json:"nextPageToken"`
+	Bundles       []RelationalDatabaseBundle `json:"bundles,omitempty"`
+	NextPageToken *string                    `json:"nextPageToken,omitempty"`
 }

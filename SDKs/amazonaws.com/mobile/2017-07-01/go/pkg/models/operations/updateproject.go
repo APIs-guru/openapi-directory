@@ -19,7 +19,7 @@ type UpdateProjectHeaders struct {
 }
 
 type UpdateProjectRequestBody struct {
-	Contents *string `json:"contents"`
+	Contents *string `json:"contents,omitempty"`
 }
 
 type UpdateProjectRequest struct {

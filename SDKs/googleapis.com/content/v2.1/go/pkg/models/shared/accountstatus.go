@@ -1,10 +1,10 @@
 package shared
 
 type AccountStatus struct {
-	AccountID          *string                          `json:"accountId"`
-	AccountLevelIssues []AccountStatusAccountLevelIssue `json:"accountLevelIssues"`
-	AccountManagement  *string                          `json:"accountManagement"`
-	Kind               *string                          `json:"kind"`
-	Products           []AccountStatusProducts          `json:"products"`
-	WebsiteClaimed     *bool                            `json:"websiteClaimed"`
+	AccountID          *string                          `json:"accountId,omitempty"`
+	AccountLevelIssues []AccountStatusAccountLevelIssue `json:"accountLevelIssues,omitempty"`
+	AccountManagement  *string                          `json:"accountManagement,omitempty"`
+	Kind               *string                          `json:"kind,omitempty"`
+	Products           []AccountStatusProducts          `json:"products,omitempty"`
+	WebsiteClaimed     *bool                            `json:"websiteClaimed,omitempty"`
 }

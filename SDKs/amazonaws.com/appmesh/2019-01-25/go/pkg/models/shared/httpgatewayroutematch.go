@@ -1,10 +1,10 @@
 package shared
 
 type HTTPGatewayRouteMatch struct {
-	Headers         []HTTPGatewayRouteHeader   `json:"headers"`
-	Hostname        *GatewayRouteHostnameMatch `json:"hostname"`
-	Method          *HTTPMethodEnum            `json:"method"`
-	Path            *HTTPPathMatch             `json:"path"`
-	Prefix          *string                    `json:"prefix"`
-	QueryParameters []HTTPQueryParameter       `json:"queryParameters"`
+	Headers         []HTTPGatewayRouteHeader   `json:"headers,omitempty"`
+	Hostname        *GatewayRouteHostnameMatch `json:"hostname,omitempty"`
+	Method          *HTTPMethodEnum            `json:"method,omitempty"`
+	Path            *HTTPPathMatch             `json:"path,omitempty"`
+	Prefix          *string                    `json:"prefix,omitempty"`
+	QueryParameters []HTTPQueryParameter       `json:"queryParameters,omitempty"`
 }

@@ -9,13 +9,13 @@ const (
 )
 
 type SendAs struct {
-	DisplayName        *string                       `json:"displayName"`
-	IsDefault          *bool                         `json:"isDefault"`
-	IsPrimary          *bool                         `json:"isPrimary"`
-	ReplyToAddress     *string                       `json:"replyToAddress"`
-	SendAsEmail        *string                       `json:"sendAsEmail"`
-	Signature          *string                       `json:"signature"`
-	SMTPMsa            *SMTPMsa                      `json:"smtpMsa"`
-	TreatAsAlias       *bool                         `json:"treatAsAlias"`
-	VerificationStatus *SendAsVerificationStatusEnum `json:"verificationStatus"`
+	DisplayName        *string                       `json:"displayName,omitempty"`
+	IsDefault          *bool                         `json:"isDefault,omitempty"`
+	IsPrimary          *bool                         `json:"isPrimary,omitempty"`
+	ReplyToAddress     *string                       `json:"replyToAddress,omitempty"`
+	SendAsEmail        *string                       `json:"sendAsEmail,omitempty"`
+	Signature          *string                       `json:"signature,omitempty"`
+	SMTPMsa            *SMTPMsa                      `json:"smtpMsa,omitempty"`
+	TreatAsAlias       *bool                         `json:"treatAsAlias,omitempty"`
+	VerificationStatus *SendAsVerificationStatusEnum `json:"verificationStatus,omitempty"`
 }

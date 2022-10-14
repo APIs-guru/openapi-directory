@@ -311,44 +311,44 @@ const (
 )
 
 type Check struct {
-	BirthCertificate   *string                 `json:"birth_certificate"`
+	BirthCertificate   *string                 `json:"birth_certificate,omitempty"`
 	CheckID            string                  `json:"check_id"`
-	CompanySummary     *CompanySummary         `json:"company_summary"`
+	CompanySummary     *CompanySummary         `json:"company_summary,omitempty"`
 	Country            CheckCountryEnum        `json:"country"`
 	CreationDate       time.Time               `json:"creation_date"`
-	DateOfBirth        *time.Time              `json:"date_of_birth"`
-	DiplomaticID       *string                 `json:"diplomatic_id"`
-	DriverLicense      *string                 `json:"driver_license"`
-	FirstName          *string                 `json:"first_name"`
-	ForeignID          *string                 `json:"foreign_id"`
-	HomonymProbability *float32                `json:"homonym_probability"`
-	HomonymScore       *float32                `json:"homonym_score"`
-	HomonymScores      []Score                 `json:"homonym_scores"`
+	DateOfBirth        *time.Time              `json:"date_of_birth,omitempty"`
+	DiplomaticID       *string                 `json:"diplomatic_id,omitempty"`
+	DriverLicense      *string                 `json:"driver_license,omitempty"`
+	FirstName          *string                 `json:"first_name,omitempty"`
+	ForeignID          *string                 `json:"foreign_id,omitempty"`
+	HomonymProbability *float32                `json:"homonym_probability,omitempty"`
+	HomonymScore       *float32                `json:"homonym_score,omitempty"`
+	HomonymScores      []Score                 `json:"homonym_scores,omitempty"`
 	IDScore            float32                 `json:"id_score"`
-	IssueDate          *time.Time              `json:"issue_date"`
-	LastName           *string                 `json:"last_name"`
-	LicensePlate       *string                 `json:"license_plate"`
-	NationalID         *string                 `json:"national_id"`
-	NativeCountry      *CheckNativeCountryEnum `json:"native_country"`
-	OwnerDocumentID    *string                 `json:"owner_document_id"`
-	OwnerDocumentType  *string                 `json:"owner_document_type"`
-	Passport           *string                 `json:"passport"`
-	PaymentDate        *string                 `json:"payment_date"`
-	Pep                *string                 `json:"pep"`
-	PhoneNumber        *string                 `json:"phone_number"`
-	ProfessionalCard   *string                 `json:"professional_card"`
-	Ptp                *string                 `json:"ptp"`
-	Region             *CheckRegionEnum        `json:"region"`
-	ReportID           *string                 `json:"report_id"`
+	IssueDate          *time.Time              `json:"issue_date,omitempty"`
+	LastName           *string                 `json:"last_name,omitempty"`
+	LicensePlate       *string                 `json:"license_plate,omitempty"`
+	NationalID         *string                 `json:"national_id,omitempty"`
+	NativeCountry      *CheckNativeCountryEnum `json:"native_country,omitempty"`
+	OwnerDocumentID    *string                 `json:"owner_document_id,omitempty"`
+	OwnerDocumentType  *string                 `json:"owner_document_type,omitempty"`
+	Passport           *string                 `json:"passport,omitempty"`
+	PaymentDate        *string                 `json:"payment_date,omitempty"`
+	Pep                *string                 `json:"pep,omitempty"`
+	PhoneNumber        *string                 `json:"phone_number,omitempty"`
+	ProfessionalCard   *string                 `json:"professional_card,omitempty"`
+	Ptp                *string                 `json:"ptp,omitempty"`
+	Region             *CheckRegionEnum        `json:"region,omitempty"`
+	ReportID           *string                 `json:"report_id,omitempty"`
 	Score              float32                 `json:"score"`
-	Scores             []Score                 `json:"scores"`
+	Scores             []Score                 `json:"scores,omitempty"`
 	Status             CheckStatusEnum         `json:"status"`
 	Statuses           []Status                `json:"statuses"`
 	Summary            Summary                 `json:"summary"`
-	TaxID              *string                 `json:"tax_id"`
+	TaxID              *string                 `json:"tax_id,omitempty"`
 	Type               interface{}             `json:"type"`
-	UpdateDate         *time.Time              `json:"update_date"`
-	VehicleID          *string                 `json:"vehicle_id"`
-	VehicleSummary     *VehicleSummary         `json:"vehicle_summary"`
-	WrongInputs        []WrongInput            `json:"wrong_inputs"`
+	UpdateDate         *time.Time              `json:"update_date,omitempty"`
+	VehicleID          *string                 `json:"vehicle_id,omitempty"`
+	VehicleSummary     *VehicleSummary         `json:"vehicle_summary,omitempty"`
+	WrongInputs        []WrongInput            `json:"wrong_inputs,omitempty"`
 }

@@ -1,8 +1,8 @@
 package shared
 
 type ProgressDetail struct {
-	CurrentProgress               *RobotDeploymentStepEnum `json:"currentProgress"`
-	EstimatedTimeRemainingSeconds *int64                   `json:"estimatedTimeRemainingSeconds"`
-	PercentDone                   *float32                 `json:"percentDone"`
-	TargetResource                *string                  `json:"targetResource"`
+	CurrentProgress               *RobotDeploymentStepEnum `json:"currentProgress,omitempty"`
+	EstimatedTimeRemainingSeconds *int64                   `json:"estimatedTimeRemainingSeconds,omitempty"`
+	PercentDone                   *float32                 `json:"percentDone,omitempty"`
+	TargetResource                *string                  `json:"targetResource,omitempty"`
 }

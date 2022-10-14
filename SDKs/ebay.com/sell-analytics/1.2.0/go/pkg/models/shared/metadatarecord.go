@@ -1,6 +1,6 @@
 package shared
 
 type MetadataRecord struct {
-	MetadataValues []Value `json:"metadataValues"`
-	Value          *Value  `json:"value"`
+	MetadataValues []Value `json:"metadataValues,omitempty"`
+	Value          *Value  `json:"value,omitempty"`
 }

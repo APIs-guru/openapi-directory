@@ -1,6 +1,6 @@
 package shared
 
 type MediaPathInfo struct {
-	NetworkPath *string `json:"NetworkPath"`
-	Path        *string `json:"Path"`
+	NetworkPath *string `json:"NetworkPath,omitempty"`
+	Path        *string `json:"Path,omitempty"`
 }

@@ -1,8 +1,8 @@
 package shared
 
 type ListOtherContactsResponse struct {
-	NextPageToken *string  `json:"nextPageToken"`
-	NextSyncToken *string  `json:"nextSyncToken"`
-	OtherContacts []Person `json:"otherContacts"`
-	TotalSize     *int32   `json:"totalSize"`
+	NextPageToken *string  `json:"nextPageToken,omitempty"`
+	NextSyncToken *string  `json:"nextSyncToken,omitempty"`
+	OtherContacts []Person `json:"otherContacts,omitempty"`
+	TotalSize     *int32   `json:"totalSize,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type Alerts struct {
-	Items []Alert `json:"items"`
-	Kind  *string `json:"kind"`
+	Items []Alert `json:"items,omitempty"`
+	Kind  *string `json:"kind,omitempty"`
 }

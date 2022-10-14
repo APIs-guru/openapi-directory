@@ -44,13 +44,13 @@ const (
 )
 
 type RecognitionMetadata struct {
-	AudioTopic               *string                                     `json:"audioTopic"`
-	IndustryNaicsCodeOfAudio *int64                                      `json:"industryNaicsCodeOfAudio"`
-	InteractionType          *RecognitionMetadataInteractionTypeEnum     `json:"interactionType"`
-	MicrophoneDistance       *RecognitionMetadataMicrophoneDistanceEnum  `json:"microphoneDistance"`
-	ObfuscatedID             *string                                     `json:"obfuscatedId"`
-	OriginalMediaType        *RecognitionMetadataOriginalMediaTypeEnum   `json:"originalMediaType"`
-	OriginalMimeType         *string                                     `json:"originalMimeType"`
-	RecordingDeviceName      *string                                     `json:"recordingDeviceName"`
-	RecordingDeviceType      *RecognitionMetadataRecordingDeviceTypeEnum `json:"recordingDeviceType"`
+	AudioTopic               *string                                     `json:"audioTopic,omitempty"`
+	IndustryNaicsCodeOfAudio *int64                                      `json:"industryNaicsCodeOfAudio,omitempty"`
+	InteractionType          *RecognitionMetadataInteractionTypeEnum     `json:"interactionType,omitempty"`
+	MicrophoneDistance       *RecognitionMetadataMicrophoneDistanceEnum  `json:"microphoneDistance,omitempty"`
+	ObfuscatedID             *string                                     `json:"obfuscatedId,omitempty"`
+	OriginalMediaType        *RecognitionMetadataOriginalMediaTypeEnum   `json:"originalMediaType,omitempty"`
+	OriginalMimeType         *string                                     `json:"originalMimeType,omitempty"`
+	RecordingDeviceName      *string                                     `json:"recordingDeviceName,omitempty"`
+	RecordingDeviceType      *RecognitionMetadataRecordingDeviceTypeEnum `json:"recordingDeviceType,omitempty"`
 }

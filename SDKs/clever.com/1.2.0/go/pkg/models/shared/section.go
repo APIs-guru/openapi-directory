@@ -38,22 +38,22 @@ const (
 )
 
 type Section struct {
-	CourseDescription *string             `json:"course_description"`
-	CourseName        *string             `json:"course_name"`
-	CourseNumber      *string             `json:"course_number"`
-	Created           *string             `json:"created"`
-	District          *string             `json:"district"`
-	Grade             *SectionGradeEnum   `json:"grade"`
-	ID                *string             `json:"id"`
-	LastModified      *string             `json:"last_modified"`
-	Name              *string             `json:"name"`
-	Period            *string             `json:"period"`
-	School            *string             `json:"school"`
-	SectionNumber     *string             `json:"section_number"`
-	SisID             *string             `json:"sis_id"`
-	Students          []string            `json:"students"`
-	Subject           *SectionSubjectEnum `json:"subject"`
-	Teacher           *string             `json:"teacher"`
-	Teachers          []string            `json:"teachers"`
-	Term              *Term               `json:"term"`
+	CourseDescription *string             `json:"course_description,omitempty"`
+	CourseName        *string             `json:"course_name,omitempty"`
+	CourseNumber      *string             `json:"course_number,omitempty"`
+	Created           *string             `json:"created,omitempty"`
+	District          *string             `json:"district,omitempty"`
+	Grade             *SectionGradeEnum   `json:"grade,omitempty"`
+	ID                *string             `json:"id,omitempty"`
+	LastModified      *string             `json:"last_modified,omitempty"`
+	Name              *string             `json:"name,omitempty"`
+	Period            *string             `json:"period,omitempty"`
+	School            *string             `json:"school,omitempty"`
+	SectionNumber     *string             `json:"section_number,omitempty"`
+	SisID             *string             `json:"sis_id,omitempty"`
+	Students          []string            `json:"students,omitempty"`
+	Subject           *SectionSubjectEnum `json:"subject,omitempty"`
+	Teacher           *string             `json:"teacher,omitempty"`
+	Teachers          []string            `json:"teachers,omitempty"`
+	Term              *Term               `json:"term,omitempty"`
 }

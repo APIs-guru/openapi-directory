@@ -1,5 +1,5 @@
 package shared
 
 type DataSource struct {
-	DataLocation *string `json:"dataLocation"`
+	DataLocation *string `json:"dataLocation,omitempty"`
 }

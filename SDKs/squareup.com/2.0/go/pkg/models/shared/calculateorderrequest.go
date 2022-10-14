@@ -2,5 +2,5 @@ package shared
 
 type CalculateOrderRequest struct {
 	Order           Order         `json:"order"`
-	ProposedRewards []OrderReward `json:"proposed_rewards"`
+	ProposedRewards []OrderReward `json:"proposed_rewards,omitempty"`
 }

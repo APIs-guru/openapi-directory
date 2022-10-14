@@ -21,7 +21,7 @@ type GetDependentsForTaskRequest struct {
 }
 
 type GetDependentsForTask200ApplicationJSON struct {
-	Data []shared.TaskCompact `json:"data"`
+	Data []shared.TaskCompact `json:"data,omitempty"`
 }
 
 type GetDependentsForTaskResponse struct {

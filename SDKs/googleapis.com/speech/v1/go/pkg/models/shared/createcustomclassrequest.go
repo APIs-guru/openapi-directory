@@ -1,6 +1,6 @@
 package shared
 
 type CreateCustomClassRequest struct {
-	CustomClass   *CustomClass `json:"customClass"`
-	CustomClassID *string      `json:"customClassId"`
+	CustomClass   *CustomClass `json:"customClass,omitempty"`
+	CustomClassID *string      `json:"customClassId,omitempty"`
 }

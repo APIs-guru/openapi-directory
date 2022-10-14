@@ -5,8 +5,8 @@ import (
 )
 
 type PipelineSummary struct {
-	CreationTime          *time.Time            `json:"creationTime"`
-	LastUpdateTime        *time.Time            `json:"lastUpdateTime"`
-	PipelineName          *string               `json:"pipelineName"`
-	ReprocessingSummaries []ReprocessingSummary `json:"reprocessingSummaries"`
+	CreationTime          *time.Time            `json:"creationTime,omitempty"`
+	LastUpdateTime        *time.Time            `json:"lastUpdateTime,omitempty"`
+	PipelineName          *string               `json:"pipelineName,omitempty"`
+	ReprocessingSummaries []ReprocessingSummary `json:"reprocessingSummaries,omitempty"`
 }

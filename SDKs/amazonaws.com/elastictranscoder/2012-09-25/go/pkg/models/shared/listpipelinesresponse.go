@@ -1,6 +1,6 @@
 package shared
 
 type ListPipelinesResponse struct {
-	NextPageToken *string    `json:"NextPageToken"`
-	Pipelines     []Pipeline `json:"Pipelines"`
+	NextPageToken *string    `json:"NextPageToken,omitempty"`
+	Pipelines     []Pipeline `json:"Pipelines,omitempty"`
 }

@@ -1,8 +1,8 @@
 package shared
 
 type AuthenticationRule struct {
-	AllowWithoutCredential *bool              `json:"allowWithoutCredential"`
-	Oauth                  *OAuthRequirements `json:"oauth"`
-	Requirements           []AuthRequirement  `json:"requirements"`
-	Selector               *string            `json:"selector"`
+	AllowWithoutCredential *bool              `json:"allowWithoutCredential,omitempty"`
+	Oauth                  *OAuthRequirements `json:"oauth,omitempty"`
+	Requirements           []AuthRequirement  `json:"requirements,omitempty"`
+	Selector               *string            `json:"selector,omitempty"`
 }

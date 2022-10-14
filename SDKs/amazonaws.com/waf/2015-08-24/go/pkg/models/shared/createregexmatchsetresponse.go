@@ -1,6 +1,6 @@
 package shared
 
 type CreateRegexMatchSetResponse struct {
-	ChangeToken   *string        `json:"ChangeToken"`
-	RegexMatchSet *RegexMatchSet `json:"RegexMatchSet"`
+	ChangeToken   *string        `json:"ChangeToken,omitempty"`
+	RegexMatchSet *RegexMatchSet `json:"RegexMatchSet,omitempty"`
 }

@@ -12,8 +12,8 @@ const (
 )
 
 type DashboardFilter struct {
-	FilterType       *DashboardFilterFilterTypeEnum `json:"filterType"`
-	LabelKey         *string                        `json:"labelKey"`
-	StringValue      *string                        `json:"stringValue"`
-	TemplateVariable *string                        `json:"templateVariable"`
+	FilterType       *DashboardFilterFilterTypeEnum `json:"filterType,omitempty"`
+	LabelKey         *string                        `json:"labelKey,omitempty"`
+	StringValue      *string                        `json:"stringValue,omitempty"`
+	TemplateVariable *string                        `json:"templateVariable,omitempty"`
 }

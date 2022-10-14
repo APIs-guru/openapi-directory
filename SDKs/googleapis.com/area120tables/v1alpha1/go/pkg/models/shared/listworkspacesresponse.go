@@ -1,6 +1,6 @@
 package shared
 
 type ListWorkspacesResponse struct {
-	NextPageToken *string     `json:"nextPageToken"`
-	Workspaces    []Workspace `json:"workspaces"`
+	NextPageToken *string     `json:"nextPageToken,omitempty"`
+	Workspaces    []Workspace `json:"workspaces,omitempty"`
 }

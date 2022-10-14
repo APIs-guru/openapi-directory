@@ -13,11 +13,11 @@ const (
 )
 
 type DoubleVerify struct {
-	AppStarRating         *DoubleVerifyAppStarRating          `json:"appStarRating"`
-	AvoidedAgeRatings     []DoubleVerifyAvoidedAgeRatingsEnum `json:"avoidedAgeRatings"`
-	BrandSafetyCategories *DoubleVerifyBrandSafetyCategories  `json:"brandSafetyCategories"`
-	CustomSegmentID       *string                             `json:"customSegmentId"`
-	DisplayViewability    *DoubleVerifyDisplayViewability     `json:"displayViewability"`
-	FraudInvalidTraffic   *DoubleVerifyFraudInvalidTraffic    `json:"fraudInvalidTraffic"`
-	VideoViewability      *DoubleVerifyVideoViewability       `json:"videoViewability"`
+	AppStarRating         *DoubleVerifyAppStarRating          `json:"appStarRating,omitempty"`
+	AvoidedAgeRatings     []DoubleVerifyAvoidedAgeRatingsEnum `json:"avoidedAgeRatings,omitempty"`
+	BrandSafetyCategories *DoubleVerifyBrandSafetyCategories  `json:"brandSafetyCategories,omitempty"`
+	CustomSegmentID       *string                             `json:"customSegmentId,omitempty"`
+	DisplayViewability    *DoubleVerifyDisplayViewability     `json:"displayViewability,omitempty"`
+	FraudInvalidTraffic   *DoubleVerifyFraudInvalidTraffic    `json:"fraudInvalidTraffic,omitempty"`
+	VideoViewability      *DoubleVerifyVideoViewability       `json:"videoViewability,omitempty"`
 }

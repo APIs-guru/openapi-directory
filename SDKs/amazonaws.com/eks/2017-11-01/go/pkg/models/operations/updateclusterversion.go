@@ -19,7 +19,7 @@ type UpdateClusterVersionHeaders struct {
 }
 
 type UpdateClusterVersionRequestBody struct {
-	ClientRequestToken *string `json:"clientRequestToken"`
+	ClientRequestToken *string `json:"clientRequestToken,omitempty"`
 	Version            string  `json:"version"`
 }
 

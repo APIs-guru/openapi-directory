@@ -9,9 +9,9 @@ const (
 )
 
 type KeyedAppState struct {
-	Data                 *string                    `json:"data"`
-	Key                  *string                    `json:"key"`
-	Message              *string                    `json:"message"`
-	Severity             *KeyedAppStateSeverityEnum `json:"severity"`
-	StateTimestampMillis *string                    `json:"stateTimestampMillis"`
+	Data                 *string                    `json:"data,omitempty"`
+	Key                  *string                    `json:"key,omitempty"`
+	Message              *string                    `json:"message,omitempty"`
+	Severity             *KeyedAppStateSeverityEnum `json:"severity,omitempty"`
+	StateTimestampMillis *string                    `json:"stateTimestampMillis,omitempty"`
 }

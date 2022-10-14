@@ -1,6 +1,6 @@
 package shared
 
 type ListCustomDataIdentifiersResponse struct {
-	Items     []CustomDataIdentifierSummary `json:"items"`
-	NextToken *string                       `json:"nextToken"`
+	Items     []CustomDataIdentifierSummary `json:"items,omitempty"`
+	NextToken *string                       `json:"nextToken,omitempty"`
 }

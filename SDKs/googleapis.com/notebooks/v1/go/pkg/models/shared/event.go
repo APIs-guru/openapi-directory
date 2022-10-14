@@ -11,7 +11,7 @@ const (
 )
 
 type Event struct {
-	Details    map[string]string `json:"details"`
-	ReportTime *string           `json:"reportTime"`
-	Type       *EventTypeEnum    `json:"type"`
+	Details    map[string]string `json:"details,omitempty"`
+	ReportTime *string           `json:"reportTime,omitempty"`
+	Type       *EventTypeEnum    `json:"type,omitempty"`
 }

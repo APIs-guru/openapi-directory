@@ -1,11 +1,11 @@
 package shared
 
 type TargetTrackingConfiguration struct {
-	CustomizedScalingMetricSpecification *CustomizedScalingMetricSpecification `json:"CustomizedScalingMetricSpecification"`
-	DisableScaleIn                       *bool                                 `json:"DisableScaleIn"`
-	EstimatedInstanceWarmup              *int64                                `json:"EstimatedInstanceWarmup"`
-	PredefinedScalingMetricSpecification *PredefinedScalingMetricSpecification `json:"PredefinedScalingMetricSpecification"`
-	ScaleInCooldown                      *int64                                `json:"ScaleInCooldown"`
-	ScaleOutCooldown                     *int64                                `json:"ScaleOutCooldown"`
+	CustomizedScalingMetricSpecification *CustomizedScalingMetricSpecification `json:"CustomizedScalingMetricSpecification,omitempty"`
+	DisableScaleIn                       *bool                                 `json:"DisableScaleIn,omitempty"`
+	EstimatedInstanceWarmup              *int64                                `json:"EstimatedInstanceWarmup,omitempty"`
+	PredefinedScalingMetricSpecification *PredefinedScalingMetricSpecification `json:"PredefinedScalingMetricSpecification,omitempty"`
+	ScaleInCooldown                      *int64                                `json:"ScaleInCooldown,omitempty"`
+	ScaleOutCooldown                     *int64                                `json:"ScaleOutCooldown,omitempty"`
 	TargetValue                          float64                               `json:"TargetValue"`
 }

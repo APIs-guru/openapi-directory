@@ -1,19 +1,19 @@
 package shared
 
 type Workspace struct {
-	BundleID                    *string              `json:"BundleId"`
-	ComputerName                *string              `json:"ComputerName"`
-	DirectoryID                 *string              `json:"DirectoryId"`
-	ErrorCode                   *string              `json:"ErrorCode"`
-	ErrorMessage                *string              `json:"ErrorMessage"`
-	IPAddress                   *string              `json:"IpAddress"`
-	ModificationStates          []ModificationState  `json:"ModificationStates"`
-	RootVolumeEncryptionEnabled *bool                `json:"RootVolumeEncryptionEnabled"`
-	State                       *WorkspaceStateEnum  `json:"State"`
-	SubnetID                    *string              `json:"SubnetId"`
-	UserName                    *string              `json:"UserName"`
-	UserVolumeEncryptionEnabled *bool                `json:"UserVolumeEncryptionEnabled"`
-	VolumeEncryptionKey         *string              `json:"VolumeEncryptionKey"`
-	WorkspaceID                 *string              `json:"WorkspaceId"`
-	WorkspaceProperties         *WorkspaceProperties `json:"WorkspaceProperties"`
+	BundleID                    *string              `json:"BundleId,omitempty"`
+	ComputerName                *string              `json:"ComputerName,omitempty"`
+	DirectoryID                 *string              `json:"DirectoryId,omitempty"`
+	ErrorCode                   *string              `json:"ErrorCode,omitempty"`
+	ErrorMessage                *string              `json:"ErrorMessage,omitempty"`
+	IPAddress                   *string              `json:"IpAddress,omitempty"`
+	ModificationStates          []ModificationState  `json:"ModificationStates,omitempty"`
+	RootVolumeEncryptionEnabled *bool                `json:"RootVolumeEncryptionEnabled,omitempty"`
+	State                       *WorkspaceStateEnum  `json:"State,omitempty"`
+	SubnetID                    *string              `json:"SubnetId,omitempty"`
+	UserName                    *string              `json:"UserName,omitempty"`
+	UserVolumeEncryptionEnabled *bool                `json:"UserVolumeEncryptionEnabled,omitempty"`
+	VolumeEncryptionKey         *string              `json:"VolumeEncryptionKey,omitempty"`
+	WorkspaceID                 *string              `json:"WorkspaceId,omitempty"`
+	WorkspaceProperties         *WorkspaceProperties `json:"WorkspaceProperties,omitempty"`
 }

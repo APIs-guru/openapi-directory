@@ -20,13 +20,13 @@ const (
 )
 
 type GoogleCloudDataplexV1Job struct {
-	EndTime    *string                              `json:"endTime"`
-	Message    *string                              `json:"message"`
-	Name       *string                              `json:"name"`
-	RetryCount *int64                               `json:"retryCount"`
-	Service    *GoogleCloudDataplexV1JobServiceEnum `json:"service"`
-	ServiceJob *string                              `json:"serviceJob"`
-	StartTime  *string                              `json:"startTime"`
-	State      *GoogleCloudDataplexV1JobStateEnum   `json:"state"`
-	UID        *string                              `json:"uid"`
+	EndTime    *string                              `json:"endTime,omitempty"`
+	Message    *string                              `json:"message,omitempty"`
+	Name       *string                              `json:"name,omitempty"`
+	RetryCount *int64                               `json:"retryCount,omitempty"`
+	Service    *GoogleCloudDataplexV1JobServiceEnum `json:"service,omitempty"`
+	ServiceJob *string                              `json:"serviceJob,omitempty"`
+	StartTime  *string                              `json:"startTime,omitempty"`
+	State      *GoogleCloudDataplexV1JobStateEnum   `json:"state,omitempty"`
+	UID        *string                              `json:"uid,omitempty"`
 }

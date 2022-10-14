@@ -9,16 +9,16 @@ const (
 )
 
 type PatchDeployment struct {
-	CreateTime        *string                   `json:"createTime"`
-	Description       *string                   `json:"description"`
-	Duration          *string                   `json:"duration"`
-	InstanceFilter    *PatchInstanceFilter      `json:"instanceFilter"`
-	LastExecuteTime   *string                   `json:"lastExecuteTime"`
-	Name              *string                   `json:"name"`
-	OneTimeSchedule   *OneTimeSchedule          `json:"oneTimeSchedule"`
-	PatchConfig       *PatchConfig              `json:"patchConfig"`
-	RecurringSchedule *RecurringSchedule        `json:"recurringSchedule"`
-	Rollout           *PatchRollout             `json:"rollout"`
-	State             *PatchDeploymentStateEnum `json:"state"`
-	UpdateTime        *string                   `json:"updateTime"`
+	CreateTime        *string                   `json:"createTime,omitempty"`
+	Description       *string                   `json:"description,omitempty"`
+	Duration          *string                   `json:"duration,omitempty"`
+	InstanceFilter    *PatchInstanceFilter      `json:"instanceFilter,omitempty"`
+	LastExecuteTime   *string                   `json:"lastExecuteTime,omitempty"`
+	Name              *string                   `json:"name,omitempty"`
+	OneTimeSchedule   *OneTimeSchedule          `json:"oneTimeSchedule,omitempty"`
+	PatchConfig       *PatchConfig              `json:"patchConfig,omitempty"`
+	RecurringSchedule *RecurringSchedule        `json:"recurringSchedule,omitempty"`
+	Rollout           *PatchRollout             `json:"rollout,omitempty"`
+	State             *PatchDeploymentStateEnum `json:"state,omitempty"`
+	UpdateTime        *string                   `json:"updateTime,omitempty"`
 }

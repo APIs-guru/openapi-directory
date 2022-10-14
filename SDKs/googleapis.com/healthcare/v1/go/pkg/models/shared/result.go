@@ -1,7 +1,7 @@
 package shared
 
 type Result struct {
-	ConsentDetails map[string]ConsentEvaluation `json:"consentDetails"`
-	Consented      *bool                        `json:"consented"`
-	DataID         *string                      `json:"dataId"`
+	ConsentDetails map[string]ConsentEvaluation `json:"consentDetails,omitempty"`
+	Consented      *bool                        `json:"consented,omitempty"`
+	DataID         *string                      `json:"dataId,omitempty"`
 }

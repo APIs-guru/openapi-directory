@@ -1,6 +1,6 @@
 package shared
 
 type Row struct {
-	ColumnSpecIds []string      `json:"columnSpecIds"`
-	Values        []interface{} `json:"values"`
+	ColumnSpecIds []string      `json:"columnSpecIds,omitempty"`
+	Values        []interface{} `json:"values,omitempty"`
 }

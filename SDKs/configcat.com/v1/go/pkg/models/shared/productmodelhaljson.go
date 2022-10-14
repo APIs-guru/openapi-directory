@@ -1,32 +1,32 @@
 package shared
 
 type ProductModelHaljsonEmbeddedOrganizationLinks struct {
-	Members  *string `json:"members"`
-	Products *string `json:"products"`
+	Members  *string `json:"members,omitempty"`
+	Products *string `json:"products,omitempty"`
 }
 
 type ProductModelHaljsonEmbeddedOrganization struct {
-	Links          *ProductModelHaljsonEmbeddedOrganizationLinks `json:"_links"`
-	Name           *string                                       `json:"name"`
-	OrganizationID *string                                       `json:"organizationId"`
+	Links          *ProductModelHaljsonEmbeddedOrganizationLinks `json:"_links,omitempty"`
+	Name           *string                                       `json:"name,omitempty"`
+	OrganizationID *string                                       `json:"organizationId,omitempty"`
 }
 
 type ProductModelHaljsonEmbedded struct {
-	Organization *ProductModelHaljsonEmbeddedOrganization `json:"organization"`
+	Organization *ProductModelHaljsonEmbeddedOrganization `json:"organization,omitempty"`
 }
 
 type ProductModelHaljsonLinks struct {
-	Configs          *string `json:"configs"`
-	Environments     *string `json:"environments"`
-	Members          *string `json:"members"`
-	PermissionGroups *string `json:"permission-groups"`
-	Self             *string `json:"self"`
-	Tags             *string `json:"tags"`
+	Configs          *string `json:"configs,omitempty"`
+	Environments     *string `json:"environments,omitempty"`
+	Members          *string `json:"members,omitempty"`
+	PermissionGroups *string `json:"permission-groups,omitempty"`
+	Self             *string `json:"self,omitempty"`
+	Tags             *string `json:"tags,omitempty"`
 }
 
 type ProductModelHaljson struct {
-	Embedded  *ProductModelHaljsonEmbedded `json:"_embedded"`
-	Links     *ProductModelHaljsonLinks    `json:"_links"`
-	Name      *string                      `json:"name"`
-	ProductID *string                      `json:"productId"`
+	Embedded  *ProductModelHaljsonEmbedded `json:"_embedded,omitempty"`
+	Links     *ProductModelHaljsonLinks    `json:"_links,omitempty"`
+	Name      *string                      `json:"name,omitempty"`
+	ProductID *string                      `json:"productId,omitempty"`
 }

@@ -9,8 +9,8 @@ const (
 )
 
 type GetTemplateResponse struct {
-	Metadata        *TemplateMetadata                    `json:"metadata"`
-	RuntimeMetadata *RuntimeMetadata                     `json:"runtimeMetadata"`
-	Status          *Status                              `json:"status"`
-	TemplateType    *GetTemplateResponseTemplateTypeEnum `json:"templateType"`
+	Metadata        *TemplateMetadata                    `json:"metadata,omitempty"`
+	RuntimeMetadata *RuntimeMetadata                     `json:"runtimeMetadata,omitempty"`
+	Status          *Status                              `json:"status,omitempty"`
+	TemplateType    *GetTemplateResponseTemplateTypeEnum `json:"templateType,omitempty"`
 }

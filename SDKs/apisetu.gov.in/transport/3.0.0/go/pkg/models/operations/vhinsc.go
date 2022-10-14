@@ -19,8 +19,8 @@ const (
 )
 
 type VhinscRequestBody struct {
-	CertificateParameters *VhinscRequestBodyCertificateParameters `json:"certificateParameters"`
-	ConsentArtifact       *interface{}                            `json:"consentArtifact"`
+	CertificateParameters *VhinscRequestBodyCertificateParameters `json:"certificateParameters,omitempty"`
+	ConsentArtifact       *interface{}                            `json:"consentArtifact,omitempty"`
 	Format                VhinscRequestBodyFormatEnum             `json:"format"`
 	TxnID                 string                                  `json:"txnId"`
 }
@@ -56,8 +56,8 @@ const (
 )
 
 type Vhinsc400ApplicationJSON struct {
-	Error            *Vhinsc400ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Vhinsc400ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Vhinsc400ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Vhinsc400ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Vhinsc401ApplicationJSONErrorEnum string
@@ -75,8 +75,8 @@ const (
 )
 
 type Vhinsc401ApplicationJSON struct {
-	Error            *Vhinsc401ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Vhinsc401ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Vhinsc401ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Vhinsc401ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Vhinsc404ApplicationJSONErrorEnum string
@@ -94,8 +94,8 @@ const (
 )
 
 type Vhinsc404ApplicationJSON struct {
-	Error            *Vhinsc404ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Vhinsc404ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Vhinsc404ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Vhinsc404ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Vhinsc500ApplicationJSONErrorEnum string
@@ -111,8 +111,8 @@ const (
 )
 
 type Vhinsc500ApplicationJSON struct {
-	Error            *Vhinsc500ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Vhinsc500ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Vhinsc500ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Vhinsc500ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Vhinsc502ApplicationJSONErrorEnum string
@@ -128,8 +128,8 @@ const (
 )
 
 type Vhinsc502ApplicationJSON struct {
-	Error            *Vhinsc502ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Vhinsc502ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Vhinsc502ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Vhinsc502ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Vhinsc503ApplicationJSONErrorEnum string
@@ -145,8 +145,8 @@ const (
 )
 
 type Vhinsc503ApplicationJSON struct {
-	Error            *Vhinsc503ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Vhinsc503ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Vhinsc503ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Vhinsc503ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Vhinsc504ApplicationJSONErrorEnum string
@@ -162,8 +162,8 @@ const (
 )
 
 type Vhinsc504ApplicationJSON struct {
-	Error            *Vhinsc504ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Vhinsc504ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Vhinsc504ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Vhinsc504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type VhinscResponse struct {

@@ -1,7 +1,7 @@
 package shared
 
 type CreateMailboxRequest struct {
-	AccountID    *int32  `json:"account_id"`
-	EmailAddress *string `json:"email_address"`
-	Password     *string `json:"password"`
+	AccountID    *int32  `json:"account_id,omitempty"`
+	EmailAddress *string `json:"email_address,omitempty"`
+	Password     *string `json:"password,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type DisassociateResourceResponse struct {
-	ApplicationArn *string `json:"applicationArn"`
-	ResourceArn    *string `json:"resourceArn"`
+	ApplicationArn *string `json:"applicationArn,omitempty"`
+	ResourceArn    *string `json:"resourceArn,omitempty"`
 }

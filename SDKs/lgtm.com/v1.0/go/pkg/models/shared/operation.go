@@ -16,10 +16,10 @@ const (
 )
 
 type Operation struct {
-	ID            *int64                   `json:"id"`
-	Status        *OperationStatusEnum     `json:"status"`
-	TaskResult    *interface{}             `json:"task-result"`
-	TaskResultURL *string                  `json:"task-result-url"`
+	ID            *int64                   `json:"id,omitempty"`
+	Status        *OperationStatusEnum     `json:"status,omitempty"`
+	TaskResult    *interface{}             `json:"task-result,omitempty"`
+	TaskResultURL *string                  `json:"task-result-url,omitempty"`
 	TaskType      OperationTaskTypeEnum    `json:"task-type"`
-	Uploads       map[string]UploadSession `json:"uploads"`
+	Uploads       map[string]UploadSession `json:"uploads,omitempty"`
 }

@@ -15,10 +15,10 @@ const (
 )
 
 type User struct {
-	AccountIdentifier *string                 `json:"accountIdentifier"`
-	AccountType       *UserAccountTypeEnum    `json:"accountType"`
-	DisplayName       *string                 `json:"displayName"`
-	ID                *string                 `json:"id"`
-	ManagementType    *UserManagementTypeEnum `json:"managementType"`
-	PrimaryEmail      *string                 `json:"primaryEmail"`
+	AccountIdentifier *string                 `json:"accountIdentifier,omitempty"`
+	AccountType       *UserAccountTypeEnum    `json:"accountType,omitempty"`
+	DisplayName       *string                 `json:"displayName,omitempty"`
+	ID                *string                 `json:"id,omitempty"`
+	ManagementType    *UserManagementTypeEnum `json:"managementType,omitempty"`
+	PrimaryEmail      *string                 `json:"primaryEmail,omitempty"`
 }

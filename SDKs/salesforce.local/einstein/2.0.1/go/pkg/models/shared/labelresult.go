@@ -1,6 +1,6 @@
 package shared
 
 type LabelResult struct {
-	Label       *string  `json:"label"`
-	Probability *float32 `json:"probability"`
+	Label       *string  `json:"label,omitempty"`
+	Probability *float32 `json:"probability,omitempty"`
 }

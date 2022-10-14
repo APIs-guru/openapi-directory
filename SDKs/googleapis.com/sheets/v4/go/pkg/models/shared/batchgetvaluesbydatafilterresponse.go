@@ -1,6 +1,6 @@
 package shared
 
 type BatchGetValuesByDataFilterResponse struct {
-	SpreadsheetID *string             `json:"spreadsheetId"`
-	ValueRanges   []MatchedValueRange `json:"valueRanges"`
+	SpreadsheetID *string             `json:"spreadsheetId,omitempty"`
+	ValueRanges   []MatchedValueRange `json:"valueRanges,omitempty"`
 }

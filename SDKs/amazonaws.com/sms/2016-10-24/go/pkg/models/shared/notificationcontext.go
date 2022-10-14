@@ -1,7 +1,7 @@
 package shared
 
 type NotificationContext struct {
-	Status        *ValidationStatusEnum `json:"status"`
-	StatusMessage *string               `json:"statusMessage"`
-	ValidationID  *string               `json:"validationId"`
+	Status        *ValidationStatusEnum `json:"status,omitempty"`
+	StatusMessage *string               `json:"statusMessage,omitempty"`
+	ValidationID  *string               `json:"validationId,omitempty"`
 }

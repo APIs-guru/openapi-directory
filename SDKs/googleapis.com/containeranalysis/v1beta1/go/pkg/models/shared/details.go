@@ -1,5 +1,5 @@
 package shared
 
 type Details struct {
-	Attestation *Attestation `json:"attestation"`
+	Attestation *Attestation `json:"attestation,omitempty"`
 }

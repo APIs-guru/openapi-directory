@@ -1,5 +1,5 @@
 package shared
 
 type ApkDetail struct {
-	ApkManifest *ApkManifest `json:"apkManifest"`
+	ApkManifest *ApkManifest `json:"apkManifest,omitempty"`
 }

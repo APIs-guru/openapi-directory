@@ -5,12 +5,12 @@ import (
 )
 
 type AssessmentReportMetadata struct {
-	AssessmentID   *string                     `json:"assessmentId"`
-	AssessmentName *string                     `json:"assessmentName"`
-	Author         *string                     `json:"author"`
-	CreationTime   *time.Time                  `json:"creationTime"`
-	Description    *string                     `json:"description"`
-	ID             *string                     `json:"id"`
-	Name           *string                     `json:"name"`
-	Status         *AssessmentReportStatusEnum `json:"status"`
+	AssessmentID   *string                     `json:"assessmentId,omitempty"`
+	AssessmentName *string                     `json:"assessmentName,omitempty"`
+	Author         *string                     `json:"author,omitempty"`
+	CreationTime   *time.Time                  `json:"creationTime,omitempty"`
+	Description    *string                     `json:"description,omitempty"`
+	ID             *string                     `json:"id,omitempty"`
+	Name           *string                     `json:"name,omitempty"`
+	Status         *AssessmentReportStatusEnum `json:"status,omitempty"`
 }

@@ -1,8 +1,8 @@
 package shared
 
 type LookupResponse struct {
-	Deferred []Key          `json:"deferred"`
-	Found    []EntityResult `json:"found"`
-	Missing  []EntityResult `json:"missing"`
-	ReadTime *string        `json:"readTime"`
+	Deferred []Key          `json:"deferred,omitempty"`
+	Found    []EntityResult `json:"found,omitempty"`
+	Missing  []EntityResult `json:"missing,omitempty"`
+	ReadTime *string        `json:"readTime,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type VisitedExpression struct {
-	SourcePosition *SourcePosition `json:"sourcePosition"`
-	Value          *interface{}    `json:"value"`
+	SourcePosition *SourcePosition `json:"sourcePosition,omitempty"`
+	Value          *interface{}    `json:"value,omitempty"`
 }

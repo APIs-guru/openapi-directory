@@ -15,11 +15,11 @@ type UpdateComputeEnvironmentHeaders struct {
 }
 
 type UpdateComputeEnvironmentRequestBodyComputeResources struct {
-	DesiredvCpus     *int64   `json:"desiredvCpus"`
-	MaxvCpus         *int64   `json:"maxvCpus"`
-	MinvCpus         *int64   `json:"minvCpus"`
-	SecurityGroupIds []string `json:"securityGroupIds"`
-	Subnets          []string `json:"subnets"`
+	DesiredvCpus     *int64   `json:"desiredvCpus,omitempty"`
+	MaxvCpus         *int64   `json:"maxvCpus,omitempty"`
+	MinvCpus         *int64   `json:"minvCpus,omitempty"`
+	SecurityGroupIds []string `json:"securityGroupIds,omitempty"`
+	Subnets          []string `json:"subnets,omitempty"`
 }
 
 type UpdateComputeEnvironmentRequestBodyStateEnum string
@@ -31,9 +31,9 @@ const (
 
 type UpdateComputeEnvironmentRequestBody struct {
 	ComputeEnvironment string                                               `json:"computeEnvironment"`
-	ComputeResources   *UpdateComputeEnvironmentRequestBodyComputeResources `json:"computeResources"`
-	ServiceRole        *string                                              `json:"serviceRole"`
-	State              *UpdateComputeEnvironmentRequestBodyStateEnum        `json:"state"`
+	ComputeResources   *UpdateComputeEnvironmentRequestBodyComputeResources `json:"computeResources,omitempty"`
+	ServiceRole        *string                                              `json:"serviceRole,omitempty"`
+	State              *UpdateComputeEnvironmentRequestBodyStateEnum        `json:"state,omitempty"`
 }
 
 type UpdateComputeEnvironmentRequest struct {

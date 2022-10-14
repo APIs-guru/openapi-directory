@@ -1,5 +1,5 @@
 package shared
 
 type GetSearchApplicationUserStatsResponse struct {
-	Stats []SearchApplicationUserStats `json:"stats"`
+	Stats []SearchApplicationUserStats `json:"stats,omitempty"`
 }

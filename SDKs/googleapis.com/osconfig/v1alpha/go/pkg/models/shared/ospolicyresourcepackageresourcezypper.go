@@ -1,5 +1,5 @@
 package shared
 
 type OsPolicyResourcePackageResourceZypper struct {
-	Name *string `json:"name"`
+	Name *string `json:"name,omitempty"`
 }

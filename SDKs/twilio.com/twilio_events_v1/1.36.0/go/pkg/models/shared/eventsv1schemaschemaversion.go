@@ -5,9 +5,9 @@ import (
 )
 
 type EventsV1SchemaSchemaVersion struct {
-	DateCreated   *time.Time `json:"date_created"`
-	ID            *string    `json:"id"`
-	Raw           *string    `json:"raw"`
-	SchemaVersion *int64     `json:"schema_version"`
-	URL           *string    `json:"url"`
+	DateCreated   *time.Time `json:"date_created,omitempty"`
+	ID            *string    `json:"id,omitempty"`
+	Raw           *string    `json:"raw,omitempty"`
+	SchemaVersion *int64     `json:"schema_version,omitempty"`
+	URL           *string    `json:"url,omitempty"`
 }

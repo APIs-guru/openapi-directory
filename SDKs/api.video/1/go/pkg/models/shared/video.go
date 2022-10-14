@@ -5,17 +5,17 @@ import (
 )
 
 type Video struct {
-	Assets      *VideoAssets  `json:"assets"`
-	Description *string       `json:"description"`
-	Metadata    []Metadata    `json:"metadata"`
-	Mp4Support  *bool         `json:"mp4Support"`
-	Panoramic   *bool         `json:"panoramic"`
-	PlayerID    *string       `json:"playerId"`
-	Public      *bool         `json:"public"`
-	PublishedAt *string       `json:"publishedAt"`
-	Source      *VideoSource  `json:"source"`
-	Tags        []interface{} `json:"tags"`
-	Title       *string       `json:"title"`
-	UpdatedAt   *time.Time    `json:"updatedAt"`
-	VideoID     *string       `json:"videoId"`
+	Assets      *VideoAssets  `json:"assets,omitempty"`
+	Description *string       `json:"description,omitempty"`
+	Metadata    []Metadata    `json:"metadata,omitempty"`
+	Mp4Support  *bool         `json:"mp4Support,omitempty"`
+	Panoramic   *bool         `json:"panoramic,omitempty"`
+	PlayerID    *string       `json:"playerId,omitempty"`
+	Public      *bool         `json:"public,omitempty"`
+	PublishedAt *string       `json:"publishedAt,omitempty"`
+	Source      *VideoSource  `json:"source,omitempty"`
+	Tags        []interface{} `json:"tags,omitempty"`
+	Title       *string       `json:"title,omitempty"`
+	UpdatedAt   *time.Time    `json:"updatedAt,omitempty"`
+	VideoID     *string       `json:"videoId,omitempty"`
 }

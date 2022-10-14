@@ -1,6 +1,6 @@
 package shared
 
 type ContainerServiceDeploymentRequest struct {
-	Containers     map[string]Container `json:"containers"`
-	PublicEndpoint *EndpointRequest     `json:"publicEndpoint"`
+	Containers     map[string]Container `json:"containers,omitempty"`
+	PublicEndpoint *EndpointRequest     `json:"publicEndpoint,omitempty"`
 }

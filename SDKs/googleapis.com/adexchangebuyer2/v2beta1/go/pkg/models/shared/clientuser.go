@@ -10,8 +10,8 @@ const (
 )
 
 type ClientUser struct {
-	ClientAccountID *string               `json:"clientAccountId"`
-	Email           *string               `json:"email"`
-	Status          *ClientUserStatusEnum `json:"status"`
-	UserID          *string               `json:"userId"`
+	ClientAccountID *string               `json:"clientAccountId,omitempty"`
+	Email           *string               `json:"email,omitempty"`
+	Status          *ClientUserStatusEnum `json:"status,omitempty"`
+	UserID          *string               `json:"userId,omitempty"`
 }

@@ -15,13 +15,13 @@ type CreateRecordingConfigurationHeaders struct {
 }
 
 type CreateRecordingConfigurationRequestBodyDestinationConfiguration struct {
-	S3 *shared.S3DestinationConfiguration `json:"s3"`
+	S3 *shared.S3DestinationConfiguration `json:"s3,omitempty"`
 }
 
 type CreateRecordingConfigurationRequestBody struct {
 	DestinationConfiguration CreateRecordingConfigurationRequestBodyDestinationConfiguration `json:"destinationConfiguration"`
-	Name                     *string                                                         `json:"name"`
-	Tags                     map[string]string                                               `json:"tags"`
+	Name                     *string                                                         `json:"name,omitempty"`
+	Tags                     map[string]string                                               `json:"tags,omitempty"`
 }
 
 type CreateRecordingConfigurationRequest struct {

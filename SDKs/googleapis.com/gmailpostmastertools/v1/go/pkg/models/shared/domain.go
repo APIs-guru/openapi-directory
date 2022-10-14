@@ -10,7 +10,7 @@ const (
 )
 
 type Domain struct {
-	CreateTime *string               `json:"createTime"`
-	Name       *string               `json:"name"`
-	Permission *DomainPermissionEnum `json:"permission"`
+	CreateTime *string               `json:"createTime,omitempty"`
+	Name       *string               `json:"name,omitempty"`
+	Permission *DomainPermissionEnum `json:"permission,omitempty"`
 }

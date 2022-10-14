@@ -5,24 +5,24 @@ import (
 )
 
 type TflAPIPresentationEntitiesPrediction struct {
-	Bearing             *string                                     `json:"bearing"`
-	CurrentLocation     *string                                     `json:"currentLocation"`
-	DestinationName     *string                                     `json:"destinationName"`
-	DestinationNaptanID *string                                     `json:"destinationNaptanId"`
-	Direction           *string                                     `json:"direction"`
-	ExpectedArrival     *time.Time                                  `json:"expectedArrival"`
-	ID                  *string                                     `json:"id"`
-	LineID              *string                                     `json:"lineId"`
-	LineName            *string                                     `json:"lineName"`
-	ModeName            *string                                     `json:"modeName"`
-	NaptanID            *string                                     `json:"naptanId"`
-	OperationType       *int32                                      `json:"operationType"`
-	PlatformName        *string                                     `json:"platformName"`
-	StationName         *string                                     `json:"stationName"`
-	TimeToLive          *time.Time                                  `json:"timeToLive"`
-	TimeToStation       *int32                                      `json:"timeToStation"`
-	Timestamp           *time.Time                                  `json:"timestamp"`
-	Timing              *TflAPIPresentationEntitiesPredictionTiming `json:"timing"`
-	Towards             *string                                     `json:"towards"`
-	VehicleID           *string                                     `json:"vehicleId"`
+	Bearing             *string                                     `json:"bearing,omitempty"`
+	CurrentLocation     *string                                     `json:"currentLocation,omitempty"`
+	DestinationName     *string                                     `json:"destinationName,omitempty"`
+	DestinationNaptanID *string                                     `json:"destinationNaptanId,omitempty"`
+	Direction           *string                                     `json:"direction,omitempty"`
+	ExpectedArrival     *time.Time                                  `json:"expectedArrival,omitempty"`
+	ID                  *string                                     `json:"id,omitempty"`
+	LineID              *string                                     `json:"lineId,omitempty"`
+	LineName            *string                                     `json:"lineName,omitempty"`
+	ModeName            *string                                     `json:"modeName,omitempty"`
+	NaptanID            *string                                     `json:"naptanId,omitempty"`
+	OperationType       *int32                                      `json:"operationType,omitempty"`
+	PlatformName        *string                                     `json:"platformName,omitempty"`
+	StationName         *string                                     `json:"stationName,omitempty"`
+	TimeToLive          *time.Time                                  `json:"timeToLive,omitempty"`
+	TimeToStation       *int32                                      `json:"timeToStation,omitempty"`
+	Timestamp           *time.Time                                  `json:"timestamp,omitempty"`
+	Timing              *TflAPIPresentationEntitiesPredictionTiming `json:"timing,omitempty"`
+	Towards             *string                                     `json:"towards,omitempty"`
+	VehicleID           *string                                     `json:"vehicleId,omitempty"`
 }

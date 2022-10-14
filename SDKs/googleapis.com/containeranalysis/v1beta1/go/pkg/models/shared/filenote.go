@@ -18,7 +18,7 @@ const (
 )
 
 type FileNote struct {
-	Checksum []string              `json:"checksum"`
-	FileType *FileNoteFileTypeEnum `json:"fileType"`
-	Title    *string               `json:"title"`
+	Checksum []string              `json:"checksum,omitempty"`
+	FileType *FileNoteFileTypeEnum `json:"fileType,omitempty"`
+	Title    *string               `json:"title,omitempty"`
 }

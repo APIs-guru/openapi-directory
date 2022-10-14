@@ -11,8 +11,8 @@ const (
 )
 
 type BuildSystemSharedDtoActivityRunStatus struct {
-	CurrentStep  *int32                                           `json:"CurrentStep" form:"name=CurrentStep"`
-	Status       *BuildSystemSharedDtoActivityRunStatusStatusEnum `json:"Status" form:"name=Status"`
-	StepProgress *int32                                           `json:"StepProgress" form:"name=StepProgress"`
-	StepStatus   *string                                          `json:"StepStatus" form:"name=StepStatus"`
+	CurrentStep  *int32                                           `json:"CurrentStep,omitempty" form:"name=CurrentStep"`
+	Status       *BuildSystemSharedDtoActivityRunStatusStatusEnum `json:"Status,omitempty" form:"name=Status"`
+	StepProgress *int32                                           `json:"StepProgress,omitempty" form:"name=StepProgress"`
+	StepStatus   *string                                          `json:"StepStatus,omitempty" form:"name=StepStatus"`
 }

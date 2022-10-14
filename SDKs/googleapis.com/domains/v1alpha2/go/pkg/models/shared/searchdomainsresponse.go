@@ -1,5 +1,5 @@
 package shared
 
 type SearchDomainsResponse struct {
-	RegisterParameters []RegisterParameters `json:"registerParameters"`
+	RegisterParameters []RegisterParameters `json:"registerParameters,omitempty"`
 }

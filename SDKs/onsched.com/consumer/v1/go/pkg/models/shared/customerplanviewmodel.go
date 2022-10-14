@@ -5,13 +5,13 @@ import (
 )
 
 type CustomerPlanViewModel struct {
-	Created        *time.Time `json:"created"`
-	Description    *string    `json:"description"`
-	ID             *string    `json:"id"`
-	LocationID     *string    `json:"locationId"`
-	Name           *string    `json:"name"`
-	ObjectName     *string    `json:"objectName"`
-	ServiceGroupID *string    `json:"serviceGroupId"`
-	StripePlanID   *string    `json:"stripePlanId"`
-	UID            *string    `json:"uid"`
+	Created        *time.Time `json:"created,omitempty"`
+	Description    *string    `json:"description,omitempty"`
+	ID             *string    `json:"id,omitempty"`
+	LocationID     *string    `json:"locationId,omitempty"`
+	Name           *string    `json:"name,omitempty"`
+	ObjectName     *string    `json:"objectName,omitempty"`
+	ServiceGroupID *string    `json:"serviceGroupId,omitempty"`
+	StripePlanID   *string    `json:"stripePlanId,omitempty"`
+	UID            *string    `json:"uid,omitempty"`
 }

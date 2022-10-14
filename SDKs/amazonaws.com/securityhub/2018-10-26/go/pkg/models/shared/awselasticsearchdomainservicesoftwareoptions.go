@@ -1,11 +1,11 @@
 package shared
 
 type AwsElasticsearchDomainServiceSoftwareOptions struct {
-	AutomatedUpdateDate *string `json:"AutomatedUpdateDate"`
-	Cancellable         *bool   `json:"Cancellable"`
-	CurrentVersion      *string `json:"CurrentVersion"`
-	Description         *string `json:"Description"`
-	NewVersion          *string `json:"NewVersion"`
-	UpdateAvailable     *bool   `json:"UpdateAvailable"`
-	UpdateStatus        *string `json:"UpdateStatus"`
+	AutomatedUpdateDate *string `json:"AutomatedUpdateDate,omitempty"`
+	Cancellable         *bool   `json:"Cancellable,omitempty"`
+	CurrentVersion      *string `json:"CurrentVersion,omitempty"`
+	Description         *string `json:"Description,omitempty"`
+	NewVersion          *string `json:"NewVersion,omitempty"`
+	UpdateAvailable     *bool   `json:"UpdateAvailable,omitempty"`
+	UpdateStatus        *string `json:"UpdateStatus,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type SuggestedPositionedObjectProperties struct {
-	PositionedObjectProperties                *PositionedObjectProperties                `json:"positionedObjectProperties"`
-	PositionedObjectPropertiesSuggestionState *PositionedObjectPropertiesSuggestionState `json:"positionedObjectPropertiesSuggestionState"`
+	PositionedObjectProperties                *PositionedObjectProperties                `json:"positionedObjectProperties,omitempty"`
+	PositionedObjectPropertiesSuggestionState *PositionedObjectPropertiesSuggestionState `json:"positionedObjectPropertiesSuggestionState,omitempty"`
 }

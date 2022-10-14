@@ -14,13 +14,13 @@ const (
 )
 
 type CutoverJob struct {
-	ComputeEngineTargetDetails *ComputeEngineTargetDetails `json:"computeEngineTargetDetails"`
-	CreateTime                 *string                     `json:"createTime"`
-	EndTime                    *string                     `json:"endTime"`
-	Error                      *Status                     `json:"error"`
-	Name                       *string                     `json:"name"`
-	ProgressPercent            *int32                      `json:"progressPercent"`
-	State                      *CutoverJobStateEnum        `json:"state"`
-	StateMessage               *string                     `json:"stateMessage"`
-	StateTime                  *string                     `json:"stateTime"`
+	ComputeEngineTargetDetails *ComputeEngineTargetDetails `json:"computeEngineTargetDetails,omitempty"`
+	CreateTime                 *string                     `json:"createTime,omitempty"`
+	EndTime                    *string                     `json:"endTime,omitempty"`
+	Error                      *Status                     `json:"error,omitempty"`
+	Name                       *string                     `json:"name,omitempty"`
+	ProgressPercent            *int32                      `json:"progressPercent,omitempty"`
+	State                      *CutoverJobStateEnum        `json:"state,omitempty"`
+	StateMessage               *string                     `json:"stateMessage,omitempty"`
+	StateTime                  *string                     `json:"stateTime,omitempty"`
 }

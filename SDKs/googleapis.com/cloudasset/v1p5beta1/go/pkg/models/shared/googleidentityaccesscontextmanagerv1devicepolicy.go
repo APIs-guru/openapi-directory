@@ -19,10 +19,10 @@ const (
 )
 
 type GoogleIdentityAccesscontextmanagerV1DevicePolicy struct {
-	AllowedDeviceManagementLevels []GoogleIdentityAccesscontextmanagerV1DevicePolicyAllowedDeviceManagementLevelsEnum `json:"allowedDeviceManagementLevels"`
-	AllowedEncryptionStatuses     []GoogleIdentityAccesscontextmanagerV1DevicePolicyAllowedEncryptionStatusesEnum     `json:"allowedEncryptionStatuses"`
-	OsConstraints                 []GoogleIdentityAccesscontextmanagerV1OsConstraint                                  `json:"osConstraints"`
-	RequireAdminApproval          *bool                                                                               `json:"requireAdminApproval"`
-	RequireCorpOwned              *bool                                                                               `json:"requireCorpOwned"`
-	RequireScreenlock             *bool                                                                               `json:"requireScreenlock"`
+	AllowedDeviceManagementLevels []GoogleIdentityAccesscontextmanagerV1DevicePolicyAllowedDeviceManagementLevelsEnum `json:"allowedDeviceManagementLevels,omitempty"`
+	AllowedEncryptionStatuses     []GoogleIdentityAccesscontextmanagerV1DevicePolicyAllowedEncryptionStatusesEnum     `json:"allowedEncryptionStatuses,omitempty"`
+	OsConstraints                 []GoogleIdentityAccesscontextmanagerV1OsConstraint                                  `json:"osConstraints,omitempty"`
+	RequireAdminApproval          *bool                                                                               `json:"requireAdminApproval,omitempty"`
+	RequireCorpOwned              *bool                                                                               `json:"requireCorpOwned,omitempty"`
+	RequireScreenlock             *bool                                                                               `json:"requireScreenlock,omitempty"`
 }

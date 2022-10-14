@@ -1,6 +1,6 @@
 package shared
 
 type SearchOrganizationsResponse struct {
-	NextPageToken *string        `json:"nextPageToken"`
-	Organizations []Organization `json:"organizations"`
+	NextPageToken *string        `json:"nextPageToken,omitempty"`
+	Organizations []Organization `json:"organizations,omitempty"`
 }

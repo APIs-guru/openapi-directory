@@ -1,9 +1,9 @@
 package shared
 
 type QueryRangeRequest struct {
-	End     *string `json:"end"`
-	Query   *string `json:"query"`
-	Start   *string `json:"start"`
-	Step    *string `json:"step"`
-	Timeout *string `json:"timeout"`
+	End     *string `json:"end,omitempty"`
+	Query   *string `json:"query,omitempty"`
+	Start   *string `json:"start,omitempty"`
+	Step    *string `json:"step,omitempty"`
+	Timeout *string `json:"timeout,omitempty"`
 }

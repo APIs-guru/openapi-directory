@@ -20,14 +20,14 @@ type RegisterCaCertificateHeaders struct {
 }
 
 type RegisterCaCertificateRequestBodyRegistrationConfig struct {
-	RoleArn      *string `json:"roleArn"`
-	TemplateBody *string `json:"templateBody"`
+	RoleArn      *string `json:"roleArn,omitempty"`
+	TemplateBody *string `json:"templateBody,omitempty"`
 }
 
 type RegisterCaCertificateRequestBody struct {
 	CaCertificate           string                                              `json:"caCertificate"`
-	RegistrationConfig      *RegisterCaCertificateRequestBodyRegistrationConfig `json:"registrationConfig"`
-	Tags                    []shared.Tag                                        `json:"tags"`
+	RegistrationConfig      *RegisterCaCertificateRequestBodyRegistrationConfig `json:"registrationConfig,omitempty"`
+	Tags                    []shared.Tag                                        `json:"tags,omitempty"`
 	VerificationCertificate string                                              `json:"verificationCertificate"`
 }
 

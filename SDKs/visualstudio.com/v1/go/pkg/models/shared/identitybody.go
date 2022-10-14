@@ -1,7 +1,7 @@
 package shared
 
 type IdentityBody struct {
-	DisplayName *string `json:"displayName"`
-	ID          *string `json:"id"`
-	UserName    *string `json:"userName"`
+	DisplayName *string `json:"displayName,omitempty"`
+	ID          *string `json:"id,omitempty"`
+	UserName    *string `json:"userName,omitempty"`
 }

@@ -1,7 +1,7 @@
 package shared
 
 type DomainConfigurationSummary struct {
-	DomainConfigurationArn  *string          `json:"domainConfigurationArn"`
-	DomainConfigurationName *string          `json:"domainConfigurationName"`
-	ServiceType             *ServiceTypeEnum `json:"serviceType"`
+	DomainConfigurationArn  *string          `json:"domainConfigurationArn,omitempty"`
+	DomainConfigurationName *string          `json:"domainConfigurationName,omitempty"`
+	ServiceType             *ServiceTypeEnum `json:"serviceType,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type MtlsPolicy struct {
-	ClientValidationCa []ValidationCa `json:"clientValidationCa"`
+	ClientValidationCa []ValidationCa `json:"clientValidationCa,omitempty"`
 }

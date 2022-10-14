@@ -24,11 +24,11 @@ type UpdateInAppTemplateHeaders struct {
 }
 
 type UpdateInAppTemplateRequestBodyInAppTemplateRequest struct {
-	Content             []shared.InAppMessageContent `json:"Content"`
-	CustomConfig        map[string]string            `json:"CustomConfig"`
-	Layout              *shared.LayoutEnum           `json:"Layout"`
-	TemplateDescription *string                      `json:"TemplateDescription"`
-	Tags                map[string]string            `json:"tags"`
+	Content             []shared.InAppMessageContent `json:"Content,omitempty"`
+	CustomConfig        map[string]string            `json:"CustomConfig,omitempty"`
+	Layout              *shared.LayoutEnum           `json:"Layout,omitempty"`
+	TemplateDescription *string                      `json:"TemplateDescription,omitempty"`
+	Tags                map[string]string            `json:"tags,omitempty"`
 }
 
 type UpdateInAppTemplateRequestBody struct {

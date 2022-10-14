@@ -1,7 +1,7 @@
 package shared
 
 type TableAutoScalingDescription struct {
-	Replicas    []ReplicaAutoScalingDescription `json:"Replicas"`
-	TableName   *string                         `json:"TableName"`
-	TableStatus *TableStatusEnum                `json:"TableStatus"`
+	Replicas    []ReplicaAutoScalingDescription `json:"Replicas,omitempty"`
+	TableName   *string                         `json:"TableName,omitempty"`
+	TableStatus *TableStatusEnum                `json:"TableStatus,omitempty"`
 }

@@ -16,10 +16,10 @@ type UpdateLinkAttributesHeaders struct {
 }
 
 type UpdateLinkAttributesRequestBodyTypedLinkSpecifier struct {
-	IdentityAttributeValues []shared.AttributeNameAndValue      `json:"IdentityAttributeValues"`
-	SourceObjectReference   *shared.ObjectReference             `json:"SourceObjectReference"`
-	TargetObjectReference   *shared.ObjectReference             `json:"TargetObjectReference"`
-	TypedLinkFacet          *shared.TypedLinkSchemaAndFacetName `json:"TypedLinkFacet"`
+	IdentityAttributeValues []shared.AttributeNameAndValue      `json:"IdentityAttributeValues,omitempty"`
+	SourceObjectReference   *shared.ObjectReference             `json:"SourceObjectReference,omitempty"`
+	TargetObjectReference   *shared.ObjectReference             `json:"TargetObjectReference,omitempty"`
+	TypedLinkFacet          *shared.TypedLinkSchemaAndFacetName `json:"TypedLinkFacet,omitempty"`
 }
 
 type UpdateLinkAttributesRequestBody struct {

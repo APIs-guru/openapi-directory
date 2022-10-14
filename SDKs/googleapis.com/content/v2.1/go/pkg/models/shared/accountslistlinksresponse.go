@@ -1,7 +1,7 @@
 package shared
 
 type AccountsListLinksResponse struct {
-	Kind          *string         `json:"kind"`
-	Links         []LinkedAccount `json:"links"`
-	NextPageToken *string         `json:"nextPageToken"`
+	Kind          *string         `json:"kind,omitempty"`
+	Links         []LinkedAccount `json:"links,omitempty"`
+	NextPageToken *string         `json:"nextPageToken,omitempty"`
 }

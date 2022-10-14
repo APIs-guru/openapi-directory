@@ -1,5 +1,5 @@
 package shared
 
 type TableRowResult struct {
-	TableRowCellsResult []TableCellResult `json:"TableRowCellsResult"`
+	TableRowCellsResult []TableCellResult `json:"TableRowCellsResult,omitempty"`
 }

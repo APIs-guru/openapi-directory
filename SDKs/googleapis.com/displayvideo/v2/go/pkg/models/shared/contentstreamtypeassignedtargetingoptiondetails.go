@@ -9,6 +9,6 @@ const (
 )
 
 type ContentStreamTypeAssignedTargetingOptionDetails struct {
-	ContentStreamType *ContentStreamTypeAssignedTargetingOptionDetailsContentStreamTypeEnum `json:"contentStreamType"`
-	TargetingOptionID *string                                                               `json:"targetingOptionId"`
+	ContentStreamType *ContentStreamTypeAssignedTargetingOptionDetailsContentStreamTypeEnum `json:"contentStreamType,omitempty"`
+	TargetingOptionID *string                                                               `json:"targetingOptionId,omitempty"`
 }

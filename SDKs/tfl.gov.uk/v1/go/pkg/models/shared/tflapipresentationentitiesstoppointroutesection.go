@@ -5,16 +5,16 @@ import (
 )
 
 type TflAPIPresentationEntitiesStopPointRouteSection struct {
-	DestinationName        *string    `json:"destinationName"`
-	Direction              *string    `json:"direction"`
-	IsActive               *bool      `json:"isActive"`
-	LineID                 *string    `json:"lineId"`
-	LineString             *string    `json:"lineString"`
-	Mode                   *string    `json:"mode"`
-	NaptanID               *string    `json:"naptanId"`
-	RouteSectionName       *string    `json:"routeSectionName"`
-	ServiceType            *string    `json:"serviceType"`
-	ValidFrom              *time.Time `json:"validFrom"`
-	ValidTo                *time.Time `json:"validTo"`
-	VehicleDestinationText *string    `json:"vehicleDestinationText"`
+	DestinationName        *string    `json:"destinationName,omitempty"`
+	Direction              *string    `json:"direction,omitempty"`
+	IsActive               *bool      `json:"isActive,omitempty"`
+	LineID                 *string    `json:"lineId,omitempty"`
+	LineString             *string    `json:"lineString,omitempty"`
+	Mode                   *string    `json:"mode,omitempty"`
+	NaptanID               *string    `json:"naptanId,omitempty"`
+	RouteSectionName       *string    `json:"routeSectionName,omitempty"`
+	ServiceType            *string    `json:"serviceType,omitempty"`
+	ValidFrom              *time.Time `json:"validFrom,omitempty"`
+	ValidTo                *time.Time `json:"validTo,omitempty"`
+	VehicleDestinationText *string    `json:"vehicleDestinationText,omitempty"`
 }

@@ -1,8 +1,8 @@
 package shared
 
 type DataValidationRule struct {
-	Condition    *BooleanCondition `json:"condition"`
-	InputMessage *string           `json:"inputMessage"`
-	ShowCustomUI *bool             `json:"showCustomUi"`
-	Strict       *bool             `json:"strict"`
+	Condition    *BooleanCondition `json:"condition,omitempty"`
+	InputMessage *string           `json:"inputMessage,omitempty"`
+	ShowCustomUI *bool             `json:"showCustomUi,omitempty"`
+	Strict       *bool             `json:"strict,omitempty"`
 }

@@ -12,21 +12,21 @@ const (
 )
 
 type TransferConfig struct {
-	DataRefreshWindowDays   *int32                   `json:"dataRefreshWindowDays"`
-	DataSourceID            *string                  `json:"dataSourceId"`
-	DatasetRegion           *string                  `json:"datasetRegion"`
-	DestinationDatasetID    *string                  `json:"destinationDatasetId"`
-	Disabled                *bool                    `json:"disabled"`
-	DisplayName             *string                  `json:"displayName"`
-	EmailPreferences        *EmailPreferences        `json:"emailPreferences"`
-	Name                    *string                  `json:"name"`
-	NextRunTime             *string                  `json:"nextRunTime"`
-	NotificationPubsubTopic *string                  `json:"notificationPubsubTopic"`
-	OwnerInfo               *UserInfo                `json:"ownerInfo"`
-	Params                  map[string]interface{}   `json:"params"`
-	Schedule                *string                  `json:"schedule"`
-	ScheduleOptions         *ScheduleOptions         `json:"scheduleOptions"`
-	State                   *TransferConfigStateEnum `json:"state"`
-	UpdateTime              *string                  `json:"updateTime"`
-	UserID                  *string                  `json:"userId"`
+	DataRefreshWindowDays   *int32                   `json:"dataRefreshWindowDays,omitempty"`
+	DataSourceID            *string                  `json:"dataSourceId,omitempty"`
+	DatasetRegion           *string                  `json:"datasetRegion,omitempty"`
+	DestinationDatasetID    *string                  `json:"destinationDatasetId,omitempty"`
+	Disabled                *bool                    `json:"disabled,omitempty"`
+	DisplayName             *string                  `json:"displayName,omitempty"`
+	EmailPreferences        *EmailPreferences        `json:"emailPreferences,omitempty"`
+	Name                    *string                  `json:"name,omitempty"`
+	NextRunTime             *string                  `json:"nextRunTime,omitempty"`
+	NotificationPubsubTopic *string                  `json:"notificationPubsubTopic,omitempty"`
+	OwnerInfo               *UserInfo                `json:"ownerInfo,omitempty"`
+	Params                  map[string]interface{}   `json:"params,omitempty"`
+	Schedule                *string                  `json:"schedule,omitempty"`
+	ScheduleOptions         *ScheduleOptions         `json:"scheduleOptions,omitempty"`
+	State                   *TransferConfigStateEnum `json:"state,omitempty"`
+	UpdateTime              *string                  `json:"updateTime,omitempty"`
+	UserID                  *string                  `json:"userId,omitempty"`
 }

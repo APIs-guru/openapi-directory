@@ -82,7 +82,7 @@ type GetVolumes200ApplicationJSONVolumes struct {
 }
 
 type GetVolumes200ApplicationJSON struct {
-	Meta    *GetVolumes200ApplicationJSONMeta     `json:"meta"`
+	Meta    *GetVolumes200ApplicationJSONMeta     `json:"meta,omitempty"`
 	Volumes []GetVolumes200ApplicationJSONVolumes `json:"volumes"`
 }
 

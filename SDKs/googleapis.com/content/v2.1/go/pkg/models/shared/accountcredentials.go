@@ -9,7 +9,7 @@ const (
 )
 
 type AccountCredentials struct {
-	AccessToken *string                        `json:"accessToken"`
-	ExpiresIn   *string                        `json:"expiresIn"`
-	Purpose     *AccountCredentialsPurposeEnum `json:"purpose"`
+	AccessToken *string                        `json:"accessToken,omitempty"`
+	ExpiresIn   *string                        `json:"expiresIn,omitempty"`
+	Purpose     *AccountCredentialsPurposeEnum `json:"purpose,omitempty"`
 }

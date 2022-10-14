@@ -5,10 +5,10 @@ import (
 )
 
 type OutgoingCertificate struct {
-	CertificateArn  *string    `json:"certificateArn"`
-	CertificateID   *string    `json:"certificateId"`
-	CreationDate    *time.Time `json:"creationDate"`
-	TransferDate    *time.Time `json:"transferDate"`
-	TransferMessage *string    `json:"transferMessage"`
-	TransferredTo   *string    `json:"transferredTo"`
+	CertificateArn  *string    `json:"certificateArn,omitempty"`
+	CertificateID   *string    `json:"certificateId,omitempty"`
+	CreationDate    *time.Time `json:"creationDate,omitempty"`
+	TransferDate    *time.Time `json:"transferDate,omitempty"`
+	TransferMessage *string    `json:"transferMessage,omitempty"`
+	TransferredTo   *string    `json:"transferredTo,omitempty"`
 }

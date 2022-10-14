@@ -1,5 +1,5 @@
 package shared
 
 type CreatePatchBaselineResult struct {
-	BaselineID *string `json:"BaselineId"`
+	BaselineID *string `json:"BaselineId,omitempty"`
 }

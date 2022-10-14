@@ -9,6 +9,6 @@ const (
 )
 
 type WebhookConfig struct {
-	Secret *string                 `json:"secret"`
-	State  *WebhookConfigStateEnum `json:"state"`
+	Secret *string                 `json:"secret,omitempty"`
+	State  *WebhookConfigStateEnum `json:"state,omitempty"`
 }

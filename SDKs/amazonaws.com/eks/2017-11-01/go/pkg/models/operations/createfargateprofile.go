@@ -19,12 +19,12 @@ type CreateFargateProfileHeaders struct {
 }
 
 type CreateFargateProfileRequestBody struct {
-	ClientRequestToken  *string                         `json:"clientRequestToken"`
+	ClientRequestToken  *string                         `json:"clientRequestToken,omitempty"`
 	FargateProfileName  string                          `json:"fargateProfileName"`
 	PodExecutionRoleArn string                          `json:"podExecutionRoleArn"`
-	Selectors           []shared.FargateProfileSelector `json:"selectors"`
-	Subnets             []string                        `json:"subnets"`
-	Tags                map[string]string               `json:"tags"`
+	Selectors           []shared.FargateProfileSelector `json:"selectors,omitempty"`
+	Subnets             []string                        `json:"subnets,omitempty"`
+	Tags                map[string]string               `json:"tags,omitempty"`
 }
 
 type CreateFargateProfileRequest struct {

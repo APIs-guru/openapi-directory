@@ -1,9 +1,9 @@
 package shared
 
 type EncryptRequest struct {
-	EncryptionAlgorithm *EncryptionAlgorithmSpecEnum `json:"EncryptionAlgorithm"`
-	EncryptionContext   map[string]string            `json:"EncryptionContext"`
-	GrantTokens         []string                     `json:"GrantTokens"`
+	EncryptionAlgorithm *EncryptionAlgorithmSpecEnum `json:"EncryptionAlgorithm,omitempty"`
+	EncryptionContext   map[string]string            `json:"EncryptionContext,omitempty"`
+	GrantTokens         []string                     `json:"GrantTokens,omitempty"`
 	KeyID               string                       `json:"KeyId"`
 	Plaintext           string                       `json:"Plaintext"`
 }

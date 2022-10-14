@@ -1,5 +1,5 @@
 package shared
 
 type CreateHomeRegionControlResult struct {
-	HomeRegionControl *HomeRegionControl `json:"HomeRegionControl"`
+	HomeRegionControl *HomeRegionControl `json:"HomeRegionControl,omitempty"`
 }

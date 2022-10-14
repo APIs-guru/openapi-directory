@@ -1,8 +1,8 @@
 package shared
 
 type RetrieveDistributionLinksResponseMeta struct {
-	HTTPStatus *string `json:"httpStatus"`
-	RequestID  *string `json:"requestId"`
+	HTTPStatus *string `json:"httpStatus,omitempty"`
+	RequestID  *string `json:"requestId,omitempty"`
 }
 
 type RetrieveDistributionLinksResponseResultElements struct {
@@ -20,11 +20,11 @@ type RetrieveDistributionLinksResponseResultElements struct {
 }
 
 type RetrieveDistributionLinksResponseResult struct {
-	Elements []RetrieveDistributionLinksResponseResultElements `json:"elements"`
-	NextPage *interface{}                                      `json:"nextPage"`
+	Elements []RetrieveDistributionLinksResponseResultElements `json:"elements,omitempty"`
+	NextPage *interface{}                                      `json:"nextPage,omitempty"`
 }
 
 type RetrieveDistributionLinksResponse struct {
-	Meta   *RetrieveDistributionLinksResponseMeta   `json:"meta"`
-	Result *RetrieveDistributionLinksResponseResult `json:"result"`
+	Meta   *RetrieveDistributionLinksResponseMeta   `json:"meta,omitempty"`
+	Result *RetrieveDistributionLinksResponseResult `json:"result,omitempty"`
 }

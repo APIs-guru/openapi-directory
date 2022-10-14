@@ -1,5 +1,5 @@
 package shared
 
 type ValidationData struct {
-	Assets []Asset `json:"Assets"`
+	Assets []Asset `json:"Assets,omitempty"`
 }

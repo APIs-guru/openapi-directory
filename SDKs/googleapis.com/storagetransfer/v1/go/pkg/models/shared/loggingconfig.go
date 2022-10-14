@@ -18,7 +18,7 @@ const (
 )
 
 type LoggingConfig struct {
-	EnableOnpremGcsTransferLogs *bool                              `json:"enableOnpremGcsTransferLogs"`
-	LogActionStates             []LoggingConfigLogActionStatesEnum `json:"logActionStates"`
-	LogActions                  []LoggingConfigLogActionsEnum      `json:"logActions"`
+	EnableOnpremGcsTransferLogs *bool                              `json:"enableOnpremGcsTransferLogs,omitempty"`
+	LogActionStates             []LoggingConfigLogActionStatesEnum `json:"logActionStates,omitempty"`
+	LogActions                  []LoggingConfigLogActionsEnum      `json:"logActions,omitempty"`
 }

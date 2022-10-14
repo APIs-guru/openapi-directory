@@ -10,8 +10,8 @@ type PostLkeClusterPoolsPathParams struct {
 
 type PostLkeClusterPoolsRequestBody struct {
 	Count int64          `json:"count"`
-	Disks []shared.Items `json:"disks"`
-	Tags  []string       `json:"tags"`
+	Disks []shared.Items `json:"disks,omitempty"`
+	Tags  []string       `json:"tags,omitempty"`
 	Type  string         `json:"type"`
 }
 
@@ -35,7 +35,7 @@ type PostLkeClusterPoolsRequest struct {
 }
 
 type PostLkeClusterPoolsDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type PostLkeClusterPoolsResponse struct {

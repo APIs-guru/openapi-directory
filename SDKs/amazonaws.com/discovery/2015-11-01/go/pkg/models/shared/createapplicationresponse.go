@@ -1,5 +1,5 @@
 package shared
 
 type CreateApplicationResponse struct {
-	ConfigurationID *string `json:"configurationId"`
+	ConfigurationID *string `json:"configurationId,omitempty"`
 }

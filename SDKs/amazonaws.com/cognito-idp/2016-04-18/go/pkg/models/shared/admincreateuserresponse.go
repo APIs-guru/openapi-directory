@@ -1,5 +1,5 @@
 package shared
 
 type AdminCreateUserResponse struct {
-	User *UserType `json:"User"`
+	User *UserType `json:"User,omitempty"`
 }

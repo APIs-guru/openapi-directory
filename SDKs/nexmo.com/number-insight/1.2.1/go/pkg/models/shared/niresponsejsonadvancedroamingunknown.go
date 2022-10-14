@@ -40,25 +40,25 @@ const (
 )
 
 type NiResponseJSONAdvancedRoamingUnknown struct {
-	CallerIdentity            *NiCallerIdentity                                    `json:"caller_identity"`
+	CallerIdentity            *NiCallerIdentity                                    `json:"caller_identity,omitempty"`
 	CountryCode               string                                               `json:"country_code"`
 	CountryCodeIso3           string                                               `json:"country_code_iso3"`
 	CountryName               string                                               `json:"country_name"`
 	CountryPrefix             string                                               `json:"country_prefix"`
-	CurrentCarrier            *NiCurrentCarrierProperties                          `json:"current_carrier"`
+	CurrentCarrier            *NiCurrentCarrierProperties                          `json:"current_carrier,omitempty"`
 	InternationalFormatNumber string                                               `json:"international_format_number"`
-	LookupOutcome             *int64                                               `json:"lookup_outcome"`
-	LookupOutcomeMessage      *string                                              `json:"lookup_outcome_message"`
+	LookupOutcome             *int64                                               `json:"lookup_outcome,omitempty"`
+	LookupOutcomeMessage      *string                                              `json:"lookup_outcome_message,omitempty"`
 	NationalFormatNumber      string                                               `json:"national_format_number"`
-	OriginalCarrier           *NiInitialCarrierProperties                          `json:"original_carrier"`
-	Ported                    *NiResponseJSONAdvancedRoamingUnknownPortedEnum      `json:"ported"`
-	Reachable                 *NiResponseJSONAdvancedRoamingUnknownReachableEnum   `json:"reachable"`
-	RefundPrice               *string                                              `json:"refund_price"`
-	RemainingBalance          *string                                              `json:"remaining_balance"`
+	OriginalCarrier           *NiInitialCarrierProperties                          `json:"original_carrier,omitempty"`
+	Ported                    *NiResponseJSONAdvancedRoamingUnknownPortedEnum      `json:"ported,omitempty"`
+	Reachable                 *NiResponseJSONAdvancedRoamingUnknownReachableEnum   `json:"reachable,omitempty"`
+	RefundPrice               *string                                              `json:"refund_price,omitempty"`
+	RemainingBalance          *string                                              `json:"remaining_balance,omitempty"`
 	RequestID                 string                                               `json:"request_id"`
-	RequestPrice              *string                                              `json:"request_price"`
-	Roaming                   *NiResponseJSONAdvancedRoamingUnknownRoamingEnum     `json:"roaming"`
+	RequestPrice              *string                                              `json:"request_price,omitempty"`
+	Roaming                   *NiResponseJSONAdvancedRoamingUnknownRoamingEnum     `json:"roaming,omitempty"`
 	Status                    int64                                                `json:"status"`
 	StatusMessage             string                                               `json:"status_message"`
-	ValidNumber               *NiResponseJSONAdvancedRoamingUnknownValidNumberEnum `json:"valid_number"`
+	ValidNumber               *NiResponseJSONAdvancedRoamingUnknownValidNumberEnum `json:"valid_number,omitempty"`
 }

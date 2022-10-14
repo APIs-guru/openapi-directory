@@ -1,5 +1,5 @@
 package shared
 
 type GoogleCloudChannelV1CheckCloudIdentityAccountsExistResponse struct {
-	CloudIdentityAccounts []GoogleCloudChannelV1CloudIdentityCustomerAccount `json:"cloudIdentityAccounts"`
+	CloudIdentityAccounts []GoogleCloudChannelV1CloudIdentityCustomerAccount `json:"cloudIdentityAccounts,omitempty"`
 }

@@ -22,8 +22,8 @@ type UpdateRecordsHeaders struct {
 }
 
 type UpdateRecordsRequestBody struct {
-	DeviceID         *string              `json:"DeviceId"`
-	RecordPatches    []shared.RecordPatch `json:"RecordPatches"`
+	DeviceID         *string              `json:"DeviceId,omitempty"`
+	RecordPatches    []shared.RecordPatch `json:"RecordPatches,omitempty"`
 	SyncSessionToken string               `json:"SyncSessionToken"`
 }
 

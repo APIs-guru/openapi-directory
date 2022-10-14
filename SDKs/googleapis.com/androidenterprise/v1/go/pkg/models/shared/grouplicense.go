@@ -23,10 +23,10 @@ const (
 )
 
 type GroupLicense struct {
-	AcquisitionKind *GroupLicenseAcquisitionKindEnum `json:"acquisitionKind"`
-	Approval        *GroupLicenseApprovalEnum        `json:"approval"`
-	NumProvisioned  *int32                           `json:"numProvisioned"`
-	NumPurchased    *int32                           `json:"numPurchased"`
-	Permissions     *GroupLicensePermissionsEnum     `json:"permissions"`
-	ProductID       *string                          `json:"productId"`
+	AcquisitionKind *GroupLicenseAcquisitionKindEnum `json:"acquisitionKind,omitempty"`
+	Approval        *GroupLicenseApprovalEnum        `json:"approval,omitempty"`
+	NumProvisioned  *int32                           `json:"numProvisioned,omitempty"`
+	NumPurchased    *int32                           `json:"numPurchased,omitempty"`
+	Permissions     *GroupLicensePermissionsEnum     `json:"permissions,omitempty"`
+	ProductID       *string                          `json:"productId,omitempty"`
 }

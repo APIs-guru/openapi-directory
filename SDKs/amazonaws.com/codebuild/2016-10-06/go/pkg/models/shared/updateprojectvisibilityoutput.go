@@ -1,7 +1,7 @@
 package shared
 
 type UpdateProjectVisibilityOutput struct {
-	ProjectArn         *string                    `json:"projectArn"`
-	ProjectVisibility  *ProjectVisibilityTypeEnum `json:"projectVisibility"`
-	PublicProjectAlias *string                    `json:"publicProjectAlias"`
+	ProjectArn         *string                    `json:"projectArn,omitempty"`
+	ProjectVisibility  *ProjectVisibilityTypeEnum `json:"projectVisibility,omitempty"`
+	PublicProjectAlias *string                    `json:"publicProjectAlias,omitempty"`
 }

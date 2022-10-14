@@ -5,15 +5,15 @@ type CreateOrganizationActionBatchPathParams struct {
 }
 
 type CreateOrganizationActionBatchRequestBodyActions struct {
-	Body      map[string]interface{} `json:"body"`
+	Body      map[string]interface{} `json:"body,omitempty"`
 	Operation string                 `json:"operation"`
 	Resource  string                 `json:"resource"`
 }
 
 type CreateOrganizationActionBatchRequestBody struct {
 	Actions     []CreateOrganizationActionBatchRequestBodyActions `json:"actions"`
-	Confirmed   *bool                                             `json:"confirmed"`
-	Synchronous *bool                                             `json:"synchronous"`
+	Confirmed   *bool                                             `json:"confirmed,omitempty"`
+	Synchronous *bool                                             `json:"synchronous,omitempty"`
 }
 
 type CreateOrganizationActionBatchRequest struct {

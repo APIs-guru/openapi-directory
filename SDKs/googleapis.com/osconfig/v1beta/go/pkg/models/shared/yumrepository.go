@@ -1,8 +1,8 @@
 package shared
 
 type YumRepository struct {
-	BaseURL     *string  `json:"baseUrl"`
-	DisplayName *string  `json:"displayName"`
-	GpgKeys     []string `json:"gpgKeys"`
-	ID          *string  `json:"id"`
+	BaseURL     *string  `json:"baseUrl,omitempty"`
+	DisplayName *string  `json:"displayName,omitempty"`
+	GpgKeys     []string `json:"gpgKeys,omitempty"`
+	ID          *string  `json:"id,omitempty"`
 }

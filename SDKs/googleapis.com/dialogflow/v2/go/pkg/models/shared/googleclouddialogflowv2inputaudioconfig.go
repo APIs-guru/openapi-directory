@@ -23,14 +23,14 @@ const (
 )
 
 type GoogleCloudDialogflowV2InputAudioConfig struct {
-	AudioEncoding                  *GoogleCloudDialogflowV2InputAudioConfigAudioEncodingEnum `json:"audioEncoding"`
-	DisableNoSpeechRecognizedEvent *bool                                                     `json:"disableNoSpeechRecognizedEvent"`
-	EnableWordInfo                 *bool                                                     `json:"enableWordInfo"`
-	LanguageCode                   *string                                                   `json:"languageCode"`
-	Model                          *string                                                   `json:"model"`
-	ModelVariant                   *GoogleCloudDialogflowV2InputAudioConfigModelVariantEnum  `json:"modelVariant"`
-	PhraseHints                    []string                                                  `json:"phraseHints"`
-	SampleRateHertz                *int32                                                    `json:"sampleRateHertz"`
-	SingleUtterance                *bool                                                     `json:"singleUtterance"`
-	SpeechContexts                 []GoogleCloudDialogflowV2SpeechContext                    `json:"speechContexts"`
+	AudioEncoding                  *GoogleCloudDialogflowV2InputAudioConfigAudioEncodingEnum `json:"audioEncoding,omitempty"`
+	DisableNoSpeechRecognizedEvent *bool                                                     `json:"disableNoSpeechRecognizedEvent,omitempty"`
+	EnableWordInfo                 *bool                                                     `json:"enableWordInfo,omitempty"`
+	LanguageCode                   *string                                                   `json:"languageCode,omitempty"`
+	Model                          *string                                                   `json:"model,omitempty"`
+	ModelVariant                   *GoogleCloudDialogflowV2InputAudioConfigModelVariantEnum  `json:"modelVariant,omitempty"`
+	PhraseHints                    []string                                                  `json:"phraseHints,omitempty"`
+	SampleRateHertz                *int32                                                    `json:"sampleRateHertz,omitempty"`
+	SingleUtterance                *bool                                                     `json:"singleUtterance,omitempty"`
+	SpeechContexts                 []GoogleCloudDialogflowV2SpeechContext                    `json:"speechContexts,omitempty"`
 }

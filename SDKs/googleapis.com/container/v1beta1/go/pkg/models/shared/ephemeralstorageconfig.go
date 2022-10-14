@@ -1,5 +1,5 @@
 package shared
 
 type EphemeralStorageConfig struct {
-	LocalSsdCount *int32 `json:"localSsdCount"`
+	LocalSsdCount *int32 `json:"localSsdCount,omitempty"`
 }

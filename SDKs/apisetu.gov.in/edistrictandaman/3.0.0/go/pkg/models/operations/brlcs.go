@@ -15,8 +15,8 @@ const (
 )
 
 type BrlcsRequestBody struct {
-	CertificateParameters *BrlcsRequestBodyCertificateParameters `json:"certificateParameters"`
-	ConsentArtifact       *interface{}                           `json:"consentArtifact"`
+	CertificateParameters *BrlcsRequestBodyCertificateParameters `json:"certificateParameters,omitempty"`
+	ConsentArtifact       *interface{}                           `json:"consentArtifact,omitempty"`
 	Format                BrlcsRequestBodyFormatEnum             `json:"format"`
 	TxnID                 string                                 `json:"txnId"`
 }
@@ -52,8 +52,8 @@ const (
 )
 
 type Brlcs400ApplicationJSON struct {
-	Error            *Brlcs400ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Brlcs400ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Brlcs400ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Brlcs400ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Brlcs401ApplicationJSONErrorEnum string
@@ -71,8 +71,8 @@ const (
 )
 
 type Brlcs401ApplicationJSON struct {
-	Error            *Brlcs401ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Brlcs401ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Brlcs401ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Brlcs401ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Brlcs404ApplicationJSONErrorEnum string
@@ -90,8 +90,8 @@ const (
 )
 
 type Brlcs404ApplicationJSON struct {
-	Error            *Brlcs404ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Brlcs404ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Brlcs404ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Brlcs404ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Brlcs500ApplicationJSONErrorEnum string
@@ -107,8 +107,8 @@ const (
 )
 
 type Brlcs500ApplicationJSON struct {
-	Error            *Brlcs500ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Brlcs500ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Brlcs500ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Brlcs500ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Brlcs502ApplicationJSONErrorEnum string
@@ -124,8 +124,8 @@ const (
 )
 
 type Brlcs502ApplicationJSON struct {
-	Error            *Brlcs502ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Brlcs502ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Brlcs502ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Brlcs502ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Brlcs503ApplicationJSONErrorEnum string
@@ -141,8 +141,8 @@ const (
 )
 
 type Brlcs503ApplicationJSON struct {
-	Error            *Brlcs503ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Brlcs503ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Brlcs503ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Brlcs503ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Brlcs504ApplicationJSONErrorEnum string
@@ -158,8 +158,8 @@ const (
 )
 
 type Brlcs504ApplicationJSON struct {
-	Error            *Brlcs504ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Brlcs504ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Brlcs504ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Brlcs504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type BrlcsResponse struct {

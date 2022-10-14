@@ -27,7 +27,7 @@ const (
 
 type AwsKinesisRulePostTarget struct {
 	Authentication interface{}                        `json:"authentication"`
-	Enveloped      *bool                              `json:"enveloped"`
+	Enveloped      *bool                              `json:"enveloped,omitempty"`
 	Format         AwsKinesisRulePostTargetFormatEnum `json:"format"`
 	PartitionKey   string                             `json:"partitionKey"`
 	Region         string                             `json:"region"`
@@ -38,6 +38,6 @@ type AwsKinesisRulePost struct {
 	RequestMode AwsKinesisRulePostRequestModeEnum `json:"requestMode"`
 	RuleType    AwsKinesisRulePostRuleTypeEnum    `json:"ruleType"`
 	Source      RuleSource                        `json:"source"`
-	Status      *AwsKinesisRulePostStatusEnum     `json:"status"`
+	Status      *AwsKinesisRulePostStatusEnum     `json:"status,omitempty"`
 	Target      AwsKinesisRulePostTarget          `json:"target"`
 }

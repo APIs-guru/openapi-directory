@@ -8,20 +8,20 @@ const (
 )
 
 type BillLineItem struct {
-	Code               *string                   `json:"code"`
-	Description        *string                   `json:"description"`
-	DiscountPercentage *float64                  `json:"discount_percentage"`
-	ID                 *string                   `json:"id"`
-	Item               *LinkedInvoiceItem        `json:"item"`
-	LedgerAccount      *LinkedLedgerAccount      `json:"ledger_account"`
-	LineNumber         *int64                    `json:"line_number"`
-	Quantity           *float64                  `json:"quantity"`
-	RowID              *string                   `json:"row_id"`
-	RowVersion         *string                   `json:"row_version"`
-	TaxAmount          *float64                  `json:"tax_amount"`
-	TaxRate            *LinkedTaxRate            `json:"tax_rate"`
-	TotalAmount        *float64                  `json:"total_amount"`
-	Type               *BillLineItemTypeTypeEnum `json:"type"`
-	UnitOfMeasure      *string                   `json:"unit_of_measure"`
-	UnitPrice          *float64                  `json:"unit_price"`
+	Code               *string                   `json:"code,omitempty"`
+	Description        *string                   `json:"description,omitempty"`
+	DiscountPercentage *float64                  `json:"discount_percentage,omitempty"`
+	ID                 *string                   `json:"id,omitempty"`
+	Item               *LinkedInvoiceItem        `json:"item,omitempty"`
+	LedgerAccount      *LinkedLedgerAccount      `json:"ledger_account,omitempty"`
+	LineNumber         *int64                    `json:"line_number,omitempty"`
+	Quantity           *float64                  `json:"quantity,omitempty"`
+	RowID              *string                   `json:"row_id,omitempty"`
+	RowVersion         *string                   `json:"row_version,omitempty"`
+	TaxAmount          *float64                  `json:"tax_amount,omitempty"`
+	TaxRate            *LinkedTaxRate            `json:"tax_rate,omitempty"`
+	TotalAmount        *float64                  `json:"total_amount,omitempty"`
+	Type               *BillLineItemTypeTypeEnum `json:"type,omitempty"`
+	UnitOfMeasure      *string                   `json:"unit_of_measure,omitempty"`
+	UnitPrice          *float64                  `json:"unit_price,omitempty"`
 }

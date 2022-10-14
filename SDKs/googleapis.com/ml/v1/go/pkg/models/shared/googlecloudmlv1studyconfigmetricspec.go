@@ -9,6 +9,6 @@ const (
 )
 
 type GoogleCloudMlV1StudyConfigMetricSpec struct {
-	Goal   *GoogleCloudMlV1StudyConfigMetricSpecGoalEnum `json:"goal"`
-	Metric *string                                       `json:"metric"`
+	Goal   *GoogleCloudMlV1StudyConfigMetricSpecGoalEnum `json:"goal,omitempty"`
+	Metric *string                                       `json:"metric,omitempty"`
 }

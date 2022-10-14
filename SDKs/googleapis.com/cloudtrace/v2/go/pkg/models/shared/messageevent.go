@@ -9,8 +9,8 @@ const (
 )
 
 type MessageEvent struct {
-	CompressedSizeBytes   *string               `json:"compressedSizeBytes"`
-	ID                    *string               `json:"id"`
-	Type                  *MessageEventTypeEnum `json:"type"`
-	UncompressedSizeBytes *string               `json:"uncompressedSizeBytes"`
+	CompressedSizeBytes   *string               `json:"compressedSizeBytes,omitempty"`
+	ID                    *string               `json:"id,omitempty"`
+	Type                  *MessageEventTypeEnum `json:"type,omitempty"`
+	UncompressedSizeBytes *string               `json:"uncompressedSizeBytes,omitempty"`
 }

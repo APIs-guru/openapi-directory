@@ -1,33 +1,33 @@
 package shared
 
 type ArticleWithCountTypeMediaMediaMetadata struct {
-	Format *string `json:"format"`
-	Height *int64  `json:"height"`
-	URL    *string `json:"url"`
-	Width  *int64  `json:"width"`
+	Format *string `json:"format,omitempty"`
+	Height *int64  `json:"height,omitempty"`
+	URL    *string `json:"url,omitempty"`
+	Width  *int64  `json:"width,omitempty"`
 }
 
 type ArticleWithCountTypeMedia struct {
-	Caption       *string                                 `json:"caption"`
-	Copyright     *string                                 `json:"copyright"`
-	MediaMetadata *ArticleWithCountTypeMediaMediaMetadata `json:"media-metadata"`
-	Subtype       *string                                 `json:"subtype"`
-	Type          *string                                 `json:"type"`
+	Caption       *string                                 `json:"caption,omitempty"`
+	Copyright     *string                                 `json:"copyright,omitempty"`
+	MediaMetadata *ArticleWithCountTypeMediaMediaMetadata `json:"media-metadata,omitempty"`
+	Subtype       *string                                 `json:"subtype,omitempty"`
+	Type          *string                                 `json:"type,omitempty"`
 }
 
 type ArticleWithCountType struct {
-	Abstract      *string                     `json:"abstract"`
-	Byline        *string                     `json:"byline"`
-	Column        *string                     `json:"column"`
-	CountType     *string                     `json:"count_type"`
-	DesFacet      *interface{}                `json:"des_facet"`
-	GeoFacet      *interface{}                `json:"geo_facet"`
-	Media         []ArticleWithCountTypeMedia `json:"media"`
-	OrgFacet      []interface{}               `json:"org_facet"`
-	PerFacet      []interface{}               `json:"per_facet"`
-	PublishedDate *string                     `json:"published_date"`
-	Section       *string                     `json:"section"`
-	Source        *string                     `json:"source"`
-	Title         *string                     `json:"title"`
-	URL           *string                     `json:"url"`
+	Abstract      *string                     `json:"abstract,omitempty"`
+	Byline        *string                     `json:"byline,omitempty"`
+	Column        *string                     `json:"column,omitempty"`
+	CountType     *string                     `json:"count_type,omitempty"`
+	DesFacet      *interface{}                `json:"des_facet,omitempty"`
+	GeoFacet      *interface{}                `json:"geo_facet,omitempty"`
+	Media         []ArticleWithCountTypeMedia `json:"media,omitempty"`
+	OrgFacet      []interface{}               `json:"org_facet,omitempty"`
+	PerFacet      []interface{}               `json:"per_facet,omitempty"`
+	PublishedDate *string                     `json:"published_date,omitempty"`
+	Section       *string                     `json:"section,omitempty"`
+	Source        *string                     `json:"source,omitempty"`
+	Title         *string                     `json:"title,omitempty"`
+	URL           *string                     `json:"url,omitempty"`
 }

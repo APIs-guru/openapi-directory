@@ -1,29 +1,29 @@
 package shared
 
 type MessageConversation struct {
-	ID *string `json:"id"`
+	ID *string `json:"id,omitempty"`
 }
 
 type MessageMedia struct {
-	Filename *string `json:"filename"`
-	Type     *string `json:"type"`
-	URL      *string `json:"url"`
+	Filename *string `json:"filename,omitempty"`
+	Type     *string `json:"type,omitempty"`
+	URL      *string `json:"url,omitempty"`
 }
 
 type Message struct {
-	Contact      *ContactIdentifiers  `json:"contact"`
-	Conversation *MessageConversation `json:"conversation"`
-	Created      *Updated             `json:"created"`
-	Error        *Error               `json:"error"`
-	ID           *string              `json:"id"`
-	Media        []MessageMedia       `json:"media"`
-	Message      *string              `json:"message"`
-	Outgoing     *bool                `json:"outgoing"`
-	PhoneNumber  *string              `json:"phoneNumber"`
-	Price        *float64             `json:"price"`
-	Read         *bool                `json:"read"`
-	Segments     *float64             `json:"segments"`
-	Status       *string              `json:"status"`
-	Template     *string              `json:"template"`
-	Updated      *Updated             `json:"updated"`
+	Contact      *ContactIdentifiers  `json:"contact,omitempty"`
+	Conversation *MessageConversation `json:"conversation,omitempty"`
+	Created      *Updated             `json:"created,omitempty"`
+	Error        *Error               `json:"error,omitempty"`
+	ID           *string              `json:"id,omitempty"`
+	Media        []MessageMedia       `json:"media,omitempty"`
+	Message      *string              `json:"message,omitempty"`
+	Outgoing     *bool                `json:"outgoing,omitempty"`
+	PhoneNumber  *string              `json:"phoneNumber,omitempty"`
+	Price        *float64             `json:"price,omitempty"`
+	Read         *bool                `json:"read,omitempty"`
+	Segments     *float64             `json:"segments,omitempty"`
+	Status       *string              `json:"status,omitempty"`
+	Template     *string              `json:"template,omitempty"`
+	Updated      *Updated             `json:"updated,omitempty"`
 }

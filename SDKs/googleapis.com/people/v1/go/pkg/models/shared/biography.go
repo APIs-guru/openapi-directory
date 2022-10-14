@@ -9,7 +9,7 @@ const (
 )
 
 type Biography struct {
-	ContentType *BiographyContentTypeEnum `json:"contentType"`
-	Metadata    *FieldMetadata            `json:"metadata"`
-	Value       *string                   `json:"value"`
+	ContentType *BiographyContentTypeEnum `json:"contentType,omitempty"`
+	Metadata    *FieldMetadata            `json:"metadata,omitempty"`
+	Value       *string                   `json:"value,omitempty"`
 }

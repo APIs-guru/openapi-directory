@@ -1,9 +1,9 @@
 package shared
 
 type AutoScalingSettingsDescription struct {
-	AutoScalingDisabled *bool                          `json:"AutoScalingDisabled"`
-	AutoScalingRoleArn  *string                        `json:"AutoScalingRoleArn"`
-	MaximumUnits        *int64                         `json:"MaximumUnits"`
-	MinimumUnits        *int64                         `json:"MinimumUnits"`
-	ScalingPolicies     []AutoScalingPolicyDescription `json:"ScalingPolicies"`
+	AutoScalingDisabled *bool                          `json:"AutoScalingDisabled,omitempty"`
+	AutoScalingRoleArn  *string                        `json:"AutoScalingRoleArn,omitempty"`
+	MaximumUnits        *int64                         `json:"MaximumUnits,omitempty"`
+	MinimumUnits        *int64                         `json:"MinimumUnits,omitempty"`
+	ScalingPolicies     []AutoScalingPolicyDescription `json:"ScalingPolicies,omitempty"`
 }

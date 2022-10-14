@@ -106,18 +106,18 @@ const (
 )
 
 type IntegralAdScience struct {
-	CustomSegmentID               []string                                            `json:"customSegmentId"`
-	DisplayViewability            *IntegralAdScienceDisplayViewabilityEnum            `json:"displayViewability"`
-	ExcludeUnrateable             *bool                                               `json:"excludeUnrateable"`
-	ExcludedAdFraudRisk           *IntegralAdScienceExcludedAdFraudRiskEnum           `json:"excludedAdFraudRisk"`
-	ExcludedAdultRisk             *IntegralAdScienceExcludedAdultRiskEnum             `json:"excludedAdultRisk"`
-	ExcludedAlcoholRisk           *IntegralAdScienceExcludedAlcoholRiskEnum           `json:"excludedAlcoholRisk"`
-	ExcludedDrugsRisk             *IntegralAdScienceExcludedDrugsRiskEnum             `json:"excludedDrugsRisk"`
-	ExcludedGamblingRisk          *IntegralAdScienceExcludedGamblingRiskEnum          `json:"excludedGamblingRisk"`
-	ExcludedHateSpeechRisk        *IntegralAdScienceExcludedHateSpeechRiskEnum        `json:"excludedHateSpeechRisk"`
-	ExcludedIllegalDownloadsRisk  *IntegralAdScienceExcludedIllegalDownloadsRiskEnum  `json:"excludedIllegalDownloadsRisk"`
-	ExcludedOffensiveLanguageRisk *IntegralAdScienceExcludedOffensiveLanguageRiskEnum `json:"excludedOffensiveLanguageRisk"`
-	ExcludedViolenceRisk          *IntegralAdScienceExcludedViolenceRiskEnum          `json:"excludedViolenceRisk"`
-	TraqScoreOption               *IntegralAdScienceTraqScoreOptionEnum               `json:"traqScoreOption"`
-	VideoViewability              *IntegralAdScienceVideoViewabilityEnum              `json:"videoViewability"`
+	CustomSegmentID               []string                                            `json:"customSegmentId,omitempty"`
+	DisplayViewability            *IntegralAdScienceDisplayViewabilityEnum            `json:"displayViewability,omitempty"`
+	ExcludeUnrateable             *bool                                               `json:"excludeUnrateable,omitempty"`
+	ExcludedAdFraudRisk           *IntegralAdScienceExcludedAdFraudRiskEnum           `json:"excludedAdFraudRisk,omitempty"`
+	ExcludedAdultRisk             *IntegralAdScienceExcludedAdultRiskEnum             `json:"excludedAdultRisk,omitempty"`
+	ExcludedAlcoholRisk           *IntegralAdScienceExcludedAlcoholRiskEnum           `json:"excludedAlcoholRisk,omitempty"`
+	ExcludedDrugsRisk             *IntegralAdScienceExcludedDrugsRiskEnum             `json:"excludedDrugsRisk,omitempty"`
+	ExcludedGamblingRisk          *IntegralAdScienceExcludedGamblingRiskEnum          `json:"excludedGamblingRisk,omitempty"`
+	ExcludedHateSpeechRisk        *IntegralAdScienceExcludedHateSpeechRiskEnum        `json:"excludedHateSpeechRisk,omitempty"`
+	ExcludedIllegalDownloadsRisk  *IntegralAdScienceExcludedIllegalDownloadsRiskEnum  `json:"excludedIllegalDownloadsRisk,omitempty"`
+	ExcludedOffensiveLanguageRisk *IntegralAdScienceExcludedOffensiveLanguageRiskEnum `json:"excludedOffensiveLanguageRisk,omitempty"`
+	ExcludedViolenceRisk          *IntegralAdScienceExcludedViolenceRiskEnum          `json:"excludedViolenceRisk,omitempty"`
+	TraqScoreOption               *IntegralAdScienceTraqScoreOptionEnum               `json:"traqScoreOption,omitempty"`
+	VideoViewability              *IntegralAdScienceVideoViewabilityEnum              `json:"videoViewability,omitempty"`
 }

@@ -5,11 +5,11 @@ import (
 )
 
 type EmailStatementDto struct {
-	BccAddresses   []string   `json:"bccAddresses"`
-	CustomerID     *int64     `json:"customerId"`
-	FromPeriod     *time.Time `json:"fromPeriod"`
-	MessageBody    *string    `json:"messageBody"`
-	MinimumBalance *float64   `json:"minimumBalance"`
-	ToAddress      *string    `json:"toAddress"`
-	ToPeriod       *time.Time `json:"toPeriod"`
+	BccAddresses   []string   `json:"bccAddresses,omitempty"`
+	CustomerID     *int64     `json:"customerId,omitempty"`
+	FromPeriod     *time.Time `json:"fromPeriod,omitempty"`
+	MessageBody    *string    `json:"messageBody,omitempty"`
+	MinimumBalance *float64   `json:"minimumBalance,omitempty"`
+	ToAddress      *string    `json:"toAddress,omitempty"`
+	ToPeriod       *time.Time `json:"toPeriod,omitempty"`
 }

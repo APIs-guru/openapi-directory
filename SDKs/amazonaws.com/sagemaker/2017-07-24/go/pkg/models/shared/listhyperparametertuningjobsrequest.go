@@ -5,14 +5,14 @@ import (
 )
 
 type ListHyperParameterTuningJobsRequest struct {
-	CreationTimeAfter      *time.Time                                `json:"CreationTimeAfter"`
-	CreationTimeBefore     *time.Time                                `json:"CreationTimeBefore"`
-	LastModifiedTimeAfter  *time.Time                                `json:"LastModifiedTimeAfter"`
-	LastModifiedTimeBefore *time.Time                                `json:"LastModifiedTimeBefore"`
-	MaxResults             *int64                                    `json:"MaxResults"`
-	NameContains           *string                                   `json:"NameContains"`
-	NextToken              *string                                   `json:"NextToken"`
-	SortBy                 *HyperParameterTuningJobSortByOptionsEnum `json:"SortBy"`
-	SortOrder              *SortOrderEnum                            `json:"SortOrder"`
-	StatusEquals           *HyperParameterTuningJobStatusEnum        `json:"StatusEquals"`
+	CreationTimeAfter      *time.Time                                `json:"CreationTimeAfter,omitempty"`
+	CreationTimeBefore     *time.Time                                `json:"CreationTimeBefore,omitempty"`
+	LastModifiedTimeAfter  *time.Time                                `json:"LastModifiedTimeAfter,omitempty"`
+	LastModifiedTimeBefore *time.Time                                `json:"LastModifiedTimeBefore,omitempty"`
+	MaxResults             *int64                                    `json:"MaxResults,omitempty"`
+	NameContains           *string                                   `json:"NameContains,omitempty"`
+	NextToken              *string                                   `json:"NextToken,omitempty"`
+	SortBy                 *HyperParameterTuningJobSortByOptionsEnum `json:"SortBy,omitempty"`
+	SortOrder              *SortOrderEnum                            `json:"SortOrder,omitempty"`
+	StatusEquals           *HyperParameterTuningJobStatusEnum        `json:"StatusEquals,omitempty"`
 }

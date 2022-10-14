@@ -15,7 +15,7 @@ type UpdateDeviceStateHeaders struct {
 }
 
 type UpdateDeviceStateRequestBody struct {
-	Enabled *bool `json:"enabled"`
+	Enabled *bool `json:"enabled,omitempty"`
 }
 
 type UpdateDeviceStateRequest struct {

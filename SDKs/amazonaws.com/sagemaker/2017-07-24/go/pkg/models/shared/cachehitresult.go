@@ -1,5 +1,5 @@
 package shared
 
 type CacheHitResult struct {
-	SourcePipelineExecutionArn *string `json:"SourcePipelineExecutionArn"`
+	SourcePipelineExecutionArn *string `json:"SourcePipelineExecutionArn,omitempty"`
 }

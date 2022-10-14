@@ -5,18 +5,18 @@ import (
 )
 
 type ComprehendMedicalAsyncJobProperties struct {
-	DataAccessRoleArn *string           `json:"DataAccessRoleArn"`
-	EndTime           *time.Time        `json:"EndTime"`
-	ExpirationTime    *time.Time        `json:"ExpirationTime"`
-	InputDataConfig   *InputDataConfig  `json:"InputDataConfig"`
-	JobID             *string           `json:"JobId"`
-	JobName           *string           `json:"JobName"`
-	JobStatus         *JobStatusEnum    `json:"JobStatus"`
-	KmsKey            *string           `json:"KMSKey"`
-	LanguageCode      *LanguageCodeEnum `json:"LanguageCode"`
-	ManifestFilePath  *string           `json:"ManifestFilePath"`
-	Message           *string           `json:"Message"`
-	ModelVersion      *string           `json:"ModelVersion"`
-	OutputDataConfig  *OutputDataConfig `json:"OutputDataConfig"`
-	SubmitTime        *time.Time        `json:"SubmitTime"`
+	DataAccessRoleArn *string           `json:"DataAccessRoleArn,omitempty"`
+	EndTime           *time.Time        `json:"EndTime,omitempty"`
+	ExpirationTime    *time.Time        `json:"ExpirationTime,omitempty"`
+	InputDataConfig   *InputDataConfig  `json:"InputDataConfig,omitempty"`
+	JobID             *string           `json:"JobId,omitempty"`
+	JobName           *string           `json:"JobName,omitempty"`
+	JobStatus         *JobStatusEnum    `json:"JobStatus,omitempty"`
+	KmsKey            *string           `json:"KMSKey,omitempty"`
+	LanguageCode      *LanguageCodeEnum `json:"LanguageCode,omitempty"`
+	ManifestFilePath  *string           `json:"ManifestFilePath,omitempty"`
+	Message           *string           `json:"Message,omitempty"`
+	ModelVersion      *string           `json:"ModelVersion,omitempty"`
+	OutputDataConfig  *OutputDataConfig `json:"OutputDataConfig,omitempty"`
+	SubmitTime        *time.Time        `json:"SubmitTime,omitempty"`
 }

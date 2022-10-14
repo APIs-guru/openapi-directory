@@ -1,8 +1,8 @@
 package shared
 
 type CompleteLayerUploadResponse struct {
-	LayerDigest    *string `json:"layerDigest"`
-	RegistryID     *string `json:"registryId"`
-	RepositoryName *string `json:"repositoryName"`
-	UploadID       *string `json:"uploadId"`
+	LayerDigest    *string `json:"layerDigest,omitempty"`
+	RegistryID     *string `json:"registryId,omitempty"`
+	RepositoryName *string `json:"repositoryName,omitempty"`
+	UploadID       *string `json:"uploadId,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type ChartSourceRange struct {
-	Sources []GridRange `json:"sources"`
+	Sources []GridRange `json:"sources,omitempty"`
 }

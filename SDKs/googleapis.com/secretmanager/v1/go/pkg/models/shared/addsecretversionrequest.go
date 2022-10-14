@@ -1,5 +1,5 @@
 package shared
 
 type AddSecretVersionRequest struct {
-	Payload *SecretPayload `json:"payload"`
+	Payload *SecretPayload `json:"payload,omitempty"`
 }

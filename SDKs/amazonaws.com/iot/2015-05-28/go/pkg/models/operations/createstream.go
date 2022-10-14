@@ -19,10 +19,10 @@ type CreateStreamHeaders struct {
 }
 
 type CreateStreamRequestBody struct {
-	Description *string             `json:"description"`
+	Description *string             `json:"description,omitempty"`
 	Files       []shared.StreamFile `json:"files"`
 	RoleArn     string              `json:"roleArn"`
-	Tags        []shared.Tag        `json:"tags"`
+	Tags        []shared.Tag        `json:"tags,omitempty"`
 }
 
 type CreateStreamRequest struct {

@@ -14,12 +14,12 @@ const (
 )
 
 type AppRestrictionsSchemaRestriction struct {
-	DefaultValue      *AppRestrictionsSchemaRestrictionRestrictionValue    `json:"defaultValue"`
-	Description       *string                                              `json:"description"`
-	Entry             []string                                             `json:"entry"`
-	EntryValue        []string                                             `json:"entryValue"`
-	Key               *string                                              `json:"key"`
-	NestedRestriction []AppRestrictionsSchemaRestriction                   `json:"nestedRestriction"`
-	RestrictionType   *AppRestrictionsSchemaRestrictionRestrictionTypeEnum `json:"restrictionType"`
-	Title             *string                                              `json:"title"`
+	DefaultValue      *AppRestrictionsSchemaRestrictionRestrictionValue    `json:"defaultValue,omitempty"`
+	Description       *string                                              `json:"description,omitempty"`
+	Entry             []string                                             `json:"entry,omitempty"`
+	EntryValue        []string                                             `json:"entryValue,omitempty"`
+	Key               *string                                              `json:"key,omitempty"`
+	NestedRestriction []AppRestrictionsSchemaRestriction                   `json:"nestedRestriction,omitempty"`
+	RestrictionType   *AppRestrictionsSchemaRestrictionRestrictionTypeEnum `json:"restrictionType,omitempty"`
+	Title             *string                                              `json:"title,omitempty"`
 }

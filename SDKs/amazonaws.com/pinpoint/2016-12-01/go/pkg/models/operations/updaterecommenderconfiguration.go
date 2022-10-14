@@ -19,15 +19,15 @@ type UpdateRecommenderConfigurationHeaders struct {
 }
 
 type UpdateRecommenderConfigurationRequestBodyUpdateRecommenderConfiguration struct {
-	Attributes                    map[string]string `json:"Attributes"`
-	Description                   *string           `json:"Description"`
-	Name                          *string           `json:"Name"`
-	RecommendationProviderIDType  *string           `json:"RecommendationProviderIdType"`
-	RecommendationProviderRoleArn *string           `json:"RecommendationProviderRoleArn"`
-	RecommendationProviderURI     *string           `json:"RecommendationProviderUri"`
-	RecommendationTransformerURI  *string           `json:"RecommendationTransformerUri"`
-	RecommendationsDisplayName    *string           `json:"RecommendationsDisplayName"`
-	RecommendationsPerMessage     *int64            `json:"RecommendationsPerMessage"`
+	Attributes                    map[string]string `json:"Attributes,omitempty"`
+	Description                   *string           `json:"Description,omitempty"`
+	Name                          *string           `json:"Name,omitempty"`
+	RecommendationProviderIDType  *string           `json:"RecommendationProviderIdType,omitempty"`
+	RecommendationProviderRoleArn *string           `json:"RecommendationProviderRoleArn,omitempty"`
+	RecommendationProviderURI     *string           `json:"RecommendationProviderUri,omitempty"`
+	RecommendationTransformerURI  *string           `json:"RecommendationTransformerUri,omitempty"`
+	RecommendationsDisplayName    *string           `json:"RecommendationsDisplayName,omitempty"`
+	RecommendationsPerMessage     *int64            `json:"RecommendationsPerMessage,omitempty"`
 }
 
 type UpdateRecommenderConfigurationRequestBody struct {

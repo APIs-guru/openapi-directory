@@ -17,9 +17,9 @@ const (
 )
 
 type NfsExportOptions struct {
-	AccessMode *NfsExportOptionsAccessModeEnum `json:"accessMode"`
-	AnonGid    *string                         `json:"anonGid"`
-	AnonUID    *string                         `json:"anonUid"`
-	IPRanges   []string                        `json:"ipRanges"`
-	SquashMode *NfsExportOptionsSquashModeEnum `json:"squashMode"`
+	AccessMode *NfsExportOptionsAccessModeEnum `json:"accessMode,omitempty"`
+	AnonGid    *string                         `json:"anonGid,omitempty"`
+	AnonUID    *string                         `json:"anonUid,omitempty"`
+	IPRanges   []string                        `json:"ipRanges,omitempty"`
+	SquashMode *NfsExportOptionsSquashModeEnum `json:"squashMode,omitempty"`
 }

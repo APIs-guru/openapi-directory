@@ -144,17 +144,17 @@ const (
 )
 
 type StartSpeechSynthesisTaskRequestBody struct {
-	Engine             *StartSpeechSynthesisTaskRequestBodyEngineEnum       `json:"Engine"`
-	LanguageCode       *StartSpeechSynthesisTaskRequestBodyLanguageCodeEnum `json:"LanguageCode"`
-	LexiconNames       []string                                             `json:"LexiconNames"`
+	Engine             *StartSpeechSynthesisTaskRequestBodyEngineEnum       `json:"Engine,omitempty"`
+	LanguageCode       *StartSpeechSynthesisTaskRequestBodyLanguageCodeEnum `json:"LanguageCode,omitempty"`
+	LexiconNames       []string                                             `json:"LexiconNames,omitempty"`
 	OutputFormat       StartSpeechSynthesisTaskRequestBodyOutputFormatEnum  `json:"OutputFormat"`
 	OutputS3BucketName string                                               `json:"OutputS3BucketName"`
-	OutputS3KeyPrefix  *string                                              `json:"OutputS3KeyPrefix"`
-	SampleRate         *string                                              `json:"SampleRate"`
-	SnsTopicArn        *string                                              `json:"SnsTopicArn"`
-	SpeechMarkTypes    []shared.SpeechMarkTypeEnum                          `json:"SpeechMarkTypes"`
+	OutputS3KeyPrefix  *string                                              `json:"OutputS3KeyPrefix,omitempty"`
+	SampleRate         *string                                              `json:"SampleRate,omitempty"`
+	SnsTopicArn        *string                                              `json:"SnsTopicArn,omitempty"`
+	SpeechMarkTypes    []shared.SpeechMarkTypeEnum                          `json:"SpeechMarkTypes,omitempty"`
 	Text               string                                               `json:"Text"`
-	TextType           *StartSpeechSynthesisTaskRequestBodyTextTypeEnum     `json:"TextType"`
+	TextType           *StartSpeechSynthesisTaskRequestBodyTextTypeEnum     `json:"TextType,omitempty"`
 	VoiceID            StartSpeechSynthesisTaskRequestBodyVoiceIDEnum       `json:"VoiceId"`
 }
 

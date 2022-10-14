@@ -5,8 +5,8 @@ type CreateNetworkGroupPolicyPathParams struct {
 }
 
 type CreateNetworkGroupPolicyRequestBodyBandwidthBandwidthLimits struct {
-	LimitDown *int64 `json:"limitDown"`
-	LimitUp   *int64 `json:"limitUp"`
+	LimitDown *int64 `json:"limitDown,omitempty"`
+	LimitUp   *int64 `json:"limitUp,omitempty"`
 }
 
 type CreateNetworkGroupPolicyRequestBodyBandwidthSettingsEnum string
@@ -18,8 +18,8 @@ const (
 )
 
 type CreateNetworkGroupPolicyRequestBodyBandwidth struct {
-	BandwidthLimits *CreateNetworkGroupPolicyRequestBodyBandwidthBandwidthLimits `json:"bandwidthLimits"`
-	Settings        *CreateNetworkGroupPolicyRequestBodyBandwidthSettingsEnum    `json:"settings"`
+	BandwidthLimits *CreateNetworkGroupPolicyRequestBodyBandwidthBandwidthLimits `json:"bandwidthLimits,omitempty"`
+	Settings        *CreateNetworkGroupPolicyRequestBodyBandwidthSettingsEnum    `json:"settings,omitempty"`
 }
 
 type CreateNetworkGroupPolicyRequestBodyBonjourForwardingRulesServicesEnum string
@@ -39,7 +39,7 @@ const (
 )
 
 type CreateNetworkGroupPolicyRequestBodyBonjourForwardingRules struct {
-	Description *string                                                                 `json:"description"`
+	Description *string                                                                 `json:"description,omitempty"`
 	Services    []CreateNetworkGroupPolicyRequestBodyBonjourForwardingRulesServicesEnum `json:"services"`
 	VlanID      string                                                                  `json:"vlanId"`
 }
@@ -53,8 +53,8 @@ const (
 )
 
 type CreateNetworkGroupPolicyRequestBodyBonjourForwarding struct {
-	Rules    []CreateNetworkGroupPolicyRequestBodyBonjourForwardingRules       `json:"rules"`
-	Settings *CreateNetworkGroupPolicyRequestBodyBonjourForwardingSettingsEnum `json:"settings"`
+	Rules    []CreateNetworkGroupPolicyRequestBodyBonjourForwardingRules       `json:"rules,omitempty"`
+	Settings *CreateNetworkGroupPolicyRequestBodyBonjourForwardingSettingsEnum `json:"settings,omitempty"`
 }
 
 type CreateNetworkGroupPolicyRequestBodyContentFilteringAllowedURLPatternsSettingsEnum string
@@ -66,8 +66,8 @@ const (
 )
 
 type CreateNetworkGroupPolicyRequestBodyContentFilteringAllowedURLPatterns struct {
-	Patterns []string                                                                           `json:"patterns"`
-	Settings *CreateNetworkGroupPolicyRequestBodyContentFilteringAllowedURLPatternsSettingsEnum `json:"settings"`
+	Patterns []string                                                                           `json:"patterns,omitempty"`
+	Settings *CreateNetworkGroupPolicyRequestBodyContentFilteringAllowedURLPatternsSettingsEnum `json:"settings,omitempty"`
 }
 
 type CreateNetworkGroupPolicyRequestBodyContentFilteringBlockedURLCategoriesSettingsEnum string
@@ -79,8 +79,8 @@ const (
 )
 
 type CreateNetworkGroupPolicyRequestBodyContentFilteringBlockedURLCategories struct {
-	Categories []string                                                                             `json:"categories"`
-	Settings   *CreateNetworkGroupPolicyRequestBodyContentFilteringBlockedURLCategoriesSettingsEnum `json:"settings"`
+	Categories []string                                                                             `json:"categories,omitempty"`
+	Settings   *CreateNetworkGroupPolicyRequestBodyContentFilteringBlockedURLCategoriesSettingsEnum `json:"settings,omitempty"`
 }
 
 type CreateNetworkGroupPolicyRequestBodyContentFilteringBlockedURLPatternsSettingsEnum string
@@ -92,20 +92,20 @@ const (
 )
 
 type CreateNetworkGroupPolicyRequestBodyContentFilteringBlockedURLPatterns struct {
-	Patterns []string                                                                           `json:"patterns"`
-	Settings *CreateNetworkGroupPolicyRequestBodyContentFilteringBlockedURLPatternsSettingsEnum `json:"settings"`
+	Patterns []string                                                                           `json:"patterns,omitempty"`
+	Settings *CreateNetworkGroupPolicyRequestBodyContentFilteringBlockedURLPatternsSettingsEnum `json:"settings,omitempty"`
 }
 
 type CreateNetworkGroupPolicyRequestBodyContentFiltering struct {
-	AllowedURLPatterns   *CreateNetworkGroupPolicyRequestBodyContentFilteringAllowedURLPatterns   `json:"allowedUrlPatterns"`
-	BlockedURLCategories *CreateNetworkGroupPolicyRequestBodyContentFilteringBlockedURLCategories `json:"blockedUrlCategories"`
-	BlockedURLPatterns   *CreateNetworkGroupPolicyRequestBodyContentFilteringBlockedURLPatterns   `json:"blockedUrlPatterns"`
+	AllowedURLPatterns   *CreateNetworkGroupPolicyRequestBodyContentFilteringAllowedURLPatterns   `json:"allowedUrlPatterns,omitempty"`
+	BlockedURLCategories *CreateNetworkGroupPolicyRequestBodyContentFilteringBlockedURLCategories `json:"blockedUrlCategories,omitempty"`
+	BlockedURLPatterns   *CreateNetworkGroupPolicyRequestBodyContentFilteringBlockedURLPatterns   `json:"blockedUrlPatterns,omitempty"`
 }
 
 type CreateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingL3FirewallRules struct {
-	Comment  *string `json:"comment"`
+	Comment  *string `json:"comment,omitempty"`
 	DestCidr string  `json:"destCidr"`
-	DestPort *string `json:"destPort"`
+	DestPort *string `json:"destPort,omitempty"`
 	Policy   string  `json:"policy"`
 	Protocol string  `json:"protocol"`
 }
@@ -127,9 +127,9 @@ const (
 )
 
 type CreateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingL7FirewallRules struct {
-	Policy *CreateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingL7FirewallRulesPolicyEnum `json:"policy"`
-	Type   *CreateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingL7FirewallRulesTypeEnum   `json:"type"`
-	Value  *string                                                                                `json:"value"`
+	Policy *CreateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingL7FirewallRulesPolicyEnum `json:"policy,omitempty"`
+	Type   *CreateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingL7FirewallRulesTypeEnum   `json:"type,omitempty"`
+	Value  *string                                                                                `json:"value,omitempty"`
 }
 
 type CreateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingSettingsEnum string
@@ -157,81 +157,81 @@ type CreateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingTrafficShapingR
 }
 
 type CreateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingTrafficShapingRulesPerClientBandwidthLimitsBandwidthLimits struct {
-	LimitDown *int64 `json:"limitDown"`
-	LimitUp   *int64 `json:"limitUp"`
+	LimitDown *int64 `json:"limitDown,omitempty"`
+	LimitUp   *int64 `json:"limitUp,omitempty"`
 }
 
 type CreateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingTrafficShapingRulesPerClientBandwidthLimits struct {
-	BandwidthLimits *CreateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingTrafficShapingRulesPerClientBandwidthLimitsBandwidthLimits `json:"bandwidthLimits"`
-	Settings        *string                                                                                                                 `json:"settings"`
+	BandwidthLimits *CreateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingTrafficShapingRulesPerClientBandwidthLimitsBandwidthLimits `json:"bandwidthLimits,omitempty"`
+	Settings        *string                                                                                                                 `json:"settings,omitempty"`
 }
 
 type CreateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingTrafficShapingRules struct {
 	Definitions              []CreateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingTrafficShapingRulesDefinitions             `json:"definitions"`
-	DscpTagValue             *int64                                                                                                   `json:"dscpTagValue"`
-	PcpTagValue              *int64                                                                                                   `json:"pcpTagValue"`
-	PerClientBandwidthLimits *CreateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingTrafficShapingRulesPerClientBandwidthLimits `json:"perClientBandwidthLimits"`
-	Priority                 *string                                                                                                  `json:"priority"`
+	DscpTagValue             *int64                                                                                                   `json:"dscpTagValue,omitempty"`
+	PcpTagValue              *int64                                                                                                   `json:"pcpTagValue,omitempty"`
+	PerClientBandwidthLimits *CreateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingTrafficShapingRulesPerClientBandwidthLimits `json:"perClientBandwidthLimits,omitempty"`
+	Priority                 *string                                                                                                  `json:"priority,omitempty"`
 }
 
 type CreateNetworkGroupPolicyRequestBodyFirewallAndTrafficShaping struct {
-	L3FirewallRules     []CreateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingL3FirewallRules     `json:"l3FirewallRules"`
-	L7FirewallRules     []CreateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingL7FirewallRules     `json:"l7FirewallRules"`
-	Settings            *CreateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingSettingsEnum         `json:"settings"`
-	TrafficShapingRules []CreateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingTrafficShapingRules `json:"trafficShapingRules"`
+	L3FirewallRules     []CreateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingL3FirewallRules     `json:"l3FirewallRules,omitempty"`
+	L7FirewallRules     []CreateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingL7FirewallRules     `json:"l7FirewallRules,omitempty"`
+	Settings            *CreateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingSettingsEnum         `json:"settings,omitempty"`
+	TrafficShapingRules []CreateNetworkGroupPolicyRequestBodyFirewallAndTrafficShapingTrafficShapingRules `json:"trafficShapingRules,omitempty"`
 }
 
 type CreateNetworkGroupPolicyRequestBodySchedulingFriday struct {
-	Active *bool   `json:"active"`
-	From   *string `json:"from"`
-	To     *string `json:"to"`
+	Active *bool   `json:"active,omitempty"`
+	From   *string `json:"from,omitempty"`
+	To     *string `json:"to,omitempty"`
 }
 
 type CreateNetworkGroupPolicyRequestBodySchedulingMonday struct {
-	Active *bool   `json:"active"`
-	From   *string `json:"from"`
-	To     *string `json:"to"`
+	Active *bool   `json:"active,omitempty"`
+	From   *string `json:"from,omitempty"`
+	To     *string `json:"to,omitempty"`
 }
 
 type CreateNetworkGroupPolicyRequestBodySchedulingSaturday struct {
-	Active *bool   `json:"active"`
-	From   *string `json:"from"`
-	To     *string `json:"to"`
+	Active *bool   `json:"active,omitempty"`
+	From   *string `json:"from,omitempty"`
+	To     *string `json:"to,omitempty"`
 }
 
 type CreateNetworkGroupPolicyRequestBodySchedulingSunday struct {
-	Active *bool   `json:"active"`
-	From   *string `json:"from"`
-	To     *string `json:"to"`
+	Active *bool   `json:"active,omitempty"`
+	From   *string `json:"from,omitempty"`
+	To     *string `json:"to,omitempty"`
 }
 
 type CreateNetworkGroupPolicyRequestBodySchedulingThursday struct {
-	Active *bool   `json:"active"`
-	From   *string `json:"from"`
-	To     *string `json:"to"`
+	Active *bool   `json:"active,omitempty"`
+	From   *string `json:"from,omitempty"`
+	To     *string `json:"to,omitempty"`
 }
 
 type CreateNetworkGroupPolicyRequestBodySchedulingTuesday struct {
-	Active *bool   `json:"active"`
-	From   *string `json:"from"`
-	To     *string `json:"to"`
+	Active *bool   `json:"active,omitempty"`
+	From   *string `json:"from,omitempty"`
+	To     *string `json:"to,omitempty"`
 }
 
 type CreateNetworkGroupPolicyRequestBodySchedulingWednesday struct {
-	Active *bool   `json:"active"`
-	From   *string `json:"from"`
-	To     *string `json:"to"`
+	Active *bool   `json:"active,omitempty"`
+	From   *string `json:"from,omitempty"`
+	To     *string `json:"to,omitempty"`
 }
 
 type CreateNetworkGroupPolicyRequestBodyScheduling struct {
-	Enabled   *bool                                                   `json:"enabled"`
-	Friday    *CreateNetworkGroupPolicyRequestBodySchedulingFriday    `json:"friday"`
-	Monday    *CreateNetworkGroupPolicyRequestBodySchedulingMonday    `json:"monday"`
-	Saturday  *CreateNetworkGroupPolicyRequestBodySchedulingSaturday  `json:"saturday"`
-	Sunday    *CreateNetworkGroupPolicyRequestBodySchedulingSunday    `json:"sunday"`
-	Thursday  *CreateNetworkGroupPolicyRequestBodySchedulingThursday  `json:"thursday"`
-	Tuesday   *CreateNetworkGroupPolicyRequestBodySchedulingTuesday   `json:"tuesday"`
-	Wednesday *CreateNetworkGroupPolicyRequestBodySchedulingWednesday `json:"wednesday"`
+	Enabled   *bool                                                   `json:"enabled,omitempty"`
+	Friday    *CreateNetworkGroupPolicyRequestBodySchedulingFriday    `json:"friday,omitempty"`
+	Monday    *CreateNetworkGroupPolicyRequestBodySchedulingMonday    `json:"monday,omitempty"`
+	Saturday  *CreateNetworkGroupPolicyRequestBodySchedulingSaturday  `json:"saturday,omitempty"`
+	Sunday    *CreateNetworkGroupPolicyRequestBodySchedulingSunday    `json:"sunday,omitempty"`
+	Thursday  *CreateNetworkGroupPolicyRequestBodySchedulingThursday  `json:"thursday,omitempty"`
+	Tuesday   *CreateNetworkGroupPolicyRequestBodySchedulingTuesday   `json:"tuesday,omitempty"`
+	Wednesday *CreateNetworkGroupPolicyRequestBodySchedulingWednesday `json:"wednesday,omitempty"`
 }
 
 type CreateNetworkGroupPolicyRequestBodySplashAuthSettingsEnum string
@@ -250,19 +250,19 @@ const (
 )
 
 type CreateNetworkGroupPolicyRequestBodyVlanTagging struct {
-	Settings *CreateNetworkGroupPolicyRequestBodyVlanTaggingSettingsEnum `json:"settings"`
-	VlanID   *string                                                     `json:"vlanId"`
+	Settings *CreateNetworkGroupPolicyRequestBodyVlanTaggingSettingsEnum `json:"settings,omitempty"`
+	VlanID   *string                                                     `json:"vlanId,omitempty"`
 }
 
 type CreateNetworkGroupPolicyRequestBody struct {
-	Bandwidth                 *CreateNetworkGroupPolicyRequestBodyBandwidth                 `json:"bandwidth"`
-	BonjourForwarding         *CreateNetworkGroupPolicyRequestBodyBonjourForwarding         `json:"bonjourForwarding"`
-	ContentFiltering          *CreateNetworkGroupPolicyRequestBodyContentFiltering          `json:"contentFiltering"`
-	FirewallAndTrafficShaping *CreateNetworkGroupPolicyRequestBodyFirewallAndTrafficShaping `json:"firewallAndTrafficShaping"`
+	Bandwidth                 *CreateNetworkGroupPolicyRequestBodyBandwidth                 `json:"bandwidth,omitempty"`
+	BonjourForwarding         *CreateNetworkGroupPolicyRequestBodyBonjourForwarding         `json:"bonjourForwarding,omitempty"`
+	ContentFiltering          *CreateNetworkGroupPolicyRequestBodyContentFiltering          `json:"contentFiltering,omitempty"`
+	FirewallAndTrafficShaping *CreateNetworkGroupPolicyRequestBodyFirewallAndTrafficShaping `json:"firewallAndTrafficShaping,omitempty"`
 	Name                      string                                                        `json:"name"`
-	Scheduling                *CreateNetworkGroupPolicyRequestBodyScheduling                `json:"scheduling"`
-	SplashAuthSettings        *CreateNetworkGroupPolicyRequestBodySplashAuthSettingsEnum    `json:"splashAuthSettings"`
-	VlanTagging               *CreateNetworkGroupPolicyRequestBodyVlanTagging               `json:"vlanTagging"`
+	Scheduling                *CreateNetworkGroupPolicyRequestBodyScheduling                `json:"scheduling,omitempty"`
+	SplashAuthSettings        *CreateNetworkGroupPolicyRequestBodySplashAuthSettingsEnum    `json:"splashAuthSettings,omitempty"`
+	VlanTagging               *CreateNetworkGroupPolicyRequestBodyVlanTagging               `json:"vlanTagging,omitempty"`
 }
 
 type CreateNetworkGroupPolicyRequest struct {

@@ -5,11 +5,11 @@ import (
 )
 
 type Link struct {
-	Created      *time.Time `json:"created"`
-	DisplayOrder *int32     `json:"displayOrder"`
-	ID           *int64     `json:"id"`
-	LastUpdate   *time.Time `json:"lastUpdate"`
-	Link         *string    `json:"link"`
-	LinkType     *Lookup    `json:"linkType"`
-	Name         *string    `json:"name"`
+	Created      *time.Time `json:"created,omitempty"`
+	DisplayOrder *int32     `json:"displayOrder,omitempty"`
+	ID           *int64     `json:"id,omitempty"`
+	LastUpdate   *time.Time `json:"lastUpdate,omitempty"`
+	Link         *string    `json:"link,omitempty"`
+	LinkType     *Lookup    `json:"linkType,omitempty"`
+	Name         *string    `json:"name,omitempty"`
 }

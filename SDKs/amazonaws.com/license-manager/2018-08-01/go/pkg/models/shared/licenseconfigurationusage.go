@@ -5,10 +5,10 @@ import (
 )
 
 type LicenseConfigurationUsage struct {
-	AssociationTime  *time.Time        `json:"AssociationTime"`
-	ConsumedLicenses *int64            `json:"ConsumedLicenses"`
-	ResourceArn      *string           `json:"ResourceArn"`
-	ResourceOwnerID  *string           `json:"ResourceOwnerId"`
-	ResourceStatus   *string           `json:"ResourceStatus"`
-	ResourceType     *ResourceTypeEnum `json:"ResourceType"`
+	AssociationTime  *time.Time        `json:"AssociationTime,omitempty"`
+	ConsumedLicenses *int64            `json:"ConsumedLicenses,omitempty"`
+	ResourceArn      *string           `json:"ResourceArn,omitempty"`
+	ResourceOwnerID  *string           `json:"ResourceOwnerId,omitempty"`
+	ResourceStatus   *string           `json:"ResourceStatus,omitempty"`
+	ResourceType     *ResourceTypeEnum `json:"ResourceType,omitempty"`
 }

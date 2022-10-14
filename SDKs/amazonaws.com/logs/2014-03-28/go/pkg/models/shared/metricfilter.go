@@ -1,9 +1,9 @@
 package shared
 
 type MetricFilter struct {
-	CreationTime          *int64                 `json:"creationTime"`
-	FilterName            *string                `json:"filterName"`
-	FilterPattern         *string                `json:"filterPattern"`
-	LogGroupName          *string                `json:"logGroupName"`
-	MetricTransformations []MetricTransformation `json:"metricTransformations"`
+	CreationTime          *int64                 `json:"creationTime,omitempty"`
+	FilterName            *string                `json:"filterName,omitempty"`
+	FilterPattern         *string                `json:"filterPattern,omitempty"`
+	LogGroupName          *string                `json:"logGroupName,omitempty"`
+	MetricTransformations []MetricTransformation `json:"metricTransformations,omitempty"`
 }

@@ -1,13 +1,13 @@
 package shared
 
 type PoolStatusResponseBody struct {
-	AllWithLatestVersion                 *bool   `json:"allWithLatestVersion"`
-	IsEnvironmentPool                    *bool   `json:"isEnvironmentPool"`
-	Location                             *string `json:"location"`
-	PoolCode                             *string `json:"poolCode"`
-	ReadyUnassignedCount                 *int32  `json:"readyUnassignedCount"`
-	ReadyUnassignedLatestVersionCount    *int32  `json:"readyUnassignedLatestVersionCount"`
-	ReadyUnassignedNotLatestVersionCount *int32  `json:"readyUnassignedNotLatestVersionCount"`
-	ResourceType                         *string `json:"resourceType"`
-	Sku                                  *string `json:"sku"`
+	AllWithLatestVersion                 *bool   `json:"allWithLatestVersion,omitempty"`
+	IsEnvironmentPool                    *bool   `json:"isEnvironmentPool,omitempty"`
+	Location                             *string `json:"location,omitempty"`
+	PoolCode                             *string `json:"poolCode,omitempty"`
+	ReadyUnassignedCount                 *int32  `json:"readyUnassignedCount,omitempty"`
+	ReadyUnassignedLatestVersionCount    *int32  `json:"readyUnassignedLatestVersionCount,omitempty"`
+	ReadyUnassignedNotLatestVersionCount *int32  `json:"readyUnassignedNotLatestVersionCount,omitempty"`
+	ResourceType                         *string `json:"resourceType,omitempty"`
+	Sku                                  *string `json:"sku,omitempty"`
 }

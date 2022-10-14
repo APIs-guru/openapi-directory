@@ -1,9 +1,9 @@
 package shared
 
 type RegionalinventoryCustomBatchRequestEntry struct {
-	BatchID           *int64             `json:"batchId"`
-	MerchantID        *string            `json:"merchantId"`
-	Method            *string            `json:"method"`
-	ProductID         *string            `json:"productId"`
-	RegionalInventory *RegionalInventory `json:"regionalInventory"`
+	BatchID           *int64             `json:"batchId,omitempty"`
+	MerchantID        *string            `json:"merchantId,omitempty"`
+	Method            *string            `json:"method,omitempty"`
+	ProductID         *string            `json:"productId,omitempty"`
+	RegionalInventory *RegionalInventory `json:"regionalInventory,omitempty"`
 }

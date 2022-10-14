@@ -1,7 +1,7 @@
 package shared
 
 type Metric struct {
-	Expression *string `json:"expression"`
-	Invisible  *bool   `json:"invisible"`
-	Name       *string `json:"name"`
+	Expression *string `json:"expression,omitempty"`
+	Invisible  *bool   `json:"invisible,omitempty"`
+	Name       *string `json:"name,omitempty"`
 }

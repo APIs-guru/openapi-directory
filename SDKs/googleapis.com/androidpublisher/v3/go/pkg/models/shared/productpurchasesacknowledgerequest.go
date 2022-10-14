@@ -1,5 +1,5 @@
 package shared
 
 type ProductPurchasesAcknowledgeRequest struct {
-	DeveloperPayload *string `json:"developerPayload"`
+	DeveloperPayload *string `json:"developerPayload,omitempty"`
 }

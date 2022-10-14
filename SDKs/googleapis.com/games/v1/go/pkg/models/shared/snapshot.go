@@ -8,15 +8,15 @@ const (
 )
 
 type Snapshot struct {
-	CoverImage         *SnapshotImage    `json:"coverImage"`
-	Description        *string           `json:"description"`
-	DriveID            *string           `json:"driveId"`
-	DurationMillis     *string           `json:"durationMillis"`
-	ID                 *string           `json:"id"`
-	Kind               *string           `json:"kind"`
-	LastModifiedMillis *string           `json:"lastModifiedMillis"`
-	ProgressValue      *string           `json:"progressValue"`
-	Title              *string           `json:"title"`
-	Type               *SnapshotTypeEnum `json:"type"`
-	UniqueName         *string           `json:"uniqueName"`
+	CoverImage         *SnapshotImage    `json:"coverImage,omitempty"`
+	Description        *string           `json:"description,omitempty"`
+	DriveID            *string           `json:"driveId,omitempty"`
+	DurationMillis     *string           `json:"durationMillis,omitempty"`
+	ID                 *string           `json:"id,omitempty"`
+	Kind               *string           `json:"kind,omitempty"`
+	LastModifiedMillis *string           `json:"lastModifiedMillis,omitempty"`
+	ProgressValue      *string           `json:"progressValue,omitempty"`
+	Title              *string           `json:"title,omitempty"`
+	Type               *SnapshotTypeEnum `json:"type,omitempty"`
+	UniqueName         *string           `json:"uniqueName,omitempty"`
 }

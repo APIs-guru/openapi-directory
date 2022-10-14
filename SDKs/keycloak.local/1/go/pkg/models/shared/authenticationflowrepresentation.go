@@ -1,11 +1,11 @@
 package shared
 
 type AuthenticationFlowRepresentation struct {
-	Alias                    *string                                       `json:"alias"`
-	AuthenticationExecutions []AuthenticationExecutionExportRepresentation `json:"authenticationExecutions"`
-	BuiltIn                  *bool                                         `json:"builtIn"`
-	Description              *string                                       `json:"description"`
-	ID                       *string                                       `json:"id"`
-	ProviderID               *string                                       `json:"providerId"`
-	TopLevel                 *bool                                         `json:"topLevel"`
+	Alias                    *string                                       `json:"alias,omitempty"`
+	AuthenticationExecutions []AuthenticationExecutionExportRepresentation `json:"authenticationExecutions,omitempty"`
+	BuiltIn                  *bool                                         `json:"builtIn,omitempty"`
+	Description              *string                                       `json:"description,omitempty"`
+	ID                       *string                                       `json:"id,omitempty"`
+	ProviderID               *string                                       `json:"providerId,omitempty"`
+	TopLevel                 *bool                                         `json:"topLevel,omitempty"`
 }

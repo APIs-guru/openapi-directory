@@ -18,18 +18,18 @@ type GetCertificateDataInXMLFormatFromURIIDRequest struct {
 }
 
 type GetCertificateDataInXMLFormatFromURIID400ApplicationJSON struct {
-	Error            *string `json:"error"`
-	ErrorDescription *string `json:"error_description"`
+	Error            *string `json:"error,omitempty"`
+	ErrorDescription *string `json:"error_description,omitempty"`
 }
 
 type GetCertificateDataInXMLFormatFromURIID401ApplicationJSON struct {
-	Error            *string `json:"error"`
-	ErrorDescription *string `json:"error_description"`
+	Error            *string `json:"error,omitempty"`
+	ErrorDescription *string `json:"error_description,omitempty"`
 }
 
 type GetCertificateDataInXMLFormatFromURIID404ApplicationJSON struct {
-	Error            *string `json:"error"`
-	ErrorDescription *string `json:"error_description"`
+	Error            *string `json:"error,omitempty"`
+	ErrorDescription *string `json:"error_description,omitempty"`
 }
 
 type GetCertificateDataInXMLFormatFromURIIDResponse struct {

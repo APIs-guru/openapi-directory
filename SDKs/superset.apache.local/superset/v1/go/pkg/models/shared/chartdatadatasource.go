@@ -9,5 +9,5 @@ const (
 
 type ChartDataDatasource struct {
 	ID   int32                        `json:"id"`
-	Type *ChartDataDatasourceTypeEnum `json:"type"`
+	Type *ChartDataDatasourceTypeEnum `json:"type,omitempty"`
 }

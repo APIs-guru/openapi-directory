@@ -5,12 +5,12 @@ import (
 )
 
 type DescribeMitigationActionResponse struct {
-	ActionArn        *string                   `json:"actionArn"`
-	ActionID         *string                   `json:"actionId"`
-	ActionName       *string                   `json:"actionName"`
-	ActionParams     *MitigationActionParams   `json:"actionParams"`
-	ActionType       *MitigationActionTypeEnum `json:"actionType"`
-	CreationDate     *time.Time                `json:"creationDate"`
-	LastModifiedDate *time.Time                `json:"lastModifiedDate"`
-	RoleArn          *string                   `json:"roleArn"`
+	ActionArn        *string                   `json:"actionArn,omitempty"`
+	ActionID         *string                   `json:"actionId,omitempty"`
+	ActionName       *string                   `json:"actionName,omitempty"`
+	ActionParams     *MitigationActionParams   `json:"actionParams,omitempty"`
+	ActionType       *MitigationActionTypeEnum `json:"actionType,omitempty"`
+	CreationDate     *time.Time                `json:"creationDate,omitempty"`
+	LastModifiedDate *time.Time                `json:"lastModifiedDate,omitempty"`
+	RoleArn          *string                   `json:"roleArn,omitempty"`
 }

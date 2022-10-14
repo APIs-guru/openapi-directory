@@ -1,5 +1,5 @@
 package shared
 
 type FetchCaCertsResponse struct {
-	CaCerts []CertChain `json:"caCerts"`
+	CaCerts []CertChain `json:"caCerts,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type Secrets struct {
-	Inline        []InlineSecret        `json:"inline"`
-	SecretManager []SecretManagerSecret `json:"secretManager"`
+	Inline        []InlineSecret        `json:"inline,omitempty"`
+	SecretManager []SecretManagerSecret `json:"secretManager,omitempty"`
 }

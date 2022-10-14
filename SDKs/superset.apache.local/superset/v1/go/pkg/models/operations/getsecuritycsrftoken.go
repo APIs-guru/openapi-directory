@@ -13,15 +13,15 @@ type GetSecurityCsrfTokenRequest struct {
 }
 
 type GetSecurityCsrfToken200ApplicationJSON struct {
-	Result *string `json:"result"`
+	Result *string `json:"result,omitempty"`
 }
 
 type GetSecurityCsrfToken401ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetSecurityCsrfToken500ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetSecurityCsrfTokenResponse struct {

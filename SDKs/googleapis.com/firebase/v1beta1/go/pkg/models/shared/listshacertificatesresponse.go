@@ -1,5 +1,5 @@
 package shared
 
 type ListShaCertificatesResponse struct {
-	Certificates []ShaCertificate `json:"certificates"`
+	Certificates []ShaCertificate `json:"certificates,omitempty"`
 }

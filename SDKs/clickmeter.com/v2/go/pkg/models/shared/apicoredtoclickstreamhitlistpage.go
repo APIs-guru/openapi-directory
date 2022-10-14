@@ -1,6 +1,6 @@
 package shared
 
 type APICoreDtoClickStreamHitListPage struct {
-	Hits    []APICoreDtoClickStreamHit `json:"hits"`
-	LastKey *string                    `json:"lastKey"`
+	Hits    []APICoreDtoClickStreamHit `json:"hits,omitempty"`
+	LastKey *string                    `json:"lastKey,omitempty"`
 }

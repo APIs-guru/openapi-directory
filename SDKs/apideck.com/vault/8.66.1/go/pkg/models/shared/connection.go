@@ -8,15 +8,15 @@ const (
 )
 
 type ConnectionConfigurationDefaults struct {
-	ID      *string                                    `json:"id"`
-	Options []interface{}                              `json:"options"`
-	Target  *ConnectionConfigurationDefaultsTargetEnum `json:"target"`
-	Value   *interface{}                               `json:"value"`
+	ID      *string                                    `json:"id,omitempty"`
+	Options []interface{}                              `json:"options,omitempty"`
+	Target  *ConnectionConfigurationDefaultsTargetEnum `json:"target,omitempty"`
+	Value   *interface{}                               `json:"value,omitempty"`
 }
 
 type ConnectionConfiguration struct {
-	Defaults []ConnectionConfigurationDefaults `json:"defaults"`
-	Resource *string                           `json:"resource"`
+	Defaults []ConnectionConfigurationDefaults `json:"defaults,omitempty"`
+	Resource *string                           `json:"resource,omitempty"`
 }
 
 type ConnectionStatusEnum string
@@ -28,30 +28,30 @@ const (
 )
 
 type Connection struct {
-	AuthType                         *AuthTypeEnum             `json:"auth_type"`
-	AuthorizeURL                     *string                   `json:"authorize_url"`
-	ConfigurableResources            []string                  `json:"configurable_resources"`
-	Configuration                    []ConnectionConfiguration `json:"configuration"`
-	CreatedAt                        *float64                  `json:"created_at"`
-	Enabled                          *bool                     `json:"enabled"`
-	FormFields                       []FormField               `json:"form_fields"`
-	HasGuide                         *bool                     `json:"has_guide"`
-	Icon                             *string                   `json:"icon"`
-	ID                               *string                   `json:"id"`
-	Logo                             *string                   `json:"logo"`
-	Metadata                         map[string]interface{}    `json:"metadata"`
-	Name                             *string                   `json:"name"`
-	OauthGrantType                   *OAuthGrantTypeEnum       `json:"oauth_grant_type"`
-	ResourceSchemaSupport            []string                  `json:"resource_schema_support"`
-	ResourceSettingsSupport          []string                  `json:"resource_settings_support"`
-	RevokeURL                        *string                   `json:"revoke_url"`
-	ServiceID                        *string                   `json:"service_id"`
-	Settings                         map[string]interface{}    `json:"settings"`
-	SettingsRequiredForAuthorization []string                  `json:"settings_required_for_authorization"`
-	State                            *ConnectionStateEnum      `json:"state"`
-	Status                           *ConnectionStatusEnum     `json:"status"`
-	TagLine                          *string                   `json:"tag_line"`
-	UnifiedAPI                       *string                   `json:"unified_api"`
-	UpdatedAt                        *float64                  `json:"updated_at"`
-	Website                          *string                   `json:"website"`
+	AuthType                         *AuthTypeEnum             `json:"auth_type,omitempty"`
+	AuthorizeURL                     *string                   `json:"authorize_url,omitempty"`
+	ConfigurableResources            []string                  `json:"configurable_resources,omitempty"`
+	Configuration                    []ConnectionConfiguration `json:"configuration,omitempty"`
+	CreatedAt                        *float64                  `json:"created_at,omitempty"`
+	Enabled                          *bool                     `json:"enabled,omitempty"`
+	FormFields                       []FormField               `json:"form_fields,omitempty"`
+	HasGuide                         *bool                     `json:"has_guide,omitempty"`
+	Icon                             *string                   `json:"icon,omitempty"`
+	ID                               *string                   `json:"id,omitempty"`
+	Logo                             *string                   `json:"logo,omitempty"`
+	Metadata                         map[string]interface{}    `json:"metadata,omitempty"`
+	Name                             *string                   `json:"name,omitempty"`
+	OauthGrantType                   *OAuthGrantTypeEnum       `json:"oauth_grant_type,omitempty"`
+	ResourceSchemaSupport            []string                  `json:"resource_schema_support,omitempty"`
+	ResourceSettingsSupport          []string                  `json:"resource_settings_support,omitempty"`
+	RevokeURL                        *string                   `json:"revoke_url,omitempty"`
+	ServiceID                        *string                   `json:"service_id,omitempty"`
+	Settings                         map[string]interface{}    `json:"settings,omitempty"`
+	SettingsRequiredForAuthorization []string                  `json:"settings_required_for_authorization,omitempty"`
+	State                            *ConnectionStateEnum      `json:"state,omitempty"`
+	Status                           *ConnectionStatusEnum     `json:"status,omitempty"`
+	TagLine                          *string                   `json:"tag_line,omitempty"`
+	UnifiedAPI                       *string                   `json:"unified_api,omitempty"`
+	UpdatedAt                        *float64                  `json:"updated_at,omitempty"`
+	Website                          *string                   `json:"website,omitempty"`
 }

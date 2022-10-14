@@ -33,15 +33,15 @@ type ListMediaRequest struct {
 }
 
 type ListMedia200ApplicationJSONListMediaResponse struct {
-	End             *int64                               `json:"end"`
-	FirstPageURI    *string                              `json:"first_page_uri"`
-	MediaList       []shared.APIV2010AccountMessageMedia `json:"media_list"`
-	NextPageURI     *string                              `json:"next_page_uri"`
-	Page            *int64                               `json:"page"`
-	PageSize        *int64                               `json:"page_size"`
-	PreviousPageURI *string                              `json:"previous_page_uri"`
-	Start           *int64                               `json:"start"`
-	URI             *string                              `json:"uri"`
+	End             *int64                               `json:"end,omitempty"`
+	FirstPageURI    *string                              `json:"first_page_uri,omitempty"`
+	MediaList       []shared.APIV2010AccountMessageMedia `json:"media_list,omitempty"`
+	NextPageURI     *string                              `json:"next_page_uri,omitempty"`
+	Page            *int64                               `json:"page,omitempty"`
+	PageSize        *int64                               `json:"page_size,omitempty"`
+	PreviousPageURI *string                              `json:"previous_page_uri,omitempty"`
+	Start           *int64                               `json:"start,omitempty"`
+	URI             *string                              `json:"uri,omitempty"`
 }
 
 type ListMediaResponse struct {

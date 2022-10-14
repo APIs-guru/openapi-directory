@@ -22,8 +22,8 @@ type SetProfileImageRequest struct {
 }
 
 type SetProfileImage200ApplicationJSON struct {
-	Photo *shared.PhotoResult `json:"photo"`
-	User  *shared.CurrentUser `json:"user"`
+	Photo *shared.PhotoResult `json:"photo,omitempty"`
+	User  *shared.CurrentUser `json:"user,omitempty"`
 }
 
 type SetProfileImageResponse struct {

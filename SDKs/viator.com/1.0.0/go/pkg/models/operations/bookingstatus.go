@@ -9,14 +9,14 @@ type BookingStatusHeaders struct {
 }
 
 type BookingStatusRequestBody struct {
-	BookingDateFrom     *string  `json:"bookingDateFrom"`
-	BookingDateTo       *string  `json:"bookingDateTo"`
-	DistributorItemRefs []string `json:"distributorItemRefs"`
-	DistributorRefs     []string `json:"distributorRefs"`
-	ItemIds             []int64  `json:"itemIds"`
-	LeadFirstName       *string  `json:"leadFirstName"`
-	LeadSurname         *string  `json:"leadSurname"`
-	Test                *bool    `json:"test"`
+	BookingDateFrom     *string  `json:"bookingDateFrom,omitempty"`
+	BookingDateTo       *string  `json:"bookingDateTo,omitempty"`
+	DistributorItemRefs []string `json:"distributorItemRefs,omitempty"`
+	DistributorRefs     []string `json:"distributorRefs,omitempty"`
+	ItemIds             []int64  `json:"itemIds,omitempty"`
+	LeadFirstName       *string  `json:"leadFirstName,omitempty"`
+	LeadSurname         *string  `json:"leadSurname,omitempty"`
+	Test                *bool    `json:"test,omitempty"`
 }
 
 type BookingStatusRequest struct {
@@ -25,37 +25,37 @@ type BookingStatusRequest struct {
 }
 
 type BookingStatus200ApplicationJSONDataItemSummaries struct {
-	BookingStatus      *shared.BookingStatusItem `json:"bookingStatus"`
-	DistributorItemRef *string                   `json:"distributorItemRef"`
-	ItemID             *int64                    `json:"itemId"`
-	ItineraryID        *int64                    `json:"itineraryId"`
-	SortOrder          *int64                    `json:"sortOrder"`
-	TravelDate         *string                   `json:"travelDate"`
+	BookingStatus      *shared.BookingStatusItem `json:"bookingStatus,omitempty"`
+	DistributorItemRef *string                   `json:"distributorItemRef,omitempty"`
+	ItemID             *int64                    `json:"itemId,omitempty"`
+	ItineraryID        *int64                    `json:"itineraryId,omitempty"`
+	SortOrder          *int64                    `json:"sortOrder,omitempty"`
+	TravelDate         *string                   `json:"travelDate,omitempty"`
 }
 
 type BookingStatus200ApplicationJSONData struct {
-	BookingDate    *string                                            `json:"bookingDate"`
-	BookingStatus  *shared.BookingStatusItinerary                     `json:"bookingStatus"`
-	DistributorRef *string                                            `json:"distributorRef"`
-	ItemSummaries  []BookingStatus200ApplicationJSONDataItemSummaries `json:"itemSummaries"`
-	ItineraryID    *int64                                             `json:"itineraryId"`
-	SortOrder      *int64                                             `json:"sortOrder"`
+	BookingDate    *string                                            `json:"bookingDate,omitempty"`
+	BookingStatus  *shared.BookingStatusItinerary                     `json:"bookingStatus,omitempty"`
+	DistributorRef *string                                            `json:"distributorRef,omitempty"`
+	ItemSummaries  []BookingStatus200ApplicationJSONDataItemSummaries `json:"itemSummaries,omitempty"`
+	ItineraryID    *int64                                             `json:"itineraryId,omitempty"`
+	SortOrder      *int64                                             `json:"sortOrder,omitempty"`
 }
 
 type BookingStatus200ApplicationJSON struct {
-	Data             *BookingStatus200ApplicationJSONData `json:"data"`
-	DateStamp        *string                              `json:"dateStamp"`
-	ErrorCodes       []string                             `json:"errorCodes"`
-	ErrorMessage     []interface{}                        `json:"errorMessage"`
-	ErrorMessageText *string                              `json:"errorMessageText"`
-	ErrorName        *string                              `json:"errorName"`
-	ErrorReference   *string                              `json:"errorReference"`
-	ErrorType        *string                              `json:"errorType"`
-	ExtraInfo        map[string]interface{}               `json:"extraInfo"`
-	ExtraObject      map[string]interface{}               `json:"extraObject"`
-	Success          *bool                                `json:"success"`
-	TotalCount       *int64                               `json:"totalCount"`
-	Vmid             *string                              `json:"vmid"`
+	Data             *BookingStatus200ApplicationJSONData `json:"data,omitempty"`
+	DateStamp        *string                              `json:"dateStamp,omitempty"`
+	ErrorCodes       []string                             `json:"errorCodes,omitempty"`
+	ErrorMessage     []interface{}                        `json:"errorMessage,omitempty"`
+	ErrorMessageText *string                              `json:"errorMessageText,omitempty"`
+	ErrorName        *string                              `json:"errorName,omitempty"`
+	ErrorReference   *string                              `json:"errorReference,omitempty"`
+	ErrorType        *string                              `json:"errorType,omitempty"`
+	ExtraInfo        map[string]interface{}               `json:"extraInfo,omitempty"`
+	ExtraObject      map[string]interface{}               `json:"extraObject,omitempty"`
+	Success          *bool                                `json:"success,omitempty"`
+	TotalCount       *int64                               `json:"totalCount,omitempty"`
+	Vmid             *string                              `json:"vmid,omitempty"`
 }
 
 type BookingStatusResponse struct {

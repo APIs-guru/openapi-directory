@@ -1,6 +1,6 @@
 package shared
 
 type OsPolicyAssignmentInstanceFilterInventory struct {
-	OsShortName *string `json:"osShortName"`
-	OsVersion   *string `json:"osVersion"`
+	OsShortName *string `json:"osShortName,omitempty"`
+	OsVersion   *string `json:"osVersion,omitempty"`
 }

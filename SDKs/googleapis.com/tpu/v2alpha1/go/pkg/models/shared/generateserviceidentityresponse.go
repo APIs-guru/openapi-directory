@@ -1,5 +1,5 @@
 package shared
 
 type GenerateServiceIdentityResponse struct {
-	Identity *ServiceIdentity `json:"identity"`
+	Identity *ServiceIdentity `json:"identity,omitempty"`
 }

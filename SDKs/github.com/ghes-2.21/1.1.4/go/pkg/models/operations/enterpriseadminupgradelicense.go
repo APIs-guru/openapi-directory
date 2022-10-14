@@ -1,7 +1,7 @@
 package operations
 
 type EnterpriseAdminUpgradeLicenseRequestBody struct {
-	License *string `json:"license"`
+	License *string `json:"license,omitempty"`
 }
 
 type EnterpriseAdminUpgradeLicenseRequest struct {

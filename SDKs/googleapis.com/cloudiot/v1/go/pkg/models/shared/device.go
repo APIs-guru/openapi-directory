@@ -11,21 +11,21 @@ const (
 )
 
 type Device struct {
-	Blocked            *bool               `json:"blocked"`
-	Config             *DeviceConfig       `json:"config"`
-	Credentials        []DeviceCredential  `json:"credentials"`
-	GatewayConfig      *GatewayConfig      `json:"gatewayConfig"`
-	ID                 *string             `json:"id"`
-	LastConfigAckTime  *string             `json:"lastConfigAckTime"`
-	LastConfigSendTime *string             `json:"lastConfigSendTime"`
-	LastErrorStatus    *Status             `json:"lastErrorStatus"`
-	LastErrorTime      *string             `json:"lastErrorTime"`
-	LastEventTime      *string             `json:"lastEventTime"`
-	LastHeartbeatTime  *string             `json:"lastHeartbeatTime"`
-	LastStateTime      *string             `json:"lastStateTime"`
-	LogLevel           *DeviceLogLevelEnum `json:"logLevel"`
-	Metadata           map[string]string   `json:"metadata"`
-	Name               *string             `json:"name"`
-	NumID              *string             `json:"numId"`
-	State              *DeviceState        `json:"state"`
+	Blocked            *bool               `json:"blocked,omitempty"`
+	Config             *DeviceConfig       `json:"config,omitempty"`
+	Credentials        []DeviceCredential  `json:"credentials,omitempty"`
+	GatewayConfig      *GatewayConfig      `json:"gatewayConfig,omitempty"`
+	ID                 *string             `json:"id,omitempty"`
+	LastConfigAckTime  *string             `json:"lastConfigAckTime,omitempty"`
+	LastConfigSendTime *string             `json:"lastConfigSendTime,omitempty"`
+	LastErrorStatus    *Status             `json:"lastErrorStatus,omitempty"`
+	LastErrorTime      *string             `json:"lastErrorTime,omitempty"`
+	LastEventTime      *string             `json:"lastEventTime,omitempty"`
+	LastHeartbeatTime  *string             `json:"lastHeartbeatTime,omitempty"`
+	LastStateTime      *string             `json:"lastStateTime,omitempty"`
+	LogLevel           *DeviceLogLevelEnum `json:"logLevel,omitempty"`
+	Metadata           map[string]string   `json:"metadata,omitempty"`
+	Name               *string             `json:"name,omitempty"`
+	NumID              *string             `json:"numId,omitempty"`
+	State              *DeviceState        `json:"state,omitempty"`
 }

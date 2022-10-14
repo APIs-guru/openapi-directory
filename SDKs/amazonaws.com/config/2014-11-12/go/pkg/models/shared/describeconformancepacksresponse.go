@@ -1,6 +1,6 @@
 package shared
 
 type DescribeConformancePacksResponse struct {
-	ConformancePackDetails []ConformancePackDetail `json:"ConformancePackDetails"`
-	NextToken              *string                 `json:"NextToken"`
+	ConformancePackDetails []ConformancePackDetail `json:"ConformancePackDetails,omitempty"`
+	NextToken              *string                 `json:"NextToken,omitempty"`
 }

@@ -1,13 +1,13 @@
 package shared
 
 type DocumentOccurrence struct {
-	CreateTime           *string  `json:"createTime"`
-	CreatorComment       *string  `json:"creatorComment"`
-	Creators             []string `json:"creators"`
-	DocumentComment      *string  `json:"documentComment"`
-	ExternalDocumentRefs []string `json:"externalDocumentRefs"`
-	ID                   *string  `json:"id"`
-	LicenseListVersion   *string  `json:"licenseListVersion"`
-	Namespace            *string  `json:"namespace"`
-	Title                *string  `json:"title"`
+	CreateTime           *string  `json:"createTime,omitempty"`
+	CreatorComment       *string  `json:"creatorComment,omitempty"`
+	Creators             []string `json:"creators,omitempty"`
+	DocumentComment      *string  `json:"documentComment,omitempty"`
+	ExternalDocumentRefs []string `json:"externalDocumentRefs,omitempty"`
+	ID                   *string  `json:"id,omitempty"`
+	LicenseListVersion   *string  `json:"licenseListVersion,omitempty"`
+	Namespace            *string  `json:"namespace,omitempty"`
+	Title                *string  `json:"title,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type EnterpriseCrmEventbusProtoDoubleParameterArray struct {
-	DoubleValues []float64 `json:"doubleValues"`
+	DoubleValues []float64 `json:"doubleValues,omitempty"`
 }

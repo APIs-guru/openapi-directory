@@ -1,7 +1,7 @@
 package shared
 
 type CertificateConfig struct {
-	PublicKey      *PublicKey             `json:"publicKey"`
-	ReusableConfig *ReusableConfigWrapper `json:"reusableConfig"`
-	SubjectConfig  *SubjectConfig         `json:"subjectConfig"`
+	PublicKey      *PublicKey             `json:"publicKey,omitempty"`
+	ReusableConfig *ReusableConfigWrapper `json:"reusableConfig,omitempty"`
+	SubjectConfig  *SubjectConfig         `json:"subjectConfig,omitempty"`
 }

@@ -5,13 +5,13 @@ import (
 )
 
 type Twitch struct {
-	Created     *time.Time `json:"created"`
-	Description *string    `json:"description"`
-	ExternalID  *int64     `json:"external_id"`
-	ID          *int64     `json:"id"`
-	Language    *string    `json:"language"`
-	Name        *string    `json:"name"`
-	Published   *time.Time `json:"published"`
-	Thumbnail   *string    `json:"thumbnail"`
-	ViewCount   *int64     `json:"view_count"`
+	Created     *time.Time `json:"created,omitempty"`
+	Description *string    `json:"description,omitempty"`
+	ExternalID  *int64     `json:"external_id,omitempty"`
+	ID          *int64     `json:"id,omitempty"`
+	Language    *string    `json:"language,omitempty"`
+	Name        *string    `json:"name,omitempty"`
+	Published   *time.Time `json:"published,omitempty"`
+	Thumbnail   *string    `json:"thumbnail,omitempty"`
+	ViewCount   *int64     `json:"view_count,omitempty"`
 }

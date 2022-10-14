@@ -40,12 +40,12 @@ type ChromepolicyCustomersPoliciesGroupsListGroupPriorityOrderingSecurity struct
 type ChromepolicyCustomersPoliciesGroupsListGroupPriorityOrderingRequest struct {
 	PathParams  ChromepolicyCustomersPoliciesGroupsListGroupPriorityOrderingPathParams
 	QueryParams ChromepolicyCustomersPoliciesGroupsListGroupPriorityOrderingQueryParams
-	Request     *shared.GoogleChromePolicyV1ListGroupPriorityOrderingRequest `request:"mediaType=application/json"`
+	Request     *shared.GoogleChromePolicyVersionsV1ListGroupPriorityOrderingRequest `request:"mediaType=application/json"`
 	Security    ChromepolicyCustomersPoliciesGroupsListGroupPriorityOrderingSecurity
 }
 
 type ChromepolicyCustomersPoliciesGroupsListGroupPriorityOrderingResponse struct {
-	ContentType                                           string
-	GoogleChromePolicyV1ListGroupPriorityOrderingResponse *shared.GoogleChromePolicyV1ListGroupPriorityOrderingResponse
-	StatusCode                                            int64
+	ContentType                                                   string
+	GoogleChromePolicyVersionsV1ListGroupPriorityOrderingResponse *shared.GoogleChromePolicyVersionsV1ListGroupPriorityOrderingResponse
+	StatusCode                                                    int64
 }

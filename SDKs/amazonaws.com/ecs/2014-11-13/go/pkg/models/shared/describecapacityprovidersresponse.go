@@ -1,7 +1,7 @@
 package shared
 
 type DescribeCapacityProvidersResponse struct {
-	CapacityProviders []CapacityProvider `json:"capacityProviders"`
-	Failures          []Failure          `json:"failures"`
-	NextToken         *string            `json:"nextToken"`
+	CapacityProviders []CapacityProvider `json:"capacityProviders,omitempty"`
+	Failures          []Failure          `json:"failures,omitempty"`
+	NextToken         *string            `json:"nextToken,omitempty"`
 }

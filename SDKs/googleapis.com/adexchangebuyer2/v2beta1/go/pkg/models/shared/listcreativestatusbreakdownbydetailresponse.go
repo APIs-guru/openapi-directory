@@ -16,7 +16,7 @@ const (
 )
 
 type ListCreativeStatusBreakdownByDetailResponse struct {
-	DetailType            *ListCreativeStatusBreakdownByDetailResponseDetailTypeEnum `json:"detailType"`
-	FilteredBidDetailRows []FilteredBidDetailRow                                     `json:"filteredBidDetailRows"`
-	NextPageToken         *string                                                    `json:"nextPageToken"`
+	DetailType            *ListCreativeStatusBreakdownByDetailResponseDetailTypeEnum `json:"detailType,omitempty"`
+	FilteredBidDetailRows []FilteredBidDetailRow                                     `json:"filteredBidDetailRows,omitempty"`
+	NextPageToken         *string                                                    `json:"nextPageToken,omitempty"`
 }

@@ -1,7 +1,7 @@
 package shared
 
 type Compatibility struct {
-	ClusterVersion   *string  `json:"clusterVersion"`
-	DefaultVersion   *bool    `json:"defaultVersion"`
-	PlatformVersions []string `json:"platformVersions"`
+	ClusterVersion   *string  `json:"clusterVersion,omitempty"`
+	DefaultVersion   *bool    `json:"defaultVersion,omitempty"`
+	PlatformVersions []string `json:"platformVersions,omitempty"`
 }

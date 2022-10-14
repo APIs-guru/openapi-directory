@@ -1,7 +1,7 @@
 package shared
 
 type GetConfigResponse struct {
-	ConfigCred *string `json:"ConfigCred"`
-	ConfigFile *string `json:"ConfigFile"`
-	ConfigType *string `json:"ConfigType"`
+	ConfigCred *string `json:"ConfigCred,omitempty"`
+	ConfigFile *string `json:"ConfigFile,omitempty"`
+	ConfigType *string `json:"ConfigType,omitempty"`
 }

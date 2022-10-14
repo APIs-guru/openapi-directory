@@ -38,6 +38,6 @@ const (
 )
 
 type BooleanCondition struct {
-	Type   *BooleanConditionTypeEnum `json:"type"`
-	Values []ConditionValue          `json:"values"`
+	Type   *BooleanConditionTypeEnum `json:"type,omitempty"`
+	Values []ConditionValue          `json:"values,omitempty"`
 }

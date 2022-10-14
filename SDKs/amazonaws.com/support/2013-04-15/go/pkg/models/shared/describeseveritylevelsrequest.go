@@ -1,5 +1,5 @@
 package shared
 
 type DescribeSeverityLevelsRequest struct {
-	Language *string `json:"language"`
+	Language *string `json:"language,omitempty"`
 }

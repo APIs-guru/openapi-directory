@@ -3,6 +3,6 @@ package shared
 type ManagedAgentStateChange struct {
 	ContainerName    string               `json:"containerName"`
 	ManagedAgentName ManagedAgentNameEnum `json:"managedAgentName"`
-	Reason           *string              `json:"reason"`
+	Reason           *string              `json:"reason,omitempty"`
 	Status           string               `json:"status"`
 }

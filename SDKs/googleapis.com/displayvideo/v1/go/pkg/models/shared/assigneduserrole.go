@@ -18,8 +18,8 @@ const (
 )
 
 type AssignedUserRole struct {
-	AdvertiserID       *string                       `json:"advertiserId"`
-	AssignedUserRoleID *string                       `json:"assignedUserRoleId"`
-	PartnerID          *string                       `json:"partnerId"`
-	UserRole           *AssignedUserRoleUserRoleEnum `json:"userRole"`
+	AdvertiserID       *string                       `json:"advertiserId,omitempty"`
+	AssignedUserRoleID *string                       `json:"assignedUserRoleId,omitempty"`
+	PartnerID          *string                       `json:"partnerId,omitempty"`
+	UserRole           *AssignedUserRoleUserRoleEnum `json:"userRole,omitempty"`
 }

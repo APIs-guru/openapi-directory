@@ -1,16 +1,16 @@
 package shared
 
 type IdentitytoolkitRelyingpartyGetProjectConfigResponse struct {
-	AllowPasswordUser           *bool          `json:"allowPasswordUser"`
-	APIKey                      *string        `json:"apiKey"`
-	AuthorizedDomains           []string       `json:"authorizedDomains"`
-	ChangeEmailTemplate         *EmailTemplate `json:"changeEmailTemplate"`
-	DynamicLinksDomain          *string        `json:"dynamicLinksDomain"`
-	EnableAnonymousUser         *bool          `json:"enableAnonymousUser"`
-	IdpConfig                   []IdpConfig    `json:"idpConfig"`
-	LegacyResetPasswordTemplate *EmailTemplate `json:"legacyResetPasswordTemplate"`
-	ProjectID                   *string        `json:"projectId"`
-	ResetPasswordTemplate       *EmailTemplate `json:"resetPasswordTemplate"`
-	UseEmailSending             *bool          `json:"useEmailSending"`
-	VerifyEmailTemplate         *EmailTemplate `json:"verifyEmailTemplate"`
+	AllowPasswordUser           *bool          `json:"allowPasswordUser,omitempty"`
+	APIKey                      *string        `json:"apiKey,omitempty"`
+	AuthorizedDomains           []string       `json:"authorizedDomains,omitempty"`
+	ChangeEmailTemplate         *EmailTemplate `json:"changeEmailTemplate,omitempty"`
+	DynamicLinksDomain          *string        `json:"dynamicLinksDomain,omitempty"`
+	EnableAnonymousUser         *bool          `json:"enableAnonymousUser,omitempty"`
+	IdpConfig                   []IdpConfig    `json:"idpConfig,omitempty"`
+	LegacyResetPasswordTemplate *EmailTemplate `json:"legacyResetPasswordTemplate,omitempty"`
+	ProjectID                   *string        `json:"projectId,omitempty"`
+	ResetPasswordTemplate       *EmailTemplate `json:"resetPasswordTemplate,omitempty"`
+	UseEmailSending             *bool          `json:"useEmailSending,omitempty"`
+	VerifyEmailTemplate         *EmailTemplate `json:"verifyEmailTemplate,omitempty"`
 }

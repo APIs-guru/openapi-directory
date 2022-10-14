@@ -21,6 +21,6 @@ const (
 )
 
 type Onev21droplets1Percent7BdropletIDPercent7D1actionsPostRequestBodyContentApplication1jsonSchemaAnyOf6 struct {
-	Name *string                                                                                                      `json:"name"`
+	Name *string                                                                                                      `json:"name,omitempty"`
 	Type Onev21droplets1Percent7BdropletIDPercent7D1actionsPostRequestBodyContentApplication1jsonSchemaAnyOf6TypeEnum `json:"type"`
 }

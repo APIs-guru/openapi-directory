@@ -1,12 +1,12 @@
 package shared
 
 type PolicyDetails struct {
-	Actions           []Action                     `json:"Actions"`
-	EventSource       *EventSource                 `json:"EventSource"`
-	Parameters        *Parameters                  `json:"Parameters"`
-	PolicyType        *PolicyTypeValuesEnum        `json:"PolicyType"`
-	ResourceLocations []ResourceLocationValuesEnum `json:"ResourceLocations"`
-	ResourceTypes     []ResourceTypeValuesEnum     `json:"ResourceTypes"`
-	Schedules         []Schedule                   `json:"Schedules"`
-	TargetTags        []Tag                        `json:"TargetTags"`
+	Actions           []Action                     `json:"Actions,omitempty"`
+	EventSource       *EventSource                 `json:"EventSource,omitempty"`
+	Parameters        *Parameters                  `json:"Parameters,omitempty"`
+	PolicyType        *PolicyTypeValuesEnum        `json:"PolicyType,omitempty"`
+	ResourceLocations []ResourceLocationValuesEnum `json:"ResourceLocations,omitempty"`
+	ResourceTypes     []ResourceTypeValuesEnum     `json:"ResourceTypes,omitempty"`
+	Schedules         []Schedule                   `json:"Schedules,omitempty"`
+	TargetTags        []Tag                        `json:"TargetTags,omitempty"`
 }

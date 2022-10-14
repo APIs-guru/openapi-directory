@@ -11,17 +11,17 @@ const (
 )
 
 type GoogleCloudDataplexV1Asset struct {
-	CreateTime      *string                                    `json:"createTime"`
-	Description     *string                                    `json:"description"`
-	DiscoverySpec   *GoogleCloudDataplexV1AssetDiscoverySpec   `json:"discoverySpec"`
-	DiscoveryStatus *GoogleCloudDataplexV1AssetDiscoveryStatus `json:"discoveryStatus"`
-	DisplayName     *string                                    `json:"displayName"`
-	Labels          map[string]string                          `json:"labels"`
-	Name            *string                                    `json:"name"`
-	ResourceSpec    *GoogleCloudDataplexV1AssetResourceSpec    `json:"resourceSpec"`
-	ResourceStatus  *GoogleCloudDataplexV1AssetResourceStatus  `json:"resourceStatus"`
-	SecurityStatus  *GoogleCloudDataplexV1AssetSecurityStatus  `json:"securityStatus"`
-	State           *GoogleCloudDataplexV1AssetStateEnum       `json:"state"`
-	UID             *string                                    `json:"uid"`
-	UpdateTime      *string                                    `json:"updateTime"`
+	CreateTime      *string                                    `json:"createTime,omitempty"`
+	Description     *string                                    `json:"description,omitempty"`
+	DiscoverySpec   *GoogleCloudDataplexV1AssetDiscoverySpec   `json:"discoverySpec,omitempty"`
+	DiscoveryStatus *GoogleCloudDataplexV1AssetDiscoveryStatus `json:"discoveryStatus,omitempty"`
+	DisplayName     *string                                    `json:"displayName,omitempty"`
+	Labels          map[string]string                          `json:"labels,omitempty"`
+	Name            *string                                    `json:"name,omitempty"`
+	ResourceSpec    *GoogleCloudDataplexV1AssetResourceSpec    `json:"resourceSpec,omitempty"`
+	ResourceStatus  *GoogleCloudDataplexV1AssetResourceStatus  `json:"resourceStatus,omitempty"`
+	SecurityStatus  *GoogleCloudDataplexV1AssetSecurityStatus  `json:"securityStatus,omitempty"`
+	State           *GoogleCloudDataplexV1AssetStateEnum       `json:"state,omitempty"`
+	UID             *string                                    `json:"uid,omitempty"`
+	UpdateTime      *string                                    `json:"updateTime,omitempty"`
 }

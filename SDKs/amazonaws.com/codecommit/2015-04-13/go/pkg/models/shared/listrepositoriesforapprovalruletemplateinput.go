@@ -2,6 +2,6 @@ package shared
 
 type ListRepositoriesForApprovalRuleTemplateInput struct {
 	ApprovalRuleTemplateName string  `json:"approvalRuleTemplateName"`
-	MaxResults               *int64  `json:"maxResults"`
-	NextToken                *string `json:"nextToken"`
+	MaxResults               *int64  `json:"maxResults,omitempty"`
+	NextToken                *string `json:"nextToken,omitempty"`
 }

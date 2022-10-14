@@ -15,8 +15,8 @@ const (
 )
 
 type YarnApplication struct {
-	Name        *string                   `json:"name"`
-	Progress    *float32                  `json:"progress"`
-	State       *YarnApplicationStateEnum `json:"state"`
-	TrackingURL *string                   `json:"trackingUrl"`
+	Name        *string                   `json:"name,omitempty"`
+	Progress    *float32                  `json:"progress,omitempty"`
+	State       *YarnApplicationStateEnum `json:"state,omitempty"`
+	TrackingURL *string                   `json:"trackingUrl,omitempty"`
 }

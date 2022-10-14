@@ -19,10 +19,10 @@ const (
 )
 
 type GoogleDatastoreAdminV1Index struct {
-	Ancestor   *GoogleDatastoreAdminV1IndexAncestorEnum `json:"ancestor"`
-	IndexID    *string                                  `json:"indexId"`
-	Kind       *string                                  `json:"kind"`
-	ProjectID  *string                                  `json:"projectId"`
-	Properties []GoogleDatastoreAdminV1IndexedProperty  `json:"properties"`
-	State      *GoogleDatastoreAdminV1IndexStateEnum    `json:"state"`
+	Ancestor   *GoogleDatastoreAdminV1IndexAncestorEnum `json:"ancestor,omitempty"`
+	IndexID    *string                                  `json:"indexId,omitempty"`
+	Kind       *string                                  `json:"kind,omitempty"`
+	ProjectID  *string                                  `json:"projectId,omitempty"`
+	Properties []GoogleDatastoreAdminV1IndexedProperty  `json:"properties,omitempty"`
+	State      *GoogleDatastoreAdminV1IndexStateEnum    `json:"state,omitempty"`
 }

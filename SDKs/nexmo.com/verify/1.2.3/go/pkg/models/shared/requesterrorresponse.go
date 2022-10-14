@@ -20,8 +20,8 @@ const (
 )
 
 type RequestErrorResponse struct {
-	ErrorText *string                         `json:"error_text"`
-	Network   *string                         `json:"network"`
-	RequestID *string                         `json:"request_id"`
-	Status    *RequestErrorResponseStatusEnum `json:"status"`
+	ErrorText *string                         `json:"error_text,omitempty"`
+	Network   *string                         `json:"network,omitempty"`
+	RequestID *string                         `json:"request_id,omitempty"`
+	Status    *RequestErrorResponseStatusEnum `json:"status,omitempty"`
 }

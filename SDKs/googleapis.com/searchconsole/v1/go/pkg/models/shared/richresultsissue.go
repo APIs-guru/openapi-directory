@@ -9,6 +9,6 @@ const (
 )
 
 type RichResultsIssue struct {
-	IssueMessage *string                       `json:"issueMessage"`
-	Severity     *RichResultsIssueSeverityEnum `json:"severity"`
+	IssueMessage *string                       `json:"issueMessage,omitempty"`
+	Severity     *RichResultsIssueSeverityEnum `json:"severity,omitempty"`
 }

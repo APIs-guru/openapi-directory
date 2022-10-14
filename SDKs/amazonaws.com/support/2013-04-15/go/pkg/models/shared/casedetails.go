@@ -1,16 +1,16 @@
 package shared
 
 type CaseDetails struct {
-	CaseID               *string                   `json:"caseId"`
-	CategoryCode         *string                   `json:"categoryCode"`
-	CcEmailAddresses     []string                  `json:"ccEmailAddresses"`
-	DisplayID            *string                   `json:"displayId"`
-	Language             *string                   `json:"language"`
-	RecentCommunications *RecentCaseCommunications `json:"recentCommunications"`
-	ServiceCode          *string                   `json:"serviceCode"`
-	SeverityCode         *string                   `json:"severityCode"`
-	Status               *string                   `json:"status"`
-	Subject              *string                   `json:"subject"`
-	SubmittedBy          *string                   `json:"submittedBy"`
-	TimeCreated          *string                   `json:"timeCreated"`
+	CaseID               *string                   `json:"caseId,omitempty"`
+	CategoryCode         *string                   `json:"categoryCode,omitempty"`
+	CcEmailAddresses     []string                  `json:"ccEmailAddresses,omitempty"`
+	DisplayID            *string                   `json:"displayId,omitempty"`
+	Language             *string                   `json:"language,omitempty"`
+	RecentCommunications *RecentCaseCommunications `json:"recentCommunications,omitempty"`
+	ServiceCode          *string                   `json:"serviceCode,omitempty"`
+	SeverityCode         *string                   `json:"severityCode,omitempty"`
+	Status               *string                   `json:"status,omitempty"`
+	Subject              *string                   `json:"subject,omitempty"`
+	SubmittedBy          *string                   `json:"submittedBy,omitempty"`
+	TimeCreated          *string                   `json:"timeCreated,omitempty"`
 }

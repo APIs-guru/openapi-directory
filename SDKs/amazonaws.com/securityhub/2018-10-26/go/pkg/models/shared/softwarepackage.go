@@ -1,11 +1,11 @@
 package shared
 
 type SoftwarePackage struct {
-	Architecture   *string `json:"Architecture"`
-	Epoch          *string `json:"Epoch"`
-	FilePath       *string `json:"FilePath"`
-	Name           *string `json:"Name"`
-	PackageManager *string `json:"PackageManager"`
-	Release        *string `json:"Release"`
-	Version        *string `json:"Version"`
+	Architecture   *string `json:"Architecture,omitempty"`
+	Epoch          *string `json:"Epoch,omitempty"`
+	FilePath       *string `json:"FilePath,omitempty"`
+	Name           *string `json:"Name,omitempty"`
+	PackageManager *string `json:"PackageManager,omitempty"`
+	Release        *string `json:"Release,omitempty"`
+	Version        *string `json:"Version,omitempty"`
 }

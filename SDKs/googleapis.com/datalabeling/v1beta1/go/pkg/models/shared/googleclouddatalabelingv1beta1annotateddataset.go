@@ -27,15 +27,15 @@ const (
 )
 
 type GoogleCloudDatalabelingV1beta1AnnotatedDataset struct {
-	AnnotationSource      *GoogleCloudDatalabelingV1beta1AnnotatedDatasetAnnotationSourceEnum `json:"annotationSource"`
-	AnnotationType        *GoogleCloudDatalabelingV1beta1AnnotatedDatasetAnnotationTypeEnum   `json:"annotationType"`
-	BlockingResources     []string                                                            `json:"blockingResources"`
-	CompletedExampleCount *string                                                             `json:"completedExampleCount"`
-	CreateTime            *string                                                             `json:"createTime"`
-	Description           *string                                                             `json:"description"`
-	DisplayName           *string                                                             `json:"displayName"`
-	ExampleCount          *string                                                             `json:"exampleCount"`
-	LabelStats            *GoogleCloudDatalabelingV1beta1LabelStats                           `json:"labelStats"`
-	Metadata              *GoogleCloudDatalabelingV1beta1AnnotatedDatasetMetadata             `json:"metadata"`
-	Name                  *string                                                             `json:"name"`
+	AnnotationSource      *GoogleCloudDatalabelingV1beta1AnnotatedDatasetAnnotationSourceEnum `json:"annotationSource,omitempty"`
+	AnnotationType        *GoogleCloudDatalabelingV1beta1AnnotatedDatasetAnnotationTypeEnum   `json:"annotationType,omitempty"`
+	BlockingResources     []string                                                            `json:"blockingResources,omitempty"`
+	CompletedExampleCount *string                                                             `json:"completedExampleCount,omitempty"`
+	CreateTime            *string                                                             `json:"createTime,omitempty"`
+	Description           *string                                                             `json:"description,omitempty"`
+	DisplayName           *string                                                             `json:"displayName,omitempty"`
+	ExampleCount          *string                                                             `json:"exampleCount,omitempty"`
+	LabelStats            *GoogleCloudDatalabelingV1beta1LabelStats                           `json:"labelStats,omitempty"`
+	Metadata              *GoogleCloudDatalabelingV1beta1AnnotatedDatasetMetadata             `json:"metadata,omitempty"`
+	Name                  *string                                                             `json:"name,omitempty"`
 }

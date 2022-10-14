@@ -1,6 +1,6 @@
 package shared
 
 type ProductPermissions struct {
-	Permission []ProductPermission `json:"permission"`
-	ProductID  *string             `json:"productId"`
+	Permission []ProductPermission `json:"permission,omitempty"`
+	ProductID  *string             `json:"productId,omitempty"`
 }

@@ -1,7 +1,7 @@
 package shared
 
 type LaunchTemplateSpecification struct {
-	LaunchTemplateID   *string `json:"launchTemplateId"`
-	LaunchTemplateName *string `json:"launchTemplateName"`
-	Version            *string `json:"version"`
+	LaunchTemplateID   *string `json:"launchTemplateId,omitempty"`
+	LaunchTemplateName *string `json:"launchTemplateName,omitempty"`
+	Version            *string `json:"version,omitempty"`
 }

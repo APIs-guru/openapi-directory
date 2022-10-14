@@ -1,6 +1,6 @@
 package shared
 
 type ListEulaAcceptancesResponse struct {
-	EulaAcceptances []EulaAcceptance `json:"eulaAcceptances"`
-	NextToken       *string          `json:"nextToken"`
+	EulaAcceptances []EulaAcceptance `json:"eulaAcceptances,omitempty"`
+	NextToken       *string          `json:"nextToken,omitempty"`
 }

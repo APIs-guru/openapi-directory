@@ -29,14 +29,14 @@ type ListIndexHeaders struct {
 }
 
 type ListIndexRequestBodyIndexReference struct {
-	Selector *string `json:"Selector"`
+	Selector *string `json:"Selector,omitempty"`
 }
 
 type ListIndexRequestBody struct {
 	IndexReference        ListIndexRequestBodyIndexReference `json:"IndexReference"`
-	MaxResults            *int64                             `json:"MaxResults"`
-	NextToken             *string                            `json:"NextToken"`
-	RangesOnIndexedValues []shared.ObjectAttributeRange      `json:"RangesOnIndexedValues"`
+	MaxResults            *int64                             `json:"MaxResults,omitempty"`
+	NextToken             *string                            `json:"NextToken,omitempty"`
+	RangesOnIndexedValues []shared.ObjectAttributeRange      `json:"RangesOnIndexedValues,omitempty"`
 }
 
 type ListIndexRequest struct {

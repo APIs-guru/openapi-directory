@@ -15,8 +15,8 @@ const (
 )
 
 type CecerRequestBody struct {
-	CertificateParameters *CecerRequestBodyCertificateParameters `json:"certificateParameters"`
-	ConsentArtifact       *interface{}                           `json:"consentArtifact"`
+	CertificateParameters *CecerRequestBodyCertificateParameters `json:"certificateParameters,omitempty"`
+	ConsentArtifact       *interface{}                           `json:"consentArtifact,omitempty"`
 	Format                CecerRequestBodyFormatEnum             `json:"format"`
 	TxnID                 string                                 `json:"txnId"`
 }
@@ -52,8 +52,8 @@ const (
 )
 
 type Cecer400ApplicationJSON struct {
-	Error            *Cecer400ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Cecer400ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Cecer400ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Cecer400ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Cecer401ApplicationJSONErrorEnum string
@@ -71,8 +71,8 @@ const (
 )
 
 type Cecer401ApplicationJSON struct {
-	Error            *Cecer401ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Cecer401ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Cecer401ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Cecer401ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Cecer404ApplicationJSONErrorEnum string
@@ -90,8 +90,8 @@ const (
 )
 
 type Cecer404ApplicationJSON struct {
-	Error            *Cecer404ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Cecer404ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Cecer404ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Cecer404ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Cecer500ApplicationJSONErrorEnum string
@@ -107,8 +107,8 @@ const (
 )
 
 type Cecer500ApplicationJSON struct {
-	Error            *Cecer500ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Cecer500ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Cecer500ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Cecer500ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Cecer502ApplicationJSONErrorEnum string
@@ -124,8 +124,8 @@ const (
 )
 
 type Cecer502ApplicationJSON struct {
-	Error            *Cecer502ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Cecer502ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Cecer502ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Cecer502ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Cecer503ApplicationJSONErrorEnum string
@@ -141,8 +141,8 @@ const (
 )
 
 type Cecer503ApplicationJSON struct {
-	Error            *Cecer503ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Cecer503ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Cecer503ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Cecer503ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Cecer504ApplicationJSONErrorEnum string
@@ -158,8 +158,8 @@ const (
 )
 
 type Cecer504ApplicationJSON struct {
-	Error            *Cecer504ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Cecer504ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Cecer504ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Cecer504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type CecerResponse struct {

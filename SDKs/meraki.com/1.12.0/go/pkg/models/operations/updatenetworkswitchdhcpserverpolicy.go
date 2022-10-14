@@ -12,9 +12,9 @@ const (
 )
 
 type UpdateNetworkSwitchDhcpServerPolicyRequestBody struct {
-	AllowedServers []string                                                         `json:"allowedServers"`
-	BlockedServers []string                                                         `json:"blockedServers"`
-	DefaultPolicy  *UpdateNetworkSwitchDhcpServerPolicyRequestBodyDefaultPolicyEnum `json:"defaultPolicy"`
+	AllowedServers []string                                                         `json:"allowedServers,omitempty"`
+	BlockedServers []string                                                         `json:"blockedServers,omitempty"`
+	DefaultPolicy  *UpdateNetworkSwitchDhcpServerPolicyRequestBodyDefaultPolicyEnum `json:"defaultPolicy,omitempty"`
 }
 
 type UpdateNetworkSwitchDhcpServerPolicyRequest struct {

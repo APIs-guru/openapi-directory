@@ -1,17 +1,17 @@
 package shared
 
 type OrderedJob struct {
-	HadoopJob           *HadoopJob        `json:"hadoopJob"`
-	HiveJob             *HiveJob          `json:"hiveJob"`
-	Labels              map[string]string `json:"labels"`
-	PigJob              *PigJob           `json:"pigJob"`
-	PrerequisiteStepIds []string          `json:"prerequisiteStepIds"`
-	PrestoJob           *PrestoJob        `json:"prestoJob"`
-	PysparkJob          *PySparkJob       `json:"pysparkJob"`
-	Scheduling          *JobScheduling    `json:"scheduling"`
-	SparkJob            *SparkJob         `json:"sparkJob"`
-	SparkRJob           *SparkRJob        `json:"sparkRJob"`
-	SparkSQLJob         *SparkSQLJob      `json:"sparkSqlJob"`
-	StepID              *string           `json:"stepId"`
-	TrinoJob            *TrinoJob         `json:"trinoJob"`
+	HadoopJob           *HadoopJob        `json:"hadoopJob,omitempty"`
+	HiveJob             *HiveJob          `json:"hiveJob,omitempty"`
+	Labels              map[string]string `json:"labels,omitempty"`
+	PigJob              *PigJob           `json:"pigJob,omitempty"`
+	PrerequisiteStepIds []string          `json:"prerequisiteStepIds,omitempty"`
+	PrestoJob           *PrestoJob        `json:"prestoJob,omitempty"`
+	PysparkJob          *PySparkJob       `json:"pysparkJob,omitempty"`
+	Scheduling          *JobScheduling    `json:"scheduling,omitempty"`
+	SparkJob            *SparkJob         `json:"sparkJob,omitempty"`
+	SparkRJob           *SparkRJob        `json:"sparkRJob,omitempty"`
+	SparkSQLJob         *SparkSQLJob      `json:"sparkSqlJob,omitempty"`
+	StepID              *string           `json:"stepId,omitempty"`
+	TrinoJob            *TrinoJob         `json:"trinoJob,omitempty"`
 }

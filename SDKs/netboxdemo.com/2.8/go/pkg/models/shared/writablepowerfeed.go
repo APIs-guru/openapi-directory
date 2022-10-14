@@ -35,20 +35,20 @@ const (
 )
 
 type WritablePowerFeed struct {
-	Amperage       *int64                             `json:"amperage"`
-	Comments       *string                            `json:"comments"`
-	Created        *time.Time                         `json:"created"`
-	CustomFields   map[string]interface{}             `json:"custom_fields"`
-	ID             *int64                             `json:"id"`
-	LastUpdated    *time.Time                         `json:"last_updated"`
-	MaxUtilization *int64                             `json:"max_utilization"`
+	Amperage       *int64                             `json:"amperage,omitempty"`
+	Comments       *string                            `json:"comments,omitempty"`
+	Created        *time.Time                         `json:"created,omitempty"`
+	CustomFields   map[string]interface{}             `json:"custom_fields,omitempty"`
+	ID             *int64                             `json:"id,omitempty"`
+	LastUpdated    *time.Time                         `json:"last_updated,omitempty"`
+	MaxUtilization *int64                             `json:"max_utilization,omitempty"`
 	Name           string                             `json:"name"`
-	Phase          *WritablePowerFeedPhasePhaseEnum   `json:"phase"`
+	Phase          *WritablePowerFeedPhasePhaseEnum   `json:"phase,omitempty"`
 	PowerPanel     int64                              `json:"power_panel"`
-	Rack           *int64                             `json:"rack"`
-	Status         *WritablePowerFeedStatusStatusEnum `json:"status"`
-	Supply         *WritablePowerFeedSupplySupplyEnum `json:"supply"`
-	Tags           []string                           `json:"tags"`
-	Type           *WritablePowerFeedTypeTypeEnum     `json:"type"`
-	Voltage        *int64                             `json:"voltage"`
+	Rack           *int64                             `json:"rack,omitempty"`
+	Status         *WritablePowerFeedStatusStatusEnum `json:"status,omitempty"`
+	Supply         *WritablePowerFeedSupplySupplyEnum `json:"supply,omitempty"`
+	Tags           []string                           `json:"tags,omitempty"`
+	Type           *WritablePowerFeedTypeTypeEnum     `json:"type,omitempty"`
+	Voltage        *int64                             `json:"voltage,omitempty"`
 }

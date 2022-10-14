@@ -1,19 +1,19 @@
 package shared
 
 type Cluster struct {
-	ActiveServicesCount               *int64                         `json:"activeServicesCount"`
-	Attachments                       []Attachment                   `json:"attachments"`
-	AttachmentsStatus                 *string                        `json:"attachmentsStatus"`
-	CapacityProviders                 []string                       `json:"capacityProviders"`
-	ClusterArn                        *string                        `json:"clusterArn"`
-	ClusterName                       *string                        `json:"clusterName"`
-	Configuration                     *ClusterConfiguration          `json:"configuration"`
-	DefaultCapacityProviderStrategy   []CapacityProviderStrategyItem `json:"defaultCapacityProviderStrategy"`
-	PendingTasksCount                 *int64                         `json:"pendingTasksCount"`
-	RegisteredContainerInstancesCount *int64                         `json:"registeredContainerInstancesCount"`
-	RunningTasksCount                 *int64                         `json:"runningTasksCount"`
-	Settings                          []ClusterSetting               `json:"settings"`
-	Statistics                        []KeyValuePair                 `json:"statistics"`
-	Status                            *string                        `json:"status"`
-	Tags                              []Tag                          `json:"tags"`
+	ActiveServicesCount               *int64                         `json:"activeServicesCount,omitempty"`
+	Attachments                       []Attachment                   `json:"attachments,omitempty"`
+	AttachmentsStatus                 *string                        `json:"attachmentsStatus,omitempty"`
+	CapacityProviders                 []string                       `json:"capacityProviders,omitempty"`
+	ClusterArn                        *string                        `json:"clusterArn,omitempty"`
+	ClusterName                       *string                        `json:"clusterName,omitempty"`
+	Configuration                     *ClusterConfiguration          `json:"configuration,omitempty"`
+	DefaultCapacityProviderStrategy   []CapacityProviderStrategyItem `json:"defaultCapacityProviderStrategy,omitempty"`
+	PendingTasksCount                 *int64                         `json:"pendingTasksCount,omitempty"`
+	RegisteredContainerInstancesCount *int64                         `json:"registeredContainerInstancesCount,omitempty"`
+	RunningTasksCount                 *int64                         `json:"runningTasksCount,omitempty"`
+	Settings                          []ClusterSetting               `json:"settings,omitempty"`
+	Statistics                        []KeyValuePair                 `json:"statistics,omitempty"`
+	Status                            *string                        `json:"status,omitempty"`
+	Tags                              []Tag                          `json:"tags,omitempty"`
 }

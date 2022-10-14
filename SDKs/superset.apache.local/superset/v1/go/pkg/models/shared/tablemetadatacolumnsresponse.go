@@ -1,9 +1,9 @@
 package shared
 
 type TableMetadataColumnsResponse struct {
-	DuplicatesConstraint *string  `json:"duplicates_constraint"`
-	Keys                 []string `json:"keys"`
-	LongType             *string  `json:"longType"`
-	Name                 *string  `json:"name"`
-	Type                 *string  `json:"type"`
+	DuplicatesConstraint *string  `json:"duplicates_constraint,omitempty"`
+	Keys                 []string `json:"keys,omitempty"`
+	LongType             *string  `json:"longType,omitempty"`
+	Name                 *string  `json:"name,omitempty"`
+	Type                 *string  `json:"type,omitempty"`
 }

@@ -5,11 +5,11 @@ import (
 )
 
 type DescribeAgentResponse struct {
-	AgentArn           *string            `json:"AgentArn"`
-	CreationTime       *time.Time         `json:"CreationTime"`
-	EndpointType       *EndpointTypeEnum  `json:"EndpointType"`
-	LastConnectionTime *time.Time         `json:"LastConnectionTime"`
-	Name               *string            `json:"Name"`
-	PrivateLinkConfig  *PrivateLinkConfig `json:"PrivateLinkConfig"`
-	Status             *AgentStatusEnum   `json:"Status"`
+	AgentArn           *string            `json:"AgentArn,omitempty"`
+	CreationTime       *time.Time         `json:"CreationTime,omitempty"`
+	EndpointType       *EndpointTypeEnum  `json:"EndpointType,omitempty"`
+	LastConnectionTime *time.Time         `json:"LastConnectionTime,omitempty"`
+	Name               *string            `json:"Name,omitempty"`
+	PrivateLinkConfig  *PrivateLinkConfig `json:"PrivateLinkConfig,omitempty"`
+	Status             *AgentStatusEnum   `json:"Status,omitempty"`
 }

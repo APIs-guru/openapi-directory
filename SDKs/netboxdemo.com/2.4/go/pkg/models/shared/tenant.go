@@ -5,14 +5,14 @@ import (
 )
 
 type Tenant struct {
-	Comments     *string                `json:"comments"`
-	Created      *time.Time             `json:"created"`
-	CustomFields map[string]interface{} `json:"custom_fields"`
-	Description  *string                `json:"description"`
-	Group        *NestedTenantGroup     `json:"group"`
-	ID           *int64                 `json:"id"`
-	LastUpdated  *time.Time             `json:"last_updated"`
+	Comments     *string                `json:"comments,omitempty"`
+	Created      *time.Time             `json:"created,omitempty"`
+	CustomFields map[string]interface{} `json:"custom_fields,omitempty"`
+	Description  *string                `json:"description,omitempty"`
+	Group        *NestedTenantGroup     `json:"group,omitempty"`
+	ID           *int64                 `json:"id,omitempty"`
+	LastUpdated  *time.Time             `json:"last_updated,omitempty"`
 	Name         string                 `json:"name"`
 	Slug         string                 `json:"slug"`
-	Tags         []string               `json:"tags"`
+	Tags         []string               `json:"tags,omitempty"`
 }

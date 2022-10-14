@@ -10,11 +10,11 @@ const (
 )
 
 type CodeScanningAlertRule struct {
-	Description     *string                            `json:"description"`
-	FullDescription *string                            `json:"full_description"`
-	Help            *string                            `json:"help"`
-	ID              *string                            `json:"id"`
-	Name            *string                            `json:"name"`
-	Severity        *CodeScanningAlertRuleSeverityEnum `json:"severity"`
-	Tags            []string                           `json:"tags"`
+	Description     *string                            `json:"description,omitempty"`
+	FullDescription *string                            `json:"full_description,omitempty"`
+	Help            *string                            `json:"help,omitempty"`
+	ID              *string                            `json:"id,omitempty"`
+	Name            *string                            `json:"name,omitempty"`
+	Severity        *CodeScanningAlertRuleSeverityEnum `json:"severity,omitempty"`
+	Tags            []string                           `json:"tags,omitempty"`
 }

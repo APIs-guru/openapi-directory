@@ -5,10 +5,10 @@ import (
 )
 
 type UpdateSuiteDefinitionResponse struct {
-	CreatedAt              *time.Time `json:"createdAt"`
-	LastUpdatedAt          *time.Time `json:"lastUpdatedAt"`
-	SuiteDefinitionArn     *string    `json:"suiteDefinitionArn"`
-	SuiteDefinitionID      *string    `json:"suiteDefinitionId"`
-	SuiteDefinitionName    *string    `json:"suiteDefinitionName"`
-	SuiteDefinitionVersion *string    `json:"suiteDefinitionVersion"`
+	CreatedAt              *time.Time `json:"createdAt,omitempty"`
+	LastUpdatedAt          *time.Time `json:"lastUpdatedAt,omitempty"`
+	SuiteDefinitionArn     *string    `json:"suiteDefinitionArn,omitempty"`
+	SuiteDefinitionID      *string    `json:"suiteDefinitionId,omitempty"`
+	SuiteDefinitionName    *string    `json:"suiteDefinitionName,omitempty"`
+	SuiteDefinitionVersion *string    `json:"suiteDefinitionVersion,omitempty"`
 }

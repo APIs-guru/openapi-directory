@@ -1,7 +1,7 @@
 package shared
 
 type Captions struct {
-	CaptionFormats []CaptionFormat `json:"CaptionFormats"`
-	CaptionSources []CaptionSource `json:"CaptionSources"`
-	MergePolicy    *string         `json:"MergePolicy"`
+	CaptionFormats []CaptionFormat `json:"CaptionFormats,omitempty"`
+	CaptionSources []CaptionSource `json:"CaptionSources,omitempty"`
+	MergePolicy    *string         `json:"MergePolicy,omitempty"`
 }

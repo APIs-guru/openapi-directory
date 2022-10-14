@@ -6,20 +6,20 @@ import (
 
 type ApplicationDetail struct {
 	ApplicationArn                                 string                                          `json:"ApplicationARN"`
-	ApplicationConfigurationDescription            *ApplicationConfigurationDescription            `json:"ApplicationConfigurationDescription"`
-	ApplicationDescription                         *string                                         `json:"ApplicationDescription"`
-	ApplicationMaintenanceConfigurationDescription *ApplicationMaintenanceConfigurationDescription `json:"ApplicationMaintenanceConfigurationDescription"`
-	ApplicationMode                                *ApplicationModeEnum                            `json:"ApplicationMode"`
+	ApplicationConfigurationDescription            *ApplicationConfigurationDescription            `json:"ApplicationConfigurationDescription,omitempty"`
+	ApplicationDescription                         *string                                         `json:"ApplicationDescription,omitempty"`
+	ApplicationMaintenanceConfigurationDescription *ApplicationMaintenanceConfigurationDescription `json:"ApplicationMaintenanceConfigurationDescription,omitempty"`
+	ApplicationMode                                *ApplicationModeEnum                            `json:"ApplicationMode,omitempty"`
 	ApplicationName                                string                                          `json:"ApplicationName"`
 	ApplicationStatus                              ApplicationStatusEnum                           `json:"ApplicationStatus"`
 	ApplicationVersionID                           int64                                           `json:"ApplicationVersionId"`
-	ApplicationVersionRolledBackFrom               *int64                                          `json:"ApplicationVersionRolledBackFrom"`
-	ApplicationVersionRolledBackTo                 *int64                                          `json:"ApplicationVersionRolledBackTo"`
-	ApplicationVersionUpdatedFrom                  *int64                                          `json:"ApplicationVersionUpdatedFrom"`
-	CloudWatchLoggingOptionDescriptions            []CloudWatchLoggingOptionDescription            `json:"CloudWatchLoggingOptionDescriptions"`
-	ConditionalToken                               *string                                         `json:"ConditionalToken"`
-	CreateTimestamp                                *time.Time                                      `json:"CreateTimestamp"`
-	LastUpdateTimestamp                            *time.Time                                      `json:"LastUpdateTimestamp"`
+	ApplicationVersionRolledBackFrom               *int64                                          `json:"ApplicationVersionRolledBackFrom,omitempty"`
+	ApplicationVersionRolledBackTo                 *int64                                          `json:"ApplicationVersionRolledBackTo,omitempty"`
+	ApplicationVersionUpdatedFrom                  *int64                                          `json:"ApplicationVersionUpdatedFrom,omitempty"`
+	CloudWatchLoggingOptionDescriptions            []CloudWatchLoggingOptionDescription            `json:"CloudWatchLoggingOptionDescriptions,omitempty"`
+	ConditionalToken                               *string                                         `json:"ConditionalToken,omitempty"`
+	CreateTimestamp                                *time.Time                                      `json:"CreateTimestamp,omitempty"`
+	LastUpdateTimestamp                            *time.Time                                      `json:"LastUpdateTimestamp,omitempty"`
 	RuntimeEnvironment                             RuntimeEnvironmentEnum                          `json:"RuntimeEnvironment"`
-	ServiceExecutionRole                           *string                                         `json:"ServiceExecutionRole"`
+	ServiceExecutionRole                           *string                                         `json:"ServiceExecutionRole,omitempty"`
 }

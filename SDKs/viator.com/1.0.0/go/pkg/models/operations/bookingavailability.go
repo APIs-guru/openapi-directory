@@ -5,16 +5,16 @@ type BookingAvailabilityHeaders struct {
 }
 
 type BookingAvailabilityRequestBodyAgeBands struct {
-	BandID *int64 `json:"bandId"`
-	Count  *int64 `json:"count"`
+	BandID *int64 `json:"bandId,omitempty"`
+	Count  *int64 `json:"count,omitempty"`
 }
 
 type BookingAvailabilityRequestBody struct {
-	AgeBands     []BookingAvailabilityRequestBodyAgeBands `json:"ageBands"`
-	CurrencyCode *string                                  `json:"currencyCode"`
-	Month        *string                                  `json:"month"`
-	ProductCode  *string                                  `json:"productCode"`
-	Year         *string                                  `json:"year"`
+	AgeBands     []BookingAvailabilityRequestBodyAgeBands `json:"ageBands,omitempty"`
+	CurrencyCode *string                                  `json:"currencyCode,omitempty"`
+	Month        *string                                  `json:"month,omitempty"`
+	ProductCode  *string                                  `json:"productCode,omitempty"`
+	Year         *string                                  `json:"year,omitempty"`
 }
 
 type BookingAvailabilityRequest struct {
@@ -23,39 +23,39 @@ type BookingAvailabilityRequest struct {
 }
 
 type BookingAvailability200ApplicationJSONDataAvailability struct {
-	Available                 *bool    `json:"available"`
-	BookingDate               *string  `json:"bookingDate"`
-	CurrencyCode              *string  `json:"currencyCode"`
-	GradeCode                 *string  `json:"gradeCode"`
-	MerchantNetPrice          *float64 `json:"merchantNetPrice"`
-	MerchantNetPriceFormatted *string  `json:"merchantNetPriceFormatted"`
-	RetailPrice               *float64 `json:"retailPrice"`
-	RetailPriceFormatted      *string  `json:"retailPriceFormatted"`
-	SortOrder                 *int64   `json:"sortOrder"`
-	UnavailableReason         *string  `json:"unavailableReason"`
+	Available                 *bool    `json:"available,omitempty"`
+	BookingDate               *string  `json:"bookingDate,omitempty"`
+	CurrencyCode              *string  `json:"currencyCode,omitempty"`
+	GradeCode                 *string  `json:"gradeCode,omitempty"`
+	MerchantNetPrice          *float64 `json:"merchantNetPrice,omitempty"`
+	MerchantNetPriceFormatted *string  `json:"merchantNetPriceFormatted,omitempty"`
+	RetailPrice               *float64 `json:"retailPrice,omitempty"`
+	RetailPriceFormatted      *string  `json:"retailPriceFormatted,omitempty"`
+	SortOrder                 *int64   `json:"sortOrder,omitempty"`
+	UnavailableReason         *string  `json:"unavailableReason,omitempty"`
 }
 
 type BookingAvailability200ApplicationJSONData struct {
-	Availability       []BookingAvailability200ApplicationJSONDataAvailability `json:"availability"`
-	FirstAvailableDate *string                                                 `json:"firstAvailableDate"`
-	LastAvailableDate  *string                                                 `json:"lastAvailableDate"`
-	ProductCode        *string                                                 `json:"productCode"`
+	Availability       []BookingAvailability200ApplicationJSONDataAvailability `json:"availability,omitempty"`
+	FirstAvailableDate *string                                                 `json:"firstAvailableDate,omitempty"`
+	LastAvailableDate  *string                                                 `json:"lastAvailableDate,omitempty"`
+	ProductCode        *string                                                 `json:"productCode,omitempty"`
 }
 
 type BookingAvailability200ApplicationJSON struct {
-	Data             *BookingAvailability200ApplicationJSONData `json:"data"`
-	DateStamp        *string                                    `json:"dateStamp"`
-	ErrorCodes       []string                                   `json:"errorCodes"`
-	ErrorMessage     []interface{}                              `json:"errorMessage"`
-	ErrorMessageText *string                                    `json:"errorMessageText"`
-	ErrorName        *string                                    `json:"errorName"`
-	ErrorReference   *string                                    `json:"errorReference"`
-	ErrorType        *string                                    `json:"errorType"`
-	ExtraInfo        map[string]interface{}                     `json:"extraInfo"`
-	ExtraObject      map[string]interface{}                     `json:"extraObject"`
-	Success          *bool                                      `json:"success"`
-	TotalCount       *int64                                     `json:"totalCount"`
-	Vmid             *string                                    `json:"vmid"`
+	Data             *BookingAvailability200ApplicationJSONData `json:"data,omitempty"`
+	DateStamp        *string                                    `json:"dateStamp,omitempty"`
+	ErrorCodes       []string                                   `json:"errorCodes,omitempty"`
+	ErrorMessage     []interface{}                              `json:"errorMessage,omitempty"`
+	ErrorMessageText *string                                    `json:"errorMessageText,omitempty"`
+	ErrorName        *string                                    `json:"errorName,omitempty"`
+	ErrorReference   *string                                    `json:"errorReference,omitempty"`
+	ErrorType        *string                                    `json:"errorType,omitempty"`
+	ExtraInfo        map[string]interface{}                     `json:"extraInfo,omitempty"`
+	ExtraObject      map[string]interface{}                     `json:"extraObject,omitempty"`
+	Success          *bool                                      `json:"success,omitempty"`
+	TotalCount       *int64                                     `json:"totalCount,omitempty"`
+	Vmid             *string                                    `json:"vmid,omitempty"`
 }
 
 type BookingAvailabilityResponse struct {

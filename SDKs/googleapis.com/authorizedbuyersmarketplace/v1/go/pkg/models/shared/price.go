@@ -9,6 +9,6 @@ const (
 )
 
 type Price struct {
-	Amount *Money         `json:"amount"`
-	Type   *PriceTypeEnum `json:"type"`
+	Amount *Money         `json:"amount,omitempty"`
+	Type   *PriceTypeEnum `json:"type,omitempty"`
 }

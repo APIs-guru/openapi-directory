@@ -17,7 +17,7 @@ const (
 )
 
 type ReauthSettings struct {
-	MaxAge     *string                       `json:"maxAge"`
-	Method     *ReauthSettingsMethodEnum     `json:"method"`
-	PolicyType *ReauthSettingsPolicyTypeEnum `json:"policyType"`
+	MaxAge     *string                       `json:"maxAge,omitempty"`
+	Method     *ReauthSettingsMethodEnum     `json:"method,omitempty"`
+	PolicyType *ReauthSettingsPolicyTypeEnum `json:"policyType,omitempty"`
 }

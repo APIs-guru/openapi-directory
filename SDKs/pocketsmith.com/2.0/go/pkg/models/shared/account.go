@@ -16,21 +16,21 @@ const (
 )
 
 type Account struct {
-	CreatedAt                    *string              `json:"created_at"`
-	CurrencyCode                 *string              `json:"currency_code"`
-	CurrentBalance               *float64             `json:"current_balance"`
-	CurrentBalanceDate           *string              `json:"current_balance_date"`
-	CurrentBalanceExchangeRate   *float64             `json:"current_balance_exchange_rate"`
-	CurrentBalanceInBaseCurrency *float64             `json:"current_balance_in_base_currency"`
-	ID                           *int64               `json:"id"`
-	IsNetWorth                   *bool                `json:"is_net_worth"`
-	PrimaryScenario              *Scenario            `json:"primary_scenario"`
-	PrimaryTransactionAccount    *TransactionAccount  `json:"primary_transaction_account"`
-	SafeBalance                  *float64             `json:"safe_balance"`
-	SafeBalanceInBaseCurrency    *float64             `json:"safe_balance_in_base_currency"`
-	Scenarios                    []Scenario           `json:"scenarios"`
-	Title                        *string              `json:"title"`
-	TransactionAccounts          []TransactionAccount `json:"transaction_accounts"`
-	Type                         *AccountTypeEnum     `json:"type"`
-	UpdatedAt                    *string              `json:"updated_at"`
+	CreatedAt                    *string              `json:"created_at,omitempty"`
+	CurrencyCode                 *string              `json:"currency_code,omitempty"`
+	CurrentBalance               *float64             `json:"current_balance,omitempty"`
+	CurrentBalanceDate           *string              `json:"current_balance_date,omitempty"`
+	CurrentBalanceExchangeRate   *float64             `json:"current_balance_exchange_rate,omitempty"`
+	CurrentBalanceInBaseCurrency *float64             `json:"current_balance_in_base_currency,omitempty"`
+	ID                           *int64               `json:"id,omitempty"`
+	IsNetWorth                   *bool                `json:"is_net_worth,omitempty"`
+	PrimaryScenario              *Scenario            `json:"primary_scenario,omitempty"`
+	PrimaryTransactionAccount    *TransactionAccount  `json:"primary_transaction_account,omitempty"`
+	SafeBalance                  *float64             `json:"safe_balance,omitempty"`
+	SafeBalanceInBaseCurrency    *float64             `json:"safe_balance_in_base_currency,omitempty"`
+	Scenarios                    []Scenario           `json:"scenarios,omitempty"`
+	Title                        *string              `json:"title,omitempty"`
+	TransactionAccounts          []TransactionAccount `json:"transaction_accounts,omitempty"`
+	Type                         *AccountTypeEnum     `json:"type,omitempty"`
+	UpdatedAt                    *string              `json:"updated_at,omitempty"`
 }

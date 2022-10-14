@@ -1,7 +1,7 @@
 package shared
 
 type GoogleCloudIdentitytoolkitV2StartMfaEnrollmentRequest struct {
-	IDToken             *string                                               `json:"idToken"`
-	PhoneEnrollmentInfo *GoogleCloudIdentitytoolkitV2StartMfaPhoneRequestInfo `json:"phoneEnrollmentInfo"`
-	TenantID            *string                                               `json:"tenantId"`
+	IDToken             *string                                               `json:"idToken,omitempty"`
+	PhoneEnrollmentInfo *GoogleCloudIdentitytoolkitV2StartMfaPhoneRequestInfo `json:"phoneEnrollmentInfo,omitempty"`
+	TenantID            *string                                               `json:"tenantId,omitempty"`
 }

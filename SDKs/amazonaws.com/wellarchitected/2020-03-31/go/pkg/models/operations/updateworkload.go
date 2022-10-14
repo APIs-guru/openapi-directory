@@ -36,20 +36,20 @@ const (
 )
 
 type UpdateWorkloadRequestBody struct {
-	AccountIds                      []string                                        `json:"AccountIds"`
-	ArchitecturalDesign             *string                                         `json:"ArchitecturalDesign"`
-	AwsRegions                      []string                                        `json:"AwsRegions"`
-	Description                     *string                                         `json:"Description"`
-	Environment                     *UpdateWorkloadRequestBodyEnvironmentEnum       `json:"Environment"`
-	ImprovementStatus               *UpdateWorkloadRequestBodyImprovementStatusEnum `json:"ImprovementStatus"`
-	Industry                        *string                                         `json:"Industry"`
-	IndustryType                    *string                                         `json:"IndustryType"`
-	IsReviewOwnerUpdateAcknowledged *bool                                           `json:"IsReviewOwnerUpdateAcknowledged"`
-	NonAwsRegions                   []string                                        `json:"NonAwsRegions"`
-	Notes                           *string                                         `json:"Notes"`
-	PillarPriorities                []string                                        `json:"PillarPriorities"`
-	ReviewOwner                     *string                                         `json:"ReviewOwner"`
-	WorkloadName                    *string                                         `json:"WorkloadName"`
+	AccountIds                      []string                                        `json:"AccountIds,omitempty"`
+	ArchitecturalDesign             *string                                         `json:"ArchitecturalDesign,omitempty"`
+	AwsRegions                      []string                                        `json:"AwsRegions,omitempty"`
+	Description                     *string                                         `json:"Description,omitempty"`
+	Environment                     *UpdateWorkloadRequestBodyEnvironmentEnum       `json:"Environment,omitempty"`
+	ImprovementStatus               *UpdateWorkloadRequestBodyImprovementStatusEnum `json:"ImprovementStatus,omitempty"`
+	Industry                        *string                                         `json:"Industry,omitempty"`
+	IndustryType                    *string                                         `json:"IndustryType,omitempty"`
+	IsReviewOwnerUpdateAcknowledged *bool                                           `json:"IsReviewOwnerUpdateAcknowledged,omitempty"`
+	NonAwsRegions                   []string                                        `json:"NonAwsRegions,omitempty"`
+	Notes                           *string                                         `json:"Notes,omitempty"`
+	PillarPriorities                []string                                        `json:"PillarPriorities,omitempty"`
+	ReviewOwner                     *string                                         `json:"ReviewOwner,omitempty"`
+	WorkloadName                    *string                                         `json:"WorkloadName,omitempty"`
 }
 
 type UpdateWorkloadRequest struct {

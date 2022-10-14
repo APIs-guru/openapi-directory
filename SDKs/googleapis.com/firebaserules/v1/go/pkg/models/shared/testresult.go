@@ -9,10 +9,10 @@ const (
 )
 
 type TestResult struct {
-	DebugMessages      []string             `json:"debugMessages"`
-	ErrorPosition      *SourcePosition      `json:"errorPosition"`
-	ExpressionReports  []ExpressionReport   `json:"expressionReports"`
-	FunctionCalls      []FunctionCall       `json:"functionCalls"`
-	State              *TestResultStateEnum `json:"state"`
-	VisitedExpressions []VisitedExpression  `json:"visitedExpressions"`
+	DebugMessages      []string             `json:"debugMessages,omitempty"`
+	ErrorPosition      *SourcePosition      `json:"errorPosition,omitempty"`
+	ExpressionReports  []ExpressionReport   `json:"expressionReports,omitempty"`
+	FunctionCalls      []FunctionCall       `json:"functionCalls,omitempty"`
+	State              *TestResultStateEnum `json:"state,omitempty"`
+	VisitedExpressions []VisitedExpression  `json:"visitedExpressions,omitempty"`
 }

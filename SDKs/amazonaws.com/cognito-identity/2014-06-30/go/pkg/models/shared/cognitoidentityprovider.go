@@ -1,7 +1,7 @@
 package shared
 
 type CognitoIdentityProvider struct {
-	ClientID             *string `json:"ClientId"`
-	ProviderName         *string `json:"ProviderName"`
-	ServerSideTokenCheck *bool   `json:"ServerSideTokenCheck"`
+	ClientID             *string `json:"ClientId,omitempty"`
+	ProviderName         *string `json:"ProviderName,omitempty"`
+	ServerSideTokenCheck *bool   `json:"ServerSideTokenCheck,omitempty"`
 }

@@ -9,7 +9,7 @@ const (
 )
 
 type PullRequestFilter struct {
-	Branch         *string                              `json:"branch"`
-	CommentControl *PullRequestFilterCommentControlEnum `json:"commentControl"`
-	InvertRegex    *bool                                `json:"invertRegex"`
+	Branch         *string                              `json:"branch,omitempty"`
+	CommentControl *PullRequestFilterCommentControlEnum `json:"commentControl,omitempty"`
+	InvertRegex    *bool                                `json:"invertRegex,omitempty"`
 }

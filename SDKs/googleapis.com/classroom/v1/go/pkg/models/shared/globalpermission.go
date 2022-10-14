@@ -8,5 +8,5 @@ const (
 )
 
 type GlobalPermission struct {
-	Permission *GlobalPermissionPermissionEnum `json:"permission"`
+	Permission *GlobalPermissionPermissionEnum `json:"permission,omitempty"`
 }

@@ -1,8 +1,8 @@
 package shared
 
 type AwsCertificateManagerCertificateRenewalSummary struct {
-	DomainValidationOptions []AwsCertificateManagerCertificateDomainValidationOption `json:"DomainValidationOptions"`
-	RenewalStatus           *string                                                  `json:"RenewalStatus"`
-	RenewalStatusReason     *string                                                  `json:"RenewalStatusReason"`
-	UpdatedAt               *string                                                  `json:"UpdatedAt"`
+	DomainValidationOptions []AwsCertificateManagerCertificateDomainValidationOption `json:"DomainValidationOptions,omitempty"`
+	RenewalStatus           *string                                                  `json:"RenewalStatus,omitempty"`
+	RenewalStatusReason     *string                                                  `json:"RenewalStatusReason,omitempty"`
+	UpdatedAt               *string                                                  `json:"UpdatedAt,omitempty"`
 }

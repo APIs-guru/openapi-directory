@@ -10,6 +10,6 @@ const (
 
 type VLanConfigDot1Q struct {
 	Vlan          int32                             `json:"vlan"`
-	VlanEthertype *VLanConfigDot1QVlanEthertypeEnum `json:"vlan_ethertype"`
+	VlanEthertype *VLanConfigDot1QVlanEthertypeEnum `json:"vlan_ethertype,omitempty"`
 	VlanType      string                            `json:"vlan_type"`
 }

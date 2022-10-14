@@ -1,5 +1,5 @@
 package shared
 
 type DescribeAppsResult struct {
-	Apps []App `json:"Apps"`
+	Apps []App `json:"Apps,omitempty"`
 }

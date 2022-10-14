@@ -5,9 +5,9 @@ import (
 )
 
 type BillStageSitting struct {
-	BillID      *int32     `json:"billId"`
-	BillStageID *int32     `json:"billStageId"`
-	Date        *time.Time `json:"date"`
-	ID          *int32     `json:"id"`
-	StageID     *int32     `json:"stageId"`
+	BillID      *int32     `json:"billId,omitempty"`
+	BillStageID *int32     `json:"billStageId,omitempty"`
+	Date        *time.Time `json:"date,omitempty"`
+	ID          *int32     `json:"id,omitempty"`
+	StageID     *int32     `json:"stageId,omitempty"`
 }

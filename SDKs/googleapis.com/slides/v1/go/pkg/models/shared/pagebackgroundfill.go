@@ -9,7 +9,7 @@ const (
 )
 
 type PageBackgroundFill struct {
-	PropertyState        *PageBackgroundFillPropertyStateEnum `json:"propertyState"`
-	SolidFill            *SolidFill                           `json:"solidFill"`
-	StretchedPictureFill *StretchedPictureFill                `json:"stretchedPictureFill"`
+	PropertyState        *PageBackgroundFillPropertyStateEnum `json:"propertyState,omitempty"`
+	SolidFill            *SolidFill                           `json:"solidFill,omitempty"`
+	StretchedPictureFill *StretchedPictureFill                `json:"stretchedPictureFill,omitempty"`
 }

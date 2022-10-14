@@ -5,7 +5,7 @@ import (
 )
 
 type EventDateTime struct {
-	Date     *time.Time `json:"date"`
-	DateTime *time.Time `json:"dateTime"`
-	TimeZone *string    `json:"timeZone"`
+	Date     *time.Time `json:"date,omitempty"`
+	DateTime *time.Time `json:"dateTime,omitempty"`
+	TimeZone *string    `json:"timeZone,omitempty"`
 }

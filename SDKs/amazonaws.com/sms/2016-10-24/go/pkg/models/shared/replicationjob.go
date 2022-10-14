@@ -5,22 +5,22 @@ import (
 )
 
 type ReplicationJob struct {
-	Description                 *string                  `json:"description"`
-	Encrypted                   *bool                    `json:"encrypted"`
-	Frequency                   *int64                   `json:"frequency"`
-	KmsKeyID                    *string                  `json:"kmsKeyId"`
-	LatestAmiID                 *string                  `json:"latestAmiId"`
-	LicenseType                 *LicenseTypeEnum         `json:"licenseType"`
-	NextReplicationRunStartTime *time.Time               `json:"nextReplicationRunStartTime"`
-	NumberOfRecentAmisToKeep    *int64                   `json:"numberOfRecentAmisToKeep"`
-	ReplicationJobID            *string                  `json:"replicationJobId"`
-	ReplicationRunList          []ReplicationRun         `json:"replicationRunList"`
-	RoleName                    *string                  `json:"roleName"`
-	RunOnce                     *bool                    `json:"runOnce"`
-	SeedReplicationTime         *time.Time               `json:"seedReplicationTime"`
-	ServerID                    *string                  `json:"serverId"`
-	ServerType                  *ServerTypeEnum          `json:"serverType"`
-	State                       *ReplicationJobStateEnum `json:"state"`
-	StatusMessage               *string                  `json:"statusMessage"`
-	VMServer                    *VMServer                `json:"vmServer"`
+	Description                 *string                  `json:"description,omitempty"`
+	Encrypted                   *bool                    `json:"encrypted,omitempty"`
+	Frequency                   *int64                   `json:"frequency,omitempty"`
+	KmsKeyID                    *string                  `json:"kmsKeyId,omitempty"`
+	LatestAmiID                 *string                  `json:"latestAmiId,omitempty"`
+	LicenseType                 *LicenseTypeEnum         `json:"licenseType,omitempty"`
+	NextReplicationRunStartTime *time.Time               `json:"nextReplicationRunStartTime,omitempty"`
+	NumberOfRecentAmisToKeep    *int64                   `json:"numberOfRecentAmisToKeep,omitempty"`
+	ReplicationJobID            *string                  `json:"replicationJobId,omitempty"`
+	ReplicationRunList          []ReplicationRun         `json:"replicationRunList,omitempty"`
+	RoleName                    *string                  `json:"roleName,omitempty"`
+	RunOnce                     *bool                    `json:"runOnce,omitempty"`
+	SeedReplicationTime         *time.Time               `json:"seedReplicationTime,omitempty"`
+	ServerID                    *string                  `json:"serverId,omitempty"`
+	ServerType                  *ServerTypeEnum          `json:"serverType,omitempty"`
+	State                       *ReplicationJobStateEnum `json:"state,omitempty"`
+	StatusMessage               *string                  `json:"statusMessage,omitempty"`
+	VMServer                    *VMServer                `json:"vmServer,omitempty"`
 }

@@ -5,19 +5,19 @@ import (
 )
 
 type SolutionVersion struct {
-	CreationDateTime    *time.Time        `json:"creationDateTime"`
-	DatasetGroupArn     *string           `json:"datasetGroupArn"`
-	EventType           *string           `json:"eventType"`
-	FailureReason       *string           `json:"failureReason"`
-	LastUpdatedDateTime *time.Time        `json:"lastUpdatedDateTime"`
-	PerformAutoMl       *bool             `json:"performAutoML"`
-	PerformHpo          *bool             `json:"performHPO"`
-	RecipeArn           *string           `json:"recipeArn"`
-	SolutionArn         *string           `json:"solutionArn"`
-	SolutionConfig      *SolutionConfig   `json:"solutionConfig"`
-	SolutionVersionArn  *string           `json:"solutionVersionArn"`
-	Status              *string           `json:"status"`
-	TrainingHours       *float64          `json:"trainingHours"`
-	TrainingMode        *TrainingModeEnum `json:"trainingMode"`
-	TunedHpoParams      *TunedHpoParams   `json:"tunedHPOParams"`
+	CreationDateTime    *time.Time        `json:"creationDateTime,omitempty"`
+	DatasetGroupArn     *string           `json:"datasetGroupArn,omitempty"`
+	EventType           *string           `json:"eventType,omitempty"`
+	FailureReason       *string           `json:"failureReason,omitempty"`
+	LastUpdatedDateTime *time.Time        `json:"lastUpdatedDateTime,omitempty"`
+	PerformAutoMl       *bool             `json:"performAutoML,omitempty"`
+	PerformHpo          *bool             `json:"performHPO,omitempty"`
+	RecipeArn           *string           `json:"recipeArn,omitempty"`
+	SolutionArn         *string           `json:"solutionArn,omitempty"`
+	SolutionConfig      *SolutionConfig   `json:"solutionConfig,omitempty"`
+	SolutionVersionArn  *string           `json:"solutionVersionArn,omitempty"`
+	Status              *string           `json:"status,omitempty"`
+	TrainingHours       *float64          `json:"trainingHours,omitempty"`
+	TrainingMode        *TrainingModeEnum `json:"trainingMode,omitempty"`
+	TunedHpoParams      *TunedHpoParams   `json:"tunedHPOParams,omitempty"`
 }

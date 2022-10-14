@@ -9,6 +9,6 @@ const (
 )
 
 type JSONPathMatcher struct {
-	JSONMatcher *JSONPathMatcherJSONMatcherEnum `json:"jsonMatcher"`
-	JSONPath    *string                         `json:"jsonPath"`
+	JSONMatcher *JSONPathMatcherJSONMatcherEnum `json:"jsonMatcher,omitempty"`
+	JSONPath    *string                         `json:"jsonPath,omitempty"`
 }

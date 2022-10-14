@@ -9,10 +9,10 @@ const (
 )
 
 type VirtualTariff struct {
-	Factor *float64               `json:"Factor"`
-	ID     *string                `json:"Id"`
-	Name   *string                `json:"Name"`
-	Type   *VirtualTariffTypeEnum `json:"Type"`
-	Unit   *string                `json:"Unit"`
-	Value  *float64               `json:"Value"`
+	Factor *float64               `json:"Factor,omitempty"`
+	ID     *string                `json:"Id,omitempty"`
+	Name   *string                `json:"Name,omitempty"`
+	Type   *VirtualTariffTypeEnum `json:"Type,omitempty"`
+	Unit   *string                `json:"Unit,omitempty"`
+	Value  *float64               `json:"Value,omitempty"`
 }

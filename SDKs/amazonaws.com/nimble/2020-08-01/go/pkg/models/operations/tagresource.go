@@ -15,7 +15,7 @@ type TagResourceHeaders struct {
 }
 
 type TagResourceRequestBody struct {
-	Tags map[string]string `json:"tags"`
+	Tags map[string]string `json:"tags,omitempty"`
 }
 
 type TagResourceRequest struct {

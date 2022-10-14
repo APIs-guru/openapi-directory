@@ -27,7 +27,7 @@ type GetEntityTransferRequest struct {
 }
 
 type GetEntityTransferDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type GetEntityTransferResponse struct {

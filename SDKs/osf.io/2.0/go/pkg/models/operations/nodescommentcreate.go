@@ -9,37 +9,37 @@ type NodesCommentCreatePathParams struct {
 }
 
 type NodesCommentCreateRequestBodyAttributesAttributes struct {
-	CanEdit      *bool      `json:"can_edit"`
-	Content      *string    `json:"content"`
-	DateCreated  *time.Time `json:"date_created"`
-	DateModified *time.Time `json:"date_modified"`
-	Deleted      *bool      `json:"deleted"`
-	HasChildren  *bool      `json:"has_children"`
-	HasReport    *bool      `json:"has_report"`
-	IsAbuse      *bool      `json:"is_abuse"`
-	IsHam        *bool      `json:"is_ham"`
-	Modified     *bool      `json:"modified"`
-	Page         *string    `json:"page"`
+	CanEdit      *bool      `json:"can_edit,omitempty"`
+	Content      *string    `json:"content,omitempty"`
+	DateCreated  *time.Time `json:"date_created,omitempty"`
+	DateModified *time.Time `json:"date_modified,omitempty"`
+	Deleted      *bool      `json:"deleted,omitempty"`
+	HasChildren  *bool      `json:"has_children,omitempty"`
+	HasReport    *bool      `json:"has_report,omitempty"`
+	IsAbuse      *bool      `json:"is_abuse,omitempty"`
+	IsHam        *bool      `json:"is_ham,omitempty"`
+	Modified     *bool      `json:"modified,omitempty"`
+	Page         *string    `json:"page,omitempty"`
 }
 
 type NodesCommentCreateRequestBodyLinksLinks struct {
-	Self *string `json:"self"`
+	Self *string `json:"self,omitempty"`
 }
 
 type NodesCommentCreateRequestBodyRelationshipsRelationships struct {
-	Node    *string `json:"node"`
-	Replies *string `json:"replies"`
-	Reports *string `json:"reports"`
-	Target  *string `json:"target"`
-	User    *string `json:"user"`
+	Node    *string `json:"node,omitempty"`
+	Replies *string `json:"replies,omitempty"`
+	Reports *string `json:"reports,omitempty"`
+	Target  *string `json:"target,omitempty"`
+	User    *string `json:"user,omitempty"`
 }
 
 type NodesCommentCreateRequestBodyComment struct {
-	Attributes    *NodesCommentCreateRequestBodyAttributesAttributes       `json:"attributes"`
+	Attributes    *NodesCommentCreateRequestBodyAttributesAttributes       `json:"attributes,omitempty"`
 	ID            string                                                   `json:"id"`
-	Links         *NodesCommentCreateRequestBodyLinksLinks                 `json:"links"`
-	Relationships *NodesCommentCreateRequestBodyRelationshipsRelationships `json:"relationships"`
-	Type          *string                                                  `json:"type"`
+	Links         *NodesCommentCreateRequestBodyLinksLinks                 `json:"links,omitempty"`
+	Relationships *NodesCommentCreateRequestBodyRelationshipsRelationships `json:"relationships,omitempty"`
+	Type          *string                                                  `json:"type,omitempty"`
 }
 
 type NodesCommentCreateRequest struct {

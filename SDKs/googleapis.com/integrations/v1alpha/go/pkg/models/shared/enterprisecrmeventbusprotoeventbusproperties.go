@@ -1,5 +1,5 @@
 package shared
 
 type EnterpriseCrmEventbusProtoEventBusProperties struct {
-	Properties []EnterpriseCrmEventbusProtoPropertyEntry `json:"properties"`
+	Properties []EnterpriseCrmEventbusProtoPropertyEntry `json:"properties,omitempty"`
 }

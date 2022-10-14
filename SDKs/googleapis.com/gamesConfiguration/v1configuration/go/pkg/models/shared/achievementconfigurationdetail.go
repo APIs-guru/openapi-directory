@@ -1,10 +1,10 @@
 package shared
 
 type AchievementConfigurationDetail struct {
-	Description *LocalizedStringBundle `json:"description"`
-	IconURL     *string                `json:"iconUrl"`
-	Kind        *string                `json:"kind"`
-	Name        *LocalizedStringBundle `json:"name"`
-	PointValue  *int32                 `json:"pointValue"`
-	SortRank    *int32                 `json:"sortRank"`
+	Description *LocalizedStringBundle `json:"description,omitempty"`
+	IconURL     *string                `json:"iconUrl,omitempty"`
+	Kind        *string                `json:"kind,omitempty"`
+	Name        *LocalizedStringBundle `json:"name,omitempty"`
+	PointValue  *int32                 `json:"pointValue,omitempty"`
+	SortRank    *int32                 `json:"sortRank,omitempty"`
 }

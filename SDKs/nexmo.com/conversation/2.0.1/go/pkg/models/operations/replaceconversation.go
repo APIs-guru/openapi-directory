@@ -9,10 +9,10 @@ type ReplaceConversationPathParams struct {
 }
 
 type ReplaceConversationRequestBody struct {
-	DisplayName *string                        `json:"display_name"`
-	ImageURL    *string                        `json:"image_url"`
-	Name        *string                        `json:"name"`
-	Properties  *shared.ConversationProperties `json:"properties"`
+	DisplayName *string                        `json:"display_name,omitempty"`
+	ImageURL    *string                        `json:"image_url,omitempty"`
+	Name        *string                        `json:"name,omitempty"`
+	Properties  *shared.ConversationProperties `json:"properties,omitempty"`
 }
 
 type ReplaceConversationRequest struct {

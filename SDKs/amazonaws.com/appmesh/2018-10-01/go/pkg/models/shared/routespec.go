@@ -1,5 +1,5 @@
 package shared
 
 type RouteSpec struct {
-	HTTPRoute *HTTPRoute `json:"httpRoute"`
+	HTTPRoute *HTTPRoute `json:"httpRoute,omitempty"`
 }

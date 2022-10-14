@@ -5,12 +5,12 @@ import (
 )
 
 type Lookup struct {
-	Created             *time.Time  `json:"created"`
-	Description         *string     `json:"description"`
-	DescriptionFriendly *string     `json:"descriptionFriendly"`
-	DisplayOrder        *int64      `json:"displayOrder"`
-	ID                  *int64      `json:"id"`
-	LastUpdate          *time.Time  `json:"lastUpdate"`
-	LookupType          *LookupType `json:"lookupType"`
-	Value               *string     `json:"value"`
+	Created             *time.Time  `json:"created,omitempty"`
+	Description         *string     `json:"description,omitempty"`
+	DescriptionFriendly *string     `json:"descriptionFriendly,omitempty"`
+	DisplayOrder        *int64      `json:"displayOrder,omitempty"`
+	ID                  *int64      `json:"id,omitempty"`
+	LastUpdate          *time.Time  `json:"lastUpdate,omitempty"`
+	LookupType          *LookupType `json:"lookupType,omitempty"`
+	Value               *string     `json:"value,omitempty"`
 }

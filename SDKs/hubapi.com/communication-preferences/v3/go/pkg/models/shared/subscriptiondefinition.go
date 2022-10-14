@@ -5,7 +5,7 @@ import (
 )
 
 type SubscriptionDefinition struct {
-	CommunicationMethod *string   `json:"communicationMethod"`
+	CommunicationMethod *string   `json:"communicationMethod,omitempty"`
 	CreatedAt           time.Time `json:"createdAt"`
 	Description         string    `json:"description"`
 	ID                  string    `json:"id"`
@@ -13,6 +13,6 @@ type SubscriptionDefinition struct {
 	IsDefault           bool      `json:"isDefault"`
 	IsInternal          bool      `json:"isInternal"`
 	Name                string    `json:"name"`
-	Purpose             *string   `json:"purpose"`
+	Purpose             *string   `json:"purpose,omitempty"`
 	UpdatedAt           time.Time `json:"updatedAt"`
 }

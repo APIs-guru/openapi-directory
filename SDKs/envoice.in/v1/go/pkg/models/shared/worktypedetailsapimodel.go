@@ -5,7 +5,7 @@ import (
 )
 
 type WorkTypeDetailsAPIModel struct {
-	CreatedOn *time.Time `json:"CreatedOn"`
-	ID        *int32     `json:"Id"`
-	Title     *string    `json:"Title"`
+	CreatedOn *time.Time `json:"CreatedOn,omitempty"`
+	ID        *int32     `json:"Id,omitempty"`
+	Title     *string    `json:"Title,omitempty"`
 }

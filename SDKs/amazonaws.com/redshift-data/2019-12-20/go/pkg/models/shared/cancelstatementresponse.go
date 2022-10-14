@@ -1,5 +1,5 @@
 package shared
 
 type CancelStatementResponse struct {
-	Status *bool `json:"Status"`
+	Status *bool `json:"Status,omitempty"`
 }

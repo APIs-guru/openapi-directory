@@ -1,6 +1,6 @@
 package shared
 
 type ScheduleAByZipPage struct {
-	Pagination *OffsetInfo      `json:"pagination"`
-	Results    []ScheduleAByZip `json:"results"`
+	Pagination *OffsetInfo      `json:"pagination,omitempty"`
+	Results    []ScheduleAByZip `json:"results,omitempty"`
 }

@@ -1,8 +1,8 @@
 package shared
 
 type TelnetUser struct {
-	Groups      []string `json:"groups"`
-	HasPassword *int32   `json:"hasPassword"`
-	Password    *string  `json:"password"`
-	Username    *string  `json:"username"`
+	Groups      []string `json:"groups,omitempty"`
+	HasPassword *int32   `json:"hasPassword,omitempty"`
+	Password    *string  `json:"password,omitempty"`
+	Username    *string  `json:"username,omitempty"`
 }

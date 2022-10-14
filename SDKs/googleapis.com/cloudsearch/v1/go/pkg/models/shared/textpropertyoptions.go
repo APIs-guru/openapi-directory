@@ -1,6 +1,6 @@
 package shared
 
 type TextPropertyOptions struct {
-	OperatorOptions     *TextOperatorOptions `json:"operatorOptions"`
-	RetrievalImportance *RetrievalImportance `json:"retrievalImportance"`
+	OperatorOptions     *TextOperatorOptions `json:"operatorOptions,omitempty"`
+	RetrievalImportance *RetrievalImportance `json:"retrievalImportance,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type SerialPipeline struct {
-	Stages []Stage `json:"stages"`
+	Stages []Stage `json:"stages,omitempty"`
 }

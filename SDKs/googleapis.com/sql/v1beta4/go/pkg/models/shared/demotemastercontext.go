@@ -1,9 +1,9 @@
 package shared
 
 type DemoteMasterContext struct {
-	Kind                  *string                    `json:"kind"`
-	MasterInstanceName    *string                    `json:"masterInstanceName"`
-	ReplicaConfiguration  *DemoteMasterConfiguration `json:"replicaConfiguration"`
-	SkipReplicationSetup  *bool                      `json:"skipReplicationSetup"`
-	VerifyGtidConsistency *bool                      `json:"verifyGtidConsistency"`
+	Kind                  *string                    `json:"kind,omitempty"`
+	MasterInstanceName    *string                    `json:"masterInstanceName,omitempty"`
+	ReplicaConfiguration  *DemoteMasterConfiguration `json:"replicaConfiguration,omitempty"`
+	SkipReplicationSetup  *bool                      `json:"skipReplicationSetup,omitempty"`
+	VerifyGtidConsistency *bool                      `json:"verifyGtidConsistency,omitempty"`
 }

@@ -6,7 +6,7 @@ import (
 
 type UsersCreatePublicSSHKeyForAuthenticatedRequestBody struct {
 	Key   string  `json:"key"`
-	Title *string `json:"title"`
+	Title *string `json:"title,omitempty"`
 }
 
 type UsersCreatePublicSSHKeyForAuthenticatedRequest struct {

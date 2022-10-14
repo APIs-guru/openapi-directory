@@ -16,22 +16,22 @@ const (
 )
 
 type VideoV1Recording struct {
-	AccountSid            *string                                   `json:"account_sid"`
-	Codec                 *RecordingEnumCodecEnum                   `json:"codec"`
-	ContainerFormat       *RecordingEnumFormatEnum                  `json:"container_format"`
-	DateCreated           *time.Time                                `json:"date_created"`
-	Duration              *int64                                    `json:"duration"`
-	GroupingSids          *interface{}                              `json:"grouping_sids"`
-	Links                 map[string]interface{}                    `json:"links"`
-	MediaExternalLocation *string                                   `json:"media_external_location"`
-	Offset                *int64                                    `json:"offset"`
-	Sid                   *string                                   `json:"sid"`
-	Size                  *int64                                    `json:"size"`
-	SourceSid             *string                                   `json:"source_sid"`
-	Status                *RecordingEnumStatusEnum                  `json:"status"`
-	StatusCallback        *string                                   `json:"status_callback"`
-	StatusCallbackMethod  *VideoV1RecordingStatusCallbackMethodEnum `json:"status_callback_method"`
-	TrackName             *string                                   `json:"track_name"`
-	Type                  *RecordingEnumTypeEnum                    `json:"type"`
-	URL                   *string                                   `json:"url"`
+	AccountSid            *string                                   `json:"account_sid,omitempty"`
+	Codec                 *RecordingEnumCodecEnum                   `json:"codec,omitempty"`
+	ContainerFormat       *RecordingEnumFormatEnum                  `json:"container_format,omitempty"`
+	DateCreated           *time.Time                                `json:"date_created,omitempty"`
+	Duration              *int64                                    `json:"duration,omitempty"`
+	GroupingSids          *interface{}                              `json:"grouping_sids,omitempty"`
+	Links                 map[string]interface{}                    `json:"links,omitempty"`
+	MediaExternalLocation *string                                   `json:"media_external_location,omitempty"`
+	Offset                *int64                                    `json:"offset,omitempty"`
+	Sid                   *string                                   `json:"sid,omitempty"`
+	Size                  *int64                                    `json:"size,omitempty"`
+	SourceSid             *string                                   `json:"source_sid,omitempty"`
+	Status                *RecordingEnumStatusEnum                  `json:"status,omitempty"`
+	StatusCallback        *string                                   `json:"status_callback,omitempty"`
+	StatusCallbackMethod  *VideoV1RecordingStatusCallbackMethodEnum `json:"status_callback_method,omitempty"`
+	TrackName             *string                                   `json:"track_name,omitempty"`
+	Type                  *RecordingEnumTypeEnum                    `json:"type,omitempty"`
+	URL                   *string                                   `json:"url,omitempty"`
 }

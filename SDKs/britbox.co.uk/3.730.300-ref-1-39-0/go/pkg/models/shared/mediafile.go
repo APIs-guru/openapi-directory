@@ -20,7 +20,7 @@ const (
 )
 
 type MediaFile struct {
-	Channels     *int32                    `json:"channels"`
+	Channels     *int32                    `json:"channels,omitempty"`
 	DeliveryType MediaFileDeliveryTypeEnum `json:"deliveryType"`
 	Drm          string                    `json:"drm"`
 	Format       string                    `json:"format"`

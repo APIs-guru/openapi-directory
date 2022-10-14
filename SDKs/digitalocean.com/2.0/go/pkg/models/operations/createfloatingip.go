@@ -17,19 +17,19 @@ type CreateFloatingIPRequest struct {
 }
 
 type CreateFloatingIP202ApplicationJSONLinks struct {
-	Actions  []shared.Onev21dropletsPostResponses202ContentApplication1jsonSchemaOneOf0PropertiesLinksPropertiesActionsItems `json:"actions"`
-	Droplets []shared.Onev21dropletsPostResponses202ContentApplication1jsonSchemaOneOf0PropertiesLinksPropertiesActionsItems `json:"droplets"`
+	Actions  []shared.Onev21dropletsPostResponses202ContentApplication1jsonSchemaOneOf0PropertiesLinksPropertiesActionsItems `json:"actions,omitempty"`
+	Droplets []shared.Onev21dropletsPostResponses202ContentApplication1jsonSchemaOneOf0PropertiesLinksPropertiesActionsItems `json:"droplets,omitempty"`
 }
 
 type CreateFloatingIP202ApplicationJSON struct {
-	FloatingIP *shared.Onev21floatingIpsGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesFloatingIpsItems `json:"floating_ip"`
-	Links      *CreateFloatingIP202ApplicationJSONLinks                                                              `json:"links"`
+	FloatingIP *shared.Onev21floatingIpsGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesFloatingIpsItems `json:"floating_ip,omitempty"`
+	Links      *CreateFloatingIP202ApplicationJSONLinks                                                              `json:"links,omitempty"`
 }
 
 type CreateFloatingIP401ApplicationJSON struct {
 	ID        string  `json:"id"`
 	Message   string  `json:"message"`
-	RequestID *string `json:"request_id"`
+	RequestID *string `json:"request_id,omitempty"`
 }
 
 type CreateFloatingIPResponse struct {

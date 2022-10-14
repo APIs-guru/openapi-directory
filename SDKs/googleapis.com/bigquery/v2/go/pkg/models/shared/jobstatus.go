@@ -1,7 +1,7 @@
 package shared
 
 type JobStatus struct {
-	ErrorResult *ErrorProto  `json:"errorResult"`
-	Errors      []ErrorProto `json:"errors"`
-	State       *string      `json:"state"`
+	ErrorResult *ErrorProto  `json:"errorResult,omitempty"`
+	Errors      []ErrorProto `json:"errors,omitempty"`
+	State       *string      `json:"state,omitempty"`
 }

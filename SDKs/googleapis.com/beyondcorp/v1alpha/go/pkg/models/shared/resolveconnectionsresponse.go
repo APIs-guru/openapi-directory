@@ -1,7 +1,7 @@
 package shared
 
 type ResolveConnectionsResponse struct {
-	ConnectionDetails []ConnectionDetails `json:"connectionDetails"`
-	NextPageToken     *string             `json:"nextPageToken"`
-	Unreachable       []string            `json:"unreachable"`
+	ConnectionDetails []ConnectionDetails `json:"connectionDetails,omitempty"`
+	NextPageToken     *string             `json:"nextPageToken,omitempty"`
+	Unreachable       []string            `json:"unreachable,omitempty"`
 }

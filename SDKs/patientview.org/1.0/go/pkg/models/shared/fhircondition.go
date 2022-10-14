@@ -5,17 +5,17 @@ import (
 )
 
 type FhirCondition struct {
-	Asserter        *string    `json:"asserter"`
-	Category        *string    `json:"category"`
-	Code            *string    `json:"code"`
-	Date            *time.Time `json:"date"`
-	Description     *string    `json:"description"`
-	FullDescription *string    `json:"fullDescription"`
-	Group           *Group     `json:"group"`
-	ID              *int64     `json:"id"`
-	Identifier      *string    `json:"identifier"`
-	Links           []Link     `json:"links"`
-	Notes           *string    `json:"notes"`
-	Severity        *string    `json:"severity"`
-	Status          *string    `json:"status"`
+	Asserter        *string    `json:"asserter,omitempty"`
+	Category        *string    `json:"category,omitempty"`
+	Code            *string    `json:"code,omitempty"`
+	Date            *time.Time `json:"date,omitempty"`
+	Description     *string    `json:"description,omitempty"`
+	FullDescription *string    `json:"fullDescription,omitempty"`
+	Group           *Group     `json:"group,omitempty"`
+	ID              *int64     `json:"id,omitempty"`
+	Identifier      *string    `json:"identifier,omitempty"`
+	Links           []Link     `json:"links,omitempty"`
+	Notes           *string    `json:"notes,omitempty"`
+	Severity        *string    `json:"severity,omitempty"`
+	Status          *string    `json:"status,omitempty"`
 }

@@ -5,9 +5,9 @@ import (
 )
 
 type WorkGroup struct {
-	Configuration *WorkGroupConfiguration `json:"Configuration"`
-	CreationTime  *time.Time              `json:"CreationTime"`
-	Description   *string                 `json:"Description"`
+	Configuration *WorkGroupConfiguration `json:"Configuration,omitempty"`
+	CreationTime  *time.Time              `json:"CreationTime,omitempty"`
+	Description   *string                 `json:"Description,omitempty"`
 	Name          string                  `json:"Name"`
-	State         *WorkGroupStateEnum     `json:"State"`
+	State         *WorkGroupStateEnum     `json:"State,omitempty"`
 }

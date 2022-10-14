@@ -1,6 +1,6 @@
 package shared
 
 type CandidateHistoryPage struct {
-	Pagination *OffsetInfo        `json:"pagination"`
-	Results    []CandidateHistory `json:"results"`
+	Pagination *OffsetInfo        `json:"pagination,omitempty"`
+	Results    []CandidateHistory `json:"results,omitempty"`
 }

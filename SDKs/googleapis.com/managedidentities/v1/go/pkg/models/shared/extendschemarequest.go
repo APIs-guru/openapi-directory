@@ -1,7 +1,7 @@
 package shared
 
 type ExtendSchemaRequest struct {
-	Description  *string `json:"description"`
-	FileContents *string `json:"fileContents"`
-	GcsPath      *string `json:"gcsPath"`
+	Description  *string `json:"description,omitempty"`
+	FileContents *string `json:"fileContents,omitempty"`
+	GcsPath      *string `json:"gcsPath,omitempty"`
 }

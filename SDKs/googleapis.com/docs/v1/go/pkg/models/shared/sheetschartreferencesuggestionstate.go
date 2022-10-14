@@ -1,6 +1,6 @@
 package shared
 
 type SheetsChartReferenceSuggestionState struct {
-	ChartIDSuggested       *bool `json:"chartIdSuggested"`
-	SpreadsheetIDSuggested *bool `json:"spreadsheetIdSuggested"`
+	ChartIDSuggested       *bool `json:"chartIdSuggested,omitempty"`
+	SpreadsheetIDSuggested *bool `json:"spreadsheetIdSuggested,omitempty"`
 }

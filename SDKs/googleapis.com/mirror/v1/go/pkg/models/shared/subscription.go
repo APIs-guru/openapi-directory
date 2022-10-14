@@ -5,13 +5,13 @@ import (
 )
 
 type Subscription struct {
-	CallbackURL  *string       `json:"callbackUrl"`
-	Collection   *string       `json:"collection"`
-	ID           *string       `json:"id"`
-	Kind         *string       `json:"kind"`
-	Notification *Notification `json:"notification"`
-	Operation    []string      `json:"operation"`
-	Updated      *time.Time    `json:"updated"`
-	UserToken    *string       `json:"userToken"`
-	VerifyToken  *string       `json:"verifyToken"`
+	CallbackURL  *string       `json:"callbackUrl,omitempty"`
+	Collection   *string       `json:"collection,omitempty"`
+	ID           *string       `json:"id,omitempty"`
+	Kind         *string       `json:"kind,omitempty"`
+	Notification *Notification `json:"notification,omitempty"`
+	Operation    []string      `json:"operation,omitempty"`
+	Updated      *time.Time    `json:"updated,omitempty"`
+	UserToken    *string       `json:"userToken,omitempty"`
+	VerifyToken  *string       `json:"verifyToken,omitempty"`
 }

@@ -10,8 +10,8 @@ const (
 )
 
 type Key struct {
-	EffectiveConnectionType *string            `json:"effectiveConnectionType"`
-	FormFactor              *KeyFormFactorEnum `json:"formFactor"`
-	Origin                  *string            `json:"origin"`
-	URL                     *string            `json:"url"`
+	EffectiveConnectionType *string            `json:"effectiveConnectionType,omitempty"`
+	FormFactor              *KeyFormFactorEnum `json:"formFactor,omitempty"`
+	Origin                  *string            `json:"origin,omitempty"`
+	URL                     *string            `json:"url,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type CodeDestination struct {
-	CodeCommit *CodeCommitCodeDestination `json:"codeCommit"`
-	GitHub     *GitHubCodeDestination     `json:"gitHub"`
+	CodeCommit *CodeCommitCodeDestination `json:"codeCommit,omitempty"`
+	GitHub     *GitHubCodeDestination     `json:"gitHub,omitempty"`
 }

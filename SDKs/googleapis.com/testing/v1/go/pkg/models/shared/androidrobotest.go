@@ -9,14 +9,14 @@ const (
 )
 
 type AndroidRoboTest struct {
-	AppApk             *FileReference               `json:"appApk"`
-	AppBundle          *AppBundle                   `json:"appBundle"`
-	AppInitialActivity *string                      `json:"appInitialActivity"`
-	AppPackageID       *string                      `json:"appPackageId"`
-	MaxDepth           *int32                       `json:"maxDepth"`
-	MaxSteps           *int32                       `json:"maxSteps"`
-	RoboDirectives     []RoboDirective              `json:"roboDirectives"`
-	RoboMode           *AndroidRoboTestRoboModeEnum `json:"roboMode"`
-	RoboScript         *FileReference               `json:"roboScript"`
-	StartingIntents    []RoboStartingIntent         `json:"startingIntents"`
+	AppApk             *FileReference               `json:"appApk,omitempty"`
+	AppBundle          *AppBundle                   `json:"appBundle,omitempty"`
+	AppInitialActivity *string                      `json:"appInitialActivity,omitempty"`
+	AppPackageID       *string                      `json:"appPackageId,omitempty"`
+	MaxDepth           *int32                       `json:"maxDepth,omitempty"`
+	MaxSteps           *int32                       `json:"maxSteps,omitempty"`
+	RoboDirectives     []RoboDirective              `json:"roboDirectives,omitempty"`
+	RoboMode           *AndroidRoboTestRoboModeEnum `json:"roboMode,omitempty"`
+	RoboScript         *FileReference               `json:"roboScript,omitempty"`
+	StartingIntents    []RoboStartingIntent         `json:"startingIntents,omitempty"`
 }

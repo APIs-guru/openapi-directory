@@ -13,7 +13,7 @@ const (
 )
 
 type GoogleCloudPolicysimulatorV1beta1AccessStateDiff struct {
-	AccessChange *GoogleCloudPolicysimulatorV1beta1AccessStateDiffAccessChangeEnum `json:"accessChange"`
-	Baseline     *GoogleCloudPolicysimulatorV1beta1ExplainedAccess                 `json:"baseline"`
-	Simulated    *GoogleCloudPolicysimulatorV1beta1ExplainedAccess                 `json:"simulated"`
+	AccessChange *GoogleCloudPolicysimulatorV1beta1AccessStateDiffAccessChangeEnum `json:"accessChange,omitempty"`
+	Baseline     *GoogleCloudPolicysimulatorV1beta1ExplainedAccess                 `json:"baseline,omitempty"`
+	Simulated    *GoogleCloudPolicysimulatorV1beta1ExplainedAccess                 `json:"simulated,omitempty"`
 }

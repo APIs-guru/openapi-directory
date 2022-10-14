@@ -18,7 +18,7 @@ const (
 )
 
 type LineItemBudget struct {
-	BudgetAllocationType *LineItemBudgetBudgetAllocationTypeEnum `json:"budgetAllocationType"`
-	BudgetUnit           *LineItemBudgetBudgetUnitEnum           `json:"budgetUnit"`
-	MaxAmount            *string                                 `json:"maxAmount"`
+	BudgetAllocationType *LineItemBudgetBudgetAllocationTypeEnum `json:"budgetAllocationType,omitempty"`
+	BudgetUnit           *LineItemBudgetBudgetUnitEnum           `json:"budgetUnit,omitempty"`
+	MaxAmount            *string                                 `json:"maxAmount,omitempty"`
 }

@@ -1,9 +1,9 @@
 package shared
 
 type InvitedUserInfo struct {
-	ID       *string `json:"id"`
-	IsInvite *bool   `json:"isInvite"`
-	Mail     *string `json:"mail"`
-	Name     *string `json:"name"`
-	RoleID   *string `json:"roleId"`
+	ID       *string `json:"id,omitempty"`
+	IsInvite *bool   `json:"isInvite,omitempty"`
+	Mail     *string `json:"mail,omitempty"`
+	Name     *string `json:"name,omitempty"`
+	RoleID   *string `json:"roleId,omitempty"`
 }

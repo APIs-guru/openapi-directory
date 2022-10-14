@@ -2,5 +2,5 @@ package shared
 
 type ApplicationRestoreConfiguration struct {
 	ApplicationRestoreType ApplicationRestoreTypeEnum `json:"ApplicationRestoreType"`
-	SnapshotName           *string                    `json:"SnapshotName"`
+	SnapshotName           *string                    `json:"SnapshotName,omitempty"`
 }

@@ -15,22 +15,22 @@ type CreateAccessPointHeaders struct {
 }
 
 type CreateAccessPointRequestBodyPosixUser struct {
-	Gid           *int64  `json:"Gid"`
-	SecondaryGids []int64 `json:"SecondaryGids"`
-	UID           *int64  `json:"Uid"`
+	Gid           *int64  `json:"Gid,omitempty"`
+	SecondaryGids []int64 `json:"SecondaryGids,omitempty"`
+	UID           *int64  `json:"Uid,omitempty"`
 }
 
 type CreateAccessPointRequestBodyRootDirectory struct {
-	CreationInfo *shared.CreationInfo `json:"CreationInfo"`
-	Path         *string              `json:"Path"`
+	CreationInfo *shared.CreationInfo `json:"CreationInfo,omitempty"`
+	Path         *string              `json:"Path,omitempty"`
 }
 
 type CreateAccessPointRequestBody struct {
 	ClientToken   string                                     `json:"ClientToken"`
 	FileSystemID  string                                     `json:"FileSystemId"`
-	PosixUser     *CreateAccessPointRequestBodyPosixUser     `json:"PosixUser"`
-	RootDirectory *CreateAccessPointRequestBodyRootDirectory `json:"RootDirectory"`
-	Tags          []shared.Tag                               `json:"Tags"`
+	PosixUser     *CreateAccessPointRequestBodyPosixUser     `json:"PosixUser,omitempty"`
+	RootDirectory *CreateAccessPointRequestBodyRootDirectory `json:"RootDirectory,omitempty"`
+	Tags          []shared.Tag                               `json:"Tags,omitempty"`
 }
 
 type CreateAccessPointRequest struct {

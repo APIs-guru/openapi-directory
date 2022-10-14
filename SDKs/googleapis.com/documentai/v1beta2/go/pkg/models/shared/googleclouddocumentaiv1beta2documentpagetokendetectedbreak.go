@@ -10,5 +10,5 @@ const (
 )
 
 type GoogleCloudDocumentaiV1beta2DocumentPageTokenDetectedBreak struct {
-	Type *GoogleCloudDocumentaiV1beta2DocumentPageTokenDetectedBreakTypeEnum `json:"type"`
+	Type *GoogleCloudDocumentaiV1beta2DocumentPageTokenDetectedBreakTypeEnum `json:"type,omitempty"`
 }

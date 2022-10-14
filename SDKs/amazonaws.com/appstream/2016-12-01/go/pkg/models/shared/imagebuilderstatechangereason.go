@@ -1,6 +1,6 @@
 package shared
 
 type ImageBuilderStateChangeReason struct {
-	Code    *ImageBuilderStateChangeReasonCodeEnum `json:"Code"`
-	Message *string                                `json:"Message"`
+	Code    *ImageBuilderStateChangeReasonCodeEnum `json:"Code,omitempty"`
+	Message *string                                `json:"Message,omitempty"`
 }

@@ -6,17 +6,17 @@ import (
 )
 
 type ListProjects200ApplicationJSONLinksPages1 struct {
-	Last *string `json:"last"`
-	Next *string `json:"next"`
+	Last *string `json:"last,omitempty"`
+	Next *string `json:"next,omitempty"`
 }
 
 type ListProjects200ApplicationJSONLinksPages2 struct {
-	First *string `json:"first"`
-	Prev  *string `json:"prev"`
+	First *string `json:"first,omitempty"`
+	Prev  *string `json:"prev,omitempty"`
 }
 
 type ListProjects200ApplicationJSONLinks struct {
-	Pages *interface{} `json:"pages"`
+	Pages *interface{} `json:"pages,omitempty"`
 }
 
 type ListProjects200ApplicationJSONMeta struct {
@@ -32,28 +32,28 @@ const (
 )
 
 type ListProjects200ApplicationJSONProjects struct {
-	CreatedAt   *time.Time                                             `json:"created_at"`
-	Description *string                                                `json:"description"`
-	Environment *ListProjects200ApplicationJSONProjectsEnvironmentEnum `json:"environment"`
-	ID          *string                                                `json:"id"`
-	IsDefault   *bool                                                  `json:"is_default"`
-	Name        *string                                                `json:"name"`
-	OwnerID     *int64                                                 `json:"owner_id"`
-	OwnerUUID   *string                                                `json:"owner_uuid"`
-	Purpose     *string                                                `json:"purpose"`
-	UpdatedAt   *time.Time                                             `json:"updated_at"`
+	CreatedAt   *time.Time                                             `json:"created_at,omitempty"`
+	Description *string                                                `json:"description,omitempty"`
+	Environment *ListProjects200ApplicationJSONProjectsEnvironmentEnum `json:"environment,omitempty"`
+	ID          *string                                                `json:"id,omitempty"`
+	IsDefault   *bool                                                  `json:"is_default,omitempty"`
+	Name        *string                                                `json:"name,omitempty"`
+	OwnerID     *int64                                                 `json:"owner_id,omitempty"`
+	OwnerUUID   *string                                                `json:"owner_uuid,omitempty"`
+	Purpose     *string                                                `json:"purpose,omitempty"`
+	UpdatedAt   *time.Time                                             `json:"updated_at,omitempty"`
 }
 
 type ListProjects200ApplicationJSON struct {
-	Links    *ListProjects200ApplicationJSONLinks     `json:"links"`
+	Links    *ListProjects200ApplicationJSONLinks     `json:"links,omitempty"`
 	Meta     ListProjects200ApplicationJSONMeta       `json:"meta"`
-	Projects []ListProjects200ApplicationJSONProjects `json:"projects"`
+	Projects []ListProjects200ApplicationJSONProjects `json:"projects,omitempty"`
 }
 
 type ListProjects401ApplicationJSON struct {
 	ID        string  `json:"id"`
 	Message   string  `json:"message"`
-	RequestID *string `json:"request_id"`
+	RequestID *string `json:"request_id,omitempty"`
 }
 
 type ListProjectsResponse struct {

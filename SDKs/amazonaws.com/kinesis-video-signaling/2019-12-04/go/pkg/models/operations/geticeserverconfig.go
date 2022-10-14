@@ -22,9 +22,9 @@ const (
 
 type GetIceServerConfigRequestBody struct {
 	ChannelArn string                                    `json:"ChannelARN"`
-	ClientID   *string                                   `json:"ClientId"`
-	Service    *GetIceServerConfigRequestBodyServiceEnum `json:"Service"`
-	Username   *string                                   `json:"Username"`
+	ClientID   *string                                   `json:"ClientId,omitempty"`
+	Service    *GetIceServerConfigRequestBodyServiceEnum `json:"Service,omitempty"`
+	Username   *string                                   `json:"Username,omitempty"`
 }
 
 type GetIceServerConfigRequest struct {

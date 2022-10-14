@@ -14,9 +14,9 @@ const (
 )
 
 type ActionsCreateOrUpdateOrgSecretRequestBody struct {
-	EncryptedValue        *string                                                 `json:"encrypted_value"`
-	KeyID                 *string                                                 `json:"key_id"`
-	SelectedRepositoryIds []string                                                `json:"selected_repository_ids"`
+	EncryptedValue        *string                                                 `json:"encrypted_value,omitempty"`
+	KeyID                 *string                                                 `json:"key_id,omitempty"`
+	SelectedRepositoryIds []string                                                `json:"selected_repository_ids,omitempty"`
 	Visibility            ActionsCreateOrUpdateOrgSecretRequestBodyVisibilityEnum `json:"visibility"`
 }
 

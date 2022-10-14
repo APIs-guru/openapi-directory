@@ -22,7 +22,7 @@ type CommunityProfileFilesIssueTemplateCommunityHealthFile struct {
 }
 
 type CommunityProfileFilesLicenseLicenseSimple struct {
-	HTMLURL *string `json:"html_url"`
+	HTMLURL *string `json:"html_url,omitempty"`
 	Key     string  `json:"key"`
 	Name    string  `json:"name"`
 	NodeID  string  `json:"node_id"`
@@ -50,7 +50,7 @@ type CommunityProfileFiles struct {
 }
 
 type CommunityProfile struct {
-	ContentReportsEnabled *bool                 `json:"content_reports_enabled"`
+	ContentReportsEnabled *bool                 `json:"content_reports_enabled,omitempty"`
 	Description           string                `json:"description"`
 	Documentation         string                `json:"documentation"`
 	Files                 CommunityProfileFiles `json:"files"`

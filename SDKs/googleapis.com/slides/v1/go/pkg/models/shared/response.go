@@ -1,16 +1,16 @@
 package shared
 
 type Response struct {
-	CreateImage                     *CreateImageResponse                     `json:"createImage"`
-	CreateLine                      *CreateLineResponse                      `json:"createLine"`
-	CreateShape                     *CreateShapeResponse                     `json:"createShape"`
-	CreateSheetsChart               *CreateSheetsChartResponse               `json:"createSheetsChart"`
-	CreateSlide                     *CreateSlideResponse                     `json:"createSlide"`
-	CreateTable                     *CreateTableResponse                     `json:"createTable"`
-	CreateVideo                     *CreateVideoResponse                     `json:"createVideo"`
-	DuplicateObject                 *DuplicateObjectResponse                 `json:"duplicateObject"`
-	GroupObjects                    *GroupObjectsResponse                    `json:"groupObjects"`
-	ReplaceAllShapesWithImage       *ReplaceAllShapesWithImageResponse       `json:"replaceAllShapesWithImage"`
-	ReplaceAllShapesWithSheetsChart *ReplaceAllShapesWithSheetsChartResponse `json:"replaceAllShapesWithSheetsChart"`
-	ReplaceAllText                  *ReplaceAllTextResponse                  `json:"replaceAllText"`
+	CreateImage                     *CreateImageResponse                     `json:"createImage,omitempty"`
+	CreateLine                      *CreateLineResponse                      `json:"createLine,omitempty"`
+	CreateShape                     *CreateShapeResponse                     `json:"createShape,omitempty"`
+	CreateSheetsChart               *CreateSheetsChartResponse               `json:"createSheetsChart,omitempty"`
+	CreateSlide                     *CreateSlideResponse                     `json:"createSlide,omitempty"`
+	CreateTable                     *CreateTableResponse                     `json:"createTable,omitempty"`
+	CreateVideo                     *CreateVideoResponse                     `json:"createVideo,omitempty"`
+	DuplicateObject                 *DuplicateObjectResponse                 `json:"duplicateObject,omitempty"`
+	GroupObjects                    *GroupObjectsResponse                    `json:"groupObjects,omitempty"`
+	ReplaceAllShapesWithImage       *ReplaceAllShapesWithImageResponse       `json:"replaceAllShapesWithImage,omitempty"`
+	ReplaceAllShapesWithSheetsChart *ReplaceAllShapesWithSheetsChartResponse `json:"replaceAllShapesWithSheetsChart,omitempty"`
+	ReplaceAllText                  *ReplaceAllTextResponse                  `json:"replaceAllText,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type FlattenInstruction struct {
-	Inputs []InstructionInput `json:"inputs"`
+	Inputs []InstructionInput `json:"inputs,omitempty"`
 }

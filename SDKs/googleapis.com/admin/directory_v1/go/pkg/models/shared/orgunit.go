@@ -1,13 +1,13 @@
 package shared
 
 type OrgUnit struct {
-	BlockInheritance  *bool   `json:"blockInheritance"`
-	Description       *string `json:"description"`
-	Etag              *string `json:"etag"`
-	Kind              *string `json:"kind"`
-	Name              *string `json:"name"`
-	OrgUnitID         *string `json:"orgUnitId"`
-	OrgUnitPath       *string `json:"orgUnitPath"`
-	ParentOrgUnitID   *string `json:"parentOrgUnitId"`
-	ParentOrgUnitPath *string `json:"parentOrgUnitPath"`
+	BlockInheritance  *bool   `json:"blockInheritance,omitempty"`
+	Description       *string `json:"description,omitempty"`
+	Etag              *string `json:"etag,omitempty"`
+	Kind              *string `json:"kind,omitempty"`
+	Name              *string `json:"name,omitempty"`
+	OrgUnitID         *string `json:"orgUnitId,omitempty"`
+	OrgUnitPath       *string `json:"orgUnitPath,omitempty"`
+	ParentOrgUnitID   *string `json:"parentOrgUnitId,omitempty"`
+	ParentOrgUnitPath *string `json:"parentOrgUnitPath,omitempty"`
 }

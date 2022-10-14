@@ -1,5 +1,5 @@
 package shared
 
 type InstancesCloneRequest struct {
-	CloneContext *CloneContext `json:"cloneContext"`
+	CloneContext *CloneContext `json:"cloneContext,omitempty"`
 }

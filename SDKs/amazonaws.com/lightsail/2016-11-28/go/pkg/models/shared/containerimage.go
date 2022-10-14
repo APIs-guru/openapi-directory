@@ -5,7 +5,7 @@ import (
 )
 
 type ContainerImage struct {
-	CreatedAt *time.Time `json:"createdAt"`
-	Digest    *string    `json:"digest"`
-	Image     *string    `json:"image"`
+	CreatedAt *time.Time `json:"createdAt,omitempty"`
+	Digest    *string    `json:"digest,omitempty"`
+	Image     *string    `json:"image,omitempty"`
 }

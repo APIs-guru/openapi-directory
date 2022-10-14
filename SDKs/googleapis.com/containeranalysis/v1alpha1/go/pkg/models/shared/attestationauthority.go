@@ -1,5 +1,5 @@
 package shared
 
 type AttestationAuthority struct {
-	Hint *AttestationAuthorityHint `json:"hint"`
+	Hint *AttestationAuthorityHint `json:"hint,omitempty"`
 }

@@ -1,8 +1,8 @@
 package shared
 
 type TransactWriteItem struct {
-	ConditionCheck *ConditionCheck `json:"ConditionCheck"`
-	Delete         *Delete         `json:"Delete"`
-	Put            *Put            `json:"Put"`
-	Update         *Update         `json:"Update"`
+	ConditionCheck *ConditionCheck `json:"ConditionCheck,omitempty"`
+	Delete         *Delete         `json:"Delete,omitempty"`
+	Put            *Put            `json:"Put,omitempty"`
+	Update         *Update         `json:"Update,omitempty"`
 }

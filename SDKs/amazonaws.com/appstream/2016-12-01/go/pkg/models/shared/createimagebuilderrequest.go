@@ -1,17 +1,17 @@
 package shared
 
 type CreateImageBuilderRequest struct {
-	AccessEndpoints             []AccessEndpoint  `json:"AccessEndpoints"`
-	AppstreamAgentVersion       *string           `json:"AppstreamAgentVersion"`
-	Description                 *string           `json:"Description"`
-	DisplayName                 *string           `json:"DisplayName"`
-	DomainJoinInfo              *DomainJoinInfo   `json:"DomainJoinInfo"`
-	EnableDefaultInternetAccess *bool             `json:"EnableDefaultInternetAccess"`
-	IamRoleArn                  *string           `json:"IamRoleArn"`
-	ImageArn                    *string           `json:"ImageArn"`
-	ImageName                   *string           `json:"ImageName"`
+	AccessEndpoints             []AccessEndpoint  `json:"AccessEndpoints,omitempty"`
+	AppstreamAgentVersion       *string           `json:"AppstreamAgentVersion,omitempty"`
+	Description                 *string           `json:"Description,omitempty"`
+	DisplayName                 *string           `json:"DisplayName,omitempty"`
+	DomainJoinInfo              *DomainJoinInfo   `json:"DomainJoinInfo,omitempty"`
+	EnableDefaultInternetAccess *bool             `json:"EnableDefaultInternetAccess,omitempty"`
+	IamRoleArn                  *string           `json:"IamRoleArn,omitempty"`
+	ImageArn                    *string           `json:"ImageArn,omitempty"`
+	ImageName                   *string           `json:"ImageName,omitempty"`
 	InstanceType                string            `json:"InstanceType"`
 	Name                        string            `json:"Name"`
-	Tags                        map[string]string `json:"Tags"`
-	VpcConfig                   *VpcConfig        `json:"VpcConfig"`
+	Tags                        map[string]string `json:"Tags,omitempty"`
+	VpcConfig                   *VpcConfig        `json:"VpcConfig,omitempty"`
 }

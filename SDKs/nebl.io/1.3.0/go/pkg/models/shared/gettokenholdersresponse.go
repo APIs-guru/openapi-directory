@@ -1,15 +1,15 @@
 package shared
 
 type GetTokenHoldersResponseHolders struct {
-	Address *string  `json:"address"`
-	Amount  *float64 `json:"amount"`
+	Address *string  `json:"address,omitempty"`
+	Amount  *float64 `json:"amount,omitempty"`
 }
 
 type GetTokenHoldersResponse struct {
-	AggregationPolicy *string                          `json:"aggregationPolicy"`
-	Divibility        *float64                         `json:"divibility"`
-	Holders           []GetTokenHoldersResponseHolders `json:"holders"`
-	LockStatus        *bool                            `json:"lockStatus"`
-	SomeUtxo          *string                          `json:"someUtxo"`
-	TokenID           *string                          `json:"tokenId"`
+	AggregationPolicy *string                          `json:"aggregationPolicy,omitempty"`
+	Divibility        *float64                         `json:"divibility,omitempty"`
+	Holders           []GetTokenHoldersResponseHolders `json:"holders,omitempty"`
+	LockStatus        *bool                            `json:"lockStatus,omitempty"`
+	SomeUtxo          *string                          `json:"someUtxo,omitempty"`
+	TokenID           *string                          `json:"tokenId,omitempty"`
 }

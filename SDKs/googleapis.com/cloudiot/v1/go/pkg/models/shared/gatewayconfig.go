@@ -18,8 +18,8 @@ const (
 )
 
 type GatewayConfig struct {
-	GatewayAuthMethod       *GatewayConfigGatewayAuthMethodEnum `json:"gatewayAuthMethod"`
-	GatewayType             *GatewayConfigGatewayTypeEnum       `json:"gatewayType"`
-	LastAccessedGatewayID   *string                             `json:"lastAccessedGatewayId"`
-	LastAccessedGatewayTime *string                             `json:"lastAccessedGatewayTime"`
+	GatewayAuthMethod       *GatewayConfigGatewayAuthMethodEnum `json:"gatewayAuthMethod,omitempty"`
+	GatewayType             *GatewayConfigGatewayTypeEnum       `json:"gatewayType,omitempty"`
+	LastAccessedGatewayID   *string                             `json:"lastAccessedGatewayId,omitempty"`
+	LastAccessedGatewayTime *string                             `json:"lastAccessedGatewayTime,omitempty"`
 }

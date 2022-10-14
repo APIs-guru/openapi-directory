@@ -39,27 +39,27 @@ const (
 
 type ChecksCreateRequestBodyOutputAnnotations struct {
 	AnnotationLevel ChecksCreateRequestBodyOutputAnnotationsAnnotationLevelEnum `json:"annotation_level"`
-	EndColumn       *int64                                                      `json:"end_column"`
+	EndColumn       *int64                                                      `json:"end_column,omitempty"`
 	EndLine         int64                                                       `json:"end_line"`
 	Message         string                                                      `json:"message"`
 	Path            string                                                      `json:"path"`
-	RawDetails      *string                                                     `json:"raw_details"`
-	StartColumn     *int64                                                      `json:"start_column"`
+	RawDetails      *string                                                     `json:"raw_details,omitempty"`
+	StartColumn     *int64                                                      `json:"start_column,omitempty"`
 	StartLine       int64                                                       `json:"start_line"`
-	Title           *string                                                     `json:"title"`
+	Title           *string                                                     `json:"title,omitempty"`
 }
 
 type ChecksCreateRequestBodyOutputImages struct {
 	Alt      string  `json:"alt"`
-	Caption  *string `json:"caption"`
+	Caption  *string `json:"caption,omitempty"`
 	ImageURL string  `json:"image_url"`
 }
 
 type ChecksCreateRequestBodyOutput struct {
-	Annotations []ChecksCreateRequestBodyOutputAnnotations `json:"annotations"`
-	Images      []ChecksCreateRequestBodyOutputImages      `json:"images"`
+	Annotations []ChecksCreateRequestBodyOutputAnnotations `json:"annotations,omitempty"`
+	Images      []ChecksCreateRequestBodyOutputImages      `json:"images,omitempty"`
 	Summary     string                                     `json:"summary"`
-	Text        *string                                    `json:"text"`
+	Text        *string                                    `json:"text,omitempty"`
 	Title       string                                     `json:"title"`
 }
 
@@ -72,16 +72,16 @@ const (
 )
 
 type ChecksCreateRequestBody struct {
-	Actions     []ChecksCreateRequestBodyActions       `json:"actions"`
-	CompletedAt *time.Time                             `json:"completed_at"`
-	Conclusion  *ChecksCreateRequestBodyConclusionEnum `json:"conclusion"`
-	DetailsURL  *string                                `json:"details_url"`
-	ExternalID  *string                                `json:"external_id"`
+	Actions     []ChecksCreateRequestBodyActions       `json:"actions,omitempty"`
+	CompletedAt *time.Time                             `json:"completed_at,omitempty"`
+	Conclusion  *ChecksCreateRequestBodyConclusionEnum `json:"conclusion,omitempty"`
+	DetailsURL  *string                                `json:"details_url,omitempty"`
+	ExternalID  *string                                `json:"external_id,omitempty"`
 	HeadSha     string                                 `json:"head_sha"`
 	Name        string                                 `json:"name"`
-	Output      *ChecksCreateRequestBodyOutput         `json:"output"`
-	StartedAt   *time.Time                             `json:"started_at"`
-	Status      *ChecksCreateRequestBodyStatusEnum     `json:"status"`
+	Output      *ChecksCreateRequestBodyOutput         `json:"output,omitempty"`
+	StartedAt   *time.Time                             `json:"started_at,omitempty"`
+	Status      *ChecksCreateRequestBodyStatusEnum     `json:"status,omitempty"`
 }
 
 type ChecksCreateRequest struct {

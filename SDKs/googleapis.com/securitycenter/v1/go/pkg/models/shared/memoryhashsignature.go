@@ -1,6 +1,6 @@
 package shared
 
 type MemoryHashSignature struct {
-	BinaryFamily *string     `json:"binaryFamily"`
-	Detections   []Detection `json:"detections"`
+	BinaryFamily *string     `json:"binaryFamily,omitempty"`
+	Detections   []Detection `json:"detections,omitempty"`
 }

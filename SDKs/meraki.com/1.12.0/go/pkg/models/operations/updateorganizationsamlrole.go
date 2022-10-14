@@ -42,10 +42,10 @@ type UpdateOrganizationSamlRoleRequestBodyTags struct {
 }
 
 type UpdateOrganizationSamlRoleRequestBody struct {
-	Networks  []UpdateOrganizationSamlRoleRequestBodyNetworks     `json:"networks"`
-	OrgAccess *UpdateOrganizationSamlRoleRequestBodyOrgAccessEnum `json:"orgAccess"`
-	Role      *string                                             `json:"role"`
-	Tags      []UpdateOrganizationSamlRoleRequestBodyTags         `json:"tags"`
+	Networks  []UpdateOrganizationSamlRoleRequestBodyNetworks     `json:"networks,omitempty"`
+	OrgAccess *UpdateOrganizationSamlRoleRequestBodyOrgAccessEnum `json:"orgAccess,omitempty"`
+	Role      *string                                             `json:"role,omitempty"`
+	Tags      []UpdateOrganizationSamlRoleRequestBodyTags         `json:"tags,omitempty"`
 }
 
 type UpdateOrganizationSamlRoleRequest struct {

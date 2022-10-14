@@ -1,5 +1,5 @@
 package shared
 
 type CreateCodeReviewResponse struct {
-	CodeReview *CodeReview `json:"CodeReview"`
+	CodeReview *CodeReview `json:"CodeReview,omitempty"`
 }

@@ -14,7 +14,7 @@ type AddFollowersForProjectQueryParams struct {
 }
 
 type AddFollowersForProjectRequestBody struct {
-	Data *shared.AddFollowersRequest `json:"data"`
+	Data *shared.AddFollowersRequest `json:"data,omitempty"`
 }
 
 type AddFollowersForProjectRequest struct {
@@ -24,7 +24,7 @@ type AddFollowersForProjectRequest struct {
 }
 
 type AddFollowersForProject200ApplicationJSON struct {
-	Data map[string]interface{} `json:"data"`
+	Data map[string]interface{} `json:"data,omitempty"`
 }
 
 type AddFollowersForProjectResponse struct {

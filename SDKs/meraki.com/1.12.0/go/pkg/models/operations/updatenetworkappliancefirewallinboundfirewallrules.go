@@ -21,19 +21,19 @@ const (
 )
 
 type UpdateNetworkApplianceFirewallInboundFirewallRulesRequestBodyRules struct {
-	Comment       *string                                                                        `json:"comment"`
+	Comment       *string                                                                        `json:"comment,omitempty"`
 	DestCidr      string                                                                         `json:"destCidr"`
-	DestPort      *string                                                                        `json:"destPort"`
+	DestPort      *string                                                                        `json:"destPort,omitempty"`
 	Policy        UpdateNetworkApplianceFirewallInboundFirewallRulesRequestBodyRulesPolicyEnum   `json:"policy"`
 	Protocol      UpdateNetworkApplianceFirewallInboundFirewallRulesRequestBodyRulesProtocolEnum `json:"protocol"`
 	SrcCidr       string                                                                         `json:"srcCidr"`
-	SrcPort       *string                                                                        `json:"srcPort"`
-	SyslogEnabled *bool                                                                          `json:"syslogEnabled"`
+	SrcPort       *string                                                                        `json:"srcPort,omitempty"`
+	SyslogEnabled *bool                                                                          `json:"syslogEnabled,omitempty"`
 }
 
 type UpdateNetworkApplianceFirewallInboundFirewallRulesRequestBody struct {
-	Rules             []UpdateNetworkApplianceFirewallInboundFirewallRulesRequestBodyRules `json:"rules"`
-	SyslogDefaultRule *bool                                                                `json:"syslogDefaultRule"`
+	Rules             []UpdateNetworkApplianceFirewallInboundFirewallRulesRequestBodyRules `json:"rules,omitempty"`
+	SyslogDefaultRule *bool                                                                `json:"syslogDefaultRule,omitempty"`
 }
 
 type UpdateNetworkApplianceFirewallInboundFirewallRulesRequest struct {

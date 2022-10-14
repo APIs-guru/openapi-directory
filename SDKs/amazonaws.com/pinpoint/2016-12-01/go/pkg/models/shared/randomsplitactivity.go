@@ -1,5 +1,5 @@
 package shared
 
 type RandomSplitActivity struct {
-	Branches []RandomSplitEntry `json:"Branches"`
+	Branches []RandomSplitEntry `json:"Branches,omitempty"`
 }

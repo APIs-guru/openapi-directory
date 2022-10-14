@@ -1,15 +1,15 @@
 package shared
 
 type Userinfo struct {
-	Email         *string `json:"email"`
-	FamilyName    *string `json:"family_name"`
-	Gender        *string `json:"gender"`
-	GivenName     *string `json:"given_name"`
-	Hd            *string `json:"hd"`
-	ID            *string `json:"id"`
-	Link          *string `json:"link"`
-	Locale        *string `json:"locale"`
-	Name          *string `json:"name"`
-	Picture       *string `json:"picture"`
-	VerifiedEmail *bool   `json:"verified_email"`
+	Email         *string `json:"email,omitempty"`
+	FamilyName    *string `json:"family_name,omitempty"`
+	Gender        *string `json:"gender,omitempty"`
+	GivenName     *string `json:"given_name,omitempty"`
+	Hd            *string `json:"hd,omitempty"`
+	ID            *string `json:"id,omitempty"`
+	Link          *string `json:"link,omitempty"`
+	Locale        *string `json:"locale,omitempty"`
+	Name          *string `json:"name,omitempty"`
+	Picture       *string `json:"picture,omitempty"`
+	VerifiedEmail *bool   `json:"verified_email,omitempty"`
 }

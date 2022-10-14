@@ -1,5 +1,5 @@
 package shared
 
 type CreateDeveloperMetadataRequest struct {
-	DeveloperMetadata *DeveloperMetadata `json:"developerMetadata"`
+	DeveloperMetadata *DeveloperMetadata `json:"developerMetadata,omitempty"`
 }

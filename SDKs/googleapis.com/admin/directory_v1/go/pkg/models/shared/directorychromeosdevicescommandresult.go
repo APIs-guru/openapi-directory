@@ -10,7 +10,7 @@ const (
 )
 
 type DirectoryChromeosdevicesCommandResult struct {
-	ErrorMessage *string                                          `json:"errorMessage"`
-	ExecuteTime  *string                                          `json:"executeTime"`
-	Result       *DirectoryChromeosdevicesCommandResultResultEnum `json:"result"`
+	ErrorMessage *string                                          `json:"errorMessage,omitempty"`
+	ExecuteTime  *string                                          `json:"executeTime,omitempty"`
+	Result       *DirectoryChromeosdevicesCommandResultResultEnum `json:"result,omitempty"`
 }

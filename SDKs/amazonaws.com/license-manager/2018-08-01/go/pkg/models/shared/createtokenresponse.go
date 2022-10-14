@@ -1,7 +1,7 @@
 package shared
 
 type CreateTokenResponse struct {
-	Token     *string        `json:"Token"`
-	TokenID   *string        `json:"TokenId"`
-	TokenType *TokenTypeEnum `json:"TokenType"`
+	Token     *string        `json:"Token,omitempty"`
+	TokenID   *string        `json:"TokenId,omitempty"`
+	TokenType *TokenTypeEnum `json:"TokenType,omitempty"`
 }

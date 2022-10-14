@@ -20,8 +20,8 @@ type SubmitUserFeedbackRequest struct {
 }
 
 type SubmitUserFeedback200ApplicationJSON struct {
-	Feedback *shared.Feedback `json:"feedback"`
-	User     *shared.User     `json:"user"`
+	Feedback *shared.Feedback `json:"feedback,omitempty"`
+	User     *shared.User     `json:"user,omitempty"`
 }
 
 type SubmitUserFeedbackResponse struct {

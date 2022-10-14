@@ -32,15 +32,15 @@ type ListIncomingPhoneNumberTollFreeRequest struct {
 }
 
 type ListIncomingPhoneNumberTollFree200ApplicationJSONListIncomingPhoneNumberTollFreeResponse struct {
-	End                  *int64                                                                 `json:"end"`
-	FirstPageURI         *string                                                                `json:"first_page_uri"`
-	IncomingPhoneNumbers []shared.APIV2010AccountIncomingPhoneNumberIncomingPhoneNumberTollFree `json:"incoming_phone_numbers"`
-	NextPageURI          *string                                                                `json:"next_page_uri"`
-	Page                 *int64                                                                 `json:"page"`
-	PageSize             *int64                                                                 `json:"page_size"`
-	PreviousPageURI      *string                                                                `json:"previous_page_uri"`
-	Start                *int64                                                                 `json:"start"`
-	URI                  *string                                                                `json:"uri"`
+	End                  *int64                                                                 `json:"end,omitempty"`
+	FirstPageURI         *string                                                                `json:"first_page_uri,omitempty"`
+	IncomingPhoneNumbers []shared.APIV2010AccountIncomingPhoneNumberIncomingPhoneNumberTollFree `json:"incoming_phone_numbers,omitempty"`
+	NextPageURI          *string                                                                `json:"next_page_uri,omitempty"`
+	Page                 *int64                                                                 `json:"page,omitempty"`
+	PageSize             *int64                                                                 `json:"page_size,omitempty"`
+	PreviousPageURI      *string                                                                `json:"previous_page_uri,omitempty"`
+	Start                *int64                                                                 `json:"start,omitempty"`
+	URI                  *string                                                                `json:"uri,omitempty"`
 }
 
 type ListIncomingPhoneNumberTollFreeResponse struct {

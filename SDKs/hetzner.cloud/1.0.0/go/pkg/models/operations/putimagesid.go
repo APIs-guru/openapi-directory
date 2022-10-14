@@ -11,9 +11,9 @@ const (
 )
 
 type PutImagesIDRequestBodyUpdateImageRequest struct {
-	Description *string                         `json:"description"`
-	Labels      map[string]interface{}          `json:"labels"`
-	Type        *PutImagesIDRequestBodyTypeEnum `json:"type"`
+	Description *string                         `json:"description,omitempty"`
+	Labels      map[string]interface{}          `json:"labels,omitempty"`
+	Type        *PutImagesIDRequestBodyTypeEnum `json:"type,omitempty"`
 }
 
 type PutImagesIDRequest struct {
@@ -60,7 +60,7 @@ const (
 
 type PutImagesID200ApplicationJSONImage struct {
 	BoundTo     int64                                          `json:"bound_to"`
-	BuildID     *string                                        `json:"build_id"`
+	BuildID     *string                                        `json:"build_id,omitempty"`
 	Created     string                                         `json:"created"`
 	CreatedFrom PutImagesID200ApplicationJSONImageCreatedFrom  `json:"created_from"`
 	Deleted     string                                         `json:"deleted"`
@@ -74,13 +74,13 @@ type PutImagesID200ApplicationJSONImage struct {
 	OsFlavor    PutImagesID200ApplicationJSONImageOsFlavorEnum `json:"os_flavor"`
 	OsVersion   string                                         `json:"os_version"`
 	Protection  PutImagesID200ApplicationJSONImageProtection   `json:"protection"`
-	RapidDeploy *bool                                          `json:"rapid_deploy"`
+	RapidDeploy *bool                                          `json:"rapid_deploy,omitempty"`
 	Status      PutImagesID200ApplicationJSONImageStatusEnum   `json:"status"`
 	Type        PutImagesID200ApplicationJSONImageTypeEnum     `json:"type"`
 }
 
 type PutImagesID200ApplicationJSON struct {
-	Image *PutImagesID200ApplicationJSONImage `json:"image"`
+	Image *PutImagesID200ApplicationJSONImage `json:"image,omitempty"`
 }
 
 type PutImagesIDResponse struct {

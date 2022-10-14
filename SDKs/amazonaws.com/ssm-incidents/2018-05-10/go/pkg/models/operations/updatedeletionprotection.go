@@ -12,7 +12,7 @@ type UpdateDeletionProtectionHeaders struct {
 
 type UpdateDeletionProtectionRequestBody struct {
 	Arn               string  `json:"arn"`
-	ClientToken       *string `json:"clientToken"`
+	ClientToken       *string `json:"clientToken,omitempty"`
 	DeletionProtected bool    `json:"deletionProtected"`
 }
 

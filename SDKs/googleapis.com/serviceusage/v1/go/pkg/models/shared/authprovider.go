@@ -1,10 +1,10 @@
 package shared
 
 type AuthProvider struct {
-	Audiences        *string       `json:"audiences"`
-	AuthorizationURL *string       `json:"authorizationUrl"`
-	ID               *string       `json:"id"`
-	Issuer           *string       `json:"issuer"`
-	JwksURI          *string       `json:"jwksUri"`
-	JwtLocations     []JwtLocation `json:"jwtLocations"`
+	Audiences        *string       `json:"audiences,omitempty"`
+	AuthorizationURL *string       `json:"authorizationUrl,omitempty"`
+	ID               *string       `json:"id,omitempty"`
+	Issuer           *string       `json:"issuer,omitempty"`
+	JwksURI          *string       `json:"jwksUri,omitempty"`
+	JwtLocations     []JwtLocation `json:"jwtLocations,omitempty"`
 }

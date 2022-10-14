@@ -1,17 +1,17 @@
 package shared
 
 type UpdateProvisionedProductInput struct {
-	AcceptLanguage           *string                        `json:"AcceptLanguage"`
-	PathID                   *string                        `json:"PathId"`
-	PathName                 *string                        `json:"PathName"`
-	ProductID                *string                        `json:"ProductId"`
-	ProductName              *string                        `json:"ProductName"`
-	ProvisionedProductID     *string                        `json:"ProvisionedProductId"`
-	ProvisionedProductName   *string                        `json:"ProvisionedProductName"`
-	ProvisioningArtifactID   *string                        `json:"ProvisioningArtifactId"`
-	ProvisioningArtifactName *string                        `json:"ProvisioningArtifactName"`
-	ProvisioningParameters   []UpdateProvisioningParameter  `json:"ProvisioningParameters"`
-	ProvisioningPreferences  *UpdateProvisioningPreferences `json:"ProvisioningPreferences"`
-	Tags                     []Tag                          `json:"Tags"`
+	AcceptLanguage           *string                        `json:"AcceptLanguage,omitempty"`
+	PathID                   *string                        `json:"PathId,omitempty"`
+	PathName                 *string                        `json:"PathName,omitempty"`
+	ProductID                *string                        `json:"ProductId,omitempty"`
+	ProductName              *string                        `json:"ProductName,omitempty"`
+	ProvisionedProductID     *string                        `json:"ProvisionedProductId,omitempty"`
+	ProvisionedProductName   *string                        `json:"ProvisionedProductName,omitempty"`
+	ProvisioningArtifactID   *string                        `json:"ProvisioningArtifactId,omitempty"`
+	ProvisioningArtifactName *string                        `json:"ProvisioningArtifactName,omitempty"`
+	ProvisioningParameters   []UpdateProvisioningParameter  `json:"ProvisioningParameters,omitempty"`
+	ProvisioningPreferences  *UpdateProvisioningPreferences `json:"ProvisioningPreferences,omitempty"`
+	Tags                     []Tag                          `json:"Tags,omitempty"`
 	UpdateToken              string                         `json:"UpdateToken"`
 }

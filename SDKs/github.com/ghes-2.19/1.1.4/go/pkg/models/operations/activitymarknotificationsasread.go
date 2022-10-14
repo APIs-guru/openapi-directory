@@ -6,8 +6,8 @@ import (
 )
 
 type ActivityMarkNotificationsAsReadRequestBody struct {
-	LastReadAt *time.Time `json:"last_read_at"`
-	Read       *bool      `json:"read"`
+	LastReadAt *time.Time `json:"last_read_at,omitempty"`
+	Read       *bool      `json:"read,omitempty"`
 }
 
 type ActivityMarkNotificationsAsReadRequest struct {
@@ -15,7 +15,7 @@ type ActivityMarkNotificationsAsReadRequest struct {
 }
 
 type ActivityMarkNotificationsAsRead202ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type ActivityMarkNotificationsAsReadResponse struct {

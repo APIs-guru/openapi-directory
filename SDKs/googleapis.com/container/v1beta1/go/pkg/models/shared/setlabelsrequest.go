@@ -1,10 +1,10 @@
 package shared
 
 type SetLabelsRequest struct {
-	ClusterID        *string           `json:"clusterId"`
-	LabelFingerprint *string           `json:"labelFingerprint"`
-	Name             *string           `json:"name"`
-	ProjectID        *string           `json:"projectId"`
-	ResourceLabels   map[string]string `json:"resourceLabels"`
-	Zone             *string           `json:"zone"`
+	ClusterID        *string           `json:"clusterId,omitempty"`
+	LabelFingerprint *string           `json:"labelFingerprint,omitempty"`
+	Name             *string           `json:"name,omitempty"`
+	ProjectID        *string           `json:"projectId,omitempty"`
+	ResourceLabels   map[string]string `json:"resourceLabels,omitempty"`
+	Zone             *string           `json:"zone,omitempty"`
 }

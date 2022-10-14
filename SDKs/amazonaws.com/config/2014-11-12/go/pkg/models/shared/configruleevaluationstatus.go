@@ -5,16 +5,16 @@ import (
 )
 
 type ConfigRuleEvaluationStatus struct {
-	ConfigRuleArn                *string    `json:"ConfigRuleArn"`
-	ConfigRuleID                 *string    `json:"ConfigRuleId"`
-	ConfigRuleName               *string    `json:"ConfigRuleName"`
-	FirstActivatedTime           *time.Time `json:"FirstActivatedTime"`
-	FirstEvaluationStarted       *bool      `json:"FirstEvaluationStarted"`
-	LastDeactivatedTime          *time.Time `json:"LastDeactivatedTime"`
-	LastErrorCode                *string    `json:"LastErrorCode"`
-	LastErrorMessage             *string    `json:"LastErrorMessage"`
-	LastFailedEvaluationTime     *time.Time `json:"LastFailedEvaluationTime"`
-	LastFailedInvocationTime     *time.Time `json:"LastFailedInvocationTime"`
-	LastSuccessfulEvaluationTime *time.Time `json:"LastSuccessfulEvaluationTime"`
-	LastSuccessfulInvocationTime *time.Time `json:"LastSuccessfulInvocationTime"`
+	ConfigRuleArn                *string    `json:"ConfigRuleArn,omitempty"`
+	ConfigRuleID                 *string    `json:"ConfigRuleId,omitempty"`
+	ConfigRuleName               *string    `json:"ConfigRuleName,omitempty"`
+	FirstActivatedTime           *time.Time `json:"FirstActivatedTime,omitempty"`
+	FirstEvaluationStarted       *bool      `json:"FirstEvaluationStarted,omitempty"`
+	LastDeactivatedTime          *time.Time `json:"LastDeactivatedTime,omitempty"`
+	LastErrorCode                *string    `json:"LastErrorCode,omitempty"`
+	LastErrorMessage             *string    `json:"LastErrorMessage,omitempty"`
+	LastFailedEvaluationTime     *time.Time `json:"LastFailedEvaluationTime,omitempty"`
+	LastFailedInvocationTime     *time.Time `json:"LastFailedInvocationTime,omitempty"`
+	LastSuccessfulEvaluationTime *time.Time `json:"LastSuccessfulEvaluationTime,omitempty"`
+	LastSuccessfulInvocationTime *time.Time `json:"LastSuccessfulInvocationTime,omitempty"`
 }

@@ -16,10 +16,10 @@ const (
 )
 
 type SegmentDimensionFilter struct {
-	CaseSensitive      *bool                               `json:"caseSensitive"`
-	DimensionName      *string                             `json:"dimensionName"`
-	Expressions        []string                            `json:"expressions"`
-	MaxComparisonValue *string                             `json:"maxComparisonValue"`
-	MinComparisonValue *string                             `json:"minComparisonValue"`
-	Operator           *SegmentDimensionFilterOperatorEnum `json:"operator"`
+	CaseSensitive      *bool                               `json:"caseSensitive,omitempty"`
+	DimensionName      *string                             `json:"dimensionName,omitempty"`
+	Expressions        []string                            `json:"expressions,omitempty"`
+	MaxComparisonValue *string                             `json:"maxComparisonValue,omitempty"`
+	MinComparisonValue *string                             `json:"minComparisonValue,omitempty"`
+	Operator           *SegmentDimensionFilterOperatorEnum `json:"operator,omitempty"`
 }

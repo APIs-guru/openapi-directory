@@ -1,6 +1,6 @@
 package shared
 
 type BatchPredictOutputConfig struct {
-	BigqueryDestination *BigQueryDestination `json:"bigqueryDestination"`
-	GcsDestination      *GcsDestination      `json:"gcsDestination"`
+	BigqueryDestination *BigQueryDestination `json:"bigqueryDestination,omitempty"`
+	GcsDestination      *GcsDestination      `json:"gcsDestination,omitempty"`
 }

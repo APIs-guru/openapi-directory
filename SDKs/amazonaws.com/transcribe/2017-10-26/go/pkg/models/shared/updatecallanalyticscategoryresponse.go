@@ -1,5 +1,5 @@
 package shared
 
 type UpdateCallAnalyticsCategoryResponse struct {
-	CategoryProperties *CategoryProperties `json:"CategoryProperties"`
+	CategoryProperties *CategoryProperties `json:"CategoryProperties,omitempty"`
 }

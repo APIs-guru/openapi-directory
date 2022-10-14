@@ -16,8 +16,8 @@ type HipHealthInformationRequestAcknowledgementHiRequest struct {
 }
 
 type HipHealthInformationRequestAcknowledgement struct {
-	Error     *Error                                               `json:"error"`
-	HiRequest *HipHealthInformationRequestAcknowledgementHiRequest `json:"hiRequest"`
+	Error     *Error                                               `json:"error,omitempty"`
+	HiRequest *HipHealthInformationRequestAcknowledgementHiRequest `json:"hiRequest,omitempty"`
 	RequestID string                                               `json:"requestId"`
 	Resp      RequestReference                                     `json:"resp"`
 	Timestamp time.Time                                            `json:"timestamp"`

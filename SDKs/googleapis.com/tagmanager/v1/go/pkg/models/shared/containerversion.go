@@ -1,18 +1,18 @@
 package shared
 
 type ContainerVersion struct {
-	AccountID          *string    `json:"accountId"`
-	Container          *Container `json:"container"`
-	ContainerID        *string    `json:"containerId"`
-	ContainerVersionID *string    `json:"containerVersionId"`
-	Deleted            *bool      `json:"deleted"`
-	Fingerprint        *string    `json:"fingerprint"`
-	Folder             []Folder   `json:"folder"`
-	Macro              []Macro    `json:"macro"`
-	Name               *string    `json:"name"`
-	Notes              *string    `json:"notes"`
-	Rule               []Rule     `json:"rule"`
-	Tag                []Tag      `json:"tag"`
-	Trigger            []Trigger  `json:"trigger"`
-	Variable           []Variable `json:"variable"`
+	AccountID          *string    `json:"accountId,omitempty"`
+	Container          *Container `json:"container,omitempty"`
+	ContainerID        *string    `json:"containerId,omitempty"`
+	ContainerVersionID *string    `json:"containerVersionId,omitempty"`
+	Deleted            *bool      `json:"deleted,omitempty"`
+	Fingerprint        *string    `json:"fingerprint,omitempty"`
+	Folder             []Folder   `json:"folder,omitempty"`
+	Macro              []Macro    `json:"macro,omitempty"`
+	Name               *string    `json:"name,omitempty"`
+	Notes              *string    `json:"notes,omitempty"`
+	Rule               []Rule     `json:"rule,omitempty"`
+	Tag                []Tag      `json:"tag,omitempty"`
+	Trigger            []Trigger  `json:"trigger,omitempty"`
+	Variable           []Variable `json:"variable,omitempty"`
 }

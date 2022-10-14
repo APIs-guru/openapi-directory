@@ -9,9 +9,9 @@ const (
 )
 
 type VirtualTariffConsumptionData struct {
-	Consumption *float64                                    `json:"Consumption"`
-	Currency    *string                                     `json:"Currency"`
-	Name        *string                                     `json:"Name"`
-	Price       *float64                                    `json:"Price"`
-	TariffType  *VirtualTariffConsumptionDataTariffTypeEnum `json:"TariffType"`
+	Consumption *float64                                    `json:"Consumption,omitempty"`
+	Currency    *string                                     `json:"Currency,omitempty"`
+	Name        *string                                     `json:"Name,omitempty"`
+	Price       *float64                                    `json:"Price,omitempty"`
+	TariffType  *VirtualTariffConsumptionDataTariffTypeEnum `json:"TariffType,omitempty"`
 }

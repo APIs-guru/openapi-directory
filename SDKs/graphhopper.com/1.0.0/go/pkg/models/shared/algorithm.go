@@ -15,6 +15,6 @@ const (
 )
 
 type Algorithm struct {
-	Objective   *AlgorithmObjectiveEnum   `json:"objective"`
-	ProblemType *AlgorithmProblemTypeEnum `json:"problem_type"`
+	Objective   *AlgorithmObjectiveEnum   `json:"objective,omitempty"`
+	ProblemType *AlgorithmProblemTypeEnum `json:"problem_type,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type DeregisterAccountResponse struct {
-	Status *AccountStatusEnum `json:"status"`
+	Status *AccountStatusEnum `json:"status,omitempty"`
 }

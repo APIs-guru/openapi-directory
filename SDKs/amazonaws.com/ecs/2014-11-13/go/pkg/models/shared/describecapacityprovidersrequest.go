@@ -1,8 +1,8 @@
 package shared
 
 type DescribeCapacityProvidersRequest struct {
-	CapacityProviders []string                    `json:"capacityProviders"`
-	Include           []CapacityProviderFieldEnum `json:"include"`
-	MaxResults        *int64                      `json:"maxResults"`
-	NextToken         *string                     `json:"nextToken"`
+	CapacityProviders []string                    `json:"capacityProviders,omitempty"`
+	Include           []CapacityProviderFieldEnum `json:"include,omitempty"`
+	MaxResults        *int64                      `json:"maxResults,omitempty"`
+	NextToken         *string                     `json:"nextToken,omitempty"`
 }

@@ -23,40 +23,40 @@ type GetDatasetPkRequest struct {
 }
 
 type GetDatasetPk200ApplicationJSONDescriptionColumns struct {
-	ColumnName *string `json:"column_name"`
+	ColumnName *string `json:"column_name,omitempty"`
 }
 
 type GetDatasetPk200ApplicationJSONLabelColumns struct {
-	ColumnName *string `json:"column_name"`
+	ColumnName *string `json:"column_name,omitempty"`
 }
 
 type GetDatasetPk200ApplicationJSON struct {
-	DescriptionColumns *GetDatasetPk200ApplicationJSONDescriptionColumns `json:"description_columns"`
-	ID                 *string                                           `json:"id"`
-	LabelColumns       *GetDatasetPk200ApplicationJSONLabelColumns       `json:"label_columns"`
-	Result             *shared.DatasetRestAPIGet                         `json:"result"`
-	ShowColumns        []string                                          `json:"show_columns"`
-	ShowTitle          *string                                           `json:"show_title"`
+	DescriptionColumns *GetDatasetPk200ApplicationJSONDescriptionColumns `json:"description_columns,omitempty"`
+	ID                 *string                                           `json:"id,omitempty"`
+	LabelColumns       *GetDatasetPk200ApplicationJSONLabelColumns       `json:"label_columns,omitempty"`
+	Result             *shared.DatasetRestAPIGet                         `json:"result,omitempty"`
+	ShowColumns        []string                                          `json:"show_columns,omitempty"`
+	ShowTitle          *string                                           `json:"show_title,omitempty"`
 }
 
 type GetDatasetPk400ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetDatasetPk401ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetDatasetPk404ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetDatasetPk422ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetDatasetPk500ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetDatasetPkResponse struct {

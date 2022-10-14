@@ -5,10 +5,10 @@ import (
 )
 
 type Pipeline struct {
-	Activities            []PipelineActivity    `json:"activities"`
-	Arn                   *string               `json:"arn"`
-	CreationTime          *time.Time            `json:"creationTime"`
-	LastUpdateTime        *time.Time            `json:"lastUpdateTime"`
-	Name                  *string               `json:"name"`
-	ReprocessingSummaries []ReprocessingSummary `json:"reprocessingSummaries"`
+	Activities            []PipelineActivity    `json:"activities,omitempty"`
+	Arn                   *string               `json:"arn,omitempty"`
+	CreationTime          *time.Time            `json:"creationTime,omitempty"`
+	LastUpdateTime        *time.Time            `json:"lastUpdateTime,omitempty"`
+	Name                  *string               `json:"name,omitempty"`
+	ReprocessingSummaries []ReprocessingSummary `json:"reprocessingSummaries,omitempty"`
 }

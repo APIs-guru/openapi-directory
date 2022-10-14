@@ -9,8 +9,8 @@ const (
 )
 
 type Video struct {
-	ID              *string          `json:"id"`
-	Source          *VideoSourceEnum `json:"source"`
-	URL             *string          `json:"url"`
-	VideoProperties *VideoProperties `json:"videoProperties"`
+	ID              *string          `json:"id,omitempty"`
+	Source          *VideoSourceEnum `json:"source,omitempty"`
+	URL             *string          `json:"url,omitempty"`
+	VideoProperties *VideoProperties `json:"videoProperties,omitempty"`
 }

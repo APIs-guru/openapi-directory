@@ -14,15 +14,15 @@ type GistsGetCommentRequest struct {
 }
 
 type GistsGetComment403ApplicationJSONBlock struct {
-	CreatedAt *string `json:"created_at"`
-	HTMLURL   *string `json:"html_url"`
-	Reason    *string `json:"reason"`
+	CreatedAt *string `json:"created_at,omitempty"`
+	HTMLURL   *string `json:"html_url,omitempty"`
+	Reason    *string `json:"reason,omitempty"`
 }
 
 type GistsGetComment403ApplicationJSON struct {
-	Block            *GistsGetComment403ApplicationJSONBlock `json:"block"`
-	DocumentationURL *string                                 `json:"documentation_url"`
-	Message          *string                                 `json:"message"`
+	Block            *GistsGetComment403ApplicationJSONBlock `json:"block,omitempty"`
+	DocumentationURL *string                                 `json:"documentation_url,omitempty"`
+	Message          *string                                 `json:"message,omitempty"`
 }
 
 type GistsGetCommentResponse struct {

@@ -1,7 +1,7 @@
 package shared
 
 type AdsListResponse struct {
-	Ads           []Ad    `json:"ads"`
-	Kind          *string `json:"kind"`
-	NextPageToken *string `json:"nextPageToken"`
+	Ads           []Ad    `json:"ads,omitempty"`
+	Kind          *string `json:"kind,omitempty"`
+	NextPageToken *string `json:"nextPageToken,omitempty"`
 }

@@ -5,12 +5,12 @@ import (
 )
 
 type ApprovalRule struct {
-	ApprovalRuleContent        *string                     `json:"approvalRuleContent"`
-	ApprovalRuleID             *string                     `json:"approvalRuleId"`
-	ApprovalRuleName           *string                     `json:"approvalRuleName"`
-	CreationDate               *time.Time                  `json:"creationDate"`
-	LastModifiedDate           *time.Time                  `json:"lastModifiedDate"`
-	LastModifiedUser           *string                     `json:"lastModifiedUser"`
-	OriginApprovalRuleTemplate *OriginApprovalRuleTemplate `json:"originApprovalRuleTemplate"`
-	RuleContentSha256          *string                     `json:"ruleContentSha256"`
+	ApprovalRuleContent        *string                     `json:"approvalRuleContent,omitempty"`
+	ApprovalRuleID             *string                     `json:"approvalRuleId,omitempty"`
+	ApprovalRuleName           *string                     `json:"approvalRuleName,omitempty"`
+	CreationDate               *time.Time                  `json:"creationDate,omitempty"`
+	LastModifiedDate           *time.Time                  `json:"lastModifiedDate,omitempty"`
+	LastModifiedUser           *string                     `json:"lastModifiedUser,omitempty"`
+	OriginApprovalRuleTemplate *OriginApprovalRuleTemplate `json:"originApprovalRuleTemplate,omitempty"`
+	RuleContentSha256          *string                     `json:"ruleContentSha256,omitempty"`
 }

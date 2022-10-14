@@ -21,7 +21,7 @@ type GetItemsForPortfolioRequest struct {
 }
 
 type GetItemsForPortfolio200ApplicationJSON struct {
-	Data []shared.ProjectCompact `json:"data"`
+	Data []shared.ProjectCompact `json:"data,omitempty"`
 }
 
 type GetItemsForPortfolioResponse struct {

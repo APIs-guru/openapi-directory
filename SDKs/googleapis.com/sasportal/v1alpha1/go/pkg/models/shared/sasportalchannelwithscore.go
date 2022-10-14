@@ -1,6 +1,6 @@
 package shared
 
 type SasPortalChannelWithScore struct {
-	FrequencyRange *SasPortalFrequencyRange `json:"frequencyRange"`
-	Score          *float64                 `json:"score"`
+	FrequencyRange *SasPortalFrequencyRange `json:"frequencyRange,omitempty"`
+	Score          *float64                 `json:"score,omitempty"`
 }

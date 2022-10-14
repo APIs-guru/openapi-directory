@@ -30,13 +30,13 @@ const (
 )
 
 type CapacityCommitment struct {
-	CommitmentEndTime    *string                            `json:"commitmentEndTime"`
-	CommitmentStartTime  *string                            `json:"commitmentStartTime"`
-	FailureStatus        *Status                            `json:"failureStatus"`
-	MultiRegionAuxiliary *bool                              `json:"multiRegionAuxiliary"`
-	Name                 *string                            `json:"name"`
-	Plan                 *CapacityCommitmentPlanEnum        `json:"plan"`
-	RenewalPlan          *CapacityCommitmentRenewalPlanEnum `json:"renewalPlan"`
-	SlotCount            *string                            `json:"slotCount"`
-	State                *CapacityCommitmentStateEnum       `json:"state"`
+	CommitmentEndTime    *string                            `json:"commitmentEndTime,omitempty"`
+	CommitmentStartTime  *string                            `json:"commitmentStartTime,omitempty"`
+	FailureStatus        *Status                            `json:"failureStatus,omitempty"`
+	MultiRegionAuxiliary *bool                              `json:"multiRegionAuxiliary,omitempty"`
+	Name                 *string                            `json:"name,omitempty"`
+	Plan                 *CapacityCommitmentPlanEnum        `json:"plan,omitempty"`
+	RenewalPlan          *CapacityCommitmentRenewalPlanEnum `json:"renewalPlan,omitempty"`
+	SlotCount            *string                            `json:"slotCount,omitempty"`
+	State                *CapacityCommitmentStateEnum       `json:"state,omitempty"`
 }

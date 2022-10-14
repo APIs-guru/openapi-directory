@@ -1,8 +1,8 @@
 package shared
 
 type NotFound struct {
-	Name   *string `json:"name"`
-	Status *int64  `json:"status"`
-	Title  *string `json:"title"`
-	Type   *string `json:"type"`
+	Name   *string `json:"name,omitempty"`
+	Status *int64  `json:"status,omitempty"`
+	Title  *string `json:"title,omitempty"`
+	Type   *string `json:"type,omitempty"`
 }

@@ -5,58 +5,58 @@ import (
 )
 
 type FilterAdvancedDetails struct {
-	CaseSensitive       *bool   `json:"caseSensitive"`
-	ExtractA            *string `json:"extractA"`
-	ExtractB            *string `json:"extractB"`
-	FieldA              *string `json:"fieldA"`
-	FieldAIndex         *int32  `json:"fieldAIndex"`
-	FieldARequired      *bool   `json:"fieldARequired"`
-	FieldB              *string `json:"fieldB"`
-	FieldBIndex         *int32  `json:"fieldBIndex"`
-	FieldBRequired      *bool   `json:"fieldBRequired"`
-	OutputConstructor   *string `json:"outputConstructor"`
-	OutputToField       *string `json:"outputToField"`
-	OutputToFieldIndex  *int32  `json:"outputToFieldIndex"`
-	OverrideOutputField *bool   `json:"overrideOutputField"`
+	CaseSensitive       *bool   `json:"caseSensitive,omitempty"`
+	ExtractA            *string `json:"extractA,omitempty"`
+	ExtractB            *string `json:"extractB,omitempty"`
+	FieldA              *string `json:"fieldA,omitempty"`
+	FieldAIndex         *int32  `json:"fieldAIndex,omitempty"`
+	FieldARequired      *bool   `json:"fieldARequired,omitempty"`
+	FieldB              *string `json:"fieldB,omitempty"`
+	FieldBIndex         *int32  `json:"fieldBIndex,omitempty"`
+	FieldBRequired      *bool   `json:"fieldBRequired,omitempty"`
+	OutputConstructor   *string `json:"outputConstructor,omitempty"`
+	OutputToField       *string `json:"outputToField,omitempty"`
+	OutputToFieldIndex  *int32  `json:"outputToFieldIndex,omitempty"`
+	OverrideOutputField *bool   `json:"overrideOutputField,omitempty"`
 }
 
 type FilterLowercaseDetails struct {
-	Field      *string `json:"field"`
-	FieldIndex *int32  `json:"fieldIndex"`
+	Field      *string `json:"field,omitempty"`
+	FieldIndex *int32  `json:"fieldIndex,omitempty"`
 }
 
 type FilterParentLink struct {
-	Href *string `json:"href"`
-	Type *string `json:"type"`
+	Href *string `json:"href,omitempty"`
+	Type *string `json:"type,omitempty"`
 }
 
 type FilterSearchAndReplaceDetails struct {
-	CaseSensitive *bool   `json:"caseSensitive"`
-	Field         *string `json:"field"`
-	FieldIndex    *int32  `json:"fieldIndex"`
-	ReplaceString *string `json:"replaceString"`
-	SearchString  *string `json:"searchString"`
+	CaseSensitive *bool   `json:"caseSensitive,omitempty"`
+	Field         *string `json:"field,omitempty"`
+	FieldIndex    *int32  `json:"fieldIndex,omitempty"`
+	ReplaceString *string `json:"replaceString,omitempty"`
+	SearchString  *string `json:"searchString,omitempty"`
 }
 
 type FilterUppercaseDetails struct {
-	Field      *string `json:"field"`
-	FieldIndex *int32  `json:"fieldIndex"`
+	Field      *string `json:"field,omitempty"`
+	FieldIndex *int32  `json:"fieldIndex,omitempty"`
 }
 
 type Filter struct {
-	AccountID               *string                        `json:"accountId"`
-	AdvancedDetails         *FilterAdvancedDetails         `json:"advancedDetails"`
-	Created                 *time.Time                     `json:"created"`
-	ExcludeDetails          *FilterExpression              `json:"excludeDetails"`
-	ID                      *string                        `json:"id"`
-	IncludeDetails          *FilterExpression              `json:"includeDetails"`
-	Kind                    *string                        `json:"kind"`
-	LowercaseDetails        *FilterLowercaseDetails        `json:"lowercaseDetails"`
-	Name                    *string                        `json:"name"`
-	ParentLink              *FilterParentLink              `json:"parentLink"`
-	SearchAndReplaceDetails *FilterSearchAndReplaceDetails `json:"searchAndReplaceDetails"`
-	SelfLink                *string                        `json:"selfLink"`
-	Type                    *string                        `json:"type"`
-	Updated                 *time.Time                     `json:"updated"`
-	UppercaseDetails        *FilterUppercaseDetails        `json:"uppercaseDetails"`
+	AccountID               *string                        `json:"accountId,omitempty"`
+	AdvancedDetails         *FilterAdvancedDetails         `json:"advancedDetails,omitempty"`
+	Created                 *time.Time                     `json:"created,omitempty"`
+	ExcludeDetails          *FilterExpression              `json:"excludeDetails,omitempty"`
+	ID                      *string                        `json:"id,omitempty"`
+	IncludeDetails          *FilterExpression              `json:"includeDetails,omitempty"`
+	Kind                    *string                        `json:"kind,omitempty"`
+	LowercaseDetails        *FilterLowercaseDetails        `json:"lowercaseDetails,omitempty"`
+	Name                    *string                        `json:"name,omitempty"`
+	ParentLink              *FilterParentLink              `json:"parentLink,omitempty"`
+	SearchAndReplaceDetails *FilterSearchAndReplaceDetails `json:"searchAndReplaceDetails,omitempty"`
+	SelfLink                *string                        `json:"selfLink,omitempty"`
+	Type                    *string                        `json:"type,omitempty"`
+	Updated                 *time.Time                     `json:"updated,omitempty"`
+	UppercaseDetails        *FilterUppercaseDetails        `json:"uppercaseDetails,omitempty"`
 }

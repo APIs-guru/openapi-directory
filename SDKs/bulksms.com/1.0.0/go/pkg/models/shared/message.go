@@ -34,7 +34,7 @@ const (
 
 type MessageStatus struct {
 	ID      string                    `json:"id"`
-	Subtype *MessageStatusSubtypeEnum `json:"subtype"`
+	Subtype *MessageStatusSubtypeEnum `json:"subtype,omitempty"`
 	Type    MessageStatusTypeEnum     `json:"type"`
 }
 
@@ -52,17 +52,17 @@ const (
 
 type Message struct {
 	Body                 interface{}          `json:"body"`
-	CreditCost           *float32             `json:"creditCost"`
-	Encoding             *MessageEncodingEnum `json:"encoding"`
-	From                 *string              `json:"from"`
+	CreditCost           *float32             `json:"creditCost,omitempty"`
+	Encoding             *MessageEncodingEnum `json:"encoding,omitempty"`
+	From                 *string              `json:"from,omitempty"`
 	ID                   string               `json:"id"`
-	MessageClass         *int32               `json:"messageClass"`
-	NumberOfParts        *int32               `json:"numberOfParts"`
-	ProtocolID           *int32               `json:"protocolId"`
-	RelatedSentMessageID *string              `json:"relatedSentMessageId"`
+	MessageClass         *int32               `json:"messageClass,omitempty"`
+	NumberOfParts        *int32               `json:"numberOfParts,omitempty"`
+	ProtocolID           *int32               `json:"protocolId,omitempty"`
+	RelatedSentMessageID *string              `json:"relatedSentMessageId,omitempty"`
 	Status               MessageStatus        `json:"status"`
-	Submission           *MessageSubmission   `json:"submission"`
+	Submission           *MessageSubmission   `json:"submission,omitempty"`
 	To                   string               `json:"to"`
 	Type                 MessageTypeEnum      `json:"type"`
-	UserSuppliedID       *string              `json:"userSuppliedId"`
+	UserSuppliedID       *string              `json:"userSuppliedId,omitempty"`
 }

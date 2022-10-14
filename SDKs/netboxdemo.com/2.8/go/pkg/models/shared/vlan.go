@@ -26,19 +26,19 @@ type VlanStatusStatus struct {
 }
 
 type Vlan struct {
-	Created      *time.Time             `json:"created"`
-	CustomFields map[string]interface{} `json:"custom_fields"`
-	Description  *string                `json:"description"`
-	DisplayName  *string                `json:"display_name"`
-	Group        *NestedVlanGroup       `json:"group"`
-	ID           *int64                 `json:"id"`
-	LastUpdated  *time.Time             `json:"last_updated"`
+	Created      *time.Time             `json:"created,omitempty"`
+	CustomFields map[string]interface{} `json:"custom_fields,omitempty"`
+	Description  *string                `json:"description,omitempty"`
+	DisplayName  *string                `json:"display_name,omitempty"`
+	Group        *NestedVlanGroup       `json:"group,omitempty"`
+	ID           *int64                 `json:"id,omitempty"`
+	LastUpdated  *time.Time             `json:"last_updated,omitempty"`
 	Name         string                 `json:"name"`
-	PrefixCount  *int64                 `json:"prefix_count"`
-	Role         *NestedRole            `json:"role"`
-	Site         *NestedSite            `json:"site"`
-	Status       *VlanStatusStatus      `json:"status"`
-	Tags         []string               `json:"tags"`
-	Tenant       *NestedTenant          `json:"tenant"`
+	PrefixCount  *int64                 `json:"prefix_count,omitempty"`
+	Role         *NestedRole            `json:"role,omitempty"`
+	Site         *NestedSite            `json:"site,omitempty"`
+	Status       *VlanStatusStatus      `json:"status,omitempty"`
+	Tags         []string               `json:"tags,omitempty"`
+	Tenant       *NestedTenant          `json:"tenant,omitempty"`
 	Vid          int64                  `json:"vid"`
 }

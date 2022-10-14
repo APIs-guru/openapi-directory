@@ -15,21 +15,21 @@ type CreateImageRecipeHeaders struct {
 }
 
 type CreateImageRecipeRequestBodyAdditionalInstanceConfiguration struct {
-	SystemsManagerAgent *shared.SystemsManagerAgent `json:"systemsManagerAgent"`
-	UserDataOverride    *string                     `json:"userDataOverride"`
+	SystemsManagerAgent *shared.SystemsManagerAgent `json:"systemsManagerAgent,omitempty"`
+	UserDataOverride    *string                     `json:"userDataOverride,omitempty"`
 }
 
 type CreateImageRecipeRequestBody struct {
-	AdditionalInstanceConfiguration *CreateImageRecipeRequestBodyAdditionalInstanceConfiguration `json:"additionalInstanceConfiguration"`
-	BlockDeviceMappings             []shared.InstanceBlockDeviceMapping                          `json:"blockDeviceMappings"`
+	AdditionalInstanceConfiguration *CreateImageRecipeRequestBodyAdditionalInstanceConfiguration `json:"additionalInstanceConfiguration,omitempty"`
+	BlockDeviceMappings             []shared.InstanceBlockDeviceMapping                          `json:"blockDeviceMappings,omitempty"`
 	ClientToken                     string                                                       `json:"clientToken"`
 	Components                      []shared.ComponentConfiguration                              `json:"components"`
-	Description                     *string                                                      `json:"description"`
+	Description                     *string                                                      `json:"description,omitempty"`
 	Name                            string                                                       `json:"name"`
 	ParentImage                     string                                                       `json:"parentImage"`
 	SemanticVersion                 string                                                       `json:"semanticVersion"`
-	Tags                            map[string]string                                            `json:"tags"`
-	WorkingDirectory                *string                                                      `json:"workingDirectory"`
+	Tags                            map[string]string                                            `json:"tags,omitempty"`
+	WorkingDirectory                *string                                                      `json:"workingDirectory,omitempty"`
 }
 
 type CreateImageRecipeRequest struct {

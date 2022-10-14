@@ -1,6 +1,6 @@
 package shared
 
 type GoogleCloudDialogflowV2ListSessionEntityTypesResponse struct {
-	NextPageToken      *string                                    `json:"nextPageToken"`
-	SessionEntityTypes []GoogleCloudDialogflowV2SessionEntityType `json:"sessionEntityTypes"`
+	NextPageToken      *string                                    `json:"nextPageToken,omitempty"`
+	SessionEntityTypes []GoogleCloudDialogflowV2SessionEntityType `json:"sessionEntityTypes,omitempty"`
 }

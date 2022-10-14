@@ -23,10 +23,10 @@ type UpdateNetworkApplianceFirewallPortForwardingRulesRequestBodyRules struct {
 	AllowedIps []string                                                                      `json:"allowedIps"`
 	LanIP      string                                                                        `json:"lanIp"`
 	LocalPort  string                                                                        `json:"localPort"`
-	Name       *string                                                                       `json:"name"`
+	Name       *string                                                                       `json:"name,omitempty"`
 	Protocol   UpdateNetworkApplianceFirewallPortForwardingRulesRequestBodyRulesProtocolEnum `json:"protocol"`
 	PublicPort string                                                                        `json:"publicPort"`
-	Uplink     *UpdateNetworkApplianceFirewallPortForwardingRulesRequestBodyRulesUplinkEnum  `json:"uplink"`
+	Uplink     *UpdateNetworkApplianceFirewallPortForwardingRulesRequestBodyRulesUplinkEnum  `json:"uplink,omitempty"`
 }
 
 type UpdateNetworkApplianceFirewallPortForwardingRulesRequestBody struct {

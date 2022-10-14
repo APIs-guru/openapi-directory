@@ -1,7 +1,7 @@
 package shared
 
 type CampaignCreativeAssociationsListResponse struct {
-	CampaignCreativeAssociations []CampaignCreativeAssociation `json:"campaignCreativeAssociations"`
-	Kind                         *string                       `json:"kind"`
-	NextPageToken                *string                       `json:"nextPageToken"`
+	CampaignCreativeAssociations []CampaignCreativeAssociation `json:"campaignCreativeAssociations,omitempty"`
+	Kind                         *string                       `json:"kind,omitempty"`
+	NextPageToken                *string                       `json:"nextPageToken,omitempty"`
 }

@@ -19,10 +19,10 @@ type CreateBackendAuthHeaders struct {
 }
 
 type CreateBackendAuthRequestBodyResourceConfig struct {
-	AuthResources       *shared.AuthResourcesEnum                   `json:"AuthResources"`
-	IdentityPoolConfigs *shared.CreateBackendAuthIdentityPoolConfig `json:"IdentityPoolConfigs"`
-	Service             *shared.ServiceEnum                         `json:"Service"`
-	UserPoolConfigs     *shared.CreateBackendAuthUserPoolConfig     `json:"UserPoolConfigs"`
+	AuthResources       *shared.AuthResourcesEnum                   `json:"AuthResources,omitempty"`
+	IdentityPoolConfigs *shared.CreateBackendAuthIdentityPoolConfig `json:"IdentityPoolConfigs,omitempty"`
+	Service             *shared.ServiceEnum                         `json:"Service,omitempty"`
+	UserPoolConfigs     *shared.CreateBackendAuthUserPoolConfig     `json:"UserPoolConfigs,omitempty"`
 }
 
 type CreateBackendAuthRequestBody struct {

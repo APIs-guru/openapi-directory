@@ -523,31 +523,31 @@ const (
 type CreatePayeesCsvRequest2 struct {
 	AddressCity                      string                                                `json:"addressCity"`
 	AddressCountry                   CreatePayeesCsvRequest2AddressCountryEnum             `json:"addressCountry"`
-	AddressCountyOrProvince          *string                                               `json:"addressCountyOrProvince"`
+	AddressCountyOrProvince          *string                                               `json:"addressCountyOrProvince,omitempty"`
 	AddressLine1                     string                                                `json:"addressLine1"`
-	AddressLine2                     *string                                               `json:"addressLine2"`
-	AddressLine3                     *string                                               `json:"addressLine3"`
-	AddressLine4                     *string                                               `json:"addressLine4"`
+	AddressLine2                     *string                                               `json:"addressLine2,omitempty"`
+	AddressLine3                     *string                                               `json:"addressLine3,omitempty"`
+	AddressLine4                     *string                                               `json:"addressLine4,omitempty"`
 	AddressZipOrPostcode             string                                                `json:"addressZipOrPostcode"`
-	ChallengeDescription             *string                                               `json:"challengeDescription"`
-	ChallengeValue                   *string                                               `json:"challengeValue"`
-	CompanyEin                       *string                                               `json:"companyEIN"`
-	CompanyName                      *string                                               `json:"companyName"`
-	CompanyOperatingName             *string                                               `json:"companyOperatingName"`
+	ChallengeDescription             *string                                               `json:"challengeDescription,omitempty"`
+	ChallengeValue                   *string                                               `json:"challengeValue,omitempty"`
+	CompanyEin                       *string                                               `json:"companyEIN,omitempty"`
+	CompanyName                      *string                                               `json:"companyName,omitempty"`
+	CompanyOperatingName             *string                                               `json:"companyOperatingName,omitempty"`
 	Email                            string                                                `json:"email"`
-	IndividualDateOfBirth            *time.Time                                            `json:"individualDateOfBirth"`
-	IndividualFirstName              *string                                               `json:"individualFirstName"`
-	IndividualLastName               *string                                               `json:"individualLastName"`
-	IndividualNationalIdentification *string                                               `json:"individualNationalIdentification"`
-	IndividualOtherNames             *string                                               `json:"individualOtherNames"`
-	IndividualTitle                  *string                                               `json:"individualTitle"`
-	PayeeLanguage                    *string                                               `json:"payeeLanguage"`
-	PaymentChannelAccountName        *string                                               `json:"paymentChannelAccountName"`
-	PaymentChannelAccountNumber      *string                                               `json:"paymentChannelAccountNumber"`
-	PaymentChannelCountryCode        *CreatePayeesCsvRequest2PaymentChannelCountryCodeEnum `json:"paymentChannelCountryCode"`
-	PaymentChannelCurrency           *CreatePayeesCsvRequest2PaymentChannelCurrencyEnum    `json:"paymentChannelCurrency"`
-	PaymentChannelIban               *string                                               `json:"paymentChannelIban"`
-	PaymentChannelRoutingNumber      *string                                               `json:"paymentChannelRoutingNumber"`
+	IndividualDateOfBirth            *time.Time                                            `json:"individualDateOfBirth,omitempty"`
+	IndividualFirstName              *string                                               `json:"individualFirstName,omitempty"`
+	IndividualLastName               *string                                               `json:"individualLastName,omitempty"`
+	IndividualNationalIdentification *string                                               `json:"individualNationalIdentification,omitempty"`
+	IndividualOtherNames             *string                                               `json:"individualOtherNames,omitempty"`
+	IndividualTitle                  *string                                               `json:"individualTitle,omitempty"`
+	PayeeLanguage                    *string                                               `json:"payeeLanguage,omitempty"`
+	PaymentChannelAccountName        *string                                               `json:"paymentChannelAccountName,omitempty"`
+	PaymentChannelAccountNumber      *string                                               `json:"paymentChannelAccountNumber,omitempty"`
+	PaymentChannelCountryCode        *CreatePayeesCsvRequest2PaymentChannelCountryCodeEnum `json:"paymentChannelCountryCode,omitempty"`
+	PaymentChannelCurrency           *CreatePayeesCsvRequest2PaymentChannelCurrencyEnum    `json:"paymentChannelCurrency,omitempty"`
+	PaymentChannelIban               *string                                               `json:"paymentChannelIban,omitempty"`
+	PaymentChannelRoutingNumber      *string                                               `json:"paymentChannelRoutingNumber,omitempty"`
 	RemoteID                         string                                                `json:"remoteId"`
 	Type                             PayeeTypeEnum                                         `json:"type"`
 }

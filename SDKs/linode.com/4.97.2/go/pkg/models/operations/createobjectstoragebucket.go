@@ -18,9 +18,9 @@ const (
 )
 
 type CreateObjectStorageBucketRequestBody struct {
-	ACL         *CreateObjectStorageBucketRequestBodyACLEnum `json:"acl"`
+	ACL         *CreateObjectStorageBucketRequestBodyACLEnum `json:"acl,omitempty"`
 	Cluster     string                                       `json:"cluster"`
-	CorsEnabled *bool                                        `json:"cors_enabled"`
+	CorsEnabled *bool                                        `json:"cors_enabled,omitempty"`
 	Label       string                                       `json:"label"`
 }
 
@@ -44,7 +44,7 @@ type CreateObjectStorageBucketRequest struct {
 }
 
 type CreateObjectStorageBucketDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type CreateObjectStorageBucketResponse struct {

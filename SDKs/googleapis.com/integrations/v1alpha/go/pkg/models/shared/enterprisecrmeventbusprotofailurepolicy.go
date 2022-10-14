@@ -14,7 +14,7 @@ const (
 )
 
 type EnterpriseCrmEventbusProtoFailurePolicy struct {
-	IntervalInSeconds *string                                                   `json:"intervalInSeconds"`
-	MaxNumRetries     *int32                                                    `json:"maxNumRetries"`
-	RetryStrategy     *EnterpriseCrmEventbusProtoFailurePolicyRetryStrategyEnum `json:"retryStrategy"`
+	IntervalInSeconds *string                                                   `json:"intervalInSeconds,omitempty"`
+	MaxNumRetries     *int32                                                    `json:"maxNumRetries,omitempty"`
+	RetryStrategy     *EnterpriseCrmEventbusProtoFailurePolicyRetryStrategyEnum `json:"retryStrategy,omitempty"`
 }

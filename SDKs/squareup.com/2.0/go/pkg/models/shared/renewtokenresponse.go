@@ -1,10 +1,10 @@
 package shared
 
 type RenewTokenResponse struct {
-	AccessToken    *string `json:"access_token"`
-	ExpiresAt      *string `json:"expires_at"`
-	MerchantID     *string `json:"merchant_id"`
-	PlanID         *string `json:"plan_id"`
-	SubscriptionID *string `json:"subscription_id"`
-	TokenType      *string `json:"token_type"`
+	AccessToken    *string `json:"access_token,omitempty"`
+	ExpiresAt      *string `json:"expires_at,omitempty"`
+	MerchantID     *string `json:"merchant_id,omitempty"`
+	PlanID         *string `json:"plan_id,omitempty"`
+	SubscriptionID *string `json:"subscription_id,omitempty"`
+	TokenType      *string `json:"token_type,omitempty"`
 }

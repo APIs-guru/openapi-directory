@@ -28,24 +28,24 @@ const (
 )
 
 type GetListofCards200ApplicationJSONCardsCard struct {
-	Blocked      *bool                                                  `json:"blocked"`
-	CardID       *int64                                                 `json:"cardId"`
-	DateCreated  *time.Time                                             `json:"dateCreated"`
-	EmailAddress *string                                                `json:"emailAddress"`
-	EurIcan      *int64                                                 `json:"eurIcan"`
-	ExpiryDate   *time.Time                                             `json:"expiryDate"`
-	FirstName    *string                                                `json:"firstName"`
-	GbpIcan      *int64                                                 `json:"gbpIcan"`
-	LastName     *string                                                `json:"lastName"`
-	MaskedPan    *string                                                `json:"maskedPan"`
-	Provider     *GetListofCards200ApplicationJSONCardsProviderEnum     `json:"provider"`
-	Status       *GetListofCards200ApplicationJSONCardsStatusEnum       `json:"status"`
-	StatusReason *GetListofCards200ApplicationJSONCardsStatusReasonEnum `json:"statusReason"`
-	UserID       *int64                                                 `json:"userId"`
+	Blocked      *bool                                                  `json:"blocked,omitempty"`
+	CardID       *int64                                                 `json:"cardId,omitempty"`
+	DateCreated  *time.Time                                             `json:"dateCreated,omitempty"`
+	EmailAddress *string                                                `json:"emailAddress,omitempty"`
+	EurIcan      *int64                                                 `json:"eurIcan,omitempty"`
+	ExpiryDate   *time.Time                                             `json:"expiryDate,omitempty"`
+	FirstName    *string                                                `json:"firstName,omitempty"`
+	GbpIcan      *int64                                                 `json:"gbpIcan,omitempty"`
+	LastName     *string                                                `json:"lastName,omitempty"`
+	MaskedPan    *string                                                `json:"maskedPan,omitempty"`
+	Provider     *GetListofCards200ApplicationJSONCardsProviderEnum     `json:"provider,omitempty"`
+	Status       *GetListofCards200ApplicationJSONCardsStatusEnum       `json:"status,omitempty"`
+	StatusReason *GetListofCards200ApplicationJSONCardsStatusReasonEnum `json:"statusReason,omitempty"`
+	UserID       *int64                                                 `json:"userId,omitempty"`
 }
 
 type GetListofCards200ApplicationJSONCards struct {
-	Cards []GetListofCards200ApplicationJSONCardsCard `json:"cards"`
+	Cards []GetListofCards200ApplicationJSONCardsCard `json:"cards,omitempty"`
 }
 
 type GetListofCardsResponse struct {

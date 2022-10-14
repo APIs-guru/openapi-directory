@@ -17,16 +17,16 @@ const (
 )
 
 type Backup struct {
-	CreateTime           *string                    `json:"createTime"`
-	Database             *string                    `json:"database"`
-	DatabaseDialect      *BackupDatabaseDialectEnum `json:"databaseDialect"`
-	EncryptionInfo       *EncryptionInfo            `json:"encryptionInfo"`
-	ExpireTime           *string                    `json:"expireTime"`
-	MaxExpireTime        *string                    `json:"maxExpireTime"`
-	Name                 *string                    `json:"name"`
-	ReferencingBackups   []string                   `json:"referencingBackups"`
-	ReferencingDatabases []string                   `json:"referencingDatabases"`
-	SizeBytes            *string                    `json:"sizeBytes"`
-	State                *BackupStateEnum           `json:"state"`
-	VersionTime          *string                    `json:"versionTime"`
+	CreateTime           *string                    `json:"createTime,omitempty"`
+	Database             *string                    `json:"database,omitempty"`
+	DatabaseDialect      *BackupDatabaseDialectEnum `json:"databaseDialect,omitempty"`
+	EncryptionInfo       *EncryptionInfo            `json:"encryptionInfo,omitempty"`
+	ExpireTime           *string                    `json:"expireTime,omitempty"`
+	MaxExpireTime        *string                    `json:"maxExpireTime,omitempty"`
+	Name                 *string                    `json:"name,omitempty"`
+	ReferencingBackups   []string                   `json:"referencingBackups,omitempty"`
+	ReferencingDatabases []string                   `json:"referencingDatabases,omitempty"`
+	SizeBytes            *string                    `json:"sizeBytes,omitempty"`
+	State                *BackupStateEnum           `json:"state,omitempty"`
+	VersionTime          *string                    `json:"versionTime,omitempty"`
 }

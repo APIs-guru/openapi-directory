@@ -1,8 +1,8 @@
 package shared
 
 type OrderCustomer struct {
-	FullName              *string                           `json:"fullName"`
-	InvoiceReceivingEmail *string                           `json:"invoiceReceivingEmail"`
-	LoyaltyInfo           *OrderCustomerLoyaltyInfo         `json:"loyaltyInfo"`
-	MarketingRightsInfo   *OrderCustomerMarketingRightsInfo `json:"marketingRightsInfo"`
+	FullName              *string                           `json:"fullName,omitempty"`
+	InvoiceReceivingEmail *string                           `json:"invoiceReceivingEmail,omitempty"`
+	LoyaltyInfo           *OrderCustomerLoyaltyInfo         `json:"loyaltyInfo,omitempty"`
+	MarketingRightsInfo   *OrderCustomerMarketingRightsInfo `json:"marketingRightsInfo,omitempty"`
 }

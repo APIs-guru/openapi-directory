@@ -1,7 +1,7 @@
 package shared
 
 type PutObjectResponse struct {
-	ContentSha256 *string           `json:"ContentSHA256"`
-	ETag          *string           `json:"ETag"`
-	StorageClass  *StorageClassEnum `json:"StorageClass"`
+	ContentSha256 *string           `json:"ContentSHA256,omitempty"`
+	ETag          *string           `json:"ETag,omitempty"`
+	StorageClass  *StorageClassEnum `json:"StorageClass,omitempty"`
 }

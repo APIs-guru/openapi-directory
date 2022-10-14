@@ -11,11 +11,11 @@ type AddThingToThingGroupHeaders struct {
 }
 
 type AddThingToThingGroupRequestBody struct {
-	OverrideDynamicGroups *bool   `json:"overrideDynamicGroups"`
-	ThingArn              *string `json:"thingArn"`
-	ThingGroupArn         *string `json:"thingGroupArn"`
-	ThingGroupName        *string `json:"thingGroupName"`
-	ThingName             *string `json:"thingName"`
+	OverrideDynamicGroups *bool   `json:"overrideDynamicGroups,omitempty"`
+	ThingArn              *string `json:"thingArn,omitempty"`
+	ThingGroupArn         *string `json:"thingGroupArn,omitempty"`
+	ThingGroupName        *string `json:"thingGroupName,omitempty"`
+	ThingName             *string `json:"thingName,omitempty"`
 }
 
 type AddThingToThingGroupRequest struct {

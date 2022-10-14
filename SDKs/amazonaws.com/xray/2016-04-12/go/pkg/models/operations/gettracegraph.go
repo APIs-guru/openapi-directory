@@ -19,7 +19,7 @@ type GetTraceGraphHeaders struct {
 }
 
 type GetTraceGraphRequestBody struct {
-	NextToken *string  `json:"NextToken"`
+	NextToken *string  `json:"NextToken,omitempty"`
 	TraceIds  []string `json:"TraceIds"`
 }
 

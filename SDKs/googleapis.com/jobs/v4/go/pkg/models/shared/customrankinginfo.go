@@ -13,6 +13,6 @@ const (
 )
 
 type CustomRankingInfo struct {
-	ImportanceLevel   *CustomRankingInfoImportanceLevelEnum `json:"importanceLevel"`
-	RankingExpression *string                               `json:"rankingExpression"`
+	ImportanceLevel   *CustomRankingInfoImportanceLevelEnum `json:"importanceLevel,omitempty"`
+	RankingExpression *string                               `json:"rankingExpression,omitempty"`
 }

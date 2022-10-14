@@ -25,11 +25,11 @@ type ListBackendJobsHeaders struct {
 }
 
 type ListBackendJobsRequestBody struct {
-	JobID      *string `json:"jobId"`
-	MaxResults *int64  `json:"maxResults"`
-	NextToken  *string `json:"nextToken"`
-	Operation  *string `json:"operation"`
-	Status     *string `json:"status"`
+	JobID      *string `json:"jobId,omitempty"`
+	MaxResults *int64  `json:"maxResults,omitempty"`
+	NextToken  *string `json:"nextToken,omitempty"`
+	Operation  *string `json:"operation,omitempty"`
+	Status     *string `json:"status,omitempty"`
 }
 
 type ListBackendJobsRequest struct {

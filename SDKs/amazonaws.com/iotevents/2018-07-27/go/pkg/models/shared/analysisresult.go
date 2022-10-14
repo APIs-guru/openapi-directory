@@ -1,8 +1,8 @@
 package shared
 
 type AnalysisResult struct {
-	Level     *AnalysisResultLevelEnum `json:"level"`
-	Locations []AnalysisResultLocation `json:"locations"`
-	Message   *string                  `json:"message"`
-	Type      *string                  `json:"type"`
+	Level     *AnalysisResultLevelEnum `json:"level,omitempty"`
+	Locations []AnalysisResultLocation `json:"locations,omitempty"`
+	Message   *string                  `json:"message,omitempty"`
+	Type      *string                  `json:"type,omitempty"`
 }

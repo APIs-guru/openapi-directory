@@ -1,6 +1,6 @@
 package shared
 
 type ListComplianceStatusResponse struct {
-	NextToken                  *string                  `json:"NextToken"`
-	PolicyComplianceStatusList []PolicyComplianceStatus `json:"PolicyComplianceStatusList"`
+	NextToken                  *string                  `json:"NextToken,omitempty"`
+	PolicyComplianceStatusList []PolicyComplianceStatus `json:"PolicyComplianceStatusList,omitempty"`
 }

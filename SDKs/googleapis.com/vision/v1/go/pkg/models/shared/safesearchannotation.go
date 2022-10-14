@@ -56,9 +56,9 @@ const (
 )
 
 type SafeSearchAnnotation struct {
-	Adult    *SafeSearchAnnotationAdultEnum    `json:"adult"`
-	Medical  *SafeSearchAnnotationMedicalEnum  `json:"medical"`
-	Racy     *SafeSearchAnnotationRacyEnum     `json:"racy"`
-	Spoof    *SafeSearchAnnotationSpoofEnum    `json:"spoof"`
-	Violence *SafeSearchAnnotationViolenceEnum `json:"violence"`
+	Adult    *SafeSearchAnnotationAdultEnum    `json:"adult,omitempty"`
+	Medical  *SafeSearchAnnotationMedicalEnum  `json:"medical,omitempty"`
+	Racy     *SafeSearchAnnotationRacyEnum     `json:"racy,omitempty"`
+	Spoof    *SafeSearchAnnotationSpoofEnum    `json:"spoof,omitempty"`
+	Violence *SafeSearchAnnotationViolenceEnum `json:"violence,omitempty"`
 }

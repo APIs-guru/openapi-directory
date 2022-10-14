@@ -25,18 +25,18 @@ const (
 )
 
 type GetShopScriptTag200ApplicationJSONScriptTag struct {
-	AccountID          *string                                                      `json:"account_id"`
-	DisplayScope       *GetShopScriptTag200ApplicationJSONScriptTagDisplayScopeEnum `json:"display_scope"`
-	ID                 *int64                                                       `json:"id"`
-	Integrity          *string                                                      `json:"integrity"`
-	MakeDate           *int64                                                       `json:"make_date"`
-	OauthApplicationID *int64                                                       `json:"oauth_application_id"`
-	Src                *string                                                      `json:"src"`
-	UpdateDate         *int64                                                       `json:"update_date"`
+	AccountID          *string                                                      `json:"account_id,omitempty"`
+	DisplayScope       *GetShopScriptTag200ApplicationJSONScriptTagDisplayScopeEnum `json:"display_scope,omitempty"`
+	ID                 *int64                                                       `json:"id,omitempty"`
+	Integrity          *string                                                      `json:"integrity,omitempty"`
+	MakeDate           *int64                                                       `json:"make_date,omitempty"`
+	OauthApplicationID *int64                                                       `json:"oauth_application_id,omitempty"`
+	Src                *string                                                      `json:"src,omitempty"`
+	UpdateDate         *int64                                                       `json:"update_date,omitempty"`
 }
 
 type GetShopScriptTag200ApplicationJSON struct {
-	ScriptTag *GetShopScriptTag200ApplicationJSONScriptTag `json:"script_tag"`
+	ScriptTag *GetShopScriptTag200ApplicationJSONScriptTag `json:"script_tag,omitempty"`
 }
 
 type GetShopScriptTagResponse struct {

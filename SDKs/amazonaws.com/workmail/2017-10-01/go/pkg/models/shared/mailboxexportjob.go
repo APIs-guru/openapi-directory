@@ -5,13 +5,13 @@ import (
 )
 
 type MailboxExportJob struct {
-	Description       *string                    `json:"Description"`
-	EndTime           *time.Time                 `json:"EndTime"`
-	EntityID          *string                    `json:"EntityId"`
-	EstimatedProgress *int64                     `json:"EstimatedProgress"`
-	JobID             *string                    `json:"JobId"`
-	S3BucketName      *string                    `json:"S3BucketName"`
-	S3Path            *string                    `json:"S3Path"`
-	StartTime         *time.Time                 `json:"StartTime"`
-	State             *MailboxExportJobStateEnum `json:"State"`
+	Description       *string                    `json:"Description,omitempty"`
+	EndTime           *time.Time                 `json:"EndTime,omitempty"`
+	EntityID          *string                    `json:"EntityId,omitempty"`
+	EstimatedProgress *int64                     `json:"EstimatedProgress,omitempty"`
+	JobID             *string                    `json:"JobId,omitempty"`
+	S3BucketName      *string                    `json:"S3BucketName,omitempty"`
+	S3Path            *string                    `json:"S3Path,omitempty"`
+	StartTime         *time.Time                 `json:"StartTime,omitempty"`
+	State             *MailboxExportJobStateEnum `json:"State,omitempty"`
 }

@@ -11,21 +11,21 @@ type InterfaceModeMode struct {
 }
 
 type Interface struct {
-	CircuitTermination  *InterfaceCircuitTermination   `json:"circuit_termination"`
-	Description         *string                        `json:"description"`
+	CircuitTermination  *InterfaceCircuitTermination   `json:"circuit_termination,omitempty"`
+	Description         *string                        `json:"description,omitempty"`
 	Device              NestedDevice                   `json:"device"`
-	Enabled             *bool                          `json:"enabled"`
-	FormFactor          *InterfaceFormFactorFormFactor `json:"form_factor"`
-	ID                  *int64                         `json:"id"`
-	InterfaceConnection *string                        `json:"interface_connection"`
-	IsConnected         *string                        `json:"is_connected"`
-	Lag                 *NestedInterface               `json:"lag"`
-	MacAddress          *string                        `json:"mac_address"`
-	MgmtOnly            *bool                          `json:"mgmt_only"`
-	Mode                *InterfaceModeMode             `json:"mode"`
-	Mtu                 *int64                         `json:"mtu"`
+	Enabled             *bool                          `json:"enabled,omitempty"`
+	FormFactor          *InterfaceFormFactorFormFactor `json:"form_factor,omitempty"`
+	ID                  *int64                         `json:"id,omitempty"`
+	InterfaceConnection *string                        `json:"interface_connection,omitempty"`
+	IsConnected         *string                        `json:"is_connected,omitempty"`
+	Lag                 *NestedInterface               `json:"lag,omitempty"`
+	MacAddress          *string                        `json:"mac_address,omitempty"`
+	MgmtOnly            *bool                          `json:"mgmt_only,omitempty"`
+	Mode                *InterfaceModeMode             `json:"mode,omitempty"`
+	Mtu                 *int64                         `json:"mtu,omitempty"`
 	Name                string                         `json:"name"`
-	TaggedVlans         []InterfaceVlan                `json:"tagged_vlans"`
-	Tags                []string                       `json:"tags"`
-	UntaggedVlan        *InterfaceVlan                 `json:"untagged_vlan"`
+	TaggedVlans         []InterfaceVlan                `json:"tagged_vlans,omitempty"`
+	Tags                []string                       `json:"tags,omitempty"`
+	UntaggedVlan        *InterfaceVlan                 `json:"untagged_vlan,omitempty"`
 }

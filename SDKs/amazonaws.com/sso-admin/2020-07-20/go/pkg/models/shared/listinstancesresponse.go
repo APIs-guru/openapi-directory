@@ -1,6 +1,6 @@
 package shared
 
 type ListInstancesResponse struct {
-	Instances []InstanceMetadata `json:"Instances"`
-	NextToken *string            `json:"NextToken"`
+	Instances []InstanceMetadata `json:"Instances,omitempty"`
+	NextToken *string            `json:"NextToken,omitempty"`
 }

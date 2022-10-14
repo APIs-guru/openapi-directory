@@ -1,5 +1,5 @@
 package shared
 
 type GetDomainsRequest struct {
-	PageToken *string `json:"pageToken"`
+	PageToken *string `json:"pageToken,omitempty"`
 }

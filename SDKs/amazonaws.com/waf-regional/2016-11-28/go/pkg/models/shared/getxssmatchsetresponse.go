@@ -1,5 +1,5 @@
 package shared
 
 type GetXSSMatchSetResponse struct {
-	XSSMatchSet *XSSMatchSet `json:"XssMatchSet"`
+	XSSMatchSet *XSSMatchSet `json:"XssMatchSet,omitempty"`
 }

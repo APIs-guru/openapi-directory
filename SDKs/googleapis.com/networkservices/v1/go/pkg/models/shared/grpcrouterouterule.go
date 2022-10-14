@@ -1,6 +1,6 @@
 package shared
 
 type GrpcRouteRouteRule struct {
-	Action  *GrpcRouteRouteAction `json:"action"`
-	Matches []GrpcRouteRouteMatch `json:"matches"`
+	Action  *GrpcRouteRouteAction `json:"action,omitempty"`
+	Matches []GrpcRouteRouteMatch `json:"matches,omitempty"`
 }

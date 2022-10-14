@@ -1,7 +1,7 @@
 package shared
 
 type DeliveryArea struct {
-	CountryCode     *string                      `json:"countryCode"`
-	PostalCodeRange *DeliveryAreaPostalCodeRange `json:"postalCodeRange"`
-	RegionCode      *string                      `json:"regionCode"`
+	CountryCode     *string                      `json:"countryCode,omitempty"`
+	PostalCodeRange *DeliveryAreaPostalCodeRange `json:"postalCodeRange,omitempty"`
+	RegionCode      *string                      `json:"regionCode,omitempty"`
 }

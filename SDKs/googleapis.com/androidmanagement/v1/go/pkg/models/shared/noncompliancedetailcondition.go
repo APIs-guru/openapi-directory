@@ -17,7 +17,7 @@ const (
 )
 
 type NonComplianceDetailCondition struct {
-	NonComplianceReason *NonComplianceDetailConditionNonComplianceReasonEnum `json:"nonComplianceReason"`
-	PackageName         *string                                              `json:"packageName"`
-	SettingName         *string                                              `json:"settingName"`
+	NonComplianceReason *NonComplianceDetailConditionNonComplianceReasonEnum `json:"nonComplianceReason,omitempty"`
+	PackageName         *string                                              `json:"packageName,omitempty"`
+	SettingName         *string                                              `json:"settingName,omitempty"`
 }

@@ -1,10 +1,10 @@
 package shared
 
 type QueryTimelineSample struct {
-	ActiveUnits            *string `json:"activeUnits"`
-	CompletedUnits         *string `json:"completedUnits"`
-	ElapsedMs              *string `json:"elapsedMs"`
-	EstimatedRunnableUnits *string `json:"estimatedRunnableUnits"`
-	PendingUnits           *string `json:"pendingUnits"`
-	TotalSlotMs            *string `json:"totalSlotMs"`
+	ActiveUnits            *string `json:"activeUnits,omitempty"`
+	CompletedUnits         *string `json:"completedUnits,omitempty"`
+	ElapsedMs              *string `json:"elapsedMs,omitempty"`
+	EstimatedRunnableUnits *string `json:"estimatedRunnableUnits,omitempty"`
+	PendingUnits           *string `json:"pendingUnits,omitempty"`
+	TotalSlotMs            *string `json:"totalSlotMs,omitempty"`
 }

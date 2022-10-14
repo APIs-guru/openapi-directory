@@ -1,6 +1,6 @@
 package shared
 
 type EntityFilter struct {
-	Name  *EntityFilterNameEnum `json:"name"`
-	Value []string              `json:"value"`
+	Name  *EntityFilterNameEnum `json:"name,omitempty"`
+	Value []string              `json:"value,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type MappingsRepresentation struct {
-	ClientMappings map[string]interface{} `json:"clientMappings"`
-	RealmMappings  []RoleRepresentation   `json:"realmMappings"`
+	ClientMappings map[string]interface{} `json:"clientMappings,omitempty"`
+	RealmMappings  []RoleRepresentation   `json:"realmMappings,omitempty"`
 }

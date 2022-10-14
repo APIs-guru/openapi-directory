@@ -1,5 +1,5 @@
 package shared
 
 type BatchCreatePerfSamplesResponse struct {
-	PerfSamples []PerfSample `json:"perfSamples"`
+	PerfSamples []PerfSample `json:"perfSamples,omitempty"`
 }

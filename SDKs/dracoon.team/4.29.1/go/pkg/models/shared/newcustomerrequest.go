@@ -9,16 +9,16 @@ const (
 )
 
 type NewCustomerRequest struct {
-	ActivationCode       *string                                    `json:"activationCode"`
-	CompanyName          *string                                    `json:"companyName"`
-	CustomerAttributes   *CustomerAttributes                        `json:"customerAttributes"`
+	ActivationCode       *string                                    `json:"activationCode,omitempty"`
+	CompanyName          *string                                    `json:"companyName,omitempty"`
+	CustomerAttributes   *CustomerAttributes                        `json:"customerAttributes,omitempty"`
 	CustomerContractType NewCustomerRequestCustomerContractTypeEnum `json:"customerContractType"`
 	FirstAdminUser       FirstAdminUser                             `json:"firstAdminUser"`
-	IsLocked             *bool                                      `json:"isLocked"`
-	LockStatus           *bool                                      `json:"lockStatus"`
-	ProviderCustomerID   *string                                    `json:"providerCustomerId"`
+	IsLocked             *bool                                      `json:"isLocked,omitempty"`
+	LockStatus           *bool                                      `json:"lockStatus,omitempty"`
+	ProviderCustomerID   *string                                    `json:"providerCustomerId,omitempty"`
 	QuotaMax             int64                                      `json:"quotaMax"`
-	TrialDays            *int32                                     `json:"trialDays"`
+	TrialDays            *int32                                     `json:"trialDays,omitempty"`
 	UserMax              int32                                      `json:"userMax"`
-	WebhooksMax          *int64                                     `json:"webhooksMax"`
+	WebhooksMax          *int64                                     `json:"webhooksMax,omitempty"`
 }

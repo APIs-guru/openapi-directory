@@ -20,21 +20,21 @@ const (
 )
 
 type AmqpRulePatchTargetHeaders struct {
-	Name  *string `json:"name"`
-	Value *string `json:"value"`
+	Name  *string `json:"name,omitempty"`
+	Value *string `json:"value,omitempty"`
 }
 
 type AmqpRulePatchTarget struct {
-	Enveloped *bool                        `json:"enveloped"`
-	Format    *string                      `json:"format"`
-	Headers   []AmqpRulePatchTargetHeaders `json:"headers"`
-	QueueID   *string                      `json:"queueId"`
+	Enveloped *bool                        `json:"enveloped,omitempty"`
+	Format    *string                      `json:"format,omitempty"`
+	Headers   []AmqpRulePatchTargetHeaders `json:"headers,omitempty"`
+	QueueID   *string                      `json:"queueId,omitempty"`
 }
 
 type AmqpRulePatch struct {
-	RequestMode *AmqpRulePatchRequestModeEnum `json:"requestMode"`
-	RuleType    *AmqpRulePatchRuleTypeEnum    `json:"ruleType"`
-	Source      *RuleSource                   `json:"source"`
-	Status      *AmqpRulePatchStatusEnum      `json:"status"`
-	Target      *AmqpRulePatchTarget          `json:"target"`
+	RequestMode *AmqpRulePatchRequestModeEnum `json:"requestMode,omitempty"`
+	RuleType    *AmqpRulePatchRuleTypeEnum    `json:"ruleType,omitempty"`
+	Source      *RuleSource                   `json:"source,omitempty"`
+	Status      *AmqpRulePatchStatusEnum      `json:"status,omitempty"`
+	Target      *AmqpRulePatchTarget          `json:"target,omitempty"`
 }

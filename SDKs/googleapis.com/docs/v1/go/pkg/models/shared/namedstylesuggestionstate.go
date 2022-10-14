@@ -16,7 +16,7 @@ const (
 )
 
 type NamedStyleSuggestionState struct {
-	NamedStyleType                *NamedStyleSuggestionStateNamedStyleTypeEnum `json:"namedStyleType"`
-	ParagraphStyleSuggestionState *ParagraphStyleSuggestionState               `json:"paragraphStyleSuggestionState"`
-	TextStyleSuggestionState      *TextStyleSuggestionState                    `json:"textStyleSuggestionState"`
+	NamedStyleType                *NamedStyleSuggestionStateNamedStyleTypeEnum `json:"namedStyleType,omitempty"`
+	ParagraphStyleSuggestionState *ParagraphStyleSuggestionState               `json:"paragraphStyleSuggestionState,omitempty"`
+	TextStyleSuggestionState      *TextStyleSuggestionState                    `json:"textStyleSuggestionState,omitempty"`
 }

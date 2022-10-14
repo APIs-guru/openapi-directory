@@ -9,10 +9,10 @@ const (
 )
 
 type GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequestConstraints struct {
-	DeviceLocation        *string                                                                                                          `json:"deviceLocation"`
-	Language              *string                                                                                                          `json:"language"`
-	MaxDatabaseEntries    *int32                                                                                                           `json:"maxDatabaseEntries"`
-	MaxUpdateEntries      *int32                                                                                                           `json:"maxUpdateEntries"`
-	Region                *string                                                                                                          `json:"region"`
-	SupportedCompressions []GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequestConstraintsSupportedCompressionsEnum `json:"supportedCompressions"`
+	DeviceLocation        *string                                                                                                          `json:"deviceLocation,omitempty"`
+	Language              *string                                                                                                          `json:"language,omitempty"`
+	MaxDatabaseEntries    *int32                                                                                                           `json:"maxDatabaseEntries,omitempty"`
+	MaxUpdateEntries      *int32                                                                                                           `json:"maxUpdateEntries,omitempty"`
+	Region                *string                                                                                                          `json:"region,omitempty"`
+	SupportedCompressions []GoogleSecuritySafebrowsingV4FetchThreatListUpdatesRequestListUpdateRequestConstraintsSupportedCompressionsEnum `json:"supportedCompressions,omitempty"`
 }

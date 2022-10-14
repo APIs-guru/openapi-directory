@@ -16,8 +16,8 @@ type PostProjectUsernameProjectSSHKeyHeaders struct {
 }
 
 type PostProjectUsernameProjectSSHKeyRequestBody struct {
-	Hostname   *string `json:"hostname"`
-	PrivateKey *string `json:"private_key"`
+	Hostname   *string `json:"hostname,omitempty"`
+	PrivateKey *string `json:"private_key,omitempty"`
 }
 
 type PostProjectUsernameProjectSSHKeyRequest struct {
@@ -27,7 +27,7 @@ type PostProjectUsernameProjectSSHKeyRequest struct {
 }
 
 type PostProjectUsernameProjectSSHKeyDefaultApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type PostProjectUsernameProjectSSHKeyResponse struct {

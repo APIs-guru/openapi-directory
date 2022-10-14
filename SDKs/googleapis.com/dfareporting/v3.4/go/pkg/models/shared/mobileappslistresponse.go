@@ -1,7 +1,7 @@
 package shared
 
 type MobileAppsListResponse struct {
-	Kind          *string     `json:"kind"`
-	MobileApps    []MobileApp `json:"mobileApps"`
-	NextPageToken *string     `json:"nextPageToken"`
+	Kind          *string     `json:"kind,omitempty"`
+	MobileApps    []MobileApp `json:"mobileApps,omitempty"`
+	NextPageToken *string     `json:"nextPageToken,omitempty"`
 }

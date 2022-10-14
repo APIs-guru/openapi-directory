@@ -5,5 +5,5 @@ import (
 )
 
 type CompletionEstimation struct {
-	Estimate *time.Time `json:"estimate"`
+	Estimate *time.Time `json:"estimate,omitempty"`
 }

@@ -1,7 +1,7 @@
 package shared
 
 type InAppCampaignSchedule struct {
-	EndDate     *string              `json:"EndDate"`
-	EventFilter *CampaignEventFilter `json:"EventFilter"`
-	QuietTime   *QuietTime           `json:"QuietTime"`
+	EndDate     *string              `json:"EndDate,omitempty"`
+	EventFilter *CampaignEventFilter `json:"EventFilter,omitempty"`
+	QuietTime   *QuietTime           `json:"QuietTime,omitempty"`
 }

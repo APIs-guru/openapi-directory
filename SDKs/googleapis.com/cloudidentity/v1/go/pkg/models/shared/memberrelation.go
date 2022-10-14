@@ -10,8 +10,8 @@ const (
 )
 
 type MemberRelation struct {
-	Member             *string                         `json:"member"`
-	PreferredMemberKey []EntityKey                     `json:"preferredMemberKey"`
-	RelationType       *MemberRelationRelationTypeEnum `json:"relationType"`
-	Roles              []TransitiveMembershipRole      `json:"roles"`
+	Member             *string                         `json:"member,omitempty"`
+	PreferredMemberKey []EntityKey                     `json:"preferredMemberKey,omitempty"`
+	RelationType       *MemberRelationRelationTypeEnum `json:"relationType,omitempty"`
+	Roles              []TransitiveMembershipRole      `json:"roles,omitempty"`
 }

@@ -5,25 +5,25 @@ import (
 )
 
 type PostAbusesRequestBodyAccount struct {
-	ID *int64 `json:"id"`
+	ID *int64 `json:"id,omitempty"`
 }
 
 type PostAbusesRequestBodyComment struct {
-	ID *int64 `json:"id"`
+	ID *int64 `json:"id,omitempty"`
 }
 
 type PostAbusesRequestBodyVideo struct {
-	EndAt   *int64 `json:"endAt"`
-	ID      *int64 `json:"id"`
-	StartAt *int64 `json:"startAt"`
+	EndAt   *int64 `json:"endAt,omitempty"`
+	ID      *int64 `json:"id,omitempty"`
+	StartAt *int64 `json:"startAt,omitempty"`
 }
 
 type PostAbusesRequestBody struct {
-	Account           *PostAbusesRequestBodyAccount       `json:"account"`
-	Comment           *PostAbusesRequestBodyComment       `json:"comment"`
-	PredefinedReasons []shared.PredefinedAbuseReasonsEnum `json:"predefinedReasons"`
+	Account           *PostAbusesRequestBodyAccount       `json:"account,omitempty"`
+	Comment           *PostAbusesRequestBodyComment       `json:"comment,omitempty"`
+	PredefinedReasons []shared.PredefinedAbuseReasonsEnum `json:"predefinedReasons,omitempty"`
 	Reason            string                              `json:"reason"`
-	Video             *PostAbusesRequestBodyVideo         `json:"video"`
+	Video             *PostAbusesRequestBodyVideo         `json:"video,omitempty"`
 }
 
 type PostAbusesSecurity struct {
@@ -36,11 +36,11 @@ type PostAbusesRequest struct {
 }
 
 type PostAbuses200ApplicationJSONAbuse struct {
-	ID *int64 `json:"id"`
+	ID *int64 `json:"id,omitempty"`
 }
 
 type PostAbuses200ApplicationJSON struct {
-	Abuse *PostAbuses200ApplicationJSONAbuse `json:"abuse"`
+	Abuse *PostAbuses200ApplicationJSONAbuse `json:"abuse,omitempty"`
 }
 
 type PostAbusesResponse struct {

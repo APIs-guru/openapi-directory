@@ -1,14 +1,14 @@
 package shared
 
 type Manifest struct {
-	Config                 *ConfigFile  `json:"config"`
-	ExpandedConfig         *string      `json:"expandedConfig"`
-	ID                     *string      `json:"id"`
-	Imports                []ImportFile `json:"imports"`
-	InsertTime             *string      `json:"insertTime"`
-	Layout                 *string      `json:"layout"`
-	ManifestSizeBytes      *string      `json:"manifestSizeBytes"`
-	ManifestSizeLimitBytes *string      `json:"manifestSizeLimitBytes"`
-	Name                   *string      `json:"name"`
-	SelfLink               *string      `json:"selfLink"`
+	Config                 *ConfigFile  `json:"config,omitempty"`
+	ExpandedConfig         *string      `json:"expandedConfig,omitempty"`
+	ID                     *string      `json:"id,omitempty"`
+	Imports                []ImportFile `json:"imports,omitempty"`
+	InsertTime             *string      `json:"insertTime,omitempty"`
+	Layout                 *string      `json:"layout,omitempty"`
+	ManifestSizeBytes      *string      `json:"manifestSizeBytes,omitempty"`
+	ManifestSizeLimitBytes *string      `json:"manifestSizeLimitBytes,omitempty"`
+	Name                   *string      `json:"name,omitempty"`
+	SelfLink               *string      `json:"selfLink,omitempty"`
 }

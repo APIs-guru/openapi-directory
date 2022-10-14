@@ -9,14 +9,14 @@ const (
 )
 
 type EnrollmentToken struct {
-	AdditionalData      *string                                `json:"additionalData"`
-	AllowPersonalUsage  *EnrollmentTokenAllowPersonalUsageEnum `json:"allowPersonalUsage"`
-	Duration            *string                                `json:"duration"`
-	ExpirationTimestamp *string                                `json:"expirationTimestamp"`
-	Name                *string                                `json:"name"`
-	OneTimeOnly         *bool                                  `json:"oneTimeOnly"`
-	PolicyName          *string                                `json:"policyName"`
-	QrCode              *string                                `json:"qrCode"`
-	User                *User                                  `json:"user"`
-	Value               *string                                `json:"value"`
+	AdditionalData      *string                                `json:"additionalData,omitempty"`
+	AllowPersonalUsage  *EnrollmentTokenAllowPersonalUsageEnum `json:"allowPersonalUsage,omitempty"`
+	Duration            *string                                `json:"duration,omitempty"`
+	ExpirationTimestamp *string                                `json:"expirationTimestamp,omitempty"`
+	Name                *string                                `json:"name,omitempty"`
+	OneTimeOnly         *bool                                  `json:"oneTimeOnly,omitempty"`
+	PolicyName          *string                                `json:"policyName,omitempty"`
+	QrCode              *string                                `json:"qrCode,omitempty"`
+	User                *User                                  `json:"user,omitempty"`
+	Value               *string                                `json:"value,omitempty"`
 }

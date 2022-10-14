@@ -71,13 +71,13 @@ const (
 )
 
 type Cvssv3 struct {
-	AttackComplexity      *Cvssv3AttackComplexityEnum      `json:"attackComplexity"`
-	AttackVector          *Cvssv3AttackVectorEnum          `json:"attackVector"`
-	AvailabilityImpact    *Cvssv3AvailabilityImpactEnum    `json:"availabilityImpact"`
-	BaseScore             *float64                         `json:"baseScore"`
-	ConfidentialityImpact *Cvssv3ConfidentialityImpactEnum `json:"confidentialityImpact"`
-	IntegrityImpact       *Cvssv3IntegrityImpactEnum       `json:"integrityImpact"`
-	PrivilegesRequired    *Cvssv3PrivilegesRequiredEnum    `json:"privilegesRequired"`
-	Scope                 *Cvssv3ScopeEnum                 `json:"scope"`
-	UserInteraction       *Cvssv3UserInteractionEnum       `json:"userInteraction"`
+	AttackComplexity      *Cvssv3AttackComplexityEnum      `json:"attackComplexity,omitempty"`
+	AttackVector          *Cvssv3AttackVectorEnum          `json:"attackVector,omitempty"`
+	AvailabilityImpact    *Cvssv3AvailabilityImpactEnum    `json:"availabilityImpact,omitempty"`
+	BaseScore             *float64                         `json:"baseScore,omitempty"`
+	ConfidentialityImpact *Cvssv3ConfidentialityImpactEnum `json:"confidentialityImpact,omitempty"`
+	IntegrityImpact       *Cvssv3IntegrityImpactEnum       `json:"integrityImpact,omitempty"`
+	PrivilegesRequired    *Cvssv3PrivilegesRequiredEnum    `json:"privilegesRequired,omitempty"`
+	Scope                 *Cvssv3ScopeEnum                 `json:"scope,omitempty"`
+	UserInteraction       *Cvssv3UserInteractionEnum       `json:"userInteraction,omitempty"`
 }

@@ -1,7 +1,7 @@
 package shared
 
 type GrpcRouteMetadata struct {
-	Invert *bool                         `json:"invert"`
-	Match  *GrpcRouteMetadataMatchMethod `json:"match"`
+	Invert *bool                         `json:"invert,omitempty"`
+	Match  *GrpcRouteMetadataMatchMethod `json:"match,omitempty"`
 	Name   string                        `json:"name"`
 }

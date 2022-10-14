@@ -1,5 +1,5 @@
 package shared
 
 type DescribeApplicationResponse struct {
-	ApplicationInfo *ApplicationInfo `json:"ApplicationInfo"`
+	ApplicationInfo *ApplicationInfo `json:"ApplicationInfo,omitempty"`
 }

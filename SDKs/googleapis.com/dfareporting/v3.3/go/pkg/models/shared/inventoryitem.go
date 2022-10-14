@@ -8,24 +8,24 @@ const (
 )
 
 type InventoryItem struct {
-	AccountID                 *string                `json:"accountId"`
-	AdSlots                   []AdSlot               `json:"adSlots"`
-	AdvertiserID              *string                `json:"advertiserId"`
-	ContentCategoryID         *string                `json:"contentCategoryId"`
-	EstimatedClickThroughRate *string                `json:"estimatedClickThroughRate"`
-	EstimatedConversionRate   *string                `json:"estimatedConversionRate"`
-	ID                        *string                `json:"id"`
-	InPlan                    *bool                  `json:"inPlan"`
-	Kind                      *string                `json:"kind"`
-	LastModifiedInfo          *LastModifiedInfo      `json:"lastModifiedInfo"`
-	Name                      *string                `json:"name"`
-	NegotiationChannelID      *string                `json:"negotiationChannelId"`
-	OrderID                   *string                `json:"orderId"`
-	PlacementStrategyID       *string                `json:"placementStrategyId"`
-	Pricing                   *Pricing               `json:"pricing"`
-	ProjectID                 *string                `json:"projectId"`
-	RfpID                     *string                `json:"rfpId"`
-	SiteID                    *string                `json:"siteId"`
-	SubaccountID              *string                `json:"subaccountId"`
-	Type                      *InventoryItemTypeEnum `json:"type"`
+	AccountID                 *string                `json:"accountId,omitempty"`
+	AdSlots                   []AdSlot               `json:"adSlots,omitempty"`
+	AdvertiserID              *string                `json:"advertiserId,omitempty"`
+	ContentCategoryID         *string                `json:"contentCategoryId,omitempty"`
+	EstimatedClickThroughRate *string                `json:"estimatedClickThroughRate,omitempty"`
+	EstimatedConversionRate   *string                `json:"estimatedConversionRate,omitempty"`
+	ID                        *string                `json:"id,omitempty"`
+	InPlan                    *bool                  `json:"inPlan,omitempty"`
+	Kind                      *string                `json:"kind,omitempty"`
+	LastModifiedInfo          *LastModifiedInfo      `json:"lastModifiedInfo,omitempty"`
+	Name                      *string                `json:"name,omitempty"`
+	NegotiationChannelID      *string                `json:"negotiationChannelId,omitempty"`
+	OrderID                   *string                `json:"orderId,omitempty"`
+	PlacementStrategyID       *string                `json:"placementStrategyId,omitempty"`
+	Pricing                   *Pricing               `json:"pricing,omitempty"`
+	ProjectID                 *string                `json:"projectId,omitempty"`
+	RfpID                     *string                `json:"rfpId,omitempty"`
+	SiteID                    *string                `json:"siteId,omitempty"`
+	SubaccountID              *string                `json:"subaccountId,omitempty"`
+	Type                      *InventoryItemTypeEnum `json:"type,omitempty"`
 }

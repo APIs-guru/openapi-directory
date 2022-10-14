@@ -1,15 +1,15 @@
 package shared
 
 type Pipeline struct {
-	Arn             *string               `json:"Arn"`
-	AwsKmsKeyArn    *string               `json:"AwsKmsKeyArn"`
-	ContentConfig   *PipelineOutputConfig `json:"ContentConfig"`
-	ID              *string               `json:"Id"`
-	InputBucket     *string               `json:"InputBucket"`
-	Name            *string               `json:"Name"`
-	Notifications   *Notifications        `json:"Notifications"`
-	OutputBucket    *string               `json:"OutputBucket"`
-	Role            *string               `json:"Role"`
-	Status          *string               `json:"Status"`
-	ThumbnailConfig *PipelineOutputConfig `json:"ThumbnailConfig"`
+	Arn             *string               `json:"Arn,omitempty"`
+	AwsKmsKeyArn    *string               `json:"AwsKmsKeyArn,omitempty"`
+	ContentConfig   *PipelineOutputConfig `json:"ContentConfig,omitempty"`
+	ID              *string               `json:"Id,omitempty"`
+	InputBucket     *string               `json:"InputBucket,omitempty"`
+	Name            *string               `json:"Name,omitempty"`
+	Notifications   *Notifications        `json:"Notifications,omitempty"`
+	OutputBucket    *string               `json:"OutputBucket,omitempty"`
+	Role            *string               `json:"Role,omitempty"`
+	Status          *string               `json:"Status,omitempty"`
+	ThumbnailConfig *PipelineOutputConfig `json:"ThumbnailConfig,omitempty"`
 }

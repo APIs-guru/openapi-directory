@@ -1,12 +1,12 @@
 package shared
 
 type Campaign struct {
-	CampaignCriterion *CampaignCriterion `json:"campaignCriterion"`
-	CampaignID        *string            `json:"campaignId"`
-	CampaignName      *string            `json:"campaignName"`
-	CampaignStatus    *string            `json:"campaignStatus"`
-	EndDate           *string            `json:"endDate"`
-	FundingStrategy   *FundingStrategy   `json:"fundingStrategy"`
-	MarketplaceID     *string            `json:"marketplaceId"`
-	StartDate         *string            `json:"startDate"`
+	CampaignCriterion *CampaignCriterion `json:"campaignCriterion,omitempty"`
+	CampaignID        *string            `json:"campaignId,omitempty"`
+	CampaignName      *string            `json:"campaignName,omitempty"`
+	CampaignStatus    *string            `json:"campaignStatus,omitempty"`
+	EndDate           *string            `json:"endDate,omitempty"`
+	FundingStrategy   *FundingStrategy   `json:"fundingStrategy,omitempty"`
+	MarketplaceID     *string            `json:"marketplaceId,omitempty"`
+	StartDate         *string            `json:"startDate,omitempty"`
 }

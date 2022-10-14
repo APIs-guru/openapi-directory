@@ -5,7 +5,7 @@ type CreateNetworkWebhooksWebhookTestPathParams struct {
 }
 
 type CreateNetworkWebhooksWebhookTestRequestBody struct {
-	SharedSecret *string `json:"sharedSecret"`
+	SharedSecret *string `json:"sharedSecret,omitempty"`
 	URL          string  `json:"url"`
 }
 

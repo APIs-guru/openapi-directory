@@ -1,8 +1,8 @@
 package shared
 
 type VideoSessionReferrer struct {
-	Medium     *string `json:"medium"`
-	SearchTerm *string `json:"searchTerm"`
-	Source     *string `json:"source"`
-	URL        *string `json:"url"`
+	Medium     *string `json:"medium,omitempty"`
+	SearchTerm *string `json:"searchTerm,omitempty"`
+	Source     *string `json:"source,omitempty"`
+	URL        *string `json:"url,omitempty"`
 }

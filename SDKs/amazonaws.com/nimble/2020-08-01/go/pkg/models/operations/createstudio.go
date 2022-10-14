@@ -16,16 +16,16 @@ type CreateStudioHeaders struct {
 }
 
 type CreateStudioRequestBodyStudioEncryptionConfiguration struct {
-	KeyArn  *string                                          `json:"keyArn"`
-	KeyType *shared.StudioEncryptionConfigurationKeyTypeEnum `json:"keyType"`
+	KeyArn  *string                                          `json:"keyArn,omitempty"`
+	KeyType *shared.StudioEncryptionConfigurationKeyTypeEnum `json:"keyType,omitempty"`
 }
 
 type CreateStudioRequestBody struct {
 	AdminRoleArn                  string                                                `json:"adminRoleArn"`
 	DisplayName                   string                                                `json:"displayName"`
-	StudioEncryptionConfiguration *CreateStudioRequestBodyStudioEncryptionConfiguration `json:"studioEncryptionConfiguration"`
+	StudioEncryptionConfiguration *CreateStudioRequestBodyStudioEncryptionConfiguration `json:"studioEncryptionConfiguration,omitempty"`
 	StudioName                    string                                                `json:"studioName"`
-	Tags                          map[string]string                                     `json:"tags"`
+	Tags                          map[string]string                                     `json:"tags,omitempty"`
 	UserRoleArn                   string                                                `json:"userRoleArn"`
 }
 

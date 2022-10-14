@@ -1,13 +1,13 @@
 package shared
 
 type TflAPIPresentationEntitiesJourneyPlannerFare struct {
-	ChargeLevel       *string                                           `json:"chargeLevel"`
-	ChargeProfileName *string                                           `json:"chargeProfileName"`
-	Cost              *int32                                            `json:"cost"`
-	HighZone          *int32                                            `json:"highZone"`
-	IsHopperFare      *bool                                             `json:"isHopperFare"`
-	LowZone           *int32                                            `json:"lowZone"`
-	OffPeak           *int32                                            `json:"offPeak"`
-	Peak              *int32                                            `json:"peak"`
-	Taps              []TflAPIPresentationEntitiesJourneyPlannerFareTap `json:"taps"`
+	ChargeLevel       *string                                           `json:"chargeLevel,omitempty"`
+	ChargeProfileName *string                                           `json:"chargeProfileName,omitempty"`
+	Cost              *int32                                            `json:"cost,omitempty"`
+	HighZone          *int32                                            `json:"highZone,omitempty"`
+	IsHopperFare      *bool                                             `json:"isHopperFare,omitempty"`
+	LowZone           *int32                                            `json:"lowZone,omitempty"`
+	OffPeak           *int32                                            `json:"offPeak,omitempty"`
+	Peak              *int32                                            `json:"peak,omitempty"`
+	Taps              []TflAPIPresentationEntitiesJourneyPlannerFareTap `json:"taps,omitempty"`
 }

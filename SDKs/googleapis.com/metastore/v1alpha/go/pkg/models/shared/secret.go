@@ -1,5 +1,5 @@
 package shared
 
 type Secret struct {
-	CloudSecret *string `json:"cloudSecret"`
+	CloudSecret *string `json:"cloudSecret,omitempty"`
 }

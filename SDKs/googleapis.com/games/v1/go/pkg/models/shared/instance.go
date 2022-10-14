@@ -10,13 +10,13 @@ const (
 )
 
 type Instance struct {
-	AcquisitionURI  *string                   `json:"acquisitionUri"`
-	AndroidInstance *InstanceAndroidDetails   `json:"androidInstance"`
-	IosInstance     *InstanceIosDetails       `json:"iosInstance"`
-	Kind            *string                   `json:"kind"`
-	Name            *string                   `json:"name"`
-	PlatformType    *InstancePlatformTypeEnum `json:"platformType"`
-	RealtimePlay    *bool                     `json:"realtimePlay"`
-	TurnBasedPlay   *bool                     `json:"turnBasedPlay"`
-	WebInstance     *InstanceWebDetails       `json:"webInstance"`
+	AcquisitionURI  *string                   `json:"acquisitionUri,omitempty"`
+	AndroidInstance *InstanceAndroidDetails   `json:"androidInstance,omitempty"`
+	IosInstance     *InstanceIosDetails       `json:"iosInstance,omitempty"`
+	Kind            *string                   `json:"kind,omitempty"`
+	Name            *string                   `json:"name,omitempty"`
+	PlatformType    *InstancePlatformTypeEnum `json:"platformType,omitempty"`
+	RealtimePlay    *bool                     `json:"realtimePlay,omitempty"`
+	TurnBasedPlay   *bool                     `json:"turnBasedPlay,omitempty"`
+	WebInstance     *InstanceWebDetails       `json:"webInstance,omitempty"`
 }

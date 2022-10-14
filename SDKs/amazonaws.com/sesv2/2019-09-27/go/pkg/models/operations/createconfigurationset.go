@@ -16,35 +16,35 @@ type CreateConfigurationSetHeaders struct {
 }
 
 type CreateConfigurationSetRequestBodyDeliveryOptions struct {
-	SendingPoolName *string               `json:"SendingPoolName"`
-	TLSPolicy       *shared.TLSPolicyEnum `json:"TlsPolicy"`
+	SendingPoolName *string               `json:"SendingPoolName,omitempty"`
+	TLSPolicy       *shared.TLSPolicyEnum `json:"TlsPolicy,omitempty"`
 }
 
 type CreateConfigurationSetRequestBodyReputationOptions struct {
-	LastFreshStart           *time.Time `json:"LastFreshStart"`
-	ReputationMetricsEnabled *bool      `json:"ReputationMetricsEnabled"`
+	LastFreshStart           *time.Time `json:"LastFreshStart,omitempty"`
+	ReputationMetricsEnabled *bool      `json:"ReputationMetricsEnabled,omitempty"`
 }
 
 type CreateConfigurationSetRequestBodySendingOptions struct {
-	SendingEnabled *bool `json:"SendingEnabled"`
+	SendingEnabled *bool `json:"SendingEnabled,omitempty"`
 }
 
 type CreateConfigurationSetRequestBodySuppressionOptions struct {
-	SuppressedReasons []shared.SuppressionListReasonEnum `json:"SuppressedReasons"`
+	SuppressedReasons []shared.SuppressionListReasonEnum `json:"SuppressedReasons,omitempty"`
 }
 
 type CreateConfigurationSetRequestBodyTrackingOptions struct {
-	CustomRedirectDomain *string `json:"CustomRedirectDomain"`
+	CustomRedirectDomain *string `json:"CustomRedirectDomain,omitempty"`
 }
 
 type CreateConfigurationSetRequestBody struct {
 	ConfigurationSetName string                                               `json:"ConfigurationSetName"`
-	DeliveryOptions      *CreateConfigurationSetRequestBodyDeliveryOptions    `json:"DeliveryOptions"`
-	ReputationOptions    *CreateConfigurationSetRequestBodyReputationOptions  `json:"ReputationOptions"`
-	SendingOptions       *CreateConfigurationSetRequestBodySendingOptions     `json:"SendingOptions"`
-	SuppressionOptions   *CreateConfigurationSetRequestBodySuppressionOptions `json:"SuppressionOptions"`
-	Tags                 []shared.Tag                                         `json:"Tags"`
-	TrackingOptions      *CreateConfigurationSetRequestBodyTrackingOptions    `json:"TrackingOptions"`
+	DeliveryOptions      *CreateConfigurationSetRequestBodyDeliveryOptions    `json:"DeliveryOptions,omitempty"`
+	ReputationOptions    *CreateConfigurationSetRequestBodyReputationOptions  `json:"ReputationOptions,omitempty"`
+	SendingOptions       *CreateConfigurationSetRequestBodySendingOptions     `json:"SendingOptions,omitempty"`
+	SuppressionOptions   *CreateConfigurationSetRequestBodySuppressionOptions `json:"SuppressionOptions,omitempty"`
+	Tags                 []shared.Tag                                         `json:"Tags,omitempty"`
+	TrackingOptions      *CreateConfigurationSetRequestBodyTrackingOptions    `json:"TrackingOptions,omitempty"`
 }
 
 type CreateConfigurationSetRequest struct {

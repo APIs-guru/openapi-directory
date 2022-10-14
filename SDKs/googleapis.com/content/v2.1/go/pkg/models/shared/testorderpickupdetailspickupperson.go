@@ -1,6 +1,6 @@
 package shared
 
 type TestOrderPickupDetailsPickupPerson struct {
-	Name        *string `json:"name"`
-	PhoneNumber *string `json:"phoneNumber"`
+	Name        *string `json:"name,omitempty"`
+	PhoneNumber *string `json:"phoneNumber,omitempty"`
 }

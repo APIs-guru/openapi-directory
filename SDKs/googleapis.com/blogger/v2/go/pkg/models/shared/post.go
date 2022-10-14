@@ -1,29 +1,29 @@
 package shared
 
 type PostAuthorImage struct {
-	URL *string `json:"url"`
+	URL *string `json:"url,omitempty"`
 }
 
 type PostAuthor struct {
-	DisplayName *string          `json:"displayName"`
-	ID          *string          `json:"id"`
-	Image       *PostAuthorImage `json:"image"`
-	URL         *string          `json:"url"`
+	DisplayName *string          `json:"displayName,omitempty"`
+	ID          *string          `json:"id,omitempty"`
+	Image       *PostAuthorImage `json:"image,omitempty"`
+	URL         *string          `json:"url,omitempty"`
 }
 
 type PostBlog struct {
-	ID *string `json:"id"`
+	ID *string `json:"id,omitempty"`
 }
 
 type PostImages struct {
-	URL *string `json:"url"`
+	URL *string `json:"url,omitempty"`
 }
 
 type PostLocation struct {
-	Lat  *float64 `json:"lat"`
-	Lng  *float64 `json:"lng"`
-	Name *string  `json:"name"`
-	Span *string  `json:"span"`
+	Lat  *float64 `json:"lat,omitempty"`
+	Lng  *float64 `json:"lng,omitempty"`
+	Name *string  `json:"name,omitempty"`
+	Span *string  `json:"span,omitempty"`
 }
 
 type PostReaderCommentsEnum string
@@ -35,9 +35,9 @@ const (
 )
 
 type PostReplies struct {
-	Items      []Comment `json:"items"`
-	SelfLink   *string   `json:"selfLink"`
-	TotalItems *string   `json:"totalItems"`
+	Items      []Comment `json:"items,omitempty"`
+	SelfLink   *string   `json:"selfLink,omitempty"`
+	TotalItems *string   `json:"totalItems,omitempty"`
 }
 
 type PostStatusEnum string
@@ -50,24 +50,24 @@ const (
 )
 
 type Post struct {
-	Author         *PostAuthor             `json:"author"`
-	Blog           *PostBlog               `json:"blog"`
-	Content        *string                 `json:"content"`
-	CustomMetaData *string                 `json:"customMetaData"`
-	Etag           *string                 `json:"etag"`
-	ID             *string                 `json:"id"`
-	Images         []PostImages            `json:"images"`
-	Kind           *string                 `json:"kind"`
-	Labels         []string                `json:"labels"`
-	Location       *PostLocation           `json:"location"`
-	Published      *string                 `json:"published"`
-	ReaderComments *PostReaderCommentsEnum `json:"readerComments"`
-	Replies        *PostReplies            `json:"replies"`
-	SelfLink       *string                 `json:"selfLink"`
-	Status         *PostStatusEnum         `json:"status"`
-	Title          *string                 `json:"title"`
-	TitleLink      *string                 `json:"titleLink"`
-	Trashed        *string                 `json:"trashed"`
-	Updated        *string                 `json:"updated"`
-	URL            *string                 `json:"url"`
+	Author         *PostAuthor             `json:"author,omitempty"`
+	Blog           *PostBlog               `json:"blog,omitempty"`
+	Content        *string                 `json:"content,omitempty"`
+	CustomMetaData *string                 `json:"customMetaData,omitempty"`
+	Etag           *string                 `json:"etag,omitempty"`
+	ID             *string                 `json:"id,omitempty"`
+	Images         []PostImages            `json:"images,omitempty"`
+	Kind           *string                 `json:"kind,omitempty"`
+	Labels         []string                `json:"labels,omitempty"`
+	Location       *PostLocation           `json:"location,omitempty"`
+	Published      *string                 `json:"published,omitempty"`
+	ReaderComments *PostReaderCommentsEnum `json:"readerComments,omitempty"`
+	Replies        *PostReplies            `json:"replies,omitempty"`
+	SelfLink       *string                 `json:"selfLink,omitempty"`
+	Status         *PostStatusEnum         `json:"status,omitempty"`
+	Title          *string                 `json:"title,omitempty"`
+	TitleLink      *string                 `json:"titleLink,omitempty"`
+	Trashed        *string                 `json:"trashed,omitempty"`
+	Updated        *string                 `json:"updated,omitempty"`
+	URL            *string                 `json:"url,omitempty"`
 }

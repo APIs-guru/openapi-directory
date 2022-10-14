@@ -18,8 +18,8 @@ const (
 )
 
 type CripcRequestBody struct {
-	CertificateParameters *CripcRequestBodyCertificateParameters `json:"certificateParameters"`
-	ConsentArtifact       *interface{}                           `json:"consentArtifact"`
+	CertificateParameters *CripcRequestBodyCertificateParameters `json:"certificateParameters,omitempty"`
+	ConsentArtifact       *interface{}                           `json:"consentArtifact,omitempty"`
 	Format                CripcRequestBodyFormatEnum             `json:"format"`
 	TxnID                 string                                 `json:"txnId"`
 }
@@ -55,8 +55,8 @@ const (
 )
 
 type Cripc400ApplicationJSON struct {
-	Error            *Cripc400ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Cripc400ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Cripc400ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Cripc400ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Cripc401ApplicationJSONErrorEnum string
@@ -74,8 +74,8 @@ const (
 )
 
 type Cripc401ApplicationJSON struct {
-	Error            *Cripc401ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Cripc401ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Cripc401ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Cripc401ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Cripc404ApplicationJSONErrorEnum string
@@ -93,8 +93,8 @@ const (
 )
 
 type Cripc404ApplicationJSON struct {
-	Error            *Cripc404ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Cripc404ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Cripc404ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Cripc404ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Cripc500ApplicationJSONErrorEnum string
@@ -110,8 +110,8 @@ const (
 )
 
 type Cripc500ApplicationJSON struct {
-	Error            *Cripc500ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Cripc500ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Cripc500ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Cripc500ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Cripc502ApplicationJSONErrorEnum string
@@ -127,8 +127,8 @@ const (
 )
 
 type Cripc502ApplicationJSON struct {
-	Error            *Cripc502ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Cripc502ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Cripc502ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Cripc502ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Cripc503ApplicationJSONErrorEnum string
@@ -144,8 +144,8 @@ const (
 )
 
 type Cripc503ApplicationJSON struct {
-	Error            *Cripc503ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Cripc503ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Cripc503ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Cripc503ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Cripc504ApplicationJSONErrorEnum string
@@ -161,8 +161,8 @@ const (
 )
 
 type Cripc504ApplicationJSON struct {
-	Error            *Cripc504ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Cripc504ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Cripc504ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Cripc504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type CripcResponse struct {

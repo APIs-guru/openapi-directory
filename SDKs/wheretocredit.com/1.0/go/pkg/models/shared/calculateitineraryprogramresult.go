@@ -1,10 +1,10 @@
 package shared
 
 type CalculateItineraryProgramResult struct {
-	Airlines     []string `json:"airlines"`
-	ID           *string  `json:"id"`
-	Name         *string  `json:"name"`
-	RevenueBased *bool    `json:"revenueBased"`
-	Unpublished  *bool    `json:"unpublished"`
-	Value        *int32   `json:"value"`
+	Airlines     []string `json:"airlines,omitempty"`
+	ID           *string  `json:"id,omitempty"`
+	Name         *string  `json:"name,omitempty"`
+	RevenueBased *bool    `json:"revenueBased,omitempty"`
+	Unpublished  *bool    `json:"unpublished,omitempty"`
+	Value        *int32   `json:"value,omitempty"`
 }

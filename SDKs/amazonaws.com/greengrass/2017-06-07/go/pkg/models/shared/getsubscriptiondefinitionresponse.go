@@ -1,12 +1,12 @@
 package shared
 
 type GetSubscriptionDefinitionResponse struct {
-	Arn                  *string           `json:"Arn"`
-	CreationTimestamp    *string           `json:"CreationTimestamp"`
-	ID                   *string           `json:"Id"`
-	LastUpdatedTimestamp *string           `json:"LastUpdatedTimestamp"`
-	LatestVersion        *string           `json:"LatestVersion"`
-	LatestVersionArn     *string           `json:"LatestVersionArn"`
-	Name                 *string           `json:"Name"`
-	Tags                 map[string]string `json:"tags"`
+	Arn                  *string           `json:"Arn,omitempty"`
+	CreationTimestamp    *string           `json:"CreationTimestamp,omitempty"`
+	ID                   *string           `json:"Id,omitempty"`
+	LastUpdatedTimestamp *string           `json:"LastUpdatedTimestamp,omitempty"`
+	LatestVersion        *string           `json:"LatestVersion,omitempty"`
+	LatestVersionArn     *string           `json:"LatestVersionArn,omitempty"`
+	Name                 *string           `json:"Name,omitempty"`
+	Tags                 map[string]string `json:"tags,omitempty"`
 }

@@ -1,23 +1,23 @@
 package shared
 
 type CreateJobRequest struct {
-	AllocatedCapacity       *int64                `json:"AllocatedCapacity"`
+	AllocatedCapacity       *int64                `json:"AllocatedCapacity,omitempty"`
 	Command                 JobCommand            `json:"Command"`
-	Connections             *ConnectionsList      `json:"Connections"`
-	DefaultArguments        map[string]string     `json:"DefaultArguments"`
-	Description             *string               `json:"Description"`
-	ExecutionProperty       *ExecutionProperty    `json:"ExecutionProperty"`
-	GlueVersion             *string               `json:"GlueVersion"`
-	LogURI                  *string               `json:"LogUri"`
-	MaxCapacity             *float64              `json:"MaxCapacity"`
-	MaxRetries              *int64                `json:"MaxRetries"`
+	Connections             *ConnectionsList      `json:"Connections,omitempty"`
+	DefaultArguments        map[string]string     `json:"DefaultArguments,omitempty"`
+	Description             *string               `json:"Description,omitempty"`
+	ExecutionProperty       *ExecutionProperty    `json:"ExecutionProperty,omitempty"`
+	GlueVersion             *string               `json:"GlueVersion,omitempty"`
+	LogURI                  *string               `json:"LogUri,omitempty"`
+	MaxCapacity             *float64              `json:"MaxCapacity,omitempty"`
+	MaxRetries              *int64                `json:"MaxRetries,omitempty"`
 	Name                    string                `json:"Name"`
-	NonOverridableArguments map[string]string     `json:"NonOverridableArguments"`
-	NotificationProperty    *NotificationProperty `json:"NotificationProperty"`
-	NumberOfWorkers         *int64                `json:"NumberOfWorkers"`
+	NonOverridableArguments map[string]string     `json:"NonOverridableArguments,omitempty"`
+	NotificationProperty    *NotificationProperty `json:"NotificationProperty,omitempty"`
+	NumberOfWorkers         *int64                `json:"NumberOfWorkers,omitempty"`
 	Role                    string                `json:"Role"`
-	SecurityConfiguration   *string               `json:"SecurityConfiguration"`
-	Tags                    map[string]string     `json:"Tags"`
-	Timeout                 *int64                `json:"Timeout"`
-	WorkerType              *WorkerTypeEnum       `json:"WorkerType"`
+	SecurityConfiguration   *string               `json:"SecurityConfiguration,omitempty"`
+	Tags                    map[string]string     `json:"Tags,omitempty"`
+	Timeout                 *int64                `json:"Timeout,omitempty"`
+	WorkerType              *WorkerTypeEnum       `json:"WorkerType,omitempty"`
 }

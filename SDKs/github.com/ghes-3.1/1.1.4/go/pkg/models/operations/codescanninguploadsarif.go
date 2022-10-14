@@ -11,12 +11,12 @@ type CodeScanningUploadSarifPathParams struct {
 }
 
 type CodeScanningUploadSarifRequestBody struct {
-	CheckoutURI *string    `json:"checkout_uri"`
+	CheckoutURI *string    `json:"checkout_uri,omitempty"`
 	CommitSha   string     `json:"commit_sha"`
 	Ref         string     `json:"ref"`
 	Sarif       string     `json:"sarif"`
-	StartedAt   *time.Time `json:"started_at"`
-	ToolName    *string    `json:"tool_name"`
+	StartedAt   *time.Time `json:"started_at,omitempty"`
+	ToolName    *string    `json:"tool_name,omitempty"`
 }
 
 type CodeScanningUploadSarifRequest struct {
@@ -25,9 +25,9 @@ type CodeScanningUploadSarifRequest struct {
 }
 
 type CodeScanningUploadSarif503ApplicationJSON struct {
-	Code             *string `json:"code"`
-	DocumentationURL *string `json:"documentation_url"`
-	Message          *string `json:"message"`
+	Code             *string `json:"code,omitempty"`
+	DocumentationURL *string `json:"documentation_url,omitempty"`
+	Message          *string `json:"message,omitempty"`
 }
 
 type CodeScanningUploadSarifResponse struct {

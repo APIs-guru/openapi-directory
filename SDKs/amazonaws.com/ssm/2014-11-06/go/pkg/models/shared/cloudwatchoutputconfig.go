@@ -1,6 +1,6 @@
 package shared
 
 type CloudWatchOutputConfig struct {
-	CloudWatchLogGroupName  *string `json:"CloudWatchLogGroupName"`
-	CloudWatchOutputEnabled *bool   `json:"CloudWatchOutputEnabled"`
+	CloudWatchLogGroupName  *string `json:"CloudWatchLogGroupName,omitempty"`
+	CloudWatchOutputEnabled *bool   `json:"CloudWatchOutputEnabled,omitempty"`
 }

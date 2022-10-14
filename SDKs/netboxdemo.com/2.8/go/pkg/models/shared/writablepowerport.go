@@ -72,16 +72,16 @@ const (
 )
 
 type WritablePowerPort struct {
-	AllocatedDraw         *int64                         `json:"allocated_draw"`
-	Cable                 *NestedCable                   `json:"cable"`
-	ConnectedEndpoint     map[string]string              `json:"connected_endpoint"`
-	ConnectedEndpointType *string                        `json:"connected_endpoint_type"`
-	ConnectionStatus      *bool                          `json:"connection_status"`
-	Description           *string                        `json:"description"`
+	AllocatedDraw         *int64                         `json:"allocated_draw,omitempty"`
+	Cable                 *NestedCable                   `json:"cable,omitempty"`
+	ConnectedEndpoint     map[string]string              `json:"connected_endpoint,omitempty"`
+	ConnectedEndpointType *string                        `json:"connected_endpoint_type,omitempty"`
+	ConnectionStatus      *bool                          `json:"connection_status,omitempty"`
+	Description           *string                        `json:"description,omitempty"`
 	Device                int64                          `json:"device"`
-	ID                    *int64                         `json:"id"`
-	MaximumDraw           *int64                         `json:"maximum_draw"`
+	ID                    *int64                         `json:"id,omitempty"`
+	MaximumDraw           *int64                         `json:"maximum_draw,omitempty"`
 	Name                  string                         `json:"name"`
-	Tags                  []string                       `json:"tags"`
-	Type                  *WritablePowerPortTypeTypeEnum `json:"type"`
+	Tags                  []string                       `json:"tags,omitempty"`
+	Type                  *WritablePowerPortTypeTypeEnum `json:"type,omitempty"`
 }

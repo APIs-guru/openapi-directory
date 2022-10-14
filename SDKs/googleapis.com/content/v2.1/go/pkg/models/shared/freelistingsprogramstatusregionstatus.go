@@ -35,13 +35,13 @@ const (
 )
 
 type FreeListingsProgramStatusRegionStatus struct {
-	DisapprovalDate                      *string                                                             `json:"disapprovalDate"`
-	EligibilityStatus                    *FreeListingsProgramStatusRegionStatusEligibilityStatusEnum         `json:"eligibilityStatus"`
-	OnboardingIssues                     []string                                                            `json:"onboardingIssues"`
-	RegionCodes                          []string                                                            `json:"regionCodes"`
-	ReviewEligibilityStatus              *FreeListingsProgramStatusRegionStatusReviewEligibilityStatusEnum   `json:"reviewEligibilityStatus"`
-	ReviewIneligibilityReason            *FreeListingsProgramStatusRegionStatusReviewIneligibilityReasonEnum `json:"reviewIneligibilityReason"`
-	ReviewIneligibilityReasonDescription *string                                                             `json:"reviewIneligibilityReasonDescription"`
-	ReviewIneligibilityReasonDetails     *FreeListingsProgramStatusReviewIneligibilityReasonDetails          `json:"reviewIneligibilityReasonDetails"`
-	ReviewIssues                         []string                                                            `json:"reviewIssues"`
+	DisapprovalDate                      *string                                                             `json:"disapprovalDate,omitempty"`
+	EligibilityStatus                    *FreeListingsProgramStatusRegionStatusEligibilityStatusEnum         `json:"eligibilityStatus,omitempty"`
+	OnboardingIssues                     []string                                                            `json:"onboardingIssues,omitempty"`
+	RegionCodes                          []string                                                            `json:"regionCodes,omitempty"`
+	ReviewEligibilityStatus              *FreeListingsProgramStatusRegionStatusReviewEligibilityStatusEnum   `json:"reviewEligibilityStatus,omitempty"`
+	ReviewIneligibilityReason            *FreeListingsProgramStatusRegionStatusReviewIneligibilityReasonEnum `json:"reviewIneligibilityReason,omitempty"`
+	ReviewIneligibilityReasonDescription *string                                                             `json:"reviewIneligibilityReasonDescription,omitempty"`
+	ReviewIneligibilityReasonDetails     *FreeListingsProgramStatusReviewIneligibilityReasonDetails          `json:"reviewIneligibilityReasonDetails,omitempty"`
+	ReviewIssues                         []string                                                            `json:"reviewIssues,omitempty"`
 }

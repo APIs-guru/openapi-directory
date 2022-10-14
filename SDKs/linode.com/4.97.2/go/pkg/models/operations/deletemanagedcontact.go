@@ -27,7 +27,7 @@ type DeleteManagedContactRequest struct {
 }
 
 type DeleteManagedContactDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type DeleteManagedContactResponse struct {

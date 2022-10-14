@@ -5,6 +5,6 @@ import (
 )
 
 type DescribeApplicationStateResult struct {
-	ApplicationStatus *ApplicationStatusEnum `json:"ApplicationStatus"`
-	LastUpdatedTime   *time.Time             `json:"LastUpdatedTime"`
+	ApplicationStatus *ApplicationStatusEnum `json:"ApplicationStatus,omitempty"`
+	LastUpdatedTime   *time.Time             `json:"LastUpdatedTime,omitempty"`
 }

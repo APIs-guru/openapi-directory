@@ -5,11 +5,11 @@ import (
 )
 
 type MetricSetSummary struct {
-	AnomalyDetectorArn   *string           `json:"AnomalyDetectorArn"`
-	CreationTime         *time.Time        `json:"CreationTime"`
-	LastModificationTime *time.Time        `json:"LastModificationTime"`
-	MetricSetArn         *string           `json:"MetricSetArn"`
-	MetricSetDescription *string           `json:"MetricSetDescription"`
-	MetricSetName        *string           `json:"MetricSetName"`
-	Tags                 map[string]string `json:"Tags"`
+	AnomalyDetectorArn   *string           `json:"AnomalyDetectorArn,omitempty"`
+	CreationTime         *time.Time        `json:"CreationTime,omitempty"`
+	LastModificationTime *time.Time        `json:"LastModificationTime,omitempty"`
+	MetricSetArn         *string           `json:"MetricSetArn,omitempty"`
+	MetricSetDescription *string           `json:"MetricSetDescription,omitempty"`
+	MetricSetName        *string           `json:"MetricSetName,omitempty"`
+	Tags                 map[string]string `json:"Tags,omitempty"`
 }

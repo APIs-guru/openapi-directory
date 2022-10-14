@@ -6,10 +6,10 @@ import (
 
 type AppsListData struct {
 	AppsList         []App            `json:"AppsList"`
-	CreateTime       *time.Time       `json:"CreateTime"`
-	LastUpdateTime   *time.Time       `json:"LastUpdateTime"`
-	ListID           *string          `json:"ListId"`
+	CreateTime       *time.Time       `json:"CreateTime,omitempty"`
+	LastUpdateTime   *time.Time       `json:"LastUpdateTime,omitempty"`
+	ListID           *string          `json:"ListId,omitempty"`
 	ListName         string           `json:"ListName"`
-	ListUpdateToken  *string          `json:"ListUpdateToken"`
-	PreviousAppsList map[string][]App `json:"PreviousAppsList"`
+	ListUpdateToken  *string          `json:"ListUpdateToken,omitempty"`
+	PreviousAppsList map[string][]App `json:"PreviousAppsList,omitempty"`
 }

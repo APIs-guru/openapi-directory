@@ -1,6 +1,6 @@
 package shared
 
 type DescribeAppsRequest struct {
-	AppIds  []string `json:"AppIds"`
-	StackID *string  `json:"StackId"`
+	AppIds  []string `json:"AppIds,omitempty"`
+	StackID *string  `json:"StackId,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type SearchTransitiveGroupsResponse struct {
-	Memberships   []GroupRelation `json:"memberships"`
-	NextPageToken *string         `json:"nextPageToken"`
+	Memberships   []GroupRelation `json:"memberships,omitempty"`
+	NextPageToken *string         `json:"nextPageToken,omitempty"`
 }

@@ -1,11 +1,11 @@
 package shared
 
 type GoogleCloudDialogflowCxV3Environment struct {
-	Description     *string                                              `json:"description"`
-	DisplayName     *string                                              `json:"displayName"`
-	Name            *string                                              `json:"name"`
-	TestCasesConfig *GoogleCloudDialogflowCxV3EnvironmentTestCasesConfig `json:"testCasesConfig"`
-	UpdateTime      *string                                              `json:"updateTime"`
-	VersionConfigs  []GoogleCloudDialogflowCxV3EnvironmentVersionConfig  `json:"versionConfigs"`
-	WebhookConfig   *GoogleCloudDialogflowCxV3EnvironmentWebhookConfig   `json:"webhookConfig"`
+	Description     *string                                              `json:"description,omitempty"`
+	DisplayName     *string                                              `json:"displayName,omitempty"`
+	Name            *string                                              `json:"name,omitempty"`
+	TestCasesConfig *GoogleCloudDialogflowCxV3EnvironmentTestCasesConfig `json:"testCasesConfig,omitempty"`
+	UpdateTime      *string                                              `json:"updateTime,omitempty"`
+	VersionConfigs  []GoogleCloudDialogflowCxV3EnvironmentVersionConfig  `json:"versionConfigs,omitempty"`
+	WebhookConfig   *GoogleCloudDialogflowCxV3EnvironmentWebhookConfig   `json:"webhookConfig,omitempty"`
 }

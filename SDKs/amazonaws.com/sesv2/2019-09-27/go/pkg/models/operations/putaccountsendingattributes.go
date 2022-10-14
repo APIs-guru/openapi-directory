@@ -11,7 +11,7 @@ type PutAccountSendingAttributesHeaders struct {
 }
 
 type PutAccountSendingAttributesRequestBody struct {
-	SendingEnabled *bool `json:"SendingEnabled"`
+	SendingEnabled *bool `json:"SendingEnabled,omitempty"`
 }
 
 type PutAccountSendingAttributesRequest struct {

@@ -1,6 +1,6 @@
 package shared
 
 type DataSourceListResponse struct {
-	Results    []DataSourceEntityID `json:"results"`
-	TotalCount *int64               `json:"total_count"`
+	Results    []DataSourceEntityID `json:"results,omitempty"`
+	TotalCount *int64               `json:"total_count,omitempty"`
 }

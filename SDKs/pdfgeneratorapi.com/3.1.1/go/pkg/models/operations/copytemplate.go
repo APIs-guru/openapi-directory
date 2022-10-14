@@ -14,7 +14,7 @@ type CopyTemplateRequest struct {
 }
 
 type CopyTemplate200ApplicationJSON struct {
-	Response *shared.TemplateDefinition `json:"response"`
+	Response *shared.TemplateDefinition `json:"response,omitempty"`
 }
 
 type CopyTemplate401ApplicationJSONErrorEnum string
@@ -33,8 +33,8 @@ const (
 )
 
 type CopyTemplate401ApplicationJSON struct {
-	Error  *CopyTemplate401ApplicationJSONErrorEnum `json:"error"`
-	Status *int64                                   `json:"status"`
+	Error  *CopyTemplate401ApplicationJSONErrorEnum `json:"error,omitempty"`
+	Status *int64                                   `json:"status,omitempty"`
 }
 
 type CopyTemplate403ApplicationJSONErrorEnum string
@@ -44,8 +44,8 @@ const (
 )
 
 type CopyTemplate403ApplicationJSON struct {
-	Error  *CopyTemplate403ApplicationJSONErrorEnum `json:"error"`
-	Status *int64                                   `json:"status"`
+	Error  *CopyTemplate403ApplicationJSONErrorEnum `json:"error,omitempty"`
+	Status *int64                                   `json:"status,omitempty"`
 }
 
 type CopyTemplate404ApplicationJSONErrorEnum string
@@ -57,8 +57,8 @@ const (
 )
 
 type CopyTemplate404ApplicationJSON struct {
-	Error  *CopyTemplate404ApplicationJSONErrorEnum `json:"error"`
-	Status *int64                                   `json:"status"`
+	Error  *CopyTemplate404ApplicationJSONErrorEnum `json:"error,omitempty"`
+	Status *int64                                   `json:"status,omitempty"`
 }
 
 type CopyTemplate422ApplicationJSONErrorEnum string
@@ -71,13 +71,13 @@ const (
 )
 
 type CopyTemplate422ApplicationJSON struct {
-	Error  *CopyTemplate422ApplicationJSONErrorEnum `json:"error"`
-	Status *int64                                   `json:"status"`
+	Error  *CopyTemplate422ApplicationJSONErrorEnum `json:"error,omitempty"`
+	Status *int64                                   `json:"status,omitempty"`
 }
 
 type CopyTemplate500ApplicationJSON struct {
-	Error  *string `json:"error"`
-	Status *int64  `json:"status"`
+	Error  *string `json:"error,omitempty"`
+	Status *int64  `json:"status,omitempty"`
 }
 
 type CopyTemplateResponse struct {

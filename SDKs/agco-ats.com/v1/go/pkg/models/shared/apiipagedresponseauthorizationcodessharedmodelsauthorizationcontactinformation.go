@@ -1,6 +1,6 @@
 package shared
 
 type APIIPagedResponseAuthorizationCodesSharedModelsAuthorizationContactInformation struct {
-	Entities []AuthorizationCodesSharedModelsAuthorizationContactInformation `json:"Entities"`
-	Metadata *APIPagedResponseMetadata                                       `json:"Metadata"`
+	Entities []AuthorizationCodesSharedModelsAuthorizationContactInformation `json:"Entities,omitempty"`
+	Metadata *APIPagedResponseMetadata                                       `json:"Metadata,omitempty"`
 }

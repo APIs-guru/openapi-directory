@@ -10,8 +10,8 @@ type ActivitySetRepoSubscriptionPathParams struct {
 }
 
 type ActivitySetRepoSubscriptionRequestBody struct {
-	Ignored    *bool `json:"ignored"`
-	Subscribed *bool `json:"subscribed"`
+	Ignored    *bool `json:"ignored,omitempty"`
+	Subscribed *bool `json:"subscribed,omitempty"`
 }
 
 type ActivitySetRepoSubscriptionRequest struct {

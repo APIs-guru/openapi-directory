@@ -1,6 +1,6 @@
 package shared
 
 type Environment struct {
-	AndroidDevice *AndroidDevice `json:"androidDevice"`
-	IosDevice     *IosDevice     `json:"iosDevice"`
+	AndroidDevice *AndroidDevice `json:"androidDevice,omitempty"`
+	IosDevice     *IosDevice     `json:"iosDevice,omitempty"`
 }

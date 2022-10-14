@@ -1,6 +1,6 @@
 package shared
 
 type VideoSourceLiveStream struct {
-	Links        []VideoSourceLiveStreamLink `json:"links"`
-	LiveStreamID *string                     `json:"liveStreamId"`
+	Links        []VideoSourceLiveStreamLink `json:"links,omitempty"`
+	LiveStreamID *string                     `json:"liveStreamId,omitempty"`
 }

@@ -9,7 +9,7 @@ type CreateTemplateRequest struct {
 }
 
 type CreateTemplate200ApplicationJSON struct {
-	Response *shared.TemplateDefinition `json:"response"`
+	Response *shared.TemplateDefinition `json:"response,omitempty"`
 }
 
 type CreateTemplate401ApplicationJSONErrorEnum string
@@ -28,8 +28,8 @@ const (
 )
 
 type CreateTemplate401ApplicationJSON struct {
-	Error  *CreateTemplate401ApplicationJSONErrorEnum `json:"error"`
-	Status *int64                                     `json:"status"`
+	Error  *CreateTemplate401ApplicationJSONErrorEnum `json:"error,omitempty"`
+	Status *int64                                     `json:"status,omitempty"`
 }
 
 type CreateTemplate403ApplicationJSONErrorEnum string
@@ -39,8 +39,8 @@ const (
 )
 
 type CreateTemplate403ApplicationJSON struct {
-	Error  *CreateTemplate403ApplicationJSONErrorEnum `json:"error"`
-	Status *int64                                     `json:"status"`
+	Error  *CreateTemplate403ApplicationJSONErrorEnum `json:"error,omitempty"`
+	Status *int64                                     `json:"status,omitempty"`
 }
 
 type CreateTemplate404ApplicationJSONErrorEnum string
@@ -52,8 +52,8 @@ const (
 )
 
 type CreateTemplate404ApplicationJSON struct {
-	Error  *CreateTemplate404ApplicationJSONErrorEnum `json:"error"`
-	Status *int64                                     `json:"status"`
+	Error  *CreateTemplate404ApplicationJSONErrorEnum `json:"error,omitempty"`
+	Status *int64                                     `json:"status,omitempty"`
 }
 
 type CreateTemplate422ApplicationJSONErrorEnum string
@@ -66,13 +66,13 @@ const (
 )
 
 type CreateTemplate422ApplicationJSON struct {
-	Error  *CreateTemplate422ApplicationJSONErrorEnum `json:"error"`
-	Status *int64                                     `json:"status"`
+	Error  *CreateTemplate422ApplicationJSONErrorEnum `json:"error,omitempty"`
+	Status *int64                                     `json:"status,omitempty"`
 }
 
 type CreateTemplate500ApplicationJSON struct {
-	Error  *string `json:"error"`
-	Status *int64  `json:"status"`
+	Error  *string `json:"error,omitempty"`
+	Status *int64  `json:"status,omitempty"`
 }
 
 type CreateTemplateResponse struct {

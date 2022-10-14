@@ -5,8 +5,8 @@ import (
 )
 
 type CanaryTimeline struct {
-	Created      *time.Time `json:"Created"`
-	LastModified *time.Time `json:"LastModified"`
-	LastStarted  *time.Time `json:"LastStarted"`
-	LastStopped  *time.Time `json:"LastStopped"`
+	Created      *time.Time `json:"Created,omitempty"`
+	LastModified *time.Time `json:"LastModified,omitempty"`
+	LastStarted  *time.Time `json:"LastStarted,omitempty"`
+	LastStopped  *time.Time `json:"LastStopped,omitempty"`
 }

@@ -22,6 +22,6 @@ const (
 )
 
 type GoogleCloudDataplexV1SchemaPartitionField struct {
-	Name *string                                            `json:"name"`
-	Type *GoogleCloudDataplexV1SchemaPartitionFieldTypeEnum `json:"type"`
+	Name *string                                            `json:"name,omitempty"`
+	Type *GoogleCloudDataplexV1SchemaPartitionFieldTypeEnum `json:"type,omitempty"`
 }

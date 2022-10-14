@@ -1,12 +1,12 @@
 package shared
 
 type PosInventoryRequest struct {
-	ContentLanguage *string `json:"contentLanguage"`
-	Gtin            *string `json:"gtin"`
-	ItemID          *string `json:"itemId"`
-	Price           *Price  `json:"price"`
-	Quantity        *string `json:"quantity"`
-	StoreCode       *string `json:"storeCode"`
-	TargetCountry   *string `json:"targetCountry"`
-	Timestamp       *string `json:"timestamp"`
+	ContentLanguage *string `json:"contentLanguage,omitempty"`
+	Gtin            *string `json:"gtin,omitempty"`
+	ItemID          *string `json:"itemId,omitempty"`
+	Price           *Price  `json:"price,omitempty"`
+	Quantity        *string `json:"quantity,omitempty"`
+	StoreCode       *string `json:"storeCode,omitempty"`
+	TargetCountry   *string `json:"targetCountry,omitempty"`
+	Timestamp       *string `json:"timestamp,omitempty"`
 }

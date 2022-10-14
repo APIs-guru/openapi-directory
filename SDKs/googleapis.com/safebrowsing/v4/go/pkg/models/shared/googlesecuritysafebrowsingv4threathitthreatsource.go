@@ -11,8 +11,8 @@ const (
 )
 
 type GoogleSecuritySafebrowsingV4ThreatHitThreatSource struct {
-	Referrer *string                                                    `json:"referrer"`
-	RemoteIP *string                                                    `json:"remoteIp"`
-	Type     *GoogleSecuritySafebrowsingV4ThreatHitThreatSourceTypeEnum `json:"type"`
-	URL      *string                                                    `json:"url"`
+	Referrer *string                                                    `json:"referrer,omitempty"`
+	RemoteIP *string                                                    `json:"remoteIp,omitempty"`
+	Type     *GoogleSecuritySafebrowsingV4ThreatHitThreatSourceTypeEnum `json:"type,omitempty"`
+	URL      *string                                                    `json:"url,omitempty"`
 }

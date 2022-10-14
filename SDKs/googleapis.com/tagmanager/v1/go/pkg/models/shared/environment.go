@@ -10,16 +10,16 @@ const (
 )
 
 type Environment struct {
-	AccountID                *string              `json:"accountId"`
-	AuthorizationCode        *string              `json:"authorizationCode"`
-	AuthorizationTimestampMs *string              `json:"authorizationTimestampMs"`
-	ContainerID              *string              `json:"containerId"`
-	ContainerVersionID       *string              `json:"containerVersionId"`
-	Description              *string              `json:"description"`
-	EnableDebug              *bool                `json:"enableDebug"`
-	EnvironmentID            *string              `json:"environmentId"`
-	Fingerprint              *string              `json:"fingerprint"`
-	Name                     *string              `json:"name"`
-	Type                     *EnvironmentTypeEnum `json:"type"`
-	URL                      *string              `json:"url"`
+	AccountID                *string              `json:"accountId,omitempty"`
+	AuthorizationCode        *string              `json:"authorizationCode,omitempty"`
+	AuthorizationTimestampMs *string              `json:"authorizationTimestampMs,omitempty"`
+	ContainerID              *string              `json:"containerId,omitempty"`
+	ContainerVersionID       *string              `json:"containerVersionId,omitempty"`
+	Description              *string              `json:"description,omitempty"`
+	EnableDebug              *bool                `json:"enableDebug,omitempty"`
+	EnvironmentID            *string              `json:"environmentId,omitempty"`
+	Fingerprint              *string              `json:"fingerprint,omitempty"`
+	Name                     *string              `json:"name,omitempty"`
+	Type                     *EnvironmentTypeEnum `json:"type,omitempty"`
+	URL                      *string              `json:"url,omitempty"`
 }

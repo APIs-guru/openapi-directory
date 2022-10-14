@@ -1,7 +1,7 @@
 package shared
 
 type SecretInfo struct {
-	Links     *SecretMgmtLinks `json:"_links"`
-	CreatedAt *string          `json:"created_at"`
-	ID        *string          `json:"id"`
+	Links     *SecretMgmtLinks `json:"_links,omitempty"`
+	CreatedAt *string          `json:"created_at,omitempty"`
+	ID        *string          `json:"id,omitempty"`
 }

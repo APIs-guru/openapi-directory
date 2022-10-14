@@ -1,8 +1,8 @@
 package shared
 
 type DescribeProductAsAdminInput struct {
-	AcceptLanguage    *string `json:"AcceptLanguage"`
-	ID                *string `json:"Id"`
-	Name              *string `json:"Name"`
-	SourcePortfolioID *string `json:"SourcePortfolioId"`
+	AcceptLanguage    *string `json:"AcceptLanguage,omitempty"`
+	ID                *string `json:"Id,omitempty"`
+	Name              *string `json:"Name,omitempty"`
+	SourcePortfolioID *string `json:"SourcePortfolioId,omitempty"`
 }

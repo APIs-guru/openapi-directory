@@ -1,6 +1,6 @@
 package shared
 
 type ListComponentVersionsResponse struct {
-	ComponentVersions []ComponentVersionListItem `json:"componentVersions"`
-	NextToken         *string                    `json:"nextToken"`
+	ComponentVersions []ComponentVersionListItem `json:"componentVersions,omitempty"`
+	NextToken         *string                    `json:"nextToken,omitempty"`
 }

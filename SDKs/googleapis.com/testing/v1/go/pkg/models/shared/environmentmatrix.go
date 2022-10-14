@@ -1,7 +1,7 @@
 package shared
 
 type EnvironmentMatrix struct {
-	AndroidDeviceList *AndroidDeviceList `json:"androidDeviceList"`
-	AndroidMatrix     *AndroidMatrix     `json:"androidMatrix"`
-	IosDeviceList     *IosDeviceList     `json:"iosDeviceList"`
+	AndroidDeviceList *AndroidDeviceList `json:"androidDeviceList,omitempty"`
+	AndroidMatrix     *AndroidMatrix     `json:"androidMatrix,omitempty"`
+	IosDeviceList     *IosDeviceList     `json:"iosDeviceList,omitempty"`
 }

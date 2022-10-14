@@ -1,6 +1,6 @@
 package shared
 
 type PolicyControllerMembershipSpec struct {
-	PolicyControllerHubConfig *PolicyControllerHubConfig `json:"policyControllerHubConfig"`
-	Version                   *string                    `json:"version"`
+	PolicyControllerHubConfig *PolicyControllerHubConfig `json:"policyControllerHubConfig,omitempty"`
+	Version                   *string                    `json:"version,omitempty"`
 }

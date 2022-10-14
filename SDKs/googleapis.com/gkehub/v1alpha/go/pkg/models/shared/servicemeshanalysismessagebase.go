@@ -10,7 +10,7 @@ const (
 )
 
 type ServiceMeshAnalysisMessageBase struct {
-	DocumentationURL *string                                  `json:"documentationUrl"`
-	Level            *ServiceMeshAnalysisMessageBaseLevelEnum `json:"level"`
-	Type             *ServiceMeshType                         `json:"type"`
+	DocumentationURL *string                                  `json:"documentationUrl,omitempty"`
+	Level            *ServiceMeshAnalysisMessageBaseLevelEnum `json:"level,omitempty"`
+	Type             *ServiceMeshType                         `json:"type,omitempty"`
 }

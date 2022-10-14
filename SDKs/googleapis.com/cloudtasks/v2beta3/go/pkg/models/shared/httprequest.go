@@ -14,10 +14,10 @@ const (
 )
 
 type HTTPRequest struct {
-	Body       *string                    `json:"body"`
-	Headers    map[string]string          `json:"headers"`
-	HTTPMethod *HTTPRequestHTTPMethodEnum `json:"httpMethod"`
-	OauthToken *OAuthToken                `json:"oauthToken"`
-	OidcToken  *OidcToken                 `json:"oidcToken"`
-	URL        *string                    `json:"url"`
+	Body       *string                    `json:"body,omitempty"`
+	Headers    map[string]string          `json:"headers,omitempty"`
+	HTTPMethod *HTTPRequestHTTPMethodEnum `json:"httpMethod,omitempty"`
+	OauthToken *OAuthToken                `json:"oauthToken,omitempty"`
+	OidcToken  *OidcToken                 `json:"oidcToken,omitempty"`
+	URL        *string                    `json:"url,omitempty"`
 }

@@ -1,37 +1,37 @@
 package operations
 
 type CreateWorkspaceRequestBodyWorkspaceCollections struct {
-	ID   *string `json:"id"`
-	Name *string `json:"name"`
-	UID  *string `json:"uid"`
+	ID   *string `json:"id,omitempty"`
+	Name *string `json:"name,omitempty"`
+	UID  *string `json:"uid,omitempty"`
 }
 
 type CreateWorkspaceRequestBodyWorkspaceEnvironments struct {
-	ID   *string `json:"id"`
-	Name *string `json:"name"`
-	UID  *string `json:"uid"`
+	ID   *string `json:"id,omitempty"`
+	Name *string `json:"name,omitempty"`
+	UID  *string `json:"uid,omitempty"`
 }
 
 type CreateWorkspaceRequestBodyWorkspaceMocks struct {
-	ID *string `json:"id"`
+	ID *string `json:"id,omitempty"`
 }
 
 type CreateWorkspaceRequestBodyWorkspaceMonitors struct {
-	ID *string `json:"id"`
+	ID *string `json:"id,omitempty"`
 }
 
 type CreateWorkspaceRequestBodyWorkspace struct {
-	Collections  []CreateWorkspaceRequestBodyWorkspaceCollections  `json:"collections"`
-	Description  *string                                           `json:"description"`
-	Environments []CreateWorkspaceRequestBodyWorkspaceEnvironments `json:"environments"`
-	Mocks        []CreateWorkspaceRequestBodyWorkspaceMocks        `json:"mocks"`
-	Monitors     []CreateWorkspaceRequestBodyWorkspaceMonitors     `json:"monitors"`
-	Name         *string                                           `json:"name"`
-	Type         *string                                           `json:"type"`
+	Collections  []CreateWorkspaceRequestBodyWorkspaceCollections  `json:"collections,omitempty"`
+	Description  *string                                           `json:"description,omitempty"`
+	Environments []CreateWorkspaceRequestBodyWorkspaceEnvironments `json:"environments,omitempty"`
+	Mocks        []CreateWorkspaceRequestBodyWorkspaceMocks        `json:"mocks,omitempty"`
+	Monitors     []CreateWorkspaceRequestBodyWorkspaceMonitors     `json:"monitors,omitempty"`
+	Name         *string                                           `json:"name,omitempty"`
+	Type         *string                                           `json:"type,omitempty"`
 }
 
 type CreateWorkspaceRequestBody struct {
-	Workspace *CreateWorkspaceRequestBodyWorkspace `json:"workspace"`
+	Workspace *CreateWorkspaceRequestBodyWorkspace `json:"workspace,omitempty"`
 }
 
 type CreateWorkspaceRequest struct {
@@ -39,21 +39,21 @@ type CreateWorkspaceRequest struct {
 }
 
 type CreateWorkspace200ApplicationJSONWorkspace struct {
-	ID   *string `json:"id"`
-	Name *string `json:"name"`
+	ID   *string `json:"id,omitempty"`
+	Name *string `json:"name,omitempty"`
 }
 
 type CreateWorkspace200ApplicationJSON struct {
-	Workspace *CreateWorkspace200ApplicationJSONWorkspace `json:"workspace"`
+	Workspace *CreateWorkspace200ApplicationJSONWorkspace `json:"workspace,omitempty"`
 }
 
 type CreateWorkspace400ApplicationJSONError struct {
-	Message *string `json:"message"`
-	Name    *string `json:"name"`
+	Message *string `json:"message,omitempty"`
+	Name    *string `json:"name,omitempty"`
 }
 
 type CreateWorkspace400ApplicationJSON struct {
-	Error *CreateWorkspace400ApplicationJSONError `json:"error"`
+	Error *CreateWorkspace400ApplicationJSONError `json:"error,omitempty"`
 }
 
 type CreateWorkspaceResponse struct {

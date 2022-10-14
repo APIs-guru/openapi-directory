@@ -1,7 +1,7 @@
 package shared
 
 type DeleteOrderDealsRequest struct {
-	DealIds                []string `json:"dealIds"`
-	ProposalRevisionNumber *string  `json:"proposalRevisionNumber"`
-	UpdateAction           *string  `json:"updateAction"`
+	DealIds                []string `json:"dealIds,omitempty"`
+	ProposalRevisionNumber *string  `json:"proposalRevisionNumber,omitempty"`
+	UpdateAction           *string  `json:"updateAction,omitempty"`
 }

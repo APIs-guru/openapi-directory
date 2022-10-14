@@ -1,6 +1,6 @@
 package shared
 
 type PutContainerRecipePolicyResponse struct {
-	ContainerRecipeArn *string `json:"containerRecipeArn"`
-	RequestID          *string `json:"requestId"`
+	ContainerRecipeArn *string `json:"containerRecipeArn,omitempty"`
+	RequestID          *string `json:"requestId,omitempty"`
 }

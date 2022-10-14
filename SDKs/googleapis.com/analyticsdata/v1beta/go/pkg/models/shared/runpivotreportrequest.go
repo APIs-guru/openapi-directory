@@ -1,15 +1,15 @@
 package shared
 
 type RunPivotReportRequest struct {
-	CohortSpec          *CohortSpec       `json:"cohortSpec"`
-	CurrencyCode        *string           `json:"currencyCode"`
-	DateRanges          []DateRange       `json:"dateRanges"`
-	DimensionFilter     *FilterExpression `json:"dimensionFilter"`
-	Dimensions          []Dimension       `json:"dimensions"`
-	KeepEmptyRows       *bool             `json:"keepEmptyRows"`
-	MetricFilter        *FilterExpression `json:"metricFilter"`
-	Metrics             []Metric          `json:"metrics"`
-	Pivots              []Pivot           `json:"pivots"`
-	Property            *string           `json:"property"`
-	ReturnPropertyQuota *bool             `json:"returnPropertyQuota"`
+	CohortSpec          *CohortSpec       `json:"cohortSpec,omitempty"`
+	CurrencyCode        *string           `json:"currencyCode,omitempty"`
+	DateRanges          []DateRange       `json:"dateRanges,omitempty"`
+	DimensionFilter     *FilterExpression `json:"dimensionFilter,omitempty"`
+	Dimensions          []Dimension       `json:"dimensions,omitempty"`
+	KeepEmptyRows       *bool             `json:"keepEmptyRows,omitempty"`
+	MetricFilter        *FilterExpression `json:"metricFilter,omitempty"`
+	Metrics             []Metric          `json:"metrics,omitempty"`
+	Pivots              []Pivot           `json:"pivots,omitempty"`
+	Property            *string           `json:"property,omitempty"`
+	ReturnPropertyQuota *bool             `json:"returnPropertyQuota,omitempty"`
 }

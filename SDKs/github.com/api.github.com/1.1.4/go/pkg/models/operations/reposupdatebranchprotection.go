@@ -11,15 +11,15 @@ type ReposUpdateBranchProtectionPathParams struct {
 }
 
 type ReposUpdateBranchProtectionRequestBodyRequiredPullRequestReviewsDismissalRestrictions struct {
-	Teams []string `json:"teams"`
-	Users []string `json:"users"`
+	Teams []string `json:"teams,omitempty"`
+	Users []string `json:"users,omitempty"`
 }
 
 type ReposUpdateBranchProtectionRequestBodyRequiredPullRequestReviews struct {
-	DismissStaleReviews          *bool                                                                                  `json:"dismiss_stale_reviews"`
-	DismissalRestrictions        *ReposUpdateBranchProtectionRequestBodyRequiredPullRequestReviewsDismissalRestrictions `json:"dismissal_restrictions"`
-	RequireCodeOwnerReviews      *bool                                                                                  `json:"require_code_owner_reviews"`
-	RequiredApprovingReviewCount *int64                                                                                 `json:"required_approving_review_count"`
+	DismissStaleReviews          *bool                                                                                  `json:"dismiss_stale_reviews,omitempty"`
+	DismissalRestrictions        *ReposUpdateBranchProtectionRequestBodyRequiredPullRequestReviewsDismissalRestrictions `json:"dismissal_restrictions,omitempty"`
+	RequireCodeOwnerReviews      *bool                                                                                  `json:"require_code_owner_reviews,omitempty"`
+	RequiredApprovingReviewCount *int64                                                                                 `json:"required_approving_review_count,omitempty"`
 }
 
 type ReposUpdateBranchProtectionRequestBodyRequiredStatusChecks struct {
@@ -28,16 +28,16 @@ type ReposUpdateBranchProtectionRequestBodyRequiredStatusChecks struct {
 }
 
 type ReposUpdateBranchProtectionRequestBodyRestrictions struct {
-	Apps  []string `json:"apps"`
+	Apps  []string `json:"apps,omitempty"`
 	Teams []string `json:"teams"`
 	Users []string `json:"users"`
 }
 
 type ReposUpdateBranchProtectionRequestBody struct {
-	AllowDeletions             *bool                                                            `json:"allow_deletions"`
-	AllowForcePushes           *bool                                                            `json:"allow_force_pushes"`
+	AllowDeletions             *bool                                                            `json:"allow_deletions,omitempty"`
+	AllowForcePushes           *bool                                                            `json:"allow_force_pushes,omitempty"`
 	EnforceAdmins              bool                                                             `json:"enforce_admins"`
-	RequiredLinearHistory      *bool                                                            `json:"required_linear_history"`
+	RequiredLinearHistory      *bool                                                            `json:"required_linear_history,omitempty"`
 	RequiredPullRequestReviews ReposUpdateBranchProtectionRequestBodyRequiredPullRequestReviews `json:"required_pull_request_reviews"`
 	RequiredStatusChecks       ReposUpdateBranchProtectionRequestBodyRequiredStatusChecks       `json:"required_status_checks"`
 	Restrictions               ReposUpdateBranchProtectionRequestBodyRestrictions               `json:"restrictions"`

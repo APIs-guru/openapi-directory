@@ -1,6 +1,6 @@
 package shared
 
 type CreateOrderRequest struct {
-	IdempotencyKey *string `json:"idempotency_key"`
-	Order          *Order  `json:"order"`
+	IdempotencyKey *string `json:"idempotency_key,omitempty"`
+	Order          *Order  `json:"order,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type TextFormatRun struct {
-	Format     *TextFormat `json:"format"`
-	StartIndex *int32      `json:"startIndex"`
+	Format     *TextFormat `json:"format,omitempty"`
+	StartIndex *int32      `json:"startIndex,omitempty"`
 }

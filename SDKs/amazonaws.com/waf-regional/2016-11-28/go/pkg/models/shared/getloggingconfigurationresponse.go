@@ -1,5 +1,5 @@
 package shared
 
 type GetLoggingConfigurationResponse struct {
-	LoggingConfiguration *LoggingConfiguration `json:"LoggingConfiguration"`
+	LoggingConfiguration *LoggingConfiguration `json:"LoggingConfiguration,omitempty"`
 }

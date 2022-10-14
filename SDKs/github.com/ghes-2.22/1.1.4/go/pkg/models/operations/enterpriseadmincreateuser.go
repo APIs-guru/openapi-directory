@@ -5,7 +5,7 @@ import (
 )
 
 type EnterpriseAdminCreateUserRequestBody struct {
-	Email *string `json:"email"`
+	Email *string `json:"email,omitempty"`
 	Login string  `json:"login"`
 }
 

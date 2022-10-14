@@ -19,7 +19,7 @@ type GetPortfolioRequest struct {
 }
 
 type GetPortfolio200ApplicationJSON struct {
-	Data *shared.PortfolioResponse `json:"data"`
+	Data *shared.PortfolioResponse `json:"data,omitempty"`
 }
 
 type GetPortfolioResponse struct {

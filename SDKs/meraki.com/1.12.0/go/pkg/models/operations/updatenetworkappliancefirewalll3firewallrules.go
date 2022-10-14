@@ -21,19 +21,19 @@ const (
 )
 
 type UpdateNetworkApplianceFirewallL3FirewallRulesRequestBodyRules struct {
-	Comment       *string                                                                   `json:"comment"`
+	Comment       *string                                                                   `json:"comment,omitempty"`
 	DestCidr      string                                                                    `json:"destCidr"`
-	DestPort      *string                                                                   `json:"destPort"`
+	DestPort      *string                                                                   `json:"destPort,omitempty"`
 	Policy        UpdateNetworkApplianceFirewallL3FirewallRulesRequestBodyRulesPolicyEnum   `json:"policy"`
 	Protocol      UpdateNetworkApplianceFirewallL3FirewallRulesRequestBodyRulesProtocolEnum `json:"protocol"`
 	SrcCidr       string                                                                    `json:"srcCidr"`
-	SrcPort       *string                                                                   `json:"srcPort"`
-	SyslogEnabled *bool                                                                     `json:"syslogEnabled"`
+	SrcPort       *string                                                                   `json:"srcPort,omitempty"`
+	SyslogEnabled *bool                                                                     `json:"syslogEnabled,omitempty"`
 }
 
 type UpdateNetworkApplianceFirewallL3FirewallRulesRequestBody struct {
-	Rules             []UpdateNetworkApplianceFirewallL3FirewallRulesRequestBodyRules `json:"rules"`
-	SyslogDefaultRule *bool                                                           `json:"syslogDefaultRule"`
+	Rules             []UpdateNetworkApplianceFirewallL3FirewallRulesRequestBodyRules `json:"rules,omitempty"`
+	SyslogDefaultRule *bool                                                           `json:"syslogDefaultRule,omitempty"`
 }
 
 type UpdateNetworkApplianceFirewallL3FirewallRulesRequest struct {

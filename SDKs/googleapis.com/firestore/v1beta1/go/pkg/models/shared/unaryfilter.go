@@ -11,6 +11,6 @@ const (
 )
 
 type UnaryFilter struct {
-	Field *FieldReference    `json:"field"`
-	Op    *UnaryFilterOpEnum `json:"op"`
+	Field *FieldReference    `json:"field,omitempty"`
+	Op    *UnaryFilterOpEnum `json:"op,omitempty"`
 }

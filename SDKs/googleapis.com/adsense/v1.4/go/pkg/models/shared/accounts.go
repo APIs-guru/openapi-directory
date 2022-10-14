@@ -1,8 +1,8 @@
 package shared
 
 type Accounts struct {
-	Etag          *string   `json:"etag"`
-	Items         []Account `json:"items"`
-	Kind          *string   `json:"kind"`
-	NextPageToken *string   `json:"nextPageToken"`
+	Etag          *string   `json:"etag,omitempty"`
+	Items         []Account `json:"items,omitempty"`
+	Kind          *string   `json:"kind,omitempty"`
+	NextPageToken *string   `json:"nextPageToken,omitempty"`
 }

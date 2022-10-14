@@ -1,7 +1,7 @@
 package shared
 
 type ReturnPolicyPolicy struct {
-	LastReturnDate *string `json:"lastReturnDate"`
-	NumberOfDays   *string `json:"numberOfDays"`
-	Type           *string `json:"type"`
+	LastReturnDate *string `json:"lastReturnDate,omitempty"`
+	NumberOfDays   *string `json:"numberOfDays,omitempty"`
+	Type           *string `json:"type,omitempty"`
 }

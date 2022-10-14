@@ -1,11 +1,11 @@
 package shared
 
 type EmailMessage struct {
-	Body                      *string             `json:"Body"`
-	FeedbackForwardingAddress *string             `json:"FeedbackForwardingAddress"`
-	FromAddress               *string             `json:"FromAddress"`
-	RawEmail                  *RawEmail           `json:"RawEmail"`
-	ReplyToAddresses          []string            `json:"ReplyToAddresses"`
-	SimpleEmail               *SimpleEmail        `json:"SimpleEmail"`
-	Substitutions             map[string][]string `json:"Substitutions"`
+	Body                      *string             `json:"Body,omitempty"`
+	FeedbackForwardingAddress *string             `json:"FeedbackForwardingAddress,omitempty"`
+	FromAddress               *string             `json:"FromAddress,omitempty"`
+	RawEmail                  *RawEmail           `json:"RawEmail,omitempty"`
+	ReplyToAddresses          []string            `json:"ReplyToAddresses,omitempty"`
+	SimpleEmail               *SimpleEmail        `json:"SimpleEmail,omitempty"`
+	Substitutions             map[string][]string `json:"Substitutions,omitempty"`
 }

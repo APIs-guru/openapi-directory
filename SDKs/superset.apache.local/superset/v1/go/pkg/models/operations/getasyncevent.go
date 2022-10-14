@@ -18,25 +18,25 @@ type GetAsyncEventRequest struct {
 }
 
 type GetAsyncEvent200ApplicationJSONResult struct {
-	ChannelID *string                  `json:"channel_id"`
-	Errors    []map[string]interface{} `json:"errors"`
-	ID        *string                  `json:"id"`
-	JobID     *string                  `json:"job_id"`
-	ResultURL *string                  `json:"result_url"`
-	Status    *string                  `json:"status"`
-	UserID    *int64                   `json:"user_id"`
+	ChannelID *string                  `json:"channel_id,omitempty"`
+	Errors    []map[string]interface{} `json:"errors,omitempty"`
+	ID        *string                  `json:"id,omitempty"`
+	JobID     *string                  `json:"job_id,omitempty"`
+	ResultURL *string                  `json:"result_url,omitempty"`
+	Status    *string                  `json:"status,omitempty"`
+	UserID    *int64                   `json:"user_id,omitempty"`
 }
 
 type GetAsyncEvent200ApplicationJSON struct {
-	Result []GetAsyncEvent200ApplicationJSONResult `json:"result"`
+	Result []GetAsyncEvent200ApplicationJSONResult `json:"result,omitempty"`
 }
 
 type GetAsyncEvent401ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetAsyncEvent500ApplicationJSON struct {
-	Message *string `json:"message"`
+	Message *string `json:"message,omitempty"`
 }
 
 type GetAsyncEventResponse struct {

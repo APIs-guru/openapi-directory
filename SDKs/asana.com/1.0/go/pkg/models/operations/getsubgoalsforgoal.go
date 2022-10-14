@@ -19,7 +19,7 @@ type GetSubgoalsForGoalRequest struct {
 }
 
 type GetSubgoalsForGoal200ApplicationJSON struct {
-	Data []shared.GoalCompact `json:"data"`
+	Data []shared.GoalCompact `json:"data,omitempty"`
 }
 
 type GetSubgoalsForGoalResponse struct {

@@ -1,23 +1,23 @@
 package operations
 
 type PostServersRequestBodyFirewalls struct {
-	Firewall *int64 `json:"firewall"`
+	Firewall *int64 `json:"firewall,omitempty"`
 }
 
 type PostServersRequestBodyCreateServerRequest struct {
-	Automount        *bool                             `json:"automount"`
-	Datacenter       *string                           `json:"datacenter"`
-	Firewalls        []PostServersRequestBodyFirewalls `json:"firewalls"`
+	Automount        *bool                             `json:"automount,omitempty"`
+	Datacenter       *string                           `json:"datacenter,omitempty"`
+	Firewalls        []PostServersRequestBodyFirewalls `json:"firewalls,omitempty"`
 	Image            string                            `json:"image"`
-	Labels           map[string]interface{}            `json:"labels"`
-	Location         *string                           `json:"location"`
+	Labels           map[string]interface{}            `json:"labels,omitempty"`
+	Location         *string                           `json:"location,omitempty"`
 	Name             string                            `json:"name"`
-	Networks         []int64                           `json:"networks"`
+	Networks         []int64                           `json:"networks,omitempty"`
 	ServerType       string                            `json:"server_type"`
-	SSHKeys          []string                          `json:"ssh_keys"`
-	StartAfterCreate *bool                             `json:"start_after_create"`
-	UserData         *string                           `json:"user_data"`
-	Volumes          []int64                           `json:"volumes"`
+	SSHKeys          []string                          `json:"ssh_keys,omitempty"`
+	StartAfterCreate *bool                             `json:"start_after_create,omitempty"`
+	UserData         *string                           `json:"user_data,omitempty"`
+	Volumes          []int64                           `json:"volumes,omitempty"`
 }
 
 type PostServersRequest struct {
@@ -146,7 +146,7 @@ const (
 
 type PostServers201ApplicationJSONServerImage struct {
 	BoundTo     int64                                                `json:"bound_to"`
-	BuildID     *string                                              `json:"build_id"`
+	BuildID     *string                                              `json:"build_id,omitempty"`
 	Created     string                                               `json:"created"`
 	CreatedFrom PostServers201ApplicationJSONServerImageCreatedFrom  `json:"created_from"`
 	Deleted     string                                               `json:"deleted"`
@@ -160,7 +160,7 @@ type PostServers201ApplicationJSONServerImage struct {
 	OsFlavor    PostServers201ApplicationJSONServerImageOsFlavorEnum `json:"os_flavor"`
 	OsVersion   string                                               `json:"os_version"`
 	Protection  PostServers201ApplicationJSONServerImageProtection   `json:"protection"`
-	RapidDeploy *bool                                                `json:"rapid_deploy"`
+	RapidDeploy *bool                                                `json:"rapid_deploy,omitempty"`
 	Status      PostServers201ApplicationJSONServerImageStatusEnum   `json:"status"`
 	Type        PostServers201ApplicationJSONServerImageTypeEnum     `json:"type"`
 }
@@ -196,10 +196,10 @@ type PostServers201ApplicationJSONServerPlacementGroupPlacementGroupNullable str
 }
 
 type PostServers201ApplicationJSONServerPrivateNet struct {
-	AliasIps   []string `json:"alias_ips"`
-	IP         *string  `json:"ip"`
-	MacAddress *string  `json:"mac_address"`
-	Network    *int64   `json:"network"`
+	AliasIps   []string `json:"alias_ips,omitempty"`
+	IP         *string  `json:"ip,omitempty"`
+	MacAddress *string  `json:"mac_address,omitempty"`
+	Network    *int64   `json:"network,omitempty"`
 }
 
 type PostServers201ApplicationJSONServerProtection struct {
@@ -215,8 +215,8 @@ const (
 )
 
 type PostServers201ApplicationJSONServerPublicNetFirewallsServerPublicNetFirewall struct {
-	ID     *int64                                                           `json:"id"`
-	Status *PostServers201ApplicationJSONServerPublicNetFirewallsStatusEnum `json:"status"`
+	ID     *int64                                                           `json:"id,omitempty"`
+	Status *PostServers201ApplicationJSONServerPublicNetFirewallsStatusEnum `json:"status,omitempty"`
 }
 
 type PostServers201ApplicationJSONServerPublicNetIpv4 struct {
@@ -237,7 +237,7 @@ type PostServers201ApplicationJSONServerPublicNetIpv6 struct {
 }
 
 type PostServers201ApplicationJSONServerPublicNet struct {
-	Firewalls   []PostServers201ApplicationJSONServerPublicNetFirewallsServerPublicNetFirewall `json:"firewalls"`
+	Firewalls   []PostServers201ApplicationJSONServerPublicNetFirewallsServerPublicNetFirewall `json:"firewalls,omitempty"`
 	FloatingIps []int64                                                                        `json:"floating_ips"`
 	Ipv4        PostServers201ApplicationJSONServerPublicNetIpv4                               `json:"ipv4"`
 	Ipv6        PostServers201ApplicationJSONServerPublicNetIpv6                               `json:"ipv6"`
@@ -310,11 +310,11 @@ type PostServers201ApplicationJSONServer struct {
 	IngoingTraffic  float64                                                                  `json:"ingoing_traffic"`
 	Iso             PostServers201ApplicationJSONServerIso                                   `json:"iso"`
 	Labels          map[string]string                                                        `json:"labels"`
-	LoadBalancers   []int64                                                                  `json:"load_balancers"`
+	LoadBalancers   []int64                                                                  `json:"load_balancers,omitempty"`
 	Locked          bool                                                                     `json:"locked"`
 	Name            string                                                                   `json:"name"`
 	OutgoingTraffic float64                                                                  `json:"outgoing_traffic"`
-	PlacementGroup  *PostServers201ApplicationJSONServerPlacementGroupPlacementGroupNullable `json:"placement_group"`
+	PlacementGroup  *PostServers201ApplicationJSONServerPlacementGroupPlacementGroupNullable `json:"placement_group,omitempty"`
 	PrimaryDiskSize float64                                                                  `json:"primary_disk_size"`
 	PrivateNet      []PostServers201ApplicationJSONServerPrivateNet                          `json:"private_net"`
 	Protection      PostServers201ApplicationJSONServerProtection                            `json:"protection"`
@@ -322,7 +322,7 @@ type PostServers201ApplicationJSONServer struct {
 	RescueEnabled   bool                                                                     `json:"rescue_enabled"`
 	ServerType      PostServers201ApplicationJSONServerServerType                            `json:"server_type"`
 	Status          PostServers201ApplicationJSONServerStatusEnum                            `json:"status"`
-	Volumes         []int64                                                                  `json:"volumes"`
+	Volumes         []int64                                                                  `json:"volumes,omitempty"`
 }
 
 type PostServers201ApplicationJSONCreateServerResponse struct {

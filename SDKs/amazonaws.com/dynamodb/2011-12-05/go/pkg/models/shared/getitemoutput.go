@@ -1,6 +1,6 @@
 package shared
 
 type GetItemOutput struct {
-	ConsumedCapacityUnits *float64                  `json:"ConsumedCapacityUnits"`
-	Item                  map[string]AttributeValue `json:"Item"`
+	ConsumedCapacityUnits *float64                  `json:"ConsumedCapacityUnits,omitempty"`
+	Item                  map[string]AttributeValue `json:"Item,omitempty"`
 }

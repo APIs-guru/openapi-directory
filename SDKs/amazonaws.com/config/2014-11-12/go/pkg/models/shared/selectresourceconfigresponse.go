@@ -1,7 +1,7 @@
 package shared
 
 type SelectResourceConfigResponse struct {
-	NextToken *string    `json:"NextToken"`
-	QueryInfo *QueryInfo `json:"QueryInfo"`
-	Results   []string   `json:"Results"`
+	NextToken *string    `json:"NextToken,omitempty"`
+	QueryInfo *QueryInfo `json:"QueryInfo,omitempty"`
+	Results   []string   `json:"Results,omitempty"`
 }

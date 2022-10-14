@@ -7,7 +7,7 @@ import (
 type WebhookResourceAttributes struct {
 	CreatedAt   time.Time `json:"createdAt"`
 	Description string    `json:"description"`
-	SecretKey   *string   `json:"secretKey"`
+	SecretKey   *string   `json:"secretKey,omitempty"`
 	URL         string    `json:"url"`
 }
 
@@ -20,7 +20,7 @@ type WebhookResourceRelationshipsLogsLinks struct {
 }
 
 type WebhookResourceRelationshipsLogs struct {
-	Links *WebhookResourceRelationshipsLogsLinks `json:"links"`
+	Links *WebhookResourceRelationshipsLogsLinks `json:"links,omitempty"`
 }
 
 type WebhookResourceRelationships struct {
@@ -30,7 +30,7 @@ type WebhookResourceRelationships struct {
 type WebhookResource struct {
 	Attributes    WebhookResourceAttributes    `json:"attributes"`
 	ID            string                       `json:"id"`
-	Links         *WebhookResourceLinks        `json:"links"`
+	Links         *WebhookResourceLinks        `json:"links,omitempty"`
 	Relationships WebhookResourceRelationships `json:"relationships"`
 	Type          string                       `json:"type"`
 }

@@ -1,8 +1,8 @@
 package shared
 
 type ManagedConfiguration struct {
-	ConfigurationVariables *ConfigurationVariables `json:"configurationVariables"`
-	Kind                   *string                 `json:"kind"`
-	ManagedProperty        []ManagedProperty       `json:"managedProperty"`
-	ProductID              *string                 `json:"productId"`
+	ConfigurationVariables *ConfigurationVariables `json:"configurationVariables,omitempty"`
+	Kind                   *string                 `json:"kind,omitempty"`
+	ManagedProperty        []ManagedProperty       `json:"managedProperty,omitempty"`
+	ProductID              *string                 `json:"productId,omitempty"`
 }

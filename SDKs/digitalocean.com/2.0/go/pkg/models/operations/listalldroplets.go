@@ -72,26 +72,26 @@ const (
 )
 
 type ListAllDroplets200ApplicationJSONDropletsImage struct {
-	CreatedAt     *time.Time                                                      `json:"created_at"`
-	Description   *string                                                         `json:"description"`
-	Distribution  *ListAllDroplets200ApplicationJSONDropletsImageDistributionEnum `json:"distribution"`
-	ErrorMessage  *string                                                         `json:"error_message"`
-	ID            *int64                                                          `json:"id"`
-	MinDiskSize   *int64                                                          `json:"min_disk_size"`
-	Name          *string                                                         `json:"name"`
-	Public        *bool                                                           `json:"public"`
-	Regions       []ListAllDroplets200ApplicationJSONDropletsImageRegionsEnum     `json:"regions"`
-	SizeGigabytes *float32                                                        `json:"size_gigabytes"`
-	Slug          *string                                                         `json:"slug"`
-	Status        *ListAllDroplets200ApplicationJSONDropletsImageStatusEnum       `json:"status"`
-	Tags          []string                                                        `json:"tags"`
-	Type          *ListAllDroplets200ApplicationJSONDropletsImageTypeEnum         `json:"type"`
+	CreatedAt     *time.Time                                                      `json:"created_at,omitempty"`
+	Description   *string                                                         `json:"description,omitempty"`
+	Distribution  *ListAllDroplets200ApplicationJSONDropletsImageDistributionEnum `json:"distribution,omitempty"`
+	ErrorMessage  *string                                                         `json:"error_message,omitempty"`
+	ID            *int64                                                          `json:"id,omitempty"`
+	MinDiskSize   *int64                                                          `json:"min_disk_size,omitempty"`
+	Name          *string                                                         `json:"name,omitempty"`
+	Public        *bool                                                           `json:"public,omitempty"`
+	Regions       []ListAllDroplets200ApplicationJSONDropletsImageRegionsEnum     `json:"regions,omitempty"`
+	SizeGigabytes *float32                                                        `json:"size_gigabytes,omitempty"`
+	Slug          *string                                                         `json:"slug,omitempty"`
+	Status        *ListAllDroplets200ApplicationJSONDropletsImageStatusEnum       `json:"status,omitempty"`
+	Tags          []string                                                        `json:"tags,omitempty"`
+	Type          *ListAllDroplets200ApplicationJSONDropletsImageTypeEnum         `json:"type,omitempty"`
 }
 
 type ListAllDroplets200ApplicationJSONDropletsKernel struct {
-	ID      *int64  `json:"id"`
-	Name    *string `json:"name"`
-	Version *string `json:"version"`
+	ID      *int64  `json:"id,omitempty"`
+	Name    *string `json:"name,omitempty"`
+	Version *string `json:"version,omitempty"`
 }
 
 type ListAllDroplets200ApplicationJSONDropletsNetworksV4TypeEnum string
@@ -102,10 +102,10 @@ const (
 )
 
 type ListAllDroplets200ApplicationJSONDropletsNetworksV4 struct {
-	Gateway   *string                                                      `json:"gateway"`
-	IPAddress *string                                                      `json:"ip_address"`
-	Netmask   *string                                                      `json:"netmask"`
-	Type      *ListAllDroplets200ApplicationJSONDropletsNetworksV4TypeEnum `json:"type"`
+	Gateway   *string                                                      `json:"gateway,omitempty"`
+	IPAddress *string                                                      `json:"ip_address,omitempty"`
+	Netmask   *string                                                      `json:"netmask,omitempty"`
+	Type      *ListAllDroplets200ApplicationJSONDropletsNetworksV4TypeEnum `json:"type,omitempty"`
 }
 
 type ListAllDroplets200ApplicationJSONDropletsNetworksV6TypeEnum string
@@ -115,20 +115,20 @@ const (
 )
 
 type ListAllDroplets200ApplicationJSONDropletsNetworksV6 struct {
-	Gateway   *string                                                      `json:"gateway"`
-	IPAddress *string                                                      `json:"ip_address"`
-	Netmask   *int64                                                       `json:"netmask"`
-	Type      *ListAllDroplets200ApplicationJSONDropletsNetworksV6TypeEnum `json:"type"`
+	Gateway   *string                                                      `json:"gateway,omitempty"`
+	IPAddress *string                                                      `json:"ip_address,omitempty"`
+	Netmask   *int64                                                       `json:"netmask,omitempty"`
+	Type      *ListAllDroplets200ApplicationJSONDropletsNetworksV6TypeEnum `json:"type,omitempty"`
 }
 
 type ListAllDroplets200ApplicationJSONDropletsNetworks struct {
-	V4 []ListAllDroplets200ApplicationJSONDropletsNetworksV4 `json:"v4"`
-	V6 []ListAllDroplets200ApplicationJSONDropletsNetworksV6 `json:"v6"`
+	V4 []ListAllDroplets200ApplicationJSONDropletsNetworksV4 `json:"v4,omitempty"`
+	V6 []ListAllDroplets200ApplicationJSONDropletsNetworksV6 `json:"v6,omitempty"`
 }
 
 type ListAllDroplets200ApplicationJSONDropletsNextBackupWindow struct {
-	End   *time.Time `json:"end"`
-	Start *time.Time `json:"start"`
+	End   *time.Time `json:"end,omitempty"`
+	Start *time.Time `json:"start,omitempty"`
 }
 
 type ListAllDroplets200ApplicationJSONDropletsSize struct {
@@ -174,21 +174,21 @@ type ListAllDroplets200ApplicationJSONDroplets struct {
 	Tags             []string                                                                                                     `json:"tags"`
 	Vcpus            int64                                                                                                        `json:"vcpus"`
 	VolumeIds        []string                                                                                                     `json:"volume_ids"`
-	VpcUUID          *string                                                                                                      `json:"vpc_uuid"`
+	VpcUUID          *string                                                                                                      `json:"vpc_uuid,omitempty"`
 }
 
 type ListAllDroplets200ApplicationJSONLinksPages1 struct {
-	Last *string `json:"last"`
-	Next *string `json:"next"`
+	Last *string `json:"last,omitempty"`
+	Next *string `json:"next,omitempty"`
 }
 
 type ListAllDroplets200ApplicationJSONLinksPages2 struct {
-	First *string `json:"first"`
-	Prev  *string `json:"prev"`
+	First *string `json:"first,omitempty"`
+	Prev  *string `json:"prev,omitempty"`
 }
 
 type ListAllDroplets200ApplicationJSONLinks struct {
-	Pages *interface{} `json:"pages"`
+	Pages *interface{} `json:"pages,omitempty"`
 }
 
 type ListAllDroplets200ApplicationJSONMeta struct {
@@ -196,15 +196,15 @@ type ListAllDroplets200ApplicationJSONMeta struct {
 }
 
 type ListAllDroplets200ApplicationJSON struct {
-	Droplets []ListAllDroplets200ApplicationJSONDroplets `json:"droplets"`
-	Links    *ListAllDroplets200ApplicationJSONLinks     `json:"links"`
+	Droplets []ListAllDroplets200ApplicationJSONDroplets `json:"droplets,omitempty"`
+	Links    *ListAllDroplets200ApplicationJSONLinks     `json:"links,omitempty"`
 	Meta     ListAllDroplets200ApplicationJSONMeta       `json:"meta"`
 }
 
 type ListAllDroplets401ApplicationJSON struct {
 	ID        string  `json:"id"`
 	Message   string  `json:"message"`
-	RequestID *string `json:"request_id"`
+	RequestID *string `json:"request_id,omitempty"`
 }
 
 type ListAllDropletsResponse struct {

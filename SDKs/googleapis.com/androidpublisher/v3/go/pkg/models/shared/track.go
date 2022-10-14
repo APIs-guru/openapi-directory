@@ -1,6 +1,6 @@
 package shared
 
 type Track struct {
-	Releases []TrackRelease `json:"releases"`
-	Track    *string        `json:"track"`
+	Releases []TrackRelease `json:"releases,omitempty"`
+	Track    *string        `json:"track,omitempty"`
 }

@@ -1,10 +1,10 @@
 package shared
 
 type EmailTemplate struct {
-	Body            *string `json:"body"`
-	Format          *string `json:"format"`
-	From            *string `json:"from"`
-	FromDisplayName *string `json:"fromDisplayName"`
-	ReplyTo         *string `json:"replyTo"`
-	Subject         *string `json:"subject"`
+	Body            *string `json:"body,omitempty"`
+	Format          *string `json:"format,omitempty"`
+	From            *string `json:"from,omitempty"`
+	FromDisplayName *string `json:"fromDisplayName,omitempty"`
+	ReplyTo         *string `json:"replyTo,omitempty"`
+	Subject         *string `json:"subject,omitempty"`
 }

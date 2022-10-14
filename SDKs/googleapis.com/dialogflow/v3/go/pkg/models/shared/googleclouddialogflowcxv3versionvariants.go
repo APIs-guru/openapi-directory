@@ -1,5 +1,5 @@
 package shared
 
 type GoogleCloudDialogflowCxV3VersionVariants struct {
-	Variants []GoogleCloudDialogflowCxV3VersionVariantsVariant `json:"variants"`
+	Variants []GoogleCloudDialogflowCxV3VersionVariantsVariant `json:"variants,omitempty"`
 }

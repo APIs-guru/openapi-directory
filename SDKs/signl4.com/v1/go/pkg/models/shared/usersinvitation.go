@@ -1,6 +1,6 @@
 package shared
 
 type UsersInvitation struct {
-	InviterID *string      `json:"inviterId"`
-	Invites   []UserInvite `json:"invites"`
+	InviterID *string      `json:"inviterId,omitempty"`
+	Invites   []UserInvite `json:"invites,omitempty"`
 }

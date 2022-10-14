@@ -12,18 +12,18 @@ const (
 )
 
 type Span struct {
-	Attributes              *Attributes        `json:"attributes"`
-	ChildSpanCount          *int32             `json:"childSpanCount"`
-	DisplayName             *TruncatableString `json:"displayName"`
-	EndTime                 *string            `json:"endTime"`
-	Links                   *Links             `json:"links"`
-	Name                    *string            `json:"name"`
-	ParentSpanID            *string            `json:"parentSpanId"`
-	SameProcessAsParentSpan *bool              `json:"sameProcessAsParentSpan"`
-	SpanID                  *string            `json:"spanId"`
-	SpanKind                *SpanSpanKindEnum  `json:"spanKind"`
-	StackTrace              *StackTrace        `json:"stackTrace"`
-	StartTime               *string            `json:"startTime"`
-	Status                  *Status            `json:"status"`
-	TimeEvents              *TimeEvents        `json:"timeEvents"`
+	Attributes              *Attributes        `json:"attributes,omitempty"`
+	ChildSpanCount          *int32             `json:"childSpanCount,omitempty"`
+	DisplayName             *TruncatableString `json:"displayName,omitempty"`
+	EndTime                 *string            `json:"endTime,omitempty"`
+	Links                   *Links             `json:"links,omitempty"`
+	Name                    *string            `json:"name,omitempty"`
+	ParentSpanID            *string            `json:"parentSpanId,omitempty"`
+	SameProcessAsParentSpan *bool              `json:"sameProcessAsParentSpan,omitempty"`
+	SpanID                  *string            `json:"spanId,omitempty"`
+	SpanKind                *SpanSpanKindEnum  `json:"spanKind,omitempty"`
+	StackTrace              *StackTrace        `json:"stackTrace,omitempty"`
+	StartTime               *string            `json:"startTime,omitempty"`
+	Status                  *Status            `json:"status,omitempty"`
+	TimeEvents              *TimeEvents        `json:"timeEvents,omitempty"`
 }

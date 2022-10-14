@@ -1,6 +1,6 @@
 package shared
 
 type NegativeKeyword struct {
-	KeywordValue *string `json:"keywordValue"`
-	Name         *string `json:"name"`
+	KeywordValue *string `json:"keywordValue,omitempty"`
+	Name         *string `json:"name,omitempty"`
 }

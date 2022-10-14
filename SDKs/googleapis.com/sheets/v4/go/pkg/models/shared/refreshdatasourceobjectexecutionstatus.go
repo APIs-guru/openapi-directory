@@ -1,6 +1,6 @@
 package shared
 
 type RefreshDataSourceObjectExecutionStatus struct {
-	DataExecutionStatus *DataExecutionStatus       `json:"dataExecutionStatus"`
-	Reference           *DataSourceObjectReference `json:"reference"`
+	DataExecutionStatus *DataExecutionStatus       `json:"dataExecutionStatus,omitempty"`
+	Reference           *DataSourceObjectReference `json:"reference,omitempty"`
 }

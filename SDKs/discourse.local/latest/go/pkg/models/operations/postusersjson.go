@@ -6,12 +6,12 @@ type PostUsersJSONHeaders struct {
 }
 
 type PostUsersJSONRequestBody struct {
-	Active      *bool   `json:"active"`
-	Approved    *bool   `json:"approved"`
+	Active      *bool   `json:"active,omitempty"`
+	Approved    *bool   `json:"approved,omitempty"`
 	Email       string  `json:"email"`
 	Name        string  `json:"name"`
 	Password    string  `json:"password"`
-	UserFields1 *string `json:"user_fields[1]"`
+	UserFields1 *string `json:"user_fields[1],omitempty"`
 	Username    string  `json:"username"`
 }
 
@@ -21,10 +21,10 @@ type PostUsersJSONRequest struct {
 }
 
 type PostUsersJSON200ApplicationJSON struct {
-	Active  *bool   `json:"active"`
-	Message *string `json:"message"`
-	Success *bool   `json:"success"`
-	UserID  *int64  `json:"user_id"`
+	Active  *bool   `json:"active,omitempty"`
+	Message *string `json:"message,omitempty"`
+	Success *bool   `json:"success,omitempty"`
+	UserID  *int64  `json:"user_id,omitempty"`
 }
 
 type PostUsersJSONResponse struct {

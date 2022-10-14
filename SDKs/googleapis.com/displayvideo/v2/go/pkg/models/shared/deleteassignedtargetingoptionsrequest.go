@@ -52,6 +52,6 @@ const (
 )
 
 type DeleteAssignedTargetingOptionsRequest struct {
-	AssignedTargetingOptionIds []string                                                `json:"assignedTargetingOptionIds"`
-	TargetingType              *DeleteAssignedTargetingOptionsRequestTargetingTypeEnum `json:"targetingType"`
+	AssignedTargetingOptionIds []string                                                `json:"assignedTargetingOptionIds,omitempty"`
+	TargetingType              *DeleteAssignedTargetingOptionsRequestTargetingTypeEnum `json:"targetingType,omitempty"`
 }

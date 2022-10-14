@@ -1,7 +1,7 @@
 package shared
 
 type ReceivedMessage struct {
-	AckID           *string        `json:"ackId"`
-	DeliveryAttempt *int32         `json:"deliveryAttempt"`
-	Message         *PubsubMessage `json:"message"`
+	AckID           *string        `json:"ackId,omitempty"`
+	DeliveryAttempt *int32         `json:"deliveryAttempt,omitempty"`
+	Message         *PubsubMessage `json:"message,omitempty"`
 }

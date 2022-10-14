@@ -1,5 +1,5 @@
 package shared
 
 type LaunchAppRequest struct {
-	AppID *string `json:"appId"`
+	AppID *string `json:"appId,omitempty"`
 }

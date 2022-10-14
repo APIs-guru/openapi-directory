@@ -9,10 +9,10 @@ const (
 )
 
 type Doc struct {
-	Body      *string      `json:"body"`
+	Body      *string      `json:"body,omitempty"`
 	Category  string       `json:"category"`
-	Hidden    *bool        `json:"hidden"`
-	ParentDoc *string      `json:"parentDoc"`
+	Hidden    *bool        `json:"hidden,omitempty"`
+	ParentDoc *string      `json:"parentDoc,omitempty"`
 	Title     string       `json:"title"`
-	Type      *DocTypeEnum `json:"type"`
+	Type      *DocTypeEnum `json:"type,omitempty"`
 }

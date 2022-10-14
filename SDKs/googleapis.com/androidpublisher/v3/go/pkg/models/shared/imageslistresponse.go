@@ -1,5 +1,5 @@
 package shared
 
 type ImagesListResponse struct {
-	Images []Image `json:"images"`
+	Images []Image `json:"images,omitempty"`
 }

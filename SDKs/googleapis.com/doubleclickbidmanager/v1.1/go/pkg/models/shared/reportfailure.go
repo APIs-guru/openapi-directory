@@ -24,5 +24,5 @@ const (
 )
 
 type ReportFailure struct {
-	ErrorCode *ReportFailureErrorCodeEnum `json:"errorCode"`
+	ErrorCode *ReportFailureErrorCodeEnum `json:"errorCode,omitempty"`
 }

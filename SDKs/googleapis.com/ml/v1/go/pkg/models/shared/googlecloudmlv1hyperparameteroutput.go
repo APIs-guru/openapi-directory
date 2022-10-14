@@ -14,14 +14,14 @@ const (
 )
 
 type GoogleCloudMlV1HyperparameterOutput struct {
-	AllMetrics             []GoogleCloudMlV1HyperparameterOutputHyperparameterMetric `json:"allMetrics"`
-	BuiltInAlgorithmOutput *GoogleCloudMlV1BuiltInAlgorithmOutput                    `json:"builtInAlgorithmOutput"`
-	EndTime                *string                                                   `json:"endTime"`
-	FinalMetric            *GoogleCloudMlV1HyperparameterOutputHyperparameterMetric  `json:"finalMetric"`
-	Hyperparameters        map[string]string                                         `json:"hyperparameters"`
-	IsTrialStoppedEarly    *bool                                                     `json:"isTrialStoppedEarly"`
-	StartTime              *string                                                   `json:"startTime"`
-	State                  *GoogleCloudMlV1HyperparameterOutputStateEnum             `json:"state"`
-	TrialID                *string                                                   `json:"trialId"`
-	WebAccessUris          map[string]string                                         `json:"webAccessUris"`
+	AllMetrics             []GoogleCloudMlV1HyperparameterOutputHyperparameterMetric `json:"allMetrics,omitempty"`
+	BuiltInAlgorithmOutput *GoogleCloudMlV1BuiltInAlgorithmOutput                    `json:"builtInAlgorithmOutput,omitempty"`
+	EndTime                *string                                                   `json:"endTime,omitempty"`
+	FinalMetric            *GoogleCloudMlV1HyperparameterOutputHyperparameterMetric  `json:"finalMetric,omitempty"`
+	Hyperparameters        map[string]string                                         `json:"hyperparameters,omitempty"`
+	IsTrialStoppedEarly    *bool                                                     `json:"isTrialStoppedEarly,omitempty"`
+	StartTime              *string                                                   `json:"startTime,omitempty"`
+	State                  *GoogleCloudMlV1HyperparameterOutputStateEnum             `json:"state,omitempty"`
+	TrialID                *string                                                   `json:"trialId,omitempty"`
+	WebAccessUris          map[string]string                                         `json:"webAccessUris,omitempty"`
 }

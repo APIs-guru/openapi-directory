@@ -31,8 +31,8 @@ const (
 )
 
 type GoogleAnalyticsAdminV1alphaAttributionSettings struct {
-	AcquisitionConversionEventLookbackWindow *GoogleAnalyticsAdminV1alphaAttributionSettingsAcquisitionConversionEventLookbackWindowEnum `json:"acquisitionConversionEventLookbackWindow"`
-	Name                                     *string                                                                                     `json:"name"`
-	OtherConversionEventLookbackWindow       *GoogleAnalyticsAdminV1alphaAttributionSettingsOtherConversionEventLookbackWindowEnum       `json:"otherConversionEventLookbackWindow"`
-	ReportingAttributionModel                *GoogleAnalyticsAdminV1alphaAttributionSettingsReportingAttributionModelEnum                `json:"reportingAttributionModel"`
+	AcquisitionConversionEventLookbackWindow *GoogleAnalyticsAdminV1alphaAttributionSettingsAcquisitionConversionEventLookbackWindowEnum `json:"acquisitionConversionEventLookbackWindow,omitempty"`
+	Name                                     *string                                                                                     `json:"name,omitempty"`
+	OtherConversionEventLookbackWindow       *GoogleAnalyticsAdminV1alphaAttributionSettingsOtherConversionEventLookbackWindowEnum       `json:"otherConversionEventLookbackWindow,omitempty"`
+	ReportingAttributionModel                *GoogleAnalyticsAdminV1alphaAttributionSettingsReportingAttributionModelEnum                `json:"reportingAttributionModel,omitempty"`
 }

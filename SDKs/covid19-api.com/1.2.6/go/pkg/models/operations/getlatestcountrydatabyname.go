@@ -21,15 +21,15 @@ type GetLatestCountryDataByNameRequest struct {
 }
 
 type GetLatestCountryDataByName200ApplicationJSON struct {
-	Confirmed  *int64     `json:"confirmed"`
-	Country    *string    `json:"country"`
-	Critical   *int64     `json:"critical"`
-	Deaths     *int64     `json:"deaths"`
-	LastChange *time.Time `json:"lastChange"`
-	LastUpdate *time.Time `json:"lastUpdate"`
-	Latitude   *float32   `json:"latitude"`
-	Longitude  *float32   `json:"longitude"`
-	Recovered  *int64     `json:"recovered"`
+	Confirmed  *int64     `json:"confirmed,omitempty"`
+	Country    *string    `json:"country,omitempty"`
+	Critical   *int64     `json:"critical,omitempty"`
+	Deaths     *int64     `json:"deaths,omitempty"`
+	LastChange *time.Time `json:"lastChange,omitempty"`
+	LastUpdate *time.Time `json:"lastUpdate,omitempty"`
+	Latitude   *float32   `json:"latitude,omitempty"`
+	Longitude  *float32   `json:"longitude,omitempty"`
+	Recovered  *int64     `json:"recovered,omitempty"`
 }
 
 type GetLatestCountryDataByNameResponse struct {

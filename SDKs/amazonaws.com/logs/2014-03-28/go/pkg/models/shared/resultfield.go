@@ -1,6 +1,6 @@
 package shared
 
 type ResultField struct {
-	Field *string `json:"field"`
-	Value *string `json:"value"`
+	Field *string `json:"field,omitempty"`
+	Value *string `json:"value,omitempty"`
 }

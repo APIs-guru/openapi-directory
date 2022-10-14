@@ -20,7 +20,7 @@ type ImportBackendAuthHeaders struct {
 }
 
 type ImportBackendAuthRequestBody struct {
-	IdentityPoolID *string `json:"identityPoolId"`
+	IdentityPoolID *string `json:"identityPoolId,omitempty"`
 	NativeClientID string  `json:"nativeClientId"`
 	UserPoolID     string  `json:"userPoolId"`
 	WebClientID    string  `json:"webClientId"`

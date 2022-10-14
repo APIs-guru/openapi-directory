@@ -1,7 +1,7 @@
 package shared
 
 type AccessConfig struct {
-	Name  *string `json:"name"`
-	NatIP *string `json:"natIp"`
-	Type  *string `json:"type"`
+	Name  *string `json:"name,omitempty"`
+	NatIP *string `json:"natIp,omitempty"`
+	Type  *string `json:"type,omitempty"`
 }

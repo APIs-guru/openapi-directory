@@ -1,12 +1,12 @@
 package shared
 
 type PreviewSyncServiceSyncMapSyncMapPermission struct {
-	AccountSid *string `json:"account_sid"`
-	Identity   *string `json:"identity"`
-	Manage     *bool   `json:"manage"`
-	MapSid     *string `json:"map_sid"`
-	Read       *bool   `json:"read"`
-	ServiceSid *string `json:"service_sid"`
-	URL        *string `json:"url"`
-	Write      *bool   `json:"write"`
+	AccountSid *string `json:"account_sid,omitempty"`
+	Identity   *string `json:"identity,omitempty"`
+	Manage     *bool   `json:"manage,omitempty"`
+	MapSid     *string `json:"map_sid,omitempty"`
+	Read       *bool   `json:"read,omitempty"`
+	ServiceSid *string `json:"service_sid,omitempty"`
+	URL        *string `json:"url,omitempty"`
+	Write      *bool   `json:"write,omitempty"`
 }

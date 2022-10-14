@@ -5,12 +5,12 @@ import (
 )
 
 type DataTransfer struct {
-	ApplicationDataTransfers  []ApplicationDataTransfer `json:"applicationDataTransfers"`
-	Etag                      *string                   `json:"etag"`
-	ID                        *string                   `json:"id"`
-	Kind                      *string                   `json:"kind"`
-	NewOwnerUserID            *string                   `json:"newOwnerUserId"`
-	OldOwnerUserID            *string                   `json:"oldOwnerUserId"`
-	OverallTransferStatusCode *string                   `json:"overallTransferStatusCode"`
-	RequestTime               *time.Time                `json:"requestTime"`
+	ApplicationDataTransfers  []ApplicationDataTransfer `json:"applicationDataTransfers,omitempty"`
+	Etag                      *string                   `json:"etag,omitempty"`
+	ID                        *string                   `json:"id,omitempty"`
+	Kind                      *string                   `json:"kind,omitempty"`
+	NewOwnerUserID            *string                   `json:"newOwnerUserId,omitempty"`
+	OldOwnerUserID            *string                   `json:"oldOwnerUserId,omitempty"`
+	OverallTransferStatusCode *string                   `json:"overallTransferStatusCode,omitempty"`
+	RequestTime               *time.Time                `json:"requestTime,omitempty"`
 }

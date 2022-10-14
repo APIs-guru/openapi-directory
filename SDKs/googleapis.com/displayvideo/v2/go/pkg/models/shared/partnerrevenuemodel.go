@@ -10,6 +10,6 @@ const (
 )
 
 type PartnerRevenueModel struct {
-	MarkupAmount *string                            `json:"markupAmount"`
-	MarkupType   *PartnerRevenueModelMarkupTypeEnum `json:"markupType"`
+	MarkupAmount *string                            `json:"markupAmount,omitempty"`
+	MarkupType   *PartnerRevenueModelMarkupTypeEnum `json:"markupType,omitempty"`
 }

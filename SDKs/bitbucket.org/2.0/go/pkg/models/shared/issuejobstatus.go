@@ -10,10 +10,10 @@ const (
 )
 
 type IssueJobStatus struct {
-	Count  *int64                    `json:"count"`
-	Pct    *float64                  `json:"pct"`
-	Phase  *string                   `json:"phase"`
-	Status *IssueJobStatusStatusEnum `json:"status"`
-	Total  *int64                    `json:"total"`
-	Type   *string                   `json:"type"`
+	Count  *int64                    `json:"count,omitempty"`
+	Pct    *float64                  `json:"pct,omitempty"`
+	Phase  *string                   `json:"phase,omitempty"`
+	Status *IssueJobStatusStatusEnum `json:"status,omitempty"`
+	Total  *int64                    `json:"total,omitempty"`
+	Type   *string                   `json:"type,omitempty"`
 }

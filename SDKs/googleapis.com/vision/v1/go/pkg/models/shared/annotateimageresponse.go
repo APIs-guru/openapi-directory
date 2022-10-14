@@ -1,18 +1,18 @@
 package shared
 
 type AnnotateImageResponse struct {
-	Context                    *ImageAnnotationContext     `json:"context"`
-	CropHintsAnnotation        *CropHintsAnnotation        `json:"cropHintsAnnotation"`
-	Error                      *Status                     `json:"error"`
-	FaceAnnotations            []FaceAnnotation            `json:"faceAnnotations"`
-	FullTextAnnotation         *TextAnnotation             `json:"fullTextAnnotation"`
-	ImagePropertiesAnnotation  *ImageProperties            `json:"imagePropertiesAnnotation"`
-	LabelAnnotations           []EntityAnnotation          `json:"labelAnnotations"`
-	LandmarkAnnotations        []EntityAnnotation          `json:"landmarkAnnotations"`
-	LocalizedObjectAnnotations []LocalizedObjectAnnotation `json:"localizedObjectAnnotations"`
-	LogoAnnotations            []EntityAnnotation          `json:"logoAnnotations"`
-	ProductSearchResults       *ProductSearchResults       `json:"productSearchResults"`
-	SafeSearchAnnotation       *SafeSearchAnnotation       `json:"safeSearchAnnotation"`
-	TextAnnotations            []EntityAnnotation          `json:"textAnnotations"`
-	WebDetection               *WebDetection               `json:"webDetection"`
+	Context                    *ImageAnnotationContext     `json:"context,omitempty"`
+	CropHintsAnnotation        *CropHintsAnnotation        `json:"cropHintsAnnotation,omitempty"`
+	Error                      *Status                     `json:"error,omitempty"`
+	FaceAnnotations            []FaceAnnotation            `json:"faceAnnotations,omitempty"`
+	FullTextAnnotation         *TextAnnotation             `json:"fullTextAnnotation,omitempty"`
+	ImagePropertiesAnnotation  *ImageProperties            `json:"imagePropertiesAnnotation,omitempty"`
+	LabelAnnotations           []EntityAnnotation          `json:"labelAnnotations,omitempty"`
+	LandmarkAnnotations        []EntityAnnotation          `json:"landmarkAnnotations,omitempty"`
+	LocalizedObjectAnnotations []LocalizedObjectAnnotation `json:"localizedObjectAnnotations,omitempty"`
+	LogoAnnotations            []EntityAnnotation          `json:"logoAnnotations,omitempty"`
+	ProductSearchResults       *ProductSearchResults       `json:"productSearchResults,omitempty"`
+	SafeSearchAnnotation       *SafeSearchAnnotation       `json:"safeSearchAnnotation,omitempty"`
+	TextAnnotations            []EntityAnnotation          `json:"textAnnotations,omitempty"`
+	WebDetection               *WebDetection               `json:"webDetection,omitempty"`
 }

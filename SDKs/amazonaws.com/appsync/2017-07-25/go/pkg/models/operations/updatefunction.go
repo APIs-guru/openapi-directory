@@ -20,19 +20,19 @@ type UpdateFunctionHeaders struct {
 }
 
 type UpdateFunctionRequestBodySyncConfig struct {
-	ConflictDetection           *shared.ConflictDetectionTypeEnum   `json:"conflictDetection"`
-	ConflictHandler             *shared.ConflictHandlerTypeEnum     `json:"conflictHandler"`
-	LambdaConflictHandlerConfig *shared.LambdaConflictHandlerConfig `json:"lambdaConflictHandlerConfig"`
+	ConflictDetection           *shared.ConflictDetectionTypeEnum   `json:"conflictDetection,omitempty"`
+	ConflictHandler             *shared.ConflictHandlerTypeEnum     `json:"conflictHandler,omitempty"`
+	LambdaConflictHandlerConfig *shared.LambdaConflictHandlerConfig `json:"lambdaConflictHandlerConfig,omitempty"`
 }
 
 type UpdateFunctionRequestBody struct {
 	DataSourceName          string                               `json:"dataSourceName"`
-	Description             *string                              `json:"description"`
+	Description             *string                              `json:"description,omitempty"`
 	FunctionVersion         string                               `json:"functionVersion"`
 	Name                    string                               `json:"name"`
-	RequestMappingTemplate  *string                              `json:"requestMappingTemplate"`
-	ResponseMappingTemplate *string                              `json:"responseMappingTemplate"`
-	SyncConfig              *UpdateFunctionRequestBodySyncConfig `json:"syncConfig"`
+	RequestMappingTemplate  *string                              `json:"requestMappingTemplate,omitempty"`
+	ResponseMappingTemplate *string                              `json:"responseMappingTemplate,omitempty"`
+	SyncConfig              *UpdateFunctionRequestBodySyncConfig `json:"syncConfig,omitempty"`
 }
 
 type UpdateFunctionRequest struct {

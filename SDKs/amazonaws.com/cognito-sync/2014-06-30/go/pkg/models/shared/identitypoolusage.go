@@ -5,8 +5,8 @@ import (
 )
 
 type IdentityPoolUsage struct {
-	DataStorage       *int64     `json:"DataStorage"`
-	IdentityPoolID    *string    `json:"IdentityPoolId"`
-	LastModifiedDate  *time.Time `json:"LastModifiedDate"`
-	SyncSessionsCount *int64     `json:"SyncSessionsCount"`
+	DataStorage       *int64     `json:"DataStorage,omitempty"`
+	IdentityPoolID    *string    `json:"IdentityPoolId,omitempty"`
+	LastModifiedDate  *time.Time `json:"LastModifiedDate,omitempty"`
+	SyncSessionsCount *int64     `json:"SyncSessionsCount,omitempty"`
 }

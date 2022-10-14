@@ -1,6 +1,6 @@
 package shared
 
 type RunConfigurationDescription struct {
-	ApplicationRestoreConfigurationDescription *ApplicationRestoreConfiguration `json:"ApplicationRestoreConfigurationDescription"`
-	FlinkRunConfigurationDescription           *FlinkRunConfiguration           `json:"FlinkRunConfigurationDescription"`
+	ApplicationRestoreConfigurationDescription *ApplicationRestoreConfiguration `json:"ApplicationRestoreConfigurationDescription,omitempty"`
+	FlinkRunConfigurationDescription           *FlinkRunConfiguration           `json:"FlinkRunConfigurationDescription,omitempty"`
 }

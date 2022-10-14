@@ -47,13 +47,13 @@ const (
 )
 
 type BillingRate struct {
-	CurrencyCode  *string                       `json:"currencyCode"`
-	EndDate       *string                       `json:"endDate"`
-	ID            *string                       `json:"id"`
-	Name          *string                       `json:"name"`
-	RateInMicros  *string                       `json:"rateInMicros"`
-	StartDate     *string                       `json:"startDate"`
-	TieredRates   []BillingRateTieredRate       `json:"tieredRates"`
-	Type          *BillingRateTypeEnum          `json:"type"`
-	UnitOfMeasure *BillingRateUnitOfMeasureEnum `json:"unitOfMeasure"`
+	CurrencyCode  *string                       `json:"currencyCode,omitempty"`
+	EndDate       *string                       `json:"endDate,omitempty"`
+	ID            *string                       `json:"id,omitempty"`
+	Name          *string                       `json:"name,omitempty"`
+	RateInMicros  *string                       `json:"rateInMicros,omitempty"`
+	StartDate     *string                       `json:"startDate,omitempty"`
+	TieredRates   []BillingRateTieredRate       `json:"tieredRates,omitempty"`
+	Type          *BillingRateTypeEnum          `json:"type,omitempty"`
+	UnitOfMeasure *BillingRateUnitOfMeasureEnum `json:"unitOfMeasure,omitempty"`
 }

@@ -1,15 +1,15 @@
 package shared
 
 type GoogleCloudApigeeV1CertInfo struct {
-	BasicConstraints        *string  `json:"basicConstraints"`
-	ExpiryDate              *string  `json:"expiryDate"`
-	IsValid                 *string  `json:"isValid"`
-	Issuer                  *string  `json:"issuer"`
-	PublicKey               *string  `json:"publicKey"`
-	SerialNumber            *string  `json:"serialNumber"`
-	SigAlgName              *string  `json:"sigAlgName"`
-	Subject                 *string  `json:"subject"`
-	SubjectAlternativeNames []string `json:"subjectAlternativeNames"`
-	ValidFrom               *string  `json:"validFrom"`
-	Version                 *int32   `json:"version"`
+	BasicConstraints        *string  `json:"basicConstraints,omitempty"`
+	ExpiryDate              *string  `json:"expiryDate,omitempty"`
+	IsValid                 *string  `json:"isValid,omitempty"`
+	Issuer                  *string  `json:"issuer,omitempty"`
+	PublicKey               *string  `json:"publicKey,omitempty"`
+	SerialNumber            *string  `json:"serialNumber,omitempty"`
+	SigAlgName              *string  `json:"sigAlgName,omitempty"`
+	Subject                 *string  `json:"subject,omitempty"`
+	SubjectAlternativeNames []string `json:"subjectAlternativeNames,omitempty"`
+	ValidFrom               *string  `json:"validFrom,omitempty"`
+	Version                 *int32   `json:"version,omitempty"`
 }

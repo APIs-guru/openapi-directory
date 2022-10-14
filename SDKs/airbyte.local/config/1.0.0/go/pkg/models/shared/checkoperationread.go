@@ -8,6 +8,6 @@ const (
 )
 
 type CheckOperationRead struct {
-	Message *string                      `json:"message"`
+	Message *string                      `json:"message,omitempty"`
 	Status  CheckOperationReadStatusEnum `json:"status"`
 }

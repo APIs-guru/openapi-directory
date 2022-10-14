@@ -1,6 +1,6 @@
 package shared
 
 type ListManagedDataIdentifiersResponse struct {
-	Items     []ManagedDataIdentifierSummary `json:"items"`
-	NextToken *string                        `json:"nextToken"`
+	Items     []ManagedDataIdentifierSummary `json:"items,omitempty"`
+	NextToken *string                        `json:"nextToken,omitempty"`
 }

@@ -1,19 +1,19 @@
 package shared
 
 type Component struct {
-	Arn                 *string                    `json:"arn"`
-	ChangeDescription   *string                    `json:"changeDescription"`
-	Data                *string                    `json:"data"`
-	DateCreated         *string                    `json:"dateCreated"`
-	Description         *string                    `json:"description"`
-	Encrypted           *bool                      `json:"encrypted"`
-	KmsKeyID            *string                    `json:"kmsKeyId"`
-	Name                *string                    `json:"name"`
-	Owner               *string                    `json:"owner"`
-	Parameters          []ComponentParameterDetail `json:"parameters"`
-	Platform            *PlatformEnum              `json:"platform"`
-	SupportedOsVersions []string                   `json:"supportedOsVersions"`
-	Tags                map[string]string          `json:"tags"`
-	Type                *ComponentTypeEnum         `json:"type"`
-	Version             *string                    `json:"version"`
+	Arn                 *string                    `json:"arn,omitempty"`
+	ChangeDescription   *string                    `json:"changeDescription,omitempty"`
+	Data                *string                    `json:"data,omitempty"`
+	DateCreated         *string                    `json:"dateCreated,omitempty"`
+	Description         *string                    `json:"description,omitempty"`
+	Encrypted           *bool                      `json:"encrypted,omitempty"`
+	KmsKeyID            *string                    `json:"kmsKeyId,omitempty"`
+	Name                *string                    `json:"name,omitempty"`
+	Owner               *string                    `json:"owner,omitempty"`
+	Parameters          []ComponentParameterDetail `json:"parameters,omitempty"`
+	Platform            *PlatformEnum              `json:"platform,omitempty"`
+	SupportedOsVersions []string                   `json:"supportedOsVersions,omitempty"`
+	Tags                map[string]string          `json:"tags,omitempty"`
+	Type                *ComponentTypeEnum         `json:"type,omitempty"`
+	Version             *string                    `json:"version,omitempty"`
 }

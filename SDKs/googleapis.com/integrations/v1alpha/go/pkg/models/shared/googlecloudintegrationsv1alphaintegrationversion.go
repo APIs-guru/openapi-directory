@@ -38,24 +38,24 @@ const (
 )
 
 type GoogleCloudIntegrationsV1alphaIntegrationVersion struct {
-	CreateTime                    *string                                                                        `json:"createTime"`
-	DatabasePersistencePolicy     *GoogleCloudIntegrationsV1alphaIntegrationVersionDatabasePersistencePolicyEnum `json:"databasePersistencePolicy"`
-	Description                   *string                                                                        `json:"description"`
-	IntegrationParameters         []GoogleCloudIntegrationsV1alphaIntegrationParameter                           `json:"integrationParameters"`
-	IntegrationParametersInternal *EnterpriseCrmFrontendsEventbusProtoWorkflowParameters                         `json:"integrationParametersInternal"`
-	LastModifierEmail             *string                                                                        `json:"lastModifierEmail"`
-	LockHolder                    *string                                                                        `json:"lockHolder"`
-	Name                          *string                                                                        `json:"name"`
-	Origin                        *GoogleCloudIntegrationsV1alphaIntegrationVersionOriginEnum                    `json:"origin"`
-	ParentTemplateID              *string                                                                        `json:"parentTemplateId"`
-	SnapshotNumber                *string                                                                        `json:"snapshotNumber"`
-	State                         *GoogleCloudIntegrationsV1alphaIntegrationVersionStateEnum                     `json:"state"`
-	Status                        *GoogleCloudIntegrationsV1alphaIntegrationVersionStatusEnum                    `json:"status"`
-	TaskConfigs                   []GoogleCloudIntegrationsV1alphaTaskConfig                                     `json:"taskConfigs"`
-	TaskConfigsInternal           []EnterpriseCrmFrontendsEventbusProtoTaskConfig                                `json:"taskConfigsInternal"`
-	Teardown                      *EnterpriseCrmEventbusProtoTeardown                                            `json:"teardown"`
-	TriggerConfigs                []GoogleCloudIntegrationsV1alphaTriggerConfig                                  `json:"triggerConfigs"`
-	TriggerConfigsInternal        []EnterpriseCrmFrontendsEventbusProtoTriggerConfig                             `json:"triggerConfigsInternal"`
-	UpdateTime                    *string                                                                        `json:"updateTime"`
-	UserLabel                     *string                                                                        `json:"userLabel"`
+	CreateTime                    *string                                                                        `json:"createTime,omitempty"`
+	DatabasePersistencePolicy     *GoogleCloudIntegrationsV1alphaIntegrationVersionDatabasePersistencePolicyEnum `json:"databasePersistencePolicy,omitempty"`
+	Description                   *string                                                                        `json:"description,omitempty"`
+	IntegrationParameters         []GoogleCloudIntegrationsV1alphaIntegrationParameter                           `json:"integrationParameters,omitempty"`
+	IntegrationParametersInternal *EnterpriseCrmFrontendsEventbusProtoWorkflowParameters                         `json:"integrationParametersInternal,omitempty"`
+	LastModifierEmail             *string                                                                        `json:"lastModifierEmail,omitempty"`
+	LockHolder                    *string                                                                        `json:"lockHolder,omitempty"`
+	Name                          *string                                                                        `json:"name,omitempty"`
+	Origin                        *GoogleCloudIntegrationsV1alphaIntegrationVersionOriginEnum                    `json:"origin,omitempty"`
+	ParentTemplateID              *string                                                                        `json:"parentTemplateId,omitempty"`
+	SnapshotNumber                *string                                                                        `json:"snapshotNumber,omitempty"`
+	State                         *GoogleCloudIntegrationsV1alphaIntegrationVersionStateEnum                     `json:"state,omitempty"`
+	Status                        *GoogleCloudIntegrationsV1alphaIntegrationVersionStatusEnum                    `json:"status,omitempty"`
+	TaskConfigs                   []GoogleCloudIntegrationsV1alphaTaskConfig                                     `json:"taskConfigs,omitempty"`
+	TaskConfigsInternal           []EnterpriseCrmFrontendsEventbusProtoTaskConfig                                `json:"taskConfigsInternal,omitempty"`
+	Teardown                      *EnterpriseCrmEventbusProtoTeardown                                            `json:"teardown,omitempty"`
+	TriggerConfigs                []GoogleCloudIntegrationsV1alphaTriggerConfig                                  `json:"triggerConfigs,omitempty"`
+	TriggerConfigsInternal        []EnterpriseCrmFrontendsEventbusProtoTriggerConfig                             `json:"triggerConfigsInternal,omitempty"`
+	UpdateTime                    *string                                                                        `json:"updateTime,omitempty"`
+	UserLabel                     *string                                                                        `json:"userLabel,omitempty"`
 }

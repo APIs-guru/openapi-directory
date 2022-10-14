@@ -11,5 +11,5 @@ const (
 )
 
 type ConsentEvaluation struct {
-	EvaluationResult *ConsentEvaluationEvaluationResultEnum `json:"evaluationResult"`
+	EvaluationResult *ConsentEvaluationEvaluationResultEnum `json:"evaluationResult,omitempty"`
 }

@@ -1,43 +1,43 @@
 package shared
 
 type AwsSecurityFinding struct {
-	Action                *Action                `json:"Action"`
+	Action                *Action                `json:"Action,omitempty"`
 	AwsAccountID          string                 `json:"AwsAccountId"`
-	CompanyName           *string                `json:"CompanyName"`
-	Compliance            *Compliance            `json:"Compliance"`
-	Confidence            *int64                 `json:"Confidence"`
+	CompanyName           *string                `json:"CompanyName,omitempty"`
+	Compliance            *Compliance            `json:"Compliance,omitempty"`
+	Confidence            *int64                 `json:"Confidence,omitempty"`
 	CreatedAt             string                 `json:"CreatedAt"`
-	Criticality           *int64                 `json:"Criticality"`
+	Criticality           *int64                 `json:"Criticality,omitempty"`
 	Description           string                 `json:"Description"`
-	FindingProviderFields *FindingProviderFields `json:"FindingProviderFields"`
-	FirstObservedAt       *string                `json:"FirstObservedAt"`
+	FindingProviderFields *FindingProviderFields `json:"FindingProviderFields,omitempty"`
+	FirstObservedAt       *string                `json:"FirstObservedAt,omitempty"`
 	GeneratorID           string                 `json:"GeneratorId"`
 	ID                    string                 `json:"Id"`
-	LastObservedAt        *string                `json:"LastObservedAt"`
-	Malware               []Malware              `json:"Malware"`
-	Network               *Network               `json:"Network"`
-	NetworkPath           []NetworkPathComponent `json:"NetworkPath"`
-	Note                  *Note                  `json:"Note"`
-	PatchSummary          *PatchSummary          `json:"PatchSummary"`
-	Process               *ProcessDetails        `json:"Process"`
+	LastObservedAt        *string                `json:"LastObservedAt,omitempty"`
+	Malware               []Malware              `json:"Malware,omitempty"`
+	Network               *Network               `json:"Network,omitempty"`
+	NetworkPath           []NetworkPathComponent `json:"NetworkPath,omitempty"`
+	Note                  *Note                  `json:"Note,omitempty"`
+	PatchSummary          *PatchSummary          `json:"PatchSummary,omitempty"`
+	Process               *ProcessDetails        `json:"Process,omitempty"`
 	ProductArn            string                 `json:"ProductArn"`
-	ProductFields         map[string]string      `json:"ProductFields"`
-	ProductName           *string                `json:"ProductName"`
-	RecordState           *RecordStateEnum       `json:"RecordState"`
-	Region                *string                `json:"Region"`
-	RelatedFindings       []RelatedFinding       `json:"RelatedFindings"`
-	Remediation           *Remediation           `json:"Remediation"`
+	ProductFields         map[string]string      `json:"ProductFields,omitempty"`
+	ProductName           *string                `json:"ProductName,omitempty"`
+	RecordState           *RecordStateEnum       `json:"RecordState,omitempty"`
+	Region                *string                `json:"Region,omitempty"`
+	RelatedFindings       []RelatedFinding       `json:"RelatedFindings,omitempty"`
+	Remediation           *Remediation           `json:"Remediation,omitempty"`
 	Resources             []Resource             `json:"Resources"`
 	SchemaVersion         string                 `json:"SchemaVersion"`
-	Severity              *Severity              `json:"Severity"`
-	SourceURL             *string                `json:"SourceUrl"`
-	ThreatIntelIndicators []ThreatIntelIndicator `json:"ThreatIntelIndicators"`
+	Severity              *Severity              `json:"Severity,omitempty"`
+	SourceURL             *string                `json:"SourceUrl,omitempty"`
+	ThreatIntelIndicators []ThreatIntelIndicator `json:"ThreatIntelIndicators,omitempty"`
 	Title                 string                 `json:"Title"`
-	Types                 []string               `json:"Types"`
+	Types                 []string               `json:"Types,omitempty"`
 	UpdatedAt             string                 `json:"UpdatedAt"`
-	UserDefinedFields     map[string]string      `json:"UserDefinedFields"`
-	VerificationState     *VerificationStateEnum `json:"VerificationState"`
-	Vulnerabilities       []Vulnerability        `json:"Vulnerabilities"`
-	Workflow              *Workflow              `json:"Workflow"`
-	WorkflowState         *WorkflowStateEnum     `json:"WorkflowState"`
+	UserDefinedFields     map[string]string      `json:"UserDefinedFields,omitempty"`
+	VerificationState     *VerificationStateEnum `json:"VerificationState,omitempty"`
+	Vulnerabilities       []Vulnerability        `json:"Vulnerabilities,omitempty"`
+	Workflow              *Workflow              `json:"Workflow,omitempty"`
+	WorkflowState         *WorkflowStateEnum     `json:"WorkflowState,omitempty"`
 }

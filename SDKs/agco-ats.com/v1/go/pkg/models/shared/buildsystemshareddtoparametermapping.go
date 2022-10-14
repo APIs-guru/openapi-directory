@@ -8,7 +8,7 @@ const (
 )
 
 type BuildSystemSharedDtoParameterMapping struct {
-	Name       *string                                             `json:"Name"`
-	Source     *string                                             `json:"Source"`
-	SourceType *BuildSystemSharedDtoParameterMappingSourceTypeEnum `json:"SourceType"`
+	Name       *string                                             `json:"Name,omitempty"`
+	Source     *string                                             `json:"Source,omitempty"`
+	SourceType *BuildSystemSharedDtoParameterMappingSourceTypeEnum `json:"SourceType,omitempty"`
 }

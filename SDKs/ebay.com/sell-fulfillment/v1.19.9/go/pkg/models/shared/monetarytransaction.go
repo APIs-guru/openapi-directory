@@ -1,8 +1,8 @@
 package shared
 
 type MonetaryTransaction struct {
-	Amount *DisputeAmount `json:"amount"`
-	Date   *string        `json:"date"`
-	Reason *string        `json:"reason"`
-	Type   *string        `json:"type"`
+	Amount *DisputeAmount `json:"amount,omitempty"`
+	Date   *string        `json:"date,omitempty"`
+	Reason *string        `json:"reason,omitempty"`
+	Type   *string        `json:"type,omitempty"`
 }

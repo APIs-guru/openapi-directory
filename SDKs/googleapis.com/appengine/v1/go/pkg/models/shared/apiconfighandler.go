@@ -28,9 +28,9 @@ const (
 )
 
 type APIConfigHandler struct {
-	AuthFailAction *APIConfigHandlerAuthFailActionEnum `json:"authFailAction"`
-	Login          *APIConfigHandlerLoginEnum          `json:"login"`
-	Script         *string                             `json:"script"`
-	SecurityLevel  *APIConfigHandlerSecurityLevelEnum  `json:"securityLevel"`
-	URL            *string                             `json:"url"`
+	AuthFailAction *APIConfigHandlerAuthFailActionEnum `json:"authFailAction,omitempty"`
+	Login          *APIConfigHandlerLoginEnum          `json:"login,omitempty"`
+	Script         *string                             `json:"script,omitempty"`
+	SecurityLevel  *APIConfigHandlerSecurityLevelEnum  `json:"securityLevel,omitempty"`
+	URL            *string                             `json:"url,omitempty"`
 }

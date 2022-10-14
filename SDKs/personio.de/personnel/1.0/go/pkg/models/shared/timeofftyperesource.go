@@ -1,7 +1,7 @@
 package shared
 
 type TimeOffTypeResourceAttributes struct {
-	Name *string `json:"name"`
+	Name *string `json:"name,omitempty"`
 }
 
 type TimeOffTypeResourceTypeEnum string
@@ -11,7 +11,7 @@ const (
 )
 
 type TimeOffTypeResource struct {
-	Attributes *TimeOffTypeResourceAttributes `json:"attributes"`
-	ID         *int64                         `json:"id"`
-	Type       *TimeOffTypeResourceTypeEnum   `json:"type"`
+	Attributes *TimeOffTypeResourceAttributes `json:"attributes,omitempty"`
+	ID         *int64                         `json:"id,omitempty"`
+	Type       *TimeOffTypeResourceTypeEnum   `json:"type,omitempty"`
 }

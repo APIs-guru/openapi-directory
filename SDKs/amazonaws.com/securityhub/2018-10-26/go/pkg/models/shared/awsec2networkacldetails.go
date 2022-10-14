@@ -1,10 +1,10 @@
 package shared
 
 type AwsEc2NetworkACLDetails struct {
-	Associations []AwsEc2NetworkACLAssociation `json:"Associations"`
-	Entries      []AwsEc2NetworkACLEntry       `json:"Entries"`
-	IsDefault    *bool                         `json:"IsDefault"`
-	NetworkACLID *string                       `json:"NetworkAclId"`
-	OwnerID      *string                       `json:"OwnerId"`
-	VpcID        *string                       `json:"VpcId"`
+	Associations []AwsEc2NetworkACLAssociation `json:"Associations,omitempty"`
+	Entries      []AwsEc2NetworkACLEntry       `json:"Entries,omitempty"`
+	IsDefault    *bool                         `json:"IsDefault,omitempty"`
+	NetworkACLID *string                       `json:"NetworkAclId,omitempty"`
+	OwnerID      *string                       `json:"OwnerId,omitempty"`
+	VpcID        *string                       `json:"VpcId,omitempty"`
 }

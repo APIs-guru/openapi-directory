@@ -1,6 +1,6 @@
 package shared
 
 type StartRemediationExecutionResponse struct {
-	FailedItems    []ResourceKey `json:"FailedItems"`
-	FailureMessage *string       `json:"FailureMessage"`
+	FailedItems    []ResourceKey `json:"FailedItems,omitempty"`
+	FailureMessage *string       `json:"FailureMessage,omitempty"`
 }

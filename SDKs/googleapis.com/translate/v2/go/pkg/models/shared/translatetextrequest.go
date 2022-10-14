@@ -1,9 +1,9 @@
 package shared
 
 type TranslateTextRequest struct {
-	Format *string  `json:"format"`
-	Model  *string  `json:"model"`
-	Q      []string `json:"q"`
-	Source *string  `json:"source"`
-	Target *string  `json:"target"`
+	Format *string  `json:"format,omitempty"`
+	Model  *string  `json:"model,omitempty"`
+	Q      []string `json:"q,omitempty"`
+	Source *string  `json:"source,omitempty"`
+	Target *string  `json:"target,omitempty"`
 }

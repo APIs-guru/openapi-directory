@@ -5,8 +5,8 @@ import (
 )
 
 type JobDetails struct {
-	IsDefinedInJob   *IsDefinedInJobEnum   `json:"isDefinedInJob"`
-	IsMonitoredByJob *IsMonitoredByJobEnum `json:"isMonitoredByJob"`
-	LastJobID        *string               `json:"lastJobId"`
-	LastJobRunTime   *time.Time            `json:"lastJobRunTime"`
+	IsDefinedInJob   *IsDefinedInJobEnum   `json:"isDefinedInJob,omitempty"`
+	IsMonitoredByJob *IsMonitoredByJobEnum `json:"isMonitoredByJob,omitempty"`
+	LastJobID        *string               `json:"lastJobId,omitempty"`
+	LastJobRunTime   *time.Time            `json:"lastJobRunTime,omitempty"`
 }

@@ -1,11 +1,11 @@
 package shared
 
 type CountClosedWorkflowExecutionsInput struct {
-	CloseStatusFilter *CloseStatusFilter       `json:"closeStatusFilter"`
-	CloseTimeFilter   *ExecutionTimeFilter     `json:"closeTimeFilter"`
+	CloseStatusFilter *CloseStatusFilter       `json:"closeStatusFilter,omitempty"`
+	CloseTimeFilter   *ExecutionTimeFilter     `json:"closeTimeFilter,omitempty"`
 	Domain            string                   `json:"domain"`
-	ExecutionFilter   *WorkflowExecutionFilter `json:"executionFilter"`
-	StartTimeFilter   *ExecutionTimeFilter     `json:"startTimeFilter"`
-	TagFilter         *TagFilter               `json:"tagFilter"`
-	TypeFilter        *WorkflowTypeFilter      `json:"typeFilter"`
+	ExecutionFilter   *WorkflowExecutionFilter `json:"executionFilter,omitempty"`
+	StartTimeFilter   *ExecutionTimeFilter     `json:"startTimeFilter,omitempty"`
+	TagFilter         *TagFilter               `json:"tagFilter,omitempty"`
+	TypeFilter        *WorkflowTypeFilter      `json:"typeFilter,omitempty"`
 }

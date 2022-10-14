@@ -1,6 +1,6 @@
 package shared
 
 type MonetaryAmount struct {
-	Amount       *float64          `json:"amount"`
-	CurrencyCode *CurrencyCodeEnum `json:"currencyCode"`
+	Amount       *float64          `json:"amount,omitempty"`
+	CurrencyCode *CurrencyCodeEnum `json:"currencyCode,omitempty"`
 }

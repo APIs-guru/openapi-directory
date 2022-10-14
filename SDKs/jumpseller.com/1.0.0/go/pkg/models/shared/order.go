@@ -1,5 +1,5 @@
 package shared
 
 type Order struct {
-	Order *interface{} `json:"order"`
+	Order *interface{} `json:"order,omitempty"`
 }

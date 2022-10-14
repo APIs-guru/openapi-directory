@@ -5,10 +5,10 @@ import (
 )
 
 type Deployment struct {
-	AutoDeployed            *bool                 `json:"AutoDeployed"`
-	CreatedDate             *time.Time            `json:"CreatedDate"`
-	DeploymentID            *string               `json:"DeploymentId"`
-	DeploymentStatus        *DeploymentStatusEnum `json:"DeploymentStatus"`
-	DeploymentStatusMessage *string               `json:"DeploymentStatusMessage"`
-	Description             *string               `json:"Description"`
+	AutoDeployed            *bool                 `json:"AutoDeployed,omitempty"`
+	CreatedDate             *time.Time            `json:"CreatedDate,omitempty"`
+	DeploymentID            *string               `json:"DeploymentId,omitempty"`
+	DeploymentStatus        *DeploymentStatusEnum `json:"DeploymentStatus,omitempty"`
+	DeploymentStatusMessage *string               `json:"DeploymentStatusMessage,omitempty"`
+	Description             *string               `json:"Description,omitempty"`
 }

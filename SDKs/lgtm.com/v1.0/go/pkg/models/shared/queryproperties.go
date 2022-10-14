@@ -1,8 +1,8 @@
 package shared
 
 type QueryProperties struct {
-	ID       *string  `json:"id"`
-	Name     *string  `json:"name"`
-	Severity *string  `json:"severity"`
-	Tags     []string `json:"tags"`
+	ID       *string  `json:"id,omitempty"`
+	Name     *string  `json:"name,omitempty"`
+	Severity *string  `json:"severity,omitempty"`
+	Tags     []string `json:"tags,omitempty"`
 }

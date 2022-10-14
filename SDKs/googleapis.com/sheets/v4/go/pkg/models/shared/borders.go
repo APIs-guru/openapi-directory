@@ -1,8 +1,8 @@
 package shared
 
 type Borders struct {
-	Bottom *Border `json:"bottom"`
-	Left   *Border `json:"left"`
-	Right  *Border `json:"right"`
-	Top    *Border `json:"top"`
+	Bottom *Border `json:"bottom,omitempty"`
+	Left   *Border `json:"left,omitempty"`
+	Right  *Border `json:"right,omitempty"`
+	Top    *Border `json:"top,omitempty"`
 }

@@ -14,17 +14,17 @@ const (
 )
 
 type CutoverJob struct {
-	ComputeEngineTargetDetails *ComputeEngineTargetDetails `json:"computeEngineTargetDetails"`
-	ComputeEngineVMDetails     *TargetVMDetails            `json:"computeEngineVmDetails"`
-	CreateTime                 *string                     `json:"createTime"`
-	EndTime                    *string                     `json:"endTime"`
-	Error                      *Status                     `json:"error"`
-	Name                       *string                     `json:"name"`
-	Progress                   *int32                      `json:"progress"`
-	ProgressPercent            *int32                      `json:"progressPercent"`
-	State                      *CutoverJobStateEnum        `json:"state"`
-	StateMessage               *string                     `json:"stateMessage"`
-	StateTime                  *string                     `json:"stateTime"`
-	Steps                      []CutoverStep               `json:"steps"`
-	TargetDetails              *TargetVMDetails            `json:"targetDetails"`
+	ComputeEngineTargetDetails *ComputeEngineTargetDetails `json:"computeEngineTargetDetails,omitempty"`
+	ComputeEngineVMDetails     *TargetVMDetails            `json:"computeEngineVmDetails,omitempty"`
+	CreateTime                 *string                     `json:"createTime,omitempty"`
+	EndTime                    *string                     `json:"endTime,omitempty"`
+	Error                      *Status                     `json:"error,omitempty"`
+	Name                       *string                     `json:"name,omitempty"`
+	Progress                   *int32                      `json:"progress,omitempty"`
+	ProgressPercent            *int32                      `json:"progressPercent,omitempty"`
+	State                      *CutoverJobStateEnum        `json:"state,omitempty"`
+	StateMessage               *string                     `json:"stateMessage,omitempty"`
+	StateTime                  *string                     `json:"stateTime,omitempty"`
+	Steps                      []CutoverStep               `json:"steps,omitempty"`
+	TargetDetails              *TargetVMDetails            `json:"targetDetails,omitempty"`
 }

@@ -10,5 +10,5 @@ const (
 )
 
 type GoogleFirestoreAdminV1TTLConfig struct {
-	State *GoogleFirestoreAdminV1TTLConfigStateEnum `json:"state"`
+	State *GoogleFirestoreAdminV1TTLConfigStateEnum `json:"state,omitempty"`
 }

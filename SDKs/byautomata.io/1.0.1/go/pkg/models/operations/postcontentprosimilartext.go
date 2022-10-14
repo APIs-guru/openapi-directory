@@ -13,16 +13,16 @@ type PostContentproSimilarTextRequest struct {
 }
 
 type PostContentproSimilarText200ApplicationJSONData struct {
-	Article  *shared.Article            `json:"article"`
-	Company  *shared.ContentProCompany  `json:"company"`
-	Snippets *shared.ContentProSnippets `json:"snippets"`
+	Article  *shared.Article            `json:"article,omitempty"`
+	Company  *shared.ContentProCompany  `json:"company,omitempty"`
+	Snippets *shared.ContentProSnippets `json:"snippets,omitempty"`
 }
 
 type PostContentproSimilarText200ApplicationJSON struct {
-	CallsPerMonth  *string                                           `json:"calls_per_month"`
-	CountRemaining *string                                           `json:"count_remaining"`
-	Data           []PostContentproSimilarText200ApplicationJSONData `json:"data"`
-	RenewalDate    *string                                           `json:"renewal_date"`
+	CallsPerMonth  *string                                           `json:"calls_per_month,omitempty"`
+	CountRemaining *string                                           `json:"count_remaining,omitempty"`
+	Data           []PostContentproSimilarText200ApplicationJSONData `json:"data,omitempty"`
+	RenewalDate    *string                                           `json:"renewal_date,omitempty"`
 }
 
 type PostContentproSimilarTextResponse struct {

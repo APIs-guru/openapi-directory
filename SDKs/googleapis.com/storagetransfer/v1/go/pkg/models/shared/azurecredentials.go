@@ -1,5 +1,5 @@
 package shared
 
 type AzureCredentials struct {
-	SasToken *string `json:"sasToken"`
+	SasToken *string `json:"sasToken,omitempty"`
 }

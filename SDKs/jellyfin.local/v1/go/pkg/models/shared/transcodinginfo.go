@@ -1,16 +1,16 @@
 package shared
 
 type TranscodingInfo struct {
-	AudioChannels        *int32                `json:"AudioChannels"`
-	AudioCodec           *string               `json:"AudioCodec"`
-	Bitrate              *int32                `json:"Bitrate"`
-	CompletionPercentage *float64              `json:"CompletionPercentage"`
-	Container            *string               `json:"Container"`
-	Framerate            *float32              `json:"Framerate"`
-	Height               *int32                `json:"Height"`
-	IsAudioDirect        *bool                 `json:"IsAudioDirect"`
-	IsVideoDirect        *bool                 `json:"IsVideoDirect"`
-	TranscodeReasons     []TranscodeReasonEnum `json:"TranscodeReasons"`
-	VideoCodec           *string               `json:"VideoCodec"`
-	Width                *int32                `json:"Width"`
+	AudioChannels        *int32                `json:"AudioChannels,omitempty"`
+	AudioCodec           *string               `json:"AudioCodec,omitempty"`
+	Bitrate              *int32                `json:"Bitrate,omitempty"`
+	CompletionPercentage *float64              `json:"CompletionPercentage,omitempty"`
+	Container            *string               `json:"Container,omitempty"`
+	Framerate            *float32              `json:"Framerate,omitempty"`
+	Height               *int32                `json:"Height,omitempty"`
+	IsAudioDirect        *bool                 `json:"IsAudioDirect,omitempty"`
+	IsVideoDirect        *bool                 `json:"IsVideoDirect,omitempty"`
+	TranscodeReasons     []TranscodeReasonEnum `json:"TranscodeReasons,omitempty"`
+	VideoCodec           *string               `json:"VideoCodec,omitempty"`
+	Width                *int32                `json:"Width,omitempty"`
 }

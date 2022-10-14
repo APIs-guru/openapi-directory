@@ -5,7 +5,7 @@ type PostFloatingIpsIDActionsChangeProtectionPathParams struct {
 }
 
 type PostFloatingIpsIDActionsChangeProtectionRequestBodyChangeProtectionRequest struct {
-	Delete *bool `json:"delete"`
+	Delete *bool `json:"delete,omitempty"`
 }
 
 type PostFloatingIpsIDActionsChangeProtectionRequest struct {

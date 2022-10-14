@@ -1,6 +1,6 @@
 package shared
 
 type ListJobsByStatusResponse struct {
-	Jobs          []Job   `json:"Jobs"`
-	NextPageToken *string `json:"NextPageToken"`
+	Jobs          []Job   `json:"Jobs,omitempty"`
+	NextPageToken *string `json:"NextPageToken,omitempty"`
 }

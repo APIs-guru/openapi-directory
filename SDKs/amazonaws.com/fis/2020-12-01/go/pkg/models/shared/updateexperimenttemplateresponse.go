@@ -1,5 +1,5 @@
 package shared
 
 type UpdateExperimentTemplateResponse struct {
-	ExperimentTemplate *ExperimentTemplate `json:"experimentTemplate"`
+	ExperimentTemplate *ExperimentTemplate `json:"experimentTemplate,omitempty"`
 }

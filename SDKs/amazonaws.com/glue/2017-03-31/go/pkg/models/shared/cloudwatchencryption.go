@@ -1,6 +1,6 @@
 package shared
 
 type CloudWatchEncryption struct {
-	CloudWatchEncryptionMode *CloudWatchEncryptionModeEnum `json:"CloudWatchEncryptionMode"`
-	KmsKeyArn                *string                       `json:"KmsKeyArn"`
+	CloudWatchEncryptionMode *CloudWatchEncryptionModeEnum `json:"CloudWatchEncryptionMode,omitempty"`
+	KmsKeyArn                *string                       `json:"KmsKeyArn,omitempty"`
 }

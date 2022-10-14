@@ -1,6 +1,6 @@
 package shared
 
 type BatchDetectKeyPhrasesItemResult struct {
-	Index      *int64      `json:"Index"`
-	KeyPhrases []KeyPhrase `json:"KeyPhrases"`
+	Index      *int64      `json:"Index,omitempty"`
+	KeyPhrases []KeyPhrase `json:"KeyPhrases,omitempty"`
 }

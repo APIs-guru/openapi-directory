@@ -19,6 +19,6 @@ const (
 )
 
 type GoogleCloudAssuredworkloadsV1WorkloadSaaEnrollmentResponse struct {
-	SetupErrors []GoogleCloudAssuredworkloadsV1WorkloadSaaEnrollmentResponseSetupErrorsEnum `json:"setupErrors"`
-	SetupStatus *GoogleCloudAssuredworkloadsV1WorkloadSaaEnrollmentResponseSetupStatusEnum  `json:"setupStatus"`
+	SetupErrors []GoogleCloudAssuredworkloadsV1WorkloadSaaEnrollmentResponseSetupErrorsEnum `json:"setupErrors,omitempty"`
+	SetupStatus *GoogleCloudAssuredworkloadsV1WorkloadSaaEnrollmentResponseSetupStatusEnum  `json:"setupStatus,omitempty"`
 }

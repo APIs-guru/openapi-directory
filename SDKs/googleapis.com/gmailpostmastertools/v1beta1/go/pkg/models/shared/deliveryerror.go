@@ -25,7 +25,7 @@ const (
 )
 
 type DeliveryError struct {
-	ErrorClass *DeliveryErrorErrorClassEnum `json:"errorClass"`
-	ErrorRatio *float64                     `json:"errorRatio"`
-	ErrorType  *DeliveryErrorErrorTypeEnum  `json:"errorType"`
+	ErrorClass *DeliveryErrorErrorClassEnum `json:"errorClass,omitempty"`
+	ErrorRatio *float64                     `json:"errorRatio,omitempty"`
+	ErrorType  *DeliveryErrorErrorTypeEnum  `json:"errorType,omitempty"`
 }

@@ -9,9 +9,9 @@ const (
 )
 
 type CheckCompatibilityRequest struct {
-	CompatibilityFilter *CheckCompatibilityRequestCompatibilityFilterEnum `json:"compatibilityFilter"`
-	DimensionFilter     *FilterExpression                                 `json:"dimensionFilter"`
-	Dimensions          []Dimension                                       `json:"dimensions"`
-	MetricFilter        *FilterExpression                                 `json:"metricFilter"`
-	Metrics             []Metric                                          `json:"metrics"`
+	CompatibilityFilter *CheckCompatibilityRequestCompatibilityFilterEnum `json:"compatibilityFilter,omitempty"`
+	DimensionFilter     *FilterExpression                                 `json:"dimensionFilter,omitempty"`
+	Dimensions          []Dimension                                       `json:"dimensions,omitempty"`
+	MetricFilter        *FilterExpression                                 `json:"metricFilter,omitempty"`
+	Metrics             []Metric                                          `json:"metrics,omitempty"`
 }

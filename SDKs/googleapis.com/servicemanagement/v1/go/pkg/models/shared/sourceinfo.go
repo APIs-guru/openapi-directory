@@ -1,5 +1,5 @@
 package shared
 
 type SourceInfo struct {
-	SourceFiles []map[string]interface{} `json:"sourceFiles"`
+	SourceFiles []map[string]interface{} `json:"sourceFiles,omitempty"`
 }

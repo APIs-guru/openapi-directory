@@ -27,14 +27,14 @@ const (
 )
 
 type CreateAuthorizerRequestBody struct {
-	AuthType                     *string                             `json:"authType"`
-	AuthorizerCredentials        *string                             `json:"authorizerCredentials"`
-	AuthorizerResultTTLInSeconds *int64                              `json:"authorizerResultTtlInSeconds"`
-	AuthorizerURI                *string                             `json:"authorizerUri"`
-	IdentitySource               *string                             `json:"identitySource"`
-	IdentityValidationExpression *string                             `json:"identityValidationExpression"`
+	AuthType                     *string                             `json:"authType,omitempty"`
+	AuthorizerCredentials        *string                             `json:"authorizerCredentials,omitempty"`
+	AuthorizerResultTTLInSeconds *int64                              `json:"authorizerResultTtlInSeconds,omitempty"`
+	AuthorizerURI                *string                             `json:"authorizerUri,omitempty"`
+	IdentitySource               *string                             `json:"identitySource,omitempty"`
+	IdentityValidationExpression *string                             `json:"identityValidationExpression,omitempty"`
 	Name                         string                              `json:"name"`
-	ProviderArNs                 []string                            `json:"providerARNs"`
+	ProviderArNs                 []string                            `json:"providerARNs,omitempty"`
 	Type                         CreateAuthorizerRequestBodyTypeEnum `json:"type"`
 }
 

@@ -1,5 +1,5 @@
 package shared
 
 type TranslationAnnotation struct {
-	TranslatedContent *TextSnippet `json:"translatedContent"`
+	TranslatedContent *TextSnippet `json:"translatedContent,omitempty"`
 }

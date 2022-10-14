@@ -10,10 +10,10 @@ type PostProjectUsernameProjectPathParams struct {
 }
 
 type PostProjectUsernameProjectRequestBody struct {
-	BuildParameters map[string]interface{} `json:"build_parameters"`
-	Parallel        *string                `json:"parallel"`
-	Revision        *string                `json:"revision"`
-	Tag             *string                `json:"tag"`
+	BuildParameters map[string]interface{} `json:"build_parameters,omitempty"`
+	Parallel        *string                `json:"parallel,omitempty"`
+	Revision        *string                `json:"revision,omitempty"`
+	Tag             *string                `json:"tag,omitempty"`
 }
 
 type PostProjectUsernameProjectRequest struct {

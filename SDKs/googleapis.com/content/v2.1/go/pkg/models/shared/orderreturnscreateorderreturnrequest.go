@@ -1,8 +1,8 @@
 package shared
 
 type OrderreturnsCreateOrderReturnRequest struct {
-	LineItems        []OrderreturnsLineItem `json:"lineItems"`
-	OperationID      *string                `json:"operationId"`
-	OrderID          *string                `json:"orderId"`
-	ReturnMethodType *string                `json:"returnMethodType"`
+	LineItems        []OrderreturnsLineItem `json:"lineItems,omitempty"`
+	OperationID      *string                `json:"operationId,omitempty"`
+	OrderID          *string                `json:"orderId,omitempty"`
+	ReturnMethodType *string                `json:"returnMethodType,omitempty"`
 }

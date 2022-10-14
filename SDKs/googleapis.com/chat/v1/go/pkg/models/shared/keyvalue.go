@@ -37,12 +37,12 @@ const (
 )
 
 type KeyValue struct {
-	BottomLabel      *string           `json:"bottomLabel"`
-	Button           *Button           `json:"button"`
-	Content          *string           `json:"content"`
-	ContentMultiline *bool             `json:"contentMultiline"`
-	Icon             *KeyValueIconEnum `json:"icon"`
-	IconURL          *string           `json:"iconUrl"`
-	OnClick          *OnClick          `json:"onClick"`
-	TopLabel         *string           `json:"topLabel"`
+	BottomLabel      *string           `json:"bottomLabel,omitempty"`
+	Button           *Button           `json:"button,omitempty"`
+	Content          *string           `json:"content,omitempty"`
+	ContentMultiline *bool             `json:"contentMultiline,omitempty"`
+	Icon             *KeyValueIconEnum `json:"icon,omitempty"`
+	IconURL          *string           `json:"iconUrl,omitempty"`
+	OnClick          *OnClick          `json:"onClick,omitempty"`
+	TopLabel         *string           `json:"topLabel,omitempty"`
 }

@@ -15,7 +15,7 @@ type ContributorActivityAuthorSimpleUser struct {
 	ReceivedEventsURL string  `json:"received_events_url"`
 	ReposURL          string  `json:"repos_url"`
 	SiteAdmin         bool    `json:"site_admin"`
-	StarredAt         *string `json:"starred_at"`
+	StarredAt         *string `json:"starred_at,omitempty"`
 	StarredURL        string  `json:"starred_url"`
 	SubscriptionsURL  string  `json:"subscriptions_url"`
 	Type              string  `json:"type"`
@@ -23,10 +23,10 @@ type ContributorActivityAuthorSimpleUser struct {
 }
 
 type ContributorActivityWeeks struct {
-	A *int64 `json:"a"`
-	C *int64 `json:"c"`
-	D *int64 `json:"d"`
-	W *int64 `json:"w"`
+	A *int64 `json:"a,omitempty"`
+	C *int64 `json:"c,omitempty"`
+	D *int64 `json:"d,omitempty"`
+	W *int64 `json:"w,omitempty"`
 }
 
 type ContributorActivity struct {

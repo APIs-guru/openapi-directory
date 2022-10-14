@@ -1,6 +1,6 @@
 package shared
 
 type ProductstatusesCustomBatchResponse struct {
-	Entries []ProductstatusesCustomBatchResponseEntry `json:"entries"`
-	Kind    *string                                   `json:"kind"`
+	Entries []ProductstatusesCustomBatchResponseEntry `json:"entries,omitempty"`
+	Kind    *string                                   `json:"kind,omitempty"`
 }

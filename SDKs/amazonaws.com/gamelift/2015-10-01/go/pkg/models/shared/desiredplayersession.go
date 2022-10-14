@@ -1,6 +1,6 @@
 package shared
 
 type DesiredPlayerSession struct {
-	PlayerData *string `json:"PlayerData"`
-	PlayerID   *string `json:"PlayerId"`
+	PlayerData *string `json:"PlayerData,omitempty"`
+	PlayerID   *string `json:"PlayerId,omitempty"`
 }

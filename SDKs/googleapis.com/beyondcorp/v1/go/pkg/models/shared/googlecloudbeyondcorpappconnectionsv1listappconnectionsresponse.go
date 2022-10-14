@@ -1,7 +1,7 @@
 package shared
 
 type GoogleCloudBeyondcorpAppconnectionsV1ListAppConnectionsResponse struct {
-	AppConnections []GoogleCloudBeyondcorpAppconnectionsV1AppConnection `json:"appConnections"`
-	NextPageToken  *string                                              `json:"nextPageToken"`
-	Unreachable    []string                                             `json:"unreachable"`
+	AppConnections []GoogleCloudBeyondcorpAppconnectionsV1AppConnection `json:"appConnections,omitempty"`
+	NextPageToken  *string                                              `json:"nextPageToken,omitempty"`
+	Unreachable    []string                                             `json:"unreachable,omitempty"`
 }

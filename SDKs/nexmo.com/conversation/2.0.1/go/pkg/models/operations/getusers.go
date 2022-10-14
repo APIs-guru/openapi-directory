@@ -1,9 +1,9 @@
 package operations
 
 type GetUsers200ApplicationJSON struct {
-	Href *string `json:"href"`
-	ID   *string `json:"id"`
-	Name *string `json:"name"`
+	Href *string `json:"href,omitempty"`
+	ID   *string `json:"id,omitempty"`
+	Name *string `json:"name,omitempty"`
 }
 
 type GetUsersResponse struct {

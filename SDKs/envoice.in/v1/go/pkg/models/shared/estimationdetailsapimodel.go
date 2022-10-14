@@ -13,20 +13,20 @@ const (
 )
 
 type EstimationDetailsAPIModel struct {
-	AccessToken    *string                              `json:"AccessToken"`
-	Client         *ClientDetailsAPIModel               `json:"Client"`
-	ClonedFromID   *int32                               `json:"ClonedFromId"`
-	Currency       *CurrencyDetailsAPIModel             `json:"Currency"`
-	DiscountAmount *float64                             `json:"DiscountAmount"`
-	ExpiresOn      *time.Time                           `json:"ExpiresOn"`
-	ID             *int32                               `json:"Id"`
-	IssuedOn       *time.Time                           `json:"IssuedOn"`
-	Notes          *string                              `json:"Notes"`
-	Number         *string                              `json:"Number"`
-	PoNumber       *string                              `json:"PoNumber"`
-	Status         *EstimationDetailsAPIModelStatusEnum `json:"Status"`
-	SubTotalAmount *float64                             `json:"SubTotalAmount"`
-	TaxAmount      *float64                             `json:"TaxAmount"`
-	Terms          *string                              `json:"Terms"`
-	TotalAmount    *float64                             `json:"TotalAmount"`
+	AccessToken    *string                              `json:"AccessToken,omitempty"`
+	Client         *ClientDetailsAPIModel               `json:"Client,omitempty"`
+	ClonedFromID   *int32                               `json:"ClonedFromId,omitempty"`
+	Currency       *CurrencyDetailsAPIModel             `json:"Currency,omitempty"`
+	DiscountAmount *float64                             `json:"DiscountAmount,omitempty"`
+	ExpiresOn      *time.Time                           `json:"ExpiresOn,omitempty"`
+	ID             *int32                               `json:"Id,omitempty"`
+	IssuedOn       *time.Time                           `json:"IssuedOn,omitempty"`
+	Notes          *string                              `json:"Notes,omitempty"`
+	Number         *string                              `json:"Number,omitempty"`
+	PoNumber       *string                              `json:"PoNumber,omitempty"`
+	Status         *EstimationDetailsAPIModelStatusEnum `json:"Status,omitempty"`
+	SubTotalAmount *float64                             `json:"SubTotalAmount,omitempty"`
+	TaxAmount      *float64                             `json:"TaxAmount,omitempty"`
+	Terms          *string                              `json:"Terms,omitempty"`
+	TotalAmount    *float64                             `json:"TotalAmount,omitempty"`
 }

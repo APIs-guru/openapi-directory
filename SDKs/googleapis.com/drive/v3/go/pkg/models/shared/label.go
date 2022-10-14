@@ -1,8 +1,8 @@
 package shared
 
 type Label struct {
-	Fields     map[string]LabelField `json:"fields"`
-	ID         *string               `json:"id"`
-	Kind       *string               `json:"kind"`
-	RevisionID *string               `json:"revisionId"`
+	Fields     map[string]LabelField `json:"fields,omitempty"`
+	ID         *string               `json:"id,omitempty"`
+	Kind       *string               `json:"kind,omitempty"`
+	RevisionID *string               `json:"revisionId,omitempty"`
 }

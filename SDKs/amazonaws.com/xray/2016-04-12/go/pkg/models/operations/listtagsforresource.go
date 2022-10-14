@@ -15,7 +15,7 @@ type ListTagsForResourceHeaders struct {
 }
 
 type ListTagsForResourceRequestBody struct {
-	NextToken   *string `json:"NextToken"`
+	NextToken   *string `json:"NextToken,omitempty"`
 	ResourceArn string  `json:"ResourceARN"`
 }
 

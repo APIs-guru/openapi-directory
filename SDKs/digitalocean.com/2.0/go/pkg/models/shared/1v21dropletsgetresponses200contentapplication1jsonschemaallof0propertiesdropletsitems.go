@@ -61,26 +61,26 @@ const (
 )
 
 type Onev21dropletsGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesDropletsItemsImage struct {
-	CreatedAt     *time.Time                                                                                                    `json:"created_at"`
-	Description   *string                                                                                                       `json:"description"`
-	Distribution  *Onev21dropletsGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesDropletsItemsImageDistributionEnum `json:"distribution"`
-	ErrorMessage  *string                                                                                                       `json:"error_message"`
-	ID            *int64                                                                                                        `json:"id"`
-	MinDiskSize   *int64                                                                                                        `json:"min_disk_size"`
-	Name          *string                                                                                                       `json:"name"`
-	Public        *bool                                                                                                         `json:"public"`
-	Regions       []Onev21dropletsGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesDropletsItemsImageRegionsEnum     `json:"regions"`
-	SizeGigabytes *float32                                                                                                      `json:"size_gigabytes"`
-	Slug          *string                                                                                                       `json:"slug"`
-	Status        *Onev21dropletsGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesDropletsItemsImageStatusEnum       `json:"status"`
-	Tags          []string                                                                                                      `json:"tags"`
-	Type          *Onev21dropletsGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesDropletsItemsImageTypeEnum         `json:"type"`
+	CreatedAt     *time.Time                                                                                                    `json:"created_at,omitempty"`
+	Description   *string                                                                                                       `json:"description,omitempty"`
+	Distribution  *Onev21dropletsGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesDropletsItemsImageDistributionEnum `json:"distribution,omitempty"`
+	ErrorMessage  *string                                                                                                       `json:"error_message,omitempty"`
+	ID            *int64                                                                                                        `json:"id,omitempty"`
+	MinDiskSize   *int64                                                                                                        `json:"min_disk_size,omitempty"`
+	Name          *string                                                                                                       `json:"name,omitempty"`
+	Public        *bool                                                                                                         `json:"public,omitempty"`
+	Regions       []Onev21dropletsGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesDropletsItemsImageRegionsEnum     `json:"regions,omitempty"`
+	SizeGigabytes *float32                                                                                                      `json:"size_gigabytes,omitempty"`
+	Slug          *string                                                                                                       `json:"slug,omitempty"`
+	Status        *Onev21dropletsGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesDropletsItemsImageStatusEnum       `json:"status,omitempty"`
+	Tags          []string                                                                                                      `json:"tags,omitempty"`
+	Type          *Onev21dropletsGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesDropletsItemsImageTypeEnum         `json:"type,omitempty"`
 }
 
 type Onev21dropletsGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesDropletsItemsKernel struct {
-	ID      *int64  `json:"id"`
-	Name    *string `json:"name"`
-	Version *string `json:"version"`
+	ID      *int64  `json:"id,omitempty"`
+	Name    *string `json:"name,omitempty"`
+	Version *string `json:"version,omitempty"`
 }
 
 type Onev21dropletsGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesDropletsItemsNetworksV4TypeEnum string
@@ -91,10 +91,10 @@ const (
 )
 
 type Onev21dropletsGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesDropletsItemsNetworksV4 struct {
-	Gateway   *string                                                                                                    `json:"gateway"`
-	IPAddress *string                                                                                                    `json:"ip_address"`
-	Netmask   *string                                                                                                    `json:"netmask"`
-	Type      *Onev21dropletsGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesDropletsItemsNetworksV4TypeEnum `json:"type"`
+	Gateway   *string                                                                                                    `json:"gateway,omitempty"`
+	IPAddress *string                                                                                                    `json:"ip_address,omitempty"`
+	Netmask   *string                                                                                                    `json:"netmask,omitempty"`
+	Type      *Onev21dropletsGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesDropletsItemsNetworksV4TypeEnum `json:"type,omitempty"`
 }
 
 type Onev21dropletsGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesDropletsItemsNetworksV6TypeEnum string
@@ -104,20 +104,20 @@ const (
 )
 
 type Onev21dropletsGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesDropletsItemsNetworksV6 struct {
-	Gateway   *string                                                                                                    `json:"gateway"`
-	IPAddress *string                                                                                                    `json:"ip_address"`
-	Netmask   *int64                                                                                                     `json:"netmask"`
-	Type      *Onev21dropletsGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesDropletsItemsNetworksV6TypeEnum `json:"type"`
+	Gateway   *string                                                                                                    `json:"gateway,omitempty"`
+	IPAddress *string                                                                                                    `json:"ip_address,omitempty"`
+	Netmask   *int64                                                                                                     `json:"netmask,omitempty"`
+	Type      *Onev21dropletsGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesDropletsItemsNetworksV6TypeEnum `json:"type,omitempty"`
 }
 
 type Onev21dropletsGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesDropletsItemsNetworks struct {
-	V4 []Onev21dropletsGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesDropletsItemsNetworksV4 `json:"v4"`
-	V6 []Onev21dropletsGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesDropletsItemsNetworksV6 `json:"v6"`
+	V4 []Onev21dropletsGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesDropletsItemsNetworksV4 `json:"v4,omitempty"`
+	V6 []Onev21dropletsGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesDropletsItemsNetworksV6 `json:"v6,omitempty"`
 }
 
 type Onev21dropletsGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesDropletsItemsNextBackupWindow struct {
-	End   *time.Time `json:"end"`
-	Start *time.Time `json:"start"`
+	End   *time.Time `json:"end,omitempty"`
+	Start *time.Time `json:"start,omitempty"`
 }
 
 type Onev21dropletsGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesDropletsItemsSize struct {
@@ -163,5 +163,5 @@ type Onev21dropletsGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesD
 	Tags             []string                                                                                                `json:"tags"`
 	Vcpus            int64                                                                                                   `json:"vcpus"`
 	VolumeIds        []string                                                                                                `json:"volume_ids"`
-	VpcUUID          *string                                                                                                 `json:"vpc_uuid"`
+	VpcUUID          *string                                                                                                 `json:"vpc_uuid,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type NetworkConfiguration struct {
-	AssignPublicIP *AssignPublicIPEnum `json:"assignPublicIp"`
+	AssignPublicIP *AssignPublicIPEnum `json:"assignPublicIp,omitempty"`
 }

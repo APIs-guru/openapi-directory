@@ -10,25 +10,25 @@ type ScimSetInformationForProvisionedUserPathParams struct {
 }
 
 type ScimSetInformationForProvisionedUserRequestBodyEmails struct {
-	Primary *bool   `json:"primary"`
-	Type    *string `json:"type"`
+	Primary *bool   `json:"primary,omitempty"`
+	Type    *string `json:"type,omitempty"`
 	Value   string  `json:"value"`
 }
 
 type ScimSetInformationForProvisionedUserRequestBodyName struct {
 	FamilyName string  `json:"familyName"`
-	Formatted  *string `json:"formatted"`
+	Formatted  *string `json:"formatted,omitempty"`
 	GivenName  string  `json:"givenName"`
 }
 
 type ScimSetInformationForProvisionedUserRequestBody struct {
-	Active      *bool                                                   `json:"active"`
-	DisplayName *string                                                 `json:"displayName"`
+	Active      *bool                                                   `json:"active,omitempty"`
+	DisplayName *string                                                 `json:"displayName,omitempty"`
 	Emails      []ScimSetInformationForProvisionedUserRequestBodyEmails `json:"emails"`
-	ExternalID  *string                                                 `json:"externalId"`
-	Groups      []string                                                `json:"groups"`
+	ExternalID  *string                                                 `json:"externalId,omitempty"`
+	Groups      []string                                                `json:"groups,omitempty"`
 	Name        ScimSetInformationForProvisionedUserRequestBodyName     `json:"name"`
-	Schemas     []string                                                `json:"schemas"`
+	Schemas     []string                                                `json:"schemas,omitempty"`
 	UserName    string                                                  `json:"userName"`
 }
 

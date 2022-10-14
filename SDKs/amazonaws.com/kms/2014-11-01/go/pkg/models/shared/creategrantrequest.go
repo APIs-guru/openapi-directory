@@ -1,11 +1,11 @@
 package shared
 
 type CreateGrantRequest struct {
-	Constraints       *GrantConstraints    `json:"Constraints"`
-	GrantTokens       []string             `json:"GrantTokens"`
+	Constraints       *GrantConstraints    `json:"Constraints,omitempty"`
+	GrantTokens       []string             `json:"GrantTokens,omitempty"`
 	GranteePrincipal  string               `json:"GranteePrincipal"`
 	KeyID             string               `json:"KeyId"`
-	Name              *string              `json:"Name"`
+	Name              *string              `json:"Name,omitempty"`
 	Operations        []GrantOperationEnum `json:"Operations"`
-	RetiringPrincipal *string              `json:"RetiringPrincipal"`
+	RetiringPrincipal *string              `json:"RetiringPrincipal,omitempty"`
 }

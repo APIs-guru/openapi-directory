@@ -5,13 +5,13 @@ import (
 )
 
 type TrialComponentMetricSummary struct {
-	Avg        *float64   `json:"Avg"`
-	Count      *int64     `json:"Count"`
-	Last       *float64   `json:"Last"`
-	Max        *float64   `json:"Max"`
-	MetricName *string    `json:"MetricName"`
-	Min        *float64   `json:"Min"`
-	SourceArn  *string    `json:"SourceArn"`
-	StdDev     *float64   `json:"StdDev"`
-	TimeStamp  *time.Time `json:"TimeStamp"`
+	Avg        *float64   `json:"Avg,omitempty"`
+	Count      *int64     `json:"Count,omitempty"`
+	Last       *float64   `json:"Last,omitempty"`
+	Max        *float64   `json:"Max,omitempty"`
+	MetricName *string    `json:"MetricName,omitempty"`
+	Min        *float64   `json:"Min,omitempty"`
+	SourceArn  *string    `json:"SourceArn,omitempty"`
+	StdDev     *float64   `json:"StdDev,omitempty"`
+	TimeStamp  *time.Time `json:"TimeStamp,omitempty"`
 }

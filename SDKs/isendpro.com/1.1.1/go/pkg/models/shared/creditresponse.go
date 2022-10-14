@@ -1,5 +1,5 @@
 package shared
 
 type CreditResponse struct {
-	Etat *interface{} `json:"etat"`
+	Etat *interface{} `json:"etat,omitempty"`
 }

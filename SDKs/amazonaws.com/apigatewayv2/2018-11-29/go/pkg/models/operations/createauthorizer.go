@@ -26,20 +26,20 @@ const (
 )
 
 type CreateAuthorizerRequestBodyJwtConfiguration struct {
-	Audience []string `json:"Audience"`
-	Issuer   *string  `json:"Issuer"`
+	Audience []string `json:"Audience,omitempty"`
+	Issuer   *string  `json:"Issuer,omitempty"`
 }
 
 type CreateAuthorizerRequestBody struct {
-	AuthorizerCredentialsArn       *string                                       `json:"authorizerCredentialsArn"`
-	AuthorizerPayloadFormatVersion *string                                       `json:"authorizerPayloadFormatVersion"`
-	AuthorizerResultTTLInSeconds   *int64                                        `json:"authorizerResultTtlInSeconds"`
+	AuthorizerCredentialsArn       *string                                       `json:"authorizerCredentialsArn,omitempty"`
+	AuthorizerPayloadFormatVersion *string                                       `json:"authorizerPayloadFormatVersion,omitempty"`
+	AuthorizerResultTTLInSeconds   *int64                                        `json:"authorizerResultTtlInSeconds,omitempty"`
 	AuthorizerType                 CreateAuthorizerRequestBodyAuthorizerTypeEnum `json:"authorizerType"`
-	AuthorizerURI                  *string                                       `json:"authorizerUri"`
-	EnableSimpleResponses          *bool                                         `json:"enableSimpleResponses"`
+	AuthorizerURI                  *string                                       `json:"authorizerUri,omitempty"`
+	EnableSimpleResponses          *bool                                         `json:"enableSimpleResponses,omitempty"`
 	IdentitySource                 []string                                      `json:"identitySource"`
-	IdentityValidationExpression   *string                                       `json:"identityValidationExpression"`
-	JwtConfiguration               *CreateAuthorizerRequestBodyJwtConfiguration  `json:"jwtConfiguration"`
+	IdentityValidationExpression   *string                                       `json:"identityValidationExpression,omitempty"`
+	JwtConfiguration               *CreateAuthorizerRequestBodyJwtConfiguration  `json:"jwtConfiguration,omitempty"`
 	Name                           string                                        `json:"name"`
 }
 

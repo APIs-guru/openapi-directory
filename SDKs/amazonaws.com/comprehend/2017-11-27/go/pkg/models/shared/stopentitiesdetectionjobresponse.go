@@ -1,6 +1,6 @@
 package shared
 
 type StopEntitiesDetectionJobResponse struct {
-	JobID     *string        `json:"JobId"`
-	JobStatus *JobStatusEnum `json:"JobStatus"`
+	JobID     *string        `json:"JobId,omitempty"`
+	JobStatus *JobStatusEnum `json:"JobStatus,omitempty"`
 }

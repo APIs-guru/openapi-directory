@@ -1,6 +1,6 @@
 package shared
 
 type CreateDomainResponse struct {
-	DomainArn *string `json:"DomainArn"`
-	URL       *string `json:"Url"`
+	DomainArn *string `json:"DomainArn,omitempty"`
+	URL       *string `json:"Url,omitempty"`
 }

@@ -33,9 +33,9 @@ const (
 )
 
 type ArtistForEventContract struct {
-	Artist         *ArtistContract                           `json:"artist"`
-	EffectiveRoles *ArtistForEventContractEffectiveRolesEnum `json:"effectiveRoles"`
-	ID             *int32                                    `json:"id"`
-	Name           *string                                   `json:"name"`
-	Roles          *ArtistForEventContractRolesEnum          `json:"roles"`
+	Artist         *ArtistContract                           `json:"artist,omitempty"`
+	EffectiveRoles *ArtistForEventContractEffectiveRolesEnum `json:"effectiveRoles,omitempty"`
+	ID             *int32                                    `json:"id,omitempty"`
+	Name           *string                                   `json:"name,omitempty"`
+	Roles          *ArtistForEventContractRolesEnum          `json:"roles,omitempty"`
 }

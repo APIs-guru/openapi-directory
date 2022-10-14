@@ -6,7 +6,7 @@ import (
 
 type CreateFolderRequestBodyFolder struct {
 	Name           string  `json:"name"`
-	ParentFolderID *string `json:"parent_folder_id"`
+	ParentFolderID *string `json:"parent_folder_id,omitempty"`
 }
 
 type CreateFolderRequestBodyCreateFolderData struct {
@@ -23,10 +23,10 @@ type CreateFolderRequest struct {
 }
 
 type CreateFolder200ApplicationJSONFolder struct {
-	ID             *string `json:"id"`
-	Name           *string `json:"name"`
-	ParentFolderID *string `json:"parent_folder_id"`
-	Path           *string `json:"path"`
+	ID             *string `json:"id,omitempty"`
+	Name           *string `json:"name,omitempty"`
+	ParentFolderID *string `json:"parent_folder_id,omitempty"`
+	Path           *string `json:"path,omitempty"`
 }
 
 type CreateFolderResponse struct {

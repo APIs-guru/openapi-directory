@@ -1,7 +1,7 @@
 package shared
 
 type Environment struct {
-	BenchmarkIndex   *float64 `json:"benchmarkIndex"`
-	HostUserAgent    *string  `json:"hostUserAgent"`
-	NetworkUserAgent *string  `json:"networkUserAgent"`
+	BenchmarkIndex   *float64 `json:"benchmarkIndex,omitempty"`
+	HostUserAgent    *string  `json:"hostUserAgent,omitempty"`
+	NetworkUserAgent *string  `json:"networkUserAgent,omitempty"`
 }

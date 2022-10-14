@@ -1,7 +1,7 @@
 package shared
 
 type AssessmentReportEvidenceError struct {
-	ErrorCode    *string `json:"errorCode"`
-	ErrorMessage *string `json:"errorMessage"`
-	EvidenceID   *string `json:"evidenceId"`
+	ErrorCode    *string `json:"errorCode,omitempty"`
+	ErrorMessage *string `json:"errorMessage,omitempty"`
+	EvidenceID   *string `json:"evidenceId,omitempty"`
 }

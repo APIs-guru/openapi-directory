@@ -1,12 +1,12 @@
 package shared
 
 type AdminEventRepresentation struct {
-	AuthDetails    *AuthDetailsRepresentation `json:"authDetails"`
-	Error          *string                    `json:"error"`
-	OperationType  *string                    `json:"operationType"`
-	RealmID        *string                    `json:"realmId"`
-	Representation *string                    `json:"representation"`
-	ResourcePath   *string                    `json:"resourcePath"`
-	ResourceType   *string                    `json:"resourceType"`
-	Time           *int64                     `json:"time"`
+	AuthDetails    *AuthDetailsRepresentation `json:"authDetails,omitempty"`
+	Error          *string                    `json:"error,omitempty"`
+	OperationType  *string                    `json:"operationType,omitempty"`
+	RealmID        *string                    `json:"realmId,omitempty"`
+	Representation *string                    `json:"representation,omitempty"`
+	ResourcePath   *string                    `json:"resourcePath,omitempty"`
+	ResourceType   *string                    `json:"resourceType,omitempty"`
+	Time           *int64                     `json:"time,omitempty"`
 }

@@ -5,8 +5,8 @@ type UpdateNetworkWirelessBillingPathParams struct {
 }
 
 type UpdateNetworkWirelessBillingRequestBodyPlansBandwidthLimits struct {
-	LimitDown *int64 `json:"limitDown"`
-	LimitUp   *int64 `json:"limitUp"`
+	LimitDown *int64 `json:"limitDown,omitempty"`
+	LimitUp   *int64 `json:"limitUp,omitempty"`
 }
 
 type UpdateNetworkWirelessBillingRequestBodyPlansTimeLimitEnum string
@@ -20,14 +20,14 @@ const (
 
 type UpdateNetworkWirelessBillingRequestBodyPlans struct {
 	BandwidthLimits UpdateNetworkWirelessBillingRequestBodyPlansBandwidthLimits `json:"bandwidthLimits"`
-	ID              *string                                                     `json:"id"`
+	ID              *string                                                     `json:"id,omitempty"`
 	Price           float32                                                     `json:"price"`
 	TimeLimit       UpdateNetworkWirelessBillingRequestBodyPlansTimeLimitEnum   `json:"timeLimit"`
 }
 
 type UpdateNetworkWirelessBillingRequestBody struct {
-	Currency *string                                        `json:"currency"`
-	Plans    []UpdateNetworkWirelessBillingRequestBodyPlans `json:"plans"`
+	Currency *string                                        `json:"currency,omitempty"`
+	Plans    []UpdateNetworkWirelessBillingRequestBodyPlans `json:"plans,omitempty"`
 }
 
 type UpdateNetworkWirelessBillingRequest struct {

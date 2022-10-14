@@ -9,13 +9,13 @@ const (
 )
 
 type AndroidInstrumentationTest struct {
-	AppApk             *FileReference                                    `json:"appApk"`
-	AppBundle          *AppBundle                                        `json:"appBundle"`
-	AppPackageID       *string                                           `json:"appPackageId"`
-	OrchestratorOption *AndroidInstrumentationTestOrchestratorOptionEnum `json:"orchestratorOption"`
-	ShardingOption     *ShardingOption                                   `json:"shardingOption"`
-	TestApk            *FileReference                                    `json:"testApk"`
-	TestPackageID      *string                                           `json:"testPackageId"`
-	TestRunnerClass    *string                                           `json:"testRunnerClass"`
-	TestTargets        []string                                          `json:"testTargets"`
+	AppApk             *FileReference                                    `json:"appApk,omitempty"`
+	AppBundle          *AppBundle                                        `json:"appBundle,omitempty"`
+	AppPackageID       *string                                           `json:"appPackageId,omitempty"`
+	OrchestratorOption *AndroidInstrumentationTestOrchestratorOptionEnum `json:"orchestratorOption,omitempty"`
+	ShardingOption     *ShardingOption                                   `json:"shardingOption,omitempty"`
+	TestApk            *FileReference                                    `json:"testApk,omitempty"`
+	TestPackageID      *string                                           `json:"testPackageId,omitempty"`
+	TestRunnerClass    *string                                           `json:"testRunnerClass,omitempty"`
+	TestTargets        []string                                          `json:"testTargets,omitempty"`
 }

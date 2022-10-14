@@ -15,9 +15,9 @@ type DescribeSavingsPlanRatesHeaders struct {
 }
 
 type DescribeSavingsPlanRatesRequestBody struct {
-	Filters       []shared.SavingsPlanRateFilter `json:"filters"`
-	MaxResults    *int64                         `json:"maxResults"`
-	NextToken     *string                        `json:"nextToken"`
+	Filters       []shared.SavingsPlanRateFilter `json:"filters,omitempty"`
+	MaxResults    *int64                         `json:"maxResults,omitempty"`
+	NextToken     *string                        `json:"nextToken,omitempty"`
 	SavingsPlanID string                         `json:"savingsPlanId"`
 }
 

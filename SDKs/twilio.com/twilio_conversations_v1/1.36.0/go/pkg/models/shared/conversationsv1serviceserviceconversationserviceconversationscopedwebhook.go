@@ -5,13 +5,13 @@ import (
 )
 
 type ConversationsV1ServiceServiceConversationServiceConversationScopedWebhook struct {
-	AccountSid      *string      `json:"account_sid"`
-	ChatServiceSid  *string      `json:"chat_service_sid"`
-	Configuration   *interface{} `json:"configuration"`
-	ConversationSid *string      `json:"conversation_sid"`
-	DateCreated     *time.Time   `json:"date_created"`
-	DateUpdated     *time.Time   `json:"date_updated"`
-	Sid             *string      `json:"sid"`
-	Target          *string      `json:"target"`
-	URL             *string      `json:"url"`
+	AccountSid      *string      `json:"account_sid,omitempty"`
+	ChatServiceSid  *string      `json:"chat_service_sid,omitempty"`
+	Configuration   *interface{} `json:"configuration,omitempty"`
+	ConversationSid *string      `json:"conversation_sid,omitempty"`
+	DateCreated     *time.Time   `json:"date_created,omitempty"`
+	DateUpdated     *time.Time   `json:"date_updated,omitempty"`
+	Sid             *string      `json:"sid,omitempty"`
+	Target          *string      `json:"target,omitempty"`
+	URL             *string      `json:"url,omitempty"`
 }

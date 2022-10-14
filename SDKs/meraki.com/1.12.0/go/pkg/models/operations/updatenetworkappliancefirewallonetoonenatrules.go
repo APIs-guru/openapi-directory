@@ -14,9 +14,9 @@ const (
 )
 
 type UpdateNetworkApplianceFirewallOneToOneNatRulesRequestBodyRulesAllowedInbound struct {
-	AllowedIps       []string                                                                                  `json:"allowedIps"`
-	DestinationPorts []string                                                                                  `json:"destinationPorts"`
-	Protocol         *UpdateNetworkApplianceFirewallOneToOneNatRulesRequestBodyRulesAllowedInboundProtocolEnum `json:"protocol"`
+	AllowedIps       []string                                                                                  `json:"allowedIps,omitempty"`
+	DestinationPorts []string                                                                                  `json:"destinationPorts,omitempty"`
+	Protocol         *UpdateNetworkApplianceFirewallOneToOneNatRulesRequestBodyRulesAllowedInboundProtocolEnum `json:"protocol,omitempty"`
 }
 
 type UpdateNetworkApplianceFirewallOneToOneNatRulesRequestBodyRulesUplinkEnum string
@@ -27,11 +27,11 @@ const (
 )
 
 type UpdateNetworkApplianceFirewallOneToOneNatRulesRequestBodyRules struct {
-	AllowedInbound []UpdateNetworkApplianceFirewallOneToOneNatRulesRequestBodyRulesAllowedInbound `json:"allowedInbound"`
+	AllowedInbound []UpdateNetworkApplianceFirewallOneToOneNatRulesRequestBodyRulesAllowedInbound `json:"allowedInbound,omitempty"`
 	LanIP          string                                                                         `json:"lanIp"`
-	Name           *string                                                                        `json:"name"`
-	PublicIP       *string                                                                        `json:"publicIp"`
-	Uplink         *UpdateNetworkApplianceFirewallOneToOneNatRulesRequestBodyRulesUplinkEnum      `json:"uplink"`
+	Name           *string                                                                        `json:"name,omitempty"`
+	PublicIP       *string                                                                        `json:"publicIp,omitempty"`
+	Uplink         *UpdateNetworkApplianceFirewallOneToOneNatRulesRequestBodyRulesUplinkEnum      `json:"uplink,omitempty"`
 }
 
 type UpdateNetworkApplianceFirewallOneToOneNatRulesRequestBody struct {

@@ -10,7 +10,7 @@ const (
 )
 
 type GoogleCloudHealthcareV1beta1DicomBigQueryDestination struct {
-	Force            *bool                                                                     `json:"force"`
-	TableURI         *string                                                                   `json:"tableUri"`
-	WriteDisposition *GoogleCloudHealthcareV1beta1DicomBigQueryDestinationWriteDispositionEnum `json:"writeDisposition"`
+	Force            *bool                                                                     `json:"force,omitempty"`
+	TableURI         *string                                                                   `json:"tableUri,omitempty"`
+	WriteDisposition *GoogleCloudHealthcareV1beta1DicomBigQueryDestinationWriteDispositionEnum `json:"writeDisposition,omitempty"`
 }

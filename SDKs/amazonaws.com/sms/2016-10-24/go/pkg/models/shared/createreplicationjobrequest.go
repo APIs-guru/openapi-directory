@@ -5,14 +5,14 @@ import (
 )
 
 type CreateReplicationJobRequest struct {
-	Description              *string          `json:"description"`
-	Encrypted                *bool            `json:"encrypted"`
-	Frequency                *int64           `json:"frequency"`
-	KmsKeyID                 *string          `json:"kmsKeyId"`
-	LicenseType              *LicenseTypeEnum `json:"licenseType"`
-	NumberOfRecentAmisToKeep *int64           `json:"numberOfRecentAmisToKeep"`
-	RoleName                 *string          `json:"roleName"`
-	RunOnce                  *bool            `json:"runOnce"`
+	Description              *string          `json:"description,omitempty"`
+	Encrypted                *bool            `json:"encrypted,omitempty"`
+	Frequency                *int64           `json:"frequency,omitempty"`
+	KmsKeyID                 *string          `json:"kmsKeyId,omitempty"`
+	LicenseType              *LicenseTypeEnum `json:"licenseType,omitempty"`
+	NumberOfRecentAmisToKeep *int64           `json:"numberOfRecentAmisToKeep,omitempty"`
+	RoleName                 *string          `json:"roleName,omitempty"`
+	RunOnce                  *bool            `json:"runOnce,omitempty"`
 	SeedReplicationTime      time.Time        `json:"seedReplicationTime"`
 	ServerID                 string           `json:"serverId"`
 }

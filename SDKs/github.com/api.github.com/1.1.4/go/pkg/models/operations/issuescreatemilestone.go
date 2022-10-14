@@ -17,9 +17,9 @@ const (
 )
 
 type IssuesCreateMilestoneRequestBody struct {
-	Description *string                                    `json:"description"`
-	DueOn       *string                                    `json:"due_on"`
-	State       *IssuesCreateMilestoneRequestBodyStateEnum `json:"state"`
+	Description *string                                    `json:"description,omitempty"`
+	DueOn       *string                                    `json:"due_on,omitempty"`
+	State       *IssuesCreateMilestoneRequestBodyStateEnum `json:"state,omitempty"`
 	Title       string                                     `json:"title"`
 }
 

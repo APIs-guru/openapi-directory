@@ -1,5 +1,5 @@
 package shared
 
 type DescribeProtectionResponse struct {
-	Protection *Protection `json:"Protection"`
+	Protection *Protection `json:"Protection,omitempty"`
 }

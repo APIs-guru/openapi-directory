@@ -1,9 +1,9 @@
 package shared
 
 type Attribute struct {
-	Attribute   *string `json:"attribute"`
-	Description *string `json:"description"`
-	Expression  *string `json:"expression"`
-	ID          *int64  `json:"id"`
-	Type        *string `json:"type"`
+	Attribute   *string `json:"attribute,omitempty"`
+	Description *string `json:"description,omitempty"`
+	Expression  *string `json:"expression,omitempty"`
+	ID          *int64  `json:"id,omitempty"`
+	Type        *string `json:"type,omitempty"`
 }

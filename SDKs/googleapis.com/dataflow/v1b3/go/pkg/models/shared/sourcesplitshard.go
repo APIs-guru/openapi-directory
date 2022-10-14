@@ -10,6 +10,6 @@ const (
 )
 
 type SourceSplitShard struct {
-	DerivationMode *SourceSplitShardDerivationModeEnum `json:"derivationMode"`
-	Source         *Source                             `json:"source"`
+	DerivationMode *SourceSplitShardDerivationModeEnum `json:"derivationMode,omitempty"`
+	Source         *Source                             `json:"source,omitempty"`
 }

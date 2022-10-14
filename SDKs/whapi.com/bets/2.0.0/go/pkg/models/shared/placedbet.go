@@ -1,17 +1,17 @@
 package shared
 
 type PlacedBet struct {
-	CashinValue      *float64       `json:"cashinValue"`
+	CashinValue      *float64       `json:"cashinValue,omitempty"`
 	EstimatedReturns float64        `json:"estimatedReturns"`
-	FreeBetValue     *float64       `json:"freeBetValue"`
+	FreeBetValue     *float64       `json:"freeBetValue,omitempty"`
 	ID               string         `json:"id"`
-	Legs             []PlacedBetLeg `json:"legs"`
-	NumLines         *int64         `json:"numLines"`
-	NumSelections    *int64         `json:"numSelections"`
-	Receipt          *string        `json:"receipt"`
+	Legs             []PlacedBetLeg `json:"legs,omitempty"`
+	NumLines         *int64         `json:"numLines,omitempty"`
+	NumSelections    *int64         `json:"numSelections,omitempty"`
+	Receipt          *string        `json:"receipt,omitempty"`
 	Settled          bool           `json:"settled"`
 	Stake            float64        `json:"stake"`
-	StakePerLine     *float64       `json:"stakePerLine"`
+	StakePerLine     *float64       `json:"stakePerLine,omitempty"`
 	Status           string         `json:"status"`
 	TransDateTime    string         `json:"transDateTime"`
 	TypeCode         string         `json:"typeCode"`

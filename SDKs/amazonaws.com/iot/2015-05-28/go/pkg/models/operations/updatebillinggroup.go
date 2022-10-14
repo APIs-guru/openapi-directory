@@ -19,12 +19,12 @@ type UpdateBillingGroupHeaders struct {
 }
 
 type UpdateBillingGroupRequestBodyBillingGroupProperties struct {
-	BillingGroupDescription *string `json:"billingGroupDescription"`
+	BillingGroupDescription *string `json:"billingGroupDescription,omitempty"`
 }
 
 type UpdateBillingGroupRequestBody struct {
 	BillingGroupProperties UpdateBillingGroupRequestBodyBillingGroupProperties `json:"billingGroupProperties"`
-	ExpectedVersion        *int64                                              `json:"expectedVersion"`
+	ExpectedVersion        *int64                                              `json:"expectedVersion,omitempty"`
 }
 
 type UpdateBillingGroupRequest struct {

@@ -11,10 +11,10 @@ const (
 )
 
 type GoogleCloudDataplexV1AssetDiscoveryStatus struct {
-	LastRunDuration *string                                             `json:"lastRunDuration"`
-	LastRunTime     *string                                             `json:"lastRunTime"`
-	Message         *string                                             `json:"message"`
-	State           *GoogleCloudDataplexV1AssetDiscoveryStatusStateEnum `json:"state"`
-	Stats           *GoogleCloudDataplexV1AssetDiscoveryStatusStats     `json:"stats"`
-	UpdateTime      *string                                             `json:"updateTime"`
+	LastRunDuration *string                                             `json:"lastRunDuration,omitempty"`
+	LastRunTime     *string                                             `json:"lastRunTime,omitempty"`
+	Message         *string                                             `json:"message,omitempty"`
+	State           *GoogleCloudDataplexV1AssetDiscoveryStatusStateEnum `json:"state,omitempty"`
+	Stats           *GoogleCloudDataplexV1AssetDiscoveryStatusStats     `json:"stats,omitempty"`
+	UpdateTime      *string                                             `json:"updateTime,omitempty"`
 }

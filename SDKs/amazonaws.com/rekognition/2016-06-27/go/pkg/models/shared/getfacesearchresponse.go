@@ -1,9 +1,9 @@
 package shared
 
 type GetFaceSearchResponse struct {
-	JobStatus     *VideoJobStatusEnum `json:"JobStatus"`
-	NextToken     *string             `json:"NextToken"`
-	Persons       []PersonMatch       `json:"Persons"`
-	StatusMessage *string             `json:"StatusMessage"`
-	VideoMetadata *VideoMetadata      `json:"VideoMetadata"`
+	JobStatus     *VideoJobStatusEnum `json:"JobStatus,omitempty"`
+	NextToken     *string             `json:"NextToken,omitempty"`
+	Persons       []PersonMatch       `json:"Persons,omitempty"`
+	StatusMessage *string             `json:"StatusMessage,omitempty"`
+	VideoMetadata *VideoMetadata      `json:"VideoMetadata,omitempty"`
 }

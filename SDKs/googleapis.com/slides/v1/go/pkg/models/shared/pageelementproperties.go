@@ -1,7 +1,7 @@
 package shared
 
 type PageElementProperties struct {
-	PageObjectID *string          `json:"pageObjectId"`
-	Size         *Size            `json:"size"`
-	Transform    *AffineTransform `json:"transform"`
+	PageObjectID *string          `json:"pageObjectId,omitempty"`
+	Size         *Size            `json:"size,omitempty"`
+	Transform    *AffineTransform `json:"transform,omitempty"`
 }

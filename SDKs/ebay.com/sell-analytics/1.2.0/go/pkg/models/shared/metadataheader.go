@@ -1,6 +1,6 @@
 package shared
 
 type MetadataHeader struct {
-	Key          *string      `json:"key"`
-	MetadataKeys []Definition `json:"metadataKeys"`
+	Key          *string      `json:"key,omitempty"`
+	MetadataKeys []Definition `json:"metadataKeys,omitempty"`
 }

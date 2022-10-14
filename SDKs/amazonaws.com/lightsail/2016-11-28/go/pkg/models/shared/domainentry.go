@@ -1,10 +1,10 @@
 package shared
 
 type DomainEntry struct {
-	ID      *string           `json:"id"`
-	IsAlias *bool             `json:"isAlias"`
-	Name    *string           `json:"name"`
-	Options map[string]string `json:"options"`
-	Target  *string           `json:"target"`
-	Type    *string           `json:"type"`
+	ID      *string           `json:"id,omitempty"`
+	IsAlias *bool             `json:"isAlias,omitempty"`
+	Name    *string           `json:"name,omitempty"`
+	Options map[string]string `json:"options,omitempty"`
+	Target  *string           `json:"target,omitempty"`
+	Type    *string           `json:"type,omitempty"`
 }

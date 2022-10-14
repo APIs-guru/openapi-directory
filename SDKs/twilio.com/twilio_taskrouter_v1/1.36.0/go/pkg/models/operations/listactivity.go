@@ -30,18 +30,18 @@ type ListActivityRequest struct {
 }
 
 type ListActivity200ApplicationJSONMeta struct {
-	FirstPageURL    *string `json:"first_page_url"`
-	Key             *string `json:"key"`
-	NextPageURL     *string `json:"next_page_url"`
-	Page            *int64  `json:"page"`
-	PageSize        *int64  `json:"page_size"`
-	PreviousPageURL *string `json:"previous_page_url"`
-	URL             *string `json:"url"`
+	FirstPageURL    *string `json:"first_page_url,omitempty"`
+	Key             *string `json:"key,omitempty"`
+	NextPageURL     *string `json:"next_page_url,omitempty"`
+	Page            *int64  `json:"page,omitempty"`
+	PageSize        *int64  `json:"page_size,omitempty"`
+	PreviousPageURL *string `json:"previous_page_url,omitempty"`
+	URL             *string `json:"url,omitempty"`
 }
 
 type ListActivity200ApplicationJSONListActivityResponse struct {
-	Activities []shared.TaskrouterV1WorkspaceActivity `json:"activities"`
-	Meta       *ListActivity200ApplicationJSONMeta    `json:"meta"`
+	Activities []shared.TaskrouterV1WorkspaceActivity `json:"activities,omitempty"`
+	Meta       *ListActivity200ApplicationJSONMeta    `json:"meta,omitempty"`
 }
 
 type ListActivityResponse struct {

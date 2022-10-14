@@ -1,11 +1,11 @@
 package shared
 
 type EventItemSearchResponse struct {
-	EventItems []EventItem `json:"eventItems"`
-	Href       *string     `json:"href"`
-	Limit      *int32      `json:"limit"`
-	Next       *string     `json:"next"`
-	Offset     *int32      `json:"offset"`
-	Prev       *string     `json:"prev"`
-	Total      *int32      `json:"total"`
+	EventItems []EventItem `json:"eventItems,omitempty"`
+	Href       *string     `json:"href,omitempty"`
+	Limit      *int32      `json:"limit,omitempty"`
+	Next       *string     `json:"next,omitempty"`
+	Offset     *int32      `json:"offset,omitempty"`
+	Prev       *string     `json:"prev,omitempty"`
+	Total      *int32      `json:"total,omitempty"`
 }

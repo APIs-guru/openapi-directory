@@ -27,17 +27,17 @@ const (
 )
 
 type SearchJobsRequest struct {
-	DisableKeywordMatch      *bool                                      `json:"disableKeywordMatch"`
-	DiversificationLevel     *SearchJobsRequestDiversificationLevelEnum `json:"diversificationLevel"`
-	EnableBroadening         *bool                                      `json:"enableBroadening"`
-	HistogramFacets          *HistogramFacets                           `json:"histogramFacets"`
-	JobQuery                 *JobQuery                                  `json:"jobQuery"`
-	JobView                  *SearchJobsRequestJobViewEnum              `json:"jobView"`
-	Offset                   *int32                                     `json:"offset"`
-	OrderBy                  *string                                    `json:"orderBy"`
-	PageSize                 *int32                                     `json:"pageSize"`
-	PageToken                *string                                    `json:"pageToken"`
-	RequestMetadata          *RequestMetadata                           `json:"requestMetadata"`
-	RequirePreciseResultSize *bool                                      `json:"requirePreciseResultSize"`
-	SearchMode               *SearchJobsRequestSearchModeEnum           `json:"searchMode"`
+	DisableKeywordMatch      *bool                                      `json:"disableKeywordMatch,omitempty"`
+	DiversificationLevel     *SearchJobsRequestDiversificationLevelEnum `json:"diversificationLevel,omitempty"`
+	EnableBroadening         *bool                                      `json:"enableBroadening,omitempty"`
+	HistogramFacets          *HistogramFacets                           `json:"histogramFacets,omitempty"`
+	JobQuery                 *JobQuery                                  `json:"jobQuery,omitempty"`
+	JobView                  *SearchJobsRequestJobViewEnum              `json:"jobView,omitempty"`
+	Offset                   *int32                                     `json:"offset,omitempty"`
+	OrderBy                  *string                                    `json:"orderBy,omitempty"`
+	PageSize                 *int32                                     `json:"pageSize,omitempty"`
+	PageToken                *string                                    `json:"pageToken,omitempty"`
+	RequestMetadata          *RequestMetadata                           `json:"requestMetadata,omitempty"`
+	RequirePreciseResultSize *bool                                      `json:"requirePreciseResultSize,omitempty"`
+	SearchMode               *SearchJobsRequestSearchModeEnum           `json:"searchMode,omitempty"`
 }

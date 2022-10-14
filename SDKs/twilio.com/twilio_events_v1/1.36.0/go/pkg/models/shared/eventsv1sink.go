@@ -5,13 +5,13 @@ import (
 )
 
 type EventsV1Sink struct {
-	DateCreated       *time.Time             `json:"date_created"`
-	DateUpdated       *time.Time             `json:"date_updated"`
-	Description       *string                `json:"description"`
-	Links             map[string]interface{} `json:"links"`
-	Sid               *string                `json:"sid"`
-	SinkConfiguration *interface{}           `json:"sink_configuration"`
-	SinkType          *SinkEnumSinkTypeEnum  `json:"sink_type"`
-	Status            *SinkEnumStatusEnum    `json:"status"`
-	URL               *string                `json:"url"`
+	DateCreated       *time.Time             `json:"date_created,omitempty"`
+	DateUpdated       *time.Time             `json:"date_updated,omitempty"`
+	Description       *string                `json:"description,omitempty"`
+	Links             map[string]interface{} `json:"links,omitempty"`
+	Sid               *string                `json:"sid,omitempty"`
+	SinkConfiguration *interface{}           `json:"sink_configuration,omitempty"`
+	SinkType          *SinkEnumSinkTypeEnum  `json:"sink_type,omitempty"`
+	Status            *SinkEnumStatusEnum    `json:"status,omitempty"`
+	URL               *string                `json:"url,omitempty"`
 }

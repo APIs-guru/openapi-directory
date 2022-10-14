@@ -1,5 +1,5 @@
 package shared
 
 type SharedDriveInfo struct {
-	SharedDriveIds []string `json:"sharedDriveIds"`
+	SharedDriveIds []string `json:"sharedDriveIds,omitempty"`
 }

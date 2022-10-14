@@ -9,7 +9,7 @@ const (
 )
 
 type DataFilterValueRange struct {
-	DataFilter     *DataFilter                             `json:"dataFilter"`
-	MajorDimension *DataFilterValueRangeMajorDimensionEnum `json:"majorDimension"`
-	Values         [][]interface{}                         `json:"values"`
+	DataFilter     *DataFilter                             `json:"dataFilter,omitempty"`
+	MajorDimension *DataFilterValueRangeMajorDimensionEnum `json:"majorDimension,omitempty"`
+	Values         [][]interface{}                         `json:"values,omitempty"`
 }

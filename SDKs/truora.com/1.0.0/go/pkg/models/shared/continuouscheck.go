@@ -14,14 +14,14 @@ const (
 )
 
 type ContinuousCheck struct {
-	ContinuousCheckID     *string                                  `json:"ContinuousCheckID"`
+	ContinuousCheckID     *string                                  `json:"ContinuousCheckID,omitempty"`
 	ContinuousCheckStatus ContinuousCheckContinuousCheckStatusEnum `json:"ContinuousCheckStatus"`
-	CreationDate          *time.Time                               `json:"CreationDate"`
-	Enabled               *bool                                    `json:"Enabled"`
+	CreationDate          *time.Time                               `json:"CreationDate,omitempty"`
+	Enabled               *bool                                    `json:"Enabled,omitempty"`
 	Frequency             string                                   `json:"Frequency"`
-	History               *ContinuousCheckEntry                    `json:"History"`
+	History               *ContinuousCheckEntry                    `json:"History,omitempty"`
 	LastCheckID           string                                   `json:"LastCheckID"`
-	NextRunDate           *time.Time                               `json:"NextRunDate"`
-	OriginalCheck         *Check                                   `json:"OriginalCheck"`
-	UpdateDate            *time.Time                               `json:"UpdateDate"`
+	NextRunDate           *time.Time                               `json:"NextRunDate,omitempty"`
+	OriginalCheck         *Check                                   `json:"OriginalCheck,omitempty"`
+	UpdateDate            *time.Time                               `json:"UpdateDate,omitempty"`
 }

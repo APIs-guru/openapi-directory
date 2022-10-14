@@ -9,8 +9,8 @@ const (
 )
 
 type History struct {
-	DisplayName  *string                  `json:"displayName"`
-	HistoryID    *string                  `json:"historyId"`
-	Name         *string                  `json:"name"`
-	TestPlatform *HistoryTestPlatformEnum `json:"testPlatform"`
+	DisplayName  *string                  `json:"displayName,omitempty"`
+	HistoryID    *string                  `json:"historyId,omitempty"`
+	Name         *string                  `json:"name,omitempty"`
+	TestPlatform *HistoryTestPlatformEnum `json:"testPlatform,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type CreateXSSMatchSetResponse struct {
-	ChangeToken *string      `json:"ChangeToken"`
-	XSSMatchSet *XSSMatchSet `json:"XssMatchSet"`
+	ChangeToken *string      `json:"ChangeToken,omitempty"`
+	XSSMatchSet *XSSMatchSet `json:"XssMatchSet,omitempty"`
 }

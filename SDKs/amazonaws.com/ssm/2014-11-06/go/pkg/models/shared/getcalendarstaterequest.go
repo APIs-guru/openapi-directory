@@ -1,6 +1,6 @@
 package shared
 
 type GetCalendarStateRequest struct {
-	AtTime        *string  `json:"AtTime"`
+	AtTime        *string  `json:"AtTime,omitempty"`
 	CalendarNames []string `json:"CalendarNames"`
 }

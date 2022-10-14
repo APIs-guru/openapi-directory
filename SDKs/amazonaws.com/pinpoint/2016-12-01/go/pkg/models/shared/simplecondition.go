@@ -1,7 +1,7 @@
 package shared
 
 type SimpleCondition struct {
-	EventCondition    *EventCondition    `json:"EventCondition"`
-	SegmentCondition  *SegmentCondition  `json:"SegmentCondition"`
-	SegmentDimensions *SegmentDimensions `json:"SegmentDimensions"`
+	EventCondition    *EventCondition    `json:"EventCondition,omitempty"`
+	SegmentCondition  *SegmentCondition  `json:"SegmentCondition,omitempty"`
+	SegmentDimensions *SegmentDimensions `json:"SegmentDimensions,omitempty"`
 }

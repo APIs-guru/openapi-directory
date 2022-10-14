@@ -1,7 +1,7 @@
 package shared
 
 type BlueGreenDeploymentConfiguration struct {
-	DeploymentReadyOption                     *DeploymentReadyOption         `json:"deploymentReadyOption"`
-	GreenFleetProvisioningOption              *GreenFleetProvisioningOption  `json:"greenFleetProvisioningOption"`
-	TerminateBlueInstancesOnDeploymentSuccess *BlueInstanceTerminationOption `json:"terminateBlueInstancesOnDeploymentSuccess"`
+	DeploymentReadyOption                     *DeploymentReadyOption         `json:"deploymentReadyOption,omitempty"`
+	GreenFleetProvisioningOption              *GreenFleetProvisioningOption  `json:"greenFleetProvisioningOption,omitempty"`
+	TerminateBlueInstancesOnDeploymentSuccess *BlueInstanceTerminationOption `json:"terminateBlueInstancesOnDeploymentSuccess,omitempty"`
 }

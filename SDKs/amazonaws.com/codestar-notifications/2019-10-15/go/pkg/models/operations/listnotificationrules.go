@@ -20,9 +20,9 @@ type ListNotificationRulesHeaders struct {
 }
 
 type ListNotificationRulesRequestBody struct {
-	Filters    []shared.ListNotificationRulesFilter `json:"Filters"`
-	MaxResults *int64                               `json:"MaxResults"`
-	NextToken  *string                              `json:"NextToken"`
+	Filters    []shared.ListNotificationRulesFilter `json:"Filters,omitempty"`
+	MaxResults *int64                               `json:"MaxResults,omitempty"`
+	NextToken  *string                              `json:"NextToken,omitempty"`
 }
 
 type ListNotificationRulesRequest struct {

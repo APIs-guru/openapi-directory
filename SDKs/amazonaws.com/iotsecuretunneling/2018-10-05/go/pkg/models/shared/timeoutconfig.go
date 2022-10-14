@@ -1,5 +1,5 @@
 package shared
 
 type TimeoutConfig struct {
-	MaxLifetimeTimeoutMinutes *int64 `json:"maxLifetimeTimeoutMinutes"`
+	MaxLifetimeTimeoutMinutes *int64 `json:"maxLifetimeTimeoutMinutes,omitempty"`
 }

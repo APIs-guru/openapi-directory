@@ -1,7 +1,7 @@
 package shared
 
 type ListEmployeeWagesResponse struct {
-	Cursor        *string        `json:"cursor"`
-	EmployeeWages []EmployeeWage `json:"employee_wages"`
-	Errors        []Error        `json:"errors"`
+	Cursor        *string        `json:"cursor,omitempty"`
+	EmployeeWages []EmployeeWage `json:"employee_wages,omitempty"`
+	Errors        []Error        `json:"errors,omitempty"`
 }

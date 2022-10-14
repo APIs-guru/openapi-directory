@@ -15,9 +15,9 @@ type CodeScanningGetAlertRequest struct {
 }
 
 type CodeScanningGetAlert503ApplicationJSON struct {
-	Code             *string `json:"code"`
-	DocumentationURL *string `json:"documentation_url"`
-	Message          *string `json:"message"`
+	Code             *string `json:"code,omitempty"`
+	DocumentationURL *string `json:"documentation_url,omitempty"`
+	Message          *string `json:"message,omitempty"`
 }
 
 type CodeScanningGetAlertResponse struct {

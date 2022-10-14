@@ -11,7 +11,7 @@ const (
 )
 
 type CollectdValue struct {
-	DataSourceName *string                          `json:"dataSourceName"`
-	DataSourceType *CollectdValueDataSourceTypeEnum `json:"dataSourceType"`
-	Value          *TypedValue                      `json:"value"`
+	DataSourceName *string                          `json:"dataSourceName,omitempty"`
+	DataSourceType *CollectdValueDataSourceTypeEnum `json:"dataSourceType,omitempty"`
+	Value          *TypedValue                      `json:"value,omitempty"`
 }

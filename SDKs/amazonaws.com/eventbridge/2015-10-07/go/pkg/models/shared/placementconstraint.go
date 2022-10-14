@@ -1,6 +1,6 @@
 package shared
 
 type PlacementConstraint struct {
-	Expression *string                      `json:"expression"`
-	Type       *PlacementConstraintTypeEnum `json:"type"`
+	Expression *string                      `json:"expression,omitempty"`
+	Type       *PlacementConstraintTypeEnum `json:"type,omitempty"`
 }

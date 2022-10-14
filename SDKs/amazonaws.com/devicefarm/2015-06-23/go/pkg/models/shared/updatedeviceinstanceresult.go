@@ -1,5 +1,5 @@
 package shared
 
 type UpdateDeviceInstanceResult struct {
-	DeviceInstance *DeviceInstance `json:"deviceInstance"`
+	DeviceInstance *DeviceInstance `json:"deviceInstance,omitempty"`
 }

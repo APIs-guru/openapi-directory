@@ -1,11 +1,11 @@
 package shared
 
 type UpdateBordersRequest struct {
-	Bottom          *Border    `json:"bottom"`
-	InnerHorizontal *Border    `json:"innerHorizontal"`
-	InnerVertical   *Border    `json:"innerVertical"`
-	Left            *Border    `json:"left"`
-	Range           *GridRange `json:"range"`
-	Right           *Border    `json:"right"`
-	Top             *Border    `json:"top"`
+	Bottom          *Border    `json:"bottom,omitempty"`
+	InnerHorizontal *Border    `json:"innerHorizontal,omitempty"`
+	InnerVertical   *Border    `json:"innerVertical,omitempty"`
+	Left            *Border    `json:"left,omitempty"`
+	Range           *GridRange `json:"range,omitempty"`
+	Right           *Border    `json:"right,omitempty"`
+	Top             *Border    `json:"top,omitempty"`
 }

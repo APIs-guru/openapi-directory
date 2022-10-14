@@ -1,5 +1,5 @@
 package shared
 
 type DescribeFleetLocationUtilizationOutput struct {
-	FleetUtilization *FleetUtilization `json:"FleetUtilization"`
+	FleetUtilization *FleetUtilization `json:"FleetUtilization,omitempty"`
 }

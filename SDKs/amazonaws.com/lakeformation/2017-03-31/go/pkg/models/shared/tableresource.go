@@ -1,8 +1,8 @@
 package shared
 
 type TableResource struct {
-	CatalogID     *string                `json:"CatalogId"`
+	CatalogID     *string                `json:"CatalogId,omitempty"`
 	DatabaseName  string                 `json:"DatabaseName"`
-	Name          *string                `json:"Name"`
-	TableWildcard map[string]interface{} `json:"TableWildcard"`
+	Name          *string                `json:"Name,omitempty"`
+	TableWildcard map[string]interface{} `json:"TableWildcard,omitempty"`
 }

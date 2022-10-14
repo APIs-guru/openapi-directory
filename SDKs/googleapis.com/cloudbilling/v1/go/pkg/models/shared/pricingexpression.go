@@ -1,11 +1,11 @@
 package shared
 
 type PricingExpression struct {
-	BaseUnit                 *string    `json:"baseUnit"`
-	BaseUnitConversionFactor *float64   `json:"baseUnitConversionFactor"`
-	BaseUnitDescription      *string    `json:"baseUnitDescription"`
-	DisplayQuantity          *float64   `json:"displayQuantity"`
-	TieredRates              []TierRate `json:"tieredRates"`
-	UsageUnit                *string    `json:"usageUnit"`
-	UsageUnitDescription     *string    `json:"usageUnitDescription"`
+	BaseUnit                 *string    `json:"baseUnit,omitempty"`
+	BaseUnitConversionFactor *float64   `json:"baseUnitConversionFactor,omitempty"`
+	BaseUnitDescription      *string    `json:"baseUnitDescription,omitempty"`
+	DisplayQuantity          *float64   `json:"displayQuantity,omitempty"`
+	TieredRates              []TierRate `json:"tieredRates,omitempty"`
+	UsageUnit                *string    `json:"usageUnit,omitempty"`
+	UsageUnitDescription     *string    `json:"usageUnitDescription,omitempty"`
 }

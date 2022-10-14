@@ -10,10 +10,10 @@ type MigrationsUpdateImportPathParams struct {
 }
 
 type MigrationsUpdateImportRequestBody struct {
-	TfvcProject *string `json:"tfvc_project"`
-	Vcs         *string `json:"vcs"`
-	VcsPassword *string `json:"vcs_password"`
-	VcsUsername *string `json:"vcs_username"`
+	TfvcProject *string `json:"tfvc_project,omitempty"`
+	Vcs         *string `json:"vcs,omitempty"`
+	VcsPassword *string `json:"vcs_password,omitempty"`
+	VcsUsername *string `json:"vcs_username,omitempty"`
 }
 
 type MigrationsUpdateImportRequest struct {

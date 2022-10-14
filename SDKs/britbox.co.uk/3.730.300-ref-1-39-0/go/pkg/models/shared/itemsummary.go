@@ -15,37 +15,37 @@ const (
 )
 
 type ItemSummary struct {
-	AdvisoryText          *string                `json:"advisoryText"`
-	AvailableEpisodeCount *int32                 `json:"availableEpisodeCount"`
-	AvailableSeasonCount  *int32                 `json:"availableSeasonCount"`
-	AverageUserRating     *float64               `json:"averageUserRating"`
-	Badge                 *string                `json:"badge"`
-	ChannelShortCode      *string                `json:"channelShortCode"`
-	Classification        *ClassificationSummary `json:"classification"`
-	ContextualTitle       *string                `json:"contextualTitle"`
-	CustomFields          map[string]interface{} `json:"customFields"`
-	CustomID              *string                `json:"customId"`
-	Duration              *int32                 `json:"duration"`
-	EpisodeCount          *int32                 `json:"episodeCount"`
-	EpisodeName           *string                `json:"episodeName"`
-	EpisodeNumber         *int32                 `json:"episodeNumber"`
-	Genres                []string               `json:"genres"`
-	HasClosedCaptions     *bool                  `json:"hasClosedCaptions"`
+	AdvisoryText          *string                `json:"advisoryText,omitempty"`
+	AvailableEpisodeCount *int32                 `json:"availableEpisodeCount,omitempty"`
+	AvailableSeasonCount  *int32                 `json:"availableSeasonCount,omitempty"`
+	AverageUserRating     *float64               `json:"averageUserRating,omitempty"`
+	Badge                 *string                `json:"badge,omitempty"`
+	ChannelShortCode      *string                `json:"channelShortCode,omitempty"`
+	Classification        *ClassificationSummary `json:"classification,omitempty"`
+	ContextualTitle       *string                `json:"contextualTitle,omitempty"`
+	CustomFields          map[string]interface{} `json:"customFields,omitempty"`
+	CustomID              *string                `json:"customId,omitempty"`
+	Duration              *int32                 `json:"duration,omitempty"`
+	EpisodeCount          *int32                 `json:"episodeCount,omitempty"`
+	EpisodeName           *string                `json:"episodeName,omitempty"`
+	EpisodeNumber         *int32                 `json:"episodeNumber,omitempty"`
+	Genres                []string               `json:"genres,omitempty"`
+	HasClosedCaptions     *bool                  `json:"hasClosedCaptions,omitempty"`
 	ID                    string                 `json:"id"`
-	Images                map[string]string      `json:"images"`
-	Offers                []Offer                `json:"offers"`
+	Images                map[string]string      `json:"images,omitempty"`
+	Offers                []Offer                `json:"offers,omitempty"`
 	Path                  string                 `json:"path"`
-	ReleaseYear           *int32                 `json:"releaseYear"`
-	Scopes                []string               `json:"scopes"`
-	SeasonID              *string                `json:"seasonId"`
-	SeasonNumber          *int32                 `json:"seasonNumber"`
-	ShortDescription      *string                `json:"shortDescription"`
-	ShowID                *string                `json:"showId"`
-	ShowTitle             *string                `json:"showTitle"`
-	Subtype               *string                `json:"subtype"`
-	Tagline               *string                `json:"tagline"`
-	Themes                []Theme                `json:"themes"`
+	ReleaseYear           *int32                 `json:"releaseYear,omitempty"`
+	Scopes                []string               `json:"scopes,omitempty"`
+	SeasonID              *string                `json:"seasonId,omitempty"`
+	SeasonNumber          *int32                 `json:"seasonNumber,omitempty"`
+	ShortDescription      *string                `json:"shortDescription,omitempty"`
+	ShowID                *string                `json:"showId,omitempty"`
+	ShowTitle             *string                `json:"showTitle,omitempty"`
+	Subtype               *string                `json:"subtype,omitempty"`
+	Tagline               *string                `json:"tagline,omitempty"`
+	Themes                []Theme                `json:"themes,omitempty"`
 	Title                 string                 `json:"title"`
 	Type                  ItemSummaryTypeEnum    `json:"type"`
-	WatchPath             *string                `json:"watchPath"`
+	WatchPath             *string                `json:"watchPath,omitempty"`
 }

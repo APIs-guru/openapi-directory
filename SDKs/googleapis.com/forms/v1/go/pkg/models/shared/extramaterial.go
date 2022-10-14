@@ -1,6 +1,6 @@
 package shared
 
 type ExtraMaterial struct {
-	Link  *TextLink  `json:"link"`
-	Video *VideoLink `json:"video"`
+	Link  *TextLink  `json:"link,omitempty"`
+	Video *VideoLink `json:"video,omitempty"`
 }

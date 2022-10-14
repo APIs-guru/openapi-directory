@@ -16,8 +16,8 @@ const (
 )
 
 type EwcerRequestBody struct {
-	CertificateParameters *EwcerRequestBodyCertificateParameters `json:"certificateParameters"`
-	ConsentArtifact       *interface{}                           `json:"consentArtifact"`
+	CertificateParameters *EwcerRequestBodyCertificateParameters `json:"certificateParameters,omitempty"`
+	ConsentArtifact       *interface{}                           `json:"consentArtifact,omitempty"`
 	Format                EwcerRequestBodyFormatEnum             `json:"format"`
 	TxnID                 string                                 `json:"txnId"`
 }
@@ -53,8 +53,8 @@ const (
 )
 
 type Ewcer400ApplicationJSON struct {
-	Error            *Ewcer400ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Ewcer400ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Ewcer400ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Ewcer400ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Ewcer401ApplicationJSONErrorEnum string
@@ -72,8 +72,8 @@ const (
 )
 
 type Ewcer401ApplicationJSON struct {
-	Error            *Ewcer401ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Ewcer401ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Ewcer401ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Ewcer401ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Ewcer404ApplicationJSONErrorEnum string
@@ -91,8 +91,8 @@ const (
 )
 
 type Ewcer404ApplicationJSON struct {
-	Error            *Ewcer404ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Ewcer404ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Ewcer404ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Ewcer404ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Ewcer500ApplicationJSONErrorEnum string
@@ -108,8 +108,8 @@ const (
 )
 
 type Ewcer500ApplicationJSON struct {
-	Error            *Ewcer500ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Ewcer500ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Ewcer500ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Ewcer500ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Ewcer502ApplicationJSONErrorEnum string
@@ -125,8 +125,8 @@ const (
 )
 
 type Ewcer502ApplicationJSON struct {
-	Error            *Ewcer502ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Ewcer502ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Ewcer502ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Ewcer502ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Ewcer503ApplicationJSONErrorEnum string
@@ -142,8 +142,8 @@ const (
 )
 
 type Ewcer503ApplicationJSON struct {
-	Error            *Ewcer503ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Ewcer503ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Ewcer503ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Ewcer503ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type Ewcer504ApplicationJSONErrorEnum string
@@ -159,8 +159,8 @@ const (
 )
 
 type Ewcer504ApplicationJSON struct {
-	Error            *Ewcer504ApplicationJSONErrorEnum            `json:"error"`
-	ErrorDescription *Ewcer504ApplicationJSONErrorDescriptionEnum `json:"errorDescription"`
+	Error            *Ewcer504ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Ewcer504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type EwcerResponse struct {

@@ -12,6 +12,6 @@ const (
 )
 
 type GoogleCloudVisionV1p2beta1TextAnnotationDetectedBreak struct {
-	IsPrefix *bool                                                          `json:"isPrefix"`
-	Type     *GoogleCloudVisionV1p2beta1TextAnnotationDetectedBreakTypeEnum `json:"type"`
+	IsPrefix *bool                                                          `json:"isPrefix,omitempty"`
+	Type     *GoogleCloudVisionV1p2beta1TextAnnotationDetectedBreakTypeEnum `json:"type,omitempty"`
 }

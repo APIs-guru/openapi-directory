@@ -5,25 +5,25 @@ import (
 )
 
 type DescribeModelResponse struct {
-	CreatedAt                      *time.Time                      `json:"CreatedAt"`
-	DataPreProcessingConfiguration *DataPreProcessingConfiguration `json:"DataPreProcessingConfiguration"`
-	DatasetArn                     *string                         `json:"DatasetArn"`
-	DatasetName                    *string                         `json:"DatasetName"`
-	EvaluationDataEndTime          *time.Time                      `json:"EvaluationDataEndTime"`
-	EvaluationDataStartTime        *time.Time                      `json:"EvaluationDataStartTime"`
-	FailedReason                   *string                         `json:"FailedReason"`
-	LabelsInputConfiguration       *LabelsInputConfiguration       `json:"LabelsInputConfiguration"`
-	LastUpdatedTime                *time.Time                      `json:"LastUpdatedTime"`
-	ModelArn                       *string                         `json:"ModelArn"`
-	ModelMetrics                   *string                         `json:"ModelMetrics"`
-	ModelName                      *string                         `json:"ModelName"`
-	OffCondition                   *string                         `json:"OffCondition"`
-	RoleArn                        *string                         `json:"RoleArn"`
-	Schema                         *string                         `json:"Schema"`
-	ServerSideKmsKeyID             *string                         `json:"ServerSideKmsKeyId"`
-	Status                         *ModelStatusEnum                `json:"Status"`
-	TrainingDataEndTime            *time.Time                      `json:"TrainingDataEndTime"`
-	TrainingDataStartTime          *time.Time                      `json:"TrainingDataStartTime"`
-	TrainingExecutionEndTime       *time.Time                      `json:"TrainingExecutionEndTime"`
-	TrainingExecutionStartTime     *time.Time                      `json:"TrainingExecutionStartTime"`
+	CreatedAt                      *time.Time                      `json:"CreatedAt,omitempty"`
+	DataPreProcessingConfiguration *DataPreProcessingConfiguration `json:"DataPreProcessingConfiguration,omitempty"`
+	DatasetArn                     *string                         `json:"DatasetArn,omitempty"`
+	DatasetName                    *string                         `json:"DatasetName,omitempty"`
+	EvaluationDataEndTime          *time.Time                      `json:"EvaluationDataEndTime,omitempty"`
+	EvaluationDataStartTime        *time.Time                      `json:"EvaluationDataStartTime,omitempty"`
+	FailedReason                   *string                         `json:"FailedReason,omitempty"`
+	LabelsInputConfiguration       *LabelsInputConfiguration       `json:"LabelsInputConfiguration,omitempty"`
+	LastUpdatedTime                *time.Time                      `json:"LastUpdatedTime,omitempty"`
+	ModelArn                       *string                         `json:"ModelArn,omitempty"`
+	ModelMetrics                   *string                         `json:"ModelMetrics,omitempty"`
+	ModelName                      *string                         `json:"ModelName,omitempty"`
+	OffCondition                   *string                         `json:"OffCondition,omitempty"`
+	RoleArn                        *string                         `json:"RoleArn,omitempty"`
+	Schema                         *string                         `json:"Schema,omitempty"`
+	ServerSideKmsKeyID             *string                         `json:"ServerSideKmsKeyId,omitempty"`
+	Status                         *ModelStatusEnum                `json:"Status,omitempty"`
+	TrainingDataEndTime            *time.Time                      `json:"TrainingDataEndTime,omitempty"`
+	TrainingDataStartTime          *time.Time                      `json:"TrainingDataStartTime,omitempty"`
+	TrainingExecutionEndTime       *time.Time                      `json:"TrainingExecutionEndTime,omitempty"`
+	TrainingExecutionStartTime     *time.Time                      `json:"TrainingExecutionStartTime,omitempty"`
 }

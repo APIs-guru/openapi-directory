@@ -1,14 +1,14 @@
 package shared
 
 type LeaveApplication struct {
-	Description        *string           `json:"Description"`
-	EmployeeID         *string           `json:"EmployeeID"`
-	EndDate            *string           `json:"EndDate"`
-	LeaveApplicationID *string           `json:"LeaveApplicationID"`
-	LeavePeriods       []LeavePeriod     `json:"LeavePeriods"`
-	LeaveTypeID        *string           `json:"LeaveTypeID"`
-	StartDate          *string           `json:"StartDate"`
-	Title              *string           `json:"Title"`
-	UpdatedDateUtc     *string           `json:"UpdatedDateUTC"`
-	ValidationErrors   []ValidationError `json:"ValidationErrors"`
+	Description        *string           `json:"Description,omitempty"`
+	EmployeeID         *string           `json:"EmployeeID,omitempty"`
+	EndDate            *string           `json:"EndDate,omitempty"`
+	LeaveApplicationID *string           `json:"LeaveApplicationID,omitempty"`
+	LeavePeriods       []LeavePeriod     `json:"LeavePeriods,omitempty"`
+	LeaveTypeID        *string           `json:"LeaveTypeID,omitempty"`
+	StartDate          *string           `json:"StartDate,omitempty"`
+	Title              *string           `json:"Title,omitempty"`
+	UpdatedDateUtc     *string           `json:"UpdatedDateUTC,omitempty"`
+	ValidationErrors   []ValidationError `json:"ValidationErrors,omitempty"`
 }

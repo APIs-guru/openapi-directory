@@ -1,7 +1,7 @@
 package shared
 
 type Destination struct {
-	BccAddresses []string `json:"BccAddresses"`
-	CcAddresses  []string `json:"CcAddresses"`
-	ToAddresses  []string `json:"ToAddresses"`
+	BccAddresses []string `json:"BccAddresses,omitempty"`
+	CcAddresses  []string `json:"CcAddresses,omitempty"`
+	ToAddresses  []string `json:"ToAddresses,omitempty"`
 }

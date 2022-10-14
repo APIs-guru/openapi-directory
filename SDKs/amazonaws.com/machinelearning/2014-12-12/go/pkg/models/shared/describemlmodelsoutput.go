@@ -1,6 +1,6 @@
 package shared
 
 type DescribeMlModelsOutput struct {
-	NextToken *string   `json:"NextToken"`
-	Results   []MlModel `json:"Results"`
+	NextToken *string   `json:"NextToken,omitempty"`
+	Results   []MlModel `json:"Results,omitempty"`
 }

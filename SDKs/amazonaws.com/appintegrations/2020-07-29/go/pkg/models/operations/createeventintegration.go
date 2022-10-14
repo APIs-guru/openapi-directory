@@ -15,16 +15,16 @@ type CreateEventIntegrationHeaders struct {
 }
 
 type CreateEventIntegrationRequestBodyEventFilter struct {
-	Source *string `json:"Source"`
+	Source *string `json:"Source,omitempty"`
 }
 
 type CreateEventIntegrationRequestBody struct {
-	ClientToken    *string                                      `json:"ClientToken"`
-	Description    *string                                      `json:"Description"`
+	ClientToken    *string                                      `json:"ClientToken,omitempty"`
+	Description    *string                                      `json:"Description,omitempty"`
 	EventBridgeBus string                                       `json:"EventBridgeBus"`
 	EventFilter    CreateEventIntegrationRequestBodyEventFilter `json:"EventFilter"`
 	Name           string                                       `json:"Name"`
-	Tags           map[string]string                            `json:"Tags"`
+	Tags           map[string]string                            `json:"Tags,omitempty"`
 }
 
 type CreateEventIntegrationRequest struct {

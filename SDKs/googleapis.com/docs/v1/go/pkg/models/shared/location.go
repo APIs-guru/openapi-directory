@@ -1,6 +1,6 @@
 package shared
 
 type Location struct {
-	Index     *int32  `json:"index"`
-	SegmentID *string `json:"segmentId"`
+	Index     *int32  `json:"index,omitempty"`
+	SegmentID *string `json:"segmentId,omitempty"`
 }

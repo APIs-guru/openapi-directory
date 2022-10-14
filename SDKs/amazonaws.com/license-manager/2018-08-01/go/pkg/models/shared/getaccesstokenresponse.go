@@ -1,5 +1,5 @@
 package shared
 
 type GetAccessTokenResponse struct {
-	AccessToken *string `json:"AccessToken"`
+	AccessToken *string `json:"AccessToken,omitempty"`
 }

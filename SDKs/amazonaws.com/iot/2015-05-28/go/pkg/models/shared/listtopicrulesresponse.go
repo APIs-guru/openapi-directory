@@ -1,6 +1,6 @@
 package shared
 
 type ListTopicRulesResponse struct {
-	NextToken *string             `json:"nextToken"`
-	Rules     []TopicRuleListItem `json:"rules"`
+	NextToken *string             `json:"nextToken,omitempty"`
+	Rules     []TopicRuleListItem `json:"rules,omitempty"`
 }

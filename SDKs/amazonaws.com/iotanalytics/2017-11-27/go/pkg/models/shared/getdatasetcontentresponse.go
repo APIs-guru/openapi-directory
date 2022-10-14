@@ -5,7 +5,7 @@ import (
 )
 
 type GetDatasetContentResponse struct {
-	Entries   []DatasetEntry        `json:"entries"`
-	Status    *DatasetContentStatus `json:"status"`
-	Timestamp *time.Time            `json:"timestamp"`
+	Entries   []DatasetEntry        `json:"entries,omitempty"`
+	Status    *DatasetContentStatus `json:"status,omitempty"`
+	Timestamp *time.Time            `json:"timestamp,omitempty"`
 }

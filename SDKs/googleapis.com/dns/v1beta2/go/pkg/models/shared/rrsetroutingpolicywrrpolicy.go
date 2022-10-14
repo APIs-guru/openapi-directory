@@ -1,6 +1,6 @@
 package shared
 
 type RrSetRoutingPolicyWrrPolicy struct {
-	Items []RrSetRoutingPolicyWrrPolicyWrrPolicyItem `json:"items"`
-	Kind  *string                                    `json:"kind"`
+	Items []RrSetRoutingPolicyWrrPolicyWrrPolicyItem `json:"items,omitempty"`
+	Kind  *string                                    `json:"kind,omitempty"`
 }

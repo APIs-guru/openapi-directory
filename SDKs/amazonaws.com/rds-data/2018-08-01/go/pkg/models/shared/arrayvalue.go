@@ -1,9 +1,9 @@
 package shared
 
 type ArrayValue struct {
-	ArrayValues   []ArrayValue `json:"arrayValues"`
-	BooleanValues []bool       `json:"booleanValues"`
-	DoubleValues  []float64    `json:"doubleValues"`
-	LongValues    []int64      `json:"longValues"`
-	StringValues  []string     `json:"stringValues"`
+	ArrayValues   []ArrayValue `json:"arrayValues,omitempty"`
+	BooleanValues []bool       `json:"booleanValues,omitempty"`
+	DoubleValues  []float64    `json:"doubleValues,omitempty"`
+	LongValues    []int64      `json:"longValues,omitempty"`
+	StringValues  []string     `json:"stringValues,omitempty"`
 }

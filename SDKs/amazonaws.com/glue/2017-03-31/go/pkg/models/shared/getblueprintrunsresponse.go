@@ -1,6 +1,6 @@
 package shared
 
 type GetBlueprintRunsResponse struct {
-	BlueprintRuns []BlueprintRun `json:"BlueprintRuns"`
-	NextToken     *string        `json:"NextToken"`
+	BlueprintRuns []BlueprintRun `json:"BlueprintRuns,omitempty"`
+	NextToken     *string        `json:"NextToken,omitempty"`
 }

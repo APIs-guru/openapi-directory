@@ -1,9 +1,9 @@
 package shared
 
 type DiagnosticConfig struct {
-	CopyHomeFilesFlagEnabled *bool   `json:"copyHomeFilesFlagEnabled"`
-	GcsBucket                *string `json:"gcsBucket"`
-	PacketCaptureFlagEnabled *bool   `json:"packetCaptureFlagEnabled"`
-	RelativePath             *string `json:"relativePath"`
-	RepairFlagEnabled        *bool   `json:"repairFlagEnabled"`
+	CopyHomeFilesFlagEnabled *bool   `json:"copyHomeFilesFlagEnabled,omitempty"`
+	GcsBucket                *string `json:"gcsBucket,omitempty"`
+	PacketCaptureFlagEnabled *bool   `json:"packetCaptureFlagEnabled,omitempty"`
+	RelativePath             *string `json:"relativePath,omitempty"`
+	RepairFlagEnabled        *bool   `json:"repairFlagEnabled,omitempty"`
 }

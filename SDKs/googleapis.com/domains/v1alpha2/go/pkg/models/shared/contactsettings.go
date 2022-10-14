@@ -10,8 +10,8 @@ const (
 )
 
 type ContactSettings struct {
-	AdminContact      *Contact                    `json:"adminContact"`
-	Privacy           *ContactSettingsPrivacyEnum `json:"privacy"`
-	RegistrantContact *Contact                    `json:"registrantContact"`
-	TechnicalContact  *Contact                    `json:"technicalContact"`
+	AdminContact      *Contact                    `json:"adminContact,omitempty"`
+	Privacy           *ContactSettingsPrivacyEnum `json:"privacy,omitempty"`
+	RegistrantContact *Contact                    `json:"registrantContact,omitempty"`
+	TechnicalContact  *Contact                    `json:"technicalContact,omitempty"`
 }

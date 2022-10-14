@@ -1,8 +1,8 @@
 package shared
 
 type PublicationLink struct {
-	ContentType *string `json:"contentType"`
-	ID          *int32  `json:"id"`
-	Title       *string `json:"title"`
-	URL         *string `json:"url"`
+	ContentType *string `json:"contentType,omitempty"`
+	ID          *int32  `json:"id,omitempty"`
+	Title       *string `json:"title,omitempty"`
+	URL         *string `json:"url,omitempty"`
 }

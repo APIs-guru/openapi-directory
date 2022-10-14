@@ -1,6 +1,6 @@
 package shared
 
 type OperatingSystemsListResponse struct {
-	Kind             *string           `json:"kind"`
-	OperatingSystems []OperatingSystem `json:"operatingSystems"`
+	Kind             *string           `json:"kind,omitempty"`
+	OperatingSystems []OperatingSystem `json:"operatingSystems,omitempty"`
 }

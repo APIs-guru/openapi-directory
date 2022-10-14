@@ -20,9 +20,9 @@ type ListSimulationJobBatchesHeaders struct {
 }
 
 type ListSimulationJobBatchesRequestBody struct {
-	Filters    []shared.Filter `json:"filters"`
-	MaxResults *int64          `json:"maxResults"`
-	NextToken  *string         `json:"nextToken"`
+	Filters    []shared.Filter `json:"filters,omitempty"`
+	MaxResults *int64          `json:"maxResults,omitempty"`
+	NextToken  *string         `json:"nextToken,omitempty"`
 }
 
 type ListSimulationJobBatchesRequest struct {

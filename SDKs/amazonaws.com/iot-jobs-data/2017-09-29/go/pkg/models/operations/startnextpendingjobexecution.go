@@ -19,8 +19,8 @@ type StartNextPendingJobExecutionHeaders struct {
 }
 
 type StartNextPendingJobExecutionRequestBody struct {
-	StatusDetails        map[string]string `json:"statusDetails"`
-	StepTimeoutInMinutes *int64            `json:"stepTimeoutInMinutes"`
+	StatusDetails        map[string]string `json:"statusDetails,omitempty"`
+	StepTimeoutInMinutes *int64            `json:"stepTimeoutInMinutes,omitempty"`
 }
 
 type StartNextPendingJobExecutionRequest struct {

@@ -1,9 +1,9 @@
 package shared
 
 type ProvisioningArtifactProperties struct {
-	Description               *string                       `json:"Description"`
-	DisableTemplateValidation *bool                         `json:"DisableTemplateValidation"`
+	Description               *string                       `json:"Description,omitempty"`
+	DisableTemplateValidation *bool                         `json:"DisableTemplateValidation,omitempty"`
 	Info                      map[string]string             `json:"Info"`
-	Name                      *string                       `json:"Name"`
-	Type                      *ProvisioningArtifactTypeEnum `json:"Type"`
+	Name                      *string                       `json:"Name,omitempty"`
+	Type                      *ProvisioningArtifactTypeEnum `json:"Type,omitempty"`
 }

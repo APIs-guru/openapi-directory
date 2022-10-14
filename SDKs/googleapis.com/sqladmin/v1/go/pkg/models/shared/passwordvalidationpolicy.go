@@ -8,10 +8,10 @@ const (
 )
 
 type PasswordValidationPolicy struct {
-	Complexity                *PasswordValidationPolicyComplexityEnum `json:"complexity"`
-	DisallowUsernameSubstring *bool                                   `json:"disallowUsernameSubstring"`
-	EnablePasswordPolicy      *bool                                   `json:"enablePasswordPolicy"`
-	MinLength                 *int32                                  `json:"minLength"`
-	PasswordChangeInterval    *string                                 `json:"passwordChangeInterval"`
-	ReuseInterval             *int32                                  `json:"reuseInterval"`
+	Complexity                *PasswordValidationPolicyComplexityEnum `json:"complexity,omitempty"`
+	DisallowUsernameSubstring *bool                                   `json:"disallowUsernameSubstring,omitempty"`
+	EnablePasswordPolicy      *bool                                   `json:"enablePasswordPolicy,omitempty"`
+	MinLength                 *int32                                  `json:"minLength,omitempty"`
+	PasswordChangeInterval    *string                                 `json:"passwordChangeInterval,omitempty"`
+	ReuseInterval             *int32                                  `json:"reuseInterval,omitempty"`
 }

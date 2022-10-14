@@ -23,16 +23,16 @@ type PutSessionHeaders struct {
 }
 
 type PutSessionRequestBodySessionState struct {
-	ActiveContexts       []shared.ActiveContext `json:"activeContexts"`
-	DialogAction         *shared.DialogAction   `json:"dialogAction"`
-	Intent               *shared.Intent         `json:"intent"`
-	OriginatingRequestID *string                `json:"originatingRequestId"`
-	SessionAttributes    map[string]string      `json:"sessionAttributes"`
+	ActiveContexts       []shared.ActiveContext `json:"activeContexts,omitempty"`
+	DialogAction         *shared.DialogAction   `json:"dialogAction,omitempty"`
+	Intent               *shared.Intent         `json:"intent,omitempty"`
+	OriginatingRequestID *string                `json:"originatingRequestId,omitempty"`
+	SessionAttributes    map[string]string      `json:"sessionAttributes,omitempty"`
 }
 
 type PutSessionRequestBody struct {
-	Messages          []shared.Message                  `json:"messages"`
-	RequestAttributes map[string]string                 `json:"requestAttributes"`
+	Messages          []shared.Message                  `json:"messages,omitempty"`
+	RequestAttributes map[string]string                 `json:"requestAttributes,omitempty"`
 	SessionState      PutSessionRequestBodySessionState `json:"sessionState"`
 }
 

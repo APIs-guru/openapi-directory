@@ -1,7 +1,7 @@
 package shared
 
 type Sponsor struct {
-	Member       *Member       `json:"member"`
-	Organisation *Organisation `json:"organisation"`
-	SortOrder    *int32        `json:"sortOrder"`
+	Member       *Member       `json:"member,omitempty"`
+	Organisation *Organisation `json:"organisation,omitempty"`
+	SortOrder    *int32        `json:"sortOrder,omitempty"`
 }

@@ -5,8 +5,8 @@ import (
 )
 
 type CategoryProperties struct {
-	CategoryName   *string    `json:"CategoryName"`
-	CreateTime     *time.Time `json:"CreateTime"`
-	LastUpdateTime *time.Time `json:"LastUpdateTime"`
-	Rules          []Rule     `json:"Rules"`
+	CategoryName   *string    `json:"CategoryName,omitempty"`
+	CreateTime     *time.Time `json:"CreateTime,omitempty"`
+	LastUpdateTime *time.Time `json:"LastUpdateTime,omitempty"`
+	Rules          []Rule     `json:"Rules,omitempty"`
 }

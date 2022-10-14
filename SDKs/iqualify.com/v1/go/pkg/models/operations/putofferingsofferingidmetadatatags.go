@@ -9,7 +9,7 @@ type PutOfferingsOfferingIDMetadataTagsPathParams struct {
 }
 
 type PutOfferingsOfferingIDMetadataTagsRequestBody struct {
-	Tags []string `json:"tags"`
+	Tags []string `json:"tags,omitempty"`
 }
 
 type PutOfferingsOfferingIDMetadataTagsRequest struct {

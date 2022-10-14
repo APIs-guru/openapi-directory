@@ -8,33 +8,33 @@ const (
 )
 
 type RepertoirEmodifrequest struct {
-	Champ1         []string                                 `json:"champ1"`
-	Champ10        []string                                 `json:"champ10"`
-	Champ11        []string                                 `json:"champ11"`
-	Champ12        []string                                 `json:"champ12"`
-	Champ13        []string                                 `json:"champ13"`
-	Champ14        []string                                 `json:"champ14"`
-	Champ15        []string                                 `json:"champ15"`
-	Champ16        []string                                 `json:"champ16"`
-	Champ17        []string                                 `json:"champ17"`
-	Champ18        []string                                 `json:"champ18"`
-	Champ19        []string                                 `json:"champ19"`
-	Champ2         []string                                 `json:"champ2"`
-	Champ20        []string                                 `json:"champ20"`
-	Champ21        []string                                 `json:"champ21"`
-	Champ22        []string                                 `json:"champ22"`
-	Champ23        []string                                 `json:"champ23"`
-	Champ24        []string                                 `json:"champ24"`
-	Champ25        []string                                 `json:"champ25"`
-	Champ26        []string                                 `json:"champ26"`
-	Champ27        []string                                 `json:"champ27"`
-	Champ3         []string                                 `json:"champ3"`
-	Champ4         []string                                 `json:"champ4"`
-	Champ5         []string                                 `json:"champ5"`
-	Champ6         []string                                 `json:"champ6"`
-	Champ7         []string                                 `json:"champ7"`
-	Champ8         []string                                 `json:"champ8"`
-	Champ9         []string                                 `json:"champ9"`
+	Champ1         []string                                 `json:"champ1,omitempty"`
+	Champ10        []string                                 `json:"champ10,omitempty"`
+	Champ11        []string                                 `json:"champ11,omitempty"`
+	Champ12        []string                                 `json:"champ12,omitempty"`
+	Champ13        []string                                 `json:"champ13,omitempty"`
+	Champ14        []string                                 `json:"champ14,omitempty"`
+	Champ15        []string                                 `json:"champ15,omitempty"`
+	Champ16        []string                                 `json:"champ16,omitempty"`
+	Champ17        []string                                 `json:"champ17,omitempty"`
+	Champ18        []string                                 `json:"champ18,omitempty"`
+	Champ19        []string                                 `json:"champ19,omitempty"`
+	Champ2         []string                                 `json:"champ2,omitempty"`
+	Champ20        []string                                 `json:"champ20,omitempty"`
+	Champ21        []string                                 `json:"champ21,omitempty"`
+	Champ22        []string                                 `json:"champ22,omitempty"`
+	Champ23        []string                                 `json:"champ23,omitempty"`
+	Champ24        []string                                 `json:"champ24,omitempty"`
+	Champ25        []string                                 `json:"champ25,omitempty"`
+	Champ26        []string                                 `json:"champ26,omitempty"`
+	Champ27        []string                                 `json:"champ27,omitempty"`
+	Champ3         []string                                 `json:"champ3,omitempty"`
+	Champ4         []string                                 `json:"champ4,omitempty"`
+	Champ5         []string                                 `json:"champ5,omitempty"`
+	Champ6         []string                                 `json:"champ6,omitempty"`
+	Champ7         []string                                 `json:"champ7,omitempty"`
+	Champ8         []string                                 `json:"champ8,omitempty"`
+	Champ9         []string                                 `json:"champ9,omitempty"`
 	Keyid          string                                   `json:"keyid"`
 	Num            []string                                 `json:"num"`
 	RepertoireEdit RepertoirEmodifrequestRepertoireEditEnum `json:"repertoireEdit"`

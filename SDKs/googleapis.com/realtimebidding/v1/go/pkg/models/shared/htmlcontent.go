@@ -1,7 +1,7 @@
 package shared
 
 type HTMLContent struct {
-	Height  *int32  `json:"height"`
-	Snippet *string `json:"snippet"`
-	Width   *int32  `json:"width"`
+	Height  *int32  `json:"height,omitempty"`
+	Snippet *string `json:"snippet,omitempty"`
+	Width   *int32  `json:"width,omitempty"`
 }

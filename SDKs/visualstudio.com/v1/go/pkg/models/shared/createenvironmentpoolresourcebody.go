@@ -1,6 +1,6 @@
 package shared
 
 type CreateEnvironmentPoolResourceBody struct {
-	EnvironmentOptions *PrebuildEnvironmentOptions `json:"environmentOptions"`
-	Secrets            []SecretDataBody            `json:"secrets"`
+	EnvironmentOptions *PrebuildEnvironmentOptions `json:"environmentOptions,omitempty"`
+	Secrets            []SecretDataBody            `json:"secrets,omitempty"`
 }

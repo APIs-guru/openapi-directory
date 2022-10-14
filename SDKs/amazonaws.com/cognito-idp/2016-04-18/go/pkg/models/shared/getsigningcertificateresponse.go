@@ -1,5 +1,5 @@
 package shared
 
 type GetSigningCertificateResponse struct {
-	Certificate *string `json:"Certificate"`
+	Certificate *string `json:"Certificate,omitempty"`
 }

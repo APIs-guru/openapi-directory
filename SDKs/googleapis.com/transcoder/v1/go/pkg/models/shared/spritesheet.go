@@ -1,15 +1,15 @@
 package shared
 
 type SpriteSheet struct {
-	ColumnCount        *int32  `json:"columnCount"`
-	EndTimeOffset      *string `json:"endTimeOffset"`
-	FilePrefix         *string `json:"filePrefix"`
-	Format             *string `json:"format"`
-	Interval           *string `json:"interval"`
-	Quality            *int32  `json:"quality"`
-	RowCount           *int32  `json:"rowCount"`
-	SpriteHeightPixels *int32  `json:"spriteHeightPixels"`
-	SpriteWidthPixels  *int32  `json:"spriteWidthPixels"`
-	StartTimeOffset    *string `json:"startTimeOffset"`
-	TotalCount         *int32  `json:"totalCount"`
+	ColumnCount        *int32  `json:"columnCount,omitempty"`
+	EndTimeOffset      *string `json:"endTimeOffset,omitempty"`
+	FilePrefix         *string `json:"filePrefix,omitempty"`
+	Format             *string `json:"format,omitempty"`
+	Interval           *string `json:"interval,omitempty"`
+	Quality            *int32  `json:"quality,omitempty"`
+	RowCount           *int32  `json:"rowCount,omitempty"`
+	SpriteHeightPixels *int32  `json:"spriteHeightPixels,omitempty"`
+	SpriteWidthPixels  *int32  `json:"spriteWidthPixels,omitempty"`
+	StartTimeOffset    *string `json:"startTimeOffset,omitempty"`
+	TotalCount         *int32  `json:"totalCount,omitempty"`
 }

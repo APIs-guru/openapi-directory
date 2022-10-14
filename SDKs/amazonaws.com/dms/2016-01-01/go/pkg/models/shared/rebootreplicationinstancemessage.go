@@ -1,7 +1,7 @@
 package shared
 
 type RebootReplicationInstanceMessage struct {
-	ForceFailover          *bool  `json:"ForceFailover"`
-	ForcePlannedFailover   *bool  `json:"ForcePlannedFailover"`
+	ForceFailover          *bool  `json:"ForceFailover,omitempty"`
+	ForcePlannedFailover   *bool  `json:"ForcePlannedFailover,omitempty"`
 	ReplicationInstanceArn string `json:"ReplicationInstanceArn"`
 }

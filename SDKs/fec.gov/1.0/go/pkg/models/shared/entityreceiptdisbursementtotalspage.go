@@ -1,6 +1,6 @@
 package shared
 
 type EntityReceiptDisbursementTotalsPage struct {
-	Pagination *OffsetInfo                       `json:"pagination"`
-	Results    []EntityReceiptDisbursementTotals `json:"results"`
+	Pagination *OffsetInfo                       `json:"pagination,omitempty"`
+	Results    []EntityReceiptDisbursementTotals `json:"results,omitempty"`
 }

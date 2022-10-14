@@ -1,6 +1,6 @@
 package shared
 
 type UnlabelParameterVersionResult struct {
-	InvalidLabels []string `json:"InvalidLabels"`
-	RemovedLabels []string `json:"RemovedLabels"`
+	InvalidLabels []string `json:"InvalidLabels,omitempty"`
+	RemovedLabels []string `json:"RemovedLabels,omitempty"`
 }

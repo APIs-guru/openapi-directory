@@ -1,8 +1,8 @@
 package shared
 
 type ItvUpdateIntentStrongResponse struct {
-	ClientSecret *string `json:"clientSecret"`
-	IntentID     *string `json:"intentId"`
-	IntentType   *string `json:"intentType"`
-	Status       *string `json:"status"`
+	ClientSecret *string `json:"clientSecret,omitempty"`
+	IntentID     *string `json:"intentId,omitempty"`
+	IntentType   *string `json:"intentType,omitempty"`
+	Status       *string `json:"status,omitempty"`
 }

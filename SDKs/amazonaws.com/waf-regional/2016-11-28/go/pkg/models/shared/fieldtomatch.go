@@ -1,6 +1,6 @@
 package shared
 
 type FieldToMatch struct {
-	Data *string            `json:"Data"`
+	Data *string            `json:"Data,omitempty"`
 	Type MatchFieldTypeEnum `json:"Type"`
 }

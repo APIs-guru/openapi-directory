@@ -1,5 +1,5 @@
 package shared
 
 type LicenseAssignmentInsert struct {
-	UserID *string `json:"userId"`
+	UserID *string `json:"userId,omitempty"`
 }

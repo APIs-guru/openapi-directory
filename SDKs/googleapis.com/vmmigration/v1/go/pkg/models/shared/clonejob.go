@@ -14,11 +14,11 @@ const (
 )
 
 type CloneJob struct {
-	ComputeEngineTargetDetails *ComputeEngineTargetDetails `json:"computeEngineTargetDetails"`
-	CreateTime                 *string                     `json:"createTime"`
-	EndTime                    *string                     `json:"endTime"`
-	Error                      *Status                     `json:"error"`
-	Name                       *string                     `json:"name"`
-	State                      *CloneJobStateEnum          `json:"state"`
-	StateTime                  *string                     `json:"stateTime"`
+	ComputeEngineTargetDetails *ComputeEngineTargetDetails `json:"computeEngineTargetDetails,omitempty"`
+	CreateTime                 *string                     `json:"createTime,omitempty"`
+	EndTime                    *string                     `json:"endTime,omitempty"`
+	Error                      *Status                     `json:"error,omitempty"`
+	Name                       *string                     `json:"name,omitempty"`
+	State                      *CloneJobStateEnum          `json:"state,omitempty"`
+	StateTime                  *string                     `json:"stateTime,omitempty"`
 }

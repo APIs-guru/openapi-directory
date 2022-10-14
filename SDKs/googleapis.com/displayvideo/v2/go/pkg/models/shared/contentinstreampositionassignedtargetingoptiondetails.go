@@ -20,6 +20,6 @@ const (
 )
 
 type ContentInstreamPositionAssignedTargetingOptionDetails struct {
-	AdType                  *ContentInstreamPositionAssignedTargetingOptionDetailsAdTypeEnum                  `json:"adType"`
-	ContentInstreamPosition *ContentInstreamPositionAssignedTargetingOptionDetailsContentInstreamPositionEnum `json:"contentInstreamPosition"`
+	AdType                  *ContentInstreamPositionAssignedTargetingOptionDetailsAdTypeEnum                  `json:"adType,omitempty"`
+	ContentInstreamPosition *ContentInstreamPositionAssignedTargetingOptionDetailsContentInstreamPositionEnum `json:"contentInstreamPosition,omitempty"`
 }

@@ -1,7 +1,7 @@
 package shared
 
 type CertificateIdentityConstraints struct {
-	AllowSubjectAltNamesPassthrough *bool `json:"allowSubjectAltNamesPassthrough"`
-	AllowSubjectPassthrough         *bool `json:"allowSubjectPassthrough"`
-	CelExpression                   *Expr `json:"celExpression"`
+	AllowSubjectAltNamesPassthrough *bool `json:"allowSubjectAltNamesPassthrough,omitempty"`
+	AllowSubjectPassthrough         *bool `json:"allowSubjectPassthrough,omitempty"`
+	CelExpression                   *Expr `json:"celExpression,omitempty"`
 }

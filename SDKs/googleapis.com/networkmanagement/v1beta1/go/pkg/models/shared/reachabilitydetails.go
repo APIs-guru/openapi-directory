@@ -11,8 +11,8 @@ const (
 )
 
 type ReachabilityDetails struct {
-	Error      *Status                        `json:"error"`
-	Result     *ReachabilityDetailsResultEnum `json:"result"`
-	Traces     []Trace                        `json:"traces"`
-	VerifyTime *string                        `json:"verifyTime"`
+	Error      *Status                        `json:"error,omitempty"`
+	Result     *ReachabilityDetailsResultEnum `json:"result,omitempty"`
+	Traces     []Trace                        `json:"traces,omitempty"`
+	VerifyTime *string                        `json:"verifyTime,omitempty"`
 }

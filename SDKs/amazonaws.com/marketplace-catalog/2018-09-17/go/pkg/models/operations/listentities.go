@@ -20,17 +20,17 @@ type ListEntitiesHeaders struct {
 }
 
 type ListEntitiesRequestBodySort struct {
-	SortBy    *string               `json:"SortBy"`
-	SortOrder *shared.SortOrderEnum `json:"SortOrder"`
+	SortBy    *string               `json:"SortBy,omitempty"`
+	SortOrder *shared.SortOrderEnum `json:"SortOrder,omitempty"`
 }
 
 type ListEntitiesRequestBody struct {
 	Catalog    string                       `json:"Catalog"`
 	EntityType string                       `json:"EntityType"`
-	FilterList []shared.Filter              `json:"FilterList"`
-	MaxResults *int64                       `json:"MaxResults"`
-	NextToken  *string                      `json:"NextToken"`
-	Sort       *ListEntitiesRequestBodySort `json:"Sort"`
+	FilterList []shared.Filter              `json:"FilterList,omitempty"`
+	MaxResults *int64                       `json:"MaxResults,omitempty"`
+	NextToken  *string                      `json:"NextToken,omitempty"`
+	Sort       *ListEntitiesRequestBodySort `json:"Sort,omitempty"`
 }
 
 type ListEntitiesRequest struct {

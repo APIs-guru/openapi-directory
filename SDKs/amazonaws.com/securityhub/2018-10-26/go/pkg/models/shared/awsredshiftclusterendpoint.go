@@ -1,6 +1,6 @@
 package shared
 
 type AwsRedshiftClusterEndpoint struct {
-	Address *string `json:"Address"`
-	Port    *int64  `json:"Port"`
+	Address *string `json:"Address,omitempty"`
+	Port    *int64  `json:"Port,omitempty"`
 }

@@ -12,7 +12,7 @@ type PullsRemoveRequestedReviewersPathParams struct {
 
 type PullsRemoveRequestedReviewersRequestBody struct {
 	Reviewers     []string `json:"reviewers"`
-	TeamReviewers []string `json:"team_reviewers"`
+	TeamReviewers []string `json:"team_reviewers,omitempty"`
 }
 
 type PullsRemoveRequestedReviewersRequest struct {

@@ -20,9 +20,9 @@ type ListPublishedSchemaArnsHeaders struct {
 }
 
 type ListPublishedSchemaArnsRequestBody struct {
-	MaxResults *int64  `json:"MaxResults"`
-	NextToken  *string `json:"NextToken"`
-	SchemaArn  *string `json:"SchemaArn"`
+	MaxResults *int64  `json:"MaxResults,omitempty"`
+	NextToken  *string `json:"NextToken,omitempty"`
+	SchemaArn  *string `json:"SchemaArn,omitempty"`
 }
 
 type ListPublishedSchemaArnsRequest struct {

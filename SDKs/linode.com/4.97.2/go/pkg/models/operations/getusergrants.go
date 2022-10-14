@@ -27,7 +27,7 @@ type GetUserGrantsRequest struct {
 }
 
 type GetUserGrantsDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type GetUserGrantsResponse struct {

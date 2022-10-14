@@ -1,7 +1,7 @@
 package shared
 
 type ListProfileObjectTypeTemplateItem struct {
-	SourceName   *string `json:"SourceName"`
-	SourceObject *string `json:"SourceObject"`
-	TemplateID   *string `json:"TemplateId"`
+	SourceName   *string `json:"SourceName,omitempty"`
+	SourceObject *string `json:"SourceObject,omitempty"`
+	TemplateID   *string `json:"TemplateId,omitempty"`
 }

@@ -5,13 +5,13 @@ import (
 )
 
 type EnvironmentApprovalsEnvironments struct {
-	CreatedAt *time.Time `json:"created_at"`
-	HTMLURL   *string    `json:"html_url"`
-	ID        *int64     `json:"id"`
-	Name      *string    `json:"name"`
-	NodeID    *string    `json:"node_id"`
-	UpdatedAt *time.Time `json:"updated_at"`
-	URL       *string    `json:"url"`
+	CreatedAt *time.Time `json:"created_at,omitempty"`
+	HTMLURL   *string    `json:"html_url,omitempty"`
+	ID        *int64     `json:"id,omitempty"`
+	Name      *string    `json:"name,omitempty"`
+	NodeID    *string    `json:"node_id,omitempty"`
+	UpdatedAt *time.Time `json:"updated_at,omitempty"`
+	URL       *string    `json:"url,omitempty"`
 }
 
 type EnvironmentApprovalsStateEnum string

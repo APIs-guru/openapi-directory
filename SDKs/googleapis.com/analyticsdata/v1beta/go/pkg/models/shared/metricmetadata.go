@@ -27,13 +27,13 @@ const (
 )
 
 type MetricMetadata struct {
-	APIName            *string                            `json:"apiName"`
-	BlockedReasons     []MetricMetadataBlockedReasonsEnum `json:"blockedReasons"`
-	Category           *string                            `json:"category"`
-	CustomDefinition   *bool                              `json:"customDefinition"`
-	DeprecatedAPINames []string                           `json:"deprecatedApiNames"`
-	Description        *string                            `json:"description"`
-	Expression         *string                            `json:"expression"`
-	Type               *MetricMetadataTypeEnum            `json:"type"`
-	UIName             *string                            `json:"uiName"`
+	APIName            *string                            `json:"apiName,omitempty"`
+	BlockedReasons     []MetricMetadataBlockedReasonsEnum `json:"blockedReasons,omitempty"`
+	Category           *string                            `json:"category,omitempty"`
+	CustomDefinition   *bool                              `json:"customDefinition,omitempty"`
+	DeprecatedAPINames []string                           `json:"deprecatedApiNames,omitempty"`
+	Description        *string                            `json:"description,omitempty"`
+	Expression         *string                            `json:"expression,omitempty"`
+	Type               *MetricMetadataTypeEnum            `json:"type,omitempty"`
+	UIName             *string                            `json:"uiName,omitempty"`
 }

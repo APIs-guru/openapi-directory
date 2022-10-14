@@ -1,5 +1,5 @@
 package shared
 
 type CsmSettings struct {
-	RctokenAud *string `json:"rctokenAud"`
+	RctokenAud *string `json:"rctokenAud,omitempty"`
 }

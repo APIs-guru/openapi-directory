@@ -17,17 +17,17 @@ const (
 )
 
 type BillingProfile struct {
-	ConsolidatedInvoice         *bool                           `json:"consolidatedInvoice"`
-	CountryCode                 *string                         `json:"countryCode"`
-	CurrencyCode                *string                         `json:"currencyCode"`
-	ID                          *string                         `json:"id"`
-	InvoiceLevel                *BillingProfileInvoiceLevelEnum `json:"invoiceLevel"`
-	IsDefault                   *bool                           `json:"isDefault"`
-	Kind                        *string                         `json:"kind"`
-	Name                        *string                         `json:"name"`
-	PaymentsAccountID           *string                         `json:"paymentsAccountId"`
-	PaymentsCustomerID          *string                         `json:"paymentsCustomerId"`
-	PurchaseOrder               *string                         `json:"purchaseOrder"`
-	SecondaryPaymentsCustomerID *string                         `json:"secondaryPaymentsCustomerId"`
-	Status                      *BillingProfileStatusEnum       `json:"status"`
+	ConsolidatedInvoice         *bool                           `json:"consolidatedInvoice,omitempty"`
+	CountryCode                 *string                         `json:"countryCode,omitempty"`
+	CurrencyCode                *string                         `json:"currencyCode,omitempty"`
+	ID                          *string                         `json:"id,omitempty"`
+	InvoiceLevel                *BillingProfileInvoiceLevelEnum `json:"invoiceLevel,omitempty"`
+	IsDefault                   *bool                           `json:"isDefault,omitempty"`
+	Kind                        *string                         `json:"kind,omitempty"`
+	Name                        *string                         `json:"name,omitempty"`
+	PaymentsAccountID           *string                         `json:"paymentsAccountId,omitempty"`
+	PaymentsCustomerID          *string                         `json:"paymentsCustomerId,omitempty"`
+	PurchaseOrder               *string                         `json:"purchaseOrder,omitempty"`
+	SecondaryPaymentsCustomerID *string                         `json:"secondaryPaymentsCustomerId,omitempty"`
+	Status                      *BillingProfileStatusEnum       `json:"status,omitempty"`
 }

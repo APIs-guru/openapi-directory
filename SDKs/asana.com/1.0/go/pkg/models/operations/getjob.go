@@ -19,7 +19,7 @@ type GetJobRequest struct {
 }
 
 type GetJob200ApplicationJSON struct {
-	Data *shared.JobResponse `json:"data"`
+	Data *shared.JobResponse `json:"data,omitempty"`
 }
 
 type GetJobResponse struct {

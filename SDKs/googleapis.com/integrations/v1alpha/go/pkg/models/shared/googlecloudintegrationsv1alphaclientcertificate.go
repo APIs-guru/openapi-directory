@@ -1,7 +1,7 @@
 package shared
 
 type GoogleCloudIntegrationsV1alphaClientCertificate struct {
-	EncryptedPrivateKey *string `json:"encryptedPrivateKey"`
-	Passphrase          *string `json:"passphrase"`
-	SslCertificate      *string `json:"sslCertificate"`
+	EncryptedPrivateKey *string `json:"encryptedPrivateKey,omitempty"`
+	Passphrase          *string `json:"passphrase,omitempty"`
+	SslCertificate      *string `json:"sslCertificate,omitempty"`
 }

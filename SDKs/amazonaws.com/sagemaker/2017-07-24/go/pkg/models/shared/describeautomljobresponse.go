@@ -6,24 +6,24 @@ import (
 
 type DescribeAutoMlJobResponse struct {
 	AutoMlJobArn                     string                       `json:"AutoMLJobArn"`
-	AutoMlJobArtifacts               *AutoMlJobArtifacts          `json:"AutoMLJobArtifacts"`
-	AutoMlJobConfig                  *AutoMlJobConfig             `json:"AutoMLJobConfig"`
+	AutoMlJobArtifacts               *AutoMlJobArtifacts          `json:"AutoMLJobArtifacts,omitempty"`
+	AutoMlJobConfig                  *AutoMlJobConfig             `json:"AutoMLJobConfig,omitempty"`
 	AutoMlJobName                    string                       `json:"AutoMLJobName"`
-	AutoMlJobObjective               *AutoMlJobObjective          `json:"AutoMLJobObjective"`
+	AutoMlJobObjective               *AutoMlJobObjective          `json:"AutoMLJobObjective,omitempty"`
 	AutoMlJobSecondaryStatus         AutoMlJobSecondaryStatusEnum `json:"AutoMLJobSecondaryStatus"`
 	AutoMlJobStatus                  AutoMlJobStatusEnum          `json:"AutoMLJobStatus"`
-	BestCandidate                    *AutoMlCandidate             `json:"BestCandidate"`
+	BestCandidate                    *AutoMlCandidate             `json:"BestCandidate,omitempty"`
 	CreationTime                     time.Time                    `json:"CreationTime"`
-	EndTime                          *time.Time                   `json:"EndTime"`
-	FailureReason                    *string                      `json:"FailureReason"`
-	GenerateCandidateDefinitionsOnly *bool                        `json:"GenerateCandidateDefinitionsOnly"`
+	EndTime                          *time.Time                   `json:"EndTime,omitempty"`
+	FailureReason                    *string                      `json:"FailureReason,omitempty"`
+	GenerateCandidateDefinitionsOnly *bool                        `json:"GenerateCandidateDefinitionsOnly,omitempty"`
 	InputDataConfig                  []AutoMlChannel              `json:"InputDataConfig"`
 	LastModifiedTime                 time.Time                    `json:"LastModifiedTime"`
-	ModelDeployConfig                *ModelDeployConfig           `json:"ModelDeployConfig"`
-	ModelDeployResult                *ModelDeployResult           `json:"ModelDeployResult"`
+	ModelDeployConfig                *ModelDeployConfig           `json:"ModelDeployConfig,omitempty"`
+	ModelDeployResult                *ModelDeployResult           `json:"ModelDeployResult,omitempty"`
 	OutputDataConfig                 AutoMlOutputDataConfig       `json:"OutputDataConfig"`
-	PartialFailureReasons            []AutoMlPartialFailureReason `json:"PartialFailureReasons"`
-	ProblemType                      *ProblemTypeEnum             `json:"ProblemType"`
-	ResolvedAttributes               *ResolvedAttributes          `json:"ResolvedAttributes"`
+	PartialFailureReasons            []AutoMlPartialFailureReason `json:"PartialFailureReasons,omitempty"`
+	ProblemType                      *ProblemTypeEnum             `json:"ProblemType,omitempty"`
+	ResolvedAttributes               *ResolvedAttributes          `json:"ResolvedAttributes,omitempty"`
 	RoleArn                          string                       `json:"RoleArn"`
 }

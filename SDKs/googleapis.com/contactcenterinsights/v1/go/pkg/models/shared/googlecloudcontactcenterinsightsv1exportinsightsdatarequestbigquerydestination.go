@@ -1,7 +1,7 @@
 package shared
 
 type GoogleCloudContactcenterinsightsV1ExportInsightsDataRequestBigQueryDestination struct {
-	Dataset   *string `json:"dataset"`
-	ProjectID *string `json:"projectId"`
-	Table     *string `json:"table"`
+	Dataset   *string `json:"dataset,omitempty"`
+	ProjectID *string `json:"projectId,omitempty"`
+	Table     *string `json:"table,omitempty"`
 }

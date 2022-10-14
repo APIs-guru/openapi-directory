@@ -1,9 +1,9 @@
 package shared
 
 type UpdateGameServerGroupInput struct {
-	BalancingStrategy          *BalancingStrategyEnum          `json:"BalancingStrategy"`
+	BalancingStrategy          *BalancingStrategyEnum          `json:"BalancingStrategy,omitempty"`
 	GameServerGroupName        string                          `json:"GameServerGroupName"`
-	GameServerProtectionPolicy *GameServerProtectionPolicyEnum `json:"GameServerProtectionPolicy"`
-	InstanceDefinitions        []InstanceDefinition            `json:"InstanceDefinitions"`
-	RoleArn                    *string                         `json:"RoleArn"`
+	GameServerProtectionPolicy *GameServerProtectionPolicyEnum `json:"GameServerProtectionPolicy,omitempty"`
+	InstanceDefinitions        []InstanceDefinition            `json:"InstanceDefinitions,omitempty"`
+	RoleArn                    *string                         `json:"RoleArn,omitempty"`
 }

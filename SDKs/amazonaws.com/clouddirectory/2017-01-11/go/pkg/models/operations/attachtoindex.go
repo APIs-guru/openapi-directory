@@ -16,11 +16,11 @@ type AttachToIndexHeaders struct {
 }
 
 type AttachToIndexRequestBodyIndexReference struct {
-	Selector *string `json:"Selector"`
+	Selector *string `json:"Selector,omitempty"`
 }
 
 type AttachToIndexRequestBodyTargetReference struct {
-	Selector *string `json:"Selector"`
+	Selector *string `json:"Selector,omitempty"`
 }
 
 type AttachToIndexRequestBody struct {

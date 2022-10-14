@@ -27,8 +27,8 @@ const (
 )
 
 type DateRange struct {
-	EndDate           *time.Time                      `json:"endDate"`
-	Kind              *string                         `json:"kind"`
-	RelativeDateRange *DateRangeRelativeDateRangeEnum `json:"relativeDateRange"`
-	StartDate         *time.Time                      `json:"startDate"`
+	EndDate           *time.Time                      `json:"endDate,omitempty"`
+	Kind              *string                         `json:"kind,omitempty"`
+	RelativeDateRange *DateRangeRelativeDateRangeEnum `json:"relativeDateRange,omitempty"`
+	StartDate         *time.Time                      `json:"startDate,omitempty"`
 }

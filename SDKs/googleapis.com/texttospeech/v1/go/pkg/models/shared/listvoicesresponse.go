@@ -1,5 +1,5 @@
 package shared
 
 type ListVoicesResponse struct {
-	Voices []Voice `json:"voices"`
+	Voices []Voice `json:"voices,omitempty"`
 }

@@ -5,12 +5,12 @@ type PutNetworksIDPathParams struct {
 }
 
 type PutNetworksIDRequestBodyLabels struct {
-	Labelkey *string `json:"labelkey"`
+	Labelkey *string `json:"labelkey,omitempty"`
 }
 
 type PutNetworksIDRequestBodyUpdateNetworkRequest struct {
-	Labels *PutNetworksIDRequestBodyLabels `json:"labels"`
-	Name   *string                         `json:"name"`
+	Labels *PutNetworksIDRequestBodyLabels `json:"labels,omitempty"`
+	Name   *string                         `json:"name,omitempty"`
 }
 
 type PutNetworksIDRequest struct {
@@ -37,7 +37,7 @@ const (
 
 type PutNetworksID200ApplicationJSONNetworkSubnets struct {
 	Gateway     string                                                `json:"gateway"`
-	IPRange     *string                                               `json:"ip_range"`
+	IPRange     *string                                               `json:"ip_range,omitempty"`
 	NetworkZone string                                                `json:"network_zone"`
 	Type        PutNetworksID200ApplicationJSONNetworkSubnetsTypeEnum `json:"type"`
 }
@@ -47,7 +47,7 @@ type PutNetworksID200ApplicationJSONNetwork struct {
 	ID            int64                                            `json:"id"`
 	IPRange       string                                           `json:"ip_range"`
 	Labels        map[string]interface{}                           `json:"labels"`
-	LoadBalancers []int64                                          `json:"load_balancers"`
+	LoadBalancers []int64                                          `json:"load_balancers,omitempty"`
 	Name          string                                           `json:"name"`
 	Protection    PutNetworksID200ApplicationJSONNetworkProtection `json:"protection"`
 	Routes        []PutNetworksID200ApplicationJSONNetworkRoutes   `json:"routes"`
@@ -56,7 +56,7 @@ type PutNetworksID200ApplicationJSONNetwork struct {
 }
 
 type PutNetworksID200ApplicationJSON struct {
-	Network *PutNetworksID200ApplicationJSONNetwork `json:"network"`
+	Network *PutNetworksID200ApplicationJSONNetwork `json:"network,omitempty"`
 }
 
 type PutNetworksIDResponse struct {

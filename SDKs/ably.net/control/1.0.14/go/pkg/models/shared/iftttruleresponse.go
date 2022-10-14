@@ -25,15 +25,15 @@ type IftttRuleResponseTarget struct {
 }
 
 type IftttRuleResponse struct {
-	Links       map[string]interface{}           `json:"_links"`
-	AppID       *string                          `json:"appId"`
-	Created     *float64                         `json:"created"`
-	ID          *string                          `json:"id"`
-	Modified    *float64                         `json:"modified"`
+	Links       map[string]interface{}           `json:"_links,omitempty"`
+	AppID       *string                          `json:"appId,omitempty"`
+	Created     *float64                         `json:"created,omitempty"`
+	ID          *string                          `json:"id,omitempty"`
+	Modified    *float64                         `json:"modified,omitempty"`
 	RequestMode IftttRuleResponseRequestModeEnum `json:"requestMode"`
 	RuleType    IftttRuleResponseRuleTypeEnum    `json:"ruleType"`
 	Source      RuleSource                       `json:"source"`
-	Status      *IftttRuleResponseStatusEnum     `json:"status"`
+	Status      *IftttRuleResponseStatusEnum     `json:"status,omitempty"`
 	Target      IftttRuleResponseTarget          `json:"target"`
-	Version     *string                          `json:"version"`
+	Version     *string                          `json:"version,omitempty"`
 }

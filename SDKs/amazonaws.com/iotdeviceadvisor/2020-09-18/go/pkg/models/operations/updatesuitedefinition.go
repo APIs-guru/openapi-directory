@@ -19,15 +19,15 @@ type UpdateSuiteDefinitionHeaders struct {
 }
 
 type UpdateSuiteDefinitionRequestBodySuiteDefinitionConfiguration struct {
-	DevicePermissionRoleArn  *string                  `json:"devicePermissionRoleArn"`
-	Devices                  []shared.DeviceUnderTest `json:"devices"`
-	IntendedForQualification *bool                    `json:"intendedForQualification"`
-	RootGroup                *string                  `json:"rootGroup"`
-	SuiteDefinitionName      *string                  `json:"suiteDefinitionName"`
+	DevicePermissionRoleArn  *string                  `json:"devicePermissionRoleArn,omitempty"`
+	Devices                  []shared.DeviceUnderTest `json:"devices,omitempty"`
+	IntendedForQualification *bool                    `json:"intendedForQualification,omitempty"`
+	RootGroup                *string                  `json:"rootGroup,omitempty"`
+	SuiteDefinitionName      *string                  `json:"suiteDefinitionName,omitempty"`
 }
 
 type UpdateSuiteDefinitionRequestBody struct {
-	SuiteDefinitionConfiguration *UpdateSuiteDefinitionRequestBodySuiteDefinitionConfiguration `json:"suiteDefinitionConfiguration"`
+	SuiteDefinitionConfiguration *UpdateSuiteDefinitionRequestBodySuiteDefinitionConfiguration `json:"suiteDefinitionConfiguration,omitempty"`
 }
 
 type UpdateSuiteDefinitionRequest struct {

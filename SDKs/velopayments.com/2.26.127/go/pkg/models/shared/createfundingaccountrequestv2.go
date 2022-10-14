@@ -8,11 +8,11 @@ const (
 )
 
 type CreateFundingAccountRequestV2 struct {
-	AccountName   *string                               `json:"accountName"`
-	AccountNumber *string                               `json:"accountNumber"`
-	Currency      *string                               `json:"currency"`
+	AccountName   *string                               `json:"accountName,omitempty"`
+	AccountNumber *string                               `json:"accountNumber,omitempty"`
+	Currency      *string                               `json:"currency,omitempty"`
 	Name          string                                `json:"name"`
 	PayorID       string                                `json:"payorId"`
-	RoutingNumber *string                               `json:"routingNumber"`
+	RoutingNumber *string                               `json:"routingNumber,omitempty"`
 	Type          CreateFundingAccountRequestV2TypeEnum `json:"type"`
 }

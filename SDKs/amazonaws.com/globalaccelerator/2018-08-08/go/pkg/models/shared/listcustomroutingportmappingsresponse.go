@@ -1,6 +1,6 @@
 package shared
 
 type ListCustomRoutingPortMappingsResponse struct {
-	NextToken    *string       `json:"NextToken"`
-	PortMappings []PortMapping `json:"PortMappings"`
+	NextToken    *string       `json:"NextToken,omitempty"`
+	PortMappings []PortMapping `json:"PortMappings,omitempty"`
 }

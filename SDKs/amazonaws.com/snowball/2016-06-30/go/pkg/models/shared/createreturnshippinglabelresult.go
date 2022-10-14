@@ -1,5 +1,5 @@
 package shared
 
 type CreateReturnShippingLabelResult struct {
-	Status *ShippingLabelStatusEnum `json:"Status"`
+	Status *ShippingLabelStatusEnum `json:"Status,omitempty"`
 }

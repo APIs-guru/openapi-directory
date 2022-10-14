@@ -18,19 +18,19 @@ const (
 )
 
 type Finding struct {
-	Body                 *string                 `json:"body"`
-	Description          *string                 `json:"description"`
-	FinalURL             *string                 `json:"finalUrl"`
-	FindingType          *FindingFindingTypeEnum `json:"findingType"`
-	FrameURL             *string                 `json:"frameUrl"`
-	FuzzedURL            *string                 `json:"fuzzedUrl"`
-	HTTPMethod           *string                 `json:"httpMethod"`
-	Name                 *string                 `json:"name"`
-	OutdatedLibrary      *OutdatedLibrary        `json:"outdatedLibrary"`
-	ReproductionURL      *string                 `json:"reproductionUrl"`
-	TrackingID           *string                 `json:"trackingId"`
-	ViolatingResource    *ViolatingResource      `json:"violatingResource"`
-	VulnerableHeaders    *VulnerableHeaders      `json:"vulnerableHeaders"`
-	VulnerableParameters *VulnerableParameters   `json:"vulnerableParameters"`
-	XSS                  *XSS                    `json:"xss"`
+	Body                 *string                 `json:"body,omitempty"`
+	Description          *string                 `json:"description,omitempty"`
+	FinalURL             *string                 `json:"finalUrl,omitempty"`
+	FindingType          *FindingFindingTypeEnum `json:"findingType,omitempty"`
+	FrameURL             *string                 `json:"frameUrl,omitempty"`
+	FuzzedURL            *string                 `json:"fuzzedUrl,omitempty"`
+	HTTPMethod           *string                 `json:"httpMethod,omitempty"`
+	Name                 *string                 `json:"name,omitempty"`
+	OutdatedLibrary      *OutdatedLibrary        `json:"outdatedLibrary,omitempty"`
+	ReproductionURL      *string                 `json:"reproductionUrl,omitempty"`
+	TrackingID           *string                 `json:"trackingId,omitempty"`
+	ViolatingResource    *ViolatingResource      `json:"violatingResource,omitempty"`
+	VulnerableHeaders    *VulnerableHeaders      `json:"vulnerableHeaders,omitempty"`
+	VulnerableParameters *VulnerableParameters   `json:"vulnerableParameters,omitempty"`
+	XSS                  *XSS                    `json:"xss,omitempty"`
 }

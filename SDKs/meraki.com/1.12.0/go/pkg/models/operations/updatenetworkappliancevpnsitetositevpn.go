@@ -6,7 +6,7 @@ type UpdateNetworkApplianceVpnSiteToSiteVpnPathParams struct {
 
 type UpdateNetworkApplianceVpnSiteToSiteVpnRequestBodyHubs struct {
 	HubID           string `json:"hubId"`
-	UseDefaultRoute *bool  `json:"useDefaultRoute"`
+	UseDefaultRoute *bool  `json:"useDefaultRoute,omitempty"`
 }
 
 type UpdateNetworkApplianceVpnSiteToSiteVpnRequestBodyModeEnum string
@@ -19,13 +19,13 @@ const (
 
 type UpdateNetworkApplianceVpnSiteToSiteVpnRequestBodySubnets struct {
 	LocalSubnet string `json:"localSubnet"`
-	UseVpn      *bool  `json:"useVpn"`
+	UseVpn      *bool  `json:"useVpn,omitempty"`
 }
 
 type UpdateNetworkApplianceVpnSiteToSiteVpnRequestBody struct {
-	Hubs    []UpdateNetworkApplianceVpnSiteToSiteVpnRequestBodyHubs    `json:"hubs"`
+	Hubs    []UpdateNetworkApplianceVpnSiteToSiteVpnRequestBodyHubs    `json:"hubs,omitempty"`
 	Mode    UpdateNetworkApplianceVpnSiteToSiteVpnRequestBodyModeEnum  `json:"mode"`
-	Subnets []UpdateNetworkApplianceVpnSiteToSiteVpnRequestBodySubnets `json:"subnets"`
+	Subnets []UpdateNetworkApplianceVpnSiteToSiteVpnRequestBodySubnets `json:"subnets,omitempty"`
 }
 
 type UpdateNetworkApplianceVpnSiteToSiteVpnRequest struct {

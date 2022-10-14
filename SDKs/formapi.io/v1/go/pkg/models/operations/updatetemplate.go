@@ -17,22 +17,22 @@ const (
 )
 
 type UpdateTemplateRequestBodyTemplateTemplateData struct {
-	AllowAdditionalProperties *bool                                                    `json:"allow_additional_properties"`
-	Description               *string                                                  `json:"description"`
-	EditableSubmissions       *bool                                                    `json:"editable_submissions"`
-	ExpirationInterval        *UpdateTemplateRequestBodyTemplateExpirationIntervalEnum `json:"expiration_interval"`
-	ExpireAfter               *float64                                                 `json:"expire_after"`
-	ExpireSubmissions         *bool                                                    `json:"expire_submissions"`
-	FooterHTML                *string                                                  `json:"footer_html"`
-	HeaderHTML                *string                                                  `json:"header_html"`
-	HTML                      *string                                                  `json:"html"`
-	Name                      *string                                                  `json:"name"`
-	PublicSubmissions         *bool                                                    `json:"public_submissions"`
-	PublicWebForm             *bool                                                    `json:"public_web_form"`
-	RedirectURL               *string                                                  `json:"redirect_url"`
-	Scss                      *string                                                  `json:"scss"`
-	SlackWebhookURL           *string                                                  `json:"slack_webhook_url"`
-	WebhookURL                *string                                                  `json:"webhook_url"`
+	AllowAdditionalProperties *bool                                                    `json:"allow_additional_properties,omitempty"`
+	Description               *string                                                  `json:"description,omitempty"`
+	EditableSubmissions       *bool                                                    `json:"editable_submissions,omitempty"`
+	ExpirationInterval        *UpdateTemplateRequestBodyTemplateExpirationIntervalEnum `json:"expiration_interval,omitempty"`
+	ExpireAfter               *float64                                                 `json:"expire_after,omitempty"`
+	ExpireSubmissions         *bool                                                    `json:"expire_submissions,omitempty"`
+	FooterHTML                *string                                                  `json:"footer_html,omitempty"`
+	HeaderHTML                *string                                                  `json:"header_html,omitempty"`
+	HTML                      *string                                                  `json:"html,omitempty"`
+	Name                      *string                                                  `json:"name,omitempty"`
+	PublicSubmissions         *bool                                                    `json:"public_submissions,omitempty"`
+	PublicWebForm             *bool                                                    `json:"public_web_form,omitempty"`
+	RedirectURL               *string                                                  `json:"redirect_url,omitempty"`
+	Scss                      *string                                                  `json:"scss,omitempty"`
+	SlackWebhookURL           *string                                                  `json:"slack_webhook_url,omitempty"`
+	WebhookURL                *string                                                  `json:"webhook_url,omitempty"`
 }
 
 type UpdateTemplateRequestBodyUpdateTemplateData struct {
@@ -57,7 +57,7 @@ const (
 )
 
 type UpdateTemplate200ApplicationJSONUpdateTemplateResponse struct {
-	Errors []string                                   `json:"errors"`
+	Errors []string                                   `json:"errors,omitempty"`
 	Status UpdateTemplate200ApplicationJSONStatusEnum `json:"status"`
 }
 

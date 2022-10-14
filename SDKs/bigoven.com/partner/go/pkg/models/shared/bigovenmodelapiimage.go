@@ -1,18 +1,18 @@
 package shared
 
 type BigOvenModelAPIImage struct {
-	Caption        *string                  `json:"Caption"`
-	CreationDate   *string                  `json:"CreationDate"`
-	ImageID        *int64                   `json:"ImageID"`
-	ImageSquares   []int32                  `json:"ImageSquares"`
-	ImageURL       *string                  `json:"ImageURL"`
-	ImageUrl120    *string                  `json:"ImageURL120"`
-	ImageUrl128    *string                  `json:"ImageURL128"`
-	ImageUrl200    *string                  `json:"ImageURL200"`
-	ImageUrl256    *string                  `json:"ImageURL256"`
-	ImageUrl48     *string                  `json:"ImageURL48"`
-	ImageUrl64     *string                  `json:"ImageURL64"`
-	IsPrimary      *bool                    `json:"IsPrimary"`
-	MaxImageSquare *int32                   `json:"MaxImageSquare"`
-	Poster         *BigOvenModelAPIUserInfo `json:"Poster"`
+	Caption        *string                  `json:"Caption,omitempty"`
+	CreationDate   *string                  `json:"CreationDate,omitempty"`
+	ImageID        *int64                   `json:"ImageID,omitempty"`
+	ImageSquares   []int32                  `json:"ImageSquares,omitempty"`
+	ImageURL       *string                  `json:"ImageURL,omitempty"`
+	ImageUrl120    *string                  `json:"ImageURL120,omitempty"`
+	ImageUrl128    *string                  `json:"ImageURL128,omitempty"`
+	ImageUrl200    *string                  `json:"ImageURL200,omitempty"`
+	ImageUrl256    *string                  `json:"ImageURL256,omitempty"`
+	ImageUrl48     *string                  `json:"ImageURL48,omitempty"`
+	ImageUrl64     *string                  `json:"ImageURL64,omitempty"`
+	IsPrimary      *bool                    `json:"IsPrimary,omitempty"`
+	MaxImageSquare *int32                   `json:"MaxImageSquare,omitempty"`
+	Poster         *BigOvenModelAPIUserInfo `json:"Poster,omitempty"`
 }

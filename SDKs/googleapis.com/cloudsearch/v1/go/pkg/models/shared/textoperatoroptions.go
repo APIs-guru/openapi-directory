@@ -1,6 +1,6 @@
 package shared
 
 type TextOperatorOptions struct {
-	ExactMatchWithOperator *bool   `json:"exactMatchWithOperator"`
-	OperatorName           *string `json:"operatorName"`
+	ExactMatchWithOperator *bool   `json:"exactMatchWithOperator,omitempty"`
+	OperatorName           *string `json:"operatorName,omitempty"`
 }

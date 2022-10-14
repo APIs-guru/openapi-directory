@@ -5,11 +5,11 @@ import (
 )
 
 type DescribeDatasetGroupResponse struct {
-	CreationTime         *time.Time  `json:"CreationTime"`
-	DatasetArns          []string    `json:"DatasetArns"`
-	DatasetGroupArn      *string     `json:"DatasetGroupArn"`
-	DatasetGroupName     *string     `json:"DatasetGroupName"`
-	Domain               *DomainEnum `json:"Domain"`
-	LastModificationTime *time.Time  `json:"LastModificationTime"`
-	Status               *string     `json:"Status"`
+	CreationTime         *time.Time  `json:"CreationTime,omitempty"`
+	DatasetArns          []string    `json:"DatasetArns,omitempty"`
+	DatasetGroupArn      *string     `json:"DatasetGroupArn,omitempty"`
+	DatasetGroupName     *string     `json:"DatasetGroupName,omitempty"`
+	Domain               *DomainEnum `json:"Domain,omitempty"`
+	LastModificationTime *time.Time  `json:"LastModificationTime,omitempty"`
+	Status               *string     `json:"Status,omitempty"`
 }

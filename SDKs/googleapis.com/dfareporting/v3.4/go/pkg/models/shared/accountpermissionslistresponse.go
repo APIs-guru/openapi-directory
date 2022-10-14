@@ -1,6 +1,6 @@
 package shared
 
 type AccountPermissionsListResponse struct {
-	AccountPermissions []AccountPermission `json:"accountPermissions"`
-	Kind               *string             `json:"kind"`
+	AccountPermissions []AccountPermission `json:"accountPermissions,omitempty"`
+	Kind               *string             `json:"kind,omitempty"`
 }

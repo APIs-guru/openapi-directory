@@ -33,7 +33,7 @@ type DeleteObjectStorageSslRequest struct {
 }
 
 type DeleteObjectStorageSslDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors"`
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type DeleteObjectStorageSslResponse struct {

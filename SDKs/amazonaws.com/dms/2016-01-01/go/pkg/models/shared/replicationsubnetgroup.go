@@ -1,9 +1,9 @@
 package shared
 
 type ReplicationSubnetGroup struct {
-	ReplicationSubnetGroupDescription *string  `json:"ReplicationSubnetGroupDescription"`
-	ReplicationSubnetGroupIdentifier  *string  `json:"ReplicationSubnetGroupIdentifier"`
-	SubnetGroupStatus                 *string  `json:"SubnetGroupStatus"`
-	Subnets                           []Subnet `json:"Subnets"`
-	VpcID                             *string  `json:"VpcId"`
+	ReplicationSubnetGroupDescription *string  `json:"ReplicationSubnetGroupDescription,omitempty"`
+	ReplicationSubnetGroupIdentifier  *string  `json:"ReplicationSubnetGroupIdentifier,omitempty"`
+	SubnetGroupStatus                 *string  `json:"SubnetGroupStatus,omitempty"`
+	Subnets                           []Subnet `json:"Subnets,omitempty"`
+	VpcID                             *string  `json:"VpcId,omitempty"`
 }

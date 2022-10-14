@@ -1,6 +1,6 @@
 package shared
 
 type ListAccountLabelsResponse struct {
-	AccountLabels []AccountLabel `json:"accountLabels"`
-	NextPageToken *string        `json:"nextPageToken"`
+	AccountLabels []AccountLabel `json:"accountLabels,omitempty"`
+	NextPageToken *string        `json:"nextPageToken,omitempty"`
 }

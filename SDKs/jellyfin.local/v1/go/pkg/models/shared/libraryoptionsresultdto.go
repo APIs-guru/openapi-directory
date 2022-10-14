@@ -1,8 +1,8 @@
 package shared
 
 type LibraryOptionsResultDto struct {
-	MetadataReaders  []LibraryOptionInfoDto  `json:"MetadataReaders"`
-	MetadataSavers   []LibraryOptionInfoDto  `json:"MetadataSavers"`
-	SubtitleFetchers []LibraryOptionInfoDto  `json:"SubtitleFetchers"`
-	TypeOptions      []LibraryTypeOptionsDto `json:"TypeOptions"`
+	MetadataReaders  []LibraryOptionInfoDto  `json:"MetadataReaders,omitempty"`
+	MetadataSavers   []LibraryOptionInfoDto  `json:"MetadataSavers,omitempty"`
+	SubtitleFetchers []LibraryOptionInfoDto  `json:"SubtitleFetchers,omitempty"`
+	TypeOptions      []LibraryTypeOptionsDto `json:"TypeOptions,omitempty"`
 }

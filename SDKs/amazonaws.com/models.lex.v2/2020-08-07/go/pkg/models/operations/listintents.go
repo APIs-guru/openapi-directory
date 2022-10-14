@@ -26,15 +26,15 @@ type ListIntentsHeaders struct {
 }
 
 type ListIntentsRequestBodySortBy struct {
-	Attribute *shared.IntentSortAttributeEnum `json:"attribute"`
-	Order     *shared.SortOrderEnum           `json:"order"`
+	Attribute *shared.IntentSortAttributeEnum `json:"attribute,omitempty"`
+	Order     *shared.SortOrderEnum           `json:"order,omitempty"`
 }
 
 type ListIntentsRequestBody struct {
-	Filters    []shared.IntentFilter         `json:"filters"`
-	MaxResults *int64                        `json:"maxResults"`
-	NextToken  *string                       `json:"nextToken"`
-	SortBy     *ListIntentsRequestBodySortBy `json:"sortBy"`
+	Filters    []shared.IntentFilter         `json:"filters,omitempty"`
+	MaxResults *int64                        `json:"maxResults,omitempty"`
+	NextToken  *string                       `json:"nextToken,omitempty"`
+	SortBy     *ListIntentsRequestBodySortBy `json:"sortBy,omitempty"`
 }
 
 type ListIntentsRequest struct {

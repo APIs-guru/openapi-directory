@@ -1,8 +1,8 @@
 package shared
 
 type MitigationAction struct {
-	ActionParams *MitigationActionParams `json:"actionParams"`
-	ID           *string                 `json:"id"`
-	Name         *string                 `json:"name"`
-	RoleArn      *string                 `json:"roleArn"`
+	ActionParams *MitigationActionParams `json:"actionParams,omitempty"`
+	ID           *string                 `json:"id,omitempty"`
+	Name         *string                 `json:"name,omitempty"`
+	RoleArn      *string                 `json:"roleArn,omitempty"`
 }

@@ -8,8 +8,8 @@ const (
 )
 
 type MarkdownRenderRequestBody struct {
-	Context *string                            `json:"context"`
-	Mode    *MarkdownRenderRequestBodyModeEnum `json:"mode"`
+	Context *string                            `json:"context,omitempty"`
+	Mode    *MarkdownRenderRequestBodyModeEnum `json:"mode,omitempty"`
 	Text    string                             `json:"text"`
 }
 

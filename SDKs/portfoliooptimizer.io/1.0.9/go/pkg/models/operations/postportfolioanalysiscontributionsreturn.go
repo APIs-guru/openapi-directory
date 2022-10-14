@@ -6,7 +6,7 @@ type PostPortfolioAnalysisContributionsReturnRequestBodyPortfolios struct {
 
 type PostPortfolioAnalysisContributionsReturnRequestBody struct {
 	Assets        int64                                                           `json:"assets"`
-	AssetsGroups  [][]int64                                                       `json:"assetsGroups"`
+	AssetsGroups  [][]int64                                                       `json:"assetsGroups,omitempty"`
 	AssetsReturns []float64                                                       `json:"assetsReturns"`
 	Portfolios    []PostPortfolioAnalysisContributionsReturnRequestBodyPortfolios `json:"portfolios"`
 }
@@ -16,7 +16,7 @@ type PostPortfolioAnalysisContributionsReturnRequest struct {
 }
 
 type PostPortfolioAnalysisContributionsReturn200ApplicationJSONPortfolios struct {
-	AssetsGroupsReturnContributions []float64 `json:"assetsGroupsReturnContributions"`
+	AssetsGroupsReturnContributions []float64 `json:"assetsGroupsReturnContributions,omitempty"`
 	AssetsReturnContributions       []float64 `json:"assetsReturnContributions"`
 }
 

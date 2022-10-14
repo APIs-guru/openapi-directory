@@ -72,10 +72,10 @@ const (
 )
 
 type WritablePowerPortTemplate struct {
-	AllocatedDraw *int64                                 `json:"allocated_draw"`
+	AllocatedDraw *int64                                 `json:"allocated_draw,omitempty"`
 	DeviceType    int64                                  `json:"device_type"`
-	ID            *int64                                 `json:"id"`
-	MaximumDraw   *int64                                 `json:"maximum_draw"`
+	ID            *int64                                 `json:"id,omitempty"`
+	MaximumDraw   *int64                                 `json:"maximum_draw,omitempty"`
 	Name          string                                 `json:"name"`
-	Type          *WritablePowerPortTemplateTypeTypeEnum `json:"type"`
+	Type          *WritablePowerPortTemplateTypeTypeEnum `json:"type,omitempty"`
 }

@@ -9,7 +9,7 @@ const (
 )
 
 type FreeInstanceMetadata struct {
-	ExpireBehavior *FreeInstanceMetadataExpireBehaviorEnum `json:"expireBehavior"`
-	ExpireTime     *string                                 `json:"expireTime"`
-	UpgradeTime    *string                                 `json:"upgradeTime"`
+	ExpireBehavior *FreeInstanceMetadataExpireBehaviorEnum `json:"expireBehavior,omitempty"`
+	ExpireTime     *string                                 `json:"expireTime,omitempty"`
+	UpgradeTime    *string                                 `json:"upgradeTime,omitempty"`
 }

@@ -1,5 +1,5 @@
 package shared
 
 type RowData struct {
-	Values []CellData `json:"values"`
+	Values []CellData `json:"values,omitempty"`
 }

@@ -19,7 +19,7 @@ const (
 )
 
 type CreateTextTrackRequestBody struct {
-	Active   *bool                              `json:"active"`
+	Active   *bool                              `json:"active,omitempty"`
 	Language string                             `json:"language"`
 	Name     string                             `json:"name"`
 	Type     CreateTextTrackRequestBodyTypeEnum `json:"type"`

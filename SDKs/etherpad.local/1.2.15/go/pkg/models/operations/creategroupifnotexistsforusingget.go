@@ -9,31 +9,31 @@ type CreateGroupIfNotExistsForUsingGetRequest struct {
 }
 
 type CreateGroupIfNotExistsForUsingGet200ApplicationJSONData struct {
-	GroupID *string `json:"groupID"`
+	GroupID *string `json:"groupID,omitempty"`
 }
 
 type CreateGroupIfNotExistsForUsingGet200ApplicationJSON struct {
-	Code    *int64                                                   `json:"code"`
-	Data    *CreateGroupIfNotExistsForUsingGet200ApplicationJSONData `json:"data"`
-	Message *string                                                  `json:"message"`
+	Code    *int64                                                   `json:"code,omitempty"`
+	Data    *CreateGroupIfNotExistsForUsingGet200ApplicationJSONData `json:"data,omitempty"`
+	Message *string                                                  `json:"message,omitempty"`
 }
 
 type CreateGroupIfNotExistsForUsingGet400ApplicationJSON struct {
-	Code    *int64                 `json:"code"`
-	Data    map[string]interface{} `json:"data"`
-	Message *string                `json:"message"`
+	Code    *int64                 `json:"code,omitempty"`
+	Data    map[string]interface{} `json:"data,omitempty"`
+	Message *string                `json:"message,omitempty"`
 }
 
 type CreateGroupIfNotExistsForUsingGet401ApplicationJSON struct {
-	Code    *int64                 `json:"code"`
-	Data    map[string]interface{} `json:"data"`
-	Message *string                `json:"message"`
+	Code    *int64                 `json:"code,omitempty"`
+	Data    map[string]interface{} `json:"data,omitempty"`
+	Message *string                `json:"message,omitempty"`
 }
 
 type CreateGroupIfNotExistsForUsingGet500ApplicationJSON struct {
-	Code    *int64                 `json:"code"`
-	Data    map[string]interface{} `json:"data"`
-	Message *string                `json:"message"`
+	Code    *int64                 `json:"code,omitempty"`
+	Data    map[string]interface{} `json:"data,omitempty"`
+	Message *string                `json:"message,omitempty"`
 }
 
 type CreateGroupIfNotExistsForUsingGetResponse struct {

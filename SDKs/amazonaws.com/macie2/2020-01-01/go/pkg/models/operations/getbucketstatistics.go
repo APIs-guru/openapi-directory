@@ -15,7 +15,7 @@ type GetBucketStatisticsHeaders struct {
 }
 
 type GetBucketStatisticsRequestBody struct {
-	AccountID *string `json:"accountId"`
+	AccountID *string `json:"accountId,omitempty"`
 }
 
 type GetBucketStatisticsRequest struct {

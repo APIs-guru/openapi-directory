@@ -10,18 +10,18 @@ type GetemailinfoRequest struct {
 }
 
 type Getemailinfo200ApplicationJSON struct {
-	Code             *string `json:"Code"`
-	Credits          *string `json:"Credits"`
-	Email            *string `json:"Email"`
-	Geolocation      *string `json:"Geolocation"`
-	Info             *string `json:"Info"`
-	IsDisposable     *string `json:"IsDisposable"`
-	IsEducational    *string `json:"IsEducational"`
-	IsGeneric        *string `json:"IsGeneric"`
-	IsGovernment     *string `json:"IsGovernment"`
-	IsOrganizational *string `json:"IsOrganizational"`
-	IsVulgar         *string `json:"IsVulgar"`
-	Response         *string `json:"Response"`
+	Code             *string `json:"Code,omitempty"`
+	Credits          *string `json:"Credits,omitempty"`
+	Email            *string `json:"Email,omitempty"`
+	Geolocation      *string `json:"Geolocation,omitempty"`
+	Info             *string `json:"Info,omitempty"`
+	IsDisposable     *string `json:"IsDisposable,omitempty"`
+	IsEducational    *string `json:"IsEducational,omitempty"`
+	IsGeneric        *string `json:"IsGeneric,omitempty"`
+	IsGovernment     *string `json:"IsGovernment,omitempty"`
+	IsOrganizational *string `json:"IsOrganizational,omitempty"`
+	IsVulgar         *string `json:"IsVulgar,omitempty"`
+	Response         *string `json:"Response,omitempty"`
 }
 
 type GetemailinfoResponse struct {

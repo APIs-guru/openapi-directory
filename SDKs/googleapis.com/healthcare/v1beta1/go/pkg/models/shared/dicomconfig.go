@@ -11,8 +11,8 @@ const (
 )
 
 type DicomConfig struct {
-	FilterProfile   *DicomConfigFilterProfileEnum `json:"filterProfile"`
-	KeepList        *TagFilterList                `json:"keepList"`
-	RemoveList      *TagFilterList                `json:"removeList"`
-	SkipIDRedaction *bool                         `json:"skipIdRedaction"`
+	FilterProfile   *DicomConfigFilterProfileEnum `json:"filterProfile,omitempty"`
+	KeepList        *TagFilterList                `json:"keepList,omitempty"`
+	RemoveList      *TagFilterList                `json:"removeList,omitempty"`
+	SkipIDRedaction *bool                         `json:"skipIdRedaction,omitempty"`
 }

@@ -1,6 +1,6 @@
 package shared
 
 type Adjustment struct {
-	Metric *string `json:"Metric"`
-	Reason *string `json:"Reason"`
+	Metric *string `json:"Metric,omitempty"`
+	Reason *string `json:"Reason,omitempty"`
 }

@@ -1,9 +1,9 @@
 package shared
 
 type GoogleCloudMlV1ContainerSpec struct {
-	Args    []string                       `json:"args"`
-	Command []string                       `json:"command"`
-	Env     []GoogleCloudMlV1EnvVar        `json:"env"`
-	Image   *string                        `json:"image"`
-	Ports   []GoogleCloudMlV1ContainerPort `json:"ports"`
+	Args    []string                       `json:"args,omitempty"`
+	Command []string                       `json:"command,omitempty"`
+	Env     []GoogleCloudMlV1EnvVar        `json:"env,omitempty"`
+	Image   *string                        `json:"image,omitempty"`
+	Ports   []GoogleCloudMlV1ContainerPort `json:"ports,omitempty"`
 }

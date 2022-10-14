@@ -10,5 +10,5 @@ const (
 )
 
 type GoogleAppsDriveLabelsV2betaLabelAppliedLabelPolicy struct {
-	CopyMode *GoogleAppsDriveLabelsV2betaLabelAppliedLabelPolicyCopyModeEnum `json:"copyMode"`
+	CopyMode *GoogleAppsDriveLabelsV2betaLabelAppliedLabelPolicyCopyModeEnum `json:"copyMode,omitempty"`
 }
