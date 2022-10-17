@@ -620,7 +620,7 @@ components:
       properties:
         threat:
           $ref: "#/components/schemas/GoogleCloudWebriskV1SearchUrisResponseThreatUri"
-          description: The threat list matches. This may be empty if the URI is on no list.
+          description: The threat list matches. This might be empty if the URI is on no list.
       type: object
     GoogleCloudWebriskV1SearchUrisResponseThreatUri:
       description: Contains threat information on a matching uri.
@@ -645,7 +645,7 @@ components:
       description: Wraps a URI that might be displaying malicious content.
       properties:
         threatTypes:
-          description: ThreatTypes found to be associated with the submitted URI after reviewing it. This may be empty if the URI was not added to any list.
+          description: ThreatTypes found to be associated with the submitted URI after reviewing it. This might be empty if the URI was not added to any list.
           items:
             enum:
               - THREAT_TYPE_UNSPECIFIED
@@ -738,10 +738,10 @@ components:
         metadata:
           additionalProperties:
             description: Properties of the object. Contains field @type with type URL.
-          description: This field will contain a `SubmitUriMetadata` object.
+          description: Contains a `SubmitUriMetadata` object.
           type: object
         name:
-          description: This will match the pattern `/v1/{project-name}/operations/{operation-id}`.
+          description: Matches the `/v1/{project-name}/operations/{operation-id}` pattern.
           type: string
         response:
           additionalProperties:

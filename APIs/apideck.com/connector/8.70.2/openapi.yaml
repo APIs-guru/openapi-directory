@@ -595,7 +595,7 @@ paths:
         - $ref: "#/components/parameters/doc_id"
       responses:
         "200":
-          $ref: "#/components/responses/GetConnectorResponse"
+          $ref: "#/components/responses/GetConnectorDocResponse"
         "401":
           $ref: "#/components/responses/UnauthorizedResponse"
         "402":
@@ -1829,7 +1829,6 @@ components:
         - customer-support
         - time-registration
         - transactional-email
-        - hcm
         - form
         - csp
         - email-marketing
