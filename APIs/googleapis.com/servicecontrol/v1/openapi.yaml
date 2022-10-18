@@ -1249,9 +1249,6 @@ components:
     ResourceInfo:
       description: Describes a resource associated with this operation.
       properties:
-        permission:
-          description: The resource permission required for this request.
-          type: string
         resourceContainer:
           description: "The identifier of the parent of this resource instance. Must be in one of the following formats: - `projects/` - `folders/` - `organizations/`"
           type: string
