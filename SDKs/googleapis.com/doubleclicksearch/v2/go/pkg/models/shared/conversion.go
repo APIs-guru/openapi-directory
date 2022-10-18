@@ -17,6 +17,7 @@ type Conversion struct {
 	CurrencyCode                *string           `json:"currencyCode,omitempty"`
 	CustomDimension             []CustomDimension `json:"customDimension,omitempty"`
 	CustomMetric                []CustomMetric    `json:"customMetric,omitempty"`
+	CustomerID                  *string           `json:"customerId,omitempty"`
 	DeviceType                  *string           `json:"deviceType,omitempty"`
 	DsConversionID              *string           `json:"dsConversionId,omitempty"`
 	EngineAccountID             *string           `json:"engineAccountId,omitempty"`

@@ -87,12 +87,12 @@ func (s *SDK) PatchAttraction(ctx context.Context, request operations.PatchAttra
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `*/*`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -135,12 +135,12 @@ func (s *SDK) PatchEvent(ctx context.Context, request operations.PatchEventReque
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `*/*`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -183,12 +183,12 @@ func (s *SDK) PatchVenue(ctx context.Context, request operations.PatchVenueReque
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `*/*`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -231,12 +231,12 @@ func (s *SDK) PublishAttraction(ctx context.Context, request operations.PublishA
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `*/*`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -279,12 +279,12 @@ func (s *SDK) PublishAttractionVideos(ctx context.Context, request operations.Pu
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `*/*`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -327,12 +327,12 @@ func (s *SDK) PublishEntitlements(ctx context.Context, request operations.Publis
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `*/*`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -375,12 +375,12 @@ func (s *SDK) PublishEvent(ctx context.Context, request operations.PublishEventR
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `*/*`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -423,12 +423,12 @@ func (s *SDK) PublishEventVideos(ctx context.Context, request operations.Publish
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `*/*`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -471,12 +471,12 @@ func (s *SDK) PublishExtension(ctx context.Context, request operations.PublishEx
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `*/*`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -519,12 +519,12 @@ func (s *SDK) PublishVenue(ctx context.Context, request operations.PublishVenueR
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `*/*`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 

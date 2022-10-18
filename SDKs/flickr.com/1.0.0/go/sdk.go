@@ -3,7 +3,6 @@ package sdk
 import (
 	"context"
 	"fmt"
-	"io"
 	"net/http"
 	"openapi/internal/utils"
 	"openapi/pkg/models/operations"
@@ -162,13 +161,12 @@ func (s *SDK) GetAccessToken(ctx context.Context, request operations.GetAccessTo
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
+			var out *string
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
 			}
 
-			out := string(data)
-			res.GetAccessToken200ApplicationJSONString = &out
+			res.GetAccessToken200ApplicationJSONString = out
 		}
 	}
 
@@ -1024,13 +1022,12 @@ func (s *SDK) GetRequestToken(ctx context.Context, request operations.GetRequest
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
+			var out *string
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
 			}
 
-			out := string(data)
-			res.GetRequestToken200ApplicationJSONString = &out
+			res.GetRequestToken200ApplicationJSONString = out
 		}
 	}
 

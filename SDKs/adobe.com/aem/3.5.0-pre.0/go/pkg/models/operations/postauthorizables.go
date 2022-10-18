@@ -14,7 +14,7 @@ type PostAuthorizablesRequest struct {
 }
 
 type PostAuthorizablesResponse struct {
-	ContentType                            string
-	StatusCode                             int64
-	PostAuthorizablesDefaultTextHTMLString *string
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }

@@ -8,7 +8,7 @@ type PutRealmUsersIDCredentialsCredentialIDUserLabelPathParams struct {
 
 type PutRealmUsersIDCredentialsCredentialIDUserLabelRequest struct {
 	PathParams PutRealmUsersIDCredentialsCredentialIDUserLabelPathParams
-	Request    string `request:"mediaType=text/plain"`
+	Request    []byte `request:"mediaType=text/plain"`
 }
 
 type PutRealmUsersIDCredentialsCredentialIDUserLabelResponse struct {

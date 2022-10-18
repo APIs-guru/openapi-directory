@@ -101,22 +101,22 @@ func (s *SDK) BuyANumber(ctx context.Context, request operations.BuyANumberReque
 
 			res.Response = out
 		case utils.MatchContentType(contentType, `text/xml`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	case httpRes.StatusCode == 401:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.Unauthorized
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -128,12 +128,12 @@ func (s *SDK) BuyANumber(ctx context.Context, request operations.BuyANumberReque
 	case httpRes.StatusCode == 420:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.Response420
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -190,22 +190,22 @@ func (s *SDK) CancelANumber(ctx context.Context, request operations.CancelANumbe
 
 			res.Response = out
 		case utils.MatchContentType(contentType, `text/xml`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	case httpRes.StatusCode == 401:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.Unauthorized
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -255,22 +255,22 @@ func (s *SDK) GetAvailableNumbers(ctx context.Context, request operations.GetAva
 
 			res.AvailableNumbers = out
 		case utils.MatchContentType(contentType, `text/xml`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	case httpRes.StatusCode == 401:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.AccountUnauthorized
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -320,22 +320,22 @@ func (s *SDK) GetOwnedNumbers(ctx context.Context, request operations.GetOwnedNu
 
 			res.InboundNumbers = out
 		case utils.MatchContentType(contentType, `text/xml`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	case httpRes.StatusCode == 401:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.AccountUnauthorized
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -392,22 +392,22 @@ func (s *SDK) UpdateANumber(ctx context.Context, request operations.UpdateANumbe
 
 			res.Response = out
 		case utils.MatchContentType(contentType, `text/xml`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	case httpRes.StatusCode == 401:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.Unauthorized
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {

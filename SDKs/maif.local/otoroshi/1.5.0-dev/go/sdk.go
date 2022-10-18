@@ -208,13 +208,12 @@ func (s *SDK) AllLines(ctx context.Context, request operations.AllLinesRequest) 
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
+			var out *string
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
 			}
 
-			out := string(data)
-			res.Environment = &out
+			res.Environment = out
 		}
 	case httpRes.StatusCode == 400:
 	case httpRes.StatusCode == 401:
@@ -3767,12 +3766,12 @@ func (s *SDK) ServiceLiveStats(ctx context.Context, request operations.ServiceLi
 
 			res.Stats = out
 		case utils.MatchContentType(contentType, `text/event-stream`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	case httpRes.StatusCode == 400:
 	case httpRes.StatusCode == 401:

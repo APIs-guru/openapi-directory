@@ -3,7 +3,6 @@ package sdk
 import (
 	"context"
 	"fmt"
-	"io"
 	"net/http"
 	"openapi/internal/utils"
 	"openapi/pkg/models/operations"
@@ -81,13 +80,12 @@ func (s *SDK) DeleteCategoriesIDJSON(ctx context.Context, request operations.Del
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
+			var out *string
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
 			}
 
-			out := string(data)
-			res.DeleteCategoriesIDJSON200ApplicationJSONString = &out
+			res.DeleteCategoriesIDJSON200ApplicationJSONString = out
 		}
 	case httpRes.StatusCode == 404:
 		switch {
@@ -133,13 +131,12 @@ func (s *SDK) DeleteCheckoutCustomFieldsIDJSON(ctx context.Context, request oper
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
+			var out *string
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
 			}
 
-			out := string(data)
-			res.DeleteCheckoutCustomFieldsIDJSON200ApplicationJSONString = &out
+			res.DeleteCheckoutCustomFieldsIDJSON200ApplicationJSONString = out
 		}
 	case httpRes.StatusCode == 404:
 		switch {
@@ -185,13 +182,12 @@ func (s *SDK) DeleteCustomFieldsIDJSON(ctx context.Context, request operations.D
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
+			var out *string
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
 			}
 
-			out := string(data)
-			res.DeleteCustomFieldsIDJSON200ApplicationJSONString = &out
+			res.DeleteCustomFieldsIDJSON200ApplicationJSONString = out
 		}
 	case httpRes.StatusCode == 404:
 		switch {
@@ -237,13 +233,12 @@ func (s *SDK) DeleteCustomFieldsIDSelectOptionsCustomFieldSelectOptionIDJSON(ctx
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
+			var out *string
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
 			}
 
-			out := string(data)
-			res.DeleteCustomFieldsIDSelectOptionsCustomFieldSelectOptionIDJSON200ApplicationJSONString = &out
+			res.DeleteCustomFieldsIDSelectOptionsCustomFieldSelectOptionIDJSON200ApplicationJSONString = out
 		}
 	case httpRes.StatusCode == 404:
 		switch {
@@ -298,13 +293,12 @@ func (s *SDK) DeleteCustomerCategoriesIDCustomersJSON(ctx context.Context, reque
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
+			var out *string
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
 			}
 
-			out := string(data)
-			res.DeleteCustomerCategoriesIDCustomersJSON200ApplicationJSONString = &out
+			res.DeleteCustomerCategoriesIDCustomersJSON200ApplicationJSONString = out
 		}
 	case httpRes.StatusCode == 404:
 		switch {
@@ -350,13 +344,12 @@ func (s *SDK) DeleteCustomerCategoriesIDJSON(ctx context.Context, request operat
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
+			var out *string
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
 			}
 
-			out := string(data)
-			res.DeleteCustomerCategoriesIDJSON200ApplicationJSONString = &out
+			res.DeleteCustomerCategoriesIDJSON200ApplicationJSONString = out
 		}
 	case httpRes.StatusCode == 404:
 		switch {
@@ -402,13 +395,12 @@ func (s *SDK) DeleteCustomersIDFieldsFieldID(ctx context.Context, request operat
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
+			var out *string
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
 			}
 
-			out := string(data)
-			res.DeleteCustomersIDFieldsFieldID200ApplicationJSONString = &out
+			res.DeleteCustomersIDFieldsFieldID200ApplicationJSONString = out
 		}
 	case httpRes.StatusCode == 404:
 		switch {
@@ -454,13 +446,12 @@ func (s *SDK) DeleteCustomersIDJSON(ctx context.Context, request operations.Dele
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
+			var out *string
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
 			}
 
-			out := string(data)
-			res.DeleteCustomersIDJSON200ApplicationJSONString = &out
+			res.DeleteCustomersIDJSON200ApplicationJSONString = out
 		}
 	case httpRes.StatusCode == 404:
 		switch {
@@ -506,13 +497,12 @@ func (s *SDK) DeleteHooksIDJSON(ctx context.Context, request operations.DeleteHo
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
+			var out *string
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
 			}
 
-			out := string(data)
-			res.DeleteHooksIDJSON200ApplicationJSONString = &out
+			res.DeleteHooksIDJSON200ApplicationJSONString = out
 		}
 	case httpRes.StatusCode == 404:
 		switch {
@@ -558,13 +548,12 @@ func (s *SDK) DeleteJsappsCodeJSON(ctx context.Context, request operations.Delet
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
+			var out *string
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
 			}
 
-			out := string(data)
-			res.DeleteJsappsCodeJSON200ApplicationJSONString = &out
+			res.DeleteJsappsCodeJSON200ApplicationJSONString = out
 		}
 	case httpRes.StatusCode == 404:
 		switch {
@@ -610,13 +599,12 @@ func (s *SDK) DeletePagesIDJSON(ctx context.Context, request operations.DeletePa
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
+			var out *string
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
 			}
 
-			out := string(data)
-			res.DeletePagesIDJSON200ApplicationJSONString = &out
+			res.DeletePagesIDJSON200ApplicationJSONString = out
 		}
 	case httpRes.StatusCode == 404:
 		switch {
@@ -662,13 +650,12 @@ func (s *SDK) DeleteProductsIDAttachmentsAttachmentIDJSON(ctx context.Context, r
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
+			var out *string
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
 			}
 
-			out := string(data)
-			res.DeleteProductsIDAttachmentsAttachmentIDJSON200ApplicationJSONString = &out
+			res.DeleteProductsIDAttachmentsAttachmentIDJSON200ApplicationJSONString = out
 		}
 	case httpRes.StatusCode == 404:
 		switch {
@@ -714,13 +701,12 @@ func (s *SDK) DeleteProductsIDDigitalProductsDigitalProductIDJSON(ctx context.Co
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
+			var out *string
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
 			}
 
-			out := string(data)
-			res.DeleteProductsIDDigitalProductsDigitalProductIDJSON200ApplicationJSONString = &out
+			res.DeleteProductsIDDigitalProductsDigitalProductIDJSON200ApplicationJSONString = out
 		}
 	case httpRes.StatusCode == 404:
 		switch {
@@ -766,13 +752,12 @@ func (s *SDK) DeleteProductsIDImagesImageIDJSON(ctx context.Context, request ope
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
+			var out *string
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
 			}
 
-			out := string(data)
-			res.DeleteProductsIDImagesImageIDJSON200ApplicationJSONString = &out
+			res.DeleteProductsIDImagesImageIDJSON200ApplicationJSONString = out
 		}
 	case httpRes.StatusCode == 404:
 		switch {
@@ -818,13 +803,12 @@ func (s *SDK) DeleteProductsIDJSON(ctx context.Context, request operations.Delet
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
+			var out *string
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
 			}
 
-			out := string(data)
-			res.DeleteProductsIDJSON200ApplicationJSONString = &out
+			res.DeleteProductsIDJSON200ApplicationJSONString = out
 		}
 	case httpRes.StatusCode == 404:
 		switch {
@@ -870,13 +854,12 @@ func (s *SDK) DeleteProductsIDOptionsOptionIDJSON(ctx context.Context, request o
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
+			var out *string
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
 			}
 
-			out := string(data)
-			res.DeleteProductsIDOptionsOptionIDJSON200ApplicationJSONString = &out
+			res.DeleteProductsIDOptionsOptionIDJSON200ApplicationJSONString = out
 		}
 	case httpRes.StatusCode == 404:
 		switch {
@@ -922,13 +905,12 @@ func (s *SDK) DeleteProductsIDOptionsOptionIDValuesValueIDJSON(ctx context.Conte
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
+			var out *string
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
 			}
 
-			out := string(data)
-			res.DeleteProductsIDOptionsOptionIDValuesValueIDJSON200ApplicationJSONString = &out
+			res.DeleteProductsIDOptionsOptionIDValuesValueIDJSON200ApplicationJSONString = out
 		}
 	case httpRes.StatusCode == 404:
 		switch {
@@ -1025,13 +1007,12 @@ func (s *SDK) DeletePromotionsIDJSON(ctx context.Context, request operations.Del
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
+			var out *string
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
 			}
 
-			out := string(data)
-			res.DeletePromotionsIDJSON200ApplicationJSONString = &out
+			res.DeletePromotionsIDJSON200ApplicationJSONString = out
 		}
 	case httpRes.StatusCode == 404:
 		switch {
@@ -1077,13 +1058,12 @@ func (s *SDK) DeleteShippingMethodsIDJSON(ctx context.Context, request operation
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
+			var out *string
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
 			}
 
-			out := string(data)
-			res.DeleteShippingMethodsIDJSON200ApplicationJSONString = &out
+			res.DeleteShippingMethodsIDJSON200ApplicationJSONString = out
 		}
 	case httpRes.StatusCode == 404:
 		switch {

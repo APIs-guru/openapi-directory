@@ -13,7 +13,6 @@ type GetAPIV1EnvironmentsEnvironmentIDLogsResponse struct {
 	ContentType                                                   string
 	GetAPIV1EnvironmentsEnvironmentIDLogs200ApplicationJSONString *string
 	GetAPIV1EnvironmentsEnvironmentIDLogs200TextJSONString        *string
-	GetAPIV1EnvironmentsEnvironmentIDLogs200TextPlainString       *string
 	ProblemDetails                                                map[string]interface{}
 	StatusCode                                                    int64
 }

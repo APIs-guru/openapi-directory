@@ -548,12 +548,12 @@ func (s *SDK) AssetReportPdfGet(ctx context.Context, request operations.AssetRep
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/pdf`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.AssetReportPdfGetResponse = out
+			res.AssetReportPdfGetResponse = data
 		}
 	}
 
@@ -1656,12 +1656,12 @@ func (s *SDK) IncomeVerificationDocumentsDownload(ctx context.Context, request o
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/zip`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.IncomeVerificationDocumentsDownload200ApplicationZipBinaryString = out
+			res.IncomeVerificationDocumentsDownload200ApplicationZipBinaryString = data
 		}
 	}
 

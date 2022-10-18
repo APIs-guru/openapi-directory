@@ -3,7 +3,6 @@ package sdk
 import (
 	"context"
 	"fmt"
-	"io"
 	"net/http"
 	"openapi/internal/utils"
 	"openapi/pkg/models/operations"
@@ -80,13 +79,12 @@ func (s *SDK) GetCity(ctx context.Context, request operations.GetCityRequest) (*
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json; charset=utf-8`):
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
+			var out *string
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
 			}
 
-			out := string(data)
-			res.GetCity200ApplicationJSONString = &out
+			res.GetCity200ApplicationJSONString = out
 		}
 	}
 

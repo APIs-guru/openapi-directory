@@ -834,12 +834,12 @@ func (s *SDK) GetInstancesIDAttachmentsNameCompressedData(ctx context.Context, r
 
 		switch {
 		case utils.MatchContentType(contentType, `application/octet-stream`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -875,12 +875,12 @@ func (s *SDK) GetInstancesIDAttachmentsNameCompressedMd5(ctx context.Context, re
 
 		switch {
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -916,12 +916,12 @@ func (s *SDK) GetInstancesIDAttachmentsNameCompressedSize(ctx context.Context, r
 
 		switch {
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -957,12 +957,12 @@ func (s *SDK) GetInstancesIDAttachmentsNameData(ctx context.Context, request ope
 
 		switch {
 		case utils.MatchContentType(contentType, `application/octet-stream`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -998,12 +998,12 @@ func (s *SDK) GetInstancesIDAttachmentsNameIsCompressed(ctx context.Context, req
 
 		switch {
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -1039,12 +1039,12 @@ func (s *SDK) GetInstancesIDAttachmentsNameMd5(ctx context.Context, request oper
 
 		switch {
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -1080,12 +1080,12 @@ func (s *SDK) GetInstancesIDAttachmentsNameSize(ctx context.Context, request ope
 
 		switch {
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -1121,12 +1121,12 @@ func (s *SDK) GetInstancesIDContent(ctx context.Context, request operations.GetI
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/octet-stream`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -1160,19 +1160,19 @@ func (s *SDK) GetInstancesIDFile(ctx context.Context, request operations.GetInst
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/dicom`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		case utils.MatchContentType(contentType, `application/dicom+xml`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		case utils.MatchContentType(contentType, `application/dicom+json`):
 			var out *interface{}
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -1293,26 +1293,26 @@ func (s *SDK) GetInstancesIDFramesFrameImageInt16(ctx context.Context, request o
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `image/jpeg`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		case utils.MatchContentType(contentType, `image/png`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		case utils.MatchContentType(contentType, `image/x-portable-arbitrarymap`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -1348,26 +1348,26 @@ func (s *SDK) GetInstancesIDFramesFrameImageUint16(ctx context.Context, request 
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `image/jpeg`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		case utils.MatchContentType(contentType, `image/png`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		case utils.MatchContentType(contentType, `image/x-portable-arbitrarymap`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -1403,26 +1403,26 @@ func (s *SDK) GetInstancesIDFramesFrameImageUint8(ctx context.Context, request o
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `image/jpeg`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		case utils.MatchContentType(contentType, `image/png`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		case utils.MatchContentType(contentType, `image/x-portable-arbitrarymap`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -1456,12 +1456,12 @@ func (s *SDK) GetInstancesIDFramesFrameMatlab(ctx context.Context, request opera
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -1497,26 +1497,26 @@ func (s *SDK) GetInstancesIDFramesFramePreview(ctx context.Context, request oper
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `image/jpeg`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		case utils.MatchContentType(contentType, `image/png`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		case utils.MatchContentType(contentType, `image/x-portable-arbitrarymap`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -1550,12 +1550,12 @@ func (s *SDK) GetInstancesIDFramesFrameRaw(ctx context.Context, request operatio
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/octet-stream`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -1589,12 +1589,12 @@ func (s *SDK) GetInstancesIDFramesFrameRawGz(ctx context.Context, request operat
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/gzip`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -1630,26 +1630,26 @@ func (s *SDK) GetInstancesIDFramesFrameRendered(ctx context.Context, request ope
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `image/jpeg`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		case utils.MatchContentType(contentType, `image/png`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		case utils.MatchContentType(contentType, `image/x-portable-arbitrarymap`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -1726,26 +1726,26 @@ func (s *SDK) GetInstancesIDImageInt16(ctx context.Context, request operations.G
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `image/jpeg`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		case utils.MatchContentType(contentType, `image/png`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		case utils.MatchContentType(contentType, `image/x-portable-arbitrarymap`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -1781,26 +1781,26 @@ func (s *SDK) GetInstancesIDImageUint16(ctx context.Context, request operations.
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `image/jpeg`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		case utils.MatchContentType(contentType, `image/png`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		case utils.MatchContentType(contentType, `image/x-portable-arbitrarymap`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -1836,26 +1836,26 @@ func (s *SDK) GetInstancesIDImageUint8(ctx context.Context, request operations.G
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `image/jpeg`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		case utils.MatchContentType(contentType, `image/png`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		case utils.MatchContentType(contentType, `image/x-portable-arbitrarymap`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -1889,12 +1889,12 @@ func (s *SDK) GetInstancesIDMatlab(ctx context.Context, request operations.GetIn
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -1971,12 +1971,12 @@ func (s *SDK) GetInstancesIDMetadataName(ctx context.Context, request operations
 
 		switch {
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -2092,12 +2092,12 @@ func (s *SDK) GetInstancesIDPdf(ctx context.Context, request operations.GetInsta
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/pdf`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -2133,26 +2133,26 @@ func (s *SDK) GetInstancesIDPreview(ctx context.Context, request operations.GetI
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `image/jpeg`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		case utils.MatchContentType(contentType, `image/png`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		case utils.MatchContentType(contentType, `image/x-portable-arbitrarymap`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -2188,26 +2188,26 @@ func (s *SDK) GetInstancesIDRendered(ctx context.Context, request operations.Get
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `image/jpeg`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		case utils.MatchContentType(contentType, `image/png`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		case utils.MatchContentType(contentType, `image/x-portable-arbitrarymap`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -2524,12 +2524,12 @@ func (s *SDK) GetJobsIDKey(ctx context.Context, request operations.GetJobsIDKeyR
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/octet-stream`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -2766,12 +2766,12 @@ func (s *SDK) GetPatientsIDArchive(ctx context.Context, request operations.GetPa
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/zip`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -2887,12 +2887,12 @@ func (s *SDK) GetPatientsIDAttachmentsNameCompressedData(ctx context.Context, re
 
 		switch {
 		case utils.MatchContentType(contentType, `application/octet-stream`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -2928,12 +2928,12 @@ func (s *SDK) GetPatientsIDAttachmentsNameCompressedMd5(ctx context.Context, req
 
 		switch {
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -2969,12 +2969,12 @@ func (s *SDK) GetPatientsIDAttachmentsNameCompressedSize(ctx context.Context, re
 
 		switch {
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -3010,12 +3010,12 @@ func (s *SDK) GetPatientsIDAttachmentsNameData(ctx context.Context, request oper
 
 		switch {
 		case utils.MatchContentType(contentType, `application/octet-stream`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -3051,12 +3051,12 @@ func (s *SDK) GetPatientsIDAttachmentsNameIsCompressed(ctx context.Context, requ
 
 		switch {
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -3092,12 +3092,12 @@ func (s *SDK) GetPatientsIDAttachmentsNameMd5(ctx context.Context, request opera
 
 		switch {
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -3133,12 +3133,12 @@ func (s *SDK) GetPatientsIDAttachmentsNameSize(ctx context.Context, request oper
 
 		switch {
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -3256,12 +3256,12 @@ func (s *SDK) GetPatientsIDMedia(ctx context.Context, request operations.GetPati
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/zip`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -3338,12 +3338,12 @@ func (s *SDK) GetPatientsIDMetadataName(ctx context.Context, request operations.
 
 		switch {
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -3418,12 +3418,12 @@ func (s *SDK) GetPatientsIDProtected(ctx context.Context, request operations.Get
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -3816,12 +3816,12 @@ func (s *SDK) GetPluginsExplorerJs(ctx context.Context) (*operations.GetPluginsE
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/javascript`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -4093,12 +4093,12 @@ func (s *SDK) GetQueriesIDLevel(ctx context.Context, request operations.GetQueri
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -4132,12 +4132,12 @@ func (s *SDK) GetQueriesIDModality(ctx context.Context, request operations.GetQu
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -4296,12 +4296,12 @@ func (s *SDK) GetSeriesIDArchive(ctx context.Context, request operations.GetSeri
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/zip`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -4417,12 +4417,12 @@ func (s *SDK) GetSeriesIDAttachmentsNameCompressedData(ctx context.Context, requ
 
 		switch {
 		case utils.MatchContentType(contentType, `application/octet-stream`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -4458,12 +4458,12 @@ func (s *SDK) GetSeriesIDAttachmentsNameCompressedMd5(ctx context.Context, reque
 
 		switch {
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -4499,12 +4499,12 @@ func (s *SDK) GetSeriesIDAttachmentsNameCompressedSize(ctx context.Context, requ
 
 		switch {
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -4540,12 +4540,12 @@ func (s *SDK) GetSeriesIDAttachmentsNameData(ctx context.Context, request operat
 
 		switch {
 		case utils.MatchContentType(contentType, `application/octet-stream`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -4581,12 +4581,12 @@ func (s *SDK) GetSeriesIDAttachmentsNameIsCompressed(ctx context.Context, reques
 
 		switch {
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -4622,12 +4622,12 @@ func (s *SDK) GetSeriesIDAttachmentsNameMd5(ctx context.Context, request operati
 
 		switch {
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -4663,12 +4663,12 @@ func (s *SDK) GetSeriesIDAttachmentsNameSize(ctx context.Context, request operat
 
 		switch {
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -4786,12 +4786,12 @@ func (s *SDK) GetSeriesIDMedia(ctx context.Context, request operations.GetSeries
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/zip`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -4868,12 +4868,12 @@ func (s *SDK) GetSeriesIDMetadataName(ctx context.Context, request operations.Ge
 
 		switch {
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -5311,12 +5311,12 @@ func (s *SDK) GetStudiesIDArchive(ctx context.Context, request operations.GetStu
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/zip`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -5432,12 +5432,12 @@ func (s *SDK) GetStudiesIDAttachmentsNameCompressedData(ctx context.Context, req
 
 		switch {
 		case utils.MatchContentType(contentType, `application/octet-stream`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -5473,12 +5473,12 @@ func (s *SDK) GetStudiesIDAttachmentsNameCompressedMd5(ctx context.Context, requ
 
 		switch {
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -5514,12 +5514,12 @@ func (s *SDK) GetStudiesIDAttachmentsNameCompressedSize(ctx context.Context, req
 
 		switch {
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -5555,12 +5555,12 @@ func (s *SDK) GetStudiesIDAttachmentsNameData(ctx context.Context, request opera
 
 		switch {
 		case utils.MatchContentType(contentType, `application/octet-stream`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -5596,12 +5596,12 @@ func (s *SDK) GetStudiesIDAttachmentsNameIsCompressed(ctx context.Context, reque
 
 		switch {
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -5637,12 +5637,12 @@ func (s *SDK) GetStudiesIDAttachmentsNameMd5(ctx context.Context, request operat
 
 		switch {
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -5678,12 +5678,12 @@ func (s *SDK) GetStudiesIDAttachmentsNameSize(ctx context.Context, request opera
 
 		switch {
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -5801,12 +5801,12 @@ func (s *SDK) GetStudiesIDMedia(ctx context.Context, request operations.GetStudi
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/zip`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -5883,12 +5883,12 @@ func (s *SDK) GetStudiesIDMetadataName(ctx context.Context, request operations.G
 
 		switch {
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -6283,12 +6283,12 @@ func (s *SDK) GetToolsDefaultEncoding(ctx context.Context) (*operations.GetTools
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -6322,12 +6322,12 @@ func (s *SDK) GetToolsDicomConformance(ctx context.Context) (*operations.GetTool
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -6363,12 +6363,12 @@ func (s *SDK) GetToolsGenerateUID(ctx context.Context, request operations.GetToo
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -6402,12 +6402,12 @@ func (s *SDK) GetToolsLogLevel(ctx context.Context) (*operations.GetToolsLogLeve
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -6441,12 +6441,12 @@ func (s *SDK) GetToolsLogLevelDicom(ctx context.Context) (*operations.GetToolsLo
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -6480,12 +6480,12 @@ func (s *SDK) GetToolsLogLevelGeneric(ctx context.Context) (*operations.GetTools
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -6519,12 +6519,12 @@ func (s *SDK) GetToolsLogLevelHTTP(ctx context.Context) (*operations.GetToolsLog
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -6558,12 +6558,12 @@ func (s *SDK) GetToolsLogLevelJobs(ctx context.Context) (*operations.GetToolsLog
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -6597,12 +6597,12 @@ func (s *SDK) GetToolsLogLevelLua(ctx context.Context) (*operations.GetToolsLogL
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -6636,12 +6636,12 @@ func (s *SDK) GetToolsLogLevelPlugins(ctx context.Context) (*operations.GetTools
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -6675,12 +6675,12 @@ func (s *SDK) GetToolsLogLevelSqlite(ctx context.Context) (*operations.GetToolsL
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -6714,12 +6714,12 @@ func (s *SDK) GetToolsMetrics(ctx context.Context) (*operations.GetToolsMetricsR
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -6783,12 +6783,12 @@ func (s *SDK) GetToolsNow(ctx context.Context) (*operations.GetToolsNowResponse,
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -6822,12 +6822,12 @@ func (s *SDK) GetToolsNowLocal(ctx context.Context) (*operations.GetToolsNowLoca
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -6861,12 +6861,12 @@ func (s *SDK) GetToolsUnknownSopClassAccepted(ctx context.Context) (*operations.
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -6951,12 +6951,12 @@ func (s *SDK) PostInstancesIDAnonymize(ctx context.Context, request operations.P
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/dicom`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -7131,12 +7131,12 @@ func (s *SDK) PostInstancesIDModify(ctx context.Context, request operations.Post
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/dicom`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -7936,12 +7936,12 @@ func (s *SDK) PostPatientsIDArchive(ctx context.Context, request operations.Post
 
 			res.PostPatientsIDArchive200ApplicationJSONAny = out
 		case utils.MatchContentType(contentType, `application/zip`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -8087,12 +8087,12 @@ func (s *SDK) PostPatientsIDMedia(ctx context.Context, request operations.PostPa
 
 			res.PostPatientsIDMedia200ApplicationJSONAny = out
 		case utils.MatchContentType(contentType, `application/zip`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -8574,12 +8574,12 @@ func (s *SDK) PostSeriesIDArchive(ctx context.Context, request operations.PostSe
 
 			res.PostSeriesIDArchive200ApplicationJSONAny = out
 		case utils.MatchContentType(contentType, `application/zip`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -8725,12 +8725,12 @@ func (s *SDK) PostSeriesIDMedia(ctx context.Context, request operations.PostSeri
 
 			res.PostSeriesIDMedia200ApplicationJSONAny = out
 		case utils.MatchContentType(contentType, `application/zip`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -8927,12 +8927,12 @@ func (s *SDK) PostStudiesIDArchive(ctx context.Context, request operations.PostS
 
 			res.PostStudiesIDArchive200ApplicationJSONAny = out
 		case utils.MatchContentType(contentType, `application/zip`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -9078,12 +9078,12 @@ func (s *SDK) PostStudiesIDMedia(ctx context.Context, request operations.PostStu
 
 			res.PostStudiesIDMedia200ApplicationJSONAny = out
 		case utils.MatchContentType(contentType, `application/zip`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -9457,12 +9457,12 @@ func (s *SDK) PostToolsCreateArchive(ctx context.Context, request operations.Pos
 
 			res.PostToolsCreateArchive200ApplicationJSONAny = out
 		case utils.MatchContentType(contentType, `application/zip`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -9554,12 +9554,12 @@ func (s *SDK) PostToolsCreateMedia(ctx context.Context, request operations.PostT
 
 			res.PostToolsCreateMedia200ApplicationJSONAny = out
 		case utils.MatchContentType(contentType, `application/zip`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -9606,12 +9606,12 @@ func (s *SDK) PostToolsCreateMediaExtended(ctx context.Context, request operatio
 
 			res.PostToolsCreateMediaExtended200ApplicationJSONAny = out
 		case utils.MatchContentType(contentType, `application/zip`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -9687,12 +9687,12 @@ func (s *SDK) PostToolsExecuteScript(ctx context.Context, request operations.Pos
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 

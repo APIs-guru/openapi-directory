@@ -139,12 +139,12 @@ func (s *SDK) PostAPIPdfWkhtmltopdf(ctx context.Context, request operations.Post
 
 			res.PdfResponseDto = out
 		case utils.MatchContentType(contentType, `application/pdf`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.PostAPIPdfWkhtmltopdf200ApplicationPdfBinaryString = out
+			res.PostAPIPdfWkhtmltopdf200ApplicationPdfBinaryString = data
 		}
 	case httpRes.StatusCode == 400:
 		switch {

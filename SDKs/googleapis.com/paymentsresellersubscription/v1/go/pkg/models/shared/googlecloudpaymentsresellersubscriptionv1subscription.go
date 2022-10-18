@@ -17,6 +17,7 @@ const (
 	GoogleCloudPaymentsResellerSubscriptionV1SubscriptionStateEnumStateCancelled          GoogleCloudPaymentsResellerSubscriptionV1SubscriptionStateEnum = "STATE_CANCELLED"
 	GoogleCloudPaymentsResellerSubscriptionV1SubscriptionStateEnumStateInGracePeriod      GoogleCloudPaymentsResellerSubscriptionV1SubscriptionStateEnum = "STATE_IN_GRACE_PERIOD"
 	GoogleCloudPaymentsResellerSubscriptionV1SubscriptionStateEnumStateCancelAtEndOfCycle GoogleCloudPaymentsResellerSubscriptionV1SubscriptionStateEnum = "STATE_CANCEL_AT_END_OF_CYCLE"
+	GoogleCloudPaymentsResellerSubscriptionV1SubscriptionStateEnumStateSuspended          GoogleCloudPaymentsResellerSubscriptionV1SubscriptionStateEnum = "STATE_SUSPENDED"
 )
 
 type GoogleCloudPaymentsResellerSubscriptionV1Subscription struct {

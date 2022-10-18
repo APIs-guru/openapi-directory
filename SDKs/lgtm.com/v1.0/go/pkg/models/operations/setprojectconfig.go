@@ -14,7 +14,7 @@ type SetProjectConfigSecurity struct {
 
 type SetProjectConfigRequest struct {
 	PathParams SetProjectConfigPathParams
-	Request    string `request:"mediaType=application/x-yaml"`
+	Request    []byte `request:"mediaType=application/x-yaml"`
 	Security   SetProjectConfigSecurity
 }
 

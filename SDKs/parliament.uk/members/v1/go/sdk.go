@@ -93,12 +93,12 @@ func (s *SDK) GetAPILocationBrowseLocationTypeLocationName(ctx context.Context, 
 
 			res.LocationItem = out
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	case httpRes.StatusCode == 400:
 	case httpRes.StatusCode == 404:
@@ -150,12 +150,12 @@ func (s *SDK) GetAPILocationConstituencySearch(ctx context.Context, request oper
 
 			res.ConstituencyMembersServiceSearchResult = out
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -204,12 +204,12 @@ func (s *SDK) GetAPILocationConstituencyID(ctx context.Context, request operatio
 
 			res.ConstituencyItem = out
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	case httpRes.StatusCode == 400:
 	case httpRes.StatusCode == 404:
@@ -259,12 +259,12 @@ func (s *SDK) GetAPILocationConstituencyIDElectionResultLatest(ctx context.Conte
 
 			res.ElectionResultItem = out
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	case httpRes.StatusCode == 400:
 	case httpRes.StatusCode == 404:
@@ -314,12 +314,12 @@ func (s *SDK) GetAPILocationConstituencyIDElectionResultElectionID(ctx context.C
 
 			res.ElectionResultItem = out
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	case httpRes.StatusCode == 400:
 	case httpRes.StatusCode == 404:
@@ -369,12 +369,12 @@ func (s *SDK) GetAPILocationConstituencyIDElectionResults(ctx context.Context, r
 
 			res.ElectionResultListItem = out
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	case httpRes.StatusCode == 400:
 	case httpRes.StatusCode == 404:
@@ -424,12 +424,12 @@ func (s *SDK) GetAPILocationConstituencyIDGeometry(ctx context.Context, request 
 
 			res.StringItem = out
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	case httpRes.StatusCode == 400:
 	case httpRes.StatusCode == 404:
@@ -479,12 +479,12 @@ func (s *SDK) GetAPILocationConstituencyIDRepresentations(ctx context.Context, r
 
 			res.ConstituencyRepresentationListItem = out
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	case httpRes.StatusCode == 400:
 	case httpRes.StatusCode == 404:
@@ -534,12 +534,12 @@ func (s *SDK) GetAPILocationConstituencyIDSynopsis(ctx context.Context, request 
 
 			res.StringItem = out
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	case httpRes.StatusCode == 400:
 	case httpRes.StatusCode == 404:
@@ -591,12 +591,12 @@ func (s *SDK) GetAPILordsInterestsRegister(ctx context.Context, request operatio
 
 			res.MembersInterestsMembersServiceSearchResult = out
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -647,12 +647,12 @@ func (s *SDK) GetAPILordsInterestsStaff(ctx context.Context, request operations.
 
 			res.MembersStaffMembersServiceSearchResult = out
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -703,12 +703,12 @@ func (s *SDK) GetAPIMembersHistory(ctx context.Context, request operations.GetAP
 
 			res.MemberHistoryItems = out
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	case httpRes.StatusCode == 400:
 	case httpRes.StatusCode == 404:
@@ -760,12 +760,12 @@ func (s *SDK) GetAPIMembersSearch(ctx context.Context, request operations.GetAPI
 
 			res.MemberMembersServiceSearchResult = out
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -816,12 +816,12 @@ func (s *SDK) GetAPIMembersSearchHistorical(ctx context.Context, request operati
 
 			res.MemberMembersServiceSearchResult = out
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -872,12 +872,12 @@ func (s *SDK) GetAPIMembersID(ctx context.Context, request operations.GetAPIMemb
 
 			res.MemberItem = out
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	case httpRes.StatusCode == 400:
 	case httpRes.StatusCode == 404:
@@ -927,12 +927,12 @@ func (s *SDK) GetAPIMembersIDBiography(ctx context.Context, request operations.G
 
 			res.MemberBiographyItem = out
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	case httpRes.StatusCode == 400:
 	case httpRes.StatusCode == 404:
@@ -982,12 +982,12 @@ func (s *SDK) GetAPIMembersIDContact(ctx context.Context, request operations.Get
 
 			res.ContactInformationListItem = out
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	case httpRes.StatusCode == 400:
 	case httpRes.StatusCode == 404:
@@ -1039,12 +1039,12 @@ func (s *SDK) GetAPIMembersIDContributionSummary(ctx context.Context, request op
 
 			res.DebateContributionMembersServiceSearchResult = out
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	case httpRes.StatusCode == 400:
 	case httpRes.StatusCode == 404:
@@ -1096,12 +1096,12 @@ func (s *SDK) GetAPIMembersIDEdms(ctx context.Context, request operations.GetAPI
 
 			res.EarlyDayMotionMembersServiceSearchResult = out
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	case httpRes.StatusCode == 400:
 	case httpRes.StatusCode == 404:
@@ -1151,12 +1151,12 @@ func (s *SDK) GetAPIMembersIDExperience(ctx context.Context, request operations.
 
 			res.BiographyExperienceListItem = out
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	case httpRes.StatusCode == 400:
 	case httpRes.StatusCode == 404:
@@ -1206,12 +1206,12 @@ func (s *SDK) GetAPIMembersIDFocus(ctx context.Context, request operations.GetAP
 
 			res.MemberFocusListItem = out
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	case httpRes.StatusCode == 400:
 	case httpRes.StatusCode == 404:
@@ -1261,12 +1261,12 @@ func (s *SDK) GetAPIMembersIDLatestElectionResult(ctx context.Context, request o
 
 			res.ElectionResultItem = out
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	case httpRes.StatusCode == 400:
 	case httpRes.StatusCode == 404:
@@ -1351,12 +1351,12 @@ func (s *SDK) GetAPIMembersIDPortraitURL(ctx context.Context, request operations
 
 			res.StringItem = out
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	case httpRes.StatusCode == 400:
 	case httpRes.StatusCode == 404:
@@ -1406,12 +1406,12 @@ func (s *SDK) GetAPIMembersIDRegisteredInterests(ctx context.Context, request op
 
 			res.RegisteredInterestCategoryListItem = out
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	case httpRes.StatusCode == 400:
 	case httpRes.StatusCode == 404:
@@ -1461,12 +1461,12 @@ func (s *SDK) GetAPIMembersIDStaff(ctx context.Context, request operations.GetAP
 
 			res.StaffListItem = out
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	case httpRes.StatusCode == 400:
 	case httpRes.StatusCode == 404:
@@ -1516,12 +1516,12 @@ func (s *SDK) GetAPIMembersIDSynopsis(ctx context.Context, request operations.Ge
 
 			res.StringItem = out
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	case httpRes.StatusCode == 400:
 	case httpRes.StatusCode == 404:
@@ -1603,12 +1603,12 @@ func (s *SDK) GetAPIMembersIDThumbnailURL(ctx context.Context, request operation
 
 			res.StringItem = out
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	case httpRes.StatusCode == 400:
 	case httpRes.StatusCode == 404:
@@ -1660,12 +1660,12 @@ func (s *SDK) GetAPIMembersIDVoting(ctx context.Context, request operations.GetA
 
 			res.VoteMembersServiceSearchResult = out
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	case httpRes.StatusCode == 400:
 	case httpRes.StatusCode == 404:
@@ -1717,12 +1717,12 @@ func (s *SDK) GetAPIMembersIDWrittenQuestions(ctx context.Context, request opera
 
 			res.WrittenQuestionMembersServiceSearchResult = out
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	case httpRes.StatusCode == 400:
 	case httpRes.StatusCode == 404:
@@ -1772,12 +1772,12 @@ func (s *SDK) GetAPIPartiesGetActiveHouse(ctx context.Context, request operation
 
 			res.PartyMembersServiceSearchResult = out
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -1826,12 +1826,12 @@ func (s *SDK) GetAPIPartiesLordsByTypeForDate(ctx context.Context, request opera
 
 			res.LordsByTypeMembersServiceSearchResult = out
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -1880,12 +1880,12 @@ func (s *SDK) GetAPIPartiesStateOfThePartiesHouseForDate(ctx context.Context, re
 
 			res.PartySeatCountMembersServiceSearchResult = out
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -1934,12 +1934,12 @@ func (s *SDK) GetAPIPostsDepartmentsType(ctx context.Context, request operations
 
 			res.GovernmentDepartments = out
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	case httpRes.StatusCode == 404:
 	}
@@ -1990,12 +1990,12 @@ func (s *SDK) GetAPIPostsGovernmentPosts(ctx context.Context, request operations
 
 			res.GovernmentOppositionPostItems = out
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	case httpRes.StatusCode == 400:
 	case httpRes.StatusCode == 404:
@@ -2047,12 +2047,12 @@ func (s *SDK) GetAPIPostsOppositionPosts(ctx context.Context, request operations
 
 			res.GovernmentOppositionPostItems = out
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	case httpRes.StatusCode == 400:
 	case httpRes.StatusCode == 404:
@@ -2102,12 +2102,12 @@ func (s *SDK) GetAPIPostsSpeakerAndDeputiesForDate(ctx context.Context, request 
 
 			res.MemberItems = out
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	case httpRes.StatusCode == 400:
 	case httpRes.StatusCode == 404:
@@ -2159,12 +2159,12 @@ func (s *SDK) GetAPIPostsSpokespersons(ctx context.Context, request operations.G
 
 			res.GovernmentOppositionPostItems = out
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	case httpRes.StatusCode == 400:
 	case httpRes.StatusCode == 404:
@@ -2216,12 +2216,12 @@ func (s *SDK) GetAPIReferenceAnsweringBodies(ctx context.Context, request operat
 
 			res.AnsweringBodies = out
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -2272,12 +2272,12 @@ func (s *SDK) GetAPIReferenceDepartments(ctx context.Context, request operations
 
 			res.GovernmentDepartments = out
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -2358,12 +2358,12 @@ func (s *SDK) GetAPIReferencePolicyInterests(ctx context.Context) (*operations.G
 
 			res.GenericReferenceData = out
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 

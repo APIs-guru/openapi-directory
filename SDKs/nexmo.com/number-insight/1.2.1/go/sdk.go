@@ -93,12 +93,12 @@ func (s *SDK) GetNumberInsightAdvanced(ctx context.Context, request operations.G
 
 			res.GetNumberInsightAdvanced200ApplicationJSONOneOf = out
 		case utils.MatchContentType(contentType, `text/xml`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -141,12 +141,12 @@ func (s *SDK) GetNumberInsightAsync(ctx context.Context, request operations.GetN
 
 			res.GetNumberInsightAsync200ApplicationJSONOneOf = out
 		case utils.MatchContentType(contentType, `text/xml`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -189,12 +189,12 @@ func (s *SDK) GetNumberInsightBasic(ctx context.Context, request operations.GetN
 
 			res.NiResponseJSONBasic = out
 		case utils.MatchContentType(contentType, `text/xml`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -237,12 +237,12 @@ func (s *SDK) GetNumberInsightStandard(ctx context.Context, request operations.G
 
 			res.GetNumberInsightStandard200ApplicationJSONOneOf = out
 		case utils.MatchContentType(contentType, `text/xml`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 

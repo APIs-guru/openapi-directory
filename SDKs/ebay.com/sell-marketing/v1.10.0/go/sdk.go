@@ -1565,12 +1565,12 @@ func (s *SDK) GetReport(ctx context.Context, request operations.GetReportRequest
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `text/tab-separated-values`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	case httpRes.StatusCode == 400:
 	case httpRes.StatusCode == 404:

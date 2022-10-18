@@ -19,10 +19,10 @@ type GetInvoiceCsvByUUID401ApplicationJSON struct {
 }
 
 type GetInvoiceCsvByUUIDResponse struct {
+	Body                                                      []byte
 	ContentType                                               string
 	Headers                                                   map[string][]string
 	StatusCode                                                int64
-	GetInvoiceCsvByUUID200TextCsvString                       *string
 	GetInvoiceCsvByUUID401ApplicationJSONObject               *GetInvoiceCsvByUUID401ApplicationJSON
 	Onev211ClicksGetResponses401ContentApplication1jsonSchema *shared.Onev211ClicksGetResponses401ContentApplication1jsonSchema
 }

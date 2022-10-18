@@ -9,7 +9,7 @@ type GetHeartbeatRequest struct {
 }
 
 type GetHeartbeatResponse struct {
-	ContentType                    string
-	GetHeartbeat200TextPlainString *string
-	StatusCode                     int64
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }

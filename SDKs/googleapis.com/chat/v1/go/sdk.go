@@ -144,7 +144,7 @@ func (s *SDK) ChatSpacesMembersList(ctx context.Context, request operations.Chat
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := utils.CreateSecurityClient(request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {
@@ -185,7 +185,7 @@ func (s *SDK) ChatSpacesMessagesAttachmentsGet(ctx context.Context, request oper
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
-	client := s.defaultClient
+	client := utils.CreateSecurityClient(request.Security)
 
 	httpRes, err := client.Do(req)
 	if err != nil {

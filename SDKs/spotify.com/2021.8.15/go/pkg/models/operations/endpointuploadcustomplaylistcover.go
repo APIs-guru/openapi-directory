@@ -20,7 +20,7 @@ type EndpointUploadCustomPlaylistCoverSecurity struct {
 type EndpointUploadCustomPlaylistCoverRequest struct {
 	PathParams EndpointUploadCustomPlaylistCoverPathParams
 	Headers    EndpointUploadCustomPlaylistCoverHeaders
-	Request    string `request:"mediaType=image/jpeg"`
+	Request    []byte `request:"mediaType=image/jpeg"`
 	Security   EndpointUploadCustomPlaylistCoverSecurity
 }
 

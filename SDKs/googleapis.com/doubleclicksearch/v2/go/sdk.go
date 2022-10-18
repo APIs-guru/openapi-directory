@@ -51,47 +51,6 @@ func New(opts ...SDKOption) *SDK {
 	return sdk
 }
 
-func (s *SDK) DoubleclicksearchConversionGet(ctx context.Context, request operations.DoubleclicksearchConversionGetRequest) (*operations.DoubleclicksearchConversionGetResponse, error) {
-	baseURL := s.serverURL
-	url := utils.GenerateURL(ctx, baseURL, "/doubleclicksearch/v2/agency/{agencyId}/advertiser/{advertiserId}/engine/{engineAccountId}/conversion", request.PathParams)
-
-	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
-	if err != nil {
-		return nil, fmt.Errorf("error creating request: %w", err)
-	}
-
-	utils.PopulateQueryParams(ctx, req, request.QueryParams)
-
-	client := utils.CreateSecurityClient(request.Security)
-
-	httpRes, err := client.Do(req)
-	if err != nil {
-		return nil, fmt.Errorf("error sending request: %w", err)
-	}
-	defer httpRes.Body.Close()
-
-	contentType := httpRes.Header.Get("Content-Type")
-
-	res := &operations.DoubleclicksearchConversionGetResponse{
-		StatusCode:  int64(httpRes.StatusCode),
-		ContentType: contentType,
-	}
-	switch {
-	case httpRes.StatusCode == 200:
-		switch {
-		case utils.MatchContentType(contentType, `application/json`):
-			var out *shared.ConversionList
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
-			}
-
-			res.ConversionList = out
-		}
-	}
-
-	return res, nil
-}
-
 func (s *SDK) DoubleclicksearchConversionInsert(ctx context.Context, request operations.DoubleclicksearchConversionInsertRequest) (*operations.DoubleclicksearchConversionInsertResponse, error) {
 	baseURL := s.serverURL
 	url := strings.TrimSuffix(baseURL, "/") + "/doubleclicksearch/v2/conversion"

@@ -23,10 +23,9 @@ type PreprocessingUnrotateRequest struct {
 }
 
 type PreprocessingUnrotateResponse struct {
+	Body                                              []byte
 	ContentType                                       string
 	PreprocessingUnrotate200ApplicationJSONByteString *string
-	PreprocessingUnrotate200ApplicationXMLByteString  *string
 	PreprocessingUnrotate200TextJSONByteString        *string
-	PreprocessingUnrotate200TextXMLByteString         *string
 	StatusCode                                        int64
 }

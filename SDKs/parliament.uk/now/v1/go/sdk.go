@@ -92,12 +92,12 @@ func (s *SDK) GetMessage(ctx context.Context, request operations.GetMessageReque
 
 			res.MessageViewModel = out
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	case httpRes.StatusCode == 404:
 	}
@@ -146,12 +146,12 @@ func (s *SDK) GetSpecificMessage(ctx context.Context, request operations.GetSpec
 
 			res.MessageViewModel = out
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	case httpRes.StatusCode == 400:
 	case httpRes.StatusCode == 404:

@@ -22,9 +22,15 @@ type ChatSpacesMessagesAttachmentsGetQueryParams struct {
 	UploadProtocol *string           `queryParam:"style=form,explode=true,name=upload_protocol"`
 }
 
+type ChatSpacesMessagesAttachmentsGetSecurity struct {
+	Oauth2  shared.SchemeOauth2  `security:"scheme,type=oauth2"`
+	Oauth2c shared.SchemeOauth2c `security:"scheme,type=oauth2"`
+}
+
 type ChatSpacesMessagesAttachmentsGetRequest struct {
 	PathParams  ChatSpacesMessagesAttachmentsGetPathParams
 	QueryParams ChatSpacesMessagesAttachmentsGetQueryParams
+	Security    ChatSpacesMessagesAttachmentsGetSecurity
 }
 
 type ChatSpacesMessagesAttachmentsGetResponse struct {

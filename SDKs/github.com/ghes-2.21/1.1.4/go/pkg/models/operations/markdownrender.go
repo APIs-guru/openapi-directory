@@ -18,8 +18,8 @@ type MarkdownRenderRequest struct {
 }
 
 type MarkdownRenderResponse struct {
-	ContentType                     string
-	Headers                         map[string][]string
-	StatusCode                      int64
-	MarkdownRender200TextHTMLString *string
+	Body        []byte
+	ContentType string
+	Headers     map[string][]string
+	StatusCode  int64
 }

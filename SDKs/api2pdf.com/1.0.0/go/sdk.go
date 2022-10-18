@@ -149,12 +149,12 @@ func (s *SDK) ChromeFromURLGet(ctx context.Context, request operations.ChromeFro
 
 			res.APIResponseSuccess = out
 		case utils.MatchContentType(contentType, `application/pdf`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ChromeFromURLGet200ApplicationPdfBinaryString = out
+			res.ChromeFromURLGet200ApplicationPdfBinaryString = data
 		}
 	case httpRes.StatusCode == 401:
 		switch {
@@ -427,12 +427,12 @@ func (s *SDK) WkhtmltopdfFromURLGet(ctx context.Context, request operations.Wkht
 
 			res.APIResponseSuccess = out
 		case utils.MatchContentType(contentType, `application/pdf`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.WkhtmltopdfFromURLGet200ApplicationPdfBinaryString = out
+			res.WkhtmltopdfFromURLGet200ApplicationPdfBinaryString = data
 		}
 	case httpRes.StatusCode == 401:
 		switch {
@@ -533,12 +533,12 @@ func (s *SDK) ZebraGet(ctx context.Context, request operations.ZebraGetRequest) 
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `image/png`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ZebraGet200ImagePngBinaryString = out
+			res.ZebraGet200ImagePngBinaryString = data
 		}
 	}
 

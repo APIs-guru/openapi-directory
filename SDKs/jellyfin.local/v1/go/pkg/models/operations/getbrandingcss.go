@@ -1,8 +1,8 @@
 package operations
 
 type GetBrandingCSSResponse struct {
+	Body                                   []byte
 	ContentType                            string
 	GetBrandingCSS200ApplicationJSONString *string
-	GetBrandingCSS200TextCSSString         *string
 	StatusCode                             int64
 }

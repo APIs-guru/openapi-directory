@@ -27,7 +27,7 @@ type PostReportsSecurity struct {
 
 type PostReportsRequest struct {
 	QueryParams PostReportsQueryParams
-	Request     string `request:"mediaType=text/csv"`
+	Request     []byte `request:"mediaType=text/csv"`
 	Security    PostReportsSecurity
 }
 

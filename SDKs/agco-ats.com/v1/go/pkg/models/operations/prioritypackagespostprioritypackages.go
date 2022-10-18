@@ -21,8 +21,6 @@ type PriorityPackagesPostPriorityPackagesResponse struct {
 	Body                                                         []byte
 	ContentType                                                  string
 	PriorityPackagesPostPriorityPackages200ApplicationJSONString *string
-	PriorityPackagesPostPriorityPackages200ApplicationXMLString  *string
 	PriorityPackagesPostPriorityPackages200TextJSONString        *string
-	PriorityPackagesPostPriorityPackages200TextXMLString         *string
 	StatusCode                                                   int64
 }

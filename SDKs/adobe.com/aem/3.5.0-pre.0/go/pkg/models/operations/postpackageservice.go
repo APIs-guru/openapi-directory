@@ -9,7 +9,7 @@ type PostPackageServiceRequest struct {
 }
 
 type PostPackageServiceResponse struct {
-	ContentType                            string
-	StatusCode                             int64
-	PostPackageServiceDefaultTextXMLString *string
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }

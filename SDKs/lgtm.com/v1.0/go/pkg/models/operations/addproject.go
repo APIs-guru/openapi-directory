@@ -28,7 +28,7 @@ type AddProjectSecurity struct {
 
 type AddProjectRequest struct {
 	QueryParams AddProjectQueryParams
-	Request     *string `request:"mediaType=application/x-yaml"`
+	Request     []byte `request:"mediaType=application/x-yaml"`
 	Security    AddProjectSecurity
 }
 

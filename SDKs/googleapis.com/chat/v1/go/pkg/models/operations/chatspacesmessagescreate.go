@@ -15,6 +15,7 @@ type ChatSpacesMessagesCreateQueryParams struct {
 	Callback       *string           `queryParam:"style=form,explode=true,name=callback"`
 	Fields         *string           `queryParam:"style=form,explode=true,name=fields"`
 	Key            *string           `queryParam:"style=form,explode=true,name=key"`
+	MessageID      *string           `queryParam:"style=form,explode=true,name=messageId"`
 	OauthToken     *string           `queryParam:"style=form,explode=true,name=oauth_token"`
 	PrettyPrint    *bool             `queryParam:"style=form,explode=true,name=prettyPrint"`
 	QuotaUser      *string           `queryParam:"style=form,explode=true,name=quotaUser"`

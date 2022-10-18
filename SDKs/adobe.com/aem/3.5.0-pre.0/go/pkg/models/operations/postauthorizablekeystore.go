@@ -45,8 +45,7 @@ type PostAuthorizableKeystoreRequest struct {
 }
 
 type PostAuthorizableKeystoreResponse struct {
-	Body                                           []byte
-	ContentType                                    string
-	StatusCode                                     int64
-	PostAuthorizableKeystoreDefaultTextPlainString *string
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }

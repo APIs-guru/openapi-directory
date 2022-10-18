@@ -21,8 +21,6 @@ type FilesPostFileResponse struct {
 	Body                                  []byte
 	ContentType                           string
 	FilesPostFile200ApplicationJSONString *string
-	FilesPostFile200ApplicationXMLString  *string
 	FilesPostFile200TextJSONString        *string
-	FilesPostFile200TextXMLString         *string
 	StatusCode                            int64
 }

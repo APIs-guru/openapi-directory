@@ -106,8 +106,7 @@ func (s *SDK) GetAllFacilities(ctx context.Context, request operations.GetAllFac
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			out := string(data)
-			res.GetAllFacilities200TextCsvString = &out
+			res.Body = data
 		}
 	case httpRes.StatusCode == 401:
 		switch {

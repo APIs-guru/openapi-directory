@@ -17,10 +17,9 @@ type VouchersPostRequest struct {
 }
 
 type VouchersPostResponse struct {
+	Body                                 []byte
 	ContentType                          string
 	StatusCode                           int64
 	VouchersPost200ApplicationJSONString *string
-	VouchersPost200ApplicationXMLString  *string
 	VouchersPost200TextJSONString        *string
-	VouchersPost200TextXMLString         *string
 }

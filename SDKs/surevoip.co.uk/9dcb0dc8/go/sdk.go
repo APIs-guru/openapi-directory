@@ -144,12 +144,12 @@ func (s *SDK) Get(ctx context.Context, request operations.GetRequest) (*operatio
 
 			res.Get200ApplicationJSONObject = out
 		case utils.MatchContentType(contentType, `text/xml`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -190,12 +190,12 @@ func (s *SDK) GetAnnouncements(ctx context.Context) (*operations.GetAnnouncement
 
 			res.OneGetResponses200ContentApplication1jsonSchema = out
 		case utils.MatchContentType(contentType, `text/xml`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 

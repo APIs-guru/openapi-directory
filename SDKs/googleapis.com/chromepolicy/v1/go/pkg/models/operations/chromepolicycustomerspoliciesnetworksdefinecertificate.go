@@ -30,12 +30,12 @@ type ChromepolicyCustomersPoliciesNetworksDefineCertificateSecurity struct {
 type ChromepolicyCustomersPoliciesNetworksDefineCertificateRequest struct {
 	PathParams  ChromepolicyCustomersPoliciesNetworksDefineCertificatePathParams
 	QueryParams ChromepolicyCustomersPoliciesNetworksDefineCertificateQueryParams
-	Request     *shared.GoogleChromePolicyV1DefineCertificateRequest `request:"mediaType=application/json"`
+	Request     *shared.GoogleChromePolicyVersionsV1DefineCertificateRequest `request:"mediaType=application/json"`
 	Security    ChromepolicyCustomersPoliciesNetworksDefineCertificateSecurity
 }
 
 type ChromepolicyCustomersPoliciesNetworksDefineCertificateResponse struct {
-	ContentType                                   string
-	GoogleChromePolicyV1DefineCertificateResponse *shared.GoogleChromePolicyV1DefineCertificateResponse
-	StatusCode                                    int64
+	ContentType                                           string
+	GoogleChromePolicyVersionsV1DefineCertificateResponse *shared.GoogleChromePolicyVersionsV1DefineCertificateResponse
+	StatusCode                                            int64
 }

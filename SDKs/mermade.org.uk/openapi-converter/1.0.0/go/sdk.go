@@ -93,22 +93,22 @@ func (s *SDK) Convert(ctx context.Context, request operations.ConvertRequest) (*
 
 			res.Convert200ApplicationJSONAny = out
 		case utils.MatchContentType(contentType, `application/x-yaml`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	case httpRes.StatusCode == 400:
 		switch {
 		case utils.MatchContentType(contentType, `application/x-yaml`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *interface{}
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -158,12 +158,12 @@ func (s *SDK) ConvertURL(ctx context.Context, request operations.ConvertURLReque
 
 			res.ConvertURL200ApplicationJSONAny = out
 		case utils.MatchContentType(contentType, `application/x-yaml`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -236,12 +236,12 @@ func (s *SDK) GetStatus(ctx context.Context) (*operations.GetStatusResponse, err
 
 			res.GetStatus200ApplicationJSONAny = out
 		case utils.MatchContentType(contentType, `application/x-yaml`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -288,22 +288,22 @@ func (s *SDK) Validate(ctx context.Context, request operations.ValidateRequest) 
 
 			res.ValidationResult = out
 		case utils.MatchContentType(contentType, `application/x-yaml`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	case httpRes.StatusCode == 400:
 		switch {
 		case utils.MatchContentType(contentType, `application/x-yaml`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *interface{}
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -353,12 +353,12 @@ func (s *SDK) ValidateURL(ctx context.Context, request operations.ValidateURLReq
 
 			res.ValidationResult = out
 		case utils.MatchContentType(contentType, `application/x-yaml`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 

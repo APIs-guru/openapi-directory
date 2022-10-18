@@ -6577,13 +6577,12 @@ func (s *SDK) CodeScanningGetAnalysis(ctx context.Context, request operations.Co
 
 			res.CodeScanningAnalysis = out
 		case utils.MatchContentType(contentType, `application/json+sarif`):
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
+			var out *string
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
 			}
 
-			out := string(data)
-			res.CodeScanningGetAnalysis200ApplicationJSONPlusSarifString = &out
+			res.CodeScanningGetAnalysis200ApplicationJSONPlusSarifString = out
 		}
 	case httpRes.StatusCode == 403:
 		switch {
@@ -15080,8 +15079,7 @@ func (s *SDK) MarkdownRender(ctx context.Context, request operations.MarkdownRen
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			out := string(data)
-			res.MarkdownRender200TextHTMLString = &out
+			res.Body = data
 		}
 	case httpRes.StatusCode == 304:
 	}
@@ -15129,8 +15127,7 @@ func (s *SDK) MarkdownRenderRaw(ctx context.Context, request operations.Markdown
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			out := string(data)
-			res.MarkdownRenderRaw200TextHTMLString = &out
+			res.Body = data
 		}
 	case httpRes.StatusCode == 304:
 	}
@@ -15212,8 +15209,7 @@ func (s *SDK) MetaGetOctocat(ctx context.Context, request operations.MetaGetOcto
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			out := string(data)
-			res.MetaGetOctocat200ApplicationOctocatStreamString = &out
+			res.Body = data
 		}
 	}
 
@@ -15252,8 +15248,7 @@ func (s *SDK) MetaGetZen(ctx context.Context) (*operations.MetaGetZenResponse, e
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			out := string(data)
-			res.MetaGetZen200TextPlainString = &out
+			res.Body = data
 		}
 	}
 
@@ -25239,12 +25234,12 @@ func (s *SDK) ReposGetContent(ctx context.Context, request operations.ReposGetCo
 
 			res.ReposGetContent200ApplicationJSONOneOf = out
 		case utils.MatchContentType(contentType, `application/vnd.github.v3.object`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	case httpRes.StatusCode == 302:
 	case httpRes.StatusCode == 403:

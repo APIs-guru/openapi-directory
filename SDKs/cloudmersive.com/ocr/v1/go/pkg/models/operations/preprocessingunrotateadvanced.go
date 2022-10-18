@@ -23,10 +23,9 @@ type PreprocessingUnrotateAdvancedRequest struct {
 }
 
 type PreprocessingUnrotateAdvancedResponse struct {
+	Body                                                      []byte
 	ContentType                                               string
 	PreprocessingUnrotateAdvanced200ApplicationJSONByteString *string
-	PreprocessingUnrotateAdvanced200ApplicationXMLByteString  *string
 	PreprocessingUnrotateAdvanced200TextJSONByteString        *string
-	PreprocessingUnrotateAdvanced200TextXMLByteString         *string
 	StatusCode                                                int64
 }

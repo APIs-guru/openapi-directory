@@ -2406,12 +2406,12 @@ func (s *SDK) GetChartExport(ctx context.Context, request operations.GetChartExp
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/zip`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetChartExport200ApplicationZipBinaryString = out
+			res.GetChartExport200ApplicationZipBinaryString = data
 		}
 	case httpRes.StatusCode == 400:
 		switch {
@@ -2901,12 +2901,12 @@ func (s *SDK) GetChartPkScreenshotDigest(ctx context.Context, request operations
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `image/*`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetChartPkScreenshotDigest200ImageWildcardBinaryString = out
+			res.GetChartPkScreenshotDigest200ImageWildcardBinaryString = data
 		}
 	case httpRes.StatusCode == 302:
 	case httpRes.StatusCode == 400:
@@ -2981,12 +2981,12 @@ func (s *SDK) GetChartPkThumbnailDigest(ctx context.Context, request operations.
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `image/*`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetChartPkThumbnailDigest200ImageWildcardBinaryString = out
+			res.GetChartPkThumbnailDigest200ImageWildcardBinaryString = data
 		}
 	case httpRes.StatusCode == 302:
 	case httpRes.StatusCode == 400:
@@ -3564,8 +3564,7 @@ func (s *SDK) GetDashboardExport(ctx context.Context, request operations.GetDash
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			out := string(data)
-			res.GetDashboardExport200TextPlainString = &out
+			res.Body = data
 		}
 	case httpRes.StatusCode == 400:
 		switch {
@@ -4023,12 +4022,12 @@ func (s *SDK) GetDashboardPkThumbnailDigest(ctx context.Context, request operati
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `image/*`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetDashboardPkThumbnailDigest200ImageWildcardBinaryString = out
+			res.GetDashboardPkThumbnailDigest200ImageWildcardBinaryString = data
 		}
 	case httpRes.StatusCode == 202:
 		switch {
@@ -4335,12 +4334,12 @@ func (s *SDK) GetDatabaseExport(ctx context.Context, request operations.GetDatab
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/zip`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetDatabaseExport200ApplicationZipBinaryString = out
+			res.GetDatabaseExport200ApplicationZipBinaryString = data
 		}
 	case httpRes.StatusCode == 401:
 		switch {
@@ -5233,8 +5232,7 @@ func (s *SDK) GetDatasetExport(ctx context.Context, request operations.GetDatase
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			out := string(data)
-			res.GetDatasetExport200TextPlainString = &out
+			res.Body = data
 		}
 	case httpRes.StatusCode == 400:
 		switch {
@@ -6914,12 +6912,12 @@ func (s *SDK) GetSavedQueryExport(ctx context.Context, request operations.GetSav
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/zip`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetSavedQueryExport200ApplicationZipBinaryString = out
+			res.GetSavedQueryExport200ApplicationZipBinaryString = data
 		}
 	case httpRes.StatusCode == 400:
 		switch {

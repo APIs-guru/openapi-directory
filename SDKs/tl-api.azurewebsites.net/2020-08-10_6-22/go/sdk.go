@@ -779,12 +779,12 @@ func (s *SDK) AuthLogin(ctx context.Context, request operations.AuthLoginRequest
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/octet-stream`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.AuthLogin200ApplicationOctetStreamBinaryString = out
+			res.AuthLogin200ApplicationOctetStreamBinaryString = data
 		}
 	}
 

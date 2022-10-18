@@ -742,13 +742,12 @@ func (s *SDK) DeletHook(ctx context.Context, request operations.DeletHookRequest
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
+			var out *string
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
 			}
 
-			out := string(data)
-			res.DeletHook200ApplicationJSONString = &out
+			res.DeletHook200ApplicationJSONString = out
 		}
 	}
 
@@ -1174,12 +1173,12 @@ func (s *SDK) UpdateHook(ctx context.Context, request operations.UpdateHookReque
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/x-www-form-urlencoded`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	case httpRes.StatusCode == 400:
 		switch {

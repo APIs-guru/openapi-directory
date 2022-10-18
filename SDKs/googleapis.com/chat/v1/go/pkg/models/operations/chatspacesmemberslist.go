@@ -24,9 +24,15 @@ type ChatSpacesMembersListQueryParams struct {
 	UploadProtocol *string           `queryParam:"style=form,explode=true,name=upload_protocol"`
 }
 
+type ChatSpacesMembersListSecurity struct {
+	Oauth2  shared.SchemeOauth2  `security:"scheme,type=oauth2"`
+	Oauth2c shared.SchemeOauth2c `security:"scheme,type=oauth2"`
+}
+
 type ChatSpacesMembersListRequest struct {
 	PathParams  ChatSpacesMembersListPathParams
 	QueryParams ChatSpacesMembersListQueryParams
+	Security    ChatSpacesMembersListSecurity
 }
 
 type ChatSpacesMembersListResponse struct {

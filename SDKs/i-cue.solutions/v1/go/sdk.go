@@ -183,12 +183,12 @@ func (s *SDK) GetAdministrationEntity(ctx context.Context, request operations.Ge
 
 			res.Entities = out
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -236,12 +236,12 @@ func (s *SDK) GetAdministrationPlanningLevels(ctx context.Context, request opera
 
 			res.PlanningLevelInfoResponses = out
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -379,12 +379,12 @@ func (s *SDK) GetHyperparameter(ctx context.Context, request operations.GetHyper
 
 			res.HyperparameterModel = out
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -462,12 +462,12 @@ func (s *SDK) GetReportPerformanceSkuRationalizationPlanningLevelID(ctx context.
 
 			res.PortfolioModels = out
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -597,29 +597,26 @@ func (s *SDK) PostAdministrationEntity(ctx context.Context, request operations.P
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
+			var out *string
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
 			}
 
-			out := string(data)
-			res.PostAdministrationEntity200ApplicationJSONUUIDString = &out
+			res.PostAdministrationEntity200ApplicationJSONUUIDString = out
 		case utils.MatchContentType(contentType, `text/json`):
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
+			var out *string
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
 			}
 
-			out := string(data)
-			res.PostAdministrationEntity200TextJSONUUIDString = &out
+			res.PostAdministrationEntity200TextJSONUUIDString = out
 		case utils.MatchContentType(contentType, `text/plain`):
 			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			out := string(data)
-			res.PostAdministrationEntity200TextPlainUUIDString = &out
+			res.Body = data
 		}
 	}
 
@@ -689,29 +686,26 @@ func (s *SDK) PostAdministrationToken(ctx context.Context, request operations.Po
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
+			var out *string
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
 			}
 
-			out := string(data)
-			res.PostAdministrationToken200ApplicationJSONUUIDString = &out
+			res.PostAdministrationToken200ApplicationJSONUUIDString = out
 		case utils.MatchContentType(contentType, `text/json`):
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
+			var out *string
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
 			}
 
-			out := string(data)
-			res.PostAdministrationToken200TextJSONUUIDString = &out
+			res.PostAdministrationToken200TextJSONUUIDString = out
 		case utils.MatchContentType(contentType, `text/plain`):
 			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			out := string(data)
-			res.PostAdministrationToken200TextPlainUUIDString = &out
+			res.Body = data
 		}
 	}
 
@@ -751,29 +745,26 @@ func (s *SDK) PostAdministrationUser(ctx context.Context, request operations.Pos
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
+			var out *string
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
 			}
 
-			out := string(data)
-			res.PostAdministrationUser200ApplicationJSONUUIDString = &out
+			res.PostAdministrationUser200ApplicationJSONUUIDString = out
 		case utils.MatchContentType(contentType, `text/json`):
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
+			var out *string
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
 			}
 
-			out := string(data)
-			res.PostAdministrationUser200TextJSONUUIDString = &out
+			res.PostAdministrationUser200TextJSONUUIDString = out
 		case utils.MatchContentType(contentType, `text/plain`):
 			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			out := string(data)
-			res.PostAdministrationUser200TextPlainUUIDString = &out
+			res.Body = data
 		}
 	}
 
@@ -827,12 +818,12 @@ func (s *SDK) PostForecast(ctx context.Context, request operations.PostForecastR
 
 			res.ForecastResponse = out
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -886,12 +877,12 @@ func (s *SDK) PostForecastAi(ctx context.Context, request operations.PostForecas
 
 			res.ForecastResponse = out
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -945,12 +936,12 @@ func (s *SDK) PostForecastAiHistoryAndForecast(ctx context.Context, request oper
 
 			res.HistoryAndForecastResponse = out
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -1004,12 +995,12 @@ func (s *SDK) PostForecastForecastBottomUp(ctx context.Context, request operatio
 
 			res.ForecastBottomUpResponse = out
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -1099,12 +1090,12 @@ func (s *SDK) PostForecastFullDetail(ctx context.Context, request operations.Pos
 
 			res.FullDetailsForecastResponse = out
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -1158,12 +1149,12 @@ func (s *SDK) PostForecastHistoryAndForecast(ctx context.Context, request operat
 
 			res.HistoryAndForecastResponse = out
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -1217,12 +1208,12 @@ func (s *SDK) PostForecastOptimalParameter(ctx context.Context, request operatio
 
 			res.OptimalParameterResponse = out
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -1276,12 +1267,12 @@ func (s *SDK) PostForecastRerun(ctx context.Context, request operations.PostFore
 
 			res.ForecastResponse = out
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -1761,12 +1752,12 @@ func (s *SDK) PostLifecycleManyToOne(ctx context.Context, request operations.Pos
 
 			res.PlanningLevelDataDto = out
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -1820,12 +1811,12 @@ func (s *SDK) PostLifecycleOneToOne(ctx context.Context, request operations.Post
 
 			res.PlanningLevelDataDto = out
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -1879,12 +1870,12 @@ func (s *SDK) PostOutlier(ctx context.Context, request operations.PostOutlierReq
 
 			res.TimeSeriesOutliersResponses = out
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -1938,12 +1929,12 @@ func (s *SDK) PostPortfolio(ctx context.Context, request operations.PostPortfoli
 
 			res.PortfolioModels = out
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -1997,12 +1988,12 @@ func (s *SDK) PostPortfolioAbc(ctx context.Context, request operations.PostPortf
 
 			res.PortfolioAbcModels = out
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -2056,12 +2047,12 @@ func (s *SDK) PostPortfolioForecastPerformanceRewind(ctx context.Context, reques
 
 			res.RewindResponse = out
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -2115,12 +2106,12 @@ func (s *SDK) PostPortfolioXyz(ctx context.Context, request operations.PostPortf
 
 			res.PortfolioXyzModels = out
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 

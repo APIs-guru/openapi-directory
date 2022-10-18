@@ -84,8 +84,7 @@ func (s *SDK) CacheNonceGet(ctx context.Context, request operations.CacheNonceGe
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			out := string(data)
-			res.LoginButton = &out
+			res.Body = data
 		}
 	case httpRes.StatusCode == 401:
 		switch {
@@ -744,13 +743,12 @@ func (s *SDK) StoryIDAnalytics(ctx context.Context, request operations.StoryIDAn
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
+			var out *string
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
 			}
 
-			out := string(data)
-			res.RevealJsPresenationWithAnalyticsData = &out
+			res.RevealJsPresenationWithAnalyticsData = out
 		}
 	case httpRes.StatusCode == 400:
 		switch {
@@ -770,8 +768,7 @@ func (s *SDK) StoryIDAnalytics(ctx context.Context, request operations.StoryIDAn
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			out := string(data)
-			res.LoginButton = &out
+			res.Body = data
 		}
 	case httpRes.StatusCode == 404:
 		switch {
@@ -1555,26 +1552,26 @@ func (s *SDK) StoryIDFileOoxmlautomationidGet(ctx context.Context, request opera
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/vnd.openxmlformats-officedocument.presentationml.presentation`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.PowerpointPresentation = out
+			res.PowerpointPresentation = data
 		case utils.MatchContentType(contentType, `application/vnd.openxmlformats-officedocument.spreadsheetml.sheet`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.WordDocument = out
+			res.WordDocument = data
 		case utils.MatchContentType(contentType, `application/vnd.openxmlformats-officedocument.wordprocessingml.document`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ExcelSpreadsheet = out
+			res.ExcelSpreadsheet = data
 		}
 	case httpRes.StatusCode == 400:
 		switch {
@@ -1897,13 +1894,12 @@ func (s *SDK) StoryIDOutlineGet(ctx context.Context, request operations.StoryIDO
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
+			var out *string
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
 			}
 
-			out := string(data)
-			res.StoryIDOutlineGet200ApplicationJSONString = &out
+			res.StoryIDOutlineGet200ApplicationJSONString = out
 		}
 	case httpRes.StatusCode == 202:
 		switch {
@@ -2047,13 +2043,12 @@ func (s *SDK) StoryIDPublic(ctx context.Context, request operations.StoryIDPubli
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
+			var out *string
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
 			}
 
-			out := string(data)
-			res.RevealJsPresenation = &out
+			res.RevealJsPresenation = out
 		}
 	case httpRes.StatusCode == 302:
 	case httpRes.StatusCode == 400:
@@ -2178,13 +2173,12 @@ func (s *SDK) StoryIDReveal(ctx context.Context, request operations.StoryIDRevea
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
+			var out *string
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
 			}
 
-			out := string(data)
-			res.RevealJsPresenation = &out
+			res.RevealJsPresenation = out
 		}
 	case httpRes.StatusCode == 400:
 		switch {
@@ -2204,8 +2198,7 @@ func (s *SDK) StoryIDReveal(ctx context.Context, request operations.StoryIDRevea
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			out := string(data)
-			res.LoginButton = &out
+			res.Body = data
 		}
 	case httpRes.StatusCode == 404:
 		switch {

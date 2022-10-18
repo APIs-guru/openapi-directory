@@ -17,10 +17,9 @@ type LandlordControllerCreateMaintenancePreferenceRequest struct {
 }
 
 type LandlordControllerCreateMaintenancePreferenceResponse struct {
+	Body                                                                  []byte
 	ContentType                                                           string
 	LandlordControllerCreateMaintenancePreference200ApplicationJSONString *string
-	LandlordControllerCreateMaintenancePreference200ApplicationXMLString  *string
 	LandlordControllerCreateMaintenancePreference200TextJSONString        *string
-	LandlordControllerCreateMaintenancePreference200TextXMLString         *string
 	StatusCode                                                            int64
 }

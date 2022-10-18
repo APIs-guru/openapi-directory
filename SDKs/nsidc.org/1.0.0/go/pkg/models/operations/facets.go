@@ -39,7 +39,7 @@ type FacetsRequest struct {
 }
 
 type FacetsResponse struct {
-	ContentType                                  string
-	StatusCode                                   int64
-	Facets200ApplicationNsidcfacetsPlusXMLString *string
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }

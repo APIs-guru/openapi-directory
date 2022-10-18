@@ -23,10 +23,9 @@ type PreprocessingUnskewRequest struct {
 }
 
 type PreprocessingUnskewResponse struct {
+	Body                                            []byte
 	ContentType                                     string
 	PreprocessingUnskew200ApplicationJSONByteString *string
-	PreprocessingUnskew200ApplicationXMLByteString  *string
 	PreprocessingUnskew200TextJSONByteString        *string
-	PreprocessingUnskew200TextXMLByteString         *string
 	StatusCode                                      int64
 }

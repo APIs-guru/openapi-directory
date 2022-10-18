@@ -20,9 +20,9 @@ type PostAdministrationEntityRequest struct {
 }
 
 type PostAdministrationEntityResponse struct {
+	Body                                                 []byte
 	ContentType                                          string
 	PostAdministrationEntity200ApplicationJSONUUIDString *string
 	PostAdministrationEntity200TextJSONUUIDString        *string
-	PostAdministrationEntity200TextPlainUUIDString       *string
 	StatusCode                                           int64
 }

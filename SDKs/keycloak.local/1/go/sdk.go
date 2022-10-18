@@ -7544,8 +7544,7 @@ func (s *SDK) PostRealmClientsIDCertificatesAttrDownload(ctx context.Context, re
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			out := string(data)
-			res.PostRealmClientsIDCertificatesAttrDownload2XxApplicationOctetStreamByteString = &out
+			res.Body = data
 		}
 	}
 
@@ -7632,8 +7631,7 @@ func (s *SDK) PostRealmClientsIDCertificatesAttrGenerateAndDownload(ctx context.
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			out := string(data)
-			res.PostRealmClientsIDCertificatesAttrGenerateAndDownload2XxApplicationOctetStreamByteString = &out
+			res.Body = data
 		}
 	}
 

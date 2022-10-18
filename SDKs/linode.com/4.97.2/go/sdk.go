@@ -5470,12 +5470,12 @@ func (s *SDK) GetClientThumbnail(ctx context.Context, request operations.GetClie
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `image/png`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetClientThumbnail200ImagePngBinaryString = out
+			res.GetClientThumbnail200ImagePngBinaryString = data
 		}
 	default:
 		switch {

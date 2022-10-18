@@ -10,8 +10,7 @@ type GetAuthorizableKeystoreRequest struct {
 }
 
 type GetAuthorizableKeystoreResponse struct {
-	Body                                          []byte
-	ContentType                                   string
-	StatusCode                                    int64
-	GetAuthorizableKeystoreDefaultTextPlainString *string
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }

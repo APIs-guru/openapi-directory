@@ -11,6 +11,7 @@ type ChatSpacesMessagesUpdatePathParams struct {
 type ChatSpacesMessagesUpdateQueryParams struct {
 	DollarXgafv    *shared.XgafvEnum `queryParam:"style=form,explode=true,name=$.xgafv"`
 	AccessToken    *string           `queryParam:"style=form,explode=true,name=access_token"`
+	AllowMissing   *bool             `queryParam:"style=form,explode=true,name=allowMissing"`
 	Alt            *shared.AltEnum   `queryParam:"style=form,explode=true,name=alt"`
 	Callback       *string           `queryParam:"style=form,explode=true,name=callback"`
 	Fields         *string           `queryParam:"style=form,explode=true,name=fields"`

@@ -9,7 +9,7 @@ type StatusRequest struct {
 }
 
 type StatusResponse struct {
-	ContentType              string
-	StatusCode               int64
-	Status200TextPlainString *string
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }

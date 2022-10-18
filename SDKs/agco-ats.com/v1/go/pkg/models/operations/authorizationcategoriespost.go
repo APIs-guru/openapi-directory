@@ -19,9 +19,7 @@ type AuthorizationCategoriesPostRequest struct {
 type AuthorizationCategoriesPostResponse struct {
 	APIModelsAPIError                                   *shared.APIModelsAPIError
 	AuthorizationCategoriesPost200ApplicationJSONString *string
-	AuthorizationCategoriesPost200ApplicationXMLString  *string
 	AuthorizationCategoriesPost200TextJSONString        *string
-	AuthorizationCategoriesPost200TextXMLString         *string
 	Body                                                []byte
 	ContentType                                         string
 	StatusCode                                          int64

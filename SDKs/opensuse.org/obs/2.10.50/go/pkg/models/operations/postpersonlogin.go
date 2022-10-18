@@ -27,7 +27,7 @@ type PostPersonLoginSecurity struct {
 type PostPersonLoginRequest struct {
 	PathParams  PostPersonLoginPathParams
 	QueryParams PostPersonLoginQueryParams
-	Request     *string `request:"mediaType=text/plain"`
+	Request     []byte `request:"mediaType=text/plain"`
 	Security    PostPersonLoginSecurity
 }
 

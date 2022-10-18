@@ -885,8 +885,7 @@ func (s *SDK) ApplyNode(ctx context.Context, request operations.ApplyNodeRequest
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			out := string(data)
-			res.ApplyNode200TextPlainString = &out
+			res.Body = data
 		}
 	}
 
@@ -2753,12 +2752,12 @@ func (s *SDK) GetZipArchive(ctx context.Context, request operations.GetZipArchiv
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/octet-stream`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetZipArchive200ApplicationOctetStreamBinaryString = out
+			res.GetZipArchive200ApplicationOctetStreamBinaryString = data
 		}
 	}
 

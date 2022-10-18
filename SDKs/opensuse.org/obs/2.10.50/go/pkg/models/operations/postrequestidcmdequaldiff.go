@@ -38,8 +38,7 @@ type PostRequestIDCmdEqualDiffRequest struct {
 }
 
 type PostRequestIDCmdEqualDiffResponse struct {
-	Body                                        []byte
-	ContentType                                 string
-	PostRequestIDCmdEqualDiff200TextPlainString *string
-	StatusCode                                  int64
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }

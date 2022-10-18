@@ -23,7 +23,7 @@ type ReposUploadReleaseAssetRequest struct {
 	ServerURL   *string
 	PathParams  ReposUploadReleaseAssetPathParams
 	QueryParams ReposUploadReleaseAssetQueryParams
-	Request     *string `request:"mediaType=*/*"`
+	Request     []byte `request:"mediaType=*/*"`
 }
 
 type ReposUploadReleaseAssetResponse struct {

@@ -9,7 +9,7 @@ type GetPrometheusMetricsRequest struct {
 }
 
 type GetPrometheusMetricsResponse struct {
-	ContentType                            string
-	GetPrometheusMetrics200TextPlainString *string
-	StatusCode                             int64
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }

@@ -3,7 +3,6 @@ package sdk
 import (
 	"context"
 	"fmt"
-	"io"
 	"net/http"
 	"openapi/internal/utils"
 	"openapi/pkg/models/operations"
@@ -1254,13 +1253,12 @@ func (s *SDK) PostContainersFloatingIpsRequest(ctx context.Context, request oper
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
+			var out *string
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
 			}
 
-			out := string(data)
-			res.PostContainersFloatingIpsRequest200ApplicationJSONString = &out
+			res.PostContainersFloatingIpsRequest200ApplicationJSONString = out
 		}
 	case httpRes.StatusCode == 401:
 	case httpRes.StatusCode == 402:

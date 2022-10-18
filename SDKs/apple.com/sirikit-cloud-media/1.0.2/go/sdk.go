@@ -128,12 +128,12 @@ func (s *SDK) ExtensionConfiguration(ctx context.Context, request operations.Ext
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	case httpRes.StatusCode == 304:
 		res.Headers = httpRes.Header

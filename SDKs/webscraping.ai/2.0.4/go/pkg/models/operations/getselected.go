@@ -18,9 +18,9 @@ type GetSelectedRequest struct {
 }
 
 type GetSelectedResponse struct {
-	ContentType                  string
-	Error                        *shared.Error
-	PageError                    *shared.PageError
-	StatusCode                   int64
-	GetSelected200TextHTMLString *string
+	Body        []byte
+	ContentType string
+	Error       *shared.Error
+	PageError   *shared.PageError
+	StatusCode  int64
 }

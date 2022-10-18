@@ -16,7 +16,7 @@ type PutPolicyModuleQueryParams struct {
 type PutPolicyModuleRequest struct {
 	PathParams  PutPolicyModulePathParams
 	QueryParams PutPolicyModuleQueryParams
-	Request     string `request:"mediaType=text/plain"`
+	Request     []byte `request:"mediaType=text/plain"`
 }
 
 type PutPolicyModuleResponse struct {

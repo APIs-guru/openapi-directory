@@ -17,8 +17,6 @@ type LogsPostLogResponse struct {
 	Body                                []byte
 	ContentType                         string
 	LogsPostLog200ApplicationJSONString *string
-	LogsPostLog200ApplicationXMLString  *string
 	LogsPostLog200TextJSONString        *string
-	LogsPostLog200TextXMLString         *string
 	StatusCode                          int64
 }

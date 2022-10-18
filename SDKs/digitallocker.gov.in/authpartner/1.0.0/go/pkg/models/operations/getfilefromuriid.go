@@ -33,11 +33,8 @@ type GetFileFromURIID404ApplicationJSON struct {
 }
 
 type GetFileFromURIIDResponse struct {
+	Body                                     []byte
 	ContentType                              string
-	GetFileFromURIID200ApplicationPdfString  *string
-	GetFileFromURIID200ImageJpegString       *string
-	GetFileFromURIID200ImageJpgString        *string
-	GetFileFromURIID200ImagePngString        *string
 	GetFileFromURIID400ApplicationJSONObject *GetFileFromURIID400ApplicationJSON
 	GetFileFromURIID401ApplicationJSONObject *GetFileFromURIID401ApplicationJSON
 	GetFileFromURIID404ApplicationJSONObject *GetFileFromURIID404ApplicationJSON

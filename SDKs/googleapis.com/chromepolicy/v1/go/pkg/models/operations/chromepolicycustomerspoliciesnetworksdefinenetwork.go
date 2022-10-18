@@ -30,12 +30,12 @@ type ChromepolicyCustomersPoliciesNetworksDefineNetworkSecurity struct {
 type ChromepolicyCustomersPoliciesNetworksDefineNetworkRequest struct {
 	PathParams  ChromepolicyCustomersPoliciesNetworksDefineNetworkPathParams
 	QueryParams ChromepolicyCustomersPoliciesNetworksDefineNetworkQueryParams
-	Request     *shared.GoogleChromePolicyV1DefineNetworkRequest `request:"mediaType=application/json"`
+	Request     *shared.GoogleChromePolicyVersionsV1DefineNetworkRequest `request:"mediaType=application/json"`
 	Security    ChromepolicyCustomersPoliciesNetworksDefineNetworkSecurity
 }
 
 type ChromepolicyCustomersPoliciesNetworksDefineNetworkResponse struct {
-	ContentType                               string
-	GoogleChromePolicyV1DefineNetworkResponse *shared.GoogleChromePolicyV1DefineNetworkResponse
-	StatusCode                                int64
+	ContentType                                       string
+	GoogleChromePolicyVersionsV1DefineNetworkResponse *shared.GoogleChromePolicyVersionsV1DefineNetworkResponse
+	StatusCode                                        int64
 }

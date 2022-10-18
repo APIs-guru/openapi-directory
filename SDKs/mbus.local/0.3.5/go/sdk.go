@@ -84,8 +84,7 @@ func (s *SDK) Get(ctx context.Context, request operations.GetRequest) (*operatio
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			out := string(data)
-			res.MbusData = &out
+			res.Body = data
 		}
 	case httpRes.StatusCode == 400:
 		switch {
@@ -95,8 +94,7 @@ func (s *SDK) Get(ctx context.Context, request operations.GetRequest) (*operatio
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			out := string(data)
-			res.TextError = &out
+			res.Body = data
 		}
 	case httpRes.StatusCode == 404:
 		switch {
@@ -106,8 +104,7 @@ func (s *SDK) Get(ctx context.Context, request operations.GetRequest) (*operatio
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			out := string(data)
-			res.TextError = &out
+			res.Body = data
 		}
 	}
 
@@ -146,8 +143,7 @@ func (s *SDK) GetMulti(ctx context.Context, request operations.GetMultiRequest) 
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			out := string(data)
-			res.MbusData = &out
+			res.Body = data
 		}
 	case httpRes.StatusCode == 400:
 		switch {
@@ -157,8 +153,7 @@ func (s *SDK) GetMulti(ctx context.Context, request operations.GetMultiRequest) 
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			out := string(data)
-			res.TextError = &out
+			res.Body = data
 		}
 	case httpRes.StatusCode == 404:
 		switch {
@@ -168,8 +163,7 @@ func (s *SDK) GetMulti(ctx context.Context, request operations.GetMultiRequest) 
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			out := string(data)
-			res.TextError = &out
+			res.Body = data
 		}
 	}
 
@@ -218,8 +212,7 @@ func (s *SDK) Hat(ctx context.Context) (*operations.HatResponse, error) {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			out := string(data)
-			res.TextError = &out
+			res.Body = data
 		}
 	}
 
@@ -259,8 +252,7 @@ func (s *SDK) HatOff(ctx context.Context) (*operations.HatOffResponse, error) {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			out := string(data)
-			res.TextError = &out
+			res.Body = data
 		}
 	}
 
@@ -300,8 +292,7 @@ func (s *SDK) HatOn(ctx context.Context) (*operations.HatOnResponse, error) {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			out := string(data)
-			res.TextError = &out
+			res.Body = data
 		}
 	}
 
@@ -340,8 +331,7 @@ func (s *SDK) MbusAPI(ctx context.Context) (*operations.MbusAPIResponse, error) 
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			out := string(data)
-			res.Yaml = &out
+			res.Body = data
 		}
 	case httpRes.StatusCode == 404:
 		switch {
@@ -351,8 +341,7 @@ func (s *SDK) MbusAPI(ctx context.Context) (*operations.MbusAPIResponse, error) 
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			out := string(data)
-			res.TextError = &out
+			res.Body = data
 		}
 	}
 
@@ -391,8 +380,7 @@ func (s *SDK) Scan(ctx context.Context, request operations.ScanRequest) (*operat
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			out := string(data)
-			res.Slaves = &out
+			res.Body = data
 		}
 	case httpRes.StatusCode == 400:
 		switch {
@@ -402,8 +390,7 @@ func (s *SDK) Scan(ctx context.Context, request operations.ScanRequest) (*operat
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			out := string(data)
-			res.TextError = &out
+			res.Body = data
 		}
 	case httpRes.StatusCode == 404:
 		switch {
@@ -413,8 +400,7 @@ func (s *SDK) Scan(ctx context.Context, request operations.ScanRequest) (*operat
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			out := string(data)
-			res.TextError = &out
+			res.Body = data
 		}
 	}
 

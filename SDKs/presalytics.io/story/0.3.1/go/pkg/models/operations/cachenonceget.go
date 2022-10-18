@@ -9,8 +9,8 @@ type CacheNonceGetRequest struct {
 }
 
 type CacheNonceGetResponse struct {
+	Body          []byte
 	ContentType   string
-	LoginButton   *string
 	StatusCode    int64
 	ProblemDetail *interface{}
 }

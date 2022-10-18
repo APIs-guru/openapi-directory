@@ -10,5 +10,5 @@ type Access struct {
 	ServiceAccountKeyName        *string                        `json:"serviceAccountKeyName,omitempty"`
 	ServiceName                  *string                        `json:"serviceName,omitempty"`
 	UserAgentFamily              *string                        `json:"userAgentFamily,omitempty"`
-	Username                     *string                        `json:"username,omitempty"`
+	UserName                     *string                        `json:"userName,omitempty"`
 }

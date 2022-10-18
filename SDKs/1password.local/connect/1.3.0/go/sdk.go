@@ -227,12 +227,12 @@ func (s *SDK) DownloadFileByID(ctx context.Context, request operations.DownloadF
 
 		switch {
 		case utils.MatchContentType(contentType, `application/octet-stream`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.DownloadFileByID200ApplicationOctetStreamBinaryString = out
+			res.DownloadFileByID200ApplicationOctetStreamBinaryString = data
 		}
 	case httpRes.StatusCode == 401:
 		switch {
@@ -429,8 +429,7 @@ func (s *SDK) GetHeartbeat(ctx context.Context, request operations.GetHeartbeatR
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			out := string(data)
-			res.GetHeartbeat200TextPlainString = &out
+			res.Body = data
 		}
 	}
 
@@ -544,8 +543,7 @@ func (s *SDK) GetPrometheusMetrics(ctx context.Context, request operations.GetPr
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			out := string(data)
-			res.GetPrometheusMetrics200TextPlainString = &out
+			res.Body = data
 		}
 	}
 

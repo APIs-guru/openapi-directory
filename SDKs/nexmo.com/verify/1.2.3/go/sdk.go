@@ -183,12 +183,12 @@ func (s *SDK) VerifyCheck(ctx context.Context, request operations.VerifyCheckReq
 
 			res.VerifyCheck200ApplicationJSONOneOf = out
 		case utils.MatchContentType(contentType, `text/xml`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -238,12 +238,12 @@ func (s *SDK) VerifyControl(ctx context.Context, request operations.VerifyContro
 
 			res.VerifyControl200ApplicationJSONOneOf = out
 		case utils.MatchContentType(contentType, `text/xml`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -293,12 +293,12 @@ func (s *SDK) VerifyRequest(ctx context.Context, request operations.VerifyReques
 
 			res.VerifyRequest200ApplicationJSONOneOf = out
 		case utils.MatchContentType(contentType, `text/xml`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 
@@ -389,12 +389,12 @@ func (s *SDK) VerifySearch(ctx context.Context, request operations.VerifySearchR
 
 			res.VerifySearch200ApplicationJSONOneOf = out
 		case utils.MatchContentType(contentType, `text/xml`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 

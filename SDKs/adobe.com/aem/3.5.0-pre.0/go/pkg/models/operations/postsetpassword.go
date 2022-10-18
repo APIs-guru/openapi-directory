@@ -11,7 +11,7 @@ type PostSetPasswordRequest struct {
 }
 
 type PostSetPasswordResponse struct {
-	ContentType                           string
-	StatusCode                            int64
-	PostSetPasswordDefaultTextPlainString *string
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }

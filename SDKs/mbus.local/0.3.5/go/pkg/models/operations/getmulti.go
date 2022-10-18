@@ -12,8 +12,7 @@ type GetMultiRequest struct {
 }
 
 type GetMultiResponse struct {
+	Body        []byte
 	ContentType string
 	StatusCode  int64
-	MbusData    *string
-	TextError   *string
 }

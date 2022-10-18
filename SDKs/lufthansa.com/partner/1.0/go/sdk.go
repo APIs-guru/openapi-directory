@@ -3,7 +3,6 @@ package sdk
 import (
 	"context"
 	"fmt"
-	"io"
 	"net/http"
 	"openapi/internal/utils"
 	"openapi/pkg/models/operations"
@@ -80,13 +79,12 @@ func (s *SDK) AllFares(ctx context.Context, request operations.AllFaresRequest) 
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
+			var out *string
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
 			}
 
-			out := string(data)
-			res.AllFares200ApplicationJSONString = &out
+			res.AllFares200ApplicationJSONString = out
 		}
 	}
 
@@ -122,13 +120,12 @@ func (s *SDK) AutoCheckIn(ctx context.Context, request operations.AutoCheckInReq
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
+			var out *string
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
 			}
 
-			out := string(data)
-			res.AutoCheckIn200ApplicationJSONString = &out
+			res.AutoCheckIn200ApplicationJSONString = out
 		}
 	}
 
@@ -162,13 +159,12 @@ func (s *SDK) BaggageTripAndContact(ctx context.Context, request operations.Bagg
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
+			var out *string
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
 			}
 
-			out := string(data)
-			res.BaggageTripAndContact200ApplicationJSONString = &out
+			res.BaggageTripAndContact200ApplicationJSONString = out
 		}
 	}
 
@@ -204,13 +200,12 @@ func (s *SDK) BestFares(ctx context.Context, request operations.BestFaresRequest
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
+			var out *string
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
 			}
 
-			out := string(data)
-			res.BestFares200ApplicationJSONString = &out
+			res.BestFares200ApplicationJSONString = out
 		}
 	}
 
@@ -246,13 +241,12 @@ func (s *SDK) DeepLinks(ctx context.Context, request operations.DeepLinksRequest
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
+			var out *string
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
 			}
 
-			out := string(data)
-			res.DeepLinks200ApplicationJSONString = &out
+			res.DeepLinks200ApplicationJSONString = out
 		}
 	}
 
@@ -288,13 +282,12 @@ func (s *SDK) Fares(ctx context.Context, request operations.FaresRequest) (*oper
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
+			var out *string
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
 			}
 
-			out := string(data)
-			res.Fares200ApplicationJSONString = &out
+			res.Fares200ApplicationJSONString = out
 		}
 	}
 
@@ -330,13 +323,12 @@ func (s *SDK) FaresSubscriptions(ctx context.Context, request operations.FaresSu
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
+			var out *string
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
 			}
 
-			out := string(data)
-			res.FaresSubscriptions200ApplicationJSONString = &out
+			res.FaresSubscriptions200ApplicationJSONString = out
 		}
 	}
 
@@ -372,13 +364,12 @@ func (s *SDK) LhDeepLinksFfp(ctx context.Context, request operations.LhDeepLinks
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
+			var out *string
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
 			}
 
-			out := string(data)
-			res.LhDeepLinksFfp200ApplicationJSONString = &out
+			res.LhDeepLinksFfp200ApplicationJSONString = out
 		}
 	}
 
@@ -414,13 +405,12 @@ func (s *SDK) LhDeepLinksItco(ctx context.Context, request operations.LhDeepLink
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
+			var out *string
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
 			}
 
-			out := string(data)
-			res.LhDeepLinksItco200ApplicationJSONString = &out
+			res.LhDeepLinksItco200ApplicationJSONString = out
 		}
 	}
 
@@ -456,13 +446,12 @@ func (s *SDK) LowestFares(ctx context.Context, request operations.LowestFaresReq
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
+			var out *string
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
 			}
 
-			out := string(data)
-			res.LowestFares200ApplicationJSONString = &out
+			res.LowestFares200ApplicationJSONString = out
 		}
 	}
 
@@ -498,13 +487,12 @@ func (s *SDK) OndRoute(ctx context.Context, request operations.OndRouteRequest) 
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
+			var out *string
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
 			}
 
-			out := string(data)
-			res.OndRoute200ApplicationJSONString = &out
+			res.OndRoute200ApplicationJSONString = out
 		}
 	}
 
@@ -540,13 +528,12 @@ func (s *SDK) OndStatus(ctx context.Context, request operations.OndStatusRequest
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
+			var out *string
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
 			}
 
-			out := string(data)
-			res.OndStatus200ApplicationJSONString = &out
+			res.OndStatus200ApplicationJSONString = out
 		}
 	}
 
@@ -580,13 +567,12 @@ func (s *SDK) Orders(ctx context.Context, request operations.OrdersRequest) (*op
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
+			var out *string
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
 			}
 
-			out := string(data)
-			res.Orders200ApplicationJSONString = &out
+			res.Orders200ApplicationJSONString = out
 		}
 	}
 
@@ -622,13 +608,12 @@ func (s *SDK) PriceOffers(ctx context.Context, request operations.PriceOffersReq
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
+			var out *string
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
 			}
 
-			out := string(data)
-			res.PriceOffers200ApplicationJSONString = &out
+			res.PriceOffers200ApplicationJSONString = out
 		}
 	}
 
@@ -664,13 +649,12 @@ func (s *SDK) SeatDetails(ctx context.Context, request operations.SeatDetailsReq
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
+			var out *string
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
 			}
 
-			out := string(data)
-			res.SeatDetails200ApplicationJSONString = &out
+			res.SeatDetails200ApplicationJSONString = out
 		}
 	}
 
@@ -706,13 +690,12 @@ func (s *SDK) TopOnd(ctx context.Context, request operations.TopOndRequest) (*op
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
+			var out *string
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
 			}
 
-			out := string(data)
-			res.TopOnd200ApplicationJSONString = &out
+			res.TopOnd200ApplicationJSONString = out
 		}
 	}
 

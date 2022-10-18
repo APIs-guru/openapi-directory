@@ -3,7 +3,6 @@ package sdk
 import (
 	"context"
 	"fmt"
-	"io"
 	"net/http"
 	"openapi/internal/utils"
 	"openapi/pkg/models/operations"
@@ -81,13 +80,12 @@ func (s *SDK) PostV1OrderFeedback(ctx context.Context, request operations.PostV1
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json; charset=utf-8`):
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
+			var out *string
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
 			}
 
-			out := string(data)
-			res.PostV1OrderFeedback200ApplicationJSONString = &out
+			res.PostV1OrderFeedback200ApplicationJSONString = out
 		}
 	}
 
@@ -123,13 +121,12 @@ func (s *SDK) PostV1OrderScreen(ctx context.Context, request operations.PostV1Or
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json; charset=utf-8`):
-			data, err := io.ReadAll(httpRes.Body)
-			if err != nil {
-				return nil, fmt.Errorf("error reading response body: %w", err)
+			var out *string
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
 			}
 
-			out := string(data)
-			res.PostV1OrderScreen200ApplicationJSONString = &out
+			res.PostV1OrderScreen200ApplicationJSONString = out
 		}
 	}
 

@@ -23,10 +23,9 @@ type PreprocessingBinarizeAdvancedRequest struct {
 }
 
 type PreprocessingBinarizeAdvancedResponse struct {
+	Body                                                      []byte
 	ContentType                                               string
 	PreprocessingBinarizeAdvanced200ApplicationJSONByteString *string
-	PreprocessingBinarizeAdvanced200ApplicationXMLByteString  *string
 	PreprocessingBinarizeAdvanced200TextJSONByteString        *string
-	PreprocessingBinarizeAdvanced200TextXMLByteString         *string
 	StatusCode                                                int64
 }

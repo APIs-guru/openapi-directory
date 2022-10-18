@@ -9,7 +9,7 @@ type ApplyNodeRequest struct {
 }
 
 type ApplyNodeResponse struct {
-	ContentType                 string
-	StatusCode                  int64
-	ApplyNode200TextPlainString *string
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }

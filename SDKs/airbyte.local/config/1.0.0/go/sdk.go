@@ -1421,12 +1421,12 @@ func (s *SDK) ExportArchive(ctx context.Context) (*operations.ExportArchiveRespo
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/x-gzip`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.AirbyteArchive = out
+			res.AirbyteArchive = data
 		}
 	}
 
@@ -1848,12 +1848,12 @@ func (s *SDK) GetLogs(ctx context.Context, request operations.GetLogsRequest) (*
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetLogs200TextPlainBinaryString = out
+			res.GetLogs200TextPlainBinaryString = data
 		}
 	case httpRes.StatusCode == 404:
 		switch {
@@ -1907,12 +1907,12 @@ func (s *SDK) GetOpenAPISpec(ctx context.Context) (*operations.GetOpenAPISpecRes
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `text/plain`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetOpenAPISpec200TextPlainBinaryString = out
+			res.GetOpenAPISpec200TextPlainBinaryString = data
 		}
 	}
 

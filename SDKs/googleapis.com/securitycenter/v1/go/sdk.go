@@ -97,94 +97,6 @@ func (s *SDK) SecuritycenterOrganizationsAssetsRunDiscovery(ctx context.Context,
 	return res, nil
 }
 
-func (s *SDK) SecuritycenterOrganizationsNotificationConfigsCreate(ctx context.Context, request operations.SecuritycenterOrganizationsNotificationConfigsCreateRequest) (*operations.SecuritycenterOrganizationsNotificationConfigsCreateResponse, error) {
-	baseURL := s.serverURL
-	url := utils.GenerateURL(ctx, baseURL, "/v1/{parent}/notificationConfigs", request.PathParams)
-
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
-	if err != nil {
-		return nil, fmt.Errorf("error serializing request body: %w", err)
-	}
-
-	req, err := http.NewRequestWithContext(ctx, "POST", url, bodyReader)
-	if err != nil {
-		return nil, fmt.Errorf("error creating request: %w", err)
-	}
-	req.Header.Set("Content-Type", reqContentType)
-
-	utils.PopulateQueryParams(ctx, req, request.QueryParams)
-
-	client := utils.CreateSecurityClient(request.Security)
-
-	httpRes, err := client.Do(req)
-	if err != nil {
-		return nil, fmt.Errorf("error sending request: %w", err)
-	}
-	defer httpRes.Body.Close()
-
-	contentType := httpRes.Header.Get("Content-Type")
-
-	res := &operations.SecuritycenterOrganizationsNotificationConfigsCreateResponse{
-		StatusCode:  int64(httpRes.StatusCode),
-		ContentType: contentType,
-	}
-	switch {
-	case httpRes.StatusCode == 200:
-		switch {
-		case utils.MatchContentType(contentType, `application/json`):
-			var out *shared.NotificationConfig
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
-			}
-
-			res.NotificationConfig = out
-		}
-	}
-
-	return res, nil
-}
-
-func (s *SDK) SecuritycenterOrganizationsNotificationConfigsList(ctx context.Context, request operations.SecuritycenterOrganizationsNotificationConfigsListRequest) (*operations.SecuritycenterOrganizationsNotificationConfigsListResponse, error) {
-	baseURL := s.serverURL
-	url := utils.GenerateURL(ctx, baseURL, "/v1/{parent}/notificationConfigs", request.PathParams)
-
-	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
-	if err != nil {
-		return nil, fmt.Errorf("error creating request: %w", err)
-	}
-
-	utils.PopulateQueryParams(ctx, req, request.QueryParams)
-
-	client := utils.CreateSecurityClient(request.Security)
-
-	httpRes, err := client.Do(req)
-	if err != nil {
-		return nil, fmt.Errorf("error sending request: %w", err)
-	}
-	defer httpRes.Body.Close()
-
-	contentType := httpRes.Header.Get("Content-Type")
-
-	res := &operations.SecuritycenterOrganizationsNotificationConfigsListResponse{
-		StatusCode:  int64(httpRes.StatusCode),
-		ContentType: contentType,
-	}
-	switch {
-	case httpRes.StatusCode == 200:
-		switch {
-		case utils.MatchContentType(contentType, `application/json`):
-			var out *shared.ListNotificationConfigsResponse
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
-			}
-
-			res.ListNotificationConfigsResponse = out
-		}
-	}
-
-	return res, nil
-}
-
 func (s *SDK) SecuritycenterOrganizationsOperationsCancel(ctx context.Context, request operations.SecuritycenterOrganizationsOperationsCancelRequest) (*operations.SecuritycenterOrganizationsOperationsCancelResponse, error) {
 	baseURL := s.serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/{name}:cancel", request.PathParams)
@@ -731,88 +643,6 @@ func (s *SDK) SecuritycenterProjectsMuteConfigsCreate(ctx context.Context, reque
 	return res, nil
 }
 
-func (s *SDK) SecuritycenterProjectsMuteConfigsDelete(ctx context.Context, request operations.SecuritycenterProjectsMuteConfigsDeleteRequest) (*operations.SecuritycenterProjectsMuteConfigsDeleteResponse, error) {
-	baseURL := s.serverURL
-	url := utils.GenerateURL(ctx, baseURL, "/v1/{name}", request.PathParams)
-
-	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
-	if err != nil {
-		return nil, fmt.Errorf("error creating request: %w", err)
-	}
-
-	utils.PopulateQueryParams(ctx, req, request.QueryParams)
-
-	client := utils.CreateSecurityClient(request.Security)
-
-	httpRes, err := client.Do(req)
-	if err != nil {
-		return nil, fmt.Errorf("error sending request: %w", err)
-	}
-	defer httpRes.Body.Close()
-
-	contentType := httpRes.Header.Get("Content-Type")
-
-	res := &operations.SecuritycenterProjectsMuteConfigsDeleteResponse{
-		StatusCode:  int64(httpRes.StatusCode),
-		ContentType: contentType,
-	}
-	switch {
-	case httpRes.StatusCode == 200:
-		switch {
-		case utils.MatchContentType(contentType, `application/json`):
-			var out map[string]interface{}
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
-			}
-
-			res.Empty = out
-		}
-	}
-
-	return res, nil
-}
-
-func (s *SDK) SecuritycenterProjectsMuteConfigsGet(ctx context.Context, request operations.SecuritycenterProjectsMuteConfigsGetRequest) (*operations.SecuritycenterProjectsMuteConfigsGetResponse, error) {
-	baseURL := s.serverURL
-	url := utils.GenerateURL(ctx, baseURL, "/v1/{name}", request.PathParams)
-
-	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
-	if err != nil {
-		return nil, fmt.Errorf("error creating request: %w", err)
-	}
-
-	utils.PopulateQueryParams(ctx, req, request.QueryParams)
-
-	client := utils.CreateSecurityClient(request.Security)
-
-	httpRes, err := client.Do(req)
-	if err != nil {
-		return nil, fmt.Errorf("error sending request: %w", err)
-	}
-	defer httpRes.Body.Close()
-
-	contentType := httpRes.Header.Get("Content-Type")
-
-	res := &operations.SecuritycenterProjectsMuteConfigsGetResponse{
-		StatusCode:  int64(httpRes.StatusCode),
-		ContentType: contentType,
-	}
-	switch {
-	case httpRes.StatusCode == 200:
-		switch {
-		case utils.MatchContentType(contentType, `application/json`):
-			var out *shared.GoogleCloudSecuritycenterV1MuteConfig
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
-			}
-
-			res.GoogleCloudSecuritycenterV1MuteConfig = out
-		}
-	}
-
-	return res, nil
-}
-
 func (s *SDK) SecuritycenterProjectsMuteConfigsList(ctx context.Context, request operations.SecuritycenterProjectsMuteConfigsListRequest) (*operations.SecuritycenterProjectsMuteConfigsListResponse, error) {
 	baseURL := s.serverURL
 	url := utils.GenerateURL(ctx, baseURL, "/v1/{parent}/muteConfigs", request.PathParams)
@@ -848,6 +678,176 @@ func (s *SDK) SecuritycenterProjectsMuteConfigsList(ctx context.Context, request
 			}
 
 			res.ListMuteConfigsResponse = out
+		}
+	}
+
+	return res, nil
+}
+
+func (s *SDK) SecuritycenterProjectsNotificationConfigsCreate(ctx context.Context, request operations.SecuritycenterProjectsNotificationConfigsCreateRequest) (*operations.SecuritycenterProjectsNotificationConfigsCreateResponse, error) {
+	baseURL := s.serverURL
+	url := utils.GenerateURL(ctx, baseURL, "/v1/{parent}/notificationConfigs", request.PathParams)
+
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request)
+	if err != nil {
+		return nil, fmt.Errorf("error serializing request body: %w", err)
+	}
+
+	req, err := http.NewRequestWithContext(ctx, "POST", url, bodyReader)
+	if err != nil {
+		return nil, fmt.Errorf("error creating request: %w", err)
+	}
+	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateQueryParams(ctx, req, request.QueryParams)
+
+	client := utils.CreateSecurityClient(request.Security)
+
+	httpRes, err := client.Do(req)
+	if err != nil {
+		return nil, fmt.Errorf("error sending request: %w", err)
+	}
+	defer httpRes.Body.Close()
+
+	contentType := httpRes.Header.Get("Content-Type")
+
+	res := &operations.SecuritycenterProjectsNotificationConfigsCreateResponse{
+		StatusCode:  int64(httpRes.StatusCode),
+		ContentType: contentType,
+	}
+	switch {
+	case httpRes.StatusCode == 200:
+		switch {
+		case utils.MatchContentType(contentType, `application/json`):
+			var out *shared.NotificationConfig
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
+			}
+
+			res.NotificationConfig = out
+		}
+	}
+
+	return res, nil
+}
+
+func (s *SDK) SecuritycenterProjectsNotificationConfigsDelete(ctx context.Context, request operations.SecuritycenterProjectsNotificationConfigsDeleteRequest) (*operations.SecuritycenterProjectsNotificationConfigsDeleteResponse, error) {
+	baseURL := s.serverURL
+	url := utils.GenerateURL(ctx, baseURL, "/v1/{name}", request.PathParams)
+
+	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
+	if err != nil {
+		return nil, fmt.Errorf("error creating request: %w", err)
+	}
+
+	utils.PopulateQueryParams(ctx, req, request.QueryParams)
+
+	client := utils.CreateSecurityClient(request.Security)
+
+	httpRes, err := client.Do(req)
+	if err != nil {
+		return nil, fmt.Errorf("error sending request: %w", err)
+	}
+	defer httpRes.Body.Close()
+
+	contentType := httpRes.Header.Get("Content-Type")
+
+	res := &operations.SecuritycenterProjectsNotificationConfigsDeleteResponse{
+		StatusCode:  int64(httpRes.StatusCode),
+		ContentType: contentType,
+	}
+	switch {
+	case httpRes.StatusCode == 200:
+		switch {
+		case utils.MatchContentType(contentType, `application/json`):
+			var out map[string]interface{}
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
+			}
+
+			res.Empty = out
+		}
+	}
+
+	return res, nil
+}
+
+func (s *SDK) SecuritycenterProjectsNotificationConfigsGet(ctx context.Context, request operations.SecuritycenterProjectsNotificationConfigsGetRequest) (*operations.SecuritycenterProjectsNotificationConfigsGetResponse, error) {
+	baseURL := s.serverURL
+	url := utils.GenerateURL(ctx, baseURL, "/v1/{name}", request.PathParams)
+
+	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
+	if err != nil {
+		return nil, fmt.Errorf("error creating request: %w", err)
+	}
+
+	utils.PopulateQueryParams(ctx, req, request.QueryParams)
+
+	client := utils.CreateSecurityClient(request.Security)
+
+	httpRes, err := client.Do(req)
+	if err != nil {
+		return nil, fmt.Errorf("error sending request: %w", err)
+	}
+	defer httpRes.Body.Close()
+
+	contentType := httpRes.Header.Get("Content-Type")
+
+	res := &operations.SecuritycenterProjectsNotificationConfigsGetResponse{
+		StatusCode:  int64(httpRes.StatusCode),
+		ContentType: contentType,
+	}
+	switch {
+	case httpRes.StatusCode == 200:
+		switch {
+		case utils.MatchContentType(contentType, `application/json`):
+			var out *shared.NotificationConfig
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
+			}
+
+			res.NotificationConfig = out
+		}
+	}
+
+	return res, nil
+}
+
+func (s *SDK) SecuritycenterProjectsNotificationConfigsList(ctx context.Context, request operations.SecuritycenterProjectsNotificationConfigsListRequest) (*operations.SecuritycenterProjectsNotificationConfigsListResponse, error) {
+	baseURL := s.serverURL
+	url := utils.GenerateURL(ctx, baseURL, "/v1/{parent}/notificationConfigs", request.PathParams)
+
+	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
+	if err != nil {
+		return nil, fmt.Errorf("error creating request: %w", err)
+	}
+
+	utils.PopulateQueryParams(ctx, req, request.QueryParams)
+
+	client := utils.CreateSecurityClient(request.Security)
+
+	httpRes, err := client.Do(req)
+	if err != nil {
+		return nil, fmt.Errorf("error sending request: %w", err)
+	}
+	defer httpRes.Body.Close()
+
+	contentType := httpRes.Header.Get("Content-Type")
+
+	res := &operations.SecuritycenterProjectsNotificationConfigsListResponse{
+		StatusCode:  int64(httpRes.StatusCode),
+		ContentType: contentType,
+	}
+	switch {
+	case httpRes.StatusCode == 200:
+		switch {
+		case utils.MatchContentType(contentType, `application/json`):
+			var out *shared.ListNotificationConfigsResponse
+			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
+				return nil, err
+			}
+
+			res.ListNotificationConfigsResponse = out
 		}
 	}
 

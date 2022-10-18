@@ -15,10 +15,9 @@ type SessionControllerLoginRequest struct {
 }
 
 type SessionControllerLoginResponse struct {
+	Body                                           []byte
 	ContentType                                    string
 	SessionControllerLogin200ApplicationJSONString *string
-	SessionControllerLogin200ApplicationXMLString  *string
 	SessionControllerLogin200TextJSONString        *string
-	SessionControllerLogin200TextXMLString         *string
 	StatusCode                                     int64
 }

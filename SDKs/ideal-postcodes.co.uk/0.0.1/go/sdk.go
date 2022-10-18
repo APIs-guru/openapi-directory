@@ -507,8 +507,7 @@ func (s *SDK) DownloadUsageHistory(ctx context.Context, request operations.Downl
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			out := string(data)
-			res.DownloadUsageHistory200TextCsvString = &out
+			res.Body = data
 		}
 	case httpRes.StatusCode == 400:
 		switch {

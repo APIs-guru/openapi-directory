@@ -256,12 +256,12 @@ func (s *SDK) GetCampagne(ctx context.Context, request operations.GetCampagneReq
 
 			res.GetCampagne200ApplicationJSONBinaryString = out
 		case utils.MatchContentType(contentType, `file`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetCampagne200FileBinaryString = out
+			res.GetCampagne200FileBinaryString = data
 		}
 	case httpRes.StatusCode == 400:
 		switch {
@@ -273,12 +273,12 @@ func (s *SDK) GetCampagne(ctx context.Context, request operations.GetCampagneReq
 
 			res.Erreur = out
 		case utils.MatchContentType(contentType, `file`):
-			out, err := io.ReadAll(httpRes.Body)
+			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = out
+			res.Body = data
 		}
 	}
 

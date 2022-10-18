@@ -14,10 +14,9 @@ type SessionControllerGetSessionInfoRequest struct {
 }
 
 type SessionControllerGetSessionInfoResponse struct {
+	Body                                                    []byte
 	ContentType                                             string
 	SessionControllerGetSessionInfo200ApplicationJSONString *string
-	SessionControllerGetSessionInfo200ApplicationXMLString  *string
 	SessionControllerGetSessionInfo200TextJSONString        *string
-	SessionControllerGetSessionInfo200TextXMLString         *string
 	StatusCode                                              int64
 }

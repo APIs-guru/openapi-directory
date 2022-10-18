@@ -22,7 +22,5 @@ type UpdateGroupClientRelationshipsPostSubscriptionResponse struct {
 	ContentType                                                            string
 	StatusCode                                                             int64
 	UpdateGroupClientRelationshipsPostSubscription200ApplicationJSONString *string
-	UpdateGroupClientRelationshipsPostSubscription200ApplicationXMLString  *string
 	UpdateGroupClientRelationshipsPostSubscription200TextJSONString        *string
-	UpdateGroupClientRelationshipsPostSubscription200TextXMLString         *string
 }

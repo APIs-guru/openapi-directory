@@ -85,8 +85,7 @@ func (s *SDK) Get(ctx context.Context, request operations.GetRequest) (*operatio
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			out := string(data)
-			res.Get200TextHTMLString = &out
+			res.Body = data
 		}
 	}
 

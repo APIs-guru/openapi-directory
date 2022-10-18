@@ -15,10 +15,9 @@ type StopPointDirectionRequest struct {
 }
 
 type StopPointDirectionResponse struct {
+	Body                                       []byte
 	ContentType                                string
 	StatusCode                                 int64
 	StopPointDirection200ApplicationJSONString *string
-	StopPointDirection200ApplicationXMLString  *string
 	StopPointDirection200TextJSONString        *string
-	StopPointDirection200TextXMLString         *string
 }

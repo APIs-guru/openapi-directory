@@ -273,12 +273,12 @@ func (s *SDK) ChromepolicyCustomersPoliciesNetworksDefineCertificate(ctx context
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *shared.GoogleChromePolicyV1DefineCertificateResponse
+			var out *shared.GoogleChromePolicyVersionsV1DefineCertificateResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.GoogleChromePolicyV1DefineCertificateResponse = out
+			res.GoogleChromePolicyVersionsV1DefineCertificateResponse = out
 		}
 	}
 
@@ -320,12 +320,12 @@ func (s *SDK) ChromepolicyCustomersPoliciesNetworksDefineNetwork(ctx context.Con
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *shared.GoogleChromePolicyV1DefineNetworkResponse
+			var out *shared.GoogleChromePolicyVersionsV1DefineNetworkResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
 
-			res.GoogleChromePolicyV1DefineNetworkResponse = out
+			res.GoogleChromePolicyVersionsV1DefineNetworkResponse = out
 		}
 	}
 
@@ -372,7 +372,7 @@ func (s *SDK) ChromepolicyCustomersPoliciesNetworksRemoveCertificate(ctx context
 				return nil, err
 			}
 
-			res.GoogleChromePolicyV1RemoveCertificateResponse = out
+			res.GoogleChromePolicyVersionsV1RemoveCertificateResponse = out
 		}
 	}
 
@@ -419,7 +419,7 @@ func (s *SDK) ChromepolicyCustomersPoliciesNetworksRemoveNetwork(ctx context.Con
 				return nil, err
 			}
 
-			res.GoogleChromePolicyV1RemoveNetworkResponse = out
+			res.GoogleChromePolicyVersionsV1RemoveNetworkResponse = out
 		}
 	}
 

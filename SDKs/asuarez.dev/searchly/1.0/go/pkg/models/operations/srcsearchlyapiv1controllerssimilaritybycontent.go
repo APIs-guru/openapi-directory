@@ -13,8 +13,8 @@ type SrcSearchlyAPIV1ControllersSimilarityByContentRequest struct {
 }
 
 type SrcSearchlyAPIV1ControllersSimilarityByContentResponse struct {
-	APIResponseSimilarity                                                      *shared.APIResponseSimilarity
-	ContentType                                                                string
-	StatusCode                                                                 int64
-	SrcSearchlyAPIV1ControllersSimilarityByContentDefaultApplicationTextString *string
+	APIResponseSimilarity *shared.APIResponseSimilarity
+	Body                  []byte
+	ContentType           string
+	StatusCode            int64
 }
