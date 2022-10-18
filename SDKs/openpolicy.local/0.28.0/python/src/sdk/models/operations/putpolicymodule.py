@@ -18,7 +18,7 @@ class PutPolicyModuleQueryParams:
 class PutPolicyModuleRequest:
     path_params: PutPolicyModulePathParams = field(default=None)
     query_params: PutPolicyModuleQueryParams = field(default=None)
-    request: str = field(default=None, metadata={'request': { 'media_type': 'text/plain' }})
+    request: bytes = field(default=None, metadata={'request': { 'media_type': 'text/plain' }})
     
 
 @dataclass

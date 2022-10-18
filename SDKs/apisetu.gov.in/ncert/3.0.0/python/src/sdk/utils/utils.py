@@ -227,8 +227,6 @@ def serialize_content_type(request_field_name: str, metadata, request: dataclass
     else:
         if isinstance(request, (bytes, bytearray)):
             return media_type, request, None
-        if isinstance(request, str):
-            return media_type, request, None
         else:
             raise Exception(
                 f"invalid request body type {type(request)} for mediaType {metadata['media_type']}")

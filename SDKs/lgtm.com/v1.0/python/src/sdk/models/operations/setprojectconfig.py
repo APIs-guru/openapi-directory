@@ -15,7 +15,7 @@ class SetProjectConfigSecurity:
 @dataclass
 class SetProjectConfigRequest:
     path_params: SetProjectConfigPathParams = field(default=None)
-    request: str = field(default=None, metadata={'request': { 'media_type': 'application/x-yaml' }})
+    request: bytes = field(default=None, metadata={'request': { 'media_type': 'application/x-yaml' }})
     security: SetProjectConfigSecurity = field(default=None)
     
 

@@ -1,11 +1,10 @@
 from dataclasses import dataclass, field
-from typing import Optional
+
 
 
 @dataclass
 class GetCrxdeStatusResponse:
+    body: bytes = field(default=None)
     content_type: str = field(default=None)
     status_code: int = field(default=None)
-    get_crxde_status_200_plain_text_string: Optional[str] = field(default=None)
-    get_crxde_status_404_plain_text_string: Optional[str] = field(default=None)
     

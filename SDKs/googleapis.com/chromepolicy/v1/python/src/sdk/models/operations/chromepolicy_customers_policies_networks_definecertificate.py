@@ -33,13 +33,13 @@ class ChromepolicyCustomersPoliciesNetworksDefineCertificateSecurity:
 class ChromepolicyCustomersPoliciesNetworksDefineCertificateRequest:
     path_params: ChromepolicyCustomersPoliciesNetworksDefineCertificatePathParams = field(default=None)
     query_params: ChromepolicyCustomersPoliciesNetworksDefineCertificateQueryParams = field(default=None)
-    request: Optional[shared.GoogleChromePolicyV1DefineCertificateRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: Optional[shared.GoogleChromePolicyVersionsV1DefineCertificateRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     security: ChromepolicyCustomersPoliciesNetworksDefineCertificateSecurity = field(default=None)
     
 
 @dataclass
 class ChromepolicyCustomersPoliciesNetworksDefineCertificateResponse:
     content_type: str = field(default=None)
-    google_chrome_policy_v1_define_certificate_response: Optional[shared.GoogleChromePolicyV1DefineCertificateResponse] = field(default=None)
+    google_chrome_policy_versions_v1_define_certificate_response: Optional[shared.GoogleChromePolicyVersionsV1DefineCertificateResponse] = field(default=None)
     status_code: int = field(default=None)
     

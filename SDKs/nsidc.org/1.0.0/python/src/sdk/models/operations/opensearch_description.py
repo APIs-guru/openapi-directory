@@ -1,10 +1,10 @@
 from dataclasses import dataclass, field
-from typing import Optional
+
 
 
 @dataclass
 class OpensearchDescriptionResponse:
+    body: bytes = field(default=None)
     content_type: str = field(default=None)
     status_code: int = field(default=None)
-    opensearch_description_200_application_opensearchdescription_plus_xml_string: Optional[str] = field(default=None)
     

@@ -333,11 +333,13 @@ class SDK:
         res = operations.PostAdministrationEntityResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                res.post_administration_entity_200_application_json_uuid_string = r.content
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.post_administration_entity_200_application_json_uuid_string = out
             if utils.match_content_type(content_type, "text/json"):
-                res.post_administration_entity_200_text_json_uuid_string = r.content
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.post_administration_entity_200_text_json_uuid_string = out
             if utils.match_content_type(content_type, "text/plain"):
-                res.post_administration_entity_200_text_plain_uuid_string = r.content
+                res.body = r.content
 
         return res
 
@@ -380,11 +382,13 @@ class SDK:
         res = operations.PostAdministrationTokenResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                res.post_administration_token_200_application_json_uuid_string = r.content
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.post_administration_token_200_application_json_uuid_string = out
             if utils.match_content_type(content_type, "text/json"):
-                res.post_administration_token_200_text_json_uuid_string = r.content
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.post_administration_token_200_text_json_uuid_string = out
             if utils.match_content_type(content_type, "text/plain"):
-                res.post_administration_token_200_text_plain_uuid_string = r.content
+                res.body = r.content
 
         return res
 
@@ -408,11 +412,13 @@ class SDK:
         res = operations.PostAdministrationUserResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                res.post_administration_user_200_application_json_uuid_string = r.content
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.post_administration_user_200_application_json_uuid_string = out
             if utils.match_content_type(content_type, "text/json"):
-                res.post_administration_user_200_text_json_uuid_string = r.content
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.post_administration_user_200_text_json_uuid_string = out
             if utils.match_content_type(content_type, "text/plain"):
-                res.post_administration_user_200_text_plain_uuid_string = r.content
+                res.body = r.content
 
         return res
 

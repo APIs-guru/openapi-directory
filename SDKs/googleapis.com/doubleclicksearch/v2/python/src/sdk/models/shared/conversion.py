@@ -24,6 +24,7 @@ class Conversion:
     currency_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'currencyCode' }})
     custom_dimension: Optional[List[customdimension.CustomDimension]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'customDimension' }})
     custom_metric: Optional[List[custommetric.CustomMetric]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'customMetric' }})
+    customer_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'customerId' }})
     device_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'deviceType' }})
     ds_conversion_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dsConversionId' }})
     engine_account_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'engineAccountId' }})

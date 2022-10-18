@@ -11,7 +11,7 @@ class CreateEventNotificationHeaders:
 @dataclass
 class CreateEventNotificationRequest:
     headers: CreateEventNotificationHeaders = field(default=None)
-    request: str = field(default=None, metadata={'request': { 'media_type': 'application/jwt' }})
+    request: bytes = field(default=None, metadata={'request': { 'media_type': 'application/jwt' }})
     
 
 @dataclass

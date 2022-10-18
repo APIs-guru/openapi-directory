@@ -35,7 +35,7 @@ class SDK:
         res = operations.CacheNonceGetResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "text/html"):
-                res.login_button = r.content
+                res.body = r.content
         elif r.status_code == 401:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[Any])
@@ -369,14 +369,15 @@ class SDK:
         res = operations.StoryIDAnalyticsResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                res.reveal_js_presenation_with_analytics_data = r.content
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.reveal_js_presenation_with_analytics_data = out
         elif r.status_code == 400:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[Any])
                 res.problem_detail = out
         elif r.status_code == 401:
             if utils.match_content_type(content_type, "text/html"):
-                res.login_button = r.content
+                res.body = r.content
         elif r.status_code == 404:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[Any])
@@ -947,7 +948,8 @@ class SDK:
         res = operations.StoryIDOutlineGetResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                res.story_id_outline_get_200_application_json_string = r.content
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.story_id_outline_get_200_application_json_string = out
         elif r.status_code == 202:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[Any])
@@ -1023,7 +1025,8 @@ class SDK:
         res = operations.StoryIDPublicResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                res.reveal_js_presenation = r.content
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.reveal_js_presenation = out
         elif r.status_code == 302:
             pass
         elif r.status_code == 400:
@@ -1090,14 +1093,15 @@ class SDK:
         res = operations.StoryIDRevealResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                res.reveal_js_presenation = r.content
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.reveal_js_presenation = out
         elif r.status_code == 400:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[Any])
                 res.problem_detail = out
         elif r.status_code == 401:
             if utils.match_content_type(content_type, "text/html"):
-                res.login_button = r.content
+                res.body = r.content
         elif r.status_code == 404:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[Any])

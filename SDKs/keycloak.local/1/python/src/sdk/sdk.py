@@ -4309,7 +4309,7 @@ class SDK:
         res = operations.PostRealmClientsIDCertificatesAttrDownloadResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code >= 200 and r.status_code < 300:
             if utils.match_content_type(content_type, "application/octet-stream"):
-                res.post_realm_clients_id_certificates_attr_download_2_xx_application_octet_stream_byte_string = r.content
+                res.body = r.content
 
         return res
 
@@ -4357,7 +4357,7 @@ class SDK:
         res = operations.PostRealmClientsIDCertificatesAttrGenerateAndDownloadResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code >= 200 and r.status_code < 300:
             if utils.match_content_type(content_type, "application/octet-stream"):
-                res.post_realm_clients_id_certificates_attr_generate_and_download_2_xx_application_octet_stream_byte_string = r.content
+                res.body = r.content
 
         return res
 

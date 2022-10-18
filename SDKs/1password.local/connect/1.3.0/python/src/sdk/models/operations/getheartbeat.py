@@ -12,7 +12,7 @@ class GetHeartbeatRequest:
 
 @dataclass
 class GetHeartbeatResponse:
+    body: bytes = field(default=None)
     content_type: str = field(default=None)
-    get_heartbeat_200_text_plain_string: Optional[str] = field(default=None)
     status_code: int = field(default=None)
     

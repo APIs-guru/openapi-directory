@@ -26,7 +26,7 @@ class PostReportsSecurity:
 @dataclass
 class PostReportsRequest:
     query_params: PostReportsQueryParams = field(default=None)
-    request: str = field(default=None, metadata={'request': { 'media_type': 'text/csv' }})
+    request: bytes = field(default=None, metadata={'request': { 'media_type': 'text/csv' }})
     security: PostReportsSecurity = field(default=None)
     
 

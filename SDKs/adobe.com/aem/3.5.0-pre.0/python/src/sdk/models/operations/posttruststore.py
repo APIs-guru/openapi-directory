@@ -30,7 +30,7 @@ class PostTruststoreRequest:
 
 @dataclass
 class PostTruststoreResponse:
+    body: bytes = field(default=None)
     content_type: str = field(default=None)
     status_code: int = field(default=None)
-    post_truststore_default_text_plain_string: Optional[str] = field(default=None)
     

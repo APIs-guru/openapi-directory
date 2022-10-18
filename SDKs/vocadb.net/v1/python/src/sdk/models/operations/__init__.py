@@ -98,7 +98,6 @@ from .userapi_postalbumstatus import *
 from .userapi_postfollowedtag import *
 from .userapi_postrefreshentryedit import *
 from .userapi_postreport import *
-from .userapi_postsetting import *
 from .venueapi_delete import *
 from .venueapi_getlist import *
 from .venueapi_postreport import *

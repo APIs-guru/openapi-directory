@@ -267,7 +267,8 @@ class SDK:
         res = operations.GetResourcesMediaIDContentResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                res.get_resources_media_id_content_200_application_json_string = r.content
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.get_resources_media_id_content_200_application_json_string = out
         elif r.status_code == 400:
             pass
         elif r.status_code == 500:
@@ -292,7 +293,8 @@ class SDK:
         res = operations.GetResourcesMediaIDEmbedJSONResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                res.get_resources_media_id_embed_json_200_application_json_string = r.content
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.get_resources_media_id_embed_json_200_application_json_string = out
         elif r.status_code == 400:
             pass
         elif r.status_code == 500:
@@ -727,7 +729,8 @@ class SDK:
         res = operations.GetResourcesTagsIDSyndicateFormatResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                res.get_resources_tags_id_syndicate_format_200_application_json_string = r.content
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.get_resources_tags_id_syndicate_format_200_application_json_string = out
         elif r.status_code == 400:
             pass
         elif r.status_code == 500:

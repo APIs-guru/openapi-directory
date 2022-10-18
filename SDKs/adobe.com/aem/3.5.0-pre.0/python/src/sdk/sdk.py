@@ -77,7 +77,8 @@ class SDK:
         res = operations.GetAemHealthCheckResponse(status_code=r.status_code, content_type=content_type)
         if True:
             if utils.match_content_type(content_type, "application/json"):
-                res.get_aem_health_check_default_application_json_string = r.content
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.get_aem_health_check_default_application_json_string = out
 
         return res
 
@@ -137,7 +138,8 @@ class SDK:
         res = operations.GetAgentsResponse(status_code=r.status_code, content_type=content_type)
         if True:
             if utils.match_content_type(content_type, "application/json"):
-                res.get_agents_default_application_json_string = r.content
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.get_agents_default_application_json_string = out
 
         return res
 
@@ -160,7 +162,7 @@ class SDK:
                 res.body = r.content
         else:
             if utils.match_content_type(content_type, "text/plain"):
-                res.get_authorizable_keystore_default_text_plain_string = r.content
+                res.body = r.content
 
         return res
 
@@ -180,7 +182,7 @@ class SDK:
         res = operations.GetConfigMgrResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "text/xml"):
-                res.get_config_mgr_200_text_xml_string = r.content
+                res.body = r.content
         elif r.status_code >= 500 and r.status_code < 600:
             pass
 
@@ -202,10 +204,10 @@ class SDK:
         res = operations.GetCrxdeStatusResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "plain/text"):
-                res.get_crxde_status_200_plain_text_string = r.content
+                res.body = r.content
         elif r.status_code == 404:
             if utils.match_content_type(content_type, "plain/text"):
-                res.get_crxde_status_404_plain_text_string = r.content
+                res.body = r.content
 
         return res
 
@@ -229,7 +231,8 @@ class SDK:
                 res.install_status = out
         else:
             if utils.match_content_type(content_type, "application/json"):
-                res.get_install_status_default_application_json_string = r.content
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.get_install_status_default_application_json_string = out
 
         return res
 
@@ -269,7 +272,7 @@ class SDK:
         res = operations.GetLoginPageResponse(status_code=r.status_code, content_type=content_type)
         if True:
             if utils.match_content_type(content_type, "text/html"):
-                res.get_login_page_default_text_html_string = r.content
+                res.body = r.content
 
         return res
 
@@ -328,7 +331,8 @@ class SDK:
         res = operations.GetPackageFilterResponse(status_code=r.status_code, content_type=content_type)
         if True:
             if utils.match_content_type(content_type, "application/json"):
-                res.get_package_filter_default_application_json_string = r.content
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.get_package_filter_default_application_json_string = out
 
         return res
 
@@ -348,10 +352,10 @@ class SDK:
         res = operations.GetPackageManagerServletResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 404:
             if utils.match_content_type(content_type, "text/html"):
-                res.get_package_manager_servlet_404_text_html_string = r.content
+                res.body = r.content
         elif r.status_code == 405:
             if utils.match_content_type(content_type, "text/html"):
-                res.get_package_manager_servlet_405_text_html_string = r.content
+                res.body = r.content
 
         return res
 
@@ -372,7 +376,8 @@ class SDK:
         res = operations.GetQueryResponse(status_code=r.status_code, content_type=content_type)
         if True:
             if utils.match_content_type(content_type, "application/json"):
-                res.get_query_default_application_json_string = r.content
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.get_query_default_application_json_string = out
 
         return res
 
@@ -416,7 +421,8 @@ class SDK:
                 res.truststore_info = out
         else:
             if utils.match_content_type(content_type, "application/json"):
-                res.get_truststore_info_default_application_json_string = r.content
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.get_truststore_info_default_application_json_string = out
 
         return res
 
@@ -464,7 +470,7 @@ class SDK:
                 res.body = r.content
         else:
             if utils.match_content_type(content_type, "text/plain"):
-                res.post_authorizable_keystore_default_text_plain_string = r.content
+                res.body = r.content
 
         return res
 
@@ -485,7 +491,7 @@ class SDK:
         res = operations.PostAuthorizablesResponse(status_code=r.status_code, content_type=content_type)
         if True:
             if utils.match_content_type(content_type, "text/html"):
-                res.post_authorizables_default_text_html_string = r.content
+                res.body = r.content
 
         return res
 
@@ -788,7 +794,7 @@ class SDK:
         res = operations.PostPackageServiceResponse(status_code=r.status_code, content_type=content_type)
         if True:
             if utils.match_content_type(content_type, "text/xml"):
-                res.post_package_service_default_text_xml_string = r.content
+                res.body = r.content
 
         return res
 
@@ -813,7 +819,8 @@ class SDK:
         res = operations.PostPackageServiceJSONResponse(status_code=r.status_code, content_type=content_type)
         if True:
             if utils.match_content_type(content_type, "application/json"):
-                res.post_package_service_json_default_application_json_string = r.content
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.post_package_service_json_default_application_json_string = out
 
         return res
 
@@ -834,7 +841,8 @@ class SDK:
         res = operations.PostPackageUpdateResponse(status_code=r.status_code, content_type=content_type)
         if True:
             if utils.match_content_type(content_type, "application/json"):
-                res.post_package_update_default_application_json_string = r.content
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.post_package_update_default_application_json_string = out
 
         return res
 
@@ -875,7 +883,8 @@ class SDK:
         res = operations.PostQueryResponse(status_code=r.status_code, content_type=content_type)
         if True:
             if utils.match_content_type(content_type, "application/json"):
-                res.post_query_default_application_json_string = r.content
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.post_query_default_application_json_string = out
 
         return res
 
@@ -899,10 +908,10 @@ class SDK:
                 res.body = r.content
         elif r.status_code == 302:
             if utils.match_content_type(content_type, "text/plain"):
-                res.post_saml_configuration_302_text_plain_string = r.content
+                res.body = r.content
         else:
             if utils.match_content_type(content_type, "text/plain"):
-                res.post_saml_configuration_default_text_plain_string = r.content
+                res.body = r.content
 
         return res
 
@@ -923,7 +932,7 @@ class SDK:
         res = operations.PostSetPasswordResponse(status_code=r.status_code, content_type=content_type)
         if True:
             if utils.match_content_type(content_type, "text/plain"):
-                res.post_set_password_default_text_plain_string = r.content
+                res.body = r.content
 
         return res
 
@@ -968,7 +977,7 @@ class SDK:
         res = operations.PostTruststoreResponse(status_code=r.status_code, content_type=content_type)
         if True:
             if utils.match_content_type(content_type, "text/plain"):
-                res.post_truststore_default_text_plain_string = r.content
+                res.body = r.content
 
         return res
 
@@ -992,7 +1001,7 @@ class SDK:
         res = operations.PostTruststorePkcs12Response(status_code=r.status_code, content_type=content_type)
         if True:
             if utils.match_content_type(content_type, "text/plain"):
-                res.post_truststore_pkcs12_default_text_plain_string = r.content
+                res.body = r.content
 
         return res
 
@@ -1017,7 +1026,7 @@ class SDK:
         res = operations.SslSetupResponse(status_code=r.status_code, content_type=content_type)
         if True:
             if utils.match_content_type(content_type, "text/plain"):
-                res.ssl_setup_default_text_plain_string = r.content
+                res.body = r.content
 
         return res
 

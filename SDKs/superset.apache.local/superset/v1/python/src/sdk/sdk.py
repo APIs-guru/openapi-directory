@@ -1705,7 +1705,7 @@ class SDK:
         res = operations.GetDashboardExportResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "text/plain"):
-                res.get_dashboard_export_200_text_plain_string = r.content
+                res.body = r.content
         elif r.status_code == 400:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetDashboardExport400ApplicationJSON])
@@ -2511,7 +2511,7 @@ class SDK:
         res = operations.GetDatasetExportResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "text/plain"):
-                res.get_dataset_export_200_text_plain_string = r.content
+                res.body = r.content
         elif r.status_code == 400:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetDatasetExport400ApplicationJSON])

@@ -439,13 +439,15 @@ class SDK:
         res = operations.PreprocessingBinarizeResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                res.preprocessing_binarize_200_application_json_byte_string = r.content
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.preprocessing_binarize_200_application_json_byte_string = out
             if utils.match_content_type(content_type, "application/xml"):
-                res.preprocessing_binarize_200_application_xml_byte_string = r.content
-            if utils.match_content_type(content_type, "text/json"):
-                res.preprocessing_binarize_200_text_json_byte_string = r.content
+                res.body = r.content
             if utils.match_content_type(content_type, "text/xml"):
-                res.preprocessing_binarize_200_text_xml_byte_string = r.content
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.preprocessing_binarize_200_text_json_byte_string = out
 
         return res
 
@@ -473,13 +475,15 @@ class SDK:
         res = operations.PreprocessingBinarizeAdvancedResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                res.preprocessing_binarize_advanced_200_application_json_byte_string = r.content
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.preprocessing_binarize_advanced_200_application_json_byte_string = out
             if utils.match_content_type(content_type, "application/xml"):
-                res.preprocessing_binarize_advanced_200_application_xml_byte_string = r.content
-            if utils.match_content_type(content_type, "text/json"):
-                res.preprocessing_binarize_advanced_200_text_json_byte_string = r.content
+                res.body = r.content
             if utils.match_content_type(content_type, "text/xml"):
-                res.preprocessing_binarize_advanced_200_text_xml_byte_string = r.content
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.preprocessing_binarize_advanced_200_text_json_byte_string = out
 
         return res
 
@@ -543,13 +547,15 @@ class SDK:
         res = operations.PreprocessingUnrotateResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                res.preprocessing_unrotate_200_application_json_byte_string = r.content
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.preprocessing_unrotate_200_application_json_byte_string = out
             if utils.match_content_type(content_type, "application/xml"):
-                res.preprocessing_unrotate_200_application_xml_byte_string = r.content
-            if utils.match_content_type(content_type, "text/json"):
-                res.preprocessing_unrotate_200_text_json_byte_string = r.content
+                res.body = r.content
             if utils.match_content_type(content_type, "text/xml"):
-                res.preprocessing_unrotate_200_text_xml_byte_string = r.content
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.preprocessing_unrotate_200_text_json_byte_string = out
 
         return res
 
@@ -577,13 +583,15 @@ class SDK:
         res = operations.PreprocessingUnrotateAdvancedResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                res.preprocessing_unrotate_advanced_200_application_json_byte_string = r.content
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.preprocessing_unrotate_advanced_200_application_json_byte_string = out
             if utils.match_content_type(content_type, "application/xml"):
-                res.preprocessing_unrotate_advanced_200_application_xml_byte_string = r.content
-            if utils.match_content_type(content_type, "text/json"):
-                res.preprocessing_unrotate_advanced_200_text_json_byte_string = r.content
+                res.body = r.content
             if utils.match_content_type(content_type, "text/xml"):
-                res.preprocessing_unrotate_advanced_200_text_xml_byte_string = r.content
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.preprocessing_unrotate_advanced_200_text_json_byte_string = out
 
         return res
 
@@ -611,13 +619,15 @@ class SDK:
         res = operations.PreprocessingUnskewResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                res.preprocessing_unskew_200_application_json_byte_string = r.content
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.preprocessing_unskew_200_application_json_byte_string = out
             if utils.match_content_type(content_type, "application/xml"):
-                res.preprocessing_unskew_200_application_xml_byte_string = r.content
-            if utils.match_content_type(content_type, "text/json"):
-                res.preprocessing_unskew_200_text_json_byte_string = r.content
+                res.body = r.content
             if utils.match_content_type(content_type, "text/xml"):
-                res.preprocessing_unskew_200_text_xml_byte_string = r.content
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.preprocessing_unskew_200_text_json_byte_string = out
 
         return res
 

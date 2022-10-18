@@ -3115,19 +3115,22 @@ class SDK:
         res = operations.UserAPIPostAlbumStatusResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/javascript"):
-                res.user_api_post_album_status_200_application_javascript_string = r.content
-            if utils.match_content_type(content_type, "application/json"):
-                res.user_api_post_album_status_200_application_json_string = r.content
-            if utils.match_content_type(content_type, "application/json-p"):
-                res.user_api_post_album_status_200_application_jsonp_string = r.content
+                res.body = r.content
             if utils.match_content_type(content_type, "application/xml"):
-                res.user_api_post_album_status_200_application_xml_string = r.content
+                res.body = r.content
             if utils.match_content_type(content_type, "text/javascript"):
-                res.user_api_post_album_status_200_text_javascript_string = r.content
-            if utils.match_content_type(content_type, "text/json"):
-                res.user_api_post_album_status_200_text_json_string = r.content
+                res.body = r.content
             if utils.match_content_type(content_type, "text/xml"):
-                res.user_api_post_album_status_200_text_xml_string = r.content
+                res.body = r.content
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.user_api_post_album_status_200_application_json_string = out
+            if utils.match_content_type(content_type, "application/json-p"):
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.user_api_post_album_status_200_application_jsonp_string = out
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.user_api_post_album_status_200_text_json_string = out
 
         return res
 
@@ -3209,32 +3212,6 @@ class SDK:
             if utils.match_content_type(content_type, "text/json"):
                 out = utils.unmarshal_json(r.text, Optional[bool])
                 res.user_api_post_report_200_text_json_boolean = out
-
-        return res
-
-    
-    
-    def user_api_post_setting(self, request: operations.UserAPIPostSettingRequest) -> operations.UserAPIPostSettingResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = utils.generate_url(base_url, "/api/users/{id}/settings/{settingName}", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
-        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
-        if data is None and form is None:
-           raise Exception('request body is required')
-        
-        client = self.client
-
-        r = client.request("POST", url, data=data, files=form, headers=headers)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.UserAPIPostSettingResponse(status_code=r.status_code, content_type=content_type)
-        if r.status_code == 204:
-            pass
 
         return res
 

@@ -1061,24 +1061,26 @@ class SDK:
         res = operations.AuthorizationCategoriesPostResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                res.authorization_categories_post_200_application_json_string = r.content
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.authorization_categories_post_200_application_json_string = out
             if utils.match_content_type(content_type, "application/xml"):
-                res.authorization_categories_post_200_application_xml_string = r.content
-            if utils.match_content_type(content_type, "text/json"):
-                res.authorization_categories_post_200_text_json_string = r.content
+                res.body = r.content
             if utils.match_content_type(content_type, "text/xml"):
-                res.authorization_categories_post_200_text_xml_string = r.content
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.authorization_categories_post_200_text_json_string = out
         else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
                 res.api_models_api_error = out
             if utils.match_content_type(content_type, "text/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
                 res.api_models_api_error = out
-            if utils.match_content_type(content_type, "application/xml"):
-                res.body = r.content
-            if utils.match_content_type(content_type, "text/xml"):
-                res.body = r.content
 
         return res
 
@@ -1659,24 +1661,26 @@ class SDK:
         res = operations.BundlesPostBundleResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                res.bundles_post_bundle_200_application_json_string = r.content
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.bundles_post_bundle_200_application_json_string = out
             if utils.match_content_type(content_type, "application/xml"):
-                res.bundles_post_bundle_200_application_xml_string = r.content
-            if utils.match_content_type(content_type, "text/json"):
-                res.bundles_post_bundle_200_text_json_string = r.content
+                res.body = r.content
             if utils.match_content_type(content_type, "text/xml"):
-                res.bundles_post_bundle_200_text_xml_string = r.content
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.bundles_post_bundle_200_text_json_string = out
         else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
                 res.api_models_api_error = out
             if utils.match_content_type(content_type, "text/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
                 res.api_models_api_error = out
-            if utils.match_content_type(content_type, "application/xml"):
-                res.body = r.content
-            if utils.match_content_type(content_type, "text/xml"):
-                res.body = r.content
 
         return res
 
@@ -2851,24 +2855,26 @@ class SDK:
         res = operations.FilesPostFileResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                res.files_post_file_200_application_json_string = r.content
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.files_post_file_200_application_json_string = out
             if utils.match_content_type(content_type, "application/xml"):
-                res.files_post_file_200_application_xml_string = r.content
-            if utils.match_content_type(content_type, "text/json"):
-                res.files_post_file_200_text_json_string = r.content
+                res.body = r.content
             if utils.match_content_type(content_type, "text/xml"):
-                res.files_post_file_200_text_xml_string = r.content
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.files_post_file_200_text_json_string = out
         else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
                 res.api_models_api_error = out
             if utils.match_content_type(content_type, "text/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
                 res.api_models_api_error = out
-            if utils.match_content_type(content_type, "application/xml"):
-                res.body = r.content
-            if utils.match_content_type(content_type, "text/xml"):
-                res.body = r.content
 
         return res
 
@@ -3365,24 +3371,26 @@ class SDK:
         res = operations.GlobalImageCategoriesPostFileResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                res.global_image_categories_post_file_200_application_json_string = r.content
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.global_image_categories_post_file_200_application_json_string = out
             if utils.match_content_type(content_type, "application/xml"):
-                res.global_image_categories_post_file_200_application_xml_string = r.content
-            if utils.match_content_type(content_type, "text/json"):
-                res.global_image_categories_post_file_200_text_json_string = r.content
+                res.body = r.content
             if utils.match_content_type(content_type, "text/xml"):
-                res.global_image_categories_post_file_200_text_xml_string = r.content
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.global_image_categories_post_file_200_text_json_string = out
         else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
                 res.api_models_api_error = out
             if utils.match_content_type(content_type, "text/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
                 res.api_models_api_error = out
-            if utils.match_content_type(content_type, "application/xml"):
-                res.body = r.content
-            if utils.match_content_type(content_type, "text/xml"):
-                res.body = r.content
 
         return res
 
@@ -4218,24 +4226,26 @@ class SDK:
         res = operations.LogsPostLogResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                res.logs_post_log_200_application_json_string = r.content
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.logs_post_log_200_application_json_string = out
             if utils.match_content_type(content_type, "application/xml"):
-                res.logs_post_log_200_application_xml_string = r.content
-            if utils.match_content_type(content_type, "text/json"):
-                res.logs_post_log_200_text_json_string = r.content
+                res.body = r.content
             if utils.match_content_type(content_type, "text/xml"):
-                res.logs_post_log_200_text_xml_string = r.content
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.logs_post_log_200_text_json_string = out
         else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
                 res.api_models_api_error = out
             if utils.match_content_type(content_type, "text/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
                 res.api_models_api_error = out
-            if utils.match_content_type(content_type, "application/xml"):
-                res.body = r.content
-            if utils.match_content_type(content_type, "text/xml"):
-                res.body = r.content
 
         return res
 
@@ -4406,24 +4416,26 @@ class SDK:
         res = operations.PackageTypesPostResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                res.package_types_post_200_application_json_string = r.content
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.package_types_post_200_application_json_string = out
             if utils.match_content_type(content_type, "application/xml"):
-                res.package_types_post_200_application_xml_string = r.content
-            if utils.match_content_type(content_type, "text/json"):
-                res.package_types_post_200_text_json_string = r.content
+                res.body = r.content
             if utils.match_content_type(content_type, "text/xml"):
-                res.package_types_post_200_text_xml_string = r.content
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.package_types_post_200_text_json_string = out
         else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
                 res.api_models_api_error = out
             if utils.match_content_type(content_type, "text/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
                 res.api_models_api_error = out
-            if utils.match_content_type(content_type, "application/xml"):
-                res.body = r.content
-            if utils.match_content_type(content_type, "text/xml"):
-                res.body = r.content
 
         return res
 
@@ -4707,24 +4719,26 @@ class SDK:
         res = operations.PackagesPostPackageResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                res.packages_post_package_200_application_json_string = r.content
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.packages_post_package_200_application_json_string = out
             if utils.match_content_type(content_type, "application/xml"):
-                res.packages_post_package_200_application_xml_string = r.content
-            if utils.match_content_type(content_type, "text/json"):
-                res.packages_post_package_200_text_json_string = r.content
+                res.body = r.content
             if utils.match_content_type(content_type, "text/xml"):
-                res.packages_post_package_200_text_xml_string = r.content
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.packages_post_package_200_text_json_string = out
         else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
                 res.api_models_api_error = out
             if utils.match_content_type(content_type, "text/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
                 res.api_models_api_error = out
-            if utils.match_content_type(content_type, "application/xml"):
-                res.body = r.content
-            if utils.match_content_type(content_type, "text/xml"):
-                res.body = r.content
 
         return res
 
@@ -5006,24 +5020,26 @@ class SDK:
         res = operations.PriorityPackagesPostPriorityPackagesResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                res.priority_packages_post_priority_packages_200_application_json_string = r.content
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.priority_packages_post_priority_packages_200_application_json_string = out
             if utils.match_content_type(content_type, "application/xml"):
-                res.priority_packages_post_priority_packages_200_application_xml_string = r.content
-            if utils.match_content_type(content_type, "text/json"):
-                res.priority_packages_post_priority_packages_200_text_json_string = r.content
+                res.body = r.content
             if utils.match_content_type(content_type, "text/xml"):
-                res.priority_packages_post_priority_packages_200_text_xml_string = r.content
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.priority_packages_post_priority_packages_200_text_json_string = out
         else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
                 res.api_models_api_error = out
             if utils.match_content_type(content_type, "text/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
                 res.api_models_api_error = out
-            if utils.match_content_type(content_type, "application/xml"):
-                res.body = r.content
-            if utils.match_content_type(content_type, "text/xml"):
-                res.body = r.content
 
         return res
 
@@ -6734,24 +6750,26 @@ class SDK:
         res = operations.UpdateGroupClientRelationshipsPostSubscriptionResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                res.update_group_client_relationships_post_subscription_200_application_json_string = r.content
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.update_group_client_relationships_post_subscription_200_application_json_string = out
             if utils.match_content_type(content_type, "application/xml"):
-                res.update_group_client_relationships_post_subscription_200_application_xml_string = r.content
-            if utils.match_content_type(content_type, "text/json"):
-                res.update_group_client_relationships_post_subscription_200_text_json_string = r.content
+                res.body = r.content
             if utils.match_content_type(content_type, "text/xml"):
-                res.update_group_client_relationships_post_subscription_200_text_xml_string = r.content
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.update_group_client_relationships_post_subscription_200_text_json_string = out
         else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
                 res.api_models_api_error = out
             if utils.match_content_type(content_type, "text/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
                 res.api_models_api_error = out
-            if utils.match_content_type(content_type, "application/xml"):
-                res.body = r.content
-            if utils.match_content_type(content_type, "text/xml"):
-                res.body = r.content
 
         return res
 
@@ -7106,24 +7124,26 @@ class SDK:
         res = operations.UpdateGroupsPostResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                res.update_groups_post_200_application_json_string = r.content
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.update_groups_post_200_application_json_string = out
             if utils.match_content_type(content_type, "application/xml"):
-                res.update_groups_post_200_application_xml_string = r.content
-            if utils.match_content_type(content_type, "text/json"):
-                res.update_groups_post_200_text_json_string = r.content
+                res.body = r.content
             if utils.match_content_type(content_type, "text/xml"):
-                res.update_groups_post_200_text_xml_string = r.content
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.update_groups_post_200_text_json_string = out
         else:
+            if utils.match_content_type(content_type, "application/xml"):
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/xml"):
+                res.body = r.content
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
                 res.api_models_api_error = out
             if utils.match_content_type(content_type, "text/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIModelsAPIError])
                 res.api_models_api_error = out
-            if utils.match_content_type(content_type, "application/xml"):
-                res.body = r.content
-            if utils.match_content_type(content_type, "text/xml"):
-                res.body = r.content
 
         return res
 
@@ -7801,13 +7821,15 @@ class SDK:
         res = operations.VouchersPostResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                res.vouchers_post_200_application_json_string = r.content
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.vouchers_post_200_application_json_string = out
             if utils.match_content_type(content_type, "application/xml"):
-                res.vouchers_post_200_application_xml_string = r.content
-            if utils.match_content_type(content_type, "text/json"):
-                res.vouchers_post_200_text_json_string = r.content
+                res.body = r.content
             if utils.match_content_type(content_type, "text/xml"):
-                res.vouchers_post_200_text_xml_string = r.content
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.vouchers_post_200_text_json_string = out
 
         return res
 

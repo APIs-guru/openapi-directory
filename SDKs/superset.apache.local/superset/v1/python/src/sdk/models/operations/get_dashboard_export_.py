@@ -51,8 +51,8 @@ class GetDashboardExport500ApplicationJSON:
 
 @dataclass
 class GetDashboardExportResponse:
+    body: bytes = field(default=None)
     content_type: str = field(default=None)
-    get_dashboard_export_200_text_plain_string: Optional[str] = field(default=None)
     get_dashboard_export_400_application_json_object: Optional[GetDashboardExport400ApplicationJSON] = field(default=None)
     get_dashboard_export_401_application_json_object: Optional[GetDashboardExport401ApplicationJSON] = field(default=None)
     get_dashboard_export_404_application_json_object: Optional[GetDashboardExport404ApplicationJSON] = field(default=None)

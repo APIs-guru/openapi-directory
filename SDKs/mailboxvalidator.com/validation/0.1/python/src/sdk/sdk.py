@@ -1,5 +1,6 @@
 import warnings
 import requests
+from typing import Optional
 from sdk.models import operations
 from . import utils
 
@@ -35,7 +36,8 @@ class SDK:
         res = operations.GetV1ValidationSingleResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json; charset=utf-8"):
-                res.get_v1_validation_single_200_application_json_string = r.content
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.get_v1_validation_single_200_application_json_string = out
 
         return res
 

@@ -453,7 +453,7 @@ class SDK:
         res = operations.LegalNoticeResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "text/plain"):
-                res.legal_notice_200_text_plain_string = r.content
+                res.body = r.content
 
         return res
 

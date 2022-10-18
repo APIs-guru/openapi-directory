@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Optional
+
 
 
 @dataclass
@@ -14,7 +14,7 @@ class GetMapsUsingGet1Request:
 
 @dataclass
 class GetMapsUsingGet1Response:
+    body: bytes = field(default=None)
     content_type: str = field(default=None)
     status_code: int = field(default=None)
-    get_maps_using_get_1_200_wildcard_string: Optional[str] = field(default=None)
     

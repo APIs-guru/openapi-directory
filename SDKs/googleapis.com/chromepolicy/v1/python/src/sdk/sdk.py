@@ -149,8 +149,8 @@ class SDK:
         res = operations.ChromepolicyCustomersPoliciesNetworksDefineCertificateResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[shared.GoogleChromePolicyV1DefineCertificateResponse])
-                res.google_chrome_policy_v1_define_certificate_response = out
+                out = utils.unmarshal_json(r.text, Optional[shared.GoogleChromePolicyVersionsV1DefineCertificateResponse])
+                res.google_chrome_policy_versions_v1_define_certificate_response = out
 
         return res
 
@@ -176,8 +176,8 @@ class SDK:
         res = operations.ChromepolicyCustomersPoliciesNetworksDefineNetworkResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[shared.GoogleChromePolicyV1DefineNetworkResponse])
-                res.google_chrome_policy_v1_define_network_response = out
+                out = utils.unmarshal_json(r.text, Optional[shared.GoogleChromePolicyVersionsV1DefineNetworkResponse])
+                res.google_chrome_policy_versions_v1_define_network_response = out
 
         return res
 
@@ -204,7 +204,7 @@ class SDK:
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
-                res.google_chrome_policy_v1_remove_certificate_response = out
+                res.google_chrome_policy_versions_v1_remove_certificate_response = out
 
         return res
 
@@ -231,7 +231,7 @@ class SDK:
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
-                res.google_chrome_policy_v1_remove_network_response = out
+                res.google_chrome_policy_versions_v1_remove_network_response = out
 
         return res
 

@@ -1,5 +1,6 @@
 import warnings
 import requests
+from typing import Optional
 from sdk.models import operations, shared
 from . import utils
 
@@ -56,7 +57,8 @@ class SDK:
         res = operations.GetUtilityV1HealthHeartbeatResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                res.get_utility_v1_health_heartbeat_200_application_json_string = r.content
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.get_utility_v1_health_heartbeat_200_application_json_string = out
 
         return res
 

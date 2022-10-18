@@ -21,9 +21,7 @@ class AuthorizationCategoriesPostRequest:
 class AuthorizationCategoriesPostResponse:
     api_models_api_error: Optional[shared.APIModelsAPIError] = field(default=None)
     authorization_categories_post_200_application_json_string: Optional[str] = field(default=None)
-    authorization_categories_post_200_application_xml_string: Optional[str] = field(default=None)
     authorization_categories_post_200_text_json_string: Optional[str] = field(default=None)
-    authorization_categories_post_200_text_xml_string: Optional[str] = field(default=None)
     body: bytes = field(default=None)
     content_type: str = field(default=None)
     status_code: int = field(default=None)

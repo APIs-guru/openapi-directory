@@ -17,5 +17,5 @@ class Access:
     service_account_key_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'serviceAccountKeyName' }})
     service_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'serviceName' }})
     user_agent_family: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'userAgentFamily' }})
-    username: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'username' }})
+    user_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'userName' }})
     

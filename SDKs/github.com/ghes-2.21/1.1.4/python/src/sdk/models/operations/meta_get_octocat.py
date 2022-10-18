@@ -14,7 +14,7 @@ class MetaGetOctocatRequest:
 
 @dataclass
 class MetaGetOctocatResponse:
+    body: bytes = field(default=None)
     content_type: str = field(default=None)
     status_code: int = field(default=None)
-    meta_get_octocat_200_application_octocat_stream_string: Optional[str] = field(default=None)
     

@@ -809,7 +809,8 @@ class SDK:
         res = operations.PostContainersFloatingIpsRequestResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                res.post_containers_floating_ips_request_200_application_json_string = r.content
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.post_containers_floating_ips_request_200_application_json_string = out
         elif r.status_code == 401:
             pass
         elif r.status_code == 402:

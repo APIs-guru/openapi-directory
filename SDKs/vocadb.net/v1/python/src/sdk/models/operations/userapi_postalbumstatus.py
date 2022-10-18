@@ -33,13 +33,10 @@ class UserAPIPostAlbumStatusRequest:
 
 @dataclass
 class UserAPIPostAlbumStatusResponse:
+    body: bytes = field(default=None)
     content_type: str = field(default=None)
     status_code: int = field(default=None)
     user_api_post_album_status_200_application_json_string: Optional[str] = field(default=None)
-    user_api_post_album_status_200_application_javascript_string: Optional[str] = field(default=None)
     user_api_post_album_status_200_application_jsonp_string: Optional[str] = field(default=None)
-    user_api_post_album_status_200_application_xml_string: Optional[str] = field(default=None)
     user_api_post_album_status_200_text_json_string: Optional[str] = field(default=None)
-    user_api_post_album_status_200_text_javascript_string: Optional[str] = field(default=None)
-    user_api_post_album_status_200_text_xml_string: Optional[str] = field(default=None)
     

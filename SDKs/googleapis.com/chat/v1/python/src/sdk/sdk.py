@@ -72,7 +72,8 @@ class SDK:
         url = utils.generate_url(base_url, "/v1/{parent}/members", request.path_params)
         
         query_params = utils.get_query_params(request.query_params)
-        client = self.client
+        client = utils.configure_security_client(request.security)
+        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
@@ -94,7 +95,8 @@ class SDK:
         url = utils.generate_url(base_url, "/v1/{name}", request.path_params)
         
         query_params = utils.get_query_params(request.query_params)
-        client = self.client
+        client = utils.configure_security_client(request.security)
+        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")

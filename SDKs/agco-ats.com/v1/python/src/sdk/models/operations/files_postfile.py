@@ -23,8 +23,6 @@ class FilesPostFileResponse:
     body: bytes = field(default=None)
     content_type: str = field(default=None)
     files_post_file_200_application_json_string: Optional[str] = field(default=None)
-    files_post_file_200_application_xml_string: Optional[str] = field(default=None)
     files_post_file_200_text_json_string: Optional[str] = field(default=None)
-    files_post_file_200_text_xml_string: Optional[str] = field(default=None)
     status_code: int = field(default=None)
     

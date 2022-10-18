@@ -19,7 +19,7 @@ class PostAuthorizablesRequest:
 
 @dataclass
 class PostAuthorizablesResponse:
+    body: bytes = field(default=None)
     content_type: str = field(default=None)
     status_code: int = field(default=None)
-    post_authorizables_default_text_html_string: Optional[str] = field(default=None)
     

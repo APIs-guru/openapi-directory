@@ -26,10 +26,9 @@ class PreprocessingUnskewRequest:
 
 @dataclass
 class PreprocessingUnskewResponse:
+    body: bytes = field(default=None)
     content_type: str = field(default=None)
     preprocessing_unskew_200_application_json_byte_string: Optional[str] = field(default=None)
-    preprocessing_unskew_200_application_xml_byte_string: Optional[str] = field(default=None)
     preprocessing_unskew_200_text_json_byte_string: Optional[str] = field(default=None)
-    preprocessing_unskew_200_text_xml_byte_string: Optional[str] = field(default=None)
     status_code: int = field(default=None)
     

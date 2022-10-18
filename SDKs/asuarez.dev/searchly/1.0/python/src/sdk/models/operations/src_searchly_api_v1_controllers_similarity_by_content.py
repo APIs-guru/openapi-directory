@@ -18,7 +18,7 @@ class SrcSearchlyAPIV1ControllersSimilarityByContentRequest:
 @dataclass
 class SrcSearchlyAPIV1ControllersSimilarityByContentResponse:
     api_response_similarity: Optional[shared.APIResponseSimilarity] = field(default=None)
+    body: bytes = field(default=None)
     content_type: str = field(default=None)
     status_code: int = field(default=None)
-    src_searchly_api_v1_controllers_similarity_by_content_default_application_text_string: Optional[str] = field(default=None)
     

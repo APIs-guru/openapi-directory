@@ -19,6 +19,7 @@ class GoogleCloudPaymentsResellerSubscriptionV1SubscriptionStateEnum(str, Enum):
     STATE_CANCELLED = "STATE_CANCELLED"
     STATE_IN_GRACE_PERIOD = "STATE_IN_GRACE_PERIOD"
     STATE_CANCEL_AT_END_OF_CYCLE = "STATE_CANCEL_AT_END_OF_CYCLE"
+    STATE_SUSPENDED = "STATE_SUSPENDED"
 
 
 @dataclass_json

@@ -16,7 +16,7 @@ class SrcSearchlyAPIV1ControllersSongSearchRequest:
 @dataclass
 class SrcSearchlyAPIV1ControllersSongSearchResponse:
     api_response_song: Optional[shared.APIResponseSong] = field(default=None)
+    body: bytes = field(default=None)
     content_type: str = field(default=None)
     status_code: int = field(default=None)
-    src_searchly_api_v1_controllers_song_search_default_application_text_string: Optional[str] = field(default=None)
     

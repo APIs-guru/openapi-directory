@@ -1673,7 +1673,7 @@ class SDK:
         res = operations.GetMapsUsingGet1Response(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "*/*"):
-                res.get_maps_using_get_1_200_wildcard_string = r.content
+                res.body = r.content
         elif r.status_code == 401:
             pass
         elif r.status_code == 403:

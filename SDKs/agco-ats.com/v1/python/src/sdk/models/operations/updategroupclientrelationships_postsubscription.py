@@ -24,7 +24,5 @@ class UpdateGroupClientRelationshipsPostSubscriptionResponse:
     content_type: str = field(default=None)
     status_code: int = field(default=None)
     update_group_client_relationships_post_subscription_200_application_json_string: Optional[str] = field(default=None)
-    update_group_client_relationships_post_subscription_200_application_xml_string: Optional[str] = field(default=None)
     update_group_client_relationships_post_subscription_200_text_json_string: Optional[str] = field(default=None)
-    update_group_client_relationships_post_subscription_200_text_xml_string: Optional[str] = field(default=None)
     

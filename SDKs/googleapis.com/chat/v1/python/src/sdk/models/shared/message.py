@@ -22,6 +22,7 @@ class Message:
     attachment: Optional[List[attachment.Attachment]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'attachment' }})
     cards: Optional[List[card.Card]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cards' }})
     cards_v2: Optional[List[cardwithid.CardWithID]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cardsV2' }})
+    client_assigned_message_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'clientAssignedMessageId' }})
     create_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'createTime' }})
     fallback_text: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'fallbackText' }})
     last_update_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lastUpdateTime' }})

@@ -24,9 +24,16 @@ class ChatSpacesMessagesAttachmentsGetQueryParams:
     
 
 @dataclass
+class ChatSpacesMessagesAttachmentsGetSecurity:
+    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    
+
+@dataclass
 class ChatSpacesMessagesAttachmentsGetRequest:
     path_params: ChatSpacesMessagesAttachmentsGetPathParams = field(default=None)
     query_params: ChatSpacesMessagesAttachmentsGetQueryParams = field(default=None)
+    security: ChatSpacesMessagesAttachmentsGetSecurity = field(default=None)
     
 
 @dataclass

@@ -1,5 +1,4 @@
 from dataclasses import dataclass, field
-from typing import Optional
 from sdk.models import shared
 
 
@@ -18,7 +17,7 @@ class PostRealmClientsIDCertificatesAttrGenerateAndDownloadRequest:
 
 @dataclass
 class PostRealmClientsIDCertificatesAttrGenerateAndDownloadResponse:
+    body: bytes = field(default=None)
     content_type: str = field(default=None)
-    post_realm_clients_id_certificates_attr_generate_and_download_2_xx_application_octet_stream_byte_string: Optional[str] = field(default=None)
     status_code: int = field(default=None)
     

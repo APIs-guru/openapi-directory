@@ -37,7 +37,7 @@ class FacetsRequest:
 
 @dataclass
 class FacetsResponse:
+    body: bytes = field(default=None)
     content_type: str = field(default=None)
     status_code: int = field(default=None)
-    facets_200_application_nsidcfacets_plus_xml_string: Optional[str] = field(default=None)
     

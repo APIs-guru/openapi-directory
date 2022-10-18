@@ -48,56 +48,6 @@ class SDK:
 
     
     
-    def securitycenter_organizations_notification_configs_create(self, request: operations.SecuritycenterOrganizationsNotificationConfigsCreateRequest) -> operations.SecuritycenterOrganizationsNotificationConfigsCreateResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = utils.generate_url(base_url, "/v1/{parent}/notificationConfigs", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
-        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
-        query_params = utils.get_query_params(request.query_params)
-        client = utils.configure_security_client(request.security)
-        
-
-        r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SecuritycenterOrganizationsNotificationConfigsCreateResponse(status_code=r.status_code, content_type=content_type)
-        if r.status_code == 200:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[shared.NotificationConfig])
-                res.notification_config = out
-
-        return res
-
-    
-    
-    def securitycenter_organizations_notification_configs_list(self, request: operations.SecuritycenterOrganizationsNotificationConfigsListRequest) -> operations.SecuritycenterOrganizationsNotificationConfigsListResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = utils.generate_url(base_url, "/v1/{parent}/notificationConfigs", request.path_params)
-        
-        query_params = utils.get_query_params(request.query_params)
-        client = utils.configure_security_client(request.security)
-        
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SecuritycenterOrganizationsNotificationConfigsListResponse(status_code=r.status_code, content_type=content_type)
-        if r.status_code == 200:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[shared.ListNotificationConfigsResponse])
-                res.list_notification_configs_response = out
-
-        return res
-
-    
-    
     def securitycenter_organizations_operations_cancel(self, request: operations.SecuritycenterOrganizationsOperationsCancelRequest) -> operations.SecuritycenterOrganizationsOperationsCancelResponse:
         warnings.simplefilter("ignore")
 
@@ -410,52 +360,6 @@ class SDK:
 
     
     
-    def securitycenter_projects_mute_configs_delete(self, request: operations.SecuritycenterProjectsMuteConfigsDeleteRequest) -> operations.SecuritycenterProjectsMuteConfigsDeleteResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = utils.generate_url(base_url, "/v1/{name}", request.path_params)
-        
-        query_params = utils.get_query_params(request.query_params)
-        client = utils.configure_security_client(request.security)
-        
-
-        r = client.request("DELETE", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SecuritycenterProjectsMuteConfigsDeleteResponse(status_code=r.status_code, content_type=content_type)
-        if r.status_code == 200:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
-                res.empty = out
-
-        return res
-
-    
-    
-    def securitycenter_projects_mute_configs_get(self, request: operations.SecuritycenterProjectsMuteConfigsGetRequest) -> operations.SecuritycenterProjectsMuteConfigsGetResponse:
-        warnings.simplefilter("ignore")
-
-        base_url = self.server_url
-        url = utils.generate_url(base_url, "/v1/{name}", request.path_params)
-        
-        query_params = utils.get_query_params(request.query_params)
-        client = utils.configure_security_client(request.security)
-        
-
-        r = client.request("GET", url, params=query_params)
-        content_type = r.headers.get("Content-Type")
-
-        res = operations.SecuritycenterProjectsMuteConfigsGetResponse(status_code=r.status_code, content_type=content_type)
-        if r.status_code == 200:
-            if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[shared.GoogleCloudSecuritycenterV1MuteConfig])
-                res.google_cloud_securitycenter_v1_mute_config = out
-
-        return res
-
-    
-    
     def securitycenter_projects_mute_configs_list(self, request: operations.SecuritycenterProjectsMuteConfigsListRequest) -> operations.SecuritycenterProjectsMuteConfigsListResponse:
         warnings.simplefilter("ignore")
 
@@ -474,6 +378,102 @@ class SDK:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListMuteConfigsResponse])
                 res.list_mute_configs_response = out
+
+        return res
+
+    
+    
+    def securitycenter_projects_notification_configs_create(self, request: operations.SecuritycenterProjectsNotificationConfigsCreateRequest) -> operations.SecuritycenterProjectsNotificationConfigsCreateResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/v1/{parent}/notificationConfigs", request.path_params)
+        
+        req_content_type, data, form = utils.serialize_request_body(request)
+        headers = {}
+        if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
+            headers = {"content-type": req_content_type}
+        query_params = utils.get_query_params(request.query_params)
+        client = utils.configure_security_client(request.security)
+        
+
+        r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.SecuritycenterProjectsNotificationConfigsCreateResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.NotificationConfig])
+                res.notification_config = out
+
+        return res
+
+    
+    
+    def securitycenter_projects_notification_configs_delete(self, request: operations.SecuritycenterProjectsNotificationConfigsDeleteRequest) -> operations.SecuritycenterProjectsNotificationConfigsDeleteResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/v1/{name}", request.path_params)
+        
+        query_params = utils.get_query_params(request.query_params)
+        client = utils.configure_security_client(request.security)
+        
+
+        r = client.request("DELETE", url, params=query_params)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.SecuritycenterProjectsNotificationConfigsDeleteResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
+                res.empty = out
+
+        return res
+
+    
+    
+    def securitycenter_projects_notification_configs_get(self, request: operations.SecuritycenterProjectsNotificationConfigsGetRequest) -> operations.SecuritycenterProjectsNotificationConfigsGetResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/v1/{name}", request.path_params)
+        
+        query_params = utils.get_query_params(request.query_params)
+        client = utils.configure_security_client(request.security)
+        
+
+        r = client.request("GET", url, params=query_params)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.SecuritycenterProjectsNotificationConfigsGetResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.NotificationConfig])
+                res.notification_config = out
+
+        return res
+
+    
+    
+    def securitycenter_projects_notification_configs_list(self, request: operations.SecuritycenterProjectsNotificationConfigsListRequest) -> operations.SecuritycenterProjectsNotificationConfigsListResponse:
+        warnings.simplefilter("ignore")
+
+        base_url = self.server_url
+        url = utils.generate_url(base_url, "/v1/{parent}/notificationConfigs", request.path_params)
+        
+        query_params = utils.get_query_params(request.query_params)
+        client = utils.configure_security_client(request.security)
+        
+
+        r = client.request("GET", url, params=query_params)
+        content_type = r.headers.get("Content-Type")
+
+        res = operations.SecuritycenterProjectsNotificationConfigsListResponse(status_code=r.status_code, content_type=content_type)
+        if r.status_code == 200:
+            if utils.match_content_type(content_type, "application/json"):
+                out = utils.unmarshal_json(r.text, Optional[shared.ListNotificationConfigsResponse])
+                res.list_notification_configs_response = out
 
         return res
 

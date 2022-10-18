@@ -33,13 +33,13 @@ class ChromepolicyCustomersPoliciesNetworksRemoveCertificateSecurity:
 class ChromepolicyCustomersPoliciesNetworksRemoveCertificateRequest:
     path_params: ChromepolicyCustomersPoliciesNetworksRemoveCertificatePathParams = field(default=None)
     query_params: ChromepolicyCustomersPoliciesNetworksRemoveCertificateQueryParams = field(default=None)
-    request: Optional[shared.GoogleChromePolicyV1RemoveCertificateRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: Optional[shared.GoogleChromePolicyVersionsV1RemoveCertificateRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     security: ChromepolicyCustomersPoliciesNetworksRemoveCertificateSecurity = field(default=None)
     
 
 @dataclass
 class ChromepolicyCustomersPoliciesNetworksRemoveCertificateResponse:
     content_type: str = field(default=None)
-    google_chrome_policy_v1_remove_certificate_response: Optional[dict[str, Any]] = field(default=None)
+    google_chrome_policy_versions_v1_remove_certificate_response: Optional[dict[str, Any]] = field(default=None)
     status_code: int = field(default=None)
     

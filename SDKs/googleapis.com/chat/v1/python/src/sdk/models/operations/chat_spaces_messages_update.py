@@ -12,6 +12,7 @@ class ChatSpacesMessagesUpdatePathParams:
 class ChatSpacesMessagesUpdateQueryParams:
     dollar_xgafv: Optional[shared.XgafvEnum] = field(default=None, metadata={'query_param': { 'field_name': '$.xgafv', 'style': 'form', 'explode': True }})
     access_token: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'access_token', 'style': 'form', 'explode': True }})
+    allow_missing: Optional[bool] = field(default=None, metadata={'query_param': { 'field_name': 'allowMissing', 'style': 'form', 'explode': True }})
     alt: Optional[shared.AltEnum] = field(default=None, metadata={'query_param': { 'field_name': 'alt', 'style': 'form', 'explode': True }})
     callback: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'callback', 'style': 'form', 'explode': True }})
     fields: Optional[str] = field(default=None, metadata={'query_param': { 'field_name': 'fields', 'style': 'form', 'explode': True }})

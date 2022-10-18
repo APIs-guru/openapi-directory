@@ -217,7 +217,7 @@ class SDK:
         res = operations.DemoV2LocationsTilesViewerGetResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "text/html"):
-                res.demo_v2_locations_tiles_viewer_get_200_text_html_string = r.content
+                res.body = r.content
 
         return res
 

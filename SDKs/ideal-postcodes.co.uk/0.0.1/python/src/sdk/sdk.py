@@ -249,7 +249,7 @@ class SDK:
         res = operations.DownloadUsageHistoryResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "text/csv"):
-                res.download_usage_history_200_text_csv_string = r.content
+                res.body = r.content
         elif r.status_code == 400:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ErrorResponseSchema])

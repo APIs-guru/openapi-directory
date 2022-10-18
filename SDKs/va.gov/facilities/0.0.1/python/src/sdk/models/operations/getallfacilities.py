@@ -27,9 +27,9 @@ class GetAllFacilitiesRequest:
 @dataclass
 class GetAllFacilitiesResponse:
     api_error: Optional[shared.APIError] = field(default=None)
+    body: bytes = field(default=None)
     content_type: str = field(default=None)
     generic_error: Optional[shared.GenericError] = field(default=None)
     geo_facilities_response: Optional[shared.GeoFacilitiesResponse] = field(default=None)
     status_code: int = field(default=None)
-    get_all_facilities_200_text_csv_string: Optional[str] = field(default=None)
     

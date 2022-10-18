@@ -23,8 +23,6 @@ class PriorityPackagesPostPriorityPackagesResponse:
     body: bytes = field(default=None)
     content_type: str = field(default=None)
     priority_packages_post_priority_packages_200_application_json_string: Optional[str] = field(default=None)
-    priority_packages_post_priority_packages_200_application_xml_string: Optional[str] = field(default=None)
     priority_packages_post_priority_packages_200_text_json_string: Optional[str] = field(default=None)
-    priority_packages_post_priority_packages_200_text_xml_string: Optional[str] = field(default=None)
     status_code: int = field(default=None)
     

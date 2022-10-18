@@ -23,9 +23,9 @@ class PostAdministrationTokenRequest:
 
 @dataclass
 class PostAdministrationTokenResponse:
+    body: bytes = field(default=None)
     content_type: str = field(default=None)
     post_administration_token_200_application_json_uuid_string: Optional[str] = field(default=None)
     post_administration_token_200_text_json_uuid_string: Optional[str] = field(default=None)
-    post_administration_token_200_text_plain_uuid_string: Optional[str] = field(default=None)
     status_code: int = field(default=None)
     

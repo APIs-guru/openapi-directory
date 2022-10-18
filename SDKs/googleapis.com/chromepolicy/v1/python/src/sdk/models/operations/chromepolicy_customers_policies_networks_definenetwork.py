@@ -33,13 +33,13 @@ class ChromepolicyCustomersPoliciesNetworksDefineNetworkSecurity:
 class ChromepolicyCustomersPoliciesNetworksDefineNetworkRequest:
     path_params: ChromepolicyCustomersPoliciesNetworksDefineNetworkPathParams = field(default=None)
     query_params: ChromepolicyCustomersPoliciesNetworksDefineNetworkQueryParams = field(default=None)
-    request: Optional[shared.GoogleChromePolicyV1DefineNetworkRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: Optional[shared.GoogleChromePolicyVersionsV1DefineNetworkRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     security: ChromepolicyCustomersPoliciesNetworksDefineNetworkSecurity = field(default=None)
     
 
 @dataclass
 class ChromepolicyCustomersPoliciesNetworksDefineNetworkResponse:
     content_type: str = field(default=None)
-    google_chrome_policy_v1_define_network_response: Optional[shared.GoogleChromePolicyV1DefineNetworkResponse] = field(default=None)
+    google_chrome_policy_versions_v1_define_network_response: Optional[shared.GoogleChromePolicyVersionsV1DefineNetworkResponse] = field(default=None)
     status_code: int = field(default=None)
     

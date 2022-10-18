@@ -18,7 +18,7 @@ class CreateQueryJobSecurity:
 @dataclass
 class CreateQueryJobRequest:
     query_params: CreateQueryJobQueryParams = field(default=None)
-    request: str = field(default=None, metadata={'request': { 'media_type': 'text/plain' }})
+    request: bytes = field(default=None, metadata={'request': { 'media_type': 'text/plain' }})
     security: CreateQueryJobSecurity = field(default=None)
     
 

@@ -14,8 +14,8 @@ class StoryIDAnalyticsRequest:
 
 @dataclass
 class StoryIDAnalyticsResponse:
+    body: bytes = field(default=None)
     content_type: str = field(default=None)
-    login_button: Optional[str] = field(default=None)
     status_code: int = field(default=None)
     problem_detail: Optional[Any] = field(default=None)
     reveal_js_presenation_with_analytics_data: Optional[str] = field(default=None)

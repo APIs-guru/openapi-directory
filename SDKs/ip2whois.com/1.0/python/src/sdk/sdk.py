@@ -35,7 +35,7 @@ class SDK:
         res = operations.GetResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "text/html; charset=UTF-8"):
-                res.get_200_text_html_string = r.content
+                res.body = r.content
 
         return res
 

@@ -1,5 +1,6 @@
 import warnings
 import requests
+from typing import Optional
 from sdk.models import operations
 from . import utils
 
@@ -36,7 +37,8 @@ class SDK:
         res = operations.PostV1OrderFeedbackResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json; charset=utf-8"):
-                res.post_v1_order_feedback_200_application_json_string = r.content
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.post_v1_order_feedback_200_application_json_string = out
 
         return res
 
@@ -57,7 +59,8 @@ class SDK:
         res = operations.PostV1OrderScreenResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json; charset=utf-8"):
-                res.post_v1_order_screen_200_application_json_string = r.content
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.post_v1_order_screen_200_application_json_string = out
 
         return res
 

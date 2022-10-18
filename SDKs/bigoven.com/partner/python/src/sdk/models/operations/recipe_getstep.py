@@ -16,10 +16,9 @@ class RecipeGetStepRequest:
 
 @dataclass
 class RecipeGetStepResponse:
+    body: bytes = field(default=None)
     content_type: str = field(default=None)
     recipe_get_step_200_application_json_string: Optional[str] = field(default=None)
-    recipe_get_step_200_application_xml_string: Optional[str] = field(default=None)
     recipe_get_step_200_text_json_string: Optional[str] = field(default=None)
-    recipe_get_step_200_text_xml_string: Optional[str] = field(default=None)
     status_code: int = field(default=None)
     

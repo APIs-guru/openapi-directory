@@ -56,6 +56,7 @@ from .message import *
 from .onclick import *
 from .openlink import *
 from .section import *
+from .security import *
 from .slashcommand import *
 from .slashcommandmetadata import *
 from .space import *

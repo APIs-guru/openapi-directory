@@ -30,8 +30,8 @@ class DownloadUsageHistoryRequest:
 
 @dataclass
 class DownloadUsageHistoryResponse:
+    body: bytes = field(default=None)
     content_type: str = field(default=None)
-    download_usage_history_200_text_csv_string: Optional[str] = field(default=None)
     error_response_schema: Optional[shared.ErrorResponseSchema] = field(default=None)
     status_code: int = field(default=None)
     

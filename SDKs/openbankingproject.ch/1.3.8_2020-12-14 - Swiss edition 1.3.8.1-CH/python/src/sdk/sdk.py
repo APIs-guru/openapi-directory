@@ -1565,7 +1565,7 @@ class SDK:
                 out = utils.unmarshal_json(r.text, Optional[shared.PaymentInitiationStatusResponse200JSON])
                 res.payment_initiation_status_response_200_json = out
             if utils.match_content_type(content_type, "application/xml"):
-                res.payment_initiation_status_response_200_xml = r.content
+                res.body = r.content
         elif r.status_code == 400:
             res.headers = r.headers
             if utils.match_content_type(content_type, "application/json"):

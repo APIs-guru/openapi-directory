@@ -40,7 +40,8 @@ class SDK:
         res = operations.ConnectResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                res.connect_200_application_json_string = r.content
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.connect_200_application_json_string = out
 
         return res
 
@@ -89,7 +90,8 @@ class SDK:
         res = operations.DisconnectResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                res.disconnect_200_application_json_string = r.content
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.disconnect_200_application_json_string = out
 
         return res
 

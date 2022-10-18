@@ -14,8 +14,8 @@ class CacheNonceGetRequest:
 
 @dataclass
 class CacheNonceGetResponse:
+    body: bytes = field(default=None)
     content_type: str = field(default=None)
-    login_button: Optional[str] = field(default=None)
     status_code: int = field(default=None)
     problem_detail: Optional[Any] = field(default=None)
     

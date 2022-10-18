@@ -26,9 +26,16 @@ class ChatSpacesMembersListQueryParams:
     
 
 @dataclass
+class ChatSpacesMembersListSecurity:
+    oauth2: shared.SchemeOauth2 = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    oauth2c: shared.SchemeOauth2c = field(default=None, metadata={'security': { 'scheme': True, 'type': 'oauth2' }})
+    
+
+@dataclass
 class ChatSpacesMembersListRequest:
     path_params: ChatSpacesMembersListPathParams = field(default=None)
     query_params: ChatSpacesMembersListQueryParams = field(default=None)
+    security: ChatSpacesMembersListSecurity = field(default=None)
     
 
 @dataclass

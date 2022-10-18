@@ -3601,7 +3601,8 @@ class SDK:
                 out = utils.unmarshal_json(r.text, Optional[shared.CodeScanningAnalysis])
                 res.code_scanning_analysis = out
             if utils.match_content_type(content_type, "application/json+sarif"):
-                res.code_scanning_get_analysis_200_application_json_plus_sarif_string = r.content
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.code_scanning_get_analysis_200_application_json_plus_sarif_string = out
         elif r.status_code == 403:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.BasicError])
@@ -8166,7 +8167,7 @@ class SDK:
         if r.status_code == 200:
             res.headers = r.headers
             if utils.match_content_type(content_type, "text/html"):
-                res.markdown_render_200_text_html_string = r.content
+                res.body = r.content
         elif r.status_code == 304:
             pass
 
@@ -8193,7 +8194,7 @@ class SDK:
         if r.status_code == 200:
             res.headers = r.headers
             if utils.match_content_type(content_type, "text/html"):
-                res.markdown_render_raw_200_text_html_string = r.content
+                res.body = r.content
         elif r.status_code == 304:
             pass
 
@@ -8239,7 +8240,7 @@ class SDK:
         res = operations.MetaGetOctocatResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/octocat-stream"):
-                res.meta_get_octocat_200_application_octocat_stream_string = r.content
+                res.body = r.content
 
         return res
 
@@ -8259,7 +8260,7 @@ class SDK:
         res = operations.MetaGetZenResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "text/plain"):
-                res.meta_get_zen_200_text_plain_string = r.content
+                res.body = r.content
 
         return res
 

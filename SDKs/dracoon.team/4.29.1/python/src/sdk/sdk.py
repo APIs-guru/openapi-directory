@@ -900,7 +900,8 @@ class SDK:
                 res.node = out
         elif r.status_code == 204:
             if utils.match_content_type(content_type, "application/json"):
-                res.copy_nodes_204_application_json_string = r.content
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.copy_nodes_204_application_json_string = out
         elif r.status_code == 400:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ErrorResponse])
@@ -2158,7 +2159,7 @@ class SDK:
         res = operations.DownloadAvatarResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/octet-stream"):
-                res.download_avatar_200_application_octet_stream_string = r.content
+                res.body = r.content
         elif r.status_code == 400:
             if utils.match_content_type(content_type, "application/octet-stream"):
                 res.body = r.content
@@ -3249,7 +3250,8 @@ class SDK:
                 res.node = out
         elif r.status_code == 204:
             if utils.match_content_type(content_type, "application/json"):
-                res.move_nodes_204_application_json_string = r.content
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.move_nodes_204_application_json_string = out
         elif r.status_code == 400:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ErrorResponse])
@@ -3301,7 +3303,7 @@ class SDK:
         res = operations.PingResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "text/plain"):
-                res.ping_200_text_plain_string = r.content
+                res.body = r.content
         elif r.status_code == 406:
             if utils.match_content_type(content_type, "text/plain"):
                 res.body = r.content
@@ -3324,7 +3326,7 @@ class SDK:
         res = operations.PingUserResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "text/plain"):
-                res.ping_user_200_text_plain_string = r.content
+                res.body = r.content
         elif r.status_code == 401:
             if utils.match_content_type(content_type, "text/plain"):
                 res.body = r.content

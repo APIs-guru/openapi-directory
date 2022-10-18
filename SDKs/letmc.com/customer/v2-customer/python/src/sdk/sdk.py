@@ -93,13 +93,15 @@ class SDK:
         res = operations.LandlordControllerCreateMaintenancePreferenceResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                res.landlord_controller_create_maintenance_preference_200_application_json_string = r.content
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.landlord_controller_create_maintenance_preference_200_application_json_string = out
             if utils.match_content_type(content_type, "application/xml"):
-                res.landlord_controller_create_maintenance_preference_200_application_xml_string = r.content
-            if utils.match_content_type(content_type, "text/json"):
-                res.landlord_controller_create_maintenance_preference_200_text_json_string = r.content
+                res.body = r.content
             if utils.match_content_type(content_type, "text/xml"):
-                res.landlord_controller_create_maintenance_preference_200_text_xml_string = r.content
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.landlord_controller_create_maintenance_preference_200_text_json_string = out
 
         return res
 
@@ -567,13 +569,15 @@ class SDK:
         res = operations.SessionControllerGetSessionInfoResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                res.session_controller_get_session_info_200_application_json_string = r.content
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.session_controller_get_session_info_200_application_json_string = out
             if utils.match_content_type(content_type, "application/xml"):
-                res.session_controller_get_session_info_200_application_xml_string = r.content
-            if utils.match_content_type(content_type, "text/json"):
-                res.session_controller_get_session_info_200_text_json_string = r.content
+                res.body = r.content
             if utils.match_content_type(content_type, "text/xml"):
-                res.session_controller_get_session_info_200_text_xml_string = r.content
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.session_controller_get_session_info_200_text_json_string = out
 
         return res
 
@@ -594,13 +598,15 @@ class SDK:
         res = operations.SessionControllerLoginResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                res.session_controller_login_200_application_json_string = r.content
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.session_controller_login_200_application_json_string = out
             if utils.match_content_type(content_type, "application/xml"):
-                res.session_controller_login_200_application_xml_string = r.content
-            if utils.match_content_type(content_type, "text/json"):
-                res.session_controller_login_200_text_json_string = r.content
+                res.body = r.content
             if utils.match_content_type(content_type, "text/xml"):
-                res.session_controller_login_200_text_xml_string = r.content
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.session_controller_login_200_text_json_string = out
 
         return res
 

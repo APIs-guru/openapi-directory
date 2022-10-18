@@ -33,13 +33,13 @@ class ChromepolicyCustomersPoliciesNetworksRemoveNetworkSecurity:
 class ChromepolicyCustomersPoliciesNetworksRemoveNetworkRequest:
     path_params: ChromepolicyCustomersPoliciesNetworksRemoveNetworkPathParams = field(default=None)
     query_params: ChromepolicyCustomersPoliciesNetworksRemoveNetworkQueryParams = field(default=None)
-    request: Optional[shared.GoogleChromePolicyV1RemoveNetworkRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: Optional[shared.GoogleChromePolicyVersionsV1RemoveNetworkRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     security: ChromepolicyCustomersPoliciesNetworksRemoveNetworkSecurity = field(default=None)
     
 
 @dataclass
 class ChromepolicyCustomersPoliciesNetworksRemoveNetworkResponse:
     content_type: str = field(default=None)
-    google_chrome_policy_v1_remove_network_response: Optional[dict[str, Any]] = field(default=None)
+    google_chrome_policy_versions_v1_remove_network_response: Optional[dict[str, Any]] = field(default=None)
     status_code: int = field(default=None)
     

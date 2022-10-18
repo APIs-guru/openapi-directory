@@ -1340,13 +1340,15 @@ class SDK:
         res = operations.RecipeGetStepResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                res.recipe_get_step_200_application_json_string = r.content
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.recipe_get_step_200_application_json_string = out
             if utils.match_content_type(content_type, "application/xml"):
-                res.recipe_get_step_200_application_xml_string = r.content
-            if utils.match_content_type(content_type, "text/json"):
-                res.recipe_get_step_200_text_json_string = r.content
+                res.body = r.content
             if utils.match_content_type(content_type, "text/xml"):
-                res.recipe_get_step_200_text_xml_string = r.content
+                res.body = r.content
+            if utils.match_content_type(content_type, "text/json"):
+                out = utils.unmarshal_json(r.text, Optional[str])
+                res.recipe_get_step_200_text_json_string = out
 
         return res
 

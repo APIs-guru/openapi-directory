@@ -38,7 +38,7 @@ class SslSetupRequest:
 
 @dataclass
 class SslSetupResponse:
+    body: bytes = field(default=None)
     content_type: str = field(default=None)
     status_code: int = field(default=None)
-    ssl_setup_default_text_plain_string: Optional[str] = field(default=None)
     
