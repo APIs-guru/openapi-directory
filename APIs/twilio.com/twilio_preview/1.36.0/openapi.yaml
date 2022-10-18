@@ -1952,8 +1952,8 @@ paths:
     servers:
       - url: https://preview.twilio.com
     x-twilio:
-      className: document_permission
       defaultOutputProperties: []
+      mountName: document_permissions
       parent: /Services/{ServiceSid}/Documents
       pathType: list
   "/Sync/Services/{ServiceSid}/Documents/{DocumentSid}/Permissions/{Identity}":
@@ -2085,8 +2085,8 @@ paths:
     servers:
       - url: https://preview.twilio.com
     x-twilio:
-      className: document_permission
       defaultOutputProperties: []
+      mountName: document_permissions
       parent: /Services/{ServiceSid}/Documents
       pathType: instance
   "/Sync/Services/{ServiceSid}/Documents/{Sid}":
@@ -2296,8 +2296,8 @@ paths:
     servers:
       - url: https://preview.twilio.com
     x-twilio:
-      className: sync_list
       defaultOutputProperties: []
+      mountName: sync_lists
       parent: /Services
       pathType: list
   "/Sync/Services/{ServiceSid}/Lists/{ListSid}/Items":
@@ -2427,8 +2427,8 @@ paths:
     servers:
       - url: https://preview.twilio.com
     x-twilio:
-      className: sync_list_item
       defaultOutputProperties: []
+      mountName: sync_list_items
       parent: /Services/{ServiceSid}/Lists
       pathType: list
   "/Sync/Services/{ServiceSid}/Lists/{ListSid}/Items/{Index}":
@@ -2561,8 +2561,8 @@ paths:
     servers:
       - url: https://preview.twilio.com
     x-twilio:
-      className: sync_list_item
       defaultOutputProperties: []
+      mountName: sync_list_items
       parent: /Services/{ServiceSid}/Lists
       pathType: instance
   "/Sync/Services/{ServiceSid}/Lists/{ListSid}/Permissions":
@@ -2634,8 +2634,8 @@ paths:
     servers:
       - url: https://preview.twilio.com
     x-twilio:
-      className: sync_list_permission
       defaultOutputProperties: []
+      mountName: sync_list_permissions
       parent: /Services/{ServiceSid}/Lists
       pathType: list
   "/Sync/Services/{ServiceSid}/Lists/{ListSid}/Permissions/{Identity}":
@@ -2767,8 +2767,8 @@ paths:
     servers:
       - url: https://preview.twilio.com
     x-twilio:
-      className: sync_list_permission
       defaultOutputProperties: []
+      mountName: sync_list_permissions
       parent: /Services/{ServiceSid}/Lists
       pathType: instance
   "/Sync/Services/{ServiceSid}/Lists/{Sid}":
@@ -2832,8 +2832,8 @@ paths:
     servers:
       - url: https://preview.twilio.com
     x-twilio:
-      className: sync_list
       defaultOutputProperties: []
+      mountName: sync_lists
       parent: /Services
       pathType: instance
   "/Sync/Services/{ServiceSid}/Maps":
@@ -2933,8 +2933,8 @@ paths:
     servers:
       - url: https://preview.twilio.com
     x-twilio:
-      className: sync_map
       defaultOutputProperties: []
+      mountName: sync_maps
       parent: /Services
       pathType: list
   "/Sync/Services/{ServiceSid}/Maps/{MapSid}/Items":
@@ -3068,8 +3068,8 @@ paths:
     servers:
       - url: https://preview.twilio.com
     x-twilio:
-      className: sync_map_item
       defaultOutputProperties: []
+      mountName: sync_map_items
       parent: /Services/{ServiceSid}/Maps
       pathType: list
   "/Sync/Services/{ServiceSid}/Maps/{MapSid}/Items/{Key}":
@@ -3202,8 +3202,8 @@ paths:
     servers:
       - url: https://preview.twilio.com
     x-twilio:
-      className: sync_map_item
       defaultOutputProperties: []
+      mountName: sync_map_items
       parent: /Services/{ServiceSid}/Maps
       pathType: instance
   "/Sync/Services/{ServiceSid}/Maps/{MapSid}/Permissions":
@@ -3275,8 +3275,8 @@ paths:
     servers:
       - url: https://preview.twilio.com
     x-twilio:
-      className: sync_map_permission
       defaultOutputProperties: []
+      mountName: sync_map_permissions
       parent: /Services/{ServiceSid}/Maps
       pathType: list
   "/Sync/Services/{ServiceSid}/Maps/{MapSid}/Permissions/{Identity}":
@@ -3408,8 +3408,8 @@ paths:
     servers:
       - url: https://preview.twilio.com
     x-twilio:
-      className: sync_map_permission
       defaultOutputProperties: []
+      mountName: sync_map_permissions
       parent: /Services/{ServiceSid}/Maps
       pathType: instance
   "/Sync/Services/{ServiceSid}/Maps/{Sid}":
@@ -3473,8 +3473,8 @@ paths:
     servers:
       - url: https://preview.twilio.com
     x-twilio:
-      className: sync_map
       defaultOutputProperties: []
+      mountName: sync_maps
       parent: /Services
       pathType: instance
   "/Sync/Services/{Sid}":
@@ -3783,6 +3783,7 @@ paths:
         - to
         - url
         - use_case
+      mountName: current_calls
       pathType: instance
   /marketplace/AvailableAddOns:
     description: "TODO: Resource-level docs"
@@ -4515,6 +4516,7 @@ paths:
     x-twilio:
       className: assistant_fallback_actions
       defaultOutputProperties: []
+      mountName: assistant_fallback_actions
       parent: /Assistants
       pathType: instance
   "/understand/Assistants/{AssistantSid}/FieldTypes":
@@ -4962,6 +4964,7 @@ paths:
     x-twilio:
       className: assistant_initiation_actions
       defaultOutputProperties: []
+      mountName: assistant_initiation_actions
       parent: /Assistants
       pathType: instance
   "/understand/Assistants/{AssistantSid}/ModelBuilds":
@@ -5720,6 +5723,7 @@ paths:
     x-twilio:
       className: task_actions
       defaultOutputProperties: []
+      mountName: task_actions
       parent: /Assistants/{AssistantSid}/Tasks
       pathType: instance
   "/understand/Assistants/{AssistantSid}/Tasks/{TaskSid}/Fields":

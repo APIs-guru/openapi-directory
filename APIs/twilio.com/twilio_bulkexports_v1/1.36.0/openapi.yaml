@@ -206,13 +206,13 @@ paths:
     servers:
       - url: https://bulkexports.twilio.com
     x-twilio:
-      className: export_configuration
       defaultOutputProperties:
         - enabled
         - resource_type
         - url
         - webhook_method
         - webhook_url
+      mountName: export_configuration
       pathType: instance
   "/v1/Exports/{ResourceType}/Days":
     description: "TODO: Resource-level docs"
@@ -434,7 +434,6 @@ paths:
     servers:
       - url: https://bulkexports.twilio.com
     x-twilio:
-      className: export_custom_job
       defaultOutputProperties:
         - details
         - email
@@ -447,6 +446,7 @@ paths:
         - start_day
         - webhook_method
         - webhook_url
+      mountName: export_custom_jobs
       parent: /Exports
       pathType: list
 components:

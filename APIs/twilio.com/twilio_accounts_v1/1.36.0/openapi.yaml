@@ -44,11 +44,11 @@ paths:
     servers:
       - url: https://accounts.twilio.com
     x-twilio:
-      className: auth_token_promotion
       defaultOutputProperties:
         - account_sid
         - auth_token
         - date_created
+      mountName: auth_token_promotion
       pathType: instance
   /v1/AuthTokens/Secondary:
     delete:
@@ -79,11 +79,11 @@ paths:
     servers:
       - url: https://accounts.twilio.com
     x-twilio:
-      className: secondary_auth_token
       defaultOutputProperties:
         - account_sid
         - secondary_auth_token
         - date_created
+      mountName: secondary_auth_token
       pathType: instance
   /v1/Credentials:
     description: "TODO: Resource-level docs"
@@ -369,6 +369,7 @@ paths:
         - sid
         - friendly_name
         - date_created
+      mountName: public_key
       parent: /Credentials
       pathType: list
   "/v1/Credentials/PublicKeys/{Sid}":
@@ -458,6 +459,7 @@ paths:
         - sid
         - friendly_name
         - date_created
+      mountName: public_key
       parent: /Credentials
       pathType: instance
 components:

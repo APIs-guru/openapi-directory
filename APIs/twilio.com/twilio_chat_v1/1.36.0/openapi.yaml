@@ -1874,10 +1874,10 @@ paths:
     servers:
       - url: https://chat.twilio.com
     x-twilio:
-      className: user_channel
       defaultOutputProperties:
         - channel_sid
         - status
+      mountName: user_channels
       parent: /Services/{ServiceSid}/Users
       pathType: list
   "/v1/Services/{Sid}":

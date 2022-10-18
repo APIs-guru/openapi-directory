@@ -382,7 +382,7 @@ paths:
         - enterprises
   "/v1/{parent}/devices":
     get:
-      description: Lists devices for a given enterprise.
+      description: Lists devices for a given enterprise. Deleted devices are not returned in the response.
       operationId: androidmanagement.enterprises.devices.list
       parameters:
         - description: The name of the enterprise in the form enterprises/{enterpriseId}.
@@ -2645,7 +2645,7 @@ components:
             type: string
           type: array
         cameraDisabled:
-          description: Whether camera is disabled.
+          description: If true, the camera is disabled on the personal profile.
           type: boolean
         maxDaysWithWorkOff:
           description: Controls how long the work profile can stay off. The duration must be at least 3 days.
@@ -2665,7 +2665,7 @@ components:
             - ALLOWLIST
           type: string
         screenCaptureDisabled:
-          description: Whether screen capture is disabled.
+          description: If true, screen capture is disabled for all users.
           type: boolean
       type: object
     Policy:

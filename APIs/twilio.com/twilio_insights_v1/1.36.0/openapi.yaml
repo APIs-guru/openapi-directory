@@ -247,12 +247,12 @@ paths:
     servers:
       - url: https://insights.twilio.com
     x-twilio:
-      className: conference_participant
       defaultOutputProperties:
         - participant_sid
         - conference_sid
         - call_sid
         - account_sid
+      mountName: conference_participants
       parent: /Conferences
       pathType: list
   "/v1/Conferences/{ConferenceSid}/Participants/{ParticipantSid}":
@@ -303,12 +303,12 @@ paths:
     servers:
       - url: https://insights.twilio.com
     x-twilio:
-      className: conference_participant
       defaultOutputProperties:
         - participant_sid
         - conference_sid
         - call_sid
         - account_sid
+      mountName: conference_participants
       parent: /Conferences
       pathType: instance
   /v1/Video/Rooms:
@@ -757,6 +757,7 @@ paths:
         - connect_duration
         - call_type
         - call_state
+      mountName: call_summaries
       pathType: list
   "/v1/Voice/{CallSid}/Annotation":
     description: "TODO: Resource-level docs"
@@ -1079,8 +1080,8 @@ paths:
     servers:
       - url: https://insights.twilio.com
     x-twilio:
-      className: call
       defaultOutputProperties: []
+      mountName: calls
       pathType: instance
 components:
   schemas:

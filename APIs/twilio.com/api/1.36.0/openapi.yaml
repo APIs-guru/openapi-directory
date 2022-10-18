@@ -2707,6 +2707,7 @@ paths:
         - call_feedback_count
         - quality_score_average
         - start_date
+      mountName: feedback_summaries
       parent: /Accounts/{AccountSid}/Calls.json
       pathType: list
   "/2010-04-01/Accounts/{AccountSid}/Calls/FeedbackSummary/{Sid}.json":
@@ -2781,6 +2782,7 @@ paths:
         - call_feedback_count
         - quality_score_average
         - start_date
+      mountName: feedback_summaries
       parent: /Accounts/{AccountSid}/Calls.json
       pathType: instance
   "/2010-04-01/Accounts/{AccountSid}/Calls/{CallSid}/Events.json":
@@ -8213,7 +8215,7 @@ paths:
       x-maturity:
         - GA
       x-twilio:
-        className: new_key
+        mountName: new_keys
     servers:
       - url: https://api.twilio.com
     x-twilio:
@@ -9187,7 +9189,7 @@ paths:
       x-maturity:
         - GA
       x-twilio:
-        className: validation_request
+        mountName: validation_requests
     servers:
       - url: https://api.twilio.com
     x-twilio:
@@ -13205,7 +13207,7 @@ paths:
       x-maturity:
         - GA
       x-twilio:
-        className: new_signing_key
+        mountName: new_signing_keys
     servers:
       - url: https://api.twilio.com
     x-twilio:

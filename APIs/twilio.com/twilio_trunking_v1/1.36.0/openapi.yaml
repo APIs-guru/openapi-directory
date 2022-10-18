@@ -362,10 +362,12 @@ paths:
     servers:
       - url: https://trunking.twilio.com
     x-twilio:
+      className: credential_list
       defaultOutputProperties:
         - sid
         - friendly_name
         - date_created
+      mountName: credentials_lists
       parent: /Trunks
       pathType: list
   "/v1/Trunks/{TrunkSid}/CredentialLists/{Sid}":
@@ -435,10 +437,12 @@ paths:
     servers:
       - url: https://trunking.twilio.com
     x-twilio:
+      className: credential_list
       defaultOutputProperties:
         - sid
         - friendly_name
         - date_created
+      mountName: credentials_lists
       parent: /Trunks
       pathType: instance
   "/v1/Trunks/{TrunkSid}/IpAccessControlLists":
@@ -1129,6 +1133,7 @@ paths:
       defaultOutputProperties:
         - mode
         - trim
+      mountName: recordings
       parent: /Trunks
       pathType: instance
 components:

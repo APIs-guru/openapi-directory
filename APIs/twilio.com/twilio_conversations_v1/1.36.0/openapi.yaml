@@ -215,12 +215,12 @@ paths:
     servers:
       - url: https://conversations.twilio.com
     x-twilio:
-      className: address_configuration
       defaultOutputProperties:
         - sid
         - type
         - address
         - friendly_name
+      mountName: address_configurations
       pathType: list
   "/v1/Configuration/Addresses/{Sid}":
     delete:
@@ -330,12 +330,12 @@ paths:
     servers:
       - url: https://conversations.twilio.com
     x-twilio:
-      className: address_configuration
       defaultOutputProperties:
         - sid
         - type
         - address
         - friendly_name
+      mountName: address_configurations
       pathType: instance
   /v1/Configuration/Webhooks:
     description: A Webhook resource manages a service-level set of callback URLs and their configuration for receiving all conversation events.
@@ -722,12 +722,12 @@ paths:
     servers:
       - url: https://conversations.twilio.com
     x-twilio:
-      className: delivery_receipt
       defaultOutputProperties:
         - sid
         - message_sid
         - status
         - date_created
+      mountName: delivery_receipts
       parent: /Conversations/{ConversationSid}/Messages
       pathType: list
   "/v1/Conversations/{ConversationSid}/Messages/{MessageSid}/Receipts/{Sid}":
@@ -774,12 +774,12 @@ paths:
     servers:
       - url: https://conversations.twilio.com
     x-twilio:
-      className: delivery_receipt
       defaultOutputProperties:
         - sid
         - message_sid
         - status
         - date_created
+      mountName: delivery_receipts
       parent: /Conversations/{ConversationSid}/Messages
       pathType: instance
   "/v1/Conversations/{ConversationSid}/Messages/{Sid}":
@@ -2915,12 +2915,12 @@ paths:
     servers:
       - url: https://conversations.twilio.com
     x-twilio:
-      className: delivery_receipt
       defaultOutputProperties:
         - sid
         - message_sid
         - status
         - date_created
+      mountName: delivery_receipts
       parent: /Services/{ChatServiceSid}/Conversations/{ConversationSid}/Messages
       pathType: list
   "/v1/Services/{ChatServiceSid}/Conversations/{ConversationSid}/Messages/{MessageSid}/Receipts/{Sid}":
@@ -2976,12 +2976,12 @@ paths:
     servers:
       - url: https://conversations.twilio.com
     x-twilio:
-      className: delivery_receipt
       defaultOutputProperties:
         - sid
         - message_sid
         - status
         - date_created
+      mountName: delivery_receipts
       parent: /Services/{ChatServiceSid}/Conversations/{ConversationSid}/Messages
       pathType: instance
   "/v1/Services/{ChatServiceSid}/Conversations/{ConversationSid}/Messages/{Sid}":
@@ -4536,13 +4536,13 @@ paths:
     servers:
       - url: https://conversations.twilio.com
     x-twilio:
-      className: user_conversation
       defaultOutputProperties:
         - conversation_sid
         - user_sid
         - chat_service_sid
         - friendly_name
         - date_created
+      mountName: user_conversations
       parent: /Services/{ChatServiceSid}/Users
       pathType: list
   "/v1/Services/{ChatServiceSid}/Users/{UserSid}/Conversations/{ConversationSid}":
@@ -4673,13 +4673,13 @@ paths:
     servers:
       - url: https://conversations.twilio.com
     x-twilio:
-      className: user_conversation
       defaultOutputProperties:
         - conversation_sid
         - user_sid
         - chat_service_sid
         - friendly_name
         - date_created
+      mountName: user_conversations
       parent: /Services/{ChatServiceSid}/Users
       pathType: instance
   "/v1/Services/{Sid}":
@@ -4997,13 +4997,13 @@ paths:
     servers:
       - url: https://conversations.twilio.com
     x-twilio:
-      className: user_conversation
       defaultOutputProperties:
         - conversation_sid
         - user_sid
         - chat_service_sid
         - friendly_name
         - date_created
+      mountName: user_conversations
       parent: /Users
       pathType: list
   "/v1/Users/{UserSid}/Conversations/{ConversationSid}":
@@ -5107,13 +5107,13 @@ paths:
     servers:
       - url: https://conversations.twilio.com
     x-twilio:
-      className: user_conversation
       defaultOutputProperties:
         - conversation_sid
         - user_sid
         - chat_service_sid
         - friendly_name
         - date_created
+      mountName: user_conversations
       parent: /Users
       pathType: instance
 components:

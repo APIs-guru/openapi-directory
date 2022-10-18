@@ -275,7 +275,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Accounting API
-  version: 8.66.1
+  version: 8.70.2
   x-apideck-api: accounting
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -2155,6 +2155,9 @@ paths:
       tags:
         - Invoices
       x-apideck-api: accounting
+      x-apideck-gotchas:
+        - connector: quickbooks
+          description: Quickbooks offers limited (regional) support for applying discount on a Line Item. Including discount_percentage applies to entire invoice.
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -2189,6 +2192,7 @@ paths:
                 sub_total: 27500,
                 total_tax: 2500,
                 tax_code: '1234',
+                discount_percentage: 5.5,
                 total: 27500,
                 balance: 27500,
                 deposit: 0,
@@ -2455,6 +2459,7 @@ paths:
                 sub_total: 27500,
                 total_tax: 2500,
                 tax_code: '1234',
+                discount_percentage: 5.5,
                 total: 27500,
                 balance: 27500,
                 deposit: 0,
@@ -5304,7 +5309,10 @@ components:
         downstream_id: low
         due_date: critical
         id: critical
+        ledger_account: low
         line_items: critical
+        notes: low
+        paid_date: high
         po_number: low
         reference: low
         row_version: edge-case
@@ -8216,6 +8224,12 @@ components:
           nullable: true
           title: Deposit
           type: number
+        discount_percentage:
+          description: Discount percentage applied to this invoice.
+          example: 5.5
+          nullable: true
+          title: Discount
+          type: number
         downstream_id:
           $ref: "#/components/schemas/DownstreamId"
         due_date:
@@ -8356,6 +8370,7 @@ components:
         customer: high
         customer_memo: low
         deposit: low
+        discount_percentage: medium
         downstream_id: low
         due_date: edge-case
         id: critical
@@ -8557,10 +8572,10 @@ components:
           title: Description
           type: string
         discount_percentage:
-          description: Discount percentage
+          description: Discount percentage applied to the line item when supported downstream.
           example: 0.01
           nullable: true
-          title: Discount amount
+          title: Discount
           type: number
         id:
           $ref: "#/components/schemas/Id"
@@ -10612,3 +10627,335 @@ components:
       in: header
       name: Authorization
       type: apiKey
+x-webhooks:
+  CustomerCreated:
+    post:
+      description: Customer Created
+      operationId: customerCreated
+      parameters:
+        - description: The type of event that was triggered
+          in: header
+          name: x-apideck-event-type
+          required: true
+          schema:
+            $ref: "#/components/schemas/AccountingEventType"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AccountingWebhookEvent"
+      responses:
+        "200":
+          description: Return a 200 status to indicate that the data was received successfully
+      summary: Customer Created
+      tags:
+        - Webhook Events
+  CustomerDeleted:
+    post:
+      description: Activity Deleted
+      operationId: activityDeleted
+      parameters:
+        - description: The type of event that was triggered
+          in: header
+          name: x-apideck-event-type
+          required: true
+          schema:
+            $ref: "#/components/schemas/AccountingEventType"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AccountingWebhookEvent"
+      responses:
+        "200":
+          description: Return a 200 status to indicate that the data was received successfully
+      summary: Activity Deleted
+      tags:
+        - Webhook Events
+  CustomerUpdated:
+    post:
+      description: Activity Updated
+      operationId: activityUpdated
+      parameters:
+        - description: The type of event that was triggered
+          in: header
+          name: x-apideck-event-type
+          required: true
+          schema:
+            $ref: "#/components/schemas/AccountingEventType"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AccountingWebhookEvent"
+      responses:
+        "200":
+          description: Return a 200 status to indicate that the data was received successfully
+      summary: Activity Updated
+      tags:
+        - Webhook Events
+  InvoiceCreated:
+    post:
+      description: Invoice Created
+      operationId: invoiceCreated
+      parameters:
+        - description: The type of event that was triggered
+          in: header
+          name: x-apideck-event-type
+          required: true
+          schema:
+            $ref: "#/components/schemas/AccountingEventType"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AccountingWebhookEvent"
+      responses:
+        "200":
+          description: Return a 200 status to indicate that the data was received successfully
+      summary: Invoice Created
+      tags:
+        - Webhook Events
+  InvoiceDeleted:
+    post:
+      description: Invoice Deleted
+      operationId: invoiceDeleted
+      parameters:
+        - description: The type of event that was triggered
+          in: header
+          name: x-apideck-event-type
+          required: true
+          schema:
+            $ref: "#/components/schemas/AccountingEventType"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AccountingWebhookEvent"
+      responses:
+        "200":
+          description: Return a 200 status to indicate that the data was received successfully
+      summary: Invoice Deleted
+      tags:
+        - Webhook Events
+  InvoiceItemCreated:
+    post:
+      description: Invoice Item Created
+      operationId: invoiceItemCreated
+      parameters:
+        - description: The type of event that was triggered
+          in: header
+          name: x-apideck-event-type
+          required: true
+          schema:
+            $ref: "#/components/schemas/AccountingEventType"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AccountingWebhookEvent"
+      responses:
+        "200":
+          description: Return a 200 status to indicate that the data was received successfully
+      summary: Invoice Item Created
+      tags:
+        - Webhook Events
+  InvoiceItemDeleted:
+    post:
+      description: Invoice Item Deleted
+      operationId: invoiceItemDeleted
+      parameters:
+        - description: The type of event that was triggered
+          in: header
+          name: x-apideck-event-type
+          required: true
+          schema:
+            $ref: "#/components/schemas/AccountingEventType"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AccountingWebhookEvent"
+      responses:
+        "200":
+          description: Return a 200 status to indicate that the data was received successfully
+      summary: Invoice Item Deleted
+      tags:
+        - Webhook Events
+  InvoiceItemUpdated:
+    post:
+      description: Invoice Item Updated
+      operationId: invoiceItemUpdated
+      parameters:
+        - description: The type of event that was triggered
+          in: header
+          name: x-apideck-event-type
+          required: true
+          schema:
+            $ref: "#/components/schemas/AccountingEventType"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AccountingWebhookEvent"
+      responses:
+        "200":
+          description: Return a 200 status to indicate that the data was received successfully
+      summary: Invoice Item Updated
+      tags:
+        - Webhook Events
+  InvoiceUpdated:
+    post:
+      description: Invoice Updated
+      operationId: invoiceUpdated
+      parameters:
+        - description: The type of event that was triggered
+          in: header
+          name: x-apideck-event-type
+          required: true
+          schema:
+            $ref: "#/components/schemas/AccountingEventType"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AccountingWebhookEvent"
+      responses:
+        "200":
+          description: Return a 200 status to indicate that the data was received successfully
+      summary: Invoice Updated
+      tags:
+        - Webhook Events
+  LedgerAccountCreated:
+    post:
+      description: Ledger Account Created
+      operationId: ledgerAccountCreated
+      parameters:
+        - description: The type of event that was triggered
+          in: header
+          name: x-apideck-event-type
+          required: true
+          schema:
+            $ref: "#/components/schemas/AccountingEventType"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AccountingWebhookEvent"
+      responses:
+        "200":
+          description: Return a 200 status to indicate that the data was received successfully
+      summary: Ledger Account Created
+      tags:
+        - Webhook Events
+  LedgerAccountDeleted:
+    post:
+      description: Ledger Account Deleted
+      operationId: ledgerAccountDeleted
+      parameters:
+        - description: The type of event that was triggered
+          in: header
+          name: x-apideck-event-type
+          required: true
+          schema:
+            $ref: "#/components/schemas/AccountingEventType"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AccountingWebhookEvent"
+      responses:
+        "200":
+          description: Return a 200 status to indicate that the data was received successfully
+      summary: Ledger Account Deleted
+      tags:
+        - Webhook Events
+  LedgerAccountUpdated:
+    post:
+      description: Ledger Account Updated
+      operationId: ledgerAccountUpdated
+      parameters:
+        - description: The type of event that was triggered
+          in: header
+          name: x-apideck-event-type
+          required: true
+          schema:
+            $ref: "#/components/schemas/AccountingEventType"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AccountingWebhookEvent"
+      responses:
+        "200":
+          description: Return a 200 status to indicate that the data was received successfully
+      summary: Ledger Account Updated
+      tags:
+        - Webhook Events
+  TaxRateCreated:
+    post:
+      description: Tax Rate Created
+      operationId: taxRateCreated
+      parameters:
+        - description: The type of event that was triggered
+          in: header
+          name: x-apideck-event-type
+          required: true
+          schema:
+            $ref: "#/components/schemas/AccountingEventType"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AccountingWebhookEvent"
+      responses:
+        "200":
+          description: Return a 200 status to indicate that the data was received successfully
+      summary: Tax Rate Created
+      tags:
+        - Webhook Events
+  TaxRateDeleted:
+    post:
+      description: Tax Rate Deleted
+      operationId: taxRateDeleted
+      parameters:
+        - description: The type of event that was triggered
+          in: header
+          name: x-apideck-event-type
+          required: true
+          schema:
+            $ref: "#/components/schemas/AccountingEventType"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AccountingWebhookEvent"
+      responses:
+        "200":
+          description: Return a 200 status to indicate that the data was received successfully
+      summary: Tax Rate Deleted
+      tags:
+        - Webhook Events
+  TaxRateUpdated:
+    post:
+      description: Tax Rate Updated
+      operationId: taxRateUpdated
+      parameters:
+        - description: The type of event that was triggered
+          in: header
+          name: x-apideck-event-type
+          required: true
+          schema:
+            $ref: "#/components/schemas/AccountingEventType"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AccountingWebhookEvent"
+      responses:
+        "200":
+          description: Return a 200 status to indicate that the data was received successfully
+      summary: Tax Rate Updated
+      tags:
+        - Webhook Events
+  x-sdk-exclude: true

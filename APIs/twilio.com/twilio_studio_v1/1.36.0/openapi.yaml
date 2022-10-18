@@ -237,9 +237,9 @@ paths:
     servers:
       - url: https://studio.twilio.com
     x-twilio:
-      className: engagement_context
       defaultOutputProperties:
         - context
+      mountName: engagement_context
       parent: /Flows/{FlowSid}/Engagements
       pathType: instance
   "/v1/Flows/{FlowSid}/Engagements/{EngagementSid}/Steps":
@@ -422,9 +422,9 @@ paths:
     servers:
       - url: https://studio.twilio.com
     x-twilio:
-      className: step_context
       defaultOutputProperties:
         - context
+      mountName: step_context
       parent: /Flows/{FlowSid}/Engagements/{EngagementSid}/Steps
       pathType: instance
   "/v1/Flows/{FlowSid}/Engagements/{Sid}":
@@ -665,9 +665,9 @@ paths:
     servers:
       - url: https://studio.twilio.com
     x-twilio:
-      className: execution_context
       defaultOutputProperties:
         - context
+      mountName: execution_context
       parent: /Flows/{FlowSid}/Executions
       pathType: instance
   "/v1/Flows/{FlowSid}/Executions/{ExecutionSid}/Steps":
@@ -853,6 +853,7 @@ paths:
       className: execution_step_context
       defaultOutputProperties:
         - context
+      mountName: step_context
       parent: /Flows/{FlowSid}/Executions/{ExecutionSid}/Steps
       pathType: instance
   "/v1/Flows/{FlowSid}/Executions/{Sid}":

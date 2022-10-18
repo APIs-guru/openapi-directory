@@ -264,9 +264,9 @@ paths:
     servers:
       - url: https://trusthub.twilio.com
     x-twilio:
-      className: customer_profiles_channel_endpoint_assignment
       defaultOutputProperties:
         - sid
+      mountName: customer_profiles_channel_endpoint_assignment
       parent: /CustomerProfiles
       pathType: list
   "/v1/CustomerProfiles/{CustomerProfileSid}/ChannelEndpointAssignments/{Sid}":
@@ -336,9 +336,9 @@ paths:
     servers:
       - url: https://trusthub.twilio.com
     x-twilio:
-      className: customer_profiles_channel_endpoint_assignment
       defaultOutputProperties:
         - sid
+      mountName: customer_profiles_channel_endpoint_assignment
       parent: /CustomerProfiles
       pathType: instance
   "/v1/CustomerProfiles/{CustomerProfileSid}/EntityAssignments":
@@ -446,6 +446,7 @@ paths:
       className: customer_profiles_entity_assignments
       defaultOutputProperties:
         - sid
+      mountName: customer_profiles_entity_assignments
       parent: /CustomerProfiles
       pathType: list
   "/v1/CustomerProfiles/{CustomerProfileSid}/EntityAssignments/{Sid}":
@@ -518,6 +519,7 @@ paths:
       className: customer_profiles_entity_assignments
       defaultOutputProperties:
         - sid
+      mountName: customer_profiles_entity_assignments
       parent: /CustomerProfiles
       pathType: instance
   "/v1/CustomerProfiles/{CustomerProfileSid}/Evaluations":
@@ -625,6 +627,7 @@ paths:
       className: customer_profiles_evaluations
       defaultOutputProperties:
         - sid
+      mountName: customer_profiles_evaluations
       parent: /CustomerProfiles
       pathType: list
   "/v1/CustomerProfiles/{CustomerProfileSid}/Evaluations/{Sid}":
@@ -668,6 +671,7 @@ paths:
       className: customer_profiles_evaluations
       defaultOutputProperties:
         - sid
+      mountName: customer_profiles_evaluations
       parent: /CustomerProfiles
       pathType: instance
   "/v1/CustomerProfiles/{Sid}":
@@ -1736,9 +1740,9 @@ paths:
     servers:
       - url: https://trusthub.twilio.com
     x-twilio:
-      className: trust_products_channel_endpoint_assignment
       defaultOutputProperties:
         - sid
+      mountName: trust_products_channel_endpoint_assignment
       parent: /TrustProducts
       pathType: list
   "/v1/TrustProducts/{TrustProductSid}/ChannelEndpointAssignments/{Sid}":
@@ -1808,9 +1812,9 @@ paths:
     servers:
       - url: https://trusthub.twilio.com
     x-twilio:
-      className: trust_products_channel_endpoint_assignment
       defaultOutputProperties:
         - sid
+      mountName: trust_products_channel_endpoint_assignment
       parent: /TrustProducts
       pathType: instance
   "/v1/TrustProducts/{TrustProductSid}/EntityAssignments":
@@ -1918,6 +1922,7 @@ paths:
       className: trust_products_entity_assignments
       defaultOutputProperties:
         - sid
+      mountName: trust_products_entity_assignments
       parent: /TrustProducts
       pathType: list
   "/v1/TrustProducts/{TrustProductSid}/EntityAssignments/{Sid}":
@@ -1990,6 +1995,7 @@ paths:
       className: trust_products_entity_assignments
       defaultOutputProperties:
         - sid
+      mountName: trust_products_entity_assignments
       parent: /TrustProducts
       pathType: instance
   "/v1/TrustProducts/{TrustProductSid}/Evaluations":
@@ -2097,6 +2103,7 @@ paths:
       className: trust_products_evaluations
       defaultOutputProperties:
         - sid
+      mountName: trust_products_evaluations
       parent: /TrustProducts
       pathType: list
   "/v1/TrustProducts/{TrustProductSid}/Evaluations/{Sid}":
@@ -2140,6 +2147,7 @@ paths:
       className: trust_products_evaluations
       defaultOutputProperties:
         - sid
+      mountName: trust_products_evaluations
       parent: /TrustProducts
       pathType: instance
 components:

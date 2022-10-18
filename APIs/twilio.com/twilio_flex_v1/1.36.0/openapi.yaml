@@ -146,6 +146,7 @@ paths:
         - flex_flow_sid
         - user_sid
         - task_sid
+      mountName: channel
       pathType: list
   "/v1/Channels/{Sid}":
     delete:
@@ -201,6 +202,7 @@ paths:
         - flex_flow_sid
         - user_sid
         - task_sid
+      mountName: channel
       pathType: instance
   /v1/Configuration:
     description: Configuration for a Flex instance
@@ -388,6 +390,7 @@ paths:
         - friendly_name
         - channel_type
         - integration_type
+      mountName: flex_flow
       pathType: list
   "/v1/FlexFlows/{Sid}":
     delete:
@@ -540,6 +543,7 @@ paths:
         - friendly_name
         - channel_type
         - integration_type
+      mountName: flex_flow
       pathType: instance
   /v1/Interactions:
     description: "TODO: Resource-level docs"
@@ -576,6 +580,7 @@ paths:
     x-twilio:
       defaultOutputProperties:
         - sid
+      mountName: interaction
       pathType: list
   "/v1/Interactions/{InteractionSid}/Channels":
     description: "TODO: Resource-level docs"
@@ -1079,6 +1084,7 @@ paths:
     x-twilio:
       defaultOutputProperties:
         - sid
+      mountName: interaction
       pathType: instance
   /v1/WebChannels:
     description: "TODO: Resource-level docs"
@@ -1184,6 +1190,7 @@ paths:
       defaultOutputProperties:
         - sid
         - flex_flow_sid
+      mountName: web_channel
       pathType: list
   "/v1/WebChannels/{Sid}":
     delete:
@@ -1275,6 +1282,7 @@ paths:
       defaultOutputProperties:
         - sid
         - flex_flow_sid
+      mountName: web_channel
       pathType: instance
 components:
   schemas:

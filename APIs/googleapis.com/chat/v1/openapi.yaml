@@ -74,12 +74,12 @@ paths:
       description: "Lists spaces the caller is a member of. Requires [service account authentication](https://developers.google.com/chat/api/guides/auth/service-accounts). "
       operationId: chat.spaces.list
       parameters:
-        - description: Optional. Requested page size. The value is capped at 1000. Server may return fewer results than requested. If unspecified, server will default to 100.
+        - description: Optional. The maximum number of spaces to return. The service may return fewer than this value. If unspecified, at most 100 spaces are returned. The maximum value is 1000; values above 1000 are coerced to 1000. Negative values return an INVALID_ARGUMENT error.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: Optional. A token identifying a page of results the server should return.
+        - description: Optional. A page token, received from a previous list spaces call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided must match the call that provided the page token.
           in: query
           name: pageToken
           schema:
@@ -142,6 +142,11 @@ paths:
               schema:
                 $ref: "#/components/schemas/Attachment"
           description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/chat.memberships
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.memberships
       tags:
         - spaces
     parameters:
@@ -166,6 +171,11 @@ paths:
           required: true
           schema:
             type: string
+        - description: Optional. If `true` and the message is not found, a new message is created and `updateMask` is ignored. The specified message ID must be [client-assigned](https://developers.google.com/chat/api/guides/crudl/messages#name_a_created_message) or the request fails.
+          in: query
+          name: allowMissing
+          schema:
+            type: boolean
         - description: "Required. The field paths to update. Separate multiple values with commas. Currently supported field paths: - text - cards (Requires [service account authentication](/chat/api/guides/auth/service-accounts).) - cards_v2 "
           in: query
           name: updateMask
@@ -196,12 +206,12 @@ paths:
           required: true
           schema:
             type: string
-        - description: Requested page size. The value is capped at 1000. Server may return fewer results than requested. If unspecified, server will default to 100.
+        - description: The maximum number of memberships to return. The service may return fewer than this value. If unspecified, at most 100 memberships are returned. The maximum value is 1000; values above 1000 are coerced to 1000. Negative values return an INVALID_ARGUMENT error.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: A token identifying a page of results the server should return.
+        - description: A page token, received from a previous list memberships call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided must match the call that provided the page token.
           in: query
           name: pageToken
           schema:
@@ -213,6 +223,11 @@ paths:
               schema:
                 $ref: "#/components/schemas/ListMembershipsResponse"
           description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/chat.memberships
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.memberships
       tags:
         - spaces
     parameters:
@@ -248,6 +263,11 @@ paths:
           in: path
           name: parent
           required: true
+          schema:
+            type: string
+        - description: Optional. A custom name for a Chat message assigned at creation. Must start with `client-` and contain only lowercase letters, numbers, and hyphens up to 63 characters in length. Specify this field to get, update, or delete the message with the specified value. For example usage, see [Name a created message](https://developers.google.com/chat/api/guides/crudl/messages#name_a_created_message).
+          in: query
+          name: messageId
           schema:
             type: string
         - description: Optional. A unique request ID for this message. Specifying an existing request ID returns the message created with that ID instead of creating a new message.
@@ -295,6 +315,11 @@ paths:
           in: path
           name: parent
           required: true
+          schema:
+            type: string
+        - description: Optional. A custom name for a Chat message assigned at creation. Must start with `client-` and contain only lowercase letters, numbers, and hyphens up to 63 characters in length. Specify this field to get, update, or delete the message with the specified value. For example usage, see [Name a created message](https://developers.google.com/chat/api/guides/crudl/messages#name_a_created_message).
+          in: query
+          name: messageId
           schema:
             type: string
         - description: Optional. A unique request ID for this message. Specifying an existing request ID returns the message created with that ID instead of creating a new message.
@@ -1476,13 +1501,13 @@ components:
             $ref: "#/components/schemas/Membership"
           type: array
         nextPageToken:
-          description: Continuation token to retrieve the next page of results. It will be empty for the last page of results.
+          description: A token that can be sent as `pageToken` to retrieve the next page of results. If empty, there are no subsequent pages.
           type: string
       type: object
     ListSpacesResponse:
       properties:
         nextPageToken:
-          description: Continuation token to retrieve the next page of results. It will be empty for the last page of results. Tokens expire in an hour. An error is thrown if an expired token is passed.
+          description: A token that can be sent as `pageToken` to retrieve the next page of results. If empty, there are no subsequent pages.
           type: string
         spaces:
           description: List of spaces in the requested (or first) page.
@@ -1567,6 +1592,9 @@ components:
           items:
             $ref: "#/components/schemas/CardWithId"
           type: array
+        clientAssignedMessageId:
+          description: A custom name for a Chat message assigned at creation. Must start with `client-` and contain only lowercase letters, numbers, and hyphens up to 63 characters in length. Specify this field to get, update, or delete the message with the specified value. For example usage, see [Name a created message](https://developers.google.com/chat/api/guides/crudl/messages#name_a_created_message).
+          type: string
         createTime:
           description: Output only. The time at which the message was created in Google Chat server.
           format: google-datetime
@@ -1834,3 +1862,21 @@ components:
           $ref: "#/components/schemas/TextParagraph"
           description: Display a text paragraph in this widget.
       type: object
+  securitySchemes:
+    Oauth2:
+      description: Oauth 2.0 implicit authentication
+      flows:
+        implicit:
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
+          scopes:
+            https://www.googleapis.com/auth/chat.memberships: View, add, and remove members from conversations in Google Chat
+      type: oauth2
+    Oauth2c:
+      description: Oauth 2.0 authorizationCode authentication
+      flows:
+        authorizationCode:
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
+          scopes:
+            https://www.googleapis.com/auth/chat.memberships: View, add, and remove members from conversations in Google Chat
+          tokenUrl: https://accounts.google.com/o/oauth2/token
+      type: oauth2

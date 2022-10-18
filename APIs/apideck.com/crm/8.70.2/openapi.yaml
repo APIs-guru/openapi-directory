@@ -276,7 +276,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: CRM API
-  version: 8.66.1
+  version: 8.70.2
   x-apideck-api: crm
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -8333,6 +8333,13 @@ x-webhooks:
     post:
       description: Activity Created
       operationId: activityCreated
+      parameters:
+        - description: The type of event that was triggered
+          in: header
+          name: x-apideck-event-type
+          required: true
+          schema:
+            $ref: "#/components/schemas/CrmEventType"
       requestBody:
         content:
           application/json:
@@ -8349,6 +8356,13 @@ x-webhooks:
     post:
       description: Activity Deleted
       operationId: activityDeleted
+      parameters:
+        - description: The type of event that was triggered
+          in: header
+          name: x-apideck-event-type
+          required: true
+          schema:
+            $ref: "#/components/schemas/CrmEventType"
       requestBody:
         content:
           application/json:
@@ -8365,6 +8379,13 @@ x-webhooks:
     post:
       description: Activity Updated
       operationId: activityUpdated
+      parameters:
+        - description: The type of event that was triggered
+          in: header
+          name: x-apideck-event-type
+          required: true
+          schema:
+            $ref: "#/components/schemas/CrmEventType"
       requestBody:
         content:
           application/json:
@@ -8381,6 +8402,13 @@ x-webhooks:
     post:
       description: Company Created
       operationId: companyCreated
+      parameters:
+        - description: The type of event that was triggered
+          in: header
+          name: x-apideck-event-type
+          required: true
+          schema:
+            $ref: "#/components/schemas/CrmEventType"
       requestBody:
         content:
           application/json:
@@ -8397,6 +8425,13 @@ x-webhooks:
     post:
       description: Company Deleted
       operationId: companyDeleted
+      parameters:
+        - description: The type of event that was triggered
+          in: header
+          name: x-apideck-event-type
+          required: true
+          schema:
+            $ref: "#/components/schemas/CrmEventType"
       requestBody:
         content:
           application/json:
@@ -8413,6 +8448,13 @@ x-webhooks:
     post:
       description: Company Updated
       operationId: companyUpdated
+      parameters:
+        - description: The type of event that was triggered
+          in: header
+          name: x-apideck-event-type
+          required: true
+          schema:
+            $ref: "#/components/schemas/CrmEventType"
       requestBody:
         content:
           application/json:
@@ -8429,6 +8471,13 @@ x-webhooks:
     post:
       description: Contact Created
       operationId: contactCreated
+      parameters:
+        - description: The type of event that was triggered
+          in: header
+          name: x-apideck-event-type
+          required: true
+          schema:
+            $ref: "#/components/schemas/CrmEventType"
       requestBody:
         content:
           application/json:
@@ -8445,6 +8494,13 @@ x-webhooks:
     post:
       description: Contact Deleted
       operationId: contactDeleted
+      parameters:
+        - description: The type of event that was triggered
+          in: header
+          name: x-apideck-event-type
+          required: true
+          schema:
+            $ref: "#/components/schemas/CrmEventType"
       requestBody:
         content:
           application/json:
@@ -8461,6 +8517,13 @@ x-webhooks:
     post:
       description: Contact Updated
       operationId: contactUpdated
+      parameters:
+        - description: The type of event that was triggered
+          in: header
+          name: x-apideck-event-type
+          required: true
+          schema:
+            $ref: "#/components/schemas/CrmEventType"
       requestBody:
         content:
           application/json:
@@ -8477,6 +8540,13 @@ x-webhooks:
     post:
       description: Lead Created
       operationId: leadCreated
+      parameters:
+        - description: The type of event that was triggered
+          in: header
+          name: x-apideck-event-type
+          required: true
+          schema:
+            $ref: "#/components/schemas/CrmEventType"
       requestBody:
         content:
           application/json:
@@ -8493,6 +8563,13 @@ x-webhooks:
     post:
       description: Lead Deleted
       operationId: leadDeleted
+      parameters:
+        - description: The type of event that was triggered
+          in: header
+          name: x-apideck-event-type
+          required: true
+          schema:
+            $ref: "#/components/schemas/CrmEventType"
       requestBody:
         content:
           application/json:
@@ -8509,6 +8586,13 @@ x-webhooks:
     post:
       description: Lead Updated
       operationId: leadUpdated
+      parameters:
+        - description: The type of event that was triggered
+          in: header
+          name: x-apideck-event-type
+          required: true
+          schema:
+            $ref: "#/components/schemas/CrmEventType"
       requestBody:
         content:
           application/json:
@@ -8525,6 +8609,13 @@ x-webhooks:
     post:
       description: Note Created
       operationId: noteCreated
+      parameters:
+        - description: The type of event that was triggered
+          in: header
+          name: x-apideck-event-type
+          required: true
+          schema:
+            $ref: "#/components/schemas/CrmEventType"
       requestBody:
         content:
           application/json:
@@ -8541,6 +8632,13 @@ x-webhooks:
     post:
       description: Note Deleted
       operationId: noteDeleted
+      parameters:
+        - description: The type of event that was triggered
+          in: header
+          name: x-apideck-event-type
+          required: true
+          schema:
+            $ref: "#/components/schemas/CrmEventType"
       requestBody:
         content:
           application/json:
@@ -8557,6 +8655,13 @@ x-webhooks:
     post:
       description: Note Updated
       operationId: noteUpdated
+      parameters:
+        - description: The type of event that was triggered
+          in: header
+          name: x-apideck-event-type
+          required: true
+          schema:
+            $ref: "#/components/schemas/CrmEventType"
       requestBody:
         content:
           application/json:
@@ -8573,6 +8678,13 @@ x-webhooks:
     post:
       description: Opportunity Created
       operationId: opportunityCreated
+      parameters:
+        - description: The type of event that was triggered
+          in: header
+          name: x-apideck-event-type
+          required: true
+          schema:
+            $ref: "#/components/schemas/CrmEventType"
       requestBody:
         content:
           application/json:
@@ -8589,6 +8701,13 @@ x-webhooks:
     post:
       description: Opportunity Deleted
       operationId: opportunityDeleted
+      parameters:
+        - description: The type of event that was triggered
+          in: header
+          name: x-apideck-event-type
+          required: true
+          schema:
+            $ref: "#/components/schemas/CrmEventType"
       requestBody:
         content:
           application/json:
@@ -8605,6 +8724,13 @@ x-webhooks:
     post:
       description: Opportunity Updated
       operationId: opportunityUpdated
+      parameters:
+        - description: The type of event that was triggered
+          in: header
+          name: x-apideck-event-type
+          required: true
+          schema:
+            $ref: "#/components/schemas/CrmEventType"
       requestBody:
         content:
           application/json:

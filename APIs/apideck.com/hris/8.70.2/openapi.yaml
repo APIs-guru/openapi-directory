@@ -275,7 +275,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: HRIS API
-  version: 8.66.1
+  version: 8.70.2
   x-apideck-api: hris
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -5745,7 +5745,7 @@ components:
             - requested
             - approved
             - declined
-            - canceled
+            - cancelled
             - deleted
             - other
           example: approved
@@ -6166,6 +6166,13 @@ x-webhooks:
     post:
       description: Company created
       operationId: companyCreated
+      parameters:
+        - description: The type of event that was triggered
+          in: header
+          name: x-apideck-event-type
+          required: true
+          schema:
+            $ref: "#/components/schemas/HrisEventType"
       requestBody:
         content:
           application/json:
@@ -6182,6 +6189,13 @@ x-webhooks:
     post:
       description: Company deleted
       operationId: companyDeleted
+      parameters:
+        - description: The type of event that was triggered
+          in: header
+          name: x-apideck-event-type
+          required: true
+          schema:
+            $ref: "#/components/schemas/HrisEventType"
       requestBody:
         content:
           application/json:
@@ -6198,6 +6212,13 @@ x-webhooks:
     post:
       description: Company updated
       operationId: companyUpdated
+      parameters:
+        - description: The type of event that was triggered
+          in: header
+          name: x-apideck-event-type
+          required: true
+          schema:
+            $ref: "#/components/schemas/HrisEventType"
       requestBody:
         content:
           application/json:
@@ -6214,6 +6235,13 @@ x-webhooks:
     post:
       description: Employee created
       operationId: employeeCreated
+      parameters:
+        - description: The type of event that was triggered
+          in: header
+          name: x-apideck-event-type
+          required: true
+          schema:
+            $ref: "#/components/schemas/HrisEventType"
       requestBody:
         content:
           application/json:
@@ -6230,6 +6258,13 @@ x-webhooks:
     post:
       description: Employee deleted
       operationId: employeeDeleted
+      parameters:
+        - description: The type of event that was triggered
+          in: header
+          name: x-apideck-event-type
+          required: true
+          schema:
+            $ref: "#/components/schemas/HrisEventType"
       requestBody:
         content:
           application/json:
@@ -6246,6 +6281,13 @@ x-webhooks:
     post:
       description: Employee updated
       operationId: employeeUpdated
+      parameters:
+        - description: The type of event that was triggered
+          in: header
+          name: x-apideck-event-type
+          required: true
+          schema:
+            $ref: "#/components/schemas/HrisEventType"
       requestBody:
         content:
           application/json:

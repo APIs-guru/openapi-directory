@@ -57,8 +57,8 @@ paths:
     servers:
       - url: https://voice.twilio.com
     x-twilio:
-      className: archived_call
       defaultOutputProperties: []
+      mountName: archived_calls
       pathType: instance
   /v1/ByocTrunks:
     description: BYOC Trunks allow you to bring your own voice carrier to Twilio, enabling your calls to use our Programmable Voice APIs.
