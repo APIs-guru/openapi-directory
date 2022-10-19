@@ -19,11 +19,12 @@ info:
   x-logo:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: google
+    - format: openapi
       url: https://documentai.googleapis.com/$discovery/rest?version=v1beta2
-      version: v1
+      version: "3.0"
   x-providerName: googleapis.com
   x-serviceName: documentai
+  x-preferred: true
 externalDocs:
   url: https://cloud.google.com/document-ai/docs/
 tags:
@@ -1444,6 +1445,9 @@ components:
         layout:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta1DocumentPageLayout"
           description: Layout for Table.
+        provenance:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta1DocumentProvenance"
+          description: The history of this table.
       type: object
     GoogleCloudDocumentaiV1beta1DocumentPageTableTableCell:
       description: A cell representation inside the table.
@@ -2347,6 +2351,9 @@ components:
         layout:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2DocumentPageLayout"
           description: Layout for Table.
+        provenance:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2DocumentProvenance"
+          description: The history of this table.
       type: object
     GoogleCloudDocumentaiV1beta2DocumentPageTableTableCell:
       description: A cell representation inside the table.

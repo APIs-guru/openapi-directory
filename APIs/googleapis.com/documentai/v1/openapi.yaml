@@ -1745,7 +1745,7 @@ components:
       description: The configuration used when outputting documents.
       properties:
         fieldMask:
-          description: Specifies which fields to include in the output documents.
+          description: Specifies which fields to include in the output documents. Only supports top level document and pages field so it must be in the form of `{document_field_name}` or `pages.{page_field_name}`.
           format: google-fieldmask
           type: string
         gcsUri:
@@ -2101,6 +2101,9 @@ components:
         layout:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1DocumentPageLayout"
           description: Layout for Table.
+        provenance:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1DocumentProvenance"
+          description: The history of this table.
       type: object
     GoogleCloudDocumentaiV1DocumentPageTableTableCell:
       description: A cell representation inside the table.
@@ -2598,7 +2601,7 @@ components:
       description: Request message for the process document method.
       properties:
         fieldMask:
-          description: Specifies which fields to include in ProcessResponse's document.
+          description: Specifies which fields to include in ProcessResponse's document. Only supports top level document and pages field so it must be in the form of `{document_field_name}` or `pages.{page_field_name}`.
           format: google-fieldmask
           type: string
         inlineDocument:
@@ -3422,6 +3425,9 @@ components:
         layout:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta1DocumentPageLayout"
           description: Layout for Table.
+        provenance:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta1DocumentProvenance"
+          description: The history of this table.
       type: object
     GoogleCloudDocumentaiV1beta1DocumentPageTableTableCell:
       description: A cell representation inside the table.
@@ -4309,6 +4315,9 @@ components:
         layout:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2DocumentPageLayout"
           description: Layout for Table.
+        provenance:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2DocumentProvenance"
+          description: The history of this table.
       type: object
     GoogleCloudDocumentaiV1beta2DocumentPageTableTableCell:
       description: A cell representation inside the table.

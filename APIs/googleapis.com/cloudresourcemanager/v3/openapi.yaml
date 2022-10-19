@@ -13,20 +13,17 @@ info:
   termsOfService: https://developers.google.com/terms/
   title: Cloud Resource Manager API
   version: v3
-  x-apiClientRegistration:
-    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
-    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
+    url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: openapi
+    - format: google
       url: https://cloudresourcemanager.googleapis.com/$discovery/rest?version=v3
-      version: "3.0"
+      version: v1
   x-providerName: googleapis.com
   x-serviceName: cloudresourcemanager
-  x-preferred: true
 externalDocs:
   url: https://cloud.google.com/resource-manager
 tags:
@@ -42,7 +39,7 @@ tags:
 paths:
   /v3/effectiveTags:
     get:
-      description: Return a list of effective tags for the given cloud resource, as specified in `parent`.
+      description: Return a list of effective tags for the given Google Cloud resource, as specified in `parent`.
       operationId: cloudresourcemanager.effectiveTags.list
       parameters:
         - description: Optional. The maximum number of effective tags to return in the response. The server allows a maximum of 300 effective tags to return in a single page. If unspecified, the server will use 100 as the default.
@@ -468,7 +465,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   /v3/tagBindings:
     get:
-      description: "Lists the TagBindings for the given cloud resource, as specified with `parent`. NOTE: The `parent` field is expected to be a full resource name: https://cloud.google.com/apis/design/resource_names#full_resource_name"
+      description: "Lists the TagBindings for the given Google Cloud resource, as specified with `parent`. NOTE: The `parent` field is expected to be a full resource name: https://cloud.google.com/apis/design/resource_names#full_resource_name"
       operationId: cloudresourcemanager.tagBindings.list
       parameters:
         - description: Optional. The maximum number of TagBindings to return in the response. The server allows a maximum of 300 TagBindings to return. If unspecified, the server will use 100 as the default.
@@ -517,7 +514,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Creates a TagBinding between a TagValue and a cloud resource (currently project, folder, or organization).
+      description: Creates a TagBinding between a TagValue and a Google Cloud resource.
       operationId: cloudresourcemanager.tagBindings.create
       parameters:
         - description: Optional. Set to true to perform the validations necessary for creating the resource, but not actually perform the action.
@@ -1842,7 +1839,7 @@ components:
           type: string
       type: object
     TagBinding:
-      description: A TagBinding represents a connection between a TagValue and a cloud resource (currently project, folder, or organization). Once a TagBinding is created, the TagValue is applied to all the descendants of the cloud resource.
+      description: A TagBinding represents a connection between a TagValue and a cloud resource Once a TagBinding is created, the TagValue is applied to all the descendants of the Google Cloud resource.
       properties:
         name:
           description: "Output only. The name of the TagBinding. This is a String of the form: `tagBindings/{full-resource-name}/{tag-value-name}` (e.g. `tagBindings/%2F%2Fcloudresourcemanager.googleapis.com%2Fprojects%2F123/tagValues/456`)."
@@ -2028,5 +2025,3 @@ components:
             https://www.googleapis.com/auth/cloud-platform.read-only: View your data across Google Cloud services and see the email address of your Google Account
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
-source:
-  url: {}
