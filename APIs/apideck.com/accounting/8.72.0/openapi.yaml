@@ -275,7 +275,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Accounting API
-  version: 8.71.0
+  version: 8.72.0
   x-apideck-api: accounting
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -558,6 +558,8 @@ paths:
                     unit_price: 27500.5,
                     unit_of_measure: 'pc.',
                     discount_percentage: 0.01,
+                    location_id: '1234',
+                    department_id: '1234',
                     item: {
                       id: '12344'
                     },
@@ -586,6 +588,7 @@ paths:
                   nominal_code: 'N091',
                   code: '453'
                 },
+                bill_number: '10001',
                 row_version: '1-12345'
               }
             }
@@ -799,6 +802,8 @@ paths:
                     unit_price: 27500.5,
                     unit_of_measure: 'pc.',
                     discount_percentage: 0.01,
+                    location_id: '1234',
+                    department_id: '1234',
                     item: {
                       id: '12344'
                     },
@@ -827,6 +832,7 @@ paths:
                   nominal_code: 'N091',
                   code: '453'
                 },
+                bill_number: '10001',
                 row_version: '1-12345'
               }
             }
@@ -5186,6 +5192,11 @@ components:
           format: date
           title: Bill date
           type: string
+        bill_number:
+          example: "10001"
+          nullable: true
+          title: Bill number
+          type: string
         created_at:
           $ref: "#/components/schemas/CreatedAt"
         created_by:
@@ -5301,6 +5312,7 @@ components:
       x-apideck-weights:
         balance: high
         bill_date: critical
+        bill_number: high
         created_at: edge-case
         created_by: low
         currency: medium
@@ -5335,6 +5347,12 @@ components:
           nullable: true
           title: Item code
           type: string
+        department_id:
+          description: Department id
+          example: "1234"
+          nullable: true
+          title: Department id
+          type: string
         description:
           description: User defined description
           example: Model Y is a fully electric, mid-size SUV, with seating for up to seven, dual motor AWD and unparalleled protection.
@@ -5359,6 +5377,12 @@ components:
           nullable: true
           title: Line number
           type: integer
+        location_id:
+          description: Location id
+          example: "1234"
+          nullable: true
+          title: Location id
+          type: string
         quantity:
           $ref: "#/components/schemas/Quantity"
         row_id:

@@ -107,7 +107,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   "/v1/{name}":
     delete:
-      description: Deletes a message. Requires [service account authentication](https://developers.google.com/chat/api/guides/auth/service-accounts).
+      description: "Deletes a message. Requires [service account authentication](https://developers.google.com/chat/api/guides/auth/service-accounts). [Developer Preview](https://developers.google.com/workspace/preview): Deletes a message. Requires [user authentication](https://developers.google.com/chat/api/guides/auth/users) and the `chat.messages` authorization scope."
       operationId: chat.spaces.messages.delete
       parameters:
         - description: 'Required. Resource name of the message to be deleted, in the form "spaces/*/messages/*" Example: spaces/AAAAAAAAAAA/messages/BBBBBBBBBBB.BBBBBBBBBBB'
@@ -1625,7 +1625,7 @@ components:
           readOnly: true
         space:
           $ref: "#/components/schemas/Space"
-          description: The space the message belongs to.
+          description: The space the message belongs to. When accessed with [user authentication](https://developers.google.com/chat/api/guides/auth/users), only the name of the Space is populated.
         text:
           description: Plain-text body of the message. The first link to an image, video, web page, or other preview-able item generates a preview chip.
           type: string

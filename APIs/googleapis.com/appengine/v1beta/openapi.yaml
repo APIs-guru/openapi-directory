@@ -13,21 +13,25 @@ info:
   termsOfService: https://developers.google.com/terms/
   title: App Engine Admin API
   version: v1beta
+  x-apiClientRegistration:
+    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
-    url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
+    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
-    - format: google
+    - format: openapi
       url: https://appengine.googleapis.com/$discovery/rest?version=v1beta
-      version: v1
+      version: "3.0"
   x-providerName: googleapis.com
   x-serviceName: appengine
+  x-preferred: true
 externalDocs:
   url: https://cloud.google.com/appengine/docs/admin-api/
 tags:
   - name: apps
+  - name: projects
 paths:
   /v1beta/apps:
     parameters:
@@ -45,6 +49,12 @@ paths:
     post:
       description: "Creates an App Engine application for a Google Cloud Platform project. Required fields: id - The ID of the target Cloud Platform project. location - The region (https://cloud.google.com/appengine/docs/locations) where you want the App Engine application located.For more information about App Engine applications, see Managing Projects, Applications, and Billing (https://cloud.google.com/appengine/docs/standard/python/console/)."
       operationId: appengine.apps.create
+      parameters:
+        - description: The project and location in which the application should be created, specified in the format projects/*/locations/*
+          in: query
+          name: parent
+          schema:
+            type: string
       requestBody:
         content:
           application/json:
@@ -1813,6 +1823,399 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - apps
+  "/v1beta/projects/{projectsId}/locations":
+    get:
+      description: Lists information about the supported locations for this service.
+      operationId: appengine.projects.locations.list
+      parameters:
+        - description: Part of `name`. The resource that owns the locations collection, if applicable.
+          in: path
+          name: projectsId
+          required: true
+          schema:
+            type: string
+        - description: A filter to narrow down results to a preferred subset. The filtering language accepts strings like "displayName=tokyo", and is documented in more detail in AIP-160 (https://google.aip.dev/160).
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: The maximum number of results to return. If not set, the service selects a default.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A page token received from the next_page_token field in the response. Send that page token to receive the subsequent page.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListLocationsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/appengine.admin
+          Oauth2c:
+            - https://www.googleapis.com/auth/appengine.admin
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform.read-only
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform.read-only
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v1beta/projects/{projectsId}/locations/{locationsId}":
+    get:
+      description: Gets information about a location.
+      operationId: appengine.projects.locations.get
+      parameters:
+        - description: Part of `name`. Resource name for the location.
+          in: path
+          name: projectsId
+          required: true
+          schema:
+            type: string
+        - description: Part of `name`. See documentation of `projectsId`.
+          in: path
+          name: locationsId
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Location"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/appengine.admin
+          Oauth2c:
+            - https://www.googleapis.com/auth/appengine.admin
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform.read-only
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform.read-only
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v1beta/projects/{projectsId}/locations/{locationsId}/applications":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: "Creates an App Engine application for a Google Cloud Platform project. Required fields: id - The ID of the target Cloud Platform project. location - The region (https://cloud.google.com/appengine/docs/locations) where you want the App Engine application located.For more information about App Engine applications, see Managing Projects, Applications, and Billing (https://cloud.google.com/appengine/docs/standard/python/console/)."
+      operationId: appengine.projects.locations.applications.create
+      parameters:
+        - description: Part of `parent`. The project and location in which the application should be created, specified in the format projects/*/locations/*
+          in: path
+          name: projectsId
+          required: true
+          schema:
+            type: string
+        - description: Part of `parent`. See documentation of `projectsId`.
+          in: path
+          name: locationsId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Application"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1beta/projects/{projectsId}/locations/{locationsId}/applications/{applicationsId}":
+    get:
+      description: Gets information about an application.
+      operationId: appengine.projects.locations.applications.get
+      parameters:
+        - description: "Part of `name`. Name of the Application resource to get. Example: apps/myapp."
+          in: path
+          name: projectsId
+          required: true
+          schema:
+            type: string
+        - description: Part of `name`. See documentation of `projectsId`.
+          in: path
+          name: locationsId
+          required: true
+          schema:
+            type: string
+        - description: Part of `name`. See documentation of `projectsId`.
+          in: path
+          name: applicationsId
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Application"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/appengine.admin
+          Oauth2c:
+            - https://www.googleapis.com/auth/appengine.admin
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform.read-only
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform.read-only
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v1beta/projects/{projectsId}/locations/{locationsId}/applications/{applicationsId}:repair":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Recreates the required App Engine features for the specified App Engine application, for example a Cloud Storage bucket or App Engine service account. Use this method if you receive an error message about a missing feature, for example, Error retrieving the App Engine service account. If you have deleted your App Engine service account, this will not be able to recreate it. Instead, you should attempt to use the IAM undelete API if possible at https://cloud.google.com/iam/reference/rest/v1/projects.serviceAccounts/undelete?apix_params=%7B"name"%3A"projects%2F-%2FserviceAccounts%2Funique_id"%2C"resource"%3A%7B%7D%7D . If the deletion was recent, the numeric ID can be found in the Cloud Console Activity Log.
+      operationId: appengine.projects.locations.applications.repair
+      parameters:
+        - description: "Part of `name`. Name of the application to repair. Example: apps/myapp"
+          in: path
+          name: projectsId
+          required: true
+          schema:
+            type: string
+        - description: Part of `name`. See documentation of `projectsId`.
+          in: path
+          name: locationsId
+          required: true
+          schema:
+            type: string
+        - description: Part of `name`. See documentation of `projectsId`.
+          in: path
+          name: applicationsId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RepairApplicationRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1beta/projects/{projectsId}/locations/{locationsId}/operations":
+    get:
+      description: "Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns UNIMPLEMENTED.NOTE: the name binding allows API services to override the binding to use different resource name schemes, such as users/*/operations. To override the binding, API services can add a binding such as \"/v1/{name=users/*}/operations\" to their service configuration. For backwards compatibility, the default name includes the operations collection id, however overriding users must ensure the name binding is the parent resource, without the operations collection id."
+      operationId: appengine.projects.locations.operations.list
+      parameters:
+        - description: Part of `name`. The name of the operation's parent resource.
+          in: path
+          name: projectsId
+          required: true
+          schema:
+            type: string
+        - description: Part of `name`. See documentation of `projectsId`.
+          in: path
+          name: locationsId
+          required: true
+          schema:
+            type: string
+        - description: The standard list filter.
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: The standard list page size.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: The standard list page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListOperationsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/appengine.admin
+          Oauth2c:
+            - https://www.googleapis.com/auth/appengine.admin
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform.read-only
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform.read-only
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v1beta/projects/{projectsId}/locations/{locationsId}/operations/{operationsId}":
+    get:
+      description: Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service.
+      operationId: appengine.projects.locations.operations.get
+      parameters:
+        - description: Part of `name`. The name of the operation resource.
+          in: path
+          name: projectsId
+          required: true
+          schema:
+            type: string
+        - description: Part of `name`. See documentation of `projectsId`.
+          in: path
+          name: locationsId
+          required: true
+          schema:
+            type: string
+        - description: Part of `name`. See documentation of `projectsId`.
+          in: path
+          name: operationsId
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/appengine.admin
+          Oauth2c:
+            - https://www.googleapis.com/auth/appengine.admin
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform.read-only
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform.read-only
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
 components:
   parameters:
     _.xgafv:
@@ -1937,7 +2340,8 @@ components:
           description: Google Apps authentication domain that controls which users can access this application.Defaults to open access for any Google Account.
           type: string
         codeBucket:
-          description: Google Cloud Storage bucket that can be used for storing files associated with this application. This bucket is associated with the application and can be used by the gcloud deployment commands.@OutputOnly
+          description: Output only. Google Cloud Storage bucket that can be used for storing files associated with this application. This bucket is associated with the application and can be used by the gcloud deployment commands.@OutputOnly
+          readOnly: true
           type: string
         databaseType:
           description: The type of the Cloud Firestore or Cloud Datastore database associated with this application.
@@ -1948,14 +2352,16 @@ components:
             - CLOUD_DATASTORE_COMPATIBILITY
           type: string
         defaultBucket:
-          description: Google Cloud Storage bucket that can be used by this application to store content.@OutputOnly
+          description: Output only. Google Cloud Storage bucket that can be used by this application to store content.@OutputOnly
+          readOnly: true
           type: string
         defaultCookieExpiration:
           description: Cookie expiration policy for this application.
           format: google-duration
           type: string
         defaultHostname:
-          description: Hostname used to reach this application, as resolved by App Engine.@OutputOnly
+          description: Output only. Hostname used to reach this application, as resolved by App Engine.@OutputOnly
+          readOnly: true
           type: string
         dispatchRules:
           description: HTTP path dispatch rules for requests to the application that do not explicitly target a service or version. Rules are order-dependent. Up to 20 dispatch rules can be supported.
@@ -1966,7 +2372,8 @@ components:
           $ref: "#/components/schemas/FeatureSettings"
           description: The feature specific settings to be used in the application.
         gcrDomain:
-          description: The Google Container Registry domain used for storing managed build docker images for this application.
+          description: Output only. The Google Container Registry domain used for storing managed build docker images for this application.
+          readOnly: true
           type: string
         iap:
           $ref: "#/components/schemas/IdentityAwareProxy"
@@ -1977,7 +2384,8 @@ components:
           description: Location from which this application runs. Application instances run out of the data centers in the specified location, which is also where all of the application's end user content is stored.Defaults to us-central.View the list of supported locations (https://cloud.google.com/appengine/docs/locations).
           type: string
         name:
-          description: "Full path to the Application resource in the API. Example: apps/myapp.@OutputOnly"
+          description: "Output only. Full path to the Application resource in the API. Example: apps/myapp.@OutputOnly"
+          readOnly: true
           type: string
         serviceAccount:
           description: The service account associated with the application. This is the app-level default identity. If no identity provided during create version, Admin API will fallback to this one.
@@ -2430,7 +2838,8 @@ components:
           description: OAuth2 client secret to use for the authentication flow.For security reasons, this value cannot be retrieved via the API. Instead, the SHA-256 hash of the value is returned in the oauth2_client_secret_sha256 field.@InputOnly
           type: string
         oauth2ClientSecretSha256:
-          description: Hex-encoded SHA-256 hash of the client secret.@OutputOnly
+          description: Output only. Hex-encoded SHA-256 hash of the client secret.@OutputOnly
+          readOnly: true
           type: string
       type: object
     Instance:
@@ -3405,3 +3814,5 @@ components:
             https://www.googleapis.com/auth/cloud-platform.read-only: View your data across Google Cloud services and see the email address of your Google Account
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
+source:
+  url: {}

@@ -275,7 +275,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Connector API
-  version: 8.71.0
+  version: 8.72.0
   x-apideck-api: connector
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -741,7 +741,7 @@ components:
       schema:
         type: string
     unifiedApi:
-      description: ID of the Doc
+      description: Specify unified API for the connector resource. This is useful when a resource appears in multiple APIs
       in: query
       name: unified_api
       required: false
@@ -1302,12 +1302,15 @@ components:
           description: Unify event type
           example: employee.created
           type: string
-        resource_id:
+        resource:
           $ref: "#/components/schemas/ResourceId"
       type: object
       x-apideck-schema-id: ConnectorEvent
     ConnectorResource:
       properties:
+        custom_fields_supported:
+          description: Indicates if custom fields are supported on this resource.
+          type: boolean
         downstream_id:
           description: ID of the resource in the Connector's API (downstream)
           example: accounts

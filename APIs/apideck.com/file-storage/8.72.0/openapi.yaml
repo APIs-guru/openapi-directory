@@ -275,7 +275,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: File storage API
-  version: 8.71.0
+  version: 8.72.0
   x-apideck-api: file-storage
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -1934,7 +1934,7 @@ paths:
               console.error(error)
             }
     put:
-      description: Upload part of file to Upload Session
+      description: Upload part of File to Upload Session (max 4MB). Get `part_size` from [Get Upload Session](#operation/uploadSessionsOne) first. Every File part (except the last one) uploaded to this endpoint should have Content-Length equal to `part_size`.
       operationId: uploadSessionsUpload
       parameters:
         - $ref: "#/components/parameters/id"
@@ -1968,7 +1968,7 @@ paths:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: Upload part of file to Upload Session
+      summary: Upload part of File to Upload Session
       tags:
         - Upload Sessions
       x-apideck-api: fileStorage
@@ -2000,7 +2000,7 @@ paths:
       x-sdk-exclude: true
   "/file-storage/upload-sessions/{id}/finish":
     post:
-      description: Finish Upload Session
+      description: Finish Upload Session. Only call this endpoint after all File parts have been uploaded to [Upload part of File](#operation/uploadSessionsUpload).
       operationId: uploadSessionsFinish
       parameters:
         - $ref: "#/components/parameters/id"
