@@ -2519,7 +2519,7 @@ components:
       description: HTTPHeader describes a custom header to be used in HTTP probes
       properties:
         name:
-          description: The header field name
+          description: Required. The header field name
           type: string
         value:
           description: The header field value
@@ -3472,7 +3472,7 @@ components:
           description: ConfigurationName of a configuration to whose latest revision which will be sent this portion of traffic. When the "status.latestReadyRevisionName" of the referenced configuration changes, traffic will automatically migrate from the prior "latest ready" revision to the new one. This field is never set in Route's status, only its spec. This is mutually exclusive with RevisionName. Cloud Run currently supports a single ConfigurationName.
           type: string
         latestRevision:
-          description: Optional. LatestRevision may be provided to indicate that the latest ready Revision of the Configuration should be used for this traffic target. When provided LatestRevision must be true if RevisionName is empty; it must be false when RevisionName is non-empty.
+          description: Optional. LatestRevision may be provided to indicate that the latest ready Revision of the Configuration should be used for this traffic target. When provided LatestRevision must be true if RevisionName is empty; it must be false when RevisionName is non-empty in spec. When shown in status, this indicates that the RevisionName was resolved from a spec's ConfigurationName.
           type: boolean
         percent:
           description: Percent specifies percent of the traffic to this Revision or Configuration. This defaults to zero if unspecified.
