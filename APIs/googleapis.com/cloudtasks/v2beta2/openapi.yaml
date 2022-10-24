@@ -13,20 +13,17 @@ info:
   termsOfService: https://developers.google.com/terms/
   title: Cloud Tasks API
   version: v2beta2
-  x-apiClientRegistration:
-    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
-    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
+    url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: openapi
+    - format: google
       url: https://cloudtasks.googleapis.com/$discovery/rest?version=v2beta2
-      version: "3.0"
+      version: v1
   x-providerName: googleapis.com
   x-serviceName: cloudtasks
-  x-preferred: true
 externalDocs:
   url: https://cloud.google.com/tasks/
 tags:
@@ -1258,7 +1255,7 @@ components:
           description: If specified, an [OIDC](https://developers.google.com/identity/protocols/OpenIDConnect) token will be generated and attached as an `Authorization` header in the HTTP request. This type of authorization can be used for many scenarios, including calling Cloud Run, or endpoints where you intend to validate the token yourself.
         uriOverride:
           $ref: "#/components/schemas/UriOverride"
-          description: Uri override. When specified modifies the execution Uri for all the tasks in the queue.
+          description: Uri override. When specified, modifies the execution Uri for all the tasks in the queue.
       type: object
     LeaseTasksRequest:
       description: Request message for leasing tasks using LeaseTasks.
@@ -1680,6 +1677,13 @@ components:
             - HTTP
             - HTTPS
           type: string
+        uriOverrideEnforceMode:
+          description: Uri Override Enforce Mode Determines the Target UriOverride mode.
+          enum:
+            - URI_OVERRIDE_ENFORCE_MODE_UNSPECIFIED
+            - IF_NOT_EXISTS
+            - ALWAYS
+          type: string
       type: object
   securitySchemes:
     Oauth2:
@@ -1699,5 +1703,3 @@ components:
             https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
-source:
-  url: {}

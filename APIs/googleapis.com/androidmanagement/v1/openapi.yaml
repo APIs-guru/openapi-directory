@@ -3041,13 +3041,13 @@ components:
       properties:
         blockAction:
           $ref: "#/components/schemas/BlockAction"
-          description: "An action to block access to apps and data on a fully managed device or in a work profile. This action also triggers a user-facing notification with information (where possible) on how to correct the compliance issue. Note: wipeAction must also be specified."
+          description: "An action to block access to apps and data on a company owned device or in a work profile. This action also triggers a user-facing notification with information (where possible) on how to correct the compliance issue. Note: wipeAction must also be specified."
         settingName:
           description: The top-level policy to enforce. For example, applications or passwordPolicies.
           type: string
         wipeAction:
           $ref: "#/components/schemas/WipeAction"
-          description: "An action to reset a fully managed device or delete a work profile. Note: blockAction must also be specified."
+          description: "An action to reset a company owned device or delete a work profile. Note: blockAction must also be specified."
       type: object
     PostureDetail:
       description: Additional details regarding the security posture of the device.
@@ -3588,7 +3588,7 @@ components:
           type: string
       type: object
     WipeAction:
-      description: "An action to reset a fully managed device or delete a work profile. Note: blockAction must also be specified."
+      description: "An action to reset a company owned device or delete a work profile. Note: blockAction must also be specified."
       properties:
         preserveFrp:
           description: Whether the factory-reset protection data is preserved on the device. This setting doesn’t apply to work profiles.

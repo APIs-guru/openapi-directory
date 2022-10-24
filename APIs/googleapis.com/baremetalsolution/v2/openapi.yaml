@@ -148,10 +148,10 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   "/v2/{name}":
     delete:
-      description: Deletes a public SSH key registered in the specified project.
-      operationId: baremetalsolution.projects.locations.sshKeys.delete
+      description: Deletes a volume snapshot. Returns INVALID_ARGUMENT if called for a non-boot volume.
+      operationId: baremetalsolution.projects.locations.volumes.snapshots.delete
       parameters:
-        - description: Required. The name of the SSH key to delete. Currently, the only valid value for the location is "global".
+        - description: Required. The name of the snapshot to delete.
           in: path
           name: name
           required: true
@@ -172,10 +172,10 @@ paths:
       tags:
         - projects
     get:
-      description: Get details of a single storage logical unit number(LUN).
-      operationId: baremetalsolution.projects.locations.volumes.luns.get
+      description: Returns the specified snapshot resource. Returns INVALID_ARGUMENT if called for a non-boot volume.
+      operationId: baremetalsolution.projects.locations.volumes.snapshots.get
       parameters:
-        - description: Required. Name of the resource.
+        - description: Required. The name of the snapshot.
           in: path
           name: name
           required: true
@@ -186,7 +186,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Lun"
+                $ref: "#/components/schemas/VolumeSnapshot"
           description: Successful response
       security:
         - Oauth2:
@@ -900,6 +900,82 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  "/v2/{parent}/snapshots":
+    get:
+      description: Retrieves the list of snapshots for the specified volume. Returns a response with an empty list of snapshots if called for a non-boot volume.
+      operationId: baremetalsolution.projects.locations.volumes.snapshots.list
+      parameters:
+        - description: Required. Parent value for ListVolumesRequest.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Requested page size. The server might return fewer items than requested. If unspecified, server will pick an appropriate default.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A token identifying a page of results from the server.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListVolumeSnapshotsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Takes a snapshot of a boot volume. Returns INVALID_ARGUMENT if called for a non-boot volume.
+      operationId: baremetalsolution.projects.locations.volumes.snapshots.create
+      parameters:
+        - description: Required. The volume to snapshot.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/VolumeSnapshot"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/VolumeSnapshot"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   "/v2/{parent}/sshKeys":
     get:
       description: Lists the public SSH keys registered for the specified project. These SSH keys are used only for the interactive serial console feature.
@@ -1033,6 +1109,48 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  "/v2/{volumeSnapshot}:restoreVolumeSnapshot":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Uses the specified snapshot to restore its parent volume. Returns INVALID_ARGUMENT if called for a non-boot volume.
+      operationId: baremetalsolution.projects.locations.volumes.snapshots.restoreVolumeSnapshot
+      parameters:
+        - description: Required. Name of the snapshot which will be used to restore its parent volume.
+          in: path
+          name: volumeSnapshot
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RestoreVolumeSnapshotRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   "/v2/{volume}:resize":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -1521,6 +1639,23 @@ components:
           description: The SSH keys registered in the project.
           items:
             $ref: "#/components/schemas/SSHKey"
+          type: array
+      type: object
+    ListVolumeSnapshotsResponse:
+      description: Response message containing the list of volume snapshots.
+      properties:
+        nextPageToken:
+          description: A token identifying a page of results from the server.
+          type: string
+        unreachable:
+          description: Locations that could not be reached.
+          items:
+            type: string
+          type: array
+        volumeSnapshots:
+          description: The list of snapshots.
+          items:
+            $ref: "#/components/schemas/VolumeSnapshot"
           type: array
       type: object
     ListVolumesResponse:
@@ -2117,6 +2252,10 @@ components:
           format: int64
           type: string
       type: object
+    RestoreVolumeSnapshotRequest:
+      description: Message for restoring a volume snapshot.
+      properties: {}
+      type: object
     SSHKey:
       description: An SSH key, used for authorizing with the interactive serial console feature.
       properties:
@@ -2416,6 +2555,37 @@ components:
           type: string
         userNote:
           description: User note field, it can be used by customers to add additional information for the BMS Ops team .
+          type: string
+      type: object
+    VolumeSnapshot:
+      description: A snapshot of a volume. Only boot volumes can have snapshots.
+      properties:
+        createTime:
+          description: Output only. The creation time of the snapshot.
+          format: google-datetime
+          readOnly: true
+          type: string
+        description:
+          description: The description of the snapshot.
+          type: string
+        id:
+          description: Output only. An identifier for the snapshot, generated by the backend.
+          readOnly: true
+          type: string
+        name:
+          description: The name of the snapshot.
+          type: string
+        storageVolume:
+          description: Output only. The name of the volume which this snapshot belongs to.
+          readOnly: true
+          type: string
+        type:
+          description: Output only. The type of the snapshot which indicates whether it was scheduled or manual/ad-hoc.
+          enum:
+            - SNAPSHOT_TYPE_UNSPECIFIED
+            - AD_HOC
+            - SCHEDULED
+          readOnly: true
           type: string
       type: object
   securitySchemes:

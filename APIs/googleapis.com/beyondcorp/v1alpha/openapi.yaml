@@ -364,26 +364,21 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     patch:
-      description: Updates the parameters of a single NetConnection.
-      operationId: beyondcorp.projects.locations.netConnections.patch
+      description: Updates the parameters of a single Connector.
+      operationId: beyondcorp.projects.locations.connectors.patch
       parameters:
-        - description: Required. Unique resource name of the NetConnection. The name is ignored when creating a NetConnection.
+        - description: Required. Unique resource name of the connector. The name is ignored when creating a connector.
           in: path
           name: name
           required: true
           schema:
             type: string
-        - description: Optional. If set as true, will create the resource if it is not found.
-          in: query
-          name: allowMissing
-          schema:
-            type: boolean
         - description: Optional. An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. The server will guarantee that for at least 60 minutes since the first request. For example, consider a situation where you make an initial request and t he request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
           in: query
           name: requestId
           schema:
             type: string
-        - description: "Required. Mask of fields to update. At least one path must be supplied in this field. The elements of the repeated paths field may only include these fields from [BeyondCorp.NetConnection]: * `labels` * `display_name`"
+        - description: "Required. Mask of fields to update. At least one path must be supplied in this field. The elements of the repeated paths field may only include these fields from [BeyondCorp.Connector]: * `labels` * `display_name`"
           in: query
           name: updateMask
           schema:
@@ -397,7 +392,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/GoogleCloudBeyondcorpNetconnectionsV1alphaNetConnection"
+              $ref: "#/components/schemas/Connector"
       responses:
         "200":
           content:
@@ -1435,25 +1430,15 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1alpha/{parent}/netConnections":
+  "/v1alpha/{parent}/subscriptions":
     get:
-      description: Lists NetConnections in a given project and location.
-      operationId: beyondcorp.projects.locations.netConnections.list
+      description: Lists Subscriptions in a given organization and location.
+      operationId: beyondcorp.organizations.locations.subscriptions.list
       parameters:
-        - description: "Required. The resource name of the NetConnection location using the form: `projects/{project_id}/locations/{location_id}`"
+        - description: "Required. The resource name of Subscription using the form: `organizations/{organization_id}/locations/{location}`"
           in: path
           name: parent
           required: true
-          schema:
-            type: string
-        - description: Optional. A filter specifying constraints of a list operation.
-          in: query
-          name: filter
-          schema:
-            type: string
-        - description: Optional. Specifies the ordering of results. See [Sorting order](https://cloud.google.com/apis/design/design_patterns#sorting_order) for more information.
-          in: query
-          name: orderBy
           schema:
             type: string
         - description: Optional. The maximum number of items to return. If not specified, a default value of 50 will be used by the service. Regardless of the page_size value, the response may include a partial list and a caller should only rely on response's next_page_token to determine if there are more instances left to be queried.
@@ -1461,7 +1446,7 @@ paths:
           name: pageSize
           schema:
             type: integer
-        - description: Optional. The next_page_token value returned from a previous ListNetConnectionsRequest, if any.
+        - description: Optional. The next_page_token value returned from a previous ListSubscriptionsRequest, if any.
           in: query
           name: pageToken
           schema:
@@ -1471,7 +1456,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GoogleCloudBeyondcorpNetconnectionsV1alphaListNetConnectionsResponse"
+                $ref: "#/components/schemas/GoogleCloudBeyondcorpSaasplatformSubscriptionsV1alphaListSubscriptionsResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -1479,7 +1464,7 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
-        - projects
+        - organizations
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1493,41 +1478,26 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Creates a new NetConnection in a given project and location.
-      operationId: beyondcorp.projects.locations.netConnections.create
+      description: Creates a new BeyondCorp Enterprise Subscription in a given organization. Location will always be global as BeyondCorp subscriptions are per organization.
+      operationId: beyondcorp.organizations.locations.subscriptions.create
       parameters:
-        - description: "Required. The resource project name of the NetConnection location using the form: `projects/{project_id}/locations/{location_id}`"
+        - description: "Required. The resource name of the subscription location using the form: `organizations/{organization_id}/locations/{location}`"
           in: path
           name: parent
           required: true
           schema:
             type: string
-        - description: Optional. User-settable NetConnection resource ID. * Must start with a letter. * Must contain between 4-63 characters from `/a-z-/`. * Must end with a number or a letter.
-          in: query
-          name: netConnectionId
-          schema:
-            type: string
-        - description: Optional. An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. The server will guarantee that for at least 60 minutes since the first request. For example, consider a situation where you make an initial request and t he request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
-          in: query
-          name: requestId
-          schema:
-            type: string
-        - description: Optional. If set, validates request by executing a dry-run which would not alter the resource in any way.
-          in: query
-          name: validateOnly
-          schema:
-            type: boolean
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/GoogleCloudBeyondcorpNetconnectionsV1alphaNetConnection"
+              $ref: "#/components/schemas/GoogleCloudBeyondcorpSaasplatformSubscriptionsV1alphaSubscription"
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GoogleLongrunningOperation"
+                $ref: "#/components/schemas/GoogleCloudBeyondcorpSaasplatformSubscriptionsV1alphaSubscription"
           description: Successful response
       security:
         - Oauth2:
@@ -1535,7 +1505,7 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
-        - projects
+        - organizations
   "/v1alpha/{resource}:getIamPolicy":
     get:
       description: Gets the access control policy for a resource. Returns an empty policy if the resource exists and does not have a policy set.
@@ -2865,36 +2835,6 @@ components:
           readOnly: true
           type: string
       type: object
-    GoogleCloudBeyondcorpApplicationsV1alphaApplicationOperationMetadata:
-      description: Represents the metadata of the long-running operation.
-      properties:
-        createTime:
-          description: Output only. The time the operation was created.
-          format: google-datetime
-          readOnly: true
-          type: string
-        endTime:
-          description: Output only. The time the operation finished running.
-          format: google-datetime
-          readOnly: true
-          type: string
-        requestedCancellation:
-          description: Output only. Identifies whether the user has requested cancellation of the operation. Operations that have been cancelled successfully have Operation.error value with a google.rpc.Status.code of 1, corresponding to `Code.CANCELLED`.
-          readOnly: true
-          type: boolean
-        statusMessage:
-          description: Output only. Human-readable status of the operation, if any.
-          readOnly: true
-          type: string
-        target:
-          description: Output only. Server-defined resource path for the target of the operation.
-          readOnly: true
-          type: string
-        verb:
-          description: Output only. Name of the verb executed by the operation.
-          readOnly: true
-          type: string
-      type: object
     GoogleCloudBeyondcorpClientconnectorservicesV1ClientConnectorServiceOperationMetadata:
       description: Represents the metadata of the long-running operation.
       properties:
@@ -2948,111 +2888,6 @@ components:
           type: string
         requestedCancellation:
           description: Output only. Identifies whether the user has requested cancellation of the operation. Operations that have been cancelled successfully have Operation.error value with a google.rpc.Status.code of 1, corresponding to `Code.CANCELLED`.
-          readOnly: true
-          type: boolean
-        statusMessage:
-          description: Output only. Human-readable status of the operation, if any.
-          readOnly: true
-          type: string
-        target:
-          description: Output only. Server-defined resource path for the target of the operation.
-          readOnly: true
-          type: string
-        verb:
-          description: Output only. Name of the verb executed by the operation.
-          readOnly: true
-          type: string
-      type: object
-    GoogleCloudBeyondcorpNetconnectionsV1alphaListNetConnectionsResponse:
-      description: Response message for BeyondCorp.ListNetConnections.
-      properties:
-        netConnections:
-          description: A list of BeyondCorp NetConnections in the project.
-          items:
-            $ref: "#/components/schemas/GoogleCloudBeyondcorpNetconnectionsV1alphaNetConnection"
-          type: array
-        nextPageToken:
-          description: A token to retrieve the next page of results, or empty if there are no more results in the list.
-          type: string
-        unreachable:
-          description: A list of locations that could not be reached.
-          items:
-            type: string
-          type: array
-      type: object
-    GoogleCloudBeyondcorpNetconnectionsV1alphaNetConnection:
-      description: A BeyondCorp NetConnection resource represents a BeyondCorp protected connection from BeyondCorp Client Connector to a remote application through a BeyondCorp AppConnector gateway.
-      properties:
-        connectors:
-          description: Optional. List of [google.cloud.beyondcorp.v1main.AppConnector.name] that are authorized to be associated with this NetConnection. e.g. projects/{project}/locations/{location}/appConnectors/{app_connector}
-          items:
-            type: string
-          type: array
-        createTime:
-          description: Output only. Timestamp when the resource was created.
-          format: google-datetime
-          readOnly: true
-          type: string
-        destinationCidrs:
-          description: "Required. CIDRs for the remote networks to connect to. e.g. IPv4: 198.51.100.14/24 IPv6: 2001:db8::/48"
-          items:
-            type: string
-          type: array
-        displayName:
-          description: Optional. An arbitrary user-provided name for the NetConnection. Cannot exceed 64 characters.
-          type: string
-        labels:
-          additionalProperties:
-            type: string
-          description: Optional. Resource labels to represent user provided metadata.
-          type: object
-        name:
-          description: Required. Unique resource name of the NetConnection. The name is ignored when creating a NetConnection.
-          type: string
-        networkVpc:
-          description: Output only. The full name of the VPC network connected to the applications. Client Connector will send traffic here.
-          readOnly: true
-          type: string
-        state:
-          description: Output only. The current state of the NetConnection.
-          enum:
-            - STATE_UNSPECIFIED
-            - CREATING
-            - CREATED
-            - UPDATING
-            - DELETING
-            - DOWN
-          readOnly: true
-          type: string
-        uid:
-          description: Output only. A unique identifier for the instance generated by the system.
-          readOnly: true
-          type: string
-        updateTime:
-          description: Output only. Timestamp when the resource was last modified.
-          format: google-datetime
-          readOnly: true
-          type: string
-      type: object
-    GoogleCloudBeyondcorpNetconnectionsV1alphaNetConnectionOperationMetadata:
-      description: Represents the metadata of the long-running operation.
-      properties:
-        apiVersion:
-          description: Output only. API version used to start the operation.
-          readOnly: true
-          type: string
-        createTime:
-          description: Output only. The time the operation was created.
-          format: google-datetime
-          readOnly: true
-          type: string
-        endTime:
-          description: Output only. The time the operation finished running.
-          format: google-datetime
-          readOnly: true
-          type: string
-        requestedCancellation:
-          description: Output only. Identifies whether the user has requested cancellation of the operation. Operations that have successfully been cancelled have Operation.error value with a google.rpc.Status.code of 1, corresponding to `Code.CANCELLED`.
           readOnly: true
           type: boolean
         statusMessage:
@@ -3272,6 +3107,71 @@ components:
         value:
           description: Output only. Value of the field in string format. Acceptable values are strings or numbers.
           readOnly: true
+          type: string
+      type: object
+    GoogleCloudBeyondcorpSaasplatformSubscriptionsV1alphaListSubscriptionsResponse:
+      description: Response message for BeyondCorp.ListSubscriptions.
+      properties:
+        nextPageToken:
+          description: A token to retrieve the next page of results, or empty if there are no more results in the list.
+          type: string
+        subscriptions:
+          description: A list of BeyondCorp Subscriptions in the organization.
+          items:
+            $ref: "#/components/schemas/GoogleCloudBeyondcorpSaasplatformSubscriptionsV1alphaSubscription"
+          type: array
+      type: object
+    GoogleCloudBeyondcorpSaasplatformSubscriptionsV1alphaSubscription:
+      description: A BeyondCorp Subscription resource represents BeyondCorp Enterprise Subscription. BeyondCorp Enterprise Subscription enables BeyondCorp Enterprise permium features for an organization.
+      properties:
+        autoRenewEnabled:
+          description: Output only. Represents that, if subscription will renew or end when the term ends.
+          readOnly: true
+          type: boolean
+        createTime:
+          description: Output only. Create time of the subscription.
+          format: google-datetime
+          readOnly: true
+          type: string
+        endTime:
+          description: Output only. End time of the subscription.
+          format: google-datetime
+          readOnly: true
+          type: string
+        name:
+          description: Required. Unique resource name of the Subscription. The name is ignored when creating a subscription.
+          type: string
+        seatCount:
+          description: Output only. Number of seats in the subscription.
+          format: int64
+          readOnly: true
+          type: string
+        sku:
+          description: Required. SKU of subscription.
+          enum:
+            - SKU_UNSPECIFIED
+            - BCE_STANDARD_SKU
+          type: string
+        startTime:
+          description: Output only. Start time of the subscription.
+          format: google-datetime
+          readOnly: true
+          type: string
+        state:
+          description: Output only. The current state of the subscription.
+          enum:
+            - STATE_UNSPECIFIED
+            - ACTIVE
+            - INACTIVE
+          readOnly: true
+          type: string
+        type:
+          description: Required. Type of subscription.
+          enum:
+            - TYPE_UNSPECIFIED
+            - TRIAL
+            - PAID
+            - ALLOWLIST
           type: string
       type: object
     GoogleCloudLocationListLocationsResponse:

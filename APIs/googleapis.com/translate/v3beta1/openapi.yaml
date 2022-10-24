@@ -13,17 +13,20 @@ info:
   termsOfService: https://developers.google.com/terms/
   title: Cloud Translation API
   version: v3beta1
+  x-apiClientRegistration:
+    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
-    url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
+    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
-    - format: google
+    - format: openapi
       url: https://translation.googleapis.com/$discovery/rest?version=v3beta1
-      version: v1
+      version: "3.0"
   x-providerName: googleapis.com
   x-serviceName: translate
+  x-preferred: true
 externalDocs:
   url: https://cloud.google.com/translate/docs/quickstarts
 tags:
@@ -1134,6 +1137,9 @@ components:
         glossaryConfig:
           $ref: "#/components/schemas/TranslateTextGlossaryConfig"
           description: Optional. Glossary to be applied. The glossary must be within the same region (have the same location-id) as the model, otherwise an INVALID_ARGUMENT (400) error is returned.
+        isTranslateNativePdfOnly:
+          description: Optional. is_translate_native_pdf_only field for external customers. If true, the page limit of online native pdf translation is 300 and only native pdf pages will be translated.
+          type: boolean
         labels:
           additionalProperties:
             type: string
@@ -1261,3 +1267,5 @@ components:
             https://www.googleapis.com/auth/cloud-translation: Translate text from one language to another using Google Translate
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
+source:
+  url: {}

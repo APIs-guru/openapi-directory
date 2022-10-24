@@ -2773,6 +2773,9 @@ components:
         eventSucceeded:
           description: The status of the event.
           type: boolean
+        fastStartupEnabled:
+          description: If the session is associated with an environment with fast startup enabled, and was created before being assigned to a user.
+          type: boolean
         message:
           description: The log message.
           type: string
@@ -2798,9 +2801,6 @@ components:
         userId:
           description: The information about the user that created the session. It will be the email address of the user.
           type: string
-        warmPoolEnabled:
-          description: If the session is a warm pooled session.
-          type: boolean
       type: object
     GoogleCloudDataplexV1SessionEventQueryDetail:
       description: Execution details of the query.
@@ -3053,12 +3053,12 @@ components:
       description: Config for running scheduled notebooks.
       properties:
         archiveUris:
-          description: "Optional. GCS URIs of archives to be extracted into the working directory of each executor. Supported file types: .jar, .tar, .tar.gz, .tgz, and .zip."
+          description: "Optional. Cloud Storage URIs of archives to be extracted into the working directory of each executor. Supported file types: .jar, .tar, .tar.gz, .tgz, and .zip."
           items:
             type: string
           type: array
         fileUris:
-          description: Optional. GCS URIs of files to be placed in the working directory of each executor.
+          description: Optional. Cloud Storage URIs of files to be placed in the working directory of each executor.
           items:
             type: string
           type: array
@@ -3066,7 +3066,7 @@ components:
           $ref: "#/components/schemas/GoogleCloudDataplexV1TaskInfrastructureSpec"
           description: Optional. Infrastructure specification for the execution.
         notebook:
-          description: Required. Path to input notebook. This can be the GCS URI of the notebook file or the path to a Notebook Content. The execution args are accessible as environment variables (TASK_key=value).
+          description: Required. Path to input notebook. This can be the Cloud Storage URI of the notebook file or the path to a Notebook Content. The execution args are accessible as environment variables (TASK_key=value).
           type: string
       type: object
     GoogleCloudDataplexV1TaskSparkTaskConfig:
