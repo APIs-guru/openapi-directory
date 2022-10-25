@@ -1108,6 +1108,20 @@ components:
           format: google-datetime
           type: string
       type: object
+    ReconciliationOperationMetadata:
+      description: Operation metadata returned by the CLH during resource state reconciliation.
+      properties:
+        deleteResource:
+          description: DEPRECATED. Use exclusive_action instead.
+          type: boolean
+        exclusiveAction:
+          description: Excluisive action returned by the CLH.
+          enum:
+            - UNKNOWN_REPAIR_ACTION
+            - DELETE
+            - RETRY
+          type: string
+      type: object
     RescheduleMaintenanceRequest:
       description: Request for RescheduleMaintenance.
       properties:

@@ -63,6 +63,31 @@ paths:
         - Balance
     servers:
       - url: https://rest.nexmo.com
+  /account/register-sender:
+    post:
+      description: Register an email sender with an API Key for using email with Verify V2.
+      operationId: registerSender
+      parameters:
+        - $ref: "#/components/parameters/api_key_for_auth"
+        - $ref: "#/components/parameters/api_secret_for_auth"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/registerEmailRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/registerEmailResponse"
+          description: OK
+      summary: Register an email sender
+      tags:
+        - Configuration
+    servers:
+      - url: https://rest.nexmo.com
   /account/settings:
     post:
       description: |-
@@ -589,6 +614,62 @@ components:
           type: string
       required:
         - secret
+      type: object
+    registerEmailRequest:
+      properties:
+        application_ids:
+          description: An optional array of additional ApplicationID's that the value is to be assigned to.
+          example:
+            - 6ec9eb7de1d34e77ac2c0ad597c9554a
+            - 5dba5838689f402dba0c77957e2181f3
+          items:
+            type: string
+          type: object
+        name:
+          description: An optional name to be attached to this binding
+          example: my-email-link
+          type: string
+        provider:
+          description: The delivery method by which the value would be assigned. Always `email`
+          enum:
+            - email
+          example: email
+          format: enum
+          type: string
+        value:
+          description: The email adress to attach to the application(s)
+          example: bob@company.com
+          format: email
+          type: string
+      required:
+        - provider
+        - value
+      type: object
+    registerEmailResponse:
+      properties:
+        application_ids:
+          description: An array of ApplicationID strings attached to the value provided.
+          example:
+            - 6ec9eb7de1d34e77ac2c0ad597c9554a
+            - 5dba5838689f402dba0c77957e2181f3
+          items:
+            type: string
+          type: array
+        name:
+          description: An optional name to be attached to this binding
+          example: optionalName
+          type: string
+        provider:
+          description: Enum identifer of provider type.
+          enum:
+            - email
+          example: email
+          format: enum
+          type: string
+        value:
+          description: Value given to the provider to attach to the Application IDs.
+          example: alice@company.com
+          type: string
       type: object
     secretInfo:
       properties:
