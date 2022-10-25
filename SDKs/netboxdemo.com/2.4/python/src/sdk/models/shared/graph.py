@@ -5,7 +5,7 @@ from dataclasses_json import dataclass_json
 
 @dataclass_json
 @dataclass
-class GraphTypeType:
+class GraphType:
     label: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label' }})
     value: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
     
@@ -17,6 +17,6 @@ class Graph:
     link: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'link' }})
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
     source: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'source' }})
-    type: GraphTypeType = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    type: GraphType = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     weight: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'weight' }})
     

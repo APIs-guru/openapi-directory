@@ -26,7 +26,7 @@ type ListAlertRequest struct {
 	Security    ListAlertSecurity
 }
 
-type ListAlert200ApplicationJSONMeta struct {
+type ListAlertListAlertResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -36,13 +36,13 @@ type ListAlert200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListAlert200ApplicationJSONListAlertResponse struct {
-	Alerts []shared.MonitorV1Alert          `json:"alerts,omitempty"`
-	Meta   *ListAlert200ApplicationJSONMeta `json:"meta,omitempty"`
+type ListAlertListAlertResponse struct {
+	Alerts []shared.MonitorV1Alert         `json:"alerts,omitempty"`
+	Meta   *ListAlertListAlertResponseMeta `json:"meta,omitempty"`
 }
 
 type ListAlertResponse struct {
 	ContentType       string
-	ListAlertResponse *ListAlert200ApplicationJSONListAlertResponse
+	ListAlertResponse *ListAlertListAlertResponse
 	StatusCode        int64
 }

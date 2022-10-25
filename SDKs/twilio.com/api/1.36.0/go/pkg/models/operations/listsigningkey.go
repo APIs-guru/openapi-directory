@@ -27,7 +27,7 @@ type ListSigningKeyRequest struct {
 	Security    ListSigningKeySecurity
 }
 
-type ListSigningKey200ApplicationJSONListSigningKeyResponse struct {
+type ListSigningKeyListSigningKeyResponse struct {
 	End             *int64                             `json:"end,omitempty"`
 	FirstPageURI    *string                            `json:"first_page_uri,omitempty"`
 	NextPageURI     *string                            `json:"next_page_uri,omitempty"`
@@ -41,6 +41,6 @@ type ListSigningKey200ApplicationJSONListSigningKeyResponse struct {
 
 type ListSigningKeyResponse struct {
 	ContentType            string
-	ListSigningKeyResponse *ListSigningKey200ApplicationJSONListSigningKeyResponse
+	ListSigningKeyResponse *ListSigningKeyListSigningKeyResponse
 	StatusCode             int64
 }

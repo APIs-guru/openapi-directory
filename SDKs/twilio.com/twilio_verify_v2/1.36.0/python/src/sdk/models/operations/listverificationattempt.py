@@ -37,7 +37,7 @@ class ListVerificationAttemptRequest:
 
 @dataclass_json
 @dataclass
-class ListVerificationAttempt200ApplicationJSONMeta:
+class ListVerificationAttemptListVerificationAttemptResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -49,14 +49,14 @@ class ListVerificationAttempt200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListVerificationAttempt200ApplicationJSONListVerificationAttemptResponse:
+class ListVerificationAttemptListVerificationAttemptResponse:
     attempts: Optional[List[shared.VerifyV2VerificationAttempt]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'attempts' }})
-    meta: Optional[ListVerificationAttempt200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+    meta: Optional[ListVerificationAttemptListVerificationAttemptResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     
 
 @dataclass
 class ListVerificationAttemptResponse:
     content_type: str = field(default=None)
-    list_verification_attempt_response: Optional[ListVerificationAttempt200ApplicationJSONListVerificationAttemptResponse] = field(default=None)
+    list_verification_attempt_response: Optional[ListVerificationAttemptListVerificationAttemptResponse] = field(default=None)
     status_code: int = field(default=None)
     

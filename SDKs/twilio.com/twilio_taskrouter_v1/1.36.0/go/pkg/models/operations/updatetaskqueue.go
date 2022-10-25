@@ -13,7 +13,7 @@ type UpdateTaskQueuePathParams struct {
 	WorkspaceSid string `pathParam:"style=simple,explode=false,name=WorkspaceSid"`
 }
 
-type UpdateTaskQueueRequestBodyUpdateTaskQueueRequest struct {
+type UpdateTaskQueueUpdateTaskQueueRequest struct {
 	AssignmentActivitySid  *string                            `form:"name=AssignmentActivitySid"`
 	FriendlyName           *string                            `form:"name=FriendlyName"`
 	MaxReservedWorkers     *int64                             `form:"name=MaxReservedWorkers"`
@@ -29,7 +29,7 @@ type UpdateTaskQueueSecurity struct {
 type UpdateTaskQueueRequest struct {
 	ServerURL  *string
 	PathParams UpdateTaskQueuePathParams
-	Request    *UpdateTaskQueueRequestBodyUpdateTaskQueueRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateTaskQueueUpdateTaskQueueRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateTaskQueueSecurity
 }
 

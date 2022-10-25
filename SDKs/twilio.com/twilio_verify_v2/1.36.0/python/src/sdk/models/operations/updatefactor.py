@@ -14,7 +14,7 @@ class UpdateFactorPathParams:
     
 
 @dataclass
-class UpdateFactorRequestBodyUpdateFactorRequest:
+class UpdateFactorUpdateFactorRequest:
     auth_payload: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'AuthPayload' }})
     config_alg: Optional[shared.FactorEnumTotpAlgorithmsEnum] = field(default=None, metadata={'form': { 'field_name': 'Config.Alg' }})
     config_code_length: Optional[int] = field(default=None, metadata={'form': { 'field_name': 'Config.CodeLength' }})
@@ -35,7 +35,7 @@ class UpdateFactorSecurity:
 class UpdateFactorRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateFactorPathParams = field(default=None)
-    request: Optional[UpdateFactorRequestBodyUpdateFactorRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateFactorUpdateFactorRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateFactorSecurity = field(default=None)
     
 

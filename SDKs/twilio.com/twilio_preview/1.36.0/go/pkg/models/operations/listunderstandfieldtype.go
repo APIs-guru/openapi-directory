@@ -27,7 +27,7 @@ type ListUnderstandFieldTypeRequest struct {
 	Security    ListUnderstandFieldTypeSecurity
 }
 
-type ListUnderstandFieldType200ApplicationJSONMeta struct {
+type ListUnderstandFieldTypeListUnderstandFieldTypeResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -37,13 +37,13 @@ type ListUnderstandFieldType200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListUnderstandFieldType200ApplicationJSONListUnderstandFieldTypeResponse struct {
-	FieldTypes []shared.PreviewUnderstandAssistantFieldType   `json:"field_types,omitempty"`
-	Meta       *ListUnderstandFieldType200ApplicationJSONMeta `json:"meta,omitempty"`
+type ListUnderstandFieldTypeListUnderstandFieldTypeResponse struct {
+	FieldTypes []shared.PreviewUnderstandAssistantFieldType                `json:"field_types,omitempty"`
+	Meta       *ListUnderstandFieldTypeListUnderstandFieldTypeResponseMeta `json:"meta,omitempty"`
 }
 
 type ListUnderstandFieldTypeResponse struct {
 	ContentType                     string
-	ListUnderstandFieldTypeResponse *ListUnderstandFieldType200ApplicationJSONListUnderstandFieldTypeResponse
+	ListUnderstandFieldTypeResponse *ListUnderstandFieldTypeListUnderstandFieldTypeResponse
 	StatusCode                      int64
 }

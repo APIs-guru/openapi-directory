@@ -4,7 +4,7 @@ type PutFloatingIpsIDPathParams struct {
 	ID int64 `pathParam:"style=simple,explode=false,name=id"`
 }
 
-type PutFloatingIpsIDRequestBodyUpdateFloatingIPRequest struct {
+type PutFloatingIpsIDUpdateFloatingIPRequest struct {
 	Description *string                `json:"description,omitempty"`
 	Labels      map[string]interface{} `json:"labels,omitempty"`
 	Name        *string                `json:"name,omitempty"`
@@ -12,7 +12,7 @@ type PutFloatingIpsIDRequestBodyUpdateFloatingIPRequest struct {
 
 type PutFloatingIpsIDRequest struct {
 	PathParams PutFloatingIpsIDPathParams
-	Request    *PutFloatingIpsIDRequestBodyUpdateFloatingIPRequest `request:"mediaType=application/json"`
+	Request    *PutFloatingIpsIDUpdateFloatingIPRequest `request:"mediaType=application/json"`
 }
 
 type PutFloatingIpsID200ApplicationJSONFloatingIPDNSPtr struct {

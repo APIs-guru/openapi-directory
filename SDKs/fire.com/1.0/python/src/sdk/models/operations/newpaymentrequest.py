@@ -5,14 +5,14 @@ import dateutil.parser
 from typing import Enum,Optional
 from dataclasses_json import dataclass_json
 
-class NewPaymentRequestRequestBodyCurrencyEnum(str, Enum):
+class NewPaymentRequestNewPaymentRequestCurrencyEnum(str, Enum):
     EUR = "EUR"
     GBP = "GBP"
 
 
 @dataclass_json
 @dataclass
-class NewPaymentRequestRequestBodyOrderDetailsOrderDetails:
+class NewPaymentRequestNewPaymentRequestOrderDetails:
     comment1: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'comment1' }})
     comment2: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'comment2' }})
     customer_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'customerNumber' }})
@@ -27,46 +27,46 @@ class NewPaymentRequestRequestBodyOrderDetailsOrderDetails:
     product_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'productId' }})
     variable_reference: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'variableReference' }})
     
-class NewPaymentRequestRequestBodyTypeEnum(str, Enum):
+class NewPaymentRequestNewPaymentRequestTypeEnum(str, Enum):
     OTHER = "OTHER"
 
 
 @dataclass_json
 @dataclass
-class NewPaymentRequestRequestBodyNewPaymentRequest:
+class NewPaymentRequestNewPaymentRequest:
     additional_fields: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'additionalFields' }})
     amount: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'amount' }})
     collect_fields: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'collectFields' }})
-    currency: NewPaymentRequestRequestBodyCurrencyEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'currency' }})
+    currency: NewPaymentRequestNewPaymentRequestCurrencyEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'currency' }})
     description: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
     expiry: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'expiry', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     ican_to: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'icanTo' }})
     mandatory_fields: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'mandatoryFields' }})
     max_number_payments: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'maxNumberPayments' }})
     my_ref: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'myRef' }})
-    order_details: Optional[NewPaymentRequestRequestBodyOrderDetailsOrderDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'orderDetails' }})
+    order_details: Optional[NewPaymentRequestNewPaymentRequestOrderDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'orderDetails' }})
     return_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'returnUrl' }})
-    type: NewPaymentRequestRequestBodyTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    type: NewPaymentRequestNewPaymentRequestTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     
 
 @dataclass
 class NewPaymentRequestRequest:
-    request: NewPaymentRequestRequestBodyNewPaymentRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: NewPaymentRequestNewPaymentRequest = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
-class NewPaymentRequest200ApplicationJSONTypeEnum(str, Enum):
+class NewPaymentRequestNewPaymentRequestResponseTypeEnum(str, Enum):
     OTHER = "OTHER"
 
 
 @dataclass_json
 @dataclass
-class NewPaymentRequest200ApplicationJSONNewPaymentRequestResponse:
+class NewPaymentRequestNewPaymentRequestResponse:
     code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'code' }})
-    type: Optional[NewPaymentRequest200ApplicationJSONTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    type: Optional[NewPaymentRequestNewPaymentRequestResponseTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     
 
 @dataclass
 class NewPaymentRequestResponse:
     content_type: str = field(default=None)
-    new_payment_request_response: Optional[NewPaymentRequest200ApplicationJSONNewPaymentRequestResponse] = field(default=None)
+    new_payment_request_response: Optional[NewPaymentRequestNewPaymentRequestResponse] = field(default=None)
     status_code: int = field(default=None)
     

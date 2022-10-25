@@ -5,7 +5,7 @@ CREATE_ESIM_PROFILE_SERVERS = [
 	"https://supersim.twilio.com",
 ]
 
-class CreateEsimProfileRequestBodyCallbackMethodEnum(str, Enum):
+class CreateEsimProfileCreateEsimProfileRequestCallbackMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -15,8 +15,8 @@ class CreateEsimProfileRequestBodyCallbackMethodEnum(str, Enum):
 
 
 @dataclass
-class CreateEsimProfileRequestBodyCreateEsimProfileRequest:
-    callback_method: Optional[CreateEsimProfileRequestBodyCallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'CallbackMethod' }})
+class CreateEsimProfileCreateEsimProfileRequest:
+    callback_method: Optional[CreateEsimProfileCreateEsimProfileRequestCallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'CallbackMethod' }})
     callback_url: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'CallbackUrl' }})
     eid: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Eid' }})
     
@@ -29,7 +29,7 @@ class CreateEsimProfileSecurity:
 @dataclass
 class CreateEsimProfileRequest:
     server_url: Optional[str] = field(default=None)
-    request: Optional[CreateEsimProfileRequestBodyCreateEsimProfileRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateEsimProfileCreateEsimProfileRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateEsimProfileSecurity = field(default=None)
     
 

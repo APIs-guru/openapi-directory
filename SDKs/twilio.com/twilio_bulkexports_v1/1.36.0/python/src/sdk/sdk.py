@@ -185,7 +185,7 @@ class SDK:
         res = operations.ListDayResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListDay200ApplicationJSONListDayResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListDayListDayResponse])
                 res.list_day_response = out
 
         return res
@@ -210,7 +210,7 @@ class SDK:
         res = operations.ListExportCustomJobResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListExportCustomJob200ApplicationJSONListExportCustomJobResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListExportCustomJobListExportCustomJobResponse])
                 res.list_export_custom_job_response = out
 
         return res

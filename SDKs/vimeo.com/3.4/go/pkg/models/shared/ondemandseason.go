@@ -289,7 +289,7 @@ type OnDemandSeasonUserWebsites struct {
 	Name        string `json:"name"`
 }
 
-type OnDemandSeasonUserUser struct {
+type OnDemandSeasonUser struct {
 	Account       OnDemandSeasonUserAccountEnum  `json:"account"`
 	Bio           string                         `json:"bio"`
 	ContentFilter []string                       `json:"content_filter,omitempty"`
@@ -315,5 +315,5 @@ type OnDemandSeason struct {
 	ResourceKey string                 `json:"resource_key"`
 	Type        string                 `json:"type"`
 	URI         string                 `json:"uri"`
-	User        OnDemandSeasonUserUser `json:"user"`
+	User        OnDemandSeasonUser     `json:"user"`
 }

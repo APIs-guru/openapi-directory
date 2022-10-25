@@ -12,7 +12,7 @@ type UpdateConfigurationAddressPathParams struct {
 	Sid string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
-type UpdateConfigurationAddressRequestBodyUpdateConfigurationAddressRequest struct {
+type UpdateConfigurationAddressUpdateConfigurationAddressRequest struct {
 	AutoCreationConversationServiceSid *string                                              `form:"name=AutoCreation.ConversationServiceSid"`
 	AutoCreationEnabled                *bool                                                `form:"name=AutoCreation.Enabled"`
 	AutoCreationStudioFlowSid          *string                                              `form:"name=AutoCreation.StudioFlowSid"`
@@ -31,7 +31,7 @@ type UpdateConfigurationAddressSecurity struct {
 type UpdateConfigurationAddressRequest struct {
 	ServerURL  *string
 	PathParams UpdateConfigurationAddressPathParams
-	Request    *UpdateConfigurationAddressRequestBodyUpdateConfigurationAddressRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateConfigurationAddressUpdateConfigurationAddressRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateConfigurationAddressSecurity
 }
 

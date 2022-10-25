@@ -32,7 +32,7 @@ class ListSubscribedEventRequest:
 
 @dataclass_json
 @dataclass
-class ListSubscribedEvent200ApplicationJSONMeta:
+class ListSubscribedEventListSubscribedEventResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -44,14 +44,14 @@ class ListSubscribedEvent200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListSubscribedEvent200ApplicationJSONListSubscribedEventResponse:
-    meta: Optional[ListSubscribedEvent200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+class ListSubscribedEventListSubscribedEventResponse:
+    meta: Optional[ListSubscribedEventListSubscribedEventResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     types: Optional[List[shared.EventsV1SubscriptionSubscribedEvent]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'types' }})
     
 
 @dataclass
 class ListSubscribedEventResponse:
     content_type: str = field(default=None)
-    list_subscribed_event_response: Optional[ListSubscribedEvent200ApplicationJSONListSubscribedEventResponse] = field(default=None)
+    list_subscribed_event_response: Optional[ListSubscribedEventListSubscribedEventResponse] = field(default=None)
     status_code: int = field(default=None)
     

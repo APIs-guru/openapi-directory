@@ -4,7 +4,7 @@ import (
 	"time"
 )
 
-type StargazerUserSimpleUser struct {
+type StargazerSimpleUser struct {
 	AvatarURL         string  `json:"avatar_url"`
 	EventsURL         string  `json:"events_url"`
 	FollowersURL      string  `json:"followers_url"`
@@ -27,6 +27,6 @@ type StargazerUserSimpleUser struct {
 }
 
 type Stargazer struct {
-	StarredAt time.Time               `json:"starred_at"`
-	User      StargazerUserSimpleUser `json:"user"`
+	StarredAt time.Time           `json:"starred_at"`
+	User      StargazerSimpleUser `json:"user"`
 }

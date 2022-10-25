@@ -39,7 +39,7 @@ class ListLogRequest:
 
 @dataclass_json
 @dataclass
-class ListLog200ApplicationJSONMeta:
+class ListLogListLogResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -51,14 +51,14 @@ class ListLog200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListLog200ApplicationJSONListLogResponse:
+class ListLogListLogResponse:
     logs: Optional[List[shared.ServerlessV1ServiceEnvironmentLog]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'logs' }})
-    meta: Optional[ListLog200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+    meta: Optional[ListLogListLogResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     
 
 @dataclass
 class ListLogResponse:
     content_type: str = field(default=None)
-    list_log_response: Optional[ListLog200ApplicationJSONListLogResponse] = field(default=None)
+    list_log_response: Optional[ListLogListLogResponse] = field(default=None)
     status_code: int = field(default=None)
     

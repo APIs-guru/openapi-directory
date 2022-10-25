@@ -8,7 +8,7 @@ var CreateDialingPermissionsCountryBulkUpdateServers = []string{
 	"https://voice.twilio.com",
 }
 
-type CreateDialingPermissionsCountryBulkUpdateRequestBodyCreateDialingPermissionsCountryBulkUpdateRequest struct {
+type CreateDialingPermissionsCountryBulkUpdateCreateDialingPermissionsCountryBulkUpdateRequest struct {
 	UpdateRequest string `form:"name=UpdateRequest"`
 }
 
@@ -18,7 +18,7 @@ type CreateDialingPermissionsCountryBulkUpdateSecurity struct {
 
 type CreateDialingPermissionsCountryBulkUpdateRequest struct {
 	ServerURL *string
-	Request   *CreateDialingPermissionsCountryBulkUpdateRequestBodyCreateDialingPermissionsCountryBulkUpdateRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request   *CreateDialingPermissionsCountryBulkUpdateCreateDialingPermissionsCountryBulkUpdateRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security  CreateDialingPermissionsCountryBulkUpdateSecurity
 }
 

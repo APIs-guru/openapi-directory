@@ -12,7 +12,7 @@ type CreateSyncMapPathParams struct {
 	ServiceSid string `pathParam:"style=simple,explode=false,name=ServiceSid"`
 }
 
-type CreateSyncMapRequestBodyCreateSyncMapRequest struct {
+type CreateSyncMapCreateSyncMapRequest struct {
 	CollectionTTL *int64  `form:"name=CollectionTtl"`
 	TTL           *int64  `form:"name=Ttl"`
 	UniqueName    *string `form:"name=UniqueName"`
@@ -25,7 +25,7 @@ type CreateSyncMapSecurity struct {
 type CreateSyncMapRequest struct {
 	ServerURL  *string
 	PathParams CreateSyncMapPathParams
-	Request    *CreateSyncMapRequestBodyCreateSyncMapRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateSyncMapCreateSyncMapRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateSyncMapSecurity
 }
 

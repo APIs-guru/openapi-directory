@@ -7,7 +7,7 @@ CREATE_SAFELIST_SERVERS = [
 
 
 @dataclass
-class CreateSafelistRequestBodyCreateSafelistRequest:
+class CreateSafelistCreateSafelistRequest:
     phone_number: str = field(default=None, metadata={'form': { 'field_name': 'PhoneNumber' }})
     
 
@@ -19,7 +19,7 @@ class CreateSafelistSecurity:
 @dataclass
 class CreateSafelistRequest:
     server_url: Optional[str] = field(default=None)
-    request: Optional[CreateSafelistRequestBodyCreateSafelistRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateSafelistCreateSafelistRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateSafelistSecurity = field(default=None)
     
 

@@ -12,7 +12,7 @@ type UpdateHostedNumbersHostedNumberOrderPathParams struct {
 	Sid string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
-type UpdateHostedNumbersHostedNumberOrderRequestBodyUpdateHostedNumbersHostedNumberOrderRequest struct {
+type UpdateHostedNumbersHostedNumberOrderUpdateHostedNumbersHostedNumberOrderRequest struct {
 	CallDelay               *int64                                            `form:"name=CallDelay"`
 	CcEmails                []string                                          `form:"name=CcEmails"`
 	Email                   *string                                           `form:"name=Email"`
@@ -32,7 +32,7 @@ type UpdateHostedNumbersHostedNumberOrderSecurity struct {
 type UpdateHostedNumbersHostedNumberOrderRequest struct {
 	ServerURL  *string
 	PathParams UpdateHostedNumbersHostedNumberOrderPathParams
-	Request    *UpdateHostedNumbersHostedNumberOrderRequestBodyUpdateHostedNumbersHostedNumberOrderRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateHostedNumbersHostedNumberOrderUpdateHostedNumbersHostedNumberOrderRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateHostedNumbersHostedNumberOrderSecurity
 }
 

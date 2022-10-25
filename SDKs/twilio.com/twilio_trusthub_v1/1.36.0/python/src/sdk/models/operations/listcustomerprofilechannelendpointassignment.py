@@ -34,7 +34,7 @@ class ListCustomerProfileChannelEndpointAssignmentRequest:
 
 @dataclass_json
 @dataclass
-class ListCustomerProfileChannelEndpointAssignment200ApplicationJSONMeta:
+class ListCustomerProfileChannelEndpointAssignmentListCustomerProfileChannelEndpointAssignmentResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -46,14 +46,14 @@ class ListCustomerProfileChannelEndpointAssignment200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListCustomerProfileChannelEndpointAssignment200ApplicationJSONListCustomerProfileChannelEndpointAssignmentResponse:
-    meta: Optional[ListCustomerProfileChannelEndpointAssignment200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+class ListCustomerProfileChannelEndpointAssignmentListCustomerProfileChannelEndpointAssignmentResponse:
+    meta: Optional[ListCustomerProfileChannelEndpointAssignmentListCustomerProfileChannelEndpointAssignmentResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     results: Optional[List[shared.TrusthubV1CustomerProfileCustomerProfileChannelEndpointAssignment]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'results' }})
     
 
 @dataclass
 class ListCustomerProfileChannelEndpointAssignmentResponse:
     content_type: str = field(default=None)
-    list_customer_profile_channel_endpoint_assignment_response: Optional[ListCustomerProfileChannelEndpointAssignment200ApplicationJSONListCustomerProfileChannelEndpointAssignmentResponse] = field(default=None)
+    list_customer_profile_channel_endpoint_assignment_response: Optional[ListCustomerProfileChannelEndpointAssignmentListCustomerProfileChannelEndpointAssignmentResponse] = field(default=None)
     status_code: int = field(default=None)
     

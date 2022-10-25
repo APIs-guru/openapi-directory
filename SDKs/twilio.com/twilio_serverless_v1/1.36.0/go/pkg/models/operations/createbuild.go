@@ -12,7 +12,7 @@ type CreateBuildPathParams struct {
 	ServiceSid string `pathParam:"style=simple,explode=false,name=ServiceSid"`
 }
 
-type CreateBuildRequestBodyCreateBuildRequest struct {
+type CreateBuildCreateBuildRequest struct {
 	AssetVersions    []string `form:"name=AssetVersions"`
 	Dependencies     *string  `form:"name=Dependencies"`
 	FunctionVersions []string `form:"name=FunctionVersions"`
@@ -26,7 +26,7 @@ type CreateBuildSecurity struct {
 type CreateBuildRequest struct {
 	ServerURL  *string
 	PathParams CreateBuildPathParams
-	Request    *CreateBuildRequestBodyCreateBuildRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateBuildCreateBuildRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateBuildSecurity
 }
 

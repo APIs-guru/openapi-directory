@@ -13,7 +13,7 @@ class CreateStreamMessagePathParams:
     
 
 @dataclass
-class CreateStreamMessageRequestBodyCreateStreamMessageRequest:
+class CreateStreamMessageCreateStreamMessageRequest:
     data: Any = field(default=None, metadata={'form': { 'field_name': 'Data' }})
     
 
@@ -26,7 +26,7 @@ class CreateStreamMessageSecurity:
 class CreateStreamMessageRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateStreamMessagePathParams = field(default=None)
-    request: Optional[CreateStreamMessageRequestBodyCreateStreamMessageRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateStreamMessageCreateStreamMessageRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateStreamMessageSecurity = field(default=None)
     
 

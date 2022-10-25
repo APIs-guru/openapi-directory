@@ -32,7 +32,7 @@ class ListDataSessionRequest:
 
 @dataclass_json
 @dataclass
-class ListDataSession200ApplicationJSONMeta:
+class ListDataSessionListDataSessionResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -44,14 +44,14 @@ class ListDataSession200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListDataSession200ApplicationJSONListDataSessionResponse:
+class ListDataSessionListDataSessionResponse:
     data_sessions: Optional[List[shared.WirelessV1SimDataSession]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'data_sessions' }})
-    meta: Optional[ListDataSession200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+    meta: Optional[ListDataSessionListDataSessionResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     
 
 @dataclass
 class ListDataSessionResponse:
     content_type: str = field(default=None)
-    list_data_session_response: Optional[ListDataSession200ApplicationJSONListDataSessionResponse] = field(default=None)
+    list_data_session_response: Optional[ListDataSessionListDataSessionResponse] = field(default=None)
     status_code: int = field(default=None)
     

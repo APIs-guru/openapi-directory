@@ -38,8 +38,7 @@ class SDK:
         res = operations.AccessAddResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.access_add_200_application_json_string = out
+                res.access_add_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -61,8 +60,7 @@ class SDK:
         res = operations.AccessDelResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.access_del_200_application_json_string = out
+                res.access_del_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -84,8 +82,7 @@ class SDK:
         res = operations.AccessGetAcldbResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.access_get_acldb_200_application_json_string = out
+                res.access_get_acldb_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -107,8 +104,7 @@ class SDK:
         res = operations.AccessGetAdmindirResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.access_get_admindir_200_application_json_string = out
+                res.access_get_admindir_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -130,8 +126,7 @@ class SDK:
         res = operations.AccessGetAdminuserResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.access_get_adminuser_200_application_json_string = out
+                res.access_get_adminuser_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -153,8 +148,7 @@ class SDK:
         res = operations.AccessGetEnabledResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.access_get_enabled_200_application_json_string = out
+                res.access_get_enabled_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -245,8 +239,7 @@ class SDK:
         res = operations.AccessSetAcldbResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.access_set_acldb_200_application_json_string = out
+                res.access_set_acldb_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -268,8 +261,7 @@ class SDK:
         res = operations.AccessSetEnabledResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.access_set_enabled_200_application_json_string = out
+                res.access_set_enabled_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -291,8 +283,7 @@ class SDK:
         res = operations.AddResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.add_200_application_json_string = out
+                res.add_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -314,8 +305,7 @@ class SDK:
         res = operations.AddDaemonTimerScriptResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.add_daemon_timer_script_200_application_json_string = out
+                res.add_daemon_timer_script_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -337,8 +327,7 @@ class SDK:
         res = operations.AddIpaliasResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.add_ipalias_200_application_json_string = out
+                res.add_ipalias_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -360,8 +349,7 @@ class SDK:
         res = operations.AddTimerScriptResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.add_timer_script_200_application_json_string = out
+                res.add_timer_script_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -383,8 +371,7 @@ class SDK:
         res = operations.AgentRemoveResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.agent_remove_200_application_json_string = out
+                res.agent_remove_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -406,8 +393,7 @@ class SDK:
         res = operations.AgentStoreCopyResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.agent_store_copy_200_application_json_string = out
+                res.agent_store_copy_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -429,8 +415,7 @@ class SDK:
         res = operations.AgentStoreExistsResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.agent_store_exists_200_application_json_string = out
+                res.agent_store_exists_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -452,8 +437,7 @@ class SDK:
         res = operations.AgentStoreGetResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.agent_store_get_200_application_json_string = out
+                res.agent_store_get_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -502,8 +486,7 @@ class SDK:
         res = operations.AgentStoreLreplaceResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.agent_store_lreplace_200_application_json_string = out
+                res.agent_store_lreplace_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -525,8 +508,7 @@ class SDK:
         res = operations.AgentStorePersistsResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.agent_store_persists_200_application_json_string = out
+                res.agent_store_persists_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -552,8 +534,7 @@ class SDK:
         res = operations.AgentStoreSetResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.agent_store_set_200_application_json_string = out
+                res.agent_store_set_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -575,8 +556,7 @@ class SDK:
         res = operations.AgentStoreUnsetResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.agent_store_unset_200_application_json_string = out
+                res.agent_store_unset_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -682,8 +662,7 @@ class SDK:
         res = operations.DelDaemonTimerScriptResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.del_daemon_timer_script_200_application_json_string = out
+                res.del_daemon_timer_script_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -705,8 +684,7 @@ class SDK:
         res = operations.DelIpaliasResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.del_ipalias_200_application_json_string = out
+                res.del_ipalias_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -728,8 +706,7 @@ class SDK:
         res = operations.DelTimerScriptResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.del_timer_script_200_application_json_string = out
+                res.del_timer_script_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -751,8 +728,7 @@ class SDK:
         res = operations.EvalValueResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.eval_value_200_application_json_string = out
+                res.eval_value_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -774,8 +750,7 @@ class SDK:
         res = operations.FromAddResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.from_add_200_application_json_string = out
+                res.from_add_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -797,8 +772,7 @@ class SDK:
         res = operations.FromDelResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.from_del_200_application_json_string = out
+                res.from_del_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -1147,8 +1121,7 @@ class SDK:
         res = operations.GetHostResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.get_host_200_application_json_string = out
+                res.get_host_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -1170,8 +1143,7 @@ class SDK:
         res = operations.GetInfoResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.get_info_200_application_json_string = out
+                res.get_info_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -1239,8 +1211,7 @@ class SDK:
         res = operations.GetInterfaceResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.get_interface_200_application_json_string = out
+                res.get_interface_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -1325,8 +1296,7 @@ class SDK:
         res = operations.GetMaskResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.get_mask_200_application_json_string = out
+                res.get_mask_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -1369,8 +1339,7 @@ class SDK:
         res = operations.GetMibResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.get_mib_200_application_json_string = out
+                res.get_mib_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -1415,8 +1384,7 @@ class SDK:
         res = operations.GetNameResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.get_name_200_application_json_string = out
+                res.get_name_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -1526,8 +1494,7 @@ class SDK:
         res = operations.GetOidResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.get_oid_200_application_json_string = out
+                res.get_oid_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -1549,8 +1516,7 @@ class SDK:
         res = operations.GetOiddirResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.get_oiddir_200_application_json_string = out
+                res.get_oiddir_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -1572,8 +1538,7 @@ class SDK:
         res = operations.GetOwnerResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.get_owner_200_application_json_string = out
+                res.get_owner_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -1618,8 +1583,7 @@ class SDK:
         res = operations.GetPortResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.get_port_200_application_json_string = out
+                res.get_port_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -1641,8 +1605,7 @@ class SDK:
         res = operations.GetPrivdirResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.get_privdir_200_application_json_string = out
+                res.get_privdir_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -1708,8 +1671,7 @@ class SDK:
         res = operations.GetReadCommunityResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.get_read_community_200_application_json_string = out
+                res.get_read_community_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -1775,8 +1737,7 @@ class SDK:
         res = operations.GetSimResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.get_sim_200_application_json_string = out
+                res.get_sim_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -1798,8 +1759,7 @@ class SDK:
         res = operations.GetStarttimeResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.get_starttime_200_application_json_string = out
+                res.get_starttime_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -1821,8 +1781,7 @@ class SDK:
         res = operations.GetStateResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.get_state_200_application_json_string = out
+                res.get_state_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -1936,8 +1895,7 @@ class SDK:
         res = operations.GetValueResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.get_value_200_application_json_string = out
+                res.get_value_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -1982,8 +1940,7 @@ class SDK:
         res = operations.GetVersionResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.get_version_200_application_json_string = out
+                res.get_version_200_application_json_string = r.content
 
         return res
 
@@ -2003,8 +1960,7 @@ class SDK:
         res = operations.GetWriteCommunityResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.get_write_community_200_application_json_string = out
+                res.get_write_community_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -2026,8 +1982,7 @@ class SDK:
         res = operations.HaltResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.halt_200_application_json_string = out
+                res.halt_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -2122,8 +2077,7 @@ class SDK:
         res = operations.MsetValueResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.mset_value_200_application_json_string = out
+                res.mset_value_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -2149,8 +2103,7 @@ class SDK:
         res = operations.MunsetValueResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.munset_value_200_application_json_string = out
+                res.munset_value_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -2179,8 +2132,7 @@ class SDK:
         res = operations.NewResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.new_200_application_json_string = out
+                res.new_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -2202,8 +2154,7 @@ class SDK:
         res = operations.PauseNowResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.pause_now_200_application_json_string = out
+                res.pause_now_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -2340,8 +2291,7 @@ class SDK:
         res = operations.ProtocolCoapSetConfigResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.protocol_coap_set_config_200_application_json_string = out
+                res.protocol_coap_set_config_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -2363,8 +2313,7 @@ class SDK:
         res = operations.ProtocolCoapSetTraceResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.protocol_coap_set_trace_200_application_json_string = out
+                res.protocol_coap_set_trace_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -2524,8 +2473,7 @@ class SDK:
         res = operations.ProtocolDhcpSetConfigResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.protocol_dhcp_set_config_200_application_json_string = out
+                res.protocol_dhcp_set_config_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -2547,8 +2495,7 @@ class SDK:
         res = operations.ProtocolDhcpSetTraceResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.protocol_dhcp_set_trace_200_application_json_string = out
+                res.protocol_dhcp_set_trace_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -2616,8 +2563,7 @@ class SDK:
         res = operations.ProtocolIpmiGetAttrResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.protocol_ipmi_get_attr_200_application_json_string = out
+                res.protocol_ipmi_get_attr_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -2731,8 +2677,7 @@ class SDK:
         res = operations.ProtocolIpmiSetAttrResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.protocol_ipmi_set_attr_200_application_json_string = out
+                res.protocol_ipmi_set_attr_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -2754,8 +2699,7 @@ class SDK:
         res = operations.ProtocolIpmiSetConfigResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.protocol_ipmi_set_config_200_application_json_string = out
+                res.protocol_ipmi_set_config_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -2777,8 +2721,7 @@ class SDK:
         res = operations.ProtocolIpmiSetTraceResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.protocol_ipmi_set_trace_200_application_json_string = out
+                res.protocol_ipmi_set_trace_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -2915,8 +2858,7 @@ class SDK:
         res = operations.ProtocolMqttClientResubscribeResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.protocol_mqtt_client_resubscribe_200_application_json_string = out
+                res.protocol_mqtt_client_resubscribe_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -3352,8 +3294,7 @@ class SDK:
         res = operations.ProtocolMqttClientUnsubscribeResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.protocol_mqtt_client_unsubscribe_200_application_json_string = out
+                res.protocol_mqtt_client_unsubscribe_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -3490,8 +3431,7 @@ class SDK:
         res = operations.ProtocolMqttSetConfigResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.protocol_mqtt_set_config_200_application_json_string = out
+                res.protocol_mqtt_set_config_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -3513,8 +3453,7 @@ class SDK:
         res = operations.ProtocolMqttSetTraceResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.protocol_mqtt_set_trace_200_application_json_string = out
+                res.protocol_mqtt_set_trace_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -3536,8 +3475,7 @@ class SDK:
         res = operations.ProtocolNetflowChangeAttrResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.protocol_netflow_change_attr_200_application_json_string = out
+                res.protocol_netflow_change_attr_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -3559,8 +3497,7 @@ class SDK:
         res = operations.ProtocolNetflowChangeDfsResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.protocol_netflow_change_dfs_200_application_json_string = out
+                res.protocol_netflow_change_dfs_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -3582,8 +3519,7 @@ class SDK:
         res = operations.ProtocolNetflowChangeTfsResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.protocol_netflow_change_tfs_200_application_json_string = out
+                res.protocol_netflow_change_tfs_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -3720,8 +3656,7 @@ class SDK:
         res = operations.ProtocolNetflowHaltResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.protocol_netflow_halt_200_application_json_string = out
+                res.protocol_netflow_halt_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -3766,8 +3701,7 @@ class SDK:
         res = operations.ProtocolNetflowReloadResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.protocol_netflow_reload_200_application_json_string = out
+                res.protocol_netflow_reload_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -3789,8 +3723,7 @@ class SDK:
         res = operations.ProtocolNetflowResumeResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.protocol_netflow_resume_200_application_json_string = out
+                res.protocol_netflow_resume_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -3812,8 +3745,7 @@ class SDK:
         res = operations.ProtocolNetflowSetCollectorResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.protocol_netflow_set_collector_200_application_json_string = out
+                res.protocol_netflow_set_collector_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -3835,8 +3767,7 @@ class SDK:
         res = operations.ProtocolNetflowSetConfigResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.protocol_netflow_set_config_200_application_json_string = out
+                res.protocol_netflow_set_config_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -3858,8 +3789,7 @@ class SDK:
         res = operations.ProtocolNetflowSetFileNameResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.protocol_netflow_set_file_name_200_application_json_string = out
+                res.protocol_netflow_set_file_name_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -3881,8 +3811,7 @@ class SDK:
         res = operations.ProtocolNetflowSetTraceResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.protocol_netflow_set_trace_200_application_json_string = out
+                res.protocol_netflow_set_trace_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -4019,8 +3948,7 @@ class SDK:
         res = operations.ProtocolProxyPortAddResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.protocol_proxy_port_add_200_application_json_string = out
+                res.protocol_proxy_port_add_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -4042,8 +3970,7 @@ class SDK:
         res = operations.ProtocolProxyPortIsstartedResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.protocol_proxy_port_isstarted_200_application_json_string = out
+                res.protocol_proxy_port_isstarted_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -4088,8 +4015,7 @@ class SDK:
         res = operations.ProtocolProxyPortRemoveResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.protocol_proxy_port_remove_200_application_json_string = out
+                res.protocol_proxy_port_remove_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -4111,8 +4037,7 @@ class SDK:
         res = operations.ProtocolProxyPortStartResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.protocol_proxy_port_start_200_application_json_string = out
+                res.protocol_proxy_port_start_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -4134,8 +4059,7 @@ class SDK:
         res = operations.ProtocolProxyPortStopResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.protocol_proxy_port_stop_200_application_json_string = out
+                res.protocol_proxy_port_stop_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -4157,8 +4081,7 @@ class SDK:
         res = operations.ProtocolProxySetConfigResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.protocol_proxy_set_config_200_application_json_string = out
+                res.protocol_proxy_set_config_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -4180,8 +4103,7 @@ class SDK:
         res = operations.ProtocolProxySetTraceResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.protocol_proxy_set_trace_200_application_json_string = out
+                res.protocol_proxy_set_trace_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -4318,8 +4240,7 @@ class SDK:
         res = operations.ProtocolSflowHaltResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.protocol_sflow_halt_200_application_json_string = out
+                res.protocol_sflow_halt_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -4341,8 +4262,7 @@ class SDK:
         res = operations.ProtocolSflowReloadResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.protocol_sflow_reload_200_application_json_string = out
+                res.protocol_sflow_reload_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -4364,8 +4284,7 @@ class SDK:
         res = operations.ProtocolSflowResumeResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.protocol_sflow_resume_200_application_json_string = out
+                res.protocol_sflow_resume_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -4387,8 +4306,7 @@ class SDK:
         res = operations.ProtocolSflowSetConfigResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.protocol_sflow_set_config_200_application_json_string = out
+                res.protocol_sflow_set_config_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -4410,8 +4328,7 @@ class SDK:
         res = operations.ProtocolSflowSetTraceResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.protocol_sflow_set_trace_200_application_json_string = out
+                res.protocol_sflow_set_trace_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -4548,8 +4465,7 @@ class SDK:
         res = operations.ProtocolSnmptcpIpaliasDisableResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.protocol_snmptcp_ipalias_disable_200_application_json_string = out
+                res.protocol_snmptcp_ipalias_disable_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -4571,8 +4487,7 @@ class SDK:
         res = operations.ProtocolSnmptcpIpaliasEnableResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.protocol_snmptcp_ipalias_enable_200_application_json_string = out
+                res.protocol_snmptcp_ipalias_enable_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -4594,8 +4509,7 @@ class SDK:
         res = operations.ProtocolSnmptcpIpaliasIsenabledResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.protocol_snmptcp_ipalias_isenabled_200_application_json_string = out
+                res.protocol_snmptcp_ipalias_isenabled_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -4640,8 +4554,7 @@ class SDK:
         res = operations.ProtocolSnmptcpSetConfigResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.protocol_snmptcp_set_config_200_application_json_string = out
+                res.protocol_snmptcp_set_config_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -4663,8 +4576,7 @@ class SDK:
         res = operations.ProtocolSnmptcpSetTraceResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.protocol_snmptcp_set_trace_200_application_json_string = out
+                res.protocol_snmptcp_set_trace_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -4686,8 +4598,7 @@ class SDK:
         res = operations.ProtocolSnmpv3AccessAddResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.protocol_snmpv3_access_add_200_application_json_string = out
+                res.protocol_snmpv3_access_add_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -4709,8 +4620,7 @@ class SDK:
         res = operations.ProtocolSnmpv3AccessClearResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.protocol_snmpv3_access_clear_200_application_json_string = out
+                res.protocol_snmpv3_access_clear_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -4732,8 +4642,7 @@ class SDK:
         res = operations.ProtocolSnmpv3AccessDelResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.protocol_snmpv3_access_del_200_application_json_string = out
+                res.protocol_snmpv3_access_del_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -4801,8 +4710,7 @@ class SDK:
         res = operations.ProtocolSnmpv3GetContextEngineidResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.protocol_snmpv3_get_context_engineid_200_application_json_string = out
+                res.protocol_snmpv3_get_context_engineid_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -4847,8 +4755,7 @@ class SDK:
         res = operations.ProtocolSnmpv3GetEngineidResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.protocol_snmpv3_get_engineid_200_application_json_string = out
+                res.protocol_snmpv3_get_engineid_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -4893,8 +4800,7 @@ class SDK:
         res = operations.ProtocolSnmpv3GroupAddResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.protocol_snmpv3_group_add_200_application_json_string = out
+                res.protocol_snmpv3_group_add_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -4916,8 +4822,7 @@ class SDK:
         res = operations.ProtocolSnmpv3GroupClearResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.protocol_snmpv3_group_clear_200_application_json_string = out
+                res.protocol_snmpv3_group_clear_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -4939,8 +4844,7 @@ class SDK:
         res = operations.ProtocolSnmpv3GroupDelResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.protocol_snmpv3_group_del_200_application_json_string = out
+                res.protocol_snmpv3_group_del_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -4985,8 +4889,7 @@ class SDK:
         res = operations.ProtocolSnmpv3SetConfigResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.protocol_snmpv3_set_config_200_application_json_string = out
+                res.protocol_snmpv3_set_config_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -5008,8 +4911,7 @@ class SDK:
         res = operations.ProtocolSnmpv3UserAddResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.protocol_snmpv3_user_add_200_application_json_string = out
+                res.protocol_snmpv3_user_add_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -5031,8 +4933,7 @@ class SDK:
         res = operations.ProtocolSnmpv3UserClearResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.protocol_snmpv3_user_clear_200_application_json_string = out
+                res.protocol_snmpv3_user_clear_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -5054,8 +4955,7 @@ class SDK:
         res = operations.ProtocolSnmpv3UserDelResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.protocol_snmpv3_user_del_200_application_json_string = out
+                res.protocol_snmpv3_user_del_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -5192,8 +5092,7 @@ class SDK:
         res = operations.ProtocolSnmpv3ViewAddResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.protocol_snmpv3_view_add_200_application_json_string = out
+                res.protocol_snmpv3_view_add_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -5215,8 +5114,7 @@ class SDK:
         res = operations.ProtocolSnmpv3ViewClearResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.protocol_snmpv3_view_clear_200_application_json_string = out
+                res.protocol_snmpv3_view_clear_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -5238,8 +5136,7 @@ class SDK:
         res = operations.ProtocolSnmpv3ViewDelResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.protocol_snmpv3_view_del_200_application_json_string = out
+                res.protocol_snmpv3_view_del_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -5399,8 +5296,7 @@ class SDK:
         res = operations.ProtocolSSHIpaliasDisableResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.protocol_ssh_ipalias_disable_200_application_json_string = out
+                res.protocol_ssh_ipalias_disable_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -5422,8 +5318,7 @@ class SDK:
         res = operations.ProtocolSSHIpaliasEnableResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.protocol_ssh_ipalias_enable_200_application_json_string = out
+                res.protocol_ssh_ipalias_enable_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -5445,8 +5340,7 @@ class SDK:
         res = operations.ProtocolSSHIpaliasIsenabledResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.protocol_ssh_ipalias_isenabled_200_application_json_string = out
+                res.protocol_ssh_ipalias_isenabled_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -5491,8 +5385,7 @@ class SDK:
         res = operations.ProtocolSSHSetConfigResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.protocol_ssh_set_config_200_application_json_string = out
+                res.protocol_ssh_set_config_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -5514,8 +5407,7 @@ class SDK:
         res = operations.ProtocolSSHSetTraceResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.protocol_ssh_set_trace_200_application_json_string = out
+                res.protocol_ssh_set_trace_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -5560,8 +5452,7 @@ class SDK:
         res = operations.ProtocolSyslogGetAttrResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.protocol_syslog_get_attr_200_application_json_string = out
+                res.protocol_syslog_get_attr_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -5682,8 +5573,7 @@ class SDK:
         res = operations.ProtocolSyslogSendResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.protocol_syslog_send_200_application_json_string = out
+                res.protocol_syslog_send_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -5705,8 +5595,7 @@ class SDK:
         res = operations.ProtocolSyslogSetAttrResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.protocol_syslog_set_attr_200_application_json_string = out
+                res.protocol_syslog_set_attr_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -5728,8 +5617,7 @@ class SDK:
         res = operations.ProtocolSyslogSetConfigResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.protocol_syslog_set_config_200_application_json_string = out
+                res.protocol_syslog_set_config_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -5751,8 +5639,7 @@ class SDK:
         res = operations.ProtocolSyslogSetTraceResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.protocol_syslog_set_trace_200_application_json_string = out
+                res.protocol_syslog_set_trace_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -5958,8 +5845,7 @@ class SDK:
         res = operations.ProtocolTelnetIpaliasDisableResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.protocol_telnet_ipalias_disable_200_application_json_string = out
+                res.protocol_telnet_ipalias_disable_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -5981,8 +5867,7 @@ class SDK:
         res = operations.ProtocolTelnetIpaliasEnableResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.protocol_telnet_ipalias_enable_200_application_json_string = out
+                res.protocol_telnet_ipalias_enable_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -6004,8 +5889,7 @@ class SDK:
         res = operations.ProtocolTelnetIpaliasIsenabledResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.protocol_telnet_ipalias_isenabled_200_application_json_string = out
+                res.protocol_telnet_ipalias_isenabled_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -6188,8 +6072,7 @@ class SDK:
         res = operations.ProtocolTelnetSetConfigResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.protocol_telnet_set_config_200_application_json_string = out
+                res.protocol_telnet_set_config_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -6211,8 +6094,7 @@ class SDK:
         res = operations.ProtocolTelnetSetTraceResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.protocol_telnet_set_trace_200_application_json_string = out
+                res.protocol_telnet_set_trace_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -6349,8 +6231,7 @@ class SDK:
         res = operations.ProtocolTftpSessionGetParameterResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.protocol_tftp_session_get_parameter_200_application_json_string = out
+                res.protocol_tftp_session_get_parameter_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -6395,8 +6276,7 @@ class SDK:
         res = operations.ProtocolTftpSessionSetParameterResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.protocol_tftp_session_set_parameter_200_application_json_string = out
+                res.protocol_tftp_session_set_parameter_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -6418,8 +6298,7 @@ class SDK:
         res = operations.ProtocolTftpSessionStartResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.protocol_tftp_session_start_200_application_json_string = out
+                res.protocol_tftp_session_start_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -6441,8 +6320,7 @@ class SDK:
         res = operations.ProtocolTftpSessionStatusResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.protocol_tftp_session_status_200_application_json_string = out
+                res.protocol_tftp_session_status_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -6464,8 +6342,7 @@ class SDK:
         res = operations.ProtocolTftpSessionStopResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.protocol_tftp_session_stop_200_application_json_string = out
+                res.protocol_tftp_session_stop_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -6510,8 +6387,7 @@ class SDK:
         res = operations.ProtocolTftpSetConfigResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.protocol_tftp_set_config_200_application_json_string = out
+                res.protocol_tftp_set_config_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -6533,8 +6409,7 @@ class SDK:
         res = operations.ProtocolTftpSetTraceResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.protocol_tftp_set_trace_200_application_json_string = out
+                res.protocol_tftp_set_trace_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -6694,8 +6569,7 @@ class SDK:
         res = operations.ProtocolTodSetConfigResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.protocol_tod_set_config_200_application_json_string = out
+                res.protocol_tod_set_config_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -6717,8 +6591,7 @@ class SDK:
         res = operations.ProtocolTodSetTraceResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.protocol_tod_set_trace_200_application_json_string = out
+                res.protocol_tod_set_trace_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -6855,8 +6728,7 @@ class SDK:
         res = operations.ProtocolWebPortAddResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.protocol_web_port_add_200_application_json_string = out
+                res.protocol_web_port_add_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -6901,8 +6773,7 @@ class SDK:
         res = operations.ProtocolWebPortRemoveResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.protocol_web_port_remove_200_application_json_string = out
+                res.protocol_web_port_remove_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -6924,8 +6795,7 @@ class SDK:
         res = operations.ProtocolWebPortSetResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.protocol_web_port_set_200_application_json_string = out
+                res.protocol_web_port_set_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -6947,8 +6817,7 @@ class SDK:
         res = operations.ProtocolWebPortStartResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.protocol_web_port_start_200_application_json_string = out
+                res.protocol_web_port_start_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -6970,8 +6839,7 @@ class SDK:
         res = operations.ProtocolWebPortStopResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.protocol_web_port_stop_200_application_json_string = out
+                res.protocol_web_port_stop_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -6993,8 +6861,7 @@ class SDK:
         res = operations.ProtocolWebSetConfigResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.protocol_web_set_config_200_application_json_string = out
+                res.protocol_web_set_config_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -7016,8 +6883,7 @@ class SDK:
         res = operations.ProtocolWebSetTraceResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.protocol_web_set_trace_200_application_json_string = out
+                res.protocol_web_set_trace_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -7039,8 +6905,7 @@ class SDK:
         res = operations.ReloadResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.reload_200_application_json_string = out
+                res.reload_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -7062,8 +6927,7 @@ class SDK:
         res = operations.RemoveResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.remove_200_application_json_string = out
+                res.remove_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -7085,8 +6949,7 @@ class SDK:
         res = operations.ResumeResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.resume_200_application_json_string = out
+                res.resume_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -7108,8 +6971,7 @@ class SDK:
         res = operations.SaveResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.save_200_application_json_string = out
+                res.save_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -7177,8 +7039,7 @@ class SDK:
         res = operations.SetHostResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.set_host_200_application_json_string = out
+                res.set_host_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -7223,8 +7084,7 @@ class SDK:
         res = operations.SetInterfaceResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.set_interface_200_application_json_string = out
+                res.set_interface_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -7253,8 +7113,7 @@ class SDK:
         res = operations.SetLogResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.set_log_200_application_json_string = out
+                res.set_log_200_application_json_string = r.content
 
         return res
 
@@ -7274,8 +7133,7 @@ class SDK:
         res = operations.SetMaskResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.set_mask_200_application_json_string = out
+                res.set_mask_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -7304,8 +7162,7 @@ class SDK:
         res = operations.SetMibsResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.set_mibs_200_application_json_string = out
+                res.set_mibs_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -7348,8 +7205,7 @@ class SDK:
         res = operations.SetOiddirResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.set_oiddir_200_application_json_string = out
+                res.set_oiddir_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -7371,8 +7227,7 @@ class SDK:
         res = operations.SetOwnerResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.set_owner_200_application_json_string = out
+                res.set_owner_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -7417,8 +7272,7 @@ class SDK:
         res = operations.SetPortResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.set_port_200_application_json_string = out
+                res.set_port_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -7440,8 +7294,7 @@ class SDK:
         res = operations.SetPrivdirResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.set_privdir_200_application_json_string = out
+                res.set_privdir_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -7493,8 +7346,7 @@ class SDK:
         res = operations.SetReadCommunityResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.set_read_community_200_application_json_string = out
+                res.set_read_community_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -7516,8 +7368,7 @@ class SDK:
         res = operations.SetStarttimeResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.set_starttime_200_application_json_string = out
+                res.set_starttime_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -7539,8 +7390,7 @@ class SDK:
         res = operations.SetStateResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.set_state_200_application_json_string = out
+                res.set_state_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -7612,8 +7462,7 @@ class SDK:
         res = operations.SetValueResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.set_value_200_application_json_string = out
+                res.set_value_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -7635,8 +7484,7 @@ class SDK:
         res = operations.SetWriteCommunityResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.set_write_community_200_application_json_string = out
+                res.set_write_community_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -7681,8 +7529,7 @@ class SDK:
         res = operations.StartResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.start_200_application_json_string = out
+                res.start_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -7725,8 +7572,7 @@ class SDK:
         res = operations.StartIpaliasResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.start_ipalias_200_application_json_string = out
+                res.start_ipalias_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -7748,8 +7594,7 @@ class SDK:
         res = operations.StatusIpaliasResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.status_ipalias_200_application_json_string = out
+                res.status_ipalias_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -7771,8 +7616,7 @@ class SDK:
         res = operations.StopResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.stop_200_application_json_string = out
+                res.stop_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -7815,8 +7659,7 @@ class SDK:
         res = operations.StopIpaliasResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.stop_ipalias_200_application_json_string = out
+                res.stop_ipalias_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -7838,8 +7681,7 @@ class SDK:
         res = operations.StoreExistsResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.store_exists_200_application_json_string = out
+                res.store_exists_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -7861,8 +7703,7 @@ class SDK:
         res = operations.StoreGetResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.store_get_200_application_json_string = out
+                res.store_get_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -7911,8 +7752,7 @@ class SDK:
         res = operations.StoreLreplaceResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.store_lreplace_200_application_json_string = out
+                res.store_lreplace_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -7934,8 +7774,7 @@ class SDK:
         res = operations.StorePersistsResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.store_persists_200_application_json_string = out
+                res.store_persists_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -7982,8 +7821,7 @@ class SDK:
         res = operations.StoreSetResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.store_set_200_application_json_string = out
+                res.store_set_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -8005,8 +7843,7 @@ class SDK:
         res = operations.StoreUnsetResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.store_unset_200_application_json_string = out
+                res.store_unset_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -8049,8 +7886,7 @@ class SDK:
         res = operations.TrapConfigAddResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.trap_config_add_200_application_json_string = out
+                res.trap_config_add_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -8072,8 +7908,7 @@ class SDK:
         res = operations.TrapConfigDelResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.trap_config_del_200_application_json_string = out
+                res.trap_config_del_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 
@@ -8139,8 +7974,7 @@ class SDK:
         res = operations.UnsetValueResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.unset_value_200_application_json_string = out
+                res.unset_value_200_application_json_string = r.content
         elif r.status_code == 400:
             pass
 

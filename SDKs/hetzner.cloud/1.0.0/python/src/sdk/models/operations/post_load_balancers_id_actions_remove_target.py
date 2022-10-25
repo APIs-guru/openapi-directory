@@ -10,22 +10,22 @@ class PostLoadBalancersIDActionsRemoveTargetPathParams:
 
 @dataclass_json
 @dataclass
-class PostLoadBalancersIDActionsRemoveTargetRequestBodyIP:
+class PostLoadBalancersIDActionsRemoveTargetRemoveTargetRequestIP:
     ip: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ip' }})
     
 
 @dataclass_json
 @dataclass
-class PostLoadBalancersIDActionsRemoveTargetRequestBodyLabelSelector:
+class PostLoadBalancersIDActionsRemoveTargetRemoveTargetRequestLabelSelector:
     selector: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'selector' }})
     
 
 @dataclass_json
 @dataclass
-class PostLoadBalancersIDActionsRemoveTargetRequestBodyServer:
+class PostLoadBalancersIDActionsRemoveTargetRemoveTargetRequestServer:
     id: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     
-class PostLoadBalancersIDActionsRemoveTargetRequestBodyTypeEnum(str, Enum):
+class PostLoadBalancersIDActionsRemoveTargetRemoveTargetRequestTypeEnum(str, Enum):
     SERVER = "server"
     LABEL_SELECTOR = "label_selector"
     IP = "ip"
@@ -33,33 +33,33 @@ class PostLoadBalancersIDActionsRemoveTargetRequestBodyTypeEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class PostLoadBalancersIDActionsRemoveTargetRequestBodyRemoveTargetRequest:
-    ip: Optional[PostLoadBalancersIDActionsRemoveTargetRequestBodyIP] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ip' }})
-    label_selector: Optional[PostLoadBalancersIDActionsRemoveTargetRequestBodyLabelSelector] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label_selector' }})
-    server: Optional[PostLoadBalancersIDActionsRemoveTargetRequestBodyServer] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'server' }})
-    type: PostLoadBalancersIDActionsRemoveTargetRequestBodyTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+class PostLoadBalancersIDActionsRemoveTargetRemoveTargetRequest:
+    ip: Optional[PostLoadBalancersIDActionsRemoveTargetRemoveTargetRequestIP] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ip' }})
+    label_selector: Optional[PostLoadBalancersIDActionsRemoveTargetRemoveTargetRequestLabelSelector] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label_selector' }})
+    server: Optional[PostLoadBalancersIDActionsRemoveTargetRemoveTargetRequestServer] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'server' }})
+    type: PostLoadBalancersIDActionsRemoveTargetRemoveTargetRequestTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     
 
 @dataclass
 class PostLoadBalancersIDActionsRemoveTargetRequest:
     path_params: PostLoadBalancersIDActionsRemoveTargetPathParams = field(default=None)
-    request: Optional[PostLoadBalancersIDActionsRemoveTargetRequestBodyRemoveTargetRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: Optional[PostLoadBalancersIDActionsRemoveTargetRemoveTargetRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass_json
 @dataclass
-class PostLoadBalancersIDActionsRemoveTarget201ApplicationJSONActionError:
+class PostLoadBalancersIDActionsRemoveTargetActionResponseActionError:
     code: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'code' }})
     message: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'message' }})
     
 
 @dataclass_json
 @dataclass
-class PostLoadBalancersIDActionsRemoveTarget201ApplicationJSONActionResources:
+class PostLoadBalancersIDActionsRemoveTargetActionResponseActionResources:
     id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     type: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     
-class PostLoadBalancersIDActionsRemoveTarget201ApplicationJSONActionStatusEnum(str, Enum):
+class PostLoadBalancersIDActionsRemoveTargetActionResponseActionStatusEnum(str, Enum):
     SUCCESS = "success"
     RUNNING = "running"
     ERROR = "error"
@@ -67,26 +67,26 @@ class PostLoadBalancersIDActionsRemoveTarget201ApplicationJSONActionStatusEnum(s
 
 @dataclass_json
 @dataclass
-class PostLoadBalancersIDActionsRemoveTarget201ApplicationJSONActionAction:
+class PostLoadBalancersIDActionsRemoveTargetActionResponseAction:
     command: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'command' }})
-    error: PostLoadBalancersIDActionsRemoveTarget201ApplicationJSONActionError = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
+    error: PostLoadBalancersIDActionsRemoveTargetActionResponseActionError = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
     finished: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'finished' }})
     id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     progress: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'progress' }})
-    resources: List[PostLoadBalancersIDActionsRemoveTarget201ApplicationJSONActionResources] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resources' }})
+    resources: List[PostLoadBalancersIDActionsRemoveTargetActionResponseActionResources] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resources' }})
     started: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'started' }})
-    status: PostLoadBalancersIDActionsRemoveTarget201ApplicationJSONActionStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    status: PostLoadBalancersIDActionsRemoveTargetActionResponseActionStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
     
 
 @dataclass_json
 @dataclass
-class PostLoadBalancersIDActionsRemoveTarget201ApplicationJSONActionResponse:
-    action: PostLoadBalancersIDActionsRemoveTarget201ApplicationJSONActionAction = field(default=None, metadata={'dataclasses_json': { 'field_name': 'action' }})
+class PostLoadBalancersIDActionsRemoveTargetActionResponse:
+    action: PostLoadBalancersIDActionsRemoveTargetActionResponseAction = field(default=None, metadata={'dataclasses_json': { 'field_name': 'action' }})
     
 
 @dataclass
 class PostLoadBalancersIDActionsRemoveTargetResponse:
-    action_response: Optional[PostLoadBalancersIDActionsRemoveTarget201ApplicationJSONActionResponse] = field(default=None)
+    action_response: Optional[PostLoadBalancersIDActionsRemoveTargetActionResponse] = field(default=None)
     content_type: str = field(default=None)
     status_code: int = field(default=None)
     

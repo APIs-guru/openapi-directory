@@ -9,7 +9,7 @@ type SessionsIDViewsPostPathParams struct {
 	SessionID string `pathParam:"style=simple,explode=false,name=session_id"`
 }
 
-type SessionsIDViewsPostRequestBodyRequiredParametersToCreateAView struct {
+type SessionsIDViewsPostRequiredParametersToCreateAView struct {
 	ActiveMSecs *int64    `json:"activeMSecs,omitempty"`
 	Additional  *string   `json:"additional,omitempty"`
 	EndTime     time.Time `json:"endTime"`
@@ -19,7 +19,7 @@ type SessionsIDViewsPostRequestBodyRequiredParametersToCreateAView struct {
 
 type SessionsIDViewsPostRequest struct {
 	PathParams SessionsIDViewsPostPathParams
-	Request    SessionsIDViewsPostRequestBodyRequiredParametersToCreateAView `request:"mediaType=application/json"`
+	Request    SessionsIDViewsPostRequiredParametersToCreateAView `request:"mediaType=application/json"`
 }
 
 type SessionsIDViewsPostResponse struct {

@@ -12,7 +12,7 @@ type UpdateServiceWebhookConfigurationPathParams struct {
 	ChatServiceSid string `pathParam:"style=simple,explode=false,name=ChatServiceSid"`
 }
 
-type UpdateServiceWebhookConfigurationRequestBodyUpdateServiceWebhookConfigurationRequest struct {
+type UpdateServiceWebhookConfigurationUpdateServiceWebhookConfigurationRequest struct {
 	Filters        []string `form:"name=Filters"`
 	Method         *string  `form:"name=Method"`
 	PostWebhookURL *string  `form:"name=PostWebhookUrl"`
@@ -26,7 +26,7 @@ type UpdateServiceWebhookConfigurationSecurity struct {
 type UpdateServiceWebhookConfigurationRequest struct {
 	ServerURL  *string
 	PathParams UpdateServiceWebhookConfigurationPathParams
-	Request    *UpdateServiceWebhookConfigurationRequestBodyUpdateServiceWebhookConfigurationRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateServiceWebhookConfigurationUpdateServiceWebhookConfigurationRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateServiceWebhookConfigurationSecurity
 }
 

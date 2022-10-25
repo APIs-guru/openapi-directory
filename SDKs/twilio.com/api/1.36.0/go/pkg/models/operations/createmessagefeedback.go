@@ -13,7 +13,7 @@ type CreateMessageFeedbackPathParams struct {
 	MessageSid string `pathParam:"style=simple,explode=false,name=MessageSid"`
 }
 
-type CreateMessageFeedbackRequestBodyCreateMessageFeedbackRequest struct {
+type CreateMessageFeedbackCreateMessageFeedbackRequest struct {
 	Outcome *shared.MessageFeedbackEnumOutcomeEnum `form:"name=Outcome"`
 }
 
@@ -24,7 +24,7 @@ type CreateMessageFeedbackSecurity struct {
 type CreateMessageFeedbackRequest struct {
 	ServerURL  *string
 	PathParams CreateMessageFeedbackPathParams
-	Request    *CreateMessageFeedbackRequestBodyCreateMessageFeedbackRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateMessageFeedbackCreateMessageFeedbackRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateMessageFeedbackSecurity
 }
 

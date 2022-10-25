@@ -32,7 +32,7 @@ class ListWebhookRequest:
 
 @dataclass_json
 @dataclass
-class ListWebhook200ApplicationJSONMeta:
+class ListWebhookListWebhookResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -44,14 +44,14 @@ class ListWebhook200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListWebhook200ApplicationJSONListWebhookResponse:
-    meta: Optional[ListWebhook200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+class ListWebhookListWebhookResponse:
+    meta: Optional[ListWebhookListWebhookResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     webhooks: Optional[List[shared.AutopilotV1AssistantWebhook]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'webhooks' }})
     
 
 @dataclass
 class ListWebhookResponse:
     content_type: str = field(default=None)
-    list_webhook_response: Optional[ListWebhook200ApplicationJSONListWebhookResponse] = field(default=None)
+    list_webhook_response: Optional[ListWebhookListWebhookResponse] = field(default=None)
     status_code: int = field(default=None)
     

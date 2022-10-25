@@ -13,41 +13,41 @@ type PostLoadBalancersIDActionsDeleteServiceRequest struct {
 	Request    *PostLoadBalancersIDActionsDeleteServiceRequestBody `request:"mediaType=application/json"`
 }
 
-type PostLoadBalancersIDActionsDeleteService201ApplicationJSONActionError struct {
+type PostLoadBalancersIDActionsDeleteServiceActionResponseActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
 }
 
-type PostLoadBalancersIDActionsDeleteService201ApplicationJSONActionResources struct {
+type PostLoadBalancersIDActionsDeleteServiceActionResponseActionResources struct {
 	ID   int64  `json:"id"`
 	Type string `json:"type"`
 }
 
-type PostLoadBalancersIDActionsDeleteService201ApplicationJSONActionStatusEnum string
+type PostLoadBalancersIDActionsDeleteServiceActionResponseActionStatusEnum string
 
 const (
-	PostLoadBalancersIDActionsDeleteService201ApplicationJSONActionStatusEnumSuccess PostLoadBalancersIDActionsDeleteService201ApplicationJSONActionStatusEnum = "success"
-	PostLoadBalancersIDActionsDeleteService201ApplicationJSONActionStatusEnumRunning PostLoadBalancersIDActionsDeleteService201ApplicationJSONActionStatusEnum = "running"
-	PostLoadBalancersIDActionsDeleteService201ApplicationJSONActionStatusEnumError   PostLoadBalancersIDActionsDeleteService201ApplicationJSONActionStatusEnum = "error"
+	PostLoadBalancersIDActionsDeleteServiceActionResponseActionStatusEnumSuccess PostLoadBalancersIDActionsDeleteServiceActionResponseActionStatusEnum = "success"
+	PostLoadBalancersIDActionsDeleteServiceActionResponseActionStatusEnumRunning PostLoadBalancersIDActionsDeleteServiceActionResponseActionStatusEnum = "running"
+	PostLoadBalancersIDActionsDeleteServiceActionResponseActionStatusEnumError   PostLoadBalancersIDActionsDeleteServiceActionResponseActionStatusEnum = "error"
 )
 
-type PostLoadBalancersIDActionsDeleteService201ApplicationJSONActionAction struct {
-	Command   string                                                                     `json:"command"`
-	Error     PostLoadBalancersIDActionsDeleteService201ApplicationJSONActionError       `json:"error"`
-	Finished  string                                                                     `json:"finished"`
-	ID        int64                                                                      `json:"id"`
-	Progress  float64                                                                    `json:"progress"`
-	Resources []PostLoadBalancersIDActionsDeleteService201ApplicationJSONActionResources `json:"resources"`
-	Started   string                                                                     `json:"started"`
-	Status    PostLoadBalancersIDActionsDeleteService201ApplicationJSONActionStatusEnum  `json:"status"`
+type PostLoadBalancersIDActionsDeleteServiceActionResponseAction struct {
+	Command   string                                                                 `json:"command"`
+	Error     PostLoadBalancersIDActionsDeleteServiceActionResponseActionError       `json:"error"`
+	Finished  string                                                                 `json:"finished"`
+	ID        int64                                                                  `json:"id"`
+	Progress  float64                                                                `json:"progress"`
+	Resources []PostLoadBalancersIDActionsDeleteServiceActionResponseActionResources `json:"resources"`
+	Started   string                                                                 `json:"started"`
+	Status    PostLoadBalancersIDActionsDeleteServiceActionResponseActionStatusEnum  `json:"status"`
 }
 
-type PostLoadBalancersIDActionsDeleteService201ApplicationJSONActionResponse struct {
-	Action PostLoadBalancersIDActionsDeleteService201ApplicationJSONActionAction `json:"action"`
+type PostLoadBalancersIDActionsDeleteServiceActionResponse struct {
+	Action PostLoadBalancersIDActionsDeleteServiceActionResponseAction `json:"action"`
 }
 
 type PostLoadBalancersIDActionsDeleteServiceResponse struct {
-	ActionResponse *PostLoadBalancersIDActionsDeleteService201ApplicationJSONActionResponse
+	ActionResponse *PostLoadBalancersIDActionsDeleteServiceActionResponse
 	ContentType    string
 	StatusCode     int64
 }

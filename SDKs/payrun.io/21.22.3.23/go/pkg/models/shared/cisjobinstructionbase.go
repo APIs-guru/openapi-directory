@@ -4,22 +4,22 @@ import (
 	"time"
 )
 
-type CisJobInstructionBaseCisJobInstructionBaseEmployerEmployer struct {
+type CisJobInstructionBaseCisJobInstructionBaseEmployer struct {
 	AtHref  *string `json:"@href,omitempty"`
 	AtRel   *string `json:"@rel,omitempty"`
 	AtTitle *string `json:"@title,omitempty"`
 }
 
-type CisJobInstructionBaseCisJobInstructionBaseSubContractorsSubContractor struct {
+type CisJobInstructionBaseCisJobInstructionBaseSubContractor struct {
 	SubContractor []interface{} `json:"SubContractor,omitempty"`
 }
 
-type CisJobInstructionBaseCisJobInstructionBaseCisJobInstructionBase struct {
-	Employer       *CisJobInstructionBaseCisJobInstructionBaseEmployerEmployer            `json:"Employer,omitempty"`
-	HoldingDate    *time.Time                                                             `json:"HoldingDate,omitempty"`
-	SubContractors *CisJobInstructionBaseCisJobInstructionBaseSubContractorsSubContractor `json:"SubContractors,omitempty"`
+type CisJobInstructionBaseCisJobInstructionBase struct {
+	Employer       *CisJobInstructionBaseCisJobInstructionBaseEmployer      `json:"Employer,omitempty"`
+	HoldingDate    *time.Time                                               `json:"HoldingDate,omitempty"`
+	SubContractors *CisJobInstructionBaseCisJobInstructionBaseSubContractor `json:"SubContractors,omitempty"`
 }
 
 type CisJobInstructionBase struct {
-	CisJobInstructionBase *CisJobInstructionBaseCisJobInstructionBaseCisJobInstructionBase `json:"CisJobInstructionBase,omitempty"`
+	CisJobInstructionBase *CisJobInstructionBaseCisJobInstructionBase `json:"CisJobInstructionBase,omitempty"`
 }

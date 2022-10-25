@@ -10,7 +10,7 @@ type ApplicationGrantApp struct {
 	URL      string `json:"url"`
 }
 
-type ApplicationGrantUserSimpleUser struct {
+type ApplicationGrantSimpleUser struct {
 	AvatarURL         string  `json:"avatar_url"`
 	EventsURL         string  `json:"events_url"`
 	FollowersURL      string  `json:"followers_url"`
@@ -33,11 +33,11 @@ type ApplicationGrantUserSimpleUser struct {
 }
 
 type ApplicationGrant struct {
-	App       ApplicationGrantApp             `json:"app"`
-	CreatedAt time.Time                       `json:"created_at"`
-	ID        int64                           `json:"id"`
-	Scopes    []string                        `json:"scopes"`
-	UpdatedAt time.Time                       `json:"updated_at"`
-	URL       string                          `json:"url"`
-	User      *ApplicationGrantUserSimpleUser `json:"user,omitempty"`
+	App       ApplicationGrantApp         `json:"app"`
+	CreatedAt time.Time                   `json:"created_at"`
+	ID        int64                       `json:"id"`
+	Scopes    []string                    `json:"scopes"`
+	UpdatedAt time.Time                   `json:"updated_at"`
+	URL       string                      `json:"url"`
+	User      *ApplicationGrantSimpleUser `json:"user,omitempty"`
 }

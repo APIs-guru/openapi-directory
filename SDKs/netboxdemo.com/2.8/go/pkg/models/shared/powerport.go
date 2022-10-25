@@ -7,7 +7,7 @@ const (
 	PowerPortConnectionStatusLabelEnumConnected    PowerPortConnectionStatusLabelEnum = "Connected"
 )
 
-type PowerPortConnectionStatusConnectionStatus struct {
+type PowerPortConnectionStatus struct {
 	Label PowerPortConnectionStatusLabelEnum `json:"label"`
 	Value bool                               `json:"value"`
 }
@@ -154,22 +154,22 @@ const (
 	PowerPortTypeValueEnumItaO           PowerPortTypeValueEnum = "ita-o"
 )
 
-type PowerPortTypeType struct {
+type PowerPortType struct {
 	Label PowerPortTypeLabelEnum `json:"label"`
 	Value PowerPortTypeValueEnum `json:"value"`
 }
 
 type PowerPort struct {
-	AllocatedDraw         *int64                                     `json:"allocated_draw,omitempty"`
-	Cable                 *NestedCable                               `json:"cable,omitempty"`
-	ConnectedEndpoint     map[string]string                          `json:"connected_endpoint,omitempty"`
-	ConnectedEndpointType *string                                    `json:"connected_endpoint_type,omitempty"`
-	ConnectionStatus      *PowerPortConnectionStatusConnectionStatus `json:"connection_status,omitempty"`
-	Description           *string                                    `json:"description,omitempty"`
-	Device                NestedDevice                               `json:"device"`
-	ID                    *int64                                     `json:"id,omitempty"`
-	MaximumDraw           *int64                                     `json:"maximum_draw,omitempty"`
-	Name                  string                                     `json:"name"`
-	Tags                  []string                                   `json:"tags,omitempty"`
-	Type                  *PowerPortTypeType                         `json:"type,omitempty"`
+	AllocatedDraw         *int64                     `json:"allocated_draw,omitempty"`
+	Cable                 *NestedCable               `json:"cable,omitempty"`
+	ConnectedEndpoint     map[string]string          `json:"connected_endpoint,omitempty"`
+	ConnectedEndpointType *string                    `json:"connected_endpoint_type,omitempty"`
+	ConnectionStatus      *PowerPortConnectionStatus `json:"connection_status,omitempty"`
+	Description           *string                    `json:"description,omitempty"`
+	Device                NestedDevice               `json:"device"`
+	ID                    *int64                     `json:"id,omitempty"`
+	MaximumDraw           *int64                     `json:"maximum_draw,omitempty"`
+	Name                  string                     `json:"name"`
+	Tags                  []string                   `json:"tags,omitempty"`
+	Type                  *PowerPortType             `json:"type,omitempty"`
 }

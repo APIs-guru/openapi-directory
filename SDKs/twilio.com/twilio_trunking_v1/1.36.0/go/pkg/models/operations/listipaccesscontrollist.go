@@ -27,7 +27,7 @@ type ListIPAccessControlListRequest struct {
 	Security    ListIPAccessControlListSecurity
 }
 
-type ListIPAccessControlList200ApplicationJSONMeta struct {
+type ListIPAccessControlListListIPAccessControlListResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -37,13 +37,13 @@ type ListIPAccessControlList200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListIPAccessControlList200ApplicationJSONListIPAccessControlListResponse struct {
-	IPAccessControlLists []shared.TrunkingV1TrunkIPAccessControlList    `json:"ip_access_control_lists,omitempty"`
-	Meta                 *ListIPAccessControlList200ApplicationJSONMeta `json:"meta,omitempty"`
+type ListIPAccessControlListListIPAccessControlListResponse struct {
+	IPAccessControlLists []shared.TrunkingV1TrunkIPAccessControlList                 `json:"ip_access_control_lists,omitempty"`
+	Meta                 *ListIPAccessControlListListIPAccessControlListResponseMeta `json:"meta,omitempty"`
 }
 
 type ListIPAccessControlListResponse struct {
 	ContentType                     string
-	ListIPAccessControlListResponse *ListIPAccessControlList200ApplicationJSONListIPAccessControlListResponse
+	ListIPAccessControlListResponse *ListIPAccessControlListListIPAccessControlListResponse
 	StatusCode                      int64
 }

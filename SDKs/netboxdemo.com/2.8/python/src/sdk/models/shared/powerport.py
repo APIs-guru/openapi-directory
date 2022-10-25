@@ -11,7 +11,7 @@ class PowerPortConnectionStatusLabelEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class PowerPortConnectionStatusConnectionStatus:
+class PowerPortConnectionStatus:
     label: PowerPortConnectionStatusLabelEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label' }})
     value: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
     
@@ -154,7 +154,7 @@ class PowerPortTypeValueEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class PowerPortTypeType:
+class PowerPortType:
     label: PowerPortTypeLabelEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label' }})
     value: PowerPortTypeValueEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
     
@@ -166,12 +166,12 @@ class PowerPort:
     cable: Optional[nestedcable.NestedCable] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cable' }})
     connected_endpoint: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'connected_endpoint' }})
     connected_endpoint_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'connected_endpoint_type' }})
-    connection_status: Optional[PowerPortConnectionStatusConnectionStatus] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'connection_status' }})
+    connection_status: Optional[PowerPortConnectionStatus] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'connection_status' }})
     description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
     device: nesteddevice.NestedDevice = field(default=None, metadata={'dataclasses_json': { 'field_name': 'device' }})
     id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     maximum_draw: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'maximum_draw' }})
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
     tags: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
-    type: Optional[PowerPortTypeType] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    type: Optional[PowerPortType] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     

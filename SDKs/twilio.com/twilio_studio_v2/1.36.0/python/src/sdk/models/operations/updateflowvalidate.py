@@ -7,7 +7,7 @@ UPDATE_FLOW_VALIDATE_SERVERS = [
 
 
 @dataclass
-class UpdateFlowValidateRequestBodyUpdateFlowValidateRequest:
+class UpdateFlowValidateUpdateFlowValidateRequest:
     commit_message: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'CommitMessage' }})
     definition: Any = field(default=None, metadata={'form': { 'field_name': 'Definition' }})
     friendly_name: str = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
@@ -22,7 +22,7 @@ class UpdateFlowValidateSecurity:
 @dataclass
 class UpdateFlowValidateRequest:
     server_url: Optional[str] = field(default=None)
-    request: Optional[UpdateFlowValidateRequestBodyUpdateFlowValidateRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateFlowValidateUpdateFlowValidateRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateFlowValidateSecurity = field(default=None)
     
 

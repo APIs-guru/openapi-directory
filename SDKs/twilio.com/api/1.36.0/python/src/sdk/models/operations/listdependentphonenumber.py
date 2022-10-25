@@ -33,7 +33,7 @@ class ListDependentPhoneNumberRequest:
 
 @dataclass_json
 @dataclass
-class ListDependentPhoneNumber200ApplicationJSONListDependentPhoneNumberResponse:
+class ListDependentPhoneNumberListDependentPhoneNumberResponse:
     dependent_phone_numbers: Optional[List[shared.APIV2010AccountAddressDependentPhoneNumber]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dependent_phone_numbers' }})
     end: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'end' }})
     first_page_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_uri' }})
@@ -48,6 +48,6 @@ class ListDependentPhoneNumber200ApplicationJSONListDependentPhoneNumberResponse
 @dataclass
 class ListDependentPhoneNumberResponse:
     content_type: str = field(default=None)
-    list_dependent_phone_number_response: Optional[ListDependentPhoneNumber200ApplicationJSONListDependentPhoneNumberResponse] = field(default=None)
+    list_dependent_phone_number_response: Optional[ListDependentPhoneNumberListDependentPhoneNumberResponse] = field(default=None)
     status_code: int = field(default=None)
     

@@ -141,7 +141,8 @@ func (s *SDK) GetHTML(ctx context.Context, request operations.GetHTMLRequest) (*
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			out := string(data)
+			res.GetHTML200TextHTMLString = &out
 		}
 	case httpRes.StatusCode == 400:
 		switch {
@@ -252,7 +253,8 @@ func (s *SDK) GetSelected(ctx context.Context, request operations.GetSelectedReq
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			out := string(data)
+			res.GetSelected200TextHTMLString = &out
 		}
 	case httpRes.StatusCode == 400:
 		switch {

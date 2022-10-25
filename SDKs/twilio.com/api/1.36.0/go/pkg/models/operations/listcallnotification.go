@@ -33,7 +33,7 @@ type ListCallNotificationRequest struct {
 	Security    ListCallNotificationSecurity
 }
 
-type ListCallNotification200ApplicationJSONListCallNotificationResponse struct {
+type ListCallNotificationListCallNotificationResponse struct {
 	End             *int64                                       `json:"end,omitempty"`
 	FirstPageURI    *string                                      `json:"first_page_uri,omitempty"`
 	NextPageURI     *string                                      `json:"next_page_uri,omitempty"`
@@ -47,6 +47,6 @@ type ListCallNotification200ApplicationJSONListCallNotificationResponse struct {
 
 type ListCallNotificationResponse struct {
 	ContentType                  string
-	ListCallNotificationResponse *ListCallNotification200ApplicationJSONListCallNotificationResponse
+	ListCallNotificationResponse *ListCallNotificationListCallNotificationResponse
 	StatusCode                   int64
 }

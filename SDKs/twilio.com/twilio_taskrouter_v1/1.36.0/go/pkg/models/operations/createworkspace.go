@@ -8,7 +8,7 @@ var CreateWorkspaceServers = []string{
 	"https://taskrouter.twilio.com",
 }
 
-type CreateWorkspaceRequestBodyCreateWorkspaceRequest struct {
+type CreateWorkspaceCreateWorkspaceRequest struct {
 	EventCallbackURL     *string                             `form:"name=EventCallbackUrl"`
 	EventsFilter         *string                             `form:"name=EventsFilter"`
 	FriendlyName         string                              `form:"name=FriendlyName"`
@@ -23,7 +23,7 @@ type CreateWorkspaceSecurity struct {
 
 type CreateWorkspaceRequest struct {
 	ServerURL *string
-	Request   *CreateWorkspaceRequestBodyCreateWorkspaceRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request   *CreateWorkspaceCreateWorkspaceRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security  CreateWorkspaceSecurity
 }
 

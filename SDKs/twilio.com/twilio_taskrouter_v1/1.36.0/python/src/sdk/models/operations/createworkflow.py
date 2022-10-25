@@ -12,7 +12,7 @@ class CreateWorkflowPathParams:
     
 
 @dataclass
-class CreateWorkflowRequestBodyCreateWorkflowRequest:
+class CreateWorkflowCreateWorkflowRequest:
     assignment_callback_url: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'AssignmentCallbackUrl' }})
     configuration: str = field(default=None, metadata={'form': { 'field_name': 'Configuration' }})
     fallback_assignment_callback_url: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'FallbackAssignmentCallbackUrl' }})
@@ -29,7 +29,7 @@ class CreateWorkflowSecurity:
 class CreateWorkflowRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateWorkflowPathParams = field(default=None)
-    request: Optional[CreateWorkflowRequestBodyCreateWorkflowRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateWorkflowCreateWorkflowRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateWorkflowSecurity = field(default=None)
     
 

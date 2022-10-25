@@ -5,7 +5,7 @@ from dataclasses_json import dataclass_json
 
 @dataclass_json
 @dataclass
-class TransformDefinitionTransformDefinitionTransformDefinition:
+class TransformDefinitionTransformDefinition:
     active: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Active' }})
     content_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ContentType' }})
     definition: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Definition' }})
@@ -20,5 +20,5 @@ class TransformDefinitionTransformDefinitionTransformDefinition:
 @dataclass_json
 @dataclass
 class TransformDefinition:
-    transform_definition: Optional[TransformDefinitionTransformDefinitionTransformDefinition] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TransformDefinition' }})
+    transform_definition: Optional[TransformDefinitionTransformDefinition] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TransformDefinition' }})
     

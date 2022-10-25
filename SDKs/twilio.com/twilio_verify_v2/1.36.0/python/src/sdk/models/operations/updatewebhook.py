@@ -13,7 +13,7 @@ class UpdateWebhookPathParams:
     
 
 @dataclass
-class UpdateWebhookRequestBodyUpdateWebhookRequest:
+class UpdateWebhookUpdateWebhookRequest:
     event_types: Optional[List[str]] = field(default=None, metadata={'form': { 'field_name': 'EventTypes' }})
     friendly_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
     status: Optional[shared.WebhookEnumStatusEnum] = field(default=None, metadata={'form': { 'field_name': 'Status' }})
@@ -30,7 +30,7 @@ class UpdateWebhookSecurity:
 class UpdateWebhookRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateWebhookPathParams = field(default=None)
-    request: Optional[UpdateWebhookRequestBodyUpdateWebhookRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateWebhookUpdateWebhookRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateWebhookSecurity = field(default=None)
     
 

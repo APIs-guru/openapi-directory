@@ -13,127 +13,127 @@ type GetUnsecuredSmeLoansRequest struct {
 	Headers GetUnsecuredSmeLoansHeaders
 }
 
-type GetUnsecuredSmeLoans400ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnum string
+type GetUnsecuredSmeLoans400ErrorObjectDescriptionEnum string
 
 const (
-	GetUnsecuredSmeLoans400ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnumYouHaveSentARequestWhichCouldNotBeUnderstood GetUnsecuredSmeLoans400ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnum = "You have sent a request which could not be understood."
+	GetUnsecuredSmeLoans400ErrorObjectDescriptionEnumYouHaveSentARequestWhichCouldNotBeUnderstood GetUnsecuredSmeLoans400ErrorObjectDescriptionEnum = "You have sent a request which could not be understood."
 )
 
-type GetUnsecuredSmeLoans400ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnum string
+type GetUnsecuredSmeLoans400ErrorObjectStatusEnum string
 
 const (
-	GetUnsecuredSmeLoans400ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnumFourHundred GetUnsecuredSmeLoans400ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnum = "400"
+	GetUnsecuredSmeLoans400ErrorObjectStatusEnumFourHundred GetUnsecuredSmeLoans400ErrorObjectStatusEnum = "400"
 )
 
-type GetUnsecuredSmeLoans400ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnum string
+type GetUnsecuredSmeLoans400ErrorObjectTitleEnum string
 
 const (
-	GetUnsecuredSmeLoans400ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnumBadRequest GetUnsecuredSmeLoans400ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnum = "Bad request"
+	GetUnsecuredSmeLoans400ErrorObjectTitleEnumBadRequest GetUnsecuredSmeLoans400ErrorObjectTitleEnum = "Bad request"
 )
 
-type GetUnsecuredSmeLoans400ApplicationPrsOpenbankingOpendataV13PlusJSON400ErrorObject struct {
-	Description GetUnsecuredSmeLoans400ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnum `json:"description"`
-	Status      GetUnsecuredSmeLoans400ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnum      `json:"status"`
-	Title       GetUnsecuredSmeLoans400ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnum       `json:"title"`
+type GetUnsecuredSmeLoans400ErrorObject struct {
+	Description GetUnsecuredSmeLoans400ErrorObjectDescriptionEnum `json:"description"`
+	Status      GetUnsecuredSmeLoans400ErrorObjectStatusEnum      `json:"status"`
+	Title       GetUnsecuredSmeLoans400ErrorObjectTitleEnum       `json:"title"`
 }
 
-type GetUnsecuredSmeLoans408ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnum string
+type GetUnsecuredSmeLoans408ErrorObjectDescriptionEnum string
 
 const (
-	GetUnsecuredSmeLoans408ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnumYourClientHasFailedToSubmitARequestAndATimeoutHasOccurred GetUnsecuredSmeLoans408ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnum = "Your client has failed to submit a request, and a timeout has occurred."
+	GetUnsecuredSmeLoans408ErrorObjectDescriptionEnumYourClientHasFailedToSubmitARequestAndATimeoutHasOccurred GetUnsecuredSmeLoans408ErrorObjectDescriptionEnum = "Your client has failed to submit a request, and a timeout has occurred."
 )
 
-type GetUnsecuredSmeLoans408ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnum string
+type GetUnsecuredSmeLoans408ErrorObjectStatusEnum string
 
 const (
-	GetUnsecuredSmeLoans408ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnumFourHundredAndEight GetUnsecuredSmeLoans408ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnum = "408"
+	GetUnsecuredSmeLoans408ErrorObjectStatusEnumFourHundredAndEight GetUnsecuredSmeLoans408ErrorObjectStatusEnum = "408"
 )
 
-type GetUnsecuredSmeLoans408ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnum string
+type GetUnsecuredSmeLoans408ErrorObjectTitleEnum string
 
 const (
-	GetUnsecuredSmeLoans408ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnumClientTimeout GetUnsecuredSmeLoans408ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnum = "Client timeout"
+	GetUnsecuredSmeLoans408ErrorObjectTitleEnumClientTimeout GetUnsecuredSmeLoans408ErrorObjectTitleEnum = "Client timeout"
 )
 
-type GetUnsecuredSmeLoans408ApplicationPrsOpenbankingOpendataV13PlusJSON408ErrorObject struct {
-	Description GetUnsecuredSmeLoans408ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnum `json:"description"`
-	Status      GetUnsecuredSmeLoans408ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnum      `json:"status"`
-	Title       GetUnsecuredSmeLoans408ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnum       `json:"title"`
+type GetUnsecuredSmeLoans408ErrorObject struct {
+	Description GetUnsecuredSmeLoans408ErrorObjectDescriptionEnum `json:"description"`
+	Status      GetUnsecuredSmeLoans408ErrorObjectStatusEnum      `json:"status"`
+	Title       GetUnsecuredSmeLoans408ErrorObjectTitleEnum       `json:"title"`
 }
 
-type GetUnsecuredSmeLoans429ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnum string
+type GetUnsecuredSmeLoans429ErrorObjectDescriptionEnum string
 
 const (
-	GetUnsecuredSmeLoans429ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnumYouHaveRequestedThisResourceTooOftenSlowDown GetUnsecuredSmeLoans429ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnum = "You have requested this resource too often. Slow down."
+	GetUnsecuredSmeLoans429ErrorObjectDescriptionEnumYouHaveRequestedThisResourceTooOftenSlowDown GetUnsecuredSmeLoans429ErrorObjectDescriptionEnum = "You have requested this resource too often. Slow down."
 )
 
-type GetUnsecuredSmeLoans429ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnum string
+type GetUnsecuredSmeLoans429ErrorObjectStatusEnum string
 
 const (
-	GetUnsecuredSmeLoans429ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnumFourHundredAndTwentyNine GetUnsecuredSmeLoans429ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnum = "429"
+	GetUnsecuredSmeLoans429ErrorObjectStatusEnumFourHundredAndTwentyNine GetUnsecuredSmeLoans429ErrorObjectStatusEnum = "429"
 )
 
-type GetUnsecuredSmeLoans429ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnum string
+type GetUnsecuredSmeLoans429ErrorObjectTitleEnum string
 
 const (
-	GetUnsecuredSmeLoans429ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnumTooManyRequests GetUnsecuredSmeLoans429ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnum = "Too many requests"
+	GetUnsecuredSmeLoans429ErrorObjectTitleEnumTooManyRequests GetUnsecuredSmeLoans429ErrorObjectTitleEnum = "Too many requests"
 )
 
-type GetUnsecuredSmeLoans429ApplicationPrsOpenbankingOpendataV13PlusJSON429ErrorObject struct {
-	Description GetUnsecuredSmeLoans429ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnum `json:"description"`
-	Status      GetUnsecuredSmeLoans429ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnum      `json:"status"`
-	Title       GetUnsecuredSmeLoans429ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnum       `json:"title"`
+type GetUnsecuredSmeLoans429ErrorObject struct {
+	Description GetUnsecuredSmeLoans429ErrorObjectDescriptionEnum `json:"description"`
+	Status      GetUnsecuredSmeLoans429ErrorObjectStatusEnum      `json:"status"`
+	Title       GetUnsecuredSmeLoans429ErrorObjectTitleEnum       `json:"title"`
 }
 
-type GetUnsecuredSmeLoans500ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnum string
+type GetUnsecuredSmeLoans500ErrorObjectDescriptionEnum string
 
 const (
-	GetUnsecuredSmeLoans500ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnumAnErrorOccurredOnTheServerNoFurtherInformationIsAvailable GetUnsecuredSmeLoans500ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnum = "An error occurred on the server. No further information is available."
+	GetUnsecuredSmeLoans500ErrorObjectDescriptionEnumAnErrorOccurredOnTheServerNoFurtherInformationIsAvailable GetUnsecuredSmeLoans500ErrorObjectDescriptionEnum = "An error occurred on the server. No further information is available."
 )
 
-type GetUnsecuredSmeLoans500ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnum string
+type GetUnsecuredSmeLoans500ErrorObjectStatusEnum string
 
 const (
-	GetUnsecuredSmeLoans500ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnumFiveHundred GetUnsecuredSmeLoans500ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnum = "500"
+	GetUnsecuredSmeLoans500ErrorObjectStatusEnumFiveHundred GetUnsecuredSmeLoans500ErrorObjectStatusEnum = "500"
 )
 
-type GetUnsecuredSmeLoans500ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnum string
+type GetUnsecuredSmeLoans500ErrorObjectTitleEnum string
 
 const (
-	GetUnsecuredSmeLoans500ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnumInternalServerError GetUnsecuredSmeLoans500ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnum = "Internal server error"
+	GetUnsecuredSmeLoans500ErrorObjectTitleEnumInternalServerError GetUnsecuredSmeLoans500ErrorObjectTitleEnum = "Internal server error"
 )
 
-type GetUnsecuredSmeLoans500ApplicationPrsOpenbankingOpendataV13PlusJSON500ErrorObject struct {
-	Description GetUnsecuredSmeLoans500ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnum `json:"description"`
-	Status      GetUnsecuredSmeLoans500ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnum      `json:"status"`
-	Title       GetUnsecuredSmeLoans500ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnum       `json:"title"`
+type GetUnsecuredSmeLoans500ErrorObject struct {
+	Description GetUnsecuredSmeLoans500ErrorObjectDescriptionEnum `json:"description"`
+	Status      GetUnsecuredSmeLoans500ErrorObjectStatusEnum      `json:"status"`
+	Title       GetUnsecuredSmeLoans500ErrorObjectTitleEnum       `json:"title"`
 }
 
-type GetUnsecuredSmeLoans503ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnum string
+type GetUnsecuredSmeLoans503ErrorObjectDescriptionEnum string
 
 const (
-	GetUnsecuredSmeLoans503ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnumTheServiceIsTemporarilyUnavailable GetUnsecuredSmeLoans503ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnum = "The service is temporarily unavailable."
+	GetUnsecuredSmeLoans503ErrorObjectDescriptionEnumTheServiceIsTemporarilyUnavailable GetUnsecuredSmeLoans503ErrorObjectDescriptionEnum = "The service is temporarily unavailable."
 )
 
-type GetUnsecuredSmeLoans503ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnum string
+type GetUnsecuredSmeLoans503ErrorObjectStatusEnum string
 
 const (
-	GetUnsecuredSmeLoans503ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnumFiveHundredAndThree GetUnsecuredSmeLoans503ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnum = "503"
+	GetUnsecuredSmeLoans503ErrorObjectStatusEnumFiveHundredAndThree GetUnsecuredSmeLoans503ErrorObjectStatusEnum = "503"
 )
 
-type GetUnsecuredSmeLoans503ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnum string
+type GetUnsecuredSmeLoans503ErrorObjectTitleEnum string
 
 const (
-	GetUnsecuredSmeLoans503ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnumServiceTemporarilyUnavailable GetUnsecuredSmeLoans503ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnum = "Service temporarily unavailable"
+	GetUnsecuredSmeLoans503ErrorObjectTitleEnumServiceTemporarilyUnavailable GetUnsecuredSmeLoans503ErrorObjectTitleEnum = "Service temporarily unavailable"
 )
 
-type GetUnsecuredSmeLoans503ApplicationPrsOpenbankingOpendataV13PlusJSON503ErrorObject struct {
-	Description GetUnsecuredSmeLoans503ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnum `json:"description"`
-	Status      GetUnsecuredSmeLoans503ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnum      `json:"status"`
-	Title       GetUnsecuredSmeLoans503ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnum       `json:"title"`
+type GetUnsecuredSmeLoans503ErrorObject struct {
+	Description GetUnsecuredSmeLoans503ErrorObjectDescriptionEnum `json:"description"`
+	Status      GetUnsecuredSmeLoans503ErrorObjectStatusEnum      `json:"status"`
+	Title       GetUnsecuredSmeLoans503ErrorObjectTitleEnum       `json:"title"`
 }
 
-type GetUnsecuredSmeLoansDefaultApplicationPrsOpenbankingOpendataV13PlusJSONErrorObject struct {
+type GetUnsecuredSmeLoansErrorObject struct {
 	Description string `json:"description"`
 	Status      string `json:"status"`
 	Title       string `json:"title"`
@@ -920,45 +920,45 @@ type GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONData str
 	TsandCs                []string                                                                                            `json:"TsandCs"`
 }
 
-type GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaAgreementEnum string
+type GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaDataAgreementEnum string
 
 const (
-	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaAgreementEnumUseOfTheApIsAndAnyRelatedDataWillBeSubjectToTheTermsOfTheOpenLicenceAndSubjectToTermsAndConditions GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaAgreementEnum = "Use of the APIs and any related data will be subject to the terms of the Open Licence and subject to terms and conditions"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaDataAgreementEnumUseOfTheApIsAndAnyRelatedDataWillBeSubjectToTheTermsOfTheOpenLicenceAndSubjectToTermsAndConditions GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaDataAgreementEnum = "Use of the APIs and any related data will be subject to the terms of the Open Licence and subject to terms and conditions"
 )
 
-type GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaLicenseEnum string
+type GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaDataLicenseEnum string
 
 const (
-	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaLicenseEnumHTTPSWwwOpenbankingOrgUkOpenLicence GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaLicenseEnum = "https://www.openbanking.org.uk/open-licence"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaDataLicenseEnumHTTPSWwwOpenbankingOrgUkOpenLicence GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaDataLicenseEnum = "https://www.openbanking.org.uk/open-licence"
 )
 
-type GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaTermsOfUseEnum string
+type GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaDataTermsOfUseEnum string
 
 const (
-	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaTermsOfUseEnumHTTPSWwwOpenbankingOrgUkTerms GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaTermsOfUseEnum = "https://www.openbanking.org.uk/terms"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaDataTermsOfUseEnumHTTPSWwwOpenbankingOrgUkTerms GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaDataTermsOfUseEnum = "https://www.openbanking.org.uk/terms"
 )
 
-type GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaMetaData struct {
-	Agreement    GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaAgreementEnum  `json:"Agreement"`
-	LastUpdated  time.Time                                                                             `json:"LastUpdated"`
-	License      GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaLicenseEnum    `json:"License"`
-	TermsOfUse   GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaTermsOfUseEnum `json:"TermsOfUse"`
-	TotalResults int64                                                                                 `json:"TotalResults"`
+type GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaData struct {
+	Agreement    GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaDataAgreementEnum  `json:"Agreement"`
+	LastUpdated  time.Time                                                                                 `json:"LastUpdated"`
+	License      GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaDataLicenseEnum    `json:"License"`
+	TermsOfUse   GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaDataTermsOfUseEnum `json:"TermsOfUse"`
+	TotalResults int64                                                                                     `json:"TotalResults"`
 }
 
 type GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSON struct {
-	Data []GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONData       `json:"data"`
-	Meta GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaMetaData `json:"meta"`
+	Data []GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONData   `json:"data"`
+	Meta GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaData `json:"meta"`
 }
 
 type GetUnsecuredSmeLoansResponse struct {
-	FourHundredErrorObject                                                    *GetUnsecuredSmeLoans400ApplicationPrsOpenbankingOpendataV13PlusJSON400ErrorObject
-	FourHundredAndEightErrorObject                                            *GetUnsecuredSmeLoans408ApplicationPrsOpenbankingOpendataV13PlusJSON408ErrorObject
-	FourHundredAndTwentyNineErrorObject                                       *GetUnsecuredSmeLoans429ApplicationPrsOpenbankingOpendataV13PlusJSON429ErrorObject
-	FiveHundredErrorObject                                                    *GetUnsecuredSmeLoans500ApplicationPrsOpenbankingOpendataV13PlusJSON500ErrorObject
-	FiveHundredAndThreeErrorObject                                            *GetUnsecuredSmeLoans503ApplicationPrsOpenbankingOpendataV13PlusJSON503ErrorObject
+	FourHundredErrorObject                                                    *GetUnsecuredSmeLoans400ErrorObject
+	FourHundredAndEightErrorObject                                            *GetUnsecuredSmeLoans408ErrorObject
+	FourHundredAndTwentyNineErrorObject                                       *GetUnsecuredSmeLoans429ErrorObject
+	FiveHundredErrorObject                                                    *GetUnsecuredSmeLoans500ErrorObject
+	FiveHundredAndThreeErrorObject                                            *GetUnsecuredSmeLoans503ErrorObject
 	ContentType                                                               string
-	ErrorObject                                                               *GetUnsecuredSmeLoansDefaultApplicationPrsOpenbankingOpendataV13PlusJSONErrorObject
+	ErrorObject                                                               *GetUnsecuredSmeLoansErrorObject
 	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONObject *GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSON
 	Headers                                                                   map[string][]string
 	StatusCode                                                                int64

@@ -15,7 +15,7 @@ from . import nestedtenant
 
 @dataclass_json
 @dataclass
-class VirtualMachineWithConfigContextStatusStatus:
+class VirtualMachineWithConfigContextStatus:
     label: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label' }})
     value: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
     
@@ -39,7 +39,7 @@ class VirtualMachineWithConfigContext:
     primary_ip4: Optional[virtualmachineipaddress.VirtualMachineIPAddress] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'primary_ip4' }})
     primary_ip6: Optional[virtualmachineipaddress.VirtualMachineIPAddress] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'primary_ip6' }})
     role: Optional[nesteddevicerole.NestedDeviceRole] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'role' }})
-    status: Optional[VirtualMachineWithConfigContextStatusStatus] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    status: Optional[VirtualMachineWithConfigContextStatus] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
     tags: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
     tenant: Optional[nestedtenant.NestedTenant] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tenant' }})
     vcpus: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'vcpus' }})

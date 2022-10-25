@@ -12,7 +12,7 @@ type UpdateRoomPathParams struct {
 	Sid string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
-type UpdateRoomRequestBodyUpdateRoomRequest struct {
+type UpdateRoomUpdateRoomRequest struct {
 	Status shared.RoomEnumRoomStatusEnum `form:"name=Status"`
 }
 
@@ -23,7 +23,7 @@ type UpdateRoomSecurity struct {
 type UpdateRoomRequest struct {
 	ServerURL  *string
 	PathParams UpdateRoomPathParams
-	Request    *UpdateRoomRequestBodyUpdateRoomRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateRoomUpdateRoomRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateRoomSecurity
 }
 

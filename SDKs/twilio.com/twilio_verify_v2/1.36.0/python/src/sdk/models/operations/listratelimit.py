@@ -32,7 +32,7 @@ class ListRateLimitRequest:
 
 @dataclass_json
 @dataclass
-class ListRateLimit200ApplicationJSONMeta:
+class ListRateLimitListRateLimitResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -44,14 +44,14 @@ class ListRateLimit200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListRateLimit200ApplicationJSONListRateLimitResponse:
-    meta: Optional[ListRateLimit200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+class ListRateLimitListRateLimitResponse:
+    meta: Optional[ListRateLimitListRateLimitResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     rate_limits: Optional[List[shared.VerifyV2ServiceRateLimit]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rate_limits' }})
     
 
 @dataclass
 class ListRateLimitResponse:
     content_type: str = field(default=None)
-    list_rate_limit_response: Optional[ListRateLimit200ApplicationJSONListRateLimitResponse] = field(default=None)
+    list_rate_limit_response: Optional[ListRateLimitListRateLimitResponse] = field(default=None)
     status_code: int = field(default=None)
     

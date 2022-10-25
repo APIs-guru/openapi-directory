@@ -18,7 +18,7 @@ class UpdateServiceUserHeaders:
     
 
 @dataclass
-class UpdateServiceUserRequestBodyUpdateServiceUserRequest:
+class UpdateServiceUserUpdateServiceUserRequest:
     attributes: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Attributes' }})
     friendly_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
     role_sid: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'RoleSid' }})
@@ -34,7 +34,7 @@ class UpdateServiceUserRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateServiceUserPathParams = field(default=None)
     headers: UpdateServiceUserHeaders = field(default=None)
-    request: Optional[UpdateServiceUserRequestBodyUpdateServiceUserRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateServiceUserUpdateServiceUserRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateServiceUserSecurity = field(default=None)
     
 

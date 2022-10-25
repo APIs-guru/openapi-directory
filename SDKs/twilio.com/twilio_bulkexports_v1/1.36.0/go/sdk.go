@@ -338,7 +338,7 @@ func (s *SDK) ListDay(ctx context.Context, request operations.ListDayRequest) (*
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListDay200ApplicationJSONListDayResponse
+			var out *operations.ListDayListDayResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -383,7 +383,7 @@ func (s *SDK) ListExportCustomJob(ctx context.Context, request operations.ListEx
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListExportCustomJob200ApplicationJSONListExportCustomJobResponse
+			var out *operations.ListExportCustomJobListExportCustomJobResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}

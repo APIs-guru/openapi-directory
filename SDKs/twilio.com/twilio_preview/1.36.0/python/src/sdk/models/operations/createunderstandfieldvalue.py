@@ -13,7 +13,7 @@ class CreateUnderstandFieldValuePathParams:
     
 
 @dataclass
-class CreateUnderstandFieldValueRequestBodyCreateUnderstandFieldValueRequest:
+class CreateUnderstandFieldValueCreateUnderstandFieldValueRequest:
     language: str = field(default=None, metadata={'form': { 'field_name': 'Language' }})
     synonym_of: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'SynonymOf' }})
     value: str = field(default=None, metadata={'form': { 'field_name': 'Value' }})
@@ -28,7 +28,7 @@ class CreateUnderstandFieldValueSecurity:
 class CreateUnderstandFieldValueRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateUnderstandFieldValuePathParams = field(default=None)
-    request: Optional[CreateUnderstandFieldValueRequestBodyCreateUnderstandFieldValueRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateUnderstandFieldValueCreateUnderstandFieldValueRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateUnderstandFieldValueSecurity = field(default=None)
     
 

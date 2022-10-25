@@ -26,7 +26,7 @@ class ListMessagingCountryRequest:
 
 @dataclass_json
 @dataclass
-class ListMessagingCountry200ApplicationJSONMeta:
+class ListMessagingCountryListMessagingCountryResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -38,14 +38,14 @@ class ListMessagingCountry200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListMessagingCountry200ApplicationJSONListMessagingCountryResponse:
+class ListMessagingCountryListMessagingCountryResponse:
     countries: Optional[List[shared.PricingV1MessagingMessagingCountry]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'countries' }})
-    meta: Optional[ListMessagingCountry200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+    meta: Optional[ListMessagingCountryListMessagingCountryResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     
 
 @dataclass
 class ListMessagingCountryResponse:
     content_type: str = field(default=None)
-    list_messaging_country_response: Optional[ListMessagingCountry200ApplicationJSONListMessagingCountryResponse] = field(default=None)
+    list_messaging_country_response: Optional[ListMessagingCountryListMessagingCountryResponse] = field(default=None)
     status_code: int = field(default=None)
     

@@ -14,7 +14,7 @@ class DeviceInterfaceConnectionStatusLabelEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class DeviceInterfaceConnectionStatusConnectionStatus:
+class DeviceInterfaceConnectionStatus:
     label: DeviceInterfaceConnectionStatusLabelEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label' }})
     value: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
     
@@ -31,7 +31,7 @@ class DeviceInterfaceModeValueEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class DeviceInterfaceModeMode:
+class DeviceInterfaceMode:
     label: DeviceInterfaceModeLabelEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label' }})
     value: DeviceInterfaceModeValueEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
     
@@ -186,7 +186,7 @@ class DeviceInterfaceTypeValueEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class DeviceInterfaceTypeType:
+class DeviceInterfaceType:
     label: DeviceInterfaceTypeLabelEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label' }})
     value: DeviceInterfaceTypeValueEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
     
@@ -197,7 +197,7 @@ class DeviceInterface:
     cable: Optional[nestedcable.NestedCable] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cable' }})
     connected_endpoint: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'connected_endpoint' }})
     connected_endpoint_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'connected_endpoint_type' }})
-    connection_status: Optional[DeviceInterfaceConnectionStatusConnectionStatus] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'connection_status' }})
+    connection_status: Optional[DeviceInterfaceConnectionStatus] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'connection_status' }})
     count_ipaddresses: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'count_ipaddresses' }})
     description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
     device: nesteddevice.NestedDevice = field(default=None, metadata={'dataclasses_json': { 'field_name': 'device' }})
@@ -206,11 +206,11 @@ class DeviceInterface:
     lag: Optional[nestedinterface.NestedInterface] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lag' }})
     mac_address: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'mac_address' }})
     mgmt_only: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'mgmt_only' }})
-    mode: Optional[DeviceInterfaceModeMode] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'mode' }})
+    mode: Optional[DeviceInterfaceMode] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'mode' }})
     mtu: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'mtu' }})
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
     tagged_vlans: Optional[List[nestedvlan.NestedVlan]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tagged_vlans' }})
     tags: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
-    type: DeviceInterfaceTypeType = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    type: DeviceInterfaceType = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     untagged_vlan: Optional[nestedvlan.NestedVlan] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'untagged_vlan' }})
     

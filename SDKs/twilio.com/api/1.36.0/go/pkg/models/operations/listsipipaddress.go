@@ -28,7 +28,7 @@ type ListSipIPAddressRequest struct {
 	Security    ListSipIPAddressSecurity
 }
 
-type ListSipIPAddress200ApplicationJSONListSipIPAddressResponse struct {
+type ListSipIPAddressListSipIPAddressResponse struct {
 	End             *int64                                                        `json:"end,omitempty"`
 	FirstPageURI    *string                                                       `json:"first_page_uri,omitempty"`
 	IPAddresses     []shared.APIV2010AccountSipSipIPAccessControlListSipIPAddress `json:"ip_addresses,omitempty"`
@@ -42,6 +42,6 @@ type ListSipIPAddress200ApplicationJSONListSipIPAddressResponse struct {
 
 type ListSipIPAddressResponse struct {
 	ContentType              string
-	ListSipIPAddressResponse *ListSipIPAddress200ApplicationJSONListSipIPAddressResponse
+	ListSipIPAddressResponse *ListSipIPAddressListSipIPAddressResponse
 	StatusCode               int64
 }

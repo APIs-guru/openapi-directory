@@ -12,7 +12,7 @@ class CreateDeployedDevicesDeploymentPathParams:
     
 
 @dataclass
-class CreateDeployedDevicesDeploymentRequestBodyCreateDeployedDevicesDeploymentRequest:
+class CreateDeployedDevicesDeploymentCreateDeployedDevicesDeploymentRequest:
     friendly_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
     sync_service_sid: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'SyncServiceSid' }})
     
@@ -26,7 +26,7 @@ class CreateDeployedDevicesDeploymentSecurity:
 class CreateDeployedDevicesDeploymentRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateDeployedDevicesDeploymentPathParams = field(default=None)
-    request: Optional[CreateDeployedDevicesDeploymentRequestBodyCreateDeployedDevicesDeploymentRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateDeployedDevicesDeploymentCreateDeployedDevicesDeploymentRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateDeployedDevicesDeploymentSecurity = field(default=None)
     
 

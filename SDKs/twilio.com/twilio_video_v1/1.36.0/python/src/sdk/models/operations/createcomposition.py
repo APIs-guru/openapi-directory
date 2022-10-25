@@ -5,7 +5,7 @@ CREATE_COMPOSITION_SERVERS = [
 	"https://video.twilio.com",
 ]
 
-class CreateCompositionRequestBodyStatusCallbackMethodEnum(str, Enum):
+class CreateCompositionCreateCompositionRequestStatusCallbackMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -15,14 +15,14 @@ class CreateCompositionRequestBodyStatusCallbackMethodEnum(str, Enum):
 
 
 @dataclass
-class CreateCompositionRequestBodyCreateCompositionRequest:
+class CreateCompositionCreateCompositionRequest:
     audio_sources: Optional[List[str]] = field(default=None, metadata={'form': { 'field_name': 'AudioSources' }})
     audio_sources_excluded: Optional[List[str]] = field(default=None, metadata={'form': { 'field_name': 'AudioSourcesExcluded' }})
     format: Optional[shared.CompositionEnumFormatEnum] = field(default=None, metadata={'form': { 'field_name': 'Format' }})
     resolution: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Resolution' }})
     room_sid: str = field(default=None, metadata={'form': { 'field_name': 'RoomSid' }})
     status_callback: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'StatusCallback' }})
-    status_callback_method: Optional[CreateCompositionRequestBodyStatusCallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'StatusCallbackMethod' }})
+    status_callback_method: Optional[CreateCompositionCreateCompositionRequestStatusCallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'StatusCallbackMethod' }})
     trim: Optional[bool] = field(default=None, metadata={'form': { 'field_name': 'Trim' }})
     video_layout: Optional[Any] = field(default=None, metadata={'form': { 'field_name': 'VideoLayout' }})
     
@@ -35,7 +35,7 @@ class CreateCompositionSecurity:
 @dataclass
 class CreateCompositionRequest:
     server_url: Optional[str] = field(default=None)
-    request: Optional[CreateCompositionRequestBodyCreateCompositionRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateCompositionCreateCompositionRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateCompositionSecurity = field(default=None)
     
 

@@ -233,7 +233,7 @@ class SDK:
         res = operations.ListAccountUsageRecordResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListAccountUsageRecord200ApplicationJSONListAccountUsageRecordResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListAccountUsageRecordListAccountUsageRecordResponse])
                 res.list_account_usage_record_response = out
 
         return res
@@ -258,7 +258,7 @@ class SDK:
         res = operations.ListCommandResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListCommand200ApplicationJSONListCommandResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListCommandListCommandResponse])
                 res.list_command_response = out
 
         return res
@@ -283,7 +283,7 @@ class SDK:
         res = operations.ListDataSessionResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListDataSession200ApplicationJSONListDataSessionResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListDataSessionListDataSessionResponse])
                 res.list_data_session_response = out
 
         return res
@@ -308,7 +308,7 @@ class SDK:
         res = operations.ListRatePlanResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListRatePlan200ApplicationJSONListRatePlanResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListRatePlanListRatePlanResponse])
                 res.list_rate_plan_response = out
 
         return res
@@ -333,7 +333,7 @@ class SDK:
         res = operations.ListSimResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListSim200ApplicationJSONListSimResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListSimListSimResponse])
                 res.list_sim_response = out
 
         return res
@@ -358,7 +358,7 @@ class SDK:
         res = operations.ListUsageRecordResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListUsageRecord200ApplicationJSONListUsageRecordResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListUsageRecordListUsageRecordResponse])
                 res.list_usage_record_response = out
 
         return res

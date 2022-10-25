@@ -14,7 +14,7 @@ class UpdateChallengePathParams:
     
 
 @dataclass
-class UpdateChallengeRequestBodyUpdateChallengeRequest:
+class UpdateChallengeUpdateChallengeRequest:
     auth_payload: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'AuthPayload' }})
     metadata: Optional[Any] = field(default=None, metadata={'form': { 'field_name': 'Metadata' }})
     
@@ -28,7 +28,7 @@ class UpdateChallengeSecurity:
 class UpdateChallengeRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateChallengePathParams = field(default=None)
-    request: Optional[UpdateChallengeRequestBodyUpdateChallengeRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateChallengeUpdateChallengeRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateChallengeSecurity = field(default=None)
     
 

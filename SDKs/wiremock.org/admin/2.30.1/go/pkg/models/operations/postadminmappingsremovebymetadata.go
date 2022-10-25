@@ -1,37 +1,37 @@
 package operations
 
-type PostAdminMappingsRemoveByMetadataRequestBody1StringEquals struct {
+type PostAdminMappingsRemoveByMetadataRequestBodyStringEquals struct {
 	CaseInsensitive *bool `json:"caseInsensitive,omitempty"`
 	EqualTo         bool  `json:"equalTo"`
 }
 
-type PostAdminMappingsRemoveByMetadataRequestBody2StringContains struct {
+type PostAdminMappingsRemoveByMetadataRequestBodyStringContains struct {
 	Contains string `json:"contains"`
 }
 
-type PostAdminMappingsRemoveByMetadataRequestBody3RegularExpressionMatch struct {
+type PostAdminMappingsRemoveByMetadataRequestBodyRegularExpressionMatch struct {
 	Matches string `json:"matches"`
 }
 
-type PostAdminMappingsRemoveByMetadataRequestBody4NegativeRegularExpressionMatch struct {
+type PostAdminMappingsRemoveByMetadataRequestBodyNegativeRegularExpressionMatch struct {
 	DoesNotMatch string `json:"doesNotMatch"`
 }
 
-type PostAdminMappingsRemoveByMetadataRequestBody5JSONEquals struct {
+type PostAdminMappingsRemoveByMetadataRequestBodyJSONEquals struct {
 	EqualToJSON string `json:"equalToJson"`
 }
 
-type PostAdminMappingsRemoveByMetadataRequestBody6JSONPathMatch struct {
+type PostAdminMappingsRemoveByMetadataRequestBodyJSONPathMatch struct {
 	IgnoreArrayOrder    *bool  `json:"ignoreArrayOrder,omitempty"`
 	IgnoreExtraElements *bool  `json:"ignoreExtraElements,omitempty"`
 	MatchesJSONPath     string `json:"matchesJsonPath"`
 }
 
-type PostAdminMappingsRemoveByMetadataRequestBody7XMLEquality struct {
+type PostAdminMappingsRemoveByMetadataRequestBodyXMLEquality struct {
 	EqualToXML string `json:"equalToXml"`
 }
 
-type PostAdminMappingsRemoveByMetadataRequestBody8XPathMatch struct {
+type PostAdminMappingsRemoveByMetadataRequestBodyXPathMatch struct {
 	MatchesXpath string                 `json:"matchesXpath"`
 	Namespaces   map[string]interface{} `json:"namespaces,omitempty"`
 	ValuePattern map[string]interface{} `json:"valuePattern,omitempty"`

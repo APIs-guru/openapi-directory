@@ -10,7 +10,7 @@ CREATE_VALIDATION_REQUEST_SERVERS = [
 class CreateValidationRequestPathParams:
     account_sid: str = field(default=None, metadata={'path_param': { 'field_name': 'AccountSid', 'style': 'simple', 'explode': False }})
     
-class CreateValidationRequestRequestBodyStatusCallbackMethodEnum(str, Enum):
+class CreateValidationRequestCreateValidationRequestRequestStatusCallbackMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -20,13 +20,13 @@ class CreateValidationRequestRequestBodyStatusCallbackMethodEnum(str, Enum):
 
 
 @dataclass
-class CreateValidationRequestRequestBodyCreateValidationRequestRequest:
+class CreateValidationRequestCreateValidationRequestRequest:
     call_delay: Optional[int] = field(default=None, metadata={'form': { 'field_name': 'CallDelay' }})
     extension: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Extension' }})
     friendly_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
     phone_number: str = field(default=None, metadata={'form': { 'field_name': 'PhoneNumber' }})
     status_callback: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'StatusCallback' }})
-    status_callback_method: Optional[CreateValidationRequestRequestBodyStatusCallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'StatusCallbackMethod' }})
+    status_callback_method: Optional[CreateValidationRequestCreateValidationRequestRequestStatusCallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'StatusCallbackMethod' }})
     
 
 @dataclass
@@ -38,7 +38,7 @@ class CreateValidationRequestSecurity:
 class CreateValidationRequestRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateValidationRequestPathParams = field(default=None)
-    request: Optional[CreateValidationRequestRequestBodyCreateValidationRequestRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateValidationRequestCreateValidationRequestRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateValidationRequestSecurity = field(default=None)
     
 

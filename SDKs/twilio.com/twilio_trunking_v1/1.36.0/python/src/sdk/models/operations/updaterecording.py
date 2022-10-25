@@ -12,7 +12,7 @@ class UpdateRecordingPathParams:
     
 
 @dataclass
-class UpdateRecordingRequestBodyUpdateRecordingRequest:
+class UpdateRecordingUpdateRecordingRequest:
     mode: Optional[shared.RecordingEnumRecordingModeEnum] = field(default=None, metadata={'form': { 'field_name': 'Mode' }})
     trim: Optional[shared.RecordingEnumRecordingTrimEnum] = field(default=None, metadata={'form': { 'field_name': 'Trim' }})
     
@@ -26,7 +26,7 @@ class UpdateRecordingSecurity:
 class UpdateRecordingRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateRecordingPathParams = field(default=None)
-    request: Optional[UpdateRecordingRequestBodyUpdateRecordingRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateRecordingUpdateRecordingRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateRecordingSecurity = field(default=None)
     
 

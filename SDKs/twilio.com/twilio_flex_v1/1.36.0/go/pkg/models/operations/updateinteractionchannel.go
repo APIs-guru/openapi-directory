@@ -13,7 +13,7 @@ type UpdateInteractionChannelPathParams struct {
 	Sid            string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
-type UpdateInteractionChannelRequestBodyUpdateInteractionChannelRequest struct {
+type UpdateInteractionChannelUpdateInteractionChannelRequest struct {
 	Routing *interface{}                            `form:"name=Routing"`
 	Status  shared.InteractionChannelEnumStatusEnum `form:"name=Status"`
 }
@@ -25,7 +25,7 @@ type UpdateInteractionChannelSecurity struct {
 type UpdateInteractionChannelRequest struct {
 	ServerURL  *string
 	PathParams UpdateInteractionChannelPathParams
-	Request    *UpdateInteractionChannelRequestBodyUpdateInteractionChannelRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateInteractionChannelUpdateInteractionChannelRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateInteractionChannelSecurity
 }
 

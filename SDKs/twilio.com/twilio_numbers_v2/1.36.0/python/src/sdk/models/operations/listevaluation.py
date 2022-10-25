@@ -32,7 +32,7 @@ class ListEvaluationRequest:
 
 @dataclass_json
 @dataclass
-class ListEvaluation200ApplicationJSONMeta:
+class ListEvaluationListEvaluationResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -44,14 +44,14 @@ class ListEvaluation200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListEvaluation200ApplicationJSONListEvaluationResponse:
-    meta: Optional[ListEvaluation200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+class ListEvaluationListEvaluationResponse:
+    meta: Optional[ListEvaluationListEvaluationResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     results: Optional[List[shared.NumbersV2RegulatoryComplianceBundleEvaluation]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'results' }})
     
 
 @dataclass
 class ListEvaluationResponse:
     content_type: str = field(default=None)
-    list_evaluation_response: Optional[ListEvaluation200ApplicationJSONListEvaluationResponse] = field(default=None)
+    list_evaluation_response: Optional[ListEvaluationListEvaluationResponse] = field(default=None)
     status_code: int = field(default=None)
     

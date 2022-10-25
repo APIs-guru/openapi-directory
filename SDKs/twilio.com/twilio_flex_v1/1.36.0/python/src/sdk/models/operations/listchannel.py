@@ -26,7 +26,7 @@ class ListChannelRequest:
 
 @dataclass_json
 @dataclass
-class ListChannel200ApplicationJSONMeta:
+class ListChannelListChannelResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -38,14 +38,14 @@ class ListChannel200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListChannel200ApplicationJSONListChannelResponse:
+class ListChannelListChannelResponse:
     flex_chat_channels: Optional[List[shared.FlexV1Channel]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'flex_chat_channels' }})
-    meta: Optional[ListChannel200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+    meta: Optional[ListChannelListChannelResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     
 
 @dataclass
 class ListChannelResponse:
     content_type: str = field(default=None)
-    list_channel_response: Optional[ListChannel200ApplicationJSONListChannelResponse] = field(default=None)
+    list_channel_response: Optional[ListChannelListChannelResponse] = field(default=None)
     status_code: int = field(default=None)
     

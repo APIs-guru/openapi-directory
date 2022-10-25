@@ -31,7 +31,7 @@ type ListChallengeRequest struct {
 	Security    ListChallengeSecurity
 }
 
-type ListChallenge200ApplicationJSONMeta struct {
+type ListChallengeListChallengeResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -41,13 +41,13 @@ type ListChallenge200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListChallenge200ApplicationJSONListChallengeResponse struct {
+type ListChallengeListChallengeResponse struct {
 	Challenges []shared.VerifyV2ServiceEntityChallenge `json:"challenges,omitempty"`
-	Meta       *ListChallenge200ApplicationJSONMeta    `json:"meta,omitempty"`
+	Meta       *ListChallengeListChallengeResponseMeta `json:"meta,omitempty"`
 }
 
 type ListChallengeResponse struct {
 	ContentType           string
-	ListChallengeResponse *ListChallenge200ApplicationJSONListChallengeResponse
+	ListChallengeResponse *ListChallengeListChallengeResponse
 	StatusCode            int64
 }

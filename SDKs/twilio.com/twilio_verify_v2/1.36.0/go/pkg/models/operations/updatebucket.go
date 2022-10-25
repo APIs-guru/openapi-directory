@@ -14,7 +14,7 @@ type UpdateBucketPathParams struct {
 	Sid          string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
-type UpdateBucketRequestBodyUpdateBucketRequest struct {
+type UpdateBucketUpdateBucketRequest struct {
 	Interval *int64 `form:"name=Interval"`
 	Max      *int64 `form:"name=Max"`
 }
@@ -26,7 +26,7 @@ type UpdateBucketSecurity struct {
 type UpdateBucketRequest struct {
 	ServerURL  *string
 	PathParams UpdateBucketPathParams
-	Request    *UpdateBucketRequestBodyUpdateBucketRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateBucketUpdateBucketRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateBucketSecurity
 }
 

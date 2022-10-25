@@ -8,13 +8,13 @@ type PutOrdersIDStatusPathParams struct {
 	ID int32 `pathParam:"style=simple,explode=false,name=id"`
 }
 
-type PutOrdersIDStatusRequestBodyStatus struct {
+type PutOrdersIDStatusStatusTypeSimpleV2Status struct {
 	Code string `json:"code"`
 }
 
-type PutOrdersIDStatusRequestBodyStatusTypeSimpleV2 struct {
-	Reason string                             `json:"reason"`
-	Status PutOrdersIDStatusRequestBodyStatus `json:"status"`
+type PutOrdersIDStatusStatusTypeSimpleV2 struct {
+	Reason string                                    `json:"reason"`
+	Status PutOrdersIDStatusStatusTypeSimpleV2Status `json:"status"`
 }
 
 type PutOrdersIDStatusSecurity struct {
@@ -23,7 +23,7 @@ type PutOrdersIDStatusSecurity struct {
 
 type PutOrdersIDStatusRequest struct {
 	PathParams PutOrdersIDStatusPathParams
-	Request    PutOrdersIDStatusRequestBodyStatusTypeSimpleV2 `request:"mediaType=application/json"`
+	Request    PutOrdersIDStatusStatusTypeSimpleV2 `request:"mediaType=application/json"`
 	Security   PutOrdersIDStatusSecurity
 }
 

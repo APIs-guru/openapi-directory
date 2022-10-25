@@ -10,7 +10,7 @@ UPDATE_SIM_SERVERS = [
 class UpdateSimPathParams:
     sid: str = field(default=None, metadata={'path_param': { 'field_name': 'Sid', 'style': 'simple', 'explode': False }})
     
-class UpdateSimRequestBodyCallbackMethodEnum(str, Enum):
+class UpdateSimUpdateSimRequestCallbackMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -18,7 +18,7 @@ class UpdateSimRequestBodyCallbackMethodEnum(str, Enum):
     PUT = "PUT"
     DELETE = "DELETE"
 
-class UpdateSimRequestBodyCommandsCallbackMethodEnum(str, Enum):
+class UpdateSimUpdateSimRequestCommandsCallbackMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -26,7 +26,7 @@ class UpdateSimRequestBodyCommandsCallbackMethodEnum(str, Enum):
     PUT = "PUT"
     DELETE = "DELETE"
 
-class UpdateSimRequestBodySmsFallbackMethodEnum(str, Enum):
+class UpdateSimUpdateSimRequestSmsFallbackMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -34,7 +34,7 @@ class UpdateSimRequestBodySmsFallbackMethodEnum(str, Enum):
     PUT = "PUT"
     DELETE = "DELETE"
 
-class UpdateSimRequestBodySmsMethodEnum(str, Enum):
+class UpdateSimUpdateSimRequestSmsMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -42,7 +42,7 @@ class UpdateSimRequestBodySmsMethodEnum(str, Enum):
     PUT = "PUT"
     DELETE = "DELETE"
 
-class UpdateSimRequestBodyVoiceFallbackMethodEnum(str, Enum):
+class UpdateSimUpdateSimRequestVoiceFallbackMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -50,7 +50,7 @@ class UpdateSimRequestBodyVoiceFallbackMethodEnum(str, Enum):
     PUT = "PUT"
     DELETE = "DELETE"
 
-class UpdateSimRequestBodyVoiceMethodEnum(str, Enum):
+class UpdateSimUpdateSimRequestVoiceMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -60,24 +60,24 @@ class UpdateSimRequestBodyVoiceMethodEnum(str, Enum):
 
 
 @dataclass
-class UpdateSimRequestBodyUpdateSimRequest:
+class UpdateSimUpdateSimRequest:
     account_sid: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'AccountSid' }})
-    callback_method: Optional[UpdateSimRequestBodyCallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'CallbackMethod' }})
+    callback_method: Optional[UpdateSimUpdateSimRequestCallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'CallbackMethod' }})
     callback_url: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'CallbackUrl' }})
-    commands_callback_method: Optional[UpdateSimRequestBodyCommandsCallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'CommandsCallbackMethod' }})
+    commands_callback_method: Optional[UpdateSimUpdateSimRequestCommandsCallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'CommandsCallbackMethod' }})
     commands_callback_url: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'CommandsCallbackUrl' }})
     friendly_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
     rate_plan: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'RatePlan' }})
     reset_status: Optional[shared.SimEnumResetStatusEnum] = field(default=None, metadata={'form': { 'field_name': 'ResetStatus' }})
-    sms_fallback_method: Optional[UpdateSimRequestBodySmsFallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'SmsFallbackMethod' }})
+    sms_fallback_method: Optional[UpdateSimUpdateSimRequestSmsFallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'SmsFallbackMethod' }})
     sms_fallback_url: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'SmsFallbackUrl' }})
-    sms_method: Optional[UpdateSimRequestBodySmsMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'SmsMethod' }})
+    sms_method: Optional[UpdateSimUpdateSimRequestSmsMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'SmsMethod' }})
     sms_url: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'SmsUrl' }})
     status: Optional[shared.SimEnumStatusEnum] = field(default=None, metadata={'form': { 'field_name': 'Status' }})
     unique_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'UniqueName' }})
-    voice_fallback_method: Optional[UpdateSimRequestBodyVoiceFallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'VoiceFallbackMethod' }})
+    voice_fallback_method: Optional[UpdateSimUpdateSimRequestVoiceFallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'VoiceFallbackMethod' }})
     voice_fallback_url: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'VoiceFallbackUrl' }})
-    voice_method: Optional[UpdateSimRequestBodyVoiceMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'VoiceMethod' }})
+    voice_method: Optional[UpdateSimUpdateSimRequestVoiceMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'VoiceMethod' }})
     voice_url: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'VoiceUrl' }})
     
 
@@ -90,7 +90,7 @@ class UpdateSimSecurity:
 class UpdateSimRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateSimPathParams = field(default=None)
-    request: Optional[UpdateSimRequestBodyUpdateSimRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateSimUpdateSimRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateSimSecurity = field(default=None)
     
 

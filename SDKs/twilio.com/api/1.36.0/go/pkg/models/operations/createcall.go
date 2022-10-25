@@ -12,97 +12,97 @@ type CreateCallPathParams struct {
 	AccountSid string `pathParam:"style=simple,explode=false,name=AccountSid"`
 }
 
-type CreateCallRequestBodyAsyncAmdStatusCallbackMethodEnum string
+type CreateCallCreateCallRequestAsyncAmdStatusCallbackMethodEnum string
 
 const (
-	CreateCallRequestBodyAsyncAmdStatusCallbackMethodEnumHead   CreateCallRequestBodyAsyncAmdStatusCallbackMethodEnum = "HEAD"
-	CreateCallRequestBodyAsyncAmdStatusCallbackMethodEnumGet    CreateCallRequestBodyAsyncAmdStatusCallbackMethodEnum = "GET"
-	CreateCallRequestBodyAsyncAmdStatusCallbackMethodEnumPost   CreateCallRequestBodyAsyncAmdStatusCallbackMethodEnum = "POST"
-	CreateCallRequestBodyAsyncAmdStatusCallbackMethodEnumPatch  CreateCallRequestBodyAsyncAmdStatusCallbackMethodEnum = "PATCH"
-	CreateCallRequestBodyAsyncAmdStatusCallbackMethodEnumPut    CreateCallRequestBodyAsyncAmdStatusCallbackMethodEnum = "PUT"
-	CreateCallRequestBodyAsyncAmdStatusCallbackMethodEnumDelete CreateCallRequestBodyAsyncAmdStatusCallbackMethodEnum = "DELETE"
+	CreateCallCreateCallRequestAsyncAmdStatusCallbackMethodEnumHead   CreateCallCreateCallRequestAsyncAmdStatusCallbackMethodEnum = "HEAD"
+	CreateCallCreateCallRequestAsyncAmdStatusCallbackMethodEnumGet    CreateCallCreateCallRequestAsyncAmdStatusCallbackMethodEnum = "GET"
+	CreateCallCreateCallRequestAsyncAmdStatusCallbackMethodEnumPost   CreateCallCreateCallRequestAsyncAmdStatusCallbackMethodEnum = "POST"
+	CreateCallCreateCallRequestAsyncAmdStatusCallbackMethodEnumPatch  CreateCallCreateCallRequestAsyncAmdStatusCallbackMethodEnum = "PATCH"
+	CreateCallCreateCallRequestAsyncAmdStatusCallbackMethodEnumPut    CreateCallCreateCallRequestAsyncAmdStatusCallbackMethodEnum = "PUT"
+	CreateCallCreateCallRequestAsyncAmdStatusCallbackMethodEnumDelete CreateCallCreateCallRequestAsyncAmdStatusCallbackMethodEnum = "DELETE"
 )
 
-type CreateCallRequestBodyFallbackMethodEnum string
+type CreateCallCreateCallRequestFallbackMethodEnum string
 
 const (
-	CreateCallRequestBodyFallbackMethodEnumHead   CreateCallRequestBodyFallbackMethodEnum = "HEAD"
-	CreateCallRequestBodyFallbackMethodEnumGet    CreateCallRequestBodyFallbackMethodEnum = "GET"
-	CreateCallRequestBodyFallbackMethodEnumPost   CreateCallRequestBodyFallbackMethodEnum = "POST"
-	CreateCallRequestBodyFallbackMethodEnumPatch  CreateCallRequestBodyFallbackMethodEnum = "PATCH"
-	CreateCallRequestBodyFallbackMethodEnumPut    CreateCallRequestBodyFallbackMethodEnum = "PUT"
-	CreateCallRequestBodyFallbackMethodEnumDelete CreateCallRequestBodyFallbackMethodEnum = "DELETE"
+	CreateCallCreateCallRequestFallbackMethodEnumHead   CreateCallCreateCallRequestFallbackMethodEnum = "HEAD"
+	CreateCallCreateCallRequestFallbackMethodEnumGet    CreateCallCreateCallRequestFallbackMethodEnum = "GET"
+	CreateCallCreateCallRequestFallbackMethodEnumPost   CreateCallCreateCallRequestFallbackMethodEnum = "POST"
+	CreateCallCreateCallRequestFallbackMethodEnumPatch  CreateCallCreateCallRequestFallbackMethodEnum = "PATCH"
+	CreateCallCreateCallRequestFallbackMethodEnumPut    CreateCallCreateCallRequestFallbackMethodEnum = "PUT"
+	CreateCallCreateCallRequestFallbackMethodEnumDelete CreateCallCreateCallRequestFallbackMethodEnum = "DELETE"
 )
 
-type CreateCallRequestBodyMethodEnum string
+type CreateCallCreateCallRequestMethodEnum string
 
 const (
-	CreateCallRequestBodyMethodEnumHead   CreateCallRequestBodyMethodEnum = "HEAD"
-	CreateCallRequestBodyMethodEnumGet    CreateCallRequestBodyMethodEnum = "GET"
-	CreateCallRequestBodyMethodEnumPost   CreateCallRequestBodyMethodEnum = "POST"
-	CreateCallRequestBodyMethodEnumPatch  CreateCallRequestBodyMethodEnum = "PATCH"
-	CreateCallRequestBodyMethodEnumPut    CreateCallRequestBodyMethodEnum = "PUT"
-	CreateCallRequestBodyMethodEnumDelete CreateCallRequestBodyMethodEnum = "DELETE"
+	CreateCallCreateCallRequestMethodEnumHead   CreateCallCreateCallRequestMethodEnum = "HEAD"
+	CreateCallCreateCallRequestMethodEnumGet    CreateCallCreateCallRequestMethodEnum = "GET"
+	CreateCallCreateCallRequestMethodEnumPost   CreateCallCreateCallRequestMethodEnum = "POST"
+	CreateCallCreateCallRequestMethodEnumPatch  CreateCallCreateCallRequestMethodEnum = "PATCH"
+	CreateCallCreateCallRequestMethodEnumPut    CreateCallCreateCallRequestMethodEnum = "PUT"
+	CreateCallCreateCallRequestMethodEnumDelete CreateCallCreateCallRequestMethodEnum = "DELETE"
 )
 
-type CreateCallRequestBodyRecordingStatusCallbackMethodEnum string
+type CreateCallCreateCallRequestRecordingStatusCallbackMethodEnum string
 
 const (
-	CreateCallRequestBodyRecordingStatusCallbackMethodEnumHead   CreateCallRequestBodyRecordingStatusCallbackMethodEnum = "HEAD"
-	CreateCallRequestBodyRecordingStatusCallbackMethodEnumGet    CreateCallRequestBodyRecordingStatusCallbackMethodEnum = "GET"
-	CreateCallRequestBodyRecordingStatusCallbackMethodEnumPost   CreateCallRequestBodyRecordingStatusCallbackMethodEnum = "POST"
-	CreateCallRequestBodyRecordingStatusCallbackMethodEnumPatch  CreateCallRequestBodyRecordingStatusCallbackMethodEnum = "PATCH"
-	CreateCallRequestBodyRecordingStatusCallbackMethodEnumPut    CreateCallRequestBodyRecordingStatusCallbackMethodEnum = "PUT"
-	CreateCallRequestBodyRecordingStatusCallbackMethodEnumDelete CreateCallRequestBodyRecordingStatusCallbackMethodEnum = "DELETE"
+	CreateCallCreateCallRequestRecordingStatusCallbackMethodEnumHead   CreateCallCreateCallRequestRecordingStatusCallbackMethodEnum = "HEAD"
+	CreateCallCreateCallRequestRecordingStatusCallbackMethodEnumGet    CreateCallCreateCallRequestRecordingStatusCallbackMethodEnum = "GET"
+	CreateCallCreateCallRequestRecordingStatusCallbackMethodEnumPost   CreateCallCreateCallRequestRecordingStatusCallbackMethodEnum = "POST"
+	CreateCallCreateCallRequestRecordingStatusCallbackMethodEnumPatch  CreateCallCreateCallRequestRecordingStatusCallbackMethodEnum = "PATCH"
+	CreateCallCreateCallRequestRecordingStatusCallbackMethodEnumPut    CreateCallCreateCallRequestRecordingStatusCallbackMethodEnum = "PUT"
+	CreateCallCreateCallRequestRecordingStatusCallbackMethodEnumDelete CreateCallCreateCallRequestRecordingStatusCallbackMethodEnum = "DELETE"
 )
 
-type CreateCallRequestBodyStatusCallbackMethodEnum string
+type CreateCallCreateCallRequestStatusCallbackMethodEnum string
 
 const (
-	CreateCallRequestBodyStatusCallbackMethodEnumHead   CreateCallRequestBodyStatusCallbackMethodEnum = "HEAD"
-	CreateCallRequestBodyStatusCallbackMethodEnumGet    CreateCallRequestBodyStatusCallbackMethodEnum = "GET"
-	CreateCallRequestBodyStatusCallbackMethodEnumPost   CreateCallRequestBodyStatusCallbackMethodEnum = "POST"
-	CreateCallRequestBodyStatusCallbackMethodEnumPatch  CreateCallRequestBodyStatusCallbackMethodEnum = "PATCH"
-	CreateCallRequestBodyStatusCallbackMethodEnumPut    CreateCallRequestBodyStatusCallbackMethodEnum = "PUT"
-	CreateCallRequestBodyStatusCallbackMethodEnumDelete CreateCallRequestBodyStatusCallbackMethodEnum = "DELETE"
+	CreateCallCreateCallRequestStatusCallbackMethodEnumHead   CreateCallCreateCallRequestStatusCallbackMethodEnum = "HEAD"
+	CreateCallCreateCallRequestStatusCallbackMethodEnumGet    CreateCallCreateCallRequestStatusCallbackMethodEnum = "GET"
+	CreateCallCreateCallRequestStatusCallbackMethodEnumPost   CreateCallCreateCallRequestStatusCallbackMethodEnum = "POST"
+	CreateCallCreateCallRequestStatusCallbackMethodEnumPatch  CreateCallCreateCallRequestStatusCallbackMethodEnum = "PATCH"
+	CreateCallCreateCallRequestStatusCallbackMethodEnumPut    CreateCallCreateCallRequestStatusCallbackMethodEnum = "PUT"
+	CreateCallCreateCallRequestStatusCallbackMethodEnumDelete CreateCallCreateCallRequestStatusCallbackMethodEnum = "DELETE"
 )
 
-type CreateCallRequestBodyCreateCallRequest struct {
-	ApplicationSid                     *string                                                 `form:"name=ApplicationSid"`
-	AsyncAmd                           *string                                                 `form:"name=AsyncAmd"`
-	AsyncAmdStatusCallback             *string                                                 `form:"name=AsyncAmdStatusCallback"`
-	AsyncAmdStatusCallbackMethod       *CreateCallRequestBodyAsyncAmdStatusCallbackMethodEnum  `form:"name=AsyncAmdStatusCallbackMethod"`
-	Byoc                               *string                                                 `form:"name=Byoc"`
-	CallReason                         *string                                                 `form:"name=CallReason"`
-	CallToken                          *string                                                 `form:"name=CallToken"`
-	CallerID                           *string                                                 `form:"name=CallerId"`
-	FallbackMethod                     *CreateCallRequestBodyFallbackMethodEnum                `form:"name=FallbackMethod"`
-	FallbackURL                        *string                                                 `form:"name=FallbackUrl"`
-	From                               string                                                  `form:"name=From"`
-	MachineDetection                   *string                                                 `form:"name=MachineDetection"`
-	MachineDetectionSilenceTimeout     *int64                                                  `form:"name=MachineDetectionSilenceTimeout"`
-	MachineDetectionSpeechEndThreshold *int64                                                  `form:"name=MachineDetectionSpeechEndThreshold"`
-	MachineDetectionSpeechThreshold    *int64                                                  `form:"name=MachineDetectionSpeechThreshold"`
-	MachineDetectionTimeout            *int64                                                  `form:"name=MachineDetectionTimeout"`
-	Method                             *CreateCallRequestBodyMethodEnum                        `form:"name=Method"`
-	Record                             *bool                                                   `form:"name=Record"`
-	RecordingChannels                  *string                                                 `form:"name=RecordingChannels"`
-	RecordingStatusCallback            *string                                                 `form:"name=RecordingStatusCallback"`
-	RecordingStatusCallbackEvent       []string                                                `form:"name=RecordingStatusCallbackEvent"`
-	RecordingStatusCallbackMethod      *CreateCallRequestBodyRecordingStatusCallbackMethodEnum `form:"name=RecordingStatusCallbackMethod"`
-	RecordingTrack                     *string                                                 `form:"name=RecordingTrack"`
-	SendDigits                         *string                                                 `form:"name=SendDigits"`
-	SipAuthPassword                    *string                                                 `form:"name=SipAuthPassword"`
-	SipAuthUsername                    *string                                                 `form:"name=SipAuthUsername"`
-	StatusCallback                     *string                                                 `form:"name=StatusCallback"`
-	StatusCallbackEvent                []string                                                `form:"name=StatusCallbackEvent"`
-	StatusCallbackMethod               *CreateCallRequestBodyStatusCallbackMethodEnum          `form:"name=StatusCallbackMethod"`
-	TimeLimit                          *int64                                                  `form:"name=TimeLimit"`
-	Timeout                            *int64                                                  `form:"name=Timeout"`
-	To                                 string                                                  `form:"name=To"`
-	Trim                               *string                                                 `form:"name=Trim"`
-	Twiml                              *string                                                 `form:"name=Twiml"`
-	URL                                *string                                                 `form:"name=Url"`
+type CreateCallCreateCallRequest struct {
+	ApplicationSid                     *string                                                       `form:"name=ApplicationSid"`
+	AsyncAmd                           *string                                                       `form:"name=AsyncAmd"`
+	AsyncAmdStatusCallback             *string                                                       `form:"name=AsyncAmdStatusCallback"`
+	AsyncAmdStatusCallbackMethod       *CreateCallCreateCallRequestAsyncAmdStatusCallbackMethodEnum  `form:"name=AsyncAmdStatusCallbackMethod"`
+	Byoc                               *string                                                       `form:"name=Byoc"`
+	CallReason                         *string                                                       `form:"name=CallReason"`
+	CallToken                          *string                                                       `form:"name=CallToken"`
+	CallerID                           *string                                                       `form:"name=CallerId"`
+	FallbackMethod                     *CreateCallCreateCallRequestFallbackMethodEnum                `form:"name=FallbackMethod"`
+	FallbackURL                        *string                                                       `form:"name=FallbackUrl"`
+	From                               string                                                        `form:"name=From"`
+	MachineDetection                   *string                                                       `form:"name=MachineDetection"`
+	MachineDetectionSilenceTimeout     *int64                                                        `form:"name=MachineDetectionSilenceTimeout"`
+	MachineDetectionSpeechEndThreshold *int64                                                        `form:"name=MachineDetectionSpeechEndThreshold"`
+	MachineDetectionSpeechThreshold    *int64                                                        `form:"name=MachineDetectionSpeechThreshold"`
+	MachineDetectionTimeout            *int64                                                        `form:"name=MachineDetectionTimeout"`
+	Method                             *CreateCallCreateCallRequestMethodEnum                        `form:"name=Method"`
+	Record                             *bool                                                         `form:"name=Record"`
+	RecordingChannels                  *string                                                       `form:"name=RecordingChannels"`
+	RecordingStatusCallback            *string                                                       `form:"name=RecordingStatusCallback"`
+	RecordingStatusCallbackEvent       []string                                                      `form:"name=RecordingStatusCallbackEvent"`
+	RecordingStatusCallbackMethod      *CreateCallCreateCallRequestRecordingStatusCallbackMethodEnum `form:"name=RecordingStatusCallbackMethod"`
+	RecordingTrack                     *string                                                       `form:"name=RecordingTrack"`
+	SendDigits                         *string                                                       `form:"name=SendDigits"`
+	SipAuthPassword                    *string                                                       `form:"name=SipAuthPassword"`
+	SipAuthUsername                    *string                                                       `form:"name=SipAuthUsername"`
+	StatusCallback                     *string                                                       `form:"name=StatusCallback"`
+	StatusCallbackEvent                []string                                                      `form:"name=StatusCallbackEvent"`
+	StatusCallbackMethod               *CreateCallCreateCallRequestStatusCallbackMethodEnum          `form:"name=StatusCallbackMethod"`
+	TimeLimit                          *int64                                                        `form:"name=TimeLimit"`
+	Timeout                            *int64                                                        `form:"name=Timeout"`
+	To                                 string                                                        `form:"name=To"`
+	Trim                               *string                                                       `form:"name=Trim"`
+	Twiml                              *string                                                       `form:"name=Twiml"`
+	URL                                *string                                                       `form:"name=Url"`
 }
 
 type CreateCallSecurity struct {
@@ -112,7 +112,7 @@ type CreateCallSecurity struct {
 type CreateCallRequest struct {
 	ServerURL  *string
 	PathParams CreateCallPathParams
-	Request    *CreateCallRequestBodyCreateCallRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateCallCreateCallRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateCallSecurity
 }
 

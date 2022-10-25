@@ -13,7 +13,7 @@ type UpdateActivityPathParams struct {
 	WorkspaceSid string `pathParam:"style=simple,explode=false,name=WorkspaceSid"`
 }
 
-type UpdateActivityRequestBodyUpdateActivityRequest struct {
+type UpdateActivityUpdateActivityRequest struct {
 	FriendlyName *string `form:"name=FriendlyName"`
 }
 
@@ -24,7 +24,7 @@ type UpdateActivitySecurity struct {
 type UpdateActivityRequest struct {
 	ServerURL  *string
 	PathParams UpdateActivityPathParams
-	Request    *UpdateActivityRequestBodyUpdateActivityRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateActivityUpdateActivityRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateActivitySecurity
 }
 

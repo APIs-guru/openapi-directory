@@ -13,7 +13,7 @@ type UpdateSyncStreamPathParams struct {
 	Sid        string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
-type UpdateSyncStreamRequestBodyUpdateSyncStreamRequest struct {
+type UpdateSyncStreamUpdateSyncStreamRequest struct {
 	TTL *int64 `form:"name=Ttl"`
 }
 
@@ -24,7 +24,7 @@ type UpdateSyncStreamSecurity struct {
 type UpdateSyncStreamRequest struct {
 	ServerURL  *string
 	PathParams UpdateSyncStreamPathParams
-	Request    *UpdateSyncStreamRequestBodyUpdateSyncStreamRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateSyncStreamUpdateSyncStreamRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateSyncStreamSecurity
 }
 

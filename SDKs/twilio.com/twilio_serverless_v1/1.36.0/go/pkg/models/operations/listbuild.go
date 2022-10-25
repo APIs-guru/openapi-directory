@@ -27,7 +27,7 @@ type ListBuildRequest struct {
 	Security    ListBuildSecurity
 }
 
-type ListBuild200ApplicationJSONMeta struct {
+type ListBuildListBuildResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -37,13 +37,13 @@ type ListBuild200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListBuild200ApplicationJSONListBuildResponse struct {
+type ListBuildListBuildResponse struct {
 	Builds []shared.ServerlessV1ServiceBuild `json:"builds,omitempty"`
-	Meta   *ListBuild200ApplicationJSONMeta  `json:"meta,omitempty"`
+	Meta   *ListBuildListBuildResponseMeta   `json:"meta,omitempty"`
 }
 
 type ListBuildResponse struct {
 	ContentType       string
-	ListBuildResponse *ListBuild200ApplicationJSONListBuildResponse
+	ListBuildResponse *ListBuildListBuildResponse
 	StatusCode        int64
 }

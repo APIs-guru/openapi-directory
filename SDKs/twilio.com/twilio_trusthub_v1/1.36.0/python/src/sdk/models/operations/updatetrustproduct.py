@@ -12,7 +12,7 @@ class UpdateTrustProductPathParams:
     
 
 @dataclass
-class UpdateTrustProductRequestBodyUpdateTrustProductRequest:
+class UpdateTrustProductUpdateTrustProductRequest:
     email: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Email' }})
     friendly_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
     status: Optional[shared.TrustProductEnumStatusEnum] = field(default=None, metadata={'form': { 'field_name': 'Status' }})
@@ -28,7 +28,7 @@ class UpdateTrustProductSecurity:
 class UpdateTrustProductRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateTrustProductPathParams = field(default=None)
-    request: Optional[UpdateTrustProductRequestBodyUpdateTrustProductRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateTrustProductUpdateTrustProductRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateTrustProductSecurity = field(default=None)
     
 

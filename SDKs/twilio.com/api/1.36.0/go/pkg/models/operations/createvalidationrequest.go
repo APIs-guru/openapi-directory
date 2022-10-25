@@ -12,24 +12,24 @@ type CreateValidationRequestPathParams struct {
 	AccountSid string `pathParam:"style=simple,explode=false,name=AccountSid"`
 }
 
-type CreateValidationRequestRequestBodyStatusCallbackMethodEnum string
+type CreateValidationRequestCreateValidationRequestRequestStatusCallbackMethodEnum string
 
 const (
-	CreateValidationRequestRequestBodyStatusCallbackMethodEnumHead   CreateValidationRequestRequestBodyStatusCallbackMethodEnum = "HEAD"
-	CreateValidationRequestRequestBodyStatusCallbackMethodEnumGet    CreateValidationRequestRequestBodyStatusCallbackMethodEnum = "GET"
-	CreateValidationRequestRequestBodyStatusCallbackMethodEnumPost   CreateValidationRequestRequestBodyStatusCallbackMethodEnum = "POST"
-	CreateValidationRequestRequestBodyStatusCallbackMethodEnumPatch  CreateValidationRequestRequestBodyStatusCallbackMethodEnum = "PATCH"
-	CreateValidationRequestRequestBodyStatusCallbackMethodEnumPut    CreateValidationRequestRequestBodyStatusCallbackMethodEnum = "PUT"
-	CreateValidationRequestRequestBodyStatusCallbackMethodEnumDelete CreateValidationRequestRequestBodyStatusCallbackMethodEnum = "DELETE"
+	CreateValidationRequestCreateValidationRequestRequestStatusCallbackMethodEnumHead   CreateValidationRequestCreateValidationRequestRequestStatusCallbackMethodEnum = "HEAD"
+	CreateValidationRequestCreateValidationRequestRequestStatusCallbackMethodEnumGet    CreateValidationRequestCreateValidationRequestRequestStatusCallbackMethodEnum = "GET"
+	CreateValidationRequestCreateValidationRequestRequestStatusCallbackMethodEnumPost   CreateValidationRequestCreateValidationRequestRequestStatusCallbackMethodEnum = "POST"
+	CreateValidationRequestCreateValidationRequestRequestStatusCallbackMethodEnumPatch  CreateValidationRequestCreateValidationRequestRequestStatusCallbackMethodEnum = "PATCH"
+	CreateValidationRequestCreateValidationRequestRequestStatusCallbackMethodEnumPut    CreateValidationRequestCreateValidationRequestRequestStatusCallbackMethodEnum = "PUT"
+	CreateValidationRequestCreateValidationRequestRequestStatusCallbackMethodEnumDelete CreateValidationRequestCreateValidationRequestRequestStatusCallbackMethodEnum = "DELETE"
 )
 
-type CreateValidationRequestRequestBodyCreateValidationRequestRequest struct {
-	CallDelay            *int64                                                      `form:"name=CallDelay"`
-	Extension            *string                                                     `form:"name=Extension"`
-	FriendlyName         *string                                                     `form:"name=FriendlyName"`
-	PhoneNumber          string                                                      `form:"name=PhoneNumber"`
-	StatusCallback       *string                                                     `form:"name=StatusCallback"`
-	StatusCallbackMethod *CreateValidationRequestRequestBodyStatusCallbackMethodEnum `form:"name=StatusCallbackMethod"`
+type CreateValidationRequestCreateValidationRequestRequest struct {
+	CallDelay            *int64                                                                         `form:"name=CallDelay"`
+	Extension            *string                                                                        `form:"name=Extension"`
+	FriendlyName         *string                                                                        `form:"name=FriendlyName"`
+	PhoneNumber          string                                                                         `form:"name=PhoneNumber"`
+	StatusCallback       *string                                                                        `form:"name=StatusCallback"`
+	StatusCallbackMethod *CreateValidationRequestCreateValidationRequestRequestStatusCallbackMethodEnum `form:"name=StatusCallbackMethod"`
 }
 
 type CreateValidationRequestSecurity struct {
@@ -39,7 +39,7 @@ type CreateValidationRequestSecurity struct {
 type CreateValidationRequestRequest struct {
 	ServerURL  *string
 	PathParams CreateValidationRequestPathParams
-	Request    *CreateValidationRequestRequestBodyCreateValidationRequestRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateValidationRequestCreateValidationRequestRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateValidationRequestSecurity
 }
 

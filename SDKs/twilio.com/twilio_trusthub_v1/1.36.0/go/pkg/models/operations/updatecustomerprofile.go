@@ -12,7 +12,7 @@ type UpdateCustomerProfilePathParams struct {
 	Sid string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
-type UpdateCustomerProfileRequestBodyUpdateCustomerProfileRequest struct {
+type UpdateCustomerProfileUpdateCustomerProfileRequest struct {
 	Email          *string                               `form:"name=Email"`
 	FriendlyName   *string                               `form:"name=FriendlyName"`
 	Status         *shared.CustomerProfileEnumStatusEnum `form:"name=Status"`
@@ -26,7 +26,7 @@ type UpdateCustomerProfileSecurity struct {
 type UpdateCustomerProfileRequest struct {
 	ServerURL  *string
 	PathParams UpdateCustomerProfilePathParams
-	Request    *UpdateCustomerProfileRequestBodyUpdateCustomerProfileRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateCustomerProfileUpdateCustomerProfileRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateCustomerProfileSecurity
 }
 

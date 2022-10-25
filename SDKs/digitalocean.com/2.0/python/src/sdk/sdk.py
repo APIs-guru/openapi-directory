@@ -5430,7 +5430,7 @@ class SDK:
         if r.status_code == 200:
             res.headers = r.headers
             if utils.match_content_type(content_type, "text/csv"):
-                res.body = r.content
+                res.get_invoice_csv_by_uuid_200_text_csv_string = r.content
         elif r.status_code == 401:
             res.headers = r.headers
             if utils.match_content_type(content_type, "application/json"):
@@ -5570,7 +5570,7 @@ class SDK:
         if r.status_code == 200:
             res.headers = r.headers
             if utils.match_content_type(content_type, "application/yaml"):
-                res.body = r.content
+                res.get_kubeconfig_200_application_yaml_string = r.content
         elif r.status_code == 401:
             res.headers = r.headers
             if utils.match_content_type(content_type, "application/json"):

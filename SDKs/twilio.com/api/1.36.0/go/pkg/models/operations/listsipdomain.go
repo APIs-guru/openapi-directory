@@ -27,7 +27,7 @@ type ListSipDomainRequest struct {
 	Security    ListSipDomainSecurity
 }
 
-type ListSipDomain200ApplicationJSONListSipDomainResponse struct {
+type ListSipDomainListSipDomainResponse struct {
 	Domains         []shared.APIV2010AccountSipSipDomain `json:"domains,omitempty"`
 	End             *int64                               `json:"end,omitempty"`
 	FirstPageURI    *string                              `json:"first_page_uri,omitempty"`
@@ -41,6 +41,6 @@ type ListSipDomain200ApplicationJSONListSipDomainResponse struct {
 
 type ListSipDomainResponse struct {
 	ContentType           string
-	ListSipDomainResponse *ListSipDomain200ApplicationJSONListSipDomainResponse
+	ListSipDomainResponse *ListSipDomainListSipDomainResponse
 	StatusCode            int64
 }

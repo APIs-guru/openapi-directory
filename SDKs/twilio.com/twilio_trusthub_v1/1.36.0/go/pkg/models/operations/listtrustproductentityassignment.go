@@ -27,7 +27,7 @@ type ListTrustProductEntityAssignmentRequest struct {
 	Security    ListTrustProductEntityAssignmentSecurity
 }
 
-type ListTrustProductEntityAssignment200ApplicationJSONMeta struct {
+type ListTrustProductEntityAssignmentListTrustProductEntityAssignmentResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -37,13 +37,13 @@ type ListTrustProductEntityAssignment200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListTrustProductEntityAssignment200ApplicationJSONListTrustProductEntityAssignmentResponse struct {
-	Meta    *ListTrustProductEntityAssignment200ApplicationJSONMeta     `json:"meta,omitempty"`
-	Results []shared.TrusthubV1TrustProductTrustProductEntityAssignment `json:"results,omitempty"`
+type ListTrustProductEntityAssignmentListTrustProductEntityAssignmentResponse struct {
+	Meta    *ListTrustProductEntityAssignmentListTrustProductEntityAssignmentResponseMeta `json:"meta,omitempty"`
+	Results []shared.TrusthubV1TrustProductTrustProductEntityAssignment                   `json:"results,omitempty"`
 }
 
 type ListTrustProductEntityAssignmentResponse struct {
 	ContentType                              string
-	ListTrustProductEntityAssignmentResponse *ListTrustProductEntityAssignment200ApplicationJSONListTrustProductEntityAssignmentResponse
+	ListTrustProductEntityAssignmentResponse *ListTrustProductEntityAssignmentListTrustProductEntityAssignmentResponse
 	StatusCode                               int64
 }

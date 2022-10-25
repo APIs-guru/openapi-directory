@@ -7,13 +7,13 @@ from . import user
 
 @dataclass_json
 @dataclass
-class AlbumCustomLogoSizes:
+class AlbumPictureSizes:
     height: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'height' }})
     link: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'link' }})
     link_with_play_button: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'link_with_play_button' }})
     width: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'width' }})
     
-class AlbumCustomLogoTypeEnum(str, Enum):
+class AlbumPictureTypeEnum(str, Enum):
     CAUTION = "caution"
     CUSTOM = "custom"
     DEFAULT = "default"
@@ -21,12 +21,12 @@ class AlbumCustomLogoTypeEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class AlbumCustomLogoPicture:
+class AlbumPicture:
     active: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'active' }})
     link: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'link' }})
     resource_key: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resource_key' }})
-    sizes: List[AlbumCustomLogoSizes] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sizes' }})
-    type: AlbumCustomLogoTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    sizes: List[AlbumPictureSizes] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sizes' }})
+    type: AlbumPictureTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
     
 
@@ -125,7 +125,7 @@ class Album:
     allow_share: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'allow_share' }})
     brand_color: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'brand_color' }})
     created_time: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'created_time' }})
-    custom_logo: AlbumCustomLogoPicture = field(default=None, metadata={'dataclasses_json': { 'field_name': 'custom_logo' }})
+    custom_logo: AlbumPicture = field(default=None, metadata={'dataclasses_json': { 'field_name': 'custom_logo' }})
     description: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
     domain: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'domain' }})
     duration: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'duration' }})

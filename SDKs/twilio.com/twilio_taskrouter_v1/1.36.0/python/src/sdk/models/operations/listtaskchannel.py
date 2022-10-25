@@ -32,7 +32,7 @@ class ListTaskChannelRequest:
 
 @dataclass_json
 @dataclass
-class ListTaskChannel200ApplicationJSONMeta:
+class ListTaskChannelListTaskChannelResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -44,14 +44,14 @@ class ListTaskChannel200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListTaskChannel200ApplicationJSONListTaskChannelResponse:
+class ListTaskChannelListTaskChannelResponse:
     channels: Optional[List[shared.TaskrouterV1WorkspaceTaskChannel]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'channels' }})
-    meta: Optional[ListTaskChannel200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+    meta: Optional[ListTaskChannelListTaskChannelResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     
 
 @dataclass
 class ListTaskChannelResponse:
     content_type: str = field(default=None)
-    list_task_channel_response: Optional[ListTaskChannel200ApplicationJSONListTaskChannelResponse] = field(default=None)
+    list_task_channel_response: Optional[ListTaskChannelListTaskChannelResponse] = field(default=None)
     status_code: int = field(default=None)
     

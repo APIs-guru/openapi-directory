@@ -12,7 +12,7 @@ type UpdateRatePlanPathParams struct {
 	Sid string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
-type UpdateRatePlanRequestBodyUpdateRatePlanRequest struct {
+type UpdateRatePlanUpdateRatePlanRequest struct {
 	FriendlyName *string `form:"name=FriendlyName"`
 	UniqueName   *string `form:"name=UniqueName"`
 }
@@ -24,7 +24,7 @@ type UpdateRatePlanSecurity struct {
 type UpdateRatePlanRequest struct {
 	ServerURL  *string
 	PathParams UpdateRatePlanPathParams
-	Request    *UpdateRatePlanRequestBodyUpdateRatePlanRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateRatePlanUpdateRatePlanRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateRatePlanSecurity
 }
 

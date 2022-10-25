@@ -154,15 +154,15 @@ const (
 	InterfaceTemplateTypeValueEnumOther                            InterfaceTemplateTypeValueEnum = "other"
 )
 
-type InterfaceTemplateTypeType struct {
+type InterfaceTemplateType struct {
 	Label InterfaceTemplateTypeLabelEnum `json:"label"`
 	Value InterfaceTemplateTypeValueEnum `json:"value"`
 }
 
 type InterfaceTemplate struct {
-	DeviceType NestedDeviceType          `json:"device_type"`
-	ID         *int64                    `json:"id,omitempty"`
-	MgmtOnly   *bool                     `json:"mgmt_only,omitempty"`
-	Name       string                    `json:"name"`
-	Type       InterfaceTemplateTypeType `json:"type"`
+	DeviceType NestedDeviceType      `json:"device_type"`
+	ID         *int64                `json:"id,omitempty"`
+	MgmtOnly   *bool                 `json:"mgmt_only,omitempty"`
+	Name       string                `json:"name"`
+	Type       InterfaceTemplateType `json:"type"`
 }

@@ -29,7 +29,7 @@ type ListUnderstandSampleRequest struct {
 	Security    ListUnderstandSampleSecurity
 }
 
-type ListUnderstandSample200ApplicationJSONMeta struct {
+type ListUnderstandSampleListUnderstandSampleResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -39,13 +39,13 @@ type ListUnderstandSample200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListUnderstandSample200ApplicationJSONListUnderstandSampleResponse struct {
-	Meta    *ListUnderstandSample200ApplicationJSONMeta   `json:"meta,omitempty"`
-	Samples []shared.PreviewUnderstandAssistantTaskSample `json:"samples,omitempty"`
+type ListUnderstandSampleListUnderstandSampleResponse struct {
+	Meta    *ListUnderstandSampleListUnderstandSampleResponseMeta `json:"meta,omitempty"`
+	Samples []shared.PreviewUnderstandAssistantTaskSample         `json:"samples,omitempty"`
 }
 
 type ListUnderstandSampleResponse struct {
 	ContentType                  string
-	ListUnderstandSampleResponse *ListUnderstandSample200ApplicationJSONListUnderstandSampleResponse
+	ListUnderstandSampleResponse *ListUnderstandSampleListUnderstandSampleResponse
 	StatusCode                   int64
 }

@@ -16,100 +16,100 @@ class GetAtmsHeaders:
 class GetAtmsRequest:
     headers: GetAtmsHeaders = field(default=None)
     
-class GetAtms400ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnum(str, Enum):
+class GetAtms400ErrorObjectDescriptionEnum(str, Enum):
     YOU_HAVE_SENT_A_REQUEST_WHICH_COULD_NOT_BE_UNDERSTOOD_ = "You have sent a request which could not be understood."
 
-class GetAtms400ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnum(str, Enum):
+class GetAtms400ErrorObjectStatusEnum(str, Enum):
     FOUR_HUNDRED = "400"
 
-class GetAtms400ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnum(str, Enum):
+class GetAtms400ErrorObjectTitleEnum(str, Enum):
     BAD_REQUEST = "Bad request"
 
 
 @dataclass_json
 @dataclass
-class GetAtms400ApplicationPrsOpenbankingOpendataV13PlusJSON400ErrorObject:
-    description: GetAtms400ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    status: GetAtms400ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
-    title: GetAtms400ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'title' }})
+class GetAtms400ErrorObject:
+    description: GetAtms400ErrorObjectDescriptionEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
+    status: GetAtms400ErrorObjectStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    title: GetAtms400ErrorObjectTitleEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'title' }})
     
-class GetAtms408ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnum(str, Enum):
+class GetAtms408ErrorObjectDescriptionEnum(str, Enum):
     YOUR_CLIENT_HAS_FAILED_TO_SUBMIT_A_REQUEST_AND_A_TIMEOUT_HAS_OCCURRED_ = "Your client has failed to submit a request, and a timeout has occurred."
 
-class GetAtms408ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnum(str, Enum):
+class GetAtms408ErrorObjectStatusEnum(str, Enum):
     FOUR_HUNDRED_AND_EIGHT = "408"
 
-class GetAtms408ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnum(str, Enum):
+class GetAtms408ErrorObjectTitleEnum(str, Enum):
     CLIENT_TIMEOUT = "Client timeout"
 
 
 @dataclass_json
 @dataclass
-class GetAtms408ApplicationPrsOpenbankingOpendataV13PlusJSON408ErrorObject:
-    description: GetAtms408ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    status: GetAtms408ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
-    title: GetAtms408ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'title' }})
+class GetAtms408ErrorObject:
+    description: GetAtms408ErrorObjectDescriptionEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
+    status: GetAtms408ErrorObjectStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    title: GetAtms408ErrorObjectTitleEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'title' }})
     
-class GetAtms429ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnum(str, Enum):
+class GetAtms429ErrorObjectDescriptionEnum(str, Enum):
     YOU_HAVE_REQUESTED_THIS_RESOURCE_TOO_OFTEN_SLOW_DOWN_ = "You have requested this resource too often. Slow down."
 
-class GetAtms429ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnum(str, Enum):
+class GetAtms429ErrorObjectStatusEnum(str, Enum):
     FOUR_HUNDRED_AND_TWENTY_NINE = "429"
 
-class GetAtms429ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnum(str, Enum):
+class GetAtms429ErrorObjectTitleEnum(str, Enum):
     TOO_MANY_REQUESTS = "Too many requests"
 
 
 @dataclass_json
 @dataclass
-class GetAtms429ApplicationPrsOpenbankingOpendataV13PlusJSON429ErrorObject:
-    description: GetAtms429ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    status: GetAtms429ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
-    title: GetAtms429ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'title' }})
+class GetAtms429ErrorObject:
+    description: GetAtms429ErrorObjectDescriptionEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
+    status: GetAtms429ErrorObjectStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    title: GetAtms429ErrorObjectTitleEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'title' }})
     
-class GetAtms500ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnum(str, Enum):
+class GetAtms500ErrorObjectDescriptionEnum(str, Enum):
     AN_ERROR_OCCURRED_ON_THE_SERVER_NO_FURTHER_INFORMATION_IS_AVAILABLE_ = "An error occurred on the server. No further information is available."
 
-class GetAtms500ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnum(str, Enum):
+class GetAtms500ErrorObjectStatusEnum(str, Enum):
     FIVE_HUNDRED = "500"
 
-class GetAtms500ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnum(str, Enum):
+class GetAtms500ErrorObjectTitleEnum(str, Enum):
     INTERNAL_SERVER_ERROR = "Internal server error"
 
 
 @dataclass_json
 @dataclass
-class GetAtms500ApplicationPrsOpenbankingOpendataV13PlusJSON500ErrorObject:
-    description: GetAtms500ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    status: GetAtms500ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
-    title: GetAtms500ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'title' }})
+class GetAtms500ErrorObject:
+    description: GetAtms500ErrorObjectDescriptionEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
+    status: GetAtms500ErrorObjectStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    title: GetAtms500ErrorObjectTitleEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'title' }})
     
-class GetAtms503ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnum(str, Enum):
+class GetAtms503ErrorObjectDescriptionEnum(str, Enum):
     THE_SERVICE_IS_TEMPORARILY_UNAVAILABLE_ = "The service is temporarily unavailable."
 
-class GetAtms503ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnum(str, Enum):
+class GetAtms503ErrorObjectStatusEnum(str, Enum):
     FIVE_HUNDRED_AND_THREE = "503"
 
-class GetAtms503ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnum(str, Enum):
+class GetAtms503ErrorObjectTitleEnum(str, Enum):
     SERVICE_TEMPORARILY_UNAVAILABLE = "Service temporarily unavailable"
 
 
 @dataclass_json
 @dataclass
-class GetAtms503ApplicationPrsOpenbankingOpendataV13PlusJSON503ErrorObject:
-    description: GetAtms503ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    status: GetAtms503ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
-    title: GetAtms503ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'title' }})
+class GetAtms503ErrorObject:
+    description: GetAtms503ErrorObjectDescriptionEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
+    status: GetAtms503ErrorObjectStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    title: GetAtms503ErrorObjectTitleEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'title' }})
     
 
 @dataclass_json
 @dataclass
-class GetAtmsDefaultApplicationPrsOpenbankingOpendataV13PlusJSONErrorObject:
+class GetAtmsErrorObject:
     description: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
     status: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
     title: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'title' }})
     
-class GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataAtmServicesEnum(str, Enum):
+class GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmAtmServicesEnum(str, Enum):
     BALANCE = "Balance"
     BILL_PAYMENTS = "BillPayments"
     CASH_DEPOSITS = "CashDeposits"
@@ -126,7 +126,7 @@ class GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataAtmServicesEnum(
     PIN_ACTIVATION = "PINActivation"
     PIN_CHANGE = "PINChange"
 
-class GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataAccessibilityTypesEnum(str, Enum):
+class GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmAccessibilityTypesEnum(str, Enum):
     AUDIO_CASH_MACHINE = "AudioCashMachine"
     AUTOMATIC_DOORS = "AutomaticDoors"
     CHAIR_ACCESS = "ChairAccess"
@@ -141,7 +141,7 @@ class GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataAccessibilityTyp
 
 @dataclass_json
 @dataclass
-class GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataAddress:
+class GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmAddress:
     building_number_or_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'BuildingNumberOrName' }})
     country: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Country' }})
     country_sub_division: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CountrySubDivision' }})
@@ -153,11 +153,11 @@ class GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataAddress:
 
 @dataclass_json
 @dataclass
-class GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataGeographicLocation:
+class GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmGeographicLocation:
     latitude: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Latitude' }})
     longitude: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Longitude' }})
     
-class GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLocationCategoryEnum(str, Enum):
+class GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmLocationCategoryEnum(str, Enum):
     AIRPORT = "Airport"
     BANK_SPECIALISED_OUTLET = "BankSpecialisedOutlet"
     BRANCH_EXTERNAL = "BranchExternal"
@@ -192,100 +192,100 @@ class GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLocationCategory
     UNDERGROUND_RAILWAY_STATION = "UndergroundRailwayStation"
     UNIVERSITY_OR_COLLEGE = "UniversityOrCollege"
 
-class GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataMinimumValueDispensedEnum(str, Enum):
+class GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmMinimumValueDispensedEnum(str, Enum):
     POUND_5 = "£5"
     POUND_10 = "£10"
     POUND_20 = "£20"
     POUND_50 = "£50"
     POUND_100 = "£100"
 
-class GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataOrganisationBrandTrademarkIpoCodeEnum(str, Enum):
+class GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmOrganisationBrandTrademarkIpoCodeEnum(str, Enum):
     UK = "UK"
     EU = "EU"
 
 
 @dataclass_json
 @dataclass
-class GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataOrganisationBrand:
+class GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmOrganisationBrand:
     trademark_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TrademarkID' }})
-    trademark_ipo_code: GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataOrganisationBrandTrademarkIpoCodeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TrademarkIPOCode' }})
+    trademark_ipo_code: GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmOrganisationBrandTrademarkIpoCodeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TrademarkIPOCode' }})
     
 
 @dataclass_json
 @dataclass
-class GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataOrganisationParentOrganisationOrganisationName:
+class GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmOrganisationParentOrganisationOrganisationName:
     legal_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'LegalName' }})
     
 
 @dataclass_json
 @dataclass
-class GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataOrganisationParentOrganisation:
+class GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmOrganisationParentOrganisation:
     bic: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'BIC' }})
     lei: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'LEI' }})
-    organisation_name: GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataOrganisationParentOrganisationOrganisationName = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OrganisationName' }})
+    organisation_name: GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmOrganisationParentOrganisationOrganisationName = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OrganisationName' }})
     
 
 @dataclass_json
 @dataclass
-class GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataOrganisation:
-    brand: GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataOrganisationBrand = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Brand' }})
-    parent_organisation: GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataOrganisationParentOrganisation = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ParentOrganisation' }})
+class GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmOrganisation:
+    brand: GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmOrganisationBrand = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Brand' }})
+    parent_organisation: GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmOrganisationParentOrganisation = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ParentOrganisation' }})
     
 
 @dataclass_json
 @dataclass
-class GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataAtm:
+class GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtm:
     atmid: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ATMID' }})
-    atm_services: List[GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataAtmServicesEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ATMServices' }})
-    accessibility_types: Optional[List[GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataAccessibilityTypesEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AccessibilityTypes' }})
+    atm_services: List[GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmAtmServicesEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ATMServices' }})
+    accessibility_types: Optional[List[GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmAccessibilityTypesEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AccessibilityTypes' }})
     additional_atm_services: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AdditionalATMServices' }})
-    address: GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataAddress = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Address' }})
+    address: GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmAddress = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Address' }})
     branch_identification: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'BranchIdentification' }})
     currency: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Currency' }})
-    geographic_location: GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataGeographicLocation = field(default=None, metadata={'dataclasses_json': { 'field_name': 'GeographicLocation' }})
-    location_category: Optional[GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLocationCategoryEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'LocationCategory' }})
-    minimum_value_dispensed: Optional[GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataMinimumValueDispensedEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MinimumValueDispensed' }})
-    organisation: GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataOrganisation = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Organisation' }})
+    geographic_location: GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmGeographicLocation = field(default=None, metadata={'dataclasses_json': { 'field_name': 'GeographicLocation' }})
+    location_category: Optional[GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmLocationCategoryEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'LocationCategory' }})
+    minimum_value_dispensed: Optional[GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmMinimumValueDispensedEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MinimumValueDispensed' }})
+    organisation: GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmOrganisation = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Organisation' }})
     site_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SiteID' }})
     site_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SiteName' }})
     supported_languages: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SupportedLanguages' }})
     
-class GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaAgreementEnum(str, Enum):
+class GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaDataAgreementEnum(str, Enum):
     USE_OF_THE_AP_IS_AND_ANY_RELATED_DATA_WILL_BE_SUBJECT_TO_THE_TERMS_OF_THE_OPEN_LICENCE_AND_SUBJECT_TO_TERMS_AND_CONDITIONS = "Use of the APIs and any related data will be subject to the terms of the Open Licence and subject to terms and conditions"
 
-class GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaLicenseEnum(str, Enum):
+class GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaDataLicenseEnum(str, Enum):
     HTTPS_WWW_OPENBANKING_ORG_UK_OPEN_LICENCE = "https://www.openbanking.org.uk/open-licence"
 
-class GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaTermsOfUseEnum(str, Enum):
+class GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaDataTermsOfUseEnum(str, Enum):
     HTTPS_WWW_OPENBANKING_ORG_UK_TERMS = "https://www.openbanking.org.uk/terms"
 
 
 @dataclass_json
 @dataclass
-class GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaMetaData:
-    agreement: GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaAgreementEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Agreement' }})
+class GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaData:
+    agreement: GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaDataAgreementEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Agreement' }})
     last_updated: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'LastUpdated', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    license: GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaLicenseEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'License' }})
-    terms_of_use: GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaTermsOfUseEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TermsOfUse' }})
+    license: GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaDataLicenseEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'License' }})
+    terms_of_use: GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaDataTermsOfUseEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TermsOfUse' }})
     total_results: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TotalResults' }})
     
 
 @dataclass_json
 @dataclass
 class GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSON:
-    data: List[GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataAtm] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'data' }})
-    meta: GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaMetaData = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+    data: List[GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtm] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'data' }})
+    meta: GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaData = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     
 
 @dataclass
 class GetAtmsResponse:
-    four_hundred_error_object: Optional[GetAtms400ApplicationPrsOpenbankingOpendataV13PlusJSON400ErrorObject] = field(default=None)
-    four_hundred_and_eight_error_object: Optional[GetAtms408ApplicationPrsOpenbankingOpendataV13PlusJSON408ErrorObject] = field(default=None)
-    four_hundred_and_twenty_nine_error_object: Optional[GetAtms429ApplicationPrsOpenbankingOpendataV13PlusJSON429ErrorObject] = field(default=None)
-    five_hundred_error_object: Optional[GetAtms500ApplicationPrsOpenbankingOpendataV13PlusJSON500ErrorObject] = field(default=None)
-    five_hundred_and_three_error_object: Optional[GetAtms503ApplicationPrsOpenbankingOpendataV13PlusJSON503ErrorObject] = field(default=None)
+    four_hundred_error_object: Optional[GetAtms400ErrorObject] = field(default=None)
+    four_hundred_and_eight_error_object: Optional[GetAtms408ErrorObject] = field(default=None)
+    four_hundred_and_twenty_nine_error_object: Optional[GetAtms429ErrorObject] = field(default=None)
+    five_hundred_error_object: Optional[GetAtms500ErrorObject] = field(default=None)
+    five_hundred_and_three_error_object: Optional[GetAtms503ErrorObject] = field(default=None)
     content_type: str = field(default=None)
-    error_object: Optional[GetAtmsDefaultApplicationPrsOpenbankingOpendataV13PlusJSONErrorObject] = field(default=None)
+    error_object: Optional[GetAtmsErrorObject] = field(default=None)
     get_atms_200_application_prs_openbanking_opendata_v1_3_plus_json_object: Optional[GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSON] = field(default=None)
     headers: dict[str, List[str]] = field(default=None)
     status_code: int = field(default=None)

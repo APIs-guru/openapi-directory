@@ -39,7 +39,7 @@ class ListUsageRecordThisMonthRequest:
 
 @dataclass_json
 @dataclass
-class ListUsageRecordThisMonth200ApplicationJSONListUsageRecordThisMonthResponse:
+class ListUsageRecordThisMonthListUsageRecordThisMonthResponse:
     end: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'end' }})
     first_page_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_uri' }})
     next_page_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_uri' }})
@@ -54,6 +54,6 @@ class ListUsageRecordThisMonth200ApplicationJSONListUsageRecordThisMonthResponse
 @dataclass
 class ListUsageRecordThisMonthResponse:
     content_type: str = field(default=None)
-    list_usage_record_this_month_response: Optional[ListUsageRecordThisMonth200ApplicationJSONListUsageRecordThisMonthResponse] = field(default=None)
+    list_usage_record_this_month_response: Optional[ListUsageRecordThisMonthListUsageRecordThisMonthResponse] = field(default=None)
     status_code: int = field(default=None)
     

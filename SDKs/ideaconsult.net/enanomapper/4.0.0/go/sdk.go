@@ -136,33 +136,33 @@ func (s *SDK) GetInvestigationResults(ctx context.Context, request operations.Ge
 
 			res.Investigation = out
 		case utils.MatchContentType(contentType, `application/vnd.openxmlformats-officedocument.spreadsheetml.sheet`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/x-javascript`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `text/csv`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `text/plain`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 404:
 	}
@@ -584,12 +584,12 @@ func (s *SDK) SolrqueryGet(ctx context.Context, request operations.SolrqueryGetR
 
 			res.SolrResponse = out
 		case utils.MatchContentType(contentType, `application/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 400:
 	case httpRes.StatusCode == 401:
@@ -647,12 +647,12 @@ func (s *SDK) SolrqueryPost(ctx context.Context, request operations.SolrqueryPos
 
 			res.SolrResponse = out
 		case utils.MatchContentType(contentType, `application/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 400:
 	case httpRes.StatusCode == 401:

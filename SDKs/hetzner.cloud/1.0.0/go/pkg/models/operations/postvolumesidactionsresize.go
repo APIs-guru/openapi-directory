@@ -13,41 +13,41 @@ type PostVolumesIDActionsResizeRequest struct {
 	Request    *PostVolumesIDActionsResizeRequestBody `request:"mediaType=application/json"`
 }
 
-type PostVolumesIDActionsResize201ApplicationJSONActionError struct {
+type PostVolumesIDActionsResizeActionResponseActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
 }
 
-type PostVolumesIDActionsResize201ApplicationJSONActionResources struct {
+type PostVolumesIDActionsResizeActionResponseActionResources struct {
 	ID   int64  `json:"id"`
 	Type string `json:"type"`
 }
 
-type PostVolumesIDActionsResize201ApplicationJSONActionStatusEnum string
+type PostVolumesIDActionsResizeActionResponseActionStatusEnum string
 
 const (
-	PostVolumesIDActionsResize201ApplicationJSONActionStatusEnumSuccess PostVolumesIDActionsResize201ApplicationJSONActionStatusEnum = "success"
-	PostVolumesIDActionsResize201ApplicationJSONActionStatusEnumRunning PostVolumesIDActionsResize201ApplicationJSONActionStatusEnum = "running"
-	PostVolumesIDActionsResize201ApplicationJSONActionStatusEnumError   PostVolumesIDActionsResize201ApplicationJSONActionStatusEnum = "error"
+	PostVolumesIDActionsResizeActionResponseActionStatusEnumSuccess PostVolumesIDActionsResizeActionResponseActionStatusEnum = "success"
+	PostVolumesIDActionsResizeActionResponseActionStatusEnumRunning PostVolumesIDActionsResizeActionResponseActionStatusEnum = "running"
+	PostVolumesIDActionsResizeActionResponseActionStatusEnumError   PostVolumesIDActionsResizeActionResponseActionStatusEnum = "error"
 )
 
-type PostVolumesIDActionsResize201ApplicationJSONActionAction struct {
-	Command   string                                                        `json:"command"`
-	Error     PostVolumesIDActionsResize201ApplicationJSONActionError       `json:"error"`
-	Finished  string                                                        `json:"finished"`
-	ID        int64                                                         `json:"id"`
-	Progress  float64                                                       `json:"progress"`
-	Resources []PostVolumesIDActionsResize201ApplicationJSONActionResources `json:"resources"`
-	Started   string                                                        `json:"started"`
-	Status    PostVolumesIDActionsResize201ApplicationJSONActionStatusEnum  `json:"status"`
+type PostVolumesIDActionsResizeActionResponseAction struct {
+	Command   string                                                    `json:"command"`
+	Error     PostVolumesIDActionsResizeActionResponseActionError       `json:"error"`
+	Finished  string                                                    `json:"finished"`
+	ID        int64                                                     `json:"id"`
+	Progress  float64                                                   `json:"progress"`
+	Resources []PostVolumesIDActionsResizeActionResponseActionResources `json:"resources"`
+	Started   string                                                    `json:"started"`
+	Status    PostVolumesIDActionsResizeActionResponseActionStatusEnum  `json:"status"`
 }
 
-type PostVolumesIDActionsResize201ApplicationJSONActionResponse struct {
-	Action PostVolumesIDActionsResize201ApplicationJSONActionAction `json:"action"`
+type PostVolumesIDActionsResizeActionResponse struct {
+	Action PostVolumesIDActionsResizeActionResponseAction `json:"action"`
 }
 
 type PostVolumesIDActionsResizeResponse struct {
-	ActionResponse *PostVolumesIDActionsResize201ApplicationJSONActionResponse
+	ActionResponse *PostVolumesIDActionsResizeActionResponse
 	ContentType    string
 	StatusCode     int64
 }

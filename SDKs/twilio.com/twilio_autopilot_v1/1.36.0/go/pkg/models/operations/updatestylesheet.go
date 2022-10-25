@@ -12,7 +12,7 @@ type UpdateStyleSheetPathParams struct {
 	AssistantSid string `pathParam:"style=simple,explode=false,name=AssistantSid"`
 }
 
-type UpdateStyleSheetRequestBodyUpdateStyleSheetRequest struct {
+type UpdateStyleSheetUpdateStyleSheetRequest struct {
 	StyleSheet *interface{} `form:"name=StyleSheet"`
 }
 
@@ -23,7 +23,7 @@ type UpdateStyleSheetSecurity struct {
 type UpdateStyleSheetRequest struct {
 	ServerURL  *string
 	PathParams UpdateStyleSheetPathParams
-	Request    *UpdateStyleSheetRequestBodyUpdateStyleSheetRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateStyleSheetUpdateStyleSheetRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateStyleSheetSecurity
 }
 

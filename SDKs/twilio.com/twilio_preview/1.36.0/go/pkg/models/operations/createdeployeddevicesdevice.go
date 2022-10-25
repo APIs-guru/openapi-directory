@@ -12,7 +12,7 @@ type CreateDeployedDevicesDevicePathParams struct {
 	FleetSid string `pathParam:"style=simple,explode=false,name=FleetSid"`
 }
 
-type CreateDeployedDevicesDeviceRequestBodyCreateDeployedDevicesDeviceRequest struct {
+type CreateDeployedDevicesDeviceCreateDeployedDevicesDeviceRequest struct {
 	DeploymentSid *string `form:"name=DeploymentSid"`
 	Enabled       *bool   `form:"name=Enabled"`
 	FriendlyName  *string `form:"name=FriendlyName"`
@@ -27,7 +27,7 @@ type CreateDeployedDevicesDeviceSecurity struct {
 type CreateDeployedDevicesDeviceRequest struct {
 	ServerURL  *string
 	PathParams CreateDeployedDevicesDevicePathParams
-	Request    *CreateDeployedDevicesDeviceRequestBodyCreateDeployedDevicesDeviceRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateDeployedDevicesDeviceCreateDeployedDevicesDeviceRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateDeployedDevicesDeviceSecurity
 }
 

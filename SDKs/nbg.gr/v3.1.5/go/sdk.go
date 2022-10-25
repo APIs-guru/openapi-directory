@@ -1557,24 +1557,24 @@ func (s *SDK) GetAccountsAccountIDStatementsStatementIDFile(ctx context.Context,
 
 		switch {
 		case utils.MatchContentType(contentType, `application/pdf`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetAccountsAccountIDStatementsStatementIDFile200ApplicationPdfBinaryString = data
+			res.GetAccountsAccountIDStatementsStatementIDFile200ApplicationPdfBinaryString = out
 		}
 	case httpRes.StatusCode == 400:
 		res.Headers = httpRes.Header
 
 		switch {
 		case utils.MatchContentType(contentType, `application/pdf`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 401:
 		res.Headers = httpRes.Header
@@ -1584,12 +1584,12 @@ func (s *SDK) GetAccountsAccountIDStatementsStatementIDFile(ctx context.Context,
 
 		switch {
 		case utils.MatchContentType(contentType, `application/pdf`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 404:
 		res.Headers = httpRes.Header
@@ -1605,12 +1605,12 @@ func (s *SDK) GetAccountsAccountIDStatementsStatementIDFile(ctx context.Context,
 
 		switch {
 		case utils.MatchContentType(contentType, `application/pdf`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 

@@ -12,7 +12,7 @@ class UpdateEndUserPathParams:
     
 
 @dataclass
-class UpdateEndUserRequestBodyUpdateEndUserRequest:
+class UpdateEndUserUpdateEndUserRequest:
     attributes: Optional[Any] = field(default=None, metadata={'form': { 'field_name': 'Attributes' }})
     friendly_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
     
@@ -26,7 +26,7 @@ class UpdateEndUserSecurity:
 class UpdateEndUserRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateEndUserPathParams = field(default=None)
-    request: Optional[UpdateEndUserRequestBodyUpdateEndUserRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateEndUserUpdateEndUserRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateEndUserSecurity = field(default=None)
     
 

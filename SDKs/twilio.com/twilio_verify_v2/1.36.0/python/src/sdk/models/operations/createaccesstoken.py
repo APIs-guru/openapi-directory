@@ -12,7 +12,7 @@ class CreateAccessTokenPathParams:
     
 
 @dataclass
-class CreateAccessTokenRequestBodyCreateAccessTokenRequest:
+class CreateAccessTokenCreateAccessTokenRequest:
     factor_friendly_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'FactorFriendlyName' }})
     factor_type: shared.AccessTokenEnumFactorTypesEnum = field(default=None, metadata={'form': { 'field_name': 'FactorType' }})
     identity: str = field(default=None, metadata={'form': { 'field_name': 'Identity' }})
@@ -28,7 +28,7 @@ class CreateAccessTokenSecurity:
 class CreateAccessTokenRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateAccessTokenPathParams = field(default=None)
-    request: Optional[CreateAccessTokenRequestBodyCreateAccessTokenRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateAccessTokenCreateAccessTokenRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateAccessTokenSecurity = field(default=None)
     
 

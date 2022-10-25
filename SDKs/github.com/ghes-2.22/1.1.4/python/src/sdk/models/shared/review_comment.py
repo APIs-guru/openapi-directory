@@ -28,7 +28,7 @@ class ReviewCommentStartSideEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class ReviewCommentUserSimpleUser:
+class ReviewCommentSimpleUser:
     avatar_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'avatar_url' }})
     events_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'events_url' }})
     followers_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'followers_url' }})
@@ -79,5 +79,5 @@ class ReviewComment:
     start_side: Optional[ReviewCommentStartSideEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'start_side' }})
     updated_at: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updated_at', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'url' }})
-    user: ReviewCommentUserSimpleUser = field(default=None, metadata={'dataclasses_json': { 'field_name': 'user' }})
+    user: ReviewCommentSimpleUser = field(default=None, metadata={'dataclasses_json': { 'field_name': 'user' }})
     

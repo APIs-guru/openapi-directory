@@ -4,7 +4,7 @@ import (
 	"time"
 )
 
-type TeamDiscussionAuthorSimpleUser struct {
+type TeamDiscussionSimpleUser struct {
 	AvatarURL         string  `json:"avatar_url"`
 	EventsURL         string  `json:"events_url"`
 	FollowersURL      string  `json:"followers_url"`
@@ -27,22 +27,22 @@ type TeamDiscussionAuthorSimpleUser struct {
 }
 
 type TeamDiscussion struct {
-	Author        TeamDiscussionAuthorSimpleUser `json:"author"`
-	Body          string                         `json:"body"`
-	BodyHTML      string                         `json:"body_html"`
-	BodyVersion   string                         `json:"body_version"`
-	CommentsCount int64                          `json:"comments_count"`
-	CommentsURL   string                         `json:"comments_url"`
-	CreatedAt     time.Time                      `json:"created_at"`
-	HTMLURL       string                         `json:"html_url"`
-	LastEditedAt  time.Time                      `json:"last_edited_at"`
-	NodeID        string                         `json:"node_id"`
-	Number        int64                          `json:"number"`
-	Pinned        bool                           `json:"pinned"`
-	Private       bool                           `json:"private"`
-	Reactions     *ReactionRollup                `json:"reactions,omitempty"`
-	TeamURL       string                         `json:"team_url"`
-	Title         string                         `json:"title"`
-	UpdatedAt     time.Time                      `json:"updated_at"`
-	URL           string                         `json:"url"`
+	Author        TeamDiscussionSimpleUser `json:"author"`
+	Body          string                   `json:"body"`
+	BodyHTML      string                   `json:"body_html"`
+	BodyVersion   string                   `json:"body_version"`
+	CommentsCount int64                    `json:"comments_count"`
+	CommentsURL   string                   `json:"comments_url"`
+	CreatedAt     time.Time                `json:"created_at"`
+	HTMLURL       string                   `json:"html_url"`
+	LastEditedAt  time.Time                `json:"last_edited_at"`
+	NodeID        string                   `json:"node_id"`
+	Number        int64                    `json:"number"`
+	Pinned        bool                     `json:"pinned"`
+	Private       bool                     `json:"private"`
+	Reactions     *ReactionRollup          `json:"reactions,omitempty"`
+	TeamURL       string                   `json:"team_url"`
+	Title         string                   `json:"title"`
+	UpdatedAt     time.Time                `json:"updated_at"`
+	URL           string                   `json:"url"`
 }

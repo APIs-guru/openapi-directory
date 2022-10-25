@@ -32,7 +32,7 @@ class ListCustomerProfileEvaluationRequest:
 
 @dataclass_json
 @dataclass
-class ListCustomerProfileEvaluation200ApplicationJSONMeta:
+class ListCustomerProfileEvaluationListCustomerProfileEvaluationResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -44,14 +44,14 @@ class ListCustomerProfileEvaluation200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListCustomerProfileEvaluation200ApplicationJSONListCustomerProfileEvaluationResponse:
-    meta: Optional[ListCustomerProfileEvaluation200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+class ListCustomerProfileEvaluationListCustomerProfileEvaluationResponse:
+    meta: Optional[ListCustomerProfileEvaluationListCustomerProfileEvaluationResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     results: Optional[List[shared.TrusthubV1CustomerProfileCustomerProfileEvaluation]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'results' }})
     
 
 @dataclass
 class ListCustomerProfileEvaluationResponse:
     content_type: str = field(default=None)
-    list_customer_profile_evaluation_response: Optional[ListCustomerProfileEvaluation200ApplicationJSONListCustomerProfileEvaluationResponse] = field(default=None)
+    list_customer_profile_evaluation_response: Optional[ListCustomerProfileEvaluationListCustomerProfileEvaluationResponse] = field(default=None)
     status_code: int = field(default=None)
     

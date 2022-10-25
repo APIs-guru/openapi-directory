@@ -8,7 +8,7 @@ var CreateServiceServers = []string{
 	"https://notify.twilio.com",
 }
 
-type CreateServiceRequestBodyCreateServiceRequest struct {
+type CreateServiceCreateServiceRequest struct {
 	AlexaSkillID                            *string `form:"name=AlexaSkillId"`
 	ApnCredentialSid                        *string `form:"name=ApnCredentialSid"`
 	DefaultAlexaNotificationProtocolVersion *string `form:"name=DefaultAlexaNotificationProtocolVersion"`
@@ -31,7 +31,7 @@ type CreateServiceSecurity struct {
 
 type CreateServiceRequest struct {
 	ServerURL *string
-	Request   *CreateServiceRequestBodyCreateServiceRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request   *CreateServiceCreateServiceRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security  CreateServiceSecurity
 }
 

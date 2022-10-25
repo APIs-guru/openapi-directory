@@ -14,7 +14,7 @@ type UpdateSipIPAddressPathParams struct {
 	Sid                    string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
-type UpdateSipIPAddressRequestBodyUpdateSipIPAddressRequest struct {
+type UpdateSipIPAddressUpdateSipIPAddressRequest struct {
 	CidrPrefixLength *int64  `form:"name=CidrPrefixLength"`
 	FriendlyName     *string `form:"name=FriendlyName"`
 	IPAddress        *string `form:"name=IpAddress"`
@@ -27,7 +27,7 @@ type UpdateSipIPAddressSecurity struct {
 type UpdateSipIPAddressRequest struct {
 	ServerURL  *string
 	PathParams UpdateSipIPAddressPathParams
-	Request    *UpdateSipIPAddressRequestBodyUpdateSipIPAddressRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateSipIPAddressUpdateSipIPAddressRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateSipIPAddressSecurity
 }
 

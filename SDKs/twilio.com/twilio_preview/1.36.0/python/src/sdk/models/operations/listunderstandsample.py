@@ -34,7 +34,7 @@ class ListUnderstandSampleRequest:
 
 @dataclass_json
 @dataclass
-class ListUnderstandSample200ApplicationJSONMeta:
+class ListUnderstandSampleListUnderstandSampleResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -46,14 +46,14 @@ class ListUnderstandSample200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListUnderstandSample200ApplicationJSONListUnderstandSampleResponse:
-    meta: Optional[ListUnderstandSample200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+class ListUnderstandSampleListUnderstandSampleResponse:
+    meta: Optional[ListUnderstandSampleListUnderstandSampleResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     samples: Optional[List[shared.PreviewUnderstandAssistantTaskSample]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'samples' }})
     
 
 @dataclass
 class ListUnderstandSampleResponse:
     content_type: str = field(default=None)
-    list_understand_sample_response: Optional[ListUnderstandSample200ApplicationJSONListUnderstandSampleResponse] = field(default=None)
+    list_understand_sample_response: Optional[ListUnderstandSampleListUnderstandSampleResponse] = field(default=None)
     status_code: int = field(default=None)
     

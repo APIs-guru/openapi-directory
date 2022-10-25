@@ -12,7 +12,7 @@ type UpdateHostedNumbersAuthorizationDocumentPathParams struct {
 	Sid string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
-type UpdateHostedNumbersAuthorizationDocumentRequestBodyUpdateHostedNumbersAuthorizationDocumentRequest struct {
+type UpdateHostedNumbersAuthorizationDocumentUpdateHostedNumbersAuthorizationDocumentRequest struct {
 	AddressSid            *string                                     `form:"name=AddressSid"`
 	CcEmails              []string                                    `form:"name=CcEmails"`
 	ContactPhoneNumber    *string                                     `form:"name=ContactPhoneNumber"`
@@ -29,7 +29,7 @@ type UpdateHostedNumbersAuthorizationDocumentSecurity struct {
 type UpdateHostedNumbersAuthorizationDocumentRequest struct {
 	ServerURL  *string
 	PathParams UpdateHostedNumbersAuthorizationDocumentPathParams
-	Request    *UpdateHostedNumbersAuthorizationDocumentRequestBodyUpdateHostedNumbersAuthorizationDocumentRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateHostedNumbersAuthorizationDocumentUpdateHostedNumbersAuthorizationDocumentRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateHostedNumbersAuthorizationDocumentSecurity
 }
 

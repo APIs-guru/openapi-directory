@@ -33,7 +33,7 @@ class ListFaxRequest:
 
 @dataclass_json
 @dataclass
-class ListFax200ApplicationJSONMeta:
+class ListFaxListFaxResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -45,14 +45,14 @@ class ListFax200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListFax200ApplicationJSONListFaxResponse:
+class ListFaxListFaxResponse:
     faxes: Optional[List[shared.FaxV1Fax]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'faxes' }})
-    meta: Optional[ListFax200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+    meta: Optional[ListFaxListFaxResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     
 
 @dataclass
 class ListFaxResponse:
     content_type: str = field(default=None)
-    list_fax_response: Optional[ListFax200ApplicationJSONListFaxResponse] = field(default=None)
+    list_fax_response: Optional[ListFaxListFaxResponse] = field(default=None)
     status_code: int = field(default=None)
     

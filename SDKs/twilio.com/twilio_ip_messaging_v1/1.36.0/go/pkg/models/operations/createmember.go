@@ -13,7 +13,7 @@ type CreateMemberPathParams struct {
 	ServiceSid string `pathParam:"style=simple,explode=false,name=ServiceSid"`
 }
 
-type CreateMemberRequestBodyCreateMemberRequest struct {
+type CreateMemberCreateMemberRequest struct {
 	Identity string  `form:"name=Identity"`
 	RoleSid  *string `form:"name=RoleSid"`
 }
@@ -25,7 +25,7 @@ type CreateMemberSecurity struct {
 type CreateMemberRequest struct {
 	ServerURL  *string
 	PathParams CreateMemberPathParams
-	Request    *CreateMemberRequestBodyCreateMemberRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateMemberCreateMemberRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateMemberSecurity
 }
 

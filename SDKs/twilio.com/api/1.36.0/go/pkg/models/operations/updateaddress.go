@@ -13,7 +13,7 @@ type UpdateAddressPathParams struct {
 	Sid        string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
-type UpdateAddressRequestBodyUpdateAddressRequest struct {
+type UpdateAddressUpdateAddressRequest struct {
 	AutoCorrectAddress *bool   `form:"name=AutoCorrectAddress"`
 	City               *string `form:"name=City"`
 	CustomerName       *string `form:"name=CustomerName"`
@@ -31,7 +31,7 @@ type UpdateAddressSecurity struct {
 type UpdateAddressRequest struct {
 	ServerURL  *string
 	PathParams UpdateAddressPathParams
-	Request    *UpdateAddressRequestBodyUpdateAddressRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateAddressUpdateAddressRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateAddressSecurity
 }
 

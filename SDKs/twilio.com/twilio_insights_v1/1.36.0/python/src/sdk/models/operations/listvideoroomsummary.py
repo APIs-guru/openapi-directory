@@ -34,7 +34,7 @@ class ListVideoRoomSummaryRequest:
 
 @dataclass_json
 @dataclass
-class ListVideoRoomSummary200ApplicationJSONMeta:
+class ListVideoRoomSummaryListVideoRoomSummaryResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -46,14 +46,14 @@ class ListVideoRoomSummary200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListVideoRoomSummary200ApplicationJSONListVideoRoomSummaryResponse:
-    meta: Optional[ListVideoRoomSummary200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+class ListVideoRoomSummaryListVideoRoomSummaryResponse:
+    meta: Optional[ListVideoRoomSummaryListVideoRoomSummaryResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     rooms: Optional[List[shared.InsightsV1VideoRoomSummary]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rooms' }})
     
 
 @dataclass
 class ListVideoRoomSummaryResponse:
     content_type: str = field(default=None)
-    list_video_room_summary_response: Optional[ListVideoRoomSummary200ApplicationJSONListVideoRoomSummaryResponse] = field(default=None)
+    list_video_room_summary_response: Optional[ListVideoRoomSummaryListVideoRoomSummaryResponse] = field(default=None)
     status_code: int = field(default=None)
     

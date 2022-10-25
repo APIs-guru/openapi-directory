@@ -11,7 +11,7 @@ class PutOrdersIDShipPathParams:
 
 @dataclass_json
 @dataclass
-class PutOrdersIDShipRequestBodyOrderShipV2:
+class PutOrdersIDShipOrderShipV2:
     tracking_number: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'trackingNumber' }})
     weight_override: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'weightOverride' }})
     
@@ -24,7 +24,7 @@ class PutOrdersIDShipSecurity:
 @dataclass
 class PutOrdersIDShipRequest:
     path_params: PutOrdersIDShipPathParams = field(default=None)
-    request: PutOrdersIDShipRequestBodyOrderShipV2 = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: PutOrdersIDShipOrderShipV2 = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     security: PutOrdersIDShipSecurity = field(default=None)
     
 

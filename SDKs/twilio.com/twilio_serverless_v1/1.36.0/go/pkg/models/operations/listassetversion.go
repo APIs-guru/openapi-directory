@@ -28,7 +28,7 @@ type ListAssetVersionRequest struct {
 	Security    ListAssetVersionSecurity
 }
 
-type ListAssetVersion200ApplicationJSONMeta struct {
+type ListAssetVersionListAssetVersionResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -38,13 +38,13 @@ type ListAssetVersion200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListAssetVersion200ApplicationJSONListAssetVersionResponse struct {
+type ListAssetVersionListAssetVersionResponse struct {
 	AssetVersions []shared.ServerlessV1ServiceAssetAssetVersion `json:"asset_versions,omitempty"`
-	Meta          *ListAssetVersion200ApplicationJSONMeta       `json:"meta,omitempty"`
+	Meta          *ListAssetVersionListAssetVersionResponseMeta `json:"meta,omitempty"`
 }
 
 type ListAssetVersionResponse struct {
 	ContentType              string
-	ListAssetVersionResponse *ListAssetVersion200ApplicationJSONListAssetVersionResponse
+	ListAssetVersionResponse *ListAssetVersionListAssetVersionResponse
 	StatusCode               int64
 }

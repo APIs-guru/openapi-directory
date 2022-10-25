@@ -12,7 +12,7 @@ class UpdateWorkspacePathParams:
     
 
 @dataclass
-class UpdateWorkspaceRequestBodyUpdateWorkspaceRequest:
+class UpdateWorkspaceUpdateWorkspaceRequest:
     default_activity_sid: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'DefaultActivitySid' }})
     event_callback_url: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'EventCallbackUrl' }})
     events_filter: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'EventsFilter' }})
@@ -31,7 +31,7 @@ class UpdateWorkspaceSecurity:
 class UpdateWorkspaceRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateWorkspacePathParams = field(default=None)
-    request: Optional[UpdateWorkspaceRequestBodyUpdateWorkspaceRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateWorkspaceUpdateWorkspaceRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateWorkspaceSecurity = field(default=None)
     
 

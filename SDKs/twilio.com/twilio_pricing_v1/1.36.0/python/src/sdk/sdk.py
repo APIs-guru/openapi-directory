@@ -135,7 +135,7 @@ class SDK:
         res = operations.ListMessagingCountryResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListMessagingCountry200ApplicationJSONListMessagingCountryResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListMessagingCountryListMessagingCountryResponse])
                 res.list_messaging_country_response = out
 
         return res
@@ -160,7 +160,7 @@ class SDK:
         res = operations.ListPhoneNumberCountryResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListPhoneNumberCountry200ApplicationJSONListPhoneNumberCountryResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListPhoneNumberCountryListPhoneNumberCountryResponse])
                 res.list_phone_number_country_response = out
 
         return res
@@ -185,7 +185,7 @@ class SDK:
         res = operations.ListVoiceCountryResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListVoiceCountry200ApplicationJSONListVoiceCountryResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListVoiceCountryListVoiceCountryResponse])
                 res.list_voice_country_response = out
 
         return res

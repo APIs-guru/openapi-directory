@@ -8,7 +8,7 @@ from dataclasses_json import dataclass_json
 
 @dataclass_json
 @dataclass
-class EmployerSecretEmployerSecretEmployerSecret:
+class EmployerSecretEmployerSecret:
     created: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Created', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
     value: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Value' }})
@@ -17,5 +17,5 @@ class EmployerSecretEmployerSecretEmployerSecret:
 @dataclass_json
 @dataclass
 class EmployerSecret:
-    employer_secret: Optional[EmployerSecretEmployerSecretEmployerSecret] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'EmployerSecret' }})
+    employer_secret: Optional[EmployerSecretEmployerSecret] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'EmployerSecret' }})
     

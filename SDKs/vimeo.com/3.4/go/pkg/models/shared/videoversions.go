@@ -317,7 +317,7 @@ type VideoVersionsUserWebsites struct {
 	Name        string `json:"name"`
 }
 
-type VideoVersionsUserUser struct {
+type VideoVersionsUser struct {
 	Account       VideoVersionsUserAccountEnum  `json:"account"`
 	Bio           string                        `json:"bio"`
 	ContentFilter []string                      `json:"content_filter,omitempty"`
@@ -348,5 +348,5 @@ type VideoVersions struct {
 	Upload       VideoVersionsUpload   `json:"upload"`
 	UploadDate   string                `json:"upload_date"`
 	URI          string                `json:"uri"`
-	User         VideoVersionsUserUser `json:"user"`
+	User         VideoVersionsUser     `json:"user"`
 }

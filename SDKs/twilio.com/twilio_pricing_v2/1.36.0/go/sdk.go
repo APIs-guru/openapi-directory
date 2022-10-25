@@ -260,7 +260,7 @@ func (s *SDK) ListTrunkingCountry(ctx context.Context, request operations.ListTr
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListTrunkingCountry200ApplicationJSONListTrunkingCountryResponse
+			var out *operations.ListTrunkingCountryListTrunkingCountryResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -305,7 +305,7 @@ func (s *SDK) ListVoiceCountry(ctx context.Context, request operations.ListVoice
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListVoiceCountry200ApplicationJSONListVoiceCountryResponse
+			var out *operations.ListVoiceCountryListVoiceCountryResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}

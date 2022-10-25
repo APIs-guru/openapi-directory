@@ -8,7 +8,7 @@ from dataclasses_json import dataclass_json
 
 @dataclass_json
 @dataclass
-class SubContractorSubContractorAddressAddress:
+class SubContractorSubContractorAddress:
     address1: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Address1' }})
     address2: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Address2' }})
     address3: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Address3' }})
@@ -19,23 +19,23 @@ class SubContractorSubContractorAddressAddress:
 
 @dataclass_json
 @dataclass
-class SubContractorSubContractorBankAccountBankAccount:
+class SubContractorSubContractorBankAccount:
     account_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AccountName' }})
     account_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AccountNumber' }})
     reference: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Reference' }})
     sort_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SortCode' }})
     
-class SubContractorSubContractorBusinessTypeBusinessTypeEnum(str, Enum):
+class SubContractorSubContractorBusinessTypeEnum(str, Enum):
     SOLE_TRADER = "SoleTrader"
     COMPANY = "Company"
     PARTNERSHIP = "Partnership"
     TRUST = "Trust"
 
-class SubContractorSubContractorPayFrequencyPayFrequencyEnum(str, Enum):
+class SubContractorSubContractorPayFrequencyEnum(str, Enum):
     MONTHLY = "Monthly"
     WEEKLY = "Weekly"
 
-class SubContractorSubContractorPaymentMethodPaymentMethodEnum(str, Enum):
+class SubContractorSubContractorPaymentMethodEnum(str, Enum):
     NOT_SET = "NotSet"
     CASH = "Cash"
     CHEQUE = "Cheque"
@@ -43,27 +43,27 @@ class SubContractorSubContractorPaymentMethodPaymentMethodEnum(str, Enum):
     FASTER_PAYMENTS = "FasterPayments"
     OTHER = "Other"
 
-class SubContractorSubContractorRegionRegionEnum(str, Enum):
+class SubContractorSubContractorRegionEnum(str, Enum):
     NOT_SET = "NotSet"
     ENGLAND = "England"
     SCOTLAND = "Scotland"
     WALES = "Wales"
 
-class SubContractorSubContractorTaxationStatusTaxationStatusEnum(str, Enum):
+class SubContractorSubContractorTaxationStatusEnum(str, Enum):
     UNMATCHED = "Unmatched"
     NET = "Net"
     GROSS = "Gross"
 
-class SubContractorSubContractorTerritoryTerritoryEnum(str, Enum):
+class SubContractorSubContractorTerritoryEnum(str, Enum):
     UNITED_KINGDOM = "UnitedKingdom"
 
 
 @dataclass_json
 @dataclass
-class SubContractorSubContractorSubContractor:
-    address: Optional[SubContractorSubContractorAddressAddress] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Address' }})
-    bank_account: Optional[SubContractorSubContractorBankAccountBankAccount] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'BankAccount' }})
-    business_type: Optional[SubContractorSubContractorBusinessTypeBusinessTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'BusinessType' }})
+class SubContractorSubContractor:
+    address: Optional[SubContractorSubContractorAddress] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Address' }})
+    bank_account: Optional[SubContractorSubContractorBankAccount] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'BankAccount' }})
+    business_type: Optional[SubContractorSubContractorBusinessTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'BusinessType' }})
     company_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CompanyName' }})
     company_registration_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CompanyRegistrationNumber' }})
     deactivated: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Deactivated' }})
@@ -76,13 +76,13 @@ class SubContractorSubContractorSubContractor:
     ni_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NiNumber' }})
     partnership_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PartnershipName' }})
     partnership_unique_tax_reference: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PartnershipUniqueTaxReference' }})
-    pay_frequency: Optional[SubContractorSubContractorPayFrequencyPayFrequencyEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PayFrequency' }})
-    payment_method: Optional[SubContractorSubContractorPaymentMethodPaymentMethodEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PaymentMethod' }})
-    region: Optional[SubContractorSubContractorRegionRegionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Region' }})
+    pay_frequency: Optional[SubContractorSubContractorPayFrequencyEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PayFrequency' }})
+    payment_method: Optional[SubContractorSubContractorPaymentMethodEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PaymentMethod' }})
+    region: Optional[SubContractorSubContractorRegionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Region' }})
     revision: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Revision' }})
-    taxation_status: Optional[SubContractorSubContractorTaxationStatusTaxationStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TaxationStatus' }})
+    taxation_status: Optional[SubContractorSubContractorTaxationStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TaxationStatus' }})
     telephone: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Telephone' }})
-    territory: Optional[SubContractorSubContractorTerritoryTerritoryEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Territory' }})
+    territory: Optional[SubContractorSubContractorTerritoryEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Territory' }})
     title: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Title' }})
     trading_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TradingName' }})
     unique_tax_reference: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'UniqueTaxReference' }})
@@ -96,5 +96,5 @@ class SubContractorSubContractorSubContractor:
 @dataclass_json
 @dataclass
 class SubContractor:
-    sub_contractor: Optional[SubContractorSubContractorSubContractor] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SubContractor' }})
+    sub_contractor: Optional[SubContractorSubContractor] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SubContractor' }})
     

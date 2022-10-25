@@ -13,7 +13,7 @@ class CreateSipCredentialPathParams:
     
 
 @dataclass
-class CreateSipCredentialRequestBodyCreateSipCredentialRequest:
+class CreateSipCredentialCreateSipCredentialRequest:
     password: str = field(default=None, metadata={'form': { 'field_name': 'Password' }})
     username: str = field(default=None, metadata={'form': { 'field_name': 'Username' }})
     
@@ -27,7 +27,7 @@ class CreateSipCredentialSecurity:
 class CreateSipCredentialRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateSipCredentialPathParams = field(default=None)
-    request: Optional[CreateSipCredentialRequestBodyCreateSipCredentialRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateSipCredentialCreateSipCredentialRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateSipCredentialSecurity = field(default=None)
     
 

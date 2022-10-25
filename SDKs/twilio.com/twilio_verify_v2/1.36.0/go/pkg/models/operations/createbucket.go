@@ -13,7 +13,7 @@ type CreateBucketPathParams struct {
 	ServiceSid   string `pathParam:"style=simple,explode=false,name=ServiceSid"`
 }
 
-type CreateBucketRequestBodyCreateBucketRequest struct {
+type CreateBucketCreateBucketRequest struct {
 	Interval int64 `form:"name=Interval"`
 	Max      int64 `form:"name=Max"`
 }
@@ -25,7 +25,7 @@ type CreateBucketSecurity struct {
 type CreateBucketRequest struct {
 	ServerURL  *string
 	PathParams CreateBucketPathParams
-	Request    *CreateBucketRequestBodyCreateBucketRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateBucketCreateBucketRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateBucketSecurity
 }
 

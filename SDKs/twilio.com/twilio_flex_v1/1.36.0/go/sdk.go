@@ -740,7 +740,7 @@ func (s *SDK) ListChannel(ctx context.Context, request operations.ListChannelReq
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListChannel200ApplicationJSONListChannelResponse
+			var out *operations.ListChannelListChannelResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -785,7 +785,7 @@ func (s *SDK) ListFlexFlow(ctx context.Context, request operations.ListFlexFlowR
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListFlexFlow200ApplicationJSONListFlexFlowResponse
+			var out *operations.ListFlexFlowListFlexFlowResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -830,7 +830,7 @@ func (s *SDK) ListInteractionChannel(ctx context.Context, request operations.Lis
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListInteractionChannel200ApplicationJSONListInteractionChannelResponse
+			var out *operations.ListInteractionChannelListInteractionChannelResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -875,7 +875,7 @@ func (s *SDK) ListInteractionChannelInvite(ctx context.Context, request operatio
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListInteractionChannelInvite200ApplicationJSONListInteractionChannelInviteResponse
+			var out *operations.ListInteractionChannelInviteListInteractionChannelInviteResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -920,7 +920,7 @@ func (s *SDK) ListInteractionChannelParticipant(ctx context.Context, request ope
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListInteractionChannelParticipant200ApplicationJSONListInteractionChannelParticipantResponse
+			var out *operations.ListInteractionChannelParticipantListInteractionChannelParticipantResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -965,7 +965,7 @@ func (s *SDK) ListWebChannel(ctx context.Context, request operations.ListWebChan
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListWebChannel200ApplicationJSONListWebChannelResponse
+			var out *operations.ListWebChannelListWebChannelResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}

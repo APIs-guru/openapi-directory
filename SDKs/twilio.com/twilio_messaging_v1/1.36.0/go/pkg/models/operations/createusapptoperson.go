@@ -12,7 +12,7 @@ type CreateUsAppToPersonPathParams struct {
 	MessagingServiceSid string `pathParam:"style=simple,explode=false,name=MessagingServiceSid"`
 }
 
-type CreateUsAppToPersonRequestBodyCreateUsAppToPersonRequest struct {
+type CreateUsAppToPersonCreateUsAppToPersonRequest struct {
 	BrandRegistrationSid string   `form:"name=BrandRegistrationSid"`
 	Description          string   `form:"name=Description"`
 	HasEmbeddedLinks     bool     `form:"name=HasEmbeddedLinks"`
@@ -28,7 +28,7 @@ type CreateUsAppToPersonSecurity struct {
 type CreateUsAppToPersonRequest struct {
 	ServerURL  *string
 	PathParams CreateUsAppToPersonPathParams
-	Request    *CreateUsAppToPersonRequestBodyCreateUsAppToPersonRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateUsAppToPersonCreateUsAppToPersonRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateUsAppToPersonSecurity
 }
 

@@ -12,7 +12,7 @@ type CreatePhoneNumberPathParams struct {
 	ServiceSid string `pathParam:"style=simple,explode=false,name=ServiceSid"`
 }
 
-type CreatePhoneNumberRequestBodyCreatePhoneNumberRequest struct {
+type CreatePhoneNumberCreatePhoneNumberRequest struct {
 	IsReserved  *bool   `form:"name=IsReserved"`
 	PhoneNumber *string `form:"name=PhoneNumber"`
 	Sid         *string `form:"name=Sid"`
@@ -25,7 +25,7 @@ type CreatePhoneNumberSecurity struct {
 type CreatePhoneNumberRequest struct {
 	ServerURL  *string
 	PathParams CreatePhoneNumberPathParams
-	Request    *CreatePhoneNumberRequestBodyCreatePhoneNumberRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreatePhoneNumberCreatePhoneNumberRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreatePhoneNumberSecurity
 }
 

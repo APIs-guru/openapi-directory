@@ -2,7 +2,7 @@ from dataclasses import dataclass, field
 from typing import Enum,Optional
 from dataclasses_json import dataclass_json
 
-class DeletionResponseStatusStatusOfTheDeletionEnum(str, Enum):
+class DeletionResponseStatusOfTheDeletionEnum(str, Enum):
     QUEUED = "QUEUED"
     RUNNING = "RUNNING"
     SUCCEEDED_WAITING_FOR_CACHE_REMOVAL = "SUCCEEDED_WAITING_FOR_CACHE_REMOVAL"
@@ -11,7 +11,7 @@ class DeletionResponseStatusStatusOfTheDeletionEnum(str, Enum):
     FAILED = "FAILED"
     RETRY = "RETRY"
 
-class DeletionResponseTypeObjectThatSBeingDeletedEnum(str, Enum):
+class DeletionResponseObjectThatSBeingDeletedEnum(str, Enum):
     DATASET = "DATASET"
     MODEL = "MODEL"
 
@@ -25,6 +25,6 @@ class DeletionResponse:
     object: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'object' }})
     organization_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'organizationId' }})
     progress: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'progress' }})
-    status: Optional[DeletionResponseStatusStatusOfTheDeletionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
-    type: Optional[DeletionResponseTypeObjectThatSBeingDeletedEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    status: Optional[DeletionResponseStatusOfTheDeletionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    type: Optional[DeletionResponseObjectThatSBeingDeletedEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     

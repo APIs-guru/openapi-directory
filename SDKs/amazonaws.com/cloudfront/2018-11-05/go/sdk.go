@@ -96,62 +96,62 @@ func (s *SDK) CreateCloudFrontOriginAccessIdentity20181105(ctx context.Context, 
 	case httpRes.StatusCode == 201:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 480:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 481:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 482:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 483:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 484:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -194,452 +194,452 @@ func (s *SDK) CreateDistribution20181105(ctx context.Context, request operations
 	case httpRes.StatusCode == 201:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 480:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 481:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 482:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 483:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 484:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 485:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 486:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 487:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 488:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 489:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 490:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 491:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 492:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 493:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 494:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 495:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 496:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 497:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 498:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 499:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 500:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 501:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 502:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 503:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 504:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 505:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 506:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 507:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 508:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 509:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 510:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 511:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 512:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 513:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 514:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 515:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 516:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 517:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 518:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 519:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 520:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 521:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 522:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 523:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -684,462 +684,462 @@ func (s *SDK) CreateDistributionWithTags20181105(ctx context.Context, request op
 	case httpRes.StatusCode == 201:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 480:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 481:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 482:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 483:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 484:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 485:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 486:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 487:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 488:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 489:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 490:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 491:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 492:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 493:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 494:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 495:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 496:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 497:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 498:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 499:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 500:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 501:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 502:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 503:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 504:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 505:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 506:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 507:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 508:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 509:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 510:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 511:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 512:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 513:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 514:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 515:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 516:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 517:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 518:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 519:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 520:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 521:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 522:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 523:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 524:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -1182,92 +1182,92 @@ func (s *SDK) CreateFieldLevelEncryptionConfig20181105(ctx context.Context, requ
 	case httpRes.StatusCode == 201:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 480:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 481:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 482:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 483:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 484:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 485:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 486:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 487:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -1310,92 +1310,92 @@ func (s *SDK) CreateFieldLevelEncryptionProfile20181105(ctx context.Context, req
 	case httpRes.StatusCode == 201:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 480:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 481:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 482:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 483:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 484:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 485:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 486:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 487:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -1438,82 +1438,82 @@ func (s *SDK) CreateInvalidation20181105(ctx context.Context, request operations
 	case httpRes.StatusCode == 201:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 480:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 481:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 482:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 483:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 484:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 485:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 486:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -1556,42 +1556,42 @@ func (s *SDK) CreatePublicKey20181105(ctx context.Context, request operations.Cr
 	case httpRes.StatusCode == 201:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 480:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 481:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 482:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -1634,132 +1634,132 @@ func (s *SDK) CreateStreamingDistribution20181105(ctx context.Context, request o
 	case httpRes.StatusCode == 201:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 480:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 481:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 482:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 483:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 484:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 485:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 486:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 487:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 488:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 489:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 490:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 491:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -1804,142 +1804,142 @@ func (s *SDK) CreateStreamingDistributionWithTags20181105(ctx context.Context, r
 	case httpRes.StatusCode == 201:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 480:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 481:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 482:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 483:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 484:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 485:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 486:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 487:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 488:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 489:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 490:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 491:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 492:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -1974,52 +1974,52 @@ func (s *SDK) DeleteCloudFrontOriginAccessIdentity20181105(ctx context.Context, 
 	case httpRes.StatusCode == 480:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 481:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 482:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 483:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 484:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -2054,52 +2054,52 @@ func (s *SDK) DeleteDistribution20181105(ctx context.Context, request operations
 	case httpRes.StatusCode == 480:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 481:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 482:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 483:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 484:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -2134,52 +2134,52 @@ func (s *SDK) DeleteFieldLevelEncryptionConfig20181105(ctx context.Context, requ
 	case httpRes.StatusCode == 480:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 481:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 482:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 483:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 484:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -2214,52 +2214,52 @@ func (s *SDK) DeleteFieldLevelEncryptionProfile20181105(ctx context.Context, req
 	case httpRes.StatusCode == 480:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 481:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 482:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 483:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 484:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -2294,52 +2294,52 @@ func (s *SDK) DeletePublicKey20181105(ctx context.Context, request operations.De
 	case httpRes.StatusCode == 480:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 481:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 482:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 483:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 484:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -2374,52 +2374,52 @@ func (s *SDK) DeleteStreamingDistribution20181105(ctx context.Context, request o
 	case httpRes.StatusCode == 480:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 481:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 482:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 483:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 484:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -2453,32 +2453,32 @@ func (s *SDK) GetCloudFrontOriginAccessIdentity20181105(ctx context.Context, req
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 480:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 481:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -2512,32 +2512,32 @@ func (s *SDK) GetCloudFrontOriginAccessIdentityConfig20181105(ctx context.Contex
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 480:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 481:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -2571,32 +2571,32 @@ func (s *SDK) GetDistribution20181105(ctx context.Context, request operations.Ge
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 480:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 481:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -2630,32 +2630,32 @@ func (s *SDK) GetDistributionConfig20181105(ctx context.Context, request operati
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 480:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 481:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -2689,32 +2689,32 @@ func (s *SDK) GetFieldLevelEncryption20181105(ctx context.Context, request opera
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 480:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 481:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -2748,32 +2748,32 @@ func (s *SDK) GetFieldLevelEncryptionConfig20181105(ctx context.Context, request
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 480:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 481:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -2807,32 +2807,32 @@ func (s *SDK) GetFieldLevelEncryptionProfile20181105(ctx context.Context, reques
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 480:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 481:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -2866,32 +2866,32 @@ func (s *SDK) GetFieldLevelEncryptionProfileConfig20181105(ctx context.Context, 
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 480:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 481:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -2925,42 +2925,42 @@ func (s *SDK) GetInvalidation20181105(ctx context.Context, request operations.Ge
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 480:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 481:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 482:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -2994,32 +2994,32 @@ func (s *SDK) GetPublicKey20181105(ctx context.Context, request operations.GetPu
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 480:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 481:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -3053,32 +3053,32 @@ func (s *SDK) GetPublicKeyConfig20181105(ctx context.Context, request operations
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 480:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 481:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -3112,32 +3112,32 @@ func (s *SDK) GetStreamingDistribution20181105(ctx context.Context, request oper
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 480:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 481:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -3171,32 +3171,32 @@ func (s *SDK) GetStreamingDistributionConfig20181105(ctx context.Context, reques
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 480:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 481:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -3232,22 +3232,22 @@ func (s *SDK) ListCloudFrontOriginAccessIdentities20181105(ctx context.Context, 
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 480:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -3283,22 +3283,22 @@ func (s *SDK) ListDistributions20181105(ctx context.Context, request operations.
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 480:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -3334,32 +3334,32 @@ func (s *SDK) ListDistributionsByWebACLId20181105(ctx context.Context, request o
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 480:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 481:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -3395,22 +3395,22 @@ func (s *SDK) ListFieldLevelEncryptionConfigs20181105(ctx context.Context, reque
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 480:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -3446,22 +3446,22 @@ func (s *SDK) ListFieldLevelEncryptionProfiles20181105(ctx context.Context, requ
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 480:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -3497,42 +3497,42 @@ func (s *SDK) ListInvalidations20181105(ctx context.Context, request operations.
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 480:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 481:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 482:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -3568,22 +3568,22 @@ func (s *SDK) ListPublicKeys20181105(ctx context.Context, request operations.Lis
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 480:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -3619,22 +3619,22 @@ func (s *SDK) ListStreamingDistributions20181105(ctx context.Context, request op
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 480:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -3670,52 +3670,52 @@ func (s *SDK) ListTagsForResource20181105(ctx context.Context, request operation
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 480:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 481:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 482:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 483:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -3761,42 +3761,42 @@ func (s *SDK) TagResource20181105(ctx context.Context, request operations.TagRes
 	case httpRes.StatusCode == 480:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 481:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 482:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 483:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -3842,42 +3842,42 @@ func (s *SDK) UntagResource20181105(ctx context.Context, request operations.Unta
 	case httpRes.StatusCode == 480:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 481:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 482:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 483:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -3920,92 +3920,92 @@ func (s *SDK) UpdateCloudFrontOriginAccessIdentity20181105(ctx context.Context, 
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 480:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 481:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 482:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 483:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 484:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 485:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 486:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 487:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -4048,452 +4048,452 @@ func (s *SDK) UpdateDistribution20181105(ctx context.Context, request operations
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 480:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 481:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 482:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 483:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 484:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 485:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 486:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 487:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 488:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 489:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 490:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 491:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 492:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 493:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 494:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 495:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 496:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 497:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 498:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 499:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 500:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 501:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 502:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 503:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 504:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 505:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 506:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 507:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 508:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 509:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 510:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 511:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 512:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 513:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 514:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 515:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 516:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 517:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 518:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 519:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 520:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 521:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 522:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 523:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -4536,122 +4536,122 @@ func (s *SDK) UpdateFieldLevelEncryptionConfig20181105(ctx context.Context, requ
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 480:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 481:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 482:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 483:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 484:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 485:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 486:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 487:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 488:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 489:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 490:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -4694,132 +4694,132 @@ func (s *SDK) UpdateFieldLevelEncryptionProfile20181105(ctx context.Context, req
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 480:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 481:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 482:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 483:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 484:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 485:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 486:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 487:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 488:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 489:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 490:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 491:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -4862,82 +4862,82 @@ func (s *SDK) UpdatePublicKey20181105(ctx context.Context, request operations.Up
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 480:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 481:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 482:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 483:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 484:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 485:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 486:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -4980,142 +4980,142 @@ func (s *SDK) UpdateStreamingDistribution20181105(ctx context.Context, request o
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 480:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 481:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 482:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 483:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 484:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 485:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 486:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 487:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 488:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 489:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 490:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 491:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 492:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 

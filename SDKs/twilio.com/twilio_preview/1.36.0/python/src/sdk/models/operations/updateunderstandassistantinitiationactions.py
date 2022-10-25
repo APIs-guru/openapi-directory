@@ -12,7 +12,7 @@ class UpdateUnderstandAssistantInitiationActionsPathParams:
     
 
 @dataclass
-class UpdateUnderstandAssistantInitiationActionsRequestBodyUpdateUnderstandAssistantInitiationActionsRequest:
+class UpdateUnderstandAssistantInitiationActionsUpdateUnderstandAssistantInitiationActionsRequest:
     initiation_actions: Optional[Any] = field(default=None, metadata={'form': { 'field_name': 'InitiationActions' }})
     
 
@@ -25,7 +25,7 @@ class UpdateUnderstandAssistantInitiationActionsSecurity:
 class UpdateUnderstandAssistantInitiationActionsRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateUnderstandAssistantInitiationActionsPathParams = field(default=None)
-    request: Optional[UpdateUnderstandAssistantInitiationActionsRequestBodyUpdateUnderstandAssistantInitiationActionsRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateUnderstandAssistantInitiationActionsUpdateUnderstandAssistantInitiationActionsRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateUnderstandAssistantInitiationActionsSecurity = field(default=None)
     
 

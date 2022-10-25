@@ -12,25 +12,25 @@ type CreateUsageTriggerPathParams struct {
 	AccountSid string `pathParam:"style=simple,explode=false,name=AccountSid"`
 }
 
-type CreateUsageTriggerRequestBodyCallbackMethodEnum string
+type CreateUsageTriggerCreateUsageTriggerRequestCallbackMethodEnum string
 
 const (
-	CreateUsageTriggerRequestBodyCallbackMethodEnumHead   CreateUsageTriggerRequestBodyCallbackMethodEnum = "HEAD"
-	CreateUsageTriggerRequestBodyCallbackMethodEnumGet    CreateUsageTriggerRequestBodyCallbackMethodEnum = "GET"
-	CreateUsageTriggerRequestBodyCallbackMethodEnumPost   CreateUsageTriggerRequestBodyCallbackMethodEnum = "POST"
-	CreateUsageTriggerRequestBodyCallbackMethodEnumPatch  CreateUsageTriggerRequestBodyCallbackMethodEnum = "PATCH"
-	CreateUsageTriggerRequestBodyCallbackMethodEnumPut    CreateUsageTriggerRequestBodyCallbackMethodEnum = "PUT"
-	CreateUsageTriggerRequestBodyCallbackMethodEnumDelete CreateUsageTriggerRequestBodyCallbackMethodEnum = "DELETE"
+	CreateUsageTriggerCreateUsageTriggerRequestCallbackMethodEnumHead   CreateUsageTriggerCreateUsageTriggerRequestCallbackMethodEnum = "HEAD"
+	CreateUsageTriggerCreateUsageTriggerRequestCallbackMethodEnumGet    CreateUsageTriggerCreateUsageTriggerRequestCallbackMethodEnum = "GET"
+	CreateUsageTriggerCreateUsageTriggerRequestCallbackMethodEnumPost   CreateUsageTriggerCreateUsageTriggerRequestCallbackMethodEnum = "POST"
+	CreateUsageTriggerCreateUsageTriggerRequestCallbackMethodEnumPatch  CreateUsageTriggerCreateUsageTriggerRequestCallbackMethodEnum = "PATCH"
+	CreateUsageTriggerCreateUsageTriggerRequestCallbackMethodEnumPut    CreateUsageTriggerCreateUsageTriggerRequestCallbackMethodEnum = "PUT"
+	CreateUsageTriggerCreateUsageTriggerRequestCallbackMethodEnumDelete CreateUsageTriggerCreateUsageTriggerRequestCallbackMethodEnum = "DELETE"
 )
 
-type CreateUsageTriggerRequestBodyCreateUsageTriggerRequest struct {
-	CallbackMethod *CreateUsageTriggerRequestBodyCallbackMethodEnum `form:"name=CallbackMethod"`
-	CallbackURL    string                                           `form:"name=CallbackUrl"`
-	FriendlyName   *string                                          `form:"name=FriendlyName"`
-	Recurring      *shared.UsageTriggerEnumRecurringEnum            `form:"name=Recurring"`
-	TriggerBy      *shared.UsageTriggerEnumTriggerFieldEnum         `form:"name=TriggerBy"`
-	TriggerValue   string                                           `form:"name=TriggerValue"`
-	UsageCategory  shared.UsageTriggerEnumUsageCategoryEnum         `form:"name=UsageCategory"`
+type CreateUsageTriggerCreateUsageTriggerRequest struct {
+	CallbackMethod *CreateUsageTriggerCreateUsageTriggerRequestCallbackMethodEnum `form:"name=CallbackMethod"`
+	CallbackURL    string                                                         `form:"name=CallbackUrl"`
+	FriendlyName   *string                                                        `form:"name=FriendlyName"`
+	Recurring      *shared.UsageTriggerEnumRecurringEnum                          `form:"name=Recurring"`
+	TriggerBy      *shared.UsageTriggerEnumTriggerFieldEnum                       `form:"name=TriggerBy"`
+	TriggerValue   string                                                         `form:"name=TriggerValue"`
+	UsageCategory  shared.UsageTriggerEnumUsageCategoryEnum                       `form:"name=UsageCategory"`
 }
 
 type CreateUsageTriggerSecurity struct {
@@ -40,7 +40,7 @@ type CreateUsageTriggerSecurity struct {
 type CreateUsageTriggerRequest struct {
 	ServerURL  *string
 	PathParams CreateUsageTriggerPathParams
-	Request    *CreateUsageTriggerRequestBodyCreateUsageTriggerRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateUsageTriggerCreateUsageTriggerRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateUsageTriggerSecurity
 }
 

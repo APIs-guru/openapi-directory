@@ -13,8 +13,8 @@ type SrcSearchlyAPIV1ControllersSongSearchRequest struct {
 }
 
 type SrcSearchlyAPIV1ControllersSongSearchResponse struct {
-	APIResponseSong *shared.APIResponseSong
-	Body            []byte
-	ContentType     string
-	StatusCode      int64
+	APIResponseSong                                                   *shared.APIResponseSong
+	ContentType                                                       string
+	StatusCode                                                        int64
+	SrcSearchlyAPIV1ControllersSongSearchDefaultApplicationTextString *string
 }

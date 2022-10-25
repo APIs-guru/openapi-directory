@@ -220,7 +220,7 @@ func (s *SDK) AddInternalTransferBatchPayment(ctx context.Context, request opera
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.AddInternalTransferBatchPayment200ApplicationJSONNewBatchItemResponse
+			var out *operations.AddInternalTransferBatchPaymentNewBatchItemResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -268,7 +268,7 @@ func (s *SDK) Authenticate(ctx context.Context, request operations.AuthenticateR
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.Authenticate200ApplicationJSONAccessToken
+			var out *operations.AuthenticateAccessToken
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -376,7 +376,7 @@ func (s *SDK) CreateAPIApplication(ctx context.Context, request operations.Creat
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.CreateAPIApplication200ApplicationJSONAPIApplication
+			var out *operations.CreateAPIApplicationAPIApplication
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -424,7 +424,7 @@ func (s *SDK) CreateBatchPayment(ctx context.Context, request operations.CreateB
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.CreateBatchPayment200ApplicationJSONNewBatchResponse
+			var out *operations.CreateBatchPaymentNewBatchResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -472,7 +472,7 @@ func (s *SDK) CreateNewCard(ctx context.Context, request operations.CreateNewCar
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.CreateNewCard200ApplicationJSONNewCardResponse
+			var out *operations.CreateNewCardNewCardResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -611,7 +611,7 @@ func (s *SDK) GetAccounts(ctx context.Context) (*operations.GetAccountsResponse,
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.GetAccounts200ApplicationJSONAccounts
+			var out *operations.GetAccountsAccounts
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -653,7 +653,7 @@ func (s *SDK) GetBatches(ctx context.Context, request operations.GetBatchesReque
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.GetBatches200ApplicationJSONBatchItems
+			var out *operations.GetBatchesBatchItems
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -770,7 +770,7 @@ func (s *SDK) GetDirectDebitMandates(ctx context.Context) (*operations.GetDirect
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.GetDirectDebitMandates200ApplicationJSONMandates
+			var out *operations.GetDirectDebitMandatesMandates
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -811,7 +811,7 @@ func (s *SDK) GetDirectDebitsForMandateUUID(ctx context.Context, request operati
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.GetDirectDebitsForMandateUUID200ApplicationJSONDirectDebits
+			var out *operations.GetDirectDebitsForMandateUUIDDirectDebits
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -934,7 +934,7 @@ func (s *SDK) GetListOfAspsps(ctx context.Context, request operations.GetListOfA
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.GetListOfAspsps200ApplicationJSONAspsps
+			var out *operations.GetListOfAspspsAspsps
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -973,7 +973,7 @@ func (s *SDK) GetListofApproversForBatch(ctx context.Context, request operations
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.GetListofApproversForBatch200ApplicationJSONBatchApprovers
+			var out *operations.GetListofApproversForBatchBatchApprovers
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -1012,7 +1012,7 @@ func (s *SDK) GetListofCards(ctx context.Context) (*operations.GetListofCardsRes
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.GetListofCards200ApplicationJSONCards
+			var out *operations.GetListofCardsCards
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -1092,7 +1092,7 @@ func (s *SDK) GetPayees(ctx context.Context) (*operations.GetPayeesResponse, err
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.GetPayees200ApplicationJSONPayee
+			var out *operations.GetPayeesPayee
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -1131,7 +1131,7 @@ func (s *SDK) GetPaymentDetails(ctx context.Context, request operations.GetPayme
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.GetPaymentDetails200ApplicationJSONPaymentRequest
+			var out *operations.GetPaymentDetailsPaymentRequest
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -1170,7 +1170,7 @@ func (s *SDK) GetTransactionsByID(ctx context.Context, request operations.GetTra
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.GetTransactionsByID200ApplicationJSONTransaction
+			var out *operations.GetTransactionsByIDTransaction
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -1289,7 +1289,7 @@ func (s *SDK) GetUsers(ctx context.Context) (*operations.GetUsersResponse, error
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out []operations.GetUsers200ApplicationJSONUser
+			var out []operations.GetUsersUser
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -1337,7 +1337,7 @@ func (s *SDK) NewPaymentRequest(ctx context.Context, request operations.NewPayme
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.NewPaymentRequest200ApplicationJSONNewPaymentRequestResponse
+			var out *operations.NewPaymentRequestNewPaymentRequestResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}

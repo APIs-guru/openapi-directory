@@ -13,7 +13,7 @@ class CreateMessagePathParams:
     
 
 @dataclass
-class CreateMessageRequestBodyCreateMessageRequest:
+class CreateMessageCreateMessageRequest:
     attributes: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Attributes' }})
     body: str = field(default=None, metadata={'form': { 'field_name': 'Body' }})
     from_: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'From' }})
@@ -28,7 +28,7 @@ class CreateMessageSecurity:
 class CreateMessageRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateMessagePathParams = field(default=None)
-    request: Optional[CreateMessageRequestBodyCreateMessageRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateMessageCreateMessageRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateMessageSecurity = field(default=None)
     
 

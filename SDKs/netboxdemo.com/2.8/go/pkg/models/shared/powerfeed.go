@@ -18,7 +18,7 @@ const (
 	PowerFeedPhaseValueEnumThreePhase  PowerFeedPhaseValueEnum = "three-phase"
 )
 
-type PowerFeedPhasePhase struct {
+type PowerFeedPhase struct {
 	Label PowerFeedPhaseLabelEnum `json:"label"`
 	Value PowerFeedPhaseValueEnum `json:"value"`
 }
@@ -41,7 +41,7 @@ const (
 	PowerFeedStatusValueEnumFailed  PowerFeedStatusValueEnum = "failed"
 )
 
-type PowerFeedStatusStatus struct {
+type PowerFeedStatus struct {
 	Label PowerFeedStatusLabelEnum `json:"label"`
 	Value PowerFeedStatusValueEnum `json:"value"`
 }
@@ -60,7 +60,7 @@ const (
 	PowerFeedSupplyValueEnumDc PowerFeedSupplyValueEnum = "dc"
 )
 
-type PowerFeedSupplySupply struct {
+type PowerFeedSupply struct {
 	Label PowerFeedSupplyLabelEnum `json:"label"`
 	Value PowerFeedSupplyValueEnum `json:"value"`
 }
@@ -79,7 +79,7 @@ const (
 	PowerFeedTypeValueEnumRedundant PowerFeedTypeValueEnum = "redundant"
 )
 
-type PowerFeedTypeType struct {
+type PowerFeedType struct {
 	Label PowerFeedTypeLabelEnum `json:"label"`
 	Value PowerFeedTypeValueEnum `json:"value"`
 }
@@ -93,12 +93,12 @@ type PowerFeed struct {
 	LastUpdated    *time.Time             `json:"last_updated,omitempty"`
 	MaxUtilization *int64                 `json:"max_utilization,omitempty"`
 	Name           string                 `json:"name"`
-	Phase          *PowerFeedPhasePhase   `json:"phase,omitempty"`
+	Phase          *PowerFeedPhase        `json:"phase,omitempty"`
 	PowerPanel     NestedPowerPanel       `json:"power_panel"`
 	Rack           *NestedRack            `json:"rack,omitempty"`
-	Status         *PowerFeedStatusStatus `json:"status,omitempty"`
-	Supply         *PowerFeedSupplySupply `json:"supply,omitempty"`
+	Status         *PowerFeedStatus       `json:"status,omitempty"`
+	Supply         *PowerFeedSupply       `json:"supply,omitempty"`
 	Tags           []string               `json:"tags,omitempty"`
-	Type           *PowerFeedTypeType     `json:"type,omitempty"`
+	Type           *PowerFeedType         `json:"type,omitempty"`
 	Voltage        *int64                 `json:"voltage,omitempty"`
 }

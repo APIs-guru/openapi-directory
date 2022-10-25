@@ -26,6 +26,7 @@ class DeleteTeamsTeamIDMembershipsUserIDResponse:
     content_type: str = field(default=None)
     delete_teams_team_id_memberships_user_id_200_application_json_string: Optional[str] = field(default=None)
     delete_teams_team_id_memberships_user_id_200_text_json_string: Optional[str] = field(default=None)
+    delete_teams_team_id_memberships_user_id_200_text_plain_string: Optional[str] = field(default=None)
     error_response_content: Optional[shared.ErrorResponseContent] = field(default=None)
     status_code: int = field(default=None)
     

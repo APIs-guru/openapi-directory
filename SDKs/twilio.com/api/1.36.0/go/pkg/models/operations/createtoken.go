@@ -12,7 +12,7 @@ type CreateTokenPathParams struct {
 	AccountSid string `pathParam:"style=simple,explode=false,name=AccountSid"`
 }
 
-type CreateTokenRequestBodyCreateTokenRequest struct {
+type CreateTokenCreateTokenRequest struct {
 	TTL *int64 `form:"name=Ttl"`
 }
 
@@ -23,7 +23,7 @@ type CreateTokenSecurity struct {
 type CreateTokenRequest struct {
 	ServerURL  *string
 	PathParams CreateTokenPathParams
-	Request    *CreateTokenRequestBodyCreateTokenRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateTokenCreateTokenRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateTokenSecurity
 }
 

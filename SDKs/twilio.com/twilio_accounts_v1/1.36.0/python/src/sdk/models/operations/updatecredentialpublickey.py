@@ -12,7 +12,7 @@ class UpdateCredentialPublicKeyPathParams:
     
 
 @dataclass
-class UpdateCredentialPublicKeyRequestBodyUpdateCredentialPublicKeyRequest:
+class UpdateCredentialPublicKeyUpdateCredentialPublicKeyRequest:
     friendly_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
     
 
@@ -25,7 +25,7 @@ class UpdateCredentialPublicKeySecurity:
 class UpdateCredentialPublicKeyRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateCredentialPublicKeyPathParams = field(default=None)
-    request: Optional[UpdateCredentialPublicKeyRequestBodyUpdateCredentialPublicKeyRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateCredentialPublicKeyUpdateCredentialPublicKeyRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateCredentialPublicKeySecurity = field(default=None)
     
 

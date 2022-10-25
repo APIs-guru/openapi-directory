@@ -13,7 +13,7 @@ class UpdateMarketplaceInstalledAddOnExtensionPathParams:
     
 
 @dataclass
-class UpdateMarketplaceInstalledAddOnExtensionRequestBodyUpdateMarketplaceInstalledAddOnExtensionRequest:
+class UpdateMarketplaceInstalledAddOnExtensionUpdateMarketplaceInstalledAddOnExtensionRequest:
     enabled: bool = field(default=None, metadata={'form': { 'field_name': 'Enabled' }})
     
 
@@ -26,7 +26,7 @@ class UpdateMarketplaceInstalledAddOnExtensionSecurity:
 class UpdateMarketplaceInstalledAddOnExtensionRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateMarketplaceInstalledAddOnExtensionPathParams = field(default=None)
-    request: Optional[UpdateMarketplaceInstalledAddOnExtensionRequestBodyUpdateMarketplaceInstalledAddOnExtensionRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateMarketplaceInstalledAddOnExtensionUpdateMarketplaceInstalledAddOnExtensionRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateMarketplaceInstalledAddOnExtensionSecurity = field(default=None)
     
 

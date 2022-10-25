@@ -13,7 +13,7 @@ type CreateSipIPAddressPathParams struct {
 	IPAccessControlListSid string `pathParam:"style=simple,explode=false,name=IpAccessControlListSid"`
 }
 
-type CreateSipIPAddressRequestBodyCreateSipIPAddressRequest struct {
+type CreateSipIPAddressCreateSipIPAddressRequest struct {
 	CidrPrefixLength *int64 `form:"name=CidrPrefixLength"`
 	FriendlyName     string `form:"name=FriendlyName"`
 	IPAddress        string `form:"name=IpAddress"`
@@ -26,7 +26,7 @@ type CreateSipIPAddressSecurity struct {
 type CreateSipIPAddressRequest struct {
 	ServerURL  *string
 	PathParams CreateSipIPAddressPathParams
-	Request    *CreateSipIPAddressRequestBodyCreateSipIPAddressRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateSipIPAddressCreateSipIPAddressRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateSipIPAddressSecurity
 }
 

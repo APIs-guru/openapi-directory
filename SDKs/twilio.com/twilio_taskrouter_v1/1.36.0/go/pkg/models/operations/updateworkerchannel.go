@@ -14,7 +14,7 @@ type UpdateWorkerChannelPathParams struct {
 	WorkspaceSid string `pathParam:"style=simple,explode=false,name=WorkspaceSid"`
 }
 
-type UpdateWorkerChannelRequestBodyUpdateWorkerChannelRequest struct {
+type UpdateWorkerChannelUpdateWorkerChannelRequest struct {
 	Available *bool  `form:"name=Available"`
 	Capacity  *int64 `form:"name=Capacity"`
 }
@@ -26,7 +26,7 @@ type UpdateWorkerChannelSecurity struct {
 type UpdateWorkerChannelRequest struct {
 	ServerURL  *string
 	PathParams UpdateWorkerChannelPathParams
-	Request    *UpdateWorkerChannelRequestBodyUpdateWorkerChannelRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateWorkerChannelUpdateWorkerChannelRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateWorkerChannelSecurity
 }
 

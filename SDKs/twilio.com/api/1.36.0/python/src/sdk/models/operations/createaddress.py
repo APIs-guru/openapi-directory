@@ -12,7 +12,7 @@ class CreateAddressPathParams:
     
 
 @dataclass
-class CreateAddressRequestBodyCreateAddressRequest:
+class CreateAddressCreateAddressRequest:
     auto_correct_address: Optional[bool] = field(default=None, metadata={'form': { 'field_name': 'AutoCorrectAddress' }})
     city: str = field(default=None, metadata={'form': { 'field_name': 'City' }})
     customer_name: str = field(default=None, metadata={'form': { 'field_name': 'CustomerName' }})
@@ -33,7 +33,7 @@ class CreateAddressSecurity:
 class CreateAddressRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateAddressPathParams = field(default=None)
-    request: Optional[CreateAddressRequestBodyCreateAddressRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateAddressCreateAddressRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateAddressSecurity = field(default=None)
     
 

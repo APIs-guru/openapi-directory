@@ -27,7 +27,7 @@ type ListTranscriptionRequest struct {
 	Security    ListTranscriptionSecurity
 }
 
-type ListTranscription200ApplicationJSONListTranscriptionResponse struct {
+type ListTranscriptionListTranscriptionResponse struct {
 	End             *int64                                `json:"end,omitempty"`
 	FirstPageURI    *string                               `json:"first_page_uri,omitempty"`
 	NextPageURI     *string                               `json:"next_page_uri,omitempty"`
@@ -41,6 +41,6 @@ type ListTranscription200ApplicationJSONListTranscriptionResponse struct {
 
 type ListTranscriptionResponse struct {
 	ContentType               string
-	ListTranscriptionResponse *ListTranscription200ApplicationJSONListTranscriptionResponse
+	ListTranscriptionResponse *ListTranscriptionListTranscriptionResponse
 	StatusCode                int64
 }

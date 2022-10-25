@@ -32,7 +32,7 @@ type ListConferenceRecordingRequest struct {
 	Security    ListConferenceRecordingSecurity
 }
 
-type ListConferenceRecording200ApplicationJSONListConferenceRecordingResponse struct {
+type ListConferenceRecordingListConferenceRecordingResponse struct {
 	End             *int64                                                `json:"end,omitempty"`
 	FirstPageURI    *string                                               `json:"first_page_uri,omitempty"`
 	NextPageURI     *string                                               `json:"next_page_uri,omitempty"`
@@ -46,6 +46,6 @@ type ListConferenceRecording200ApplicationJSONListConferenceRecordingResponse st
 
 type ListConferenceRecordingResponse struct {
 	ContentType                     string
-	ListConferenceRecordingResponse *ListConferenceRecording200ApplicationJSONListConferenceRecordingResponse
+	ListConferenceRecordingResponse *ListConferenceRecordingListConferenceRecordingResponse
 	StatusCode                      int64
 }

@@ -32,7 +32,7 @@ class ListAuthorizedConnectAppRequest:
 
 @dataclass_json
 @dataclass
-class ListAuthorizedConnectApp200ApplicationJSONListAuthorizedConnectAppResponse:
+class ListAuthorizedConnectAppListAuthorizedConnectAppResponse:
     authorized_connect_apps: Optional[List[shared.APIV2010AccountAuthorizedConnectApp]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'authorized_connect_apps' }})
     end: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'end' }})
     first_page_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_uri' }})
@@ -47,6 +47,6 @@ class ListAuthorizedConnectApp200ApplicationJSONListAuthorizedConnectAppResponse
 @dataclass
 class ListAuthorizedConnectAppResponse:
     content_type: str = field(default=None)
-    list_authorized_connect_app_response: Optional[ListAuthorizedConnectApp200ApplicationJSONListAuthorizedConnectAppResponse] = field(default=None)
+    list_authorized_connect_app_response: Optional[ListAuthorizedConnectAppListAuthorizedConnectAppResponse] = field(default=None)
     status_code: int = field(default=None)
     

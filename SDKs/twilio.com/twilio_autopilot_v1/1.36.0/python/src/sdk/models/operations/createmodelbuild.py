@@ -12,7 +12,7 @@ class CreateModelBuildPathParams:
     
 
 @dataclass
-class CreateModelBuildRequestBodyCreateModelBuildRequest:
+class CreateModelBuildCreateModelBuildRequest:
     status_callback: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'StatusCallback' }})
     unique_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'UniqueName' }})
     
@@ -26,7 +26,7 @@ class CreateModelBuildSecurity:
 class CreateModelBuildRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateModelBuildPathParams = field(default=None)
-    request: Optional[CreateModelBuildRequestBodyCreateModelBuildRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateModelBuildCreateModelBuildRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateModelBuildSecurity = field(default=None)
     
 

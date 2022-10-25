@@ -12,7 +12,7 @@ class CreateSipIPAccessControlListPathParams:
     
 
 @dataclass
-class CreateSipIPAccessControlListRequestBodyCreateSipIPAccessControlListRequest:
+class CreateSipIPAccessControlListCreateSipIPAccessControlListRequest:
     friendly_name: str = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
     
 
@@ -25,7 +25,7 @@ class CreateSipIPAccessControlListSecurity:
 class CreateSipIPAccessControlListRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateSipIPAccessControlListPathParams = field(default=None)
-    request: Optional[CreateSipIPAccessControlListRequestBodyCreateSipIPAccessControlListRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateSipIPAccessControlListCreateSipIPAccessControlListRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateSipIPAccessControlListSecurity = field(default=None)
     
 

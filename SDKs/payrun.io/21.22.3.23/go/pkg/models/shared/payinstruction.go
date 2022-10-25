@@ -4,7 +4,7 @@ import (
 	"time"
 )
 
-type PayInstructionPayInstructionPayInstruction struct {
+type PayInstructionPayInstruction struct {
 	Description *string    `json:"Description,omitempty"`
 	EndDate     *time.Time `json:"EndDate,omitempty"`
 	PayLineTag  *string    `json:"PayLineTag,omitempty"`
@@ -12,5 +12,5 @@ type PayInstructionPayInstructionPayInstruction struct {
 }
 
 type PayInstruction struct {
-	PayInstruction *PayInstructionPayInstructionPayInstruction `json:"PayInstruction,omitempty"`
+	PayInstruction *PayInstructionPayInstruction `json:"PayInstruction,omitempty"`
 }

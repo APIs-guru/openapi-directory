@@ -12,7 +12,7 @@ class CreateExecutionPathParams:
     
 
 @dataclass
-class CreateExecutionRequestBodyCreateExecutionRequest:
+class CreateExecutionCreateExecutionRequest:
     from_: str = field(default=None, metadata={'form': { 'field_name': 'From' }})
     parameters: Optional[Any] = field(default=None, metadata={'form': { 'field_name': 'Parameters' }})
     to: str = field(default=None, metadata={'form': { 'field_name': 'To' }})
@@ -27,7 +27,7 @@ class CreateExecutionSecurity:
 class CreateExecutionRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateExecutionPathParams = field(default=None)
-    request: Optional[CreateExecutionRequestBodyCreateExecutionRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateExecutionCreateExecutionRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateExecutionSecurity = field(default=None)
     
 

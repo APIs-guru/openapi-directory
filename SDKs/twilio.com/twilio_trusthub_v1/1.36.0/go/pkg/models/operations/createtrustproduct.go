@@ -8,7 +8,7 @@ var CreateTrustProductServers = []string{
 	"https://trusthub.twilio.com",
 }
 
-type CreateTrustProductRequestBodyCreateTrustProductRequest struct {
+type CreateTrustProductCreateTrustProductRequest struct {
 	Email          string  `form:"name=Email"`
 	FriendlyName   string  `form:"name=FriendlyName"`
 	PolicySid      string  `form:"name=PolicySid"`
@@ -21,7 +21,7 @@ type CreateTrustProductSecurity struct {
 
 type CreateTrustProductRequest struct {
 	ServerURL *string
-	Request   *CreateTrustProductRequestBodyCreateTrustProductRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request   *CreateTrustProductCreateTrustProductRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security  CreateTrustProductSecurity
 }
 

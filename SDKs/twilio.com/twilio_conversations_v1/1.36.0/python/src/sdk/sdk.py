@@ -1455,7 +1455,7 @@ class SDK:
         res = operations.ListConfigurationAddressResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListConfigurationAddress200ApplicationJSONListConfigurationAddressResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListConfigurationAddressListConfigurationAddressResponse])
                 res.list_configuration_address_response = out
 
         return res
@@ -1480,7 +1480,7 @@ class SDK:
         res = operations.ListConversationResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListConversation200ApplicationJSONListConversationResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListConversationListConversationResponse])
                 res.list_conversation_response = out
 
         return res
@@ -1505,7 +1505,7 @@ class SDK:
         res = operations.ListConversationMessageResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListConversationMessage200ApplicationJSONListConversationMessageResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListConversationMessageListConversationMessageResponse])
                 res.list_conversation_message_response = out
 
         return res
@@ -1530,7 +1530,7 @@ class SDK:
         res = operations.ListConversationMessageReceiptResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListConversationMessageReceipt200ApplicationJSONListConversationMessageReceiptResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListConversationMessageReceiptListConversationMessageReceiptResponse])
                 res.list_conversation_message_receipt_response = out
 
         return res
@@ -1555,7 +1555,7 @@ class SDK:
         res = operations.ListConversationParticipantResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListConversationParticipant200ApplicationJSONListConversationParticipantResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListConversationParticipantListConversationParticipantResponse])
                 res.list_conversation_participant_response = out
 
         return res
@@ -1580,7 +1580,7 @@ class SDK:
         res = operations.ListConversationScopedWebhookResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListConversationScopedWebhook200ApplicationJSONListConversationScopedWebhookResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListConversationScopedWebhookListConversationScopedWebhookResponse])
                 res.list_conversation_scoped_webhook_response = out
 
         return res
@@ -1605,7 +1605,7 @@ class SDK:
         res = operations.ListCredentialResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListCredential200ApplicationJSONListCredentialResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListCredentialListCredentialResponse])
                 res.list_credential_response = out
 
         return res
@@ -1630,7 +1630,7 @@ class SDK:
         res = operations.ListParticipantConversationResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListParticipantConversation200ApplicationJSONListParticipantConversationResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListParticipantConversationListParticipantConversationResponse])
                 res.list_participant_conversation_response = out
 
         return res
@@ -1655,7 +1655,7 @@ class SDK:
         res = operations.ListRoleResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListRole200ApplicationJSONListRoleResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListRoleListRoleResponse])
                 res.list_role_response = out
 
         return res
@@ -1680,7 +1680,7 @@ class SDK:
         res = operations.ListServiceResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListService200ApplicationJSONListServiceResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListServiceListServiceResponse])
                 res.list_service_response = out
 
         return res
@@ -1705,7 +1705,7 @@ class SDK:
         res = operations.ListServiceBindingResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListServiceBinding200ApplicationJSONListServiceBindingResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListServiceBindingListServiceBindingResponse])
                 res.list_service_binding_response = out
 
         return res
@@ -1730,7 +1730,7 @@ class SDK:
         res = operations.ListServiceConversationResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListServiceConversation200ApplicationJSONListServiceConversationResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListServiceConversationListServiceConversationResponse])
                 res.list_service_conversation_response = out
 
         return res
@@ -1755,7 +1755,7 @@ class SDK:
         res = operations.ListServiceConversationMessageResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListServiceConversationMessage200ApplicationJSONListServiceConversationMessageResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListServiceConversationMessageListServiceConversationMessageResponse])
                 res.list_service_conversation_message_response = out
 
         return res
@@ -1780,7 +1780,7 @@ class SDK:
         res = operations.ListServiceConversationMessageReceiptResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListServiceConversationMessageReceipt200ApplicationJSONListServiceConversationMessageReceiptResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListServiceConversationMessageReceiptListServiceConversationMessageReceiptResponse])
                 res.list_service_conversation_message_receipt_response = out
 
         return res
@@ -1805,7 +1805,7 @@ class SDK:
         res = operations.ListServiceConversationParticipantResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListServiceConversationParticipant200ApplicationJSONListServiceConversationParticipantResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListServiceConversationParticipantListServiceConversationParticipantResponse])
                 res.list_service_conversation_participant_response = out
 
         return res
@@ -1830,7 +1830,7 @@ class SDK:
         res = operations.ListServiceConversationScopedWebhookResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListServiceConversationScopedWebhook200ApplicationJSONListServiceConversationScopedWebhookResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListServiceConversationScopedWebhookListServiceConversationScopedWebhookResponse])
                 res.list_service_conversation_scoped_webhook_response = out
 
         return res
@@ -1855,7 +1855,7 @@ class SDK:
         res = operations.ListServiceParticipantConversationResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListServiceParticipantConversation200ApplicationJSONListServiceParticipantConversationResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListServiceParticipantConversationListServiceParticipantConversationResponse])
                 res.list_service_participant_conversation_response = out
 
         return res
@@ -1880,7 +1880,7 @@ class SDK:
         res = operations.ListServiceRoleResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListServiceRole200ApplicationJSONListServiceRoleResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListServiceRoleListServiceRoleResponse])
                 res.list_service_role_response = out
 
         return res
@@ -1905,7 +1905,7 @@ class SDK:
         res = operations.ListServiceUserResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListServiceUser200ApplicationJSONListServiceUserResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListServiceUserListServiceUserResponse])
                 res.list_service_user_response = out
 
         return res
@@ -1930,7 +1930,7 @@ class SDK:
         res = operations.ListServiceUserConversationResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListServiceUserConversation200ApplicationJSONListServiceUserConversationResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListServiceUserConversationListServiceUserConversationResponse])
                 res.list_service_user_conversation_response = out
 
         return res
@@ -1955,7 +1955,7 @@ class SDK:
         res = operations.ListUserResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListUser200ApplicationJSONListUserResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListUserListUserResponse])
                 res.list_user_response = out
 
         return res
@@ -1980,7 +1980,7 @@ class SDK:
         res = operations.ListUserConversationResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListUserConversation200ApplicationJSONListUserConversationResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListUserConversationListUserConversationResponse])
                 res.list_user_conversation_response = out
 
         return res

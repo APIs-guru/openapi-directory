@@ -13,7 +13,7 @@ class CreateUnderstandSamplePathParams:
     
 
 @dataclass
-class CreateUnderstandSampleRequestBodyCreateUnderstandSampleRequest:
+class CreateUnderstandSampleCreateUnderstandSampleRequest:
     language: str = field(default=None, metadata={'form': { 'field_name': 'Language' }})
     source_channel: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'SourceChannel' }})
     tagged_text: str = field(default=None, metadata={'form': { 'field_name': 'TaggedText' }})
@@ -28,7 +28,7 @@ class CreateUnderstandSampleSecurity:
 class CreateUnderstandSampleRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateUnderstandSamplePathParams = field(default=None)
-    request: Optional[CreateUnderstandSampleRequestBodyCreateUnderstandSampleRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateUnderstandSampleCreateUnderstandSampleRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateUnderstandSampleSecurity = field(default=None)
     
 

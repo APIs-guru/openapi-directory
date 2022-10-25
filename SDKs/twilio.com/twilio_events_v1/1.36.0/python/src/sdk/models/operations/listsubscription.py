@@ -27,7 +27,7 @@ class ListSubscriptionRequest:
 
 @dataclass_json
 @dataclass
-class ListSubscription200ApplicationJSONMeta:
+class ListSubscriptionListSubscriptionResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -39,14 +39,14 @@ class ListSubscription200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListSubscription200ApplicationJSONListSubscriptionResponse:
-    meta: Optional[ListSubscription200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+class ListSubscriptionListSubscriptionResponse:
+    meta: Optional[ListSubscriptionListSubscriptionResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     subscriptions: Optional[List[shared.EventsV1Subscription]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'subscriptions' }})
     
 
 @dataclass
 class ListSubscriptionResponse:
     content_type: str = field(default=None)
-    list_subscription_response: Optional[ListSubscription200ApplicationJSONListSubscriptionResponse] = field(default=None)
+    list_subscription_response: Optional[ListSubscriptionListSubscriptionResponse] = field(default=None)
     status_code: int = field(default=None)
     

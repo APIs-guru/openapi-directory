@@ -13,7 +13,7 @@ type UpdateQueuePathParams struct {
 	Sid        string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
-type UpdateQueueRequestBodyUpdateQueueRequest struct {
+type UpdateQueueUpdateQueueRequest struct {
 	FriendlyName *string `form:"name=FriendlyName"`
 	MaxSize      *int64  `form:"name=MaxSize"`
 }
@@ -25,7 +25,7 @@ type UpdateQueueSecurity struct {
 type UpdateQueueRequest struct {
 	ServerURL  *string
 	PathParams UpdateQueuePathParams
-	Request    *UpdateQueueRequestBodyUpdateQueueRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateQueueUpdateQueueRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateQueueSecurity
 }
 

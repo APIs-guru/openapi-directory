@@ -12,7 +12,7 @@ type CreateConnectionPolicyTargetPathParams struct {
 	ConnectionPolicySid string `pathParam:"style=simple,explode=false,name=ConnectionPolicySid"`
 }
 
-type CreateConnectionPolicyTargetRequestBodyCreateConnectionPolicyTargetRequest struct {
+type CreateConnectionPolicyTargetCreateConnectionPolicyTargetRequest struct {
 	Enabled      *bool   `form:"name=Enabled"`
 	FriendlyName *string `form:"name=FriendlyName"`
 	Priority     *int64  `form:"name=Priority"`
@@ -27,7 +27,7 @@ type CreateConnectionPolicyTargetSecurity struct {
 type CreateConnectionPolicyTargetRequest struct {
 	ServerURL  *string
 	PathParams CreateConnectionPolicyTargetPathParams
-	Request    *CreateConnectionPolicyTargetRequestBodyCreateConnectionPolicyTargetRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateConnectionPolicyTargetCreateConnectionPolicyTargetRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateConnectionPolicyTargetSecurity
 }
 

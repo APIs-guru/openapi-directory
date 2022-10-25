@@ -16,7 +16,7 @@ class CreateChallengePathParams:
     
 
 @dataclass
-class CreateChallengeRequestBodyCreateChallengeRequest:
+class CreateChallengeCreateChallengeRequest:
     auth_payload: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'AuthPayload' }})
     details_fields: Optional[List[Any]] = field(default=None, metadata={'form': { 'field_name': 'Details.Fields' }})
     details_message: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Details.Message' }})
@@ -34,7 +34,7 @@ class CreateChallengeSecurity:
 class CreateChallengeRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateChallengePathParams = field(default=None)
-    request: Optional[CreateChallengeRequestBodyCreateChallengeRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateChallengeCreateChallengeRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateChallengeSecurity = field(default=None)
     
 

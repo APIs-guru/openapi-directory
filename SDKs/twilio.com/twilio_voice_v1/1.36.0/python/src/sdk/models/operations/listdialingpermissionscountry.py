@@ -32,7 +32,7 @@ class ListDialingPermissionsCountryRequest:
 
 @dataclass_json
 @dataclass
-class ListDialingPermissionsCountry200ApplicationJSONMeta:
+class ListDialingPermissionsCountryListDialingPermissionsCountryResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -44,14 +44,14 @@ class ListDialingPermissionsCountry200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListDialingPermissionsCountry200ApplicationJSONListDialingPermissionsCountryResponse:
+class ListDialingPermissionsCountryListDialingPermissionsCountryResponse:
     content: Optional[List[shared.VoiceV1DialingPermissionsDialingPermissionsCountry]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'content' }})
-    meta: Optional[ListDialingPermissionsCountry200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+    meta: Optional[ListDialingPermissionsCountryListDialingPermissionsCountryResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     
 
 @dataclass
 class ListDialingPermissionsCountryResponse:
     content_type: str = field(default=None)
-    list_dialing_permissions_country_response: Optional[ListDialingPermissionsCountry200ApplicationJSONListDialingPermissionsCountryResponse] = field(default=None)
+    list_dialing_permissions_country_response: Optional[ListDialingPermissionsCountryListDialingPermissionsCountryResponse] = field(default=None)
     status_code: int = field(default=None)
     

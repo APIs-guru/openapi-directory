@@ -15,7 +15,7 @@ type UpdateUserChannelPathParams struct {
 	UserSid    string `pathParam:"style=simple,explode=false,name=UserSid"`
 }
 
-type UpdateUserChannelRequestBodyUpdateUserChannelRequest struct {
+type UpdateUserChannelUpdateUserChannelRequest struct {
 	LastConsumedMessageIndex *int64                                       `form:"name=LastConsumedMessageIndex"`
 	LastConsumptionTimestamp *time.Time                                   `form:"name=LastConsumptionTimestamp"`
 	NotificationLevel        *shared.UserChannelEnumNotificationLevelEnum `form:"name=NotificationLevel"`
@@ -28,7 +28,7 @@ type UpdateUserChannelSecurity struct {
 type UpdateUserChannelRequest struct {
 	ServerURL  *string
 	PathParams UpdateUserChannelPathParams
-	Request    *UpdateUserChannelRequestBodyUpdateUserChannelRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateUserChannelUpdateUserChannelRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateUserChannelSecurity
 }
 

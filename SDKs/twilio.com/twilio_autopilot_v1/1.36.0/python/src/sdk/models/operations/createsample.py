@@ -13,7 +13,7 @@ class CreateSamplePathParams:
     
 
 @dataclass
-class CreateSampleRequestBodyCreateSampleRequest:
+class CreateSampleCreateSampleRequest:
     language: str = field(default=None, metadata={'form': { 'field_name': 'Language' }})
     source_channel: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'SourceChannel' }})
     tagged_text: str = field(default=None, metadata={'form': { 'field_name': 'TaggedText' }})
@@ -28,7 +28,7 @@ class CreateSampleSecurity:
 class CreateSampleRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateSamplePathParams = field(default=None)
-    request: Optional[CreateSampleRequestBodyCreateSampleRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateSampleCreateSampleRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateSampleSecurity = field(default=None)
     
 

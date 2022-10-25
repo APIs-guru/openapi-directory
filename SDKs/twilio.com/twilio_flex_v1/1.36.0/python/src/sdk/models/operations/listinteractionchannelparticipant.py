@@ -33,7 +33,7 @@ class ListInteractionChannelParticipantRequest:
 
 @dataclass_json
 @dataclass
-class ListInteractionChannelParticipant200ApplicationJSONMeta:
+class ListInteractionChannelParticipantListInteractionChannelParticipantResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -45,14 +45,14 @@ class ListInteractionChannelParticipant200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListInteractionChannelParticipant200ApplicationJSONListInteractionChannelParticipantResponse:
-    meta: Optional[ListInteractionChannelParticipant200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+class ListInteractionChannelParticipantListInteractionChannelParticipantResponse:
+    meta: Optional[ListInteractionChannelParticipantListInteractionChannelParticipantResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     participants: Optional[List[shared.FlexV1InteractionInteractionChannelInteractionChannelParticipant]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'participants' }})
     
 
 @dataclass
 class ListInteractionChannelParticipantResponse:
     content_type: str = field(default=None)
-    list_interaction_channel_participant_response: Optional[ListInteractionChannelParticipant200ApplicationJSONListInteractionChannelParticipantResponse] = field(default=None)
+    list_interaction_channel_participant_response: Optional[ListInteractionChannelParticipantListInteractionChannelParticipantResponse] = field(default=None)
     status_code: int = field(default=None)
     

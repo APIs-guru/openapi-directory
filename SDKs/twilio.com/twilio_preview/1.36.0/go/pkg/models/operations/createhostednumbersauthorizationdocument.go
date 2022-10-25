@@ -8,7 +8,7 @@ var CreateHostedNumbersAuthorizationDocumentServers = []string{
 	"https://preview.twilio.com",
 }
 
-type CreateHostedNumbersAuthorizationDocumentRequestBodyCreateHostedNumbersAuthorizationDocumentRequest struct {
+type CreateHostedNumbersAuthorizationDocumentCreateHostedNumbersAuthorizationDocumentRequest struct {
 	AddressSid            string   `form:"name=AddressSid"`
 	CcEmails              []string `form:"name=CcEmails"`
 	ContactPhoneNumber    string   `form:"name=ContactPhoneNumber"`
@@ -23,7 +23,7 @@ type CreateHostedNumbersAuthorizationDocumentSecurity struct {
 
 type CreateHostedNumbersAuthorizationDocumentRequest struct {
 	ServerURL *string
-	Request   *CreateHostedNumbersAuthorizationDocumentRequestBodyCreateHostedNumbersAuthorizationDocumentRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request   *CreateHostedNumbersAuthorizationDocumentCreateHostedNumbersAuthorizationDocumentRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security  CreateHostedNumbersAuthorizationDocumentSecurity
 }
 

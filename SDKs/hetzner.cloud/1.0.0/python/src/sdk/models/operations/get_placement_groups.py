@@ -32,7 +32,7 @@ class GetPlacementGroupsRequest:
 
 @dataclass_json
 @dataclass
-class GetPlacementGroups200ApplicationJSONMetaPagination:
+class GetPlacementGroupsPlacementGroupsResponseMetaPagination:
     last_page: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'last_page' }})
     next_page: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page' }})
     page: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'page' }})
@@ -43,34 +43,34 @@ class GetPlacementGroups200ApplicationJSONMetaPagination:
 
 @dataclass_json
 @dataclass
-class GetPlacementGroups200ApplicationJSONMeta:
-    pagination: GetPlacementGroups200ApplicationJSONMetaPagination = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pagination' }})
+class GetPlacementGroupsPlacementGroupsResponseMeta:
+    pagination: GetPlacementGroupsPlacementGroupsResponseMetaPagination = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pagination' }})
     
-class GetPlacementGroups200ApplicationJSONPlacementGroupsTypeEnum(str, Enum):
+class GetPlacementGroupsPlacementGroupsResponsePlacementGroupTypeEnum(str, Enum):
     SPREAD = "spread"
 
 
 @dataclass_json
 @dataclass
-class GetPlacementGroups200ApplicationJSONPlacementGroupsPlacementGroup:
+class GetPlacementGroupsPlacementGroupsResponsePlacementGroup:
     created: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'created' }})
     id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     labels: dict[str, str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'labels' }})
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
     servers: List[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'servers' }})
-    type: GetPlacementGroups200ApplicationJSONPlacementGroupsTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    type: GetPlacementGroupsPlacementGroupsResponsePlacementGroupTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     
 
 @dataclass_json
 @dataclass
-class GetPlacementGroups200ApplicationJSONPlacementGroupsResponse:
-    meta: Optional[GetPlacementGroups200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
-    placement_groups: List[GetPlacementGroups200ApplicationJSONPlacementGroupsPlacementGroup] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'placement_groups' }})
+class GetPlacementGroupsPlacementGroupsResponse:
+    meta: Optional[GetPlacementGroupsPlacementGroupsResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+    placement_groups: List[GetPlacementGroupsPlacementGroupsResponsePlacementGroup] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'placement_groups' }})
     
 
 @dataclass
 class GetPlacementGroupsResponse:
     content_type: str = field(default=None)
-    placement_groups_response: Optional[GetPlacementGroups200ApplicationJSONPlacementGroupsResponse] = field(default=None)
+    placement_groups_response: Optional[GetPlacementGroupsPlacementGroupsResponse] = field(default=None)
     status_code: int = field(default=None)
     

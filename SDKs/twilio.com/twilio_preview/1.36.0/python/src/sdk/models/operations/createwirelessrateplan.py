@@ -7,7 +7,7 @@ CREATE_WIRELESS_RATE_PLAN_SERVERS = [
 
 
 @dataclass
-class CreateWirelessRatePlanRequestBodyCreateWirelessRatePlanRequest:
+class CreateWirelessRatePlanCreateWirelessRatePlanRequest:
     commands_enabled: Optional[bool] = field(default=None, metadata={'form': { 'field_name': 'CommandsEnabled' }})
     data_enabled: Optional[bool] = field(default=None, metadata={'form': { 'field_name': 'DataEnabled' }})
     data_limit: Optional[int] = field(default=None, metadata={'form': { 'field_name': 'DataLimit' }})
@@ -28,7 +28,7 @@ class CreateWirelessRatePlanSecurity:
 @dataclass
 class CreateWirelessRatePlanRequest:
     server_url: Optional[str] = field(default=None)
-    request: Optional[CreateWirelessRatePlanRequestBodyCreateWirelessRatePlanRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateWirelessRatePlanCreateWirelessRatePlanRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateWirelessRatePlanSecurity = field(default=None)
     
 

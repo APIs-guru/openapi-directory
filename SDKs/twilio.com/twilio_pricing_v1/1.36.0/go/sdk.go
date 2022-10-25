@@ -256,7 +256,7 @@ func (s *SDK) ListMessagingCountry(ctx context.Context, request operations.ListM
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListMessagingCountry200ApplicationJSONListMessagingCountryResponse
+			var out *operations.ListMessagingCountryListMessagingCountryResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -301,7 +301,7 @@ func (s *SDK) ListPhoneNumberCountry(ctx context.Context, request operations.Lis
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListPhoneNumberCountry200ApplicationJSONListPhoneNumberCountryResponse
+			var out *operations.ListPhoneNumberCountryListPhoneNumberCountryResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -346,7 +346,7 @@ func (s *SDK) ListVoiceCountry(ctx context.Context, request operations.ListVoice
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListVoiceCountry200ApplicationJSONListVoiceCountryResponse
+			var out *operations.ListVoiceCountryListVoiceCountryResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}

@@ -27,7 +27,7 @@ type ListRateLimitRequest struct {
 	Security    ListRateLimitSecurity
 }
 
-type ListRateLimit200ApplicationJSONMeta struct {
+type ListRateLimitListRateLimitResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -37,13 +37,13 @@ type ListRateLimit200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListRateLimit200ApplicationJSONListRateLimitResponse struct {
-	Meta       *ListRateLimit200ApplicationJSONMeta `json:"meta,omitempty"`
-	RateLimits []shared.VerifyV2ServiceRateLimit    `json:"rate_limits,omitempty"`
+type ListRateLimitListRateLimitResponse struct {
+	Meta       *ListRateLimitListRateLimitResponseMeta `json:"meta,omitempty"`
+	RateLimits []shared.VerifyV2ServiceRateLimit       `json:"rate_limits,omitempty"`
 }
 
 type ListRateLimitResponse struct {
 	ContentType           string
-	ListRateLimitResponse *ListRateLimit200ApplicationJSONListRateLimitResponse
+	ListRateLimitResponse *ListRateLimitListRateLimitResponse
 	StatusCode            int64
 }

@@ -13,7 +13,7 @@ type UpdateWorkflowPathParams struct {
 	WorkspaceSid string `pathParam:"style=simple,explode=false,name=WorkspaceSid"`
 }
 
-type UpdateWorkflowRequestBodyUpdateWorkflowRequest struct {
+type UpdateWorkflowUpdateWorkflowRequest struct {
 	AssignmentCallbackURL         *string `form:"name=AssignmentCallbackUrl"`
 	Configuration                 *string `form:"name=Configuration"`
 	FallbackAssignmentCallbackURL *string `form:"name=FallbackAssignmentCallbackUrl"`
@@ -29,7 +29,7 @@ type UpdateWorkflowSecurity struct {
 type UpdateWorkflowRequest struct {
 	ServerURL  *string
 	PathParams UpdateWorkflowPathParams
-	Request    *UpdateWorkflowRequestBodyUpdateWorkflowRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateWorkflowUpdateWorkflowRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateWorkflowSecurity
 }
 

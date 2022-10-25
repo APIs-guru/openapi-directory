@@ -4,31 +4,31 @@ import (
 	"time"
 )
 
-type BankTransferEventListRequestBankTransferTypeBankTransferTypeEnum string
+type BankTransferEventListRequestBankTransferTypeEnum string
 
 const (
-	BankTransferEventListRequestBankTransferTypeBankTransferTypeEnumDebit  BankTransferEventListRequestBankTransferTypeBankTransferTypeEnum = "debit"
-	BankTransferEventListRequestBankTransferTypeBankTransferTypeEnumCredit BankTransferEventListRequestBankTransferTypeBankTransferTypeEnum = "credit"
+	BankTransferEventListRequestBankTransferTypeEnumDebit  BankTransferEventListRequestBankTransferTypeEnum = "debit"
+	BankTransferEventListRequestBankTransferTypeEnumCredit BankTransferEventListRequestBankTransferTypeEnum = "credit"
 )
 
-type BankTransferEventListRequestDirectionBankTransferDirectionEnum string
+type BankTransferEventListRequestBankTransferDirectionEnum string
 
 const (
-	BankTransferEventListRequestDirectionBankTransferDirectionEnumInbound  BankTransferEventListRequestDirectionBankTransferDirectionEnum = "inbound"
-	BankTransferEventListRequestDirectionBankTransferDirectionEnumOutbound BankTransferEventListRequestDirectionBankTransferDirectionEnum = "outbound"
+	BankTransferEventListRequestBankTransferDirectionEnumInbound  BankTransferEventListRequestBankTransferDirectionEnum = "inbound"
+	BankTransferEventListRequestBankTransferDirectionEnumOutbound BankTransferEventListRequestBankTransferDirectionEnum = "outbound"
 )
 
 type BankTransferEventListRequest struct {
-	AccountID            *string                                                           `json:"account_id,omitempty"`
-	BankTransferID       *string                                                           `json:"bank_transfer_id,omitempty"`
-	BankTransferType     *BankTransferEventListRequestBankTransferTypeBankTransferTypeEnum `json:"bank_transfer_type,omitempty"`
-	ClientID             *string                                                           `json:"client_id,omitempty"`
-	Count                *int64                                                            `json:"count,omitempty"`
-	Direction            *BankTransferEventListRequestDirectionBankTransferDirectionEnum   `json:"direction,omitempty"`
-	EndDate              *time.Time                                                        `json:"end_date,omitempty"`
-	EventTypes           []BankTransferEventTypeEnum                                       `json:"event_types,omitempty"`
-	Offset               *int64                                                            `json:"offset,omitempty"`
-	OriginationAccountID *string                                                           `json:"origination_account_id,omitempty"`
-	Secret               *string                                                           `json:"secret,omitempty"`
-	StartDate            *time.Time                                                        `json:"start_date,omitempty"`
+	AccountID            *string                                                `json:"account_id,omitempty"`
+	BankTransferID       *string                                                `json:"bank_transfer_id,omitempty"`
+	BankTransferType     *BankTransferEventListRequestBankTransferTypeEnum      `json:"bank_transfer_type,omitempty"`
+	ClientID             *string                                                `json:"client_id,omitempty"`
+	Count                *int64                                                 `json:"count,omitempty"`
+	Direction            *BankTransferEventListRequestBankTransferDirectionEnum `json:"direction,omitempty"`
+	EndDate              *time.Time                                             `json:"end_date,omitempty"`
+	EventTypes           []BankTransferEventTypeEnum                            `json:"event_types,omitempty"`
+	Offset               *int64                                                 `json:"offset,omitempty"`
+	OriginationAccountID *string                                                `json:"origination_account_id,omitempty"`
+	Secret               *string                                                `json:"secret,omitempty"`
+	StartDate            *time.Time                                             `json:"start_date,omitempty"`
 }

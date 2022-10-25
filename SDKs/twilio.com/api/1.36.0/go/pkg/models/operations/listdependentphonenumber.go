@@ -28,7 +28,7 @@ type ListDependentPhoneNumberRequest struct {
 	Security    ListDependentPhoneNumberSecurity
 }
 
-type ListDependentPhoneNumber200ApplicationJSONListDependentPhoneNumberResponse struct {
+type ListDependentPhoneNumberListDependentPhoneNumberResponse struct {
 	DependentPhoneNumbers []shared.APIV2010AccountAddressDependentPhoneNumber `json:"dependent_phone_numbers,omitempty"`
 	End                   *int64                                              `json:"end,omitempty"`
 	FirstPageURI          *string                                             `json:"first_page_uri,omitempty"`
@@ -42,6 +42,6 @@ type ListDependentPhoneNumber200ApplicationJSONListDependentPhoneNumberResponse 
 
 type ListDependentPhoneNumberResponse struct {
 	ContentType                      string
-	ListDependentPhoneNumberResponse *ListDependentPhoneNumber200ApplicationJSONListDependentPhoneNumberResponse
+	ListDependentPhoneNumberResponse *ListDependentPhoneNumberListDependentPhoneNumberResponse
 	StatusCode                       int64
 }

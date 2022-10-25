@@ -14,7 +14,7 @@ class UpdateBucketPathParams:
     
 
 @dataclass
-class UpdateBucketRequestBodyUpdateBucketRequest:
+class UpdateBucketUpdateBucketRequest:
     interval: Optional[int] = field(default=None, metadata={'form': { 'field_name': 'Interval' }})
     max: Optional[int] = field(default=None, metadata={'form': { 'field_name': 'Max' }})
     
@@ -28,7 +28,7 @@ class UpdateBucketSecurity:
 class UpdateBucketRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateBucketPathParams = field(default=None)
-    request: Optional[UpdateBucketRequestBodyUpdateBucketRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateBucketUpdateBucketRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateBucketSecurity = field(default=None)
     
 

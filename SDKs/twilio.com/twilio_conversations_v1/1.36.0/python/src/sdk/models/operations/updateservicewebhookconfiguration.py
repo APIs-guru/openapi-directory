@@ -12,7 +12,7 @@ class UpdateServiceWebhookConfigurationPathParams:
     
 
 @dataclass
-class UpdateServiceWebhookConfigurationRequestBodyUpdateServiceWebhookConfigurationRequest:
+class UpdateServiceWebhookConfigurationUpdateServiceWebhookConfigurationRequest:
     filters: Optional[List[str]] = field(default=None, metadata={'form': { 'field_name': 'Filters' }})
     method: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Method' }})
     post_webhook_url: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'PostWebhookUrl' }})
@@ -28,7 +28,7 @@ class UpdateServiceWebhookConfigurationSecurity:
 class UpdateServiceWebhookConfigurationRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateServiceWebhookConfigurationPathParams = field(default=None)
-    request: Optional[UpdateServiceWebhookConfigurationRequestBodyUpdateServiceWebhookConfigurationRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateServiceWebhookConfigurationUpdateServiceWebhookConfigurationRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateServiceWebhookConfigurationSecurity = field(default=None)
     
 

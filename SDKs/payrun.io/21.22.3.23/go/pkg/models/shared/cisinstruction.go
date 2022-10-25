@@ -1,40 +1,40 @@
 package shared
 
-type CisInstructionCisInstructionPayFrequencyPayFrequencyEnum string
+type CisInstructionCisInstructionPayFrequencyEnum string
 
 const (
-	CisInstructionCisInstructionPayFrequencyPayFrequencyEnumMonthly CisInstructionCisInstructionPayFrequencyPayFrequencyEnum = "Monthly"
-	CisInstructionCisInstructionPayFrequencyPayFrequencyEnumWeekly  CisInstructionCisInstructionPayFrequencyPayFrequencyEnum = "Weekly"
+	CisInstructionCisInstructionPayFrequencyEnumMonthly CisInstructionCisInstructionPayFrequencyEnum = "Monthly"
+	CisInstructionCisInstructionPayFrequencyEnumWeekly  CisInstructionCisInstructionPayFrequencyEnum = "Weekly"
 )
 
-type CisInstructionCisInstructionUomUomEnum string
+type CisInstructionCisInstructionUomEnum string
 
 const (
-	CisInstructionCisInstructionUomUomEnumNotSet CisInstructionCisInstructionUomUomEnum = "NotSet"
-	CisInstructionCisInstructionUomUomEnumMinute CisInstructionCisInstructionUomUomEnum = "Minute"
-	CisInstructionCisInstructionUomUomEnumHour   CisInstructionCisInstructionUomUomEnum = "Hour"
-	CisInstructionCisInstructionUomUomEnumDay    CisInstructionCisInstructionUomUomEnum = "Day"
-	CisInstructionCisInstructionUomUomEnumWeek   CisInstructionCisInstructionUomUomEnum = "Week"
-	CisInstructionCisInstructionUomUomEnumMonth  CisInstructionCisInstructionUomUomEnum = "Month"
-	CisInstructionCisInstructionUomUomEnumYear   CisInstructionCisInstructionUomUomEnum = "Year"
-	CisInstructionCisInstructionUomUomEnumUnit   CisInstructionCisInstructionUomUomEnum = "Unit"
+	CisInstructionCisInstructionUomEnumNotSet CisInstructionCisInstructionUomEnum = "NotSet"
+	CisInstructionCisInstructionUomEnumMinute CisInstructionCisInstructionUomEnum = "Minute"
+	CisInstructionCisInstructionUomEnumHour   CisInstructionCisInstructionUomEnum = "Hour"
+	CisInstructionCisInstructionUomEnumDay    CisInstructionCisInstructionUomEnum = "Day"
+	CisInstructionCisInstructionUomEnumWeek   CisInstructionCisInstructionUomEnum = "Week"
+	CisInstructionCisInstructionUomEnumMonth  CisInstructionCisInstructionUomEnum = "Month"
+	CisInstructionCisInstructionUomEnumYear   CisInstructionCisInstructionUomEnum = "Year"
+	CisInstructionCisInstructionUomEnumUnit   CisInstructionCisInstructionUomEnum = "Unit"
 )
 
-type CisInstructionCisInstructionCisInstruction struct {
-	CisLineTag   *string                                                   `json:"CisLineTag,omitempty"`
-	CisLineType  *string                                                   `json:"CisLineType,omitempty"`
-	Description  *string                                                   `json:"Description,omitempty"`
-	PayFrequency *CisInstructionCisInstructionPayFrequencyPayFrequencyEnum `json:"PayFrequency,omitempty"`
-	PeriodEnd    *int32                                                    `json:"PeriodEnd,omitempty"`
-	PeriodStart  *int32                                                    `json:"PeriodStart,omitempty"`
-	TaxYearEnd   *int32                                                    `json:"TaxYearEnd,omitempty"`
-	TaxYearStart *int32                                                    `json:"TaxYearStart,omitempty"`
-	Uom          *CisInstructionCisInstructionUomUomEnum                   `json:"UOM,omitempty"`
-	Units        *float64                                                  `json:"Units,omitempty"`
-	Vat          *float64                                                  `json:"VAT,omitempty"`
-	Value        *float64                                                  `json:"Value,omitempty"`
+type CisInstructionCisInstruction struct {
+	CisLineTag   *string                                       `json:"CisLineTag,omitempty"`
+	CisLineType  *string                                       `json:"CisLineType,omitempty"`
+	Description  *string                                       `json:"Description,omitempty"`
+	PayFrequency *CisInstructionCisInstructionPayFrequencyEnum `json:"PayFrequency,omitempty"`
+	PeriodEnd    *int32                                        `json:"PeriodEnd,omitempty"`
+	PeriodStart  *int32                                        `json:"PeriodStart,omitempty"`
+	TaxYearEnd   *int32                                        `json:"TaxYearEnd,omitempty"`
+	TaxYearStart *int32                                        `json:"TaxYearStart,omitempty"`
+	Uom          *CisInstructionCisInstructionUomEnum          `json:"UOM,omitempty"`
+	Units        *float64                                      `json:"Units,omitempty"`
+	Vat          *float64                                      `json:"VAT,omitempty"`
+	Value        *float64                                      `json:"Value,omitempty"`
 }
 
 type CisInstruction struct {
-	CisInstruction *CisInstructionCisInstructionCisInstruction `json:"CisInstruction,omitempty"`
+	CisInstruction *CisInstructionCisInstruction `json:"CisInstruction,omitempty"`
 }

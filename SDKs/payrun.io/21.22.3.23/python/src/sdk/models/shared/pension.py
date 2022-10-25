@@ -8,10 +8,10 @@ from dataclasses_json import dataclass_json
 
 @dataclass_json
 @dataclass
-class PensionPensionPensionablePayCodesPensionablePayCodes:
+class PensionPensionPensionablePayCodes:
     pay_code: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PayCode' }})
     
-class PensionPensionProRataMethodProRataMethodEnum(str, Enum):
+class PensionPensionProRataMethodEnum(str, Enum):
     NOT_SET = "NotSet"
     ANNUAL260_DAYS = "Annual260Days"
     ANNUAL365_DAYS = "Annual365Days"
@@ -24,10 +24,10 @@ class PensionPensionProRataMethodProRataMethodEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class PensionPensionQualifyingPayCodesQualifyingPayCodes:
+class PensionPensionQualifyingPayCodes:
     pay_code: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PayCode' }})
     
-class PensionPensionRasRoundingOverrideRasRoundingOverrideEnum(str, Enum):
+class PensionPensionRasRoundingOverrideEnum(str, Enum):
     NOT_SET = "NotSet"
     PENNY_UP = "PennyUp"
     PENNY_DOWN = "PennyDown"
@@ -37,7 +37,7 @@ class PensionPensionRasRoundingOverrideRasRoundingOverrideEnum(str, Enum):
     FLOOR = "Floor"
     CEILING = "Ceiling"
 
-class PensionPensionRoundingOptionRoundingOptionEnum(str, Enum):
+class PensionPensionRoundingOptionEnum(str, Enum):
     NOT_SET = "NotSet"
     PENNY_UP = "PennyUp"
     PENNY_DOWN = "PennyDown"
@@ -47,7 +47,7 @@ class PensionPensionRoundingOptionRoundingOptionEnum(str, Enum):
     FLOOR = "Floor"
     CEILING = "Ceiling"
 
-class PensionPensionTaxationMethodTaxationMethodEnum(str, Enum):
+class PensionPensionTaxationMethodEnum(str, Enum):
     NOT_SET = "NotSet"
     NET_BASED = "NetBased"
     RELIEF_AT_SOURCE = "ReliefAtSource"
@@ -56,7 +56,7 @@ class PensionPensionTaxationMethodTaxationMethodEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class PensionPensionPension:
+class PensionPension:
     ae_compatible: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AECompatible' }})
     code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Code' }})
     contribution_deduction_day: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ContributionDeductionDay' }})
@@ -70,18 +70,18 @@ class PensionPensionPension:
     group: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Group' }})
     lower_threshold: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'LowerThreshold' }})
     meta_data: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MetaData' }})
-    pensionable_pay_codes: Optional[PensionPensionPensionablePayCodesPensionablePayCodes] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PensionablePayCodes' }})
-    pro_rata_method: Optional[PensionPensionProRataMethodProRataMethodEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ProRataMethod' }})
+    pensionable_pay_codes: Optional[PensionPensionPensionablePayCodes] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PensionablePayCodes' }})
+    pro_rata_method: Optional[PensionPensionProRataMethodEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ProRataMethod' }})
     provider_employer_ref: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ProviderEmployerRef' }})
     provider_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ProviderName' }})
-    qualifying_pay_codes: Optional[PensionPensionQualifyingPayCodesQualifyingPayCodes] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'QualifyingPayCodes' }})
-    ras_rounding_override: Optional[PensionPensionRasRoundingOverrideRasRoundingOverrideEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RasRoundingOverride' }})
+    qualifying_pay_codes: Optional[PensionPensionQualifyingPayCodes] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'QualifyingPayCodes' }})
+    ras_rounding_override: Optional[PensionPensionRasRoundingOverrideEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RasRoundingOverride' }})
     revision: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Revision' }})
-    rounding_option: Optional[PensionPensionRoundingOptionRoundingOptionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RoundingOption' }})
+    rounding_option: Optional[PensionPensionRoundingOptionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RoundingOption' }})
     salary_sacrifice: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SalarySacrifice' }})
     scheme_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SchemeName' }})
     sub_group: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SubGroup' }})
-    taxation_method: Optional[PensionPensionTaxationMethodTaxationMethodEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TaxationMethod' }})
+    taxation_method: Optional[PensionPensionTaxationMethodEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TaxationMethod' }})
     upper_threshold: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'UpperThreshold' }})
     use_ae_thresholds: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'UseAEThresholds' }})
     
@@ -89,5 +89,5 @@ class PensionPensionPension:
 @dataclass_json
 @dataclass
 class Pension:
-    pension: Optional[PensionPensionPension] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Pension' }})
+    pension: Optional[PensionPension] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Pension' }})
     

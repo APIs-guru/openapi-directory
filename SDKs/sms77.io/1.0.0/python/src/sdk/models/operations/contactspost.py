@@ -23,8 +23,8 @@ class ContactsPostRequest:
 
 @dataclass
 class ContactsPostResponse:
-    body: bytes = field(default=None)
     contacts_post_200_application_json_string: Optional[str] = field(default=None)
+    contacts_post_200_text_plain_string: Optional[str] = field(default=None)
     content_type: str = field(default=None)
     status_code: int = field(default=None)
     

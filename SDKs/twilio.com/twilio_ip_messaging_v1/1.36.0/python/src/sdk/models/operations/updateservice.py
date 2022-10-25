@@ -10,7 +10,7 @@ UPDATE_SERVICE_SERVERS = [
 class UpdateServicePathParams:
     sid: str = field(default=None, metadata={'path_param': { 'field_name': 'Sid', 'style': 'simple', 'explode': False }})
     
-class UpdateServiceRequestBodyWebhookMethodEnum(str, Enum):
+class UpdateServiceUpdateServiceRequestWebhookMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -18,7 +18,7 @@ class UpdateServiceRequestBodyWebhookMethodEnum(str, Enum):
     PUT = "PUT"
     DELETE = "DELETE"
 
-class UpdateServiceRequestBodyWebhooksOnChannelAddMethodEnum(str, Enum):
+class UpdateServiceUpdateServiceRequestWebhooksOnChannelAddMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -26,7 +26,7 @@ class UpdateServiceRequestBodyWebhooksOnChannelAddMethodEnum(str, Enum):
     PUT = "PUT"
     DELETE = "DELETE"
 
-class UpdateServiceRequestBodyWebhooksOnChannelAddedMethodEnum(str, Enum):
+class UpdateServiceUpdateServiceRequestWebhooksOnChannelAddedMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -34,7 +34,7 @@ class UpdateServiceRequestBodyWebhooksOnChannelAddedMethodEnum(str, Enum):
     PUT = "PUT"
     DELETE = "DELETE"
 
-class UpdateServiceRequestBodyWebhooksOnChannelDestroyMethodEnum(str, Enum):
+class UpdateServiceUpdateServiceRequestWebhooksOnChannelDestroyMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -42,7 +42,7 @@ class UpdateServiceRequestBodyWebhooksOnChannelDestroyMethodEnum(str, Enum):
     PUT = "PUT"
     DELETE = "DELETE"
 
-class UpdateServiceRequestBodyWebhooksOnChannelDestroyedMethodEnum(str, Enum):
+class UpdateServiceUpdateServiceRequestWebhooksOnChannelDestroyedMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -50,7 +50,7 @@ class UpdateServiceRequestBodyWebhooksOnChannelDestroyedMethodEnum(str, Enum):
     PUT = "PUT"
     DELETE = "DELETE"
 
-class UpdateServiceRequestBodyWebhooksOnChannelUpdateMethodEnum(str, Enum):
+class UpdateServiceUpdateServiceRequestWebhooksOnChannelUpdateMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -58,7 +58,7 @@ class UpdateServiceRequestBodyWebhooksOnChannelUpdateMethodEnum(str, Enum):
     PUT = "PUT"
     DELETE = "DELETE"
 
-class UpdateServiceRequestBodyWebhooksOnChannelUpdatedMethodEnum(str, Enum):
+class UpdateServiceUpdateServiceRequestWebhooksOnChannelUpdatedMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -66,7 +66,7 @@ class UpdateServiceRequestBodyWebhooksOnChannelUpdatedMethodEnum(str, Enum):
     PUT = "PUT"
     DELETE = "DELETE"
 
-class UpdateServiceRequestBodyWebhooksOnMemberAddMethodEnum(str, Enum):
+class UpdateServiceUpdateServiceRequestWebhooksOnMemberAddMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -74,7 +74,7 @@ class UpdateServiceRequestBodyWebhooksOnMemberAddMethodEnum(str, Enum):
     PUT = "PUT"
     DELETE = "DELETE"
 
-class UpdateServiceRequestBodyWebhooksOnMemberAddedMethodEnum(str, Enum):
+class UpdateServiceUpdateServiceRequestWebhooksOnMemberAddedMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -82,7 +82,7 @@ class UpdateServiceRequestBodyWebhooksOnMemberAddedMethodEnum(str, Enum):
     PUT = "PUT"
     DELETE = "DELETE"
 
-class UpdateServiceRequestBodyWebhooksOnMemberRemoveMethodEnum(str, Enum):
+class UpdateServiceUpdateServiceRequestWebhooksOnMemberRemoveMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -90,7 +90,7 @@ class UpdateServiceRequestBodyWebhooksOnMemberRemoveMethodEnum(str, Enum):
     PUT = "PUT"
     DELETE = "DELETE"
 
-class UpdateServiceRequestBodyWebhooksOnMemberRemovedMethodEnum(str, Enum):
+class UpdateServiceUpdateServiceRequestWebhooksOnMemberRemovedMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -98,7 +98,7 @@ class UpdateServiceRequestBodyWebhooksOnMemberRemovedMethodEnum(str, Enum):
     PUT = "PUT"
     DELETE = "DELETE"
 
-class UpdateServiceRequestBodyWebhooksOnMessageRemoveMethodEnum(str, Enum):
+class UpdateServiceUpdateServiceRequestWebhooksOnMessageRemoveMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -106,7 +106,7 @@ class UpdateServiceRequestBodyWebhooksOnMessageRemoveMethodEnum(str, Enum):
     PUT = "PUT"
     DELETE = "DELETE"
 
-class UpdateServiceRequestBodyWebhooksOnMessageRemovedMethodEnum(str, Enum):
+class UpdateServiceUpdateServiceRequestWebhooksOnMessageRemovedMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -114,7 +114,7 @@ class UpdateServiceRequestBodyWebhooksOnMessageRemovedMethodEnum(str, Enum):
     PUT = "PUT"
     DELETE = "DELETE"
 
-class UpdateServiceRequestBodyWebhooksOnMessageSendMethodEnum(str, Enum):
+class UpdateServiceUpdateServiceRequestWebhooksOnMessageSendMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -122,7 +122,7 @@ class UpdateServiceRequestBodyWebhooksOnMessageSendMethodEnum(str, Enum):
     PUT = "PUT"
     DELETE = "DELETE"
 
-class UpdateServiceRequestBodyWebhooksOnMessageSentMethodEnum(str, Enum):
+class UpdateServiceUpdateServiceRequestWebhooksOnMessageSentMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -130,7 +130,7 @@ class UpdateServiceRequestBodyWebhooksOnMessageSentMethodEnum(str, Enum):
     PUT = "PUT"
     DELETE = "DELETE"
 
-class UpdateServiceRequestBodyWebhooksOnMessageUpdateMethodEnum(str, Enum):
+class UpdateServiceUpdateServiceRequestWebhooksOnMessageUpdateMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -138,7 +138,7 @@ class UpdateServiceRequestBodyWebhooksOnMessageUpdateMethodEnum(str, Enum):
     PUT = "PUT"
     DELETE = "DELETE"
 
-class UpdateServiceRequestBodyWebhooksOnMessageUpdatedMethodEnum(str, Enum):
+class UpdateServiceUpdateServiceRequestWebhooksOnMessageUpdatedMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -148,7 +148,7 @@ class UpdateServiceRequestBodyWebhooksOnMessageUpdatedMethodEnum(str, Enum):
 
 
 @dataclass
-class UpdateServiceRequestBodyUpdateServiceRequest:
+class UpdateServiceUpdateServiceRequest:
     consumption_report_interval: Optional[int] = field(default=None, metadata={'form': { 'field_name': 'ConsumptionReportInterval' }})
     default_channel_creator_role_sid: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'DefaultChannelCreatorRoleSid' }})
     default_channel_role_sid: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'DefaultChannelRoleSid' }})
@@ -170,38 +170,38 @@ class UpdateServiceRequestBodyUpdateServiceRequest:
     read_status_enabled: Optional[bool] = field(default=None, metadata={'form': { 'field_name': 'ReadStatusEnabled' }})
     typing_indicator_timeout: Optional[int] = field(default=None, metadata={'form': { 'field_name': 'TypingIndicatorTimeout' }})
     webhook_filters: Optional[List[str]] = field(default=None, metadata={'form': { 'field_name': 'WebhookFilters' }})
-    webhook_method: Optional[UpdateServiceRequestBodyWebhookMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'WebhookMethod' }})
-    webhooks_on_channel_add_method: Optional[UpdateServiceRequestBodyWebhooksOnChannelAddMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'Webhooks.OnChannelAdd.Method' }})
+    webhook_method: Optional[UpdateServiceUpdateServiceRequestWebhookMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'WebhookMethod' }})
+    webhooks_on_channel_add_method: Optional[UpdateServiceUpdateServiceRequestWebhooksOnChannelAddMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'Webhooks.OnChannelAdd.Method' }})
     webhooks_on_channel_add_url: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Webhooks.OnChannelAdd.Url' }})
-    webhooks_on_channel_added_method: Optional[UpdateServiceRequestBodyWebhooksOnChannelAddedMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'Webhooks.OnChannelAdded.Method' }})
+    webhooks_on_channel_added_method: Optional[UpdateServiceUpdateServiceRequestWebhooksOnChannelAddedMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'Webhooks.OnChannelAdded.Method' }})
     webhooks_on_channel_added_url: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Webhooks.OnChannelAdded.Url' }})
-    webhooks_on_channel_destroy_method: Optional[UpdateServiceRequestBodyWebhooksOnChannelDestroyMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'Webhooks.OnChannelDestroy.Method' }})
+    webhooks_on_channel_destroy_method: Optional[UpdateServiceUpdateServiceRequestWebhooksOnChannelDestroyMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'Webhooks.OnChannelDestroy.Method' }})
     webhooks_on_channel_destroy_url: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Webhooks.OnChannelDestroy.Url' }})
-    webhooks_on_channel_destroyed_method: Optional[UpdateServiceRequestBodyWebhooksOnChannelDestroyedMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'Webhooks.OnChannelDestroyed.Method' }})
+    webhooks_on_channel_destroyed_method: Optional[UpdateServiceUpdateServiceRequestWebhooksOnChannelDestroyedMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'Webhooks.OnChannelDestroyed.Method' }})
     webhooks_on_channel_destroyed_url: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Webhooks.OnChannelDestroyed.Url' }})
-    webhooks_on_channel_update_method: Optional[UpdateServiceRequestBodyWebhooksOnChannelUpdateMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'Webhooks.OnChannelUpdate.Method' }})
+    webhooks_on_channel_update_method: Optional[UpdateServiceUpdateServiceRequestWebhooksOnChannelUpdateMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'Webhooks.OnChannelUpdate.Method' }})
     webhooks_on_channel_update_url: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Webhooks.OnChannelUpdate.Url' }})
-    webhooks_on_channel_updated_method: Optional[UpdateServiceRequestBodyWebhooksOnChannelUpdatedMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'Webhooks.OnChannelUpdated.Method' }})
+    webhooks_on_channel_updated_method: Optional[UpdateServiceUpdateServiceRequestWebhooksOnChannelUpdatedMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'Webhooks.OnChannelUpdated.Method' }})
     webhooks_on_channel_updated_url: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Webhooks.OnChannelUpdated.Url' }})
-    webhooks_on_member_add_method: Optional[UpdateServiceRequestBodyWebhooksOnMemberAddMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'Webhooks.OnMemberAdd.Method' }})
+    webhooks_on_member_add_method: Optional[UpdateServiceUpdateServiceRequestWebhooksOnMemberAddMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'Webhooks.OnMemberAdd.Method' }})
     webhooks_on_member_add_url: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Webhooks.OnMemberAdd.Url' }})
-    webhooks_on_member_added_method: Optional[UpdateServiceRequestBodyWebhooksOnMemberAddedMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'Webhooks.OnMemberAdded.Method' }})
+    webhooks_on_member_added_method: Optional[UpdateServiceUpdateServiceRequestWebhooksOnMemberAddedMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'Webhooks.OnMemberAdded.Method' }})
     webhooks_on_member_added_url: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Webhooks.OnMemberAdded.Url' }})
-    webhooks_on_member_remove_method: Optional[UpdateServiceRequestBodyWebhooksOnMemberRemoveMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'Webhooks.OnMemberRemove.Method' }})
+    webhooks_on_member_remove_method: Optional[UpdateServiceUpdateServiceRequestWebhooksOnMemberRemoveMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'Webhooks.OnMemberRemove.Method' }})
     webhooks_on_member_remove_url: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Webhooks.OnMemberRemove.Url' }})
-    webhooks_on_member_removed_method: Optional[UpdateServiceRequestBodyWebhooksOnMemberRemovedMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'Webhooks.OnMemberRemoved.Method' }})
+    webhooks_on_member_removed_method: Optional[UpdateServiceUpdateServiceRequestWebhooksOnMemberRemovedMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'Webhooks.OnMemberRemoved.Method' }})
     webhooks_on_member_removed_url: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Webhooks.OnMemberRemoved.Url' }})
-    webhooks_on_message_remove_method: Optional[UpdateServiceRequestBodyWebhooksOnMessageRemoveMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'Webhooks.OnMessageRemove.Method' }})
+    webhooks_on_message_remove_method: Optional[UpdateServiceUpdateServiceRequestWebhooksOnMessageRemoveMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'Webhooks.OnMessageRemove.Method' }})
     webhooks_on_message_remove_url: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Webhooks.OnMessageRemove.Url' }})
-    webhooks_on_message_removed_method: Optional[UpdateServiceRequestBodyWebhooksOnMessageRemovedMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'Webhooks.OnMessageRemoved.Method' }})
+    webhooks_on_message_removed_method: Optional[UpdateServiceUpdateServiceRequestWebhooksOnMessageRemovedMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'Webhooks.OnMessageRemoved.Method' }})
     webhooks_on_message_removed_url: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Webhooks.OnMessageRemoved.Url' }})
-    webhooks_on_message_send_method: Optional[UpdateServiceRequestBodyWebhooksOnMessageSendMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'Webhooks.OnMessageSend.Method' }})
+    webhooks_on_message_send_method: Optional[UpdateServiceUpdateServiceRequestWebhooksOnMessageSendMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'Webhooks.OnMessageSend.Method' }})
     webhooks_on_message_send_url: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Webhooks.OnMessageSend.Url' }})
-    webhooks_on_message_sent_method: Optional[UpdateServiceRequestBodyWebhooksOnMessageSentMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'Webhooks.OnMessageSent.Method' }})
+    webhooks_on_message_sent_method: Optional[UpdateServiceUpdateServiceRequestWebhooksOnMessageSentMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'Webhooks.OnMessageSent.Method' }})
     webhooks_on_message_sent_url: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Webhooks.OnMessageSent.Url' }})
-    webhooks_on_message_update_method: Optional[UpdateServiceRequestBodyWebhooksOnMessageUpdateMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'Webhooks.OnMessageUpdate.Method' }})
+    webhooks_on_message_update_method: Optional[UpdateServiceUpdateServiceRequestWebhooksOnMessageUpdateMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'Webhooks.OnMessageUpdate.Method' }})
     webhooks_on_message_update_url: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Webhooks.OnMessageUpdate.Url' }})
-    webhooks_on_message_updated_method: Optional[UpdateServiceRequestBodyWebhooksOnMessageUpdatedMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'Webhooks.OnMessageUpdated.Method' }})
+    webhooks_on_message_updated_method: Optional[UpdateServiceUpdateServiceRequestWebhooksOnMessageUpdatedMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'Webhooks.OnMessageUpdated.Method' }})
     webhooks_on_message_updated_url: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Webhooks.OnMessageUpdated.Url' }})
     
 
@@ -214,7 +214,7 @@ class UpdateServiceSecurity:
 class UpdateServiceRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateServicePathParams = field(default=None)
-    request: Optional[UpdateServiceRequestBodyUpdateServiceRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateServiceUpdateServiceRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateServiceSecurity = field(default=None)
     
 

@@ -13,168 +13,168 @@ type GetAtmsRequest struct {
 	Headers GetAtmsHeaders
 }
 
-type GetAtms400ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnum string
+type GetAtms400ErrorObjectDescriptionEnum string
 
 const (
-	GetAtms400ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnumYouHaveSentARequestWhichCouldNotBeUnderstood GetAtms400ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnum = "You have sent a request which could not be understood."
+	GetAtms400ErrorObjectDescriptionEnumYouHaveSentARequestWhichCouldNotBeUnderstood GetAtms400ErrorObjectDescriptionEnum = "You have sent a request which could not be understood."
 )
 
-type GetAtms400ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnum string
+type GetAtms400ErrorObjectStatusEnum string
 
 const (
-	GetAtms400ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnumFourHundred GetAtms400ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnum = "400"
+	GetAtms400ErrorObjectStatusEnumFourHundred GetAtms400ErrorObjectStatusEnum = "400"
 )
 
-type GetAtms400ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnum string
+type GetAtms400ErrorObjectTitleEnum string
 
 const (
-	GetAtms400ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnumBadRequest GetAtms400ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnum = "Bad request"
+	GetAtms400ErrorObjectTitleEnumBadRequest GetAtms400ErrorObjectTitleEnum = "Bad request"
 )
 
-type GetAtms400ApplicationPrsOpenbankingOpendataV13PlusJSON400ErrorObject struct {
-	Description GetAtms400ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnum `json:"description"`
-	Status      GetAtms400ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnum      `json:"status"`
-	Title       GetAtms400ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnum       `json:"title"`
+type GetAtms400ErrorObject struct {
+	Description GetAtms400ErrorObjectDescriptionEnum `json:"description"`
+	Status      GetAtms400ErrorObjectStatusEnum      `json:"status"`
+	Title       GetAtms400ErrorObjectTitleEnum       `json:"title"`
 }
 
-type GetAtms408ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnum string
+type GetAtms408ErrorObjectDescriptionEnum string
 
 const (
-	GetAtms408ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnumYourClientHasFailedToSubmitARequestAndATimeoutHasOccurred GetAtms408ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnum = "Your client has failed to submit a request, and a timeout has occurred."
+	GetAtms408ErrorObjectDescriptionEnumYourClientHasFailedToSubmitARequestAndATimeoutHasOccurred GetAtms408ErrorObjectDescriptionEnum = "Your client has failed to submit a request, and a timeout has occurred."
 )
 
-type GetAtms408ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnum string
+type GetAtms408ErrorObjectStatusEnum string
 
 const (
-	GetAtms408ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnumFourHundredAndEight GetAtms408ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnum = "408"
+	GetAtms408ErrorObjectStatusEnumFourHundredAndEight GetAtms408ErrorObjectStatusEnum = "408"
 )
 
-type GetAtms408ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnum string
+type GetAtms408ErrorObjectTitleEnum string
 
 const (
-	GetAtms408ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnumClientTimeout GetAtms408ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnum = "Client timeout"
+	GetAtms408ErrorObjectTitleEnumClientTimeout GetAtms408ErrorObjectTitleEnum = "Client timeout"
 )
 
-type GetAtms408ApplicationPrsOpenbankingOpendataV13PlusJSON408ErrorObject struct {
-	Description GetAtms408ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnum `json:"description"`
-	Status      GetAtms408ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnum      `json:"status"`
-	Title       GetAtms408ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnum       `json:"title"`
+type GetAtms408ErrorObject struct {
+	Description GetAtms408ErrorObjectDescriptionEnum `json:"description"`
+	Status      GetAtms408ErrorObjectStatusEnum      `json:"status"`
+	Title       GetAtms408ErrorObjectTitleEnum       `json:"title"`
 }
 
-type GetAtms429ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnum string
+type GetAtms429ErrorObjectDescriptionEnum string
 
 const (
-	GetAtms429ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnumYouHaveRequestedThisResourceTooOftenSlowDown GetAtms429ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnum = "You have requested this resource too often. Slow down."
+	GetAtms429ErrorObjectDescriptionEnumYouHaveRequestedThisResourceTooOftenSlowDown GetAtms429ErrorObjectDescriptionEnum = "You have requested this resource too often. Slow down."
 )
 
-type GetAtms429ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnum string
+type GetAtms429ErrorObjectStatusEnum string
 
 const (
-	GetAtms429ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnumFourHundredAndTwentyNine GetAtms429ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnum = "429"
+	GetAtms429ErrorObjectStatusEnumFourHundredAndTwentyNine GetAtms429ErrorObjectStatusEnum = "429"
 )
 
-type GetAtms429ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnum string
+type GetAtms429ErrorObjectTitleEnum string
 
 const (
-	GetAtms429ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnumTooManyRequests GetAtms429ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnum = "Too many requests"
+	GetAtms429ErrorObjectTitleEnumTooManyRequests GetAtms429ErrorObjectTitleEnum = "Too many requests"
 )
 
-type GetAtms429ApplicationPrsOpenbankingOpendataV13PlusJSON429ErrorObject struct {
-	Description GetAtms429ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnum `json:"description"`
-	Status      GetAtms429ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnum      `json:"status"`
-	Title       GetAtms429ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnum       `json:"title"`
+type GetAtms429ErrorObject struct {
+	Description GetAtms429ErrorObjectDescriptionEnum `json:"description"`
+	Status      GetAtms429ErrorObjectStatusEnum      `json:"status"`
+	Title       GetAtms429ErrorObjectTitleEnum       `json:"title"`
 }
 
-type GetAtms500ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnum string
+type GetAtms500ErrorObjectDescriptionEnum string
 
 const (
-	GetAtms500ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnumAnErrorOccurredOnTheServerNoFurtherInformationIsAvailable GetAtms500ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnum = "An error occurred on the server. No further information is available."
+	GetAtms500ErrorObjectDescriptionEnumAnErrorOccurredOnTheServerNoFurtherInformationIsAvailable GetAtms500ErrorObjectDescriptionEnum = "An error occurred on the server. No further information is available."
 )
 
-type GetAtms500ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnum string
+type GetAtms500ErrorObjectStatusEnum string
 
 const (
-	GetAtms500ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnumFiveHundred GetAtms500ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnum = "500"
+	GetAtms500ErrorObjectStatusEnumFiveHundred GetAtms500ErrorObjectStatusEnum = "500"
 )
 
-type GetAtms500ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnum string
+type GetAtms500ErrorObjectTitleEnum string
 
 const (
-	GetAtms500ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnumInternalServerError GetAtms500ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnum = "Internal server error"
+	GetAtms500ErrorObjectTitleEnumInternalServerError GetAtms500ErrorObjectTitleEnum = "Internal server error"
 )
 
-type GetAtms500ApplicationPrsOpenbankingOpendataV13PlusJSON500ErrorObject struct {
-	Description GetAtms500ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnum `json:"description"`
-	Status      GetAtms500ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnum      `json:"status"`
-	Title       GetAtms500ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnum       `json:"title"`
+type GetAtms500ErrorObject struct {
+	Description GetAtms500ErrorObjectDescriptionEnum `json:"description"`
+	Status      GetAtms500ErrorObjectStatusEnum      `json:"status"`
+	Title       GetAtms500ErrorObjectTitleEnum       `json:"title"`
 }
 
-type GetAtms503ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnum string
+type GetAtms503ErrorObjectDescriptionEnum string
 
 const (
-	GetAtms503ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnumTheServiceIsTemporarilyUnavailable GetAtms503ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnum = "The service is temporarily unavailable."
+	GetAtms503ErrorObjectDescriptionEnumTheServiceIsTemporarilyUnavailable GetAtms503ErrorObjectDescriptionEnum = "The service is temporarily unavailable."
 )
 
-type GetAtms503ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnum string
+type GetAtms503ErrorObjectStatusEnum string
 
 const (
-	GetAtms503ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnumFiveHundredAndThree GetAtms503ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnum = "503"
+	GetAtms503ErrorObjectStatusEnumFiveHundredAndThree GetAtms503ErrorObjectStatusEnum = "503"
 )
 
-type GetAtms503ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnum string
+type GetAtms503ErrorObjectTitleEnum string
 
 const (
-	GetAtms503ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnumServiceTemporarilyUnavailable GetAtms503ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnum = "Service temporarily unavailable"
+	GetAtms503ErrorObjectTitleEnumServiceTemporarilyUnavailable GetAtms503ErrorObjectTitleEnum = "Service temporarily unavailable"
 )
 
-type GetAtms503ApplicationPrsOpenbankingOpendataV13PlusJSON503ErrorObject struct {
-	Description GetAtms503ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnum `json:"description"`
-	Status      GetAtms503ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnum      `json:"status"`
-	Title       GetAtms503ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnum       `json:"title"`
+type GetAtms503ErrorObject struct {
+	Description GetAtms503ErrorObjectDescriptionEnum `json:"description"`
+	Status      GetAtms503ErrorObjectStatusEnum      `json:"status"`
+	Title       GetAtms503ErrorObjectTitleEnum       `json:"title"`
 }
 
-type GetAtmsDefaultApplicationPrsOpenbankingOpendataV13PlusJSONErrorObject struct {
+type GetAtmsErrorObject struct {
 	Description string `json:"description"`
 	Status      string `json:"status"`
 	Title       string `json:"title"`
 }
 
-type GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataAtmServicesEnum string
+type GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmAtmServicesEnum string
 
 const (
-	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataAtmServicesEnumBalance                   GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataAtmServicesEnum = "Balance"
-	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataAtmServicesEnumBillPayments              GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataAtmServicesEnum = "BillPayments"
-	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataAtmServicesEnumCashDeposits              GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataAtmServicesEnum = "CashDeposits"
-	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataAtmServicesEnumCashWithdrawal            GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataAtmServicesEnum = "CashWithdrawal"
-	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataAtmServicesEnumCharityDonation           GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataAtmServicesEnum = "CharityDonation"
-	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataAtmServicesEnumChequeBookRequest         GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataAtmServicesEnum = "ChequeBookRequest"
-	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataAtmServicesEnumChequeDeposits            GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataAtmServicesEnum = "ChequeDeposits"
-	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataAtmServicesEnumFastCash                  GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataAtmServicesEnum = "FastCash"
-	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataAtmServicesEnumMiniStatement             GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataAtmServicesEnum = "MiniStatement"
-	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataAtmServicesEnumMobileBankingRegistration GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataAtmServicesEnum = "MobileBankingRegistration"
-	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataAtmServicesEnumMobilePaymentRegistration GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataAtmServicesEnum = "MobilePaymentRegistration"
-	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataAtmServicesEnumMobilePhoneTopUp          GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataAtmServicesEnum = "MobilePhoneTopUp"
-	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataAtmServicesEnumOrderStatement            GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataAtmServicesEnum = "OrderStatement"
-	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataAtmServicesEnumPinActivation             GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataAtmServicesEnum = "PINActivation"
-	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataAtmServicesEnumPinChange                 GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataAtmServicesEnum = "PINChange"
+	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmAtmServicesEnumBalance                   GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmAtmServicesEnum = "Balance"
+	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmAtmServicesEnumBillPayments              GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmAtmServicesEnum = "BillPayments"
+	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmAtmServicesEnumCashDeposits              GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmAtmServicesEnum = "CashDeposits"
+	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmAtmServicesEnumCashWithdrawal            GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmAtmServicesEnum = "CashWithdrawal"
+	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmAtmServicesEnumCharityDonation           GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmAtmServicesEnum = "CharityDonation"
+	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmAtmServicesEnumChequeBookRequest         GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmAtmServicesEnum = "ChequeBookRequest"
+	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmAtmServicesEnumChequeDeposits            GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmAtmServicesEnum = "ChequeDeposits"
+	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmAtmServicesEnumFastCash                  GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmAtmServicesEnum = "FastCash"
+	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmAtmServicesEnumMiniStatement             GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmAtmServicesEnum = "MiniStatement"
+	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmAtmServicesEnumMobileBankingRegistration GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmAtmServicesEnum = "MobileBankingRegistration"
+	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmAtmServicesEnumMobilePaymentRegistration GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmAtmServicesEnum = "MobilePaymentRegistration"
+	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmAtmServicesEnumMobilePhoneTopUp          GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmAtmServicesEnum = "MobilePhoneTopUp"
+	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmAtmServicesEnumOrderStatement            GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmAtmServicesEnum = "OrderStatement"
+	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmAtmServicesEnumPinActivation             GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmAtmServicesEnum = "PINActivation"
+	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmAtmServicesEnumPinChange                 GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmAtmServicesEnum = "PINChange"
 )
 
-type GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataAccessibilityTypesEnum string
+type GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmAccessibilityTypesEnum string
 
 const (
-	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataAccessibilityTypesEnumAudioCashMachine  GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataAccessibilityTypesEnum = "AudioCashMachine"
-	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataAccessibilityTypesEnumAutomaticDoors    GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataAccessibilityTypesEnum = "AutomaticDoors"
-	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataAccessibilityTypesEnumChairAccess       GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataAccessibilityTypesEnum = "ChairAccess"
-	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataAccessibilityTypesEnumDriveThru         GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataAccessibilityTypesEnum = "DriveThru"
-	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataAccessibilityTypesEnumExternalRamp      GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataAccessibilityTypesEnum = "ExternalRamp"
-	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataAccessibilityTypesEnumInductionLoop     GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataAccessibilityTypesEnum = "InductionLoop"
-	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataAccessibilityTypesEnumInternalRamp      GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataAccessibilityTypesEnum = "InternalRamp"
-	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataAccessibilityTypesEnumLevelAccess       GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataAccessibilityTypesEnum = "LevelAccess"
-	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataAccessibilityTypesEnumLowerLevelCounter GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataAccessibilityTypesEnum = "LowerLevelCounter"
-	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataAccessibilityTypesEnumWheelchairAccess  GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataAccessibilityTypesEnum = "WheelchairAccess"
+	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmAccessibilityTypesEnumAudioCashMachine  GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmAccessibilityTypesEnum = "AudioCashMachine"
+	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmAccessibilityTypesEnumAutomaticDoors    GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmAccessibilityTypesEnum = "AutomaticDoors"
+	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmAccessibilityTypesEnumChairAccess       GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmAccessibilityTypesEnum = "ChairAccess"
+	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmAccessibilityTypesEnumDriveThru         GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmAccessibilityTypesEnum = "DriveThru"
+	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmAccessibilityTypesEnumExternalRamp      GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmAccessibilityTypesEnum = "ExternalRamp"
+	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmAccessibilityTypesEnumInductionLoop     GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmAccessibilityTypesEnum = "InductionLoop"
+	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmAccessibilityTypesEnumInternalRamp      GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmAccessibilityTypesEnum = "InternalRamp"
+	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmAccessibilityTypesEnumLevelAccess       GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmAccessibilityTypesEnum = "LevelAccess"
+	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmAccessibilityTypesEnumLowerLevelCounter GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmAccessibilityTypesEnum = "LowerLevelCounter"
+	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmAccessibilityTypesEnumWheelchairAccess  GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmAccessibilityTypesEnum = "WheelchairAccess"
 )
 
-type GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataAddress struct {
+type GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmAddress struct {
 	BuildingNumberOrName *string `json:"BuildingNumberOrName,omitempty"`
 	Country              string  `json:"Country"`
 	CountrySubDivision   *string `json:"CountrySubDivision,omitempty"`
@@ -184,142 +184,142 @@ type GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataAddress struct {
 	TownName             *string `json:"TownName,omitempty"`
 }
 
-type GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataGeographicLocation struct {
+type GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmGeographicLocation struct {
 	Latitude  string `json:"Latitude"`
 	Longitude string `json:"Longitude"`
 }
 
-type GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLocationCategoryEnum string
+type GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmLocationCategoryEnum string
 
 const (
-	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLocationCategoryEnumAirport                   GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLocationCategoryEnum = "Airport"
-	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLocationCategoryEnumBankSpecialisedOutlet     GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLocationCategoryEnum = "BankSpecialisedOutlet"
-	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLocationCategoryEnumBranchExternal            GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLocationCategoryEnum = "BranchExternal"
-	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLocationCategoryEnumBranchInternal            GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLocationCategoryEnum = "BranchInternal"
-	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLocationCategoryEnumBranchLobby               GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLocationCategoryEnum = "BranchLobby"
-	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLocationCategoryEnumBureauDeChange            GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLocationCategoryEnum = "BureauDeChange"
-	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLocationCategoryEnumCoachStation              GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLocationCategoryEnum = "CoachStation"
-	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLocationCategoryEnumCommercialSpaceInternal   GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLocationCategoryEnum = "CommercialSpaceInternal"
-	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLocationCategoryEnumConvenienceStore          GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLocationCategoryEnum = "ConvenienceStore"
-	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLocationCategoryEnumExhibitionCentre          GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLocationCategoryEnum = "ExhibitionCentre"
-	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLocationCategoryEnumFactoryOrOffice           GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLocationCategoryEnum = "FactoryOrOffice"
-	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLocationCategoryEnumFillingStation            GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLocationCategoryEnum = "FillingStation"
-	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLocationCategoryEnumFinancialInstitution      GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLocationCategoryEnum = "FinancialInstitution"
-	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLocationCategoryEnumGovernmentOffice          GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLocationCategoryEnum = "GovernmentOffice"
-	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLocationCategoryEnumHospital                  GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLocationCategoryEnum = "Hospital"
-	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLocationCategoryEnumHotel                     GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLocationCategoryEnum = "Hotel"
-	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLocationCategoryEnumKioskPod                  GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLocationCategoryEnum = "KioskPod"
-	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLocationCategoryEnumLeisureCentre             GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLocationCategoryEnum = "LeisureCentre"
-	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLocationCategoryEnumPleasurePark              GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLocationCategoryEnum = "PleasurePark"
-	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLocationCategoryEnumPublicHouse               GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLocationCategoryEnum = "PublicHouse"
-	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLocationCategoryEnumRailwayStation            GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLocationCategoryEnum = "RailwayStation"
-	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLocationCategoryEnumRemoteUnit                GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLocationCategoryEnum = "RemoteUnit"
-	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLocationCategoryEnumRetailerDepartmentStore   GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLocationCategoryEnum = "RetailerDepartmentStore"
-	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLocationCategoryEnumRetailerOutlet            GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLocationCategoryEnum = "RetailerOutlet"
-	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLocationCategoryEnumSeaportTerminal           GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLocationCategoryEnum = "SeaportTerminal"
-	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLocationCategoryEnumServiceStation            GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLocationCategoryEnum = "ServiceStation"
-	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLocationCategoryEnumShoppingCentreExternal    GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLocationCategoryEnum = "ShoppingCentreExternal"
-	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLocationCategoryEnumShoppingCentreInternal    GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLocationCategoryEnum = "ShoppingCentreInternal"
-	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLocationCategoryEnumStorageDepot              GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLocationCategoryEnum = "StorageDepot"
-	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLocationCategoryEnumSupermarketExternal       GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLocationCategoryEnum = "SupermarketExternal"
-	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLocationCategoryEnumSupermarketInternal       GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLocationCategoryEnum = "SupermarketInternal"
-	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLocationCategoryEnumUndergroundRailwayStation GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLocationCategoryEnum = "UndergroundRailwayStation"
-	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLocationCategoryEnumUniversityOrCollege       GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLocationCategoryEnum = "UniversityOrCollege"
+	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmLocationCategoryEnumAirport                   GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmLocationCategoryEnum = "Airport"
+	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmLocationCategoryEnumBankSpecialisedOutlet     GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmLocationCategoryEnum = "BankSpecialisedOutlet"
+	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmLocationCategoryEnumBranchExternal            GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmLocationCategoryEnum = "BranchExternal"
+	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmLocationCategoryEnumBranchInternal            GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmLocationCategoryEnum = "BranchInternal"
+	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmLocationCategoryEnumBranchLobby               GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmLocationCategoryEnum = "BranchLobby"
+	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmLocationCategoryEnumBureauDeChange            GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmLocationCategoryEnum = "BureauDeChange"
+	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmLocationCategoryEnumCoachStation              GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmLocationCategoryEnum = "CoachStation"
+	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmLocationCategoryEnumCommercialSpaceInternal   GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmLocationCategoryEnum = "CommercialSpaceInternal"
+	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmLocationCategoryEnumConvenienceStore          GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmLocationCategoryEnum = "ConvenienceStore"
+	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmLocationCategoryEnumExhibitionCentre          GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmLocationCategoryEnum = "ExhibitionCentre"
+	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmLocationCategoryEnumFactoryOrOffice           GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmLocationCategoryEnum = "FactoryOrOffice"
+	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmLocationCategoryEnumFillingStation            GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmLocationCategoryEnum = "FillingStation"
+	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmLocationCategoryEnumFinancialInstitution      GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmLocationCategoryEnum = "FinancialInstitution"
+	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmLocationCategoryEnumGovernmentOffice          GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmLocationCategoryEnum = "GovernmentOffice"
+	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmLocationCategoryEnumHospital                  GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmLocationCategoryEnum = "Hospital"
+	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmLocationCategoryEnumHotel                     GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmLocationCategoryEnum = "Hotel"
+	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmLocationCategoryEnumKioskPod                  GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmLocationCategoryEnum = "KioskPod"
+	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmLocationCategoryEnumLeisureCentre             GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmLocationCategoryEnum = "LeisureCentre"
+	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmLocationCategoryEnumPleasurePark              GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmLocationCategoryEnum = "PleasurePark"
+	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmLocationCategoryEnumPublicHouse               GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmLocationCategoryEnum = "PublicHouse"
+	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmLocationCategoryEnumRailwayStation            GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmLocationCategoryEnum = "RailwayStation"
+	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmLocationCategoryEnumRemoteUnit                GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmLocationCategoryEnum = "RemoteUnit"
+	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmLocationCategoryEnumRetailerDepartmentStore   GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmLocationCategoryEnum = "RetailerDepartmentStore"
+	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmLocationCategoryEnumRetailerOutlet            GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmLocationCategoryEnum = "RetailerOutlet"
+	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmLocationCategoryEnumSeaportTerminal           GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmLocationCategoryEnum = "SeaportTerminal"
+	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmLocationCategoryEnumServiceStation            GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmLocationCategoryEnum = "ServiceStation"
+	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmLocationCategoryEnumShoppingCentreExternal    GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmLocationCategoryEnum = "ShoppingCentreExternal"
+	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmLocationCategoryEnumShoppingCentreInternal    GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmLocationCategoryEnum = "ShoppingCentreInternal"
+	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmLocationCategoryEnumStorageDepot              GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmLocationCategoryEnum = "StorageDepot"
+	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmLocationCategoryEnumSupermarketExternal       GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmLocationCategoryEnum = "SupermarketExternal"
+	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmLocationCategoryEnumSupermarketInternal       GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmLocationCategoryEnum = "SupermarketInternal"
+	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmLocationCategoryEnumUndergroundRailwayStation GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmLocationCategoryEnum = "UndergroundRailwayStation"
+	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmLocationCategoryEnumUniversityOrCollege       GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmLocationCategoryEnum = "UniversityOrCollege"
 )
 
-type GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataMinimumValueDispensedEnum string
+type GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmMinimumValueDispensedEnum string
 
 const (
-	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataMinimumValueDispensedEnumPound5   GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataMinimumValueDispensedEnum = "£5"
-	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataMinimumValueDispensedEnumPound10  GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataMinimumValueDispensedEnum = "£10"
-	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataMinimumValueDispensedEnumPound20  GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataMinimumValueDispensedEnum = "£20"
-	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataMinimumValueDispensedEnumPound50  GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataMinimumValueDispensedEnum = "£50"
-	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataMinimumValueDispensedEnumPound100 GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataMinimumValueDispensedEnum = "£100"
+	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmMinimumValueDispensedEnumPound5   GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmMinimumValueDispensedEnum = "£5"
+	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmMinimumValueDispensedEnumPound10  GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmMinimumValueDispensedEnum = "£10"
+	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmMinimumValueDispensedEnumPound20  GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmMinimumValueDispensedEnum = "£20"
+	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmMinimumValueDispensedEnumPound50  GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmMinimumValueDispensedEnum = "£50"
+	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmMinimumValueDispensedEnumPound100 GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmMinimumValueDispensedEnum = "£100"
 )
 
-type GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataOrganisationBrandTrademarkIpoCodeEnum string
+type GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmOrganisationBrandTrademarkIpoCodeEnum string
 
 const (
-	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataOrganisationBrandTrademarkIpoCodeEnumUk GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataOrganisationBrandTrademarkIpoCodeEnum = "UK"
-	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataOrganisationBrandTrademarkIpoCodeEnumEu GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataOrganisationBrandTrademarkIpoCodeEnum = "EU"
+	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmOrganisationBrandTrademarkIpoCodeEnumUk GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmOrganisationBrandTrademarkIpoCodeEnum = "UK"
+	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmOrganisationBrandTrademarkIpoCodeEnumEu GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmOrganisationBrandTrademarkIpoCodeEnum = "EU"
 )
 
-type GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataOrganisationBrand struct {
-	TrademarkID      string                                                                                          `json:"TrademarkID"`
-	TrademarkIpoCode GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataOrganisationBrandTrademarkIpoCodeEnum `json:"TrademarkIPOCode"`
+type GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmOrganisationBrand struct {
+	TrademarkID      string                                                                                         `json:"TrademarkID"`
+	TrademarkIpoCode GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmOrganisationBrandTrademarkIpoCodeEnum `json:"TrademarkIPOCode"`
 }
 
-type GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataOrganisationParentOrganisationOrganisationName struct {
+type GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmOrganisationParentOrganisationOrganisationName struct {
 	LegalName string `json:"LegalName"`
 }
 
-type GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataOrganisationParentOrganisation struct {
-	Bic              *string                                                                                                  `json:"BIC,omitempty"`
-	Lei              *string                                                                                                  `json:"LEI,omitempty"`
-	OrganisationName GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataOrganisationParentOrganisationOrganisationName `json:"OrganisationName"`
+type GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmOrganisationParentOrganisation struct {
+	Bic              *string                                                                                                 `json:"BIC,omitempty"`
+	Lei              *string                                                                                                 `json:"LEI,omitempty"`
+	OrganisationName GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmOrganisationParentOrganisationOrganisationName `json:"OrganisationName"`
 }
 
-type GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataOrganisation struct {
-	Brand              GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataOrganisationBrand              `json:"Brand"`
-	ParentOrganisation GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataOrganisationParentOrganisation `json:"ParentOrganisation"`
+type GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmOrganisation struct {
+	Brand              GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmOrganisationBrand              `json:"Brand"`
+	ParentOrganisation GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmOrganisationParentOrganisation `json:"ParentOrganisation"`
 }
 
-type GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataAtm struct {
-	Atmid                 string                                                                               `json:"ATMID"`
-	AtmServices           []GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataAtmServicesEnum          `json:"ATMServices"`
-	AccessibilityTypes    []GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataAccessibilityTypesEnum   `json:"AccessibilityTypes,omitempty"`
-	AdditionalAtmServices []string                                                                             `json:"AdditionalATMServices,omitempty"`
-	Address               GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataAddress                    `json:"Address"`
-	BranchIdentification  *string                                                                              `json:"BranchIdentification,omitempty"`
-	Currency              []string                                                                             `json:"Currency"`
-	GeographicLocation    GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataGeographicLocation         `json:"GeographicLocation"`
-	LocationCategory      *GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLocationCategoryEnum      `json:"LocationCategory,omitempty"`
-	MinimumValueDispensed *GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataMinimumValueDispensedEnum `json:"MinimumValueDispensed,omitempty"`
-	Organisation          GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataOrganisation               `json:"Organisation"`
-	SiteID                *string                                                                              `json:"SiteID,omitempty"`
-	SiteName              *string                                                                              `json:"SiteName,omitempty"`
-	SupportedLanguages    []string                                                                             `json:"SupportedLanguages"`
+type GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtm struct {
+	Atmid                 string                                                                              `json:"ATMID"`
+	AtmServices           []GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmAtmServicesEnum          `json:"ATMServices"`
+	AccessibilityTypes    []GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmAccessibilityTypesEnum   `json:"AccessibilityTypes,omitempty"`
+	AdditionalAtmServices []string                                                                            `json:"AdditionalATMServices,omitempty"`
+	Address               GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmAddress                    `json:"Address"`
+	BranchIdentification  *string                                                                             `json:"BranchIdentification,omitempty"`
+	Currency              []string                                                                            `json:"Currency"`
+	GeographicLocation    GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmGeographicLocation         `json:"GeographicLocation"`
+	LocationCategory      *GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmLocationCategoryEnum      `json:"LocationCategory,omitempty"`
+	MinimumValueDispensed *GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmMinimumValueDispensedEnum `json:"MinimumValueDispensed,omitempty"`
+	Organisation          GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtmOrganisation               `json:"Organisation"`
+	SiteID                *string                                                                             `json:"SiteID,omitempty"`
+	SiteName              *string                                                                             `json:"SiteName,omitempty"`
+	SupportedLanguages    []string                                                                            `json:"SupportedLanguages"`
 }
 
-type GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaAgreementEnum string
+type GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaDataAgreementEnum string
 
 const (
-	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaAgreementEnumUseOfTheApIsAndAnyRelatedDataWillBeSubjectToTheTermsOfTheOpenLicenceAndSubjectToTermsAndConditions GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaAgreementEnum = "Use of the APIs and any related data will be subject to the terms of the Open Licence and subject to terms and conditions"
+	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaDataAgreementEnumUseOfTheApIsAndAnyRelatedDataWillBeSubjectToTheTermsOfTheOpenLicenceAndSubjectToTermsAndConditions GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaDataAgreementEnum = "Use of the APIs and any related data will be subject to the terms of the Open Licence and subject to terms and conditions"
 )
 
-type GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaLicenseEnum string
+type GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaDataLicenseEnum string
 
 const (
-	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaLicenseEnumHTTPSWwwOpenbankingOrgUkOpenLicence GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaLicenseEnum = "https://www.openbanking.org.uk/open-licence"
+	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaDataLicenseEnumHTTPSWwwOpenbankingOrgUkOpenLicence GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaDataLicenseEnum = "https://www.openbanking.org.uk/open-licence"
 )
 
-type GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaTermsOfUseEnum string
+type GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaDataTermsOfUseEnum string
 
 const (
-	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaTermsOfUseEnumHTTPSWwwOpenbankingOrgUkTerms GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaTermsOfUseEnum = "https://www.openbanking.org.uk/terms"
+	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaDataTermsOfUseEnumHTTPSWwwOpenbankingOrgUkTerms GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaDataTermsOfUseEnum = "https://www.openbanking.org.uk/terms"
 )
 
-type GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaMetaData struct {
-	Agreement    GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaAgreementEnum  `json:"Agreement"`
-	LastUpdated  time.Time                                                                `json:"LastUpdated"`
-	License      GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaLicenseEnum    `json:"License"`
-	TermsOfUse   GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaTermsOfUseEnum `json:"TermsOfUse"`
-	TotalResults int64                                                                    `json:"TotalResults"`
+type GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaData struct {
+	Agreement    GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaDataAgreementEnum  `json:"Agreement"`
+	LastUpdated  time.Time                                                                    `json:"LastUpdated"`
+	License      GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaDataLicenseEnum    `json:"License"`
+	TermsOfUse   GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaDataTermsOfUseEnum `json:"TermsOfUse"`
+	TotalResults int64                                                                        `json:"TotalResults"`
 }
 
 type GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSON struct {
-	Data []GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONDataAtm    `json:"data"`
-	Meta GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaMetaData `json:"meta"`
+	Data []GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONAtm    `json:"data"`
+	Meta GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaData `json:"meta"`
 }
 
 type GetAtmsResponse struct {
-	FourHundredErrorObject                                       *GetAtms400ApplicationPrsOpenbankingOpendataV13PlusJSON400ErrorObject
-	FourHundredAndEightErrorObject                               *GetAtms408ApplicationPrsOpenbankingOpendataV13PlusJSON408ErrorObject
-	FourHundredAndTwentyNineErrorObject                          *GetAtms429ApplicationPrsOpenbankingOpendataV13PlusJSON429ErrorObject
-	FiveHundredErrorObject                                       *GetAtms500ApplicationPrsOpenbankingOpendataV13PlusJSON500ErrorObject
-	FiveHundredAndThreeErrorObject                               *GetAtms503ApplicationPrsOpenbankingOpendataV13PlusJSON503ErrorObject
+	FourHundredErrorObject                                       *GetAtms400ErrorObject
+	FourHundredAndEightErrorObject                               *GetAtms408ErrorObject
+	FourHundredAndTwentyNineErrorObject                          *GetAtms429ErrorObject
+	FiveHundredErrorObject                                       *GetAtms500ErrorObject
+	FiveHundredAndThreeErrorObject                               *GetAtms503ErrorObject
 	ContentType                                                  string
-	ErrorObject                                                  *GetAtmsDefaultApplicationPrsOpenbankingOpendataV13PlusJSONErrorObject
+	ErrorObject                                                  *GetAtmsErrorObject
 	GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSONObject *GetAtms200ApplicationPrsOpenbankingOpendataV13PlusJSON
 	Headers                                                      map[string][]string
 	StatusCode                                                   int64

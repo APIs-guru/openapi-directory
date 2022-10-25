@@ -33,7 +33,7 @@ class ListRecordingAddOnResultRequest:
 
 @dataclass_json
 @dataclass
-class ListRecordingAddOnResult200ApplicationJSONListRecordingAddOnResultResponse:
+class ListRecordingAddOnResultListRecordingAddOnResultResponse:
     add_on_results: Optional[List[shared.APIV2010AccountRecordingRecordingAddOnResult]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'add_on_results' }})
     end: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'end' }})
     first_page_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_uri' }})
@@ -48,6 +48,6 @@ class ListRecordingAddOnResult200ApplicationJSONListRecordingAddOnResultResponse
 @dataclass
 class ListRecordingAddOnResultResponse:
     content_type: str = field(default=None)
-    list_recording_add_on_result_response: Optional[ListRecordingAddOnResult200ApplicationJSONListRecordingAddOnResultResponse] = field(default=None)
+    list_recording_add_on_result_response: Optional[ListRecordingAddOnResultListRecordingAddOnResultResponse] = field(default=None)
     status_code: int = field(default=None)
     

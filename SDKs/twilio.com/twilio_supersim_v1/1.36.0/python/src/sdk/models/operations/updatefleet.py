@@ -10,7 +10,7 @@ UPDATE_FLEET_SERVERS = [
 class UpdateFleetPathParams:
     sid: str = field(default=None, metadata={'path_param': { 'field_name': 'Sid', 'style': 'simple', 'explode': False }})
     
-class UpdateFleetRequestBodyIPCommandsMethodEnum(str, Enum):
+class UpdateFleetUpdateFleetRequestIPCommandsMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -18,7 +18,7 @@ class UpdateFleetRequestBodyIPCommandsMethodEnum(str, Enum):
     PUT = "PUT"
     DELETE = "DELETE"
 
-class UpdateFleetRequestBodySmsCommandsMethodEnum(str, Enum):
+class UpdateFleetUpdateFleetRequestSmsCommandsMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -28,12 +28,12 @@ class UpdateFleetRequestBodySmsCommandsMethodEnum(str, Enum):
 
 
 @dataclass
-class UpdateFleetRequestBodyUpdateFleetRequest:
+class UpdateFleetUpdateFleetRequest:
     data_limit: Optional[int] = field(default=None, metadata={'form': { 'field_name': 'DataLimit' }})
-    ip_commands_method: Optional[UpdateFleetRequestBodyIPCommandsMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'IpCommandsMethod' }})
+    ip_commands_method: Optional[UpdateFleetUpdateFleetRequestIPCommandsMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'IpCommandsMethod' }})
     ip_commands_url: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'IpCommandsUrl' }})
     network_access_profile: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'NetworkAccessProfile' }})
-    sms_commands_method: Optional[UpdateFleetRequestBodySmsCommandsMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'SmsCommandsMethod' }})
+    sms_commands_method: Optional[UpdateFleetUpdateFleetRequestSmsCommandsMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'SmsCommandsMethod' }})
     sms_commands_url: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'SmsCommandsUrl' }})
     unique_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'UniqueName' }})
     
@@ -47,7 +47,7 @@ class UpdateFleetSecurity:
 class UpdateFleetRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateFleetPathParams = field(default=None)
-    request: Optional[UpdateFleetRequestBodyUpdateFleetRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateFleetUpdateFleetRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateFleetSecurity = field(default=None)
     
 

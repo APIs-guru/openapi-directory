@@ -27,7 +27,7 @@ type ListFaxRequest struct {
 	Security    ListFaxSecurity
 }
 
-type ListFax200ApplicationJSONMeta struct {
+type ListFaxListFaxResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -37,13 +37,13 @@ type ListFax200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListFax200ApplicationJSONListFaxResponse struct {
-	Faxes []shared.FaxV1Fax              `json:"faxes,omitempty"`
-	Meta  *ListFax200ApplicationJSONMeta `json:"meta,omitempty"`
+type ListFaxListFaxResponse struct {
+	Faxes []shared.FaxV1Fax           `json:"faxes,omitempty"`
+	Meta  *ListFaxListFaxResponseMeta `json:"meta,omitempty"`
 }
 
 type ListFaxResponse struct {
 	ContentType     string
-	ListFaxResponse *ListFax200ApplicationJSONListFaxResponse
+	ListFaxResponse *ListFaxListFaxResponse
 	StatusCode      int64
 }

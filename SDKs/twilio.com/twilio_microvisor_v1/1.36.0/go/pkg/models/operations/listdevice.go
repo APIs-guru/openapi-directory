@@ -22,7 +22,7 @@ type ListDeviceRequest struct {
 	Security    ListDeviceSecurity
 }
 
-type ListDevice200ApplicationJSONMeta struct {
+type ListDeviceListDeviceResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -32,13 +32,13 @@ type ListDevice200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListDevice200ApplicationJSONListDeviceResponse struct {
+type ListDeviceListDeviceResponse struct {
 	Devices []shared.MicrovisorV1Device       `json:"devices,omitempty"`
-	Meta    *ListDevice200ApplicationJSONMeta `json:"meta,omitempty"`
+	Meta    *ListDeviceListDeviceResponseMeta `json:"meta,omitempty"`
 }
 
 type ListDeviceResponse struct {
 	ContentType        string
-	ListDeviceResponse *ListDevice200ApplicationJSONListDeviceResponse
+	ListDeviceResponse *ListDeviceListDeviceResponse
 	StatusCode         int64
 }

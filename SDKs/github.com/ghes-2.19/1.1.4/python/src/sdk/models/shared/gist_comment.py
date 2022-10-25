@@ -9,7 +9,7 @@ from . import author_association_enum
 
 @dataclass_json
 @dataclass
-class GistCommentUserSimpleUser:
+class GistCommentSimpleUser:
     avatar_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'avatar_url' }})
     events_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'events_url' }})
     followers_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'followers_url' }})
@@ -41,5 +41,5 @@ class GistComment:
     node_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'node_id' }})
     updated_at: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updated_at', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'url' }})
-    user: GistCommentUserSimpleUser = field(default=None, metadata={'dataclasses_json': { 'field_name': 'user' }})
+    user: GistCommentSimpleUser = field(default=None, metadata={'dataclasses_json': { 'field_name': 'user' }})
     

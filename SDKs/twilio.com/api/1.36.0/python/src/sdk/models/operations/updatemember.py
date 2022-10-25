@@ -12,7 +12,7 @@ class UpdateMemberPathParams:
     call_sid: str = field(default=None, metadata={'path_param': { 'field_name': 'CallSid', 'style': 'simple', 'explode': False }})
     queue_sid: str = field(default=None, metadata={'path_param': { 'field_name': 'QueueSid', 'style': 'simple', 'explode': False }})
     
-class UpdateMemberRequestBodyMethodEnum(str, Enum):
+class UpdateMemberUpdateMemberRequestMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -22,8 +22,8 @@ class UpdateMemberRequestBodyMethodEnum(str, Enum):
 
 
 @dataclass
-class UpdateMemberRequestBodyUpdateMemberRequest:
-    method: Optional[UpdateMemberRequestBodyMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'Method' }})
+class UpdateMemberUpdateMemberRequest:
+    method: Optional[UpdateMemberUpdateMemberRequestMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'Method' }})
     url: str = field(default=None, metadata={'form': { 'field_name': 'Url' }})
     
 
@@ -36,7 +36,7 @@ class UpdateMemberSecurity:
 class UpdateMemberRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateMemberPathParams = field(default=None)
-    request: Optional[UpdateMemberRequestBodyUpdateMemberRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateMemberUpdateMemberRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateMemberSecurity = field(default=None)
     
 

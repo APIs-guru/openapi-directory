@@ -434,7 +434,7 @@ func (s *SDK) ListCallSummaries(ctx context.Context, request operations.ListCall
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListCallSummaries200ApplicationJSONListCallSummariesResponse
+			var out *operations.ListCallSummariesListCallSummariesResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -479,7 +479,7 @@ func (s *SDK) ListConference(ctx context.Context, request operations.ListConfere
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListConference200ApplicationJSONListConferenceResponse
+			var out *operations.ListConferenceListConferenceResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -524,7 +524,7 @@ func (s *SDK) ListConferenceParticipant(ctx context.Context, request operations.
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListConferenceParticipant200ApplicationJSONListConferenceParticipantResponse
+			var out *operations.ListConferenceParticipantListConferenceParticipantResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -569,7 +569,7 @@ func (s *SDK) ListEvent(ctx context.Context, request operations.ListEventRequest
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListEvent200ApplicationJSONListEventResponse
+			var out *operations.ListEventListEventResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -614,7 +614,7 @@ func (s *SDK) ListMetric(ctx context.Context, request operations.ListMetricReque
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListMetric200ApplicationJSONListMetricResponse
+			var out *operations.ListMetricListMetricResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -659,7 +659,7 @@ func (s *SDK) ListVideoParticipantSummary(ctx context.Context, request operation
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListVideoParticipantSummary200ApplicationJSONListVideoParticipantSummaryResponse
+			var out *operations.ListVideoParticipantSummaryListVideoParticipantSummaryResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -704,7 +704,7 @@ func (s *SDK) ListVideoRoomSummary(ctx context.Context, request operations.ListV
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListVideoRoomSummary200ApplicationJSONListVideoRoomSummaryResponse
+			var out *operations.ListVideoRoomSummaryListVideoRoomSummaryResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}

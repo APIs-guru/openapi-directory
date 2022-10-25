@@ -41,32 +41,32 @@ class SDK:
         elif r.status_code == 400:
             res.headers = r.headers
             if utils.match_content_type(content_type, "application/prs.openbanking.opendata.v1.3+json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.GetAtms400ApplicationPrsOpenbankingOpendataV13PlusJSON400ErrorObject])
+                out = utils.unmarshal_json(r.text, Optional[operations.GetAtms400ErrorObject])
                 res.four_hundred_error_object = out
         elif r.status_code == 408:
             res.headers = r.headers
             if utils.match_content_type(content_type, "application/prs.openbanking.opendata.v1.3+json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.GetAtms408ApplicationPrsOpenbankingOpendataV13PlusJSON408ErrorObject])
+                out = utils.unmarshal_json(r.text, Optional[operations.GetAtms408ErrorObject])
                 res.four_hundred_and_eight_error_object = out
         elif r.status_code == 429:
             res.headers = r.headers
             if utils.match_content_type(content_type, "application/prs.openbanking.opendata.v1.3+json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.GetAtms429ApplicationPrsOpenbankingOpendataV13PlusJSON429ErrorObject])
+                out = utils.unmarshal_json(r.text, Optional[operations.GetAtms429ErrorObject])
                 res.four_hundred_and_twenty_nine_error_object = out
         elif r.status_code == 500:
             res.headers = r.headers
             if utils.match_content_type(content_type, "application/prs.openbanking.opendata.v1.3+json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.GetAtms500ApplicationPrsOpenbankingOpendataV13PlusJSON500ErrorObject])
+                out = utils.unmarshal_json(r.text, Optional[operations.GetAtms500ErrorObject])
                 res.five_hundred_error_object = out
         elif r.status_code == 503:
             res.headers = r.headers
             if utils.match_content_type(content_type, "application/prs.openbanking.opendata.v1.3+json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.GetAtms503ApplicationPrsOpenbankingOpendataV13PlusJSON503ErrorObject])
+                out = utils.unmarshal_json(r.text, Optional[operations.GetAtms503ErrorObject])
                 res.five_hundred_and_three_error_object = out
         else:
             res.headers = r.headers
             if utils.match_content_type(content_type, "application/prs.openbanking.opendata.v1.3+json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.GetAtmsDefaultApplicationPrsOpenbankingOpendataV13PlusJSONErrorObject])
+                out = utils.unmarshal_json(r.text, Optional[operations.GetAtmsErrorObject])
                 res.error_object = out
 
         return res
@@ -93,32 +93,32 @@ class SDK:
         elif r.status_code == 400:
             res.headers = r.headers
             if utils.match_content_type(content_type, "application/prs.openbanking.opendata.v1.3+json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.GetBranches400ApplicationPrsOpenbankingOpendataV13PlusJSON400ErrorObject])
+                out = utils.unmarshal_json(r.text, Optional[operations.GetBranches400ErrorObject])
                 res.four_hundred_error_object = out
         elif r.status_code == 408:
             res.headers = r.headers
             if utils.match_content_type(content_type, "application/prs.openbanking.opendata.v1.3+json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.GetBranches408ApplicationPrsOpenbankingOpendataV13PlusJSON408ErrorObject])
+                out = utils.unmarshal_json(r.text, Optional[operations.GetBranches408ErrorObject])
                 res.four_hundred_and_eight_error_object = out
         elif r.status_code == 429:
             res.headers = r.headers
             if utils.match_content_type(content_type, "application/prs.openbanking.opendata.v1.3+json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.GetBranches429ApplicationPrsOpenbankingOpendataV13PlusJSON429ErrorObject])
+                out = utils.unmarshal_json(r.text, Optional[operations.GetBranches429ErrorObject])
                 res.four_hundred_and_twenty_nine_error_object = out
         elif r.status_code == 500:
             res.headers = r.headers
             if utils.match_content_type(content_type, "application/prs.openbanking.opendata.v1.3+json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.GetBranches500ApplicationPrsOpenbankingOpendataV13PlusJSON500ErrorObject])
+                out = utils.unmarshal_json(r.text, Optional[operations.GetBranches500ErrorObject])
                 res.five_hundred_error_object = out
         elif r.status_code == 503:
             res.headers = r.headers
             if utils.match_content_type(content_type, "application/prs.openbanking.opendata.v1.3+json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.GetBranches503ApplicationPrsOpenbankingOpendataV13PlusJSON503ErrorObject])
+                out = utils.unmarshal_json(r.text, Optional[operations.GetBranches503ErrorObject])
                 res.five_hundred_and_three_error_object = out
         else:
             res.headers = r.headers
             if utils.match_content_type(content_type, "application/prs.openbanking.opendata.v1.3+json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.GetBranchesDefaultApplicationPrsOpenbankingOpendataV13PlusJSONErrorObject])
+                out = utils.unmarshal_json(r.text, Optional[operations.GetBranchesErrorObject])
                 res.error_object = out
 
         return res
@@ -145,32 +145,32 @@ class SDK:
         elif r.status_code == 400:
             res.headers = r.headers
             if utils.match_content_type(content_type, "application/prs.openbanking.opendata.v1.3+json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.GetBusinessCurrentAccounts400ApplicationPrsOpenbankingOpendataV13PlusJSON400ErrorObject])
+                out = utils.unmarshal_json(r.text, Optional[operations.GetBusinessCurrentAccounts400ErrorObject])
                 res.four_hundred_error_object = out
         elif r.status_code == 408:
             res.headers = r.headers
             if utils.match_content_type(content_type, "application/prs.openbanking.opendata.v1.3+json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.GetBusinessCurrentAccounts408ApplicationPrsOpenbankingOpendataV13PlusJSON408ErrorObject])
+                out = utils.unmarshal_json(r.text, Optional[operations.GetBusinessCurrentAccounts408ErrorObject])
                 res.four_hundred_and_eight_error_object = out
         elif r.status_code == 429:
             res.headers = r.headers
             if utils.match_content_type(content_type, "application/prs.openbanking.opendata.v1.3+json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.GetBusinessCurrentAccounts429ApplicationPrsOpenbankingOpendataV13PlusJSON429ErrorObject])
+                out = utils.unmarshal_json(r.text, Optional[operations.GetBusinessCurrentAccounts429ErrorObject])
                 res.four_hundred_and_twenty_nine_error_object = out
         elif r.status_code == 500:
             res.headers = r.headers
             if utils.match_content_type(content_type, "application/prs.openbanking.opendata.v1.3+json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.GetBusinessCurrentAccounts500ApplicationPrsOpenbankingOpendataV13PlusJSON500ErrorObject])
+                out = utils.unmarshal_json(r.text, Optional[operations.GetBusinessCurrentAccounts500ErrorObject])
                 res.five_hundred_error_object = out
         elif r.status_code == 503:
             res.headers = r.headers
             if utils.match_content_type(content_type, "application/prs.openbanking.opendata.v1.3+json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.GetBusinessCurrentAccounts503ApplicationPrsOpenbankingOpendataV13PlusJSON503ErrorObject])
+                out = utils.unmarshal_json(r.text, Optional[operations.GetBusinessCurrentAccounts503ErrorObject])
                 res.five_hundred_and_three_error_object = out
         else:
             res.headers = r.headers
             if utils.match_content_type(content_type, "application/prs.openbanking.opendata.v1.3+json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.GetBusinessCurrentAccountsDefaultApplicationPrsOpenbankingOpendataV13PlusJSONErrorObject])
+                out = utils.unmarshal_json(r.text, Optional[operations.GetBusinessCurrentAccountsErrorObject])
                 res.error_object = out
 
         return res
@@ -197,32 +197,32 @@ class SDK:
         elif r.status_code == 400:
             res.headers = r.headers
             if utils.match_content_type(content_type, "application/prs.openbanking.opendata.v1.3+json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.GetCommercialCreditCards400ApplicationPrsOpenbankingOpendataV13PlusJSON400ErrorObject])
+                out = utils.unmarshal_json(r.text, Optional[operations.GetCommercialCreditCards400ErrorObject])
                 res.four_hundred_error_object = out
         elif r.status_code == 408:
             res.headers = r.headers
             if utils.match_content_type(content_type, "application/prs.openbanking.opendata.v1.3+json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.GetCommercialCreditCards408ApplicationPrsOpenbankingOpendataV13PlusJSON408ErrorObject])
+                out = utils.unmarshal_json(r.text, Optional[operations.GetCommercialCreditCards408ErrorObject])
                 res.four_hundred_and_eight_error_object = out
         elif r.status_code == 429:
             res.headers = r.headers
             if utils.match_content_type(content_type, "application/prs.openbanking.opendata.v1.3+json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.GetCommercialCreditCards429ApplicationPrsOpenbankingOpendataV13PlusJSON429ErrorObject])
+                out = utils.unmarshal_json(r.text, Optional[operations.GetCommercialCreditCards429ErrorObject])
                 res.four_hundred_and_twenty_nine_error_object = out
         elif r.status_code == 500:
             res.headers = r.headers
             if utils.match_content_type(content_type, "application/prs.openbanking.opendata.v1.3+json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.GetCommercialCreditCards500ApplicationPrsOpenbankingOpendataV13PlusJSON500ErrorObject])
+                out = utils.unmarshal_json(r.text, Optional[operations.GetCommercialCreditCards500ErrorObject])
                 res.five_hundred_error_object = out
         elif r.status_code == 503:
             res.headers = r.headers
             if utils.match_content_type(content_type, "application/prs.openbanking.opendata.v1.3+json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.GetCommercialCreditCards503ApplicationPrsOpenbankingOpendataV13PlusJSON503ErrorObject])
+                out = utils.unmarshal_json(r.text, Optional[operations.GetCommercialCreditCards503ErrorObject])
                 res.five_hundred_and_three_error_object = out
         else:
             res.headers = r.headers
             if utils.match_content_type(content_type, "application/prs.openbanking.opendata.v1.3+json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.GetCommercialCreditCardsDefaultApplicationPrsOpenbankingOpendataV13PlusJSONErrorObject])
+                out = utils.unmarshal_json(r.text, Optional[operations.GetCommercialCreditCardsErrorObject])
                 res.error_object = out
 
         return res
@@ -249,32 +249,32 @@ class SDK:
         elif r.status_code == 400:
             res.headers = r.headers
             if utils.match_content_type(content_type, "application/prs.openbanking.opendata.v1.3+json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.GetPersonalCurrentAccounts400ApplicationPrsOpenbankingOpendataV13PlusJSON400ErrorObject])
+                out = utils.unmarshal_json(r.text, Optional[operations.GetPersonalCurrentAccounts400ErrorObject])
                 res.four_hundred_error_object = out
         elif r.status_code == 408:
             res.headers = r.headers
             if utils.match_content_type(content_type, "application/prs.openbanking.opendata.v1.3+json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.GetPersonalCurrentAccounts408ApplicationPrsOpenbankingOpendataV13PlusJSON408ErrorObject])
+                out = utils.unmarshal_json(r.text, Optional[operations.GetPersonalCurrentAccounts408ErrorObject])
                 res.four_hundred_and_eight_error_object = out
         elif r.status_code == 429:
             res.headers = r.headers
             if utils.match_content_type(content_type, "application/prs.openbanking.opendata.v1.3+json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.GetPersonalCurrentAccounts429ApplicationPrsOpenbankingOpendataV13PlusJSON429ErrorObject])
+                out = utils.unmarshal_json(r.text, Optional[operations.GetPersonalCurrentAccounts429ErrorObject])
                 res.four_hundred_and_twenty_nine_error_object = out
         elif r.status_code == 500:
             res.headers = r.headers
             if utils.match_content_type(content_type, "application/prs.openbanking.opendata.v1.3+json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.GetPersonalCurrentAccounts500ApplicationPrsOpenbankingOpendataV13PlusJSON500ErrorObject])
+                out = utils.unmarshal_json(r.text, Optional[operations.GetPersonalCurrentAccounts500ErrorObject])
                 res.five_hundred_error_object = out
         elif r.status_code == 503:
             res.headers = r.headers
             if utils.match_content_type(content_type, "application/prs.openbanking.opendata.v1.3+json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.GetPersonalCurrentAccounts503ApplicationPrsOpenbankingOpendataV13PlusJSON503ErrorObject])
+                out = utils.unmarshal_json(r.text, Optional[operations.GetPersonalCurrentAccounts503ErrorObject])
                 res.five_hundred_and_three_error_object = out
         else:
             res.headers = r.headers
             if utils.match_content_type(content_type, "application/prs.openbanking.opendata.v1.3+json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.GetPersonalCurrentAccountsDefaultApplicationPrsOpenbankingOpendataV13PlusJSONErrorObject])
+                out = utils.unmarshal_json(r.text, Optional[operations.GetPersonalCurrentAccountsErrorObject])
                 res.error_object = out
 
         return res
@@ -301,32 +301,32 @@ class SDK:
         elif r.status_code == 400:
             res.headers = r.headers
             if utils.match_content_type(content_type, "application/prs.openbanking.opendata.v1.3+json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.GetUnsecuredSmeLoans400ApplicationPrsOpenbankingOpendataV13PlusJSON400ErrorObject])
+                out = utils.unmarshal_json(r.text, Optional[operations.GetUnsecuredSmeLoans400ErrorObject])
                 res.four_hundred_error_object = out
         elif r.status_code == 408:
             res.headers = r.headers
             if utils.match_content_type(content_type, "application/prs.openbanking.opendata.v1.3+json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.GetUnsecuredSmeLoans408ApplicationPrsOpenbankingOpendataV13PlusJSON408ErrorObject])
+                out = utils.unmarshal_json(r.text, Optional[operations.GetUnsecuredSmeLoans408ErrorObject])
                 res.four_hundred_and_eight_error_object = out
         elif r.status_code == 429:
             res.headers = r.headers
             if utils.match_content_type(content_type, "application/prs.openbanking.opendata.v1.3+json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.GetUnsecuredSmeLoans429ApplicationPrsOpenbankingOpendataV13PlusJSON429ErrorObject])
+                out = utils.unmarshal_json(r.text, Optional[operations.GetUnsecuredSmeLoans429ErrorObject])
                 res.four_hundred_and_twenty_nine_error_object = out
         elif r.status_code == 500:
             res.headers = r.headers
             if utils.match_content_type(content_type, "application/prs.openbanking.opendata.v1.3+json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.GetUnsecuredSmeLoans500ApplicationPrsOpenbankingOpendataV13PlusJSON500ErrorObject])
+                out = utils.unmarshal_json(r.text, Optional[operations.GetUnsecuredSmeLoans500ErrorObject])
                 res.five_hundred_error_object = out
         elif r.status_code == 503:
             res.headers = r.headers
             if utils.match_content_type(content_type, "application/prs.openbanking.opendata.v1.3+json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.GetUnsecuredSmeLoans503ApplicationPrsOpenbankingOpendataV13PlusJSON503ErrorObject])
+                out = utils.unmarshal_json(r.text, Optional[operations.GetUnsecuredSmeLoans503ErrorObject])
                 res.five_hundred_and_three_error_object = out
         else:
             res.headers = r.headers
             if utils.match_content_type(content_type, "application/prs.openbanking.opendata.v1.3+json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.GetUnsecuredSmeLoansDefaultApplicationPrsOpenbankingOpendataV13PlusJSONErrorObject])
+                out = utils.unmarshal_json(r.text, Optional[operations.GetUnsecuredSmeLoansErrorObject])
                 res.error_object = out
 
         return res

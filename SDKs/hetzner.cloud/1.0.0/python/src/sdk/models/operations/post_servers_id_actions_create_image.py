@@ -10,26 +10,26 @@ class PostServersIDActionsCreateImagePathParams:
 
 @dataclass_json
 @dataclass
-class PostServersIDActionsCreateImageRequestBodyLabels:
+class PostServersIDActionsCreateImageCreateImageRequestLabels:
     labelkey: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'labelkey' }})
     
-class PostServersIDActionsCreateImageRequestBodyTypeEnum(str, Enum):
+class PostServersIDActionsCreateImageCreateImageRequestTypeEnum(str, Enum):
     SNAPSHOT = "snapshot"
     BACKUP = "backup"
 
 
 @dataclass_json
 @dataclass
-class PostServersIDActionsCreateImageRequestBodyCreateImageRequest:
+class PostServersIDActionsCreateImageCreateImageRequest:
     description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    labels: Optional[PostServersIDActionsCreateImageRequestBodyLabels] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'labels' }})
-    type: Optional[PostServersIDActionsCreateImageRequestBodyTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    labels: Optional[PostServersIDActionsCreateImageCreateImageRequestLabels] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'labels' }})
+    type: Optional[PostServersIDActionsCreateImageCreateImageRequestTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     
 
 @dataclass
 class PostServersIDActionsCreateImageRequest:
     path_params: PostServersIDActionsCreateImagePathParams = field(default=None)
-    request: Optional[PostServersIDActionsCreateImageRequestBodyCreateImageRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: Optional[PostServersIDActionsCreateImageCreateImageRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass_json
@@ -53,7 +53,7 @@ class PostServersIDActionsCreateImage201ApplicationJSONActionStatusEnum(str, Enu
 
 @dataclass_json
 @dataclass
-class PostServersIDActionsCreateImage201ApplicationJSONActionAction:
+class PostServersIDActionsCreateImage201ApplicationJSONAction:
     command: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'command' }})
     error: PostServersIDActionsCreateImage201ApplicationJSONActionError = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
     finished: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'finished' }})
@@ -122,7 +122,7 @@ class PostServersIDActionsCreateImage201ApplicationJSONImage:
 @dataclass_json
 @dataclass
 class PostServersIDActionsCreateImage201ApplicationJSON:
-    action: Optional[PostServersIDActionsCreateImage201ApplicationJSONActionAction] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'action' }})
+    action: Optional[PostServersIDActionsCreateImage201ApplicationJSONAction] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'action' }})
     image: Optional[PostServersIDActionsCreateImage201ApplicationJSONImage] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'image' }})
     
 

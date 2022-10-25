@@ -7,16 +7,16 @@ const (
 	NestedPowerPortConnectionStatusLabelEnumConnected    NestedPowerPortConnectionStatusLabelEnum = "Connected"
 )
 
-type NestedPowerPortConnectionStatusConnectionStatus struct {
+type NestedPowerPortConnectionStatus struct {
 	Label NestedPowerPortConnectionStatusLabelEnum `json:"label"`
 	Value bool                                     `json:"value"`
 }
 
 type NestedPowerPort struct {
-	Cable            *int64                                           `json:"cable,omitempty"`
-	ConnectionStatus *NestedPowerPortConnectionStatusConnectionStatus `json:"connection_status,omitempty"`
-	Device           *NestedDevice                                    `json:"device,omitempty"`
-	ID               *int64                                           `json:"id,omitempty"`
-	Name             string                                           `json:"name"`
-	URL              *string                                          `json:"url,omitempty"`
+	Cable            *int64                           `json:"cable,omitempty"`
+	ConnectionStatus *NestedPowerPortConnectionStatus `json:"connection_status,omitempty"`
+	Device           *NestedDevice                    `json:"device,omitempty"`
+	ID               *int64                           `json:"id,omitempty"`
+	Name             string                           `json:"name"`
+	URL              *string                          `json:"url,omitempty"`
 }

@@ -4,50 +4,50 @@ type PostServersIDActionsDetachFromNetworkPathParams struct {
 	ID int64 `pathParam:"style=simple,explode=false,name=id"`
 }
 
-type PostServersIDActionsDetachFromNetworkRequestBodyDetachFromNetworkRequest struct {
+type PostServersIDActionsDetachFromNetworkDetachFromNetworkRequest struct {
 	Network int64 `json:"network"`
 }
 
 type PostServersIDActionsDetachFromNetworkRequest struct {
 	PathParams PostServersIDActionsDetachFromNetworkPathParams
-	Request    *PostServersIDActionsDetachFromNetworkRequestBodyDetachFromNetworkRequest `request:"mediaType=application/json"`
+	Request    *PostServersIDActionsDetachFromNetworkDetachFromNetworkRequest `request:"mediaType=application/json"`
 }
 
-type PostServersIDActionsDetachFromNetwork201ApplicationJSONActionError struct {
+type PostServersIDActionsDetachFromNetworkActionResponseActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
 }
 
-type PostServersIDActionsDetachFromNetwork201ApplicationJSONActionResources struct {
+type PostServersIDActionsDetachFromNetworkActionResponseActionResources struct {
 	ID   int64  `json:"id"`
 	Type string `json:"type"`
 }
 
-type PostServersIDActionsDetachFromNetwork201ApplicationJSONActionStatusEnum string
+type PostServersIDActionsDetachFromNetworkActionResponseActionStatusEnum string
 
 const (
-	PostServersIDActionsDetachFromNetwork201ApplicationJSONActionStatusEnumSuccess PostServersIDActionsDetachFromNetwork201ApplicationJSONActionStatusEnum = "success"
-	PostServersIDActionsDetachFromNetwork201ApplicationJSONActionStatusEnumRunning PostServersIDActionsDetachFromNetwork201ApplicationJSONActionStatusEnum = "running"
-	PostServersIDActionsDetachFromNetwork201ApplicationJSONActionStatusEnumError   PostServersIDActionsDetachFromNetwork201ApplicationJSONActionStatusEnum = "error"
+	PostServersIDActionsDetachFromNetworkActionResponseActionStatusEnumSuccess PostServersIDActionsDetachFromNetworkActionResponseActionStatusEnum = "success"
+	PostServersIDActionsDetachFromNetworkActionResponseActionStatusEnumRunning PostServersIDActionsDetachFromNetworkActionResponseActionStatusEnum = "running"
+	PostServersIDActionsDetachFromNetworkActionResponseActionStatusEnumError   PostServersIDActionsDetachFromNetworkActionResponseActionStatusEnum = "error"
 )
 
-type PostServersIDActionsDetachFromNetwork201ApplicationJSONActionAction struct {
-	Command   string                                                                   `json:"command"`
-	Error     PostServersIDActionsDetachFromNetwork201ApplicationJSONActionError       `json:"error"`
-	Finished  string                                                                   `json:"finished"`
-	ID        int64                                                                    `json:"id"`
-	Progress  float64                                                                  `json:"progress"`
-	Resources []PostServersIDActionsDetachFromNetwork201ApplicationJSONActionResources `json:"resources"`
-	Started   string                                                                   `json:"started"`
-	Status    PostServersIDActionsDetachFromNetwork201ApplicationJSONActionStatusEnum  `json:"status"`
+type PostServersIDActionsDetachFromNetworkActionResponseAction struct {
+	Command   string                                                               `json:"command"`
+	Error     PostServersIDActionsDetachFromNetworkActionResponseActionError       `json:"error"`
+	Finished  string                                                               `json:"finished"`
+	ID        int64                                                                `json:"id"`
+	Progress  float64                                                              `json:"progress"`
+	Resources []PostServersIDActionsDetachFromNetworkActionResponseActionResources `json:"resources"`
+	Started   string                                                               `json:"started"`
+	Status    PostServersIDActionsDetachFromNetworkActionResponseActionStatusEnum  `json:"status"`
 }
 
-type PostServersIDActionsDetachFromNetwork201ApplicationJSONActionResponse struct {
-	Action PostServersIDActionsDetachFromNetwork201ApplicationJSONActionAction `json:"action"`
+type PostServersIDActionsDetachFromNetworkActionResponse struct {
+	Action PostServersIDActionsDetachFromNetworkActionResponseAction `json:"action"`
 }
 
 type PostServersIDActionsDetachFromNetworkResponse struct {
-	ActionResponse *PostServersIDActionsDetachFromNetwork201ApplicationJSONActionResponse
+	ActionResponse *PostServersIDActionsDetachFromNetworkActionResponse
 	ContentType    string
 	StatusCode     int64
 }

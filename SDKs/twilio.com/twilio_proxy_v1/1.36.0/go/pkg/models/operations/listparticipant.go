@@ -28,7 +28,7 @@ type ListParticipantRequest struct {
 	Security    ListParticipantSecurity
 }
 
-type ListParticipant200ApplicationJSONMeta struct {
+type ListParticipantListParticipantResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -38,13 +38,13 @@ type ListParticipant200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListParticipant200ApplicationJSONListParticipantResponse struct {
-	Meta         *ListParticipant200ApplicationJSONMeta    `json:"meta,omitempty"`
-	Participants []shared.ProxyV1ServiceSessionParticipant `json:"participants,omitempty"`
+type ListParticipantListParticipantResponse struct {
+	Meta         *ListParticipantListParticipantResponseMeta `json:"meta,omitempty"`
+	Participants []shared.ProxyV1ServiceSessionParticipant   `json:"participants,omitempty"`
 }
 
 type ListParticipantResponse struct {
 	ContentType             string
-	ListParticipantResponse *ListParticipant200ApplicationJSONListParticipantResponse
+	ListParticipantResponse *ListParticipantListParticipantResponse
 	StatusCode              int64
 }

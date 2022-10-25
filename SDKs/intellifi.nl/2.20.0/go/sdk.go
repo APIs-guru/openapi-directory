@@ -1390,12 +1390,12 @@ func (s *SDK) GetBlobByID(ctx context.Context, request operations.GetBlobByIDReq
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `image/*`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetBlobByID200ImageWildcardBinaryString = data
+			res.GetBlobByID200ImageWildcardBinaryString = out
 		}
 	}
 

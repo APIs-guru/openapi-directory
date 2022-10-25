@@ -7,7 +7,7 @@ CREATE_CREDENTIAL_SERVERS = [
 
 
 @dataclass
-class CreateCredentialRequestBodyCreateCredentialRequest:
+class CreateCredentialCreateCredentialRequest:
     api_key: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'ApiKey' }})
     certificate: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Certificate' }})
     friendly_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
@@ -25,7 +25,7 @@ class CreateCredentialSecurity:
 @dataclass
 class CreateCredentialRequest:
     server_url: Optional[str] = field(default=None)
-    request: Optional[CreateCredentialRequestBodyCreateCredentialRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateCredentialCreateCredentialRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateCredentialSecurity = field(default=None)
     
 

@@ -40,7 +40,7 @@ type ListCallSummariesRequest struct {
 	Security    ListCallSummariesSecurity
 }
 
-type ListCallSummaries200ApplicationJSONMeta struct {
+type ListCallSummariesListCallSummariesResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -50,13 +50,13 @@ type ListCallSummaries200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListCallSummaries200ApplicationJSONListCallSummariesResponse struct {
-	CallSummaries []shared.InsightsV1CallSummaries         `json:"call_summaries,omitempty"`
-	Meta          *ListCallSummaries200ApplicationJSONMeta `json:"meta,omitempty"`
+type ListCallSummariesListCallSummariesResponse struct {
+	CallSummaries []shared.InsightsV1CallSummaries                `json:"call_summaries,omitempty"`
+	Meta          *ListCallSummariesListCallSummariesResponseMeta `json:"meta,omitempty"`
 }
 
 type ListCallSummariesResponse struct {
 	ContentType               string
-	ListCallSummariesResponse *ListCallSummaries200ApplicationJSONListCallSummariesResponse
+	ListCallSummariesResponse *ListCallSummariesListCallSummariesResponse
 	StatusCode                int64
 }

@@ -1,59 +1,59 @@
 package shared
 
-type WritableCableLengthUnitLengthUnitEnum string
+type WritableCableLengthUnitEnum string
 
 const (
-	WritableCableLengthUnitLengthUnitEnumM  WritableCableLengthUnitLengthUnitEnum = "m"
-	WritableCableLengthUnitLengthUnitEnumCm WritableCableLengthUnitLengthUnitEnum = "cm"
-	WritableCableLengthUnitLengthUnitEnumFt WritableCableLengthUnitLengthUnitEnum = "ft"
-	WritableCableLengthUnitLengthUnitEnumIn WritableCableLengthUnitLengthUnitEnum = "in"
+	WritableCableLengthUnitEnumM  WritableCableLengthUnitEnum = "m"
+	WritableCableLengthUnitEnumCm WritableCableLengthUnitEnum = "cm"
+	WritableCableLengthUnitEnumFt WritableCableLengthUnitEnum = "ft"
+	WritableCableLengthUnitEnumIn WritableCableLengthUnitEnum = "in"
 )
 
-type WritableCableStatusStatusEnum string
+type WritableCableStatusEnum string
 
 const (
-	WritableCableStatusStatusEnumConnected       WritableCableStatusStatusEnum = "connected"
-	WritableCableStatusStatusEnumPlanned         WritableCableStatusStatusEnum = "planned"
-	WritableCableStatusStatusEnumDecommissioning WritableCableStatusStatusEnum = "decommissioning"
+	WritableCableStatusEnumConnected       WritableCableStatusEnum = "connected"
+	WritableCableStatusEnumPlanned         WritableCableStatusEnum = "planned"
+	WritableCableStatusEnumDecommissioning WritableCableStatusEnum = "decommissioning"
 )
 
-type WritableCableTypeTypeEnum string
+type WritableCableTypeEnum string
 
 const (
-	WritableCableTypeTypeEnumCat3       WritableCableTypeTypeEnum = "cat3"
-	WritableCableTypeTypeEnumCat5       WritableCableTypeTypeEnum = "cat5"
-	WritableCableTypeTypeEnumCat5e      WritableCableTypeTypeEnum = "cat5e"
-	WritableCableTypeTypeEnumCat6       WritableCableTypeTypeEnum = "cat6"
-	WritableCableTypeTypeEnumCat6a      WritableCableTypeTypeEnum = "cat6a"
-	WritableCableTypeTypeEnumCat7       WritableCableTypeTypeEnum = "cat7"
-	WritableCableTypeTypeEnumDacActive  WritableCableTypeTypeEnum = "dac-active"
-	WritableCableTypeTypeEnumDacPassive WritableCableTypeTypeEnum = "dac-passive"
-	WritableCableTypeTypeEnumMrj21Trunk WritableCableTypeTypeEnum = "mrj21-trunk"
-	WritableCableTypeTypeEnumCoaxial    WritableCableTypeTypeEnum = "coaxial"
-	WritableCableTypeTypeEnumMmf        WritableCableTypeTypeEnum = "mmf"
-	WritableCableTypeTypeEnumMmfOm1     WritableCableTypeTypeEnum = "mmf-om1"
-	WritableCableTypeTypeEnumMmfOm2     WritableCableTypeTypeEnum = "mmf-om2"
-	WritableCableTypeTypeEnumMmfOm3     WritableCableTypeTypeEnum = "mmf-om3"
-	WritableCableTypeTypeEnumMmfOm4     WritableCableTypeTypeEnum = "mmf-om4"
-	WritableCableTypeTypeEnumSmf        WritableCableTypeTypeEnum = "smf"
-	WritableCableTypeTypeEnumSmfOs1     WritableCableTypeTypeEnum = "smf-os1"
-	WritableCableTypeTypeEnumSmfOs2     WritableCableTypeTypeEnum = "smf-os2"
-	WritableCableTypeTypeEnumAoc        WritableCableTypeTypeEnum = "aoc"
-	WritableCableTypeTypeEnumPower      WritableCableTypeTypeEnum = "power"
+	WritableCableTypeEnumCat3       WritableCableTypeEnum = "cat3"
+	WritableCableTypeEnumCat5       WritableCableTypeEnum = "cat5"
+	WritableCableTypeEnumCat5e      WritableCableTypeEnum = "cat5e"
+	WritableCableTypeEnumCat6       WritableCableTypeEnum = "cat6"
+	WritableCableTypeEnumCat6a      WritableCableTypeEnum = "cat6a"
+	WritableCableTypeEnumCat7       WritableCableTypeEnum = "cat7"
+	WritableCableTypeEnumDacActive  WritableCableTypeEnum = "dac-active"
+	WritableCableTypeEnumDacPassive WritableCableTypeEnum = "dac-passive"
+	WritableCableTypeEnumMrj21Trunk WritableCableTypeEnum = "mrj21-trunk"
+	WritableCableTypeEnumCoaxial    WritableCableTypeEnum = "coaxial"
+	WritableCableTypeEnumMmf        WritableCableTypeEnum = "mmf"
+	WritableCableTypeEnumMmfOm1     WritableCableTypeEnum = "mmf-om1"
+	WritableCableTypeEnumMmfOm2     WritableCableTypeEnum = "mmf-om2"
+	WritableCableTypeEnumMmfOm3     WritableCableTypeEnum = "mmf-om3"
+	WritableCableTypeEnumMmfOm4     WritableCableTypeEnum = "mmf-om4"
+	WritableCableTypeEnumSmf        WritableCableTypeEnum = "smf"
+	WritableCableTypeEnumSmfOs1     WritableCableTypeEnum = "smf-os1"
+	WritableCableTypeEnumSmfOs2     WritableCableTypeEnum = "smf-os2"
+	WritableCableTypeEnumAoc        WritableCableTypeEnum = "aoc"
+	WritableCableTypeEnumPower      WritableCableTypeEnum = "power"
 )
 
 type WritableCable struct {
-	Color            *string                                `json:"color,omitempty"`
-	ID               *int64                                 `json:"id,omitempty"`
-	Label            *string                                `json:"label,omitempty"`
-	Length           *int64                                 `json:"length,omitempty"`
-	LengthUnit       *WritableCableLengthUnitLengthUnitEnum `json:"length_unit,omitempty"`
-	Status           *WritableCableStatusStatusEnum         `json:"status,omitempty"`
-	TerminationA     map[string]string                      `json:"termination_a,omitempty"`
-	TerminationAID   int64                                  `json:"termination_a_id"`
-	TerminationAType string                                 `json:"termination_a_type"`
-	TerminationB     map[string]string                      `json:"termination_b,omitempty"`
-	TerminationBID   int64                                  `json:"termination_b_id"`
-	TerminationBType string                                 `json:"termination_b_type"`
-	Type             *WritableCableTypeTypeEnum             `json:"type,omitempty"`
+	Color            *string                      `json:"color,omitempty"`
+	ID               *int64                       `json:"id,omitempty"`
+	Label            *string                      `json:"label,omitempty"`
+	Length           *int64                       `json:"length,omitempty"`
+	LengthUnit       *WritableCableLengthUnitEnum `json:"length_unit,omitempty"`
+	Status           *WritableCableStatusEnum     `json:"status,omitempty"`
+	TerminationA     map[string]string            `json:"termination_a,omitempty"`
+	TerminationAID   int64                        `json:"termination_a_id"`
+	TerminationAType string                       `json:"termination_a_type"`
+	TerminationB     map[string]string            `json:"termination_b,omitempty"`
+	TerminationBID   int64                        `json:"termination_b_id"`
+	TerminationBType string                       `json:"termination_b_type"`
+	Type             *WritableCableTypeEnum       `json:"type,omitempty"`
 }

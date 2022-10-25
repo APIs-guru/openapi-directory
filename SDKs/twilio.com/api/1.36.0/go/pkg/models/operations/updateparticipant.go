@@ -14,52 +14,52 @@ type UpdateParticipantPathParams struct {
 	ConferenceSid string `pathParam:"style=simple,explode=false,name=ConferenceSid"`
 }
 
-type UpdateParticipantRequestBodyAnnounceMethodEnum string
+type UpdateParticipantUpdateParticipantRequestAnnounceMethodEnum string
 
 const (
-	UpdateParticipantRequestBodyAnnounceMethodEnumHead   UpdateParticipantRequestBodyAnnounceMethodEnum = "HEAD"
-	UpdateParticipantRequestBodyAnnounceMethodEnumGet    UpdateParticipantRequestBodyAnnounceMethodEnum = "GET"
-	UpdateParticipantRequestBodyAnnounceMethodEnumPost   UpdateParticipantRequestBodyAnnounceMethodEnum = "POST"
-	UpdateParticipantRequestBodyAnnounceMethodEnumPatch  UpdateParticipantRequestBodyAnnounceMethodEnum = "PATCH"
-	UpdateParticipantRequestBodyAnnounceMethodEnumPut    UpdateParticipantRequestBodyAnnounceMethodEnum = "PUT"
-	UpdateParticipantRequestBodyAnnounceMethodEnumDelete UpdateParticipantRequestBodyAnnounceMethodEnum = "DELETE"
+	UpdateParticipantUpdateParticipantRequestAnnounceMethodEnumHead   UpdateParticipantUpdateParticipantRequestAnnounceMethodEnum = "HEAD"
+	UpdateParticipantUpdateParticipantRequestAnnounceMethodEnumGet    UpdateParticipantUpdateParticipantRequestAnnounceMethodEnum = "GET"
+	UpdateParticipantUpdateParticipantRequestAnnounceMethodEnumPost   UpdateParticipantUpdateParticipantRequestAnnounceMethodEnum = "POST"
+	UpdateParticipantUpdateParticipantRequestAnnounceMethodEnumPatch  UpdateParticipantUpdateParticipantRequestAnnounceMethodEnum = "PATCH"
+	UpdateParticipantUpdateParticipantRequestAnnounceMethodEnumPut    UpdateParticipantUpdateParticipantRequestAnnounceMethodEnum = "PUT"
+	UpdateParticipantUpdateParticipantRequestAnnounceMethodEnumDelete UpdateParticipantUpdateParticipantRequestAnnounceMethodEnum = "DELETE"
 )
 
-type UpdateParticipantRequestBodyHoldMethodEnum string
+type UpdateParticipantUpdateParticipantRequestHoldMethodEnum string
 
 const (
-	UpdateParticipantRequestBodyHoldMethodEnumHead   UpdateParticipantRequestBodyHoldMethodEnum = "HEAD"
-	UpdateParticipantRequestBodyHoldMethodEnumGet    UpdateParticipantRequestBodyHoldMethodEnum = "GET"
-	UpdateParticipantRequestBodyHoldMethodEnumPost   UpdateParticipantRequestBodyHoldMethodEnum = "POST"
-	UpdateParticipantRequestBodyHoldMethodEnumPatch  UpdateParticipantRequestBodyHoldMethodEnum = "PATCH"
-	UpdateParticipantRequestBodyHoldMethodEnumPut    UpdateParticipantRequestBodyHoldMethodEnum = "PUT"
-	UpdateParticipantRequestBodyHoldMethodEnumDelete UpdateParticipantRequestBodyHoldMethodEnum = "DELETE"
+	UpdateParticipantUpdateParticipantRequestHoldMethodEnumHead   UpdateParticipantUpdateParticipantRequestHoldMethodEnum = "HEAD"
+	UpdateParticipantUpdateParticipantRequestHoldMethodEnumGet    UpdateParticipantUpdateParticipantRequestHoldMethodEnum = "GET"
+	UpdateParticipantUpdateParticipantRequestHoldMethodEnumPost   UpdateParticipantUpdateParticipantRequestHoldMethodEnum = "POST"
+	UpdateParticipantUpdateParticipantRequestHoldMethodEnumPatch  UpdateParticipantUpdateParticipantRequestHoldMethodEnum = "PATCH"
+	UpdateParticipantUpdateParticipantRequestHoldMethodEnumPut    UpdateParticipantUpdateParticipantRequestHoldMethodEnum = "PUT"
+	UpdateParticipantUpdateParticipantRequestHoldMethodEnumDelete UpdateParticipantUpdateParticipantRequestHoldMethodEnum = "DELETE"
 )
 
-type UpdateParticipantRequestBodyWaitMethodEnum string
+type UpdateParticipantUpdateParticipantRequestWaitMethodEnum string
 
 const (
-	UpdateParticipantRequestBodyWaitMethodEnumHead   UpdateParticipantRequestBodyWaitMethodEnum = "HEAD"
-	UpdateParticipantRequestBodyWaitMethodEnumGet    UpdateParticipantRequestBodyWaitMethodEnum = "GET"
-	UpdateParticipantRequestBodyWaitMethodEnumPost   UpdateParticipantRequestBodyWaitMethodEnum = "POST"
-	UpdateParticipantRequestBodyWaitMethodEnumPatch  UpdateParticipantRequestBodyWaitMethodEnum = "PATCH"
-	UpdateParticipantRequestBodyWaitMethodEnumPut    UpdateParticipantRequestBodyWaitMethodEnum = "PUT"
-	UpdateParticipantRequestBodyWaitMethodEnumDelete UpdateParticipantRequestBodyWaitMethodEnum = "DELETE"
+	UpdateParticipantUpdateParticipantRequestWaitMethodEnumHead   UpdateParticipantUpdateParticipantRequestWaitMethodEnum = "HEAD"
+	UpdateParticipantUpdateParticipantRequestWaitMethodEnumGet    UpdateParticipantUpdateParticipantRequestWaitMethodEnum = "GET"
+	UpdateParticipantUpdateParticipantRequestWaitMethodEnumPost   UpdateParticipantUpdateParticipantRequestWaitMethodEnum = "POST"
+	UpdateParticipantUpdateParticipantRequestWaitMethodEnumPatch  UpdateParticipantUpdateParticipantRequestWaitMethodEnum = "PATCH"
+	UpdateParticipantUpdateParticipantRequestWaitMethodEnumPut    UpdateParticipantUpdateParticipantRequestWaitMethodEnum = "PUT"
+	UpdateParticipantUpdateParticipantRequestWaitMethodEnumDelete UpdateParticipantUpdateParticipantRequestWaitMethodEnum = "DELETE"
 )
 
-type UpdateParticipantRequestBodyUpdateParticipantRequest struct {
-	AnnounceMethod      *UpdateParticipantRequestBodyAnnounceMethodEnum `form:"name=AnnounceMethod"`
-	AnnounceURL         *string                                         `form:"name=AnnounceUrl"`
-	BeepOnExit          *bool                                           `form:"name=BeepOnExit"`
-	CallSidToCoach      *string                                         `form:"name=CallSidToCoach"`
-	Coaching            *bool                                           `form:"name=Coaching"`
-	EndConferenceOnExit *bool                                           `form:"name=EndConferenceOnExit"`
-	Hold                *bool                                           `form:"name=Hold"`
-	HoldMethod          *UpdateParticipantRequestBodyHoldMethodEnum     `form:"name=HoldMethod"`
-	HoldURL             *string                                         `form:"name=HoldUrl"`
-	Muted               *bool                                           `form:"name=Muted"`
-	WaitMethod          *UpdateParticipantRequestBodyWaitMethodEnum     `form:"name=WaitMethod"`
-	WaitURL             *string                                         `form:"name=WaitUrl"`
+type UpdateParticipantUpdateParticipantRequest struct {
+	AnnounceMethod      *UpdateParticipantUpdateParticipantRequestAnnounceMethodEnum `form:"name=AnnounceMethod"`
+	AnnounceURL         *string                                                      `form:"name=AnnounceUrl"`
+	BeepOnExit          *bool                                                        `form:"name=BeepOnExit"`
+	CallSidToCoach      *string                                                      `form:"name=CallSidToCoach"`
+	Coaching            *bool                                                        `form:"name=Coaching"`
+	EndConferenceOnExit *bool                                                        `form:"name=EndConferenceOnExit"`
+	Hold                *bool                                                        `form:"name=Hold"`
+	HoldMethod          *UpdateParticipantUpdateParticipantRequestHoldMethodEnum     `form:"name=HoldMethod"`
+	HoldURL             *string                                                      `form:"name=HoldUrl"`
+	Muted               *bool                                                        `form:"name=Muted"`
+	WaitMethod          *UpdateParticipantUpdateParticipantRequestWaitMethodEnum     `form:"name=WaitMethod"`
+	WaitURL             *string                                                      `form:"name=WaitUrl"`
 }
 
 type UpdateParticipantSecurity struct {
@@ -69,7 +69,7 @@ type UpdateParticipantSecurity struct {
 type UpdateParticipantRequest struct {
 	ServerURL  *string
 	PathParams UpdateParticipantPathParams
-	Request    *UpdateParticipantRequestBodyUpdateParticipantRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateParticipantUpdateParticipantRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateParticipantSecurity
 }
 

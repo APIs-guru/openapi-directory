@@ -12,7 +12,7 @@ type CreateWorkerPathParams struct {
 	WorkspaceSid string `pathParam:"style=simple,explode=false,name=WorkspaceSid"`
 }
 
-type CreateWorkerRequestBodyCreateWorkerRequest struct {
+type CreateWorkerCreateWorkerRequest struct {
 	ActivitySid  *string `form:"name=ActivitySid"`
 	Attributes   *string `form:"name=Attributes"`
 	FriendlyName string  `form:"name=FriendlyName"`
@@ -25,7 +25,7 @@ type CreateWorkerSecurity struct {
 type CreateWorkerRequest struct {
 	ServerURL  *string
 	PathParams CreateWorkerPathParams
-	Request    *CreateWorkerRequestBodyCreateWorkerRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateWorkerCreateWorkerRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateWorkerSecurity
 }
 

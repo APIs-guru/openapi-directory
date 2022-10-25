@@ -32,7 +32,7 @@ class ListFlowRevisionRequest:
 
 @dataclass_json
 @dataclass
-class ListFlowRevision200ApplicationJSONMeta:
+class ListFlowRevisionListFlowRevisionResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -44,14 +44,14 @@ class ListFlowRevision200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListFlowRevision200ApplicationJSONListFlowRevisionResponse:
-    meta: Optional[ListFlowRevision200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+class ListFlowRevisionListFlowRevisionResponse:
+    meta: Optional[ListFlowRevisionListFlowRevisionResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     revisions: Optional[List[shared.StudioV2FlowFlowRevision]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'revisions' }})
     
 
 @dataclass
 class ListFlowRevisionResponse:
     content_type: str = field(default=None)
-    list_flow_revision_response: Optional[ListFlowRevision200ApplicationJSONListFlowRevisionResponse] = field(default=None)
+    list_flow_revision_response: Optional[ListFlowRevisionListFlowRevisionResponse] = field(default=None)
     status_code: int = field(default=None)
     

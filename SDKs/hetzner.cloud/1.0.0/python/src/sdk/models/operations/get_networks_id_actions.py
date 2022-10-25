@@ -47,18 +47,18 @@ class GetNetworksIDActionsRequest:
 
 @dataclass_json
 @dataclass
-class GetNetworksIDActions200ApplicationJSONActionsError:
+class GetNetworksIDActionsActionsResponseActionError:
     code: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'code' }})
     message: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'message' }})
     
 
 @dataclass_json
 @dataclass
-class GetNetworksIDActions200ApplicationJSONActionsResources:
+class GetNetworksIDActionsActionsResponseActionResources:
     id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     type: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     
-class GetNetworksIDActions200ApplicationJSONActionsStatusEnum(str, Enum):
+class GetNetworksIDActionsActionsResponseActionStatusEnum(str, Enum):
     SUCCESS = "success"
     RUNNING = "running"
     ERROR = "error"
@@ -66,20 +66,20 @@ class GetNetworksIDActions200ApplicationJSONActionsStatusEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class GetNetworksIDActions200ApplicationJSONActionsAction:
+class GetNetworksIDActionsActionsResponseAction:
     command: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'command' }})
-    error: GetNetworksIDActions200ApplicationJSONActionsError = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
+    error: GetNetworksIDActionsActionsResponseActionError = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
     finished: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'finished' }})
     id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     progress: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'progress' }})
-    resources: List[GetNetworksIDActions200ApplicationJSONActionsResources] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resources' }})
+    resources: List[GetNetworksIDActionsActionsResponseActionResources] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resources' }})
     started: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'started' }})
-    status: GetNetworksIDActions200ApplicationJSONActionsStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    status: GetNetworksIDActionsActionsResponseActionStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
     
 
 @dataclass_json
 @dataclass
-class GetNetworksIDActions200ApplicationJSONMetaPagination:
+class GetNetworksIDActionsActionsResponseMetaPagination:
     last_page: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'last_page' }})
     next_page: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page' }})
     page: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'page' }})
@@ -90,20 +90,20 @@ class GetNetworksIDActions200ApplicationJSONMetaPagination:
 
 @dataclass_json
 @dataclass
-class GetNetworksIDActions200ApplicationJSONMeta:
-    pagination: GetNetworksIDActions200ApplicationJSONMetaPagination = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pagination' }})
+class GetNetworksIDActionsActionsResponseMeta:
+    pagination: GetNetworksIDActionsActionsResponseMetaPagination = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pagination' }})
     
 
 @dataclass_json
 @dataclass
-class GetNetworksIDActions200ApplicationJSONActionsResponse:
-    actions: List[GetNetworksIDActions200ApplicationJSONActionsAction] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'actions' }})
-    meta: Optional[GetNetworksIDActions200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+class GetNetworksIDActionsActionsResponse:
+    actions: List[GetNetworksIDActionsActionsResponseAction] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'actions' }})
+    meta: Optional[GetNetworksIDActionsActionsResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     
 
 @dataclass
 class GetNetworksIDActionsResponse:
-    actions_response: Optional[GetNetworksIDActions200ApplicationJSONActionsResponse] = field(default=None)
+    actions_response: Optional[GetNetworksIDActionsActionsResponse] = field(default=None)
     content_type: str = field(default=None)
     status_code: int = field(default=None)
     

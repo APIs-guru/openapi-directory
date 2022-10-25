@@ -33,7 +33,7 @@ class ListSyncSyncMapPermissionRequest:
 
 @dataclass_json
 @dataclass
-class ListSyncSyncMapPermission200ApplicationJSONMeta:
+class ListSyncSyncMapPermissionListSyncSyncMapPermissionResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -45,14 +45,14 @@ class ListSyncSyncMapPermission200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListSyncSyncMapPermission200ApplicationJSONListSyncSyncMapPermissionResponse:
-    meta: Optional[ListSyncSyncMapPermission200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+class ListSyncSyncMapPermissionListSyncSyncMapPermissionResponse:
+    meta: Optional[ListSyncSyncMapPermissionListSyncSyncMapPermissionResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     permissions: Optional[List[shared.PreviewSyncServiceSyncMapSyncMapPermission]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'permissions' }})
     
 
 @dataclass
 class ListSyncSyncMapPermissionResponse:
     content_type: str = field(default=None)
-    list_sync_sync_map_permission_response: Optional[ListSyncSyncMapPermission200ApplicationJSONListSyncSyncMapPermissionResponse] = field(default=None)
+    list_sync_sync_map_permission_response: Optional[ListSyncSyncMapPermissionListSyncSyncMapPermissionResponse] = field(default=None)
     status_code: int = field(default=None)
     

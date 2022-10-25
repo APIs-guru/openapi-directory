@@ -16,18 +16,18 @@ class GetFirewallsIDActionsActionIDRequest:
 
 @dataclass_json
 @dataclass
-class GetFirewallsIDActionsActionID200ApplicationJSONActionError:
+class GetFirewallsIDActionsActionIDActionResponseActionError:
     code: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'code' }})
     message: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'message' }})
     
 
 @dataclass_json
 @dataclass
-class GetFirewallsIDActionsActionID200ApplicationJSONActionResources:
+class GetFirewallsIDActionsActionIDActionResponseActionResources:
     id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     type: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     
-class GetFirewallsIDActionsActionID200ApplicationJSONActionStatusEnum(str, Enum):
+class GetFirewallsIDActionsActionIDActionResponseActionStatusEnum(str, Enum):
     SUCCESS = "success"
     RUNNING = "running"
     ERROR = "error"
@@ -35,26 +35,26 @@ class GetFirewallsIDActionsActionID200ApplicationJSONActionStatusEnum(str, Enum)
 
 @dataclass_json
 @dataclass
-class GetFirewallsIDActionsActionID200ApplicationJSONActionAction:
+class GetFirewallsIDActionsActionIDActionResponseAction:
     command: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'command' }})
-    error: GetFirewallsIDActionsActionID200ApplicationJSONActionError = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
+    error: GetFirewallsIDActionsActionIDActionResponseActionError = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
     finished: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'finished' }})
     id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     progress: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'progress' }})
-    resources: List[GetFirewallsIDActionsActionID200ApplicationJSONActionResources] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resources' }})
+    resources: List[GetFirewallsIDActionsActionIDActionResponseActionResources] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resources' }})
     started: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'started' }})
-    status: GetFirewallsIDActionsActionID200ApplicationJSONActionStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    status: GetFirewallsIDActionsActionIDActionResponseActionStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
     
 
 @dataclass_json
 @dataclass
-class GetFirewallsIDActionsActionID200ApplicationJSONActionResponse:
-    action: GetFirewallsIDActionsActionID200ApplicationJSONActionAction = field(default=None, metadata={'dataclasses_json': { 'field_name': 'action' }})
+class GetFirewallsIDActionsActionIDActionResponse:
+    action: GetFirewallsIDActionsActionIDActionResponseAction = field(default=None, metadata={'dataclasses_json': { 'field_name': 'action' }})
     
 
 @dataclass
 class GetFirewallsIDActionsActionIDResponse:
-    action_response: Optional[GetFirewallsIDActionsActionID200ApplicationJSONActionResponse] = field(default=None)
+    action_response: Optional[GetFirewallsIDActionsActionIDActionResponse] = field(default=None)
     content_type: str = field(default=None)
     status_code: int = field(default=None)
     

@@ -20,8 +20,9 @@ class AccessTokenPutRequest:
 @dataclass
 class AccessTokenPutResponse:
     access_token_put_200_application_json_string: Optional[str] = field(default=None)
+    access_token_put_200_application_xml_string: Optional[str] = field(default=None)
     access_token_put_200_text_json_string: Optional[str] = field(default=None)
-    body: bytes = field(default=None)
+    access_token_put_200_text_xml_string: Optional[str] = field(default=None)
     content_type: str = field(default=None)
     status_code: int = field(default=None)
     

@@ -45,36 +45,36 @@ type GetVolumesIDActionsRequest struct {
 	QueryParams GetVolumesIDActionsQueryParams
 }
 
-type GetVolumesIDActions200ApplicationJSONActionsError struct {
+type GetVolumesIDActionsActionsResponseActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
 }
 
-type GetVolumesIDActions200ApplicationJSONActionsResources struct {
+type GetVolumesIDActionsActionsResponseActionResources struct {
 	ID   int64  `json:"id"`
 	Type string `json:"type"`
 }
 
-type GetVolumesIDActions200ApplicationJSONActionsStatusEnum string
+type GetVolumesIDActionsActionsResponseActionStatusEnum string
 
 const (
-	GetVolumesIDActions200ApplicationJSONActionsStatusEnumSuccess GetVolumesIDActions200ApplicationJSONActionsStatusEnum = "success"
-	GetVolumesIDActions200ApplicationJSONActionsStatusEnumRunning GetVolumesIDActions200ApplicationJSONActionsStatusEnum = "running"
-	GetVolumesIDActions200ApplicationJSONActionsStatusEnumError   GetVolumesIDActions200ApplicationJSONActionsStatusEnum = "error"
+	GetVolumesIDActionsActionsResponseActionStatusEnumSuccess GetVolumesIDActionsActionsResponseActionStatusEnum = "success"
+	GetVolumesIDActionsActionsResponseActionStatusEnumRunning GetVolumesIDActionsActionsResponseActionStatusEnum = "running"
+	GetVolumesIDActionsActionsResponseActionStatusEnumError   GetVolumesIDActionsActionsResponseActionStatusEnum = "error"
 )
 
-type GetVolumesIDActions200ApplicationJSONActionsAction struct {
-	Command   string                                                  `json:"command"`
-	Error     GetVolumesIDActions200ApplicationJSONActionsError       `json:"error"`
-	Finished  string                                                  `json:"finished"`
-	ID        int64                                                   `json:"id"`
-	Progress  float64                                                 `json:"progress"`
-	Resources []GetVolumesIDActions200ApplicationJSONActionsResources `json:"resources"`
-	Started   string                                                  `json:"started"`
-	Status    GetVolumesIDActions200ApplicationJSONActionsStatusEnum  `json:"status"`
+type GetVolumesIDActionsActionsResponseAction struct {
+	Command   string                                              `json:"command"`
+	Error     GetVolumesIDActionsActionsResponseActionError       `json:"error"`
+	Finished  string                                              `json:"finished"`
+	ID        int64                                               `json:"id"`
+	Progress  float64                                             `json:"progress"`
+	Resources []GetVolumesIDActionsActionsResponseActionResources `json:"resources"`
+	Started   string                                              `json:"started"`
+	Status    GetVolumesIDActionsActionsResponseActionStatusEnum  `json:"status"`
 }
 
-type GetVolumesIDActions200ApplicationJSONMetaPagination struct {
+type GetVolumesIDActionsActionsResponseMetaPagination struct {
 	LastPage     float64 `json:"last_page"`
 	NextPage     float64 `json:"next_page"`
 	Page         float64 `json:"page"`
@@ -83,17 +83,17 @@ type GetVolumesIDActions200ApplicationJSONMetaPagination struct {
 	TotalEntries float64 `json:"total_entries"`
 }
 
-type GetVolumesIDActions200ApplicationJSONMeta struct {
-	Pagination GetVolumesIDActions200ApplicationJSONMetaPagination `json:"pagination"`
+type GetVolumesIDActionsActionsResponseMeta struct {
+	Pagination GetVolumesIDActionsActionsResponseMetaPagination `json:"pagination"`
 }
 
-type GetVolumesIDActions200ApplicationJSONActionsResponse struct {
-	Actions []GetVolumesIDActions200ApplicationJSONActionsAction `json:"actions"`
-	Meta    *GetVolumesIDActions200ApplicationJSONMeta           `json:"meta,omitempty"`
+type GetVolumesIDActionsActionsResponse struct {
+	Actions []GetVolumesIDActionsActionsResponseAction `json:"actions"`
+	Meta    *GetVolumesIDActionsActionsResponseMeta    `json:"meta,omitempty"`
 }
 
 type GetVolumesIDActionsResponse struct {
-	ActionsResponse *GetVolumesIDActions200ApplicationJSONActionsResponse
+	ActionsResponse *GetVolumesIDActionsActionsResponse
 	ContentType     string
 	StatusCode      int64
 }

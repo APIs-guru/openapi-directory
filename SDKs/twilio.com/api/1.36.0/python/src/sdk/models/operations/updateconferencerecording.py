@@ -14,7 +14,7 @@ class UpdateConferenceRecordingPathParams:
     
 
 @dataclass
-class UpdateConferenceRecordingRequestBodyUpdateConferenceRecordingRequest:
+class UpdateConferenceRecordingUpdateConferenceRecordingRequest:
     pause_behavior: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'PauseBehavior' }})
     status: shared.ConferenceRecordingEnumStatusEnum = field(default=None, metadata={'form': { 'field_name': 'Status' }})
     
@@ -28,7 +28,7 @@ class UpdateConferenceRecordingSecurity:
 class UpdateConferenceRecordingRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateConferenceRecordingPathParams = field(default=None)
-    request: Optional[UpdateConferenceRecordingRequestBodyUpdateConferenceRecordingRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateConferenceRecordingUpdateConferenceRecordingRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateConferenceRecordingSecurity = field(default=None)
     
 

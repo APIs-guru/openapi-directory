@@ -7,13 +7,13 @@ const (
 	InterfaceConnectionConnectionStatusLabelEnumConnected    InterfaceConnectionConnectionStatusLabelEnum = "Connected"
 )
 
-type InterfaceConnectionConnectionStatusConnectionStatus struct {
+type InterfaceConnectionConnectionStatus struct {
 	Label InterfaceConnectionConnectionStatusLabelEnum `json:"label"`
 	Value bool                                         `json:"value"`
 }
 
 type InterfaceConnection struct {
-	ConnectionStatus *InterfaceConnectionConnectionStatusConnectionStatus `json:"connection_status,omitempty"`
-	InterfaceA       *NestedInterface                                     `json:"interface_a,omitempty"`
-	InterfaceB       NestedInterface                                      `json:"interface_b"`
+	ConnectionStatus *InterfaceConnectionConnectionStatus `json:"connection_status,omitempty"`
+	InterfaceA       *NestedInterface                     `json:"interface_a,omitempty"`
+	InterfaceB       NestedInterface                      `json:"interface_b"`
 }

@@ -10,7 +10,7 @@ CREATE_USAGE_TRIGGER_SERVERS = [
 class CreateUsageTriggerPathParams:
     account_sid: str = field(default=None, metadata={'path_param': { 'field_name': 'AccountSid', 'style': 'simple', 'explode': False }})
     
-class CreateUsageTriggerRequestBodyCallbackMethodEnum(str, Enum):
+class CreateUsageTriggerCreateUsageTriggerRequestCallbackMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -20,8 +20,8 @@ class CreateUsageTriggerRequestBodyCallbackMethodEnum(str, Enum):
 
 
 @dataclass
-class CreateUsageTriggerRequestBodyCreateUsageTriggerRequest:
-    callback_method: Optional[CreateUsageTriggerRequestBodyCallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'CallbackMethod' }})
+class CreateUsageTriggerCreateUsageTriggerRequest:
+    callback_method: Optional[CreateUsageTriggerCreateUsageTriggerRequestCallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'CallbackMethod' }})
     callback_url: str = field(default=None, metadata={'form': { 'field_name': 'CallbackUrl' }})
     friendly_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
     recurring: Optional[shared.UsageTriggerEnumRecurringEnum] = field(default=None, metadata={'form': { 'field_name': 'Recurring' }})
@@ -39,7 +39,7 @@ class CreateUsageTriggerSecurity:
 class CreateUsageTriggerRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateUsageTriggerPathParams = field(default=None)
-    request: Optional[CreateUsageTriggerRequestBodyCreateUsageTriggerRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateUsageTriggerCreateUsageTriggerRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateUsageTriggerSecurity = field(default=None)
     
 

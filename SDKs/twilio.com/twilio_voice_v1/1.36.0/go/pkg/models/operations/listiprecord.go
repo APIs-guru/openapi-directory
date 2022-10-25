@@ -22,7 +22,7 @@ type ListIPRecordRequest struct {
 	Security    ListIPRecordSecurity
 }
 
-type ListIPRecord200ApplicationJSONMeta struct {
+type ListIPRecordListIPRecordResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -32,13 +32,13 @@ type ListIPRecord200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListIPRecord200ApplicationJSONListIPRecordResponse struct {
-	IPRecords []shared.VoiceV1IPRecord            `json:"ip_records,omitempty"`
-	Meta      *ListIPRecord200ApplicationJSONMeta `json:"meta,omitempty"`
+type ListIPRecordListIPRecordResponse struct {
+	IPRecords []shared.VoiceV1IPRecord              `json:"ip_records,omitempty"`
+	Meta      *ListIPRecordListIPRecordResponseMeta `json:"meta,omitempty"`
 }
 
 type ListIPRecordResponse struct {
 	ContentType          string
-	ListIPRecordResponse *ListIPRecord200ApplicationJSONListIPRecordResponse
+	ListIPRecordResponse *ListIPRecordListIPRecordResponse
 	StatusCode           int64
 }

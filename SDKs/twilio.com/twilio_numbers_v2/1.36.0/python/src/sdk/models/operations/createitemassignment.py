@@ -12,7 +12,7 @@ class CreateItemAssignmentPathParams:
     
 
 @dataclass
-class CreateItemAssignmentRequestBodyCreateItemAssignmentRequest:
+class CreateItemAssignmentCreateItemAssignmentRequest:
     object_sid: str = field(default=None, metadata={'form': { 'field_name': 'ObjectSid' }})
     
 
@@ -25,7 +25,7 @@ class CreateItemAssignmentSecurity:
 class CreateItemAssignmentRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateItemAssignmentPathParams = field(default=None)
-    request: Optional[CreateItemAssignmentRequestBodyCreateItemAssignmentRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateItemAssignmentCreateItemAssignmentRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateItemAssignmentSecurity = field(default=None)
     
 

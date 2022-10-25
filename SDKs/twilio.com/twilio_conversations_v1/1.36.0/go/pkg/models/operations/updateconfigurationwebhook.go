@@ -8,7 +8,7 @@ var UpdateConfigurationWebhookServers = []string{
 	"https://conversations.twilio.com",
 }
 
-type UpdateConfigurationWebhookRequestBodyUpdateConfigurationWebhookRequest struct {
+type UpdateConfigurationWebhookUpdateConfigurationWebhookRequest struct {
 	Filters        []string                                   `form:"name=Filters"`
 	Method         *string                                    `form:"name=Method"`
 	PostWebhookURL *string                                    `form:"name=PostWebhookUrl"`
@@ -22,7 +22,7 @@ type UpdateConfigurationWebhookSecurity struct {
 
 type UpdateConfigurationWebhookRequest struct {
 	ServerURL *string
-	Request   *UpdateConfigurationWebhookRequestBodyUpdateConfigurationWebhookRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request   *UpdateConfigurationWebhookUpdateConfigurationWebhookRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security  UpdateConfigurationWebhookSecurity
 }
 

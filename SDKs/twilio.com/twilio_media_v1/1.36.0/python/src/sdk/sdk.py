@@ -241,7 +241,7 @@ class SDK:
         res = operations.ListMediaProcessorResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListMediaProcessor200ApplicationJSONListMediaProcessorResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListMediaProcessorListMediaProcessorResponse])
                 res.list_media_processor_response = out
 
         return res
@@ -266,7 +266,7 @@ class SDK:
         res = operations.ListMediaRecordingResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListMediaRecording200ApplicationJSONListMediaRecordingResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListMediaRecordingListMediaRecordingResponse])
                 res.list_media_recording_response = out
 
         return res
@@ -291,7 +291,7 @@ class SDK:
         res = operations.ListPlayerStreamerResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListPlayerStreamer200ApplicationJSONListPlayerStreamerResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListPlayerStreamerListPlayerStreamerResponse])
                 res.list_player_streamer_response = out
 
         return res

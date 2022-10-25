@@ -12,7 +12,7 @@ class CreateBindingPathParams:
     
 
 @dataclass
-class CreateBindingRequestBodyCreateBindingRequest:
+class CreateBindingCreateBindingRequest:
     address: str = field(default=None, metadata={'form': { 'field_name': 'Address' }})
     binding_type: shared.BindingEnumBindingTypeEnum = field(default=None, metadata={'form': { 'field_name': 'BindingType' }})
     credential_sid: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'CredentialSid' }})
@@ -31,7 +31,7 @@ class CreateBindingSecurity:
 class CreateBindingRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateBindingPathParams = field(default=None)
-    request: Optional[CreateBindingRequestBodyCreateBindingRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateBindingCreateBindingRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateBindingSecurity = field(default=None)
     
 

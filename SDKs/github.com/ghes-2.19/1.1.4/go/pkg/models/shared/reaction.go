@@ -17,7 +17,7 @@ const (
 	ReactionContentEnumEyes     ReactionContentEnum = "eyes"
 )
 
-type ReactionUserSimpleUser struct {
+type ReactionSimpleUser struct {
 	AvatarURL         string  `json:"avatar_url"`
 	EventsURL         string  `json:"events_url"`
 	FollowersURL      string  `json:"followers_url"`
@@ -40,9 +40,9 @@ type ReactionUserSimpleUser struct {
 }
 
 type Reaction struct {
-	Content   ReactionContentEnum    `json:"content"`
-	CreatedAt time.Time              `json:"created_at"`
-	ID        int64                  `json:"id"`
-	NodeID    string                 `json:"node_id"`
-	User      ReactionUserSimpleUser `json:"user"`
+	Content   ReactionContentEnum `json:"content"`
+	CreatedAt time.Time           `json:"created_at"`
+	ID        int64               `json:"id"`
+	NodeID    string              `json:"node_id"`
+	User      ReactionSimpleUser  `json:"user"`
 }

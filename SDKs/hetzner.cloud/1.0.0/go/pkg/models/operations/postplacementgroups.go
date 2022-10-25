@@ -1,72 +1,72 @@
 package operations
 
-type PostPlacementGroupsRequestBodyTypeEnum string
+type PostPlacementGroupsCreatePlacementGroupRequestTypeEnum string
 
 const (
-	PostPlacementGroupsRequestBodyTypeEnumSpread PostPlacementGroupsRequestBodyTypeEnum = "spread"
+	PostPlacementGroupsCreatePlacementGroupRequestTypeEnumSpread PostPlacementGroupsCreatePlacementGroupRequestTypeEnum = "spread"
 )
 
-type PostPlacementGroupsRequestBodyCreatePlacementGroupRequest struct {
-	Labels map[string]interface{}                 `json:"labels,omitempty"`
-	Name   string                                 `json:"name"`
-	Type   PostPlacementGroupsRequestBodyTypeEnum `json:"type"`
+type PostPlacementGroupsCreatePlacementGroupRequest struct {
+	Labels map[string]interface{}                                 `json:"labels,omitempty"`
+	Name   string                                                 `json:"name"`
+	Type   PostPlacementGroupsCreatePlacementGroupRequestTypeEnum `json:"type"`
 }
 
 type PostPlacementGroupsRequest struct {
-	Request *PostPlacementGroupsRequestBodyCreatePlacementGroupRequest `request:"mediaType=application/json"`
+	Request *PostPlacementGroupsCreatePlacementGroupRequest `request:"mediaType=application/json"`
 }
 
-type PostPlacementGroups201ApplicationJSONActionError struct {
+type PostPlacementGroupsCreatePlacementGroupResponseNullableActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
 }
 
-type PostPlacementGroups201ApplicationJSONActionResources struct {
+type PostPlacementGroupsCreatePlacementGroupResponseNullableActionResources struct {
 	ID   int64  `json:"id"`
 	Type string `json:"type"`
 }
 
-type PostPlacementGroups201ApplicationJSONActionStatusEnum string
+type PostPlacementGroupsCreatePlacementGroupResponseNullableActionStatusEnum string
 
 const (
-	PostPlacementGroups201ApplicationJSONActionStatusEnumSuccess PostPlacementGroups201ApplicationJSONActionStatusEnum = "success"
-	PostPlacementGroups201ApplicationJSONActionStatusEnumRunning PostPlacementGroups201ApplicationJSONActionStatusEnum = "running"
-	PostPlacementGroups201ApplicationJSONActionStatusEnumError   PostPlacementGroups201ApplicationJSONActionStatusEnum = "error"
+	PostPlacementGroupsCreatePlacementGroupResponseNullableActionStatusEnumSuccess PostPlacementGroupsCreatePlacementGroupResponseNullableActionStatusEnum = "success"
+	PostPlacementGroupsCreatePlacementGroupResponseNullableActionStatusEnumRunning PostPlacementGroupsCreatePlacementGroupResponseNullableActionStatusEnum = "running"
+	PostPlacementGroupsCreatePlacementGroupResponseNullableActionStatusEnumError   PostPlacementGroupsCreatePlacementGroupResponseNullableActionStatusEnum = "error"
 )
 
-type PostPlacementGroups201ApplicationJSONActionNullableAction struct {
-	Command   string                                                 `json:"command"`
-	Error     PostPlacementGroups201ApplicationJSONActionError       `json:"error"`
-	Finished  string                                                 `json:"finished"`
-	ID        int64                                                  `json:"id"`
-	Progress  float64                                                `json:"progress"`
-	Resources []PostPlacementGroups201ApplicationJSONActionResources `json:"resources"`
-	Started   string                                                 `json:"started"`
-	Status    PostPlacementGroups201ApplicationJSONActionStatusEnum  `json:"status"`
+type PostPlacementGroupsCreatePlacementGroupResponseNullableAction struct {
+	Command   string                                                                   `json:"command"`
+	Error     PostPlacementGroupsCreatePlacementGroupResponseNullableActionError       `json:"error"`
+	Finished  string                                                                   `json:"finished"`
+	ID        int64                                                                    `json:"id"`
+	Progress  float64                                                                  `json:"progress"`
+	Resources []PostPlacementGroupsCreatePlacementGroupResponseNullableActionResources `json:"resources"`
+	Started   string                                                                   `json:"started"`
+	Status    PostPlacementGroupsCreatePlacementGroupResponseNullableActionStatusEnum  `json:"status"`
 }
 
-type PostPlacementGroups201ApplicationJSONPlacementGroupTypeEnum string
+type PostPlacementGroupsCreatePlacementGroupResponsePlacementGroupTypeEnum string
 
 const (
-	PostPlacementGroups201ApplicationJSONPlacementGroupTypeEnumSpread PostPlacementGroups201ApplicationJSONPlacementGroupTypeEnum = "spread"
+	PostPlacementGroupsCreatePlacementGroupResponsePlacementGroupTypeEnumSpread PostPlacementGroupsCreatePlacementGroupResponsePlacementGroupTypeEnum = "spread"
 )
 
-type PostPlacementGroups201ApplicationJSONPlacementGroupPlacementGroup struct {
-	Created string                                                      `json:"created"`
-	ID      int64                                                       `json:"id"`
-	Labels  map[string]string                                           `json:"labels"`
-	Name    string                                                      `json:"name"`
-	Servers []int64                                                     `json:"servers"`
-	Type    PostPlacementGroups201ApplicationJSONPlacementGroupTypeEnum `json:"type"`
+type PostPlacementGroupsCreatePlacementGroupResponsePlacementGroup struct {
+	Created string                                                                `json:"created"`
+	ID      int64                                                                 `json:"id"`
+	Labels  map[string]string                                                     `json:"labels"`
+	Name    string                                                                `json:"name"`
+	Servers []int64                                                               `json:"servers"`
+	Type    PostPlacementGroupsCreatePlacementGroupResponsePlacementGroupTypeEnum `json:"type"`
 }
 
-type PostPlacementGroups201ApplicationJSONCreatePlacementGroupResponse struct {
-	Action         *PostPlacementGroups201ApplicationJSONActionNullableAction        `json:"action,omitempty"`
-	PlacementGroup PostPlacementGroups201ApplicationJSONPlacementGroupPlacementGroup `json:"placement_group"`
+type PostPlacementGroupsCreatePlacementGroupResponse struct {
+	Action         *PostPlacementGroupsCreatePlacementGroupResponseNullableAction `json:"action,omitempty"`
+	PlacementGroup PostPlacementGroupsCreatePlacementGroupResponsePlacementGroup  `json:"placement_group"`
 }
 
 type PostPlacementGroupsResponse struct {
 	ContentType                  string
-	CreatePlacementGroupResponse *PostPlacementGroups201ApplicationJSONCreatePlacementGroupResponse
+	CreatePlacementGroupResponse *PostPlacementGroupsCreatePlacementGroupResponse
 	StatusCode                   int64
 }

@@ -8,22 +8,22 @@ var CreateSmsCommandServers = []string{
 	"https://supersim.twilio.com",
 }
 
-type CreateSmsCommandRequestBodyCallbackMethodEnum string
+type CreateSmsCommandCreateSmsCommandRequestCallbackMethodEnum string
 
 const (
-	CreateSmsCommandRequestBodyCallbackMethodEnumHead   CreateSmsCommandRequestBodyCallbackMethodEnum = "HEAD"
-	CreateSmsCommandRequestBodyCallbackMethodEnumGet    CreateSmsCommandRequestBodyCallbackMethodEnum = "GET"
-	CreateSmsCommandRequestBodyCallbackMethodEnumPost   CreateSmsCommandRequestBodyCallbackMethodEnum = "POST"
-	CreateSmsCommandRequestBodyCallbackMethodEnumPatch  CreateSmsCommandRequestBodyCallbackMethodEnum = "PATCH"
-	CreateSmsCommandRequestBodyCallbackMethodEnumPut    CreateSmsCommandRequestBodyCallbackMethodEnum = "PUT"
-	CreateSmsCommandRequestBodyCallbackMethodEnumDelete CreateSmsCommandRequestBodyCallbackMethodEnum = "DELETE"
+	CreateSmsCommandCreateSmsCommandRequestCallbackMethodEnumHead   CreateSmsCommandCreateSmsCommandRequestCallbackMethodEnum = "HEAD"
+	CreateSmsCommandCreateSmsCommandRequestCallbackMethodEnumGet    CreateSmsCommandCreateSmsCommandRequestCallbackMethodEnum = "GET"
+	CreateSmsCommandCreateSmsCommandRequestCallbackMethodEnumPost   CreateSmsCommandCreateSmsCommandRequestCallbackMethodEnum = "POST"
+	CreateSmsCommandCreateSmsCommandRequestCallbackMethodEnumPatch  CreateSmsCommandCreateSmsCommandRequestCallbackMethodEnum = "PATCH"
+	CreateSmsCommandCreateSmsCommandRequestCallbackMethodEnumPut    CreateSmsCommandCreateSmsCommandRequestCallbackMethodEnum = "PUT"
+	CreateSmsCommandCreateSmsCommandRequestCallbackMethodEnumDelete CreateSmsCommandCreateSmsCommandRequestCallbackMethodEnum = "DELETE"
 )
 
-type CreateSmsCommandRequestBodyCreateSmsCommandRequest struct {
-	CallbackMethod *CreateSmsCommandRequestBodyCallbackMethodEnum `form:"name=CallbackMethod"`
-	CallbackURL    *string                                        `form:"name=CallbackUrl"`
-	Payload        string                                         `form:"name=Payload"`
-	Sim            string                                         `form:"name=Sim"`
+type CreateSmsCommandCreateSmsCommandRequest struct {
+	CallbackMethod *CreateSmsCommandCreateSmsCommandRequestCallbackMethodEnum `form:"name=CallbackMethod"`
+	CallbackURL    *string                                                    `form:"name=CallbackUrl"`
+	Payload        string                                                     `form:"name=Payload"`
+	Sim            string                                                     `form:"name=Sim"`
 }
 
 type CreateSmsCommandSecurity struct {
@@ -32,7 +32,7 @@ type CreateSmsCommandSecurity struct {
 
 type CreateSmsCommandRequest struct {
 	ServerURL *string
-	Request   *CreateSmsCommandRequestBodyCreateSmsCommandRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request   *CreateSmsCommandCreateSmsCommandRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security  CreateSmsCommandSecurity
 }
 

@@ -30,7 +30,7 @@ type ListExecutionRequest struct {
 	Security    ListExecutionSecurity
 }
 
-type ListExecution200ApplicationJSONMeta struct {
+type ListExecutionListExecutionResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -40,13 +40,13 @@ type ListExecution200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListExecution200ApplicationJSONListExecutionResponse struct {
-	Executions []shared.StudioV2FlowExecution       `json:"executions,omitempty"`
-	Meta       *ListExecution200ApplicationJSONMeta `json:"meta,omitempty"`
+type ListExecutionListExecutionResponse struct {
+	Executions []shared.StudioV2FlowExecution          `json:"executions,omitempty"`
+	Meta       *ListExecutionListExecutionResponseMeta `json:"meta,omitempty"`
 }
 
 type ListExecutionResponse struct {
 	ContentType           string
-	ListExecutionResponse *ListExecution200ApplicationJSONListExecutionResponse
+	ListExecutionResponse *ListExecutionListExecutionResponse
 	StatusCode            int64
 }

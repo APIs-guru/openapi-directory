@@ -13,7 +13,7 @@ class UpdateAddressPathParams:
     
 
 @dataclass
-class UpdateAddressRequestBodyUpdateAddressRequest:
+class UpdateAddressUpdateAddressRequest:
     auto_correct_address: Optional[bool] = field(default=None, metadata={'form': { 'field_name': 'AutoCorrectAddress' }})
     city: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'City' }})
     customer_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'CustomerName' }})
@@ -33,7 +33,7 @@ class UpdateAddressSecurity:
 class UpdateAddressRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateAddressPathParams = field(default=None)
-    request: Optional[UpdateAddressRequestBodyUpdateAddressRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateAddressUpdateAddressRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateAddressSecurity = field(default=None)
     
 

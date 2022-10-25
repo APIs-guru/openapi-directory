@@ -7,7 +7,7 @@ CREATE_SERVICE_SERVERS = [
 
 
 @dataclass
-class CreateServiceRequestBodyCreateServiceRequest:
+class CreateServiceCreateServiceRequest:
     callback_url: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'CallbackUrl' }})
     chat_instance_sid: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'ChatInstanceSid' }})
     default_ttl: Optional[int] = field(default=None, metadata={'form': { 'field_name': 'DefaultTtl' }})
@@ -26,7 +26,7 @@ class CreateServiceSecurity:
 @dataclass
 class CreateServiceRequest:
     server_url: Optional[str] = field(default=None)
-    request: Optional[CreateServiceRequestBodyCreateServiceRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateServiceCreateServiceRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateServiceSecurity = field(default=None)
     
 

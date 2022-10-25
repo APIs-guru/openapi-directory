@@ -14,41 +14,41 @@ type PostServersIDActionsChangeAliasIpsRequest struct {
 	Request    *PostServersIDActionsChangeAliasIpsRequestBody `request:"mediaType=application/json"`
 }
 
-type PostServersIDActionsChangeAliasIps201ApplicationJSONActionError struct {
+type PostServersIDActionsChangeAliasIpsActionResponseActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
 }
 
-type PostServersIDActionsChangeAliasIps201ApplicationJSONActionResources struct {
+type PostServersIDActionsChangeAliasIpsActionResponseActionResources struct {
 	ID   int64  `json:"id"`
 	Type string `json:"type"`
 }
 
-type PostServersIDActionsChangeAliasIps201ApplicationJSONActionStatusEnum string
+type PostServersIDActionsChangeAliasIpsActionResponseActionStatusEnum string
 
 const (
-	PostServersIDActionsChangeAliasIps201ApplicationJSONActionStatusEnumSuccess PostServersIDActionsChangeAliasIps201ApplicationJSONActionStatusEnum = "success"
-	PostServersIDActionsChangeAliasIps201ApplicationJSONActionStatusEnumRunning PostServersIDActionsChangeAliasIps201ApplicationJSONActionStatusEnum = "running"
-	PostServersIDActionsChangeAliasIps201ApplicationJSONActionStatusEnumError   PostServersIDActionsChangeAliasIps201ApplicationJSONActionStatusEnum = "error"
+	PostServersIDActionsChangeAliasIpsActionResponseActionStatusEnumSuccess PostServersIDActionsChangeAliasIpsActionResponseActionStatusEnum = "success"
+	PostServersIDActionsChangeAliasIpsActionResponseActionStatusEnumRunning PostServersIDActionsChangeAliasIpsActionResponseActionStatusEnum = "running"
+	PostServersIDActionsChangeAliasIpsActionResponseActionStatusEnumError   PostServersIDActionsChangeAliasIpsActionResponseActionStatusEnum = "error"
 )
 
-type PostServersIDActionsChangeAliasIps201ApplicationJSONActionAction struct {
-	Command   string                                                                `json:"command"`
-	Error     PostServersIDActionsChangeAliasIps201ApplicationJSONActionError       `json:"error"`
-	Finished  string                                                                `json:"finished"`
-	ID        int64                                                                 `json:"id"`
-	Progress  float64                                                               `json:"progress"`
-	Resources []PostServersIDActionsChangeAliasIps201ApplicationJSONActionResources `json:"resources"`
-	Started   string                                                                `json:"started"`
-	Status    PostServersIDActionsChangeAliasIps201ApplicationJSONActionStatusEnum  `json:"status"`
+type PostServersIDActionsChangeAliasIpsActionResponseAction struct {
+	Command   string                                                            `json:"command"`
+	Error     PostServersIDActionsChangeAliasIpsActionResponseActionError       `json:"error"`
+	Finished  string                                                            `json:"finished"`
+	ID        int64                                                             `json:"id"`
+	Progress  float64                                                           `json:"progress"`
+	Resources []PostServersIDActionsChangeAliasIpsActionResponseActionResources `json:"resources"`
+	Started   string                                                            `json:"started"`
+	Status    PostServersIDActionsChangeAliasIpsActionResponseActionStatusEnum  `json:"status"`
 }
 
-type PostServersIDActionsChangeAliasIps201ApplicationJSONActionResponse struct {
-	Action PostServersIDActionsChangeAliasIps201ApplicationJSONActionAction `json:"action"`
+type PostServersIDActionsChangeAliasIpsActionResponse struct {
+	Action PostServersIDActionsChangeAliasIpsActionResponseAction `json:"action"`
 }
 
 type PostServersIDActionsChangeAliasIpsResponse struct {
-	ActionResponse *PostServersIDActionsChangeAliasIps201ApplicationJSONActionResponse
+	ActionResponse *PostServersIDActionsChangeAliasIpsActionResponse
 	ContentType    string
 	StatusCode     int64
 }

@@ -11,7 +11,7 @@ class RenameFolderPathParams:
 
 @dataclass_json
 @dataclass
-class RenameFolderRequestBodyRenameFolderData:
+class RenameFolderRenameFolderData:
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
     
 
@@ -23,7 +23,7 @@ class RenameFolderSecurity:
 @dataclass
 class RenameFolderRequest:
     path_params: RenameFolderPathParams = field(default=None)
-    request: RenameFolderRequestBodyRenameFolderData = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: RenameFolderRenameFolderData = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     security: RenameFolderSecurity = field(default=None)
     
 

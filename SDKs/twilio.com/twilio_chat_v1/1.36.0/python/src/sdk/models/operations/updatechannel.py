@@ -13,7 +13,7 @@ class UpdateChannelPathParams:
     
 
 @dataclass
-class UpdateChannelRequestBodyUpdateChannelRequest:
+class UpdateChannelUpdateChannelRequest:
     attributes: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Attributes' }})
     friendly_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
     unique_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'UniqueName' }})
@@ -28,7 +28,7 @@ class UpdateChannelSecurity:
 class UpdateChannelRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateChannelPathParams = field(default=None)
-    request: Optional[UpdateChannelRequestBodyUpdateChannelRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateChannelUpdateChannelRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateChannelSecurity = field(default=None)
     
 

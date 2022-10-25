@@ -29,7 +29,7 @@ type ListOutgoingCallerIDRequest struct {
 	Security    ListOutgoingCallerIDSecurity
 }
 
-type ListOutgoingCallerID200ApplicationJSONListOutgoingCallerIDResponse struct {
+type ListOutgoingCallerIDListOutgoingCallerIDResponse struct {
 	End               *int64                                   `json:"end,omitempty"`
 	FirstPageURI      *string                                  `json:"first_page_uri,omitempty"`
 	NextPageURI       *string                                  `json:"next_page_uri,omitempty"`
@@ -43,6 +43,6 @@ type ListOutgoingCallerID200ApplicationJSONListOutgoingCallerIDResponse struct {
 
 type ListOutgoingCallerIDResponse struct {
 	ContentType                  string
-	ListOutgoingCallerIDResponse *ListOutgoingCallerID200ApplicationJSONListOutgoingCallerIDResponse
+	ListOutgoingCallerIDResponse *ListOutgoingCallerIDListOutgoingCallerIDResponse
 	StatusCode                   int64
 }

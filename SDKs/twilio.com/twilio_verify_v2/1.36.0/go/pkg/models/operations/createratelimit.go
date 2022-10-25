@@ -12,7 +12,7 @@ type CreateRateLimitPathParams struct {
 	ServiceSid string `pathParam:"style=simple,explode=false,name=ServiceSid"`
 }
 
-type CreateRateLimitRequestBodyCreateRateLimitRequest struct {
+type CreateRateLimitCreateRateLimitRequest struct {
 	Description *string `form:"name=Description"`
 	UniqueName  string  `form:"name=UniqueName"`
 }
@@ -24,7 +24,7 @@ type CreateRateLimitSecurity struct {
 type CreateRateLimitRequest struct {
 	ServerURL  *string
 	PathParams CreateRateLimitPathParams
-	Request    *CreateRateLimitRequestBodyCreateRateLimitRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateRateLimitCreateRateLimitRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateRateLimitSecurity
 }
 

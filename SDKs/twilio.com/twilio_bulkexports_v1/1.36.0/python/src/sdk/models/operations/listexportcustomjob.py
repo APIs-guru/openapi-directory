@@ -32,7 +32,7 @@ class ListExportCustomJobRequest:
 
 @dataclass_json
 @dataclass
-class ListExportCustomJob200ApplicationJSONMeta:
+class ListExportCustomJobListExportCustomJobResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -44,14 +44,14 @@ class ListExportCustomJob200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListExportCustomJob200ApplicationJSONListExportCustomJobResponse:
+class ListExportCustomJobListExportCustomJobResponse:
     jobs: Optional[List[shared.BulkexportsV1ExportExportCustomJob]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'jobs' }})
-    meta: Optional[ListExportCustomJob200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+    meta: Optional[ListExportCustomJobListExportCustomJobResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     
 
 @dataclass
 class ListExportCustomJobResponse:
     content_type: str = field(default=None)
-    list_export_custom_job_response: Optional[ListExportCustomJob200ApplicationJSONListExportCustomJobResponse] = field(default=None)
+    list_export_custom_job_response: Optional[ListExportCustomJobListExportCustomJobResponse] = field(default=None)
     status_code: int = field(default=None)
     

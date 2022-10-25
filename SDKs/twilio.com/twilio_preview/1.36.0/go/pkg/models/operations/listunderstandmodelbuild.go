@@ -27,7 +27,7 @@ type ListUnderstandModelBuildRequest struct {
 	Security    ListUnderstandModelBuildSecurity
 }
 
-type ListUnderstandModelBuild200ApplicationJSONMeta struct {
+type ListUnderstandModelBuildListUnderstandModelBuildResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -37,13 +37,13 @@ type ListUnderstandModelBuild200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListUnderstandModelBuild200ApplicationJSONListUnderstandModelBuildResponse struct {
-	Meta        *ListUnderstandModelBuild200ApplicationJSONMeta `json:"meta,omitempty"`
-	ModelBuilds []shared.PreviewUnderstandAssistantModelBuild   `json:"model_builds,omitempty"`
+type ListUnderstandModelBuildListUnderstandModelBuildResponse struct {
+	Meta        *ListUnderstandModelBuildListUnderstandModelBuildResponseMeta `json:"meta,omitempty"`
+	ModelBuilds []shared.PreviewUnderstandAssistantModelBuild                 `json:"model_builds,omitempty"`
 }
 
 type ListUnderstandModelBuildResponse struct {
 	ContentType                      string
-	ListUnderstandModelBuildResponse *ListUnderstandModelBuild200ApplicationJSONListUnderstandModelBuildResponse
+	ListUnderstandModelBuildResponse *ListUnderstandModelBuildListUnderstandModelBuildResponse
 	StatusCode                       int64
 }

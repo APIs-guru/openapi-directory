@@ -12,7 +12,7 @@ from . import nestedtenant
 
 @dataclass_json
 @dataclass
-class VlanStatusStatus:
+class VlanStatus:
     label: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label' }})
     value: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
     
@@ -30,7 +30,7 @@ class Vlan:
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
     role: Optional[nestedrole.NestedRole] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'role' }})
     site: Optional[nestedsite.NestedSite] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'site' }})
-    status: Optional[VlanStatusStatus] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    status: Optional[VlanStatus] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
     tags: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
     tenant: Optional[nestedtenant.NestedTenant] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tenant' }})
     vid: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'vid' }})

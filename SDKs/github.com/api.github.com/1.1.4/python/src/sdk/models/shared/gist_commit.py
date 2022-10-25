@@ -16,7 +16,7 @@ class GistCommitChangeStatus:
 
 @dataclass_json
 @dataclass
-class GistCommitUserSimpleUser:
+class GistCommitSimpleUser:
     avatar_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'avatar_url' }})
     events_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'events_url' }})
     followers_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'followers_url' }})
@@ -44,6 +44,6 @@ class GistCommit:
     change_status: GistCommitChangeStatus = field(default=None, metadata={'dataclasses_json': { 'field_name': 'change_status' }})
     committed_at: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'committed_at', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'url' }})
-    user: GistCommitUserSimpleUser = field(default=None, metadata={'dataclasses_json': { 'field_name': 'user' }})
+    user: GistCommitSimpleUser = field(default=None, metadata={'dataclasses_json': { 'field_name': 'user' }})
     version: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'version' }})
     

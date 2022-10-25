@@ -126,12 +126,12 @@ func (s *SDK) Balance(ctx context.Context) (*operations.BalanceResponse, error) 
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `text/plain`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -167,19 +167,21 @@ func (s *SDK) ContactsGet(ctx context.Context, request operations.ContactsGetReq
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ContactsGet200ApplicationJSONString = out
+			out := string(data)
+			res.ContactsGet200ApplicationJSONString = &out
 		case utils.MatchContentType(contentType, `text/csv`):
 			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			out := string(data)
+			res.ContactsGet200TextCsvString = &out
 		}
 	}
 
@@ -215,19 +217,21 @@ func (s *SDK) ContactsPost(ctx context.Context, request operations.ContactsPostR
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ContactsPost200ApplicationJSONString = out
+			out := string(data)
+			res.ContactsPost200ApplicationJSONString = &out
 		case utils.MatchContentType(contentType, `text/plain`):
 			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			out := string(data)
+			res.ContactsPost200TextPlainString = &out
 		}
 	}
 
@@ -416,12 +420,12 @@ func (s *SDK) Sms(ctx context.Context, request operations.SmsRequest) (*operatio
 
 			res.Sms200ApplicationJSONObject = out
 		case utils.MatchContentType(contentType, `text/plain`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -462,7 +466,8 @@ func (s *SDK) Status(ctx context.Context, request operations.StatusRequest) (*op
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			out := string(data)
+			res.Status200TextPlainString = &out
 		}
 	}
 
@@ -544,7 +549,8 @@ func (s *SDK) Voice(ctx context.Context, request operations.VoiceRequest) (*oper
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			out := string(data)
+			res.Voice200TextPlainString = &out
 		}
 	}
 

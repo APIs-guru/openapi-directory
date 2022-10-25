@@ -28,7 +28,7 @@ type ListFunctionVersionRequest struct {
 	Security    ListFunctionVersionSecurity
 }
 
-type ListFunctionVersion200ApplicationJSONMeta struct {
+type ListFunctionVersionListFunctionVersionResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -38,13 +38,13 @@ type ListFunctionVersion200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListFunctionVersion200ApplicationJSONListFunctionVersionResponse struct {
+type ListFunctionVersionListFunctionVersionResponse struct {
 	FunctionVersions []shared.ServerlessV1ServiceFunctionFunctionVersion `json:"function_versions,omitempty"`
-	Meta             *ListFunctionVersion200ApplicationJSONMeta          `json:"meta,omitempty"`
+	Meta             *ListFunctionVersionListFunctionVersionResponseMeta `json:"meta,omitempty"`
 }
 
 type ListFunctionVersionResponse struct {
 	ContentType                 string
-	ListFunctionVersionResponse *ListFunctionVersion200ApplicationJSONListFunctionVersionResponse
+	ListFunctionVersionResponse *ListFunctionVersionListFunctionVersionResponse
 	StatusCode                  int64
 }

@@ -13,7 +13,7 @@ type UpdateModelBuildPathParams struct {
 	Sid          string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
-type UpdateModelBuildRequestBodyUpdateModelBuildRequest struct {
+type UpdateModelBuildUpdateModelBuildRequest struct {
 	UniqueName *string `form:"name=UniqueName"`
 }
 
@@ -24,7 +24,7 @@ type UpdateModelBuildSecurity struct {
 type UpdateModelBuildRequest struct {
 	ServerURL  *string
 	PathParams UpdateModelBuildPathParams
-	Request    *UpdateModelBuildRequestBodyUpdateModelBuildRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateModelBuildUpdateModelBuildRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateModelBuildSecurity
 }
 

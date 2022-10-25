@@ -12,7 +12,7 @@ type CreateSyncSyncListPathParams struct {
 	ServiceSid string `pathParam:"style=simple,explode=false,name=ServiceSid"`
 }
 
-type CreateSyncSyncListRequestBodyCreateSyncSyncListRequest struct {
+type CreateSyncSyncListCreateSyncSyncListRequest struct {
 	UniqueName *string `form:"name=UniqueName"`
 }
 
@@ -23,7 +23,7 @@ type CreateSyncSyncListSecurity struct {
 type CreateSyncSyncListRequest struct {
 	ServerURL  *string
 	PathParams CreateSyncSyncListPathParams
-	Request    *CreateSyncSyncListRequestBodyCreateSyncSyncListRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateSyncSyncListCreateSyncSyncListRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateSyncSyncListSecurity
 }
 

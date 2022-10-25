@@ -15,18 +15,18 @@ class PostServersIDActionsResetRequest:
 
 @dataclass_json
 @dataclass
-class PostServersIDActionsReset201ApplicationJSONActionError:
+class PostServersIDActionsResetActionResponseActionError:
     code: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'code' }})
     message: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'message' }})
     
 
 @dataclass_json
 @dataclass
-class PostServersIDActionsReset201ApplicationJSONActionResources:
+class PostServersIDActionsResetActionResponseActionResources:
     id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     type: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     
-class PostServersIDActionsReset201ApplicationJSONActionStatusEnum(str, Enum):
+class PostServersIDActionsResetActionResponseActionStatusEnum(str, Enum):
     SUCCESS = "success"
     RUNNING = "running"
     ERROR = "error"
@@ -34,26 +34,26 @@ class PostServersIDActionsReset201ApplicationJSONActionStatusEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class PostServersIDActionsReset201ApplicationJSONActionAction:
+class PostServersIDActionsResetActionResponseAction:
     command: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'command' }})
-    error: PostServersIDActionsReset201ApplicationJSONActionError = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
+    error: PostServersIDActionsResetActionResponseActionError = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
     finished: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'finished' }})
     id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     progress: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'progress' }})
-    resources: List[PostServersIDActionsReset201ApplicationJSONActionResources] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resources' }})
+    resources: List[PostServersIDActionsResetActionResponseActionResources] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resources' }})
     started: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'started' }})
-    status: PostServersIDActionsReset201ApplicationJSONActionStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    status: PostServersIDActionsResetActionResponseActionStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
     
 
 @dataclass_json
 @dataclass
-class PostServersIDActionsReset201ApplicationJSONActionResponse:
-    action: PostServersIDActionsReset201ApplicationJSONActionAction = field(default=None, metadata={'dataclasses_json': { 'field_name': 'action' }})
+class PostServersIDActionsResetActionResponse:
+    action: PostServersIDActionsResetActionResponseAction = field(default=None, metadata={'dataclasses_json': { 'field_name': 'action' }})
     
 
 @dataclass
 class PostServersIDActionsResetResponse:
-    action_response: Optional[PostServersIDActionsReset201ApplicationJSONActionResponse] = field(default=None)
+    action_response: Optional[PostServersIDActionsResetActionResponse] = field(default=None)
     content_type: str = field(default=None)
     status_code: int = field(default=None)
     

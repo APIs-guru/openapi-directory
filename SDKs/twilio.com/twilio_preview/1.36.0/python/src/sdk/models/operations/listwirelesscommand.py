@@ -30,7 +30,7 @@ class ListWirelessCommandRequest:
 
 @dataclass_json
 @dataclass
-class ListWirelessCommand200ApplicationJSONMeta:
+class ListWirelessCommandListWirelessCommandResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -42,14 +42,14 @@ class ListWirelessCommand200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListWirelessCommand200ApplicationJSONListWirelessCommandResponse:
+class ListWirelessCommandListWirelessCommandResponse:
     commands: Optional[List[shared.PreviewWirelessCommand]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'commands' }})
-    meta: Optional[ListWirelessCommand200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+    meta: Optional[ListWirelessCommandListWirelessCommandResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     
 
 @dataclass
 class ListWirelessCommandResponse:
     content_type: str = field(default=None)
-    list_wireless_command_response: Optional[ListWirelessCommand200ApplicationJSONListWirelessCommandResponse] = field(default=None)
+    list_wireless_command_response: Optional[ListWirelessCommandListWirelessCommandResponse] = field(default=None)
     status_code: int = field(default=None)
     

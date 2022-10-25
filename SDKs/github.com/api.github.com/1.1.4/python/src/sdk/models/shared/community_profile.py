@@ -8,7 +8,7 @@ from dataclasses_json import dataclass_json
 
 @dataclass_json
 @dataclass
-class CommunityProfileFilesCodeOfConductCodeOfConductSimple:
+class CommunityProfileFilesCodeOfConductSimple:
     html_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'html_url' }})
     key: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
@@ -17,21 +17,14 @@ class CommunityProfileFilesCodeOfConductCodeOfConductSimple:
 
 @dataclass_json
 @dataclass
-class CommunityProfileFilesContributingCommunityHealthFile:
+class CommunityProfileFilesCommunityHealthFile:
     html_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'html_url' }})
     url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'url' }})
     
 
 @dataclass_json
 @dataclass
-class CommunityProfileFilesIssueTemplateCommunityHealthFile:
-    html_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'html_url' }})
-    url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'url' }})
-    
-
-@dataclass_json
-@dataclass
-class CommunityProfileFilesLicenseLicenseSimple:
+class CommunityProfileFilesLicenseSimple:
     html_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'html_url' }})
     key: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
@@ -42,27 +35,13 @@ class CommunityProfileFilesLicenseLicenseSimple:
 
 @dataclass_json
 @dataclass
-class CommunityProfileFilesPullRequestTemplateCommunityHealthFile:
-    html_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'html_url' }})
-    url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'url' }})
-    
-
-@dataclass_json
-@dataclass
-class CommunityProfileFilesReadmeCommunityHealthFile:
-    html_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'html_url' }})
-    url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'url' }})
-    
-
-@dataclass_json
-@dataclass
 class CommunityProfileFiles:
-    code_of_conduct: CommunityProfileFilesCodeOfConductCodeOfConductSimple = field(default=None, metadata={'dataclasses_json': { 'field_name': 'code_of_conduct' }})
-    contributing: CommunityProfileFilesContributingCommunityHealthFile = field(default=None, metadata={'dataclasses_json': { 'field_name': 'contributing' }})
-    issue_template: CommunityProfileFilesIssueTemplateCommunityHealthFile = field(default=None, metadata={'dataclasses_json': { 'field_name': 'issue_template' }})
-    license: CommunityProfileFilesLicenseLicenseSimple = field(default=None, metadata={'dataclasses_json': { 'field_name': 'license' }})
-    pull_request_template: CommunityProfileFilesPullRequestTemplateCommunityHealthFile = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pull_request_template' }})
-    readme: CommunityProfileFilesReadmeCommunityHealthFile = field(default=None, metadata={'dataclasses_json': { 'field_name': 'readme' }})
+    code_of_conduct: CommunityProfileFilesCodeOfConductSimple = field(default=None, metadata={'dataclasses_json': { 'field_name': 'code_of_conduct' }})
+    contributing: CommunityProfileFilesCommunityHealthFile = field(default=None, metadata={'dataclasses_json': { 'field_name': 'contributing' }})
+    issue_template: CommunityProfileFilesCommunityHealthFile = field(default=None, metadata={'dataclasses_json': { 'field_name': 'issue_template' }})
+    license: CommunityProfileFilesLicenseSimple = field(default=None, metadata={'dataclasses_json': { 'field_name': 'license' }})
+    pull_request_template: CommunityProfileFilesCommunityHealthFile = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pull_request_template' }})
+    readme: CommunityProfileFilesCommunityHealthFile = field(default=None, metadata={'dataclasses_json': { 'field_name': 'readme' }})
     
 
 @dataclass_json

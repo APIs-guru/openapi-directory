@@ -7,7 +7,7 @@ CREATE_SUBSCRIPTION_SERVERS = [
 
 
 @dataclass
-class CreateSubscriptionRequestBodyCreateSubscriptionRequest:
+class CreateSubscriptionCreateSubscriptionRequest:
     description: str = field(default=None, metadata={'form': { 'field_name': 'Description' }})
     sink_sid: str = field(default=None, metadata={'form': { 'field_name': 'SinkSid' }})
     types: List[Any] = field(default=None, metadata={'form': { 'field_name': 'Types' }})
@@ -21,7 +21,7 @@ class CreateSubscriptionSecurity:
 @dataclass
 class CreateSubscriptionRequest:
     server_url: Optional[str] = field(default=None)
-    request: Optional[CreateSubscriptionRequestBodyCreateSubscriptionRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateSubscriptionCreateSubscriptionRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateSubscriptionSecurity = field(default=None)
     
 

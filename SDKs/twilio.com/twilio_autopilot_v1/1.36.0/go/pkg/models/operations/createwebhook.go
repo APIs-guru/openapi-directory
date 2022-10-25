@@ -12,7 +12,7 @@ type CreateWebhookPathParams struct {
 	AssistantSid string `pathParam:"style=simple,explode=false,name=AssistantSid"`
 }
 
-type CreateWebhookRequestBodyCreateWebhookRequest struct {
+type CreateWebhookCreateWebhookRequest struct {
 	Events        string  `form:"name=Events"`
 	UniqueName    string  `form:"name=UniqueName"`
 	WebhookMethod *string `form:"name=WebhookMethod"`
@@ -26,7 +26,7 @@ type CreateWebhookSecurity struct {
 type CreateWebhookRequest struct {
 	ServerURL  *string
 	PathParams CreateWebhookPathParams
-	Request    *CreateWebhookRequestBodyCreateWebhookRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateWebhookCreateWebhookRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateWebhookSecurity
 }
 

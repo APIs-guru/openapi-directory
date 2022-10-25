@@ -28,7 +28,7 @@ type ListEventRequest struct {
 	Security    ListEventSecurity
 }
 
-type ListEvent200ApplicationJSONMeta struct {
+type ListEventListEventResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -38,13 +38,13 @@ type ListEvent200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListEvent200ApplicationJSONListEventResponse struct {
-	Events []shared.InsightsV1CallEvent     `json:"events,omitempty"`
-	Meta   *ListEvent200ApplicationJSONMeta `json:"meta,omitempty"`
+type ListEventListEventResponse struct {
+	Events []shared.InsightsV1CallEvent    `json:"events,omitempty"`
+	Meta   *ListEventListEventResponseMeta `json:"meta,omitempty"`
 }
 
 type ListEventResponse struct {
 	ContentType       string
-	ListEventResponse *ListEvent200ApplicationJSONListEventResponse
+	ListEventResponse *ListEventListEventResponse
 	StatusCode        int64
 }

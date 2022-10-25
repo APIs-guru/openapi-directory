@@ -1,6 +1,6 @@
 package shared
 
-type RepositoryCollaboratorPermissionUserSimpleUser struct {
+type RepositoryCollaboratorPermissionSimpleUser struct {
 	AvatarURL         string  `json:"avatar_url"`
 	EventsURL         string  `json:"events_url"`
 	FollowersURL      string  `json:"followers_url"`
@@ -23,6 +23,6 @@ type RepositoryCollaboratorPermissionUserSimpleUser struct {
 }
 
 type RepositoryCollaboratorPermission struct {
-	Permission string                                         `json:"permission"`
-	User       RepositoryCollaboratorPermissionUserSimpleUser `json:"user"`
+	Permission string                                     `json:"permission"`
+	User       RepositoryCollaboratorPermissionSimpleUser `json:"user"`
 }

@@ -10,7 +10,7 @@ class PostLoadBalancersIDActionsChangeDNSPtrPathParams:
 
 @dataclass_json
 @dataclass
-class PostLoadBalancersIDActionsChangeDNSPtrRequestBodyChangeLoadbalancerDNSPtrRequest:
+class PostLoadBalancersIDActionsChangeDNSPtrChangeLoadbalancerDNSPtrRequest:
     dns_ptr: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dns_ptr' }})
     ip: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ip' }})
     
@@ -18,23 +18,23 @@ class PostLoadBalancersIDActionsChangeDNSPtrRequestBodyChangeLoadbalancerDNSPtrR
 @dataclass
 class PostLoadBalancersIDActionsChangeDNSPtrRequest:
     path_params: PostLoadBalancersIDActionsChangeDNSPtrPathParams = field(default=None)
-    request: Optional[PostLoadBalancersIDActionsChangeDNSPtrRequestBodyChangeLoadbalancerDNSPtrRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: Optional[PostLoadBalancersIDActionsChangeDNSPtrChangeLoadbalancerDNSPtrRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass_json
 @dataclass
-class PostLoadBalancersIDActionsChangeDNSPtr201ApplicationJSONActionError:
+class PostLoadBalancersIDActionsChangeDNSPtrActionResponseActionError:
     code: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'code' }})
     message: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'message' }})
     
 
 @dataclass_json
 @dataclass
-class PostLoadBalancersIDActionsChangeDNSPtr201ApplicationJSONActionResources:
+class PostLoadBalancersIDActionsChangeDNSPtrActionResponseActionResources:
     id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     type: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     
-class PostLoadBalancersIDActionsChangeDNSPtr201ApplicationJSONActionStatusEnum(str, Enum):
+class PostLoadBalancersIDActionsChangeDNSPtrActionResponseActionStatusEnum(str, Enum):
     SUCCESS = "success"
     RUNNING = "running"
     ERROR = "error"
@@ -42,26 +42,26 @@ class PostLoadBalancersIDActionsChangeDNSPtr201ApplicationJSONActionStatusEnum(s
 
 @dataclass_json
 @dataclass
-class PostLoadBalancersIDActionsChangeDNSPtr201ApplicationJSONActionAction:
+class PostLoadBalancersIDActionsChangeDNSPtrActionResponseAction:
     command: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'command' }})
-    error: PostLoadBalancersIDActionsChangeDNSPtr201ApplicationJSONActionError = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
+    error: PostLoadBalancersIDActionsChangeDNSPtrActionResponseActionError = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
     finished: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'finished' }})
     id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     progress: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'progress' }})
-    resources: List[PostLoadBalancersIDActionsChangeDNSPtr201ApplicationJSONActionResources] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resources' }})
+    resources: List[PostLoadBalancersIDActionsChangeDNSPtrActionResponseActionResources] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resources' }})
     started: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'started' }})
-    status: PostLoadBalancersIDActionsChangeDNSPtr201ApplicationJSONActionStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    status: PostLoadBalancersIDActionsChangeDNSPtrActionResponseActionStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
     
 
 @dataclass_json
 @dataclass
-class PostLoadBalancersIDActionsChangeDNSPtr201ApplicationJSONActionResponse:
-    action: PostLoadBalancersIDActionsChangeDNSPtr201ApplicationJSONActionAction = field(default=None, metadata={'dataclasses_json': { 'field_name': 'action' }})
+class PostLoadBalancersIDActionsChangeDNSPtrActionResponse:
+    action: PostLoadBalancersIDActionsChangeDNSPtrActionResponseAction = field(default=None, metadata={'dataclasses_json': { 'field_name': 'action' }})
     
 
 @dataclass
 class PostLoadBalancersIDActionsChangeDNSPtrResponse:
-    action_response: Optional[PostLoadBalancersIDActionsChangeDNSPtr201ApplicationJSONActionResponse] = field(default=None)
+    action_response: Optional[PostLoadBalancersIDActionsChangeDNSPtrActionResponse] = field(default=None)
     content_type: str = field(default=None)
     status_code: int = field(default=None)
     

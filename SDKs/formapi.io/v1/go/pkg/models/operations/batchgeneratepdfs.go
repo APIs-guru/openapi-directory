@@ -4,7 +4,7 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-type BatchGeneratePdfsRequestBodySubmissionsSubmissionDataBatchRequest struct {
+type BatchGeneratePdfsSubmissionBatchDataSubmissionDataBatchRequest struct {
 	CSS        *string                `json:"css,omitempty"`
 	Data       map[string]interface{} `json:"data"`
 	HTML       *string                `json:"html,omitempty"`
@@ -13,11 +13,11 @@ type BatchGeneratePdfsRequestBodySubmissionsSubmissionDataBatchRequest struct {
 	Test       *bool                  `json:"test,omitempty"`
 }
 
-type BatchGeneratePdfsRequestBodySubmissionBatchData struct {
-	Metadata    map[string]interface{}                                              `json:"metadata,omitempty"`
-	Submissions []BatchGeneratePdfsRequestBodySubmissionsSubmissionDataBatchRequest `json:"submissions"`
-	TemplateID  *string                                                             `json:"template_id,omitempty"`
-	Test        *bool                                                               `json:"test,omitempty"`
+type BatchGeneratePdfsSubmissionBatchData struct {
+	Metadata    map[string]interface{}                                           `json:"metadata,omitempty"`
+	Submissions []BatchGeneratePdfsSubmissionBatchDataSubmissionDataBatchRequest `json:"submissions"`
+	TemplateID  *string                                                          `json:"template_id,omitempty"`
+	Test        *bool                                                            `json:"test,omitempty"`
 }
 
 type BatchGeneratePdfsSecurity struct {
@@ -25,63 +25,63 @@ type BatchGeneratePdfsSecurity struct {
 }
 
 type BatchGeneratePdfsRequest struct {
-	Request  BatchGeneratePdfsRequestBodySubmissionBatchData `request:"mediaType=application/json"`
+	Request  BatchGeneratePdfsSubmissionBatchData `request:"mediaType=application/json"`
 	Security BatchGeneratePdfsSecurity
 }
 
-type BatchGeneratePdfs200ApplicationJSONStatusEnum string
+type BatchGeneratePdfsCreateSubmissionBatchResponseStatusEnum string
 
 const (
-	BatchGeneratePdfs200ApplicationJSONStatusEnumSuccess BatchGeneratePdfs200ApplicationJSONStatusEnum = "success"
-	BatchGeneratePdfs200ApplicationJSONStatusEnumError   BatchGeneratePdfs200ApplicationJSONStatusEnum = "error"
+	BatchGeneratePdfsCreateSubmissionBatchResponseStatusEnumSuccess BatchGeneratePdfsCreateSubmissionBatchResponseStatusEnum = "success"
+	BatchGeneratePdfsCreateSubmissionBatchResponseStatusEnumError   BatchGeneratePdfsCreateSubmissionBatchResponseStatusEnum = "error"
 )
 
-type BatchGeneratePdfs200ApplicationJSONSubmissionBatchStateEnum string
+type BatchGeneratePdfsCreateSubmissionBatchResponseSubmissionBatchStateEnum string
 
 const (
-	BatchGeneratePdfs200ApplicationJSONSubmissionBatchStateEnumPending   BatchGeneratePdfs200ApplicationJSONSubmissionBatchStateEnum = "pending"
-	BatchGeneratePdfs200ApplicationJSONSubmissionBatchStateEnumProcessed BatchGeneratePdfs200ApplicationJSONSubmissionBatchStateEnum = "processed"
-	BatchGeneratePdfs200ApplicationJSONSubmissionBatchStateEnumError     BatchGeneratePdfs200ApplicationJSONSubmissionBatchStateEnum = "error"
+	BatchGeneratePdfsCreateSubmissionBatchResponseSubmissionBatchStateEnumPending   BatchGeneratePdfsCreateSubmissionBatchResponseSubmissionBatchStateEnum = "pending"
+	BatchGeneratePdfsCreateSubmissionBatchResponseSubmissionBatchStateEnumProcessed BatchGeneratePdfsCreateSubmissionBatchResponseSubmissionBatchStateEnum = "processed"
+	BatchGeneratePdfsCreateSubmissionBatchResponseSubmissionBatchStateEnumError     BatchGeneratePdfsCreateSubmissionBatchResponseSubmissionBatchStateEnum = "error"
 )
 
-type BatchGeneratePdfs200ApplicationJSONSubmissionBatchSubmissionBatch struct {
-	CompletionPercentage int64                                                       `json:"completion_percentage"`
-	ErrorCount           int64                                                       `json:"error_count"`
-	ID                   string                                                      `json:"id"`
-	Metadata             map[string]interface{}                                      `json:"metadata"`
-	PendingCount         int64                                                       `json:"pending_count"`
-	ProcessedAt          string                                                      `json:"processed_at"`
-	State                BatchGeneratePdfs200ApplicationJSONSubmissionBatchStateEnum `json:"state"`
-	Submissions          []shared.Submission                                         `json:"submissions,omitempty"`
-	TotalCount           int64                                                       `json:"total_count"`
+type BatchGeneratePdfsCreateSubmissionBatchResponseSubmissionBatch struct {
+	CompletionPercentage int64                                                                  `json:"completion_percentage"`
+	ErrorCount           int64                                                                  `json:"error_count"`
+	ID                   string                                                                 `json:"id"`
+	Metadata             map[string]interface{}                                                 `json:"metadata"`
+	PendingCount         int64                                                                  `json:"pending_count"`
+	ProcessedAt          string                                                                 `json:"processed_at"`
+	State                BatchGeneratePdfsCreateSubmissionBatchResponseSubmissionBatchStateEnum `json:"state"`
+	Submissions          []shared.Submission                                                    `json:"submissions,omitempty"`
+	TotalCount           int64                                                                  `json:"total_count"`
 }
 
-type BatchGeneratePdfs200ApplicationJSONSubmissionsStatusEnum string
+type BatchGeneratePdfsCreateSubmissionBatchResponseCreateSubmissionBatchSubmissionsResponseStatusEnum string
 
 const (
-	BatchGeneratePdfs200ApplicationJSONSubmissionsStatusEnumSuccess          BatchGeneratePdfs200ApplicationJSONSubmissionsStatusEnum = "success"
-	BatchGeneratePdfs200ApplicationJSONSubmissionsStatusEnumError            BatchGeneratePdfs200ApplicationJSONSubmissionsStatusEnum = "error"
-	BatchGeneratePdfs200ApplicationJSONSubmissionsStatusEnumValidButNotSaved BatchGeneratePdfs200ApplicationJSONSubmissionsStatusEnum = "valid_but_not_saved"
+	BatchGeneratePdfsCreateSubmissionBatchResponseCreateSubmissionBatchSubmissionsResponseStatusEnumSuccess          BatchGeneratePdfsCreateSubmissionBatchResponseCreateSubmissionBatchSubmissionsResponseStatusEnum = "success"
+	BatchGeneratePdfsCreateSubmissionBatchResponseCreateSubmissionBatchSubmissionsResponseStatusEnumError            BatchGeneratePdfsCreateSubmissionBatchResponseCreateSubmissionBatchSubmissionsResponseStatusEnum = "error"
+	BatchGeneratePdfsCreateSubmissionBatchResponseCreateSubmissionBatchSubmissionsResponseStatusEnumValidButNotSaved BatchGeneratePdfsCreateSubmissionBatchResponseCreateSubmissionBatchSubmissionsResponseStatusEnum = "valid_but_not_saved"
 )
 
-type BatchGeneratePdfs200ApplicationJSONSubmissionsCreateSubmissionBatchSubmissionsResponse struct {
-	Errors     []string                                                 `json:"errors,omitempty"`
-	Status     BatchGeneratePdfs200ApplicationJSONSubmissionsStatusEnum `json:"status"`
-	Submission *shared.Submission                                       `json:"submission,omitempty"`
+type BatchGeneratePdfsCreateSubmissionBatchResponseCreateSubmissionBatchSubmissionsResponse struct {
+	Errors     []string                                                                                         `json:"errors,omitempty"`
+	Status     BatchGeneratePdfsCreateSubmissionBatchResponseCreateSubmissionBatchSubmissionsResponseStatusEnum `json:"status"`
+	Submission *shared.Submission                                                                               `json:"submission,omitempty"`
 }
 
-type BatchGeneratePdfs200ApplicationJSONCreateSubmissionBatchResponse struct {
+type BatchGeneratePdfsCreateSubmissionBatchResponse struct {
 	Error           *string                                                                                  `json:"error,omitempty"`
 	Errors          []string                                                                                 `json:"errors,omitempty"`
-	Status          BatchGeneratePdfs200ApplicationJSONStatusEnum                                            `json:"status"`
-	SubmissionBatch BatchGeneratePdfs200ApplicationJSONSubmissionBatchSubmissionBatch                        `json:"submission_batch"`
-	Submissions     []BatchGeneratePdfs200ApplicationJSONSubmissionsCreateSubmissionBatchSubmissionsResponse `json:"submissions"`
+	Status          BatchGeneratePdfsCreateSubmissionBatchResponseStatusEnum                                 `json:"status"`
+	SubmissionBatch BatchGeneratePdfsCreateSubmissionBatchResponseSubmissionBatch                            `json:"submission_batch"`
+	Submissions     []BatchGeneratePdfsCreateSubmissionBatchResponseCreateSubmissionBatchSubmissionsResponse `json:"submissions"`
 }
 
 type BatchGeneratePdfsResponse struct {
 	ContentType                   string
 	StatusCode                    int64
 	AuthenticationError           *shared.AuthenticationError
-	CreateSubmissionBatchResponse *BatchGeneratePdfs200ApplicationJSONCreateSubmissionBatchResponse
+	CreateSubmissionBatchResponse *BatchGeneratePdfsCreateSubmissionBatchResponse
 	Error                         *shared.Error
 }

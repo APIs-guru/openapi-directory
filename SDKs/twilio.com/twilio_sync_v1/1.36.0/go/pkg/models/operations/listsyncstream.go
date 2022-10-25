@@ -27,7 +27,7 @@ type ListSyncStreamRequest struct {
 	Security    ListSyncStreamSecurity
 }
 
-type ListSyncStream200ApplicationJSONMeta struct {
+type ListSyncStreamListSyncStreamResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -37,13 +37,13 @@ type ListSyncStream200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListSyncStream200ApplicationJSONListSyncStreamResponse struct {
-	Meta    *ListSyncStream200ApplicationJSONMeta `json:"meta,omitempty"`
-	Streams []shared.SyncV1ServiceSyncStream      `json:"streams,omitempty"`
+type ListSyncStreamListSyncStreamResponse struct {
+	Meta    *ListSyncStreamListSyncStreamResponseMeta `json:"meta,omitempty"`
+	Streams []shared.SyncV1ServiceSyncStream          `json:"streams,omitempty"`
 }
 
 type ListSyncStreamResponse struct {
 	ContentType            string
-	ListSyncStreamResponse *ListSyncStream200ApplicationJSONListSyncStreamResponse
+	ListSyncStreamResponse *ListSyncStreamListSyncStreamResponse
 	StatusCode             int64
 }

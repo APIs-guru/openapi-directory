@@ -4,16 +4,16 @@ import (
 	"time"
 )
 
-type BatchJobInstructionBatchJobInstructionInstructionsDelete struct {
+type BatchJobInstructionBatchJobInstructionDelete struct {
 	Delete []interface{} `json:"DELETE,omitempty"`
 }
 
-type BatchJobInstructionBatchJobInstructionBatchJobInstruction struct {
-	HoldingDate  *time.Time                                                `json:"HoldingDate,omitempty"`
-	Instructions *BatchJobInstructionBatchJobInstructionInstructionsDelete `json:"Instructions,omitempty"`
-	ValidateOnly *bool                                                     `json:"ValidateOnly,omitempty"`
+type BatchJobInstructionBatchJobInstruction struct {
+	HoldingDate  *time.Time                                    `json:"HoldingDate,omitempty"`
+	Instructions *BatchJobInstructionBatchJobInstructionDelete `json:"Instructions,omitempty"`
+	ValidateOnly *bool                                         `json:"ValidateOnly,omitempty"`
 }
 
 type BatchJobInstruction struct {
-	BatchJobInstruction *BatchJobInstructionBatchJobInstructionBatchJobInstruction `json:"BatchJobInstruction,omitempty"`
+	BatchJobInstruction *BatchJobInstructionBatchJobInstruction `json:"BatchJobInstruction,omitempty"`
 }

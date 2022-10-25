@@ -16,7 +16,7 @@ from . import website
 
 @dataclass_json
 @dataclass
-class CompanyRowTypeCompanyRowType:
+class CompanyCompanyRowType:
     id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
     
@@ -54,7 +54,7 @@ class Company:
     payee_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'payee_number' }})
     phone_numbers: Optional[List[phonenumber.PhoneNumber]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'phone_numbers' }})
     read_only: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'read_only' }})
-    row_type: Optional[CompanyRowTypeCompanyRowType] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'row_type' }})
+    row_type: Optional[CompanyCompanyRowType] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'row_type' }})
     sales_tax_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sales_tax_number' }})
     salutation: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'salutation' }})
     social_links: Optional[List[sociallink.SocialLink]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'social_links' }})

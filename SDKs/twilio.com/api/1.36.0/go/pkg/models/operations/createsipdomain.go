@@ -12,53 +12,53 @@ type CreateSipDomainPathParams struct {
 	AccountSid string `pathParam:"style=simple,explode=false,name=AccountSid"`
 }
 
-type CreateSipDomainRequestBodyVoiceFallbackMethodEnum string
+type CreateSipDomainCreateSipDomainRequestVoiceFallbackMethodEnum string
 
 const (
-	CreateSipDomainRequestBodyVoiceFallbackMethodEnumHead   CreateSipDomainRequestBodyVoiceFallbackMethodEnum = "HEAD"
-	CreateSipDomainRequestBodyVoiceFallbackMethodEnumGet    CreateSipDomainRequestBodyVoiceFallbackMethodEnum = "GET"
-	CreateSipDomainRequestBodyVoiceFallbackMethodEnumPost   CreateSipDomainRequestBodyVoiceFallbackMethodEnum = "POST"
-	CreateSipDomainRequestBodyVoiceFallbackMethodEnumPatch  CreateSipDomainRequestBodyVoiceFallbackMethodEnum = "PATCH"
-	CreateSipDomainRequestBodyVoiceFallbackMethodEnumPut    CreateSipDomainRequestBodyVoiceFallbackMethodEnum = "PUT"
-	CreateSipDomainRequestBodyVoiceFallbackMethodEnumDelete CreateSipDomainRequestBodyVoiceFallbackMethodEnum = "DELETE"
+	CreateSipDomainCreateSipDomainRequestVoiceFallbackMethodEnumHead   CreateSipDomainCreateSipDomainRequestVoiceFallbackMethodEnum = "HEAD"
+	CreateSipDomainCreateSipDomainRequestVoiceFallbackMethodEnumGet    CreateSipDomainCreateSipDomainRequestVoiceFallbackMethodEnum = "GET"
+	CreateSipDomainCreateSipDomainRequestVoiceFallbackMethodEnumPost   CreateSipDomainCreateSipDomainRequestVoiceFallbackMethodEnum = "POST"
+	CreateSipDomainCreateSipDomainRequestVoiceFallbackMethodEnumPatch  CreateSipDomainCreateSipDomainRequestVoiceFallbackMethodEnum = "PATCH"
+	CreateSipDomainCreateSipDomainRequestVoiceFallbackMethodEnumPut    CreateSipDomainCreateSipDomainRequestVoiceFallbackMethodEnum = "PUT"
+	CreateSipDomainCreateSipDomainRequestVoiceFallbackMethodEnumDelete CreateSipDomainCreateSipDomainRequestVoiceFallbackMethodEnum = "DELETE"
 )
 
-type CreateSipDomainRequestBodyVoiceMethodEnum string
+type CreateSipDomainCreateSipDomainRequestVoiceMethodEnum string
 
 const (
-	CreateSipDomainRequestBodyVoiceMethodEnumHead   CreateSipDomainRequestBodyVoiceMethodEnum = "HEAD"
-	CreateSipDomainRequestBodyVoiceMethodEnumGet    CreateSipDomainRequestBodyVoiceMethodEnum = "GET"
-	CreateSipDomainRequestBodyVoiceMethodEnumPost   CreateSipDomainRequestBodyVoiceMethodEnum = "POST"
-	CreateSipDomainRequestBodyVoiceMethodEnumPatch  CreateSipDomainRequestBodyVoiceMethodEnum = "PATCH"
-	CreateSipDomainRequestBodyVoiceMethodEnumPut    CreateSipDomainRequestBodyVoiceMethodEnum = "PUT"
-	CreateSipDomainRequestBodyVoiceMethodEnumDelete CreateSipDomainRequestBodyVoiceMethodEnum = "DELETE"
+	CreateSipDomainCreateSipDomainRequestVoiceMethodEnumHead   CreateSipDomainCreateSipDomainRequestVoiceMethodEnum = "HEAD"
+	CreateSipDomainCreateSipDomainRequestVoiceMethodEnumGet    CreateSipDomainCreateSipDomainRequestVoiceMethodEnum = "GET"
+	CreateSipDomainCreateSipDomainRequestVoiceMethodEnumPost   CreateSipDomainCreateSipDomainRequestVoiceMethodEnum = "POST"
+	CreateSipDomainCreateSipDomainRequestVoiceMethodEnumPatch  CreateSipDomainCreateSipDomainRequestVoiceMethodEnum = "PATCH"
+	CreateSipDomainCreateSipDomainRequestVoiceMethodEnumPut    CreateSipDomainCreateSipDomainRequestVoiceMethodEnum = "PUT"
+	CreateSipDomainCreateSipDomainRequestVoiceMethodEnumDelete CreateSipDomainCreateSipDomainRequestVoiceMethodEnum = "DELETE"
 )
 
-type CreateSipDomainRequestBodyVoiceStatusCallbackMethodEnum string
+type CreateSipDomainCreateSipDomainRequestVoiceStatusCallbackMethodEnum string
 
 const (
-	CreateSipDomainRequestBodyVoiceStatusCallbackMethodEnumHead   CreateSipDomainRequestBodyVoiceStatusCallbackMethodEnum = "HEAD"
-	CreateSipDomainRequestBodyVoiceStatusCallbackMethodEnumGet    CreateSipDomainRequestBodyVoiceStatusCallbackMethodEnum = "GET"
-	CreateSipDomainRequestBodyVoiceStatusCallbackMethodEnumPost   CreateSipDomainRequestBodyVoiceStatusCallbackMethodEnum = "POST"
-	CreateSipDomainRequestBodyVoiceStatusCallbackMethodEnumPatch  CreateSipDomainRequestBodyVoiceStatusCallbackMethodEnum = "PATCH"
-	CreateSipDomainRequestBodyVoiceStatusCallbackMethodEnumPut    CreateSipDomainRequestBodyVoiceStatusCallbackMethodEnum = "PUT"
-	CreateSipDomainRequestBodyVoiceStatusCallbackMethodEnumDelete CreateSipDomainRequestBodyVoiceStatusCallbackMethodEnum = "DELETE"
+	CreateSipDomainCreateSipDomainRequestVoiceStatusCallbackMethodEnumHead   CreateSipDomainCreateSipDomainRequestVoiceStatusCallbackMethodEnum = "HEAD"
+	CreateSipDomainCreateSipDomainRequestVoiceStatusCallbackMethodEnumGet    CreateSipDomainCreateSipDomainRequestVoiceStatusCallbackMethodEnum = "GET"
+	CreateSipDomainCreateSipDomainRequestVoiceStatusCallbackMethodEnumPost   CreateSipDomainCreateSipDomainRequestVoiceStatusCallbackMethodEnum = "POST"
+	CreateSipDomainCreateSipDomainRequestVoiceStatusCallbackMethodEnumPatch  CreateSipDomainCreateSipDomainRequestVoiceStatusCallbackMethodEnum = "PATCH"
+	CreateSipDomainCreateSipDomainRequestVoiceStatusCallbackMethodEnumPut    CreateSipDomainCreateSipDomainRequestVoiceStatusCallbackMethodEnum = "PUT"
+	CreateSipDomainCreateSipDomainRequestVoiceStatusCallbackMethodEnumDelete CreateSipDomainCreateSipDomainRequestVoiceStatusCallbackMethodEnum = "DELETE"
 )
 
-type CreateSipDomainRequestBodyCreateSipDomainRequest struct {
-	ByocTrunkSid              *string                                                  `form:"name=ByocTrunkSid"`
-	DomainName                string                                                   `form:"name=DomainName"`
-	EmergencyCallerSid        *string                                                  `form:"name=EmergencyCallerSid"`
-	EmergencyCallingEnabled   *bool                                                    `form:"name=EmergencyCallingEnabled"`
-	FriendlyName              *string                                                  `form:"name=FriendlyName"`
-	Secure                    *bool                                                    `form:"name=Secure"`
-	SipRegistration           *bool                                                    `form:"name=SipRegistration"`
-	VoiceFallbackMethod       *CreateSipDomainRequestBodyVoiceFallbackMethodEnum       `form:"name=VoiceFallbackMethod"`
-	VoiceFallbackURL          *string                                                  `form:"name=VoiceFallbackUrl"`
-	VoiceMethod               *CreateSipDomainRequestBodyVoiceMethodEnum               `form:"name=VoiceMethod"`
-	VoiceStatusCallbackMethod *CreateSipDomainRequestBodyVoiceStatusCallbackMethodEnum `form:"name=VoiceStatusCallbackMethod"`
-	VoiceStatusCallbackURL    *string                                                  `form:"name=VoiceStatusCallbackUrl"`
-	VoiceURL                  *string                                                  `form:"name=VoiceUrl"`
+type CreateSipDomainCreateSipDomainRequest struct {
+	ByocTrunkSid              *string                                                             `form:"name=ByocTrunkSid"`
+	DomainName                string                                                              `form:"name=DomainName"`
+	EmergencyCallerSid        *string                                                             `form:"name=EmergencyCallerSid"`
+	EmergencyCallingEnabled   *bool                                                               `form:"name=EmergencyCallingEnabled"`
+	FriendlyName              *string                                                             `form:"name=FriendlyName"`
+	Secure                    *bool                                                               `form:"name=Secure"`
+	SipRegistration           *bool                                                               `form:"name=SipRegistration"`
+	VoiceFallbackMethod       *CreateSipDomainCreateSipDomainRequestVoiceFallbackMethodEnum       `form:"name=VoiceFallbackMethod"`
+	VoiceFallbackURL          *string                                                             `form:"name=VoiceFallbackUrl"`
+	VoiceMethod               *CreateSipDomainCreateSipDomainRequestVoiceMethodEnum               `form:"name=VoiceMethod"`
+	VoiceStatusCallbackMethod *CreateSipDomainCreateSipDomainRequestVoiceStatusCallbackMethodEnum `form:"name=VoiceStatusCallbackMethod"`
+	VoiceStatusCallbackURL    *string                                                             `form:"name=VoiceStatusCallbackUrl"`
+	VoiceURL                  *string                                                             `form:"name=VoiceUrl"`
 }
 
 type CreateSipDomainSecurity struct {
@@ -68,7 +68,7 @@ type CreateSipDomainSecurity struct {
 type CreateSipDomainRequest struct {
 	ServerURL  *string
 	PathParams CreateSipDomainPathParams
-	Request    *CreateSipDomainRequestBodyCreateSipDomainRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateSipDomainCreateSipDomainRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateSipDomainSecurity
 }
 

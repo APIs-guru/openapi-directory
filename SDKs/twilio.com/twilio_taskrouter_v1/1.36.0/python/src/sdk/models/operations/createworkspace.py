@@ -7,7 +7,7 @@ CREATE_WORKSPACE_SERVERS = [
 
 
 @dataclass
-class CreateWorkspaceRequestBodyCreateWorkspaceRequest:
+class CreateWorkspaceCreateWorkspaceRequest:
     event_callback_url: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'EventCallbackUrl' }})
     events_filter: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'EventsFilter' }})
     friendly_name: str = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
@@ -24,7 +24,7 @@ class CreateWorkspaceSecurity:
 @dataclass
 class CreateWorkspaceRequest:
     server_url: Optional[str] = field(default=None)
-    request: Optional[CreateWorkspaceRequestBodyCreateWorkspaceRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateWorkspaceCreateWorkspaceRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateWorkspaceSecurity = field(default=None)
     
 

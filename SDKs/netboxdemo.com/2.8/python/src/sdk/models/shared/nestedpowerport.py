@@ -10,7 +10,7 @@ class NestedPowerPortConnectionStatusLabelEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class NestedPowerPortConnectionStatusConnectionStatus:
+class NestedPowerPortConnectionStatus:
     label: NestedPowerPortConnectionStatusLabelEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label' }})
     value: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
     
@@ -19,7 +19,7 @@ class NestedPowerPortConnectionStatusConnectionStatus:
 @dataclass
 class NestedPowerPort:
     cable: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cable' }})
-    connection_status: Optional[NestedPowerPortConnectionStatusConnectionStatus] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'connection_status' }})
+    connection_status: Optional[NestedPowerPortConnectionStatus] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'connection_status' }})
     device: Optional[nesteddevice.NestedDevice] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'device' }})
     id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})

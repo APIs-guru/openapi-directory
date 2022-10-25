@@ -1,8 +1,8 @@
 package operations
 
 type MarkdownRenderRawRequests struct {
-	TextPlain     []byte `request:"mediaType=text/plain"`
-	TextXMarkdown []byte `request:"mediaType=text/x-markdown"`
+	String  *string `request:"mediaType=text/plain"`
+	String1 *string `request:"mediaType=text/x-markdown"`
 }
 
 type MarkdownRenderRawRequest struct {
@@ -10,8 +10,8 @@ type MarkdownRenderRawRequest struct {
 }
 
 type MarkdownRenderRawResponse struct {
-	Body        []byte
-	ContentType string
-	Headers     map[string][]string
-	StatusCode  int64
+	ContentType                        string
+	Headers                            map[string][]string
+	StatusCode                         int64
+	MarkdownRenderRaw200TextHTMLString *string
 }

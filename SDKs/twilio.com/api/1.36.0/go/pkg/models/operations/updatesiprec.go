@@ -14,7 +14,7 @@ type UpdateSiprecPathParams struct {
 	Sid        string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
-type UpdateSiprecRequestBodyUpdateSiprecRequest struct {
+type UpdateSiprecUpdateSiprecRequest struct {
 	Status shared.SiprecEnumUpdateStatusEnum `form:"name=Status"`
 }
 
@@ -25,7 +25,7 @@ type UpdateSiprecSecurity struct {
 type UpdateSiprecRequest struct {
 	ServerURL  *string
 	PathParams UpdateSiprecPathParams
-	Request    *UpdateSiprecRequestBodyUpdateSiprecRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateSiprecUpdateSiprecRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateSiprecSecurity
 }
 

@@ -18,8 +18,8 @@ class ContactsGetRequest:
 
 @dataclass
 class ContactsGetResponse:
-    body: bytes = field(default=None)
     contacts_get_200_application_json_string: Optional[str] = field(default=None)
+    contacts_get_200_text_csv_string: Optional[str] = field(default=None)
     content_type: str = field(default=None)
     status_code: int = field(default=None)
     

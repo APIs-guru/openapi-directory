@@ -12,7 +12,7 @@ type CreateTrustProductEntityAssignmentPathParams struct {
 	TrustProductSid string `pathParam:"style=simple,explode=false,name=TrustProductSid"`
 }
 
-type CreateTrustProductEntityAssignmentRequestBodyCreateTrustProductEntityAssignmentRequest struct {
+type CreateTrustProductEntityAssignmentCreateTrustProductEntityAssignmentRequest struct {
 	ObjectSid string `form:"name=ObjectSid"`
 }
 
@@ -23,7 +23,7 @@ type CreateTrustProductEntityAssignmentSecurity struct {
 type CreateTrustProductEntityAssignmentRequest struct {
 	ServerURL  *string
 	PathParams CreateTrustProductEntityAssignmentPathParams
-	Request    *CreateTrustProductEntityAssignmentRequestBodyCreateTrustProductEntityAssignmentRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateTrustProductEntityAssignmentCreateTrustProductEntityAssignmentRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateTrustProductEntityAssignmentSecurity
 }
 

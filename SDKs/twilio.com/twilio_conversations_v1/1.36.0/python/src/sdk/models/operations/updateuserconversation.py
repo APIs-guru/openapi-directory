@@ -16,7 +16,7 @@ class UpdateUserConversationPathParams:
     
 
 @dataclass
-class UpdateUserConversationRequestBodyUpdateUserConversationRequest:
+class UpdateUserConversationUpdateUserConversationRequest:
     last_read_message_index: Optional[int] = field(default=None, metadata={'form': { 'field_name': 'LastReadMessageIndex' }})
     last_read_timestamp: Optional[datetime] = field(default=None, metadata={'form': { 'field_name': 'LastReadTimestamp' }})
     notification_level: Optional[shared.UserConversationEnumNotificationLevelEnum] = field(default=None, metadata={'form': { 'field_name': 'NotificationLevel' }})
@@ -31,7 +31,7 @@ class UpdateUserConversationSecurity:
 class UpdateUserConversationRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateUserConversationPathParams = field(default=None)
-    request: Optional[UpdateUserConversationRequestBodyUpdateUserConversationRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateUserConversationUpdateUserConversationRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateUserConversationSecurity = field(default=None)
     
 

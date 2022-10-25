@@ -10,7 +10,7 @@ type PostRealmClientDescriptionConverterPathParams struct {
 
 type PostRealmClientDescriptionConverterRequest struct {
 	PathParams PostRealmClientDescriptionConverterPathParams
-	Request    []byte `request:"mediaType=text/plain"`
+	Request    string `request:"mediaType=text/plain"`
 }
 
 type PostRealmClientDescriptionConverterResponse struct {

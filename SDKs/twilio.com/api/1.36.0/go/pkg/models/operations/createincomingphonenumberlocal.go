@@ -12,85 +12,85 @@ type CreateIncomingPhoneNumberLocalPathParams struct {
 	AccountSid string `pathParam:"style=simple,explode=false,name=AccountSid"`
 }
 
-type CreateIncomingPhoneNumberLocalRequestBodySmsFallbackMethodEnum string
+type CreateIncomingPhoneNumberLocalCreateIncomingPhoneNumberLocalRequestSmsFallbackMethodEnum string
 
 const (
-	CreateIncomingPhoneNumberLocalRequestBodySmsFallbackMethodEnumHead   CreateIncomingPhoneNumberLocalRequestBodySmsFallbackMethodEnum = "HEAD"
-	CreateIncomingPhoneNumberLocalRequestBodySmsFallbackMethodEnumGet    CreateIncomingPhoneNumberLocalRequestBodySmsFallbackMethodEnum = "GET"
-	CreateIncomingPhoneNumberLocalRequestBodySmsFallbackMethodEnumPost   CreateIncomingPhoneNumberLocalRequestBodySmsFallbackMethodEnum = "POST"
-	CreateIncomingPhoneNumberLocalRequestBodySmsFallbackMethodEnumPatch  CreateIncomingPhoneNumberLocalRequestBodySmsFallbackMethodEnum = "PATCH"
-	CreateIncomingPhoneNumberLocalRequestBodySmsFallbackMethodEnumPut    CreateIncomingPhoneNumberLocalRequestBodySmsFallbackMethodEnum = "PUT"
-	CreateIncomingPhoneNumberLocalRequestBodySmsFallbackMethodEnumDelete CreateIncomingPhoneNumberLocalRequestBodySmsFallbackMethodEnum = "DELETE"
+	CreateIncomingPhoneNumberLocalCreateIncomingPhoneNumberLocalRequestSmsFallbackMethodEnumHead   CreateIncomingPhoneNumberLocalCreateIncomingPhoneNumberLocalRequestSmsFallbackMethodEnum = "HEAD"
+	CreateIncomingPhoneNumberLocalCreateIncomingPhoneNumberLocalRequestSmsFallbackMethodEnumGet    CreateIncomingPhoneNumberLocalCreateIncomingPhoneNumberLocalRequestSmsFallbackMethodEnum = "GET"
+	CreateIncomingPhoneNumberLocalCreateIncomingPhoneNumberLocalRequestSmsFallbackMethodEnumPost   CreateIncomingPhoneNumberLocalCreateIncomingPhoneNumberLocalRequestSmsFallbackMethodEnum = "POST"
+	CreateIncomingPhoneNumberLocalCreateIncomingPhoneNumberLocalRequestSmsFallbackMethodEnumPatch  CreateIncomingPhoneNumberLocalCreateIncomingPhoneNumberLocalRequestSmsFallbackMethodEnum = "PATCH"
+	CreateIncomingPhoneNumberLocalCreateIncomingPhoneNumberLocalRequestSmsFallbackMethodEnumPut    CreateIncomingPhoneNumberLocalCreateIncomingPhoneNumberLocalRequestSmsFallbackMethodEnum = "PUT"
+	CreateIncomingPhoneNumberLocalCreateIncomingPhoneNumberLocalRequestSmsFallbackMethodEnumDelete CreateIncomingPhoneNumberLocalCreateIncomingPhoneNumberLocalRequestSmsFallbackMethodEnum = "DELETE"
 )
 
-type CreateIncomingPhoneNumberLocalRequestBodySmsMethodEnum string
+type CreateIncomingPhoneNumberLocalCreateIncomingPhoneNumberLocalRequestSmsMethodEnum string
 
 const (
-	CreateIncomingPhoneNumberLocalRequestBodySmsMethodEnumHead   CreateIncomingPhoneNumberLocalRequestBodySmsMethodEnum = "HEAD"
-	CreateIncomingPhoneNumberLocalRequestBodySmsMethodEnumGet    CreateIncomingPhoneNumberLocalRequestBodySmsMethodEnum = "GET"
-	CreateIncomingPhoneNumberLocalRequestBodySmsMethodEnumPost   CreateIncomingPhoneNumberLocalRequestBodySmsMethodEnum = "POST"
-	CreateIncomingPhoneNumberLocalRequestBodySmsMethodEnumPatch  CreateIncomingPhoneNumberLocalRequestBodySmsMethodEnum = "PATCH"
-	CreateIncomingPhoneNumberLocalRequestBodySmsMethodEnumPut    CreateIncomingPhoneNumberLocalRequestBodySmsMethodEnum = "PUT"
-	CreateIncomingPhoneNumberLocalRequestBodySmsMethodEnumDelete CreateIncomingPhoneNumberLocalRequestBodySmsMethodEnum = "DELETE"
+	CreateIncomingPhoneNumberLocalCreateIncomingPhoneNumberLocalRequestSmsMethodEnumHead   CreateIncomingPhoneNumberLocalCreateIncomingPhoneNumberLocalRequestSmsMethodEnum = "HEAD"
+	CreateIncomingPhoneNumberLocalCreateIncomingPhoneNumberLocalRequestSmsMethodEnumGet    CreateIncomingPhoneNumberLocalCreateIncomingPhoneNumberLocalRequestSmsMethodEnum = "GET"
+	CreateIncomingPhoneNumberLocalCreateIncomingPhoneNumberLocalRequestSmsMethodEnumPost   CreateIncomingPhoneNumberLocalCreateIncomingPhoneNumberLocalRequestSmsMethodEnum = "POST"
+	CreateIncomingPhoneNumberLocalCreateIncomingPhoneNumberLocalRequestSmsMethodEnumPatch  CreateIncomingPhoneNumberLocalCreateIncomingPhoneNumberLocalRequestSmsMethodEnum = "PATCH"
+	CreateIncomingPhoneNumberLocalCreateIncomingPhoneNumberLocalRequestSmsMethodEnumPut    CreateIncomingPhoneNumberLocalCreateIncomingPhoneNumberLocalRequestSmsMethodEnum = "PUT"
+	CreateIncomingPhoneNumberLocalCreateIncomingPhoneNumberLocalRequestSmsMethodEnumDelete CreateIncomingPhoneNumberLocalCreateIncomingPhoneNumberLocalRequestSmsMethodEnum = "DELETE"
 )
 
-type CreateIncomingPhoneNumberLocalRequestBodyStatusCallbackMethodEnum string
+type CreateIncomingPhoneNumberLocalCreateIncomingPhoneNumberLocalRequestStatusCallbackMethodEnum string
 
 const (
-	CreateIncomingPhoneNumberLocalRequestBodyStatusCallbackMethodEnumHead   CreateIncomingPhoneNumberLocalRequestBodyStatusCallbackMethodEnum = "HEAD"
-	CreateIncomingPhoneNumberLocalRequestBodyStatusCallbackMethodEnumGet    CreateIncomingPhoneNumberLocalRequestBodyStatusCallbackMethodEnum = "GET"
-	CreateIncomingPhoneNumberLocalRequestBodyStatusCallbackMethodEnumPost   CreateIncomingPhoneNumberLocalRequestBodyStatusCallbackMethodEnum = "POST"
-	CreateIncomingPhoneNumberLocalRequestBodyStatusCallbackMethodEnumPatch  CreateIncomingPhoneNumberLocalRequestBodyStatusCallbackMethodEnum = "PATCH"
-	CreateIncomingPhoneNumberLocalRequestBodyStatusCallbackMethodEnumPut    CreateIncomingPhoneNumberLocalRequestBodyStatusCallbackMethodEnum = "PUT"
-	CreateIncomingPhoneNumberLocalRequestBodyStatusCallbackMethodEnumDelete CreateIncomingPhoneNumberLocalRequestBodyStatusCallbackMethodEnum = "DELETE"
+	CreateIncomingPhoneNumberLocalCreateIncomingPhoneNumberLocalRequestStatusCallbackMethodEnumHead   CreateIncomingPhoneNumberLocalCreateIncomingPhoneNumberLocalRequestStatusCallbackMethodEnum = "HEAD"
+	CreateIncomingPhoneNumberLocalCreateIncomingPhoneNumberLocalRequestStatusCallbackMethodEnumGet    CreateIncomingPhoneNumberLocalCreateIncomingPhoneNumberLocalRequestStatusCallbackMethodEnum = "GET"
+	CreateIncomingPhoneNumberLocalCreateIncomingPhoneNumberLocalRequestStatusCallbackMethodEnumPost   CreateIncomingPhoneNumberLocalCreateIncomingPhoneNumberLocalRequestStatusCallbackMethodEnum = "POST"
+	CreateIncomingPhoneNumberLocalCreateIncomingPhoneNumberLocalRequestStatusCallbackMethodEnumPatch  CreateIncomingPhoneNumberLocalCreateIncomingPhoneNumberLocalRequestStatusCallbackMethodEnum = "PATCH"
+	CreateIncomingPhoneNumberLocalCreateIncomingPhoneNumberLocalRequestStatusCallbackMethodEnumPut    CreateIncomingPhoneNumberLocalCreateIncomingPhoneNumberLocalRequestStatusCallbackMethodEnum = "PUT"
+	CreateIncomingPhoneNumberLocalCreateIncomingPhoneNumberLocalRequestStatusCallbackMethodEnumDelete CreateIncomingPhoneNumberLocalCreateIncomingPhoneNumberLocalRequestStatusCallbackMethodEnum = "DELETE"
 )
 
-type CreateIncomingPhoneNumberLocalRequestBodyVoiceFallbackMethodEnum string
+type CreateIncomingPhoneNumberLocalCreateIncomingPhoneNumberLocalRequestVoiceFallbackMethodEnum string
 
 const (
-	CreateIncomingPhoneNumberLocalRequestBodyVoiceFallbackMethodEnumHead   CreateIncomingPhoneNumberLocalRequestBodyVoiceFallbackMethodEnum = "HEAD"
-	CreateIncomingPhoneNumberLocalRequestBodyVoiceFallbackMethodEnumGet    CreateIncomingPhoneNumberLocalRequestBodyVoiceFallbackMethodEnum = "GET"
-	CreateIncomingPhoneNumberLocalRequestBodyVoiceFallbackMethodEnumPost   CreateIncomingPhoneNumberLocalRequestBodyVoiceFallbackMethodEnum = "POST"
-	CreateIncomingPhoneNumberLocalRequestBodyVoiceFallbackMethodEnumPatch  CreateIncomingPhoneNumberLocalRequestBodyVoiceFallbackMethodEnum = "PATCH"
-	CreateIncomingPhoneNumberLocalRequestBodyVoiceFallbackMethodEnumPut    CreateIncomingPhoneNumberLocalRequestBodyVoiceFallbackMethodEnum = "PUT"
-	CreateIncomingPhoneNumberLocalRequestBodyVoiceFallbackMethodEnumDelete CreateIncomingPhoneNumberLocalRequestBodyVoiceFallbackMethodEnum = "DELETE"
+	CreateIncomingPhoneNumberLocalCreateIncomingPhoneNumberLocalRequestVoiceFallbackMethodEnumHead   CreateIncomingPhoneNumberLocalCreateIncomingPhoneNumberLocalRequestVoiceFallbackMethodEnum = "HEAD"
+	CreateIncomingPhoneNumberLocalCreateIncomingPhoneNumberLocalRequestVoiceFallbackMethodEnumGet    CreateIncomingPhoneNumberLocalCreateIncomingPhoneNumberLocalRequestVoiceFallbackMethodEnum = "GET"
+	CreateIncomingPhoneNumberLocalCreateIncomingPhoneNumberLocalRequestVoiceFallbackMethodEnumPost   CreateIncomingPhoneNumberLocalCreateIncomingPhoneNumberLocalRequestVoiceFallbackMethodEnum = "POST"
+	CreateIncomingPhoneNumberLocalCreateIncomingPhoneNumberLocalRequestVoiceFallbackMethodEnumPatch  CreateIncomingPhoneNumberLocalCreateIncomingPhoneNumberLocalRequestVoiceFallbackMethodEnum = "PATCH"
+	CreateIncomingPhoneNumberLocalCreateIncomingPhoneNumberLocalRequestVoiceFallbackMethodEnumPut    CreateIncomingPhoneNumberLocalCreateIncomingPhoneNumberLocalRequestVoiceFallbackMethodEnum = "PUT"
+	CreateIncomingPhoneNumberLocalCreateIncomingPhoneNumberLocalRequestVoiceFallbackMethodEnumDelete CreateIncomingPhoneNumberLocalCreateIncomingPhoneNumberLocalRequestVoiceFallbackMethodEnum = "DELETE"
 )
 
-type CreateIncomingPhoneNumberLocalRequestBodyVoiceMethodEnum string
+type CreateIncomingPhoneNumberLocalCreateIncomingPhoneNumberLocalRequestVoiceMethodEnum string
 
 const (
-	CreateIncomingPhoneNumberLocalRequestBodyVoiceMethodEnumHead   CreateIncomingPhoneNumberLocalRequestBodyVoiceMethodEnum = "HEAD"
-	CreateIncomingPhoneNumberLocalRequestBodyVoiceMethodEnumGet    CreateIncomingPhoneNumberLocalRequestBodyVoiceMethodEnum = "GET"
-	CreateIncomingPhoneNumberLocalRequestBodyVoiceMethodEnumPost   CreateIncomingPhoneNumberLocalRequestBodyVoiceMethodEnum = "POST"
-	CreateIncomingPhoneNumberLocalRequestBodyVoiceMethodEnumPatch  CreateIncomingPhoneNumberLocalRequestBodyVoiceMethodEnum = "PATCH"
-	CreateIncomingPhoneNumberLocalRequestBodyVoiceMethodEnumPut    CreateIncomingPhoneNumberLocalRequestBodyVoiceMethodEnum = "PUT"
-	CreateIncomingPhoneNumberLocalRequestBodyVoiceMethodEnumDelete CreateIncomingPhoneNumberLocalRequestBodyVoiceMethodEnum = "DELETE"
+	CreateIncomingPhoneNumberLocalCreateIncomingPhoneNumberLocalRequestVoiceMethodEnumHead   CreateIncomingPhoneNumberLocalCreateIncomingPhoneNumberLocalRequestVoiceMethodEnum = "HEAD"
+	CreateIncomingPhoneNumberLocalCreateIncomingPhoneNumberLocalRequestVoiceMethodEnumGet    CreateIncomingPhoneNumberLocalCreateIncomingPhoneNumberLocalRequestVoiceMethodEnum = "GET"
+	CreateIncomingPhoneNumberLocalCreateIncomingPhoneNumberLocalRequestVoiceMethodEnumPost   CreateIncomingPhoneNumberLocalCreateIncomingPhoneNumberLocalRequestVoiceMethodEnum = "POST"
+	CreateIncomingPhoneNumberLocalCreateIncomingPhoneNumberLocalRequestVoiceMethodEnumPatch  CreateIncomingPhoneNumberLocalCreateIncomingPhoneNumberLocalRequestVoiceMethodEnum = "PATCH"
+	CreateIncomingPhoneNumberLocalCreateIncomingPhoneNumberLocalRequestVoiceMethodEnumPut    CreateIncomingPhoneNumberLocalCreateIncomingPhoneNumberLocalRequestVoiceMethodEnum = "PUT"
+	CreateIncomingPhoneNumberLocalCreateIncomingPhoneNumberLocalRequestVoiceMethodEnumDelete CreateIncomingPhoneNumberLocalCreateIncomingPhoneNumberLocalRequestVoiceMethodEnum = "DELETE"
 )
 
-type CreateIncomingPhoneNumberLocalRequestBodyCreateIncomingPhoneNumberLocalRequest struct {
-	AddressSid           *string                                                            `form:"name=AddressSid"`
-	APIVersion           *string                                                            `form:"name=ApiVersion"`
-	BundleSid            *string                                                            `form:"name=BundleSid"`
-	EmergencyAddressSid  *string                                                            `form:"name=EmergencyAddressSid"`
-	EmergencyStatus      *shared.IncomingPhoneNumberLocalEnumEmergencyStatusEnum            `form:"name=EmergencyStatus"`
-	FriendlyName         *string                                                            `form:"name=FriendlyName"`
-	IdentitySid          *string                                                            `form:"name=IdentitySid"`
-	PhoneNumber          string                                                             `form:"name=PhoneNumber"`
-	SmsApplicationSid    *string                                                            `form:"name=SmsApplicationSid"`
-	SmsFallbackMethod    *CreateIncomingPhoneNumberLocalRequestBodySmsFallbackMethodEnum    `form:"name=SmsFallbackMethod"`
-	SmsFallbackURL       *string                                                            `form:"name=SmsFallbackUrl"`
-	SmsMethod            *CreateIncomingPhoneNumberLocalRequestBodySmsMethodEnum            `form:"name=SmsMethod"`
-	SmsURL               *string                                                            `form:"name=SmsUrl"`
-	StatusCallback       *string                                                            `form:"name=StatusCallback"`
-	StatusCallbackMethod *CreateIncomingPhoneNumberLocalRequestBodyStatusCallbackMethodEnum `form:"name=StatusCallbackMethod"`
-	TrunkSid             *string                                                            `form:"name=TrunkSid"`
-	VoiceApplicationSid  *string                                                            `form:"name=VoiceApplicationSid"`
-	VoiceCallerIDLookup  *bool                                                              `form:"name=VoiceCallerIdLookup"`
-	VoiceFallbackMethod  *CreateIncomingPhoneNumberLocalRequestBodyVoiceFallbackMethodEnum  `form:"name=VoiceFallbackMethod"`
-	VoiceFallbackURL     *string                                                            `form:"name=VoiceFallbackUrl"`
-	VoiceMethod          *CreateIncomingPhoneNumberLocalRequestBodyVoiceMethodEnum          `form:"name=VoiceMethod"`
-	VoiceReceiveMode     *shared.IncomingPhoneNumberLocalEnumVoiceReceiveModeEnum           `form:"name=VoiceReceiveMode"`
-	VoiceURL             *string                                                            `form:"name=VoiceUrl"`
+type CreateIncomingPhoneNumberLocalCreateIncomingPhoneNumberLocalRequest struct {
+	AddressSid           *string                                                                                      `form:"name=AddressSid"`
+	APIVersion           *string                                                                                      `form:"name=ApiVersion"`
+	BundleSid            *string                                                                                      `form:"name=BundleSid"`
+	EmergencyAddressSid  *string                                                                                      `form:"name=EmergencyAddressSid"`
+	EmergencyStatus      *shared.IncomingPhoneNumberLocalEnumEmergencyStatusEnum                                      `form:"name=EmergencyStatus"`
+	FriendlyName         *string                                                                                      `form:"name=FriendlyName"`
+	IdentitySid          *string                                                                                      `form:"name=IdentitySid"`
+	PhoneNumber          string                                                                                       `form:"name=PhoneNumber"`
+	SmsApplicationSid    *string                                                                                      `form:"name=SmsApplicationSid"`
+	SmsFallbackMethod    *CreateIncomingPhoneNumberLocalCreateIncomingPhoneNumberLocalRequestSmsFallbackMethodEnum    `form:"name=SmsFallbackMethod"`
+	SmsFallbackURL       *string                                                                                      `form:"name=SmsFallbackUrl"`
+	SmsMethod            *CreateIncomingPhoneNumberLocalCreateIncomingPhoneNumberLocalRequestSmsMethodEnum            `form:"name=SmsMethod"`
+	SmsURL               *string                                                                                      `form:"name=SmsUrl"`
+	StatusCallback       *string                                                                                      `form:"name=StatusCallback"`
+	StatusCallbackMethod *CreateIncomingPhoneNumberLocalCreateIncomingPhoneNumberLocalRequestStatusCallbackMethodEnum `form:"name=StatusCallbackMethod"`
+	TrunkSid             *string                                                                                      `form:"name=TrunkSid"`
+	VoiceApplicationSid  *string                                                                                      `form:"name=VoiceApplicationSid"`
+	VoiceCallerIDLookup  *bool                                                                                        `form:"name=VoiceCallerIdLookup"`
+	VoiceFallbackMethod  *CreateIncomingPhoneNumberLocalCreateIncomingPhoneNumberLocalRequestVoiceFallbackMethodEnum  `form:"name=VoiceFallbackMethod"`
+	VoiceFallbackURL     *string                                                                                      `form:"name=VoiceFallbackUrl"`
+	VoiceMethod          *CreateIncomingPhoneNumberLocalCreateIncomingPhoneNumberLocalRequestVoiceMethodEnum          `form:"name=VoiceMethod"`
+	VoiceReceiveMode     *shared.IncomingPhoneNumberLocalEnumVoiceReceiveModeEnum                                     `form:"name=VoiceReceiveMode"`
+	VoiceURL             *string                                                                                      `form:"name=VoiceUrl"`
 }
 
 type CreateIncomingPhoneNumberLocalSecurity struct {
@@ -100,7 +100,7 @@ type CreateIncomingPhoneNumberLocalSecurity struct {
 type CreateIncomingPhoneNumberLocalRequest struct {
 	ServerURL  *string
 	PathParams CreateIncomingPhoneNumberLocalPathParams
-	Request    *CreateIncomingPhoneNumberLocalRequestBodyCreateIncomingPhoneNumberLocalRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateIncomingPhoneNumberLocalCreateIncomingPhoneNumberLocalRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateIncomingPhoneNumberLocalSecurity
 }
 

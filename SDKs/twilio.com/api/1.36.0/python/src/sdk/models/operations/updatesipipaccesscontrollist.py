@@ -13,7 +13,7 @@ class UpdateSipIPAccessControlListPathParams:
     
 
 @dataclass
-class UpdateSipIPAccessControlListRequestBodyUpdateSipIPAccessControlListRequest:
+class UpdateSipIPAccessControlListUpdateSipIPAccessControlListRequest:
     friendly_name: str = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
     
 
@@ -26,7 +26,7 @@ class UpdateSipIPAccessControlListSecurity:
 class UpdateSipIPAccessControlListRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateSipIPAccessControlListPathParams = field(default=None)
-    request: Optional[UpdateSipIPAccessControlListRequestBodyUpdateSipIPAccessControlListRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateSipIPAccessControlListUpdateSipIPAccessControlListRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateSipIPAccessControlListSecurity = field(default=None)
     
 

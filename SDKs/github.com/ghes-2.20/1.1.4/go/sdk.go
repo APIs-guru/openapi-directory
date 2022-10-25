@@ -1724,7 +1724,7 @@ func (s *SDK) AppsCheckAuthorization(ctx context.Context, request operations.App
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.AppsCheckAuthorization200ApplicationJSONAuthorization
+			var out *operations.AppsCheckAuthorizationAuthorization
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -1945,7 +1945,7 @@ func (s *SDK) AppsCreateFromManifest(ctx context.Context, request operations.App
 				return nil, err
 			}
 
-			res.AppsCreateFromManifest201ApplicationJSONObject = out
+			res.GitHubApp = out
 		}
 	case httpRes.StatusCode == 404:
 		switch {
@@ -10391,7 +10391,8 @@ func (s *SDK) MarkdownRender(ctx context.Context, request operations.MarkdownRen
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			out := string(data)
+			res.MarkdownRender200TextHTMLString = &out
 		}
 	case httpRes.StatusCode == 304:
 	}
@@ -10439,7 +10440,8 @@ func (s *SDK) MarkdownRenderRaw(ctx context.Context, request operations.Markdown
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			out := string(data)
+			res.MarkdownRenderRaw200TextHTMLString = &out
 		}
 	case httpRes.StatusCode == 304:
 	}
@@ -10521,7 +10523,8 @@ func (s *SDK) MetaGetOctocat(ctx context.Context, request operations.MetaGetOcto
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			out := string(data)
+			res.MetaGetOctocat200ApplicationOctocatStreamString = &out
 		}
 	}
 
@@ -10560,7 +10563,8 @@ func (s *SDK) MetaGetZen(ctx context.Context) (*operations.MetaGetZenResponse, e
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			out := string(data)
+			res.MetaGetZen200TextPlainString = &out
 		}
 	}
 
@@ -19908,12 +19912,12 @@ func (s *SDK) ReposGetContent(ctx context.Context, request operations.ReposGetCo
 
 			res.ReposGetContent200ApplicationJSONOneOf = out
 		case utils.MatchContentType(contentType, `application/vnd.github.v3.object`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 302:
 	case httpRes.StatusCode == 403:

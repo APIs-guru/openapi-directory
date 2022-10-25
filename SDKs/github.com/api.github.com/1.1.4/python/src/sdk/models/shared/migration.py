@@ -9,7 +9,7 @@ from . import repository
 
 @dataclass_json
 @dataclass
-class MigrationOwnerSimpleUser:
+class MigrationSimpleUser:
     avatar_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'avatar_url' }})
     events_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'events_url' }})
     followers_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'followers_url' }})
@@ -42,7 +42,7 @@ class Migration:
     id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     lock_repositories: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lock_repositories' }})
     node_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'node_id' }})
-    owner: MigrationOwnerSimpleUser = field(default=None, metadata={'dataclasses_json': { 'field_name': 'owner' }})
+    owner: MigrationSimpleUser = field(default=None, metadata={'dataclasses_json': { 'field_name': 'owner' }})
     repositories: List[repository.Repository] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'repositories' }})
     state: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'state' }})
     updated_at: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updated_at', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})

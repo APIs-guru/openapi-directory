@@ -1,31 +1,31 @@
 package shared
 
-type WritableRearPortTypeTypeEnum string
+type WritableRearPortTypeEnum string
 
 const (
-	WritableRearPortTypeTypeEnumEightp8c              WritableRearPortTypeTypeEnum = "8p8c"
-	WritableRearPortTypeTypeEnumOneHundredAndTenPunch WritableRearPortTypeTypeEnum = "110-punch"
-	WritableRearPortTypeTypeEnumBnc                   WritableRearPortTypeTypeEnum = "bnc"
-	WritableRearPortTypeTypeEnumMrj21                 WritableRearPortTypeTypeEnum = "mrj21"
-	WritableRearPortTypeTypeEnumFc                    WritableRearPortTypeTypeEnum = "fc"
-	WritableRearPortTypeTypeEnumLc                    WritableRearPortTypeTypeEnum = "lc"
-	WritableRearPortTypeTypeEnumLcApc                 WritableRearPortTypeTypeEnum = "lc-apc"
-	WritableRearPortTypeTypeEnumLsh                   WritableRearPortTypeTypeEnum = "lsh"
-	WritableRearPortTypeTypeEnumLshApc                WritableRearPortTypeTypeEnum = "lsh-apc"
-	WritableRearPortTypeTypeEnumMpo                   WritableRearPortTypeTypeEnum = "mpo"
-	WritableRearPortTypeTypeEnumMtrj                  WritableRearPortTypeTypeEnum = "mtrj"
-	WritableRearPortTypeTypeEnumSc                    WritableRearPortTypeTypeEnum = "sc"
-	WritableRearPortTypeTypeEnumScApc                 WritableRearPortTypeTypeEnum = "sc-apc"
-	WritableRearPortTypeTypeEnumSt                    WritableRearPortTypeTypeEnum = "st"
+	WritableRearPortTypeEnumEightp8c              WritableRearPortTypeEnum = "8p8c"
+	WritableRearPortTypeEnumOneHundredAndTenPunch WritableRearPortTypeEnum = "110-punch"
+	WritableRearPortTypeEnumBnc                   WritableRearPortTypeEnum = "bnc"
+	WritableRearPortTypeEnumMrj21                 WritableRearPortTypeEnum = "mrj21"
+	WritableRearPortTypeEnumFc                    WritableRearPortTypeEnum = "fc"
+	WritableRearPortTypeEnumLc                    WritableRearPortTypeEnum = "lc"
+	WritableRearPortTypeEnumLcApc                 WritableRearPortTypeEnum = "lc-apc"
+	WritableRearPortTypeEnumLsh                   WritableRearPortTypeEnum = "lsh"
+	WritableRearPortTypeEnumLshApc                WritableRearPortTypeEnum = "lsh-apc"
+	WritableRearPortTypeEnumMpo                   WritableRearPortTypeEnum = "mpo"
+	WritableRearPortTypeEnumMtrj                  WritableRearPortTypeEnum = "mtrj"
+	WritableRearPortTypeEnumSc                    WritableRearPortTypeEnum = "sc"
+	WritableRearPortTypeEnumScApc                 WritableRearPortTypeEnum = "sc-apc"
+	WritableRearPortTypeEnumSt                    WritableRearPortTypeEnum = "st"
 )
 
 type WritableRearPort struct {
-	Cable       *NestedCable                 `json:"cable,omitempty"`
-	Description *string                      `json:"description,omitempty"`
-	Device      int64                        `json:"device"`
-	ID          *int64                       `json:"id,omitempty"`
-	Name        string                       `json:"name"`
-	Positions   *int64                       `json:"positions,omitempty"`
-	Tags        []string                     `json:"tags,omitempty"`
-	Type        WritableRearPortTypeTypeEnum `json:"type"`
+	Cable       *NestedCable             `json:"cable,omitempty"`
+	Description *string                  `json:"description,omitempty"`
+	Device      int64                    `json:"device"`
+	ID          *int64                   `json:"id,omitempty"`
+	Name        string                   `json:"name"`
+	Positions   *int64                   `json:"positions,omitempty"`
+	Tags        []string                 `json:"tags,omitempty"`
+	Type        WritableRearPortTypeEnum `json:"type"`
 }

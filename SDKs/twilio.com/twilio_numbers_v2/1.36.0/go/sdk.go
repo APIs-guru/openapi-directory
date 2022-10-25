@@ -901,7 +901,7 @@ func (s *SDK) ListBundle(ctx context.Context, request operations.ListBundleReque
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListBundle200ApplicationJSONListBundleResponse
+			var out *operations.ListBundleListBundleResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -946,7 +946,7 @@ func (s *SDK) ListBundleCopy(ctx context.Context, request operations.ListBundleC
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListBundleCopy200ApplicationJSONListBundleCopyResponse
+			var out *operations.ListBundleCopyListBundleCopyResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -991,7 +991,7 @@ func (s *SDK) ListEndUser(ctx context.Context, request operations.ListEndUserReq
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListEndUser200ApplicationJSONListEndUserResponse
+			var out *operations.ListEndUserListEndUserResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -1036,7 +1036,7 @@ func (s *SDK) ListEndUserType(ctx context.Context, request operations.ListEndUse
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListEndUserType200ApplicationJSONListEndUserTypeResponse
+			var out *operations.ListEndUserTypeListEndUserTypeResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -1081,7 +1081,7 @@ func (s *SDK) ListEvaluation(ctx context.Context, request operations.ListEvaluat
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListEvaluation200ApplicationJSONListEvaluationResponse
+			var out *operations.ListEvaluationListEvaluationResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -1126,7 +1126,7 @@ func (s *SDK) ListItemAssignment(ctx context.Context, request operations.ListIte
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListItemAssignment200ApplicationJSONListItemAssignmentResponse
+			var out *operations.ListItemAssignmentListItemAssignmentResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -1171,7 +1171,7 @@ func (s *SDK) ListRegulation(ctx context.Context, request operations.ListRegulat
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListRegulation200ApplicationJSONListRegulationResponse
+			var out *operations.ListRegulationListRegulationResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -1216,7 +1216,7 @@ func (s *SDK) ListSupportingDocument(ctx context.Context, request operations.Lis
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListSupportingDocument200ApplicationJSONListSupportingDocumentResponse
+			var out *operations.ListSupportingDocumentListSupportingDocumentResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -1261,7 +1261,7 @@ func (s *SDK) ListSupportingDocumentType(ctx context.Context, request operations
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListSupportingDocumentType200ApplicationJSONListSupportingDocumentTypeResponse
+			var out *operations.ListSupportingDocumentTypeListSupportingDocumentTypeResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}

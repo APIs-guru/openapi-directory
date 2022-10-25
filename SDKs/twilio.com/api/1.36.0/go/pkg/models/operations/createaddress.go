@@ -12,7 +12,7 @@ type CreateAddressPathParams struct {
 	AccountSid string `pathParam:"style=simple,explode=false,name=AccountSid"`
 }
 
-type CreateAddressRequestBodyCreateAddressRequest struct {
+type CreateAddressCreateAddressRequest struct {
 	AutoCorrectAddress *bool   `form:"name=AutoCorrectAddress"`
 	City               string  `form:"name=City"`
 	CustomerName       string  `form:"name=CustomerName"`
@@ -31,7 +31,7 @@ type CreateAddressSecurity struct {
 type CreateAddressRequest struct {
 	ServerURL  *string
 	PathParams CreateAddressPathParams
-	Request    *CreateAddressRequestBodyCreateAddressRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateAddressCreateAddressRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateAddressSecurity
 }
 

@@ -22,7 +22,7 @@ type ListMarketplaceAvailableAddOnRequest struct {
 	Security    ListMarketplaceAvailableAddOnSecurity
 }
 
-type ListMarketplaceAvailableAddOn200ApplicationJSONMeta struct {
+type ListMarketplaceAvailableAddOnListMarketplaceAvailableAddOnResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -32,13 +32,13 @@ type ListMarketplaceAvailableAddOn200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListMarketplaceAvailableAddOn200ApplicationJSONListMarketplaceAvailableAddOnResponse struct {
-	AvailableAddOns []shared.PreviewMarketplaceAvailableAddOn            `json:"available_add_ons,omitempty"`
-	Meta            *ListMarketplaceAvailableAddOn200ApplicationJSONMeta `json:"meta,omitempty"`
+type ListMarketplaceAvailableAddOnListMarketplaceAvailableAddOnResponse struct {
+	AvailableAddOns []shared.PreviewMarketplaceAvailableAddOn                               `json:"available_add_ons,omitempty"`
+	Meta            *ListMarketplaceAvailableAddOnListMarketplaceAvailableAddOnResponseMeta `json:"meta,omitempty"`
 }
 
 type ListMarketplaceAvailableAddOnResponse struct {
 	ContentType                           string
-	ListMarketplaceAvailableAddOnResponse *ListMarketplaceAvailableAddOn200ApplicationJSONListMarketplaceAvailableAddOnResponse
+	ListMarketplaceAvailableAddOnResponse *ListMarketplaceAvailableAddOnListMarketplaceAvailableAddOnResponse
 	StatusCode                            int64
 }

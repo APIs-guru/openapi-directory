@@ -883,7 +883,7 @@ func (s *SDK) ListByocTrunk(ctx context.Context, request operations.ListByocTrun
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListByocTrunk200ApplicationJSONListByocTrunkResponse
+			var out *operations.ListByocTrunkListByocTrunkResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -928,7 +928,7 @@ func (s *SDK) ListConnectionPolicy(ctx context.Context, request operations.ListC
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListConnectionPolicy200ApplicationJSONListConnectionPolicyResponse
+			var out *operations.ListConnectionPolicyListConnectionPolicyResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -973,7 +973,7 @@ func (s *SDK) ListConnectionPolicyTarget(ctx context.Context, request operations
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListConnectionPolicyTarget200ApplicationJSONListConnectionPolicyTargetResponse
+			var out *operations.ListConnectionPolicyTargetListConnectionPolicyTargetResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -1018,7 +1018,7 @@ func (s *SDK) ListDialingPermissionsCountry(ctx context.Context, request operati
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListDialingPermissionsCountry200ApplicationJSONListDialingPermissionsCountryResponse
+			var out *operations.ListDialingPermissionsCountryListDialingPermissionsCountryResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -1063,7 +1063,7 @@ func (s *SDK) ListDialingPermissionsHrsPrefixes(ctx context.Context, request ope
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListDialingPermissionsHrsPrefixes200ApplicationJSONListDialingPermissionsHrsPrefixesResponse
+			var out *operations.ListDialingPermissionsHrsPrefixesListDialingPermissionsHrsPrefixesResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -1108,7 +1108,7 @@ func (s *SDK) ListIPRecord(ctx context.Context, request operations.ListIPRecordR
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListIPRecord200ApplicationJSONListIPRecordResponse
+			var out *operations.ListIPRecordListIPRecordResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -1153,7 +1153,7 @@ func (s *SDK) ListSourceIPMapping(ctx context.Context, request operations.ListSo
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListSourceIPMapping200ApplicationJSONListSourceIPMappingResponse
+			var out *operations.ListSourceIPMappingListSourceIPMappingResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}

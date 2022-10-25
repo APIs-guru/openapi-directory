@@ -8,7 +8,7 @@ from dataclasses_json import dataclass_json
 
 @dataclass_json
 @dataclass
-class PreprintsCreateRequestBodyAttributesAttributes:
+class PreprintsCreatePreprintAttributes:
     date_created: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'date_created', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     date_modified: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'date_modified', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     date_published: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'date_published', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
@@ -20,7 +20,7 @@ class PreprintsCreateRequestBodyAttributesAttributes:
 
 @dataclass_json
 @dataclass
-class PreprintsCreateRequestBodyLinksLinks:
+class PreprintsCreatePreprintLinks:
     doi: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'doi' }})
     html: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'html' }})
     preprint_doi: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'preprint_doi' }})
@@ -29,7 +29,7 @@ class PreprintsCreateRequestBodyLinksLinks:
 
 @dataclass_json
 @dataclass
-class PreprintsCreateRequestBodyRelationshipsRelationships:
+class PreprintsCreatePreprintRelationships:
     citation: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'citation' }})
     identifiers: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'identifiers' }})
     license: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'license' }})
@@ -40,17 +40,17 @@ class PreprintsCreateRequestBodyRelationshipsRelationships:
 
 @dataclass_json
 @dataclass
-class PreprintsCreateRequestBodyPreprint:
-    attributes: Optional[PreprintsCreateRequestBodyAttributesAttributes] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'attributes' }})
+class PreprintsCreatePreprint:
+    attributes: Optional[PreprintsCreatePreprintAttributes] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'attributes' }})
     id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    links: Optional[PreprintsCreateRequestBodyLinksLinks] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'links' }})
-    relationships: PreprintsCreateRequestBodyRelationshipsRelationships = field(default=None, metadata={'dataclasses_json': { 'field_name': 'relationships' }})
+    links: Optional[PreprintsCreatePreprintLinks] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'links' }})
+    relationships: PreprintsCreatePreprintRelationships = field(default=None, metadata={'dataclasses_json': { 'field_name': 'relationships' }})
     type: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     
 
 @dataclass
 class PreprintsCreateRequest:
-    request: PreprintsCreateRequestBodyPreprint = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: PreprintsCreatePreprint = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass

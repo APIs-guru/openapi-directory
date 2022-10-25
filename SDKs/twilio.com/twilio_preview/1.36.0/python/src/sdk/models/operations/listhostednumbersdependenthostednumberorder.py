@@ -37,7 +37,7 @@ class ListHostedNumbersDependentHostedNumberOrderRequest:
 
 @dataclass_json
 @dataclass
-class ListHostedNumbersDependentHostedNumberOrder200ApplicationJSONMeta:
+class ListHostedNumbersDependentHostedNumberOrderListHostedNumbersDependentHostedNumberOrderResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -49,14 +49,14 @@ class ListHostedNumbersDependentHostedNumberOrder200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListHostedNumbersDependentHostedNumberOrder200ApplicationJSONListHostedNumbersDependentHostedNumberOrderResponse:
+class ListHostedNumbersDependentHostedNumberOrderListHostedNumbersDependentHostedNumberOrderResponse:
     items: Optional[List[shared.PreviewHostedNumbersAuthorizationDocumentDependentHostedNumberOrder]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'items' }})
-    meta: Optional[ListHostedNumbersDependentHostedNumberOrder200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+    meta: Optional[ListHostedNumbersDependentHostedNumberOrderListHostedNumbersDependentHostedNumberOrderResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     
 
 @dataclass
 class ListHostedNumbersDependentHostedNumberOrderResponse:
     content_type: str = field(default=None)
-    list_hosted_numbers_dependent_hosted_number_order_response: Optional[ListHostedNumbersDependentHostedNumberOrder200ApplicationJSONListHostedNumbersDependentHostedNumberOrderResponse] = field(default=None)
+    list_hosted_numbers_dependent_hosted_number_order_response: Optional[ListHostedNumbersDependentHostedNumberOrderListHostedNumbersDependentHostedNumberOrderResponse] = field(default=None)
     status_code: int = field(default=None)
     

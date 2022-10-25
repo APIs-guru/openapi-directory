@@ -1,0 +1,19 @@
+package shared
+
+type GoogleAnalyticsAdminV1alphaAccessStringFilterMatchTypeEnum string
+
+const (
+	GoogleAnalyticsAdminV1alphaAccessStringFilterMatchTypeEnumMatchTypeUnspecified GoogleAnalyticsAdminV1alphaAccessStringFilterMatchTypeEnum = "MATCH_TYPE_UNSPECIFIED"
+	GoogleAnalyticsAdminV1alphaAccessStringFilterMatchTypeEnumExact                GoogleAnalyticsAdminV1alphaAccessStringFilterMatchTypeEnum = "EXACT"
+	GoogleAnalyticsAdminV1alphaAccessStringFilterMatchTypeEnumBeginsWith           GoogleAnalyticsAdminV1alphaAccessStringFilterMatchTypeEnum = "BEGINS_WITH"
+	GoogleAnalyticsAdminV1alphaAccessStringFilterMatchTypeEnumEndsWith             GoogleAnalyticsAdminV1alphaAccessStringFilterMatchTypeEnum = "ENDS_WITH"
+	GoogleAnalyticsAdminV1alphaAccessStringFilterMatchTypeEnumContains             GoogleAnalyticsAdminV1alphaAccessStringFilterMatchTypeEnum = "CONTAINS"
+	GoogleAnalyticsAdminV1alphaAccessStringFilterMatchTypeEnumFullRegexp           GoogleAnalyticsAdminV1alphaAccessStringFilterMatchTypeEnum = "FULL_REGEXP"
+	GoogleAnalyticsAdminV1alphaAccessStringFilterMatchTypeEnumPartialRegexp        GoogleAnalyticsAdminV1alphaAccessStringFilterMatchTypeEnum = "PARTIAL_REGEXP"
+)
+
+type GoogleAnalyticsAdminV1alphaAccessStringFilter struct {
+	CaseSensitive *bool                                                       `json:"caseSensitive,omitempty"`
+	MatchType     *GoogleAnalyticsAdminV1alphaAccessStringFilterMatchTypeEnum `json:"matchType,omitempty"`
+	Value         *string                                                     `json:"value,omitempty"`
+}

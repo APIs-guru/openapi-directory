@@ -413,7 +413,7 @@ func (s *SDK) ListAccountUsageRecord(ctx context.Context, request operations.Lis
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListAccountUsageRecord200ApplicationJSONListAccountUsageRecordResponse
+			var out *operations.ListAccountUsageRecordListAccountUsageRecordResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -458,7 +458,7 @@ func (s *SDK) ListCommand(ctx context.Context, request operations.ListCommandReq
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListCommand200ApplicationJSONListCommandResponse
+			var out *operations.ListCommandListCommandResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -503,7 +503,7 @@ func (s *SDK) ListDataSession(ctx context.Context, request operations.ListDataSe
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListDataSession200ApplicationJSONListDataSessionResponse
+			var out *operations.ListDataSessionListDataSessionResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -548,7 +548,7 @@ func (s *SDK) ListRatePlan(ctx context.Context, request operations.ListRatePlanR
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListRatePlan200ApplicationJSONListRatePlanResponse
+			var out *operations.ListRatePlanListRatePlanResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -593,7 +593,7 @@ func (s *SDK) ListSim(ctx context.Context, request operations.ListSimRequest) (*
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListSim200ApplicationJSONListSimResponse
+			var out *operations.ListSimListSimResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -638,7 +638,7 @@ func (s *SDK) ListUsageRecord(ctx context.Context, request operations.ListUsageR
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListUsageRecord200ApplicationJSONListUsageRecordResponse
+			var out *operations.ListUsageRecordListUsageRecordResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}

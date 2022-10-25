@@ -1,7 +1,8 @@
 package operations
 
 type GetIPTxtResponse struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+	ContentType          string
+	DateTimeTextResponse *string
+	ErrorTextResponse    *string
+	StatusCode           int64
 }

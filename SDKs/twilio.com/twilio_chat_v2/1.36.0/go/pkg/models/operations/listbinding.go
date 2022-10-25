@@ -29,7 +29,7 @@ type ListBindingRequest struct {
 	Security    ListBindingSecurity
 }
 
-type ListBinding200ApplicationJSONMeta struct {
+type ListBindingListBindingResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -39,13 +39,13 @@ type ListBinding200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListBinding200ApplicationJSONListBindingResponse struct {
-	Bindings []shared.ChatV2ServiceBinding      `json:"bindings,omitempty"`
-	Meta     *ListBinding200ApplicationJSONMeta `json:"meta,omitempty"`
+type ListBindingListBindingResponse struct {
+	Bindings []shared.ChatV2ServiceBinding       `json:"bindings,omitempty"`
+	Meta     *ListBindingListBindingResponseMeta `json:"meta,omitempty"`
 }
 
 type ListBindingResponse struct {
 	ContentType         string
-	ListBindingResponse *ListBinding200ApplicationJSONListBindingResponse
+	ListBindingResponse *ListBindingListBindingResponse
 	StatusCode          int64
 }

@@ -8,27 +8,27 @@ var CreateCompositionServers = []string{
 	"https://video.twilio.com",
 }
 
-type CreateCompositionRequestBodyStatusCallbackMethodEnum string
+type CreateCompositionCreateCompositionRequestStatusCallbackMethodEnum string
 
 const (
-	CreateCompositionRequestBodyStatusCallbackMethodEnumHead   CreateCompositionRequestBodyStatusCallbackMethodEnum = "HEAD"
-	CreateCompositionRequestBodyStatusCallbackMethodEnumGet    CreateCompositionRequestBodyStatusCallbackMethodEnum = "GET"
-	CreateCompositionRequestBodyStatusCallbackMethodEnumPost   CreateCompositionRequestBodyStatusCallbackMethodEnum = "POST"
-	CreateCompositionRequestBodyStatusCallbackMethodEnumPatch  CreateCompositionRequestBodyStatusCallbackMethodEnum = "PATCH"
-	CreateCompositionRequestBodyStatusCallbackMethodEnumPut    CreateCompositionRequestBodyStatusCallbackMethodEnum = "PUT"
-	CreateCompositionRequestBodyStatusCallbackMethodEnumDelete CreateCompositionRequestBodyStatusCallbackMethodEnum = "DELETE"
+	CreateCompositionCreateCompositionRequestStatusCallbackMethodEnumHead   CreateCompositionCreateCompositionRequestStatusCallbackMethodEnum = "HEAD"
+	CreateCompositionCreateCompositionRequestStatusCallbackMethodEnumGet    CreateCompositionCreateCompositionRequestStatusCallbackMethodEnum = "GET"
+	CreateCompositionCreateCompositionRequestStatusCallbackMethodEnumPost   CreateCompositionCreateCompositionRequestStatusCallbackMethodEnum = "POST"
+	CreateCompositionCreateCompositionRequestStatusCallbackMethodEnumPatch  CreateCompositionCreateCompositionRequestStatusCallbackMethodEnum = "PATCH"
+	CreateCompositionCreateCompositionRequestStatusCallbackMethodEnumPut    CreateCompositionCreateCompositionRequestStatusCallbackMethodEnum = "PUT"
+	CreateCompositionCreateCompositionRequestStatusCallbackMethodEnumDelete CreateCompositionCreateCompositionRequestStatusCallbackMethodEnum = "DELETE"
 )
 
-type CreateCompositionRequestBodyCreateCompositionRequest struct {
-	AudioSources         []string                                              `form:"name=AudioSources"`
-	AudioSourcesExcluded []string                                              `form:"name=AudioSourcesExcluded"`
-	Format               *shared.CompositionEnumFormatEnum                     `form:"name=Format"`
-	Resolution           *string                                               `form:"name=Resolution"`
-	RoomSid              string                                                `form:"name=RoomSid"`
-	StatusCallback       *string                                               `form:"name=StatusCallback"`
-	StatusCallbackMethod *CreateCompositionRequestBodyStatusCallbackMethodEnum `form:"name=StatusCallbackMethod"`
-	Trim                 *bool                                                 `form:"name=Trim"`
-	VideoLayout          *interface{}                                          `form:"name=VideoLayout"`
+type CreateCompositionCreateCompositionRequest struct {
+	AudioSources         []string                                                           `form:"name=AudioSources"`
+	AudioSourcesExcluded []string                                                           `form:"name=AudioSourcesExcluded"`
+	Format               *shared.CompositionEnumFormatEnum                                  `form:"name=Format"`
+	Resolution           *string                                                            `form:"name=Resolution"`
+	RoomSid              string                                                             `form:"name=RoomSid"`
+	StatusCallback       *string                                                            `form:"name=StatusCallback"`
+	StatusCallbackMethod *CreateCompositionCreateCompositionRequestStatusCallbackMethodEnum `form:"name=StatusCallbackMethod"`
+	Trim                 *bool                                                              `form:"name=Trim"`
+	VideoLayout          *interface{}                                                       `form:"name=VideoLayout"`
 }
 
 type CreateCompositionSecurity struct {
@@ -37,7 +37,7 @@ type CreateCompositionSecurity struct {
 
 type CreateCompositionRequest struct {
 	ServerURL *string
-	Request   *CreateCompositionRequestBodyCreateCompositionRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request   *CreateCompositionCreateCompositionRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security  CreateCompositionSecurity
 }
 

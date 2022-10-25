@@ -12,7 +12,7 @@ type CreateBrandVettingPathParams struct {
 	BrandSid string `pathParam:"style=simple,explode=false,name=BrandSid"`
 }
 
-type CreateBrandVettingRequestBodyCreateBrandVettingRequest struct {
+type CreateBrandVettingCreateBrandVettingRequest struct {
 	VettingID       *string                                    `form:"name=VettingId"`
 	VettingProvider shared.BrandVettingEnumVettingProviderEnum `form:"name=VettingProvider"`
 }
@@ -24,7 +24,7 @@ type CreateBrandVettingSecurity struct {
 type CreateBrandVettingRequest struct {
 	ServerURL  *string
 	PathParams CreateBrandVettingPathParams
-	Request    *CreateBrandVettingRequestBodyCreateBrandVettingRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateBrandVettingCreateBrandVettingRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateBrandVettingSecurity
 }
 

@@ -13,7 +13,7 @@ type UpdateSyncListPathParams struct {
 	Sid        string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
-type UpdateSyncListRequestBodyUpdateSyncListRequest struct {
+type UpdateSyncListUpdateSyncListRequest struct {
 	CollectionTTL *int64 `form:"name=CollectionTtl"`
 	TTL           *int64 `form:"name=Ttl"`
 }
@@ -25,7 +25,7 @@ type UpdateSyncListSecurity struct {
 type UpdateSyncListRequest struct {
 	ServerURL  *string
 	PathParams UpdateSyncListPathParams
-	Request    *UpdateSyncListRequestBodyUpdateSyncListRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateSyncListUpdateSyncListRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateSyncListSecurity
 }
 

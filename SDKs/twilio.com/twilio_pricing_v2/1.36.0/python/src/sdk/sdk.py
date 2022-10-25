@@ -137,7 +137,7 @@ class SDK:
         res = operations.ListTrunkingCountryResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListTrunkingCountry200ApplicationJSONListTrunkingCountryResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListTrunkingCountryListTrunkingCountryResponse])
                 res.list_trunking_country_response = out
 
         return res
@@ -162,7 +162,7 @@ class SDK:
         res = operations.ListVoiceCountryResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListVoiceCountry200ApplicationJSONListVoiceCountryResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListVoiceCountryListVoiceCountryResponse])
                 res.list_voice_country_response = out
 
         return res

@@ -11,7 +11,7 @@ class ConsolePortConnectionStatusLabelEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class ConsolePortConnectionStatusConnectionStatus:
+class ConsolePortConnectionStatus:
     label: ConsolePortConnectionStatusLabelEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label' }})
     value: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
     
@@ -48,7 +48,7 @@ class ConsolePortTypeValueEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class ConsolePortTypeType:
+class ConsolePortType:
     label: ConsolePortTypeLabelEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label' }})
     value: ConsolePortTypeValueEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
     
@@ -59,11 +59,11 @@ class ConsolePort:
     cable: Optional[nestedcable.NestedCable] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cable' }})
     connected_endpoint: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'connected_endpoint' }})
     connected_endpoint_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'connected_endpoint_type' }})
-    connection_status: Optional[ConsolePortConnectionStatusConnectionStatus] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'connection_status' }})
+    connection_status: Optional[ConsolePortConnectionStatus] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'connection_status' }})
     description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
     device: nesteddevice.NestedDevice = field(default=None, metadata={'dataclasses_json': { 'field_name': 'device' }})
     id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
     tags: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
-    type: Optional[ConsolePortTypeType] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    type: Optional[ConsolePortType] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     

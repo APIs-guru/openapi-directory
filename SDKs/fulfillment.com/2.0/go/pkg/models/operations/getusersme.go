@@ -13,17 +13,17 @@ type GetUsersMeRequest struct {
 	Security GetUsersMeSecurity
 }
 
-type GetUsersMe200ApplicationJSONContactInfoMerchant struct {
+type GetUsersMeUserContactV2UserContactV2Merchant struct {
 	ID *int64 `json:"id,omitempty"`
 }
 
-type GetUsersMe200ApplicationJSONContactInfoUserContactV2 struct {
+type GetUsersMeUserContactV2UserContactV2 struct {
 	APIKey      *string                                                                                   `json:"apiKey,omitempty"`
 	ContactInfo *shared.OneordersPostResponses201ContentApplication1jsonSchemaPropertiesOriginalConsignee `json:"contactInfo,omitempty"`
 	CreateDate  *time.Time                                                                                `json:"createDate,omitempty"`
 	DeptLeader  *bool                                                                                     `json:"deptLeader,omitempty"`
 	ID          int64                                                                                     `json:"id"`
-	Merchant    *GetUsersMe200ApplicationJSONContactInfoMerchant                                          `json:"merchant,omitempty"`
+	Merchant    *GetUsersMeUserContactV2UserContactV2Merchant                                             `json:"merchant,omitempty"`
 	Name        *string                                                                                   `json:"name,omitempty"`
 	Status      *bool                                                                                     `json:"status,omitempty"`
 	UpdatedAt   *time.Time                                                                                `json:"updatedAt,omitempty"`
@@ -31,26 +31,26 @@ type GetUsersMe200ApplicationJSONContactInfoUserContactV2 struct {
 	Username    *string                                                                                   `json:"username,omitempty"`
 }
 
-type GetUsersMe200ApplicationJSONMerchant struct {
+type GetUsersMeUserContactV2Merchant struct {
 	ID *int64 `json:"id,omitempty"`
 }
 
-type GetUsersMe200ApplicationJSONUserContactV2 struct {
-	APIKey      *string                                               `json:"apiKey,omitempty"`
-	ContactInfo *GetUsersMe200ApplicationJSONContactInfoUserContactV2 `json:"contactInfo,omitempty"`
-	CreateDate  *time.Time                                            `json:"createDate,omitempty"`
-	DeptLeader  *bool                                                 `json:"deptLeader,omitempty"`
-	ID          int64                                                 `json:"id"`
-	Merchant    *GetUsersMe200ApplicationJSONMerchant                 `json:"merchant,omitempty"`
-	Name        *string                                               `json:"name,omitempty"`
-	Status      *bool                                                 `json:"status,omitempty"`
-	UpdatedAt   *time.Time                                            `json:"updatedAt,omitempty"`
-	UpdatedBy   *time.Time                                            `json:"updatedBy,omitempty"`
-	Username    *string                                               `json:"username,omitempty"`
+type GetUsersMeUserContactV2 struct {
+	APIKey      *string                               `json:"apiKey,omitempty"`
+	ContactInfo *GetUsersMeUserContactV2UserContactV2 `json:"contactInfo,omitempty"`
+	CreateDate  *time.Time                            `json:"createDate,omitempty"`
+	DeptLeader  *bool                                 `json:"deptLeader,omitempty"`
+	ID          int64                                 `json:"id"`
+	Merchant    *GetUsersMeUserContactV2Merchant      `json:"merchant,omitempty"`
+	Name        *string                               `json:"name,omitempty"`
+	Status      *bool                                 `json:"status,omitempty"`
+	UpdatedAt   *time.Time                            `json:"updatedAt,omitempty"`
+	UpdatedBy   *time.Time                            `json:"updatedBy,omitempty"`
+	Username    *string                               `json:"username,omitempty"`
 }
 
 type GetUsersMeResponse struct {
 	ContentType   string
 	StatusCode    int64
-	UserContactV2 *GetUsersMe200ApplicationJSONUserContactV2
+	UserContactV2 *GetUsersMeUserContactV2
 }

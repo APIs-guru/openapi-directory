@@ -24,79 +24,79 @@ type GetFirewallsRequest struct {
 	QueryParams GetFirewallsQueryParams
 }
 
-type GetFirewalls200ApplicationJSONFirewallsAppliedToAppliedToResourcesServer struct {
+type GetFirewallsFirewallsResponseFirewallAppliedToAppliedToResourcesServer struct {
 	ID int64 `json:"id"`
 }
 
-type GetFirewalls200ApplicationJSONFirewallsAppliedToAppliedToResourcesTypeEnum string
+type GetFirewallsFirewallsResponseFirewallAppliedToAppliedToResourcesTypeEnum string
 
 const (
-	GetFirewalls200ApplicationJSONFirewallsAppliedToAppliedToResourcesTypeEnumServer GetFirewalls200ApplicationJSONFirewallsAppliedToAppliedToResourcesTypeEnum = "server"
+	GetFirewallsFirewallsResponseFirewallAppliedToAppliedToResourcesTypeEnumServer GetFirewallsFirewallsResponseFirewallAppliedToAppliedToResourcesTypeEnum = "server"
 )
 
-type GetFirewalls200ApplicationJSONFirewallsAppliedToAppliedToResources struct {
-	Server *GetFirewalls200ApplicationJSONFirewallsAppliedToAppliedToResourcesServer   `json:"server,omitempty"`
-	Type   *GetFirewalls200ApplicationJSONFirewallsAppliedToAppliedToResourcesTypeEnum `json:"type,omitempty"`
+type GetFirewallsFirewallsResponseFirewallAppliedToAppliedToResources struct {
+	Server *GetFirewallsFirewallsResponseFirewallAppliedToAppliedToResourcesServer   `json:"server,omitempty"`
+	Type   *GetFirewallsFirewallsResponseFirewallAppliedToAppliedToResourcesTypeEnum `json:"type,omitempty"`
 }
 
-type GetFirewalls200ApplicationJSONFirewallsAppliedToLabelSelector struct {
+type GetFirewallsFirewallsResponseFirewallAppliedToLabelSelector struct {
 	Selector string `json:"selector"`
 }
 
-type GetFirewalls200ApplicationJSONFirewallsAppliedToServer struct {
+type GetFirewallsFirewallsResponseFirewallAppliedToServer struct {
 	ID int64 `json:"id"`
 }
 
-type GetFirewalls200ApplicationJSONFirewallsAppliedToTypeEnum string
+type GetFirewallsFirewallsResponseFirewallAppliedToTypeEnum string
 
 const (
-	GetFirewalls200ApplicationJSONFirewallsAppliedToTypeEnumServer        GetFirewalls200ApplicationJSONFirewallsAppliedToTypeEnum = "server"
-	GetFirewalls200ApplicationJSONFirewallsAppliedToTypeEnumLabelSelector GetFirewalls200ApplicationJSONFirewallsAppliedToTypeEnum = "label_selector"
+	GetFirewallsFirewallsResponseFirewallAppliedToTypeEnumServer        GetFirewallsFirewallsResponseFirewallAppliedToTypeEnum = "server"
+	GetFirewallsFirewallsResponseFirewallAppliedToTypeEnumLabelSelector GetFirewallsFirewallsResponseFirewallAppliedToTypeEnum = "label_selector"
 )
 
-type GetFirewalls200ApplicationJSONFirewallsAppliedTo struct {
-	AppliedToResources []GetFirewalls200ApplicationJSONFirewallsAppliedToAppliedToResources `json:"applied_to_resources,omitempty"`
-	LabelSelector      *GetFirewalls200ApplicationJSONFirewallsAppliedToLabelSelector       `json:"label_selector,omitempty"`
-	Server             *GetFirewalls200ApplicationJSONFirewallsAppliedToServer              `json:"server,omitempty"`
-	Type               GetFirewalls200ApplicationJSONFirewallsAppliedToTypeEnum             `json:"type"`
+type GetFirewallsFirewallsResponseFirewallAppliedTo struct {
+	AppliedToResources []GetFirewallsFirewallsResponseFirewallAppliedToAppliedToResources `json:"applied_to_resources,omitempty"`
+	LabelSelector      *GetFirewallsFirewallsResponseFirewallAppliedToLabelSelector       `json:"label_selector,omitempty"`
+	Server             *GetFirewallsFirewallsResponseFirewallAppliedToServer              `json:"server,omitempty"`
+	Type               GetFirewallsFirewallsResponseFirewallAppliedToTypeEnum             `json:"type"`
 }
 
-type GetFirewalls200ApplicationJSONFirewallsRulesDirectionEnum string
+type GetFirewallsFirewallsResponseFirewallRuleDirectionEnum string
 
 const (
-	GetFirewalls200ApplicationJSONFirewallsRulesDirectionEnumIn  GetFirewalls200ApplicationJSONFirewallsRulesDirectionEnum = "in"
-	GetFirewalls200ApplicationJSONFirewallsRulesDirectionEnumOut GetFirewalls200ApplicationJSONFirewallsRulesDirectionEnum = "out"
+	GetFirewallsFirewallsResponseFirewallRuleDirectionEnumIn  GetFirewallsFirewallsResponseFirewallRuleDirectionEnum = "in"
+	GetFirewallsFirewallsResponseFirewallRuleDirectionEnumOut GetFirewallsFirewallsResponseFirewallRuleDirectionEnum = "out"
 )
 
-type GetFirewalls200ApplicationJSONFirewallsRulesProtocolEnum string
+type GetFirewallsFirewallsResponseFirewallRuleProtocolEnum string
 
 const (
-	GetFirewalls200ApplicationJSONFirewallsRulesProtocolEnumTCP  GetFirewalls200ApplicationJSONFirewallsRulesProtocolEnum = "tcp"
-	GetFirewalls200ApplicationJSONFirewallsRulesProtocolEnumUDP  GetFirewalls200ApplicationJSONFirewallsRulesProtocolEnum = "udp"
-	GetFirewalls200ApplicationJSONFirewallsRulesProtocolEnumIcmp GetFirewalls200ApplicationJSONFirewallsRulesProtocolEnum = "icmp"
-	GetFirewalls200ApplicationJSONFirewallsRulesProtocolEnumEsp  GetFirewalls200ApplicationJSONFirewallsRulesProtocolEnum = "esp"
-	GetFirewalls200ApplicationJSONFirewallsRulesProtocolEnumGre  GetFirewalls200ApplicationJSONFirewallsRulesProtocolEnum = "gre"
+	GetFirewallsFirewallsResponseFirewallRuleProtocolEnumTCP  GetFirewallsFirewallsResponseFirewallRuleProtocolEnum = "tcp"
+	GetFirewallsFirewallsResponseFirewallRuleProtocolEnumUDP  GetFirewallsFirewallsResponseFirewallRuleProtocolEnum = "udp"
+	GetFirewallsFirewallsResponseFirewallRuleProtocolEnumIcmp GetFirewallsFirewallsResponseFirewallRuleProtocolEnum = "icmp"
+	GetFirewallsFirewallsResponseFirewallRuleProtocolEnumEsp  GetFirewallsFirewallsResponseFirewallRuleProtocolEnum = "esp"
+	GetFirewallsFirewallsResponseFirewallRuleProtocolEnumGre  GetFirewallsFirewallsResponseFirewallRuleProtocolEnum = "gre"
 )
 
-type GetFirewalls200ApplicationJSONFirewallsRulesRule struct {
-	Description    *string                                                   `json:"description,omitempty"`
-	DestinationIps []string                                                  `json:"destination_ips,omitempty"`
-	Direction      GetFirewalls200ApplicationJSONFirewallsRulesDirectionEnum `json:"direction"`
-	Port           *string                                                   `json:"port,omitempty"`
-	Protocol       GetFirewalls200ApplicationJSONFirewallsRulesProtocolEnum  `json:"protocol"`
-	SourceIps      []string                                                  `json:"source_ips,omitempty"`
+type GetFirewallsFirewallsResponseFirewallRule struct {
+	Description    *string                                                `json:"description,omitempty"`
+	DestinationIps []string                                               `json:"destination_ips,omitempty"`
+	Direction      GetFirewallsFirewallsResponseFirewallRuleDirectionEnum `json:"direction"`
+	Port           *string                                                `json:"port,omitempty"`
+	Protocol       GetFirewallsFirewallsResponseFirewallRuleProtocolEnum  `json:"protocol"`
+	SourceIps      []string                                               `json:"source_ips,omitempty"`
 }
 
-type GetFirewalls200ApplicationJSONFirewallsFirewall struct {
-	AppliedTo []GetFirewalls200ApplicationJSONFirewallsAppliedTo `json:"applied_to"`
-	Created   string                                             `json:"created"`
-	ID        int64                                              `json:"id"`
-	Labels    map[string]string                                  `json:"labels,omitempty"`
-	Name      string                                             `json:"name"`
-	Rules     []GetFirewalls200ApplicationJSONFirewallsRulesRule `json:"rules"`
+type GetFirewallsFirewallsResponseFirewall struct {
+	AppliedTo []GetFirewallsFirewallsResponseFirewallAppliedTo `json:"applied_to"`
+	Created   string                                           `json:"created"`
+	ID        int64                                            `json:"id"`
+	Labels    map[string]string                                `json:"labels,omitempty"`
+	Name      string                                           `json:"name"`
+	Rules     []GetFirewallsFirewallsResponseFirewallRule      `json:"rules"`
 }
 
-type GetFirewalls200ApplicationJSONMetaPagination struct {
+type GetFirewallsFirewallsResponseMetaPagination struct {
 	LastPage     float64 `json:"last_page"`
 	NextPage     float64 `json:"next_page"`
 	Page         float64 `json:"page"`
@@ -105,17 +105,17 @@ type GetFirewalls200ApplicationJSONMetaPagination struct {
 	TotalEntries float64 `json:"total_entries"`
 }
 
-type GetFirewalls200ApplicationJSONMeta struct {
-	Pagination GetFirewalls200ApplicationJSONMetaPagination `json:"pagination"`
+type GetFirewallsFirewallsResponseMeta struct {
+	Pagination GetFirewallsFirewallsResponseMetaPagination `json:"pagination"`
 }
 
-type GetFirewalls200ApplicationJSONFirewallsResponse struct {
-	Firewalls []GetFirewalls200ApplicationJSONFirewallsFirewall `json:"firewalls"`
-	Meta      *GetFirewalls200ApplicationJSONMeta               `json:"meta,omitempty"`
+type GetFirewallsFirewallsResponse struct {
+	Firewalls []GetFirewallsFirewallsResponseFirewall `json:"firewalls"`
+	Meta      *GetFirewallsFirewallsResponseMeta      `json:"meta,omitempty"`
 }
 
 type GetFirewallsResponse struct {
 	ContentType       string
-	FirewallsResponse *GetFirewalls200ApplicationJSONFirewallsResponse
+	FirewallsResponse *GetFirewallsFirewallsResponse
 	StatusCode        int64
 }

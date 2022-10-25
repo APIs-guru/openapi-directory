@@ -13,7 +13,7 @@ class LicenseContentLinks:
 
 @dataclass_json
 @dataclass
-class LicenseContentLicenseLicenseSimple:
+class LicenseContentLicenseSimple:
     html_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'html_url' }})
     key: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
@@ -31,7 +31,7 @@ class LicenseContent:
     encoding: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'encoding' }})
     git_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'git_url' }})
     html_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'html_url' }})
-    license: LicenseContentLicenseLicenseSimple = field(default=None, metadata={'dataclasses_json': { 'field_name': 'license' }})
+    license: LicenseContentLicenseSimple = field(default=None, metadata={'dataclasses_json': { 'field_name': 'license' }})
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
     path: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'path' }})
     sha: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sha' }})

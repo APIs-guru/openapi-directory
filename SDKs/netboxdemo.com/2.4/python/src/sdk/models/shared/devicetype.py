@@ -9,14 +9,14 @@ from . import nestedmanufacturer
 
 @dataclass_json
 @dataclass
-class DeviceTypeInterfaceOrderingInterfaceOrdering:
+class DeviceTypeInterfaceOrdering:
     label: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label' }})
     value: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
     
 
 @dataclass_json
 @dataclass
-class DeviceTypeSubdeviceRoleSubdeviceRole:
+class DeviceTypeSubdeviceRole:
     label: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label' }})
     value: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
     
@@ -29,7 +29,7 @@ class DeviceType:
     custom_fields: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'custom_fields' }})
     id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     instance_count: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'instance_count' }})
-    interface_ordering: Optional[DeviceTypeInterfaceOrderingInterfaceOrdering] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'interface_ordering' }})
+    interface_ordering: Optional[DeviceTypeInterfaceOrdering] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'interface_ordering' }})
     is_console_server: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'is_console_server' }})
     is_full_depth: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'is_full_depth' }})
     is_network_device: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'is_network_device' }})
@@ -39,7 +39,7 @@ class DeviceType:
     model: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'model' }})
     part_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'part_number' }})
     slug: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'slug' }})
-    subdevice_role: Optional[DeviceTypeSubdeviceRoleSubdeviceRole] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'subdevice_role' }})
+    subdevice_role: Optional[DeviceTypeSubdeviceRole] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'subdevice_role' }})
     tags: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
     u_height: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'u_height' }})
     

@@ -23,18 +23,18 @@ class PostLoadBalancersIDActionsAttachToNetworkRequest:
 
 @dataclass_json
 @dataclass
-class PostLoadBalancersIDActionsAttachToNetwork201ApplicationJSONActionError:
+class PostLoadBalancersIDActionsAttachToNetworkActionResponseActionError:
     code: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'code' }})
     message: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'message' }})
     
 
 @dataclass_json
 @dataclass
-class PostLoadBalancersIDActionsAttachToNetwork201ApplicationJSONActionResources:
+class PostLoadBalancersIDActionsAttachToNetworkActionResponseActionResources:
     id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     type: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     
-class PostLoadBalancersIDActionsAttachToNetwork201ApplicationJSONActionStatusEnum(str, Enum):
+class PostLoadBalancersIDActionsAttachToNetworkActionResponseActionStatusEnum(str, Enum):
     SUCCESS = "success"
     RUNNING = "running"
     ERROR = "error"
@@ -42,26 +42,26 @@ class PostLoadBalancersIDActionsAttachToNetwork201ApplicationJSONActionStatusEnu
 
 @dataclass_json
 @dataclass
-class PostLoadBalancersIDActionsAttachToNetwork201ApplicationJSONActionAction:
+class PostLoadBalancersIDActionsAttachToNetworkActionResponseAction:
     command: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'command' }})
-    error: PostLoadBalancersIDActionsAttachToNetwork201ApplicationJSONActionError = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
+    error: PostLoadBalancersIDActionsAttachToNetworkActionResponseActionError = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
     finished: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'finished' }})
     id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     progress: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'progress' }})
-    resources: List[PostLoadBalancersIDActionsAttachToNetwork201ApplicationJSONActionResources] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resources' }})
+    resources: List[PostLoadBalancersIDActionsAttachToNetworkActionResponseActionResources] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resources' }})
     started: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'started' }})
-    status: PostLoadBalancersIDActionsAttachToNetwork201ApplicationJSONActionStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    status: PostLoadBalancersIDActionsAttachToNetworkActionResponseActionStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
     
 
 @dataclass_json
 @dataclass
-class PostLoadBalancersIDActionsAttachToNetwork201ApplicationJSONActionResponse:
-    action: PostLoadBalancersIDActionsAttachToNetwork201ApplicationJSONActionAction = field(default=None, metadata={'dataclasses_json': { 'field_name': 'action' }})
+class PostLoadBalancersIDActionsAttachToNetworkActionResponse:
+    action: PostLoadBalancersIDActionsAttachToNetworkActionResponseAction = field(default=None, metadata={'dataclasses_json': { 'field_name': 'action' }})
     
 
 @dataclass
 class PostLoadBalancersIDActionsAttachToNetworkResponse:
-    action_response: Optional[PostLoadBalancersIDActionsAttachToNetwork201ApplicationJSONActionResponse] = field(default=None)
+    action_response: Optional[PostLoadBalancersIDActionsAttachToNetworkActionResponse] = field(default=None)
     content_type: str = field(default=None)
     status_code: int = field(default=None)
     

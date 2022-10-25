@@ -13,7 +13,7 @@ type UpdateMarketplaceInstalledAddOnExtensionPathParams struct {
 	Sid               string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
-type UpdateMarketplaceInstalledAddOnExtensionRequestBodyUpdateMarketplaceInstalledAddOnExtensionRequest struct {
+type UpdateMarketplaceInstalledAddOnExtensionUpdateMarketplaceInstalledAddOnExtensionRequest struct {
 	Enabled bool `form:"name=Enabled"`
 }
 
@@ -24,7 +24,7 @@ type UpdateMarketplaceInstalledAddOnExtensionSecurity struct {
 type UpdateMarketplaceInstalledAddOnExtensionRequest struct {
 	ServerURL  *string
 	PathParams UpdateMarketplaceInstalledAddOnExtensionPathParams
-	Request    *UpdateMarketplaceInstalledAddOnExtensionRequestBodyUpdateMarketplaceInstalledAddOnExtensionRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateMarketplaceInstalledAddOnExtensionUpdateMarketplaceInstalledAddOnExtensionRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateMarketplaceInstalledAddOnExtensionSecurity
 }
 

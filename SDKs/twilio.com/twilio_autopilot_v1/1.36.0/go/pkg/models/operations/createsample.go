@@ -13,7 +13,7 @@ type CreateSamplePathParams struct {
 	TaskSid      string `pathParam:"style=simple,explode=false,name=TaskSid"`
 }
 
-type CreateSampleRequestBodyCreateSampleRequest struct {
+type CreateSampleCreateSampleRequest struct {
 	Language      string  `form:"name=Language"`
 	SourceChannel *string `form:"name=SourceChannel"`
 	TaggedText    string  `form:"name=TaggedText"`
@@ -26,7 +26,7 @@ type CreateSampleSecurity struct {
 type CreateSampleRequest struct {
 	ServerURL  *string
 	PathParams CreateSamplePathParams
-	Request    *CreateSampleRequestBodyCreateSampleRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateSampleCreateSampleRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateSampleSecurity
 }
 

@@ -13,7 +13,7 @@ class CreateMessageFeedbackPathParams:
     
 
 @dataclass
-class CreateMessageFeedbackRequestBodyCreateMessageFeedbackRequest:
+class CreateMessageFeedbackCreateMessageFeedbackRequest:
     outcome: Optional[shared.MessageFeedbackEnumOutcomeEnum] = field(default=None, metadata={'form': { 'field_name': 'Outcome' }})
     
 
@@ -26,7 +26,7 @@ class CreateMessageFeedbackSecurity:
 class CreateMessageFeedbackRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateMessageFeedbackPathParams = field(default=None)
-    request: Optional[CreateMessageFeedbackRequestBodyCreateMessageFeedbackRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateMessageFeedbackCreateMessageFeedbackRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateMessageFeedbackSecurity = field(default=None)
     
 

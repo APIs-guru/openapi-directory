@@ -13,7 +13,7 @@ type UpdateAssetPathParams struct {
 	Sid        string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
-type UpdateAssetRequestBodyUpdateAssetRequest struct {
+type UpdateAssetUpdateAssetRequest struct {
 	FriendlyName string `form:"name=FriendlyName"`
 }
 
@@ -24,7 +24,7 @@ type UpdateAssetSecurity struct {
 type UpdateAssetRequest struct {
 	ServerURL  *string
 	PathParams UpdateAssetPathParams
-	Request    *UpdateAssetRequestBodyUpdateAssetRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateAssetUpdateAssetRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateAssetSecurity
 }
 

@@ -11,7 +11,7 @@ class UpdateConnectAppPathParams:
     account_sid: str = field(default=None, metadata={'path_param': { 'field_name': 'AccountSid', 'style': 'simple', 'explode': False }})
     sid: str = field(default=None, metadata={'path_param': { 'field_name': 'Sid', 'style': 'simple', 'explode': False }})
     
-class UpdateConnectAppRequestBodyDeauthorizeCallbackMethodEnum(str, Enum):
+class UpdateConnectAppUpdateConnectAppRequestDeauthorizeCallbackMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -21,10 +21,10 @@ class UpdateConnectAppRequestBodyDeauthorizeCallbackMethodEnum(str, Enum):
 
 
 @dataclass
-class UpdateConnectAppRequestBodyUpdateConnectAppRequest:
+class UpdateConnectAppUpdateConnectAppRequest:
     authorize_redirect_url: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'AuthorizeRedirectUrl' }})
     company_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'CompanyName' }})
-    deauthorize_callback_method: Optional[UpdateConnectAppRequestBodyDeauthorizeCallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'DeauthorizeCallbackMethod' }})
+    deauthorize_callback_method: Optional[UpdateConnectAppUpdateConnectAppRequestDeauthorizeCallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'DeauthorizeCallbackMethod' }})
     deauthorize_callback_url: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'DeauthorizeCallbackUrl' }})
     description: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Description' }})
     friendly_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
@@ -41,7 +41,7 @@ class UpdateConnectAppSecurity:
 class UpdateConnectAppRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateConnectAppPathParams = field(default=None)
-    request: Optional[UpdateConnectAppRequestBodyUpdateConnectAppRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateConnectAppUpdateConnectAppRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateConnectAppSecurity = field(default=None)
     
 

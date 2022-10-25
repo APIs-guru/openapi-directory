@@ -29,7 +29,7 @@ type ListSampleRequest struct {
 	Security    ListSampleSecurity
 }
 
-type ListSample200ApplicationJSONMeta struct {
+type ListSampleListSampleResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -39,13 +39,13 @@ type ListSample200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListSample200ApplicationJSONListSampleResponse struct {
-	Meta    *ListSample200ApplicationJSONMeta       `json:"meta,omitempty"`
+type ListSampleListSampleResponse struct {
+	Meta    *ListSampleListSampleResponseMeta       `json:"meta,omitempty"`
 	Samples []shared.AutopilotV1AssistantTaskSample `json:"samples,omitempty"`
 }
 
 type ListSampleResponse struct {
 	ContentType        string
-	ListSampleResponse *ListSample200ApplicationJSONListSampleResponse
+	ListSampleResponse *ListSampleListSampleResponse
 	StatusCode         int64
 }

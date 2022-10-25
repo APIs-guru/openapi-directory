@@ -14,7 +14,7 @@ type UpdateMessagePathParams struct {
 	Sid        string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
-type UpdateMessageRequestBodyUpdateMessageRequest struct {
+type UpdateMessageUpdateMessageRequest struct {
 	Attributes *string `form:"name=Attributes"`
 	Body       *string `form:"name=Body"`
 }
@@ -26,7 +26,7 @@ type UpdateMessageSecurity struct {
 type UpdateMessageRequest struct {
 	ServerURL  *string
 	PathParams UpdateMessagePathParams
-	Request    *UpdateMessageRequestBodyUpdateMessageRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateMessageUpdateMessageRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateMessageSecurity
 }
 

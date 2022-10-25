@@ -18,7 +18,7 @@ class UpdateChannelHeaders:
     
 
 @dataclass
-class UpdateChannelRequestBodyUpdateChannelRequest:
+class UpdateChannelUpdateChannelRequest:
     messaging_service_sid: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'MessagingServiceSid' }})
     type: Optional[shared.ChannelEnumChannelTypeEnum] = field(default=None, metadata={'form': { 'field_name': 'Type' }})
     
@@ -33,7 +33,7 @@ class UpdateChannelRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateChannelPathParams = field(default=None)
     headers: UpdateChannelHeaders = field(default=None)
-    request: Optional[UpdateChannelRequestBodyUpdateChannelRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateChannelUpdateChannelRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateChannelSecurity = field(default=None)
     
 

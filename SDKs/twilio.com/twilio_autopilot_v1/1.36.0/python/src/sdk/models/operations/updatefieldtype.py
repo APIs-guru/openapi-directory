@@ -13,7 +13,7 @@ class UpdateFieldTypePathParams:
     
 
 @dataclass
-class UpdateFieldTypeRequestBodyUpdateFieldTypeRequest:
+class UpdateFieldTypeUpdateFieldTypeRequest:
     friendly_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
     unique_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'UniqueName' }})
     
@@ -27,7 +27,7 @@ class UpdateFieldTypeSecurity:
 class UpdateFieldTypeRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateFieldTypePathParams = field(default=None)
-    request: Optional[UpdateFieldTypeRequestBodyUpdateFieldTypeRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateFieldTypeUpdateFieldTypeRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateFieldTypeSecurity = field(default=None)
     
 

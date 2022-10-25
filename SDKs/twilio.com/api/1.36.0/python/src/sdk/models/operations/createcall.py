@@ -10,7 +10,7 @@ CREATE_CALL_SERVERS = [
 class CreateCallPathParams:
     account_sid: str = field(default=None, metadata={'path_param': { 'field_name': 'AccountSid', 'style': 'simple', 'explode': False }})
     
-class CreateCallRequestBodyAsyncAmdStatusCallbackMethodEnum(str, Enum):
+class CreateCallCreateCallRequestAsyncAmdStatusCallbackMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -18,7 +18,7 @@ class CreateCallRequestBodyAsyncAmdStatusCallbackMethodEnum(str, Enum):
     PUT = "PUT"
     DELETE = "DELETE"
 
-class CreateCallRequestBodyFallbackMethodEnum(str, Enum):
+class CreateCallCreateCallRequestFallbackMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -26,7 +26,7 @@ class CreateCallRequestBodyFallbackMethodEnum(str, Enum):
     PUT = "PUT"
     DELETE = "DELETE"
 
-class CreateCallRequestBodyMethodEnum(str, Enum):
+class CreateCallCreateCallRequestMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -34,7 +34,7 @@ class CreateCallRequestBodyMethodEnum(str, Enum):
     PUT = "PUT"
     DELETE = "DELETE"
 
-class CreateCallRequestBodyRecordingStatusCallbackMethodEnum(str, Enum):
+class CreateCallCreateCallRequestRecordingStatusCallbackMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -42,7 +42,7 @@ class CreateCallRequestBodyRecordingStatusCallbackMethodEnum(str, Enum):
     PUT = "PUT"
     DELETE = "DELETE"
 
-class CreateCallRequestBodyStatusCallbackMethodEnum(str, Enum):
+class CreateCallCreateCallRequestStatusCallbackMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -52,16 +52,16 @@ class CreateCallRequestBodyStatusCallbackMethodEnum(str, Enum):
 
 
 @dataclass
-class CreateCallRequestBodyCreateCallRequest:
+class CreateCallCreateCallRequest:
     application_sid: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'ApplicationSid' }})
     async_amd: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'AsyncAmd' }})
     async_amd_status_callback: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'AsyncAmdStatusCallback' }})
-    async_amd_status_callback_method: Optional[CreateCallRequestBodyAsyncAmdStatusCallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'AsyncAmdStatusCallbackMethod' }})
+    async_amd_status_callback_method: Optional[CreateCallCreateCallRequestAsyncAmdStatusCallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'AsyncAmdStatusCallbackMethod' }})
     byoc: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Byoc' }})
     call_reason: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'CallReason' }})
     call_token: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'CallToken' }})
     caller_id: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'CallerId' }})
-    fallback_method: Optional[CreateCallRequestBodyFallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'FallbackMethod' }})
+    fallback_method: Optional[CreateCallCreateCallRequestFallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'FallbackMethod' }})
     fallback_url: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'FallbackUrl' }})
     from_: str = field(default=None, metadata={'form': { 'field_name': 'From' }})
     machine_detection: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'MachineDetection' }})
@@ -69,19 +69,19 @@ class CreateCallRequestBodyCreateCallRequest:
     machine_detection_speech_end_threshold: Optional[int] = field(default=None, metadata={'form': { 'field_name': 'MachineDetectionSpeechEndThreshold' }})
     machine_detection_speech_threshold: Optional[int] = field(default=None, metadata={'form': { 'field_name': 'MachineDetectionSpeechThreshold' }})
     machine_detection_timeout: Optional[int] = field(default=None, metadata={'form': { 'field_name': 'MachineDetectionTimeout' }})
-    method: Optional[CreateCallRequestBodyMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'Method' }})
+    method: Optional[CreateCallCreateCallRequestMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'Method' }})
     record: Optional[bool] = field(default=None, metadata={'form': { 'field_name': 'Record' }})
     recording_channels: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'RecordingChannels' }})
     recording_status_callback: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'RecordingStatusCallback' }})
     recording_status_callback_event: Optional[List[str]] = field(default=None, metadata={'form': { 'field_name': 'RecordingStatusCallbackEvent' }})
-    recording_status_callback_method: Optional[CreateCallRequestBodyRecordingStatusCallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'RecordingStatusCallbackMethod' }})
+    recording_status_callback_method: Optional[CreateCallCreateCallRequestRecordingStatusCallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'RecordingStatusCallbackMethod' }})
     recording_track: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'RecordingTrack' }})
     send_digits: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'SendDigits' }})
     sip_auth_password: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'SipAuthPassword' }})
     sip_auth_username: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'SipAuthUsername' }})
     status_callback: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'StatusCallback' }})
     status_callback_event: Optional[List[str]] = field(default=None, metadata={'form': { 'field_name': 'StatusCallbackEvent' }})
-    status_callback_method: Optional[CreateCallRequestBodyStatusCallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'StatusCallbackMethod' }})
+    status_callback_method: Optional[CreateCallCreateCallRequestStatusCallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'StatusCallbackMethod' }})
     time_limit: Optional[int] = field(default=None, metadata={'form': { 'field_name': 'TimeLimit' }})
     timeout: Optional[int] = field(default=None, metadata={'form': { 'field_name': 'Timeout' }})
     to: str = field(default=None, metadata={'form': { 'field_name': 'To' }})
@@ -99,7 +99,7 @@ class CreateCallSecurity:
 class CreateCallRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateCallPathParams = field(default=None)
-    request: Optional[CreateCallRequestBodyCreateCallRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateCallCreateCallRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateCallSecurity = field(default=None)
     
 

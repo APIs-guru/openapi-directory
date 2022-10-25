@@ -12,7 +12,7 @@ type UpdateSinkPathParams struct {
 	Sid string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
-type UpdateSinkRequestBodyUpdateSinkRequest struct {
+type UpdateSinkUpdateSinkRequest struct {
 	Description string `form:"name=Description"`
 }
 
@@ -23,7 +23,7 @@ type UpdateSinkSecurity struct {
 type UpdateSinkRequest struct {
 	ServerURL  *string
 	PathParams UpdateSinkPathParams
-	Request    *UpdateSinkRequestBodyUpdateSinkRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateSinkUpdateSinkRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateSinkSecurity
 }
 

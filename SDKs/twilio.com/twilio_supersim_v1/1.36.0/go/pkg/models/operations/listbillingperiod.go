@@ -27,7 +27,7 @@ type ListBillingPeriodRequest struct {
 	Security    ListBillingPeriodSecurity
 }
 
-type ListBillingPeriod200ApplicationJSONMeta struct {
+type ListBillingPeriodListBillingPeriodResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -37,13 +37,13 @@ type ListBillingPeriod200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListBillingPeriod200ApplicationJSONListBillingPeriodResponse struct {
-	BillingPeriods []shared.SupersimV1SimBillingPeriod      `json:"billing_periods,omitempty"`
-	Meta           *ListBillingPeriod200ApplicationJSONMeta `json:"meta,omitempty"`
+type ListBillingPeriodListBillingPeriodResponse struct {
+	BillingPeriods []shared.SupersimV1SimBillingPeriod             `json:"billing_periods,omitempty"`
+	Meta           *ListBillingPeriodListBillingPeriodResponseMeta `json:"meta,omitempty"`
 }
 
 type ListBillingPeriodResponse struct {
 	ContentType               string
-	ListBillingPeriodResponse *ListBillingPeriod200ApplicationJSONListBillingPeriodResponse
+	ListBillingPeriodResponse *ListBillingPeriodListBillingPeriodResponse
 	StatusCode                int64
 }

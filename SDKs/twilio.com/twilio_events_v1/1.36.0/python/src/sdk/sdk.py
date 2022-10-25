@@ -385,7 +385,7 @@ class SDK:
         res = operations.ListEventTypeResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListEventType200ApplicationJSONListEventTypeResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListEventTypeListEventTypeResponse])
                 res.list_event_type_response = out
 
         return res
@@ -410,7 +410,7 @@ class SDK:
         res = operations.ListSchemaVersionResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListSchemaVersion200ApplicationJSONListSchemaVersionResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListSchemaVersionListSchemaVersionResponse])
                 res.list_schema_version_response = out
 
         return res
@@ -435,7 +435,7 @@ class SDK:
         res = operations.ListSinkResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListSink200ApplicationJSONListSinkResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListSinkListSinkResponse])
                 res.list_sink_response = out
 
         return res
@@ -460,7 +460,7 @@ class SDK:
         res = operations.ListSubscribedEventResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListSubscribedEvent200ApplicationJSONListSubscribedEventResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListSubscribedEventListSubscribedEventResponse])
                 res.list_subscribed_event_response = out
 
         return res
@@ -485,7 +485,7 @@ class SDK:
         res = operations.ListSubscriptionResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListSubscription200ApplicationJSONListSubscriptionResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListSubscriptionListSubscriptionResponse])
                 res.list_subscription_response = out
 
         return res

@@ -17,8 +17,8 @@ class AppsCreateFromManifestRequest:
 @dataclass
 class AppsCreateFromManifestResponse:
     content_type: str = field(default=None)
+    git_hub_app: Optional[dict[str, Any]] = field(default=None)
     status_code: int = field(default=None)
-    apps_create_from_manifest_201_application_json_object: Optional[dict[str, Any]] = field(default=None)
     basic_error: Optional[shared.BasicError] = field(default=None)
     validation_error_simple: Optional[shared.ValidationErrorSimple] = field(default=None)
     

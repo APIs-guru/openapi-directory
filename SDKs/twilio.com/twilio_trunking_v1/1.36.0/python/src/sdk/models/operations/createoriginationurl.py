@@ -12,7 +12,7 @@ class CreateOriginationURLPathParams:
     
 
 @dataclass
-class CreateOriginationURLRequestBodyCreateOriginationURLRequest:
+class CreateOriginationURLCreateOriginationURLRequest:
     enabled: bool = field(default=None, metadata={'form': { 'field_name': 'Enabled' }})
     friendly_name: str = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
     priority: int = field(default=None, metadata={'form': { 'field_name': 'Priority' }})
@@ -29,7 +29,7 @@ class CreateOriginationURLSecurity:
 class CreateOriginationURLRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateOriginationURLPathParams = field(default=None)
-    request: Optional[CreateOriginationURLRequestBodyCreateOriginationURLRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateOriginationURLCreateOriginationURLRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateOriginationURLSecurity = field(default=None)
     
 

@@ -93,19 +93,19 @@ func (s *SDK) AccidentStatsGet(ctx context.Context, request operations.AccidentS
 
 			res.TflAPIPresentationEntitiesAccidentStatsAccidentDetails = out
 		case utils.MatchContentType(contentType, `application/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -153,19 +153,19 @@ func (s *SDK) AirQualityGet(ctx context.Context) (*operations.AirQualityGetRespo
 
 			res.SystemObject = out
 		case utils.MatchContentType(contentType, `application/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -213,19 +213,19 @@ func (s *SDK) BikePointGet(ctx context.Context, request operations.BikePointGetR
 
 			res.TflAPIPresentationEntitiesPlace = out
 		case utils.MatchContentType(contentType, `application/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -273,19 +273,19 @@ func (s *SDK) BikePointGetAll(ctx context.Context) (*operations.BikePointGetAllR
 
 			res.TflAPIPresentationEntitiesPlaces = out
 		case utils.MatchContentType(contentType, `application/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -335,19 +335,19 @@ func (s *SDK) BikePointSearch(ctx context.Context, request operations.BikePointS
 
 			res.TflAPIPresentationEntitiesPlaces = out
 		case utils.MatchContentType(contentType, `application/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -397,19 +397,19 @@ func (s *SDK) CabwiseGet(ctx context.Context, request operations.CabwiseGetReque
 
 			res.SystemObject = out
 		case utils.MatchContentType(contentType, `application/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -457,19 +457,19 @@ func (s *SDK) GetOccupancyCarPark(ctx context.Context) (*operations.GetOccupancy
 
 			res.TflAPIPresentationEntitiesCarParkOccupancies = out
 		case utils.MatchContentType(contentType, `application/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -519,19 +519,19 @@ func (s *SDK) GetStopPointSearch(ctx context.Context, request operations.GetStop
 
 			res.TflAPIPresentationEntitiesSearchResponse = out
 		case utils.MatchContentType(contentType, `application/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -581,19 +581,19 @@ func (s *SDK) GetStopPointIDPlaceTypes(ctx context.Context, request operations.G
 
 			res.TflAPIPresentationEntitiesPlaces = out
 		case utils.MatchContentType(contentType, `application/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -643,19 +643,19 @@ func (s *SDK) JourneyJourneyResults(ctx context.Context, request operations.Jour
 
 			res.TflAPIPresentationEntitiesJourneyPlannerItineraryResult = out
 		case utils.MatchContentType(contentType, `application/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -703,19 +703,19 @@ func (s *SDK) JourneyMeta(ctx context.Context) (*operations.JourneyMetaResponse,
 
 			res.TflAPIPresentationEntitiesModes = out
 		case utils.MatchContentType(contentType, `application/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -756,19 +756,19 @@ func (s *SDK) LineMetaDisruptionCategories(ctx context.Context) (*operations.Lin
 
 			res.LineMetaDisruptionCategories200ApplicationJSONStrings = out
 		case utils.MatchContentType(contentType, `application/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `text/json`):
 			var out []string
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -823,19 +823,19 @@ func (s *SDK) LineMetaModes(ctx context.Context) (*operations.LineMetaModesRespo
 
 			res.TflAPIPresentationEntitiesModes = out
 		case utils.MatchContentType(contentType, `application/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -876,19 +876,19 @@ func (s *SDK) LineMetaServiceTypes(ctx context.Context) (*operations.LineMetaSer
 
 			res.LineMetaServiceTypes200ApplicationJSONStrings = out
 		case utils.MatchContentType(contentType, `application/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `text/json`):
 			var out []string
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -943,19 +943,19 @@ func (s *SDK) LineMetaSeverity(ctx context.Context) (*operations.LineMetaSeverit
 
 			res.TflAPIPresentationEntitiesStatusSeverities = out
 		case utils.MatchContentType(contentType, `application/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -1005,19 +1005,19 @@ func (s *SDK) LineRoute(ctx context.Context, request operations.LineRouteRequest
 
 			res.TflAPIPresentationEntitiesLines = out
 		case utils.MatchContentType(contentType, `application/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -1067,19 +1067,19 @@ func (s *SDK) LineRouteSequence(ctx context.Context, request operations.LineRout
 
 			res.TflAPIPresentationEntitiesRouteSequence = out
 		case utils.MatchContentType(contentType, `application/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -1129,19 +1129,19 @@ func (s *SDK) LineSearch(ctx context.Context, request operations.LineSearchReque
 
 			res.TflAPIPresentationEntitiesRouteSearchResponse = out
 		case utils.MatchContentType(contentType, `application/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -1189,19 +1189,19 @@ func (s *SDK) LineStatusBySeverity(ctx context.Context, request operations.LineS
 
 			res.TflAPIPresentationEntitiesLines = out
 		case utils.MatchContentType(contentType, `application/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -1251,19 +1251,19 @@ func (s *SDK) LineStopPoints(ctx context.Context, request operations.LineStopPoi
 
 			res.TflAPIPresentationEntitiesStopPoints = out
 		case utils.MatchContentType(contentType, `application/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -1311,19 +1311,19 @@ func (s *SDK) LineTimetable(ctx context.Context, request operations.LineTimetabl
 
 			res.TflAPIPresentationEntitiesTimetableResponse = out
 		case utils.MatchContentType(contentType, `application/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -1371,19 +1371,19 @@ func (s *SDK) LineTimetableTo(ctx context.Context, request operations.LineTimeta
 
 			res.TflAPIPresentationEntitiesTimetableResponse = out
 		case utils.MatchContentType(contentType, `application/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -1433,19 +1433,19 @@ func (s *SDK) ModeArrivals(ctx context.Context, request operations.ModeArrivalsR
 
 			res.TflAPIPresentationEntitiesPredictions = out
 		case utils.MatchContentType(contentType, `application/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -1493,19 +1493,19 @@ func (s *SDK) ModeGetActiveServiceTypes(ctx context.Context) (*operations.ModeGe
 
 			res.TflAPIPresentationEntitiesActiveServiceTypes = out
 		case utils.MatchContentType(contentType, `application/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -1553,19 +1553,19 @@ func (s *SDK) OccupancyGet(ctx context.Context, request operations.OccupancyGetR
 
 			res.TflAPIPresentationEntitiesCarParkOccupancy = out
 		case utils.MatchContentType(contentType, `application/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -1613,19 +1613,19 @@ func (s *SDK) OccupancyGetAllChargeConnectorStatus(ctx context.Context) (*operat
 
 			res.TflAPIPresentationEntitiesChargeConnectorOccupancies = out
 		case utils.MatchContentType(contentType, `application/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -1675,19 +1675,19 @@ func (s *SDK) PlaceGet(ctx context.Context, request operations.PlaceGetRequest) 
 
 			res.TflAPIPresentationEntitiesPlaces = out
 		case utils.MatchContentType(contentType, `application/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -1737,19 +1737,19 @@ func (s *SDK) PlaceGetByGeo(ctx context.Context, request operations.PlaceGetByGe
 
 			res.TflAPIPresentationEntitiesStopPoints = out
 		case utils.MatchContentType(contentType, `application/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -1799,19 +1799,19 @@ func (s *SDK) PlaceGetStreetsByPostCode(ctx context.Context, request operations.
 
 			res.SystemObject = out
 		case utils.MatchContentType(contentType, `application/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -1859,19 +1859,19 @@ func (s *SDK) PlaceMetaCategories(ctx context.Context) (*operations.PlaceMetaCat
 
 			res.TflAPIPresentationEntitiesPlaceCategories = out
 		case utils.MatchContentType(contentType, `application/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -1919,19 +1919,19 @@ func (s *SDK) PlaceMetaPlaceTypes(ctx context.Context) (*operations.PlaceMetaPla
 
 			res.TflAPIPresentationEntitiesPlaceCategories = out
 		case utils.MatchContentType(contentType, `application/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -1981,19 +1981,19 @@ func (s *SDK) PlaceSearch(ctx context.Context, request operations.PlaceSearchReq
 
 			res.TflAPIPresentationEntitiesPlaces = out
 		case utils.MatchContentType(contentType, `application/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -2043,19 +2043,19 @@ func (s *SDK) RoadDisruptedStreets(ctx context.Context, request operations.RoadD
 
 			res.SystemObject = out
 		case utils.MatchContentType(contentType, `application/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -2103,19 +2103,19 @@ func (s *SDK) RoadGet(ctx context.Context) (*operations.RoadGetResponse, error) 
 
 			res.TflAPIPresentationEntitiesRoadCorridors = out
 		case utils.MatchContentType(contentType, `application/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -2156,19 +2156,19 @@ func (s *SDK) RoadMetaCategories(ctx context.Context) (*operations.RoadMetaCateg
 
 			res.RoadMetaCategories200ApplicationJSONStrings = out
 		case utils.MatchContentType(contentType, `application/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `text/json`):
 			var out []string
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -2223,19 +2223,19 @@ func (s *SDK) RoadMetaSeverities(ctx context.Context) (*operations.RoadMetaSever
 
 			res.TflAPIPresentationEntitiesStatusSeverities = out
 		case utils.MatchContentType(contentType, `application/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -2285,19 +2285,19 @@ func (s *SDK) SearchBusSchedules(ctx context.Context, request operations.SearchB
 
 			res.TflAPIPresentationEntitiesSearchResponse = out
 		case utils.MatchContentType(contentType, `application/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -2347,19 +2347,19 @@ func (s *SDK) SearchGet(ctx context.Context, request operations.SearchGetRequest
 
 			res.TflAPIPresentationEntitiesSearchResponse = out
 		case utils.MatchContentType(contentType, `application/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -2400,19 +2400,19 @@ func (s *SDK) SearchMetaCategories(ctx context.Context) (*operations.SearchMetaC
 
 			res.SearchMetaCategories200ApplicationJSONStrings = out
 		case utils.MatchContentType(contentType, `application/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `text/json`):
 			var out []string
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -2460,19 +2460,19 @@ func (s *SDK) SearchMetaSearchProviders(ctx context.Context) (*operations.Search
 
 			res.SearchMetaSearchProviders200ApplicationJSONStrings = out
 		case utils.MatchContentType(contentType, `application/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `text/json`):
 			var out []string
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -2520,19 +2520,19 @@ func (s *SDK) SearchMetaSorts(ctx context.Context) (*operations.SearchMetaSortsR
 
 			res.SearchMetaSorts200ApplicationJSONStrings = out
 		case utils.MatchContentType(contentType, `application/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `text/json`):
 			var out []string
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -2589,19 +2589,19 @@ func (s *SDK) StopPointArrivalDepartures(ctx context.Context, request operations
 
 			res.TflAPIPresentationEntitiesArrivalDepartures = out
 		case utils.MatchContentType(contentType, `application/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -2649,19 +2649,19 @@ func (s *SDK) StopPointArrivals(ctx context.Context, request operations.StopPoin
 
 			res.TflAPIPresentationEntitiesPredictions = out
 		case utils.MatchContentType(contentType, `application/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -2711,19 +2711,19 @@ func (s *SDK) StopPointCrowding(ctx context.Context, request operations.StopPoin
 
 			res.TflAPIPresentationEntitiesStopPoints = out
 		case utils.MatchContentType(contentType, `application/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -2759,33 +2759,37 @@ func (s *SDK) StopPointDirection(ctx context.Context, request operations.StopPoi
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.StopPointDirection200ApplicationJSONString = out
+			out := string(data)
+			res.StopPointDirection200ApplicationJSONString = &out
 		case utils.MatchContentType(contentType, `application/xml`):
 			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			out := string(data)
+			res.StopPointDirection200ApplicationXMLString = &out
+		case utils.MatchContentType(contentType, `text/json`):
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
+			}
+
+			out := string(data)
+			res.StopPointDirection200TextJSONString = &out
 		case utils.MatchContentType(contentType, `text/xml`):
 			data, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
-		case utils.MatchContentType(contentType, `text/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
-			}
-
-			res.StopPointDirection200TextJSONString = out
+			out := string(data)
+			res.StopPointDirection200TextXMLString = &out
 		}
 	}
 
@@ -2835,19 +2839,19 @@ func (s *SDK) StopPointGetByGeoPoint(ctx context.Context, request operations.Sto
 
 			res.TflAPIPresentationEntitiesStopPointsResponse = out
 		case utils.MatchContentType(contentType, `application/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -2897,19 +2901,19 @@ func (s *SDK) StopPointGetBySms(ctx context.Context, request operations.StopPoin
 
 			res.SystemObject = out
 		case utils.MatchContentType(contentType, `application/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -2957,19 +2961,19 @@ func (s *SDK) StopPointGetCarParksByID(ctx context.Context, request operations.S
 
 			res.TflAPIPresentationEntitiesPlaces = out
 		case utils.MatchContentType(contentType, `application/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -3019,19 +3023,19 @@ func (s *SDK) StopPointGetServiceTypes(ctx context.Context, request operations.S
 
 			res.TflAPIPresentationEntitiesLineServiceTypes = out
 		case utils.MatchContentType(contentType, `application/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -3079,19 +3083,19 @@ func (s *SDK) StopPointGetTaxiRanksByIds(ctx context.Context, request operations
 
 			res.TflAPIPresentationEntitiesPlaces = out
 		case utils.MatchContentType(contentType, `application/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -3139,19 +3143,19 @@ func (s *SDK) StopPointMetaCategories(ctx context.Context) (*operations.StopPoin
 
 			res.TflAPIPresentationEntitiesStopPointCategories = out
 		case utils.MatchContentType(contentType, `application/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -3199,19 +3203,19 @@ func (s *SDK) StopPointMetaModes(ctx context.Context) (*operations.StopPointMeta
 
 			res.TflAPIPresentationEntitiesModes = out
 		case utils.MatchContentType(contentType, `application/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -3252,19 +3256,19 @@ func (s *SDK) StopPointMetaStopTypes(ctx context.Context) (*operations.StopPoint
 
 			res.StopPointMetaStopTypes200ApplicationJSONStrings = out
 		case utils.MatchContentType(contentType, `application/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `text/json`):
 			var out []string
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -3321,19 +3325,19 @@ func (s *SDK) StopPointReachableFrom(ctx context.Context, request operations.Sto
 
 			res.TflAPIPresentationEntitiesStopPoints = out
 		case utils.MatchContentType(contentType, `application/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -3383,19 +3387,19 @@ func (s *SDK) StopPointRoute(ctx context.Context, request operations.StopPointRo
 
 			res.TflAPIPresentationEntitiesStopPointRouteSections = out
 		case utils.MatchContentType(contentType, `application/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -3445,19 +3449,19 @@ func (s *SDK) StopPointSearch(ctx context.Context, request operations.StopPointS
 
 			res.TflAPIPresentationEntitiesSearchResponse = out
 		case utils.MatchContentType(contentType, `application/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -3507,19 +3511,19 @@ func (s *SDK) TravelTimeGetCompareOverlay(ctx context.Context, request operation
 
 			res.SystemObject = out
 		case utils.MatchContentType(contentType, `application/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -3569,19 +3573,19 @@ func (s *SDK) TravelTimeGetOverlay(ctx context.Context, request operations.Trave
 
 			res.SystemObject = out
 		case utils.MatchContentType(contentType, `application/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -3631,19 +3635,19 @@ func (s *SDK) VehicleGetEmissionsSurchargeCompliance(ctx context.Context, reques
 
 			res.TflAPIPresentationEntitiesVehicleMatch = out
 		case utils.MatchContentType(contentType, `application/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -3693,19 +3697,19 @@ func (s *SDK) VehicleGetUlezCompliance(ctx context.Context, request operations.V
 
 			res.TflAPIPresentationEntitiesVehicleMatch = out
 		case utils.MatchContentType(contentType, `application/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 

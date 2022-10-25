@@ -12,7 +12,7 @@ type CreateFunctionPathParams struct {
 	ServiceSid string `pathParam:"style=simple,explode=false,name=ServiceSid"`
 }
 
-type CreateFunctionRequestBodyCreateFunctionRequest struct {
+type CreateFunctionCreateFunctionRequest struct {
 	FriendlyName string `form:"name=FriendlyName"`
 }
 
@@ -23,7 +23,7 @@ type CreateFunctionSecurity struct {
 type CreateFunctionRequest struct {
 	ServerURL  *string
 	PathParams CreateFunctionPathParams
-	Request    *CreateFunctionRequestBodyCreateFunctionRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateFunctionCreateFunctionRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateFunctionSecurity
 }
 

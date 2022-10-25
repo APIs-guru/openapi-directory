@@ -228,7 +228,7 @@ class SDK:
         res = operations.GetActionsResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.GetActions200ApplicationJSONActionsResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.GetActionsActionsResponse])
                 res.actions_response = out
 
         return res
@@ -249,7 +249,7 @@ class SDK:
         res = operations.GetActionsIDResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.GetActionsID200ApplicationJSONActionResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.GetActionsIDActionResponse])
                 res.action_response = out
 
         return res
@@ -271,7 +271,7 @@ class SDK:
         res = operations.GetCertificatesResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.GetCertificates200ApplicationJSONCertificatesResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.GetCertificatesCertificatesResponse])
                 res.certificates_response = out
 
         return res
@@ -292,7 +292,7 @@ class SDK:
         res = operations.GetCertificatesIDResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.GetCertificatesID200ApplicationJSONCertificateResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.GetCertificatesIDCertificateResponse])
                 res.certificate_response = out
 
         return res
@@ -314,7 +314,7 @@ class SDK:
         res = operations.GetCertificatesIDActionsResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.GetCertificatesIDActions200ApplicationJSONActionsResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.GetCertificatesIDActionsActionsResponse])
                 res.actions_response = out
 
         return res
@@ -335,7 +335,7 @@ class SDK:
         res = operations.GetCertificatesIDActionsActionIDResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.GetCertificatesIDActionsActionID200ApplicationJSONActionResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.GetCertificatesIDActionsActionIDActionResponse])
                 res.action_response = out
 
         return res
@@ -400,7 +400,7 @@ class SDK:
         res = operations.GetFirewallsResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.GetFirewalls200ApplicationJSONFirewallsResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.GetFirewallsFirewallsResponse])
                 res.firewalls_response = out
 
         return res
@@ -421,7 +421,7 @@ class SDK:
         res = operations.GetFirewallsIDResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.GetFirewallsID200ApplicationJSONFirewallResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.GetFirewallsIDFirewallResponse])
                 res.firewall_response = out
 
         return res
@@ -443,7 +443,7 @@ class SDK:
         res = operations.GetFirewallsIDActionsResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.GetFirewallsIDActions200ApplicationJSONActionsResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.GetFirewallsIDActionsActionsResponse])
                 res.actions_response = out
 
         return res
@@ -464,7 +464,7 @@ class SDK:
         res = operations.GetFirewallsIDActionsActionIDResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.GetFirewallsIDActionsActionID200ApplicationJSONActionResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.GetFirewallsIDActionsActionIDActionResponse])
                 res.action_response = out
 
         return res
@@ -550,7 +550,7 @@ class SDK:
         res = operations.GetFloatingIpsIDActionsActionIDResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.GetFloatingIpsIDActionsActionID200ApplicationJSONActionResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.GetFloatingIpsIDActionsActionIDActionResponse])
                 res.action_response = out
 
         return res
@@ -615,7 +615,7 @@ class SDK:
         res = operations.GetImagesIDActionsResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.GetImagesIDActions200ApplicationJSONActionsResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.GetImagesIDActionsActionsResponse])
                 res.actions_response = out
 
         return res
@@ -636,7 +636,7 @@ class SDK:
         res = operations.GetImagesIDActionsActionIDResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.GetImagesIDActionsActionID200ApplicationJSONActionResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.GetImagesIDActionsActionIDActionResponse])
                 res.action_response = out
 
         return res
@@ -787,7 +787,7 @@ class SDK:
         res = operations.GetLoadBalancersIDActionsResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.GetLoadBalancersIDActions200ApplicationJSONActionsResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.GetLoadBalancersIDActionsActionsResponse])
                 res.actions_response = out
 
         return res
@@ -808,7 +808,7 @@ class SDK:
         res = operations.GetLoadBalancersIDActionsActionIDResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.GetLoadBalancersIDActionsActionID200ApplicationJSONActionResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.GetLoadBalancersIDActionsActionIDActionResponse])
                 res.action_response = out
 
         return res
@@ -938,7 +938,7 @@ class SDK:
         res = operations.GetNetworksIDActionsResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.GetNetworksIDActions200ApplicationJSONActionsResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.GetNetworksIDActionsActionsResponse])
                 res.actions_response = out
 
         return res
@@ -959,7 +959,7 @@ class SDK:
         res = operations.GetNetworksIDActionsActionIDResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.GetNetworksIDActionsActionID200ApplicationJSONActionResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.GetNetworksIDActionsActionIDActionResponse])
                 res.action_response = out
 
         return res
@@ -981,7 +981,7 @@ class SDK:
         res = operations.GetPlacementGroupsResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.GetPlacementGroups200ApplicationJSONPlacementGroupsResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.GetPlacementGroupsPlacementGroupsResponse])
                 res.placement_groups_response = out
 
         return res
@@ -1002,7 +1002,7 @@ class SDK:
         res = operations.GetPlacementGroupsIDResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.GetPlacementGroupsID200ApplicationJSONPlacementGroupResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.GetPlacementGroupsIDPlacementGroupResponse])
                 res.placement_group_response = out
 
         return res
@@ -1132,7 +1132,7 @@ class SDK:
         res = operations.GetServersIDActionsResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.GetServersIDActions200ApplicationJSONActionsResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.GetServersIDActionsActionsResponse])
                 res.actions_response = out
 
         return res
@@ -1153,7 +1153,7 @@ class SDK:
         res = operations.GetServersIDActionsActionIDResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.GetServersIDActionsActionID200ApplicationJSONActionResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.GetServersIDActionsActionIDActionResponse])
                 res.action_response = out
 
         return res
@@ -1283,7 +1283,7 @@ class SDK:
         res = operations.GetVolumesIDActionsResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.GetVolumesIDActions200ApplicationJSONActionsResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.GetVolumesIDActionsActionsResponse])
                 res.actions_response = out
 
         return res
@@ -1304,7 +1304,7 @@ class SDK:
         res = operations.GetVolumesIDActionsActionIDResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.GetVolumesIDActionsActionID200ApplicationJSONActionResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.GetVolumesIDActionsActionIDActionResponse])
                 res.action_response = out
 
         return res
@@ -1329,7 +1329,7 @@ class SDK:
         res = operations.PostCertificatesResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.PostCertificates201ApplicationJSONCreateCertificateResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.PostCertificatesCreateCertificateResponse])
                 res.create_certificate_response = out
 
         return res
@@ -1350,7 +1350,7 @@ class SDK:
         res = operations.PostCertificatesIDActionsRetryResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.PostCertificatesIDActionsRetry201ApplicationJSONActionResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.PostCertificatesIDActionsRetryActionResponse])
                 res.action_response = out
 
         return res
@@ -1375,7 +1375,7 @@ class SDK:
         res = operations.PostFirewallsResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.PostFirewalls201ApplicationJSONCreateFirewallResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.PostFirewallsCreateFirewallResponse])
                 res.create_firewall_response = out
 
         return res
@@ -1400,7 +1400,7 @@ class SDK:
         res = operations.PostFirewallsIDActionsApplyToResourcesResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.PostFirewallsIDActionsApplyToResources201ApplicationJSONActionsResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.PostFirewallsIDActionsApplyToResourcesActionsResponse])
                 res.actions_response = out
 
         return res
@@ -1425,7 +1425,7 @@ class SDK:
         res = operations.PostFirewallsIDActionsRemoveFromResourcesResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.PostFirewallsIDActionsRemoveFromResources201ApplicationJSONActionsResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.PostFirewallsIDActionsRemoveFromResourcesActionsResponse])
                 res.actions_response = out
 
         return res
@@ -1450,7 +1450,7 @@ class SDK:
         res = operations.PostFirewallsIDActionsSetRulesResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.PostFirewallsIDActionsSetRules201ApplicationJSONActionsResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.PostFirewallsIDActionsSetRulesActionsResponse])
                 res.actions_response = out
 
         return res
@@ -1500,7 +1500,7 @@ class SDK:
         res = operations.PostFloatingIpsIDActionsAssignResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.PostFloatingIpsIDActionsAssign201ApplicationJSONActionResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.PostFloatingIpsIDActionsAssignActionResponse])
                 res.action_response = out
 
         return res
@@ -1525,7 +1525,7 @@ class SDK:
         res = operations.PostFloatingIpsIDActionsChangeDNSPtrResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.PostFloatingIpsIDActionsChangeDNSPtr201ApplicationJSONActionResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.PostFloatingIpsIDActionsChangeDNSPtrActionResponse])
                 res.action_response = out
 
         return res
@@ -1550,7 +1550,7 @@ class SDK:
         res = operations.PostFloatingIpsIDActionsChangeProtectionResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.PostFloatingIpsIDActionsChangeProtection201ApplicationJSONActionResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.PostFloatingIpsIDActionsChangeProtectionActionResponse])
                 res.action_response = out
 
         return res
@@ -1571,7 +1571,7 @@ class SDK:
         res = operations.PostFloatingIpsIDActionsUnassignResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.PostFloatingIpsIDActionsUnassign201ApplicationJSONActionResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.PostFloatingIpsIDActionsUnassignActionResponse])
                 res.action_response = out
 
         return res
@@ -1596,7 +1596,7 @@ class SDK:
         res = operations.PostImagesIDActionsChangeProtectionResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.PostImagesIDActionsChangeProtection201ApplicationJSONActionResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.PostImagesIDActionsChangeProtectionActionResponse])
                 res.action_response = out
 
         return res
@@ -1646,7 +1646,7 @@ class SDK:
         res = operations.PostLoadBalancersIDActionsAddServiceResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.PostLoadBalancersIDActionsAddService201ApplicationJSONActionResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.PostLoadBalancersIDActionsAddServiceActionResponse])
                 res.action_response = out
 
         return res
@@ -1671,7 +1671,7 @@ class SDK:
         res = operations.PostLoadBalancersIDActionsAddTargetResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.PostLoadBalancersIDActionsAddTarget201ApplicationJSONActionResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.PostLoadBalancersIDActionsAddTargetActionResponse])
                 res.action_response = out
 
         return res
@@ -1696,7 +1696,7 @@ class SDK:
         res = operations.PostLoadBalancersIDActionsAttachToNetworkResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.PostLoadBalancersIDActionsAttachToNetwork201ApplicationJSONActionResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.PostLoadBalancersIDActionsAttachToNetworkActionResponse])
                 res.action_response = out
 
         return res
@@ -1721,7 +1721,7 @@ class SDK:
         res = operations.PostLoadBalancersIDActionsChangeAlgorithmResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.PostLoadBalancersIDActionsChangeAlgorithm201ApplicationJSONActionResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.PostLoadBalancersIDActionsChangeAlgorithmActionResponse])
                 res.action_response = out
 
         return res
@@ -1746,7 +1746,7 @@ class SDK:
         res = operations.PostLoadBalancersIDActionsChangeDNSPtrResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.PostLoadBalancersIDActionsChangeDNSPtr201ApplicationJSONActionResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.PostLoadBalancersIDActionsChangeDNSPtrActionResponse])
                 res.action_response = out
 
         return res
@@ -1771,7 +1771,7 @@ class SDK:
         res = operations.PostLoadBalancersIDActionsChangeProtectionResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.PostLoadBalancersIDActionsChangeProtection201ApplicationJSONActionResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.PostLoadBalancersIDActionsChangeProtectionActionResponse])
                 res.action_response = out
 
         return res
@@ -1796,7 +1796,7 @@ class SDK:
         res = operations.PostLoadBalancersIDActionsChangeTypeResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.PostLoadBalancersIDActionsChangeType201ApplicationJSONActionResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.PostLoadBalancersIDActionsChangeTypeActionResponse])
                 res.action_response = out
 
         return res
@@ -1821,7 +1821,7 @@ class SDK:
         res = operations.PostLoadBalancersIDActionsDeleteServiceResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.PostLoadBalancersIDActionsDeleteService201ApplicationJSONActionResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.PostLoadBalancersIDActionsDeleteServiceActionResponse])
                 res.action_response = out
 
         return res
@@ -1846,7 +1846,7 @@ class SDK:
         res = operations.PostLoadBalancersIDActionsDetachFromNetworkResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.PostLoadBalancersIDActionsDetachFromNetwork201ApplicationJSONActionResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.PostLoadBalancersIDActionsDetachFromNetworkActionResponse])
                 res.action_response = out
 
         return res
@@ -1867,7 +1867,7 @@ class SDK:
         res = operations.PostLoadBalancersIDActionsDisablePublicInterfaceResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.PostLoadBalancersIDActionsDisablePublicInterface201ApplicationJSONActionResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.PostLoadBalancersIDActionsDisablePublicInterfaceActionResponse])
                 res.action_response = out
 
         return res
@@ -1888,7 +1888,7 @@ class SDK:
         res = operations.PostLoadBalancersIDActionsEnablePublicInterfaceResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.PostLoadBalancersIDActionsEnablePublicInterface201ApplicationJSONActionResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.PostLoadBalancersIDActionsEnablePublicInterfaceActionResponse])
                 res.action_response = out
 
         return res
@@ -1913,7 +1913,7 @@ class SDK:
         res = operations.PostLoadBalancersIDActionsRemoveTargetResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.PostLoadBalancersIDActionsRemoveTarget201ApplicationJSONActionResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.PostLoadBalancersIDActionsRemoveTargetActionResponse])
                 res.action_response = out
 
         return res
@@ -1938,7 +1938,7 @@ class SDK:
         res = operations.PostLoadBalancersIDActionsUpdateServiceResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.PostLoadBalancersIDActionsUpdateService201ApplicationJSONActionResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.PostLoadBalancersIDActionsUpdateServiceActionResponse])
                 res.action_response = out
 
         return res
@@ -1988,7 +1988,7 @@ class SDK:
         res = operations.PostNetworksIDActionsAddRouteResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.PostNetworksIDActionsAddRoute201ApplicationJSONActionResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.PostNetworksIDActionsAddRouteActionResponse])
                 res.action_response = out
 
         return res
@@ -2013,7 +2013,7 @@ class SDK:
         res = operations.PostNetworksIDActionsAddSubnetResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.PostNetworksIDActionsAddSubnet201ApplicationJSONActionResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.PostNetworksIDActionsAddSubnetActionResponse])
                 res.action_response = out
 
         return res
@@ -2038,7 +2038,7 @@ class SDK:
         res = operations.PostNetworksIDActionsChangeIPRangeResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.PostNetworksIDActionsChangeIPRange201ApplicationJSONActionResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.PostNetworksIDActionsChangeIPRangeActionResponse])
                 res.action_response = out
 
         return res
@@ -2063,7 +2063,7 @@ class SDK:
         res = operations.PostNetworksIDActionsChangeProtectionResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.PostNetworksIDActionsChangeProtection201ApplicationJSONActionResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.PostNetworksIDActionsChangeProtectionActionResponse])
                 res.action_response = out
 
         return res
@@ -2088,7 +2088,7 @@ class SDK:
         res = operations.PostNetworksIDActionsDeleteRouteResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.PostNetworksIDActionsDeleteRoute201ApplicationJSONActionResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.PostNetworksIDActionsDeleteRouteActionResponse])
                 res.action_response = out
 
         return res
@@ -2113,7 +2113,7 @@ class SDK:
         res = operations.PostNetworksIDActionsDeleteSubnetResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.PostNetworksIDActionsDeleteSubnet201ApplicationJSONActionResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.PostNetworksIDActionsDeleteSubnetActionResponse])
                 res.action_response = out
 
         return res
@@ -2138,7 +2138,7 @@ class SDK:
         res = operations.PostPlacementGroupsResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.PostPlacementGroups201ApplicationJSONCreatePlacementGroupResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.PostPlacementGroupsCreatePlacementGroupResponse])
                 res.create_placement_group_response = out
 
         return res
@@ -2163,7 +2163,7 @@ class SDK:
         res = operations.PostServersResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.PostServers201ApplicationJSONCreateServerResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.PostServersCreateServerResponse])
                 res.create_server_response = out
 
         return res
@@ -2188,7 +2188,7 @@ class SDK:
         res = operations.PostServersIDActionsAddToPlacementGroupResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.PostServersIDActionsAddToPlacementGroup201ApplicationJSONActionResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.PostServersIDActionsAddToPlacementGroupActionResponse])
                 res.action_response = out
 
         return res
@@ -2213,7 +2213,7 @@ class SDK:
         res = operations.PostServersIDActionsAttachIsoResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.PostServersIDActionsAttachIso201ApplicationJSONActionResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.PostServersIDActionsAttachIsoActionResponse])
                 res.action_response = out
 
         return res
@@ -2238,7 +2238,7 @@ class SDK:
         res = operations.PostServersIDActionsAttachToNetworkResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.PostServersIDActionsAttachToNetwork201ApplicationJSONActionResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.PostServersIDActionsAttachToNetworkActionResponse])
                 res.action_response = out
 
         return res
@@ -2263,7 +2263,7 @@ class SDK:
         res = operations.PostServersIDActionsChangeAliasIpsResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.PostServersIDActionsChangeAliasIps201ApplicationJSONActionResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.PostServersIDActionsChangeAliasIpsActionResponse])
                 res.action_response = out
 
         return res
@@ -2288,7 +2288,7 @@ class SDK:
         res = operations.PostServersIDActionsChangeDNSPtrResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.PostServersIDActionsChangeDNSPtr201ApplicationJSONActionResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.PostServersIDActionsChangeDNSPtrActionResponse])
                 res.action_response = out
 
         return res
@@ -2313,7 +2313,7 @@ class SDK:
         res = operations.PostServersIDActionsChangeProtectionResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.PostServersIDActionsChangeProtection201ApplicationJSONActionResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.PostServersIDActionsChangeProtectionActionResponse])
                 res.action_response = out
 
         return res
@@ -2338,7 +2338,7 @@ class SDK:
         res = operations.PostServersIDActionsChangeTypeResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.PostServersIDActionsChangeType201ApplicationJSONActionResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.PostServersIDActionsChangeTypeActionResponse])
                 res.action_response = out
 
         return res
@@ -2388,7 +2388,7 @@ class SDK:
         res = operations.PostServersIDActionsDetachFromNetworkResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.PostServersIDActionsDetachFromNetwork201ApplicationJSONActionResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.PostServersIDActionsDetachFromNetworkActionResponse])
                 res.action_response = out
 
         return res
@@ -2409,7 +2409,7 @@ class SDK:
         res = operations.PostServersIDActionsDetachIsoResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.PostServersIDActionsDetachIso201ApplicationJSONActionResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.PostServersIDActionsDetachIsoActionResponse])
                 res.action_response = out
 
         return res
@@ -2430,7 +2430,7 @@ class SDK:
         res = operations.PostServersIDActionsDisableBackupResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.PostServersIDActionsDisableBackup201ApplicationJSONActionResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.PostServersIDActionsDisableBackupActionResponse])
                 res.action_response = out
 
         return res
@@ -2451,7 +2451,7 @@ class SDK:
         res = operations.PostServersIDActionsDisableRescueResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.PostServersIDActionsDisableRescue201ApplicationJSONActionResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.PostServersIDActionsDisableRescueActionResponse])
                 res.action_response = out
 
         return res
@@ -2472,7 +2472,7 @@ class SDK:
         res = operations.PostServersIDActionsEnableBackupResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.PostServersIDActionsEnableBackup201ApplicationJSONActionResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.PostServersIDActionsEnableBackupActionResponse])
                 res.action_response = out
 
         return res
@@ -2518,7 +2518,7 @@ class SDK:
         res = operations.PostServersIDActionsPoweroffResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.PostServersIDActionsPoweroff201ApplicationJSONActionResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.PostServersIDActionsPoweroffActionResponse])
                 res.action_response = out
 
         return res
@@ -2539,7 +2539,7 @@ class SDK:
         res = operations.PostServersIDActionsPoweronResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.PostServersIDActionsPoweron201ApplicationJSONActionResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.PostServersIDActionsPoweronActionResponse])
                 res.action_response = out
 
         return res
@@ -2560,7 +2560,7 @@ class SDK:
         res = operations.PostServersIDActionsRebootResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.PostServersIDActionsReboot201ApplicationJSONActionResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.PostServersIDActionsRebootActionResponse])
                 res.action_response = out
 
         return res
@@ -2606,7 +2606,7 @@ class SDK:
         res = operations.PostServersIDActionsRemoveFromPlacementGroupResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.PostServersIDActionsRemoveFromPlacementGroup201ApplicationJSONActionResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.PostServersIDActionsRemoveFromPlacementGroupActionResponse])
                 res.action_response = out
 
         return res
@@ -2648,7 +2648,7 @@ class SDK:
         res = operations.PostServersIDActionsResetResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.PostServersIDActionsReset201ApplicationJSONActionResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.PostServersIDActionsResetActionResponse])
                 res.action_response = out
 
         return res
@@ -2690,7 +2690,7 @@ class SDK:
         res = operations.PostServersIDActionsShutdownResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.PostServersIDActionsShutdown201ApplicationJSONActionResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.PostServersIDActionsShutdownActionResponse])
                 res.action_response = out
 
         return res
@@ -2765,7 +2765,7 @@ class SDK:
         res = operations.PostVolumesIDActionsAttachResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.PostVolumesIDActionsAttach201ApplicationJSONActionResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.PostVolumesIDActionsAttachActionResponse])
                 res.action_response = out
 
         return res
@@ -2790,7 +2790,7 @@ class SDK:
         res = operations.PostVolumesIDActionsChangeProtectionResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.PostVolumesIDActionsChangeProtection201ApplicationJSONActionResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.PostVolumesIDActionsChangeProtectionActionResponse])
                 res.action_response = out
 
         return res
@@ -2811,7 +2811,7 @@ class SDK:
         res = operations.PostVolumesIDActionsDetachResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.PostVolumesIDActionsDetach201ApplicationJSONActionResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.PostVolumesIDActionsDetachActionResponse])
                 res.action_response = out
 
         return res
@@ -2836,7 +2836,7 @@ class SDK:
         res = operations.PostVolumesIDActionsResizeResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.PostVolumesIDActionsResize201ApplicationJSONActionResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.PostVolumesIDActionsResizeActionResponse])
                 res.action_response = out
 
         return res
@@ -2861,7 +2861,7 @@ class SDK:
         res = operations.PutCertificatesIDResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.PutCertificatesID200ApplicationJSONCertificateResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.PutCertificatesIDCertificateResponse])
                 res.certificate_response = out
 
         return res
@@ -2886,7 +2886,7 @@ class SDK:
         res = operations.PutFirewallsIDResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.PutFirewallsID200ApplicationJSONFirewallResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.PutFirewallsIDFirewallResponse])
                 res.firewall_response = out
 
         return res
@@ -3011,7 +3011,7 @@ class SDK:
         res = operations.PutPlacementGroupsIDResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.PutPlacementGroupsID200ApplicationJSONPlacementGroupResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.PutPlacementGroupsIDPlacementGroupResponse])
                 res.placement_group_response = out
 
         return res

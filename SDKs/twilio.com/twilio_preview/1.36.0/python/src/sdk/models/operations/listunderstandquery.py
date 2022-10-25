@@ -35,7 +35,7 @@ class ListUnderstandQueryRequest:
 
 @dataclass_json
 @dataclass
-class ListUnderstandQuery200ApplicationJSONMeta:
+class ListUnderstandQueryListUnderstandQueryResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -47,14 +47,14 @@ class ListUnderstandQuery200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListUnderstandQuery200ApplicationJSONListUnderstandQueryResponse:
-    meta: Optional[ListUnderstandQuery200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+class ListUnderstandQueryListUnderstandQueryResponse:
+    meta: Optional[ListUnderstandQueryListUnderstandQueryResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     queries: Optional[List[shared.PreviewUnderstandAssistantQuery]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'queries' }})
     
 
 @dataclass
 class ListUnderstandQueryResponse:
     content_type: str = field(default=None)
-    list_understand_query_response: Optional[ListUnderstandQuery200ApplicationJSONListUnderstandQueryResponse] = field(default=None)
+    list_understand_query_response: Optional[ListUnderstandQueryListUnderstandQueryResponse] = field(default=None)
     status_code: int = field(default=None)
     

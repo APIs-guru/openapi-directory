@@ -33,7 +33,7 @@ class ListBucketRequest:
 
 @dataclass_json
 @dataclass
-class ListBucket200ApplicationJSONMeta:
+class ListBucketListBucketResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -45,14 +45,14 @@ class ListBucket200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListBucket200ApplicationJSONListBucketResponse:
+class ListBucketListBucketResponse:
     buckets: Optional[List[shared.VerifyV2ServiceRateLimitBucket]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'buckets' }})
-    meta: Optional[ListBucket200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+    meta: Optional[ListBucketListBucketResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     
 
 @dataclass
 class ListBucketResponse:
     content_type: str = field(default=None)
-    list_bucket_response: Optional[ListBucket200ApplicationJSONListBucketResponse] = field(default=None)
+    list_bucket_response: Optional[ListBucketListBucketResponse] = field(default=None)
     status_code: int = field(default=None)
     

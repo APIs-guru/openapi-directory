@@ -5,7 +5,7 @@ import dateutil.parser
 from typing import Any,Enum,List,Optional
 from dataclasses_json import dataclass_json
 
-class WritableCircuitStatusStatusEnum(str, Enum):
+class WritableCircuitStatusEnum(str, Enum):
     PLANNED = "planned"
     PROVISIONING = "provisioning"
     ACTIVE = "active"
@@ -27,7 +27,7 @@ class WritableCircuit:
     install_date: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'install_date', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     last_updated: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'last_updated', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     provider: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'provider' }})
-    status: Optional[WritableCircuitStatusStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    status: Optional[WritableCircuitStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
     tags: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
     tenant: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tenant' }})
     termination_a: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'termination_a' }})

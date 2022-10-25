@@ -7,7 +7,7 @@ CREATE_END_USER_SERVERS = [
 
 
 @dataclass
-class CreateEndUserRequestBodyCreateEndUserRequest:
+class CreateEndUserCreateEndUserRequest:
     attributes: Optional[Any] = field(default=None, metadata={'form': { 'field_name': 'Attributes' }})
     friendly_name: str = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
     type: shared.EndUserEnumTypeEnum = field(default=None, metadata={'form': { 'field_name': 'Type' }})
@@ -21,7 +21,7 @@ class CreateEndUserSecurity:
 @dataclass
 class CreateEndUserRequest:
     server_url: Optional[str] = field(default=None)
-    request: Optional[CreateEndUserRequestBodyCreateEndUserRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateEndUserCreateEndUserRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateEndUserSecurity = field(default=None)
     
 

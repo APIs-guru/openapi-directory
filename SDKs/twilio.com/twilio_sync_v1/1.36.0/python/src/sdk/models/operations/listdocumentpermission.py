@@ -33,7 +33,7 @@ class ListDocumentPermissionRequest:
 
 @dataclass_json
 @dataclass
-class ListDocumentPermission200ApplicationJSONMeta:
+class ListDocumentPermissionListDocumentPermissionResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -45,14 +45,14 @@ class ListDocumentPermission200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListDocumentPermission200ApplicationJSONListDocumentPermissionResponse:
-    meta: Optional[ListDocumentPermission200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+class ListDocumentPermissionListDocumentPermissionResponse:
+    meta: Optional[ListDocumentPermissionListDocumentPermissionResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     permissions: Optional[List[shared.SyncV1ServiceDocumentDocumentPermission]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'permissions' }})
     
 
 @dataclass
 class ListDocumentPermissionResponse:
     content_type: str = field(default=None)
-    list_document_permission_response: Optional[ListDocumentPermission200ApplicationJSONListDocumentPermissionResponse] = field(default=None)
+    list_document_permission_response: Optional[ListDocumentPermissionListDocumentPermissionResponse] = field(default=None)
     status_code: int = field(default=None)
     

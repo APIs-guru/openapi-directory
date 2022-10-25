@@ -12,7 +12,7 @@ class UpdateCredentialPathParams:
     
 
 @dataclass
-class UpdateCredentialRequestBodyUpdateCredentialRequest:
+class UpdateCredentialUpdateCredentialRequest:
     api_key: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'ApiKey' }})
     certificate: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Certificate' }})
     friendly_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
@@ -30,7 +30,7 @@ class UpdateCredentialSecurity:
 class UpdateCredentialRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateCredentialPathParams = field(default=None)
-    request: Optional[UpdateCredentialRequestBodyUpdateCredentialRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateCredentialUpdateCredentialRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateCredentialSecurity = field(default=None)
     
 

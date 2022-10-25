@@ -33,7 +33,7 @@ class ListCompositionRequest:
 
 @dataclass_json
 @dataclass
-class ListComposition200ApplicationJSONMeta:
+class ListCompositionListCompositionResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -45,14 +45,14 @@ class ListComposition200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListComposition200ApplicationJSONListCompositionResponse:
+class ListCompositionListCompositionResponse:
     compositions: Optional[List[shared.VideoV1Composition]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'compositions' }})
-    meta: Optional[ListComposition200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+    meta: Optional[ListCompositionListCompositionResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     
 
 @dataclass
 class ListCompositionResponse:
     content_type: str = field(default=None)
-    list_composition_response: Optional[ListComposition200ApplicationJSONListCompositionResponse] = field(default=None)
+    list_composition_response: Optional[ListCompositionListCompositionResponse] = field(default=None)
     status_code: int = field(default=None)
     

@@ -14,7 +14,7 @@ class UpdateStreamPathParams:
     
 
 @dataclass
-class UpdateStreamRequestBodyUpdateStreamRequest:
+class UpdateStreamUpdateStreamRequest:
     status: shared.StreamEnumUpdateStatusEnum = field(default=None, metadata={'form': { 'field_name': 'Status' }})
     
 
@@ -27,7 +27,7 @@ class UpdateStreamSecurity:
 class UpdateStreamRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateStreamPathParams = field(default=None)
-    request: Optional[UpdateStreamRequestBodyUpdateStreamRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateStreamUpdateStreamRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateStreamSecurity = field(default=None)
     
 

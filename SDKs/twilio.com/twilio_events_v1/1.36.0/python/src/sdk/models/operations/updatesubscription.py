@@ -12,7 +12,7 @@ class UpdateSubscriptionPathParams:
     
 
 @dataclass
-class UpdateSubscriptionRequestBodyUpdateSubscriptionRequest:
+class UpdateSubscriptionUpdateSubscriptionRequest:
     description: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Description' }})
     sink_sid: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'SinkSid' }})
     
@@ -26,7 +26,7 @@ class UpdateSubscriptionSecurity:
 class UpdateSubscriptionRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateSubscriptionPathParams = field(default=None)
-    request: Optional[UpdateSubscriptionRequestBodyUpdateSubscriptionRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateSubscriptionUpdateSubscriptionRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateSubscriptionSecurity = field(default=None)
     
 

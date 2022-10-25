@@ -32,7 +32,7 @@ class ListServiceRoleRequest:
 
 @dataclass_json
 @dataclass
-class ListServiceRole200ApplicationJSONMeta:
+class ListServiceRoleListServiceRoleResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -44,14 +44,14 @@ class ListServiceRole200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListServiceRole200ApplicationJSONListServiceRoleResponse:
-    meta: Optional[ListServiceRole200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+class ListServiceRoleListServiceRoleResponse:
+    meta: Optional[ListServiceRoleListServiceRoleResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     roles: Optional[List[shared.ConversationsV1ServiceServiceRole]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'roles' }})
     
 
 @dataclass
 class ListServiceRoleResponse:
     content_type: str = field(default=None)
-    list_service_role_response: Optional[ListServiceRole200ApplicationJSONListServiceRoleResponse] = field(default=None)
+    list_service_role_response: Optional[ListServiceRoleListServiceRoleResponse] = field(default=None)
     status_code: int = field(default=None)
     

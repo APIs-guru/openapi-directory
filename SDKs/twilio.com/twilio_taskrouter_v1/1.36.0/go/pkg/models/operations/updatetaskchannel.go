@@ -13,7 +13,7 @@ type UpdateTaskChannelPathParams struct {
 	WorkspaceSid string `pathParam:"style=simple,explode=false,name=WorkspaceSid"`
 }
 
-type UpdateTaskChannelRequestBodyUpdateTaskChannelRequest struct {
+type UpdateTaskChannelUpdateTaskChannelRequest struct {
 	ChannelOptimizedRouting *bool   `form:"name=ChannelOptimizedRouting"`
 	FriendlyName            *string `form:"name=FriendlyName"`
 }
@@ -25,7 +25,7 @@ type UpdateTaskChannelSecurity struct {
 type UpdateTaskChannelRequest struct {
 	ServerURL  *string
 	PathParams UpdateTaskChannelPathParams
-	Request    *UpdateTaskChannelRequestBodyUpdateTaskChannelRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateTaskChannelUpdateTaskChannelRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateTaskChannelSecurity
 }
 

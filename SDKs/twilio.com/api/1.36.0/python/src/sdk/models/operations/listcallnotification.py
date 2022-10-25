@@ -40,7 +40,7 @@ class ListCallNotificationRequest:
 
 @dataclass_json
 @dataclass
-class ListCallNotification200ApplicationJSONListCallNotificationResponse:
+class ListCallNotificationListCallNotificationResponse:
     end: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'end' }})
     first_page_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_uri' }})
     next_page_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_uri' }})
@@ -55,6 +55,6 @@ class ListCallNotification200ApplicationJSONListCallNotificationResponse:
 @dataclass
 class ListCallNotificationResponse:
     content_type: str = field(default=None)
-    list_call_notification_response: Optional[ListCallNotification200ApplicationJSONListCallNotificationResponse] = field(default=None)
+    list_call_notification_response: Optional[ListCallNotificationListCallNotificationResponse] = field(default=None)
     status_code: int = field(default=None)
     

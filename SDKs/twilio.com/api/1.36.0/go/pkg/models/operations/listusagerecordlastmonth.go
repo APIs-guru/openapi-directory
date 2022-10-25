@@ -32,7 +32,7 @@ type ListUsageRecordLastMonthRequest struct {
 	Security    ListUsageRecordLastMonthSecurity
 }
 
-type ListUsageRecordLastMonth200ApplicationJSONListUsageRecordLastMonthResponse struct {
+type ListUsageRecordLastMonthListUsageRecordLastMonthResponse struct {
 	End             *int64                                                       `json:"end,omitempty"`
 	FirstPageURI    *string                                                      `json:"first_page_uri,omitempty"`
 	NextPageURI     *string                                                      `json:"next_page_uri,omitempty"`
@@ -46,6 +46,6 @@ type ListUsageRecordLastMonth200ApplicationJSONListUsageRecordLastMonthResponse 
 
 type ListUsageRecordLastMonthResponse struct {
 	ContentType                      string
-	ListUsageRecordLastMonthResponse *ListUsageRecordLastMonth200ApplicationJSONListUsageRecordLastMonthResponse
+	ListUsageRecordLastMonthResponse *ListUsageRecordLastMonthListUsageRecordLastMonthResponse
 	StatusCode                       int64
 }

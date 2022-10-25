@@ -33,7 +33,7 @@ class ListVariableRequest:
 
 @dataclass_json
 @dataclass
-class ListVariable200ApplicationJSONMeta:
+class ListVariableListVariableResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -45,14 +45,14 @@ class ListVariable200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListVariable200ApplicationJSONListVariableResponse:
-    meta: Optional[ListVariable200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+class ListVariableListVariableResponse:
+    meta: Optional[ListVariableListVariableResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     variables: Optional[List[shared.ServerlessV1ServiceEnvironmentVariable]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'variables' }})
     
 
 @dataclass
 class ListVariableResponse:
     content_type: str = field(default=None)
-    list_variable_response: Optional[ListVariable200ApplicationJSONListVariableResponse] = field(default=None)
+    list_variable_response: Optional[ListVariableListVariableResponse] = field(default=None)
     status_code: int = field(default=None)
     

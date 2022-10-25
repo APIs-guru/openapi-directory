@@ -45,36 +45,36 @@ type GetNetworksIDActionsRequest struct {
 	QueryParams GetNetworksIDActionsQueryParams
 }
 
-type GetNetworksIDActions200ApplicationJSONActionsError struct {
+type GetNetworksIDActionsActionsResponseActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
 }
 
-type GetNetworksIDActions200ApplicationJSONActionsResources struct {
+type GetNetworksIDActionsActionsResponseActionResources struct {
 	ID   int64  `json:"id"`
 	Type string `json:"type"`
 }
 
-type GetNetworksIDActions200ApplicationJSONActionsStatusEnum string
+type GetNetworksIDActionsActionsResponseActionStatusEnum string
 
 const (
-	GetNetworksIDActions200ApplicationJSONActionsStatusEnumSuccess GetNetworksIDActions200ApplicationJSONActionsStatusEnum = "success"
-	GetNetworksIDActions200ApplicationJSONActionsStatusEnumRunning GetNetworksIDActions200ApplicationJSONActionsStatusEnum = "running"
-	GetNetworksIDActions200ApplicationJSONActionsStatusEnumError   GetNetworksIDActions200ApplicationJSONActionsStatusEnum = "error"
+	GetNetworksIDActionsActionsResponseActionStatusEnumSuccess GetNetworksIDActionsActionsResponseActionStatusEnum = "success"
+	GetNetworksIDActionsActionsResponseActionStatusEnumRunning GetNetworksIDActionsActionsResponseActionStatusEnum = "running"
+	GetNetworksIDActionsActionsResponseActionStatusEnumError   GetNetworksIDActionsActionsResponseActionStatusEnum = "error"
 )
 
-type GetNetworksIDActions200ApplicationJSONActionsAction struct {
-	Command   string                                                   `json:"command"`
-	Error     GetNetworksIDActions200ApplicationJSONActionsError       `json:"error"`
-	Finished  string                                                   `json:"finished"`
-	ID        int64                                                    `json:"id"`
-	Progress  float64                                                  `json:"progress"`
-	Resources []GetNetworksIDActions200ApplicationJSONActionsResources `json:"resources"`
-	Started   string                                                   `json:"started"`
-	Status    GetNetworksIDActions200ApplicationJSONActionsStatusEnum  `json:"status"`
+type GetNetworksIDActionsActionsResponseAction struct {
+	Command   string                                               `json:"command"`
+	Error     GetNetworksIDActionsActionsResponseActionError       `json:"error"`
+	Finished  string                                               `json:"finished"`
+	ID        int64                                                `json:"id"`
+	Progress  float64                                              `json:"progress"`
+	Resources []GetNetworksIDActionsActionsResponseActionResources `json:"resources"`
+	Started   string                                               `json:"started"`
+	Status    GetNetworksIDActionsActionsResponseActionStatusEnum  `json:"status"`
 }
 
-type GetNetworksIDActions200ApplicationJSONMetaPagination struct {
+type GetNetworksIDActionsActionsResponseMetaPagination struct {
 	LastPage     float64 `json:"last_page"`
 	NextPage     float64 `json:"next_page"`
 	Page         float64 `json:"page"`
@@ -83,17 +83,17 @@ type GetNetworksIDActions200ApplicationJSONMetaPagination struct {
 	TotalEntries float64 `json:"total_entries"`
 }
 
-type GetNetworksIDActions200ApplicationJSONMeta struct {
-	Pagination GetNetworksIDActions200ApplicationJSONMetaPagination `json:"pagination"`
+type GetNetworksIDActionsActionsResponseMeta struct {
+	Pagination GetNetworksIDActionsActionsResponseMetaPagination `json:"pagination"`
 }
 
-type GetNetworksIDActions200ApplicationJSONActionsResponse struct {
-	Actions []GetNetworksIDActions200ApplicationJSONActionsAction `json:"actions"`
-	Meta    *GetNetworksIDActions200ApplicationJSONMeta           `json:"meta,omitempty"`
+type GetNetworksIDActionsActionsResponse struct {
+	Actions []GetNetworksIDActionsActionsResponseAction `json:"actions"`
+	Meta    *GetNetworksIDActionsActionsResponseMeta    `json:"meta,omitempty"`
 }
 
 type GetNetworksIDActionsResponse struct {
-	ActionsResponse *GetNetworksIDActions200ApplicationJSONActionsResponse
+	ActionsResponse *GetNetworksIDActionsActionsResponse
 	ContentType     string
 	StatusCode      int64
 }

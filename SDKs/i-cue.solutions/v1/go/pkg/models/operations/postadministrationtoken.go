@@ -20,9 +20,9 @@ type PostAdministrationTokenRequest struct {
 }
 
 type PostAdministrationTokenResponse struct {
-	Body                                                []byte
 	ContentType                                         string
 	PostAdministrationToken200ApplicationJSONUUIDString *string
 	PostAdministrationToken200TextJSONUUIDString        *string
+	PostAdministrationToken200TextPlainUUIDString       *string
 	StatusCode                                          int64
 }

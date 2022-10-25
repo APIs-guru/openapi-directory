@@ -13,7 +13,7 @@ class CreateBucketPathParams:
     
 
 @dataclass
-class CreateBucketRequestBodyCreateBucketRequest:
+class CreateBucketCreateBucketRequest:
     interval: int = field(default=None, metadata={'form': { 'field_name': 'Interval' }})
     max: int = field(default=None, metadata={'form': { 'field_name': 'Max' }})
     
@@ -27,7 +27,7 @@ class CreateBucketSecurity:
 class CreateBucketRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateBucketPathParams = field(default=None)
-    request: Optional[CreateBucketRequestBodyCreateBucketRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateBucketCreateBucketRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateBucketSecurity = field(default=None)
     
 

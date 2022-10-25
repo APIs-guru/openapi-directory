@@ -25,7 +25,7 @@ type ListCustomerProfileRequest struct {
 	Security    ListCustomerProfileSecurity
 }
 
-type ListCustomerProfile200ApplicationJSONMeta struct {
+type ListCustomerProfileListCustomerProfileResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -35,13 +35,13 @@ type ListCustomerProfile200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListCustomerProfile200ApplicationJSONListCustomerProfileResponse struct {
-	Meta    *ListCustomerProfile200ApplicationJSONMeta `json:"meta,omitempty"`
-	Results []shared.TrusthubV1CustomerProfile         `json:"results,omitempty"`
+type ListCustomerProfileListCustomerProfileResponse struct {
+	Meta    *ListCustomerProfileListCustomerProfileResponseMeta `json:"meta,omitempty"`
+	Results []shared.TrusthubV1CustomerProfile                  `json:"results,omitempty"`
 }
 
 type ListCustomerProfileResponse struct {
 	ContentType                 string
-	ListCustomerProfileResponse *ListCustomerProfile200ApplicationJSONListCustomerProfileResponse
+	ListCustomerProfileResponse *ListCustomerProfileListCustomerProfileResponse
 	StatusCode                  int64
 }

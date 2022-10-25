@@ -32,7 +32,7 @@ class ListFieldTypeRequest:
 
 @dataclass_json
 @dataclass
-class ListFieldType200ApplicationJSONMeta:
+class ListFieldTypeListFieldTypeResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -44,14 +44,14 @@ class ListFieldType200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListFieldType200ApplicationJSONListFieldTypeResponse:
+class ListFieldTypeListFieldTypeResponse:
     field_types: Optional[List[shared.AutopilotV1AssistantFieldType]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'field_types' }})
-    meta: Optional[ListFieldType200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+    meta: Optional[ListFieldTypeListFieldTypeResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     
 
 @dataclass
 class ListFieldTypeResponse:
     content_type: str = field(default=None)
-    list_field_type_response: Optional[ListFieldType200ApplicationJSONListFieldTypeResponse] = field(default=None)
+    list_field_type_response: Optional[ListFieldTypeListFieldTypeResponse] = field(default=None)
     status_code: int = field(default=None)
     

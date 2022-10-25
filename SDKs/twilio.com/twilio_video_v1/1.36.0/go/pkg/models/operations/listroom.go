@@ -27,7 +27,7 @@ type ListRoomRequest struct {
 	Security    ListRoomSecurity
 }
 
-type ListRoom200ApplicationJSONMeta struct {
+type ListRoomListRoomResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -37,13 +37,13 @@ type ListRoom200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListRoom200ApplicationJSONListRoomResponse struct {
-	Meta  *ListRoom200ApplicationJSONMeta `json:"meta,omitempty"`
-	Rooms []shared.VideoV1Room            `json:"rooms,omitempty"`
+type ListRoomListRoomResponse struct {
+	Meta  *ListRoomListRoomResponseMeta `json:"meta,omitempty"`
+	Rooms []shared.VideoV1Room          `json:"rooms,omitempty"`
 }
 
 type ListRoomResponse struct {
 	ContentType      string
-	ListRoomResponse *ListRoom200ApplicationJSONListRoomResponse
+	ListRoomResponse *ListRoomListRoomResponse
 	StatusCode       int64
 }

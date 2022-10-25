@@ -13,7 +13,7 @@ type UpdateOutgoingCallerIDPathParams struct {
 	Sid        string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
-type UpdateOutgoingCallerIDRequestBodyUpdateOutgoingCallerIDRequest struct {
+type UpdateOutgoingCallerIDUpdateOutgoingCallerIDRequest struct {
 	FriendlyName *string `form:"name=FriendlyName"`
 }
 
@@ -24,7 +24,7 @@ type UpdateOutgoingCallerIDSecurity struct {
 type UpdateOutgoingCallerIDRequest struct {
 	ServerURL  *string
 	PathParams UpdateOutgoingCallerIDPathParams
-	Request    *UpdateOutgoingCallerIDRequestBodyUpdateOutgoingCallerIDRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateOutgoingCallerIDUpdateOutgoingCallerIDRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateOutgoingCallerIDSecurity
 }
 

@@ -26,7 +26,7 @@ const (
 	PostServersIDActionsRequestConsole201ApplicationJSONActionStatusEnumError   PostServersIDActionsRequestConsole201ApplicationJSONActionStatusEnum = "error"
 )
 
-type PostServersIDActionsRequestConsole201ApplicationJSONActionAction struct {
+type PostServersIDActionsRequestConsole201ApplicationJSONAction struct {
 	Command   string                                                                `json:"command"`
 	Error     PostServersIDActionsRequestConsole201ApplicationJSONActionError       `json:"error"`
 	Finished  string                                                                `json:"finished"`
@@ -38,9 +38,9 @@ type PostServersIDActionsRequestConsole201ApplicationJSONActionAction struct {
 }
 
 type PostServersIDActionsRequestConsole201ApplicationJSON struct {
-	Action   PostServersIDActionsRequestConsole201ApplicationJSONActionAction `json:"action"`
-	Password string                                                           `json:"password"`
-	WssURL   string                                                           `json:"wss_url"`
+	Action   PostServersIDActionsRequestConsole201ApplicationJSONAction `json:"action"`
+	Password string                                                     `json:"password"`
+	WssURL   string                                                     `json:"wss_url"`
 }
 
 type PostServersIDActionsRequestConsoleResponse struct {

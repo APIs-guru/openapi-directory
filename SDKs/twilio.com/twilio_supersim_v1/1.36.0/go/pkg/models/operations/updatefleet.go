@@ -12,36 +12,36 @@ type UpdateFleetPathParams struct {
 	Sid string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
-type UpdateFleetRequestBodyIPCommandsMethodEnum string
+type UpdateFleetUpdateFleetRequestIPCommandsMethodEnum string
 
 const (
-	UpdateFleetRequestBodyIPCommandsMethodEnumHead   UpdateFleetRequestBodyIPCommandsMethodEnum = "HEAD"
-	UpdateFleetRequestBodyIPCommandsMethodEnumGet    UpdateFleetRequestBodyIPCommandsMethodEnum = "GET"
-	UpdateFleetRequestBodyIPCommandsMethodEnumPost   UpdateFleetRequestBodyIPCommandsMethodEnum = "POST"
-	UpdateFleetRequestBodyIPCommandsMethodEnumPatch  UpdateFleetRequestBodyIPCommandsMethodEnum = "PATCH"
-	UpdateFleetRequestBodyIPCommandsMethodEnumPut    UpdateFleetRequestBodyIPCommandsMethodEnum = "PUT"
-	UpdateFleetRequestBodyIPCommandsMethodEnumDelete UpdateFleetRequestBodyIPCommandsMethodEnum = "DELETE"
+	UpdateFleetUpdateFleetRequestIPCommandsMethodEnumHead   UpdateFleetUpdateFleetRequestIPCommandsMethodEnum = "HEAD"
+	UpdateFleetUpdateFleetRequestIPCommandsMethodEnumGet    UpdateFleetUpdateFleetRequestIPCommandsMethodEnum = "GET"
+	UpdateFleetUpdateFleetRequestIPCommandsMethodEnumPost   UpdateFleetUpdateFleetRequestIPCommandsMethodEnum = "POST"
+	UpdateFleetUpdateFleetRequestIPCommandsMethodEnumPatch  UpdateFleetUpdateFleetRequestIPCommandsMethodEnum = "PATCH"
+	UpdateFleetUpdateFleetRequestIPCommandsMethodEnumPut    UpdateFleetUpdateFleetRequestIPCommandsMethodEnum = "PUT"
+	UpdateFleetUpdateFleetRequestIPCommandsMethodEnumDelete UpdateFleetUpdateFleetRequestIPCommandsMethodEnum = "DELETE"
 )
 
-type UpdateFleetRequestBodySmsCommandsMethodEnum string
+type UpdateFleetUpdateFleetRequestSmsCommandsMethodEnum string
 
 const (
-	UpdateFleetRequestBodySmsCommandsMethodEnumHead   UpdateFleetRequestBodySmsCommandsMethodEnum = "HEAD"
-	UpdateFleetRequestBodySmsCommandsMethodEnumGet    UpdateFleetRequestBodySmsCommandsMethodEnum = "GET"
-	UpdateFleetRequestBodySmsCommandsMethodEnumPost   UpdateFleetRequestBodySmsCommandsMethodEnum = "POST"
-	UpdateFleetRequestBodySmsCommandsMethodEnumPatch  UpdateFleetRequestBodySmsCommandsMethodEnum = "PATCH"
-	UpdateFleetRequestBodySmsCommandsMethodEnumPut    UpdateFleetRequestBodySmsCommandsMethodEnum = "PUT"
-	UpdateFleetRequestBodySmsCommandsMethodEnumDelete UpdateFleetRequestBodySmsCommandsMethodEnum = "DELETE"
+	UpdateFleetUpdateFleetRequestSmsCommandsMethodEnumHead   UpdateFleetUpdateFleetRequestSmsCommandsMethodEnum = "HEAD"
+	UpdateFleetUpdateFleetRequestSmsCommandsMethodEnumGet    UpdateFleetUpdateFleetRequestSmsCommandsMethodEnum = "GET"
+	UpdateFleetUpdateFleetRequestSmsCommandsMethodEnumPost   UpdateFleetUpdateFleetRequestSmsCommandsMethodEnum = "POST"
+	UpdateFleetUpdateFleetRequestSmsCommandsMethodEnumPatch  UpdateFleetUpdateFleetRequestSmsCommandsMethodEnum = "PATCH"
+	UpdateFleetUpdateFleetRequestSmsCommandsMethodEnumPut    UpdateFleetUpdateFleetRequestSmsCommandsMethodEnum = "PUT"
+	UpdateFleetUpdateFleetRequestSmsCommandsMethodEnumDelete UpdateFleetUpdateFleetRequestSmsCommandsMethodEnum = "DELETE"
 )
 
-type UpdateFleetRequestBodyUpdateFleetRequest struct {
-	DataLimit            *int64                                       `form:"name=DataLimit"`
-	IPCommandsMethod     *UpdateFleetRequestBodyIPCommandsMethodEnum  `form:"name=IpCommandsMethod"`
-	IPCommandsURL        *string                                      `form:"name=IpCommandsUrl"`
-	NetworkAccessProfile *string                                      `form:"name=NetworkAccessProfile"`
-	SmsCommandsMethod    *UpdateFleetRequestBodySmsCommandsMethodEnum `form:"name=SmsCommandsMethod"`
-	SmsCommandsURL       *string                                      `form:"name=SmsCommandsUrl"`
-	UniqueName           *string                                      `form:"name=UniqueName"`
+type UpdateFleetUpdateFleetRequest struct {
+	DataLimit            *int64                                              `form:"name=DataLimit"`
+	IPCommandsMethod     *UpdateFleetUpdateFleetRequestIPCommandsMethodEnum  `form:"name=IpCommandsMethod"`
+	IPCommandsURL        *string                                             `form:"name=IpCommandsUrl"`
+	NetworkAccessProfile *string                                             `form:"name=NetworkAccessProfile"`
+	SmsCommandsMethod    *UpdateFleetUpdateFleetRequestSmsCommandsMethodEnum `form:"name=SmsCommandsMethod"`
+	SmsCommandsURL       *string                                             `form:"name=SmsCommandsUrl"`
+	UniqueName           *string                                             `form:"name=UniqueName"`
 }
 
 type UpdateFleetSecurity struct {
@@ -51,7 +51,7 @@ type UpdateFleetSecurity struct {
 type UpdateFleetRequest struct {
 	ServerURL  *string
 	PathParams UpdateFleetPathParams
-	Request    *UpdateFleetRequestBodyUpdateFleetRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateFleetUpdateFleetRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateFleetSecurity
 }
 

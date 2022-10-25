@@ -12,7 +12,7 @@ class UpdateAssistantPathParams:
     
 
 @dataclass
-class UpdateAssistantRequestBodyUpdateAssistantRequest:
+class UpdateAssistantUpdateAssistantRequest:
     callback_events: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'CallbackEvents' }})
     callback_url: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'CallbackUrl' }})
     defaults: Optional[Any] = field(default=None, metadata={'form': { 'field_name': 'Defaults' }})
@@ -32,7 +32,7 @@ class UpdateAssistantSecurity:
 class UpdateAssistantRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateAssistantPathParams = field(default=None)
-    request: Optional[UpdateAssistantRequestBodyUpdateAssistantRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateAssistantUpdateAssistantRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateAssistantSecurity = field(default=None)
     
 

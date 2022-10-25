@@ -18,7 +18,7 @@ class GetListofApproversForBatchRequest:
 
 @dataclass_json
 @dataclass
-class GetListofApproversForBatch200ApplicationJSONApprovals:
+class GetListofApproversForBatchBatchApproversApprovals:
     email_address: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'emailAddress' }})
     first_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'firstName' }})
     last_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lastName' }})
@@ -30,13 +30,13 @@ class GetListofApproversForBatch200ApplicationJSONApprovals:
 
 @dataclass_json
 @dataclass
-class GetListofApproversForBatch200ApplicationJSONBatchApprovers:
-    approvals: Optional[List[GetListofApproversForBatch200ApplicationJSONApprovals]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'approvals' }})
+class GetListofApproversForBatchBatchApprovers:
+    approvals: Optional[List[GetListofApproversForBatchBatchApproversApprovals]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'approvals' }})
     
 
 @dataclass
 class GetListofApproversForBatchResponse:
-    batch_approvers: Optional[GetListofApproversForBatch200ApplicationJSONBatchApprovers] = field(default=None)
+    batch_approvers: Optional[GetListofApproversForBatchBatchApprovers] = field(default=None)
     content_type: str = field(default=None)
     status_code: int = field(default=None)
     

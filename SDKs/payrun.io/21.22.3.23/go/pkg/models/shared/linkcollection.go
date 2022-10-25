@@ -1,13 +1,13 @@
 package shared
 
-type LinkCollectionLinkCollectionLinksLink struct {
+type LinkCollectionLinkCollectionLink struct {
 	Link []interface{} `json:"Link,omitempty"`
 }
 
-type LinkCollectionLinkCollectionLinkCollection struct {
-	Links *LinkCollectionLinkCollectionLinksLink `json:"Links,omitempty"`
+type LinkCollectionLinkCollection struct {
+	Links *LinkCollectionLinkCollectionLink `json:"Links,omitempty"`
 }
 
 type LinkCollection struct {
-	LinkCollection *LinkCollectionLinkCollectionLinkCollection `json:"LinkCollection,omitempty"`
+	LinkCollection *LinkCollectionLinkCollection `json:"LinkCollection,omitempty"`
 }

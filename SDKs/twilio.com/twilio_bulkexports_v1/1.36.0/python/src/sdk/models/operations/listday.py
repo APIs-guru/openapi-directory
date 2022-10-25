@@ -32,7 +32,7 @@ class ListDayRequest:
 
 @dataclass_json
 @dataclass
-class ListDay200ApplicationJSONMeta:
+class ListDayListDayResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -44,14 +44,14 @@ class ListDay200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListDay200ApplicationJSONListDayResponse:
+class ListDayListDayResponse:
     days: Optional[List[shared.BulkexportsV1ExportDay]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'days' }})
-    meta: Optional[ListDay200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+    meta: Optional[ListDayListDayResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     
 
 @dataclass
 class ListDayResponse:
     content_type: str = field(default=None)
-    list_day_response: Optional[ListDay200ApplicationJSONListDayResponse] = field(default=None)
+    list_day_response: Optional[ListDayListDayResponse] = field(default=None)
     status_code: int = field(default=None)
     

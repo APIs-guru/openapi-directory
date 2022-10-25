@@ -7,11 +7,11 @@ from dataclasses_json import dataclass_json
 class PostFirewallsIDActionsSetRulesPathParams:
     id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
-class PostFirewallsIDActionsSetRulesRequestBodyRulesDirectionEnum(str, Enum):
+class PostFirewallsIDActionsSetRulesSetRulesRequestRuleDirectionEnum(str, Enum):
     IN = "in"
     OUT = "out"
 
-class PostFirewallsIDActionsSetRulesRequestBodyRulesProtocolEnum(str, Enum):
+class PostFirewallsIDActionsSetRulesSetRulesRequestRuleProtocolEnum(str, Enum):
     TCP = "tcp"
     UDP = "udp"
     ICMP = "icmp"
@@ -21,41 +21,41 @@ class PostFirewallsIDActionsSetRulesRequestBodyRulesProtocolEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class PostFirewallsIDActionsSetRulesRequestBodyRulesRule:
+class PostFirewallsIDActionsSetRulesSetRulesRequestRule:
     description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
     destination_ips: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'destination_ips' }})
-    direction: PostFirewallsIDActionsSetRulesRequestBodyRulesDirectionEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'direction' }})
+    direction: PostFirewallsIDActionsSetRulesSetRulesRequestRuleDirectionEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'direction' }})
     port: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'port' }})
-    protocol: PostFirewallsIDActionsSetRulesRequestBodyRulesProtocolEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'protocol' }})
+    protocol: PostFirewallsIDActionsSetRulesSetRulesRequestRuleProtocolEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'protocol' }})
     source_ips: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'source_ips' }})
     
 
 @dataclass_json
 @dataclass
-class PostFirewallsIDActionsSetRulesRequestBodySetRulesRequest:
-    rules: List[PostFirewallsIDActionsSetRulesRequestBodyRulesRule] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rules' }})
+class PostFirewallsIDActionsSetRulesSetRulesRequest:
+    rules: List[PostFirewallsIDActionsSetRulesSetRulesRequestRule] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rules' }})
     
 
 @dataclass
 class PostFirewallsIDActionsSetRulesRequest:
     path_params: PostFirewallsIDActionsSetRulesPathParams = field(default=None)
-    request: Optional[PostFirewallsIDActionsSetRulesRequestBodySetRulesRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: Optional[PostFirewallsIDActionsSetRulesSetRulesRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass_json
 @dataclass
-class PostFirewallsIDActionsSetRules201ApplicationJSONActionsError:
+class PostFirewallsIDActionsSetRulesActionsResponseActionError:
     code: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'code' }})
     message: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'message' }})
     
 
 @dataclass_json
 @dataclass
-class PostFirewallsIDActionsSetRules201ApplicationJSONActionsResources:
+class PostFirewallsIDActionsSetRulesActionsResponseActionResources:
     id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     type: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     
-class PostFirewallsIDActionsSetRules201ApplicationJSONActionsStatusEnum(str, Enum):
+class PostFirewallsIDActionsSetRulesActionsResponseActionStatusEnum(str, Enum):
     SUCCESS = "success"
     RUNNING = "running"
     ERROR = "error"
@@ -63,20 +63,20 @@ class PostFirewallsIDActionsSetRules201ApplicationJSONActionsStatusEnum(str, Enu
 
 @dataclass_json
 @dataclass
-class PostFirewallsIDActionsSetRules201ApplicationJSONActionsAction:
+class PostFirewallsIDActionsSetRulesActionsResponseAction:
     command: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'command' }})
-    error: PostFirewallsIDActionsSetRules201ApplicationJSONActionsError = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
+    error: PostFirewallsIDActionsSetRulesActionsResponseActionError = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
     finished: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'finished' }})
     id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     progress: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'progress' }})
-    resources: List[PostFirewallsIDActionsSetRules201ApplicationJSONActionsResources] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resources' }})
+    resources: List[PostFirewallsIDActionsSetRulesActionsResponseActionResources] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resources' }})
     started: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'started' }})
-    status: PostFirewallsIDActionsSetRules201ApplicationJSONActionsStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    status: PostFirewallsIDActionsSetRulesActionsResponseActionStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
     
 
 @dataclass_json
 @dataclass
-class PostFirewallsIDActionsSetRules201ApplicationJSONMetaPagination:
+class PostFirewallsIDActionsSetRulesActionsResponseMetaPagination:
     last_page: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'last_page' }})
     next_page: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page' }})
     page: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'page' }})
@@ -87,20 +87,20 @@ class PostFirewallsIDActionsSetRules201ApplicationJSONMetaPagination:
 
 @dataclass_json
 @dataclass
-class PostFirewallsIDActionsSetRules201ApplicationJSONMeta:
-    pagination: PostFirewallsIDActionsSetRules201ApplicationJSONMetaPagination = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pagination' }})
+class PostFirewallsIDActionsSetRulesActionsResponseMeta:
+    pagination: PostFirewallsIDActionsSetRulesActionsResponseMetaPagination = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pagination' }})
     
 
 @dataclass_json
 @dataclass
-class PostFirewallsIDActionsSetRules201ApplicationJSONActionsResponse:
-    actions: List[PostFirewallsIDActionsSetRules201ApplicationJSONActionsAction] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'actions' }})
-    meta: Optional[PostFirewallsIDActionsSetRules201ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+class PostFirewallsIDActionsSetRulesActionsResponse:
+    actions: List[PostFirewallsIDActionsSetRulesActionsResponseAction] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'actions' }})
+    meta: Optional[PostFirewallsIDActionsSetRulesActionsResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     
 
 @dataclass
 class PostFirewallsIDActionsSetRulesResponse:
-    actions_response: Optional[PostFirewallsIDActionsSetRules201ApplicationJSONActionsResponse] = field(default=None)
+    actions_response: Optional[PostFirewallsIDActionsSetRulesActionsResponse] = field(default=None)
     content_type: str = field(default=None)
     status_code: int = field(default=None)
     

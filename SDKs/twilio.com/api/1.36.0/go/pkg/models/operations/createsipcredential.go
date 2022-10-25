@@ -13,7 +13,7 @@ type CreateSipCredentialPathParams struct {
 	CredentialListSid string `pathParam:"style=simple,explode=false,name=CredentialListSid"`
 }
 
-type CreateSipCredentialRequestBodyCreateSipCredentialRequest struct {
+type CreateSipCredentialCreateSipCredentialRequest struct {
 	Password string `form:"name=Password"`
 	Username string `form:"name=Username"`
 }
@@ -25,7 +25,7 @@ type CreateSipCredentialSecurity struct {
 type CreateSipCredentialRequest struct {
 	ServerURL  *string
 	PathParams CreateSipCredentialPathParams
-	Request    *CreateSipCredentialRequestBodyCreateSipCredentialRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateSipCredentialCreateSipCredentialRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateSipCredentialSecurity
 }
 

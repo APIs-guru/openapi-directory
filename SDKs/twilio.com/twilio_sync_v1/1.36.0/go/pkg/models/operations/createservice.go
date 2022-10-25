@@ -8,7 +8,7 @@ var CreateServiceServers = []string{
 	"https://sync.twilio.com",
 }
 
-type CreateServiceRequestBodyCreateServiceRequest struct {
+type CreateServiceCreateServiceRequest struct {
 	ACLEnabled                    *bool   `form:"name=AclEnabled"`
 	FriendlyName                  *string `form:"name=FriendlyName"`
 	ReachabilityDebouncingEnabled *bool   `form:"name=ReachabilityDebouncingEnabled"`
@@ -24,7 +24,7 @@ type CreateServiceSecurity struct {
 
 type CreateServiceRequest struct {
 	ServerURL *string
-	Request   *CreateServiceRequestBodyCreateServiceRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request   *CreateServiceCreateServiceRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security  CreateServiceSecurity
 }
 

@@ -10,7 +10,7 @@ UPDATE_COMPOSITION_HOOK_SERVERS = [
 class UpdateCompositionHookPathParams:
     sid: str = field(default=None, metadata={'path_param': { 'field_name': 'Sid', 'style': 'simple', 'explode': False }})
     
-class UpdateCompositionHookRequestBodyStatusCallbackMethodEnum(str, Enum):
+class UpdateCompositionHookUpdateCompositionHookRequestStatusCallbackMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -20,7 +20,7 @@ class UpdateCompositionHookRequestBodyStatusCallbackMethodEnum(str, Enum):
 
 
 @dataclass
-class UpdateCompositionHookRequestBodyUpdateCompositionHookRequest:
+class UpdateCompositionHookUpdateCompositionHookRequest:
     audio_sources: Optional[List[str]] = field(default=None, metadata={'form': { 'field_name': 'AudioSources' }})
     audio_sources_excluded: Optional[List[str]] = field(default=None, metadata={'form': { 'field_name': 'AudioSourcesExcluded' }})
     enabled: Optional[bool] = field(default=None, metadata={'form': { 'field_name': 'Enabled' }})
@@ -28,7 +28,7 @@ class UpdateCompositionHookRequestBodyUpdateCompositionHookRequest:
     friendly_name: str = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
     resolution: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Resolution' }})
     status_callback: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'StatusCallback' }})
-    status_callback_method: Optional[UpdateCompositionHookRequestBodyStatusCallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'StatusCallbackMethod' }})
+    status_callback_method: Optional[UpdateCompositionHookUpdateCompositionHookRequestStatusCallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'StatusCallbackMethod' }})
     trim: Optional[bool] = field(default=None, metadata={'form': { 'field_name': 'Trim' }})
     video_layout: Optional[Any] = field(default=None, metadata={'form': { 'field_name': 'VideoLayout' }})
     
@@ -42,7 +42,7 @@ class UpdateCompositionHookSecurity:
 class UpdateCompositionHookRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateCompositionHookPathParams = field(default=None)
-    request: Optional[UpdateCompositionHookRequestBodyUpdateCompositionHookRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateCompositionHookUpdateCompositionHookRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateCompositionHookSecurity = field(default=None)
     
 

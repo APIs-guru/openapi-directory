@@ -28,7 +28,7 @@ type ListWorkflowRequest struct {
 	Security    ListWorkflowSecurity
 }
 
-type ListWorkflow200ApplicationJSONMeta struct {
+type ListWorkflowListWorkflowResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -38,13 +38,13 @@ type ListWorkflow200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListWorkflow200ApplicationJSONListWorkflowResponse struct {
-	Meta      *ListWorkflow200ApplicationJSONMeta    `json:"meta,omitempty"`
+type ListWorkflowListWorkflowResponse struct {
+	Meta      *ListWorkflowListWorkflowResponseMeta  `json:"meta,omitempty"`
 	Workflows []shared.TaskrouterV1WorkspaceWorkflow `json:"workflows,omitempty"`
 }
 
 type ListWorkflowResponse struct {
 	ContentType          string
-	ListWorkflowResponse *ListWorkflow200ApplicationJSONListWorkflowResponse
+	ListWorkflowResponse *ListWorkflowListWorkflowResponse
 	StatusCode           int64
 }

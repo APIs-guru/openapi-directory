@@ -14,7 +14,7 @@ type UpdateStreamPathParams struct {
 	Sid        string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
-type UpdateStreamRequestBodyUpdateStreamRequest struct {
+type UpdateStreamUpdateStreamRequest struct {
 	Status shared.StreamEnumUpdateStatusEnum `form:"name=Status"`
 }
 
@@ -25,7 +25,7 @@ type UpdateStreamSecurity struct {
 type UpdateStreamRequest struct {
 	ServerURL  *string
 	PathParams UpdateStreamPathParams
-	Request    *UpdateStreamRequestBodyUpdateStreamRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateStreamUpdateStreamRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateStreamSecurity
 }
 

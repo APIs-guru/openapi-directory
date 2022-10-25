@@ -10,30 +10,30 @@ class PostNetworksIDActionsChangeIPRangePathParams:
 
 @dataclass_json
 @dataclass
-class PostNetworksIDActionsChangeIPRangeRequestBodyChangeIPRangeRequest:
+class PostNetworksIDActionsChangeIPRangeChangeIPRangeRequest:
     ip_range: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ip_range' }})
     
 
 @dataclass
 class PostNetworksIDActionsChangeIPRangeRequest:
     path_params: PostNetworksIDActionsChangeIPRangePathParams = field(default=None)
-    request: Optional[PostNetworksIDActionsChangeIPRangeRequestBodyChangeIPRangeRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: Optional[PostNetworksIDActionsChangeIPRangeChangeIPRangeRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass_json
 @dataclass
-class PostNetworksIDActionsChangeIPRange201ApplicationJSONActionError:
+class PostNetworksIDActionsChangeIPRangeActionResponseActionError:
     code: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'code' }})
     message: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'message' }})
     
 
 @dataclass_json
 @dataclass
-class PostNetworksIDActionsChangeIPRange201ApplicationJSONActionResources:
+class PostNetworksIDActionsChangeIPRangeActionResponseActionResources:
     id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     type: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     
-class PostNetworksIDActionsChangeIPRange201ApplicationJSONActionStatusEnum(str, Enum):
+class PostNetworksIDActionsChangeIPRangeActionResponseActionStatusEnum(str, Enum):
     SUCCESS = "success"
     RUNNING = "running"
     ERROR = "error"
@@ -41,26 +41,26 @@ class PostNetworksIDActionsChangeIPRange201ApplicationJSONActionStatusEnum(str, 
 
 @dataclass_json
 @dataclass
-class PostNetworksIDActionsChangeIPRange201ApplicationJSONActionAction:
+class PostNetworksIDActionsChangeIPRangeActionResponseAction:
     command: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'command' }})
-    error: PostNetworksIDActionsChangeIPRange201ApplicationJSONActionError = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
+    error: PostNetworksIDActionsChangeIPRangeActionResponseActionError = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
     finished: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'finished' }})
     id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     progress: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'progress' }})
-    resources: List[PostNetworksIDActionsChangeIPRange201ApplicationJSONActionResources] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resources' }})
+    resources: List[PostNetworksIDActionsChangeIPRangeActionResponseActionResources] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resources' }})
     started: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'started' }})
-    status: PostNetworksIDActionsChangeIPRange201ApplicationJSONActionStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    status: PostNetworksIDActionsChangeIPRangeActionResponseActionStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
     
 
 @dataclass_json
 @dataclass
-class PostNetworksIDActionsChangeIPRange201ApplicationJSONActionResponse:
-    action: PostNetworksIDActionsChangeIPRange201ApplicationJSONActionAction = field(default=None, metadata={'dataclasses_json': { 'field_name': 'action' }})
+class PostNetworksIDActionsChangeIPRangeActionResponse:
+    action: PostNetworksIDActionsChangeIPRangeActionResponseAction = field(default=None, metadata={'dataclasses_json': { 'field_name': 'action' }})
     
 
 @dataclass
 class PostNetworksIDActionsChangeIPRangeResponse:
-    action_response: Optional[PostNetworksIDActionsChangeIPRange201ApplicationJSONActionResponse] = field(default=None)
+    action_response: Optional[PostNetworksIDActionsChangeIPRangeActionResponse] = field(default=None)
     content_type: str = field(default=None)
     status_code: int = field(default=None)
     

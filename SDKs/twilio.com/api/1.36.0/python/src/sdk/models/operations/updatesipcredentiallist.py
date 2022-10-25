@@ -13,7 +13,7 @@ class UpdateSipCredentialListPathParams:
     
 
 @dataclass
-class UpdateSipCredentialListRequestBodyUpdateSipCredentialListRequest:
+class UpdateSipCredentialListUpdateSipCredentialListRequest:
     friendly_name: str = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
     
 
@@ -26,7 +26,7 @@ class UpdateSipCredentialListSecurity:
 class UpdateSipCredentialListRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateSipCredentialListPathParams = field(default=None)
-    request: Optional[UpdateSipCredentialListRequestBodyUpdateSipCredentialListRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateSipCredentialListUpdateSipCredentialListRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateSipCredentialListSecurity = field(default=None)
     
 

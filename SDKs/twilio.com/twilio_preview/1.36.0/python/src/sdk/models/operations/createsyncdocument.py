@@ -12,7 +12,7 @@ class CreateSyncDocumentPathParams:
     
 
 @dataclass
-class CreateSyncDocumentRequestBodyCreateSyncDocumentRequest:
+class CreateSyncDocumentCreateSyncDocumentRequest:
     data: Optional[Any] = field(default=None, metadata={'form': { 'field_name': 'Data' }})
     unique_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'UniqueName' }})
     
@@ -26,7 +26,7 @@ class CreateSyncDocumentSecurity:
 class CreateSyncDocumentRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateSyncDocumentPathParams = field(default=None)
-    request: Optional[CreateSyncDocumentRequestBodyCreateSyncDocumentRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateSyncDocumentCreateSyncDocumentRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateSyncDocumentSecurity = field(default=None)
     
 

@@ -21,7 +21,7 @@ class TimeOffRequestRequestTypeEnum(str, Enum):
     BEREAVEMENT = "bereavement"
     OTHER = "other"
 
-class TimeOffRequestStatusStatusEnum(str, Enum):
+class TimeOffRequestStatusEnum(str, Enum):
     REQUESTED = "requested"
     APPROVED = "approved"
     DECLINED = "declined"
@@ -51,7 +51,7 @@ class TimeOffRequest:
     request_date: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'request_date' }})
     request_type: Optional[TimeOffRequestRequestTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'request_type' }})
     start_date: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'start_date' }})
-    status: Optional[TimeOffRequestStatusStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    status: Optional[TimeOffRequestStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
     units: Optional[TimeOffRequestUnitsEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'units' }})
     updated_at: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updated_at', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     updated_by: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updated_by' }})

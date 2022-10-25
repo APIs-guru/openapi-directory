@@ -13,77 +13,77 @@ type UpdateApplicationPathParams struct {
 	Sid        string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
-type UpdateApplicationRequestBodySmsFallbackMethodEnum string
+type UpdateApplicationUpdateApplicationRequestSmsFallbackMethodEnum string
 
 const (
-	UpdateApplicationRequestBodySmsFallbackMethodEnumHead   UpdateApplicationRequestBodySmsFallbackMethodEnum = "HEAD"
-	UpdateApplicationRequestBodySmsFallbackMethodEnumGet    UpdateApplicationRequestBodySmsFallbackMethodEnum = "GET"
-	UpdateApplicationRequestBodySmsFallbackMethodEnumPost   UpdateApplicationRequestBodySmsFallbackMethodEnum = "POST"
-	UpdateApplicationRequestBodySmsFallbackMethodEnumPatch  UpdateApplicationRequestBodySmsFallbackMethodEnum = "PATCH"
-	UpdateApplicationRequestBodySmsFallbackMethodEnumPut    UpdateApplicationRequestBodySmsFallbackMethodEnum = "PUT"
-	UpdateApplicationRequestBodySmsFallbackMethodEnumDelete UpdateApplicationRequestBodySmsFallbackMethodEnum = "DELETE"
+	UpdateApplicationUpdateApplicationRequestSmsFallbackMethodEnumHead   UpdateApplicationUpdateApplicationRequestSmsFallbackMethodEnum = "HEAD"
+	UpdateApplicationUpdateApplicationRequestSmsFallbackMethodEnumGet    UpdateApplicationUpdateApplicationRequestSmsFallbackMethodEnum = "GET"
+	UpdateApplicationUpdateApplicationRequestSmsFallbackMethodEnumPost   UpdateApplicationUpdateApplicationRequestSmsFallbackMethodEnum = "POST"
+	UpdateApplicationUpdateApplicationRequestSmsFallbackMethodEnumPatch  UpdateApplicationUpdateApplicationRequestSmsFallbackMethodEnum = "PATCH"
+	UpdateApplicationUpdateApplicationRequestSmsFallbackMethodEnumPut    UpdateApplicationUpdateApplicationRequestSmsFallbackMethodEnum = "PUT"
+	UpdateApplicationUpdateApplicationRequestSmsFallbackMethodEnumDelete UpdateApplicationUpdateApplicationRequestSmsFallbackMethodEnum = "DELETE"
 )
 
-type UpdateApplicationRequestBodySmsMethodEnum string
+type UpdateApplicationUpdateApplicationRequestSmsMethodEnum string
 
 const (
-	UpdateApplicationRequestBodySmsMethodEnumHead   UpdateApplicationRequestBodySmsMethodEnum = "HEAD"
-	UpdateApplicationRequestBodySmsMethodEnumGet    UpdateApplicationRequestBodySmsMethodEnum = "GET"
-	UpdateApplicationRequestBodySmsMethodEnumPost   UpdateApplicationRequestBodySmsMethodEnum = "POST"
-	UpdateApplicationRequestBodySmsMethodEnumPatch  UpdateApplicationRequestBodySmsMethodEnum = "PATCH"
-	UpdateApplicationRequestBodySmsMethodEnumPut    UpdateApplicationRequestBodySmsMethodEnum = "PUT"
-	UpdateApplicationRequestBodySmsMethodEnumDelete UpdateApplicationRequestBodySmsMethodEnum = "DELETE"
+	UpdateApplicationUpdateApplicationRequestSmsMethodEnumHead   UpdateApplicationUpdateApplicationRequestSmsMethodEnum = "HEAD"
+	UpdateApplicationUpdateApplicationRequestSmsMethodEnumGet    UpdateApplicationUpdateApplicationRequestSmsMethodEnum = "GET"
+	UpdateApplicationUpdateApplicationRequestSmsMethodEnumPost   UpdateApplicationUpdateApplicationRequestSmsMethodEnum = "POST"
+	UpdateApplicationUpdateApplicationRequestSmsMethodEnumPatch  UpdateApplicationUpdateApplicationRequestSmsMethodEnum = "PATCH"
+	UpdateApplicationUpdateApplicationRequestSmsMethodEnumPut    UpdateApplicationUpdateApplicationRequestSmsMethodEnum = "PUT"
+	UpdateApplicationUpdateApplicationRequestSmsMethodEnumDelete UpdateApplicationUpdateApplicationRequestSmsMethodEnum = "DELETE"
 )
 
-type UpdateApplicationRequestBodyStatusCallbackMethodEnum string
+type UpdateApplicationUpdateApplicationRequestStatusCallbackMethodEnum string
 
 const (
-	UpdateApplicationRequestBodyStatusCallbackMethodEnumHead   UpdateApplicationRequestBodyStatusCallbackMethodEnum = "HEAD"
-	UpdateApplicationRequestBodyStatusCallbackMethodEnumGet    UpdateApplicationRequestBodyStatusCallbackMethodEnum = "GET"
-	UpdateApplicationRequestBodyStatusCallbackMethodEnumPost   UpdateApplicationRequestBodyStatusCallbackMethodEnum = "POST"
-	UpdateApplicationRequestBodyStatusCallbackMethodEnumPatch  UpdateApplicationRequestBodyStatusCallbackMethodEnum = "PATCH"
-	UpdateApplicationRequestBodyStatusCallbackMethodEnumPut    UpdateApplicationRequestBodyStatusCallbackMethodEnum = "PUT"
-	UpdateApplicationRequestBodyStatusCallbackMethodEnumDelete UpdateApplicationRequestBodyStatusCallbackMethodEnum = "DELETE"
+	UpdateApplicationUpdateApplicationRequestStatusCallbackMethodEnumHead   UpdateApplicationUpdateApplicationRequestStatusCallbackMethodEnum = "HEAD"
+	UpdateApplicationUpdateApplicationRequestStatusCallbackMethodEnumGet    UpdateApplicationUpdateApplicationRequestStatusCallbackMethodEnum = "GET"
+	UpdateApplicationUpdateApplicationRequestStatusCallbackMethodEnumPost   UpdateApplicationUpdateApplicationRequestStatusCallbackMethodEnum = "POST"
+	UpdateApplicationUpdateApplicationRequestStatusCallbackMethodEnumPatch  UpdateApplicationUpdateApplicationRequestStatusCallbackMethodEnum = "PATCH"
+	UpdateApplicationUpdateApplicationRequestStatusCallbackMethodEnumPut    UpdateApplicationUpdateApplicationRequestStatusCallbackMethodEnum = "PUT"
+	UpdateApplicationUpdateApplicationRequestStatusCallbackMethodEnumDelete UpdateApplicationUpdateApplicationRequestStatusCallbackMethodEnum = "DELETE"
 )
 
-type UpdateApplicationRequestBodyVoiceFallbackMethodEnum string
+type UpdateApplicationUpdateApplicationRequestVoiceFallbackMethodEnum string
 
 const (
-	UpdateApplicationRequestBodyVoiceFallbackMethodEnumHead   UpdateApplicationRequestBodyVoiceFallbackMethodEnum = "HEAD"
-	UpdateApplicationRequestBodyVoiceFallbackMethodEnumGet    UpdateApplicationRequestBodyVoiceFallbackMethodEnum = "GET"
-	UpdateApplicationRequestBodyVoiceFallbackMethodEnumPost   UpdateApplicationRequestBodyVoiceFallbackMethodEnum = "POST"
-	UpdateApplicationRequestBodyVoiceFallbackMethodEnumPatch  UpdateApplicationRequestBodyVoiceFallbackMethodEnum = "PATCH"
-	UpdateApplicationRequestBodyVoiceFallbackMethodEnumPut    UpdateApplicationRequestBodyVoiceFallbackMethodEnum = "PUT"
-	UpdateApplicationRequestBodyVoiceFallbackMethodEnumDelete UpdateApplicationRequestBodyVoiceFallbackMethodEnum = "DELETE"
+	UpdateApplicationUpdateApplicationRequestVoiceFallbackMethodEnumHead   UpdateApplicationUpdateApplicationRequestVoiceFallbackMethodEnum = "HEAD"
+	UpdateApplicationUpdateApplicationRequestVoiceFallbackMethodEnumGet    UpdateApplicationUpdateApplicationRequestVoiceFallbackMethodEnum = "GET"
+	UpdateApplicationUpdateApplicationRequestVoiceFallbackMethodEnumPost   UpdateApplicationUpdateApplicationRequestVoiceFallbackMethodEnum = "POST"
+	UpdateApplicationUpdateApplicationRequestVoiceFallbackMethodEnumPatch  UpdateApplicationUpdateApplicationRequestVoiceFallbackMethodEnum = "PATCH"
+	UpdateApplicationUpdateApplicationRequestVoiceFallbackMethodEnumPut    UpdateApplicationUpdateApplicationRequestVoiceFallbackMethodEnum = "PUT"
+	UpdateApplicationUpdateApplicationRequestVoiceFallbackMethodEnumDelete UpdateApplicationUpdateApplicationRequestVoiceFallbackMethodEnum = "DELETE"
 )
 
-type UpdateApplicationRequestBodyVoiceMethodEnum string
+type UpdateApplicationUpdateApplicationRequestVoiceMethodEnum string
 
 const (
-	UpdateApplicationRequestBodyVoiceMethodEnumHead   UpdateApplicationRequestBodyVoiceMethodEnum = "HEAD"
-	UpdateApplicationRequestBodyVoiceMethodEnumGet    UpdateApplicationRequestBodyVoiceMethodEnum = "GET"
-	UpdateApplicationRequestBodyVoiceMethodEnumPost   UpdateApplicationRequestBodyVoiceMethodEnum = "POST"
-	UpdateApplicationRequestBodyVoiceMethodEnumPatch  UpdateApplicationRequestBodyVoiceMethodEnum = "PATCH"
-	UpdateApplicationRequestBodyVoiceMethodEnumPut    UpdateApplicationRequestBodyVoiceMethodEnum = "PUT"
-	UpdateApplicationRequestBodyVoiceMethodEnumDelete UpdateApplicationRequestBodyVoiceMethodEnum = "DELETE"
+	UpdateApplicationUpdateApplicationRequestVoiceMethodEnumHead   UpdateApplicationUpdateApplicationRequestVoiceMethodEnum = "HEAD"
+	UpdateApplicationUpdateApplicationRequestVoiceMethodEnumGet    UpdateApplicationUpdateApplicationRequestVoiceMethodEnum = "GET"
+	UpdateApplicationUpdateApplicationRequestVoiceMethodEnumPost   UpdateApplicationUpdateApplicationRequestVoiceMethodEnum = "POST"
+	UpdateApplicationUpdateApplicationRequestVoiceMethodEnumPatch  UpdateApplicationUpdateApplicationRequestVoiceMethodEnum = "PATCH"
+	UpdateApplicationUpdateApplicationRequestVoiceMethodEnumPut    UpdateApplicationUpdateApplicationRequestVoiceMethodEnum = "PUT"
+	UpdateApplicationUpdateApplicationRequestVoiceMethodEnumDelete UpdateApplicationUpdateApplicationRequestVoiceMethodEnum = "DELETE"
 )
 
-type UpdateApplicationRequestBodyUpdateApplicationRequest struct {
-	APIVersion            *string                                               `form:"name=ApiVersion"`
-	FriendlyName          *string                                               `form:"name=FriendlyName"`
-	MessageStatusCallback *string                                               `form:"name=MessageStatusCallback"`
-	SmsFallbackMethod     *UpdateApplicationRequestBodySmsFallbackMethodEnum    `form:"name=SmsFallbackMethod"`
-	SmsFallbackURL        *string                                               `form:"name=SmsFallbackUrl"`
-	SmsMethod             *UpdateApplicationRequestBodySmsMethodEnum            `form:"name=SmsMethod"`
-	SmsStatusCallback     *string                                               `form:"name=SmsStatusCallback"`
-	SmsURL                *string                                               `form:"name=SmsUrl"`
-	StatusCallback        *string                                               `form:"name=StatusCallback"`
-	StatusCallbackMethod  *UpdateApplicationRequestBodyStatusCallbackMethodEnum `form:"name=StatusCallbackMethod"`
-	VoiceCallerIDLookup   *bool                                                 `form:"name=VoiceCallerIdLookup"`
-	VoiceFallbackMethod   *UpdateApplicationRequestBodyVoiceFallbackMethodEnum  `form:"name=VoiceFallbackMethod"`
-	VoiceFallbackURL      *string                                               `form:"name=VoiceFallbackUrl"`
-	VoiceMethod           *UpdateApplicationRequestBodyVoiceMethodEnum          `form:"name=VoiceMethod"`
-	VoiceURL              *string                                               `form:"name=VoiceUrl"`
+type UpdateApplicationUpdateApplicationRequest struct {
+	APIVersion            *string                                                            `form:"name=ApiVersion"`
+	FriendlyName          *string                                                            `form:"name=FriendlyName"`
+	MessageStatusCallback *string                                                            `form:"name=MessageStatusCallback"`
+	SmsFallbackMethod     *UpdateApplicationUpdateApplicationRequestSmsFallbackMethodEnum    `form:"name=SmsFallbackMethod"`
+	SmsFallbackURL        *string                                                            `form:"name=SmsFallbackUrl"`
+	SmsMethod             *UpdateApplicationUpdateApplicationRequestSmsMethodEnum            `form:"name=SmsMethod"`
+	SmsStatusCallback     *string                                                            `form:"name=SmsStatusCallback"`
+	SmsURL                *string                                                            `form:"name=SmsUrl"`
+	StatusCallback        *string                                                            `form:"name=StatusCallback"`
+	StatusCallbackMethod  *UpdateApplicationUpdateApplicationRequestStatusCallbackMethodEnum `form:"name=StatusCallbackMethod"`
+	VoiceCallerIDLookup   *bool                                                              `form:"name=VoiceCallerIdLookup"`
+	VoiceFallbackMethod   *UpdateApplicationUpdateApplicationRequestVoiceFallbackMethodEnum  `form:"name=VoiceFallbackMethod"`
+	VoiceFallbackURL      *string                                                            `form:"name=VoiceFallbackUrl"`
+	VoiceMethod           *UpdateApplicationUpdateApplicationRequestVoiceMethodEnum          `form:"name=VoiceMethod"`
+	VoiceURL              *string                                                            `form:"name=VoiceUrl"`
 }
 
 type UpdateApplicationSecurity struct {
@@ -93,7 +93,7 @@ type UpdateApplicationSecurity struct {
 type UpdateApplicationRequest struct {
 	ServerURL  *string
 	PathParams UpdateApplicationPathParams
-	Request    *UpdateApplicationRequestBodyUpdateApplicationRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateApplicationUpdateApplicationRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateApplicationSecurity
 }
 

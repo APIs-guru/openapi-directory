@@ -8,13 +8,13 @@ from sdk.models import shared
 class AddBankTransferBatchPaymentPathParams:
     batch_uuid: str = field(default=None, metadata={'path_param': { 'field_name': 'batchUuid', 'style': 'simple', 'explode': False }})
     
-class AddBankTransferBatchPaymentRequestBody1PayeeTypeEnum(str, Enum):
+class AddBankTransferBatchPaymentRequestBodyBatchItemBankTransferMode2PayeeTypeEnum(str, Enum):
     ACCOUNT_DETAILS = "ACCOUNT_DETAILS"
 
 
 @dataclass_json
 @dataclass
-class AddBankTransferBatchPaymentRequestBody1BatchItemBankTransferMode2:
+class AddBankTransferBatchPaymentRequestBodyBatchItemBankTransferMode2:
     amount: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'amount' }})
     dest_account_holder_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'destAccountHolderName' }})
     dest_account_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'destAccountNumber' }})
@@ -22,21 +22,21 @@ class AddBankTransferBatchPaymentRequestBody1BatchItemBankTransferMode2:
     dest_nsc: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'destNsc' }})
     ican_from: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'icanFrom' }})
     my_ref: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'myRef' }})
-    payee_type: Optional[AddBankTransferBatchPaymentRequestBody1PayeeTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'payeeType' }})
+    payee_type: Optional[AddBankTransferBatchPaymentRequestBodyBatchItemBankTransferMode2PayeeTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'payeeType' }})
     your_ref: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'yourRef' }})
     
-class AddBankTransferBatchPaymentRequestBody2PayeeTypeEnum(str, Enum):
+class AddBankTransferBatchPaymentRequestBodyBatchItemBankTransferMode1PayeeTypeEnum(str, Enum):
     PAYEE_ID = "PAYEE_ID"
 
 
 @dataclass_json
 @dataclass
-class AddBankTransferBatchPaymentRequestBody2BatchItemBankTransferMode1:
+class AddBankTransferBatchPaymentRequestBodyBatchItemBankTransferMode1:
     amount: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'amount' }})
     ican_from: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'icanFrom' }})
     my_ref: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'myRef' }})
     payee_id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'payeeId' }})
-    payee_type: Optional[AddBankTransferBatchPaymentRequestBody2PayeeTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'payeeType' }})
+    payee_type: Optional[AddBankTransferBatchPaymentRequestBodyBatchItemBankTransferMode1PayeeTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'payeeType' }})
     your_ref: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'yourRef' }})
     
 

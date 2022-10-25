@@ -8,7 +8,7 @@ type UsersPartialUpdatePathParams struct {
 	UserID string `pathParam:"style=simple,explode=false,name=user_id"`
 }
 
-type UsersPartialUpdateRequestBodyAttributesAttributes struct {
+type UsersPartialUpdateUserAttributes struct {
 	Active         bool      `json:"active"`
 	DateRegistered time.Time `json:"date_registered"`
 	FamilyName     *string   `json:"family_name,omitempty"`
@@ -20,27 +20,27 @@ type UsersPartialUpdateRequestBodyAttributesAttributes struct {
 	Timezone       *string   `json:"timezone,omitempty"`
 }
 
-type UsersPartialUpdateRequestBodyLinksLinks struct {
+type UsersPartialUpdateUserLinks struct {
 	HTML         *string `json:"html,omitempty"`
 	ProfileImage *string `json:"profile_image,omitempty"`
 }
 
-type UsersPartialUpdateRequestBodyRelationshipsRelationships struct {
+type UsersPartialUpdateUserRelationships struct {
 	Institutions *string `json:"institutions,omitempty"`
 	Nodes        *string `json:"nodes,omitempty"`
 }
 
-type UsersPartialUpdateRequestBodyUser struct {
-	Attributes    UsersPartialUpdateRequestBodyAttributesAttributes       `json:"attributes"`
-	ID            string                                                  `json:"id"`
-	Links         UsersPartialUpdateRequestBodyLinksLinks                 `json:"links"`
-	Relationships UsersPartialUpdateRequestBodyRelationshipsRelationships `json:"relationships"`
-	Type          string                                                  `json:"type"`
+type UsersPartialUpdateUser struct {
+	Attributes    UsersPartialUpdateUserAttributes    `json:"attributes"`
+	ID            string                              `json:"id"`
+	Links         UsersPartialUpdateUserLinks         `json:"links"`
+	Relationships UsersPartialUpdateUserRelationships `json:"relationships"`
+	Type          string                              `json:"type"`
 }
 
 type UsersPartialUpdateRequest struct {
 	PathParams UsersPartialUpdatePathParams
-	Request    UsersPartialUpdateRequestBodyUser `request:"mediaType=application/json"`
+	Request    UsersPartialUpdateUser `request:"mediaType=application/json"`
 }
 
 type UsersPartialUpdateResponse struct {

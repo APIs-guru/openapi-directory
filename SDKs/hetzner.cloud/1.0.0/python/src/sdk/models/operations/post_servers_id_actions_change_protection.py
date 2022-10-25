@@ -23,18 +23,18 @@ class PostServersIDActionsChangeProtectionRequest:
 
 @dataclass_json
 @dataclass
-class PostServersIDActionsChangeProtection201ApplicationJSONActionError:
+class PostServersIDActionsChangeProtectionActionResponseActionError:
     code: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'code' }})
     message: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'message' }})
     
 
 @dataclass_json
 @dataclass
-class PostServersIDActionsChangeProtection201ApplicationJSONActionResources:
+class PostServersIDActionsChangeProtectionActionResponseActionResources:
     id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     type: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     
-class PostServersIDActionsChangeProtection201ApplicationJSONActionStatusEnum(str, Enum):
+class PostServersIDActionsChangeProtectionActionResponseActionStatusEnum(str, Enum):
     SUCCESS = "success"
     RUNNING = "running"
     ERROR = "error"
@@ -42,26 +42,26 @@ class PostServersIDActionsChangeProtection201ApplicationJSONActionStatusEnum(str
 
 @dataclass_json
 @dataclass
-class PostServersIDActionsChangeProtection201ApplicationJSONActionAction:
+class PostServersIDActionsChangeProtectionActionResponseAction:
     command: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'command' }})
-    error: PostServersIDActionsChangeProtection201ApplicationJSONActionError = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
+    error: PostServersIDActionsChangeProtectionActionResponseActionError = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
     finished: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'finished' }})
     id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     progress: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'progress' }})
-    resources: List[PostServersIDActionsChangeProtection201ApplicationJSONActionResources] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resources' }})
+    resources: List[PostServersIDActionsChangeProtectionActionResponseActionResources] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resources' }})
     started: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'started' }})
-    status: PostServersIDActionsChangeProtection201ApplicationJSONActionStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    status: PostServersIDActionsChangeProtectionActionResponseActionStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
     
 
 @dataclass_json
 @dataclass
-class PostServersIDActionsChangeProtection201ApplicationJSONActionResponse:
-    action: PostServersIDActionsChangeProtection201ApplicationJSONActionAction = field(default=None, metadata={'dataclasses_json': { 'field_name': 'action' }})
+class PostServersIDActionsChangeProtectionActionResponse:
+    action: PostServersIDActionsChangeProtectionActionResponseAction = field(default=None, metadata={'dataclasses_json': { 'field_name': 'action' }})
     
 
 @dataclass
 class PostServersIDActionsChangeProtectionResponse:
-    action_response: Optional[PostServersIDActionsChangeProtection201ApplicationJSONActionResponse] = field(default=None)
+    action_response: Optional[PostServersIDActionsChangeProtectionActionResponse] = field(default=None)
     content_type: str = field(default=None)
     status_code: int = field(default=None)
     

@@ -14,7 +14,7 @@ class RackUnitFaceValueEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class RackUnitFaceFace:
+class RackUnitFace:
     label: RackUnitFaceLabelEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label' }})
     value: RackUnitFaceValueEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
     
@@ -23,7 +23,7 @@ class RackUnitFaceFace:
 @dataclass
 class RackUnit:
     device: Optional[nesteddevice.NestedDevice] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'device' }})
-    face: Optional[RackUnitFaceFace] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'face' }})
+    face: Optional[RackUnitFace] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'face' }})
     id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
     

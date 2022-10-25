@@ -13,7 +13,7 @@ class UpdateMessagingConfigurationPathParams:
     
 
 @dataclass
-class UpdateMessagingConfigurationRequestBodyUpdateMessagingConfigurationRequest:
+class UpdateMessagingConfigurationUpdateMessagingConfigurationRequest:
     messaging_service_sid: str = field(default=None, metadata={'form': { 'field_name': 'MessagingServiceSid' }})
     
 
@@ -26,7 +26,7 @@ class UpdateMessagingConfigurationSecurity:
 class UpdateMessagingConfigurationRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateMessagingConfigurationPathParams = field(default=None)
-    request: Optional[UpdateMessagingConfigurationRequestBodyUpdateMessagingConfigurationRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateMessagingConfigurationUpdateMessagingConfigurationRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateMessagingConfigurationSecurity = field(default=None)
     
 

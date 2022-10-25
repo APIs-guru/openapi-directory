@@ -12,7 +12,7 @@ class CreateDocumentPathParams:
     
 
 @dataclass
-class CreateDocumentRequestBodyCreateDocumentRequest:
+class CreateDocumentCreateDocumentRequest:
     data: Optional[Any] = field(default=None, metadata={'form': { 'field_name': 'Data' }})
     ttl: Optional[int] = field(default=None, metadata={'form': { 'field_name': 'Ttl' }})
     unique_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'UniqueName' }})
@@ -27,7 +27,7 @@ class CreateDocumentSecurity:
 class CreateDocumentRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateDocumentPathParams = field(default=None)
-    request: Optional[CreateDocumentRequestBodyCreateDocumentRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateDocumentCreateDocumentRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateDocumentSecurity = field(default=None)
     
 

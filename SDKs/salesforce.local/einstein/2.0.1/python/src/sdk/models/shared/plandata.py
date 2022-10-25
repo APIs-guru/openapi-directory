@@ -2,7 +2,7 @@ from dataclasses import dataclass, field
 from typing import Enum,Optional
 from dataclasses_json import dataclass_json
 
-class PlanDataPlanTypeOfPlanBasedOnTheSourceEnum(str, Enum):
+class PlanDataTypeOfPlanBasedOnTheSourceEnum(str, Enum):
     STARTER = "STARTER"
     SFDC_1_M_EDITION = "SFDC_1M_EDITION"
     BRONZE = "BRONZE"
@@ -10,7 +10,7 @@ class PlanDataPlanTypeOfPlanBasedOnTheSourceEnum(str, Enum):
     GOLD = "GOLD"
     DATASET_DOWNLOAD = "DATASET_DOWNLOAD"
 
-class PlanDataSourceServiceThatProvisionedThePlanEnum(str, Enum):
+class PlanDataServiceThatProvisionedThePlanEnum(str, Enum):
     SALESFORCE = "SALESFORCE"
     HEROKU = "HEROKU"
     SF_AUTO_PROVISION = "SF_AUTO_PROVISION"
@@ -21,6 +21,6 @@ class PlanDataSourceServiceThatProvisionedThePlanEnum(str, Enum):
 @dataclass
 class PlanData:
     amount: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'amount' }})
-    plan: Optional[PlanDataPlanTypeOfPlanBasedOnTheSourceEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'plan' }})
-    source: Optional[PlanDataSourceServiceThatProvisionedThePlanEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'source' }})
+    plan: Optional[PlanDataTypeOfPlanBasedOnTheSourceEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'plan' }})
+    source: Optional[PlanDataServiceThatProvisionedThePlanEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'source' }})
     

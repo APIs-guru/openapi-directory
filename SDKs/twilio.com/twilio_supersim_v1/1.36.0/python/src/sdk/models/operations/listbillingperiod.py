@@ -32,7 +32,7 @@ class ListBillingPeriodRequest:
 
 @dataclass_json
 @dataclass
-class ListBillingPeriod200ApplicationJSONMeta:
+class ListBillingPeriodListBillingPeriodResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -44,14 +44,14 @@ class ListBillingPeriod200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListBillingPeriod200ApplicationJSONListBillingPeriodResponse:
+class ListBillingPeriodListBillingPeriodResponse:
     billing_periods: Optional[List[shared.SupersimV1SimBillingPeriod]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'billing_periods' }})
-    meta: Optional[ListBillingPeriod200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+    meta: Optional[ListBillingPeriodListBillingPeriodResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     
 
 @dataclass
 class ListBillingPeriodResponse:
     content_type: str = field(default=None)
-    list_billing_period_response: Optional[ListBillingPeriod200ApplicationJSONListBillingPeriodResponse] = field(default=None)
+    list_billing_period_response: Optional[ListBillingPeriodListBillingPeriodResponse] = field(default=None)
     status_code: int = field(default=None)
     

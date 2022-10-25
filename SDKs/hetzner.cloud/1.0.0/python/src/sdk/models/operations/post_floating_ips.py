@@ -2,25 +2,25 @@ from dataclasses import dataclass, field
 from typing import Any,Enum,List,Optional
 from dataclasses_json import dataclass_json
 
-class PostFloatingIpsRequestBodyTypeEnum(str, Enum):
+class PostFloatingIpsCreateFloatingIPRequestTypeEnum(str, Enum):
     IPV4 = "ipv4"
     IPV6 = "ipv6"
 
 
 @dataclass_json
 @dataclass
-class PostFloatingIpsRequestBodyCreateFloatingIPRequest:
+class PostFloatingIpsCreateFloatingIPRequest:
     description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
     home_location: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'home_location' }})
     labels: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'labels' }})
     name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
     server: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'server' }})
-    type: PostFloatingIpsRequestBodyTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    type: PostFloatingIpsCreateFloatingIPRequestTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     
 
 @dataclass
 class PostFloatingIpsRequest:
-    request: Optional[PostFloatingIpsRequestBodyCreateFloatingIPRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: Optional[PostFloatingIpsCreateFloatingIPRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass_json
@@ -44,7 +44,7 @@ class PostFloatingIps201ApplicationJSONActionStatusEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class PostFloatingIps201ApplicationJSONActionAction:
+class PostFloatingIps201ApplicationJSONAction:
     command: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'command' }})
     error: PostFloatingIps201ApplicationJSONActionError = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
     finished: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'finished' }})
@@ -105,7 +105,7 @@ class PostFloatingIps201ApplicationJSONFloatingIP:
 @dataclass_json
 @dataclass
 class PostFloatingIps201ApplicationJSON:
-    action: Optional[PostFloatingIps201ApplicationJSONActionAction] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'action' }})
+    action: Optional[PostFloatingIps201ApplicationJSONAction] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'action' }})
     floating_ip: PostFloatingIps201ApplicationJSONFloatingIP = field(default=None, metadata={'dataclasses_json': { 'field_name': 'floating_ip' }})
     
 

@@ -16,7 +16,7 @@ class UpdateSessionPathParams:
     
 
 @dataclass
-class UpdateSessionRequestBodyUpdateSessionRequest:
+class UpdateSessionUpdateSessionRequest:
     date_expiry: Optional[datetime] = field(default=None, metadata={'form': { 'field_name': 'DateExpiry' }})
     fail_on_participant_conflict: Optional[bool] = field(default=None, metadata={'form': { 'field_name': 'FailOnParticipantConflict' }})
     status: Optional[shared.SessionEnumStatusEnum] = field(default=None, metadata={'form': { 'field_name': 'Status' }})
@@ -32,7 +32,7 @@ class UpdateSessionSecurity:
 class UpdateSessionRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateSessionPathParams = field(default=None)
-    request: Optional[UpdateSessionRequestBodyUpdateSessionRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateSessionUpdateSessionRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateSessionSecurity = field(default=None)
     
 

@@ -33,7 +33,7 @@ class ListInteractionRequest:
 
 @dataclass_json
 @dataclass
-class ListInteraction200ApplicationJSONMeta:
+class ListInteractionListInteractionResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -45,14 +45,14 @@ class ListInteraction200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListInteraction200ApplicationJSONListInteractionResponse:
+class ListInteractionListInteractionResponse:
     interactions: Optional[List[shared.ProxyV1ServiceSessionInteraction]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'interactions' }})
-    meta: Optional[ListInteraction200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+    meta: Optional[ListInteractionListInteractionResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     
 
 @dataclass
 class ListInteractionResponse:
     content_type: str = field(default=None)
-    list_interaction_response: Optional[ListInteraction200ApplicationJSONListInteractionResponse] = field(default=None)
+    list_interaction_response: Optional[ListInteractionListInteractionResponse] = field(default=None)
     status_code: int = field(default=None)
     

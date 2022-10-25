@@ -10,7 +10,7 @@ class PutCertificatesIDPathParams:
 
 @dataclass_json
 @dataclass
-class PutCertificatesIDRequestBodyUpdateCertificateRequest:
+class PutCertificatesIDUpdateCertificateRequest:
     labels: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'labels' }})
     name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
     
@@ -18,21 +18,21 @@ class PutCertificatesIDRequestBodyUpdateCertificateRequest:
 @dataclass
 class PutCertificatesIDRequest:
     path_params: PutCertificatesIDPathParams = field(default=None)
-    request: Optional[PutCertificatesIDRequestBodyUpdateCertificateRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: Optional[PutCertificatesIDUpdateCertificateRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass_json
 @dataclass
-class PutCertificatesID200ApplicationJSONCertificateStatusError:
+class PutCertificatesIDCertificateResponseCertificateStatusError:
     code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'code' }})
     message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'message' }})
     
-class PutCertificatesID200ApplicationJSONCertificateStatusIssuanceEnum(str, Enum):
+class PutCertificatesIDCertificateResponseCertificateStatusIssuanceEnum(str, Enum):
     PENDING = "pending"
     COMPLETED = "completed"
     FAILED = "failed"
 
-class PutCertificatesID200ApplicationJSONCertificateStatusRenewalEnum(str, Enum):
+class PutCertificatesIDCertificateResponseCertificateStatusRenewalEnum(str, Enum):
     SCHEDULED = "scheduled"
     PENDING = "pending"
     FAILED = "failed"
@@ -41,26 +41,26 @@ class PutCertificatesID200ApplicationJSONCertificateStatusRenewalEnum(str, Enum)
 
 @dataclass_json
 @dataclass
-class PutCertificatesID200ApplicationJSONCertificateStatus:
-    error: Optional[PutCertificatesID200ApplicationJSONCertificateStatusError] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
-    issuance: Optional[PutCertificatesID200ApplicationJSONCertificateStatusIssuanceEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'issuance' }})
-    renewal: Optional[PutCertificatesID200ApplicationJSONCertificateStatusRenewalEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'renewal' }})
+class PutCertificatesIDCertificateResponseCertificateStatus:
+    error: Optional[PutCertificatesIDCertificateResponseCertificateStatusError] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
+    issuance: Optional[PutCertificatesIDCertificateResponseCertificateStatusIssuanceEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'issuance' }})
+    renewal: Optional[PutCertificatesIDCertificateResponseCertificateStatusRenewalEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'renewal' }})
     
-class PutCertificatesID200ApplicationJSONCertificateTypeEnum(str, Enum):
+class PutCertificatesIDCertificateResponseCertificateTypeEnum(str, Enum):
     UPLOADED = "uploaded"
     MANAGED = "managed"
 
 
 @dataclass_json
 @dataclass
-class PutCertificatesID200ApplicationJSONCertificateUsedBy:
+class PutCertificatesIDCertificateResponseCertificateUsedBy:
     id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     type: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     
 
 @dataclass_json
 @dataclass
-class PutCertificatesID200ApplicationJSONCertificateCertificate:
+class PutCertificatesIDCertificateResponseCertificate:
     certificate: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'certificate' }})
     created: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'created' }})
     domain_names: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'domain_names' }})
@@ -70,20 +70,20 @@ class PutCertificatesID200ApplicationJSONCertificateCertificate:
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
     not_valid_after: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'not_valid_after' }})
     not_valid_before: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'not_valid_before' }})
-    status: Optional[PutCertificatesID200ApplicationJSONCertificateStatus] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
-    type: Optional[PutCertificatesID200ApplicationJSONCertificateTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
-    used_by: List[PutCertificatesID200ApplicationJSONCertificateUsedBy] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'used_by' }})
+    status: Optional[PutCertificatesIDCertificateResponseCertificateStatus] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    type: Optional[PutCertificatesIDCertificateResponseCertificateTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    used_by: List[PutCertificatesIDCertificateResponseCertificateUsedBy] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'used_by' }})
     
 
 @dataclass_json
 @dataclass
-class PutCertificatesID200ApplicationJSONCertificateResponse:
-    certificate: PutCertificatesID200ApplicationJSONCertificateCertificate = field(default=None, metadata={'dataclasses_json': { 'field_name': 'certificate' }})
+class PutCertificatesIDCertificateResponse:
+    certificate: PutCertificatesIDCertificateResponseCertificate = field(default=None, metadata={'dataclasses_json': { 'field_name': 'certificate' }})
     
 
 @dataclass
 class PutCertificatesIDResponse:
-    certificate_response: Optional[PutCertificatesID200ApplicationJSONCertificateResponse] = field(default=None)
+    certificate_response: Optional[PutCertificatesIDCertificateResponse] = field(default=None)
     content_type: str = field(default=None)
     status_code: int = field(default=None)
     

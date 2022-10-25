@@ -13,7 +13,7 @@ class NodesCommentCreatePathParams:
 
 @dataclass_json
 @dataclass
-class NodesCommentCreateRequestBodyAttributesAttributes:
+class NodesCommentCreateCommentAttributes:
     can_edit: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'can_edit' }})
     content: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'content' }})
     date_created: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'date_created', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
@@ -29,13 +29,13 @@ class NodesCommentCreateRequestBodyAttributesAttributes:
 
 @dataclass_json
 @dataclass
-class NodesCommentCreateRequestBodyLinksLinks:
+class NodesCommentCreateCommentLinks:
     self: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'self' }})
     
 
 @dataclass_json
 @dataclass
-class NodesCommentCreateRequestBodyRelationshipsRelationships:
+class NodesCommentCreateCommentRelationships:
     node: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'node' }})
     replies: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'replies' }})
     reports: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'reports' }})
@@ -45,18 +45,18 @@ class NodesCommentCreateRequestBodyRelationshipsRelationships:
 
 @dataclass_json
 @dataclass
-class NodesCommentCreateRequestBodyComment:
-    attributes: Optional[NodesCommentCreateRequestBodyAttributesAttributes] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'attributes' }})
+class NodesCommentCreateComment:
+    attributes: Optional[NodesCommentCreateCommentAttributes] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'attributes' }})
     id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    links: Optional[NodesCommentCreateRequestBodyLinksLinks] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'links' }})
-    relationships: Optional[NodesCommentCreateRequestBodyRelationshipsRelationships] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'relationships' }})
+    links: Optional[NodesCommentCreateCommentLinks] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'links' }})
+    relationships: Optional[NodesCommentCreateCommentRelationships] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'relationships' }})
     type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     
 
 @dataclass
 class NodesCommentCreateRequest:
     path_params: NodesCommentCreatePathParams = field(default=None)
-    request: NodesCommentCreateRequestBodyComment = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: NodesCommentCreateComment = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass

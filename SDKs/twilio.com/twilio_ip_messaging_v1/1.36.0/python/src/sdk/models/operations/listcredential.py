@@ -26,7 +26,7 @@ class ListCredentialRequest:
 
 @dataclass_json
 @dataclass
-class ListCredential200ApplicationJSONMeta:
+class ListCredentialListCredentialResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -38,14 +38,14 @@ class ListCredential200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListCredential200ApplicationJSONListCredentialResponse:
+class ListCredentialListCredentialResponse:
     credentials: Optional[List[shared.IPMessagingV1Credential]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'credentials' }})
-    meta: Optional[ListCredential200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+    meta: Optional[ListCredentialListCredentialResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     
 
 @dataclass
 class ListCredentialResponse:
     content_type: str = field(default=None)
-    list_credential_response: Optional[ListCredential200ApplicationJSONListCredentialResponse] = field(default=None)
+    list_credential_response: Optional[ListCredentialListCredentialResponse] = field(default=None)
     status_code: int = field(default=None)
     

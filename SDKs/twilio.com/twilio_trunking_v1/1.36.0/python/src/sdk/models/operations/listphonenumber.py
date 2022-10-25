@@ -32,7 +32,7 @@ class ListPhoneNumberRequest:
 
 @dataclass_json
 @dataclass
-class ListPhoneNumber200ApplicationJSONMeta:
+class ListPhoneNumberListPhoneNumberResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -44,14 +44,14 @@ class ListPhoneNumber200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListPhoneNumber200ApplicationJSONListPhoneNumberResponse:
-    meta: Optional[ListPhoneNumber200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+class ListPhoneNumberListPhoneNumberResponse:
+    meta: Optional[ListPhoneNumberListPhoneNumberResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     phone_numbers: Optional[List[shared.TrunkingV1TrunkPhoneNumber]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'phone_numbers' }})
     
 
 @dataclass
 class ListPhoneNumberResponse:
     content_type: str = field(default=None)
-    list_phone_number_response: Optional[ListPhoneNumber200ApplicationJSONListPhoneNumberResponse] = field(default=None)
+    list_phone_number_response: Optional[ListPhoneNumberListPhoneNumberResponse] = field(default=None)
     status_code: int = field(default=None)
     

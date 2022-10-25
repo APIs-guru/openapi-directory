@@ -10,7 +10,7 @@ class AddInternalTransferBatchPaymentPathParams:
 
 @dataclass_json
 @dataclass
-class AddInternalTransferBatchPaymentRequestBodyBatchItemInternalTransfer:
+class AddInternalTransferBatchPaymentBatchItemInternalTransfer:
     amount: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'amount' }})
     ican_from: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'icanFrom' }})
     ican_to: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'icanTo' }})
@@ -20,18 +20,18 @@ class AddInternalTransferBatchPaymentRequestBodyBatchItemInternalTransfer:
 @dataclass
 class AddInternalTransferBatchPaymentRequest:
     path_params: AddInternalTransferBatchPaymentPathParams = field(default=None)
-    request: AddInternalTransferBatchPaymentRequestBodyBatchItemInternalTransfer = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: AddInternalTransferBatchPaymentBatchItemInternalTransfer = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass_json
 @dataclass
-class AddInternalTransferBatchPayment200ApplicationJSONNewBatchItemResponse:
+class AddInternalTransferBatchPaymentNewBatchItemResponse:
     batch_item_uuid: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'batchItemUuid' }})
     
 
 @dataclass
 class AddInternalTransferBatchPaymentResponse:
     content_type: str = field(default=None)
-    new_batch_item_response: Optional[AddInternalTransferBatchPayment200ApplicationJSONNewBatchItemResponse] = field(default=None)
+    new_batch_item_response: Optional[AddInternalTransferBatchPaymentNewBatchItemResponse] = field(default=None)
     status_code: int = field(default=None)
     

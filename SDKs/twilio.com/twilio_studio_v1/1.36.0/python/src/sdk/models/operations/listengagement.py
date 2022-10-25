@@ -32,7 +32,7 @@ class ListEngagementRequest:
 
 @dataclass_json
 @dataclass
-class ListEngagement200ApplicationJSONMeta:
+class ListEngagementListEngagementResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -44,14 +44,14 @@ class ListEngagement200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListEngagement200ApplicationJSONListEngagementResponse:
+class ListEngagementListEngagementResponse:
     engagements: Optional[List[shared.StudioV1FlowEngagement]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'engagements' }})
-    meta: Optional[ListEngagement200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+    meta: Optional[ListEngagementListEngagementResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     
 
 @dataclass
 class ListEngagementResponse:
     content_type: str = field(default=None)
-    list_engagement_response: Optional[ListEngagement200ApplicationJSONListEngagementResponse] = field(default=None)
+    list_engagement_response: Optional[ListEngagementListEngagementResponse] = field(default=None)
     status_code: int = field(default=None)
     

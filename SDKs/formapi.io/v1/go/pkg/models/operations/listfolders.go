@@ -17,7 +17,7 @@ type ListFoldersRequest struct {
 	Security    ListFoldersSecurity
 }
 
-type ListFolders200ApplicationJSONFolder struct {
+type ListFoldersFolder struct {
 	ID             *string `json:"id,omitempty"`
 	Name           *string `json:"name,omitempty"`
 	ParentFolderID *string `json:"parent_folder_id,omitempty"`
@@ -28,5 +28,5 @@ type ListFoldersResponse struct {
 	ContentType         string
 	StatusCode          int64
 	AuthenticationError *shared.AuthenticationError
-	Folders             []ListFolders200ApplicationJSONFolder
+	Folders             []ListFoldersFolder
 }

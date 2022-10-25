@@ -34,7 +34,7 @@ type ListWorkerRequest struct {
 	Security    ListWorkerSecurity
 }
 
-type ListWorker200ApplicationJSONMeta struct {
+type ListWorkerListWorkerResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -44,13 +44,13 @@ type ListWorker200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListWorker200ApplicationJSONListWorkerResponse struct {
-	Meta    *ListWorker200ApplicationJSONMeta    `json:"meta,omitempty"`
+type ListWorkerListWorkerResponse struct {
+	Meta    *ListWorkerListWorkerResponseMeta    `json:"meta,omitempty"`
 	Workers []shared.TaskrouterV1WorkspaceWorker `json:"workers,omitempty"`
 }
 
 type ListWorkerResponse struct {
 	ContentType        string
-	ListWorkerResponse *ListWorker200ApplicationJSONListWorkerResponse
+	ListWorkerResponse *ListWorkerListWorkerResponse
 	StatusCode         int64
 }

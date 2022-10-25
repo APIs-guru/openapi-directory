@@ -28,7 +28,7 @@ type ListInteractionRequest struct {
 	Security    ListInteractionSecurity
 }
 
-type ListInteraction200ApplicationJSONMeta struct {
+type ListInteractionListInteractionResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -38,13 +38,13 @@ type ListInteraction200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListInteraction200ApplicationJSONListInteractionResponse struct {
-	Interactions []shared.ProxyV1ServiceSessionInteraction `json:"interactions,omitempty"`
-	Meta         *ListInteraction200ApplicationJSONMeta    `json:"meta,omitempty"`
+type ListInteractionListInteractionResponse struct {
+	Interactions []shared.ProxyV1ServiceSessionInteraction   `json:"interactions,omitempty"`
+	Meta         *ListInteractionListInteractionResponseMeta `json:"meta,omitempty"`
 }
 
 type ListInteractionResponse struct {
 	ContentType             string
-	ListInteractionResponse *ListInteraction200ApplicationJSONListInteractionResponse
+	ListInteractionResponse *ListInteractionListInteractionResponse
 	StatusCode              int64
 }

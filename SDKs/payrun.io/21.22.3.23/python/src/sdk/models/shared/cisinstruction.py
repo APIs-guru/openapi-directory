@@ -2,11 +2,11 @@ from dataclasses import dataclass, field
 from typing import Enum,Optional
 from dataclasses_json import dataclass_json
 
-class CisInstructionCisInstructionPayFrequencyPayFrequencyEnum(str, Enum):
+class CisInstructionCisInstructionPayFrequencyEnum(str, Enum):
     MONTHLY = "Monthly"
     WEEKLY = "Weekly"
 
-class CisInstructionCisInstructionUomUomEnum(str, Enum):
+class CisInstructionCisInstructionUomEnum(str, Enum):
     NOT_SET = "NotSet"
     MINUTE = "Minute"
     HOUR = "Hour"
@@ -19,16 +19,16 @@ class CisInstructionCisInstructionUomUomEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class CisInstructionCisInstructionCisInstruction:
+class CisInstructionCisInstruction:
     cis_line_tag: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CisLineTag' }})
     cis_line_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CisLineType' }})
     description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Description' }})
-    pay_frequency: Optional[CisInstructionCisInstructionPayFrequencyPayFrequencyEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PayFrequency' }})
+    pay_frequency: Optional[CisInstructionCisInstructionPayFrequencyEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PayFrequency' }})
     period_end: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PeriodEnd' }})
     period_start: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PeriodStart' }})
     tax_year_end: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TaxYearEnd' }})
     tax_year_start: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TaxYearStart' }})
-    uom: Optional[CisInstructionCisInstructionUomUomEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'UOM' }})
+    uom: Optional[CisInstructionCisInstructionUomEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'UOM' }})
     units: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Units' }})
     vat: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'VAT' }})
     value: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Value' }})
@@ -37,5 +37,5 @@ class CisInstructionCisInstructionCisInstruction:
 @dataclass_json
 @dataclass
 class CisInstruction:
-    cis_instruction: Optional[CisInstructionCisInstructionCisInstruction] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CisInstruction' }})
+    cis_instruction: Optional[CisInstructionCisInstruction] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CisInstruction' }})
     

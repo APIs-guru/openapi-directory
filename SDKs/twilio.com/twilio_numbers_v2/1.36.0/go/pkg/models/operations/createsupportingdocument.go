@@ -8,7 +8,7 @@ var CreateSupportingDocumentServers = []string{
 	"https://numbers.twilio.com",
 }
 
-type CreateSupportingDocumentRequestBodyCreateSupportingDocumentRequest struct {
+type CreateSupportingDocumentCreateSupportingDocumentRequest struct {
 	Attributes   *interface{} `form:"name=Attributes"`
 	FriendlyName string       `form:"name=FriendlyName"`
 	Type         string       `form:"name=Type"`
@@ -20,7 +20,7 @@ type CreateSupportingDocumentSecurity struct {
 
 type CreateSupportingDocumentRequest struct {
 	ServerURL *string
-	Request   *CreateSupportingDocumentRequestBodyCreateSupportingDocumentRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request   *CreateSupportingDocumentCreateSupportingDocumentRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security  CreateSupportingDocumentSecurity
 }
 

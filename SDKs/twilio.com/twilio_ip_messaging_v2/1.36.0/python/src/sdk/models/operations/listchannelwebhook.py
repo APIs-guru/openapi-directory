@@ -33,7 +33,7 @@ class ListChannelWebhookRequest:
 
 @dataclass_json
 @dataclass
-class ListChannelWebhook200ApplicationJSONMeta:
+class ListChannelWebhookListChannelWebhookResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -45,14 +45,14 @@ class ListChannelWebhook200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListChannelWebhook200ApplicationJSONListChannelWebhookResponse:
-    meta: Optional[ListChannelWebhook200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+class ListChannelWebhookListChannelWebhookResponse:
+    meta: Optional[ListChannelWebhookListChannelWebhookResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     webhooks: Optional[List[shared.IPMessagingV2ServiceChannelChannelWebhook]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'webhooks' }})
     
 
 @dataclass
 class ListChannelWebhookResponse:
     content_type: str = field(default=None)
-    list_channel_webhook_response: Optional[ListChannelWebhook200ApplicationJSONListChannelWebhookResponse] = field(default=None)
+    list_channel_webhook_response: Optional[ListChannelWebhookListChannelWebhookResponse] = field(default=None)
     status_code: int = field(default=None)
     

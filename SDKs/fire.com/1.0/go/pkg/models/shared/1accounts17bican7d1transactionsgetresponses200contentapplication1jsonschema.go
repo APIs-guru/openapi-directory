@@ -4,7 +4,7 @@ import (
 	"time"
 )
 
-type Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaCardRelatedCard struct {
+type Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedCard struct {
 	Alias              *string    `json:"alias,omitempty"`
 	CardID             *float64   `json:"cardId,omitempty"`
 	EmbossBusinessName *string    `json:"embossBusinessName,omitempty"`
@@ -14,7 +14,7 @@ type Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplic
 	Provider           *string    `json:"provider,omitempty"`
 }
 
-type Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaFxTradeDetailsFxTrade struct {
+type Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaFxTrade struct {
 	BuyAmount    *int64  `json:"buyAmount,omitempty"`
 	BuyCurrency  *string `json:"buyCurrency,omitempty"`
 	FixedSide    *string `json:"fixedSide,omitempty"`
@@ -23,7 +23,7 @@ type Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplic
 	SellCurrency *string `json:"sellCurrency,omitempty"`
 }
 
-type Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedParty1Account struct {
+type Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedPartyRelatedPartyFireAccountAccount struct {
 	AccountNumber *string `json:"accountNumber,omitempty"`
 	Alias         *string `json:"alias,omitempty"`
 	Bic           *string `json:"bic,omitempty"`
@@ -32,18 +32,18 @@ type Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplic
 	Nsc           *string `json:"nsc,omitempty"`
 }
 
-type Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedParty1TypeEnum string
+type Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedPartyRelatedPartyFireAccountTypeEnum string
 
 const (
-	Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedParty1TypeEnumFireAccount Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedParty1TypeEnum = "FIRE_ACCOUNT"
+	Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedPartyRelatedPartyFireAccountTypeEnumFireAccount Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedPartyRelatedPartyFireAccountTypeEnum = "FIRE_ACCOUNT"
 )
 
-type Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedParty1RelatedPartyFireAccount struct {
-	Account *Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedParty1Account  `json:"account,omitempty"`
-	Type    *Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedParty1TypeEnum `json:"type,omitempty"`
+type Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedPartyRelatedPartyFireAccount struct {
+	Account *Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedPartyRelatedPartyFireAccountAccount  `json:"account,omitempty"`
+	Type    *Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedPartyRelatedPartyFireAccountTypeEnum `json:"type,omitempty"`
 }
 
-type Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedParty2Account struct {
+type Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedPartyRelatedPartyExternalAccountAccount struct {
 	AccountNumber *string `json:"accountNumber,omitempty"`
 	Alias         *string `json:"alias,omitempty"`
 	Bic           *string `json:"bic,omitempty"`
@@ -52,18 +52,18 @@ type Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplic
 	Nsc           *string `json:"nsc,omitempty"`
 }
 
-type Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedParty2TypeEnum string
+type Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedPartyRelatedPartyExternalAccountTypeEnum string
 
 const (
-	Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedParty2TypeEnumExternalAccount Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedParty2TypeEnum = "EXTERNAL_ACCOUNT"
+	Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedPartyRelatedPartyExternalAccountTypeEnumExternalAccount Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedPartyRelatedPartyExternalAccountTypeEnum = "EXTERNAL_ACCOUNT"
 )
 
-type Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedParty2RelatedPartyExternalAccount struct {
-	Account *Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedParty2Account  `json:"account,omitempty"`
-	Type    *Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedParty2TypeEnum `json:"type,omitempty"`
+type Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedPartyRelatedPartyExternalAccount struct {
+	Account *Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedPartyRelatedPartyExternalAccountAccount  `json:"account,omitempty"`
+	Type    *Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedPartyRelatedPartyExternalAccountTypeEnum `json:"type,omitempty"`
 }
 
-type Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedParty3Account struct {
+type Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedPartyRelatedPartyPayeeAccount struct {
 	AccountNumber *string `json:"accountNumber,omitempty"`
 	Alias         *string `json:"alias,omitempty"`
 	Bic           *string `json:"bic,omitempty"`
@@ -72,18 +72,18 @@ type Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplic
 	Nsc           *string `json:"nsc,omitempty"`
 }
 
-type Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedParty3TypeEnum string
+type Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedPartyRelatedPartyPayeeTypeEnum string
 
 const (
-	Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedParty3TypeEnumWithdrawalAccount Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedParty3TypeEnum = "WITHDRAWAL_ACCOUNT"
+	Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedPartyRelatedPartyPayeeTypeEnumWithdrawalAccount Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedPartyRelatedPartyPayeeTypeEnum = "WITHDRAWAL_ACCOUNT"
 )
 
-type Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedParty3RelatedPartyPayee struct {
-	Account *Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedParty3Account  `json:"account,omitempty"`
-	Type    *Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedParty3TypeEnum `json:"type,omitempty"`
+type Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedPartyRelatedPartyPayee struct {
+	Account *Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedPartyRelatedPartyPayeeAccount  `json:"account,omitempty"`
+	Type    *Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedPartyRelatedPartyPayeeTypeEnum `json:"type,omitempty"`
 }
 
-type Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedParty4CardMerchant struct {
+type Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedPartyRelatedPartyCardPaymentCardMerchant struct {
 	AcquirerIDDe32      *string  `json:"acquirerIdDe32,omitempty"`
 	AdditionalAmtDe54   *string  `json:"additionalAmtDe54,omitempty"`
 	AdditionalDataDe124 *string  `json:"additionalDataDe124,omitempty"`
@@ -115,34 +115,34 @@ type Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplic
 	TxnType             *string  `json:"txnType,omitempty"`
 }
 
-type Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedParty4TypeEnum string
+type Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedPartyRelatedPartyCardPaymentTypeEnum string
 
 const (
-	Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedParty4TypeEnumCardMerchant Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedParty4TypeEnum = "CARD_MERCHANT"
-	Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedParty4TypeEnumCardAtm      Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedParty4TypeEnum = "CARD_ATM"
+	Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedPartyRelatedPartyCardPaymentTypeEnumCardMerchant Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedPartyRelatedPartyCardPaymentTypeEnum = "CARD_MERCHANT"
+	Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedPartyRelatedPartyCardPaymentTypeEnumCardAtm      Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedPartyRelatedPartyCardPaymentTypeEnum = "CARD_ATM"
 )
 
-type Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedParty4RelatedPartyCardPayment struct {
-	CardMerchant *Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedParty4CardMerchant `json:"cardMerchant,omitempty"`
-	Type         *Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedParty4TypeEnum     `json:"type,omitempty"`
+type Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedPartyRelatedPartyCardPayment struct {
+	CardMerchant *Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedPartyRelatedPartyCardPaymentCardMerchant `json:"cardMerchant,omitempty"`
+	Type         *Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedPartyRelatedPartyCardPaymentTypeEnum     `json:"type,omitempty"`
 }
 
 type Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchema struct {
-	AmountAfterCharges       *int64                                                                                                            `json:"amountAfterCharges,omitempty"`
-	AmountBeforeCharges      *int64                                                                                                            `json:"amountBeforeCharges,omitempty"`
-	Balance                  *int64                                                                                                            `json:"balance,omitempty"`
-	Card                     *Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaCardRelatedCard       `json:"card,omitempty"`
-	Currency                 *OneaccountsGetResponses200ContentApplication1jsonSchemaPropertiesAccountsItemsPropertiesCurrency                 `json:"currency,omitempty"`
-	Date                     *time.Time                                                                                                        `json:"date,omitempty"`
-	DateAcknowledged         *time.Time                                                                                                        `json:"dateAcknowledged,omitempty"`
-	FeeAmount                *int64                                                                                                            `json:"feeAmount,omitempty"`
-	FxTradeDetails           *Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaFxTradeDetailsFxTrade `json:"fxTradeDetails,omitempty"`
-	Ican                     *int64                                                                                                            `json:"ican,omitempty"`
-	MyRef                    *string                                                                                                           `json:"myRef,omitempty"`
-	PaymentRequestPublicCode *string                                                                                                           `json:"paymentRequestPublicCode,omitempty"`
-	RefID                    *int64                                                                                                            `json:"refId,omitempty"`
-	RelatedParty             *interface{}                                                                                                      `json:"relatedParty,omitempty"`
-	TaxAmount                *int64                                                                                                            `json:"taxAmount,omitempty"`
-	TxnID                    *int64                                                                                                            `json:"txnId,omitempty"`
-	Type                     *string                                                                                                           `json:"type,omitempty"`
+	AmountAfterCharges       *int64                                                                                                  `json:"amountAfterCharges,omitempty"`
+	AmountBeforeCharges      *int64                                                                                                  `json:"amountBeforeCharges,omitempty"`
+	Balance                  *int64                                                                                                  `json:"balance,omitempty"`
+	Card                     *Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedCard `json:"card,omitempty"`
+	Currency                 *OneaccountsGetResponses200ContentApplication1jsonSchemaPropertiesAccountsItemsPropertiesCurrency       `json:"currency,omitempty"`
+	Date                     *time.Time                                                                                              `json:"date,omitempty"`
+	DateAcknowledged         *time.Time                                                                                              `json:"dateAcknowledged,omitempty"`
+	FeeAmount                *int64                                                                                                  `json:"feeAmount,omitempty"`
+	FxTradeDetails           *Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaFxTrade     `json:"fxTradeDetails,omitempty"`
+	Ican                     *int64                                                                                                  `json:"ican,omitempty"`
+	MyRef                    *string                                                                                                 `json:"myRef,omitempty"`
+	PaymentRequestPublicCode *string                                                                                                 `json:"paymentRequestPublicCode,omitempty"`
+	RefID                    *int64                                                                                                  `json:"refId,omitempty"`
+	RelatedParty             *interface{}                                                                                            `json:"relatedParty,omitempty"`
+	TaxAmount                *int64                                                                                                  `json:"taxAmount,omitempty"`
+	TxnID                    *int64                                                                                                  `json:"txnId,omitempty"`
+	Type                     *string                                                                                                 `json:"type,omitempty"`
 }

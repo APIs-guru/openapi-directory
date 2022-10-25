@@ -5,7 +5,7 @@ CREATE_IP_COMMAND_SERVERS = [
 	"https://supersim.twilio.com",
 ]
 
-class CreateIPCommandRequestBodyCallbackMethodEnum(str, Enum):
+class CreateIPCommandCreateIPCommandRequestCallbackMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -15,8 +15,8 @@ class CreateIPCommandRequestBodyCallbackMethodEnum(str, Enum):
 
 
 @dataclass
-class CreateIPCommandRequestBodyCreateIPCommandRequest:
-    callback_method: Optional[CreateIPCommandRequestBodyCallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'CallbackMethod' }})
+class CreateIPCommandCreateIPCommandRequest:
+    callback_method: Optional[CreateIPCommandCreateIPCommandRequestCallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'CallbackMethod' }})
     callback_url: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'CallbackUrl' }})
     device_port: int = field(default=None, metadata={'form': { 'field_name': 'DevicePort' }})
     payload: str = field(default=None, metadata={'form': { 'field_name': 'Payload' }})
@@ -32,7 +32,7 @@ class CreateIPCommandSecurity:
 @dataclass
 class CreateIPCommandRequest:
     server_url: Optional[str] = field(default=None)
-    request: Optional[CreateIPCommandRequestBodyCreateIPCommandRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateIPCommandCreateIPCommandRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateIPCommandSecurity = field(default=None)
     
 

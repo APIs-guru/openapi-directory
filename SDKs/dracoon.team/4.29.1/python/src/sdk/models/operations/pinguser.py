@@ -17,4 +17,5 @@ class PingUserResponse:
     body: bytes = field(default=None)
     content_type: str = field(default=None)
     status_code: int = field(default=None)
+    ping_user_200_text_plain_string: Optional[str] = field(default=None)
     

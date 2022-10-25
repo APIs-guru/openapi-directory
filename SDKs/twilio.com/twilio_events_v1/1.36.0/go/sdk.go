@@ -683,7 +683,7 @@ func (s *SDK) ListEventType(ctx context.Context, request operations.ListEventTyp
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListEventType200ApplicationJSONListEventTypeResponse
+			var out *operations.ListEventTypeListEventTypeResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -728,7 +728,7 @@ func (s *SDK) ListSchemaVersion(ctx context.Context, request operations.ListSche
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListSchemaVersion200ApplicationJSONListSchemaVersionResponse
+			var out *operations.ListSchemaVersionListSchemaVersionResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -773,7 +773,7 @@ func (s *SDK) ListSink(ctx context.Context, request operations.ListSinkRequest) 
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListSink200ApplicationJSONListSinkResponse
+			var out *operations.ListSinkListSinkResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -818,7 +818,7 @@ func (s *SDK) ListSubscribedEvent(ctx context.Context, request operations.ListSu
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListSubscribedEvent200ApplicationJSONListSubscribedEventResponse
+			var out *operations.ListSubscribedEventListSubscribedEventResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -863,7 +863,7 @@ func (s *SDK) ListSubscription(ctx context.Context, request operations.ListSubsc
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListSubscription200ApplicationJSONListSubscriptionResponse
+			var out *operations.ListSubscriptionListSubscriptionResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}

@@ -4,13 +4,13 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-type PostVerifyPasswordChangeRequestBodySample struct {
+type PostVerifyPasswordChangeSample struct {
 	GUID     *string `json:"guid,omitempty"`
 	Password *string `json:"password,omitempty"`
 }
 
 type PostVerifyPasswordChangeRequest struct {
-	Request PostVerifyPasswordChangeRequestBodySample `request:"mediaType=application/json"`
+	Request PostVerifyPasswordChangeSample `request:"mediaType=application/json"`
 }
 
 type PostVerifyPasswordChangeResponse struct {

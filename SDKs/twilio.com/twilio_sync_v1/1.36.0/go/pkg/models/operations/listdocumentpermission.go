@@ -28,7 +28,7 @@ type ListDocumentPermissionRequest struct {
 	Security    ListDocumentPermissionSecurity
 }
 
-type ListDocumentPermission200ApplicationJSONMeta struct {
+type ListDocumentPermissionListDocumentPermissionResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -38,13 +38,13 @@ type ListDocumentPermission200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListDocumentPermission200ApplicationJSONListDocumentPermissionResponse struct {
-	Meta        *ListDocumentPermission200ApplicationJSONMeta    `json:"meta,omitempty"`
-	Permissions []shared.SyncV1ServiceDocumentDocumentPermission `json:"permissions,omitempty"`
+type ListDocumentPermissionListDocumentPermissionResponse struct {
+	Meta        *ListDocumentPermissionListDocumentPermissionResponseMeta `json:"meta,omitempty"`
+	Permissions []shared.SyncV1ServiceDocumentDocumentPermission          `json:"permissions,omitempty"`
 }
 
 type ListDocumentPermissionResponse struct {
 	ContentType                    string
-	ListDocumentPermissionResponse *ListDocumentPermission200ApplicationJSONListDocumentPermissionResponse
+	ListDocumentPermissionResponse *ListDocumentPermissionListDocumentPermissionResponse
 	StatusCode                     int64
 }

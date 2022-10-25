@@ -1,26 +1,26 @@
 package shared
 
-type WritableConsolePortTemplateTypeTypeEnum string
+type WritableConsolePortTemplateTypeEnum string
 
 const (
-	WritableConsolePortTemplateTypeTypeEnumDe9       WritableConsolePortTemplateTypeTypeEnum = "de-9"
-	WritableConsolePortTemplateTypeTypeEnumDb25      WritableConsolePortTemplateTypeTypeEnum = "db-25"
-	WritableConsolePortTemplateTypeTypeEnumRj11      WritableConsolePortTemplateTypeTypeEnum = "rj-11"
-	WritableConsolePortTemplateTypeTypeEnumRj12      WritableConsolePortTemplateTypeTypeEnum = "rj-12"
-	WritableConsolePortTemplateTypeTypeEnumRj45      WritableConsolePortTemplateTypeTypeEnum = "rj-45"
-	WritableConsolePortTemplateTypeTypeEnumUsbA      WritableConsolePortTemplateTypeTypeEnum = "usb-a"
-	WritableConsolePortTemplateTypeTypeEnumUsbB      WritableConsolePortTemplateTypeTypeEnum = "usb-b"
-	WritableConsolePortTemplateTypeTypeEnumUsbC      WritableConsolePortTemplateTypeTypeEnum = "usb-c"
-	WritableConsolePortTemplateTypeTypeEnumUsbMiniA  WritableConsolePortTemplateTypeTypeEnum = "usb-mini-a"
-	WritableConsolePortTemplateTypeTypeEnumUsbMiniB  WritableConsolePortTemplateTypeTypeEnum = "usb-mini-b"
-	WritableConsolePortTemplateTypeTypeEnumUsbMicroA WritableConsolePortTemplateTypeTypeEnum = "usb-micro-a"
-	WritableConsolePortTemplateTypeTypeEnumUsbMicroB WritableConsolePortTemplateTypeTypeEnum = "usb-micro-b"
-	WritableConsolePortTemplateTypeTypeEnumOther     WritableConsolePortTemplateTypeTypeEnum = "other"
+	WritableConsolePortTemplateTypeEnumDe9       WritableConsolePortTemplateTypeEnum = "de-9"
+	WritableConsolePortTemplateTypeEnumDb25      WritableConsolePortTemplateTypeEnum = "db-25"
+	WritableConsolePortTemplateTypeEnumRj11      WritableConsolePortTemplateTypeEnum = "rj-11"
+	WritableConsolePortTemplateTypeEnumRj12      WritableConsolePortTemplateTypeEnum = "rj-12"
+	WritableConsolePortTemplateTypeEnumRj45      WritableConsolePortTemplateTypeEnum = "rj-45"
+	WritableConsolePortTemplateTypeEnumUsbA      WritableConsolePortTemplateTypeEnum = "usb-a"
+	WritableConsolePortTemplateTypeEnumUsbB      WritableConsolePortTemplateTypeEnum = "usb-b"
+	WritableConsolePortTemplateTypeEnumUsbC      WritableConsolePortTemplateTypeEnum = "usb-c"
+	WritableConsolePortTemplateTypeEnumUsbMiniA  WritableConsolePortTemplateTypeEnum = "usb-mini-a"
+	WritableConsolePortTemplateTypeEnumUsbMiniB  WritableConsolePortTemplateTypeEnum = "usb-mini-b"
+	WritableConsolePortTemplateTypeEnumUsbMicroA WritableConsolePortTemplateTypeEnum = "usb-micro-a"
+	WritableConsolePortTemplateTypeEnumUsbMicroB WritableConsolePortTemplateTypeEnum = "usb-micro-b"
+	WritableConsolePortTemplateTypeEnumOther     WritableConsolePortTemplateTypeEnum = "other"
 )
 
 type WritableConsolePortTemplate struct {
-	DeviceType int64                                    `json:"device_type"`
-	ID         *int64                                   `json:"id,omitempty"`
-	Name       string                                   `json:"name"`
-	Type       *WritableConsolePortTemplateTypeTypeEnum `json:"type,omitempty"`
+	DeviceType int64                                `json:"device_type"`
+	ID         *int64                               `json:"id,omitempty"`
+	Name       string                               `json:"name"`
+	Type       *WritableConsolePortTemplateTypeEnum `json:"type,omitempty"`
 }

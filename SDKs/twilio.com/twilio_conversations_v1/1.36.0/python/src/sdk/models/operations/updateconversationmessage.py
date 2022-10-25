@@ -21,7 +21,7 @@ class UpdateConversationMessageHeaders:
     
 
 @dataclass
-class UpdateConversationMessageRequestBodyUpdateConversationMessageRequest:
+class UpdateConversationMessageUpdateConversationMessageRequest:
     attributes: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Attributes' }})
     author: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Author' }})
     body: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Body' }})
@@ -39,7 +39,7 @@ class UpdateConversationMessageRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateConversationMessagePathParams = field(default=None)
     headers: UpdateConversationMessageHeaders = field(default=None)
-    request: Optional[UpdateConversationMessageRequestBodyUpdateConversationMessageRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateConversationMessageUpdateConversationMessageRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateConversationMessageSecurity = field(default=None)
     
 

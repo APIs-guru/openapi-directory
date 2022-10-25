@@ -32,7 +32,7 @@ class ListCustomerProfileEntityAssignmentRequest:
 
 @dataclass_json
 @dataclass
-class ListCustomerProfileEntityAssignment200ApplicationJSONMeta:
+class ListCustomerProfileEntityAssignmentListCustomerProfileEntityAssignmentResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -44,14 +44,14 @@ class ListCustomerProfileEntityAssignment200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListCustomerProfileEntityAssignment200ApplicationJSONListCustomerProfileEntityAssignmentResponse:
-    meta: Optional[ListCustomerProfileEntityAssignment200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+class ListCustomerProfileEntityAssignmentListCustomerProfileEntityAssignmentResponse:
+    meta: Optional[ListCustomerProfileEntityAssignmentListCustomerProfileEntityAssignmentResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     results: Optional[List[shared.TrusthubV1CustomerProfileCustomerProfileEntityAssignment]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'results' }})
     
 
 @dataclass
 class ListCustomerProfileEntityAssignmentResponse:
     content_type: str = field(default=None)
-    list_customer_profile_entity_assignment_response: Optional[ListCustomerProfileEntityAssignment200ApplicationJSONListCustomerProfileEntityAssignmentResponse] = field(default=None)
+    list_customer_profile_entity_assignment_response: Optional[ListCustomerProfileEntityAssignmentListCustomerProfileEntityAssignmentResponse] = field(default=None)
     status_code: int = field(default=None)
     

@@ -27,7 +27,7 @@ type ListDialingPermissionsHrsPrefixesRequest struct {
 	Security    ListDialingPermissionsHrsPrefixesSecurity
 }
 
-type ListDialingPermissionsHrsPrefixes200ApplicationJSONMeta struct {
+type ListDialingPermissionsHrsPrefixesListDialingPermissionsHrsPrefixesResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -37,13 +37,13 @@ type ListDialingPermissionsHrsPrefixes200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListDialingPermissionsHrsPrefixes200ApplicationJSONListDialingPermissionsHrsPrefixesResponse struct {
+type ListDialingPermissionsHrsPrefixesListDialingPermissionsHrsPrefixesResponse struct {
 	Content []shared.VoiceV1DialingPermissionsDialingPermissionsCountryDialingPermissionsHrsPrefixes `json:"content,omitempty"`
-	Meta    *ListDialingPermissionsHrsPrefixes200ApplicationJSONMeta                                 `json:"meta,omitempty"`
+	Meta    *ListDialingPermissionsHrsPrefixesListDialingPermissionsHrsPrefixesResponseMeta          `json:"meta,omitempty"`
 }
 
 type ListDialingPermissionsHrsPrefixesResponse struct {
 	ContentType                               string
-	ListDialingPermissionsHrsPrefixesResponse *ListDialingPermissionsHrsPrefixes200ApplicationJSONListDialingPermissionsHrsPrefixesResponse
+	ListDialingPermissionsHrsPrefixesResponse *ListDialingPermissionsHrsPrefixesListDialingPermissionsHrsPrefixesResponse
 	StatusCode                                int64
 }

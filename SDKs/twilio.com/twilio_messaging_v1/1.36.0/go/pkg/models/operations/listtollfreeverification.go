@@ -24,7 +24,7 @@ type ListTollfreeVerificationRequest struct {
 	Security    ListTollfreeVerificationSecurity
 }
 
-type ListTollfreeVerification200ApplicationJSONMeta struct {
+type ListTollfreeVerificationListTollfreeVerificationResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -34,13 +34,13 @@ type ListTollfreeVerification200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListTollfreeVerification200ApplicationJSONListTollfreeVerificationResponse struct {
-	Meta          *ListTollfreeVerification200ApplicationJSONMeta `json:"meta,omitempty"`
-	Verifications []shared.MessagingV1TollfreeVerification        `json:"verifications,omitempty"`
+type ListTollfreeVerificationListTollfreeVerificationResponse struct {
+	Meta          *ListTollfreeVerificationListTollfreeVerificationResponseMeta `json:"meta,omitempty"`
+	Verifications []shared.MessagingV1TollfreeVerification                      `json:"verifications,omitempty"`
 }
 
 type ListTollfreeVerificationResponse struct {
 	ContentType                      string
-	ListTollfreeVerificationResponse *ListTollfreeVerification200ApplicationJSONListTollfreeVerificationResponse
+	ListTollfreeVerificationResponse *ListTollfreeVerificationListTollfreeVerificationResponse
 	StatusCode                       int64
 }

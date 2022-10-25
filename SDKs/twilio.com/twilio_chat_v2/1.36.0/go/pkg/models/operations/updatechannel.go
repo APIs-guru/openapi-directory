@@ -18,7 +18,7 @@ type UpdateChannelHeaders struct {
 	XTwilioWebhookEnabled *shared.ChannelEnumWebhookEnabledTypeEnum `header:"name=X-Twilio-Webhook-Enabled"`
 }
 
-type UpdateChannelRequestBodyUpdateChannelRequest struct {
+type UpdateChannelUpdateChannelRequest struct {
 	Attributes   *string    `form:"name=Attributes"`
 	CreatedBy    *string    `form:"name=CreatedBy"`
 	DateCreated  *time.Time `form:"name=DateCreated"`
@@ -35,7 +35,7 @@ type UpdateChannelRequest struct {
 	ServerURL  *string
 	PathParams UpdateChannelPathParams
 	Headers    UpdateChannelHeaders
-	Request    *UpdateChannelRequestBodyUpdateChannelRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateChannelUpdateChannelRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateChannelSecurity
 }
 

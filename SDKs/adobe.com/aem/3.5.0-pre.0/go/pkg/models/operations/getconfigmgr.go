@@ -1,7 +1,7 @@
 package operations
 
 type GetConfigMgrResponse struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+	ContentType                  string
+	StatusCode                   int64
+	GetConfigMgr200TextXMLString *string
 }

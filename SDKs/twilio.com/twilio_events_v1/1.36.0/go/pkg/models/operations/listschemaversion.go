@@ -27,7 +27,7 @@ type ListSchemaVersionRequest struct {
 	Security    ListSchemaVersionSecurity
 }
 
-type ListSchemaVersion200ApplicationJSONMeta struct {
+type ListSchemaVersionListSchemaVersionResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -37,13 +37,13 @@ type ListSchemaVersion200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListSchemaVersion200ApplicationJSONListSchemaVersionResponse struct {
-	Meta           *ListSchemaVersion200ApplicationJSONMeta `json:"meta,omitempty"`
-	SchemaVersions []shared.EventsV1SchemaSchemaVersion     `json:"schema_versions,omitempty"`
+type ListSchemaVersionListSchemaVersionResponse struct {
+	Meta           *ListSchemaVersionListSchemaVersionResponseMeta `json:"meta,omitempty"`
+	SchemaVersions []shared.EventsV1SchemaSchemaVersion            `json:"schema_versions,omitempty"`
 }
 
 type ListSchemaVersionResponse struct {
 	ContentType               string
-	ListSchemaVersionResponse *ListSchemaVersion200ApplicationJSONListSchemaVersionResponse
+	ListSchemaVersionResponse *ListSchemaVersionListSchemaVersionResponse
 	StatusCode                int64
 }

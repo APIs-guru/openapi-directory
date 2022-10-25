@@ -12,7 +12,7 @@ type UpdateIPRecordPathParams struct {
 	Sid string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
-type UpdateIPRecordRequestBodyUpdateIPRecordRequest struct {
+type UpdateIPRecordUpdateIPRecordRequest struct {
 	FriendlyName *string `form:"name=FriendlyName"`
 }
 
@@ -23,7 +23,7 @@ type UpdateIPRecordSecurity struct {
 type UpdateIPRecordRequest struct {
 	ServerURL  *string
 	PathParams UpdateIPRecordPathParams
-	Request    *UpdateIPRecordRequestBodyUpdateIPRecordRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateIPRecordUpdateIPRecordRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateIPRecordSecurity
 }
 

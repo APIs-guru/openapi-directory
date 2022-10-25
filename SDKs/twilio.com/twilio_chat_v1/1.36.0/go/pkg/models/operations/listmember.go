@@ -29,7 +29,7 @@ type ListMemberRequest struct {
 	Security    ListMemberSecurity
 }
 
-type ListMember200ApplicationJSONMeta struct {
+type ListMemberListMemberResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -39,13 +39,13 @@ type ListMember200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListMember200ApplicationJSONListMemberResponse struct {
+type ListMemberListMemberResponse struct {
 	Members []shared.ChatV1ServiceChannelMember `json:"members,omitempty"`
-	Meta    *ListMember200ApplicationJSONMeta   `json:"meta,omitempty"`
+	Meta    *ListMemberListMemberResponseMeta   `json:"meta,omitempty"`
 }
 
 type ListMemberResponse struct {
 	ContentType        string
-	ListMemberResponse *ListMember200ApplicationJSONListMemberResponse
+	ListMemberResponse *ListMemberListMemberResponse
 	StatusCode         int64
 }

@@ -1,37 +1,37 @@
 package operations
 
-type PostAdminMappingsFindByMetadataRequestBody1StringEquals struct {
+type PostAdminMappingsFindByMetadataRequestBodyStringEquals struct {
 	CaseInsensitive *bool `json:"caseInsensitive,omitempty"`
 	EqualTo         bool  `json:"equalTo"`
 }
 
-type PostAdminMappingsFindByMetadataRequestBody2StringContains struct {
+type PostAdminMappingsFindByMetadataRequestBodyStringContains struct {
 	Contains string `json:"contains"`
 }
 
-type PostAdminMappingsFindByMetadataRequestBody3RegularExpressionMatch struct {
+type PostAdminMappingsFindByMetadataRequestBodyRegularExpressionMatch struct {
 	Matches string `json:"matches"`
 }
 
-type PostAdminMappingsFindByMetadataRequestBody4NegativeRegularExpressionMatch struct {
+type PostAdminMappingsFindByMetadataRequestBodyNegativeRegularExpressionMatch struct {
 	DoesNotMatch string `json:"doesNotMatch"`
 }
 
-type PostAdminMappingsFindByMetadataRequestBody5JSONEquals struct {
+type PostAdminMappingsFindByMetadataRequestBodyJSONEquals struct {
 	EqualToJSON string `json:"equalToJson"`
 }
 
-type PostAdminMappingsFindByMetadataRequestBody6JSONPathMatch struct {
+type PostAdminMappingsFindByMetadataRequestBodyJSONPathMatch struct {
 	IgnoreArrayOrder    *bool  `json:"ignoreArrayOrder,omitempty"`
 	IgnoreExtraElements *bool  `json:"ignoreExtraElements,omitempty"`
 	MatchesJSONPath     string `json:"matchesJsonPath"`
 }
 
-type PostAdminMappingsFindByMetadataRequestBody7XMLEquality struct {
+type PostAdminMappingsFindByMetadataRequestBodyXMLEquality struct {
 	EqualToXML string `json:"equalToXml"`
 }
 
-type PostAdminMappingsFindByMetadataRequestBody8XPathMatch struct {
+type PostAdminMappingsFindByMetadataRequestBodyXPathMatch struct {
 	MatchesXpath string                 `json:"matchesXpath"`
 	Namespaces   map[string]interface{} `json:"namespaces,omitempty"`
 	ValuePattern map[string]interface{} `json:"valuePattern,omitempty"`

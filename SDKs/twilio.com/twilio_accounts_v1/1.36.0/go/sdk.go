@@ -413,7 +413,7 @@ func (s *SDK) ListCredentialAws(ctx context.Context, request operations.ListCred
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListCredentialAws200ApplicationJSONListCredentialAwsResponse
+			var out *operations.ListCredentialAwsListCredentialAwsResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -458,7 +458,7 @@ func (s *SDK) ListCredentialPublicKey(ctx context.Context, request operations.Li
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListCredentialPublicKey200ApplicationJSONListCredentialPublicKeyResponse
+			var out *operations.ListCredentialPublicKeyListCredentialPublicKeyResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}

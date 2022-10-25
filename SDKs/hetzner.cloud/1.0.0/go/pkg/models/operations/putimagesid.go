@@ -4,21 +4,21 @@ type PutImagesIDPathParams struct {
 	ID int64 `pathParam:"style=simple,explode=false,name=id"`
 }
 
-type PutImagesIDRequestBodyTypeEnum string
+type PutImagesIDUpdateImageRequestTypeEnum string
 
 const (
-	PutImagesIDRequestBodyTypeEnumSnapshot PutImagesIDRequestBodyTypeEnum = "snapshot"
+	PutImagesIDUpdateImageRequestTypeEnumSnapshot PutImagesIDUpdateImageRequestTypeEnum = "snapshot"
 )
 
-type PutImagesIDRequestBodyUpdateImageRequest struct {
-	Description *string                         `json:"description,omitempty"`
-	Labels      map[string]interface{}          `json:"labels,omitempty"`
-	Type        *PutImagesIDRequestBodyTypeEnum `json:"type,omitempty"`
+type PutImagesIDUpdateImageRequest struct {
+	Description *string                                `json:"description,omitempty"`
+	Labels      map[string]interface{}                 `json:"labels,omitempty"`
+	Type        *PutImagesIDUpdateImageRequestTypeEnum `json:"type,omitempty"`
 }
 
 type PutImagesIDRequest struct {
 	PathParams PutImagesIDPathParams
-	Request    *PutImagesIDRequestBodyUpdateImageRequest `request:"mediaType=application/json"`
+	Request    *PutImagesIDUpdateImageRequest `request:"mediaType=application/json"`
 }
 
 type PutImagesID200ApplicationJSONImageCreatedFrom struct {

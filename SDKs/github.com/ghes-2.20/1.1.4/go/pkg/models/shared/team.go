@@ -1,6 +1,6 @@
 package shared
 
-type TeamParentTeamSimple struct {
+type TeamTeamSimple struct {
 	Description     string  `json:"description"`
 	HTMLURL         string  `json:"html_url"`
 	ID              int64   `json:"id"`
@@ -16,16 +16,16 @@ type TeamParentTeamSimple struct {
 }
 
 type Team struct {
-	Description     string                `json:"description"`
-	HTMLURL         string                `json:"html_url"`
-	ID              int64                 `json:"id"`
-	MembersURL      string                `json:"members_url"`
-	Name            string                `json:"name"`
-	NodeID          string                `json:"node_id"`
-	Parent          *TeamParentTeamSimple `json:"parent,omitempty"`
-	Permission      string                `json:"permission"`
-	Privacy         *string               `json:"privacy,omitempty"`
-	RepositoriesURL string                `json:"repositories_url"`
-	Slug            string                `json:"slug"`
-	URL             string                `json:"url"`
+	Description     string          `json:"description"`
+	HTMLURL         string          `json:"html_url"`
+	ID              int64           `json:"id"`
+	MembersURL      string          `json:"members_url"`
+	Name            string          `json:"name"`
+	NodeID          string          `json:"node_id"`
+	Parent          *TeamTeamSimple `json:"parent,omitempty"`
+	Permission      string          `json:"permission"`
+	Privacy         *string         `json:"privacy,omitempty"`
+	RepositoriesURL string          `json:"repositories_url"`
+	Slug            string          `json:"slug"`
+	URL             string          `json:"url"`
 }

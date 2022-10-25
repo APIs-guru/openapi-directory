@@ -36,14 +36,14 @@ const (
 	ConsoleServerPortTemplateTypeValueEnumOther     ConsoleServerPortTemplateTypeValueEnum = "other"
 )
 
-type ConsoleServerPortTemplateTypeType struct {
+type ConsoleServerPortTemplateType struct {
 	Label ConsoleServerPortTemplateTypeLabelEnum `json:"label"`
 	Value ConsoleServerPortTemplateTypeValueEnum `json:"value"`
 }
 
 type ConsoleServerPortTemplate struct {
-	DeviceType NestedDeviceType                   `json:"device_type"`
-	ID         *int64                             `json:"id,omitempty"`
-	Name       string                             `json:"name"`
-	Type       *ConsoleServerPortTemplateTypeType `json:"type,omitempty"`
+	DeviceType NestedDeviceType               `json:"device_type"`
+	ID         *int64                         `json:"id,omitempty"`
+	Name       string                         `json:"name"`
+	Type       *ConsoleServerPortTemplateType `json:"type,omitempty"`
 }

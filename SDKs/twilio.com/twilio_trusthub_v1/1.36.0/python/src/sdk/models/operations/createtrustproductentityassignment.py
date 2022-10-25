@@ -12,7 +12,7 @@ class CreateTrustProductEntityAssignmentPathParams:
     
 
 @dataclass
-class CreateTrustProductEntityAssignmentRequestBodyCreateTrustProductEntityAssignmentRequest:
+class CreateTrustProductEntityAssignmentCreateTrustProductEntityAssignmentRequest:
     object_sid: str = field(default=None, metadata={'form': { 'field_name': 'ObjectSid' }})
     
 
@@ -25,7 +25,7 @@ class CreateTrustProductEntityAssignmentSecurity:
 class CreateTrustProductEntityAssignmentRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateTrustProductEntityAssignmentPathParams = field(default=None)
-    request: Optional[CreateTrustProductEntityAssignmentRequestBodyCreateTrustProductEntityAssignmentRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateTrustProductEntityAssignmentCreateTrustProductEntityAssignmentRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateTrustProductEntityAssignmentSecurity = field(default=None)
     
 

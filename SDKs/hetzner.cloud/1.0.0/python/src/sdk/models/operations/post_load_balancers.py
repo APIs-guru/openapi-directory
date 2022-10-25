@@ -2,58 +2,58 @@ from dataclasses import dataclass, field
 from typing import Enum,List,Optional
 from dataclasses_json import dataclass_json
 
-class PostLoadBalancersRequestBodyAlgorithmTypeEnum(str, Enum):
+class PostLoadBalancersCreateLoadBalancerRequestLoadBalancerAlgorithmTypeEnum(str, Enum):
     ROUND_ROBIN = "round_robin"
     LEAST_CONNECTIONS = "least_connections"
 
 
 @dataclass_json
 @dataclass
-class PostLoadBalancersRequestBodyAlgorithmLoadBalancerAlgorithm:
-    type: PostLoadBalancersRequestBodyAlgorithmTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+class PostLoadBalancersCreateLoadBalancerRequestLoadBalancerAlgorithm:
+    type: PostLoadBalancersCreateLoadBalancerRequestLoadBalancerAlgorithmTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     
 
 @dataclass_json
 @dataclass
-class PostLoadBalancersRequestBodyLabels:
+class PostLoadBalancersCreateLoadBalancerRequestLabels:
     labelkey: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'labelkey' }})
     
 
 @dataclass_json
 @dataclass
-class PostLoadBalancersRequestBodyServicesHealthCheckHTTP:
+class PostLoadBalancersCreateLoadBalancerRequestLoadBalancerServiceLoadBalancerServiceHealthCheckHTTP:
     domain: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'domain' }})
     path: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'path' }})
     response: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'response' }})
     status_codes: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status_codes' }})
     tls: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tls' }})
     
-class PostLoadBalancersRequestBodyServicesHealthCheckProtocolEnum(str, Enum):
+class PostLoadBalancersCreateLoadBalancerRequestLoadBalancerServiceLoadBalancerServiceHealthCheckProtocolEnum(str, Enum):
     TCP = "tcp"
     HTTP = "http"
 
 
 @dataclass_json
 @dataclass
-class PostLoadBalancersRequestBodyServicesHealthCheckLoadBalancerServiceHealthCheck:
-    http: Optional[PostLoadBalancersRequestBodyServicesHealthCheckHTTP] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'http' }})
+class PostLoadBalancersCreateLoadBalancerRequestLoadBalancerServiceLoadBalancerServiceHealthCheck:
+    http: Optional[PostLoadBalancersCreateLoadBalancerRequestLoadBalancerServiceLoadBalancerServiceHealthCheckHTTP] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'http' }})
     interval: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'interval' }})
     port: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'port' }})
-    protocol: PostLoadBalancersRequestBodyServicesHealthCheckProtocolEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'protocol' }})
+    protocol: PostLoadBalancersCreateLoadBalancerRequestLoadBalancerServiceLoadBalancerServiceHealthCheckProtocolEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'protocol' }})
     retries: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'retries' }})
     timeout: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'timeout' }})
     
 
 @dataclass_json
 @dataclass
-class PostLoadBalancersRequestBodyServicesHTTP:
+class PostLoadBalancersCreateLoadBalancerRequestLoadBalancerServiceHTTP:
     certificates: Optional[List[int]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'certificates' }})
     cookie_lifetime: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cookie_lifetime' }})
     cookie_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cookie_name' }})
     redirect_http: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'redirect_http' }})
     sticky_sessions: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sticky_sessions' }})
     
-class PostLoadBalancersRequestBodyServicesProtocolEnum(str, Enum):
+class PostLoadBalancersCreateLoadBalancerRequestLoadBalancerServiceProtocolEnum(str, Enum):
     TCP = "tcp"
     HTTP = "http"
     HTTPS = "https"
@@ -61,62 +61,62 @@ class PostLoadBalancersRequestBodyServicesProtocolEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class PostLoadBalancersRequestBodyServicesLoadBalancerService:
+class PostLoadBalancersCreateLoadBalancerRequestLoadBalancerService:
     destination_port: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'destination_port' }})
-    health_check: PostLoadBalancersRequestBodyServicesHealthCheckLoadBalancerServiceHealthCheck = field(default=None, metadata={'dataclasses_json': { 'field_name': 'health_check' }})
-    http: Optional[PostLoadBalancersRequestBodyServicesHTTP] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'http' }})
+    health_check: PostLoadBalancersCreateLoadBalancerRequestLoadBalancerServiceLoadBalancerServiceHealthCheck = field(default=None, metadata={'dataclasses_json': { 'field_name': 'health_check' }})
+    http: Optional[PostLoadBalancersCreateLoadBalancerRequestLoadBalancerServiceHTTP] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'http' }})
     listen_port: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'listen_port' }})
-    protocol: PostLoadBalancersRequestBodyServicesProtocolEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'protocol' }})
+    protocol: PostLoadBalancersCreateLoadBalancerRequestLoadBalancerServiceProtocolEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'protocol' }})
     proxyprotocol: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'proxyprotocol' }})
     
 
 @dataclass_json
 @dataclass
-class PostLoadBalancersRequestBodyTargetsHealthStatus:
+class PostLoadBalancersCreateLoadBalancerRequestLoadBalancerTargetHealthStatus:
     listen_port: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'listen_port' }})
     status: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
     
 
 @dataclass_json
 @dataclass
-class PostLoadBalancersRequestBodyTargetsIP:
+class PostLoadBalancersCreateLoadBalancerRequestLoadBalancerTargetIP:
     ip: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ip' }})
     
 
 @dataclass_json
 @dataclass
-class PostLoadBalancersRequestBodyTargetsLabelSelector:
+class PostLoadBalancersCreateLoadBalancerRequestLoadBalancerTargetLabelSelector:
     selector: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'selector' }})
     
 
 @dataclass_json
 @dataclass
-class PostLoadBalancersRequestBodyTargetsServerLoadBalancerTargetServer:
+class PostLoadBalancersCreateLoadBalancerRequestLoadBalancerTargetLoadBalancerTargetServer:
     id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     
 
 @dataclass_json
 @dataclass
-class PostLoadBalancersRequestBodyTargetsTargetsHealthStatus:
+class PostLoadBalancersCreateLoadBalancerRequestLoadBalancerTargetTargetsHealthStatus:
     listen_port: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'listen_port' }})
     status: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
     
 
 @dataclass_json
 @dataclass
-class PostLoadBalancersRequestBodyTargetsTargetsServer:
+class PostLoadBalancersCreateLoadBalancerRequestLoadBalancerTargetTargetsServer:
     id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     
 
 @dataclass_json
 @dataclass
-class PostLoadBalancersRequestBodyTargetsTargets:
-    health_status: Optional[List[PostLoadBalancersRequestBodyTargetsTargetsHealthStatus]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'health_status' }})
-    server: Optional[PostLoadBalancersRequestBodyTargetsTargetsServer] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'server' }})
+class PostLoadBalancersCreateLoadBalancerRequestLoadBalancerTargetTargets:
+    health_status: Optional[List[PostLoadBalancersCreateLoadBalancerRequestLoadBalancerTargetTargetsHealthStatus]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'health_status' }})
+    server: Optional[PostLoadBalancersCreateLoadBalancerRequestLoadBalancerTargetTargetsServer] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'server' }})
     type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     use_private_ip: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'use_private_ip' }})
     
-class PostLoadBalancersRequestBodyTargetsTypeEnum(str, Enum):
+class PostLoadBalancersCreateLoadBalancerRequestLoadBalancerTargetTypeEnum(str, Enum):
     SERVER = "server"
     LABEL_SELECTOR = "label_selector"
     IP = "ip"
@@ -124,34 +124,34 @@ class PostLoadBalancersRequestBodyTargetsTypeEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class PostLoadBalancersRequestBodyTargetsLoadBalancerTarget:
-    health_status: Optional[List[PostLoadBalancersRequestBodyTargetsHealthStatus]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'health_status' }})
-    ip: Optional[PostLoadBalancersRequestBodyTargetsIP] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ip' }})
-    label_selector: Optional[PostLoadBalancersRequestBodyTargetsLabelSelector] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label_selector' }})
-    server: Optional[PostLoadBalancersRequestBodyTargetsServerLoadBalancerTargetServer] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'server' }})
-    targets: Optional[List[PostLoadBalancersRequestBodyTargetsTargets]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'targets' }})
-    type: PostLoadBalancersRequestBodyTargetsTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+class PostLoadBalancersCreateLoadBalancerRequestLoadBalancerTarget:
+    health_status: Optional[List[PostLoadBalancersCreateLoadBalancerRequestLoadBalancerTargetHealthStatus]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'health_status' }})
+    ip: Optional[PostLoadBalancersCreateLoadBalancerRequestLoadBalancerTargetIP] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ip' }})
+    label_selector: Optional[PostLoadBalancersCreateLoadBalancerRequestLoadBalancerTargetLabelSelector] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label_selector' }})
+    server: Optional[PostLoadBalancersCreateLoadBalancerRequestLoadBalancerTargetLoadBalancerTargetServer] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'server' }})
+    targets: Optional[List[PostLoadBalancersCreateLoadBalancerRequestLoadBalancerTargetTargets]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'targets' }})
+    type: PostLoadBalancersCreateLoadBalancerRequestLoadBalancerTargetTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     use_private_ip: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'use_private_ip' }})
     
 
 @dataclass_json
 @dataclass
-class PostLoadBalancersRequestBodyCreateLoadBalancerRequest:
-    algorithm: PostLoadBalancersRequestBodyAlgorithmLoadBalancerAlgorithm = field(default=None, metadata={'dataclasses_json': { 'field_name': 'algorithm' }})
-    labels: Optional[PostLoadBalancersRequestBodyLabels] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'labels' }})
+class PostLoadBalancersCreateLoadBalancerRequest:
+    algorithm: PostLoadBalancersCreateLoadBalancerRequestLoadBalancerAlgorithm = field(default=None, metadata={'dataclasses_json': { 'field_name': 'algorithm' }})
+    labels: Optional[PostLoadBalancersCreateLoadBalancerRequestLabels] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'labels' }})
     load_balancer_type: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'load_balancer_type' }})
     location: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'location' }})
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
     network: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'network' }})
     network_zone: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'network_zone' }})
     public_interface: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'public_interface' }})
-    services: Optional[List[PostLoadBalancersRequestBodyServicesLoadBalancerService]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'services' }})
-    targets: Optional[List[PostLoadBalancersRequestBodyTargetsLoadBalancerTarget]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'targets' }})
+    services: Optional[List[PostLoadBalancersCreateLoadBalancerRequestLoadBalancerService]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'services' }})
+    targets: Optional[List[PostLoadBalancersCreateLoadBalancerRequestLoadBalancerTarget]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'targets' }})
     
 
 @dataclass
 class PostLoadBalancersRequest:
-    request: Optional[PostLoadBalancersRequestBodyCreateLoadBalancerRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: Optional[PostLoadBalancersCreateLoadBalancerRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass_json
@@ -175,7 +175,7 @@ class PostLoadBalancers201ApplicationJSONActionStatusEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class PostLoadBalancers201ApplicationJSONActionAction:
+class PostLoadBalancers201ApplicationJSONAction:
     command: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'command' }})
     error: PostLoadBalancers201ApplicationJSONActionError = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
     finished: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'finished' }})
@@ -282,39 +282,39 @@ class PostLoadBalancers201ApplicationJSONLoadBalancerPublicNet:
 
 @dataclass_json
 @dataclass
-class PostLoadBalancers201ApplicationJSONLoadBalancerServicesHealthCheckHTTP:
+class PostLoadBalancers201ApplicationJSONLoadBalancerLoadBalancerServiceLoadBalancerServiceHealthCheckHTTP:
     domain: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'domain' }})
     path: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'path' }})
     response: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'response' }})
     status_codes: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status_codes' }})
     tls: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tls' }})
     
-class PostLoadBalancers201ApplicationJSONLoadBalancerServicesHealthCheckProtocolEnum(str, Enum):
+class PostLoadBalancers201ApplicationJSONLoadBalancerLoadBalancerServiceLoadBalancerServiceHealthCheckProtocolEnum(str, Enum):
     TCP = "tcp"
     HTTP = "http"
 
 
 @dataclass_json
 @dataclass
-class PostLoadBalancers201ApplicationJSONLoadBalancerServicesHealthCheckLoadBalancerServiceHealthCheck:
-    http: Optional[PostLoadBalancers201ApplicationJSONLoadBalancerServicesHealthCheckHTTP] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'http' }})
+class PostLoadBalancers201ApplicationJSONLoadBalancerLoadBalancerServiceLoadBalancerServiceHealthCheck:
+    http: Optional[PostLoadBalancers201ApplicationJSONLoadBalancerLoadBalancerServiceLoadBalancerServiceHealthCheckHTTP] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'http' }})
     interval: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'interval' }})
     port: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'port' }})
-    protocol: PostLoadBalancers201ApplicationJSONLoadBalancerServicesHealthCheckProtocolEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'protocol' }})
+    protocol: PostLoadBalancers201ApplicationJSONLoadBalancerLoadBalancerServiceLoadBalancerServiceHealthCheckProtocolEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'protocol' }})
     retries: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'retries' }})
     timeout: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'timeout' }})
     
 
 @dataclass_json
 @dataclass
-class PostLoadBalancers201ApplicationJSONLoadBalancerServicesHTTP:
+class PostLoadBalancers201ApplicationJSONLoadBalancerLoadBalancerServiceHTTP:
     certificates: Optional[List[int]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'certificates' }})
     cookie_lifetime: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cookie_lifetime' }})
     cookie_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cookie_name' }})
     redirect_http: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'redirect_http' }})
     sticky_sessions: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sticky_sessions' }})
     
-class PostLoadBalancers201ApplicationJSONLoadBalancerServicesProtocolEnum(str, Enum):
+class PostLoadBalancers201ApplicationJSONLoadBalancerLoadBalancerServiceProtocolEnum(str, Enum):
     TCP = "tcp"
     HTTP = "http"
     HTTPS = "https"
@@ -322,62 +322,62 @@ class PostLoadBalancers201ApplicationJSONLoadBalancerServicesProtocolEnum(str, E
 
 @dataclass_json
 @dataclass
-class PostLoadBalancers201ApplicationJSONLoadBalancerServicesLoadBalancerService:
+class PostLoadBalancers201ApplicationJSONLoadBalancerLoadBalancerService:
     destination_port: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'destination_port' }})
-    health_check: PostLoadBalancers201ApplicationJSONLoadBalancerServicesHealthCheckLoadBalancerServiceHealthCheck = field(default=None, metadata={'dataclasses_json': { 'field_name': 'health_check' }})
-    http: Optional[PostLoadBalancers201ApplicationJSONLoadBalancerServicesHTTP] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'http' }})
+    health_check: PostLoadBalancers201ApplicationJSONLoadBalancerLoadBalancerServiceLoadBalancerServiceHealthCheck = field(default=None, metadata={'dataclasses_json': { 'field_name': 'health_check' }})
+    http: Optional[PostLoadBalancers201ApplicationJSONLoadBalancerLoadBalancerServiceHTTP] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'http' }})
     listen_port: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'listen_port' }})
-    protocol: PostLoadBalancers201ApplicationJSONLoadBalancerServicesProtocolEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'protocol' }})
+    protocol: PostLoadBalancers201ApplicationJSONLoadBalancerLoadBalancerServiceProtocolEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'protocol' }})
     proxyprotocol: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'proxyprotocol' }})
     
 
 @dataclass_json
 @dataclass
-class PostLoadBalancers201ApplicationJSONLoadBalancerTargetsHealthStatus:
+class PostLoadBalancers201ApplicationJSONLoadBalancerLoadBalancerTargetHealthStatus:
     listen_port: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'listen_port' }})
     status: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
     
 
 @dataclass_json
 @dataclass
-class PostLoadBalancers201ApplicationJSONLoadBalancerTargetsIP:
+class PostLoadBalancers201ApplicationJSONLoadBalancerLoadBalancerTargetIP:
     ip: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ip' }})
     
 
 @dataclass_json
 @dataclass
-class PostLoadBalancers201ApplicationJSONLoadBalancerTargetsLabelSelector:
+class PostLoadBalancers201ApplicationJSONLoadBalancerLoadBalancerTargetLabelSelector:
     selector: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'selector' }})
     
 
 @dataclass_json
 @dataclass
-class PostLoadBalancers201ApplicationJSONLoadBalancerTargetsServerLoadBalancerTargetServer:
+class PostLoadBalancers201ApplicationJSONLoadBalancerLoadBalancerTargetLoadBalancerTargetServer:
     id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     
 
 @dataclass_json
 @dataclass
-class PostLoadBalancers201ApplicationJSONLoadBalancerTargetsTargetsHealthStatus:
+class PostLoadBalancers201ApplicationJSONLoadBalancerLoadBalancerTargetTargetsHealthStatus:
     listen_port: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'listen_port' }})
     status: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
     
 
 @dataclass_json
 @dataclass
-class PostLoadBalancers201ApplicationJSONLoadBalancerTargetsTargetsServer:
+class PostLoadBalancers201ApplicationJSONLoadBalancerLoadBalancerTargetTargetsServer:
     id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     
 
 @dataclass_json
 @dataclass
-class PostLoadBalancers201ApplicationJSONLoadBalancerTargetsTargets:
-    health_status: Optional[List[PostLoadBalancers201ApplicationJSONLoadBalancerTargetsTargetsHealthStatus]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'health_status' }})
-    server: Optional[PostLoadBalancers201ApplicationJSONLoadBalancerTargetsTargetsServer] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'server' }})
+class PostLoadBalancers201ApplicationJSONLoadBalancerLoadBalancerTargetTargets:
+    health_status: Optional[List[PostLoadBalancers201ApplicationJSONLoadBalancerLoadBalancerTargetTargetsHealthStatus]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'health_status' }})
+    server: Optional[PostLoadBalancers201ApplicationJSONLoadBalancerLoadBalancerTargetTargetsServer] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'server' }})
     type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     use_private_ip: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'use_private_ip' }})
     
-class PostLoadBalancers201ApplicationJSONLoadBalancerTargetsTypeEnum(str, Enum):
+class PostLoadBalancers201ApplicationJSONLoadBalancerLoadBalancerTargetTypeEnum(str, Enum):
     SERVER = "server"
     LABEL_SELECTOR = "label_selector"
     IP = "ip"
@@ -385,13 +385,13 @@ class PostLoadBalancers201ApplicationJSONLoadBalancerTargetsTypeEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class PostLoadBalancers201ApplicationJSONLoadBalancerTargetsLoadBalancerTarget:
-    health_status: Optional[List[PostLoadBalancers201ApplicationJSONLoadBalancerTargetsHealthStatus]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'health_status' }})
-    ip: Optional[PostLoadBalancers201ApplicationJSONLoadBalancerTargetsIP] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ip' }})
-    label_selector: Optional[PostLoadBalancers201ApplicationJSONLoadBalancerTargetsLabelSelector] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label_selector' }})
-    server: Optional[PostLoadBalancers201ApplicationJSONLoadBalancerTargetsServerLoadBalancerTargetServer] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'server' }})
-    targets: Optional[List[PostLoadBalancers201ApplicationJSONLoadBalancerTargetsTargets]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'targets' }})
-    type: PostLoadBalancers201ApplicationJSONLoadBalancerTargetsTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+class PostLoadBalancers201ApplicationJSONLoadBalancerLoadBalancerTarget:
+    health_status: Optional[List[PostLoadBalancers201ApplicationJSONLoadBalancerLoadBalancerTargetHealthStatus]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'health_status' }})
+    ip: Optional[PostLoadBalancers201ApplicationJSONLoadBalancerLoadBalancerTargetIP] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ip' }})
+    label_selector: Optional[PostLoadBalancers201ApplicationJSONLoadBalancerLoadBalancerTargetLabelSelector] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label_selector' }})
+    server: Optional[PostLoadBalancers201ApplicationJSONLoadBalancerLoadBalancerTargetLoadBalancerTargetServer] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'server' }})
+    targets: Optional[List[PostLoadBalancers201ApplicationJSONLoadBalancerLoadBalancerTargetTargets]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'targets' }})
+    type: PostLoadBalancers201ApplicationJSONLoadBalancerLoadBalancerTargetTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     use_private_ip: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'use_private_ip' }})
     
 
@@ -411,14 +411,14 @@ class PostLoadBalancers201ApplicationJSONLoadBalancer:
     private_net: List[PostLoadBalancers201ApplicationJSONLoadBalancerPrivateNet] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'private_net' }})
     protection: PostLoadBalancers201ApplicationJSONLoadBalancerProtection = field(default=None, metadata={'dataclasses_json': { 'field_name': 'protection' }})
     public_net: PostLoadBalancers201ApplicationJSONLoadBalancerPublicNet = field(default=None, metadata={'dataclasses_json': { 'field_name': 'public_net' }})
-    services: List[PostLoadBalancers201ApplicationJSONLoadBalancerServicesLoadBalancerService] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'services' }})
-    targets: List[PostLoadBalancers201ApplicationJSONLoadBalancerTargetsLoadBalancerTarget] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'targets' }})
+    services: List[PostLoadBalancers201ApplicationJSONLoadBalancerLoadBalancerService] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'services' }})
+    targets: List[PostLoadBalancers201ApplicationJSONLoadBalancerLoadBalancerTarget] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'targets' }})
     
 
 @dataclass_json
 @dataclass
 class PostLoadBalancers201ApplicationJSON:
-    action: PostLoadBalancers201ApplicationJSONActionAction = field(default=None, metadata={'dataclasses_json': { 'field_name': 'action' }})
+    action: PostLoadBalancers201ApplicationJSONAction = field(default=None, metadata={'dataclasses_json': { 'field_name': 'action' }})
     load_balancer: PostLoadBalancers201ApplicationJSONLoadBalancer = field(default=None, metadata={'dataclasses_json': { 'field_name': 'load_balancer' }})
     
 

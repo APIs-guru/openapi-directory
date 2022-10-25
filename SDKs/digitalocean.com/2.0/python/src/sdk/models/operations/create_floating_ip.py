@@ -6,13 +6,13 @@ from sdk.models import shared
 
 @dataclass_json
 @dataclass
-class CreateFloatingIPRequestBody1AssignToDroplet:
+class CreateFloatingIPRequestBodyAssignToDroplet:
     droplet_id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'droplet_id' }})
     
 
 @dataclass_json
 @dataclass
-class CreateFloatingIPRequestBody2ReserveToRegion:
+class CreateFloatingIPRequestBodyReserveToRegion:
     region: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'region' }})
     
 

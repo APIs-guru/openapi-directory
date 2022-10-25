@@ -13,7 +13,7 @@ class CreateSyncSyncListItemPathParams:
     
 
 @dataclass
-class CreateSyncSyncListItemRequestBodyCreateSyncSyncListItemRequest:
+class CreateSyncSyncListItemCreateSyncSyncListItemRequest:
     data: Any = field(default=None, metadata={'form': { 'field_name': 'Data' }})
     
 
@@ -26,7 +26,7 @@ class CreateSyncSyncListItemSecurity:
 class CreateSyncSyncListItemRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateSyncSyncListItemPathParams = field(default=None)
-    request: Optional[CreateSyncSyncListItemRequestBodyCreateSyncSyncListItemRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateSyncSyncListItemCreateSyncSyncListItemRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateSyncSyncListItemSecurity = field(default=None)
     
 

@@ -27,7 +27,7 @@ type ListDayRequest struct {
 	Security    ListDaySecurity
 }
 
-type ListDay200ApplicationJSONMeta struct {
+type ListDayListDayResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -37,13 +37,13 @@ type ListDay200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListDay200ApplicationJSONListDayResponse struct {
+type ListDayListDayResponse struct {
 	Days []shared.BulkexportsV1ExportDay `json:"days,omitempty"`
-	Meta *ListDay200ApplicationJSONMeta  `json:"meta,omitempty"`
+	Meta *ListDayListDayResponseMeta     `json:"meta,omitempty"`
 }
 
 type ListDayResponse struct {
 	ContentType     string
-	ListDayResponse *ListDay200ApplicationJSONListDayResponse
+	ListDayResponse *ListDayListDayResponse
 	StatusCode      int64
 }

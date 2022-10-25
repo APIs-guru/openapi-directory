@@ -13,7 +13,7 @@ class UpdateTaskChannelPathParams:
     
 
 @dataclass
-class UpdateTaskChannelRequestBodyUpdateTaskChannelRequest:
+class UpdateTaskChannelUpdateTaskChannelRequest:
     channel_optimized_routing: Optional[bool] = field(default=None, metadata={'form': { 'field_name': 'ChannelOptimizedRouting' }})
     friendly_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
     
@@ -27,7 +27,7 @@ class UpdateTaskChannelSecurity:
 class UpdateTaskChannelRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateTaskChannelPathParams = field(default=None)
-    request: Optional[UpdateTaskChannelRequestBodyUpdateTaskChannelRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateTaskChannelUpdateTaskChannelRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateTaskChannelSecurity = field(default=None)
     
 

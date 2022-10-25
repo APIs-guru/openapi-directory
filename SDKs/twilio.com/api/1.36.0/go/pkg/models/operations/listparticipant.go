@@ -31,7 +31,7 @@ type ListParticipantRequest struct {
 	Security    ListParticipantSecurity
 }
 
-type ListParticipant200ApplicationJSONListParticipantResponse struct {
+type ListParticipantListParticipantResponse struct {
 	End             *int64                                        `json:"end,omitempty"`
 	FirstPageURI    *string                                       `json:"first_page_uri,omitempty"`
 	NextPageURI     *string                                       `json:"next_page_uri,omitempty"`
@@ -45,6 +45,6 @@ type ListParticipant200ApplicationJSONListParticipantResponse struct {
 
 type ListParticipantResponse struct {
 	ContentType             string
-	ListParticipantResponse *ListParticipant200ApplicationJSONListParticipantResponse
+	ListParticipantResponse *ListParticipantListParticipantResponse
 	StatusCode              int64
 }

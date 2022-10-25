@@ -555,7 +555,7 @@ class SDK:
         res = operations.ListCompositionResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListComposition200ApplicationJSONListCompositionResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListCompositionListCompositionResponse])
                 res.list_composition_response = out
 
         return res
@@ -580,7 +580,7 @@ class SDK:
         res = operations.ListCompositionHookResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListCompositionHook200ApplicationJSONListCompositionHookResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListCompositionHookListCompositionHookResponse])
                 res.list_composition_hook_response = out
 
         return res
@@ -605,7 +605,7 @@ class SDK:
         res = operations.ListRecordingResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListRecording200ApplicationJSONListRecordingResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListRecordingListRecordingResponse])
                 res.list_recording_response = out
 
         return res
@@ -630,7 +630,7 @@ class SDK:
         res = operations.ListRoomResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListRoom200ApplicationJSONListRoomResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListRoomListRoomResponse])
                 res.list_room_response = out
 
         return res
@@ -655,7 +655,7 @@ class SDK:
         res = operations.ListRoomParticipantResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListRoomParticipant200ApplicationJSONListRoomParticipantResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListRoomParticipantListRoomParticipantResponse])
                 res.list_room_participant_response = out
 
         return res
@@ -680,7 +680,7 @@ class SDK:
         res = operations.ListRoomParticipantPublishedTrackResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListRoomParticipantPublishedTrack200ApplicationJSONListRoomParticipantPublishedTrackResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListRoomParticipantPublishedTrackListRoomParticipantPublishedTrackResponse])
                 res.list_room_participant_published_track_response = out
 
         return res
@@ -705,7 +705,7 @@ class SDK:
         res = operations.ListRoomParticipantSubscribedTrackResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListRoomParticipantSubscribedTrack200ApplicationJSONListRoomParticipantSubscribedTrackResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListRoomParticipantSubscribedTrackListRoomParticipantSubscribedTrackResponse])
                 res.list_room_participant_subscribed_track_response = out
 
         return res
@@ -730,7 +730,7 @@ class SDK:
         res = operations.ListRoomRecordingResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListRoomRecording200ApplicationJSONListRoomRecordingResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListRoomRecordingListRoomRecordingResponse])
                 res.list_room_recording_response = out
 
         return res

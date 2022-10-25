@@ -11,9 +11,10 @@ type RecipeGetStepRequest struct {
 }
 
 type RecipeGetStepResponse struct {
-	Body                                  []byte
 	ContentType                           string
 	RecipeGetStep200ApplicationJSONString *string
+	RecipeGetStep200ApplicationXMLString  *string
 	RecipeGetStep200TextJSONString        *string
+	RecipeGetStep200TextXMLString         *string
 	StatusCode                            int64
 }

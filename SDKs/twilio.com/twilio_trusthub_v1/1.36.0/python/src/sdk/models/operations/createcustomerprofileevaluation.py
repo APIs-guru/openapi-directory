@@ -12,7 +12,7 @@ class CreateCustomerProfileEvaluationPathParams:
     
 
 @dataclass
-class CreateCustomerProfileEvaluationRequestBodyCreateCustomerProfileEvaluationRequest:
+class CreateCustomerProfileEvaluationCreateCustomerProfileEvaluationRequest:
     policy_sid: str = field(default=None, metadata={'form': { 'field_name': 'PolicySid' }})
     
 
@@ -25,7 +25,7 @@ class CreateCustomerProfileEvaluationSecurity:
 class CreateCustomerProfileEvaluationRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateCustomerProfileEvaluationPathParams = field(default=None)
-    request: Optional[CreateCustomerProfileEvaluationRequestBodyCreateCustomerProfileEvaluationRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateCustomerProfileEvaluationCreateCustomerProfileEvaluationRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateCustomerProfileEvaluationSecurity = field(default=None)
     
 

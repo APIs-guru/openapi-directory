@@ -33,7 +33,7 @@ class ListServiceUserConversationRequest:
 
 @dataclass_json
 @dataclass
-class ListServiceUserConversation200ApplicationJSONMeta:
+class ListServiceUserConversationListServiceUserConversationResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -45,14 +45,14 @@ class ListServiceUserConversation200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListServiceUserConversation200ApplicationJSONListServiceUserConversationResponse:
+class ListServiceUserConversationListServiceUserConversationResponse:
     conversations: Optional[List[shared.ConversationsV1ServiceServiceUserServiceUserConversation]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'conversations' }})
-    meta: Optional[ListServiceUserConversation200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+    meta: Optional[ListServiceUserConversationListServiceUserConversationResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     
 
 @dataclass
 class ListServiceUserConversationResponse:
     content_type: str = field(default=None)
-    list_service_user_conversation_response: Optional[ListServiceUserConversation200ApplicationJSONListServiceUserConversationResponse] = field(default=None)
+    list_service_user_conversation_response: Optional[ListServiceUserConversationListServiceUserConversationResponse] = field(default=None)
     status_code: int = field(default=None)
     

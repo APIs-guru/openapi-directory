@@ -24,7 +24,7 @@ type ListSinkRequest struct {
 	Security    ListSinkSecurity
 }
 
-type ListSink200ApplicationJSONMeta struct {
+type ListSinkListSinkResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -34,13 +34,13 @@ type ListSink200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListSink200ApplicationJSONListSinkResponse struct {
-	Meta  *ListSink200ApplicationJSONMeta `json:"meta,omitempty"`
-	Sinks []shared.EventsV1Sink           `json:"sinks,omitempty"`
+type ListSinkListSinkResponse struct {
+	Meta  *ListSinkListSinkResponseMeta `json:"meta,omitempty"`
+	Sinks []shared.EventsV1Sink         `json:"sinks,omitempty"`
 }
 
 type ListSinkResponse struct {
 	ContentType      string
-	ListSinkResponse *ListSink200ApplicationJSONListSinkResponse
+	ListSinkResponse *ListSinkListSinkResponse
 	StatusCode       int64
 }

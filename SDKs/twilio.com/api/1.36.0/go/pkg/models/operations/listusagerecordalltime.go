@@ -32,7 +32,7 @@ type ListUsageRecordAllTimeRequest struct {
 	Security    ListUsageRecordAllTimeSecurity
 }
 
-type ListUsageRecordAllTime200ApplicationJSONListUsageRecordAllTimeResponse struct {
+type ListUsageRecordAllTimeListUsageRecordAllTimeResponse struct {
 	End             *int64                                                     `json:"end,omitempty"`
 	FirstPageURI    *string                                                    `json:"first_page_uri,omitempty"`
 	NextPageURI     *string                                                    `json:"next_page_uri,omitempty"`
@@ -46,6 +46,6 @@ type ListUsageRecordAllTime200ApplicationJSONListUsageRecordAllTimeResponse stru
 
 type ListUsageRecordAllTimeResponse struct {
 	ContentType                    string
-	ListUsageRecordAllTimeResponse *ListUsageRecordAllTime200ApplicationJSONListUsageRecordAllTimeResponse
+	ListUsageRecordAllTimeResponse *ListUsageRecordAllTimeListUsageRecordAllTimeResponse
 	StatusCode                     int64
 }

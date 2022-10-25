@@ -8,46 +8,46 @@ type NodesForksCreatePathParams struct {
 	NodeID string `pathParam:"style=simple,explode=false,name=node_id"`
 }
 
-type NodesForksCreateRequestBodyAttributesCategoryEnum string
+type NodesForksCreateNodeAttributesCategoryEnum string
 
 const (
-	NodesForksCreateRequestBodyAttributesCategoryEnumAnalysis           NodesForksCreateRequestBodyAttributesCategoryEnum = "analysis"
-	NodesForksCreateRequestBodyAttributesCategoryEnumCommunication      NodesForksCreateRequestBodyAttributesCategoryEnum = "communication"
-	NodesForksCreateRequestBodyAttributesCategoryEnumData               NodesForksCreateRequestBodyAttributesCategoryEnum = "data"
-	NodesForksCreateRequestBodyAttributesCategoryEnumHypothesis         NodesForksCreateRequestBodyAttributesCategoryEnum = "hypothesis"
-	NodesForksCreateRequestBodyAttributesCategoryEnumInstrumentation    NodesForksCreateRequestBodyAttributesCategoryEnum = "instrumentation"
-	NodesForksCreateRequestBodyAttributesCategoryEnumMethodsAndMeasures NodesForksCreateRequestBodyAttributesCategoryEnum = "methods and measures"
-	NodesForksCreateRequestBodyAttributesCategoryEnumProcedure          NodesForksCreateRequestBodyAttributesCategoryEnum = "procedure"
-	NodesForksCreateRequestBodyAttributesCategoryEnumProject            NodesForksCreateRequestBodyAttributesCategoryEnum = "project"
-	NodesForksCreateRequestBodyAttributesCategoryEnumSoftware           NodesForksCreateRequestBodyAttributesCategoryEnum = "software"
-	NodesForksCreateRequestBodyAttributesCategoryEnumOther              NodesForksCreateRequestBodyAttributesCategoryEnum = "other"
+	NodesForksCreateNodeAttributesCategoryEnumAnalysis           NodesForksCreateNodeAttributesCategoryEnum = "analysis"
+	NodesForksCreateNodeAttributesCategoryEnumCommunication      NodesForksCreateNodeAttributesCategoryEnum = "communication"
+	NodesForksCreateNodeAttributesCategoryEnumData               NodesForksCreateNodeAttributesCategoryEnum = "data"
+	NodesForksCreateNodeAttributesCategoryEnumHypothesis         NodesForksCreateNodeAttributesCategoryEnum = "hypothesis"
+	NodesForksCreateNodeAttributesCategoryEnumInstrumentation    NodesForksCreateNodeAttributesCategoryEnum = "instrumentation"
+	NodesForksCreateNodeAttributesCategoryEnumMethodsAndMeasures NodesForksCreateNodeAttributesCategoryEnum = "methods and measures"
+	NodesForksCreateNodeAttributesCategoryEnumProcedure          NodesForksCreateNodeAttributesCategoryEnum = "procedure"
+	NodesForksCreateNodeAttributesCategoryEnumProject            NodesForksCreateNodeAttributesCategoryEnum = "project"
+	NodesForksCreateNodeAttributesCategoryEnumSoftware           NodesForksCreateNodeAttributesCategoryEnum = "software"
+	NodesForksCreateNodeAttributesCategoryEnumOther              NodesForksCreateNodeAttributesCategoryEnum = "other"
 )
 
-type NodesForksCreateRequestBodyAttributesAttributes struct {
-	Category               NodesForksCreateRequestBodyAttributesCategoryEnum `json:"category"`
-	Collection             *bool                                             `json:"collection,omitempty"`
-	CurrentUserCanComment  *bool                                             `json:"current_user_can_comment,omitempty"`
-	CurrentUserPermissions []string                                          `json:"current_user_permissions,omitempty"`
-	DateCreated            *time.Time                                        `json:"date_created,omitempty"`
-	DateModified           *time.Time                                        `json:"date_modified,omitempty"`
-	Description            *string                                           `json:"description,omitempty"`
-	Fork                   *bool                                             `json:"fork,omitempty"`
-	ForkedDate             *time.Time                                        `json:"forked_date,omitempty"`
-	NodeLicense            *string                                           `json:"node_license,omitempty"`
-	Preprint               *bool                                             `json:"preprint,omitempty"`
-	Public                 *bool                                             `json:"public,omitempty"`
-	Registration           *bool                                             `json:"registration,omitempty"`
-	Tags                   []string                                          `json:"tags,omitempty"`
-	TemplateFrom           *string                                           `json:"template_from,omitempty"`
-	Title                  string                                            `json:"title"`
+type NodesForksCreateNodeAttributes struct {
+	Category               NodesForksCreateNodeAttributesCategoryEnum `json:"category"`
+	Collection             *bool                                      `json:"collection,omitempty"`
+	CurrentUserCanComment  *bool                                      `json:"current_user_can_comment,omitempty"`
+	CurrentUserPermissions []string                                   `json:"current_user_permissions,omitempty"`
+	DateCreated            *time.Time                                 `json:"date_created,omitempty"`
+	DateModified           *time.Time                                 `json:"date_modified,omitempty"`
+	Description            *string                                    `json:"description,omitempty"`
+	Fork                   *bool                                      `json:"fork,omitempty"`
+	ForkedDate             *time.Time                                 `json:"forked_date,omitempty"`
+	NodeLicense            *string                                    `json:"node_license,omitempty"`
+	Preprint               *bool                                      `json:"preprint,omitempty"`
+	Public                 *bool                                      `json:"public,omitempty"`
+	Registration           *bool                                      `json:"registration,omitempty"`
+	Tags                   []string                                   `json:"tags,omitempty"`
+	TemplateFrom           *string                                    `json:"template_from,omitempty"`
+	Title                  string                                     `json:"title"`
 }
 
-type NodesForksCreateRequestBodyLinksLinks struct {
+type NodesForksCreateNodeLinks struct {
 	HTML *string `json:"html,omitempty"`
 	Self *string `json:"self,omitempty"`
 }
 
-type NodesForksCreateRequestBodyRelationshipsRelationships struct {
+type NodesForksCreateNodeRelationships struct {
 	AffiliatedInstitutions *string `json:"affiliated_institutions,omitempty"`
 	Children               *string `json:"children,omitempty"`
 	Citation               *string `json:"citation,omitempty"`
@@ -71,17 +71,17 @@ type NodesForksCreateRequestBodyRelationshipsRelationships struct {
 	Wikis                  *string `json:"wikis,omitempty"`
 }
 
-type NodesForksCreateRequestBodyNode struct {
-	Attributes    NodesForksCreateRequestBodyAttributesAttributes        `json:"attributes"`
-	ID            *string                                                `json:"id,omitempty"`
-	Links         *NodesForksCreateRequestBodyLinksLinks                 `json:"links,omitempty"`
-	Relationships *NodesForksCreateRequestBodyRelationshipsRelationships `json:"relationships,omitempty"`
-	Type          string                                                 `json:"type"`
+type NodesForksCreateNode struct {
+	Attributes    NodesForksCreateNodeAttributes     `json:"attributes"`
+	ID            *string                            `json:"id,omitempty"`
+	Links         *NodesForksCreateNodeLinks         `json:"links,omitempty"`
+	Relationships *NodesForksCreateNodeRelationships `json:"relationships,omitempty"`
+	Type          string                             `json:"type"`
 }
 
 type NodesForksCreateRequest struct {
 	PathParams NodesForksCreatePathParams
-	Request    NodesForksCreateRequestBodyNode `request:"mediaType=application/json"`
+	Request    NodesForksCreateNode `request:"mediaType=application/json"`
 }
 
 type NodesForksCreateResponse struct {

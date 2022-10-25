@@ -22,7 +22,7 @@ class ListFoldersRequest:
 
 @dataclass_json
 @dataclass
-class ListFolders200ApplicationJSONFolder:
+class ListFoldersFolder:
     id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
     parent_folder_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'parent_folder_id' }})
@@ -34,5 +34,5 @@ class ListFoldersResponse:
     content_type: str = field(default=None)
     status_code: int = field(default=None)
     authentication_error: Optional[shared.AuthenticationError] = field(default=None)
-    folders: Optional[List[ListFolders200ApplicationJSONFolder]] = field(default=None)
+    folders: Optional[List[ListFoldersFolder]] = field(default=None)
     

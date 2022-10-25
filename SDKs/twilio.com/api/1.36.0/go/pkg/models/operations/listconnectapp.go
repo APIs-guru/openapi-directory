@@ -27,7 +27,7 @@ type ListConnectAppRequest struct {
 	Security    ListConnectAppSecurity
 }
 
-type ListConnectApp200ApplicationJSONListConnectAppResponse struct {
+type ListConnectAppListConnectAppResponse struct {
 	ConnectApps     []shared.APIV2010AccountConnectApp `json:"connect_apps,omitempty"`
 	End             *int64                             `json:"end,omitempty"`
 	FirstPageURI    *string                            `json:"first_page_uri,omitempty"`
@@ -41,6 +41,6 @@ type ListConnectApp200ApplicationJSONListConnectAppResponse struct {
 
 type ListConnectAppResponse struct {
 	ContentType            string
-	ListConnectAppResponse *ListConnectApp200ApplicationJSONListConnectAppResponse
+	ListConnectAppResponse *ListConnectAppListConnectAppResponse
 	StatusCode             int64
 }

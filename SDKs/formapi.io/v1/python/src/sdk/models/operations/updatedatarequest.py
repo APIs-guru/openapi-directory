@@ -8,7 +8,7 @@ from sdk.models import shared
 class UpdateDataRequestPathParams:
     data_request_id: str = field(default=None, metadata={'path_param': { 'field_name': 'data_request_id', 'style': 'simple', 'explode': False }})
     
-class UpdateDataRequestRequestBodyAuthSecondFactorTypeEnum(str, Enum):
+class UpdateDataRequestUpdateSubmissionDataRequestDataAuthSecondFactorTypeEnum(str, Enum):
     NONE = "none"
     PHONE_NUMBER = "phone_number"
     TOTP = "totp"
@@ -16,7 +16,7 @@ class UpdateDataRequestRequestBodyAuthSecondFactorTypeEnum(str, Enum):
     SECURITY_KEY = "security_key"
     FINGERPRINT = "fingerprint"
 
-class UpdateDataRequestRequestBodyAuthTypeEnum(str, Enum):
+class UpdateDataRequestUpdateSubmissionDataRequestDataAuthTypeEnum(str, Enum):
     NONE = "none"
     PASSWORD = "password"
     OAUTH = "oauth"
@@ -28,13 +28,13 @@ class UpdateDataRequestRequestBodyAuthTypeEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class UpdateDataRequestRequestBodyUpdateSubmissionDataRequestData:
+class UpdateDataRequestUpdateSubmissionDataRequestData:
     auth_phone_number_hash: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'auth_phone_number_hash' }})
     auth_provider: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'auth_provider' }})
-    auth_second_factor_type: Optional[UpdateDataRequestRequestBodyAuthSecondFactorTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'auth_second_factor_type' }})
+    auth_second_factor_type: Optional[UpdateDataRequestUpdateSubmissionDataRequestDataAuthSecondFactorTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'auth_second_factor_type' }})
     auth_session_id_hash: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'auth_session_id_hash' }})
     auth_session_started_at: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'auth_session_started_at' }})
-    auth_type: Optional[UpdateDataRequestRequestBodyAuthTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'auth_type' }})
+    auth_type: Optional[UpdateDataRequestUpdateSubmissionDataRequestDataAuthTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'auth_type' }})
     auth_user_id_hash: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'auth_user_id_hash' }})
     auth_username_hash: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'auth_username_hash' }})
     email: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'email' }})
@@ -52,20 +52,20 @@ class UpdateDataRequestSecurity:
 @dataclass
 class UpdateDataRequestRequest:
     path_params: UpdateDataRequestPathParams = field(default=None)
-    request: UpdateDataRequestRequestBodyUpdateSubmissionDataRequestData = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: UpdateDataRequestUpdateSubmissionDataRequestData = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     security: UpdateDataRequestSecurity = field(default=None)
     
-class UpdateDataRequest200ApplicationJSONStatusEnum(str, Enum):
+class UpdateDataRequestUpdateDataRequestResponseStatusEnum(str, Enum):
     SUCCESS = "success"
     ERROR = "error"
 
 
 @dataclass_json
 @dataclass
-class UpdateDataRequest200ApplicationJSONUpdateDataRequestResponse:
+class UpdateDataRequestUpdateDataRequestResponse:
     data_request: shared.SubmissionDataRequest = field(default=None, metadata={'dataclasses_json': { 'field_name': 'data_request' }})
     errors: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'errors' }})
-    status: UpdateDataRequest200ApplicationJSONStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    status: UpdateDataRequestUpdateDataRequestResponseStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
     
 
 @dataclass
@@ -75,5 +75,5 @@ class UpdateDataRequestResponse:
     authentication_error: Optional[shared.AuthenticationError] = field(default=None)
     error: Optional[shared.Error] = field(default=None)
     invalid_request: Optional[shared.InvalidRequest] = field(default=None)
-    update_data_request_response: Optional[UpdateDataRequest200ApplicationJSONUpdateDataRequestResponse] = field(default=None)
+    update_data_request_response: Optional[UpdateDataRequestUpdateDataRequestResponse] = field(default=None)
     

@@ -33,7 +33,7 @@ class ListExecutionStepRequest:
 
 @dataclass_json
 @dataclass
-class ListExecutionStep200ApplicationJSONMeta:
+class ListExecutionStepListExecutionStepResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -45,14 +45,14 @@ class ListExecutionStep200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListExecutionStep200ApplicationJSONListExecutionStepResponse:
-    meta: Optional[ListExecutionStep200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+class ListExecutionStepListExecutionStepResponse:
+    meta: Optional[ListExecutionStepListExecutionStepResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     steps: Optional[List[shared.StudioV1FlowExecutionExecutionStep]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'steps' }})
     
 
 @dataclass
 class ListExecutionStepResponse:
     content_type: str = field(default=None)
-    list_execution_step_response: Optional[ListExecutionStep200ApplicationJSONListExecutionStepResponse] = field(default=None)
+    list_execution_step_response: Optional[ListExecutionStepListExecutionStepResponse] = field(default=None)
     status_code: int = field(default=None)
     

@@ -13,7 +13,7 @@ class UpdatePhoneNumberPathParams:
     
 
 @dataclass
-class UpdatePhoneNumberRequestBodyUpdatePhoneNumberRequest:
+class UpdatePhoneNumberUpdatePhoneNumberRequest:
     is_reserved: Optional[bool] = field(default=None, metadata={'form': { 'field_name': 'IsReserved' }})
     
 
@@ -26,7 +26,7 @@ class UpdatePhoneNumberSecurity:
 class UpdatePhoneNumberRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdatePhoneNumberPathParams = field(default=None)
-    request: Optional[UpdatePhoneNumberRequestBodyUpdatePhoneNumberRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdatePhoneNumberUpdatePhoneNumberRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdatePhoneNumberSecurity = field(default=None)
     
 

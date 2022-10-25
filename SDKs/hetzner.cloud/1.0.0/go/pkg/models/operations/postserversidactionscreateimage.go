@@ -4,26 +4,26 @@ type PostServersIDActionsCreateImagePathParams struct {
 	ID int64 `pathParam:"style=simple,explode=false,name=id"`
 }
 
-type PostServersIDActionsCreateImageRequestBodyLabels struct {
+type PostServersIDActionsCreateImageCreateImageRequestLabels struct {
 	Labelkey *string `json:"labelkey,omitempty"`
 }
 
-type PostServersIDActionsCreateImageRequestBodyTypeEnum string
+type PostServersIDActionsCreateImageCreateImageRequestTypeEnum string
 
 const (
-	PostServersIDActionsCreateImageRequestBodyTypeEnumSnapshot PostServersIDActionsCreateImageRequestBodyTypeEnum = "snapshot"
-	PostServersIDActionsCreateImageRequestBodyTypeEnumBackup   PostServersIDActionsCreateImageRequestBodyTypeEnum = "backup"
+	PostServersIDActionsCreateImageCreateImageRequestTypeEnumSnapshot PostServersIDActionsCreateImageCreateImageRequestTypeEnum = "snapshot"
+	PostServersIDActionsCreateImageCreateImageRequestTypeEnumBackup   PostServersIDActionsCreateImageCreateImageRequestTypeEnum = "backup"
 )
 
-type PostServersIDActionsCreateImageRequestBodyCreateImageRequest struct {
-	Description *string                                             `json:"description,omitempty"`
-	Labels      *PostServersIDActionsCreateImageRequestBodyLabels   `json:"labels,omitempty"`
-	Type        *PostServersIDActionsCreateImageRequestBodyTypeEnum `json:"type,omitempty"`
+type PostServersIDActionsCreateImageCreateImageRequest struct {
+	Description *string                                                    `json:"description,omitempty"`
+	Labels      *PostServersIDActionsCreateImageCreateImageRequestLabels   `json:"labels,omitempty"`
+	Type        *PostServersIDActionsCreateImageCreateImageRequestTypeEnum `json:"type,omitempty"`
 }
 
 type PostServersIDActionsCreateImageRequest struct {
 	PathParams PostServersIDActionsCreateImagePathParams
-	Request    *PostServersIDActionsCreateImageRequestBodyCreateImageRequest `request:"mediaType=application/json"`
+	Request    *PostServersIDActionsCreateImageCreateImageRequest `request:"mediaType=application/json"`
 }
 
 type PostServersIDActionsCreateImage201ApplicationJSONActionError struct {
@@ -44,7 +44,7 @@ const (
 	PostServersIDActionsCreateImage201ApplicationJSONActionStatusEnumError   PostServersIDActionsCreateImage201ApplicationJSONActionStatusEnum = "error"
 )
 
-type PostServersIDActionsCreateImage201ApplicationJSONActionAction struct {
+type PostServersIDActionsCreateImage201ApplicationJSONAction struct {
 	Command   string                                                             `json:"command"`
 	Error     PostServersIDActionsCreateImage201ApplicationJSONActionError       `json:"error"`
 	Finished  string                                                             `json:"finished"`
@@ -114,8 +114,8 @@ type PostServersIDActionsCreateImage201ApplicationJSONImage struct {
 }
 
 type PostServersIDActionsCreateImage201ApplicationJSON struct {
-	Action *PostServersIDActionsCreateImage201ApplicationJSONActionAction `json:"action,omitempty"`
-	Image  *PostServersIDActionsCreateImage201ApplicationJSONImage        `json:"image,omitempty"`
+	Action *PostServersIDActionsCreateImage201ApplicationJSONAction `json:"action,omitempty"`
+	Image  *PostServersIDActionsCreateImage201ApplicationJSONImage  `json:"image,omitempty"`
 }
 
 type PostServersIDActionsCreateImageResponse struct {

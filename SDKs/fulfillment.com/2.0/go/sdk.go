@@ -130,7 +130,7 @@ func (s *SDK) GetInventory(ctx context.Context, request operations.GetInventoryR
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.GetInventory200ApplicationJSONItemInventoryArrayV2
+			var out *operations.GetInventoryItemInventoryArrayV2
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -221,7 +221,7 @@ func (s *SDK) GetOrders(ctx context.Context, request operations.GetOrdersRequest
 	case httpRes.StatusCode == 404:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.GetOrders404ApplicationJSONErrorStandardV2
+			var out *operations.GetOrdersErrorStandardV2
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -262,7 +262,7 @@ func (s *SDK) GetReturns(ctx context.Context, request operations.GetReturnsReque
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.GetReturns200ApplicationJSONReturnsArrayV2
+			var out *operations.GetReturnsReturnsArrayV2
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -303,7 +303,7 @@ func (s *SDK) GetTrack(ctx context.Context, request operations.GetTrackRequest) 
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.GetTrack200ApplicationJSONTrackingResponse
+			var out *operations.GetTrackTrackingResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -344,7 +344,7 @@ func (s *SDK) GetUsersMe(ctx context.Context, request operations.GetUsersMeReque
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.GetUsersMe200ApplicationJSONUserContactV2
+			var out *operations.GetUsersMeUserContactV2
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -434,7 +434,7 @@ func (s *SDK) PostOauthAccessToken(ctx context.Context, request operations.PostO
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.PostOauthAccessToken200ApplicationJSONAccessTokenResponseV2
+			var out *operations.PostOauthAccessTokenAccessTokenResponseV2
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -492,7 +492,7 @@ func (s *SDK) PostOrders(ctx context.Context, request operations.PostOrdersReque
 	case httpRes.StatusCode == 201:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.PostOrders201ApplicationJSONOrderResponseV2
+			var out *operations.PostOrdersOrderResponseV2
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -523,7 +523,7 @@ func (s *SDK) PostOrders(ctx context.Context, request operations.PostOrdersReque
 	case httpRes.StatusCode == 409:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.PostOrders409ApplicationJSONErrorStandardWithContextV2
+			var out *operations.PostOrdersErrorStandardWithContextV2
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -669,7 +669,7 @@ func (s *SDK) PutReturns(ctx context.Context, request operations.PutReturnsReque
 	case httpRes.StatusCode == 201:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.PutReturns201ApplicationJSONRmaResponseV2
+			var out *operations.PutReturnsRmaResponseV2
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}

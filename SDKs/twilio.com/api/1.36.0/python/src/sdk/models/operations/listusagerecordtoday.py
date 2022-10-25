@@ -39,7 +39,7 @@ class ListUsageRecordTodayRequest:
 
 @dataclass_json
 @dataclass
-class ListUsageRecordToday200ApplicationJSONListUsageRecordTodayResponse:
+class ListUsageRecordTodayListUsageRecordTodayResponse:
     end: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'end' }})
     first_page_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_uri' }})
     next_page_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_uri' }})
@@ -54,6 +54,6 @@ class ListUsageRecordToday200ApplicationJSONListUsageRecordTodayResponse:
 @dataclass
 class ListUsageRecordTodayResponse:
     content_type: str = field(default=None)
-    list_usage_record_today_response: Optional[ListUsageRecordToday200ApplicationJSONListUsageRecordTodayResponse] = field(default=None)
+    list_usage_record_today_response: Optional[ListUsageRecordTodayListUsageRecordTodayResponse] = field(default=None)
     status_code: int = field(default=None)
     

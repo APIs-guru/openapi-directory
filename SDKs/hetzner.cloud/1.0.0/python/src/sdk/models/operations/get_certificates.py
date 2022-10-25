@@ -33,16 +33,16 @@ class GetCertificatesRequest:
 
 @dataclass_json
 @dataclass
-class GetCertificates200ApplicationJSONCertificatesStatusError:
+class GetCertificatesCertificatesResponseCertificateStatusError:
     code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'code' }})
     message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'message' }})
     
-class GetCertificates200ApplicationJSONCertificatesStatusIssuanceEnum(str, Enum):
+class GetCertificatesCertificatesResponseCertificateStatusIssuanceEnum(str, Enum):
     PENDING = "pending"
     COMPLETED = "completed"
     FAILED = "failed"
 
-class GetCertificates200ApplicationJSONCertificatesStatusRenewalEnum(str, Enum):
+class GetCertificatesCertificatesResponseCertificateStatusRenewalEnum(str, Enum):
     SCHEDULED = "scheduled"
     PENDING = "pending"
     FAILED = "failed"
@@ -51,26 +51,26 @@ class GetCertificates200ApplicationJSONCertificatesStatusRenewalEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class GetCertificates200ApplicationJSONCertificatesStatus:
-    error: Optional[GetCertificates200ApplicationJSONCertificatesStatusError] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
-    issuance: Optional[GetCertificates200ApplicationJSONCertificatesStatusIssuanceEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'issuance' }})
-    renewal: Optional[GetCertificates200ApplicationJSONCertificatesStatusRenewalEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'renewal' }})
+class GetCertificatesCertificatesResponseCertificateStatus:
+    error: Optional[GetCertificatesCertificatesResponseCertificateStatusError] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
+    issuance: Optional[GetCertificatesCertificatesResponseCertificateStatusIssuanceEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'issuance' }})
+    renewal: Optional[GetCertificatesCertificatesResponseCertificateStatusRenewalEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'renewal' }})
     
-class GetCertificates200ApplicationJSONCertificatesTypeEnum(str, Enum):
+class GetCertificatesCertificatesResponseCertificateTypeEnum(str, Enum):
     UPLOADED = "uploaded"
     MANAGED = "managed"
 
 
 @dataclass_json
 @dataclass
-class GetCertificates200ApplicationJSONCertificatesUsedBy:
+class GetCertificatesCertificatesResponseCertificateUsedBy:
     id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     type: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     
 
 @dataclass_json
 @dataclass
-class GetCertificates200ApplicationJSONCertificatesCertificate:
+class GetCertificatesCertificatesResponseCertificate:
     certificate: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'certificate' }})
     created: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'created' }})
     domain_names: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'domain_names' }})
@@ -80,14 +80,14 @@ class GetCertificates200ApplicationJSONCertificatesCertificate:
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
     not_valid_after: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'not_valid_after' }})
     not_valid_before: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'not_valid_before' }})
-    status: Optional[GetCertificates200ApplicationJSONCertificatesStatus] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
-    type: Optional[GetCertificates200ApplicationJSONCertificatesTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
-    used_by: List[GetCertificates200ApplicationJSONCertificatesUsedBy] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'used_by' }})
+    status: Optional[GetCertificatesCertificatesResponseCertificateStatus] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    type: Optional[GetCertificatesCertificatesResponseCertificateTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    used_by: List[GetCertificatesCertificatesResponseCertificateUsedBy] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'used_by' }})
     
 
 @dataclass_json
 @dataclass
-class GetCertificates200ApplicationJSONMetaPagination:
+class GetCertificatesCertificatesResponseMetaPagination:
     last_page: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'last_page' }})
     next_page: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page' }})
     page: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'page' }})
@@ -98,20 +98,20 @@ class GetCertificates200ApplicationJSONMetaPagination:
 
 @dataclass_json
 @dataclass
-class GetCertificates200ApplicationJSONMeta:
-    pagination: GetCertificates200ApplicationJSONMetaPagination = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pagination' }})
+class GetCertificatesCertificatesResponseMeta:
+    pagination: GetCertificatesCertificatesResponseMetaPagination = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pagination' }})
     
 
 @dataclass_json
 @dataclass
-class GetCertificates200ApplicationJSONCertificatesResponse:
-    certificates: List[GetCertificates200ApplicationJSONCertificatesCertificate] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'certificates' }})
-    meta: Optional[GetCertificates200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+class GetCertificatesCertificatesResponse:
+    certificates: List[GetCertificatesCertificatesResponseCertificate] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'certificates' }})
+    meta: Optional[GetCertificatesCertificatesResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     
 
 @dataclass
 class GetCertificatesResponse:
-    certificates_response: Optional[GetCertificates200ApplicationJSONCertificatesResponse] = field(default=None)
+    certificates_response: Optional[GetCertificatesCertificatesResponse] = field(default=None)
     content_type: str = field(default=None)
     status_code: int = field(default=None)
     

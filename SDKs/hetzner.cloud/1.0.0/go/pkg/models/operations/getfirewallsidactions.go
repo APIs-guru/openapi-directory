@@ -45,36 +45,36 @@ type GetFirewallsIDActionsRequest struct {
 	QueryParams GetFirewallsIDActionsQueryParams
 }
 
-type GetFirewallsIDActions200ApplicationJSONActionsError struct {
+type GetFirewallsIDActionsActionsResponseActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
 }
 
-type GetFirewallsIDActions200ApplicationJSONActionsResources struct {
+type GetFirewallsIDActionsActionsResponseActionResources struct {
 	ID   int64  `json:"id"`
 	Type string `json:"type"`
 }
 
-type GetFirewallsIDActions200ApplicationJSONActionsStatusEnum string
+type GetFirewallsIDActionsActionsResponseActionStatusEnum string
 
 const (
-	GetFirewallsIDActions200ApplicationJSONActionsStatusEnumSuccess GetFirewallsIDActions200ApplicationJSONActionsStatusEnum = "success"
-	GetFirewallsIDActions200ApplicationJSONActionsStatusEnumRunning GetFirewallsIDActions200ApplicationJSONActionsStatusEnum = "running"
-	GetFirewallsIDActions200ApplicationJSONActionsStatusEnumError   GetFirewallsIDActions200ApplicationJSONActionsStatusEnum = "error"
+	GetFirewallsIDActionsActionsResponseActionStatusEnumSuccess GetFirewallsIDActionsActionsResponseActionStatusEnum = "success"
+	GetFirewallsIDActionsActionsResponseActionStatusEnumRunning GetFirewallsIDActionsActionsResponseActionStatusEnum = "running"
+	GetFirewallsIDActionsActionsResponseActionStatusEnumError   GetFirewallsIDActionsActionsResponseActionStatusEnum = "error"
 )
 
-type GetFirewallsIDActions200ApplicationJSONActionsAction struct {
-	Command   string                                                    `json:"command"`
-	Error     GetFirewallsIDActions200ApplicationJSONActionsError       `json:"error"`
-	Finished  string                                                    `json:"finished"`
-	ID        int64                                                     `json:"id"`
-	Progress  float64                                                   `json:"progress"`
-	Resources []GetFirewallsIDActions200ApplicationJSONActionsResources `json:"resources"`
-	Started   string                                                    `json:"started"`
-	Status    GetFirewallsIDActions200ApplicationJSONActionsStatusEnum  `json:"status"`
+type GetFirewallsIDActionsActionsResponseAction struct {
+	Command   string                                                `json:"command"`
+	Error     GetFirewallsIDActionsActionsResponseActionError       `json:"error"`
+	Finished  string                                                `json:"finished"`
+	ID        int64                                                 `json:"id"`
+	Progress  float64                                               `json:"progress"`
+	Resources []GetFirewallsIDActionsActionsResponseActionResources `json:"resources"`
+	Started   string                                                `json:"started"`
+	Status    GetFirewallsIDActionsActionsResponseActionStatusEnum  `json:"status"`
 }
 
-type GetFirewallsIDActions200ApplicationJSONMetaPagination struct {
+type GetFirewallsIDActionsActionsResponseMetaPagination struct {
 	LastPage     float64 `json:"last_page"`
 	NextPage     float64 `json:"next_page"`
 	Page         float64 `json:"page"`
@@ -83,17 +83,17 @@ type GetFirewallsIDActions200ApplicationJSONMetaPagination struct {
 	TotalEntries float64 `json:"total_entries"`
 }
 
-type GetFirewallsIDActions200ApplicationJSONMeta struct {
-	Pagination GetFirewallsIDActions200ApplicationJSONMetaPagination `json:"pagination"`
+type GetFirewallsIDActionsActionsResponseMeta struct {
+	Pagination GetFirewallsIDActionsActionsResponseMetaPagination `json:"pagination"`
 }
 
-type GetFirewallsIDActions200ApplicationJSONActionsResponse struct {
-	Actions []GetFirewallsIDActions200ApplicationJSONActionsAction `json:"actions"`
-	Meta    *GetFirewallsIDActions200ApplicationJSONMeta           `json:"meta,omitempty"`
+type GetFirewallsIDActionsActionsResponse struct {
+	Actions []GetFirewallsIDActionsActionsResponseAction `json:"actions"`
+	Meta    *GetFirewallsIDActionsActionsResponseMeta    `json:"meta,omitempty"`
 }
 
 type GetFirewallsIDActionsResponse struct {
-	ActionsResponse *GetFirewallsIDActions200ApplicationJSONActionsResponse
+	ActionsResponse *GetFirewallsIDActionsActionsResponse
 	ContentType     string
 	StatusCode      int64
 }

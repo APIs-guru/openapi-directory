@@ -8,7 +8,7 @@ var CreateServiceServers = []string{
 	"https://proxy.twilio.com",
 }
 
-type CreateServiceRequestBodyCreateServiceRequest struct {
+type CreateServiceCreateServiceRequest struct {
 	CallbackURL             *string                                        `form:"name=CallbackUrl"`
 	ChatInstanceSid         *string                                        `form:"name=ChatInstanceSid"`
 	DefaultTTL              *int64                                         `form:"name=DefaultTtl"`
@@ -25,7 +25,7 @@ type CreateServiceSecurity struct {
 
 type CreateServiceRequest struct {
 	ServerURL *string
-	Request   *CreateServiceRequestBodyCreateServiceRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request   *CreateServiceCreateServiceRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security  CreateServiceSecurity
 }
 

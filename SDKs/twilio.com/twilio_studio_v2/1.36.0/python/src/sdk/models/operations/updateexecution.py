@@ -13,7 +13,7 @@ class UpdateExecutionPathParams:
     
 
 @dataclass
-class UpdateExecutionRequestBodyUpdateExecutionRequest:
+class UpdateExecutionUpdateExecutionRequest:
     status: shared.ExecutionEnumStatusEnum = field(default=None, metadata={'form': { 'field_name': 'Status' }})
     
 
@@ -26,7 +26,7 @@ class UpdateExecutionSecurity:
 class UpdateExecutionRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateExecutionPathParams = field(default=None)
-    request: Optional[UpdateExecutionRequestBodyUpdateExecutionRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateExecutionUpdateExecutionRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateExecutionSecurity = field(default=None)
     
 

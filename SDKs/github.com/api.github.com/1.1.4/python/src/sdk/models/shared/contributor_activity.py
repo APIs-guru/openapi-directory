@@ -5,7 +5,7 @@ from dataclasses_json import dataclass_json
 
 @dataclass_json
 @dataclass
-class ContributorActivityAuthorSimpleUser:
+class ContributorActivitySimpleUser:
     avatar_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'avatar_url' }})
     events_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'events_url' }})
     followers_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'followers_url' }})
@@ -39,7 +39,7 @@ class ContributorActivityWeeks:
 @dataclass_json
 @dataclass
 class ContributorActivity:
-    author: ContributorActivityAuthorSimpleUser = field(default=None, metadata={'dataclasses_json': { 'field_name': 'author' }})
+    author: ContributorActivitySimpleUser = field(default=None, metadata={'dataclasses_json': { 'field_name': 'author' }})
     total: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
     weeks: List[ContributorActivityWeeks] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'weeks' }})
     

@@ -3,7 +3,7 @@ from typing import Enum,Optional
 from dataclasses_json import dataclass_json
 from . import interfacenestedcircuit
 
-class InterfaceCircuitTerminationTermSideTerminationEnum(str, Enum):
+class InterfaceCircuitTerminationTerminationEnum(str, Enum):
     A = "A"
     Z = "Z"
 
@@ -15,7 +15,7 @@ class InterfaceCircuitTermination:
     id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     port_speed: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'port_speed' }})
     pp_info: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pp_info' }})
-    term_side: InterfaceCircuitTerminationTermSideTerminationEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'term_side' }})
+    term_side: InterfaceCircuitTerminationTerminationEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'term_side' }})
     upstream_speed: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'upstream_speed' }})
     xconnect_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'xconnect_id' }})
     

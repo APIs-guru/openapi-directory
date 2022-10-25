@@ -28,7 +28,7 @@ type ListChannelRequest struct {
 	Security    ListChannelSecurity
 }
 
-type ListChannel200ApplicationJSONMeta struct {
+type ListChannelListChannelResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -38,13 +38,13 @@ type ListChannel200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListChannel200ApplicationJSONListChannelResponse struct {
+type ListChannelListChannelResponse struct {
 	Channels []shared.IPMessagingV1ServiceChannel `json:"channels,omitempty"`
-	Meta     *ListChannel200ApplicationJSONMeta   `json:"meta,omitempty"`
+	Meta     *ListChannelListChannelResponseMeta  `json:"meta,omitempty"`
 }
 
 type ListChannelResponse struct {
 	ContentType         string
-	ListChannelResponse *ListChannel200ApplicationJSONListChannelResponse
+	ListChannelResponse *ListChannelListChannelResponse
 	StatusCode          int64
 }

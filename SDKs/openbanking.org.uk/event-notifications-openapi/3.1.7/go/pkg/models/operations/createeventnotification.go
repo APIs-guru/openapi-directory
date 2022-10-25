@@ -7,7 +7,7 @@ type CreateEventNotificationHeaders struct {
 
 type CreateEventNotificationRequest struct {
 	Headers CreateEventNotificationHeaders
-	Request []byte `request:"mediaType=application/jwt"`
+	Request string `request:"mediaType=application/jwt"`
 }
 
 type CreateEventNotificationResponse struct {

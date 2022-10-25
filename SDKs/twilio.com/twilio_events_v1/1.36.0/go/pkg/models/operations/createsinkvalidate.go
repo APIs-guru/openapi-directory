@@ -12,7 +12,7 @@ type CreateSinkValidatePathParams struct {
 	Sid string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
-type CreateSinkValidateRequestBodyCreateSinkValidateRequest struct {
+type CreateSinkValidateCreateSinkValidateRequest struct {
 	TestID string `form:"name=TestId"`
 }
 
@@ -23,7 +23,7 @@ type CreateSinkValidateSecurity struct {
 type CreateSinkValidateRequest struct {
 	ServerURL  *string
 	PathParams CreateSinkValidatePathParams
-	Request    *CreateSinkValidateRequestBodyCreateSinkValidateRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateSinkValidateCreateSinkValidateRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateSinkValidateSecurity
 }
 

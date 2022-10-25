@@ -32,7 +32,7 @@ class ListBundleCopyRequest:
 
 @dataclass_json
 @dataclass
-class ListBundleCopy200ApplicationJSONMeta:
+class ListBundleCopyListBundleCopyResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -44,14 +44,14 @@ class ListBundleCopy200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListBundleCopy200ApplicationJSONListBundleCopyResponse:
-    meta: Optional[ListBundleCopy200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+class ListBundleCopyListBundleCopyResponse:
+    meta: Optional[ListBundleCopyListBundleCopyResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     results: Optional[List[shared.NumbersV2RegulatoryComplianceBundleBundleCopy]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'results' }})
     
 
 @dataclass
 class ListBundleCopyResponse:
     content_type: str = field(default=None)
-    list_bundle_copy_response: Optional[ListBundleCopy200ApplicationJSONListBundleCopyResponse] = field(default=None)
+    list_bundle_copy_response: Optional[ListBundleCopyListBundleCopyResponse] = field(default=None)
     status_code: int = field(default=None)
     

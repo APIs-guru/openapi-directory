@@ -15,7 +15,7 @@ class CreateSessionPathParams:
     
 
 @dataclass
-class CreateSessionRequestBodyCreateSessionRequest:
+class CreateSessionCreateSessionRequest:
     date_expiry: Optional[datetime] = field(default=None, metadata={'form': { 'field_name': 'DateExpiry' }})
     fail_on_participant_conflict: Optional[bool] = field(default=None, metadata={'form': { 'field_name': 'FailOnParticipantConflict' }})
     mode: Optional[shared.SessionEnumModeEnum] = field(default=None, metadata={'form': { 'field_name': 'Mode' }})
@@ -34,7 +34,7 @@ class CreateSessionSecurity:
 class CreateSessionRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateSessionPathParams = field(default=None)
-    request: Optional[CreateSessionRequestBodyCreateSessionRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateSessionCreateSessionRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateSessionSecurity = field(default=None)
     
 

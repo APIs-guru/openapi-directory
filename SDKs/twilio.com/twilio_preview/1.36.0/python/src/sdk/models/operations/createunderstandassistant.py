@@ -7,7 +7,7 @@ CREATE_UNDERSTAND_ASSISTANT_SERVERS = [
 
 
 @dataclass
-class CreateUnderstandAssistantRequestBodyCreateUnderstandAssistantRequest:
+class CreateUnderstandAssistantCreateUnderstandAssistantRequest:
     callback_events: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'CallbackEvents' }})
     callback_url: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'CallbackUrl' }})
     fallback_actions: Optional[Any] = field(default=None, metadata={'form': { 'field_name': 'FallbackActions' }})
@@ -26,7 +26,7 @@ class CreateUnderstandAssistantSecurity:
 @dataclass
 class CreateUnderstandAssistantRequest:
     server_url: Optional[str] = field(default=None)
-    request: Optional[CreateUnderstandAssistantRequestBodyCreateUnderstandAssistantRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateUnderstandAssistantCreateUnderstandAssistantRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateUnderstandAssistantSecurity = field(default=None)
     
 

@@ -39,7 +39,7 @@ class RearPortTypeValueEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class RearPortTypeType:
+class RearPortType:
     label: RearPortTypeLabelEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label' }})
     value: RearPortTypeValueEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
     
@@ -54,5 +54,5 @@ class RearPort:
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
     positions: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'positions' }})
     tags: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
-    type: RearPortTypeType = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    type: RearPortType = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     

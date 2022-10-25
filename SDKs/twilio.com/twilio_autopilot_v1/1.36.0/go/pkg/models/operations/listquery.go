@@ -31,7 +31,7 @@ type ListQueryRequest struct {
 	Security    ListQuerySecurity
 }
 
-type ListQuery200ApplicationJSONMeta struct {
+type ListQueryListQueryResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -41,13 +41,13 @@ type ListQuery200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListQuery200ApplicationJSONListQueryResponse struct {
-	Meta    *ListQuery200ApplicationJSONMeta   `json:"meta,omitempty"`
+type ListQueryListQueryResponse struct {
+	Meta    *ListQueryListQueryResponseMeta    `json:"meta,omitempty"`
 	Queries []shared.AutopilotV1AssistantQuery `json:"queries,omitempty"`
 }
 
 type ListQueryResponse struct {
 	ContentType       string
-	ListQueryResponse *ListQuery200ApplicationJSONListQueryResponse
+	ListQueryResponse *ListQueryListQueryResponse
 	StatusCode        int64
 }

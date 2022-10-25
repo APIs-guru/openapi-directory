@@ -34,7 +34,7 @@ class PostServersIDActionsRequestConsole201ApplicationJSONActionStatusEnum(str, 
 
 @dataclass_json
 @dataclass
-class PostServersIDActionsRequestConsole201ApplicationJSONActionAction:
+class PostServersIDActionsRequestConsole201ApplicationJSONAction:
     command: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'command' }})
     error: PostServersIDActionsRequestConsole201ApplicationJSONActionError = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
     finished: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'finished' }})
@@ -48,7 +48,7 @@ class PostServersIDActionsRequestConsole201ApplicationJSONActionAction:
 @dataclass_json
 @dataclass
 class PostServersIDActionsRequestConsole201ApplicationJSON:
-    action: PostServersIDActionsRequestConsole201ApplicationJSONActionAction = field(default=None, metadata={'dataclasses_json': { 'field_name': 'action' }})
+    action: PostServersIDActionsRequestConsole201ApplicationJSONAction = field(default=None, metadata={'dataclasses_json': { 'field_name': 'action' }})
     password: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'password' }})
     wss_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'wss_url' }})
     

@@ -36,7 +36,7 @@ class ListQueryRequest:
 
 @dataclass_json
 @dataclass
-class ListQuery200ApplicationJSONMeta:
+class ListQueryListQueryResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -48,14 +48,14 @@ class ListQuery200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListQuery200ApplicationJSONListQueryResponse:
-    meta: Optional[ListQuery200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+class ListQueryListQueryResponse:
+    meta: Optional[ListQueryListQueryResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     queries: Optional[List[shared.AutopilotV1AssistantQuery]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'queries' }})
     
 
 @dataclass
 class ListQueryResponse:
     content_type: str = field(default=None)
-    list_query_response: Optional[ListQuery200ApplicationJSONListQueryResponse] = field(default=None)
+    list_query_response: Optional[ListQueryListQueryResponse] = field(default=None)
     status_code: int = field(default=None)
     

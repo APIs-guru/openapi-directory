@@ -32,7 +32,7 @@ type ListHostedNumbersDependentHostedNumberOrderRequest struct {
 	Security    ListHostedNumbersDependentHostedNumberOrderSecurity
 }
 
-type ListHostedNumbersDependentHostedNumberOrder200ApplicationJSONMeta struct {
+type ListHostedNumbersDependentHostedNumberOrderListHostedNumbersDependentHostedNumberOrderResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -42,13 +42,13 @@ type ListHostedNumbersDependentHostedNumberOrder200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListHostedNumbersDependentHostedNumberOrder200ApplicationJSONListHostedNumbersDependentHostedNumberOrderResponse struct {
-	Items []shared.PreviewHostedNumbersAuthorizationDocumentDependentHostedNumberOrder `json:"items,omitempty"`
-	Meta  *ListHostedNumbersDependentHostedNumberOrder200ApplicationJSONMeta           `json:"meta,omitempty"`
+type ListHostedNumbersDependentHostedNumberOrderListHostedNumbersDependentHostedNumberOrderResponse struct {
+	Items []shared.PreviewHostedNumbersAuthorizationDocumentDependentHostedNumberOrder                        `json:"items,omitempty"`
+	Meta  *ListHostedNumbersDependentHostedNumberOrderListHostedNumbersDependentHostedNumberOrderResponseMeta `json:"meta,omitempty"`
 }
 
 type ListHostedNumbersDependentHostedNumberOrderResponse struct {
 	ContentType                                         string
-	ListHostedNumbersDependentHostedNumberOrderResponse *ListHostedNumbersDependentHostedNumberOrder200ApplicationJSONListHostedNumbersDependentHostedNumberOrderResponse
+	ListHostedNumbersDependentHostedNumberOrderResponse *ListHostedNumbersDependentHostedNumberOrderListHostedNumbersDependentHostedNumberOrderResponse
 	StatusCode                                          int64
 }

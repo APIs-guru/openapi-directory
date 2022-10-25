@@ -31,7 +31,7 @@ class ListHostedNumbersHostedNumberOrderRequest:
 
 @dataclass_json
 @dataclass
-class ListHostedNumbersHostedNumberOrder200ApplicationJSONMeta:
+class ListHostedNumbersHostedNumberOrderListHostedNumbersHostedNumberOrderResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -43,14 +43,14 @@ class ListHostedNumbersHostedNumberOrder200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListHostedNumbersHostedNumberOrder200ApplicationJSONListHostedNumbersHostedNumberOrderResponse:
+class ListHostedNumbersHostedNumberOrderListHostedNumbersHostedNumberOrderResponse:
     items: Optional[List[shared.PreviewHostedNumbersHostedNumberOrder]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'items' }})
-    meta: Optional[ListHostedNumbersHostedNumberOrder200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+    meta: Optional[ListHostedNumbersHostedNumberOrderListHostedNumbersHostedNumberOrderResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     
 
 @dataclass
 class ListHostedNumbersHostedNumberOrderResponse:
     content_type: str = field(default=None)
-    list_hosted_numbers_hosted_number_order_response: Optional[ListHostedNumbersHostedNumberOrder200ApplicationJSONListHostedNumbersHostedNumberOrderResponse] = field(default=None)
+    list_hosted_numbers_hosted_number_order_response: Optional[ListHostedNumbersHostedNumberOrderListHostedNumbersHostedNumberOrderResponse] = field(default=None)
     status_code: int = field(default=None)
     

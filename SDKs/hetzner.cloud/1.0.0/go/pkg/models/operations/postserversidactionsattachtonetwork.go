@@ -4,7 +4,7 @@ type PostServersIDActionsAttachToNetworkPathParams struct {
 	ID int64 `pathParam:"style=simple,explode=false,name=id"`
 }
 
-type PostServersIDActionsAttachToNetworkRequestBodyAttachToNetworkRequest struct {
+type PostServersIDActionsAttachToNetworkAttachToNetworkRequest struct {
 	AliasIps []string `json:"alias_ips,omitempty"`
 	IP       *string  `json:"ip,omitempty"`
 	Network  int64    `json:"network"`
@@ -12,44 +12,44 @@ type PostServersIDActionsAttachToNetworkRequestBodyAttachToNetworkRequest struct
 
 type PostServersIDActionsAttachToNetworkRequest struct {
 	PathParams PostServersIDActionsAttachToNetworkPathParams
-	Request    *PostServersIDActionsAttachToNetworkRequestBodyAttachToNetworkRequest `request:"mediaType=application/json"`
+	Request    *PostServersIDActionsAttachToNetworkAttachToNetworkRequest `request:"mediaType=application/json"`
 }
 
-type PostServersIDActionsAttachToNetwork201ApplicationJSONActionError struct {
+type PostServersIDActionsAttachToNetworkActionResponseActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
 }
 
-type PostServersIDActionsAttachToNetwork201ApplicationJSONActionResources struct {
+type PostServersIDActionsAttachToNetworkActionResponseActionResources struct {
 	ID   int64  `json:"id"`
 	Type string `json:"type"`
 }
 
-type PostServersIDActionsAttachToNetwork201ApplicationJSONActionStatusEnum string
+type PostServersIDActionsAttachToNetworkActionResponseActionStatusEnum string
 
 const (
-	PostServersIDActionsAttachToNetwork201ApplicationJSONActionStatusEnumSuccess PostServersIDActionsAttachToNetwork201ApplicationJSONActionStatusEnum = "success"
-	PostServersIDActionsAttachToNetwork201ApplicationJSONActionStatusEnumRunning PostServersIDActionsAttachToNetwork201ApplicationJSONActionStatusEnum = "running"
-	PostServersIDActionsAttachToNetwork201ApplicationJSONActionStatusEnumError   PostServersIDActionsAttachToNetwork201ApplicationJSONActionStatusEnum = "error"
+	PostServersIDActionsAttachToNetworkActionResponseActionStatusEnumSuccess PostServersIDActionsAttachToNetworkActionResponseActionStatusEnum = "success"
+	PostServersIDActionsAttachToNetworkActionResponseActionStatusEnumRunning PostServersIDActionsAttachToNetworkActionResponseActionStatusEnum = "running"
+	PostServersIDActionsAttachToNetworkActionResponseActionStatusEnumError   PostServersIDActionsAttachToNetworkActionResponseActionStatusEnum = "error"
 )
 
-type PostServersIDActionsAttachToNetwork201ApplicationJSONActionAction struct {
-	Command   string                                                                 `json:"command"`
-	Error     PostServersIDActionsAttachToNetwork201ApplicationJSONActionError       `json:"error"`
-	Finished  string                                                                 `json:"finished"`
-	ID        int64                                                                  `json:"id"`
-	Progress  float64                                                                `json:"progress"`
-	Resources []PostServersIDActionsAttachToNetwork201ApplicationJSONActionResources `json:"resources"`
-	Started   string                                                                 `json:"started"`
-	Status    PostServersIDActionsAttachToNetwork201ApplicationJSONActionStatusEnum  `json:"status"`
+type PostServersIDActionsAttachToNetworkActionResponseAction struct {
+	Command   string                                                             `json:"command"`
+	Error     PostServersIDActionsAttachToNetworkActionResponseActionError       `json:"error"`
+	Finished  string                                                             `json:"finished"`
+	ID        int64                                                              `json:"id"`
+	Progress  float64                                                            `json:"progress"`
+	Resources []PostServersIDActionsAttachToNetworkActionResponseActionResources `json:"resources"`
+	Started   string                                                             `json:"started"`
+	Status    PostServersIDActionsAttachToNetworkActionResponseActionStatusEnum  `json:"status"`
 }
 
-type PostServersIDActionsAttachToNetwork201ApplicationJSONActionResponse struct {
-	Action PostServersIDActionsAttachToNetwork201ApplicationJSONActionAction `json:"action"`
+type PostServersIDActionsAttachToNetworkActionResponse struct {
+	Action PostServersIDActionsAttachToNetworkActionResponseAction `json:"action"`
 }
 
 type PostServersIDActionsAttachToNetworkResponse struct {
-	ActionResponse *PostServersIDActionsAttachToNetwork201ApplicationJSONActionResponse
+	ActionResponse *PostServersIDActionsAttachToNetworkActionResponse
 	ContentType    string
 	StatusCode     int64
 }

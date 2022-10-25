@@ -8,7 +8,7 @@ var CreateSyncServiceServers = []string{
 	"https://preview.twilio.com",
 }
 
-type CreateSyncServiceRequestBodyCreateSyncServiceRequest struct {
+type CreateSyncServiceCreateSyncServiceRequest struct {
 	ACLEnabled                  *bool   `form:"name=AclEnabled"`
 	FriendlyName                *string `form:"name=FriendlyName"`
 	ReachabilityWebhooksEnabled *bool   `form:"name=ReachabilityWebhooksEnabled"`
@@ -21,7 +21,7 @@ type CreateSyncServiceSecurity struct {
 
 type CreateSyncServiceRequest struct {
 	ServerURL *string
-	Request   *CreateSyncServiceRequestBodyCreateSyncServiceRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request   *CreateSyncServiceCreateSyncServiceRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security  CreateSyncServiceSecurity
 }
 

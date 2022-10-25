@@ -18,7 +18,7 @@ type UpdateSyncListItemHeaders struct {
 	IfMatch *string `header:"name=If-Match"`
 }
 
-type UpdateSyncListItemRequestBodyUpdateSyncListItemRequest struct {
+type UpdateSyncListItemUpdateSyncListItemRequest struct {
 	CollectionTTL *int64       `form:"name=CollectionTtl"`
 	Data          *interface{} `form:"name=Data"`
 	ItemTTL       *int64       `form:"name=ItemTtl"`
@@ -33,7 +33,7 @@ type UpdateSyncListItemRequest struct {
 	ServerURL  *string
 	PathParams UpdateSyncListItemPathParams
 	Headers    UpdateSyncListItemHeaders
-	Request    *UpdateSyncListItemRequestBodyUpdateSyncListItemRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateSyncListItemUpdateSyncListItemRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateSyncListItemSecurity
 }
 

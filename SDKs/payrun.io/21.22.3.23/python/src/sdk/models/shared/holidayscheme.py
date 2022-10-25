@@ -8,14 +8,14 @@ from dataclasses_json import dataclass_json
 
 @dataclass_json
 @dataclass
-class HolidaySchemeHolidaySchemeAccrualPayCodesAccrualPayCodes:
+class HolidaySchemeHolidaySchemeAccrualPayCodes:
     pay_code: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PayCode' }})
     
 
 @dataclass_json
 @dataclass
-class HolidaySchemeHolidaySchemeHolidayScheme:
-    accrual_pay_codes: Optional[HolidaySchemeHolidaySchemeAccrualPayCodesAccrualPayCodes] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AccrualPayCodes' }})
+class HolidaySchemeHolidayScheme:
+    accrual_pay_codes: Optional[HolidaySchemeHolidaySchemeAccrualPayCodes] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AccrualPayCodes' }})
     allow_negative_balance: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AllowNegativeBalance' }})
     annual_entitlement_weeks: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AnnualEntitlementWeeks' }})
     bank_holiday_inclusive: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'BankHolidayInclusive' }})
@@ -33,5 +33,5 @@ class HolidaySchemeHolidaySchemeHolidayScheme:
 @dataclass_json
 @dataclass
 class HolidayScheme:
-    holiday_scheme: Optional[HolidaySchemeHolidaySchemeHolidayScheme] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'HolidayScheme' }})
+    holiday_scheme: Optional[HolidaySchemeHolidayScheme] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'HolidayScheme' }})
     

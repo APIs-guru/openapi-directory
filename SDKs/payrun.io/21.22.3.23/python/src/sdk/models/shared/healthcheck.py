@@ -5,7 +5,7 @@ from dataclasses_json import dataclass_json
 
 @dataclass_json
 @dataclass
-class HealthCheckHealthCheckHealthCheck:
+class HealthCheckHealthCheck:
     info: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Info' }})
     version: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Version' }})
     
@@ -13,5 +13,5 @@ class HealthCheckHealthCheckHealthCheck:
 @dataclass_json
 @dataclass
 class HealthCheck:
-    health_check: Optional[HealthCheckHealthCheckHealthCheck] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'HealthCheck' }})
+    health_check: Optional[HealthCheckHealthCheck] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'HealthCheck' }})
     

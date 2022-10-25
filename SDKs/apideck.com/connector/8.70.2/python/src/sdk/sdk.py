@@ -191,7 +191,7 @@ class SDK:
         res = operations.ConnectorDocsOneResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "text/markdown"):
-                res.body = r.content
+                res.connector_docs_one_200_text_markdown_markdown_string = r.content
         elif r.status_code == 401:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.UnauthorizedResponse])

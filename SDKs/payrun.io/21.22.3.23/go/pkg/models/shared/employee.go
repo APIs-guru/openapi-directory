@@ -4,37 +4,37 @@ import (
 	"time"
 )
 
-type EmployeeEmployeeAeAssessmentOverrideAeAssessmentOverrideEnum string
+type EmployeeEmployeeAeAssessmentOverrideEnum string
 
 const (
-	EmployeeEmployeeAeAssessmentOverrideAeAssessmentOverrideEnumNone               EmployeeEmployeeAeAssessmentOverrideAeAssessmentOverrideEnum = "None"
-	EmployeeEmployeeAeAssessmentOverrideAeAssessmentOverrideEnumOptOut             EmployeeEmployeeAeAssessmentOverrideAeAssessmentOverrideEnum = "OptOut"
-	EmployeeEmployeeAeAssessmentOverrideAeAssessmentOverrideEnumOptIn              EmployeeEmployeeAeAssessmentOverrideAeAssessmentOverrideEnum = "OptIn"
-	EmployeeEmployeeAeAssessmentOverrideAeAssessmentOverrideEnumVoluntaryJoiner    EmployeeEmployeeAeAssessmentOverrideAeAssessmentOverrideEnum = "VoluntaryJoiner"
-	EmployeeEmployeeAeAssessmentOverrideAeAssessmentOverrideEnumContractualPension EmployeeEmployeeAeAssessmentOverrideAeAssessmentOverrideEnum = "ContractualPension"
-	EmployeeEmployeeAeAssessmentOverrideAeAssessmentOverrideEnumCeasedMembership   EmployeeEmployeeAeAssessmentOverrideAeAssessmentOverrideEnum = "CeasedMembership"
-	EmployeeEmployeeAeAssessmentOverrideAeAssessmentOverrideEnumLeaver             EmployeeEmployeeAeAssessmentOverrideAeAssessmentOverrideEnum = "Leaver"
-	EmployeeEmployeeAeAssessmentOverrideAeAssessmentOverrideEnumExcluded           EmployeeEmployeeAeAssessmentOverrideAeAssessmentOverrideEnum = "Excluded"
+	EmployeeEmployeeAeAssessmentOverrideEnumNone               EmployeeEmployeeAeAssessmentOverrideEnum = "None"
+	EmployeeEmployeeAeAssessmentOverrideEnumOptOut             EmployeeEmployeeAeAssessmentOverrideEnum = "OptOut"
+	EmployeeEmployeeAeAssessmentOverrideEnumOptIn              EmployeeEmployeeAeAssessmentOverrideEnum = "OptIn"
+	EmployeeEmployeeAeAssessmentOverrideEnumVoluntaryJoiner    EmployeeEmployeeAeAssessmentOverrideEnum = "VoluntaryJoiner"
+	EmployeeEmployeeAeAssessmentOverrideEnumContractualPension EmployeeEmployeeAeAssessmentOverrideEnum = "ContractualPension"
+	EmployeeEmployeeAeAssessmentOverrideEnumCeasedMembership   EmployeeEmployeeAeAssessmentOverrideEnum = "CeasedMembership"
+	EmployeeEmployeeAeAssessmentOverrideEnumLeaver             EmployeeEmployeeAeAssessmentOverrideEnum = "Leaver"
+	EmployeeEmployeeAeAssessmentOverrideEnumExcluded           EmployeeEmployeeAeAssessmentOverrideEnum = "Excluded"
 )
 
-type EmployeeEmployeeAeExclusionReasonCodeAeExclusionReasonCodeEnum string
+type EmployeeEmployeeAeExclusionReasonCodeEnum string
 
 const (
-	EmployeeEmployeeAeExclusionReasonCodeAeExclusionReasonCodeEnumOtherNotKnown                  EmployeeEmployeeAeExclusionReasonCodeAeExclusionReasonCodeEnum = "OtherNotKnown"
-	EmployeeEmployeeAeExclusionReasonCodeAeExclusionReasonCodeEnumNotAWorker                     EmployeeEmployeeAeExclusionReasonCodeAeExclusionReasonCodeEnum = "NotAWorker"
-	EmployeeEmployeeAeExclusionReasonCodeAeExclusionReasonCodeEnumNotUkWorker                    EmployeeEmployeeAeExclusionReasonCodeAeExclusionReasonCodeEnum = "NotUKWorker"
-	EmployeeEmployeeAeExclusionReasonCodeAeExclusionReasonCodeEnumTemporaryUkWorker              EmployeeEmployeeAeExclusionReasonCodeAeExclusionReasonCodeEnum = "TemporaryUKWorker"
-	EmployeeEmployeeAeExclusionReasonCodeAeExclusionReasonCodeEnumOutsideAgeRange                EmployeeEmployeeAeExclusionReasonCodeAeExclusionReasonCodeEnum = "OutsideAgeRange"
-	EmployeeEmployeeAeExclusionReasonCodeAeExclusionReasonCodeEnumSingleEmployeeDirector         EmployeeEmployeeAeExclusionReasonCodeAeExclusionReasonCodeEnum = "SingleEmployeeDirector"
-	EmployeeEmployeeAeExclusionReasonCodeAeExclusionReasonCodeEnumCeasedMembershipWithin12Months EmployeeEmployeeAeExclusionReasonCodeAeExclusionReasonCodeEnum = "CeasedMembershipWithin12Months"
-	EmployeeEmployeeAeExclusionReasonCodeAeExclusionReasonCodeEnumCeasedMembershipBeyond12Months EmployeeEmployeeAeExclusionReasonCodeAeExclusionReasonCodeEnum = "CeasedMembershipBeyond12Months"
-	EmployeeEmployeeAeExclusionReasonCodeAeExclusionReasonCodeEnumWorkerWulsWithin12Month        EmployeeEmployeeAeExclusionReasonCodeAeExclusionReasonCodeEnum = "WorkerWULSWithin12Month"
-	EmployeeEmployeeAeExclusionReasonCodeAeExclusionReasonCodeEnumWorkerWulsBeyond12Month        EmployeeEmployeeAeExclusionReasonCodeAeExclusionReasonCodeEnum = "WorkerWULSBeyond12Month"
-	EmployeeEmployeeAeExclusionReasonCodeAeExclusionReasonCodeEnumWorkerInNoticePeriod           EmployeeEmployeeAeExclusionReasonCodeAeExclusionReasonCodeEnum = "WorkerInNoticePeriod"
-	EmployeeEmployeeAeExclusionReasonCodeAeExclusionReasonCodeEnumWorkerTaxProtection            EmployeeEmployeeAeExclusionReasonCodeAeExclusionReasonCodeEnum = "WorkerTaxProtection"
+	EmployeeEmployeeAeExclusionReasonCodeEnumOtherNotKnown                  EmployeeEmployeeAeExclusionReasonCodeEnum = "OtherNotKnown"
+	EmployeeEmployeeAeExclusionReasonCodeEnumNotAWorker                     EmployeeEmployeeAeExclusionReasonCodeEnum = "NotAWorker"
+	EmployeeEmployeeAeExclusionReasonCodeEnumNotUkWorker                    EmployeeEmployeeAeExclusionReasonCodeEnum = "NotUKWorker"
+	EmployeeEmployeeAeExclusionReasonCodeEnumTemporaryUkWorker              EmployeeEmployeeAeExclusionReasonCodeEnum = "TemporaryUKWorker"
+	EmployeeEmployeeAeExclusionReasonCodeEnumOutsideAgeRange                EmployeeEmployeeAeExclusionReasonCodeEnum = "OutsideAgeRange"
+	EmployeeEmployeeAeExclusionReasonCodeEnumSingleEmployeeDirector         EmployeeEmployeeAeExclusionReasonCodeEnum = "SingleEmployeeDirector"
+	EmployeeEmployeeAeExclusionReasonCodeEnumCeasedMembershipWithin12Months EmployeeEmployeeAeExclusionReasonCodeEnum = "CeasedMembershipWithin12Months"
+	EmployeeEmployeeAeExclusionReasonCodeEnumCeasedMembershipBeyond12Months EmployeeEmployeeAeExclusionReasonCodeEnum = "CeasedMembershipBeyond12Months"
+	EmployeeEmployeeAeExclusionReasonCodeEnumWorkerWulsWithin12Month        EmployeeEmployeeAeExclusionReasonCodeEnum = "WorkerWULSWithin12Month"
+	EmployeeEmployeeAeExclusionReasonCodeEnumWorkerWulsBeyond12Month        EmployeeEmployeeAeExclusionReasonCodeEnum = "WorkerWULSBeyond12Month"
+	EmployeeEmployeeAeExclusionReasonCodeEnumWorkerInNoticePeriod           EmployeeEmployeeAeExclusionReasonCodeEnum = "WorkerInNoticePeriod"
+	EmployeeEmployeeAeExclusionReasonCodeEnumWorkerTaxProtection            EmployeeEmployeeAeExclusionReasonCodeEnum = "WorkerTaxProtection"
 )
 
-type EmployeeEmployeeAddressAddress struct {
+type EmployeeEmployeeAddress struct {
 	Address1 *string `json:"Address1,omitempty"`
 	Address2 *string `json:"Address2,omitempty"`
 	Address3 *string `json:"Address3,omitempty"`
@@ -43,14 +43,14 @@ type EmployeeEmployeeAddressAddress struct {
 	Postcode *string `json:"Postcode,omitempty"`
 }
 
-type EmployeeEmployeeBankAccountBankAccount struct {
+type EmployeeEmployeeBankAccount struct {
 	AccountName   *string `json:"AccountName,omitempty"`
 	AccountNumber *string `json:"AccountNumber,omitempty"`
 	Reference     *string `json:"Reference,omitempty"`
 	SortCode      *string `json:"SortCode,omitempty"`
 }
 
-type EmployeeEmployeeEmployeePartnerEmployeePartner struct {
+type EmployeeEmployeeEmployeePartner struct {
 	FirstName  *string `json:"FirstName,omitempty"`
 	Initials   *string `json:"Initials,omitempty"`
 	LastName   *string `json:"LastName,omitempty"`
@@ -58,183 +58,183 @@ type EmployeeEmployeeEmployeePartnerEmployeePartner struct {
 	NiNumber   *string `json:"NiNumber,omitempty"`
 }
 
-type EmployeeEmployeeGenderGenderEnum string
+type EmployeeEmployeeGenderEnum string
 
 const (
-	EmployeeEmployeeGenderGenderEnumUnknown EmployeeEmployeeGenderGenderEnum = "Unknown"
-	EmployeeEmployeeGenderGenderEnumMale    EmployeeEmployeeGenderGenderEnum = "Male"
-	EmployeeEmployeeGenderGenderEnumFemale  EmployeeEmployeeGenderGenderEnum = "Female"
+	EmployeeEmployeeGenderEnumUnknown EmployeeEmployeeGenderEnum = "Unknown"
+	EmployeeEmployeeGenderEnumMale    EmployeeEmployeeGenderEnum = "Male"
+	EmployeeEmployeeGenderEnumFemale  EmployeeEmployeeGenderEnum = "Female"
 )
 
-type EmployeeEmployeeLeaverReasonLeaverReasonEnum string
+type EmployeeEmployeeLeaverReasonEnum string
 
 const (
-	EmployeeEmployeeLeaverReasonLeaverReasonEnumResigned     EmployeeEmployeeLeaverReasonLeaverReasonEnum = "Resigned"
-	EmployeeEmployeeLeaverReasonLeaverReasonEnumDismissed    EmployeeEmployeeLeaverReasonLeaverReasonEnum = "Dismissed"
-	EmployeeEmployeeLeaverReasonLeaverReasonEnumRedundant    EmployeeEmployeeLeaverReasonLeaverReasonEnum = "Redundant"
-	EmployeeEmployeeLeaverReasonLeaverReasonEnumRetired      EmployeeEmployeeLeaverReasonLeaverReasonEnum = "Retired"
-	EmployeeEmployeeLeaverReasonLeaverReasonEnumDeceased     EmployeeEmployeeLeaverReasonLeaverReasonEnum = "Deceased"
-	EmployeeEmployeeLeaverReasonLeaverReasonEnumLegalCustody EmployeeEmployeeLeaverReasonLeaverReasonEnum = "LegalCustody"
-	EmployeeEmployeeLeaverReasonLeaverReasonEnumOther        EmployeeEmployeeLeaverReasonLeaverReasonEnum = "Other"
+	EmployeeEmployeeLeaverReasonEnumResigned     EmployeeEmployeeLeaverReasonEnum = "Resigned"
+	EmployeeEmployeeLeaverReasonEnumDismissed    EmployeeEmployeeLeaverReasonEnum = "Dismissed"
+	EmployeeEmployeeLeaverReasonEnumRedundant    EmployeeEmployeeLeaverReasonEnum = "Redundant"
+	EmployeeEmployeeLeaverReasonEnumRetired      EmployeeEmployeeLeaverReasonEnum = "Retired"
+	EmployeeEmployeeLeaverReasonEnumDeceased     EmployeeEmployeeLeaverReasonEnum = "Deceased"
+	EmployeeEmployeeLeaverReasonEnumLegalCustody EmployeeEmployeeLeaverReasonEnum = "LegalCustody"
+	EmployeeEmployeeLeaverReasonEnumOther        EmployeeEmployeeLeaverReasonEnum = "Other"
 )
 
-type EmployeeEmployeeMaritalStatusMaritalStatusEnum string
+type EmployeeEmployeeMaritalStatusEnum string
 
 const (
-	EmployeeEmployeeMaritalStatusMaritalStatusEnumNotSet   EmployeeEmployeeMaritalStatusMaritalStatusEnum = "NotSet"
-	EmployeeEmployeeMaritalStatusMaritalStatusEnumSingle   EmployeeEmployeeMaritalStatusMaritalStatusEnum = "Single"
-	EmployeeEmployeeMaritalStatusMaritalStatusEnumMarried  EmployeeEmployeeMaritalStatusMaritalStatusEnum = "Married"
-	EmployeeEmployeeMaritalStatusMaritalStatusEnumDivorced EmployeeEmployeeMaritalStatusMaritalStatusEnum = "Divorced"
-	EmployeeEmployeeMaritalStatusMaritalStatusEnumWidowed  EmployeeEmployeeMaritalStatusMaritalStatusEnum = "Widowed"
+	EmployeeEmployeeMaritalStatusEnumNotSet   EmployeeEmployeeMaritalStatusEnum = "NotSet"
+	EmployeeEmployeeMaritalStatusEnumSingle   EmployeeEmployeeMaritalStatusEnum = "Single"
+	EmployeeEmployeeMaritalStatusEnumMarried  EmployeeEmployeeMaritalStatusEnum = "Married"
+	EmployeeEmployeeMaritalStatusEnumDivorced EmployeeEmployeeMaritalStatusEnum = "Divorced"
+	EmployeeEmployeeMaritalStatusEnumWidowed  EmployeeEmployeeMaritalStatusEnum = "Widowed"
 )
 
-type EmployeeEmployeeNicLiabilityNicLiabilityEnum string
+type EmployeeEmployeeNicLiabilityEnum string
 
 const (
-	EmployeeEmployeeNicLiabilityNicLiabilityEnumHasOtherJob                   EmployeeEmployeeNicLiabilityNicLiabilityEnum = "HasOtherJob"
-	EmployeeEmployeeNicLiabilityNicLiabilityEnumIsFemaleEntitledToReducedRate EmployeeEmployeeNicLiabilityNicLiabilityEnum = "IsFemaleEntitledToReducedRate"
-	EmployeeEmployeeNicLiabilityNicLiabilityEnumIsNotLiable                   EmployeeEmployeeNicLiabilityNicLiabilityEnum = "IsNotLiable"
-	EmployeeEmployeeNicLiabilityNicLiabilityEnumIsContractedOut               EmployeeEmployeeNicLiabilityNicLiabilityEnum = "IsContractedOut"
-	EmployeeEmployeeNicLiabilityNicLiabilityEnumIsFullyLiable                 EmployeeEmployeeNicLiabilityNicLiabilityEnum = "IsFullyLiable"
-	EmployeeEmployeeNicLiabilityNicLiabilityEnumIsApprentice                  EmployeeEmployeeNicLiabilityNicLiabilityEnum = "IsApprentice"
-	EmployeeEmployeeNicLiabilityNicLiabilityEnumLeaverBeyond6Weeks            EmployeeEmployeeNicLiabilityNicLiabilityEnum = "LeaverBeyond6Weeks"
-	EmployeeEmployeeNicLiabilityNicLiabilityEnumPaymentAfterLeaving           EmployeeEmployeeNicLiabilityNicLiabilityEnum = "PaymentAfterLeaving"
+	EmployeeEmployeeNicLiabilityEnumHasOtherJob                   EmployeeEmployeeNicLiabilityEnum = "HasOtherJob"
+	EmployeeEmployeeNicLiabilityEnumIsFemaleEntitledToReducedRate EmployeeEmployeeNicLiabilityEnum = "IsFemaleEntitledToReducedRate"
+	EmployeeEmployeeNicLiabilityEnumIsNotLiable                   EmployeeEmployeeNicLiabilityEnum = "IsNotLiable"
+	EmployeeEmployeeNicLiabilityEnumIsContractedOut               EmployeeEmployeeNicLiabilityEnum = "IsContractedOut"
+	EmployeeEmployeeNicLiabilityEnumIsFullyLiable                 EmployeeEmployeeNicLiabilityEnum = "IsFullyLiable"
+	EmployeeEmployeeNicLiabilityEnumIsApprentice                  EmployeeEmployeeNicLiabilityEnum = "IsApprentice"
+	EmployeeEmployeeNicLiabilityEnumLeaverBeyond6Weeks            EmployeeEmployeeNicLiabilityEnum = "LeaverBeyond6Weeks"
+	EmployeeEmployeeNicLiabilityEnumPaymentAfterLeaving           EmployeeEmployeeNicLiabilityEnum = "PaymentAfterLeaving"
 )
 
-type EmployeeEmployeePaySchedulePaySchedule struct {
+type EmployeeEmployeePaySchedule struct {
 	AtHref  *string `json:"@href,omitempty"`
 	AtRel   *string `json:"@rel,omitempty"`
 	AtTitle *string `json:"@title,omitempty"`
 }
 
-type EmployeeEmployeePaymentMethodPaymentMethodEnum string
+type EmployeeEmployeePaymentMethodEnum string
 
 const (
-	EmployeeEmployeePaymentMethodPaymentMethodEnumNotSet         EmployeeEmployeePaymentMethodPaymentMethodEnum = "NotSet"
-	EmployeeEmployeePaymentMethodPaymentMethodEnumCash           EmployeeEmployeePaymentMethodPaymentMethodEnum = "Cash"
-	EmployeeEmployeePaymentMethodPaymentMethodEnumCheque         EmployeeEmployeePaymentMethodPaymentMethodEnum = "Cheque"
-	EmployeeEmployeePaymentMethodPaymentMethodEnumBacs           EmployeeEmployeePaymentMethodPaymentMethodEnum = "BACS"
-	EmployeeEmployeePaymentMethodPaymentMethodEnumFasterPayments EmployeeEmployeePaymentMethodPaymentMethodEnum = "FasterPayments"
-	EmployeeEmployeePaymentMethodPaymentMethodEnumOther          EmployeeEmployeePaymentMethodPaymentMethodEnum = "Other"
+	EmployeeEmployeePaymentMethodEnumNotSet         EmployeeEmployeePaymentMethodEnum = "NotSet"
+	EmployeeEmployeePaymentMethodEnumCash           EmployeeEmployeePaymentMethodEnum = "Cash"
+	EmployeeEmployeePaymentMethodEnumCheque         EmployeeEmployeePaymentMethodEnum = "Cheque"
+	EmployeeEmployeePaymentMethodEnumBacs           EmployeeEmployeePaymentMethodEnum = "BACS"
+	EmployeeEmployeePaymentMethodEnumFasterPayments EmployeeEmployeePaymentMethodEnum = "FasterPayments"
+	EmployeeEmployeePaymentMethodEnumOther          EmployeeEmployeePaymentMethodEnum = "Other"
 )
 
-type EmployeeEmployeeRegionRegionEnum string
+type EmployeeEmployeeRegionEnum string
 
 const (
-	EmployeeEmployeeRegionRegionEnumNotSet   EmployeeEmployeeRegionRegionEnum = "NotSet"
-	EmployeeEmployeeRegionRegionEnumEngland  EmployeeEmployeeRegionRegionEnum = "England"
-	EmployeeEmployeeRegionRegionEnumScotland EmployeeEmployeeRegionRegionEnum = "Scotland"
-	EmployeeEmployeeRegionRegionEnumWales    EmployeeEmployeeRegionRegionEnum = "Wales"
+	EmployeeEmployeeRegionEnumNotSet   EmployeeEmployeeRegionEnum = "NotSet"
+	EmployeeEmployeeRegionEnumEngland  EmployeeEmployeeRegionEnum = "England"
+	EmployeeEmployeeRegionEnumScotland EmployeeEmployeeRegionEnum = "Scotland"
+	EmployeeEmployeeRegionEnumWales    EmployeeEmployeeRegionEnum = "Wales"
 )
 
-type EmployeeEmployeeRuleExclusionsRuleExclusionsEnum string
+type EmployeeEmployeeRuleExclusionsEnum string
 
 const (
-	EmployeeEmployeeRuleExclusionsRuleExclusionsEnumNone                                  EmployeeEmployeeRuleExclusionsRuleExclusionsEnum = "None"
-	EmployeeEmployeeRuleExclusionsRuleExclusionsEnumNiMissingPayInstructionRule           EmployeeEmployeeRuleExclusionsRuleExclusionsEnum = "NiMissingPayInstructionRule"
-	EmployeeEmployeeRuleExclusionsRuleExclusionsEnumTaxMissingPayInstructionRule          EmployeeEmployeeRuleExclusionsRuleExclusionsEnum = "TaxMissingPayInstructionRule"
-	EmployeeEmployeeRuleExclusionsRuleExclusionsEnumTaxCodeUpliftRule                     EmployeeEmployeeRuleExclusionsRuleExclusionsEnum = "TaxCodeUpliftRule"
-	EmployeeEmployeeRuleExclusionsRuleExclusionsEnumNiSetExpectedLetterRule               EmployeeEmployeeRuleExclusionsRuleExclusionsEnum = "NiSetExpectedLetterRule"
-	EmployeeEmployeeRuleExclusionsRuleExclusionsEnumNiDateOfBirthChangeRetrospectiveCRule EmployeeEmployeeRuleExclusionsRuleExclusionsEnum = "NiDateOfBirthChangeRetrospectiveCRule"
-	EmployeeEmployeeRuleExclusionsRuleExclusionsEnumNiDefermentStatusChangeRule           EmployeeEmployeeRuleExclusionsRuleExclusionsEnum = "NiDefermentStatusChangeRule"
-	EmployeeEmployeeRuleExclusionsRuleExclusionsEnumNiEndContractedOutTransferRule        EmployeeEmployeeRuleExclusionsRuleExclusionsEnum = "NiEndContractedOutTransferRule"
-	EmployeeEmployeeRuleExclusionsRuleExclusionsEnumPaymentAfterLeavingRule               EmployeeEmployeeRuleExclusionsRuleExclusionsEnum = "PaymentAfterLeavingRule"
-	EmployeeEmployeeRuleExclusionsRuleExclusionsEnumLeaverEndInstructionsRule             EmployeeEmployeeRuleExclusionsRuleExclusionsEnum = "LeaverEndInstructionsRule"
-	EmployeeEmployeeRuleExclusionsRuleExclusionsEnumP45StudentLoanInstructionRule         EmployeeEmployeeRuleExclusionsRuleExclusionsEnum = "P45StudentLoanInstructionRule"
-	EmployeeEmployeeRuleExclusionsRuleExclusionsEnumP45TaxInstructionRule                 EmployeeEmployeeRuleExclusionsRuleExclusionsEnum = "P45TaxInstructionRule"
-	EmployeeEmployeeRuleExclusionsRuleExclusionsEnumP45YtdTaxRule                         EmployeeEmployeeRuleExclusionsRuleExclusionsEnum = "P45YtdTaxRule"
-	EmployeeEmployeeRuleExclusionsRuleExclusionsEnumYtdInstructionRule                    EmployeeEmployeeRuleExclusionsRuleExclusionsEnum = "YtdInstructionRule"
-	EmployeeEmployeeRuleExclusionsRuleExclusionsEnumTaxCodeRegionChangeRule               EmployeeEmployeeRuleExclusionsRuleExclusionsEnum = "TaxCodeRegionChangeRule"
-	EmployeeEmployeeRuleExclusionsRuleExclusionsEnumAutoEnrolmentStatusChangeRule         EmployeeEmployeeRuleExclusionsRuleExclusionsEnum = "AutoEnrolmentStatusChangeRule"
-	EmployeeEmployeeRuleExclusionsRuleExclusionsEnumEmployeeDeceasedRule                  EmployeeEmployeeRuleExclusionsRuleExclusionsEnum = "EmployeeDeceasedRule"
-	EmployeeEmployeeRuleExclusionsRuleExclusionsEnumBenefitInstructionAutoEndRule         EmployeeEmployeeRuleExclusionsRuleExclusionsEnum = "BenefitInstructionAutoEndRule"
+	EmployeeEmployeeRuleExclusionsEnumNone                                  EmployeeEmployeeRuleExclusionsEnum = "None"
+	EmployeeEmployeeRuleExclusionsEnumNiMissingPayInstructionRule           EmployeeEmployeeRuleExclusionsEnum = "NiMissingPayInstructionRule"
+	EmployeeEmployeeRuleExclusionsEnumTaxMissingPayInstructionRule          EmployeeEmployeeRuleExclusionsEnum = "TaxMissingPayInstructionRule"
+	EmployeeEmployeeRuleExclusionsEnumTaxCodeUpliftRule                     EmployeeEmployeeRuleExclusionsEnum = "TaxCodeUpliftRule"
+	EmployeeEmployeeRuleExclusionsEnumNiSetExpectedLetterRule               EmployeeEmployeeRuleExclusionsEnum = "NiSetExpectedLetterRule"
+	EmployeeEmployeeRuleExclusionsEnumNiDateOfBirthChangeRetrospectiveCRule EmployeeEmployeeRuleExclusionsEnum = "NiDateOfBirthChangeRetrospectiveCRule"
+	EmployeeEmployeeRuleExclusionsEnumNiDefermentStatusChangeRule           EmployeeEmployeeRuleExclusionsEnum = "NiDefermentStatusChangeRule"
+	EmployeeEmployeeRuleExclusionsEnumNiEndContractedOutTransferRule        EmployeeEmployeeRuleExclusionsEnum = "NiEndContractedOutTransferRule"
+	EmployeeEmployeeRuleExclusionsEnumPaymentAfterLeavingRule               EmployeeEmployeeRuleExclusionsEnum = "PaymentAfterLeavingRule"
+	EmployeeEmployeeRuleExclusionsEnumLeaverEndInstructionsRule             EmployeeEmployeeRuleExclusionsEnum = "LeaverEndInstructionsRule"
+	EmployeeEmployeeRuleExclusionsEnumP45StudentLoanInstructionRule         EmployeeEmployeeRuleExclusionsEnum = "P45StudentLoanInstructionRule"
+	EmployeeEmployeeRuleExclusionsEnumP45TaxInstructionRule                 EmployeeEmployeeRuleExclusionsEnum = "P45TaxInstructionRule"
+	EmployeeEmployeeRuleExclusionsEnumP45YtdTaxRule                         EmployeeEmployeeRuleExclusionsEnum = "P45YtdTaxRule"
+	EmployeeEmployeeRuleExclusionsEnumYtdInstructionRule                    EmployeeEmployeeRuleExclusionsEnum = "YtdInstructionRule"
+	EmployeeEmployeeRuleExclusionsEnumTaxCodeRegionChangeRule               EmployeeEmployeeRuleExclusionsEnum = "TaxCodeRegionChangeRule"
+	EmployeeEmployeeRuleExclusionsEnumAutoEnrolmentStatusChangeRule         EmployeeEmployeeRuleExclusionsEnum = "AutoEnrolmentStatusChangeRule"
+	EmployeeEmployeeRuleExclusionsEnumEmployeeDeceasedRule                  EmployeeEmployeeRuleExclusionsEnum = "EmployeeDeceasedRule"
+	EmployeeEmployeeRuleExclusionsEnumBenefitInstructionAutoEndRule         EmployeeEmployeeRuleExclusionsEnum = "BenefitInstructionAutoEndRule"
 )
 
-type EmployeeEmployeeSecondedSecondedEnum string
+type EmployeeEmployeeSecondedEnum string
 
 const (
-	EmployeeEmployeeSecondedSecondedEnumNotSet              EmployeeEmployeeSecondedSecondedEnum = "NotSet"
-	EmployeeEmployeeSecondedSecondedEnumStay183DaysOrMore   EmployeeEmployeeSecondedSecondedEnum = "Stay183DaysOrMore"
-	EmployeeEmployeeSecondedSecondedEnumStayLessThan183Days EmployeeEmployeeSecondedSecondedEnum = "StayLessThan183Days"
-	EmployeeEmployeeSecondedSecondedEnumInOutUk             EmployeeEmployeeSecondedSecondedEnum = "InOutUk"
+	EmployeeEmployeeSecondedEnumNotSet              EmployeeEmployeeSecondedEnum = "NotSet"
+	EmployeeEmployeeSecondedEnumStay183DaysOrMore   EmployeeEmployeeSecondedEnum = "Stay183DaysOrMore"
+	EmployeeEmployeeSecondedEnumStayLessThan183Days EmployeeEmployeeSecondedEnum = "StayLessThan183Days"
+	EmployeeEmployeeSecondedEnumInOutUk             EmployeeEmployeeSecondedEnum = "InOutUk"
 )
 
-type EmployeeEmployeeStarterDeclarationStarterDeclarationEnum string
+type EmployeeEmployeeStarterDeclarationEnum string
 
 const (
-	EmployeeEmployeeStarterDeclarationStarterDeclarationEnumPreviouslyReported EmployeeEmployeeStarterDeclarationStarterDeclarationEnum = "PreviouslyReported"
-	EmployeeEmployeeStarterDeclarationStarterDeclarationEnumA                  EmployeeEmployeeStarterDeclarationStarterDeclarationEnum = "A"
-	EmployeeEmployeeStarterDeclarationStarterDeclarationEnumB                  EmployeeEmployeeStarterDeclarationStarterDeclarationEnum = "B"
-	EmployeeEmployeeStarterDeclarationStarterDeclarationEnumC                  EmployeeEmployeeStarterDeclarationStarterDeclarationEnum = "C"
+	EmployeeEmployeeStarterDeclarationEnumPreviouslyReported EmployeeEmployeeStarterDeclarationEnum = "PreviouslyReported"
+	EmployeeEmployeeStarterDeclarationEnumA                  EmployeeEmployeeStarterDeclarationEnum = "A"
+	EmployeeEmployeeStarterDeclarationEnumB                  EmployeeEmployeeStarterDeclarationEnum = "B"
+	EmployeeEmployeeStarterDeclarationEnumC                  EmployeeEmployeeStarterDeclarationEnum = "C"
 )
 
-type EmployeeEmployeeTerritoryTerritoryEnum string
+type EmployeeEmployeeTerritoryEnum string
 
 const (
-	EmployeeEmployeeTerritoryTerritoryEnumUnitedKingdom EmployeeEmployeeTerritoryTerritoryEnum = "UnitedKingdom"
+	EmployeeEmployeeTerritoryEnumUnitedKingdom EmployeeEmployeeTerritoryEnum = "UnitedKingdom"
 )
 
-type EmployeeEmployeeWorkingWeekWorkingWeekEnum string
+type EmployeeEmployeeWorkingWeekEnum string
 
 const (
-	EmployeeEmployeeWorkingWeekWorkingWeekEnumNone        EmployeeEmployeeWorkingWeekWorkingWeekEnum = "None"
-	EmployeeEmployeeWorkingWeekWorkingWeekEnumMonday      EmployeeEmployeeWorkingWeekWorkingWeekEnum = "Monday"
-	EmployeeEmployeeWorkingWeekWorkingWeekEnumTuesday     EmployeeEmployeeWorkingWeekWorkingWeekEnum = "Tuesday"
-	EmployeeEmployeeWorkingWeekWorkingWeekEnumWednesday   EmployeeEmployeeWorkingWeekWorkingWeekEnum = "Wednesday"
-	EmployeeEmployeeWorkingWeekWorkingWeekEnumThursday    EmployeeEmployeeWorkingWeekWorkingWeekEnum = "Thursday"
-	EmployeeEmployeeWorkingWeekWorkingWeekEnumFriday      EmployeeEmployeeWorkingWeekWorkingWeekEnum = "Friday"
-	EmployeeEmployeeWorkingWeekWorkingWeekEnumAllWeekDays EmployeeEmployeeWorkingWeekWorkingWeekEnum = "AllWeekDays"
-	EmployeeEmployeeWorkingWeekWorkingWeekEnumSaturday    EmployeeEmployeeWorkingWeekWorkingWeekEnum = "Saturday"
-	EmployeeEmployeeWorkingWeekWorkingWeekEnumSunday      EmployeeEmployeeWorkingWeekWorkingWeekEnum = "Sunday"
-	EmployeeEmployeeWorkingWeekWorkingWeekEnumAllDays     EmployeeEmployeeWorkingWeekWorkingWeekEnum = "AllDays"
+	EmployeeEmployeeWorkingWeekEnumNone        EmployeeEmployeeWorkingWeekEnum = "None"
+	EmployeeEmployeeWorkingWeekEnumMonday      EmployeeEmployeeWorkingWeekEnum = "Monday"
+	EmployeeEmployeeWorkingWeekEnumTuesday     EmployeeEmployeeWorkingWeekEnum = "Tuesday"
+	EmployeeEmployeeWorkingWeekEnumWednesday   EmployeeEmployeeWorkingWeekEnum = "Wednesday"
+	EmployeeEmployeeWorkingWeekEnumThursday    EmployeeEmployeeWorkingWeekEnum = "Thursday"
+	EmployeeEmployeeWorkingWeekEnumFriday      EmployeeEmployeeWorkingWeekEnum = "Friday"
+	EmployeeEmployeeWorkingWeekEnumAllWeekDays EmployeeEmployeeWorkingWeekEnum = "AllWeekDays"
+	EmployeeEmployeeWorkingWeekEnumSaturday    EmployeeEmployeeWorkingWeekEnum = "Saturday"
+	EmployeeEmployeeWorkingWeekEnumSunday      EmployeeEmployeeWorkingWeekEnum = "Sunday"
+	EmployeeEmployeeWorkingWeekEnumAllDays     EmployeeEmployeeWorkingWeekEnum = "AllDays"
 )
 
-type EmployeeEmployeeEmployee struct {
-	AeAssessmentOverride        *EmployeeEmployeeAeAssessmentOverrideAeAssessmentOverrideEnum   `json:"AEAssessmentOverride,omitempty"`
-	AeAssessmentOverrideDate    *time.Time                                                      `json:"AEAssessmentOverrideDate,omitempty"`
-	AeExclusionReasonCode       *EmployeeEmployeeAeExclusionReasonCodeAeExclusionReasonCodeEnum `json:"AEExclusionReasonCode,omitempty"`
-	AePostponementDate          *time.Time                                                      `json:"AEPostponementDate,omitempty"`
-	Address                     *EmployeeEmployeeAddressAddress                                 `json:"Address,omitempty"`
-	BankAccount                 *EmployeeEmployeeBankAccountBankAccount                         `json:"BankAccount,omitempty"`
-	Code                        *string                                                         `json:"Code,omitempty"`
-	DateOfBirth                 *time.Time                                                      `json:"DateOfBirth,omitempty"`
-	Deactivated                 *bool                                                           `json:"Deactivated,omitempty"`
-	DirectorshipAppointmentDate *time.Time                                                      `json:"DirectorshipAppointmentDate,omitempty"`
-	EeaCitizen                  *bool                                                           `json:"EEACitizen,omitempty"`
-	Epm6                        *bool                                                           `json:"EPM6,omitempty"`
-	EffectiveDate               *time.Time                                                      `json:"EffectiveDate,omitempty"`
-	EmployeePartner             *EmployeeEmployeeEmployeePartnerEmployeePartner                 `json:"EmployeePartner,omitempty"`
-	FirstName                   *string                                                         `json:"FirstName,omitempty"`
-	Gender                      *EmployeeEmployeeGenderGenderEnum                               `json:"Gender,omitempty"`
-	HoursPerWeek                *float64                                                        `json:"HoursPerWeek,omitempty"`
-	Initials                    *string                                                         `json:"Initials,omitempty"`
-	IrregularEmployment         *bool                                                           `json:"IrregularEmployment,omitempty"`
-	IsAgencyWorker              *bool                                                           `json:"IsAgencyWorker,omitempty"`
-	LastName                    *string                                                         `json:"LastName,omitempty"`
-	LeaverReason                *EmployeeEmployeeLeaverReasonLeaverReasonEnum                   `json:"LeaverReason,omitempty"`
-	LeavingDate                 *time.Time                                                      `json:"LeavingDate,omitempty"`
-	MaritalStatus               *EmployeeEmployeeMaritalStatusMaritalStatusEnum                 `json:"MaritalStatus,omitempty"`
-	MetaData                    map[string]interface{}                                          `json:"MetaData,omitempty"`
-	MiddleName                  *string                                                         `json:"MiddleName,omitempty"`
-	NiNumber                    *string                                                         `json:"NiNumber,omitempty"`
-	NicLiability                *EmployeeEmployeeNicLiabilityNicLiabilityEnum                   `json:"NicLiability,omitempty"`
-	OffPayrollWorker            *bool                                                           `json:"OffPayrollWorker,omitempty"`
-	OnStrike                    *bool                                                           `json:"OnStrike,omitempty"`
-	PassportNumber              *string                                                         `json:"PassportNumber,omitempty"`
-	PaySchedule                 *EmployeeEmployeePaySchedulePaySchedule                         `json:"PaySchedule,omitempty"`
-	PaymentMethod               *EmployeeEmployeePaymentMethodPaymentMethodEnum                 `json:"PaymentMethod,omitempty"`
-	PaymentToANonIndividual     *bool                                                           `json:"PaymentToANonIndividual,omitempty"`
-	Region                      *EmployeeEmployeeRegionRegionEnum                               `json:"Region,omitempty"`
-	Revision                    *int32                                                          `json:"Revision,omitempty"`
-	RuleExclusions              *EmployeeEmployeeRuleExclusionsRuleExclusionsEnum               `json:"RuleExclusions,omitempty"`
-	Seconded                    *EmployeeEmployeeSecondedSecondedEnum                           `json:"Seconded,omitempty"`
-	StartDate                   *time.Time                                                      `json:"StartDate,omitempty"`
-	StarterDeclaration          *EmployeeEmployeeStarterDeclarationStarterDeclarationEnum       `json:"StarterDeclaration,omitempty"`
-	Territory                   *EmployeeEmployeeTerritoryTerritoryEnum                         `json:"Territory,omitempty"`
-	Title                       *string                                                         `json:"Title,omitempty"`
-	WorkingWeek                 *EmployeeEmployeeWorkingWeekWorkingWeekEnum                     `json:"WorkingWeek,omitempty"`
+type EmployeeEmployee struct {
+	AeAssessmentOverride        *EmployeeEmployeeAeAssessmentOverrideEnum  `json:"AEAssessmentOverride,omitempty"`
+	AeAssessmentOverrideDate    *time.Time                                 `json:"AEAssessmentOverrideDate,omitempty"`
+	AeExclusionReasonCode       *EmployeeEmployeeAeExclusionReasonCodeEnum `json:"AEExclusionReasonCode,omitempty"`
+	AePostponementDate          *time.Time                                 `json:"AEPostponementDate,omitempty"`
+	Address                     *EmployeeEmployeeAddress                   `json:"Address,omitempty"`
+	BankAccount                 *EmployeeEmployeeBankAccount               `json:"BankAccount,omitempty"`
+	Code                        *string                                    `json:"Code,omitempty"`
+	DateOfBirth                 *time.Time                                 `json:"DateOfBirth,omitempty"`
+	Deactivated                 *bool                                      `json:"Deactivated,omitempty"`
+	DirectorshipAppointmentDate *time.Time                                 `json:"DirectorshipAppointmentDate,omitempty"`
+	EeaCitizen                  *bool                                      `json:"EEACitizen,omitempty"`
+	Epm6                        *bool                                      `json:"EPM6,omitempty"`
+	EffectiveDate               *time.Time                                 `json:"EffectiveDate,omitempty"`
+	EmployeePartner             *EmployeeEmployeeEmployeePartner           `json:"EmployeePartner,omitempty"`
+	FirstName                   *string                                    `json:"FirstName,omitempty"`
+	Gender                      *EmployeeEmployeeGenderEnum                `json:"Gender,omitempty"`
+	HoursPerWeek                *float64                                   `json:"HoursPerWeek,omitempty"`
+	Initials                    *string                                    `json:"Initials,omitempty"`
+	IrregularEmployment         *bool                                      `json:"IrregularEmployment,omitempty"`
+	IsAgencyWorker              *bool                                      `json:"IsAgencyWorker,omitempty"`
+	LastName                    *string                                    `json:"LastName,omitempty"`
+	LeaverReason                *EmployeeEmployeeLeaverReasonEnum          `json:"LeaverReason,omitempty"`
+	LeavingDate                 *time.Time                                 `json:"LeavingDate,omitempty"`
+	MaritalStatus               *EmployeeEmployeeMaritalStatusEnum         `json:"MaritalStatus,omitempty"`
+	MetaData                    map[string]interface{}                     `json:"MetaData,omitempty"`
+	MiddleName                  *string                                    `json:"MiddleName,omitempty"`
+	NiNumber                    *string                                    `json:"NiNumber,omitempty"`
+	NicLiability                *EmployeeEmployeeNicLiabilityEnum          `json:"NicLiability,omitempty"`
+	OffPayrollWorker            *bool                                      `json:"OffPayrollWorker,omitempty"`
+	OnStrike                    *bool                                      `json:"OnStrike,omitempty"`
+	PassportNumber              *string                                    `json:"PassportNumber,omitempty"`
+	PaySchedule                 *EmployeeEmployeePaySchedule               `json:"PaySchedule,omitempty"`
+	PaymentMethod               *EmployeeEmployeePaymentMethodEnum         `json:"PaymentMethod,omitempty"`
+	PaymentToANonIndividual     *bool                                      `json:"PaymentToANonIndividual,omitempty"`
+	Region                      *EmployeeEmployeeRegionEnum                `json:"Region,omitempty"`
+	Revision                    *int32                                     `json:"Revision,omitempty"`
+	RuleExclusions              *EmployeeEmployeeRuleExclusionsEnum        `json:"RuleExclusions,omitempty"`
+	Seconded                    *EmployeeEmployeeSecondedEnum              `json:"Seconded,omitempty"`
+	StartDate                   *time.Time                                 `json:"StartDate,omitempty"`
+	StarterDeclaration          *EmployeeEmployeeStarterDeclarationEnum    `json:"StarterDeclaration,omitempty"`
+	Territory                   *EmployeeEmployeeTerritoryEnum             `json:"Territory,omitempty"`
+	Title                       *string                                    `json:"Title,omitempty"`
+	WorkingWeek                 *EmployeeEmployeeWorkingWeekEnum           `json:"WorkingWeek,omitempty"`
 }
 
 type Employee struct {
-	Employee *EmployeeEmployeeEmployee `json:"Employee,omitempty"`
+	Employee *EmployeeEmployee `json:"Employee,omitempty"`
 }

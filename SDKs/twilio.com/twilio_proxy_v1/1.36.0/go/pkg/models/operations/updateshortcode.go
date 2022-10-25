@@ -13,7 +13,7 @@ type UpdateShortCodePathParams struct {
 	Sid        string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
-type UpdateShortCodeRequestBodyUpdateShortCodeRequest struct {
+type UpdateShortCodeUpdateShortCodeRequest struct {
 	IsReserved *bool `form:"name=IsReserved"`
 }
 
@@ -24,7 +24,7 @@ type UpdateShortCodeSecurity struct {
 type UpdateShortCodeRequest struct {
 	ServerURL  *string
 	PathParams UpdateShortCodePathParams
-	Request    *UpdateShortCodeRequestBodyUpdateShortCodeRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateShortCodeUpdateShortCodeRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateShortCodeSecurity
 }
 

@@ -8,7 +8,7 @@ type PageBuildError struct {
 	Message string `json:"message"`
 }
 
-type PageBuildPusherSimpleUser struct {
+type PageBuildSimpleUser struct {
 	AvatarURL         string  `json:"avatar_url"`
 	EventsURL         string  `json:"events_url"`
 	FollowersURL      string  `json:"followers_url"`
@@ -31,12 +31,12 @@ type PageBuildPusherSimpleUser struct {
 }
 
 type PageBuild struct {
-	Commit    string                    `json:"commit"`
-	CreatedAt time.Time                 `json:"created_at"`
-	Duration  int64                     `json:"duration"`
-	Error     PageBuildError            `json:"error"`
-	Pusher    PageBuildPusherSimpleUser `json:"pusher"`
-	Status    string                    `json:"status"`
-	UpdatedAt time.Time                 `json:"updated_at"`
-	URL       string                    `json:"url"`
+	Commit    string              `json:"commit"`
+	CreatedAt time.Time           `json:"created_at"`
+	Duration  int64               `json:"duration"`
+	Error     PageBuildError      `json:"error"`
+	Pusher    PageBuildSimpleUser `json:"pusher"`
+	Status    string              `json:"status"`
+	UpdatedAt time.Time           `json:"updated_at"`
+	URL       string              `json:"url"`
 }

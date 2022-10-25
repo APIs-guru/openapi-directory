@@ -7,7 +7,7 @@ CREATE_SUPPORTING_DOCUMENT_SERVERS = [
 
 
 @dataclass
-class CreateSupportingDocumentRequestBodyCreateSupportingDocumentRequest:
+class CreateSupportingDocumentCreateSupportingDocumentRequest:
     attributes: Optional[Any] = field(default=None, metadata={'form': { 'field_name': 'Attributes' }})
     friendly_name: str = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
     type: str = field(default=None, metadata={'form': { 'field_name': 'Type' }})
@@ -21,7 +21,7 @@ class CreateSupportingDocumentSecurity:
 @dataclass
 class CreateSupportingDocumentRequest:
     server_url: Optional[str] = field(default=None)
-    request: Optional[CreateSupportingDocumentRequestBodyCreateSupportingDocumentRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateSupportingDocumentCreateSupportingDocumentRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateSupportingDocumentSecurity = field(default=None)
     
 

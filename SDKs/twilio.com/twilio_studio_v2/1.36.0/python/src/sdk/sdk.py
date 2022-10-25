@@ -307,7 +307,7 @@ class SDK:
         res = operations.ListExecutionResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListExecution200ApplicationJSONListExecutionResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListExecutionListExecutionResponse])
                 res.list_execution_response = out
 
         return res
@@ -332,7 +332,7 @@ class SDK:
         res = operations.ListExecutionStepResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListExecutionStep200ApplicationJSONListExecutionStepResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListExecutionStepListExecutionStepResponse])
                 res.list_execution_step_response = out
 
         return res
@@ -357,7 +357,7 @@ class SDK:
         res = operations.ListFlowResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListFlow200ApplicationJSONListFlowResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListFlowListFlowResponse])
                 res.list_flow_response = out
 
         return res
@@ -382,7 +382,7 @@ class SDK:
         res = operations.ListFlowRevisionResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListFlowRevision200ApplicationJSONListFlowRevisionResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListFlowRevisionListFlowRevisionResponse])
                 res.list_flow_revision_response = out
 
         return res

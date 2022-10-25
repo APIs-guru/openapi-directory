@@ -23,18 +23,18 @@ class PostServersIDActionsChangeAliasIpsRequest:
 
 @dataclass_json
 @dataclass
-class PostServersIDActionsChangeAliasIps201ApplicationJSONActionError:
+class PostServersIDActionsChangeAliasIpsActionResponseActionError:
     code: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'code' }})
     message: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'message' }})
     
 
 @dataclass_json
 @dataclass
-class PostServersIDActionsChangeAliasIps201ApplicationJSONActionResources:
+class PostServersIDActionsChangeAliasIpsActionResponseActionResources:
     id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     type: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     
-class PostServersIDActionsChangeAliasIps201ApplicationJSONActionStatusEnum(str, Enum):
+class PostServersIDActionsChangeAliasIpsActionResponseActionStatusEnum(str, Enum):
     SUCCESS = "success"
     RUNNING = "running"
     ERROR = "error"
@@ -42,26 +42,26 @@ class PostServersIDActionsChangeAliasIps201ApplicationJSONActionStatusEnum(str, 
 
 @dataclass_json
 @dataclass
-class PostServersIDActionsChangeAliasIps201ApplicationJSONActionAction:
+class PostServersIDActionsChangeAliasIpsActionResponseAction:
     command: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'command' }})
-    error: PostServersIDActionsChangeAliasIps201ApplicationJSONActionError = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
+    error: PostServersIDActionsChangeAliasIpsActionResponseActionError = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
     finished: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'finished' }})
     id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     progress: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'progress' }})
-    resources: List[PostServersIDActionsChangeAliasIps201ApplicationJSONActionResources] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resources' }})
+    resources: List[PostServersIDActionsChangeAliasIpsActionResponseActionResources] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resources' }})
     started: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'started' }})
-    status: PostServersIDActionsChangeAliasIps201ApplicationJSONActionStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    status: PostServersIDActionsChangeAliasIpsActionResponseActionStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
     
 
 @dataclass_json
 @dataclass
-class PostServersIDActionsChangeAliasIps201ApplicationJSONActionResponse:
-    action: PostServersIDActionsChangeAliasIps201ApplicationJSONActionAction = field(default=None, metadata={'dataclasses_json': { 'field_name': 'action' }})
+class PostServersIDActionsChangeAliasIpsActionResponse:
+    action: PostServersIDActionsChangeAliasIpsActionResponseAction = field(default=None, metadata={'dataclasses_json': { 'field_name': 'action' }})
     
 
 @dataclass
 class PostServersIDActionsChangeAliasIpsResponse:
-    action_response: Optional[PostServersIDActionsChangeAliasIps201ApplicationJSONActionResponse] = field(default=None)
+    action_response: Optional[PostServersIDActionsChangeAliasIpsActionResponse] = field(default=None)
     content_type: str = field(default=None)
     status_code: int = field(default=None)
     

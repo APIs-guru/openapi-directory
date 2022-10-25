@@ -9,14 +9,14 @@ type PostCoursesRootContentIDPermissionsUserEmailPathParams struct {
 	UserEmail     string `pathParam:"style=simple,explode=false,name=userEmail"`
 }
 
-type PostCoursesRootContentIDPermissionsUserEmailRequestBodyPermissionToBeGrantedToTheUser struct {
+type PostCoursesRootContentIDPermissionsUserEmailPermissionToBeGrantedToTheUser struct {
 	IsBuilder  *bool `json:"isBuilder,omitempty"`
 	IsReviewer *bool `json:"isReviewer,omitempty"`
 }
 
 type PostCoursesRootContentIDPermissionsUserEmailRequest struct {
 	PathParams PostCoursesRootContentIDPermissionsUserEmailPathParams
-	Request    PostCoursesRootContentIDPermissionsUserEmailRequestBodyPermissionToBeGrantedToTheUser `request:"mediaType=application/json"`
+	Request    PostCoursesRootContentIDPermissionsUserEmailPermissionToBeGrantedToTheUser `request:"mediaType=application/json"`
 }
 
 type PostCoursesRootContentIDPermissionsUserEmail201ApplicationJSON struct {

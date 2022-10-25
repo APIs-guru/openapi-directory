@@ -8,7 +8,7 @@ from . import address
 from . import currency_enum
 from . import servicecharge
 
-class MerchantStatusStatusEnum(str, Enum):
+class MerchantStatusEnum(str, Enum):
     ACTIVE = "active"
     INACTIVE = "inactive"
     OTHER = "other"
@@ -27,7 +27,7 @@ class Merchant:
     name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
     owner_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'owner_id' }})
     service_charges: Optional[List[servicecharge.ServiceCharge]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'service_charges' }})
-    status: Optional[MerchantStatusStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    status: Optional[MerchantStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
     updated_at: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updated_at', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     updated_by: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updated_by' }})
     

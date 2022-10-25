@@ -18,12 +18,12 @@ type InvoiceItemSalesDetails struct {
 	UnitPrice     *float64       `json:"unit_price,omitempty"`
 }
 
-type InvoiceItemTypeTypeEnum string
+type InvoiceItemTypeEnum string
 
 const (
-	InvoiceItemTypeTypeEnumInventory InvoiceItemTypeTypeEnum = "inventory"
-	InvoiceItemTypeTypeEnumService   InvoiceItemTypeTypeEnum = "service"
-	InvoiceItemTypeTypeEnumOther     InvoiceItemTypeTypeEnum = "other"
+	InvoiceItemTypeEnumInventory InvoiceItemTypeEnum = "inventory"
+	InvoiceItemTypeEnumService   InvoiceItemTypeEnum = "service"
+	InvoiceItemTypeEnumOther     InvoiceItemTypeEnum = "other"
 )
 
 type InvoiceItem struct {
@@ -45,7 +45,7 @@ type InvoiceItem struct {
 	SalesDetails    *InvoiceItemSalesDetails    `json:"sales_details,omitempty"`
 	Sold            *bool                       `json:"sold,omitempty"`
 	Tracked         *bool                       `json:"tracked,omitempty"`
-	Type            *InvoiceItemTypeTypeEnum    `json:"type,omitempty"`
+	Type            *InvoiceItemTypeEnum        `json:"type,omitempty"`
 	UnitPrice       *float64                    `json:"unit_price,omitempty"`
 	UpdatedAt       *time.Time                  `json:"updated_at,omitempty"`
 	UpdatedBy       *string                     `json:"updated_by,omitempty"`

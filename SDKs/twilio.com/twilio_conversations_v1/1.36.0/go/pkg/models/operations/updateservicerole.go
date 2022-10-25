@@ -13,7 +13,7 @@ type UpdateServiceRolePathParams struct {
 	Sid            string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
-type UpdateServiceRoleRequestBodyUpdateServiceRoleRequest struct {
+type UpdateServiceRoleUpdateServiceRoleRequest struct {
 	Permission []string `form:"name=Permission"`
 }
 
@@ -24,7 +24,7 @@ type UpdateServiceRoleSecurity struct {
 type UpdateServiceRoleRequest struct {
 	ServerURL  *string
 	PathParams UpdateServiceRolePathParams
-	Request    *UpdateServiceRoleRequestBodyUpdateServiceRoleRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateServiceRoleUpdateServiceRoleRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateServiceRoleSecurity
 }
 

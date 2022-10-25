@@ -22,18 +22,18 @@ class PostLoadBalancersIDActionsChangeProtectionRequest:
 
 @dataclass_json
 @dataclass
-class PostLoadBalancersIDActionsChangeProtection201ApplicationJSONActionError:
+class PostLoadBalancersIDActionsChangeProtectionActionResponseActionError:
     code: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'code' }})
     message: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'message' }})
     
 
 @dataclass_json
 @dataclass
-class PostLoadBalancersIDActionsChangeProtection201ApplicationJSONActionResources:
+class PostLoadBalancersIDActionsChangeProtectionActionResponseActionResources:
     id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     type: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     
-class PostLoadBalancersIDActionsChangeProtection201ApplicationJSONActionStatusEnum(str, Enum):
+class PostLoadBalancersIDActionsChangeProtectionActionResponseActionStatusEnum(str, Enum):
     SUCCESS = "success"
     RUNNING = "running"
     ERROR = "error"
@@ -41,26 +41,26 @@ class PostLoadBalancersIDActionsChangeProtection201ApplicationJSONActionStatusEn
 
 @dataclass_json
 @dataclass
-class PostLoadBalancersIDActionsChangeProtection201ApplicationJSONActionAction:
+class PostLoadBalancersIDActionsChangeProtectionActionResponseAction:
     command: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'command' }})
-    error: PostLoadBalancersIDActionsChangeProtection201ApplicationJSONActionError = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
+    error: PostLoadBalancersIDActionsChangeProtectionActionResponseActionError = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
     finished: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'finished' }})
     id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     progress: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'progress' }})
-    resources: List[PostLoadBalancersIDActionsChangeProtection201ApplicationJSONActionResources] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resources' }})
+    resources: List[PostLoadBalancersIDActionsChangeProtectionActionResponseActionResources] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resources' }})
     started: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'started' }})
-    status: PostLoadBalancersIDActionsChangeProtection201ApplicationJSONActionStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    status: PostLoadBalancersIDActionsChangeProtectionActionResponseActionStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
     
 
 @dataclass_json
 @dataclass
-class PostLoadBalancersIDActionsChangeProtection201ApplicationJSONActionResponse:
-    action: PostLoadBalancersIDActionsChangeProtection201ApplicationJSONActionAction = field(default=None, metadata={'dataclasses_json': { 'field_name': 'action' }})
+class PostLoadBalancersIDActionsChangeProtectionActionResponse:
+    action: PostLoadBalancersIDActionsChangeProtectionActionResponseAction = field(default=None, metadata={'dataclasses_json': { 'field_name': 'action' }})
     
 
 @dataclass
 class PostLoadBalancersIDActionsChangeProtectionResponse:
-    action_response: Optional[PostLoadBalancersIDActionsChangeProtection201ApplicationJSONActionResponse] = field(default=None)
+    action_response: Optional[PostLoadBalancersIDActionsChangeProtectionActionResponse] = field(default=None)
     content_type: str = field(default=None)
     status_code: int = field(default=None)
     

@@ -32,7 +32,7 @@ class ListMessagingConfigurationRequest:
 
 @dataclass_json
 @dataclass
-class ListMessagingConfiguration200ApplicationJSONMeta:
+class ListMessagingConfigurationListMessagingConfigurationResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -44,14 +44,14 @@ class ListMessagingConfiguration200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListMessagingConfiguration200ApplicationJSONListMessagingConfigurationResponse:
+class ListMessagingConfigurationListMessagingConfigurationResponse:
     messaging_configurations: Optional[List[shared.VerifyV2ServiceMessagingConfiguration]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'messaging_configurations' }})
-    meta: Optional[ListMessagingConfiguration200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+    meta: Optional[ListMessagingConfigurationListMessagingConfigurationResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     
 
 @dataclass
 class ListMessagingConfigurationResponse:
     content_type: str = field(default=None)
-    list_messaging_configuration_response: Optional[ListMessagingConfiguration200ApplicationJSONListMessagingConfigurationResponse] = field(default=None)
+    list_messaging_configuration_response: Optional[ListMessagingConfigurationListMessagingConfigurationResponse] = field(default=None)
     status_code: int = field(default=None)
     

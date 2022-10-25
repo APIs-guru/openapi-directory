@@ -26,7 +26,7 @@ class ListSyncServiceRequest:
 
 @dataclass_json
 @dataclass
-class ListSyncService200ApplicationJSONMeta:
+class ListSyncServiceListSyncServiceResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -38,14 +38,14 @@ class ListSyncService200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListSyncService200ApplicationJSONListSyncServiceResponse:
-    meta: Optional[ListSyncService200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+class ListSyncServiceListSyncServiceResponse:
+    meta: Optional[ListSyncServiceListSyncServiceResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     services: Optional[List[shared.PreviewSyncService]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'services' }})
     
 
 @dataclass
 class ListSyncServiceResponse:
     content_type: str = field(default=None)
-    list_sync_service_response: Optional[ListSyncService200ApplicationJSONListSyncServiceResponse] = field(default=None)
+    list_sync_service_response: Optional[ListSyncServiceListSyncServiceResponse] = field(default=None)
     status_code: int = field(default=None)
     

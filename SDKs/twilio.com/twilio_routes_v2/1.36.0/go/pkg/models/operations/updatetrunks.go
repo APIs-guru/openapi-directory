@@ -12,7 +12,7 @@ type UpdateTrunksPathParams struct {
 	SipTrunkDomain string `pathParam:"style=simple,explode=false,name=SipTrunkDomain"`
 }
 
-type UpdateTrunksRequestBodyUpdateTrunksRequest struct {
+type UpdateTrunksUpdateTrunksRequest struct {
 	FriendlyName *string `form:"name=FriendlyName"`
 	VoiceRegion  *string `form:"name=VoiceRegion"`
 }
@@ -24,7 +24,7 @@ type UpdateTrunksSecurity struct {
 type UpdateTrunksRequest struct {
 	ServerURL  *string
 	PathParams UpdateTrunksPathParams
-	Request    *UpdateTrunksRequestBodyUpdateTrunksRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateTrunksUpdateTrunksRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateTrunksSecurity
 }
 

@@ -1,29 +1,29 @@
 package shared
 
-type PermissionPermissionPolicyPolicyEnum string
+type PermissionPermissionPolicyEnum string
 
 const (
-	PermissionPermissionPolicyPolicyEnumAllow PermissionPermissionPolicyPolicyEnum = "Allow"
-	PermissionPermissionPolicyPolicyEnumDeny  PermissionPermissionPolicyPolicyEnum = "Deny"
+	PermissionPermissionPolicyEnumAllow PermissionPermissionPolicyEnum = "Allow"
+	PermissionPermissionPolicyEnumDeny  PermissionPermissionPolicyEnum = "Deny"
 )
 
-type PermissionPermissionVerbsVerbsEnum string
+type PermissionPermissionVerbsEnum string
 
 const (
-	PermissionPermissionVerbsVerbsEnumRead   PermissionPermissionVerbsVerbsEnum = "Read"
-	PermissionPermissionVerbsVerbsEnumWrite  PermissionPermissionVerbsVerbsEnum = "Write"
-	PermissionPermissionVerbsVerbsEnumDelete PermissionPermissionVerbsVerbsEnum = "Delete"
-	PermissionPermissionVerbsVerbsEnumAll    PermissionPermissionVerbsVerbsEnum = "All"
+	PermissionPermissionVerbsEnumRead   PermissionPermissionVerbsEnum = "Read"
+	PermissionPermissionVerbsEnumWrite  PermissionPermissionVerbsEnum = "Write"
+	PermissionPermissionVerbsEnumDelete PermissionPermissionVerbsEnum = "Delete"
+	PermissionPermissionVerbsEnumAll    PermissionPermissionVerbsEnum = "All"
 )
 
-type PermissionPermissionPermission struct {
-	Description *string                               `json:"Description,omitempty"`
-	Expression  *string                               `json:"Expression,omitempty"`
-	Name        *string                               `json:"Name,omitempty"`
-	Policy      *PermissionPermissionPolicyPolicyEnum `json:"Policy,omitempty"`
-	Verbs       *PermissionPermissionVerbsVerbsEnum   `json:"Verbs,omitempty"`
+type PermissionPermission struct {
+	Description *string                         `json:"Description,omitempty"`
+	Expression  *string                         `json:"Expression,omitempty"`
+	Name        *string                         `json:"Name,omitempty"`
+	Policy      *PermissionPermissionPolicyEnum `json:"Policy,omitempty"`
+	Verbs       *PermissionPermissionVerbsEnum  `json:"Verbs,omitempty"`
 }
 
 type Permission struct {
-	Permission *PermissionPermissionPermission `json:"Permission,omitempty"`
+	Permission *PermissionPermission `json:"Permission,omitempty"`
 }

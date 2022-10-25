@@ -23,7 +23,7 @@ type ListSubscriptionRequest struct {
 	Security    ListSubscriptionSecurity
 }
 
-type ListSubscription200ApplicationJSONMeta struct {
+type ListSubscriptionListSubscriptionResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -33,13 +33,13 @@ type ListSubscription200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListSubscription200ApplicationJSONListSubscriptionResponse struct {
-	Meta          *ListSubscription200ApplicationJSONMeta `json:"meta,omitempty"`
-	Subscriptions []shared.EventsV1Subscription           `json:"subscriptions,omitempty"`
+type ListSubscriptionListSubscriptionResponse struct {
+	Meta          *ListSubscriptionListSubscriptionResponseMeta `json:"meta,omitempty"`
+	Subscriptions []shared.EventsV1Subscription                 `json:"subscriptions,omitempty"`
 }
 
 type ListSubscriptionResponse struct {
 	ContentType              string
-	ListSubscriptionResponse *ListSubscription200ApplicationJSONListSubscriptionResponse
+	ListSubscriptionResponse *ListSubscriptionListSubscriptionResponse
 	StatusCode               int64
 }

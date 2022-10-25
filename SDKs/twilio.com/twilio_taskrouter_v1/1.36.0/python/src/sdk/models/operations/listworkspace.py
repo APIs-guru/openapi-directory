@@ -27,7 +27,7 @@ class ListWorkspaceRequest:
 
 @dataclass_json
 @dataclass
-class ListWorkspace200ApplicationJSONMeta:
+class ListWorkspaceListWorkspaceResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -39,14 +39,14 @@ class ListWorkspace200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListWorkspace200ApplicationJSONListWorkspaceResponse:
-    meta: Optional[ListWorkspace200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+class ListWorkspaceListWorkspaceResponse:
+    meta: Optional[ListWorkspaceListWorkspaceResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     workspaces: Optional[List[shared.TaskrouterV1Workspace]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'workspaces' }})
     
 
 @dataclass
 class ListWorkspaceResponse:
     content_type: str = field(default=None)
-    list_workspace_response: Optional[ListWorkspace200ApplicationJSONListWorkspaceResponse] = field(default=None)
+    list_workspace_response: Optional[ListWorkspaceListWorkspaceResponse] = field(default=None)
     status_code: int = field(default=None)
     

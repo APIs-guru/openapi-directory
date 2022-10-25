@@ -31,7 +31,7 @@ class ListWirelessSimRequest:
 
 @dataclass_json
 @dataclass
-class ListWirelessSim200ApplicationJSONMeta:
+class ListWirelessSimListWirelessSimResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -43,14 +43,14 @@ class ListWirelessSim200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListWirelessSim200ApplicationJSONListWirelessSimResponse:
-    meta: Optional[ListWirelessSim200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+class ListWirelessSimListWirelessSimResponse:
+    meta: Optional[ListWirelessSimListWirelessSimResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     sims: Optional[List[shared.PreviewWirelessSim]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sims' }})
     
 
 @dataclass
 class ListWirelessSimResponse:
     content_type: str = field(default=None)
-    list_wireless_sim_response: Optional[ListWirelessSim200ApplicationJSONListWirelessSimResponse] = field(default=None)
+    list_wireless_sim_response: Optional[ListWirelessSimListWirelessSimResponse] = field(default=None)
     status_code: int = field(default=None)
     

@@ -33,7 +33,7 @@ class ListMemberRequest:
 
 @dataclass_json
 @dataclass
-class ListMember200ApplicationJSONListMemberResponse:
+class ListMemberListMemberResponse:
     end: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'end' }})
     first_page_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_uri' }})
     next_page_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_uri' }})
@@ -48,6 +48,6 @@ class ListMember200ApplicationJSONListMemberResponse:
 @dataclass
 class ListMemberResponse:
     content_type: str = field(default=None)
-    list_member_response: Optional[ListMember200ApplicationJSONListMemberResponse] = field(default=None)
+    list_member_response: Optional[ListMemberListMemberResponse] = field(default=None)
     status_code: int = field(default=None)
     

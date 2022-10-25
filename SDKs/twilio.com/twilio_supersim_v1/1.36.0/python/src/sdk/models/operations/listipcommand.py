@@ -30,7 +30,7 @@ class ListIPCommandRequest:
 
 @dataclass_json
 @dataclass
-class ListIPCommand200ApplicationJSONMeta:
+class ListIPCommandListIPCommandResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -42,14 +42,14 @@ class ListIPCommand200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListIPCommand200ApplicationJSONListIPCommandResponse:
+class ListIPCommandListIPCommandResponse:
     ip_commands: Optional[List[shared.SupersimV1IPCommand]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ip_commands' }})
-    meta: Optional[ListIPCommand200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+    meta: Optional[ListIPCommandListIPCommandResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     
 
 @dataclass
 class ListIPCommandResponse:
     content_type: str = field(default=None)
-    list_ip_command_response: Optional[ListIPCommand200ApplicationJSONListIPCommandResponse] = field(default=None)
+    list_ip_command_response: Optional[ListIPCommandListIPCommandResponse] = field(default=None)
     status_code: int = field(default=None)
     

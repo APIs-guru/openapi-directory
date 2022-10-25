@@ -14,7 +14,7 @@ type UpdateFactorPathParams struct {
 	Sid        string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
-type UpdateFactorRequestBodyUpdateFactorRequest struct {
+type UpdateFactorUpdateFactorRequest struct {
 	AuthPayload                *string                              `form:"name=AuthPayload"`
 	ConfigAlg                  *shared.FactorEnumTotpAlgorithmsEnum `form:"name=Config.Alg"`
 	ConfigCodeLength           *int64                               `form:"name=Config.CodeLength"`
@@ -33,7 +33,7 @@ type UpdateFactorSecurity struct {
 type UpdateFactorRequest struct {
 	ServerURL  *string
 	PathParams UpdateFactorPathParams
-	Request    *UpdateFactorRequestBodyUpdateFactorRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateFactorUpdateFactorRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateFactorSecurity
 }
 

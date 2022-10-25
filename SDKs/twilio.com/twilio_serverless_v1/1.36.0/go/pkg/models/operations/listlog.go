@@ -32,7 +32,7 @@ type ListLogRequest struct {
 	Security    ListLogSecurity
 }
 
-type ListLog200ApplicationJSONMeta struct {
+type ListLogListLogResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -42,13 +42,13 @@ type ListLog200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListLog200ApplicationJSONListLogResponse struct {
+type ListLogListLogResponse struct {
 	Logs []shared.ServerlessV1ServiceEnvironmentLog `json:"logs,omitempty"`
-	Meta *ListLog200ApplicationJSONMeta             `json:"meta,omitempty"`
+	Meta *ListLogListLogResponseMeta                `json:"meta,omitempty"`
 }
 
 type ListLogResponse struct {
 	ContentType     string
-	ListLogResponse *ListLog200ApplicationJSONListLogResponse
+	ListLogResponse *ListLogListLogResponse
 	StatusCode      int64
 }

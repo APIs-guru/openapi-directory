@@ -14,7 +14,7 @@ class UpdateSamplePathParams:
     
 
 @dataclass
-class UpdateSampleRequestBodyUpdateSampleRequest:
+class UpdateSampleUpdateSampleRequest:
     language: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Language' }})
     source_channel: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'SourceChannel' }})
     tagged_text: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'TaggedText' }})
@@ -29,7 +29,7 @@ class UpdateSampleSecurity:
 class UpdateSampleRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateSamplePathParams = field(default=None)
-    request: Optional[UpdateSampleRequestBodyUpdateSampleRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateSampleUpdateSampleRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateSampleSecurity = field(default=None)
     
 

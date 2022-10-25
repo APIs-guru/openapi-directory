@@ -21,7 +21,7 @@ class CreateServiceConversationParticipantHeaders:
     
 
 @dataclass
-class CreateServiceConversationParticipantRequestBodyCreateServiceConversationParticipantRequest:
+class CreateServiceConversationParticipantCreateServiceConversationParticipantRequest:
     attributes: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Attributes' }})
     date_created: Optional[datetime] = field(default=None, metadata={'form': { 'field_name': 'DateCreated' }})
     date_updated: Optional[datetime] = field(default=None, metadata={'form': { 'field_name': 'DateUpdated' }})
@@ -42,7 +42,7 @@ class CreateServiceConversationParticipantRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateServiceConversationParticipantPathParams = field(default=None)
     headers: CreateServiceConversationParticipantHeaders = field(default=None)
-    request: Optional[CreateServiceConversationParticipantRequestBodyCreateServiceConversationParticipantRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateServiceConversationParticipantCreateServiceConversationParticipantRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateServiceConversationParticipantSecurity = field(default=None)
     
 

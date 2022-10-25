@@ -13,119 +13,119 @@ type CreateParticipantPathParams struct {
 	ConferenceSid string `pathParam:"style=simple,explode=false,name=ConferenceSid"`
 }
 
-type CreateParticipantRequestBodyAmdStatusCallbackMethodEnum string
+type CreateParticipantCreateParticipantRequestAmdStatusCallbackMethodEnum string
 
 const (
-	CreateParticipantRequestBodyAmdStatusCallbackMethodEnumHead   CreateParticipantRequestBodyAmdStatusCallbackMethodEnum = "HEAD"
-	CreateParticipantRequestBodyAmdStatusCallbackMethodEnumGet    CreateParticipantRequestBodyAmdStatusCallbackMethodEnum = "GET"
-	CreateParticipantRequestBodyAmdStatusCallbackMethodEnumPost   CreateParticipantRequestBodyAmdStatusCallbackMethodEnum = "POST"
-	CreateParticipantRequestBodyAmdStatusCallbackMethodEnumPatch  CreateParticipantRequestBodyAmdStatusCallbackMethodEnum = "PATCH"
-	CreateParticipantRequestBodyAmdStatusCallbackMethodEnumPut    CreateParticipantRequestBodyAmdStatusCallbackMethodEnum = "PUT"
-	CreateParticipantRequestBodyAmdStatusCallbackMethodEnumDelete CreateParticipantRequestBodyAmdStatusCallbackMethodEnum = "DELETE"
+	CreateParticipantCreateParticipantRequestAmdStatusCallbackMethodEnumHead   CreateParticipantCreateParticipantRequestAmdStatusCallbackMethodEnum = "HEAD"
+	CreateParticipantCreateParticipantRequestAmdStatusCallbackMethodEnumGet    CreateParticipantCreateParticipantRequestAmdStatusCallbackMethodEnum = "GET"
+	CreateParticipantCreateParticipantRequestAmdStatusCallbackMethodEnumPost   CreateParticipantCreateParticipantRequestAmdStatusCallbackMethodEnum = "POST"
+	CreateParticipantCreateParticipantRequestAmdStatusCallbackMethodEnumPatch  CreateParticipantCreateParticipantRequestAmdStatusCallbackMethodEnum = "PATCH"
+	CreateParticipantCreateParticipantRequestAmdStatusCallbackMethodEnumPut    CreateParticipantCreateParticipantRequestAmdStatusCallbackMethodEnum = "PUT"
+	CreateParticipantCreateParticipantRequestAmdStatusCallbackMethodEnumDelete CreateParticipantCreateParticipantRequestAmdStatusCallbackMethodEnum = "DELETE"
 )
 
-type CreateParticipantRequestBodyConferenceRecordingStatusCallbackMethodEnum string
+type CreateParticipantCreateParticipantRequestConferenceRecordingStatusCallbackMethodEnum string
 
 const (
-	CreateParticipantRequestBodyConferenceRecordingStatusCallbackMethodEnumHead   CreateParticipantRequestBodyConferenceRecordingStatusCallbackMethodEnum = "HEAD"
-	CreateParticipantRequestBodyConferenceRecordingStatusCallbackMethodEnumGet    CreateParticipantRequestBodyConferenceRecordingStatusCallbackMethodEnum = "GET"
-	CreateParticipantRequestBodyConferenceRecordingStatusCallbackMethodEnumPost   CreateParticipantRequestBodyConferenceRecordingStatusCallbackMethodEnum = "POST"
-	CreateParticipantRequestBodyConferenceRecordingStatusCallbackMethodEnumPatch  CreateParticipantRequestBodyConferenceRecordingStatusCallbackMethodEnum = "PATCH"
-	CreateParticipantRequestBodyConferenceRecordingStatusCallbackMethodEnumPut    CreateParticipantRequestBodyConferenceRecordingStatusCallbackMethodEnum = "PUT"
-	CreateParticipantRequestBodyConferenceRecordingStatusCallbackMethodEnumDelete CreateParticipantRequestBodyConferenceRecordingStatusCallbackMethodEnum = "DELETE"
+	CreateParticipantCreateParticipantRequestConferenceRecordingStatusCallbackMethodEnumHead   CreateParticipantCreateParticipantRequestConferenceRecordingStatusCallbackMethodEnum = "HEAD"
+	CreateParticipantCreateParticipantRequestConferenceRecordingStatusCallbackMethodEnumGet    CreateParticipantCreateParticipantRequestConferenceRecordingStatusCallbackMethodEnum = "GET"
+	CreateParticipantCreateParticipantRequestConferenceRecordingStatusCallbackMethodEnumPost   CreateParticipantCreateParticipantRequestConferenceRecordingStatusCallbackMethodEnum = "POST"
+	CreateParticipantCreateParticipantRequestConferenceRecordingStatusCallbackMethodEnumPatch  CreateParticipantCreateParticipantRequestConferenceRecordingStatusCallbackMethodEnum = "PATCH"
+	CreateParticipantCreateParticipantRequestConferenceRecordingStatusCallbackMethodEnumPut    CreateParticipantCreateParticipantRequestConferenceRecordingStatusCallbackMethodEnum = "PUT"
+	CreateParticipantCreateParticipantRequestConferenceRecordingStatusCallbackMethodEnumDelete CreateParticipantCreateParticipantRequestConferenceRecordingStatusCallbackMethodEnum = "DELETE"
 )
 
-type CreateParticipantRequestBodyConferenceStatusCallbackMethodEnum string
+type CreateParticipantCreateParticipantRequestConferenceStatusCallbackMethodEnum string
 
 const (
-	CreateParticipantRequestBodyConferenceStatusCallbackMethodEnumHead   CreateParticipantRequestBodyConferenceStatusCallbackMethodEnum = "HEAD"
-	CreateParticipantRequestBodyConferenceStatusCallbackMethodEnumGet    CreateParticipantRequestBodyConferenceStatusCallbackMethodEnum = "GET"
-	CreateParticipantRequestBodyConferenceStatusCallbackMethodEnumPost   CreateParticipantRequestBodyConferenceStatusCallbackMethodEnum = "POST"
-	CreateParticipantRequestBodyConferenceStatusCallbackMethodEnumPatch  CreateParticipantRequestBodyConferenceStatusCallbackMethodEnum = "PATCH"
-	CreateParticipantRequestBodyConferenceStatusCallbackMethodEnumPut    CreateParticipantRequestBodyConferenceStatusCallbackMethodEnum = "PUT"
-	CreateParticipantRequestBodyConferenceStatusCallbackMethodEnumDelete CreateParticipantRequestBodyConferenceStatusCallbackMethodEnum = "DELETE"
+	CreateParticipantCreateParticipantRequestConferenceStatusCallbackMethodEnumHead   CreateParticipantCreateParticipantRequestConferenceStatusCallbackMethodEnum = "HEAD"
+	CreateParticipantCreateParticipantRequestConferenceStatusCallbackMethodEnumGet    CreateParticipantCreateParticipantRequestConferenceStatusCallbackMethodEnum = "GET"
+	CreateParticipantCreateParticipantRequestConferenceStatusCallbackMethodEnumPost   CreateParticipantCreateParticipantRequestConferenceStatusCallbackMethodEnum = "POST"
+	CreateParticipantCreateParticipantRequestConferenceStatusCallbackMethodEnumPatch  CreateParticipantCreateParticipantRequestConferenceStatusCallbackMethodEnum = "PATCH"
+	CreateParticipantCreateParticipantRequestConferenceStatusCallbackMethodEnumPut    CreateParticipantCreateParticipantRequestConferenceStatusCallbackMethodEnum = "PUT"
+	CreateParticipantCreateParticipantRequestConferenceStatusCallbackMethodEnumDelete CreateParticipantCreateParticipantRequestConferenceStatusCallbackMethodEnum = "DELETE"
 )
 
-type CreateParticipantRequestBodyRecordingStatusCallbackMethodEnum string
+type CreateParticipantCreateParticipantRequestRecordingStatusCallbackMethodEnum string
 
 const (
-	CreateParticipantRequestBodyRecordingStatusCallbackMethodEnumHead   CreateParticipantRequestBodyRecordingStatusCallbackMethodEnum = "HEAD"
-	CreateParticipantRequestBodyRecordingStatusCallbackMethodEnumGet    CreateParticipantRequestBodyRecordingStatusCallbackMethodEnum = "GET"
-	CreateParticipantRequestBodyRecordingStatusCallbackMethodEnumPost   CreateParticipantRequestBodyRecordingStatusCallbackMethodEnum = "POST"
-	CreateParticipantRequestBodyRecordingStatusCallbackMethodEnumPatch  CreateParticipantRequestBodyRecordingStatusCallbackMethodEnum = "PATCH"
-	CreateParticipantRequestBodyRecordingStatusCallbackMethodEnumPut    CreateParticipantRequestBodyRecordingStatusCallbackMethodEnum = "PUT"
-	CreateParticipantRequestBodyRecordingStatusCallbackMethodEnumDelete CreateParticipantRequestBodyRecordingStatusCallbackMethodEnum = "DELETE"
+	CreateParticipantCreateParticipantRequestRecordingStatusCallbackMethodEnumHead   CreateParticipantCreateParticipantRequestRecordingStatusCallbackMethodEnum = "HEAD"
+	CreateParticipantCreateParticipantRequestRecordingStatusCallbackMethodEnumGet    CreateParticipantCreateParticipantRequestRecordingStatusCallbackMethodEnum = "GET"
+	CreateParticipantCreateParticipantRequestRecordingStatusCallbackMethodEnumPost   CreateParticipantCreateParticipantRequestRecordingStatusCallbackMethodEnum = "POST"
+	CreateParticipantCreateParticipantRequestRecordingStatusCallbackMethodEnumPatch  CreateParticipantCreateParticipantRequestRecordingStatusCallbackMethodEnum = "PATCH"
+	CreateParticipantCreateParticipantRequestRecordingStatusCallbackMethodEnumPut    CreateParticipantCreateParticipantRequestRecordingStatusCallbackMethodEnum = "PUT"
+	CreateParticipantCreateParticipantRequestRecordingStatusCallbackMethodEnumDelete CreateParticipantCreateParticipantRequestRecordingStatusCallbackMethodEnum = "DELETE"
 )
 
-type CreateParticipantRequestBodyStatusCallbackMethodEnum string
+type CreateParticipantCreateParticipantRequestStatusCallbackMethodEnum string
 
 const (
-	CreateParticipantRequestBodyStatusCallbackMethodEnumHead   CreateParticipantRequestBodyStatusCallbackMethodEnum = "HEAD"
-	CreateParticipantRequestBodyStatusCallbackMethodEnumGet    CreateParticipantRequestBodyStatusCallbackMethodEnum = "GET"
-	CreateParticipantRequestBodyStatusCallbackMethodEnumPost   CreateParticipantRequestBodyStatusCallbackMethodEnum = "POST"
-	CreateParticipantRequestBodyStatusCallbackMethodEnumPatch  CreateParticipantRequestBodyStatusCallbackMethodEnum = "PATCH"
-	CreateParticipantRequestBodyStatusCallbackMethodEnumPut    CreateParticipantRequestBodyStatusCallbackMethodEnum = "PUT"
-	CreateParticipantRequestBodyStatusCallbackMethodEnumDelete CreateParticipantRequestBodyStatusCallbackMethodEnum = "DELETE"
+	CreateParticipantCreateParticipantRequestStatusCallbackMethodEnumHead   CreateParticipantCreateParticipantRequestStatusCallbackMethodEnum = "HEAD"
+	CreateParticipantCreateParticipantRequestStatusCallbackMethodEnumGet    CreateParticipantCreateParticipantRequestStatusCallbackMethodEnum = "GET"
+	CreateParticipantCreateParticipantRequestStatusCallbackMethodEnumPost   CreateParticipantCreateParticipantRequestStatusCallbackMethodEnum = "POST"
+	CreateParticipantCreateParticipantRequestStatusCallbackMethodEnumPatch  CreateParticipantCreateParticipantRequestStatusCallbackMethodEnum = "PATCH"
+	CreateParticipantCreateParticipantRequestStatusCallbackMethodEnumPut    CreateParticipantCreateParticipantRequestStatusCallbackMethodEnum = "PUT"
+	CreateParticipantCreateParticipantRequestStatusCallbackMethodEnumDelete CreateParticipantCreateParticipantRequestStatusCallbackMethodEnum = "DELETE"
 )
 
-type CreateParticipantRequestBodyWaitMethodEnum string
+type CreateParticipantCreateParticipantRequestWaitMethodEnum string
 
 const (
-	CreateParticipantRequestBodyWaitMethodEnumHead   CreateParticipantRequestBodyWaitMethodEnum = "HEAD"
-	CreateParticipantRequestBodyWaitMethodEnumGet    CreateParticipantRequestBodyWaitMethodEnum = "GET"
-	CreateParticipantRequestBodyWaitMethodEnumPost   CreateParticipantRequestBodyWaitMethodEnum = "POST"
-	CreateParticipantRequestBodyWaitMethodEnumPatch  CreateParticipantRequestBodyWaitMethodEnum = "PATCH"
-	CreateParticipantRequestBodyWaitMethodEnumPut    CreateParticipantRequestBodyWaitMethodEnum = "PUT"
-	CreateParticipantRequestBodyWaitMethodEnumDelete CreateParticipantRequestBodyWaitMethodEnum = "DELETE"
+	CreateParticipantCreateParticipantRequestWaitMethodEnumHead   CreateParticipantCreateParticipantRequestWaitMethodEnum = "HEAD"
+	CreateParticipantCreateParticipantRequestWaitMethodEnumGet    CreateParticipantCreateParticipantRequestWaitMethodEnum = "GET"
+	CreateParticipantCreateParticipantRequestWaitMethodEnumPost   CreateParticipantCreateParticipantRequestWaitMethodEnum = "POST"
+	CreateParticipantCreateParticipantRequestWaitMethodEnumPatch  CreateParticipantCreateParticipantRequestWaitMethodEnum = "PATCH"
+	CreateParticipantCreateParticipantRequestWaitMethodEnumPut    CreateParticipantCreateParticipantRequestWaitMethodEnum = "PUT"
+	CreateParticipantCreateParticipantRequestWaitMethodEnumDelete CreateParticipantCreateParticipantRequestWaitMethodEnum = "DELETE"
 )
 
-type CreateParticipantRequestBodyCreateParticipantRequest struct {
-	AmdStatusCallback                       *string                                                                  `form:"name=AmdStatusCallback"`
-	AmdStatusCallbackMethod                 *CreateParticipantRequestBodyAmdStatusCallbackMethodEnum                 `form:"name=AmdStatusCallbackMethod"`
-	Beep                                    *string                                                                  `form:"name=Beep"`
-	Byoc                                    *string                                                                  `form:"name=Byoc"`
-	CallReason                              *string                                                                  `form:"name=CallReason"`
-	CallSidToCoach                          *string                                                                  `form:"name=CallSidToCoach"`
-	CallerID                                *string                                                                  `form:"name=CallerId"`
-	Coaching                                *bool                                                                    `form:"name=Coaching"`
-	ConferenceRecord                        *string                                                                  `form:"name=ConferenceRecord"`
-	ConferenceRecordingStatusCallback       *string                                                                  `form:"name=ConferenceRecordingStatusCallback"`
-	ConferenceRecordingStatusCallbackEvent  []string                                                                 `form:"name=ConferenceRecordingStatusCallbackEvent"`
-	ConferenceRecordingStatusCallbackMethod *CreateParticipantRequestBodyConferenceRecordingStatusCallbackMethodEnum `form:"name=ConferenceRecordingStatusCallbackMethod"`
-	ConferenceStatusCallback                *string                                                                  `form:"name=ConferenceStatusCallback"`
-	ConferenceStatusCallbackEvent           []string                                                                 `form:"name=ConferenceStatusCallbackEvent"`
-	ConferenceStatusCallbackMethod          *CreateParticipantRequestBodyConferenceStatusCallbackMethodEnum          `form:"name=ConferenceStatusCallbackMethod"`
-	ConferenceTrim                          *string                                                                  `form:"name=ConferenceTrim"`
-	EarlyMedia                              *bool                                                                    `form:"name=EarlyMedia"`
-	EndConferenceOnExit                     *bool                                                                    `form:"name=EndConferenceOnExit"`
-	From                                    string                                                                   `form:"name=From"`
-	JitterBufferSize                        *string                                                                  `form:"name=JitterBufferSize"`
-	Label                                   *string                                                                  `form:"name=Label"`
-	MachineDetection                        *string                                                                  `form:"name=MachineDetection"`
-	MachineDetectionSilenceTimeout          *int64                                                                   `form:"name=MachineDetectionSilenceTimeout"`
-	MachineDetectionSpeechEndThreshold      *int64                                                                   `form:"name=MachineDetectionSpeechEndThreshold"`
-	MachineDetectionSpeechThreshold         *int64                                                                   `form:"name=MachineDetectionSpeechThreshold"`
-	MachineDetectionTimeout                 *int64                                                                   `form:"name=MachineDetectionTimeout"`
-	MaxParticipants                         *int64                                                                   `form:"name=MaxParticipants"`
-	Muted                                   *bool                                                                    `form:"name=Muted"`
-	Record                                  *bool                                                                    `form:"name=Record"`
-	RecordingChannels                       *string                                                                  `form:"name=RecordingChannels"`
-	RecordingStatusCallback                 *string                                                                  `form:"name=RecordingStatusCallback"`
-	RecordingStatusCallbackEvent            []string                                                                 `form:"name=RecordingStatusCallbackEvent"`
-	RecordingStatusCallbackMethod           *CreateParticipantRequestBodyRecordingStatusCallbackMethodEnum           `form:"name=RecordingStatusCallbackMethod"`
-	RecordingTrack                          *string                                                                  `form:"name=RecordingTrack"`
-	Region                                  *string                                                                  `form:"name=Region"`
-	SipAuthPassword                         *string                                                                  `form:"name=SipAuthPassword"`
-	SipAuthUsername                         *string                                                                  `form:"name=SipAuthUsername"`
-	StartConferenceOnEnter                  *bool                                                                    `form:"name=StartConferenceOnEnter"`
-	StatusCallback                          *string                                                                  `form:"name=StatusCallback"`
-	StatusCallbackEvent                     []string                                                                 `form:"name=StatusCallbackEvent"`
-	StatusCallbackMethod                    *CreateParticipantRequestBodyStatusCallbackMethodEnum                    `form:"name=StatusCallbackMethod"`
-	TimeLimit                               *int64                                                                   `form:"name=TimeLimit"`
-	Timeout                                 *int64                                                                   `form:"name=Timeout"`
-	To                                      string                                                                   `form:"name=To"`
-	WaitMethod                              *CreateParticipantRequestBodyWaitMethodEnum                              `form:"name=WaitMethod"`
-	WaitURL                                 *string                                                                  `form:"name=WaitUrl"`
+type CreateParticipantCreateParticipantRequest struct {
+	AmdStatusCallback                       *string                                                                               `form:"name=AmdStatusCallback"`
+	AmdStatusCallbackMethod                 *CreateParticipantCreateParticipantRequestAmdStatusCallbackMethodEnum                 `form:"name=AmdStatusCallbackMethod"`
+	Beep                                    *string                                                                               `form:"name=Beep"`
+	Byoc                                    *string                                                                               `form:"name=Byoc"`
+	CallReason                              *string                                                                               `form:"name=CallReason"`
+	CallSidToCoach                          *string                                                                               `form:"name=CallSidToCoach"`
+	CallerID                                *string                                                                               `form:"name=CallerId"`
+	Coaching                                *bool                                                                                 `form:"name=Coaching"`
+	ConferenceRecord                        *string                                                                               `form:"name=ConferenceRecord"`
+	ConferenceRecordingStatusCallback       *string                                                                               `form:"name=ConferenceRecordingStatusCallback"`
+	ConferenceRecordingStatusCallbackEvent  []string                                                                              `form:"name=ConferenceRecordingStatusCallbackEvent"`
+	ConferenceRecordingStatusCallbackMethod *CreateParticipantCreateParticipantRequestConferenceRecordingStatusCallbackMethodEnum `form:"name=ConferenceRecordingStatusCallbackMethod"`
+	ConferenceStatusCallback                *string                                                                               `form:"name=ConferenceStatusCallback"`
+	ConferenceStatusCallbackEvent           []string                                                                              `form:"name=ConferenceStatusCallbackEvent"`
+	ConferenceStatusCallbackMethod          *CreateParticipantCreateParticipantRequestConferenceStatusCallbackMethodEnum          `form:"name=ConferenceStatusCallbackMethod"`
+	ConferenceTrim                          *string                                                                               `form:"name=ConferenceTrim"`
+	EarlyMedia                              *bool                                                                                 `form:"name=EarlyMedia"`
+	EndConferenceOnExit                     *bool                                                                                 `form:"name=EndConferenceOnExit"`
+	From                                    string                                                                                `form:"name=From"`
+	JitterBufferSize                        *string                                                                               `form:"name=JitterBufferSize"`
+	Label                                   *string                                                                               `form:"name=Label"`
+	MachineDetection                        *string                                                                               `form:"name=MachineDetection"`
+	MachineDetectionSilenceTimeout          *int64                                                                                `form:"name=MachineDetectionSilenceTimeout"`
+	MachineDetectionSpeechEndThreshold      *int64                                                                                `form:"name=MachineDetectionSpeechEndThreshold"`
+	MachineDetectionSpeechThreshold         *int64                                                                                `form:"name=MachineDetectionSpeechThreshold"`
+	MachineDetectionTimeout                 *int64                                                                                `form:"name=MachineDetectionTimeout"`
+	MaxParticipants                         *int64                                                                                `form:"name=MaxParticipants"`
+	Muted                                   *bool                                                                                 `form:"name=Muted"`
+	Record                                  *bool                                                                                 `form:"name=Record"`
+	RecordingChannels                       *string                                                                               `form:"name=RecordingChannels"`
+	RecordingStatusCallback                 *string                                                                               `form:"name=RecordingStatusCallback"`
+	RecordingStatusCallbackEvent            []string                                                                              `form:"name=RecordingStatusCallbackEvent"`
+	RecordingStatusCallbackMethod           *CreateParticipantCreateParticipantRequestRecordingStatusCallbackMethodEnum           `form:"name=RecordingStatusCallbackMethod"`
+	RecordingTrack                          *string                                                                               `form:"name=RecordingTrack"`
+	Region                                  *string                                                                               `form:"name=Region"`
+	SipAuthPassword                         *string                                                                               `form:"name=SipAuthPassword"`
+	SipAuthUsername                         *string                                                                               `form:"name=SipAuthUsername"`
+	StartConferenceOnEnter                  *bool                                                                                 `form:"name=StartConferenceOnEnter"`
+	StatusCallback                          *string                                                                               `form:"name=StatusCallback"`
+	StatusCallbackEvent                     []string                                                                              `form:"name=StatusCallbackEvent"`
+	StatusCallbackMethod                    *CreateParticipantCreateParticipantRequestStatusCallbackMethodEnum                    `form:"name=StatusCallbackMethod"`
+	TimeLimit                               *int64                                                                                `form:"name=TimeLimit"`
+	Timeout                                 *int64                                                                                `form:"name=Timeout"`
+	To                                      string                                                                                `form:"name=To"`
+	WaitMethod                              *CreateParticipantCreateParticipantRequestWaitMethodEnum                              `form:"name=WaitMethod"`
+	WaitURL                                 *string                                                                               `form:"name=WaitUrl"`
 }
 
 type CreateParticipantSecurity struct {
@@ -135,7 +135,7 @@ type CreateParticipantSecurity struct {
 type CreateParticipantRequest struct {
 	ServerURL  *string
 	PathParams CreateParticipantPathParams
-	Request    *CreateParticipantRequestBodyCreateParticipantRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateParticipantCreateParticipantRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateParticipantSecurity
 }
 

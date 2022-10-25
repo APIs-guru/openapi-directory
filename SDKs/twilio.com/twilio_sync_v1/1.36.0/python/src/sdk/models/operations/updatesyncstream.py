@@ -13,7 +13,7 @@ class UpdateSyncStreamPathParams:
     
 
 @dataclass
-class UpdateSyncStreamRequestBodyUpdateSyncStreamRequest:
+class UpdateSyncStreamUpdateSyncStreamRequest:
     ttl: Optional[int] = field(default=None, metadata={'form': { 'field_name': 'Ttl' }})
     
 
@@ -26,7 +26,7 @@ class UpdateSyncStreamSecurity:
 class UpdateSyncStreamRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateSyncStreamPathParams = field(default=None)
-    request: Optional[UpdateSyncStreamRequestBodyUpdateSyncStreamRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateSyncStreamUpdateSyncStreamRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateSyncStreamSecurity = field(default=None)
     
 

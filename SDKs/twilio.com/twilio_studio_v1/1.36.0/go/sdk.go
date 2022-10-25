@@ -671,7 +671,7 @@ func (s *SDK) ListEngagement(ctx context.Context, request operations.ListEngagem
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListEngagement200ApplicationJSONListEngagementResponse
+			var out *operations.ListEngagementListEngagementResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -716,7 +716,7 @@ func (s *SDK) ListExecution(ctx context.Context, request operations.ListExecutio
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListExecution200ApplicationJSONListExecutionResponse
+			var out *operations.ListExecutionListExecutionResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -761,7 +761,7 @@ func (s *SDK) ListExecutionStep(ctx context.Context, request operations.ListExec
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListExecutionStep200ApplicationJSONListExecutionStepResponse
+			var out *operations.ListExecutionStepListExecutionStepResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -806,7 +806,7 @@ func (s *SDK) ListFlow(ctx context.Context, request operations.ListFlowRequest) 
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListFlow200ApplicationJSONListFlowResponse
+			var out *operations.ListFlowListFlowResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -851,7 +851,7 @@ func (s *SDK) ListStep(ctx context.Context, request operations.ListStepRequest) 
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListStep200ApplicationJSONListStepResponse
+			var out *operations.ListStepListStepResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}

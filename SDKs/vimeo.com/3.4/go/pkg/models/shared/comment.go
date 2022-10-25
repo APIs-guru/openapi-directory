@@ -295,7 +295,7 @@ type CommentUserWebsites struct {
 	Name        string `json:"name"`
 }
 
-type CommentUserUser struct {
+type CommentUser struct {
 	Account       CommentUserAccountEnum  `json:"account"`
 	Bio           string                  `json:"bio"`
 	ContentFilter []string                `json:"content_filter,omitempty"`
@@ -320,5 +320,5 @@ type Comment struct {
 	Text        string          `json:"text"`
 	Type        CommentTypeEnum `json:"type"`
 	URI         string          `json:"uri"`
-	User        CommentUserUser `json:"user"`
+	User        CommentUser     `json:"user"`
 }

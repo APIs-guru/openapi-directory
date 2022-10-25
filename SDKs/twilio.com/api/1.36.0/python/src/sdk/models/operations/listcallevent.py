@@ -33,7 +33,7 @@ class ListCallEventRequest:
 
 @dataclass_json
 @dataclass
-class ListCallEvent200ApplicationJSONListCallEventResponse:
+class ListCallEventListCallEventResponse:
     end: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'end' }})
     events: Optional[List[shared.APIV2010AccountCallCallEvent]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'events' }})
     first_page_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_uri' }})
@@ -48,6 +48,6 @@ class ListCallEvent200ApplicationJSONListCallEventResponse:
 @dataclass
 class ListCallEventResponse:
     content_type: str = field(default=None)
-    list_call_event_response: Optional[ListCallEvent200ApplicationJSONListCallEventResponse] = field(default=None)
+    list_call_event_response: Optional[ListCallEventListCallEventResponse] = field(default=None)
     status_code: int = field(default=None)
     

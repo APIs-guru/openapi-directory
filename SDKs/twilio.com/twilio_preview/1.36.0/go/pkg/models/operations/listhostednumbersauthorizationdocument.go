@@ -24,7 +24,7 @@ type ListHostedNumbersAuthorizationDocumentRequest struct {
 	Security    ListHostedNumbersAuthorizationDocumentSecurity
 }
 
-type ListHostedNumbersAuthorizationDocument200ApplicationJSONMeta struct {
+type ListHostedNumbersAuthorizationDocumentListHostedNumbersAuthorizationDocumentResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -34,13 +34,13 @@ type ListHostedNumbersAuthorizationDocument200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListHostedNumbersAuthorizationDocument200ApplicationJSONListHostedNumbersAuthorizationDocumentResponse struct {
-	Items []shared.PreviewHostedNumbersAuthorizationDocument            `json:"items,omitempty"`
-	Meta  *ListHostedNumbersAuthorizationDocument200ApplicationJSONMeta `json:"meta,omitempty"`
+type ListHostedNumbersAuthorizationDocumentListHostedNumbersAuthorizationDocumentResponse struct {
+	Items []shared.PreviewHostedNumbersAuthorizationDocument                                        `json:"items,omitempty"`
+	Meta  *ListHostedNumbersAuthorizationDocumentListHostedNumbersAuthorizationDocumentResponseMeta `json:"meta,omitempty"`
 }
 
 type ListHostedNumbersAuthorizationDocumentResponse struct {
 	ContentType                                    string
-	ListHostedNumbersAuthorizationDocumentResponse *ListHostedNumbersAuthorizationDocument200ApplicationJSONListHostedNumbersAuthorizationDocumentResponse
+	ListHostedNumbersAuthorizationDocumentResponse *ListHostedNumbersAuthorizationDocumentListHostedNumbersAuthorizationDocumentResponse
 	StatusCode                                     int64
 }

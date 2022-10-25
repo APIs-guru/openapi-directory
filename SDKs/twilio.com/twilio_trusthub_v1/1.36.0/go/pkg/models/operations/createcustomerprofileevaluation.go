@@ -12,7 +12,7 @@ type CreateCustomerProfileEvaluationPathParams struct {
 	CustomerProfileSid string `pathParam:"style=simple,explode=false,name=CustomerProfileSid"`
 }
 
-type CreateCustomerProfileEvaluationRequestBodyCreateCustomerProfileEvaluationRequest struct {
+type CreateCustomerProfileEvaluationCreateCustomerProfileEvaluationRequest struct {
 	PolicySid string `form:"name=PolicySid"`
 }
 
@@ -23,7 +23,7 @@ type CreateCustomerProfileEvaluationSecurity struct {
 type CreateCustomerProfileEvaluationRequest struct {
 	ServerURL  *string
 	PathParams CreateCustomerProfileEvaluationPathParams
-	Request    *CreateCustomerProfileEvaluationRequestBodyCreateCustomerProfileEvaluationRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateCustomerProfileEvaluationCreateCustomerProfileEvaluationRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateCustomerProfileEvaluationSecurity
 }
 

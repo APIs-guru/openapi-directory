@@ -10,7 +10,7 @@ class PostServersIDActionsAttachToNetworkPathParams:
 
 @dataclass_json
 @dataclass
-class PostServersIDActionsAttachToNetworkRequestBodyAttachToNetworkRequest:
+class PostServersIDActionsAttachToNetworkAttachToNetworkRequest:
     alias_ips: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'alias_ips' }})
     ip: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ip' }})
     network: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'network' }})
@@ -19,23 +19,23 @@ class PostServersIDActionsAttachToNetworkRequestBodyAttachToNetworkRequest:
 @dataclass
 class PostServersIDActionsAttachToNetworkRequest:
     path_params: PostServersIDActionsAttachToNetworkPathParams = field(default=None)
-    request: Optional[PostServersIDActionsAttachToNetworkRequestBodyAttachToNetworkRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: Optional[PostServersIDActionsAttachToNetworkAttachToNetworkRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass_json
 @dataclass
-class PostServersIDActionsAttachToNetwork201ApplicationJSONActionError:
+class PostServersIDActionsAttachToNetworkActionResponseActionError:
     code: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'code' }})
     message: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'message' }})
     
 
 @dataclass_json
 @dataclass
-class PostServersIDActionsAttachToNetwork201ApplicationJSONActionResources:
+class PostServersIDActionsAttachToNetworkActionResponseActionResources:
     id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     type: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     
-class PostServersIDActionsAttachToNetwork201ApplicationJSONActionStatusEnum(str, Enum):
+class PostServersIDActionsAttachToNetworkActionResponseActionStatusEnum(str, Enum):
     SUCCESS = "success"
     RUNNING = "running"
     ERROR = "error"
@@ -43,26 +43,26 @@ class PostServersIDActionsAttachToNetwork201ApplicationJSONActionStatusEnum(str,
 
 @dataclass_json
 @dataclass
-class PostServersIDActionsAttachToNetwork201ApplicationJSONActionAction:
+class PostServersIDActionsAttachToNetworkActionResponseAction:
     command: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'command' }})
-    error: PostServersIDActionsAttachToNetwork201ApplicationJSONActionError = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
+    error: PostServersIDActionsAttachToNetworkActionResponseActionError = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
     finished: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'finished' }})
     id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     progress: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'progress' }})
-    resources: List[PostServersIDActionsAttachToNetwork201ApplicationJSONActionResources] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resources' }})
+    resources: List[PostServersIDActionsAttachToNetworkActionResponseActionResources] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resources' }})
     started: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'started' }})
-    status: PostServersIDActionsAttachToNetwork201ApplicationJSONActionStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    status: PostServersIDActionsAttachToNetworkActionResponseActionStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
     
 
 @dataclass_json
 @dataclass
-class PostServersIDActionsAttachToNetwork201ApplicationJSONActionResponse:
-    action: PostServersIDActionsAttachToNetwork201ApplicationJSONActionAction = field(default=None, metadata={'dataclasses_json': { 'field_name': 'action' }})
+class PostServersIDActionsAttachToNetworkActionResponse:
+    action: PostServersIDActionsAttachToNetworkActionResponseAction = field(default=None, metadata={'dataclasses_json': { 'field_name': 'action' }})
     
 
 @dataclass
 class PostServersIDActionsAttachToNetworkResponse:
-    action_response: Optional[PostServersIDActionsAttachToNetwork201ApplicationJSONActionResponse] = field(default=None)
+    action_response: Optional[PostServersIDActionsAttachToNetworkActionResponse] = field(default=None)
     content_type: str = field(default=None)
     status_code: int = field(default=None)
     

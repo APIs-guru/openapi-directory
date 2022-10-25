@@ -12,7 +12,7 @@ type CreateExportCustomJobPathParams struct {
 	ResourceType string `pathParam:"style=simple,explode=false,name=ResourceType"`
 }
 
-type CreateExportCustomJobRequestBodyCreateExportCustomJobRequest struct {
+type CreateExportCustomJobCreateExportCustomJobRequest struct {
 	Email         *string `form:"name=Email"`
 	EndDay        string  `form:"name=EndDay"`
 	FriendlyName  string  `form:"name=FriendlyName"`
@@ -28,7 +28,7 @@ type CreateExportCustomJobSecurity struct {
 type CreateExportCustomJobRequest struct {
 	ServerURL  *string
 	PathParams CreateExportCustomJobPathParams
-	Request    *CreateExportCustomJobRequestBodyCreateExportCustomJobRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateExportCustomJobCreateExportCustomJobRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateExportCustomJobSecurity
 }
 

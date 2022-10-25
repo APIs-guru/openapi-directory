@@ -8,7 +8,7 @@ var CreateSafelistServers = []string{
 	"https://verify.twilio.com",
 }
 
-type CreateSafelistRequestBodyCreateSafelistRequest struct {
+type CreateSafelistCreateSafelistRequest struct {
 	PhoneNumber string `form:"name=PhoneNumber"`
 }
 
@@ -18,7 +18,7 @@ type CreateSafelistSecurity struct {
 
 type CreateSafelistRequest struct {
 	ServerURL *string
-	Request   *CreateSafelistRequestBodyCreateSafelistRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request   *CreateSafelistCreateSafelistRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security  CreateSafelistSecurity
 }
 

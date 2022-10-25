@@ -12,7 +12,7 @@ type CreateMessagingConfigurationPathParams struct {
 	ServiceSid string `pathParam:"style=simple,explode=false,name=ServiceSid"`
 }
 
-type CreateMessagingConfigurationRequestBodyCreateMessagingConfigurationRequest struct {
+type CreateMessagingConfigurationCreateMessagingConfigurationRequest struct {
 	Country             string `form:"name=Country"`
 	MessagingServiceSid string `form:"name=MessagingServiceSid"`
 }
@@ -24,7 +24,7 @@ type CreateMessagingConfigurationSecurity struct {
 type CreateMessagingConfigurationRequest struct {
 	ServerURL  *string
 	PathParams CreateMessagingConfigurationPathParams
-	Request    *CreateMessagingConfigurationRequestBodyCreateMessagingConfigurationRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateMessagingConfigurationCreateMessagingConfigurationRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateMessagingConfigurationSecurity
 }
 

@@ -13,127 +13,127 @@ type GetPersonalCurrentAccountsRequest struct {
 	Headers GetPersonalCurrentAccountsHeaders
 }
 
-type GetPersonalCurrentAccounts400ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnum string
+type GetPersonalCurrentAccounts400ErrorObjectDescriptionEnum string
 
 const (
-	GetPersonalCurrentAccounts400ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnumYouHaveSentARequestWhichCouldNotBeUnderstood GetPersonalCurrentAccounts400ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnum = "You have sent a request which could not be understood."
+	GetPersonalCurrentAccounts400ErrorObjectDescriptionEnumYouHaveSentARequestWhichCouldNotBeUnderstood GetPersonalCurrentAccounts400ErrorObjectDescriptionEnum = "You have sent a request which could not be understood."
 )
 
-type GetPersonalCurrentAccounts400ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnum string
+type GetPersonalCurrentAccounts400ErrorObjectStatusEnum string
 
 const (
-	GetPersonalCurrentAccounts400ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnumFourHundred GetPersonalCurrentAccounts400ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnum = "400"
+	GetPersonalCurrentAccounts400ErrorObjectStatusEnumFourHundred GetPersonalCurrentAccounts400ErrorObjectStatusEnum = "400"
 )
 
-type GetPersonalCurrentAccounts400ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnum string
+type GetPersonalCurrentAccounts400ErrorObjectTitleEnum string
 
 const (
-	GetPersonalCurrentAccounts400ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnumBadRequest GetPersonalCurrentAccounts400ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnum = "Bad request"
+	GetPersonalCurrentAccounts400ErrorObjectTitleEnumBadRequest GetPersonalCurrentAccounts400ErrorObjectTitleEnum = "Bad request"
 )
 
-type GetPersonalCurrentAccounts400ApplicationPrsOpenbankingOpendataV13PlusJSON400ErrorObject struct {
-	Description GetPersonalCurrentAccounts400ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnum `json:"description"`
-	Status      GetPersonalCurrentAccounts400ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnum      `json:"status"`
-	Title       GetPersonalCurrentAccounts400ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnum       `json:"title"`
+type GetPersonalCurrentAccounts400ErrorObject struct {
+	Description GetPersonalCurrentAccounts400ErrorObjectDescriptionEnum `json:"description"`
+	Status      GetPersonalCurrentAccounts400ErrorObjectStatusEnum      `json:"status"`
+	Title       GetPersonalCurrentAccounts400ErrorObjectTitleEnum       `json:"title"`
 }
 
-type GetPersonalCurrentAccounts408ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnum string
+type GetPersonalCurrentAccounts408ErrorObjectDescriptionEnum string
 
 const (
-	GetPersonalCurrentAccounts408ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnumYourClientHasFailedToSubmitARequestAndATimeoutHasOccurred GetPersonalCurrentAccounts408ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnum = "Your client has failed to submit a request, and a timeout has occurred."
+	GetPersonalCurrentAccounts408ErrorObjectDescriptionEnumYourClientHasFailedToSubmitARequestAndATimeoutHasOccurred GetPersonalCurrentAccounts408ErrorObjectDescriptionEnum = "Your client has failed to submit a request, and a timeout has occurred."
 )
 
-type GetPersonalCurrentAccounts408ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnum string
+type GetPersonalCurrentAccounts408ErrorObjectStatusEnum string
 
 const (
-	GetPersonalCurrentAccounts408ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnumFourHundredAndEight GetPersonalCurrentAccounts408ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnum = "408"
+	GetPersonalCurrentAccounts408ErrorObjectStatusEnumFourHundredAndEight GetPersonalCurrentAccounts408ErrorObjectStatusEnum = "408"
 )
 
-type GetPersonalCurrentAccounts408ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnum string
+type GetPersonalCurrentAccounts408ErrorObjectTitleEnum string
 
 const (
-	GetPersonalCurrentAccounts408ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnumClientTimeout GetPersonalCurrentAccounts408ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnum = "Client timeout"
+	GetPersonalCurrentAccounts408ErrorObjectTitleEnumClientTimeout GetPersonalCurrentAccounts408ErrorObjectTitleEnum = "Client timeout"
 )
 
-type GetPersonalCurrentAccounts408ApplicationPrsOpenbankingOpendataV13PlusJSON408ErrorObject struct {
-	Description GetPersonalCurrentAccounts408ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnum `json:"description"`
-	Status      GetPersonalCurrentAccounts408ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnum      `json:"status"`
-	Title       GetPersonalCurrentAccounts408ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnum       `json:"title"`
+type GetPersonalCurrentAccounts408ErrorObject struct {
+	Description GetPersonalCurrentAccounts408ErrorObjectDescriptionEnum `json:"description"`
+	Status      GetPersonalCurrentAccounts408ErrorObjectStatusEnum      `json:"status"`
+	Title       GetPersonalCurrentAccounts408ErrorObjectTitleEnum       `json:"title"`
 }
 
-type GetPersonalCurrentAccounts429ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnum string
+type GetPersonalCurrentAccounts429ErrorObjectDescriptionEnum string
 
 const (
-	GetPersonalCurrentAccounts429ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnumYouHaveRequestedThisResourceTooOftenSlowDown GetPersonalCurrentAccounts429ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnum = "You have requested this resource too often. Slow down."
+	GetPersonalCurrentAccounts429ErrorObjectDescriptionEnumYouHaveRequestedThisResourceTooOftenSlowDown GetPersonalCurrentAccounts429ErrorObjectDescriptionEnum = "You have requested this resource too often. Slow down."
 )
 
-type GetPersonalCurrentAccounts429ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnum string
+type GetPersonalCurrentAccounts429ErrorObjectStatusEnum string
 
 const (
-	GetPersonalCurrentAccounts429ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnumFourHundredAndTwentyNine GetPersonalCurrentAccounts429ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnum = "429"
+	GetPersonalCurrentAccounts429ErrorObjectStatusEnumFourHundredAndTwentyNine GetPersonalCurrentAccounts429ErrorObjectStatusEnum = "429"
 )
 
-type GetPersonalCurrentAccounts429ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnum string
+type GetPersonalCurrentAccounts429ErrorObjectTitleEnum string
 
 const (
-	GetPersonalCurrentAccounts429ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnumTooManyRequests GetPersonalCurrentAccounts429ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnum = "Too many requests"
+	GetPersonalCurrentAccounts429ErrorObjectTitleEnumTooManyRequests GetPersonalCurrentAccounts429ErrorObjectTitleEnum = "Too many requests"
 )
 
-type GetPersonalCurrentAccounts429ApplicationPrsOpenbankingOpendataV13PlusJSON429ErrorObject struct {
-	Description GetPersonalCurrentAccounts429ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnum `json:"description"`
-	Status      GetPersonalCurrentAccounts429ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnum      `json:"status"`
-	Title       GetPersonalCurrentAccounts429ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnum       `json:"title"`
+type GetPersonalCurrentAccounts429ErrorObject struct {
+	Description GetPersonalCurrentAccounts429ErrorObjectDescriptionEnum `json:"description"`
+	Status      GetPersonalCurrentAccounts429ErrorObjectStatusEnum      `json:"status"`
+	Title       GetPersonalCurrentAccounts429ErrorObjectTitleEnum       `json:"title"`
 }
 
-type GetPersonalCurrentAccounts500ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnum string
+type GetPersonalCurrentAccounts500ErrorObjectDescriptionEnum string
 
 const (
-	GetPersonalCurrentAccounts500ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnumAnErrorOccurredOnTheServerNoFurtherInformationIsAvailable GetPersonalCurrentAccounts500ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnum = "An error occurred on the server. No further information is available."
+	GetPersonalCurrentAccounts500ErrorObjectDescriptionEnumAnErrorOccurredOnTheServerNoFurtherInformationIsAvailable GetPersonalCurrentAccounts500ErrorObjectDescriptionEnum = "An error occurred on the server. No further information is available."
 )
 
-type GetPersonalCurrentAccounts500ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnum string
+type GetPersonalCurrentAccounts500ErrorObjectStatusEnum string
 
 const (
-	GetPersonalCurrentAccounts500ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnumFiveHundred GetPersonalCurrentAccounts500ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnum = "500"
+	GetPersonalCurrentAccounts500ErrorObjectStatusEnumFiveHundred GetPersonalCurrentAccounts500ErrorObjectStatusEnum = "500"
 )
 
-type GetPersonalCurrentAccounts500ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnum string
+type GetPersonalCurrentAccounts500ErrorObjectTitleEnum string
 
 const (
-	GetPersonalCurrentAccounts500ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnumInternalServerError GetPersonalCurrentAccounts500ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnum = "Internal server error"
+	GetPersonalCurrentAccounts500ErrorObjectTitleEnumInternalServerError GetPersonalCurrentAccounts500ErrorObjectTitleEnum = "Internal server error"
 )
 
-type GetPersonalCurrentAccounts500ApplicationPrsOpenbankingOpendataV13PlusJSON500ErrorObject struct {
-	Description GetPersonalCurrentAccounts500ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnum `json:"description"`
-	Status      GetPersonalCurrentAccounts500ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnum      `json:"status"`
-	Title       GetPersonalCurrentAccounts500ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnum       `json:"title"`
+type GetPersonalCurrentAccounts500ErrorObject struct {
+	Description GetPersonalCurrentAccounts500ErrorObjectDescriptionEnum `json:"description"`
+	Status      GetPersonalCurrentAccounts500ErrorObjectStatusEnum      `json:"status"`
+	Title       GetPersonalCurrentAccounts500ErrorObjectTitleEnum       `json:"title"`
 }
 
-type GetPersonalCurrentAccounts503ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnum string
+type GetPersonalCurrentAccounts503ErrorObjectDescriptionEnum string
 
 const (
-	GetPersonalCurrentAccounts503ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnumTheServiceIsTemporarilyUnavailable GetPersonalCurrentAccounts503ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnum = "The service is temporarily unavailable."
+	GetPersonalCurrentAccounts503ErrorObjectDescriptionEnumTheServiceIsTemporarilyUnavailable GetPersonalCurrentAccounts503ErrorObjectDescriptionEnum = "The service is temporarily unavailable."
 )
 
-type GetPersonalCurrentAccounts503ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnum string
+type GetPersonalCurrentAccounts503ErrorObjectStatusEnum string
 
 const (
-	GetPersonalCurrentAccounts503ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnumFiveHundredAndThree GetPersonalCurrentAccounts503ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnum = "503"
+	GetPersonalCurrentAccounts503ErrorObjectStatusEnumFiveHundredAndThree GetPersonalCurrentAccounts503ErrorObjectStatusEnum = "503"
 )
 
-type GetPersonalCurrentAccounts503ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnum string
+type GetPersonalCurrentAccounts503ErrorObjectTitleEnum string
 
 const (
-	GetPersonalCurrentAccounts503ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnumServiceTemporarilyUnavailable GetPersonalCurrentAccounts503ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnum = "Service temporarily unavailable"
+	GetPersonalCurrentAccounts503ErrorObjectTitleEnumServiceTemporarilyUnavailable GetPersonalCurrentAccounts503ErrorObjectTitleEnum = "Service temporarily unavailable"
 )
 
-type GetPersonalCurrentAccounts503ApplicationPrsOpenbankingOpendataV13PlusJSON503ErrorObject struct {
-	Description GetPersonalCurrentAccounts503ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnum `json:"description"`
-	Status      GetPersonalCurrentAccounts503ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnum      `json:"status"`
-	Title       GetPersonalCurrentAccounts503ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnum       `json:"title"`
+type GetPersonalCurrentAccounts503ErrorObject struct {
+	Description GetPersonalCurrentAccounts503ErrorObjectDescriptionEnum `json:"description"`
+	Status      GetPersonalCurrentAccounts503ErrorObjectStatusEnum      `json:"status"`
+	Title       GetPersonalCurrentAccounts503ErrorObjectTitleEnum       `json:"title"`
 }
 
-type GetPersonalCurrentAccountsDefaultApplicationPrsOpenbankingOpendataV13PlusJSONErrorObject struct {
+type GetPersonalCurrentAccountsErrorObject struct {
 	Description string `json:"description"`
 	Status      string `json:"status"`
 	Title       string `json:"title"`
@@ -1394,45 +1394,45 @@ type GetPersonalCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONDa
 	TsandCs                                                                 []string                                                                                                                                                   `json:"TsandCs"`
 }
 
-type GetPersonalCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaAgreementEnum string
+type GetPersonalCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaDataAgreementEnum string
 
 const (
-	GetPersonalCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaAgreementEnumUseOfTheApIsAndAnyRelatedDataWillBeSubjectToTheTermsOfTheOpenLicenceAndSubjectToTermsAndConditions GetPersonalCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaAgreementEnum = "Use of the APIs and any related data will be subject to the terms of the Open Licence and subject to terms and conditions"
+	GetPersonalCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaDataAgreementEnumUseOfTheApIsAndAnyRelatedDataWillBeSubjectToTheTermsOfTheOpenLicenceAndSubjectToTermsAndConditions GetPersonalCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaDataAgreementEnum = "Use of the APIs and any related data will be subject to the terms of the Open Licence and subject to terms and conditions"
 )
 
-type GetPersonalCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaLicenseEnum string
+type GetPersonalCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaDataLicenseEnum string
 
 const (
-	GetPersonalCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaLicenseEnumHTTPSWwwOpenbankingOrgUkOpenLicence GetPersonalCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaLicenseEnum = "https://www.openbanking.org.uk/open-licence"
+	GetPersonalCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaDataLicenseEnumHTTPSWwwOpenbankingOrgUkOpenLicence GetPersonalCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaDataLicenseEnum = "https://www.openbanking.org.uk/open-licence"
 )
 
-type GetPersonalCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaTermsOfUseEnum string
+type GetPersonalCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaDataTermsOfUseEnum string
 
 const (
-	GetPersonalCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaTermsOfUseEnumHTTPSWwwOpenbankingOrgUkTerms GetPersonalCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaTermsOfUseEnum = "https://www.openbanking.org.uk/terms"
+	GetPersonalCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaDataTermsOfUseEnumHTTPSWwwOpenbankingOrgUkTerms GetPersonalCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaDataTermsOfUseEnum = "https://www.openbanking.org.uk/terms"
 )
 
-type GetPersonalCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaMetaData struct {
-	Agreement    GetPersonalCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaAgreementEnum  `json:"Agreement"`
-	LastUpdated  time.Time                                                                                   `json:"LastUpdated"`
-	License      GetPersonalCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaLicenseEnum    `json:"License"`
-	TermsOfUse   GetPersonalCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaTermsOfUseEnum `json:"TermsOfUse"`
-	TotalResults int64                                                                                       `json:"TotalResults"`
+type GetPersonalCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaData struct {
+	Agreement    GetPersonalCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaDataAgreementEnum  `json:"Agreement"`
+	LastUpdated  time.Time                                                                                       `json:"LastUpdated"`
+	License      GetPersonalCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaDataLicenseEnum    `json:"License"`
+	TermsOfUse   GetPersonalCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaDataTermsOfUseEnum `json:"TermsOfUse"`
+	TotalResults int64                                                                                           `json:"TotalResults"`
 }
 
 type GetPersonalCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSON struct {
-	Data []GetPersonalCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONData       `json:"data"`
-	Meta GetPersonalCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaMetaData `json:"meta"`
+	Data []GetPersonalCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONData   `json:"data"`
+	Meta GetPersonalCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaData `json:"meta"`
 }
 
 type GetPersonalCurrentAccountsResponse struct {
-	FourHundredErrorObject                                                          *GetPersonalCurrentAccounts400ApplicationPrsOpenbankingOpendataV13PlusJSON400ErrorObject
-	FourHundredAndEightErrorObject                                                  *GetPersonalCurrentAccounts408ApplicationPrsOpenbankingOpendataV13PlusJSON408ErrorObject
-	FourHundredAndTwentyNineErrorObject                                             *GetPersonalCurrentAccounts429ApplicationPrsOpenbankingOpendataV13PlusJSON429ErrorObject
-	FiveHundredErrorObject                                                          *GetPersonalCurrentAccounts500ApplicationPrsOpenbankingOpendataV13PlusJSON500ErrorObject
-	FiveHundredAndThreeErrorObject                                                  *GetPersonalCurrentAccounts503ApplicationPrsOpenbankingOpendataV13PlusJSON503ErrorObject
+	FourHundredErrorObject                                                          *GetPersonalCurrentAccounts400ErrorObject
+	FourHundredAndEightErrorObject                                                  *GetPersonalCurrentAccounts408ErrorObject
+	FourHundredAndTwentyNineErrorObject                                             *GetPersonalCurrentAccounts429ErrorObject
+	FiveHundredErrorObject                                                          *GetPersonalCurrentAccounts500ErrorObject
+	FiveHundredAndThreeErrorObject                                                  *GetPersonalCurrentAccounts503ErrorObject
 	ContentType                                                                     string
-	ErrorObject                                                                     *GetPersonalCurrentAccountsDefaultApplicationPrsOpenbankingOpendataV13PlusJSONErrorObject
+	ErrorObject                                                                     *GetPersonalCurrentAccountsErrorObject
 	GetPersonalCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONObject *GetPersonalCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSON
 	Headers                                                                         map[string][]string
 	StatusCode                                                                      int64

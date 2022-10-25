@@ -2,7 +2,7 @@ from dataclasses import dataclass, field
 from typing import Enum,Optional
 from dataclasses_json import dataclass_json
 
-class Onev21apps1tiers1instanceSizesGetResponses200ContentApplication1jsonSchemaPropertiesInstanceSizesItemsCPUTypeSharedSharedVCPUCoresDedicatedDedicatedVCPUCoresEnum(str, Enum):
+class Onev21apps1tiers1instanceSizesGetResponses200ContentApplication1jsonSchemaPropertiesInstanceSizesItemsSharedSharedVCPUCoresDedicatedDedicatedVCPUCoresEnum(str, Enum):
     UNSPECIFIED = "UNSPECIFIED"
     SHARED = "SHARED"
     DEDICATED = "DEDICATED"
@@ -11,7 +11,7 @@ class Onev21apps1tiers1instanceSizesGetResponses200ContentApplication1jsonSchema
 @dataclass_json
 @dataclass
 class Onev21apps1tiers1instanceSizesGetResponses200ContentApplication1jsonSchemaPropertiesInstanceSizesItems:
-    cpu_type: Optional[Onev21apps1tiers1instanceSizesGetResponses200ContentApplication1jsonSchemaPropertiesInstanceSizesItemsCPUTypeSharedSharedVCPUCoresDedicatedDedicatedVCPUCoresEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cpu_type' }})
+    cpu_type: Optional[Onev21apps1tiers1instanceSizesGetResponses200ContentApplication1jsonSchemaPropertiesInstanceSizesItemsSharedSharedVCPUCoresDedicatedDedicatedVCPUCoresEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cpu_type' }})
     cpus: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cpus' }})
     memory_bytes: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'memory_bytes' }})
     name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})

@@ -10,24 +10,24 @@ type AuthorizationApp struct {
 	URL      string `json:"url"`
 }
 
-type AuthorizationInstallationRepositorySelectionEnum string
+type AuthorizationScopedInstallationRepositorySelectionEnum string
 
 const (
-	AuthorizationInstallationRepositorySelectionEnumAll      AuthorizationInstallationRepositorySelectionEnum = "all"
-	AuthorizationInstallationRepositorySelectionEnumSelected AuthorizationInstallationRepositorySelectionEnum = "selected"
+	AuthorizationScopedInstallationRepositorySelectionEnumAll      AuthorizationScopedInstallationRepositorySelectionEnum = "all"
+	AuthorizationScopedInstallationRepositorySelectionEnumSelected AuthorizationScopedInstallationRepositorySelectionEnum = "selected"
 )
 
-type AuthorizationInstallationScopedInstallation struct {
-	Account                SimpleUser                                       `json:"account"`
-	HasMultipleSingleFiles *bool                                            `json:"has_multiple_single_files,omitempty"`
-	Permissions            AppPermissions                                   `json:"permissions"`
-	RepositoriesURL        string                                           `json:"repositories_url"`
-	RepositorySelection    AuthorizationInstallationRepositorySelectionEnum `json:"repository_selection"`
-	SingleFileName         string                                           `json:"single_file_name"`
-	SingleFilePaths        []string                                         `json:"single_file_paths,omitempty"`
+type AuthorizationScopedInstallation struct {
+	Account                SimpleUser                                             `json:"account"`
+	HasMultipleSingleFiles *bool                                                  `json:"has_multiple_single_files,omitempty"`
+	Permissions            AppPermissions                                         `json:"permissions"`
+	RepositoriesURL        string                                                 `json:"repositories_url"`
+	RepositorySelection    AuthorizationScopedInstallationRepositorySelectionEnum `json:"repository_selection"`
+	SingleFileName         string                                                 `json:"single_file_name"`
+	SingleFilePaths        []string                                               `json:"single_file_paths,omitempty"`
 }
 
-type AuthorizationUserSimpleUser struct {
+type AuthorizationSimpleUser struct {
 	AvatarURL         string  `json:"avatar_url"`
 	EventsURL         string  `json:"events_url"`
 	FollowersURL      string  `json:"followers_url"`
@@ -50,18 +50,18 @@ type AuthorizationUserSimpleUser struct {
 }
 
 type Authorization struct {
-	App            AuthorizationApp                             `json:"app"`
-	CreatedAt      time.Time                                    `json:"created_at"`
-	Fingerprint    string                                       `json:"fingerprint"`
-	HashedToken    string                                       `json:"hashed_token"`
-	ID             int64                                        `json:"id"`
-	Installation   *AuthorizationInstallationScopedInstallation `json:"installation,omitempty"`
-	Note           string                                       `json:"note"`
-	NoteURL        string                                       `json:"note_url"`
-	Scopes         []string                                     `json:"scopes"`
-	Token          string                                       `json:"token"`
-	TokenLastEight string                                       `json:"token_last_eight"`
-	UpdatedAt      time.Time                                    `json:"updated_at"`
-	URL            string                                       `json:"url"`
-	User           *AuthorizationUserSimpleUser                 `json:"user,omitempty"`
+	App            AuthorizationApp                 `json:"app"`
+	CreatedAt      time.Time                        `json:"created_at"`
+	Fingerprint    string                           `json:"fingerprint"`
+	HashedToken    string                           `json:"hashed_token"`
+	ID             int64                            `json:"id"`
+	Installation   *AuthorizationScopedInstallation `json:"installation,omitempty"`
+	Note           string                           `json:"note"`
+	NoteURL        string                           `json:"note_url"`
+	Scopes         []string                         `json:"scopes"`
+	Token          string                           `json:"token"`
+	TokenLastEight string                           `json:"token_last_eight"`
+	UpdatedAt      time.Time                        `json:"updated_at"`
+	URL            string                           `json:"url"`
+	User           *AuthorizationSimpleUser         `json:"user,omitempty"`
 }

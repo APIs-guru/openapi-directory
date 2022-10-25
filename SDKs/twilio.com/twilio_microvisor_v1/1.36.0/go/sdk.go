@@ -204,7 +204,7 @@ func (s *SDK) ListApp(ctx context.Context, request operations.ListAppRequest) (*
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListApp200ApplicationJSONListAppResponse
+			var out *operations.ListAppListAppResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -249,7 +249,7 @@ func (s *SDK) ListDevice(ctx context.Context, request operations.ListDeviceReque
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListDevice200ApplicationJSONListDeviceResponse
+			var out *operations.ListDeviceListDeviceResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}

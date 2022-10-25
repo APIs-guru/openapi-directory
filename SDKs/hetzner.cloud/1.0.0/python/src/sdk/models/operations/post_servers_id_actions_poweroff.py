@@ -15,18 +15,18 @@ class PostServersIDActionsPoweroffRequest:
 
 @dataclass_json
 @dataclass
-class PostServersIDActionsPoweroff201ApplicationJSONActionError:
+class PostServersIDActionsPoweroffActionResponseActionError:
     code: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'code' }})
     message: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'message' }})
     
 
 @dataclass_json
 @dataclass
-class PostServersIDActionsPoweroff201ApplicationJSONActionResources:
+class PostServersIDActionsPoweroffActionResponseActionResources:
     id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     type: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     
-class PostServersIDActionsPoweroff201ApplicationJSONActionStatusEnum(str, Enum):
+class PostServersIDActionsPoweroffActionResponseActionStatusEnum(str, Enum):
     SUCCESS = "success"
     RUNNING = "running"
     ERROR = "error"
@@ -34,26 +34,26 @@ class PostServersIDActionsPoweroff201ApplicationJSONActionStatusEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class PostServersIDActionsPoweroff201ApplicationJSONActionAction:
+class PostServersIDActionsPoweroffActionResponseAction:
     command: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'command' }})
-    error: PostServersIDActionsPoweroff201ApplicationJSONActionError = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
+    error: PostServersIDActionsPoweroffActionResponseActionError = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
     finished: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'finished' }})
     id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     progress: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'progress' }})
-    resources: List[PostServersIDActionsPoweroff201ApplicationJSONActionResources] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resources' }})
+    resources: List[PostServersIDActionsPoweroffActionResponseActionResources] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resources' }})
     started: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'started' }})
-    status: PostServersIDActionsPoweroff201ApplicationJSONActionStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    status: PostServersIDActionsPoweroffActionResponseActionStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
     
 
 @dataclass_json
 @dataclass
-class PostServersIDActionsPoweroff201ApplicationJSONActionResponse:
-    action: PostServersIDActionsPoweroff201ApplicationJSONActionAction = field(default=None, metadata={'dataclasses_json': { 'field_name': 'action' }})
+class PostServersIDActionsPoweroffActionResponse:
+    action: PostServersIDActionsPoweroffActionResponseAction = field(default=None, metadata={'dataclasses_json': { 'field_name': 'action' }})
     
 
 @dataclass
 class PostServersIDActionsPoweroffResponse:
-    action_response: Optional[PostServersIDActionsPoweroff201ApplicationJSONActionResponse] = field(default=None)
+    action_response: Optional[PostServersIDActionsPoweroffActionResponse] = field(default=None)
     content_type: str = field(default=None)
     status_code: int = field(default=None)
     

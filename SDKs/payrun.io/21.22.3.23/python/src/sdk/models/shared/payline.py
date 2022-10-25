@@ -5,7 +5,7 @@ import dateutil.parser
 from typing import Enum,Optional
 from dataclasses_json import dataclass_json
 
-class PayLinePayLinePayCodeTypePayCodeTypeEnum(str, Enum):
+class PayLinePayLinePayCodeTypeEnum(str, Enum):
     NOT_SET = "NotSet"
     PAYMENT = "Payment"
     DEDUCTION = "Deduction"
@@ -13,12 +13,12 @@ class PayLinePayLinePayCodeTypePayCodeTypeEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class PayLinePayLinePayLine:
+class PayLinePayLine:
     calculator: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Calculator' }})
     description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Description' }})
     generated: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Generated', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     pay_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PayCode' }})
-    pay_code_type: Optional[PayLinePayLinePayCodeTypePayCodeTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PayCodeType' }})
+    pay_code_type: Optional[PayLinePayLinePayCodeTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PayCodeType' }})
     pay_run_sequence: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PayRunSequence' }})
     payment_date: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PaymentDate', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     tax_period: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TaxPeriod' }})
@@ -29,5 +29,5 @@ class PayLinePayLinePayLine:
 @dataclass_json
 @dataclass
 class PayLine:
-    pay_line: Optional[PayLinePayLinePayLine] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PayLine' }})
+    pay_line: Optional[PayLinePayLine] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PayLine' }})
     

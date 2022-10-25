@@ -234,7 +234,7 @@ class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplic
 
 @dataclass_json
 @dataclass
-class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecServicesRoutesACriterionForRoutingHTTPTrafficToAComponent:
+class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecServicesACriterionForRoutingHTTPTrafficToAComponent:
     path: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'path' }})
     
 
@@ -256,7 +256,7 @@ class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplic
     instance_size_slug: Optional[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecServicesInstanceSizeSlugEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'instance_size_slug' }})
     internal_ports: Optional[List[int]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'internal_ports' }})
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    routes: Optional[List[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecServicesRoutesACriterionForRoutingHTTPTrafficToAComponent]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'routes' }})
+    routes: Optional[List[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecServicesACriterionForRoutingHTTPTrafficToAComponent]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'routes' }})
     run_command: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'run_command' }})
     source_dir: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'source_dir' }})
     

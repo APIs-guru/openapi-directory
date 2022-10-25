@@ -8,7 +8,7 @@ var CreateAssistantServers = []string{
 	"https://autopilot.twilio.com",
 }
 
-type CreateAssistantRequestBodyCreateAssistantRequest struct {
+type CreateAssistantCreateAssistantRequest struct {
 	CallbackEvents *string      `form:"name=CallbackEvents"`
 	CallbackURL    *string      `form:"name=CallbackUrl"`
 	Defaults       *interface{} `form:"name=Defaults"`
@@ -24,7 +24,7 @@ type CreateAssistantSecurity struct {
 
 type CreateAssistantRequest struct {
 	ServerURL *string
-	Request   *CreateAssistantRequestBodyCreateAssistantRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request   *CreateAssistantCreateAssistantRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security  CreateAssistantSecurity
 }
 

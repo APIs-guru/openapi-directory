@@ -3,6 +3,7 @@ package sdk
 import (
 	"context"
 	"fmt"
+	"io"
 	"net/http"
 	"openapi/internal/utils"
 	"openapi/pkg/models/operations"
@@ -79,12 +80,13 @@ func (s *SDK) GetV1EmailFree(ctx context.Context, request operations.GetV1EmailF
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json; charset=utf-8`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetV1EmailFree200ApplicationJSONString = out
+			out := string(data)
+			res.GetV1EmailFree200ApplicationJSONString = &out
 		}
 	}
 

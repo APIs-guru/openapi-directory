@@ -12,7 +12,7 @@ type CreateAlphaSenderPathParams struct {
 	ServiceSid string `pathParam:"style=simple,explode=false,name=ServiceSid"`
 }
 
-type CreateAlphaSenderRequestBodyCreateAlphaSenderRequest struct {
+type CreateAlphaSenderCreateAlphaSenderRequest struct {
 	AlphaSender string `form:"name=AlphaSender"`
 }
 
@@ -23,7 +23,7 @@ type CreateAlphaSenderSecurity struct {
 type CreateAlphaSenderRequest struct {
 	ServerURL  *string
 	PathParams CreateAlphaSenderPathParams
-	Request    *CreateAlphaSenderRequestBodyCreateAlphaSenderRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateAlphaSenderCreateAlphaSenderRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateAlphaSenderSecurity
 }
 

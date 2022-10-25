@@ -5,7 +5,7 @@ import dateutil.parser
 from typing import Enum,List,Optional
 from dataclasses_json import dataclass_json
 
-class NodesCreateRequestBodyAttributesCategoryEnum(str, Enum):
+class NodesCreateNodeAttributesCategoryEnum(str, Enum):
     ANALYSIS = "analysis"
     COMMUNICATION = "communication"
     DATA = "data"
@@ -20,8 +20,8 @@ class NodesCreateRequestBodyAttributesCategoryEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class NodesCreateRequestBodyAttributesAttributes:
-    category: NodesCreateRequestBodyAttributesCategoryEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'category' }})
+class NodesCreateNodeAttributes:
+    category: NodesCreateNodeAttributesCategoryEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'category' }})
     collection: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'collection' }})
     current_user_can_comment: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'current_user_can_comment' }})
     current_user_permissions: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'current_user_permissions' }})
@@ -41,14 +41,14 @@ class NodesCreateRequestBodyAttributesAttributes:
 
 @dataclass_json
 @dataclass
-class NodesCreateRequestBodyLinksLinks:
+class NodesCreateNodeLinks:
     html: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'html' }})
     self: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'self' }})
     
 
 @dataclass_json
 @dataclass
-class NodesCreateRequestBodyRelationshipsRelationships:
+class NodesCreateNodeRelationships:
     affiliated_institutions: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'affiliated_institutions' }})
     children: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'children' }})
     citation: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'citation' }})
@@ -74,17 +74,17 @@ class NodesCreateRequestBodyRelationshipsRelationships:
 
 @dataclass_json
 @dataclass
-class NodesCreateRequestBodyNode:
-    attributes: NodesCreateRequestBodyAttributesAttributes = field(default=None, metadata={'dataclasses_json': { 'field_name': 'attributes' }})
+class NodesCreateNode:
+    attributes: NodesCreateNodeAttributes = field(default=None, metadata={'dataclasses_json': { 'field_name': 'attributes' }})
     id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    links: Optional[NodesCreateRequestBodyLinksLinks] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'links' }})
-    relationships: Optional[NodesCreateRequestBodyRelationshipsRelationships] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'relationships' }})
+    links: Optional[NodesCreateNodeLinks] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'links' }})
+    relationships: Optional[NodesCreateNodeRelationships] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'relationships' }})
     type: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     
 
 @dataclass
 class NodesCreateRequest:
-    request: NodesCreateRequestBodyNode = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: NodesCreateNode = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass

@@ -27,7 +27,7 @@ class ListFleetRequest:
 
 @dataclass_json
 @dataclass
-class ListFleet200ApplicationJSONMeta:
+class ListFleetListFleetResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -39,14 +39,14 @@ class ListFleet200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListFleet200ApplicationJSONListFleetResponse:
+class ListFleetListFleetResponse:
     fleets: Optional[List[shared.SupersimV1Fleet]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'fleets' }})
-    meta: Optional[ListFleet200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+    meta: Optional[ListFleetListFleetResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     
 
 @dataclass
 class ListFleetResponse:
     content_type: str = field(default=None)
-    list_fleet_response: Optional[ListFleet200ApplicationJSONListFleetResponse] = field(default=None)
+    list_fleet_response: Optional[ListFleetListFleetResponse] = field(default=None)
     status_code: int = field(default=None)
     

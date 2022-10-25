@@ -8,12 +8,12 @@ from dataclasses_json import dataclass_json
 
 @dataclass_json
 @dataclass
-class RtiTransactionBaseRtiTransactionBaseEmployerCoreEmployerCore:
+class RtiTransactionBaseRtiTransactionBaseEmployerCore:
     at_href: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': '@href' }})
     at_rel: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': '@rel' }})
     at_title: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': '@title' }})
     
-class RtiTransactionBaseRtiTransactionBaseTransactionStatusTransactionStatusEnum(str, Enum):
+class RtiTransactionBaseRtiTransactionBaseTransactionStatusEnum(str, Enum):
     NEW = "New"
     REQUEST_GENERATED = "RequestGenerated"
     COMPLETED_WITH_ERROR = "CompletedWithError"
@@ -23,19 +23,19 @@ class RtiTransactionBaseRtiTransactionBaseTransactionStatusTransactionStatusEnum
 
 @dataclass_json
 @dataclass
-class RtiTransactionBaseRtiTransactionBaseRtiTransactionBase:
-    employer_core: Optional[RtiTransactionBaseRtiTransactionBaseEmployerCoreEmployerCore] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'EmployerCore' }})
+class RtiTransactionBaseRtiTransactionBase:
+    employer_core: Optional[RtiTransactionBaseRtiTransactionBaseEmployerCore] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'EmployerCore' }})
     request_data: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RequestData' }})
     response_data: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ResponseData' }})
     rti_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RtiType' }})
     tax_year: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TaxYear' }})
     timestamp: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Timestamp', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    transaction_status: Optional[RtiTransactionBaseRtiTransactionBaseTransactionStatusTransactionStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TransactionStatus' }})
+    transaction_status: Optional[RtiTransactionBaseRtiTransactionBaseTransactionStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TransactionStatus' }})
     transmission_date: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TransmissionDate', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     
 
 @dataclass_json
 @dataclass
 class RtiTransactionBase:
-    rti_transaction_base: Optional[RtiTransactionBaseRtiTransactionBaseRtiTransactionBase] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RtiTransactionBase' }})
+    rti_transaction_base: Optional[RtiTransactionBaseRtiTransactionBase] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RtiTransactionBase' }})
     

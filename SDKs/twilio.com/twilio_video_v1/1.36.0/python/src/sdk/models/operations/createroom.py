@@ -5,7 +5,7 @@ CREATE_ROOM_SERVERS = [
 	"https://video.twilio.com",
 ]
 
-class CreateRoomRequestBodyStatusCallbackMethodEnum(str, Enum):
+class CreateRoomCreateRoomRequestStatusCallbackMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -15,7 +15,7 @@ class CreateRoomRequestBodyStatusCallbackMethodEnum(str, Enum):
 
 
 @dataclass
-class CreateRoomRequestBodyCreateRoomRequest:
+class CreateRoomCreateRoomRequest:
     audio_only: Optional[bool] = field(default=None, metadata={'form': { 'field_name': 'AudioOnly' }})
     empty_room_timeout: Optional[int] = field(default=None, metadata={'form': { 'field_name': 'EmptyRoomTimeout' }})
     enable_turn: Optional[bool] = field(default=None, metadata={'form': { 'field_name': 'EnableTurn' }})
@@ -26,7 +26,7 @@ class CreateRoomRequestBodyCreateRoomRequest:
     record_participants_on_connect: Optional[bool] = field(default=None, metadata={'form': { 'field_name': 'RecordParticipantsOnConnect' }})
     recording_rules: Optional[Any] = field(default=None, metadata={'form': { 'field_name': 'RecordingRules' }})
     status_callback: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'StatusCallback' }})
-    status_callback_method: Optional[CreateRoomRequestBodyStatusCallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'StatusCallbackMethod' }})
+    status_callback_method: Optional[CreateRoomCreateRoomRequestStatusCallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'StatusCallbackMethod' }})
     type: Optional[shared.RoomEnumRoomTypeEnum] = field(default=None, metadata={'form': { 'field_name': 'Type' }})
     unique_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'UniqueName' }})
     unused_room_timeout: Optional[int] = field(default=None, metadata={'form': { 'field_name': 'UnusedRoomTimeout' }})
@@ -41,7 +41,7 @@ class CreateRoomSecurity:
 @dataclass
 class CreateRoomRequest:
     server_url: Optional[str] = field(default=None)
-    request: Optional[CreateRoomRequestBodyCreateRoomRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateRoomCreateRoomRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateRoomSecurity = field(default=None)
     
 

@@ -34,7 +34,7 @@ class ListMetricRequest:
 
 @dataclass_json
 @dataclass
-class ListMetric200ApplicationJSONMeta:
+class ListMetricListMetricResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -46,14 +46,14 @@ class ListMetric200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListMetric200ApplicationJSONListMetricResponse:
-    meta: Optional[ListMetric200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+class ListMetricListMetricResponse:
+    meta: Optional[ListMetricListMetricResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     metrics: Optional[List[shared.InsightsV1CallMetric]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'metrics' }})
     
 
 @dataclass
 class ListMetricResponse:
     content_type: str = field(default=None)
-    list_metric_response: Optional[ListMetric200ApplicationJSONListMetricResponse] = field(default=None)
+    list_metric_response: Optional[ListMetricListMetricResponse] = field(default=None)
     status_code: int = field(default=None)
     

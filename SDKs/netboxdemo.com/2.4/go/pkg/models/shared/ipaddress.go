@@ -4,12 +4,12 @@ import (
 	"time"
 )
 
-type IPAddressRoleRole struct {
+type IPAddressRole struct {
 	Label string `json:"label"`
 	Value int64  `json:"value"`
 }
 
-type IPAddressStatusStatus struct {
+type IPAddressStatus struct {
 	Label string `json:"label"`
 	Value int64  `json:"value"`
 }
@@ -25,8 +25,8 @@ type IPAddress struct {
 	LastUpdated  *time.Time             `json:"last_updated,omitempty"`
 	NatInside    *NestedIPAddress       `json:"nat_inside,omitempty"`
 	NatOutside   *NestedIPAddress       `json:"nat_outside,omitempty"`
-	Role         *IPAddressRoleRole     `json:"role,omitempty"`
-	Status       *IPAddressStatusStatus `json:"status,omitempty"`
+	Role         *IPAddressRole         `json:"role,omitempty"`
+	Status       *IPAddressStatus       `json:"status,omitempty"`
 	Tags         []string               `json:"tags,omitempty"`
 	Tenant       *NestedTenant          `json:"tenant,omitempty"`
 	Vrf          *NestedVrf             `json:"vrf,omitempty"`

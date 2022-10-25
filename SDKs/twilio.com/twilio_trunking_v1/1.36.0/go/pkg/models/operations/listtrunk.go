@@ -22,7 +22,7 @@ type ListTrunkRequest struct {
 	Security    ListTrunkSecurity
 }
 
-type ListTrunk200ApplicationJSONMeta struct {
+type ListTrunkListTrunkResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -32,13 +32,13 @@ type ListTrunk200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListTrunk200ApplicationJSONListTrunkResponse struct {
-	Meta   *ListTrunk200ApplicationJSONMeta `json:"meta,omitempty"`
-	Trunks []shared.TrunkingV1Trunk         `json:"trunks,omitempty"`
+type ListTrunkListTrunkResponse struct {
+	Meta   *ListTrunkListTrunkResponseMeta `json:"meta,omitempty"`
+	Trunks []shared.TrunkingV1Trunk        `json:"trunks,omitempty"`
 }
 
 type ListTrunkResponse struct {
 	ContentType       string
-	ListTrunkResponse *ListTrunk200ApplicationJSONListTrunkResponse
+	ListTrunkResponse *ListTrunkListTrunkResponse
 	StatusCode        int64
 }

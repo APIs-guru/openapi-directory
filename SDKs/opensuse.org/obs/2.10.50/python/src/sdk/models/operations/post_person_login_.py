@@ -26,7 +26,7 @@ class PostPersonLoginSecurity:
 class PostPersonLoginRequest:
     path_params: PostPersonLoginPathParams = field(default=None)
     query_params: PostPersonLoginQueryParams = field(default=None)
-    request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'text/plain' }})
+    request: Optional[str] = field(default=None, metadata={'request': { 'media_type': 'text/plain' }})
     security: PostPersonLoginSecurity = field(default=None)
     
 

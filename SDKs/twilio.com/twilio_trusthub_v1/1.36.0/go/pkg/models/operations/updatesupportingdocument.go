@@ -12,7 +12,7 @@ type UpdateSupportingDocumentPathParams struct {
 	Sid string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
-type UpdateSupportingDocumentRequestBodyUpdateSupportingDocumentRequest struct {
+type UpdateSupportingDocumentUpdateSupportingDocumentRequest struct {
 	Attributes   *interface{} `form:"name=Attributes"`
 	FriendlyName *string      `form:"name=FriendlyName"`
 }
@@ -24,7 +24,7 @@ type UpdateSupportingDocumentSecurity struct {
 type UpdateSupportingDocumentRequest struct {
 	ServerURL  *string
 	PathParams UpdateSupportingDocumentPathParams
-	Request    *UpdateSupportingDocumentRequestBodyUpdateSupportingDocumentRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateSupportingDocumentUpdateSupportingDocumentRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateSupportingDocumentSecurity
 }
 

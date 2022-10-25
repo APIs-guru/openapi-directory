@@ -11,7 +11,7 @@ const (
 	AggregateFamilyLabelEnumIPv6 AggregateFamilyLabelEnum = "IPv6"
 )
 
-type AggregateFamilyFamily struct {
+type AggregateFamily struct {
 	Label AggregateFamilyLabelEnum `json:"label"`
 	Value int64                    `json:"value"`
 }
@@ -21,7 +21,7 @@ type Aggregate struct {
 	CustomFields map[string]interface{} `json:"custom_fields,omitempty"`
 	DateAdded    *time.Time             `json:"date_added,omitempty"`
 	Description  *string                `json:"description,omitempty"`
-	Family       *AggregateFamilyFamily `json:"family,omitempty"`
+	Family       *AggregateFamily       `json:"family,omitempty"`
 	ID           *int64                 `json:"id,omitempty"`
 	LastUpdated  *time.Time             `json:"last_updated,omitempty"`
 	Prefix       string                 `json:"prefix"`

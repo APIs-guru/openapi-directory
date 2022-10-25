@@ -2118,16 +2118,13 @@ class SDK:
         res = operations.GetBrandingCSSResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.get_branding_css_200_application_json_string = out
+                res.get_branding_css_200_application_json_string = r.content
             if utils.match_content_type(content_type, "application/json; profile=\"CamelCase\""):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.get_branding_css_200_application_json_string = out
+                res.get_branding_css_200_application_json_string = r.content
             if utils.match_content_type(content_type, "application/json; profile=\"PascalCase\""):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.get_branding_css_200_application_json_string = out
+                res.get_branding_css_200_application_json_string = r.content
             if utils.match_content_type(content_type, "text/css"):
-                res.body = r.content
+                res.get_branding_css_200_text_css_string = r.content
         elif r.status_code == 204:
             pass
 
@@ -2149,16 +2146,13 @@ class SDK:
         res = operations.GetBrandingCSS2Response(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.get_branding_css_2_200_application_json_string = out
+                res.get_branding_css_2_200_application_json_string = r.content
             if utils.match_content_type(content_type, "application/json; profile=\"CamelCase\""):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.get_branding_css_2_200_application_json_string = out
+                res.get_branding_css_2_200_application_json_string = r.content
             if utils.match_content_type(content_type, "application/json; profile=\"PascalCase\""):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.get_branding_css_2_200_application_json_string = out
+                res.get_branding_css_2_200_application_json_string = r.content
             if utils.match_content_type(content_type, "text/css"):
-                res.body = r.content
+                res.get_branding_css_2_200_text_css_string = r.content
         elif r.status_code == 204:
             pass
 
@@ -5810,14 +5804,11 @@ class SDK:
         res = operations.GetParentPathResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.get_parent_path_200_application_json_string = out
+                res.get_parent_path_200_application_json_string = r.content
             if utils.match_content_type(content_type, "application/json; profile=\"CamelCase\""):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.get_parent_path_200_application_json_string = out
+                res.get_parent_path_200_application_json_string = r.content
             if utils.match_content_type(content_type, "application/json; profile=\"PascalCase\""):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.get_parent_path_200_application_json_string = out
+                res.get_parent_path_200_application_json_string = r.content
         elif r.status_code == 401:
             pass
         elif r.status_code == 403:
@@ -6114,14 +6105,11 @@ class SDK:
         res = operations.GetPingSystemResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.get_ping_system_200_application_json_string = out
+                res.get_ping_system_200_application_json_string = r.content
             if utils.match_content_type(content_type, "application/json; profile=\"CamelCase\""):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.get_ping_system_200_application_json_string = out
+                res.get_ping_system_200_application_json_string = r.content
             if utils.match_content_type(content_type, "application/json; profile=\"PascalCase\""):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.get_ping_system_200_application_json_string = out
+                res.get_ping_system_200_application_json_string = r.content
 
         return res
 
@@ -9949,14 +9937,11 @@ class SDK:
         res = operations.PostPingSystemResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.post_ping_system_200_application_json_string = out
+                res.post_ping_system_200_application_json_string = r.content
             if utils.match_content_type(content_type, "application/json; profile=\"CamelCase\""):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.post_ping_system_200_application_json_string = out
+                res.post_ping_system_200_application_json_string = r.content
             if utils.match_content_type(content_type, "application/json; profile=\"PascalCase\""):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.post_ping_system_200_application_json_string = out
+                res.post_ping_system_200_application_json_string = r.content
 
         return res
 

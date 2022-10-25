@@ -13,7 +13,7 @@ class CreateFieldValuePathParams:
     
 
 @dataclass
-class CreateFieldValueRequestBodyCreateFieldValueRequest:
+class CreateFieldValueCreateFieldValueRequest:
     language: str = field(default=None, metadata={'form': { 'field_name': 'Language' }})
     synonym_of: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'SynonymOf' }})
     value: str = field(default=None, metadata={'form': { 'field_name': 'Value' }})
@@ -28,7 +28,7 @@ class CreateFieldValueSecurity:
 class CreateFieldValueRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateFieldValuePathParams = field(default=None)
-    request: Optional[CreateFieldValueRequestBodyCreateFieldValueRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateFieldValueCreateFieldValueRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateFieldValueSecurity = field(default=None)
     
 

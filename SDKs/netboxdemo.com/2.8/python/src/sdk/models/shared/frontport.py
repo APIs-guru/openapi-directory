@@ -40,7 +40,7 @@ class FrontPortTypeValueEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class FrontPortTypeType:
+class FrontPortType:
     label: FrontPortTypeLabelEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label' }})
     value: FrontPortTypeValueEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
     
@@ -56,5 +56,5 @@ class FrontPort:
     rear_port: frontportrearport.FrontPortRearPort = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rear_port' }})
     rear_port_position: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rear_port_position' }})
     tags: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
-    type: FrontPortTypeType = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    type: FrontPortType = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     

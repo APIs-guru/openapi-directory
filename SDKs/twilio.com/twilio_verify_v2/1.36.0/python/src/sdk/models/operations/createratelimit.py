@@ -12,7 +12,7 @@ class CreateRateLimitPathParams:
     
 
 @dataclass
-class CreateRateLimitRequestBodyCreateRateLimitRequest:
+class CreateRateLimitCreateRateLimitRequest:
     description: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Description' }})
     unique_name: str = field(default=None, metadata={'form': { 'field_name': 'UniqueName' }})
     
@@ -26,7 +26,7 @@ class CreateRateLimitSecurity:
 class CreateRateLimitRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateRateLimitPathParams = field(default=None)
-    request: Optional[CreateRateLimitRequestBodyCreateRateLimitRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateRateLimitCreateRateLimitRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateRateLimitSecurity = field(default=None)
     
 

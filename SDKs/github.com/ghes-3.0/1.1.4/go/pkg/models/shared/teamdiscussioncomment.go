@@ -4,7 +4,7 @@ import (
 	"time"
 )
 
-type TeamDiscussionCommentAuthorSimpleUser struct {
+type TeamDiscussionCommentSimpleUser struct {
 	AvatarURL         string  `json:"avatar_url"`
 	EventsURL         string  `json:"events_url"`
 	FollowersURL      string  `json:"followers_url"`
@@ -27,17 +27,17 @@ type TeamDiscussionCommentAuthorSimpleUser struct {
 }
 
 type TeamDiscussionComment struct {
-	Author        TeamDiscussionCommentAuthorSimpleUser `json:"author"`
-	Body          string                                `json:"body"`
-	BodyHTML      string                                `json:"body_html"`
-	BodyVersion   string                                `json:"body_version"`
-	CreatedAt     time.Time                             `json:"created_at"`
-	DiscussionURL string                                `json:"discussion_url"`
-	HTMLURL       string                                `json:"html_url"`
-	LastEditedAt  time.Time                             `json:"last_edited_at"`
-	NodeID        string                                `json:"node_id"`
-	Number        int64                                 `json:"number"`
-	Reactions     *ReactionRollup                       `json:"reactions,omitempty"`
-	UpdatedAt     time.Time                             `json:"updated_at"`
-	URL           string                                `json:"url"`
+	Author        TeamDiscussionCommentSimpleUser `json:"author"`
+	Body          string                          `json:"body"`
+	BodyHTML      string                          `json:"body_html"`
+	BodyVersion   string                          `json:"body_version"`
+	CreatedAt     time.Time                       `json:"created_at"`
+	DiscussionURL string                          `json:"discussion_url"`
+	HTMLURL       string                          `json:"html_url"`
+	LastEditedAt  time.Time                       `json:"last_edited_at"`
+	NodeID        string                          `json:"node_id"`
+	Number        int64                           `json:"number"`
+	Reactions     *ReactionRollup                 `json:"reactions,omitempty"`
+	UpdatedAt     time.Time                       `json:"updated_at"`
+	URL           string                          `json:"url"`
 }

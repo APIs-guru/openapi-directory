@@ -825,7 +825,7 @@ class SDK:
         res = operations.ListAssistantResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListAssistant200ApplicationJSONListAssistantResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListAssistantListAssistantResponse])
                 res.list_assistant_response = out
 
         return res
@@ -850,7 +850,7 @@ class SDK:
         res = operations.ListFieldResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListField200ApplicationJSONListFieldResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListFieldListFieldResponse])
                 res.list_field_response = out
 
         return res
@@ -875,7 +875,7 @@ class SDK:
         res = operations.ListFieldTypeResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListFieldType200ApplicationJSONListFieldTypeResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListFieldTypeListFieldTypeResponse])
                 res.list_field_type_response = out
 
         return res
@@ -900,7 +900,7 @@ class SDK:
         res = operations.ListFieldValueResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListFieldValue200ApplicationJSONListFieldValueResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListFieldValueListFieldValueResponse])
                 res.list_field_value_response = out
 
         return res
@@ -925,7 +925,7 @@ class SDK:
         res = operations.ListModelBuildResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListModelBuild200ApplicationJSONListModelBuildResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListModelBuildListModelBuildResponse])
                 res.list_model_build_response = out
 
         return res
@@ -950,7 +950,7 @@ class SDK:
         res = operations.ListQueryResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListQuery200ApplicationJSONListQueryResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListQueryListQueryResponse])
                 res.list_query_response = out
 
         return res
@@ -975,7 +975,7 @@ class SDK:
         res = operations.ListSampleResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListSample200ApplicationJSONListSampleResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListSampleListSampleResponse])
                 res.list_sample_response = out
 
         return res
@@ -1000,7 +1000,7 @@ class SDK:
         res = operations.ListTaskResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListTask200ApplicationJSONListTaskResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListTaskListTaskResponse])
                 res.list_task_response = out
 
         return res
@@ -1025,7 +1025,7 @@ class SDK:
         res = operations.ListWebhookResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListWebhook200ApplicationJSONListWebhookResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListWebhookListWebhookResponse])
                 res.list_webhook_response = out
 
         return res

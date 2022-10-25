@@ -12,7 +12,7 @@ type CreateSyncDocumentPathParams struct {
 	ServiceSid string `pathParam:"style=simple,explode=false,name=ServiceSid"`
 }
 
-type CreateSyncDocumentRequestBodyCreateSyncDocumentRequest struct {
+type CreateSyncDocumentCreateSyncDocumentRequest struct {
 	Data       *interface{} `form:"name=Data"`
 	UniqueName *string      `form:"name=UniqueName"`
 }
@@ -24,7 +24,7 @@ type CreateSyncDocumentSecurity struct {
 type CreateSyncDocumentRequest struct {
 	ServerURL  *string
 	PathParams CreateSyncDocumentPathParams
-	Request    *CreateSyncDocumentRequestBodyCreateSyncDocumentRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateSyncDocumentCreateSyncDocumentRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateSyncDocumentSecurity
 }
 

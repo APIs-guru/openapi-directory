@@ -3,7 +3,7 @@ from typing import Enum,List,Optional
 from dataclasses_json import dataclass_json
 from sdk.models import shared
 
-class ListInstanceSizes200ApplicationJSONInstanceSizesCPUTypeSharedSharedVCPUCoresDedicatedDedicatedVCPUCoresEnum(str, Enum):
+class ListInstanceSizes200ApplicationJSONInstanceSizesSharedSharedVCPUCoresDedicatedDedicatedVCPUCoresEnum(str, Enum):
     UNSPECIFIED = "UNSPECIFIED"
     SHARED = "SHARED"
     DEDICATED = "DEDICATED"
@@ -12,7 +12,7 @@ class ListInstanceSizes200ApplicationJSONInstanceSizesCPUTypeSharedSharedVCPUCor
 @dataclass_json
 @dataclass
 class ListInstanceSizes200ApplicationJSONInstanceSizes:
-    cpu_type: Optional[ListInstanceSizes200ApplicationJSONInstanceSizesCPUTypeSharedSharedVCPUCoresDedicatedDedicatedVCPUCoresEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cpu_type' }})
+    cpu_type: Optional[ListInstanceSizes200ApplicationJSONInstanceSizesSharedSharedVCPUCoresDedicatedDedicatedVCPUCoresEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cpu_type' }})
     cpus: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cpus' }})
     memory_bytes: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'memory_bytes' }})
     name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})

@@ -12,7 +12,7 @@ class OrgMembershipPermissions:
 
 @dataclass_json
 @dataclass
-class OrgMembershipUserSimpleUser:
+class OrgMembershipSimpleUser:
     avatar_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'avatar_url' }})
     events_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'events_url' }})
     followers_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'followers_url' }})
@@ -43,5 +43,5 @@ class OrgMembership:
     role: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'role' }})
     state: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'state' }})
     url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'url' }})
-    user: OrgMembershipUserSimpleUser = field(default=None, metadata={'dataclasses_json': { 'field_name': 'user' }})
+    user: OrgMembershipSimpleUser = field(default=None, metadata={'dataclasses_json': { 'field_name': 'user' }})
     

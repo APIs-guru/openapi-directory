@@ -4,32 +4,32 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-type CombinePdfsRequestBodySourcePdfs1TypeEnum string
+type CombinePdfsCombinePdfsDataSourcePdfs1TypeEnum string
 
 const (
-	CombinePdfsRequestBodySourcePdfs1TypeEnumSubmission         CombinePdfsRequestBodySourcePdfs1TypeEnum = "submission"
-	CombinePdfsRequestBodySourcePdfs1TypeEnumCombinedSubmission CombinePdfsRequestBodySourcePdfs1TypeEnum = "combined_submission"
-	CombinePdfsRequestBodySourcePdfs1TypeEnumTemplate           CombinePdfsRequestBodySourcePdfs1TypeEnum = "template"
-	CombinePdfsRequestBodySourcePdfs1TypeEnumCustomFile         CombinePdfsRequestBodySourcePdfs1TypeEnum = "custom_file"
+	CombinePdfsCombinePdfsDataSourcePdfs1TypeEnumSubmission         CombinePdfsCombinePdfsDataSourcePdfs1TypeEnum = "submission"
+	CombinePdfsCombinePdfsDataSourcePdfs1TypeEnumCombinedSubmission CombinePdfsCombinePdfsDataSourcePdfs1TypeEnum = "combined_submission"
+	CombinePdfsCombinePdfsDataSourcePdfs1TypeEnumTemplate           CombinePdfsCombinePdfsDataSourcePdfs1TypeEnum = "template"
+	CombinePdfsCombinePdfsDataSourcePdfs1TypeEnumCustomFile         CombinePdfsCombinePdfsDataSourcePdfs1TypeEnum = "custom_file"
 )
 
-type CombinePdfsRequestBodySourcePdfs1 struct {
-	ID   string                                    `json:"id"`
-	Type CombinePdfsRequestBodySourcePdfs1TypeEnum `json:"type"`
+type CombinePdfsCombinePdfsDataSourcePdfs1 struct {
+	ID   string                                        `json:"id"`
+	Type CombinePdfsCombinePdfsDataSourcePdfs1TypeEnum `json:"type"`
 }
 
-type CombinePdfsRequestBodySourcePdfs2TypeEnum string
+type CombinePdfsCombinePdfsDataSourcePdfs2TypeEnum string
 
 const (
-	CombinePdfsRequestBodySourcePdfs2TypeEnumURL CombinePdfsRequestBodySourcePdfs2TypeEnum = "url"
+	CombinePdfsCombinePdfsDataSourcePdfs2TypeEnumURL CombinePdfsCombinePdfsDataSourcePdfs2TypeEnum = "url"
 )
 
-type CombinePdfsRequestBodySourcePdfs2 struct {
-	Type CombinePdfsRequestBodySourcePdfs2TypeEnum `json:"type"`
-	URL  string                                    `json:"url"`
+type CombinePdfsCombinePdfsDataSourcePdfs2 struct {
+	Type CombinePdfsCombinePdfsDataSourcePdfs2TypeEnum `json:"type"`
+	URL  string                                        `json:"url"`
 }
 
-type CombinePdfsRequestBodyCombinePdfsData struct {
+type CombinePdfsCombinePdfsData struct {
 	DeleteCustomFiles *bool                  `json:"delete_custom_files,omitempty"`
 	ExpiresIn         *int64                 `json:"expires_in,omitempty"`
 	Metadata          map[string]interface{} `json:"metadata,omitempty"`
@@ -42,74 +42,74 @@ type CombinePdfsSecurity struct {
 }
 
 type CombinePdfsRequest struct {
-	Request  CombinePdfsRequestBodyCombinePdfsData `request:"mediaType=application/json"`
+	Request  CombinePdfsCombinePdfsData `request:"mediaType=application/json"`
 	Security CombinePdfsSecurity
 }
 
-type CombinePdfs201ApplicationJSONCombinedSubmissionSourcePdfs1TypeEnum string
+type CombinePdfsCreateCombinedSubmissionResponseCombinedSubmissionSourcePdfs1TypeEnum string
 
 const (
-	CombinePdfs201ApplicationJSONCombinedSubmissionSourcePdfs1TypeEnumSubmission         CombinePdfs201ApplicationJSONCombinedSubmissionSourcePdfs1TypeEnum = "submission"
-	CombinePdfs201ApplicationJSONCombinedSubmissionSourcePdfs1TypeEnumCombinedSubmission CombinePdfs201ApplicationJSONCombinedSubmissionSourcePdfs1TypeEnum = "combined_submission"
-	CombinePdfs201ApplicationJSONCombinedSubmissionSourcePdfs1TypeEnumTemplate           CombinePdfs201ApplicationJSONCombinedSubmissionSourcePdfs1TypeEnum = "template"
-	CombinePdfs201ApplicationJSONCombinedSubmissionSourcePdfs1TypeEnumCustomFile         CombinePdfs201ApplicationJSONCombinedSubmissionSourcePdfs1TypeEnum = "custom_file"
+	CombinePdfsCreateCombinedSubmissionResponseCombinedSubmissionSourcePdfs1TypeEnumSubmission         CombinePdfsCreateCombinedSubmissionResponseCombinedSubmissionSourcePdfs1TypeEnum = "submission"
+	CombinePdfsCreateCombinedSubmissionResponseCombinedSubmissionSourcePdfs1TypeEnumCombinedSubmission CombinePdfsCreateCombinedSubmissionResponseCombinedSubmissionSourcePdfs1TypeEnum = "combined_submission"
+	CombinePdfsCreateCombinedSubmissionResponseCombinedSubmissionSourcePdfs1TypeEnumTemplate           CombinePdfsCreateCombinedSubmissionResponseCombinedSubmissionSourcePdfs1TypeEnum = "template"
+	CombinePdfsCreateCombinedSubmissionResponseCombinedSubmissionSourcePdfs1TypeEnumCustomFile         CombinePdfsCreateCombinedSubmissionResponseCombinedSubmissionSourcePdfs1TypeEnum = "custom_file"
 )
 
-type CombinePdfs201ApplicationJSONCombinedSubmissionSourcePdfs1 struct {
-	ID   string                                                             `json:"id"`
-	Type CombinePdfs201ApplicationJSONCombinedSubmissionSourcePdfs1TypeEnum `json:"type"`
+type CombinePdfsCreateCombinedSubmissionResponseCombinedSubmissionSourcePdfs1 struct {
+	ID   string                                                                           `json:"id"`
+	Type CombinePdfsCreateCombinedSubmissionResponseCombinedSubmissionSourcePdfs1TypeEnum `json:"type"`
 }
 
-type CombinePdfs201ApplicationJSONCombinedSubmissionSourcePdfs2TypeEnum string
+type CombinePdfsCreateCombinedSubmissionResponseCombinedSubmissionSourcePdfs2TypeEnum string
 
 const (
-	CombinePdfs201ApplicationJSONCombinedSubmissionSourcePdfs2TypeEnumURL CombinePdfs201ApplicationJSONCombinedSubmissionSourcePdfs2TypeEnum = "url"
+	CombinePdfsCreateCombinedSubmissionResponseCombinedSubmissionSourcePdfs2TypeEnumURL CombinePdfsCreateCombinedSubmissionResponseCombinedSubmissionSourcePdfs2TypeEnum = "url"
 )
 
-type CombinePdfs201ApplicationJSONCombinedSubmissionSourcePdfs2 struct {
-	Type CombinePdfs201ApplicationJSONCombinedSubmissionSourcePdfs2TypeEnum `json:"type"`
-	URL  string                                                             `json:"url"`
+type CombinePdfsCreateCombinedSubmissionResponseCombinedSubmissionSourcePdfs2 struct {
+	Type CombinePdfsCreateCombinedSubmissionResponseCombinedSubmissionSourcePdfs2TypeEnum `json:"type"`
+	URL  string                                                                           `json:"url"`
 }
 
-type CombinePdfs201ApplicationJSONCombinedSubmissionStateEnum string
+type CombinePdfsCreateCombinedSubmissionResponseCombinedSubmissionStateEnum string
 
 const (
-	CombinePdfs201ApplicationJSONCombinedSubmissionStateEnumPending   CombinePdfs201ApplicationJSONCombinedSubmissionStateEnum = "pending"
-	CombinePdfs201ApplicationJSONCombinedSubmissionStateEnumProcessed CombinePdfs201ApplicationJSONCombinedSubmissionStateEnum = "processed"
-	CombinePdfs201ApplicationJSONCombinedSubmissionStateEnumError     CombinePdfs201ApplicationJSONCombinedSubmissionStateEnum = "error"
+	CombinePdfsCreateCombinedSubmissionResponseCombinedSubmissionStateEnumPending   CombinePdfsCreateCombinedSubmissionResponseCombinedSubmissionStateEnum = "pending"
+	CombinePdfsCreateCombinedSubmissionResponseCombinedSubmissionStateEnumProcessed CombinePdfsCreateCombinedSubmissionResponseCombinedSubmissionStateEnum = "processed"
+	CombinePdfsCreateCombinedSubmissionResponseCombinedSubmissionStateEnumError     CombinePdfsCreateCombinedSubmissionResponseCombinedSubmissionStateEnum = "error"
 )
 
-type CombinePdfs201ApplicationJSONCombinedSubmissionCombinedSubmission struct {
-	Actions       []shared.CombinedSubmissionAction                        `json:"actions,omitempty"`
-	DownloadURL   *string                                                  `json:"download_url,omitempty"`
-	Expired       bool                                                     `json:"expired"`
-	ExpiresAt     *string                                                  `json:"expires_at,omitempty"`
-	ID            string                                                   `json:"id"`
-	Metadata      map[string]interface{}                                   `json:"metadata,omitempty"`
-	PdfHash       *string                                                  `json:"pdf_hash,omitempty"`
-	SourcePdfs    []interface{}                                            `json:"source_pdfs"`
-	State         CombinePdfs201ApplicationJSONCombinedSubmissionStateEnum `json:"state"`
-	SubmissionIds []string                                                 `json:"submission_ids"`
+type CombinePdfsCreateCombinedSubmissionResponseCombinedSubmission struct {
+	Actions       []shared.CombinedSubmissionAction                                      `json:"actions,omitempty"`
+	DownloadURL   *string                                                                `json:"download_url,omitempty"`
+	Expired       bool                                                                   `json:"expired"`
+	ExpiresAt     *string                                                                `json:"expires_at,omitempty"`
+	ID            string                                                                 `json:"id"`
+	Metadata      map[string]interface{}                                                 `json:"metadata,omitempty"`
+	PdfHash       *string                                                                `json:"pdf_hash,omitempty"`
+	SourcePdfs    []interface{}                                                          `json:"source_pdfs"`
+	State         CombinePdfsCreateCombinedSubmissionResponseCombinedSubmissionStateEnum `json:"state"`
+	SubmissionIds []string                                                               `json:"submission_ids"`
 }
 
-type CombinePdfs201ApplicationJSONStatusEnum string
+type CombinePdfsCreateCombinedSubmissionResponseStatusEnum string
 
 const (
-	CombinePdfs201ApplicationJSONStatusEnumSuccess CombinePdfs201ApplicationJSONStatusEnum = "success"
-	CombinePdfs201ApplicationJSONStatusEnumError   CombinePdfs201ApplicationJSONStatusEnum = "error"
+	CombinePdfsCreateCombinedSubmissionResponseStatusEnumSuccess CombinePdfsCreateCombinedSubmissionResponseStatusEnum = "success"
+	CombinePdfsCreateCombinedSubmissionResponseStatusEnumError   CombinePdfsCreateCombinedSubmissionResponseStatusEnum = "error"
 )
 
-type CombinePdfs201ApplicationJSONCreateCombinedSubmissionResponse struct {
-	CombinedSubmission CombinePdfs201ApplicationJSONCombinedSubmissionCombinedSubmission `json:"combined_submission"`
-	Errors             []string                                                          `json:"errors,omitempty"`
-	Status             CombinePdfs201ApplicationJSONStatusEnum                           `json:"status"`
+type CombinePdfsCreateCombinedSubmissionResponse struct {
+	CombinedSubmission CombinePdfsCreateCombinedSubmissionResponseCombinedSubmission `json:"combined_submission"`
+	Errors             []string                                                      `json:"errors,omitempty"`
+	Status             CombinePdfsCreateCombinedSubmissionResponseStatusEnum         `json:"status"`
 }
 
 type CombinePdfsResponse struct {
 	ContentType                      string
 	StatusCode                       int64
 	AuthenticationError              *shared.AuthenticationError
-	CreateCombinedSubmissionResponse *CombinePdfs201ApplicationJSONCreateCombinedSubmissionResponse
+	CreateCombinedSubmissionResponse *CombinePdfsCreateCombinedSubmissionResponse
 	Error                            *shared.Error
 	InvalidRequest                   *shared.InvalidRequest
 }

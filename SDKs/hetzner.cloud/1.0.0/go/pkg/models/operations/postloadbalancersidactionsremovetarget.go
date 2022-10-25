@@ -4,73 +4,73 @@ type PostLoadBalancersIDActionsRemoveTargetPathParams struct {
 	ID int64 `pathParam:"style=simple,explode=false,name=id"`
 }
 
-type PostLoadBalancersIDActionsRemoveTargetRequestBodyIP struct {
+type PostLoadBalancersIDActionsRemoveTargetRemoveTargetRequestIP struct {
 	IP string `json:"ip"`
 }
 
-type PostLoadBalancersIDActionsRemoveTargetRequestBodyLabelSelector struct {
+type PostLoadBalancersIDActionsRemoveTargetRemoveTargetRequestLabelSelector struct {
 	Selector string `json:"selector"`
 }
 
-type PostLoadBalancersIDActionsRemoveTargetRequestBodyServer struct {
+type PostLoadBalancersIDActionsRemoveTargetRemoveTargetRequestServer struct {
 	ID float64 `json:"id"`
 }
 
-type PostLoadBalancersIDActionsRemoveTargetRequestBodyTypeEnum string
+type PostLoadBalancersIDActionsRemoveTargetRemoveTargetRequestTypeEnum string
 
 const (
-	PostLoadBalancersIDActionsRemoveTargetRequestBodyTypeEnumServer        PostLoadBalancersIDActionsRemoveTargetRequestBodyTypeEnum = "server"
-	PostLoadBalancersIDActionsRemoveTargetRequestBodyTypeEnumLabelSelector PostLoadBalancersIDActionsRemoveTargetRequestBodyTypeEnum = "label_selector"
-	PostLoadBalancersIDActionsRemoveTargetRequestBodyTypeEnumIP            PostLoadBalancersIDActionsRemoveTargetRequestBodyTypeEnum = "ip"
+	PostLoadBalancersIDActionsRemoveTargetRemoveTargetRequestTypeEnumServer        PostLoadBalancersIDActionsRemoveTargetRemoveTargetRequestTypeEnum = "server"
+	PostLoadBalancersIDActionsRemoveTargetRemoveTargetRequestTypeEnumLabelSelector PostLoadBalancersIDActionsRemoveTargetRemoveTargetRequestTypeEnum = "label_selector"
+	PostLoadBalancersIDActionsRemoveTargetRemoveTargetRequestTypeEnumIP            PostLoadBalancersIDActionsRemoveTargetRemoveTargetRequestTypeEnum = "ip"
 )
 
-type PostLoadBalancersIDActionsRemoveTargetRequestBodyRemoveTargetRequest struct {
-	IP            *PostLoadBalancersIDActionsRemoveTargetRequestBodyIP            `json:"ip,omitempty"`
-	LabelSelector *PostLoadBalancersIDActionsRemoveTargetRequestBodyLabelSelector `json:"label_selector,omitempty"`
-	Server        *PostLoadBalancersIDActionsRemoveTargetRequestBodyServer        `json:"server,omitempty"`
-	Type          PostLoadBalancersIDActionsRemoveTargetRequestBodyTypeEnum       `json:"type"`
+type PostLoadBalancersIDActionsRemoveTargetRemoveTargetRequest struct {
+	IP            *PostLoadBalancersIDActionsRemoveTargetRemoveTargetRequestIP            `json:"ip,omitempty"`
+	LabelSelector *PostLoadBalancersIDActionsRemoveTargetRemoveTargetRequestLabelSelector `json:"label_selector,omitempty"`
+	Server        *PostLoadBalancersIDActionsRemoveTargetRemoveTargetRequestServer        `json:"server,omitempty"`
+	Type          PostLoadBalancersIDActionsRemoveTargetRemoveTargetRequestTypeEnum       `json:"type"`
 }
 
 type PostLoadBalancersIDActionsRemoveTargetRequest struct {
 	PathParams PostLoadBalancersIDActionsRemoveTargetPathParams
-	Request    *PostLoadBalancersIDActionsRemoveTargetRequestBodyRemoveTargetRequest `request:"mediaType=application/json"`
+	Request    *PostLoadBalancersIDActionsRemoveTargetRemoveTargetRequest `request:"mediaType=application/json"`
 }
 
-type PostLoadBalancersIDActionsRemoveTarget201ApplicationJSONActionError struct {
+type PostLoadBalancersIDActionsRemoveTargetActionResponseActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
 }
 
-type PostLoadBalancersIDActionsRemoveTarget201ApplicationJSONActionResources struct {
+type PostLoadBalancersIDActionsRemoveTargetActionResponseActionResources struct {
 	ID   int64  `json:"id"`
 	Type string `json:"type"`
 }
 
-type PostLoadBalancersIDActionsRemoveTarget201ApplicationJSONActionStatusEnum string
+type PostLoadBalancersIDActionsRemoveTargetActionResponseActionStatusEnum string
 
 const (
-	PostLoadBalancersIDActionsRemoveTarget201ApplicationJSONActionStatusEnumSuccess PostLoadBalancersIDActionsRemoveTarget201ApplicationJSONActionStatusEnum = "success"
-	PostLoadBalancersIDActionsRemoveTarget201ApplicationJSONActionStatusEnumRunning PostLoadBalancersIDActionsRemoveTarget201ApplicationJSONActionStatusEnum = "running"
-	PostLoadBalancersIDActionsRemoveTarget201ApplicationJSONActionStatusEnumError   PostLoadBalancersIDActionsRemoveTarget201ApplicationJSONActionStatusEnum = "error"
+	PostLoadBalancersIDActionsRemoveTargetActionResponseActionStatusEnumSuccess PostLoadBalancersIDActionsRemoveTargetActionResponseActionStatusEnum = "success"
+	PostLoadBalancersIDActionsRemoveTargetActionResponseActionStatusEnumRunning PostLoadBalancersIDActionsRemoveTargetActionResponseActionStatusEnum = "running"
+	PostLoadBalancersIDActionsRemoveTargetActionResponseActionStatusEnumError   PostLoadBalancersIDActionsRemoveTargetActionResponseActionStatusEnum = "error"
 )
 
-type PostLoadBalancersIDActionsRemoveTarget201ApplicationJSONActionAction struct {
-	Command   string                                                                    `json:"command"`
-	Error     PostLoadBalancersIDActionsRemoveTarget201ApplicationJSONActionError       `json:"error"`
-	Finished  string                                                                    `json:"finished"`
-	ID        int64                                                                     `json:"id"`
-	Progress  float64                                                                   `json:"progress"`
-	Resources []PostLoadBalancersIDActionsRemoveTarget201ApplicationJSONActionResources `json:"resources"`
-	Started   string                                                                    `json:"started"`
-	Status    PostLoadBalancersIDActionsRemoveTarget201ApplicationJSONActionStatusEnum  `json:"status"`
+type PostLoadBalancersIDActionsRemoveTargetActionResponseAction struct {
+	Command   string                                                                `json:"command"`
+	Error     PostLoadBalancersIDActionsRemoveTargetActionResponseActionError       `json:"error"`
+	Finished  string                                                                `json:"finished"`
+	ID        int64                                                                 `json:"id"`
+	Progress  float64                                                               `json:"progress"`
+	Resources []PostLoadBalancersIDActionsRemoveTargetActionResponseActionResources `json:"resources"`
+	Started   string                                                                `json:"started"`
+	Status    PostLoadBalancersIDActionsRemoveTargetActionResponseActionStatusEnum  `json:"status"`
 }
 
-type PostLoadBalancersIDActionsRemoveTarget201ApplicationJSONActionResponse struct {
-	Action PostLoadBalancersIDActionsRemoveTarget201ApplicationJSONActionAction `json:"action"`
+type PostLoadBalancersIDActionsRemoveTargetActionResponse struct {
+	Action PostLoadBalancersIDActionsRemoveTargetActionResponseAction `json:"action"`
 }
 
 type PostLoadBalancersIDActionsRemoveTargetResponse struct {
-	ActionResponse *PostLoadBalancersIDActionsRemoveTarget201ApplicationJSONActionResponse
+	ActionResponse *PostLoadBalancersIDActionsRemoveTargetActionResponse
 	ContentType    string
 	StatusCode     int64
 }

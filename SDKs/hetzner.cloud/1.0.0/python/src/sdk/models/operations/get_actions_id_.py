@@ -15,18 +15,18 @@ class GetActionsIDRequest:
 
 @dataclass_json
 @dataclass
-class GetActionsID200ApplicationJSONActionError:
+class GetActionsIDActionResponseActionError:
     code: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'code' }})
     message: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'message' }})
     
 
 @dataclass_json
 @dataclass
-class GetActionsID200ApplicationJSONActionResources:
+class GetActionsIDActionResponseActionResources:
     id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     type: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     
-class GetActionsID200ApplicationJSONActionStatusEnum(str, Enum):
+class GetActionsIDActionResponseActionStatusEnum(str, Enum):
     SUCCESS = "success"
     RUNNING = "running"
     ERROR = "error"
@@ -34,26 +34,26 @@ class GetActionsID200ApplicationJSONActionStatusEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class GetActionsID200ApplicationJSONActionAction:
+class GetActionsIDActionResponseAction:
     command: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'command' }})
-    error: GetActionsID200ApplicationJSONActionError = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
+    error: GetActionsIDActionResponseActionError = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
     finished: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'finished' }})
     id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     progress: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'progress' }})
-    resources: List[GetActionsID200ApplicationJSONActionResources] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resources' }})
+    resources: List[GetActionsIDActionResponseActionResources] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resources' }})
     started: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'started' }})
-    status: GetActionsID200ApplicationJSONActionStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    status: GetActionsIDActionResponseActionStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
     
 
 @dataclass_json
 @dataclass
-class GetActionsID200ApplicationJSONActionResponse:
-    action: GetActionsID200ApplicationJSONActionAction = field(default=None, metadata={'dataclasses_json': { 'field_name': 'action' }})
+class GetActionsIDActionResponse:
+    action: GetActionsIDActionResponseAction = field(default=None, metadata={'dataclasses_json': { 'field_name': 'action' }})
     
 
 @dataclass
 class GetActionsIDResponse:
-    action_response: Optional[GetActionsID200ApplicationJSONActionResponse] = field(default=None)
+    action_response: Optional[GetActionsIDActionResponse] = field(default=None)
     content_type: str = field(default=None)
     status_code: int = field(default=None)
     

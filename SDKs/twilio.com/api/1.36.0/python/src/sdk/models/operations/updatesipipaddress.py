@@ -14,7 +14,7 @@ class UpdateSipIPAddressPathParams:
     
 
 @dataclass
-class UpdateSipIPAddressRequestBodyUpdateSipIPAddressRequest:
+class UpdateSipIPAddressUpdateSipIPAddressRequest:
     cidr_prefix_length: Optional[int] = field(default=None, metadata={'form': { 'field_name': 'CidrPrefixLength' }})
     friendly_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
     ip_address: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'IpAddress' }})
@@ -29,7 +29,7 @@ class UpdateSipIPAddressSecurity:
 class UpdateSipIPAddressRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateSipIPAddressPathParams = field(default=None)
-    request: Optional[UpdateSipIPAddressRequestBodyUpdateSipIPAddressRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateSipIPAddressUpdateSipIPAddressRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateSipIPAddressSecurity = field(default=None)
     
 

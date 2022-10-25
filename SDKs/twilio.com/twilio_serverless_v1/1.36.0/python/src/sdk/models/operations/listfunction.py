@@ -32,7 +32,7 @@ class ListFunctionRequest:
 
 @dataclass_json
 @dataclass
-class ListFunction200ApplicationJSONMeta:
+class ListFunctionListFunctionResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -44,14 +44,14 @@ class ListFunction200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListFunction200ApplicationJSONListFunctionResponse:
+class ListFunctionListFunctionResponse:
     functions: Optional[List[shared.ServerlessV1ServiceFunction]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'functions' }})
-    meta: Optional[ListFunction200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+    meta: Optional[ListFunctionListFunctionResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     
 
 @dataclass
 class ListFunctionResponse:
     content_type: str = field(default=None)
-    list_function_response: Optional[ListFunction200ApplicationJSONListFunctionResponse] = field(default=None)
+    list_function_response: Optional[ListFunctionListFunctionResponse] = field(default=None)
     status_code: int = field(default=None)
     

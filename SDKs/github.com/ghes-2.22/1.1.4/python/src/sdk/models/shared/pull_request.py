@@ -33,7 +33,7 @@ class PullRequestLinks:
 
 @dataclass_json
 @dataclass
-class PullRequestAssigneeSimpleUser:
+class PullRequestSimpleUser:
     avatar_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'avatar_url' }})
     events_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'events_url' }})
     followers_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'followers_url' }})
@@ -57,7 +57,7 @@ class PullRequestAssigneeSimpleUser:
 
 @dataclass_json
 @dataclass
-class PullRequestBaseRepoLicenseLicenseSimple:
+class PullRequestBaseRepoLicenseSimple:
     html_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'html_url' }})
     key: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
@@ -147,7 +147,7 @@ class PullRequestBaseRepo:
     labels_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'labels_url' }})
     language: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'language' }})
     languages_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'languages_url' }})
-    license: PullRequestBaseRepoLicenseLicenseSimple = field(default=None, metadata={'dataclasses_json': { 'field_name': 'license' }})
+    license: PullRequestBaseRepoLicenseSimple = field(default=None, metadata={'dataclasses_json': { 'field_name': 'license' }})
     master_branch: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'master_branch' }})
     merges_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'merges_url' }})
     milestones_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'milestones_url' }})
@@ -388,31 +388,7 @@ class PullRequestLabels:
 
 @dataclass_json
 @dataclass
-class PullRequestMergedBySimpleUser:
-    avatar_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'avatar_url' }})
-    events_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'events_url' }})
-    followers_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'followers_url' }})
-    following_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'following_url' }})
-    gists_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'gists_url' }})
-    gravatar_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'gravatar_id' }})
-    html_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'html_url' }})
-    id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    login: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'login' }})
-    node_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'node_id' }})
-    organizations_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'organizations_url' }})
-    received_events_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'received_events_url' }})
-    repos_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'repos_url' }})
-    site_admin: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'site_admin' }})
-    starred_at: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'starred_at' }})
-    starred_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'starred_url' }})
-    subscriptions_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'subscriptions_url' }})
-    type: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
-    url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'url' }})
-    
-
-@dataclass_json
-@dataclass
-class PullRequestMilestoneCreatorSimpleUser:
+class PullRequestMilestoneSimpleUser:
     avatar_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'avatar_url' }})
     events_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'events_url' }})
     followers_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'followers_url' }})
@@ -440,11 +416,11 @@ class PullRequestMilestoneStateEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class PullRequestMilestoneMilestone:
+class PullRequestMilestone:
     closed_at: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'closed_at', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     closed_issues: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'closed_issues' }})
     created_at: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'created_at', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    creator: PullRequestMilestoneCreatorSimpleUser = field(default=None, metadata={'dataclasses_json': { 'field_name': 'creator' }})
+    creator: PullRequestMilestoneSimpleUser = field(default=None, metadata={'dataclasses_json': { 'field_name': 'creator' }})
     description: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
     due_on: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'due_on', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     html_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'html_url' }})
@@ -465,35 +441,11 @@ class PullRequestStateEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class PullRequestUserSimpleUser:
-    avatar_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'avatar_url' }})
-    events_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'events_url' }})
-    followers_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'followers_url' }})
-    following_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'following_url' }})
-    gists_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'gists_url' }})
-    gravatar_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'gravatar_id' }})
-    html_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'html_url' }})
-    id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    login: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'login' }})
-    node_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'node_id' }})
-    organizations_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'organizations_url' }})
-    received_events_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'received_events_url' }})
-    repos_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'repos_url' }})
-    site_admin: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'site_admin' }})
-    starred_at: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'starred_at' }})
-    starred_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'starred_url' }})
-    subscriptions_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'subscriptions_url' }})
-    type: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
-    url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'url' }})
-    
-
-@dataclass_json
-@dataclass
 class PullRequest:
     links: PullRequestLinks = field(default=None, metadata={'dataclasses_json': { 'field_name': '_links' }})
     active_lock_reason: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'active_lock_reason' }})
     additions: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'additions' }})
-    assignee: PullRequestAssigneeSimpleUser = field(default=None, metadata={'dataclasses_json': { 'field_name': 'assignee' }})
+    assignee: PullRequestSimpleUser = field(default=None, metadata={'dataclasses_json': { 'field_name': 'assignee' }})
     assignees: Optional[List[simple_user.SimpleUser]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'assignees' }})
     author_association: author_association_enum.AuthorAssociationEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'author_association' }})
     base: PullRequestBase = field(default=None, metadata={'dataclasses_json': { 'field_name': 'base' }})
@@ -520,8 +472,8 @@ class PullRequest:
     mergeable_state: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'mergeable_state' }})
     merged: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'merged' }})
     merged_at: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'merged_at', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    merged_by: PullRequestMergedBySimpleUser = field(default=None, metadata={'dataclasses_json': { 'field_name': 'merged_by' }})
-    milestone: PullRequestMilestoneMilestone = field(default=None, metadata={'dataclasses_json': { 'field_name': 'milestone' }})
+    merged_by: PullRequestSimpleUser = field(default=None, metadata={'dataclasses_json': { 'field_name': 'merged_by' }})
+    milestone: PullRequestMilestone = field(default=None, metadata={'dataclasses_json': { 'field_name': 'milestone' }})
     node_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'node_id' }})
     number: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'number' }})
     patch_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'patch_url' }})
@@ -536,5 +488,5 @@ class PullRequest:
     title: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'title' }})
     updated_at: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updated_at', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'url' }})
-    user: PullRequestUserSimpleUser = field(default=None, metadata={'dataclasses_json': { 'field_name': 'user' }})
+    user: PullRequestSimpleUser = field(default=None, metadata={'dataclasses_json': { 'field_name': 'user' }})
     

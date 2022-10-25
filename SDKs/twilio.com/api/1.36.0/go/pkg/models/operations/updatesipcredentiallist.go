@@ -13,7 +13,7 @@ type UpdateSipCredentialListPathParams struct {
 	Sid        string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
-type UpdateSipCredentialListRequestBodyUpdateSipCredentialListRequest struct {
+type UpdateSipCredentialListUpdateSipCredentialListRequest struct {
 	FriendlyName string `form:"name=FriendlyName"`
 }
 
@@ -24,7 +24,7 @@ type UpdateSipCredentialListSecurity struct {
 type UpdateSipCredentialListRequest struct {
 	ServerURL  *string
 	PathParams UpdateSipCredentialListPathParams
-	Request    *UpdateSipCredentialListRequestBodyUpdateSipCredentialListRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateSipCredentialListUpdateSipCredentialListRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateSipCredentialListSecurity
 }
 

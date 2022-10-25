@@ -4,11 +4,11 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-type CreateFloatingIPRequestBody1AssignToDroplet struct {
+type CreateFloatingIPRequestBodyAssignToDroplet struct {
 	DropletID int64 `json:"droplet_id"`
 }
 
-type CreateFloatingIPRequestBody2ReserveToRegion struct {
+type CreateFloatingIPRequestBodyReserveToRegion struct {
 	Region string `json:"region"`
 }
 

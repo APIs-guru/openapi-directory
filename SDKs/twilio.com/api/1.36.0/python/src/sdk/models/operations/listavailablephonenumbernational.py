@@ -51,7 +51,7 @@ class ListAvailablePhoneNumberNationalRequest:
 
 @dataclass_json
 @dataclass
-class ListAvailablePhoneNumberNational200ApplicationJSONListAvailablePhoneNumberNationalResponse:
+class ListAvailablePhoneNumberNationalListAvailablePhoneNumberNationalResponse:
     available_phone_numbers: Optional[List[shared.APIV2010AccountAvailablePhoneNumberCountryAvailablePhoneNumberNational]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'available_phone_numbers' }})
     end: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'end' }})
     first_page_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_uri' }})
@@ -66,6 +66,6 @@ class ListAvailablePhoneNumberNational200ApplicationJSONListAvailablePhoneNumber
 @dataclass
 class ListAvailablePhoneNumberNationalResponse:
     content_type: str = field(default=None)
-    list_available_phone_number_national_response: Optional[ListAvailablePhoneNumberNational200ApplicationJSONListAvailablePhoneNumberNationalResponse] = field(default=None)
+    list_available_phone_number_national_response: Optional[ListAvailablePhoneNumberNationalListAvailablePhoneNumberNationalResponse] = field(default=None)
     status_code: int = field(default=None)
     

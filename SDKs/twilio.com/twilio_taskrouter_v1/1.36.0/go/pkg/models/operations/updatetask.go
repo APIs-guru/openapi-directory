@@ -17,7 +17,7 @@ type UpdateTaskHeaders struct {
 	IfMatch *string `header:"name=If-Match"`
 }
 
-type UpdateTaskRequestBodyUpdateTaskRequest struct {
+type UpdateTaskUpdateTaskRequest struct {
 	AssignmentStatus *shared.TaskEnumStatusEnum `form:"name=AssignmentStatus"`
 	Attributes       *string                    `form:"name=Attributes"`
 	Priority         *int64                     `form:"name=Priority"`
@@ -33,7 +33,7 @@ type UpdateTaskRequest struct {
 	ServerURL  *string
 	PathParams UpdateTaskPathParams
 	Headers    UpdateTaskHeaders
-	Request    *UpdateTaskRequestBodyUpdateTaskRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateTaskUpdateTaskRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateTaskSecurity
 }
 

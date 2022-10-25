@@ -40,7 +40,7 @@ const (
 	PostServersIDActionsEnableRescue201ApplicationJSONActionStatusEnumError   PostServersIDActionsEnableRescue201ApplicationJSONActionStatusEnum = "error"
 )
 
-type PostServersIDActionsEnableRescue201ApplicationJSONActionAction struct {
+type PostServersIDActionsEnableRescue201ApplicationJSONAction struct {
 	Command   string                                                              `json:"command"`
 	Error     PostServersIDActionsEnableRescue201ApplicationJSONActionError       `json:"error"`
 	Finished  string                                                              `json:"finished"`
@@ -52,8 +52,8 @@ type PostServersIDActionsEnableRescue201ApplicationJSONActionAction struct {
 }
 
 type PostServersIDActionsEnableRescue201ApplicationJSON struct {
-	Action       *PostServersIDActionsEnableRescue201ApplicationJSONActionAction `json:"action,omitempty"`
-	RootPassword *string                                                         `json:"root_password,omitempty"`
+	Action       *PostServersIDActionsEnableRescue201ApplicationJSONAction `json:"action,omitempty"`
+	RootPassword *string                                                   `json:"root_password,omitempty"`
 }
 
 type PostServersIDActionsEnableRescueResponse struct {

@@ -13,7 +13,7 @@ class UpdateDeployedDevicesDevicePathParams:
     
 
 @dataclass
-class UpdateDeployedDevicesDeviceRequestBodyUpdateDeployedDevicesDeviceRequest:
+class UpdateDeployedDevicesDeviceUpdateDeployedDevicesDeviceRequest:
     deployment_sid: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'DeploymentSid' }})
     enabled: Optional[bool] = field(default=None, metadata={'form': { 'field_name': 'Enabled' }})
     friendly_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
@@ -29,7 +29,7 @@ class UpdateDeployedDevicesDeviceSecurity:
 class UpdateDeployedDevicesDeviceRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateDeployedDevicesDevicePathParams = field(default=None)
-    request: Optional[UpdateDeployedDevicesDeviceRequestBodyUpdateDeployedDevicesDeviceRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateDeployedDevicesDeviceUpdateDeployedDevicesDeviceRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateDeployedDevicesDeviceSecurity = field(default=None)
     
 

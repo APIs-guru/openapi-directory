@@ -13,7 +13,7 @@ type CreateDeploymentPathParams struct {
 	ServiceSid     string `pathParam:"style=simple,explode=false,name=ServiceSid"`
 }
 
-type CreateDeploymentRequestBodyCreateDeploymentRequest struct {
+type CreateDeploymentCreateDeploymentRequest struct {
 	BuildSid *string `form:"name=BuildSid"`
 }
 
@@ -24,7 +24,7 @@ type CreateDeploymentSecurity struct {
 type CreateDeploymentRequest struct {
 	ServerURL  *string
 	PathParams CreateDeploymentPathParams
-	Request    *CreateDeploymentRequestBodyCreateDeploymentRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateDeploymentCreateDeploymentRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateDeploymentSecurity
 }
 

@@ -14,7 +14,7 @@ type UpdateDocumentPermissionPathParams struct {
 	ServiceSid  string `pathParam:"style=simple,explode=false,name=ServiceSid"`
 }
 
-type UpdateDocumentPermissionRequestBodyUpdateDocumentPermissionRequest struct {
+type UpdateDocumentPermissionUpdateDocumentPermissionRequest struct {
 	Manage bool `form:"name=Manage"`
 	Read   bool `form:"name=Read"`
 	Write  bool `form:"name=Write"`
@@ -27,7 +27,7 @@ type UpdateDocumentPermissionSecurity struct {
 type UpdateDocumentPermissionRequest struct {
 	ServerURL  *string
 	PathParams UpdateDocumentPermissionPathParams
-	Request    *UpdateDocumentPermissionRequestBodyUpdateDocumentPermissionRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateDocumentPermissionUpdateDocumentPermissionRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateDocumentPermissionSecurity
 }
 

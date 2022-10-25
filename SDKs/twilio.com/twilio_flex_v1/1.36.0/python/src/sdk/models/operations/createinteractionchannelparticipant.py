@@ -13,7 +13,7 @@ class CreateInteractionChannelParticipantPathParams:
     
 
 @dataclass
-class CreateInteractionChannelParticipantRequestBodyCreateInteractionChannelParticipantRequest:
+class CreateInteractionChannelParticipantCreateInteractionChannelParticipantRequest:
     media_properties: Any = field(default=None, metadata={'form': { 'field_name': 'MediaProperties' }})
     type: shared.InteractionChannelParticipantEnumTypeEnum = field(default=None, metadata={'form': { 'field_name': 'Type' }})
     
@@ -27,7 +27,7 @@ class CreateInteractionChannelParticipantSecurity:
 class CreateInteractionChannelParticipantRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateInteractionChannelParticipantPathParams = field(default=None)
-    request: Optional[CreateInteractionChannelParticipantRequestBodyCreateInteractionChannelParticipantRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateInteractionChannelParticipantCreateInteractionChannelParticipantRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateInteractionChannelParticipantSecurity = field(default=None)
     
 

@@ -13,7 +13,7 @@ class UpdateKeyPathParams:
     
 
 @dataclass
-class UpdateKeyRequestBodyUpdateKeyRequest:
+class UpdateKeyUpdateKeyRequest:
     friendly_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
     
 
@@ -26,7 +26,7 @@ class UpdateKeySecurity:
 class UpdateKeyRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateKeyPathParams = field(default=None)
-    request: Optional[UpdateKeyRequestBodyUpdateKeyRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateKeyUpdateKeyRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateKeySecurity = field(default=None)
     
 

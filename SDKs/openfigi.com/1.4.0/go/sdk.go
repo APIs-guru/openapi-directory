@@ -100,7 +100,8 @@ func (s *SDK) GetMappingValuesKey(ctx context.Context, request operations.GetMap
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			out := string(data)
+			res.GetMappingValuesKey400WildcardString = &out
 		}
 	case httpRes.StatusCode == 500:
 		switch {
@@ -110,7 +111,8 @@ func (s *SDK) GetMappingValuesKey(ctx context.Context, request operations.GetMap
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			out := string(data)
+			res.GetMappingValuesKey500WildcardString = &out
 		}
 	}
 
@@ -165,7 +167,8 @@ func (s *SDK) PostMapping(ctx context.Context, request operations.PostMappingReq
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			out := string(data)
+			res.PostMapping400WildcardString = &out
 		}
 	case httpRes.StatusCode == 401:
 		switch {
@@ -175,7 +178,8 @@ func (s *SDK) PostMapping(ctx context.Context, request operations.PostMappingReq
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			out := string(data)
+			res.PostMapping401WildcardString = &out
 		}
 	case httpRes.StatusCode == 406:
 		switch {
@@ -185,7 +189,8 @@ func (s *SDK) PostMapping(ctx context.Context, request operations.PostMappingReq
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			out := string(data)
+			res.PostMapping406WildcardString = &out
 		}
 	case httpRes.StatusCode == 413:
 		switch {
@@ -195,7 +200,8 @@ func (s *SDK) PostMapping(ctx context.Context, request operations.PostMappingReq
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			out := string(data)
+			res.PostMapping413WildcardString = &out
 		}
 	case httpRes.StatusCode == 500:
 		switch {
@@ -205,7 +211,8 @@ func (s *SDK) PostMapping(ctx context.Context, request operations.PostMappingReq
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			out := string(data)
+			res.PostMapping500WildcardString = &out
 		}
 	}
 

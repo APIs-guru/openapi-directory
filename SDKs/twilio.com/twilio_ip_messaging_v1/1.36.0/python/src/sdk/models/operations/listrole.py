@@ -32,7 +32,7 @@ class ListRoleRequest:
 
 @dataclass_json
 @dataclass
-class ListRole200ApplicationJSONMeta:
+class ListRoleListRoleResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -44,14 +44,14 @@ class ListRole200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListRole200ApplicationJSONListRoleResponse:
-    meta: Optional[ListRole200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+class ListRoleListRoleResponse:
+    meta: Optional[ListRoleListRoleResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     roles: Optional[List[shared.IPMessagingV1ServiceRole]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'roles' }})
     
 
 @dataclass
 class ListRoleResponse:
     content_type: str = field(default=None)
-    list_role_response: Optional[ListRole200ApplicationJSONListRoleResponse] = field(default=None)
+    list_role_response: Optional[ListRoleListRoleResponse] = field(default=None)
     status_code: int = field(default=None)
     

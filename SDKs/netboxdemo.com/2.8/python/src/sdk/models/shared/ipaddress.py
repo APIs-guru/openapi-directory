@@ -17,7 +17,7 @@ class IPAddressFamilyLabelEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class IPAddressFamilyFamily:
+class IPAddressFamily:
     label: IPAddressFamilyLabelEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label' }})
     value: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
     
@@ -44,7 +44,7 @@ class IPAddressRoleValueEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class IPAddressRoleRole:
+class IPAddressRole:
     label: IPAddressRoleLabelEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label' }})
     value: IPAddressRoleValueEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
     
@@ -63,7 +63,7 @@ class IPAddressStatusValueEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class IPAddressStatusStatus:
+class IPAddressStatus:
     label: IPAddressStatusLabelEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label' }})
     value: IPAddressStatusValueEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
     
@@ -76,14 +76,14 @@ class IPAddress:
     custom_fields: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'custom_fields' }})
     description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
     dns_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dns_name' }})
-    family: Optional[IPAddressFamilyFamily] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'family' }})
+    family: Optional[IPAddressFamily] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'family' }})
     id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     interface: Optional[ipaddressinterface.IPAddressInterface] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'interface' }})
     last_updated: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'last_updated', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     nat_inside: Optional[nestedipaddress.NestedIPAddress] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nat_inside' }})
     nat_outside: Optional[nestedipaddress.NestedIPAddress] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nat_outside' }})
-    role: Optional[IPAddressRoleRole] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'role' }})
-    status: Optional[IPAddressStatusStatus] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    role: Optional[IPAddressRole] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'role' }})
+    status: Optional[IPAddressStatus] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
     tags: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
     tenant: Optional[nestedtenant.NestedTenant] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tenant' }})
     vrf: Optional[nestedvrf.NestedVrf] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'vrf' }})

@@ -27,7 +27,7 @@ type ListConversationScopedWebhookRequest struct {
 	Security    ListConversationScopedWebhookSecurity
 }
 
-type ListConversationScopedWebhook200ApplicationJSONMeta struct {
+type ListConversationScopedWebhookListConversationScopedWebhookResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -37,13 +37,13 @@ type ListConversationScopedWebhook200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListConversationScopedWebhook200ApplicationJSONListConversationScopedWebhookResponse struct {
-	Meta     *ListConversationScopedWebhook200ApplicationJSONMeta          `json:"meta,omitempty"`
-	Webhooks []shared.ConversationsV1ConversationConversationScopedWebhook `json:"webhooks,omitempty"`
+type ListConversationScopedWebhookListConversationScopedWebhookResponse struct {
+	Meta     *ListConversationScopedWebhookListConversationScopedWebhookResponseMeta `json:"meta,omitempty"`
+	Webhooks []shared.ConversationsV1ConversationConversationScopedWebhook           `json:"webhooks,omitempty"`
 }
 
 type ListConversationScopedWebhookResponse struct {
 	ContentType                           string
-	ListConversationScopedWebhookResponse *ListConversationScopedWebhook200ApplicationJSONListConversationScopedWebhookResponse
+	ListConversationScopedWebhookResponse *ListConversationScopedWebhookListConversationScopedWebhookResponse
 	StatusCode                            int64
 }

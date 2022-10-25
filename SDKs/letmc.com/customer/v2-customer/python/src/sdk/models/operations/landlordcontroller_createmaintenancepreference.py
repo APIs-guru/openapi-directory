@@ -23,9 +23,10 @@ class LandlordControllerCreateMaintenancePreferenceRequest:
 
 @dataclass
 class LandlordControllerCreateMaintenancePreferenceResponse:
-    body: bytes = field(default=None)
     content_type: str = field(default=None)
     landlord_controller_create_maintenance_preference_200_application_json_string: Optional[str] = field(default=None)
+    landlord_controller_create_maintenance_preference_200_application_xml_string: Optional[str] = field(default=None)
     landlord_controller_create_maintenance_preference_200_text_json_string: Optional[str] = field(default=None)
+    landlord_controller_create_maintenance_preference_200_text_xml_string: Optional[str] = field(default=None)
     status_code: int = field(default=None)
     

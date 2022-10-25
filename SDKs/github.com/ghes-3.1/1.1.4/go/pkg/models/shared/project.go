@@ -4,7 +4,7 @@ import (
 	"time"
 )
 
-type ProjectCreatorSimpleUser struct {
+type ProjectSimpleUser struct {
 	AvatarURL         string  `json:"avatar_url"`
 	EventsURL         string  `json:"events_url"`
 	FollowersURL      string  `json:"followers_url"`
@@ -39,7 +39,7 @@ type Project struct {
 	Body                   string                             `json:"body"`
 	ColumnsURL             string                             `json:"columns_url"`
 	CreatedAt              time.Time                          `json:"created_at"`
-	Creator                ProjectCreatorSimpleUser           `json:"creator"`
+	Creator                ProjectSimpleUser                  `json:"creator"`
 	HTMLURL                string                             `json:"html_url"`
 	ID                     int64                              `json:"id"`
 	Name                   string                             `json:"name"`

@@ -3,7 +3,7 @@ from typing import Enum,List,Optional
 from dataclasses_json import dataclass_json
 from . import nestedcable
 
-class WritablePowerPortTypeTypeEnum(str, Enum):
+class WritablePowerPortTypeEnum(str, Enum):
     IEC_60320_C6 = "iec-60320-c6"
     IEC_60320_C8 = "iec-60320-c8"
     IEC_60320_C14 = "iec-60320-c14"
@@ -86,5 +86,5 @@ class WritablePowerPort:
     maximum_draw: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'maximum_draw' }})
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
     tags: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
-    type: Optional[WritablePowerPortTypeTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    type: Optional[WritablePowerPortTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     

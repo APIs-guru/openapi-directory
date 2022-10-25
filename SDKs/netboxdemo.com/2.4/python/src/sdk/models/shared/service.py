@@ -11,7 +11,7 @@ from . import nestedvirtualmachine
 
 @dataclass_json
 @dataclass
-class ServiceProtocolProtocol:
+class ServiceProtocol:
     label: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label' }})
     value: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
     
@@ -28,6 +28,6 @@ class Service:
     last_updated: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'last_updated', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
     port: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'port' }})
-    protocol: ServiceProtocolProtocol = field(default=None, metadata={'dataclasses_json': { 'field_name': 'protocol' }})
+    protocol: ServiceProtocol = field(default=None, metadata={'dataclasses_json': { 'field_name': 'protocol' }})
     virtual_machine: Optional[nestedvirtualmachine.NestedVirtualMachine] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'virtual_machine' }})
     

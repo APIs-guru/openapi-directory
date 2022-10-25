@@ -18,7 +18,7 @@ class UpdateSyncDocumentHeaders:
     
 
 @dataclass
-class UpdateSyncDocumentRequestBodyUpdateSyncDocumentRequest:
+class UpdateSyncDocumentUpdateSyncDocumentRequest:
     data: Any = field(default=None, metadata={'form': { 'field_name': 'Data' }})
     
 
@@ -32,7 +32,7 @@ class UpdateSyncDocumentRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateSyncDocumentPathParams = field(default=None)
     headers: UpdateSyncDocumentHeaders = field(default=None)
-    request: Optional[UpdateSyncDocumentRequestBodyUpdateSyncDocumentRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateSyncDocumentUpdateSyncDocumentRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateSyncDocumentSecurity = field(default=None)
     
 

@@ -29,7 +29,7 @@ type ListFieldValueRequest struct {
 	Security    ListFieldValueSecurity
 }
 
-type ListFieldValue200ApplicationJSONMeta struct {
+type ListFieldValueListFieldValueResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -39,13 +39,13 @@ type ListFieldValue200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListFieldValue200ApplicationJSONListFieldValueResponse struct {
+type ListFieldValueListFieldValueResponse struct {
 	FieldValues []shared.AutopilotV1AssistantFieldTypeFieldValue `json:"field_values,omitempty"`
-	Meta        *ListFieldValue200ApplicationJSONMeta            `json:"meta,omitempty"`
+	Meta        *ListFieldValueListFieldValueResponseMeta        `json:"meta,omitempty"`
 }
 
 type ListFieldValueResponse struct {
 	ContentType            string
-	ListFieldValueResponse *ListFieldValue200ApplicationJSONListFieldValueResponse
+	ListFieldValueResponse *ListFieldValueListFieldValueResponse
 	StatusCode             int64
 }

@@ -14,7 +14,7 @@ type UpdateChannelWebhookPathParams struct {
 	Sid        string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
-type UpdateChannelWebhookRequestBodyUpdateChannelWebhookRequest struct {
+type UpdateChannelWebhookUpdateChannelWebhookRequest struct {
 	ConfigurationFilters    []string                             `form:"name=Configuration.Filters"`
 	ConfigurationFlowSid    *string                              `form:"name=Configuration.FlowSid"`
 	ConfigurationMethod     *shared.ChannelWebhookEnumMethodEnum `form:"name=Configuration.Method"`
@@ -30,7 +30,7 @@ type UpdateChannelWebhookSecurity struct {
 type UpdateChannelWebhookRequest struct {
 	ServerURL  *string
 	PathParams UpdateChannelWebhookPathParams
-	Request    *UpdateChannelWebhookRequestBodyUpdateChannelWebhookRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateChannelWebhookUpdateChannelWebhookRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateChannelWebhookSecurity
 }
 

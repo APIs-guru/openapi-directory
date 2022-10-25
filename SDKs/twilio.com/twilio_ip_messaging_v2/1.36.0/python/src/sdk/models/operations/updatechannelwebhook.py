@@ -14,7 +14,7 @@ class UpdateChannelWebhookPathParams:
     
 
 @dataclass
-class UpdateChannelWebhookRequestBodyUpdateChannelWebhookRequest:
+class UpdateChannelWebhookUpdateChannelWebhookRequest:
     configuration_filters: Optional[List[str]] = field(default=None, metadata={'form': { 'field_name': 'Configuration.Filters' }})
     configuration_flow_sid: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Configuration.FlowSid' }})
     configuration_method: Optional[shared.ChannelWebhookEnumMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'Configuration.Method' }})
@@ -32,7 +32,7 @@ class UpdateChannelWebhookSecurity:
 class UpdateChannelWebhookRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateChannelWebhookPathParams = field(default=None)
-    request: Optional[UpdateChannelWebhookRequestBodyUpdateChannelWebhookRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateChannelWebhookUpdateChannelWebhookRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateChannelWebhookSecurity = field(default=None)
     
 

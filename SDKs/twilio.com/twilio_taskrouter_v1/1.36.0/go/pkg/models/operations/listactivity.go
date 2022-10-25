@@ -29,7 +29,7 @@ type ListActivityRequest struct {
 	Security    ListActivitySecurity
 }
 
-type ListActivity200ApplicationJSONMeta struct {
+type ListActivityListActivityResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -39,13 +39,13 @@ type ListActivity200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListActivity200ApplicationJSONListActivityResponse struct {
+type ListActivityListActivityResponse struct {
 	Activities []shared.TaskrouterV1WorkspaceActivity `json:"activities,omitempty"`
-	Meta       *ListActivity200ApplicationJSONMeta    `json:"meta,omitempty"`
+	Meta       *ListActivityListActivityResponseMeta  `json:"meta,omitempty"`
 }
 
 type ListActivityResponse struct {
 	ContentType          string
-	ListActivityResponse *ListActivity200ApplicationJSONListActivityResponse
+	ListActivityResponse *ListActivityListActivityResponse
 	StatusCode           int64
 }

@@ -8,7 +8,7 @@ var CreateCompositionSettingsServers = []string{
 	"https://video.twilio.com",
 }
 
-type CreateCompositionSettingsRequestBodyCreateCompositionSettingsRequest struct {
+type CreateCompositionSettingsCreateCompositionSettingsRequest struct {
 	AwsCredentialsSid *string `form:"name=AwsCredentialsSid"`
 	AwsS3URL          *string `form:"name=AwsS3Url"`
 	AwsStorageEnabled *bool   `form:"name=AwsStorageEnabled"`
@@ -23,7 +23,7 @@ type CreateCompositionSettingsSecurity struct {
 
 type CreateCompositionSettingsRequest struct {
 	ServerURL *string
-	Request   *CreateCompositionSettingsRequestBodyCreateCompositionSettingsRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request   *CreateCompositionSettingsCreateCompositionSettingsRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security  CreateCompositionSettingsSecurity
 }
 

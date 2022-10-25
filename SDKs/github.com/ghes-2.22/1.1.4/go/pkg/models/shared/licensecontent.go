@@ -6,7 +6,7 @@ type LicenseContentLinks struct {
 	Self string `json:"self"`
 }
 
-type LicenseContentLicenseLicenseSimple struct {
+type LicenseContentLicenseSimple struct {
 	HTMLURL *string `json:"html_url,omitempty"`
 	Key     string  `json:"key"`
 	Name    string  `json:"name"`
@@ -16,17 +16,17 @@ type LicenseContentLicenseLicenseSimple struct {
 }
 
 type LicenseContent struct {
-	Links       LicenseContentLinks                `json:"_links"`
-	Content     string                             `json:"content"`
-	DownloadURL string                             `json:"download_url"`
-	Encoding    string                             `json:"encoding"`
-	GitURL      string                             `json:"git_url"`
-	HTMLURL     string                             `json:"html_url"`
-	License     LicenseContentLicenseLicenseSimple `json:"license"`
-	Name        string                             `json:"name"`
-	Path        string                             `json:"path"`
-	Sha         string                             `json:"sha"`
-	Size        int64                              `json:"size"`
-	Type        string                             `json:"type"`
-	URL         string                             `json:"url"`
+	Links       LicenseContentLinks         `json:"_links"`
+	Content     string                      `json:"content"`
+	DownloadURL string                      `json:"download_url"`
+	Encoding    string                      `json:"encoding"`
+	GitURL      string                      `json:"git_url"`
+	HTMLURL     string                      `json:"html_url"`
+	License     LicenseContentLicenseSimple `json:"license"`
+	Name        string                      `json:"name"`
+	Path        string                      `json:"path"`
+	Sha         string                      `json:"sha"`
+	Size        int64                       `json:"size"`
+	Type        string                      `json:"type"`
+	URL         string                      `json:"url"`
 }

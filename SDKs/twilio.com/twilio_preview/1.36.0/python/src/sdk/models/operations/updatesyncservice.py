@@ -12,7 +12,7 @@ class UpdateSyncServicePathParams:
     
 
 @dataclass
-class UpdateSyncServiceRequestBodyUpdateSyncServiceRequest:
+class UpdateSyncServiceUpdateSyncServiceRequest:
     acl_enabled: Optional[bool] = field(default=None, metadata={'form': { 'field_name': 'AclEnabled' }})
     friendly_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
     reachability_webhooks_enabled: Optional[bool] = field(default=None, metadata={'form': { 'field_name': 'ReachabilityWebhooksEnabled' }})
@@ -28,7 +28,7 @@ class UpdateSyncServiceSecurity:
 class UpdateSyncServiceRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateSyncServicePathParams = field(default=None)
-    request: Optional[UpdateSyncServiceRequestBodyUpdateSyncServiceRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateSyncServiceUpdateSyncServiceRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateSyncServiceSecurity = field(default=None)
     
 

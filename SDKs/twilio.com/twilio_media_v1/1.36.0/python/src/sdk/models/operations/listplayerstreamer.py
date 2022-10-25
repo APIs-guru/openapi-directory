@@ -28,7 +28,7 @@ class ListPlayerStreamerRequest:
 
 @dataclass_json
 @dataclass
-class ListPlayerStreamer200ApplicationJSONMeta:
+class ListPlayerStreamerListPlayerStreamerResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -40,14 +40,14 @@ class ListPlayerStreamer200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListPlayerStreamer200ApplicationJSONListPlayerStreamerResponse:
-    meta: Optional[ListPlayerStreamer200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+class ListPlayerStreamerListPlayerStreamerResponse:
+    meta: Optional[ListPlayerStreamerListPlayerStreamerResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     player_streamers: Optional[List[shared.MediaV1PlayerStreamer]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'player_streamers' }})
     
 
 @dataclass
 class ListPlayerStreamerResponse:
     content_type: str = field(default=None)
-    list_player_streamer_response: Optional[ListPlayerStreamer200ApplicationJSONListPlayerStreamerResponse] = field(default=None)
+    list_player_streamer_response: Optional[ListPlayerStreamerListPlayerStreamerResponse] = field(default=None)
     status_code: int = field(default=None)
     

@@ -36,7 +36,7 @@ type ListTaskRequest struct {
 	Security    ListTaskSecurity
 }
 
-type ListTask200ApplicationJSONMeta struct {
+type ListTaskListTaskResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -46,13 +46,13 @@ type ListTask200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListTask200ApplicationJSONListTaskResponse struct {
-	Meta  *ListTask200ApplicationJSONMeta    `json:"meta,omitempty"`
+type ListTaskListTaskResponse struct {
+	Meta  *ListTaskListTaskResponseMeta      `json:"meta,omitempty"`
 	Tasks []shared.TaskrouterV1WorkspaceTask `json:"tasks,omitempty"`
 }
 
 type ListTaskResponse struct {
 	ContentType      string
-	ListTaskResponse *ListTask200ApplicationJSONListTaskResponse
+	ListTaskResponse *ListTaskListTaskResponse
 	StatusCode       int64
 }

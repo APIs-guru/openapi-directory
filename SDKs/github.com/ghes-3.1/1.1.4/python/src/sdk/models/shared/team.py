@@ -5,7 +5,7 @@ from dataclasses_json import dataclass_json
 
 @dataclass_json
 @dataclass
-class TeamParentTeamSimple:
+class TeamTeamSimple:
     description: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
     html_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'html_url' }})
     id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
@@ -29,7 +29,7 @@ class Team:
     members_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'members_url' }})
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
     node_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'node_id' }})
-    parent: Optional[TeamParentTeamSimple] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'parent' }})
+    parent: Optional[TeamTeamSimple] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'parent' }})
     permission: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'permission' }})
     privacy: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'privacy' }})
     repositories_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'repositories_url' }})

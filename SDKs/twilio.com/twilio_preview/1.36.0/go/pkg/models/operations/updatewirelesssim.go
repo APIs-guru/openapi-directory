@@ -12,78 +12,78 @@ type UpdateWirelessSimPathParams struct {
 	Sid string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
-type UpdateWirelessSimRequestBodyCommandsCallbackMethodEnum string
+type UpdateWirelessSimUpdateWirelessSimRequestCommandsCallbackMethodEnum string
 
 const (
-	UpdateWirelessSimRequestBodyCommandsCallbackMethodEnumHead   UpdateWirelessSimRequestBodyCommandsCallbackMethodEnum = "HEAD"
-	UpdateWirelessSimRequestBodyCommandsCallbackMethodEnumGet    UpdateWirelessSimRequestBodyCommandsCallbackMethodEnum = "GET"
-	UpdateWirelessSimRequestBodyCommandsCallbackMethodEnumPost   UpdateWirelessSimRequestBodyCommandsCallbackMethodEnum = "POST"
-	UpdateWirelessSimRequestBodyCommandsCallbackMethodEnumPatch  UpdateWirelessSimRequestBodyCommandsCallbackMethodEnum = "PATCH"
-	UpdateWirelessSimRequestBodyCommandsCallbackMethodEnumPut    UpdateWirelessSimRequestBodyCommandsCallbackMethodEnum = "PUT"
-	UpdateWirelessSimRequestBodyCommandsCallbackMethodEnumDelete UpdateWirelessSimRequestBodyCommandsCallbackMethodEnum = "DELETE"
+	UpdateWirelessSimUpdateWirelessSimRequestCommandsCallbackMethodEnumHead   UpdateWirelessSimUpdateWirelessSimRequestCommandsCallbackMethodEnum = "HEAD"
+	UpdateWirelessSimUpdateWirelessSimRequestCommandsCallbackMethodEnumGet    UpdateWirelessSimUpdateWirelessSimRequestCommandsCallbackMethodEnum = "GET"
+	UpdateWirelessSimUpdateWirelessSimRequestCommandsCallbackMethodEnumPost   UpdateWirelessSimUpdateWirelessSimRequestCommandsCallbackMethodEnum = "POST"
+	UpdateWirelessSimUpdateWirelessSimRequestCommandsCallbackMethodEnumPatch  UpdateWirelessSimUpdateWirelessSimRequestCommandsCallbackMethodEnum = "PATCH"
+	UpdateWirelessSimUpdateWirelessSimRequestCommandsCallbackMethodEnumPut    UpdateWirelessSimUpdateWirelessSimRequestCommandsCallbackMethodEnum = "PUT"
+	UpdateWirelessSimUpdateWirelessSimRequestCommandsCallbackMethodEnumDelete UpdateWirelessSimUpdateWirelessSimRequestCommandsCallbackMethodEnum = "DELETE"
 )
 
-type UpdateWirelessSimRequestBodySmsFallbackMethodEnum string
+type UpdateWirelessSimUpdateWirelessSimRequestSmsFallbackMethodEnum string
 
 const (
-	UpdateWirelessSimRequestBodySmsFallbackMethodEnumHead   UpdateWirelessSimRequestBodySmsFallbackMethodEnum = "HEAD"
-	UpdateWirelessSimRequestBodySmsFallbackMethodEnumGet    UpdateWirelessSimRequestBodySmsFallbackMethodEnum = "GET"
-	UpdateWirelessSimRequestBodySmsFallbackMethodEnumPost   UpdateWirelessSimRequestBodySmsFallbackMethodEnum = "POST"
-	UpdateWirelessSimRequestBodySmsFallbackMethodEnumPatch  UpdateWirelessSimRequestBodySmsFallbackMethodEnum = "PATCH"
-	UpdateWirelessSimRequestBodySmsFallbackMethodEnumPut    UpdateWirelessSimRequestBodySmsFallbackMethodEnum = "PUT"
-	UpdateWirelessSimRequestBodySmsFallbackMethodEnumDelete UpdateWirelessSimRequestBodySmsFallbackMethodEnum = "DELETE"
+	UpdateWirelessSimUpdateWirelessSimRequestSmsFallbackMethodEnumHead   UpdateWirelessSimUpdateWirelessSimRequestSmsFallbackMethodEnum = "HEAD"
+	UpdateWirelessSimUpdateWirelessSimRequestSmsFallbackMethodEnumGet    UpdateWirelessSimUpdateWirelessSimRequestSmsFallbackMethodEnum = "GET"
+	UpdateWirelessSimUpdateWirelessSimRequestSmsFallbackMethodEnumPost   UpdateWirelessSimUpdateWirelessSimRequestSmsFallbackMethodEnum = "POST"
+	UpdateWirelessSimUpdateWirelessSimRequestSmsFallbackMethodEnumPatch  UpdateWirelessSimUpdateWirelessSimRequestSmsFallbackMethodEnum = "PATCH"
+	UpdateWirelessSimUpdateWirelessSimRequestSmsFallbackMethodEnumPut    UpdateWirelessSimUpdateWirelessSimRequestSmsFallbackMethodEnum = "PUT"
+	UpdateWirelessSimUpdateWirelessSimRequestSmsFallbackMethodEnumDelete UpdateWirelessSimUpdateWirelessSimRequestSmsFallbackMethodEnum = "DELETE"
 )
 
-type UpdateWirelessSimRequestBodySmsMethodEnum string
+type UpdateWirelessSimUpdateWirelessSimRequestSmsMethodEnum string
 
 const (
-	UpdateWirelessSimRequestBodySmsMethodEnumHead   UpdateWirelessSimRequestBodySmsMethodEnum = "HEAD"
-	UpdateWirelessSimRequestBodySmsMethodEnumGet    UpdateWirelessSimRequestBodySmsMethodEnum = "GET"
-	UpdateWirelessSimRequestBodySmsMethodEnumPost   UpdateWirelessSimRequestBodySmsMethodEnum = "POST"
-	UpdateWirelessSimRequestBodySmsMethodEnumPatch  UpdateWirelessSimRequestBodySmsMethodEnum = "PATCH"
-	UpdateWirelessSimRequestBodySmsMethodEnumPut    UpdateWirelessSimRequestBodySmsMethodEnum = "PUT"
-	UpdateWirelessSimRequestBodySmsMethodEnumDelete UpdateWirelessSimRequestBodySmsMethodEnum = "DELETE"
+	UpdateWirelessSimUpdateWirelessSimRequestSmsMethodEnumHead   UpdateWirelessSimUpdateWirelessSimRequestSmsMethodEnum = "HEAD"
+	UpdateWirelessSimUpdateWirelessSimRequestSmsMethodEnumGet    UpdateWirelessSimUpdateWirelessSimRequestSmsMethodEnum = "GET"
+	UpdateWirelessSimUpdateWirelessSimRequestSmsMethodEnumPost   UpdateWirelessSimUpdateWirelessSimRequestSmsMethodEnum = "POST"
+	UpdateWirelessSimUpdateWirelessSimRequestSmsMethodEnumPatch  UpdateWirelessSimUpdateWirelessSimRequestSmsMethodEnum = "PATCH"
+	UpdateWirelessSimUpdateWirelessSimRequestSmsMethodEnumPut    UpdateWirelessSimUpdateWirelessSimRequestSmsMethodEnum = "PUT"
+	UpdateWirelessSimUpdateWirelessSimRequestSmsMethodEnumDelete UpdateWirelessSimUpdateWirelessSimRequestSmsMethodEnum = "DELETE"
 )
 
-type UpdateWirelessSimRequestBodyVoiceFallbackMethodEnum string
+type UpdateWirelessSimUpdateWirelessSimRequestVoiceFallbackMethodEnum string
 
 const (
-	UpdateWirelessSimRequestBodyVoiceFallbackMethodEnumHead   UpdateWirelessSimRequestBodyVoiceFallbackMethodEnum = "HEAD"
-	UpdateWirelessSimRequestBodyVoiceFallbackMethodEnumGet    UpdateWirelessSimRequestBodyVoiceFallbackMethodEnum = "GET"
-	UpdateWirelessSimRequestBodyVoiceFallbackMethodEnumPost   UpdateWirelessSimRequestBodyVoiceFallbackMethodEnum = "POST"
-	UpdateWirelessSimRequestBodyVoiceFallbackMethodEnumPatch  UpdateWirelessSimRequestBodyVoiceFallbackMethodEnum = "PATCH"
-	UpdateWirelessSimRequestBodyVoiceFallbackMethodEnumPut    UpdateWirelessSimRequestBodyVoiceFallbackMethodEnum = "PUT"
-	UpdateWirelessSimRequestBodyVoiceFallbackMethodEnumDelete UpdateWirelessSimRequestBodyVoiceFallbackMethodEnum = "DELETE"
+	UpdateWirelessSimUpdateWirelessSimRequestVoiceFallbackMethodEnumHead   UpdateWirelessSimUpdateWirelessSimRequestVoiceFallbackMethodEnum = "HEAD"
+	UpdateWirelessSimUpdateWirelessSimRequestVoiceFallbackMethodEnumGet    UpdateWirelessSimUpdateWirelessSimRequestVoiceFallbackMethodEnum = "GET"
+	UpdateWirelessSimUpdateWirelessSimRequestVoiceFallbackMethodEnumPost   UpdateWirelessSimUpdateWirelessSimRequestVoiceFallbackMethodEnum = "POST"
+	UpdateWirelessSimUpdateWirelessSimRequestVoiceFallbackMethodEnumPatch  UpdateWirelessSimUpdateWirelessSimRequestVoiceFallbackMethodEnum = "PATCH"
+	UpdateWirelessSimUpdateWirelessSimRequestVoiceFallbackMethodEnumPut    UpdateWirelessSimUpdateWirelessSimRequestVoiceFallbackMethodEnum = "PUT"
+	UpdateWirelessSimUpdateWirelessSimRequestVoiceFallbackMethodEnumDelete UpdateWirelessSimUpdateWirelessSimRequestVoiceFallbackMethodEnum = "DELETE"
 )
 
-type UpdateWirelessSimRequestBodyVoiceMethodEnum string
+type UpdateWirelessSimUpdateWirelessSimRequestVoiceMethodEnum string
 
 const (
-	UpdateWirelessSimRequestBodyVoiceMethodEnumHead   UpdateWirelessSimRequestBodyVoiceMethodEnum = "HEAD"
-	UpdateWirelessSimRequestBodyVoiceMethodEnumGet    UpdateWirelessSimRequestBodyVoiceMethodEnum = "GET"
-	UpdateWirelessSimRequestBodyVoiceMethodEnumPost   UpdateWirelessSimRequestBodyVoiceMethodEnum = "POST"
-	UpdateWirelessSimRequestBodyVoiceMethodEnumPatch  UpdateWirelessSimRequestBodyVoiceMethodEnum = "PATCH"
-	UpdateWirelessSimRequestBodyVoiceMethodEnumPut    UpdateWirelessSimRequestBodyVoiceMethodEnum = "PUT"
-	UpdateWirelessSimRequestBodyVoiceMethodEnumDelete UpdateWirelessSimRequestBodyVoiceMethodEnum = "DELETE"
+	UpdateWirelessSimUpdateWirelessSimRequestVoiceMethodEnumHead   UpdateWirelessSimUpdateWirelessSimRequestVoiceMethodEnum = "HEAD"
+	UpdateWirelessSimUpdateWirelessSimRequestVoiceMethodEnumGet    UpdateWirelessSimUpdateWirelessSimRequestVoiceMethodEnum = "GET"
+	UpdateWirelessSimUpdateWirelessSimRequestVoiceMethodEnumPost   UpdateWirelessSimUpdateWirelessSimRequestVoiceMethodEnum = "POST"
+	UpdateWirelessSimUpdateWirelessSimRequestVoiceMethodEnumPatch  UpdateWirelessSimUpdateWirelessSimRequestVoiceMethodEnum = "PATCH"
+	UpdateWirelessSimUpdateWirelessSimRequestVoiceMethodEnumPut    UpdateWirelessSimUpdateWirelessSimRequestVoiceMethodEnum = "PUT"
+	UpdateWirelessSimUpdateWirelessSimRequestVoiceMethodEnumDelete UpdateWirelessSimUpdateWirelessSimRequestVoiceMethodEnum = "DELETE"
 )
 
-type UpdateWirelessSimRequestBodyUpdateWirelessSimRequest struct {
-	CallbackMethod         *string                                                 `form:"name=CallbackMethod"`
-	CallbackURL            *string                                                 `form:"name=CallbackUrl"`
-	CommandsCallbackMethod *UpdateWirelessSimRequestBodyCommandsCallbackMethodEnum `form:"name=CommandsCallbackMethod"`
-	CommandsCallbackURL    *string                                                 `form:"name=CommandsCallbackUrl"`
-	FriendlyName           *string                                                 `form:"name=FriendlyName"`
-	RatePlan               *string                                                 `form:"name=RatePlan"`
-	SmsFallbackMethod      *UpdateWirelessSimRequestBodySmsFallbackMethodEnum      `form:"name=SmsFallbackMethod"`
-	SmsFallbackURL         *string                                                 `form:"name=SmsFallbackUrl"`
-	SmsMethod              *UpdateWirelessSimRequestBodySmsMethodEnum              `form:"name=SmsMethod"`
-	SmsURL                 *string                                                 `form:"name=SmsUrl"`
-	Status                 *string                                                 `form:"name=Status"`
-	UniqueName             *string                                                 `form:"name=UniqueName"`
-	VoiceFallbackMethod    *UpdateWirelessSimRequestBodyVoiceFallbackMethodEnum    `form:"name=VoiceFallbackMethod"`
-	VoiceFallbackURL       *string                                                 `form:"name=VoiceFallbackUrl"`
-	VoiceMethod            *UpdateWirelessSimRequestBodyVoiceMethodEnum            `form:"name=VoiceMethod"`
-	VoiceURL               *string                                                 `form:"name=VoiceUrl"`
+type UpdateWirelessSimUpdateWirelessSimRequest struct {
+	CallbackMethod         *string                                                              `form:"name=CallbackMethod"`
+	CallbackURL            *string                                                              `form:"name=CallbackUrl"`
+	CommandsCallbackMethod *UpdateWirelessSimUpdateWirelessSimRequestCommandsCallbackMethodEnum `form:"name=CommandsCallbackMethod"`
+	CommandsCallbackURL    *string                                                              `form:"name=CommandsCallbackUrl"`
+	FriendlyName           *string                                                              `form:"name=FriendlyName"`
+	RatePlan               *string                                                              `form:"name=RatePlan"`
+	SmsFallbackMethod      *UpdateWirelessSimUpdateWirelessSimRequestSmsFallbackMethodEnum      `form:"name=SmsFallbackMethod"`
+	SmsFallbackURL         *string                                                              `form:"name=SmsFallbackUrl"`
+	SmsMethod              *UpdateWirelessSimUpdateWirelessSimRequestSmsMethodEnum              `form:"name=SmsMethod"`
+	SmsURL                 *string                                                              `form:"name=SmsUrl"`
+	Status                 *string                                                              `form:"name=Status"`
+	UniqueName             *string                                                              `form:"name=UniqueName"`
+	VoiceFallbackMethod    *UpdateWirelessSimUpdateWirelessSimRequestVoiceFallbackMethodEnum    `form:"name=VoiceFallbackMethod"`
+	VoiceFallbackURL       *string                                                              `form:"name=VoiceFallbackUrl"`
+	VoiceMethod            *UpdateWirelessSimUpdateWirelessSimRequestVoiceMethodEnum            `form:"name=VoiceMethod"`
+	VoiceURL               *string                                                              `form:"name=VoiceUrl"`
 }
 
 type UpdateWirelessSimSecurity struct {
@@ -93,7 +93,7 @@ type UpdateWirelessSimSecurity struct {
 type UpdateWirelessSimRequest struct {
 	ServerURL  *string
 	PathParams UpdateWirelessSimPathParams
-	Request    *UpdateWirelessSimRequestBodyUpdateWirelessSimRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateWirelessSimUpdateWirelessSimRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateWirelessSimSecurity
 }
 

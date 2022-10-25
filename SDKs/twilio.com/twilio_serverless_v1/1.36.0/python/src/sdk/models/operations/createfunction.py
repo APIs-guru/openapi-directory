@@ -12,7 +12,7 @@ class CreateFunctionPathParams:
     
 
 @dataclass
-class CreateFunctionRequestBodyCreateFunctionRequest:
+class CreateFunctionCreateFunctionRequest:
     friendly_name: str = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
     
 
@@ -25,7 +25,7 @@ class CreateFunctionSecurity:
 class CreateFunctionRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateFunctionPathParams = field(default=None)
-    request: Optional[CreateFunctionRequestBodyCreateFunctionRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateFunctionCreateFunctionRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateFunctionSecurity = field(default=None)
     
 

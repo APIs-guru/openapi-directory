@@ -33,7 +33,7 @@ class ListAssetVersionRequest:
 
 @dataclass_json
 @dataclass
-class ListAssetVersion200ApplicationJSONMeta:
+class ListAssetVersionListAssetVersionResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -45,14 +45,14 @@ class ListAssetVersion200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListAssetVersion200ApplicationJSONListAssetVersionResponse:
+class ListAssetVersionListAssetVersionResponse:
     asset_versions: Optional[List[shared.ServerlessV1ServiceAssetAssetVersion]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'asset_versions' }})
-    meta: Optional[ListAssetVersion200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+    meta: Optional[ListAssetVersionListAssetVersionResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     
 
 @dataclass
 class ListAssetVersionResponse:
     content_type: str = field(default=None)
-    list_asset_version_response: Optional[ListAssetVersion200ApplicationJSONListAssetVersionResponse] = field(default=None)
+    list_asset_version_response: Optional[ListAssetVersionListAssetVersionResponse] = field(default=None)
     status_code: int = field(default=None)
     

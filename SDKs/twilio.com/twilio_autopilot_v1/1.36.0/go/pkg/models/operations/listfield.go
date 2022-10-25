@@ -28,7 +28,7 @@ type ListFieldRequest struct {
 	Security    ListFieldSecurity
 }
 
-type ListField200ApplicationJSONMeta struct {
+type ListFieldListFieldResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -38,13 +38,13 @@ type ListField200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListField200ApplicationJSONListFieldResponse struct {
+type ListFieldListFieldResponse struct {
 	Fields []shared.AutopilotV1AssistantTaskField `json:"fields,omitempty"`
-	Meta   *ListField200ApplicationJSONMeta       `json:"meta,omitempty"`
+	Meta   *ListFieldListFieldResponseMeta        `json:"meta,omitempty"`
 }
 
 type ListFieldResponse struct {
 	ContentType       string
-	ListFieldResponse *ListField200ApplicationJSONListFieldResponse
+	ListFieldResponse *ListFieldListFieldResponse
 	StatusCode        int64
 }

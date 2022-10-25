@@ -8,7 +8,7 @@ var CreateIPRecordServers = []string{
 	"https://voice.twilio.com",
 }
 
-type CreateIPRecordRequestBodyCreateIPRecordRequest struct {
+type CreateIPRecordCreateIPRecordRequest struct {
 	CidrPrefixLength *int64  `form:"name=CidrPrefixLength"`
 	FriendlyName     *string `form:"name=FriendlyName"`
 	IPAddress        string  `form:"name=IpAddress"`
@@ -20,7 +20,7 @@ type CreateIPRecordSecurity struct {
 
 type CreateIPRecordRequest struct {
 	ServerURL *string
-	Request   *CreateIPRecordRequestBodyCreateIPRecordRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request   *CreateIPRecordCreateIPRecordRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security  CreateIPRecordSecurity
 }
 

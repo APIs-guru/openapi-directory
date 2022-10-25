@@ -12,7 +12,7 @@ type CreateCredentialListPathParams struct {
 	TrunkSid string `pathParam:"style=simple,explode=false,name=TrunkSid"`
 }
 
-type CreateCredentialListRequestBodyCreateCredentialListRequest struct {
+type CreateCredentialListCreateCredentialListRequest struct {
 	CredentialListSid string `form:"name=CredentialListSid"`
 }
 
@@ -23,7 +23,7 @@ type CreateCredentialListSecurity struct {
 type CreateCredentialListRequest struct {
 	ServerURL  *string
 	PathParams CreateCredentialListPathParams
-	Request    *CreateCredentialListRequestBodyCreateCredentialListRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateCredentialListCreateCredentialListRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateCredentialListSecurity
 }
 

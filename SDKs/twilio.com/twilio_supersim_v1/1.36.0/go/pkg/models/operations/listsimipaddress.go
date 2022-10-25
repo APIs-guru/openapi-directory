@@ -27,7 +27,7 @@ type ListSimIPAddressRequest struct {
 	Security    ListSimIPAddressSecurity
 }
 
-type ListSimIPAddress200ApplicationJSONMeta struct {
+type ListSimIPAddressListSimIPAddressResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -37,13 +37,13 @@ type ListSimIPAddress200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListSimIPAddress200ApplicationJSONListSimIPAddressResponse struct {
-	IPAddresses []shared.SupersimV1SimSimIPAddress      `json:"ip_addresses,omitempty"`
-	Meta        *ListSimIPAddress200ApplicationJSONMeta `json:"meta,omitempty"`
+type ListSimIPAddressListSimIPAddressResponse struct {
+	IPAddresses []shared.SupersimV1SimSimIPAddress            `json:"ip_addresses,omitempty"`
+	Meta        *ListSimIPAddressListSimIPAddressResponseMeta `json:"meta,omitempty"`
 }
 
 type ListSimIPAddressResponse struct {
 	ContentType              string
-	ListSimIPAddressResponse *ListSimIPAddress200ApplicationJSONListSimIPAddressResponse
+	ListSimIPAddressResponse *ListSimIPAddressListSimIPAddressResponse
 	StatusCode               int64
 }

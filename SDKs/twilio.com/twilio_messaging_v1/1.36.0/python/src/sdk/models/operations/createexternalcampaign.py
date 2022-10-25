@@ -7,7 +7,7 @@ CREATE_EXTERNAL_CAMPAIGN_SERVERS = [
 
 
 @dataclass
-class CreateExternalCampaignRequestBodyCreateExternalCampaignRequest:
+class CreateExternalCampaignCreateExternalCampaignRequest:
     campaign_id: str = field(default=None, metadata={'form': { 'field_name': 'CampaignId' }})
     messaging_service_sid: str = field(default=None, metadata={'form': { 'field_name': 'MessagingServiceSid' }})
     
@@ -20,7 +20,7 @@ class CreateExternalCampaignSecurity:
 @dataclass
 class CreateExternalCampaignRequest:
     server_url: Optional[str] = field(default=None)
-    request: Optional[CreateExternalCampaignRequestBodyCreateExternalCampaignRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateExternalCampaignCreateExternalCampaignRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateExternalCampaignSecurity = field(default=None)
     
 

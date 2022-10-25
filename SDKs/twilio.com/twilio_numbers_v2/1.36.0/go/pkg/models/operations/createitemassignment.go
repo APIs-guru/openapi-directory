@@ -12,7 +12,7 @@ type CreateItemAssignmentPathParams struct {
 	BundleSid string `pathParam:"style=simple,explode=false,name=BundleSid"`
 }
 
-type CreateItemAssignmentRequestBodyCreateItemAssignmentRequest struct {
+type CreateItemAssignmentCreateItemAssignmentRequest struct {
 	ObjectSid string `form:"name=ObjectSid"`
 }
 
@@ -23,7 +23,7 @@ type CreateItemAssignmentSecurity struct {
 type CreateItemAssignmentRequest struct {
 	ServerURL  *string
 	PathParams CreateItemAssignmentPathParams
-	Request    *CreateItemAssignmentRequestBodyCreateItemAssignmentRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateItemAssignmentCreateItemAssignmentRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateItemAssignmentSecurity
 }
 

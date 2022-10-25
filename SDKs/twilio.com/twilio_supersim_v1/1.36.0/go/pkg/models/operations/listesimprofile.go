@@ -25,7 +25,7 @@ type ListEsimProfileRequest struct {
 	Security    ListEsimProfileSecurity
 }
 
-type ListEsimProfile200ApplicationJSONMeta struct {
+type ListEsimProfileListEsimProfileResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -35,13 +35,13 @@ type ListEsimProfile200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListEsimProfile200ApplicationJSONListEsimProfileResponse struct {
-	EsimProfiles []shared.SupersimV1EsimProfile         `json:"esim_profiles,omitempty"`
-	Meta         *ListEsimProfile200ApplicationJSONMeta `json:"meta,omitempty"`
+type ListEsimProfileListEsimProfileResponse struct {
+	EsimProfiles []shared.SupersimV1EsimProfile              `json:"esim_profiles,omitempty"`
+	Meta         *ListEsimProfileListEsimProfileResponseMeta `json:"meta,omitempty"`
 }
 
 type ListEsimProfileResponse struct {
 	ContentType             string
-	ListEsimProfileResponse *ListEsimProfile200ApplicationJSONListEsimProfileResponse
+	ListEsimProfileResponse *ListEsimProfileListEsimProfileResponse
 	StatusCode              int64
 }

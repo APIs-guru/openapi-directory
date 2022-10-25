@@ -1,6 +1,6 @@
 package shared
 
-type TransformDefinitionTransformDefinitionTransformDefinition struct {
+type TransformDefinitionTransformDefinition struct {
 	Active           *bool   `json:"Active,omitempty"`
 	ContentType      *string `json:"ContentType,omitempty"`
 	Definition       *string `json:"Definition,omitempty"`
@@ -13,5 +13,5 @@ type TransformDefinitionTransformDefinitionTransformDefinition struct {
 }
 
 type TransformDefinition struct {
-	TransformDefinition *TransformDefinitionTransformDefinitionTransformDefinition `json:"TransformDefinition,omitempty"`
+	TransformDefinition *TransformDefinitionTransformDefinition `json:"TransformDefinition,omitempty"`
 }

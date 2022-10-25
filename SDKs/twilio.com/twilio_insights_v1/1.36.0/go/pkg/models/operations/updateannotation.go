@@ -12,7 +12,7 @@ type UpdateAnnotationPathParams struct {
 	CallSid string `pathParam:"style=simple,explode=false,name=CallSid"`
 }
 
-type UpdateAnnotationRequestBodyUpdateAnnotationRequest struct {
+type UpdateAnnotationUpdateAnnotationRequest struct {
 	AnsweredBy        *shared.AnnotationEnumAnsweredByEnum        `form:"name=AnsweredBy"`
 	CallScore         *int64                                      `form:"name=CallScore"`
 	Comment           *string                                     `form:"name=Comment"`
@@ -29,7 +29,7 @@ type UpdateAnnotationSecurity struct {
 type UpdateAnnotationRequest struct {
 	ServerURL  *string
 	PathParams UpdateAnnotationPathParams
-	Request    *UpdateAnnotationRequestBodyUpdateAnnotationRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateAnnotationUpdateAnnotationRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateAnnotationSecurity
 }
 

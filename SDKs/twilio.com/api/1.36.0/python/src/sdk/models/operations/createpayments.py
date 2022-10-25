@@ -13,7 +13,7 @@ class CreatePaymentsPathParams:
     
 
 @dataclass
-class CreatePaymentsRequestBodyCreatePaymentsRequest:
+class CreatePaymentsCreatePaymentsRequest:
     bank_account_type: Optional[shared.PaymentsEnumBankAccountTypeEnum] = field(default=None, metadata={'form': { 'field_name': 'BankAccountType' }})
     charge_amount: Optional[float] = field(default=None, metadata={'form': { 'field_name': 'ChargeAmount' }})
     currency: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Currency' }})
@@ -41,7 +41,7 @@ class CreatePaymentsSecurity:
 class CreatePaymentsRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreatePaymentsPathParams = field(default=None)
-    request: Optional[CreatePaymentsRequestBodyCreatePaymentsRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreatePaymentsCreatePaymentsRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreatePaymentsSecurity = field(default=None)
     
 

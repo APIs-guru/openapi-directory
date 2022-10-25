@@ -4,18 +4,18 @@ type PutNetworksIDPathParams struct {
 	ID int64 `pathParam:"style=simple,explode=false,name=id"`
 }
 
-type PutNetworksIDRequestBodyLabels struct {
+type PutNetworksIDUpdateNetworkRequestLabels struct {
 	Labelkey *string `json:"labelkey,omitempty"`
 }
 
-type PutNetworksIDRequestBodyUpdateNetworkRequest struct {
-	Labels *PutNetworksIDRequestBodyLabels `json:"labels,omitempty"`
-	Name   *string                         `json:"name,omitempty"`
+type PutNetworksIDUpdateNetworkRequest struct {
+	Labels *PutNetworksIDUpdateNetworkRequestLabels `json:"labels,omitempty"`
+	Name   *string                                  `json:"name,omitempty"`
 }
 
 type PutNetworksIDRequest struct {
 	PathParams PutNetworksIDPathParams
-	Request    *PutNetworksIDRequestBodyUpdateNetworkRequest `request:"mediaType=application/json"`
+	Request    *PutNetworksIDUpdateNetworkRequest `request:"mediaType=application/json"`
 }
 
 type PutNetworksID200ApplicationJSONNetworkProtection struct {

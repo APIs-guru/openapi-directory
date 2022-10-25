@@ -4,12 +4,12 @@ import (
 	"time"
 )
 
-type RackTypeType struct {
+type RackType struct {
 	Label string `json:"label"`
 	Value int64  `json:"value"`
 }
 
-type RackWidthWidth struct {
+type RackWidth struct {
 	Label string `json:"label"`
 	Value int64  `json:"value"`
 }
@@ -30,7 +30,7 @@ type Rack struct {
 	Site         NestedSite             `json:"site"`
 	Tags         []string               `json:"tags,omitempty"`
 	Tenant       *NestedTenant          `json:"tenant,omitempty"`
-	Type         *RackTypeType          `json:"type,omitempty"`
+	Type         *RackType              `json:"type,omitempty"`
 	UHeight      *int64                 `json:"u_height,omitempty"`
-	Width        *RackWidthWidth        `json:"width,omitempty"`
+	Width        *RackWidth             `json:"width,omitempty"`
 }

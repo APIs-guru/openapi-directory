@@ -13,7 +13,7 @@ class UpdateFunctionPathParams:
     
 
 @dataclass
-class UpdateFunctionRequestBodyUpdateFunctionRequest:
+class UpdateFunctionUpdateFunctionRequest:
     friendly_name: str = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
     
 
@@ -26,7 +26,7 @@ class UpdateFunctionSecurity:
 class UpdateFunctionRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateFunctionPathParams = field(default=None)
-    request: Optional[UpdateFunctionRequestBodyUpdateFunctionRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateFunctionUpdateFunctionRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateFunctionSecurity = field(default=None)
     
 

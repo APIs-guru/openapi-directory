@@ -14,7 +14,7 @@ type UpdateCallRecordingPathParams struct {
 	Sid        string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
-type UpdateCallRecordingRequestBodyUpdateCallRecordingRequest struct {
+type UpdateCallRecordingUpdateCallRecordingRequest struct {
 	PauseBehavior *string                            `form:"name=PauseBehavior"`
 	Status        shared.CallRecordingEnumStatusEnum `form:"name=Status"`
 }
@@ -26,7 +26,7 @@ type UpdateCallRecordingSecurity struct {
 type UpdateCallRecordingRequest struct {
 	ServerURL  *string
 	PathParams UpdateCallRecordingPathParams
-	Request    *UpdateCallRecordingRequestBodyUpdateCallRecordingRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateCallRecordingUpdateCallRecordingRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateCallRecordingSecurity
 }
 

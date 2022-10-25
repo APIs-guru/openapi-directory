@@ -12,7 +12,7 @@ type CreateTrustProductChannelEndpointAssignmentPathParams struct {
 	TrustProductSid string `pathParam:"style=simple,explode=false,name=TrustProductSid"`
 }
 
-type CreateTrustProductChannelEndpointAssignmentRequestBodyCreateTrustProductChannelEndpointAssignmentRequest struct {
+type CreateTrustProductChannelEndpointAssignmentCreateTrustProductChannelEndpointAssignmentRequest struct {
 	ChannelEndpointSid  string `form:"name=ChannelEndpointSid"`
 	ChannelEndpointType string `form:"name=ChannelEndpointType"`
 }
@@ -24,7 +24,7 @@ type CreateTrustProductChannelEndpointAssignmentSecurity struct {
 type CreateTrustProductChannelEndpointAssignmentRequest struct {
 	ServerURL  *string
 	PathParams CreateTrustProductChannelEndpointAssignmentPathParams
-	Request    *CreateTrustProductChannelEndpointAssignmentRequestBodyCreateTrustProductChannelEndpointAssignmentRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateTrustProductChannelEndpointAssignmentCreateTrustProductChannelEndpointAssignmentRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateTrustProductChannelEndpointAssignmentSecurity
 }
 

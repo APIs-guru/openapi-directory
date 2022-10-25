@@ -4,7 +4,7 @@ import (
 	"time"
 )
 
-type DeploymentStatusCreatorSimpleUser struct {
+type DeploymentStatusSimpleUser struct {
 	AvatarURL         string  `json:"avatar_url"`
 	EventsURL         string  `json:"events_url"`
 	FollowersURL      string  `json:"followers_url"`
@@ -39,19 +39,19 @@ const (
 )
 
 type DeploymentStatus struct {
-	CreatedAt             time.Time                         `json:"created_at"`
-	Creator               DeploymentStatusCreatorSimpleUser `json:"creator"`
-	DeploymentURL         string                            `json:"deployment_url"`
-	Description           string                            `json:"description"`
-	Environment           *string                           `json:"environment,omitempty"`
-	EnvironmentURL        *string                           `json:"environment_url,omitempty"`
-	ID                    int64                             `json:"id"`
-	LogURL                *string                           `json:"log_url,omitempty"`
-	NodeID                string                            `json:"node_id"`
-	PerformedViaGithubApp map[string]interface{}            `json:"performed_via_github_app,omitempty"`
-	RepositoryURL         string                            `json:"repository_url"`
-	State                 DeploymentStatusStateEnum         `json:"state"`
-	TargetURL             string                            `json:"target_url"`
-	UpdatedAt             time.Time                         `json:"updated_at"`
-	URL                   string                            `json:"url"`
+	CreatedAt             time.Time                  `json:"created_at"`
+	Creator               DeploymentStatusSimpleUser `json:"creator"`
+	DeploymentURL         string                     `json:"deployment_url"`
+	Description           string                     `json:"description"`
+	Environment           *string                    `json:"environment,omitempty"`
+	EnvironmentURL        *string                    `json:"environment_url,omitempty"`
+	ID                    int64                      `json:"id"`
+	LogURL                *string                    `json:"log_url,omitempty"`
+	NodeID                string                     `json:"node_id"`
+	PerformedViaGithubApp map[string]interface{}     `json:"performed_via_github_app,omitempty"`
+	RepositoryURL         string                     `json:"repository_url"`
+	State                 DeploymentStatusStateEnum  `json:"state"`
+	TargetURL             string                     `json:"target_url"`
+	UpdatedAt             time.Time                  `json:"updated_at"`
+	URL                   string                     `json:"url"`
 }

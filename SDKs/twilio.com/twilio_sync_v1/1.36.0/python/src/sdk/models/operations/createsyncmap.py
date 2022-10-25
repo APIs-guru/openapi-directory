@@ -12,7 +12,7 @@ class CreateSyncMapPathParams:
     
 
 @dataclass
-class CreateSyncMapRequestBodyCreateSyncMapRequest:
+class CreateSyncMapCreateSyncMapRequest:
     collection_ttl: Optional[int] = field(default=None, metadata={'form': { 'field_name': 'CollectionTtl' }})
     ttl: Optional[int] = field(default=None, metadata={'form': { 'field_name': 'Ttl' }})
     unique_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'UniqueName' }})
@@ -27,7 +27,7 @@ class CreateSyncMapSecurity:
 class CreateSyncMapRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateSyncMapPathParams = field(default=None)
-    request: Optional[CreateSyncMapRequestBodyCreateSyncMapRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateSyncMapCreateSyncMapRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateSyncMapSecurity = field(default=None)
     
 

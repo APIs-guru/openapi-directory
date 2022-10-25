@@ -8,7 +8,7 @@ var CreateCredentialAwsServers = []string{
 	"https://accounts.twilio.com",
 }
 
-type CreateCredentialAwsRequestBodyCreateCredentialAwsRequest struct {
+type CreateCredentialAwsCreateCredentialAwsRequest struct {
 	AccountSid   *string `form:"name=AccountSid"`
 	Credentials  string  `form:"name=Credentials"`
 	FriendlyName *string `form:"name=FriendlyName"`
@@ -20,7 +20,7 @@ type CreateCredentialAwsSecurity struct {
 
 type CreateCredentialAwsRequest struct {
 	ServerURL *string
-	Request   *CreateCredentialAwsRequestBodyCreateCredentialAwsRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request   *CreateCredentialAwsCreateCredentialAwsRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security  CreateCredentialAwsSecurity
 }
 

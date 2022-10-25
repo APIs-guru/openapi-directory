@@ -12,7 +12,7 @@ type UpdateSourceIPMappingPathParams struct {
 	Sid string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
-type UpdateSourceIPMappingRequestBodyUpdateSourceIPMappingRequest struct {
+type UpdateSourceIPMappingUpdateSourceIPMappingRequest struct {
 	SipDomainSid string `form:"name=SipDomainSid"`
 }
 
@@ -23,7 +23,7 @@ type UpdateSourceIPMappingSecurity struct {
 type UpdateSourceIPMappingRequest struct {
 	ServerURL  *string
 	PathParams UpdateSourceIPMappingPathParams
-	Request    *UpdateSourceIPMappingRequestBodyUpdateSourceIPMappingRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateSourceIPMappingUpdateSourceIPMappingRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateSourceIPMappingSecurity
 }
 

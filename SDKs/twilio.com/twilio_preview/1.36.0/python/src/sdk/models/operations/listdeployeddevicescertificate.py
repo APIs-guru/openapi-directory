@@ -33,7 +33,7 @@ class ListDeployedDevicesCertificateRequest:
 
 @dataclass_json
 @dataclass
-class ListDeployedDevicesCertificate200ApplicationJSONMeta:
+class ListDeployedDevicesCertificateListDeployedDevicesCertificateResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -45,14 +45,14 @@ class ListDeployedDevicesCertificate200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListDeployedDevicesCertificate200ApplicationJSONListDeployedDevicesCertificateResponse:
+class ListDeployedDevicesCertificateListDeployedDevicesCertificateResponse:
     certificates: Optional[List[shared.PreviewDeployedDevicesFleetCertificate]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'certificates' }})
-    meta: Optional[ListDeployedDevicesCertificate200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+    meta: Optional[ListDeployedDevicesCertificateListDeployedDevicesCertificateResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     
 
 @dataclass
 class ListDeployedDevicesCertificateResponse:
     content_type: str = field(default=None)
-    list_deployed_devices_certificate_response: Optional[ListDeployedDevicesCertificate200ApplicationJSONListDeployedDevicesCertificateResponse] = field(default=None)
+    list_deployed_devices_certificate_response: Optional[ListDeployedDevicesCertificateListDeployedDevicesCertificateResponse] = field(default=None)
     status_code: int = field(default=None)
     

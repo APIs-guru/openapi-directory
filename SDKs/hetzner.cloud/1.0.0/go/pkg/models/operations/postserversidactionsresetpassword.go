@@ -26,7 +26,7 @@ const (
 	PostServersIDActionsResetPassword201ApplicationJSONActionStatusEnumError   PostServersIDActionsResetPassword201ApplicationJSONActionStatusEnum = "error"
 )
 
-type PostServersIDActionsResetPassword201ApplicationJSONActionAction struct {
+type PostServersIDActionsResetPassword201ApplicationJSONAction struct {
 	Command   string                                                               `json:"command"`
 	Error     PostServersIDActionsResetPassword201ApplicationJSONActionError       `json:"error"`
 	Finished  string                                                               `json:"finished"`
@@ -38,8 +38,8 @@ type PostServersIDActionsResetPassword201ApplicationJSONActionAction struct {
 }
 
 type PostServersIDActionsResetPassword201ApplicationJSON struct {
-	Action       *PostServersIDActionsResetPassword201ApplicationJSONActionAction `json:"action,omitempty"`
-	RootPassword *string                                                          `json:"root_password,omitempty"`
+	Action       *PostServersIDActionsResetPassword201ApplicationJSONAction `json:"action,omitempty"`
+	RootPassword *string                                                    `json:"root_password,omitempty"`
 }
 
 type PostServersIDActionsResetPasswordResponse struct {

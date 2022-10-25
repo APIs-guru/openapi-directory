@@ -8,50 +8,50 @@ var CreateByocTrunkServers = []string{
 	"https://voice.twilio.com",
 }
 
-type CreateByocTrunkRequestBodyStatusCallbackMethodEnum string
+type CreateByocTrunkCreateByocTrunkRequestStatusCallbackMethodEnum string
 
 const (
-	CreateByocTrunkRequestBodyStatusCallbackMethodEnumHead   CreateByocTrunkRequestBodyStatusCallbackMethodEnum = "HEAD"
-	CreateByocTrunkRequestBodyStatusCallbackMethodEnumGet    CreateByocTrunkRequestBodyStatusCallbackMethodEnum = "GET"
-	CreateByocTrunkRequestBodyStatusCallbackMethodEnumPost   CreateByocTrunkRequestBodyStatusCallbackMethodEnum = "POST"
-	CreateByocTrunkRequestBodyStatusCallbackMethodEnumPatch  CreateByocTrunkRequestBodyStatusCallbackMethodEnum = "PATCH"
-	CreateByocTrunkRequestBodyStatusCallbackMethodEnumPut    CreateByocTrunkRequestBodyStatusCallbackMethodEnum = "PUT"
-	CreateByocTrunkRequestBodyStatusCallbackMethodEnumDelete CreateByocTrunkRequestBodyStatusCallbackMethodEnum = "DELETE"
+	CreateByocTrunkCreateByocTrunkRequestStatusCallbackMethodEnumHead   CreateByocTrunkCreateByocTrunkRequestStatusCallbackMethodEnum = "HEAD"
+	CreateByocTrunkCreateByocTrunkRequestStatusCallbackMethodEnumGet    CreateByocTrunkCreateByocTrunkRequestStatusCallbackMethodEnum = "GET"
+	CreateByocTrunkCreateByocTrunkRequestStatusCallbackMethodEnumPost   CreateByocTrunkCreateByocTrunkRequestStatusCallbackMethodEnum = "POST"
+	CreateByocTrunkCreateByocTrunkRequestStatusCallbackMethodEnumPatch  CreateByocTrunkCreateByocTrunkRequestStatusCallbackMethodEnum = "PATCH"
+	CreateByocTrunkCreateByocTrunkRequestStatusCallbackMethodEnumPut    CreateByocTrunkCreateByocTrunkRequestStatusCallbackMethodEnum = "PUT"
+	CreateByocTrunkCreateByocTrunkRequestStatusCallbackMethodEnumDelete CreateByocTrunkCreateByocTrunkRequestStatusCallbackMethodEnum = "DELETE"
 )
 
-type CreateByocTrunkRequestBodyVoiceFallbackMethodEnum string
+type CreateByocTrunkCreateByocTrunkRequestVoiceFallbackMethodEnum string
 
 const (
-	CreateByocTrunkRequestBodyVoiceFallbackMethodEnumHead   CreateByocTrunkRequestBodyVoiceFallbackMethodEnum = "HEAD"
-	CreateByocTrunkRequestBodyVoiceFallbackMethodEnumGet    CreateByocTrunkRequestBodyVoiceFallbackMethodEnum = "GET"
-	CreateByocTrunkRequestBodyVoiceFallbackMethodEnumPost   CreateByocTrunkRequestBodyVoiceFallbackMethodEnum = "POST"
-	CreateByocTrunkRequestBodyVoiceFallbackMethodEnumPatch  CreateByocTrunkRequestBodyVoiceFallbackMethodEnum = "PATCH"
-	CreateByocTrunkRequestBodyVoiceFallbackMethodEnumPut    CreateByocTrunkRequestBodyVoiceFallbackMethodEnum = "PUT"
-	CreateByocTrunkRequestBodyVoiceFallbackMethodEnumDelete CreateByocTrunkRequestBodyVoiceFallbackMethodEnum = "DELETE"
+	CreateByocTrunkCreateByocTrunkRequestVoiceFallbackMethodEnumHead   CreateByocTrunkCreateByocTrunkRequestVoiceFallbackMethodEnum = "HEAD"
+	CreateByocTrunkCreateByocTrunkRequestVoiceFallbackMethodEnumGet    CreateByocTrunkCreateByocTrunkRequestVoiceFallbackMethodEnum = "GET"
+	CreateByocTrunkCreateByocTrunkRequestVoiceFallbackMethodEnumPost   CreateByocTrunkCreateByocTrunkRequestVoiceFallbackMethodEnum = "POST"
+	CreateByocTrunkCreateByocTrunkRequestVoiceFallbackMethodEnumPatch  CreateByocTrunkCreateByocTrunkRequestVoiceFallbackMethodEnum = "PATCH"
+	CreateByocTrunkCreateByocTrunkRequestVoiceFallbackMethodEnumPut    CreateByocTrunkCreateByocTrunkRequestVoiceFallbackMethodEnum = "PUT"
+	CreateByocTrunkCreateByocTrunkRequestVoiceFallbackMethodEnumDelete CreateByocTrunkCreateByocTrunkRequestVoiceFallbackMethodEnum = "DELETE"
 )
 
-type CreateByocTrunkRequestBodyVoiceMethodEnum string
+type CreateByocTrunkCreateByocTrunkRequestVoiceMethodEnum string
 
 const (
-	CreateByocTrunkRequestBodyVoiceMethodEnumHead   CreateByocTrunkRequestBodyVoiceMethodEnum = "HEAD"
-	CreateByocTrunkRequestBodyVoiceMethodEnumGet    CreateByocTrunkRequestBodyVoiceMethodEnum = "GET"
-	CreateByocTrunkRequestBodyVoiceMethodEnumPost   CreateByocTrunkRequestBodyVoiceMethodEnum = "POST"
-	CreateByocTrunkRequestBodyVoiceMethodEnumPatch  CreateByocTrunkRequestBodyVoiceMethodEnum = "PATCH"
-	CreateByocTrunkRequestBodyVoiceMethodEnumPut    CreateByocTrunkRequestBodyVoiceMethodEnum = "PUT"
-	CreateByocTrunkRequestBodyVoiceMethodEnumDelete CreateByocTrunkRequestBodyVoiceMethodEnum = "DELETE"
+	CreateByocTrunkCreateByocTrunkRequestVoiceMethodEnumHead   CreateByocTrunkCreateByocTrunkRequestVoiceMethodEnum = "HEAD"
+	CreateByocTrunkCreateByocTrunkRequestVoiceMethodEnumGet    CreateByocTrunkCreateByocTrunkRequestVoiceMethodEnum = "GET"
+	CreateByocTrunkCreateByocTrunkRequestVoiceMethodEnumPost   CreateByocTrunkCreateByocTrunkRequestVoiceMethodEnum = "POST"
+	CreateByocTrunkCreateByocTrunkRequestVoiceMethodEnumPatch  CreateByocTrunkCreateByocTrunkRequestVoiceMethodEnum = "PATCH"
+	CreateByocTrunkCreateByocTrunkRequestVoiceMethodEnumPut    CreateByocTrunkCreateByocTrunkRequestVoiceMethodEnum = "PUT"
+	CreateByocTrunkCreateByocTrunkRequestVoiceMethodEnumDelete CreateByocTrunkCreateByocTrunkRequestVoiceMethodEnum = "DELETE"
 )
 
-type CreateByocTrunkRequestBodyCreateByocTrunkRequest struct {
-	CnamLookupEnabled    *bool                                               `form:"name=CnamLookupEnabled"`
-	ConnectionPolicySid  *string                                             `form:"name=ConnectionPolicySid"`
-	FriendlyName         *string                                             `form:"name=FriendlyName"`
-	FromDomainSid        *string                                             `form:"name=FromDomainSid"`
-	StatusCallbackMethod *CreateByocTrunkRequestBodyStatusCallbackMethodEnum `form:"name=StatusCallbackMethod"`
-	StatusCallbackURL    *string                                             `form:"name=StatusCallbackUrl"`
-	VoiceFallbackMethod  *CreateByocTrunkRequestBodyVoiceFallbackMethodEnum  `form:"name=VoiceFallbackMethod"`
-	VoiceFallbackURL     *string                                             `form:"name=VoiceFallbackUrl"`
-	VoiceMethod          *CreateByocTrunkRequestBodyVoiceMethodEnum          `form:"name=VoiceMethod"`
-	VoiceURL             *string                                             `form:"name=VoiceUrl"`
+type CreateByocTrunkCreateByocTrunkRequest struct {
+	CnamLookupEnabled    *bool                                                          `form:"name=CnamLookupEnabled"`
+	ConnectionPolicySid  *string                                                        `form:"name=ConnectionPolicySid"`
+	FriendlyName         *string                                                        `form:"name=FriendlyName"`
+	FromDomainSid        *string                                                        `form:"name=FromDomainSid"`
+	StatusCallbackMethod *CreateByocTrunkCreateByocTrunkRequestStatusCallbackMethodEnum `form:"name=StatusCallbackMethod"`
+	StatusCallbackURL    *string                                                        `form:"name=StatusCallbackUrl"`
+	VoiceFallbackMethod  *CreateByocTrunkCreateByocTrunkRequestVoiceFallbackMethodEnum  `form:"name=VoiceFallbackMethod"`
+	VoiceFallbackURL     *string                                                        `form:"name=VoiceFallbackUrl"`
+	VoiceMethod          *CreateByocTrunkCreateByocTrunkRequestVoiceMethodEnum          `form:"name=VoiceMethod"`
+	VoiceURL             *string                                                        `form:"name=VoiceUrl"`
 }
 
 type CreateByocTrunkSecurity struct {
@@ -60,7 +60,7 @@ type CreateByocTrunkSecurity struct {
 
 type CreateByocTrunkRequest struct {
 	ServerURL *string
-	Request   *CreateByocTrunkRequestBodyCreateByocTrunkRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request   *CreateByocTrunkCreateByocTrunkRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security  CreateByocTrunkSecurity
 }
 

@@ -8,7 +8,7 @@ from dataclasses_json import dataclass_json
 
 @dataclass_json
 @dataclass
-class CommentaryCommentaryEmployeeEmployee:
+class CommentaryCommentaryEmployee:
     at_href: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': '@href' }})
     at_rel: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': '@rel' }})
     at_title: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': '@title' }})
@@ -16,7 +16,7 @@ class CommentaryCommentaryEmployeeEmployee:
 
 @dataclass_json
 @dataclass
-class CommentaryCommentaryPayRunPayRun:
+class CommentaryCommentaryPayRun:
     at_href: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': '@href' }})
     at_rel: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': '@rel' }})
     at_title: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': '@title' }})
@@ -24,15 +24,15 @@ class CommentaryCommentaryPayRunPayRun:
 
 @dataclass_json
 @dataclass
-class CommentaryCommentaryCommentary:
+class CommentaryCommentary:
     created: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Created', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     detail: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Detail' }})
-    employee: Optional[CommentaryCommentaryEmployeeEmployee] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Employee' }})
-    pay_run: Optional[CommentaryCommentaryPayRunPayRun] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PayRun' }})
+    employee: Optional[CommentaryCommentaryEmployee] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Employee' }})
+    pay_run: Optional[CommentaryCommentaryPayRun] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PayRun' }})
     
 
 @dataclass_json
 @dataclass
 class Commentary:
-    commentary: Optional[CommentaryCommentaryCommentary] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Commentary' }})
+    commentary: Optional[CommentaryCommentary] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Commentary' }})
     

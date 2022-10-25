@@ -27,7 +27,7 @@ type ListUnderstandTaskRequest struct {
 	Security    ListUnderstandTaskSecurity
 }
 
-type ListUnderstandTask200ApplicationJSONMeta struct {
+type ListUnderstandTaskListUnderstandTaskResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -37,13 +37,13 @@ type ListUnderstandTask200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListUnderstandTask200ApplicationJSONListUnderstandTaskResponse struct {
-	Meta  *ListUnderstandTask200ApplicationJSONMeta `json:"meta,omitempty"`
-	Tasks []shared.PreviewUnderstandAssistantTask   `json:"tasks,omitempty"`
+type ListUnderstandTaskListUnderstandTaskResponse struct {
+	Meta  *ListUnderstandTaskListUnderstandTaskResponseMeta `json:"meta,omitempty"`
+	Tasks []shared.PreviewUnderstandAssistantTask           `json:"tasks,omitempty"`
 }
 
 type ListUnderstandTaskResponse struct {
 	ContentType                string
-	ListUnderstandTaskResponse *ListUnderstandTask200ApplicationJSONListUnderstandTaskResponse
+	ListUnderstandTaskResponse *ListUnderstandTaskListUnderstandTaskResponse
 	StatusCode                 int64
 }

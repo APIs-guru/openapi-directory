@@ -33,7 +33,7 @@ class ListApplicationRequest:
 
 @dataclass_json
 @dataclass
-class ListApplication200ApplicationJSONListApplicationResponse:
+class ListApplicationListApplicationResponse:
     applications: Optional[List[shared.APIV2010AccountApplication]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'applications' }})
     end: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'end' }})
     first_page_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_uri' }})
@@ -48,6 +48,6 @@ class ListApplication200ApplicationJSONListApplicationResponse:
 @dataclass
 class ListApplicationResponse:
     content_type: str = field(default=None)
-    list_application_response: Optional[ListApplication200ApplicationJSONListApplicationResponse] = field(default=None)
+    list_application_response: Optional[ListApplicationListApplicationResponse] = field(default=None)
     status_code: int = field(default=None)
     

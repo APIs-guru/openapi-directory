@@ -32,7 +32,7 @@ class ListAlphaSenderRequest:
 
 @dataclass_json
 @dataclass
-class ListAlphaSender200ApplicationJSONMeta:
+class ListAlphaSenderListAlphaSenderResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -44,14 +44,14 @@ class ListAlphaSender200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListAlphaSender200ApplicationJSONListAlphaSenderResponse:
+class ListAlphaSenderListAlphaSenderResponse:
     alpha_senders: Optional[List[shared.MessagingV1ServiceAlphaSender]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'alpha_senders' }})
-    meta: Optional[ListAlphaSender200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+    meta: Optional[ListAlphaSenderListAlphaSenderResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     
 
 @dataclass
 class ListAlphaSenderResponse:
     content_type: str = field(default=None)
-    list_alpha_sender_response: Optional[ListAlphaSender200ApplicationJSONListAlphaSenderResponse] = field(default=None)
+    list_alpha_sender_response: Optional[ListAlphaSenderListAlphaSenderResponse] = field(default=None)
     status_code: int = field(default=None)
     

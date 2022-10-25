@@ -12,7 +12,7 @@ class CreateConversationScopedWebhookPathParams:
     
 
 @dataclass
-class CreateConversationScopedWebhookRequestBodyCreateConversationScopedWebhookRequest:
+class CreateConversationScopedWebhookCreateConversationScopedWebhookRequest:
     configuration_filters: Optional[List[str]] = field(default=None, metadata={'form': { 'field_name': 'Configuration.Filters' }})
     configuration_flow_sid: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Configuration.FlowSid' }})
     configuration_method: Optional[shared.ConversationScopedWebhookEnumMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'Configuration.Method' }})
@@ -31,7 +31,7 @@ class CreateConversationScopedWebhookSecurity:
 class CreateConversationScopedWebhookRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateConversationScopedWebhookPathParams = field(default=None)
-    request: Optional[CreateConversationScopedWebhookRequestBodyCreateConversationScopedWebhookRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateConversationScopedWebhookCreateConversationScopedWebhookRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateConversationScopedWebhookSecurity = field(default=None)
     
 

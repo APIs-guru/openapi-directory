@@ -12,7 +12,7 @@ type CreateNewSigningKeyPathParams struct {
 	AccountSid string `pathParam:"style=simple,explode=false,name=AccountSid"`
 }
 
-type CreateNewSigningKeyRequestBodyCreateNewSigningKeyRequest struct {
+type CreateNewSigningKeyCreateNewSigningKeyRequest struct {
 	FriendlyName *string `form:"name=FriendlyName"`
 }
 
@@ -23,7 +23,7 @@ type CreateNewSigningKeySecurity struct {
 type CreateNewSigningKeyRequest struct {
 	ServerURL  *string
 	PathParams CreateNewSigningKeyPathParams
-	Request    *CreateNewSigningKeyRequestBodyCreateNewSigningKeyRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateNewSigningKeyCreateNewSigningKeyRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateNewSigningKeySecurity
 }
 

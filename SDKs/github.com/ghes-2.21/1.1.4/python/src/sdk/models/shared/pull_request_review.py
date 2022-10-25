@@ -28,7 +28,7 @@ class PullRequestReviewLinks:
 
 @dataclass_json
 @dataclass
-class PullRequestReviewUserSimpleUser:
+class PullRequestReviewSimpleUser:
     avatar_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'avatar_url' }})
     events_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'events_url' }})
     followers_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'followers_url' }})
@@ -65,5 +65,5 @@ class PullRequestReview:
     pull_request_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pull_request_url' }})
     state: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'state' }})
     submitted_at: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'submitted_at', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    user: PullRequestReviewUserSimpleUser = field(default=None, metadata={'dataclasses_json': { 'field_name': 'user' }})
+    user: PullRequestReviewSimpleUser = field(default=None, metadata={'dataclasses_json': { 'field_name': 'user' }})
     

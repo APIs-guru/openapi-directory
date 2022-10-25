@@ -10,7 +10,7 @@ CREATE_SIP_DOMAIN_SERVERS = [
 class CreateSipDomainPathParams:
     account_sid: str = field(default=None, metadata={'path_param': { 'field_name': 'AccountSid', 'style': 'simple', 'explode': False }})
     
-class CreateSipDomainRequestBodyVoiceFallbackMethodEnum(str, Enum):
+class CreateSipDomainCreateSipDomainRequestVoiceFallbackMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -18,7 +18,7 @@ class CreateSipDomainRequestBodyVoiceFallbackMethodEnum(str, Enum):
     PUT = "PUT"
     DELETE = "DELETE"
 
-class CreateSipDomainRequestBodyVoiceMethodEnum(str, Enum):
+class CreateSipDomainCreateSipDomainRequestVoiceMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -26,7 +26,7 @@ class CreateSipDomainRequestBodyVoiceMethodEnum(str, Enum):
     PUT = "PUT"
     DELETE = "DELETE"
 
-class CreateSipDomainRequestBodyVoiceStatusCallbackMethodEnum(str, Enum):
+class CreateSipDomainCreateSipDomainRequestVoiceStatusCallbackMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -36,7 +36,7 @@ class CreateSipDomainRequestBodyVoiceStatusCallbackMethodEnum(str, Enum):
 
 
 @dataclass
-class CreateSipDomainRequestBodyCreateSipDomainRequest:
+class CreateSipDomainCreateSipDomainRequest:
     byoc_trunk_sid: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'ByocTrunkSid' }})
     domain_name: str = field(default=None, metadata={'form': { 'field_name': 'DomainName' }})
     emergency_caller_sid: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'EmergencyCallerSid' }})
@@ -44,10 +44,10 @@ class CreateSipDomainRequestBodyCreateSipDomainRequest:
     friendly_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
     secure: Optional[bool] = field(default=None, metadata={'form': { 'field_name': 'Secure' }})
     sip_registration: Optional[bool] = field(default=None, metadata={'form': { 'field_name': 'SipRegistration' }})
-    voice_fallback_method: Optional[CreateSipDomainRequestBodyVoiceFallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'VoiceFallbackMethod' }})
+    voice_fallback_method: Optional[CreateSipDomainCreateSipDomainRequestVoiceFallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'VoiceFallbackMethod' }})
     voice_fallback_url: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'VoiceFallbackUrl' }})
-    voice_method: Optional[CreateSipDomainRequestBodyVoiceMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'VoiceMethod' }})
-    voice_status_callback_method: Optional[CreateSipDomainRequestBodyVoiceStatusCallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'VoiceStatusCallbackMethod' }})
+    voice_method: Optional[CreateSipDomainCreateSipDomainRequestVoiceMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'VoiceMethod' }})
+    voice_status_callback_method: Optional[CreateSipDomainCreateSipDomainRequestVoiceStatusCallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'VoiceStatusCallbackMethod' }})
     voice_status_callback_url: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'VoiceStatusCallbackUrl' }})
     voice_url: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'VoiceUrl' }})
     
@@ -61,7 +61,7 @@ class CreateSipDomainSecurity:
 class CreateSipDomainRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateSipDomainPathParams = field(default=None)
-    request: Optional[CreateSipDomainRequestBodyCreateSipDomainRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateSipDomainCreateSipDomainRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateSipDomainSecurity = field(default=None)
     
 

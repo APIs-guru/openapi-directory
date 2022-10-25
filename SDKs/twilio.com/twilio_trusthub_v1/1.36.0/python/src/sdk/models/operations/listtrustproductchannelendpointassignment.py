@@ -34,7 +34,7 @@ class ListTrustProductChannelEndpointAssignmentRequest:
 
 @dataclass_json
 @dataclass
-class ListTrustProductChannelEndpointAssignment200ApplicationJSONMeta:
+class ListTrustProductChannelEndpointAssignmentListTrustProductChannelEndpointAssignmentResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -46,14 +46,14 @@ class ListTrustProductChannelEndpointAssignment200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListTrustProductChannelEndpointAssignment200ApplicationJSONListTrustProductChannelEndpointAssignmentResponse:
-    meta: Optional[ListTrustProductChannelEndpointAssignment200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+class ListTrustProductChannelEndpointAssignmentListTrustProductChannelEndpointAssignmentResponse:
+    meta: Optional[ListTrustProductChannelEndpointAssignmentListTrustProductChannelEndpointAssignmentResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     results: Optional[List[shared.TrusthubV1TrustProductTrustProductChannelEndpointAssignment]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'results' }})
     
 
 @dataclass
 class ListTrustProductChannelEndpointAssignmentResponse:
     content_type: str = field(default=None)
-    list_trust_product_channel_endpoint_assignment_response: Optional[ListTrustProductChannelEndpointAssignment200ApplicationJSONListTrustProductChannelEndpointAssignmentResponse] = field(default=None)
+    list_trust_product_channel_endpoint_assignment_response: Optional[ListTrustProductChannelEndpointAssignmentListTrustProductChannelEndpointAssignmentResponse] = field(default=None)
     status_code: int = field(default=None)
     

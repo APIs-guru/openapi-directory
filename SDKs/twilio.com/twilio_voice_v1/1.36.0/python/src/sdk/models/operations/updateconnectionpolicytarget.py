@@ -13,7 +13,7 @@ class UpdateConnectionPolicyTargetPathParams:
     
 
 @dataclass
-class UpdateConnectionPolicyTargetRequestBodyUpdateConnectionPolicyTargetRequest:
+class UpdateConnectionPolicyTargetUpdateConnectionPolicyTargetRequest:
     enabled: Optional[bool] = field(default=None, metadata={'form': { 'field_name': 'Enabled' }})
     friendly_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
     priority: Optional[int] = field(default=None, metadata={'form': { 'field_name': 'Priority' }})
@@ -30,7 +30,7 @@ class UpdateConnectionPolicyTargetSecurity:
 class UpdateConnectionPolicyTargetRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateConnectionPolicyTargetPathParams = field(default=None)
-    request: Optional[UpdateConnectionPolicyTargetRequestBodyUpdateConnectionPolicyTargetRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateConnectionPolicyTargetUpdateConnectionPolicyTargetRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateConnectionPolicyTargetSecurity = field(default=None)
     
 

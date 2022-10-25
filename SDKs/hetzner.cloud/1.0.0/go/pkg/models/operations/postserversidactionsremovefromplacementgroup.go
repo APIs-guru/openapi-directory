@@ -8,41 +8,41 @@ type PostServersIDActionsRemoveFromPlacementGroupRequest struct {
 	PathParams PostServersIDActionsRemoveFromPlacementGroupPathParams
 }
 
-type PostServersIDActionsRemoveFromPlacementGroup201ApplicationJSONActionError struct {
+type PostServersIDActionsRemoveFromPlacementGroupActionResponseActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
 }
 
-type PostServersIDActionsRemoveFromPlacementGroup201ApplicationJSONActionResources struct {
+type PostServersIDActionsRemoveFromPlacementGroupActionResponseActionResources struct {
 	ID   int64  `json:"id"`
 	Type string `json:"type"`
 }
 
-type PostServersIDActionsRemoveFromPlacementGroup201ApplicationJSONActionStatusEnum string
+type PostServersIDActionsRemoveFromPlacementGroupActionResponseActionStatusEnum string
 
 const (
-	PostServersIDActionsRemoveFromPlacementGroup201ApplicationJSONActionStatusEnumSuccess PostServersIDActionsRemoveFromPlacementGroup201ApplicationJSONActionStatusEnum = "success"
-	PostServersIDActionsRemoveFromPlacementGroup201ApplicationJSONActionStatusEnumRunning PostServersIDActionsRemoveFromPlacementGroup201ApplicationJSONActionStatusEnum = "running"
-	PostServersIDActionsRemoveFromPlacementGroup201ApplicationJSONActionStatusEnumError   PostServersIDActionsRemoveFromPlacementGroup201ApplicationJSONActionStatusEnum = "error"
+	PostServersIDActionsRemoveFromPlacementGroupActionResponseActionStatusEnumSuccess PostServersIDActionsRemoveFromPlacementGroupActionResponseActionStatusEnum = "success"
+	PostServersIDActionsRemoveFromPlacementGroupActionResponseActionStatusEnumRunning PostServersIDActionsRemoveFromPlacementGroupActionResponseActionStatusEnum = "running"
+	PostServersIDActionsRemoveFromPlacementGroupActionResponseActionStatusEnumError   PostServersIDActionsRemoveFromPlacementGroupActionResponseActionStatusEnum = "error"
 )
 
-type PostServersIDActionsRemoveFromPlacementGroup201ApplicationJSONActionAction struct {
-	Command   string                                                                          `json:"command"`
-	Error     PostServersIDActionsRemoveFromPlacementGroup201ApplicationJSONActionError       `json:"error"`
-	Finished  string                                                                          `json:"finished"`
-	ID        int64                                                                           `json:"id"`
-	Progress  float64                                                                         `json:"progress"`
-	Resources []PostServersIDActionsRemoveFromPlacementGroup201ApplicationJSONActionResources `json:"resources"`
-	Started   string                                                                          `json:"started"`
-	Status    PostServersIDActionsRemoveFromPlacementGroup201ApplicationJSONActionStatusEnum  `json:"status"`
+type PostServersIDActionsRemoveFromPlacementGroupActionResponseAction struct {
+	Command   string                                                                      `json:"command"`
+	Error     PostServersIDActionsRemoveFromPlacementGroupActionResponseActionError       `json:"error"`
+	Finished  string                                                                      `json:"finished"`
+	ID        int64                                                                       `json:"id"`
+	Progress  float64                                                                     `json:"progress"`
+	Resources []PostServersIDActionsRemoveFromPlacementGroupActionResponseActionResources `json:"resources"`
+	Started   string                                                                      `json:"started"`
+	Status    PostServersIDActionsRemoveFromPlacementGroupActionResponseActionStatusEnum  `json:"status"`
 }
 
-type PostServersIDActionsRemoveFromPlacementGroup201ApplicationJSONActionResponse struct {
-	Action PostServersIDActionsRemoveFromPlacementGroup201ApplicationJSONActionAction `json:"action"`
+type PostServersIDActionsRemoveFromPlacementGroupActionResponse struct {
+	Action PostServersIDActionsRemoveFromPlacementGroupActionResponseAction `json:"action"`
 }
 
 type PostServersIDActionsRemoveFromPlacementGroupResponse struct {
-	ActionResponse *PostServersIDActionsRemoveFromPlacementGroup201ApplicationJSONActionResponse
+	ActionResponse *PostServersIDActionsRemoveFromPlacementGroupActionResponse
 	ContentType    string
 	StatusCode     int64
 }

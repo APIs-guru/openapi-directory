@@ -12,7 +12,7 @@ type CreateServiceRolePathParams struct {
 	ChatServiceSid string `pathParam:"style=simple,explode=false,name=ChatServiceSid"`
 }
 
-type CreateServiceRoleRequestBodyCreateServiceRoleRequest struct {
+type CreateServiceRoleCreateServiceRoleRequest struct {
 	FriendlyName string                             `form:"name=FriendlyName"`
 	Permission   []string                           `form:"name=Permission"`
 	Type         shared.ServiceRoleEnumRoleTypeEnum `form:"name=Type"`
@@ -25,7 +25,7 @@ type CreateServiceRoleSecurity struct {
 type CreateServiceRoleRequest struct {
 	ServerURL  *string
 	PathParams CreateServiceRolePathParams
-	Request    *CreateServiceRoleRequestBodyCreateServiceRoleRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateServiceRoleCreateServiceRoleRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateServiceRoleSecurity
 }
 

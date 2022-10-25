@@ -12,7 +12,7 @@ class PowerOutletConnectionStatusLabelEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class PowerOutletConnectionStatusConnectionStatus:
+class PowerOutletConnectionStatus:
     label: PowerOutletConnectionStatusLabelEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label' }})
     value: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
     
@@ -29,7 +29,7 @@ class PowerOutletFeedLegValueEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class PowerOutletFeedLegFeedLeg:
+class PowerOutletFeedLeg:
     label: PowerOutletFeedLegLabelEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label' }})
     value: PowerOutletFeedLegValueEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
     
@@ -172,7 +172,7 @@ class PowerOutletTypeValueEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class PowerOutletTypeType:
+class PowerOutletType:
     label: PowerOutletTypeLabelEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label' }})
     value: PowerOutletTypeValueEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
     
@@ -183,13 +183,13 @@ class PowerOutlet:
     cable: Optional[nestedcable.NestedCable] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cable' }})
     connected_endpoint: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'connected_endpoint' }})
     connected_endpoint_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'connected_endpoint_type' }})
-    connection_status: Optional[PowerOutletConnectionStatusConnectionStatus] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'connection_status' }})
+    connection_status: Optional[PowerOutletConnectionStatus] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'connection_status' }})
     description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
     device: nesteddevice.NestedDevice = field(default=None, metadata={'dataclasses_json': { 'field_name': 'device' }})
-    feed_leg: Optional[PowerOutletFeedLegFeedLeg] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'feed_leg' }})
+    feed_leg: Optional[PowerOutletFeedLeg] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'feed_leg' }})
     id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
     power_port: Optional[nestedpowerport.NestedPowerPort] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'power_port' }})
     tags: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
-    type: Optional[PowerOutletTypeType] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    type: Optional[PowerOutletType] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     

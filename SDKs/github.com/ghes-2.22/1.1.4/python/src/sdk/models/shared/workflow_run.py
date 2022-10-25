@@ -11,23 +11,23 @@ from . import minimal_repository
 
 @dataclass_json
 @dataclass
-class WorkflowRunHeadCommitAuthor:
+class WorkflowRunSimpleCommitAuthor:
     email: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'email' }})
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
     
 
 @dataclass_json
 @dataclass
-class WorkflowRunHeadCommitCommitter:
+class WorkflowRunSimpleCommitCommitter:
     email: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'email' }})
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
     
 
 @dataclass_json
 @dataclass
-class WorkflowRunHeadCommitSimpleCommit:
-    author: WorkflowRunHeadCommitAuthor = field(default=None, metadata={'dataclasses_json': { 'field_name': 'author' }})
-    committer: WorkflowRunHeadCommitCommitter = field(default=None, metadata={'dataclasses_json': { 'field_name': 'committer' }})
+class WorkflowRunSimpleCommit:
+    author: WorkflowRunSimpleCommitAuthor = field(default=None, metadata={'dataclasses_json': { 'field_name': 'author' }})
+    committer: WorkflowRunSimpleCommitCommitter = field(default=None, metadata={'dataclasses_json': { 'field_name': 'committer' }})
     id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     message: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'message' }})
     timestamp: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'timestamp', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
@@ -46,7 +46,7 @@ class WorkflowRun:
     created_at: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'created_at', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     event: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'event' }})
     head_branch: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'head_branch' }})
-    head_commit: WorkflowRunHeadCommitSimpleCommit = field(default=None, metadata={'dataclasses_json': { 'field_name': 'head_commit' }})
+    head_commit: WorkflowRunSimpleCommit = field(default=None, metadata={'dataclasses_json': { 'field_name': 'head_commit' }})
     head_repository: minimal_repository.MinimalRepository = field(default=None, metadata={'dataclasses_json': { 'field_name': 'head_repository' }})
     head_repository_id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'head_repository_id' }})
     head_sha: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'head_sha' }})

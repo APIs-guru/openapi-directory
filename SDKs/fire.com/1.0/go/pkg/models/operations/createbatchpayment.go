@@ -1,30 +1,30 @@
 package operations
 
-type CreateBatchPaymentRequestBodyTypeEnum string
+type CreateBatchPaymentNewBatchTypeEnum string
 
 const (
-	CreateBatchPaymentRequestBodyTypeEnumBankTransfer     CreateBatchPaymentRequestBodyTypeEnum = "BANK_TRANSFER"
-	CreateBatchPaymentRequestBodyTypeEnumInternalTransfer CreateBatchPaymentRequestBodyTypeEnum = "INTERNAL_TRANSFER"
+	CreateBatchPaymentNewBatchTypeEnumBankTransfer     CreateBatchPaymentNewBatchTypeEnum = "BANK_TRANSFER"
+	CreateBatchPaymentNewBatchTypeEnumInternalTransfer CreateBatchPaymentNewBatchTypeEnum = "INTERNAL_TRANSFER"
 )
 
-type CreateBatchPaymentRequestBodyNewBatch struct {
-	BatchName   *string                                `json:"batchName,omitempty"`
-	CallBackURL *string                                `json:"callBackUrl,omitempty"`
-	Currency    *string                                `json:"currency,omitempty"`
-	JobNumber   *string                                `json:"jobNumber,omitempty"`
-	Type        *CreateBatchPaymentRequestBodyTypeEnum `json:"type,omitempty"`
+type CreateBatchPaymentNewBatch struct {
+	BatchName   *string                             `json:"batchName,omitempty"`
+	CallBackURL *string                             `json:"callBackUrl,omitempty"`
+	Currency    *string                             `json:"currency,omitempty"`
+	JobNumber   *string                             `json:"jobNumber,omitempty"`
+	Type        *CreateBatchPaymentNewBatchTypeEnum `json:"type,omitempty"`
 }
 
 type CreateBatchPaymentRequest struct {
-	Request CreateBatchPaymentRequestBodyNewBatch `request:"mediaType=application/json"`
+	Request CreateBatchPaymentNewBatch `request:"mediaType=application/json"`
 }
 
-type CreateBatchPayment200ApplicationJSONNewBatchResponse struct {
+type CreateBatchPaymentNewBatchResponse struct {
 	BatchUUID *string `json:"batchUuid,omitempty"`
 }
 
 type CreateBatchPaymentResponse struct {
 	ContentType      string
-	NewBatchResponse *CreateBatchPayment200ApplicationJSONNewBatchResponse
+	NewBatchResponse *CreateBatchPaymentNewBatchResponse
 	StatusCode       int64
 }

@@ -12,7 +12,7 @@ class CreateSubscribedEventPathParams:
     
 
 @dataclass
-class CreateSubscribedEventRequestBodyCreateSubscribedEventRequest:
+class CreateSubscribedEventCreateSubscribedEventRequest:
     schema_version: Optional[int] = field(default=None, metadata={'form': { 'field_name': 'SchemaVersion' }})
     type: str = field(default=None, metadata={'form': { 'field_name': 'Type' }})
     
@@ -26,7 +26,7 @@ class CreateSubscribedEventSecurity:
 class CreateSubscribedEventRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateSubscribedEventPathParams = field(default=None)
-    request: Optional[CreateSubscribedEventRequestBodyCreateSubscribedEventRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateSubscribedEventCreateSubscribedEventRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateSubscribedEventSecurity = field(default=None)
     
 

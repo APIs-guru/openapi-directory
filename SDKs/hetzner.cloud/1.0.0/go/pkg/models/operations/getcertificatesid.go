@@ -8,67 +8,67 @@ type GetCertificatesIDRequest struct {
 	PathParams GetCertificatesIDPathParams
 }
 
-type GetCertificatesID200ApplicationJSONCertificateStatusError struct {
+type GetCertificatesIDCertificateResponseCertificateStatusError struct {
 	Code    *string `json:"code,omitempty"`
 	Message *string `json:"message,omitempty"`
 }
 
-type GetCertificatesID200ApplicationJSONCertificateStatusIssuanceEnum string
+type GetCertificatesIDCertificateResponseCertificateStatusIssuanceEnum string
 
 const (
-	GetCertificatesID200ApplicationJSONCertificateStatusIssuanceEnumPending   GetCertificatesID200ApplicationJSONCertificateStatusIssuanceEnum = "pending"
-	GetCertificatesID200ApplicationJSONCertificateStatusIssuanceEnumCompleted GetCertificatesID200ApplicationJSONCertificateStatusIssuanceEnum = "completed"
-	GetCertificatesID200ApplicationJSONCertificateStatusIssuanceEnumFailed    GetCertificatesID200ApplicationJSONCertificateStatusIssuanceEnum = "failed"
+	GetCertificatesIDCertificateResponseCertificateStatusIssuanceEnumPending   GetCertificatesIDCertificateResponseCertificateStatusIssuanceEnum = "pending"
+	GetCertificatesIDCertificateResponseCertificateStatusIssuanceEnumCompleted GetCertificatesIDCertificateResponseCertificateStatusIssuanceEnum = "completed"
+	GetCertificatesIDCertificateResponseCertificateStatusIssuanceEnumFailed    GetCertificatesIDCertificateResponseCertificateStatusIssuanceEnum = "failed"
 )
 
-type GetCertificatesID200ApplicationJSONCertificateStatusRenewalEnum string
+type GetCertificatesIDCertificateResponseCertificateStatusRenewalEnum string
 
 const (
-	GetCertificatesID200ApplicationJSONCertificateStatusRenewalEnumScheduled   GetCertificatesID200ApplicationJSONCertificateStatusRenewalEnum = "scheduled"
-	GetCertificatesID200ApplicationJSONCertificateStatusRenewalEnumPending     GetCertificatesID200ApplicationJSONCertificateStatusRenewalEnum = "pending"
-	GetCertificatesID200ApplicationJSONCertificateStatusRenewalEnumFailed      GetCertificatesID200ApplicationJSONCertificateStatusRenewalEnum = "failed"
-	GetCertificatesID200ApplicationJSONCertificateStatusRenewalEnumUnavailable GetCertificatesID200ApplicationJSONCertificateStatusRenewalEnum = "unavailable"
+	GetCertificatesIDCertificateResponseCertificateStatusRenewalEnumScheduled   GetCertificatesIDCertificateResponseCertificateStatusRenewalEnum = "scheduled"
+	GetCertificatesIDCertificateResponseCertificateStatusRenewalEnumPending     GetCertificatesIDCertificateResponseCertificateStatusRenewalEnum = "pending"
+	GetCertificatesIDCertificateResponseCertificateStatusRenewalEnumFailed      GetCertificatesIDCertificateResponseCertificateStatusRenewalEnum = "failed"
+	GetCertificatesIDCertificateResponseCertificateStatusRenewalEnumUnavailable GetCertificatesIDCertificateResponseCertificateStatusRenewalEnum = "unavailable"
 )
 
-type GetCertificatesID200ApplicationJSONCertificateStatus struct {
-	Error    *GetCertificatesID200ApplicationJSONCertificateStatusError        `json:"error,omitempty"`
-	Issuance *GetCertificatesID200ApplicationJSONCertificateStatusIssuanceEnum `json:"issuance,omitempty"`
-	Renewal  *GetCertificatesID200ApplicationJSONCertificateStatusRenewalEnum  `json:"renewal,omitempty"`
+type GetCertificatesIDCertificateResponseCertificateStatus struct {
+	Error    *GetCertificatesIDCertificateResponseCertificateStatusError        `json:"error,omitempty"`
+	Issuance *GetCertificatesIDCertificateResponseCertificateStatusIssuanceEnum `json:"issuance,omitempty"`
+	Renewal  *GetCertificatesIDCertificateResponseCertificateStatusRenewalEnum  `json:"renewal,omitempty"`
 }
 
-type GetCertificatesID200ApplicationJSONCertificateTypeEnum string
+type GetCertificatesIDCertificateResponseCertificateTypeEnum string
 
 const (
-	GetCertificatesID200ApplicationJSONCertificateTypeEnumUploaded GetCertificatesID200ApplicationJSONCertificateTypeEnum = "uploaded"
-	GetCertificatesID200ApplicationJSONCertificateTypeEnumManaged  GetCertificatesID200ApplicationJSONCertificateTypeEnum = "managed"
+	GetCertificatesIDCertificateResponseCertificateTypeEnumUploaded GetCertificatesIDCertificateResponseCertificateTypeEnum = "uploaded"
+	GetCertificatesIDCertificateResponseCertificateTypeEnumManaged  GetCertificatesIDCertificateResponseCertificateTypeEnum = "managed"
 )
 
-type GetCertificatesID200ApplicationJSONCertificateUsedBy struct {
+type GetCertificatesIDCertificateResponseCertificateUsedBy struct {
 	ID   int64  `json:"id"`
 	Type string `json:"type"`
 }
 
-type GetCertificatesID200ApplicationJSONCertificateCertificate struct {
-	Certificate    string                                                  `json:"certificate"`
-	Created        string                                                  `json:"created"`
-	DomainNames    []string                                                `json:"domain_names"`
-	Fingerprint    string                                                  `json:"fingerprint"`
-	ID             int64                                                   `json:"id"`
-	Labels         map[string]string                                       `json:"labels"`
-	Name           string                                                  `json:"name"`
-	NotValidAfter  string                                                  `json:"not_valid_after"`
-	NotValidBefore string                                                  `json:"not_valid_before"`
-	Status         *GetCertificatesID200ApplicationJSONCertificateStatus   `json:"status,omitempty"`
-	Type           *GetCertificatesID200ApplicationJSONCertificateTypeEnum `json:"type,omitempty"`
-	UsedBy         []GetCertificatesID200ApplicationJSONCertificateUsedBy  `json:"used_by"`
+type GetCertificatesIDCertificateResponseCertificate struct {
+	Certificate    string                                                   `json:"certificate"`
+	Created        string                                                   `json:"created"`
+	DomainNames    []string                                                 `json:"domain_names"`
+	Fingerprint    string                                                   `json:"fingerprint"`
+	ID             int64                                                    `json:"id"`
+	Labels         map[string]string                                        `json:"labels"`
+	Name           string                                                   `json:"name"`
+	NotValidAfter  string                                                   `json:"not_valid_after"`
+	NotValidBefore string                                                   `json:"not_valid_before"`
+	Status         *GetCertificatesIDCertificateResponseCertificateStatus   `json:"status,omitempty"`
+	Type           *GetCertificatesIDCertificateResponseCertificateTypeEnum `json:"type,omitempty"`
+	UsedBy         []GetCertificatesIDCertificateResponseCertificateUsedBy  `json:"used_by"`
 }
 
-type GetCertificatesID200ApplicationJSONCertificateResponse struct {
-	Certificate GetCertificatesID200ApplicationJSONCertificateCertificate `json:"certificate"`
+type GetCertificatesIDCertificateResponse struct {
+	Certificate GetCertificatesIDCertificateResponseCertificate `json:"certificate"`
 }
 
 type GetCertificatesIDResponse struct {
-	CertificateResponse *GetCertificatesID200ApplicationJSONCertificateResponse
+	CertificateResponse *GetCertificatesIDCertificateResponse
 	ContentType         string
 	StatusCode          int64
 }

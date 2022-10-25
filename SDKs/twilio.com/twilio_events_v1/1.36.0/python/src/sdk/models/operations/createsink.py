@@ -7,7 +7,7 @@ CREATE_SINK_SERVERS = [
 
 
 @dataclass
-class CreateSinkRequestBodyCreateSinkRequest:
+class CreateSinkCreateSinkRequest:
     description: str = field(default=None, metadata={'form': { 'field_name': 'Description' }})
     sink_configuration: Any = field(default=None, metadata={'form': { 'field_name': 'SinkConfiguration' }})
     sink_type: shared.SinkEnumSinkTypeEnum = field(default=None, metadata={'form': { 'field_name': 'SinkType' }})
@@ -21,7 +21,7 @@ class CreateSinkSecurity:
 @dataclass
 class CreateSinkRequest:
     server_url: Optional[str] = field(default=None)
-    request: Optional[CreateSinkRequestBodyCreateSinkRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateSinkCreateSinkRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateSinkSecurity = field(default=None)
     
 

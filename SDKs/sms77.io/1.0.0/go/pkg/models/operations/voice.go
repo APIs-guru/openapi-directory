@@ -12,7 +12,7 @@ type VoiceRequest struct {
 }
 
 type VoiceResponse struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+	ContentType             string
+	StatusCode              int64
+	Voice200TextPlainString *string
 }

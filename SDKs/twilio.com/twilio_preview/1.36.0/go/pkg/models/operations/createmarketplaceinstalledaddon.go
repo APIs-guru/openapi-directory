@@ -8,7 +8,7 @@ var CreateMarketplaceInstalledAddOnServers = []string{
 	"https://preview.twilio.com",
 }
 
-type CreateMarketplaceInstalledAddOnRequestBodyCreateMarketplaceInstalledAddOnRequest struct {
+type CreateMarketplaceInstalledAddOnCreateMarketplaceInstalledAddOnRequest struct {
 	AcceptTermsOfService bool         `form:"name=AcceptTermsOfService"`
 	AvailableAddOnSid    string       `form:"name=AvailableAddOnSid"`
 	Configuration        *interface{} `form:"name=Configuration"`
@@ -21,7 +21,7 @@ type CreateMarketplaceInstalledAddOnSecurity struct {
 
 type CreateMarketplaceInstalledAddOnRequest struct {
 	ServerURL *string
-	Request   *CreateMarketplaceInstalledAddOnRequestBodyCreateMarketplaceInstalledAddOnRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request   *CreateMarketplaceInstalledAddOnCreateMarketplaceInstalledAddOnRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security  CreateMarketplaceInstalledAddOnSecurity
 }
 

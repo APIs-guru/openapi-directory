@@ -12,7 +12,7 @@ class CreateWebhookPathParams:
     
 
 @dataclass
-class CreateWebhookRequestBodyCreateWebhookRequest:
+class CreateWebhookCreateWebhookRequest:
     event_types: List[str] = field(default=None, metadata={'form': { 'field_name': 'EventTypes' }})
     friendly_name: str = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
     status: Optional[shared.WebhookEnumStatusEnum] = field(default=None, metadata={'form': { 'field_name': 'Status' }})
@@ -29,7 +29,7 @@ class CreateWebhookSecurity:
 class CreateWebhookRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateWebhookPathParams = field(default=None)
-    request: Optional[CreateWebhookRequestBodyCreateWebhookRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateWebhookCreateWebhookRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateWebhookSecurity = field(default=None)
     
 

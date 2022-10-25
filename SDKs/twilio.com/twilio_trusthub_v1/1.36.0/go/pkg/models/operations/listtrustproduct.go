@@ -25,7 +25,7 @@ type ListTrustProductRequest struct {
 	Security    ListTrustProductSecurity
 }
 
-type ListTrustProduct200ApplicationJSONMeta struct {
+type ListTrustProductListTrustProductResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -35,13 +35,13 @@ type ListTrustProduct200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListTrustProduct200ApplicationJSONListTrustProductResponse struct {
-	Meta    *ListTrustProduct200ApplicationJSONMeta `json:"meta,omitempty"`
-	Results []shared.TrusthubV1TrustProduct         `json:"results,omitempty"`
+type ListTrustProductListTrustProductResponse struct {
+	Meta    *ListTrustProductListTrustProductResponseMeta `json:"meta,omitempty"`
+	Results []shared.TrusthubV1TrustProduct               `json:"results,omitempty"`
 }
 
 type ListTrustProductResponse struct {
 	ContentType              string
-	ListTrustProductResponse *ListTrustProduct200ApplicationJSONListTrustProductResponse
+	ListTrustProductResponse *ListTrustProductListTrustProductResponse
 	StatusCode               int64
 }

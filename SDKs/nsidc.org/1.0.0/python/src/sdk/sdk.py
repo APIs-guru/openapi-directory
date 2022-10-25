@@ -1,6 +1,5 @@
 import warnings
 import requests
-from typing import Optional
 from sdk.models import operations
 from . import utils
 
@@ -36,7 +35,7 @@ class SDK:
         res = operations.FacetsResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/nsidcfacets+xml"):
-                res.body = r.content
+                res.facets_200_application_nsidcfacets_plus_xml_string = r.content
         elif r.status_code == 400:
             pass
         elif r.status_code == 500:
@@ -61,8 +60,7 @@ class SDK:
         res = operations.IDResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/x-suggestions+json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.id_200_application_x_suggestions_plus_json_string = out
+                res.id_200_application_x_suggestions_plus_json_string = r.content
         elif r.status_code == 400:
             pass
         elif r.status_code == 500:
@@ -87,7 +85,7 @@ class SDK:
         res = operations.OpenSearchResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/atom+xml"):
-                res.body = r.content
+                res.open_search_200_application_atom_plus_xml_string = r.content
         elif r.status_code == 400:
             pass
         elif r.status_code == 500:
@@ -111,7 +109,7 @@ class SDK:
         res = operations.OpensearchDescriptionResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/opensearchdescription+xml"):
-                res.body = r.content
+                res.opensearch_description_200_application_opensearchdescription_plus_xml_string = r.content
 
         return res
 

@@ -21,7 +21,7 @@ class CreateMemberHeaders:
     
 
 @dataclass
-class CreateMemberRequestBodyCreateMemberRequest:
+class CreateMemberCreateMemberRequest:
     attributes: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Attributes' }})
     date_created: Optional[datetime] = field(default=None, metadata={'form': { 'field_name': 'DateCreated' }})
     date_updated: Optional[datetime] = field(default=None, metadata={'form': { 'field_name': 'DateUpdated' }})
@@ -41,7 +41,7 @@ class CreateMemberRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateMemberPathParams = field(default=None)
     headers: CreateMemberHeaders = field(default=None)
-    request: Optional[CreateMemberRequestBodyCreateMemberRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateMemberCreateMemberRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateMemberSecurity = field(default=None)
     
 

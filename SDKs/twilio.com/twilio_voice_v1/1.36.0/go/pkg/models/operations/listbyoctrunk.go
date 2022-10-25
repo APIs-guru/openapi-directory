@@ -22,7 +22,7 @@ type ListByocTrunkRequest struct {
 	Security    ListByocTrunkSecurity
 }
 
-type ListByocTrunk200ApplicationJSONMeta struct {
+type ListByocTrunkListByocTrunkResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -32,13 +32,13 @@ type ListByocTrunk200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListByocTrunk200ApplicationJSONListByocTrunkResponse struct {
-	ByocTrunks []shared.VoiceV1ByocTrunk            `json:"byoc_trunks,omitempty"`
-	Meta       *ListByocTrunk200ApplicationJSONMeta `json:"meta,omitempty"`
+type ListByocTrunkListByocTrunkResponse struct {
+	ByocTrunks []shared.VoiceV1ByocTrunk               `json:"byoc_trunks,omitempty"`
+	Meta       *ListByocTrunkListByocTrunkResponseMeta `json:"meta,omitempty"`
 }
 
 type ListByocTrunkResponse struct {
 	ContentType           string
-	ListByocTrunkResponse *ListByocTrunk200ApplicationJSONListByocTrunkResponse
+	ListByocTrunkResponse *ListByocTrunkListByocTrunkResponse
 	StatusCode            int64
 }

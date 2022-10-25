@@ -20,31 +20,31 @@ class AppsCheckAuthorizationRequest:
 
 @dataclass_json
 @dataclass
-class AppsCheckAuthorization200ApplicationJSONApp:
+class AppsCheckAuthorizationAuthorizationApp:
     client_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'client_id' }})
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
     url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'url' }})
     
-class AppsCheckAuthorization200ApplicationJSONInstallationRepositorySelectionEnum(str, Enum):
+class AppsCheckAuthorizationAuthorizationScopedInstallationRepositorySelectionEnum(str, Enum):
     ALL = "all"
     SELECTED = "selected"
 
 
 @dataclass_json
 @dataclass
-class AppsCheckAuthorization200ApplicationJSONInstallationScopedInstallation:
+class AppsCheckAuthorizationAuthorizationScopedInstallation:
     account: shared.SimpleUser = field(default=None, metadata={'dataclasses_json': { 'field_name': 'account' }})
     has_multiple_single_files: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'has_multiple_single_files' }})
     permissions: shared.AppPermissions = field(default=None, metadata={'dataclasses_json': { 'field_name': 'permissions' }})
     repositories_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'repositories_url' }})
-    repository_selection: AppsCheckAuthorization200ApplicationJSONInstallationRepositorySelectionEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'repository_selection' }})
+    repository_selection: AppsCheckAuthorizationAuthorizationScopedInstallationRepositorySelectionEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'repository_selection' }})
     single_file_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'single_file_name' }})
     single_file_paths: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'single_file_paths' }})
     
 
 @dataclass_json
 @dataclass
-class AppsCheckAuthorization200ApplicationJSONUserSimpleUser:
+class AppsCheckAuthorizationAuthorizationSimpleUser:
     avatar_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'avatar_url' }})
     events_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'events_url' }})
     followers_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'followers_url' }})
@@ -68,13 +68,13 @@ class AppsCheckAuthorization200ApplicationJSONUserSimpleUser:
 
 @dataclass_json
 @dataclass
-class AppsCheckAuthorization200ApplicationJSONAuthorization:
-    app: AppsCheckAuthorization200ApplicationJSONApp = field(default=None, metadata={'dataclasses_json': { 'field_name': 'app' }})
+class AppsCheckAuthorizationAuthorization:
+    app: AppsCheckAuthorizationAuthorizationApp = field(default=None, metadata={'dataclasses_json': { 'field_name': 'app' }})
     created_at: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'created_at', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     fingerprint: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'fingerprint' }})
     hashed_token: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'hashed_token' }})
     id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    installation: Optional[AppsCheckAuthorization200ApplicationJSONInstallationScopedInstallation] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'installation' }})
+    installation: Optional[AppsCheckAuthorizationAuthorizationScopedInstallation] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'installation' }})
     note: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'note' }})
     note_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'note_url' }})
     scopes: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'scopes' }})
@@ -82,12 +82,12 @@ class AppsCheckAuthorization200ApplicationJSONAuthorization:
     token_last_eight: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'token_last_eight' }})
     updated_at: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updated_at', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'url' }})
-    user: Optional[AppsCheckAuthorization200ApplicationJSONUserSimpleUser] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'user' }})
+    user: Optional[AppsCheckAuthorizationAuthorizationSimpleUser] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'user' }})
     
 
 @dataclass
 class AppsCheckAuthorizationResponse:
-    authorization: Optional[AppsCheckAuthorization200ApplicationJSONAuthorization] = field(default=None)
+    authorization: Optional[AppsCheckAuthorizationAuthorization] = field(default=None)
     content_type: str = field(default=None)
     status_code: int = field(default=None)
     basic_error: Optional[shared.BasicError] = field(default=None)

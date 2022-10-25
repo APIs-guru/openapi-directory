@@ -11,7 +11,7 @@ class MoveTemplateToFolderPathParams:
 
 @dataclass_json
 @dataclass
-class MoveTemplateToFolderRequestBodyMoveTemplateData:
+class MoveTemplateToFolderMoveTemplateData:
     parent_folder_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'parent_folder_id' }})
     
 
@@ -23,10 +23,10 @@ class MoveTemplateToFolderSecurity:
 @dataclass
 class MoveTemplateToFolderRequest:
     path_params: MoveTemplateToFolderPathParams = field(default=None)
-    request: MoveTemplateToFolderRequestBodyMoveTemplateData = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: MoveTemplateToFolderMoveTemplateData = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     security: MoveTemplateToFolderSecurity = field(default=None)
     
-class MoveTemplateToFolder200ApplicationJSONExpirationIntervalEnum(str, Enum):
+class MoveTemplateToFolderTemplateExpirationIntervalEnum(str, Enum):
     MINUTES = "minutes"
     HOURS = "hours"
     DAYS = "days"
@@ -34,12 +34,12 @@ class MoveTemplateToFolder200ApplicationJSONExpirationIntervalEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class MoveTemplateToFolder200ApplicationJSONTemplate:
+class MoveTemplateToFolderTemplate:
     allow_additional_properties: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'allow_additional_properties' }})
     description: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
     document_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'document_url' }})
     editable_submissions: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'editable_submissions' }})
-    expiration_interval: Optional[MoveTemplateToFolder200ApplicationJSONExpirationIntervalEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'expiration_interval' }})
+    expiration_interval: Optional[MoveTemplateToFolderTemplateExpirationIntervalEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'expiration_interval' }})
     expire_after: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'expire_after' }})
     expire_submissions: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'expire_submissions' }})
     id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
@@ -62,5 +62,5 @@ class MoveTemplateToFolderResponse:
     content_type: str = field(default=None)
     status_code: int = field(default=None)
     error: Optional[shared.Error] = field(default=None)
-    template: Optional[MoveTemplateToFolder200ApplicationJSONTemplate] = field(default=None)
+    template: Optional[MoveTemplateToFolderTemplate] = field(default=None)
     

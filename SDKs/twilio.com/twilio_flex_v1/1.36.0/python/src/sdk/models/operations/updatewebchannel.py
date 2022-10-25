@@ -12,7 +12,7 @@ class UpdateWebChannelPathParams:
     
 
 @dataclass
-class UpdateWebChannelRequestBodyUpdateWebChannelRequest:
+class UpdateWebChannelUpdateWebChannelRequest:
     chat_status: Optional[shared.WebChannelEnumChatStatusEnum] = field(default=None, metadata={'form': { 'field_name': 'ChatStatus' }})
     post_engagement_data: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'PostEngagementData' }})
     
@@ -26,7 +26,7 @@ class UpdateWebChannelSecurity:
 class UpdateWebChannelRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateWebChannelPathParams = field(default=None)
-    request: Optional[UpdateWebChannelRequestBodyUpdateWebChannelRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateWebChannelUpdateWebChannelRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateWebChannelSecurity = field(default=None)
     
 

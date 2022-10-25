@@ -39,7 +39,7 @@ class ListWorkerRequest:
 
 @dataclass_json
 @dataclass
-class ListWorker200ApplicationJSONMeta:
+class ListWorkerListWorkerResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -51,14 +51,14 @@ class ListWorker200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListWorker200ApplicationJSONListWorkerResponse:
-    meta: Optional[ListWorker200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+class ListWorkerListWorkerResponse:
+    meta: Optional[ListWorkerListWorkerResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     workers: Optional[List[shared.TaskrouterV1WorkspaceWorker]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'workers' }})
     
 
 @dataclass
 class ListWorkerResponse:
     content_type: str = field(default=None)
-    list_worker_response: Optional[ListWorker200ApplicationJSONListWorkerResponse] = field(default=None)
+    list_worker_response: Optional[ListWorkerListWorkerResponse] = field(default=None)
     status_code: int = field(default=None)
     

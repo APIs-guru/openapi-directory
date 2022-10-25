@@ -10,7 +10,7 @@ class PostVolumesIDActionsAttachPathParams:
 
 @dataclass_json
 @dataclass
-class PostVolumesIDActionsAttachRequestBodyAttachVolumeRequest:
+class PostVolumesIDActionsAttachAttachVolumeRequest:
     automount: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'automount' }})
     server: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'server' }})
     
@@ -18,23 +18,23 @@ class PostVolumesIDActionsAttachRequestBodyAttachVolumeRequest:
 @dataclass
 class PostVolumesIDActionsAttachRequest:
     path_params: PostVolumesIDActionsAttachPathParams = field(default=None)
-    request: Optional[PostVolumesIDActionsAttachRequestBodyAttachVolumeRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: Optional[PostVolumesIDActionsAttachAttachVolumeRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass_json
 @dataclass
-class PostVolumesIDActionsAttach201ApplicationJSONActionError:
+class PostVolumesIDActionsAttachActionResponseActionError:
     code: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'code' }})
     message: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'message' }})
     
 
 @dataclass_json
 @dataclass
-class PostVolumesIDActionsAttach201ApplicationJSONActionResources:
+class PostVolumesIDActionsAttachActionResponseActionResources:
     id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     type: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     
-class PostVolumesIDActionsAttach201ApplicationJSONActionStatusEnum(str, Enum):
+class PostVolumesIDActionsAttachActionResponseActionStatusEnum(str, Enum):
     SUCCESS = "success"
     RUNNING = "running"
     ERROR = "error"
@@ -42,26 +42,26 @@ class PostVolumesIDActionsAttach201ApplicationJSONActionStatusEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class PostVolumesIDActionsAttach201ApplicationJSONActionAction:
+class PostVolumesIDActionsAttachActionResponseAction:
     command: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'command' }})
-    error: PostVolumesIDActionsAttach201ApplicationJSONActionError = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
+    error: PostVolumesIDActionsAttachActionResponseActionError = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
     finished: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'finished' }})
     id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     progress: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'progress' }})
-    resources: List[PostVolumesIDActionsAttach201ApplicationJSONActionResources] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resources' }})
+    resources: List[PostVolumesIDActionsAttachActionResponseActionResources] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resources' }})
     started: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'started' }})
-    status: PostVolumesIDActionsAttach201ApplicationJSONActionStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    status: PostVolumesIDActionsAttachActionResponseActionStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
     
 
 @dataclass_json
 @dataclass
-class PostVolumesIDActionsAttach201ApplicationJSONActionResponse:
-    action: PostVolumesIDActionsAttach201ApplicationJSONActionAction = field(default=None, metadata={'dataclasses_json': { 'field_name': 'action' }})
+class PostVolumesIDActionsAttachActionResponse:
+    action: PostVolumesIDActionsAttachActionResponseAction = field(default=None, metadata={'dataclasses_json': { 'field_name': 'action' }})
     
 
 @dataclass
 class PostVolumesIDActionsAttachResponse:
-    action_response: Optional[PostVolumesIDActionsAttach201ApplicationJSONActionResponse] = field(default=None)
+    action_response: Optional[PostVolumesIDActionsAttachActionResponse] = field(default=None)
     content_type: str = field(default=None)
     status_code: int = field(default=None)
     

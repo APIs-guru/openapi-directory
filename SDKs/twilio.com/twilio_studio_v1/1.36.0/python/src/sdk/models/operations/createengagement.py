@@ -12,7 +12,7 @@ class CreateEngagementPathParams:
     
 
 @dataclass
-class CreateEngagementRequestBodyCreateEngagementRequest:
+class CreateEngagementCreateEngagementRequest:
     from_: str = field(default=None, metadata={'form': { 'field_name': 'From' }})
     parameters: Optional[Any] = field(default=None, metadata={'form': { 'field_name': 'Parameters' }})
     to: str = field(default=None, metadata={'form': { 'field_name': 'To' }})
@@ -27,7 +27,7 @@ class CreateEngagementSecurity:
 class CreateEngagementRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateEngagementPathParams = field(default=None)
-    request: Optional[CreateEngagementRequestBodyCreateEngagementRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateEngagementCreateEngagementRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateEngagementSecurity = field(default=None)
     
 

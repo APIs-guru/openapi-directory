@@ -34,7 +34,7 @@ class ListActivityRequest:
 
 @dataclass_json
 @dataclass
-class ListActivity200ApplicationJSONMeta:
+class ListActivityListActivityResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -46,14 +46,14 @@ class ListActivity200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListActivity200ApplicationJSONListActivityResponse:
+class ListActivityListActivityResponse:
     activities: Optional[List[shared.TaskrouterV1WorkspaceActivity]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'activities' }})
-    meta: Optional[ListActivity200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+    meta: Optional[ListActivityListActivityResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     
 
 @dataclass
 class ListActivityResponse:
     content_type: str = field(default=None)
-    list_activity_response: Optional[ListActivity200ApplicationJSONListActivityResponse] = field(default=None)
+    list_activity_response: Optional[ListActivityListActivityResponse] = field(default=None)
     status_code: int = field(default=None)
     

@@ -32,7 +32,7 @@ class ListSyncStreamRequest:
 
 @dataclass_json
 @dataclass
-class ListSyncStream200ApplicationJSONMeta:
+class ListSyncStreamListSyncStreamResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -44,14 +44,14 @@ class ListSyncStream200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListSyncStream200ApplicationJSONListSyncStreamResponse:
-    meta: Optional[ListSyncStream200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+class ListSyncStreamListSyncStreamResponse:
+    meta: Optional[ListSyncStreamListSyncStreamResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     streams: Optional[List[shared.SyncV1ServiceSyncStream]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'streams' }})
     
 
 @dataclass
 class ListSyncStreamResponse:
     content_type: str = field(default=None)
-    list_sync_stream_response: Optional[ListSyncStream200ApplicationJSONListSyncStreamResponse] = field(default=None)
+    list_sync_stream_response: Optional[ListSyncStreamListSyncStreamResponse] = field(default=None)
     status_code: int = field(default=None)
     

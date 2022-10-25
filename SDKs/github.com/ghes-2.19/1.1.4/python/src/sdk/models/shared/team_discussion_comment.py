@@ -9,7 +9,7 @@ from . import reaction_rollup
 
 @dataclass_json
 @dataclass
-class TeamDiscussionCommentAuthorSimpleUser:
+class TeamDiscussionCommentSimpleUser:
     avatar_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'avatar_url' }})
     events_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'events_url' }})
     followers_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'followers_url' }})
@@ -34,7 +34,7 @@ class TeamDiscussionCommentAuthorSimpleUser:
 @dataclass_json
 @dataclass
 class TeamDiscussionComment:
-    author: TeamDiscussionCommentAuthorSimpleUser = field(default=None, metadata={'dataclasses_json': { 'field_name': 'author' }})
+    author: TeamDiscussionCommentSimpleUser = field(default=None, metadata={'dataclasses_json': { 'field_name': 'author' }})
     body: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'body' }})
     body_html: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'body_html' }})
     body_version: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'body_version' }})

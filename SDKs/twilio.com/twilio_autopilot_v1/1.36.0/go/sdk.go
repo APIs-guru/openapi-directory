@@ -1433,7 +1433,7 @@ func (s *SDK) ListAssistant(ctx context.Context, request operations.ListAssistan
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListAssistant200ApplicationJSONListAssistantResponse
+			var out *operations.ListAssistantListAssistantResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -1478,7 +1478,7 @@ func (s *SDK) ListField(ctx context.Context, request operations.ListFieldRequest
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListField200ApplicationJSONListFieldResponse
+			var out *operations.ListFieldListFieldResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -1523,7 +1523,7 @@ func (s *SDK) ListFieldType(ctx context.Context, request operations.ListFieldTyp
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListFieldType200ApplicationJSONListFieldTypeResponse
+			var out *operations.ListFieldTypeListFieldTypeResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -1568,7 +1568,7 @@ func (s *SDK) ListFieldValue(ctx context.Context, request operations.ListFieldVa
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListFieldValue200ApplicationJSONListFieldValueResponse
+			var out *operations.ListFieldValueListFieldValueResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -1613,7 +1613,7 @@ func (s *SDK) ListModelBuild(ctx context.Context, request operations.ListModelBu
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListModelBuild200ApplicationJSONListModelBuildResponse
+			var out *operations.ListModelBuildListModelBuildResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -1658,7 +1658,7 @@ func (s *SDK) ListQuery(ctx context.Context, request operations.ListQueryRequest
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListQuery200ApplicationJSONListQueryResponse
+			var out *operations.ListQueryListQueryResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -1703,7 +1703,7 @@ func (s *SDK) ListSample(ctx context.Context, request operations.ListSampleReque
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListSample200ApplicationJSONListSampleResponse
+			var out *operations.ListSampleListSampleResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -1748,7 +1748,7 @@ func (s *SDK) ListTask(ctx context.Context, request operations.ListTaskRequest) 
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListTask200ApplicationJSONListTaskResponse
+			var out *operations.ListTaskListTaskResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -1793,7 +1793,7 @@ func (s *SDK) ListWebhook(ctx context.Context, request operations.ListWebhookReq
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListWebhook200ApplicationJSONListWebhookResponse
+			var out *operations.ListWebhookListWebhookResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}

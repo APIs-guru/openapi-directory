@@ -12,14 +12,14 @@ from . import nestedtenant
 
 @dataclass_json
 @dataclass
-class RackTypeType:
+class RackType:
     label: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label' }})
     value: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
     
 
 @dataclass_json
 @dataclass
-class RackWidthWidth:
+class RackWidth:
     label: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label' }})
     value: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
     
@@ -42,7 +42,7 @@ class Rack:
     site: nestedsite.NestedSite = field(default=None, metadata={'dataclasses_json': { 'field_name': 'site' }})
     tags: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
     tenant: Optional[nestedtenant.NestedTenant] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tenant' }})
-    type: Optional[RackTypeType] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    type: Optional[RackType] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     u_height: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'u_height' }})
-    width: Optional[RackWidthWidth] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'width' }})
+    width: Optional[RackWidth] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'width' }})
     

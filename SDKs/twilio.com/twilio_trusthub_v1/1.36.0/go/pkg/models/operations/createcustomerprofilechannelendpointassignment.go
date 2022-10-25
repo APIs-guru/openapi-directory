@@ -12,7 +12,7 @@ type CreateCustomerProfileChannelEndpointAssignmentPathParams struct {
 	CustomerProfileSid string `pathParam:"style=simple,explode=false,name=CustomerProfileSid"`
 }
 
-type CreateCustomerProfileChannelEndpointAssignmentRequestBodyCreateCustomerProfileChannelEndpointAssignmentRequest struct {
+type CreateCustomerProfileChannelEndpointAssignmentCreateCustomerProfileChannelEndpointAssignmentRequest struct {
 	ChannelEndpointSid  string `form:"name=ChannelEndpointSid"`
 	ChannelEndpointType string `form:"name=ChannelEndpointType"`
 }
@@ -24,7 +24,7 @@ type CreateCustomerProfileChannelEndpointAssignmentSecurity struct {
 type CreateCustomerProfileChannelEndpointAssignmentRequest struct {
 	ServerURL  *string
 	PathParams CreateCustomerProfileChannelEndpointAssignmentPathParams
-	Request    *CreateCustomerProfileChannelEndpointAssignmentRequestBodyCreateCustomerProfileChannelEndpointAssignmentRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateCustomerProfileChannelEndpointAssignmentCreateCustomerProfileChannelEndpointAssignmentRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateCustomerProfileChannelEndpointAssignmentSecurity
 }
 

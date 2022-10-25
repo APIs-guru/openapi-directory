@@ -13,7 +13,7 @@ class UpdateWorkflowPathParams:
     
 
 @dataclass
-class UpdateWorkflowRequestBodyUpdateWorkflowRequest:
+class UpdateWorkflowUpdateWorkflowRequest:
     assignment_callback_url: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'AssignmentCallbackUrl' }})
     configuration: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Configuration' }})
     fallback_assignment_callback_url: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'FallbackAssignmentCallbackUrl' }})
@@ -31,7 +31,7 @@ class UpdateWorkflowSecurity:
 class UpdateWorkflowRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateWorkflowPathParams = field(default=None)
-    request: Optional[UpdateWorkflowRequestBodyUpdateWorkflowRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateWorkflowUpdateWorkflowRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateWorkflowSecurity = field(default=None)
     
 

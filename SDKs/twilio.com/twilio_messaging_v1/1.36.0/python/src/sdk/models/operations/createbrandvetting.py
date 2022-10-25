@@ -12,7 +12,7 @@ class CreateBrandVettingPathParams:
     
 
 @dataclass
-class CreateBrandVettingRequestBodyCreateBrandVettingRequest:
+class CreateBrandVettingCreateBrandVettingRequest:
     vetting_id: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'VettingId' }})
     vetting_provider: shared.BrandVettingEnumVettingProviderEnum = field(default=None, metadata={'form': { 'field_name': 'VettingProvider' }})
     
@@ -26,7 +26,7 @@ class CreateBrandVettingSecurity:
 class CreateBrandVettingRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateBrandVettingPathParams = field(default=None)
-    request: Optional[CreateBrandVettingRequestBodyCreateBrandVettingRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateBrandVettingCreateBrandVettingRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateBrandVettingSecurity = field(default=None)
     
 

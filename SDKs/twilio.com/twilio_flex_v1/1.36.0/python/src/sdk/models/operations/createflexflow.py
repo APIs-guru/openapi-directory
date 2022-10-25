@@ -7,7 +7,7 @@ CREATE_FLEX_FLOW_SERVERS = [
 
 
 @dataclass
-class CreateFlexFlowRequestBodyCreateFlexFlowRequest:
+class CreateFlexFlowCreateFlexFlowRequest:
     channel_type: shared.FlexFlowEnumChannelTypeEnum = field(default=None, metadata={'form': { 'field_name': 'ChannelType' }})
     chat_service_sid: str = field(default=None, metadata={'form': { 'field_name': 'ChatServiceSid' }})
     contact_identity: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'ContactIdentity' }})
@@ -35,7 +35,7 @@ class CreateFlexFlowSecurity:
 @dataclass
 class CreateFlexFlowRequest:
     server_url: Optional[str] = field(default=None)
-    request: Optional[CreateFlexFlowRequestBodyCreateFlexFlowRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateFlexFlowCreateFlexFlowRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateFlexFlowSecurity = field(default=None)
     
 

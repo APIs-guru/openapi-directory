@@ -28,7 +28,7 @@ type ListRoomParticipantSubscribedTrackRequest struct {
 	Security    ListRoomParticipantSubscribedTrackSecurity
 }
 
-type ListRoomParticipantSubscribedTrack200ApplicationJSONMeta struct {
+type ListRoomParticipantSubscribedTrackListRoomParticipantSubscribedTrackResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -38,13 +38,13 @@ type ListRoomParticipantSubscribedTrack200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListRoomParticipantSubscribedTrack200ApplicationJSONListRoomParticipantSubscribedTrackResponse struct {
-	Meta             *ListRoomParticipantSubscribedTrack200ApplicationJSONMeta         `json:"meta,omitempty"`
-	SubscribedTracks []shared.VideoV1RoomRoomParticipantRoomParticipantSubscribedTrack `json:"subscribed_tracks,omitempty"`
+type ListRoomParticipantSubscribedTrackListRoomParticipantSubscribedTrackResponse struct {
+	Meta             *ListRoomParticipantSubscribedTrackListRoomParticipantSubscribedTrackResponseMeta `json:"meta,omitempty"`
+	SubscribedTracks []shared.VideoV1RoomRoomParticipantRoomParticipantSubscribedTrack                 `json:"subscribed_tracks,omitempty"`
 }
 
 type ListRoomParticipantSubscribedTrackResponse struct {
 	ContentType                                string
-	ListRoomParticipantSubscribedTrackResponse *ListRoomParticipantSubscribedTrack200ApplicationJSONListRoomParticipantSubscribedTrackResponse
+	ListRoomParticipantSubscribedTrackResponse *ListRoomParticipantSubscribedTrackListRoomParticipantSubscribedTrackResponse
 	StatusCode                                 int64
 }

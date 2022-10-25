@@ -8,7 +8,7 @@ type NodesCommentCreatePathParams struct {
 	NodeID string `pathParam:"style=simple,explode=false,name=node_id"`
 }
 
-type NodesCommentCreateRequestBodyAttributesAttributes struct {
+type NodesCommentCreateCommentAttributes struct {
 	CanEdit      *bool      `json:"can_edit,omitempty"`
 	Content      *string    `json:"content,omitempty"`
 	DateCreated  *time.Time `json:"date_created,omitempty"`
@@ -22,11 +22,11 @@ type NodesCommentCreateRequestBodyAttributesAttributes struct {
 	Page         *string    `json:"page,omitempty"`
 }
 
-type NodesCommentCreateRequestBodyLinksLinks struct {
+type NodesCommentCreateCommentLinks struct {
 	Self *string `json:"self,omitempty"`
 }
 
-type NodesCommentCreateRequestBodyRelationshipsRelationships struct {
+type NodesCommentCreateCommentRelationships struct {
 	Node    *string `json:"node,omitempty"`
 	Replies *string `json:"replies,omitempty"`
 	Reports *string `json:"reports,omitempty"`
@@ -34,17 +34,17 @@ type NodesCommentCreateRequestBodyRelationshipsRelationships struct {
 	User    *string `json:"user,omitempty"`
 }
 
-type NodesCommentCreateRequestBodyComment struct {
-	Attributes    *NodesCommentCreateRequestBodyAttributesAttributes       `json:"attributes,omitempty"`
-	ID            string                                                   `json:"id"`
-	Links         *NodesCommentCreateRequestBodyLinksLinks                 `json:"links,omitempty"`
-	Relationships *NodesCommentCreateRequestBodyRelationshipsRelationships `json:"relationships,omitempty"`
-	Type          *string                                                  `json:"type,omitempty"`
+type NodesCommentCreateComment struct {
+	Attributes    *NodesCommentCreateCommentAttributes    `json:"attributes,omitempty"`
+	ID            string                                  `json:"id"`
+	Links         *NodesCommentCreateCommentLinks         `json:"links,omitempty"`
+	Relationships *NodesCommentCreateCommentRelationships `json:"relationships,omitempty"`
+	Type          *string                                 `json:"type,omitempty"`
 }
 
 type NodesCommentCreateRequest struct {
 	PathParams NodesCommentCreatePathParams
-	Request    NodesCommentCreateRequestBodyComment `request:"mediaType=application/json"`
+	Request    NodesCommentCreateComment `request:"mediaType=application/json"`
 }
 
 type NodesCommentCreateResponse struct {

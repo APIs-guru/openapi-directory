@@ -11,7 +11,7 @@ class UpdateShortCodePathParams:
     account_sid: str = field(default=None, metadata={'path_param': { 'field_name': 'AccountSid', 'style': 'simple', 'explode': False }})
     sid: str = field(default=None, metadata={'path_param': { 'field_name': 'Sid', 'style': 'simple', 'explode': False }})
     
-class UpdateShortCodeRequestBodySmsFallbackMethodEnum(str, Enum):
+class UpdateShortCodeUpdateShortCodeRequestSmsFallbackMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -19,7 +19,7 @@ class UpdateShortCodeRequestBodySmsFallbackMethodEnum(str, Enum):
     PUT = "PUT"
     DELETE = "DELETE"
 
-class UpdateShortCodeRequestBodySmsMethodEnum(str, Enum):
+class UpdateShortCodeUpdateShortCodeRequestSmsMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -29,12 +29,12 @@ class UpdateShortCodeRequestBodySmsMethodEnum(str, Enum):
 
 
 @dataclass
-class UpdateShortCodeRequestBodyUpdateShortCodeRequest:
+class UpdateShortCodeUpdateShortCodeRequest:
     api_version: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'ApiVersion' }})
     friendly_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
-    sms_fallback_method: Optional[UpdateShortCodeRequestBodySmsFallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'SmsFallbackMethod' }})
+    sms_fallback_method: Optional[UpdateShortCodeUpdateShortCodeRequestSmsFallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'SmsFallbackMethod' }})
     sms_fallback_url: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'SmsFallbackUrl' }})
-    sms_method: Optional[UpdateShortCodeRequestBodySmsMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'SmsMethod' }})
+    sms_method: Optional[UpdateShortCodeUpdateShortCodeRequestSmsMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'SmsMethod' }})
     sms_url: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'SmsUrl' }})
     
 
@@ -47,7 +47,7 @@ class UpdateShortCodeSecurity:
 class UpdateShortCodeRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateShortCodePathParams = field(default=None)
-    request: Optional[UpdateShortCodeRequestBodyUpdateShortCodeRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateShortCodeUpdateShortCodeRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateShortCodeSecurity = field(default=None)
     
 

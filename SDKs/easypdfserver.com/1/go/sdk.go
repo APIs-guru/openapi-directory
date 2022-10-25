@@ -87,12 +87,12 @@ func (s *SDK) PostMakePdf(ctx context.Context, request operations.PostMakePdfReq
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/pdf`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.PostMakePdf200ApplicationPdfBinaryString = data
+			res.PostMakePdf200ApplicationPdfBinaryString = out
 		}
 	}
 

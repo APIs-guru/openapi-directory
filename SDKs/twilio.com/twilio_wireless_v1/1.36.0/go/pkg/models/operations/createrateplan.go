@@ -8,7 +8,7 @@ var CreateRatePlanServers = []string{
 	"https://wireless.twilio.com",
 }
 
-type CreateRatePlanRequestBodyCreateRatePlanRequest struct {
+type CreateRatePlanCreateRatePlanRequest struct {
 	DataEnabled                   *bool    `form:"name=DataEnabled"`
 	DataLimit                     *int64   `form:"name=DataLimit"`
 	DataMetering                  *string  `form:"name=DataMetering"`
@@ -28,7 +28,7 @@ type CreateRatePlanSecurity struct {
 
 type CreateRatePlanRequest struct {
 	ServerURL *string
-	Request   *CreateRatePlanRequestBodyCreateRatePlanRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request   *CreateRatePlanCreateRatePlanRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security  CreateRatePlanSecurity
 }
 

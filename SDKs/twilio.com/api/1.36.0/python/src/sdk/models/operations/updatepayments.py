@@ -14,7 +14,7 @@ class UpdatePaymentsPathParams:
     
 
 @dataclass
-class UpdatePaymentsRequestBodyUpdatePaymentsRequest:
+class UpdatePaymentsUpdatePaymentsRequest:
     capture: Optional[shared.PaymentsEnumCaptureEnum] = field(default=None, metadata={'form': { 'field_name': 'Capture' }})
     idempotency_key: str = field(default=None, metadata={'form': { 'field_name': 'IdempotencyKey' }})
     status: Optional[shared.PaymentsEnumStatusEnum] = field(default=None, metadata={'form': { 'field_name': 'Status' }})
@@ -30,7 +30,7 @@ class UpdatePaymentsSecurity:
 class UpdatePaymentsRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdatePaymentsPathParams = field(default=None)
-    request: Optional[UpdatePaymentsRequestBodyUpdatePaymentsRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdatePaymentsUpdatePaymentsRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdatePaymentsSecurity = field(default=None)
     
 

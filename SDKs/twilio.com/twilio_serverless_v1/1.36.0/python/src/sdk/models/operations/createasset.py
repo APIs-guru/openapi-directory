@@ -12,7 +12,7 @@ class CreateAssetPathParams:
     
 
 @dataclass
-class CreateAssetRequestBodyCreateAssetRequest:
+class CreateAssetCreateAssetRequest:
     friendly_name: str = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
     
 
@@ -25,7 +25,7 @@ class CreateAssetSecurity:
 class CreateAssetRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateAssetPathParams = field(default=None)
-    request: Optional[CreateAssetRequestBodyCreateAssetRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateAssetCreateAssetRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateAssetSecurity = field(default=None)
     
 

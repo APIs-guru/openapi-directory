@@ -12,45 +12,45 @@ type UpdateServicePathParams struct {
 	Sid string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
-type UpdateServiceRequestBodyFallbackMethodEnum string
+type UpdateServiceUpdateServiceRequestFallbackMethodEnum string
 
 const (
-	UpdateServiceRequestBodyFallbackMethodEnumHead   UpdateServiceRequestBodyFallbackMethodEnum = "HEAD"
-	UpdateServiceRequestBodyFallbackMethodEnumGet    UpdateServiceRequestBodyFallbackMethodEnum = "GET"
-	UpdateServiceRequestBodyFallbackMethodEnumPost   UpdateServiceRequestBodyFallbackMethodEnum = "POST"
-	UpdateServiceRequestBodyFallbackMethodEnumPatch  UpdateServiceRequestBodyFallbackMethodEnum = "PATCH"
-	UpdateServiceRequestBodyFallbackMethodEnumPut    UpdateServiceRequestBodyFallbackMethodEnum = "PUT"
-	UpdateServiceRequestBodyFallbackMethodEnumDelete UpdateServiceRequestBodyFallbackMethodEnum = "DELETE"
+	UpdateServiceUpdateServiceRequestFallbackMethodEnumHead   UpdateServiceUpdateServiceRequestFallbackMethodEnum = "HEAD"
+	UpdateServiceUpdateServiceRequestFallbackMethodEnumGet    UpdateServiceUpdateServiceRequestFallbackMethodEnum = "GET"
+	UpdateServiceUpdateServiceRequestFallbackMethodEnumPost   UpdateServiceUpdateServiceRequestFallbackMethodEnum = "POST"
+	UpdateServiceUpdateServiceRequestFallbackMethodEnumPatch  UpdateServiceUpdateServiceRequestFallbackMethodEnum = "PATCH"
+	UpdateServiceUpdateServiceRequestFallbackMethodEnumPut    UpdateServiceUpdateServiceRequestFallbackMethodEnum = "PUT"
+	UpdateServiceUpdateServiceRequestFallbackMethodEnumDelete UpdateServiceUpdateServiceRequestFallbackMethodEnum = "DELETE"
 )
 
-type UpdateServiceRequestBodyInboundMethodEnum string
+type UpdateServiceUpdateServiceRequestInboundMethodEnum string
 
 const (
-	UpdateServiceRequestBodyInboundMethodEnumHead   UpdateServiceRequestBodyInboundMethodEnum = "HEAD"
-	UpdateServiceRequestBodyInboundMethodEnumGet    UpdateServiceRequestBodyInboundMethodEnum = "GET"
-	UpdateServiceRequestBodyInboundMethodEnumPost   UpdateServiceRequestBodyInboundMethodEnum = "POST"
-	UpdateServiceRequestBodyInboundMethodEnumPatch  UpdateServiceRequestBodyInboundMethodEnum = "PATCH"
-	UpdateServiceRequestBodyInboundMethodEnumPut    UpdateServiceRequestBodyInboundMethodEnum = "PUT"
-	UpdateServiceRequestBodyInboundMethodEnumDelete UpdateServiceRequestBodyInboundMethodEnum = "DELETE"
+	UpdateServiceUpdateServiceRequestInboundMethodEnumHead   UpdateServiceUpdateServiceRequestInboundMethodEnum = "HEAD"
+	UpdateServiceUpdateServiceRequestInboundMethodEnumGet    UpdateServiceUpdateServiceRequestInboundMethodEnum = "GET"
+	UpdateServiceUpdateServiceRequestInboundMethodEnumPost   UpdateServiceUpdateServiceRequestInboundMethodEnum = "POST"
+	UpdateServiceUpdateServiceRequestInboundMethodEnumPatch  UpdateServiceUpdateServiceRequestInboundMethodEnum = "PATCH"
+	UpdateServiceUpdateServiceRequestInboundMethodEnumPut    UpdateServiceUpdateServiceRequestInboundMethodEnum = "PUT"
+	UpdateServiceUpdateServiceRequestInboundMethodEnumDelete UpdateServiceUpdateServiceRequestInboundMethodEnum = "DELETE"
 )
 
-type UpdateServiceRequestBodyUpdateServiceRequest struct {
-	AreaCodeGeomatch          *bool                                       `form:"name=AreaCodeGeomatch"`
-	FallbackMethod            *UpdateServiceRequestBodyFallbackMethodEnum `form:"name=FallbackMethod"`
-	FallbackToLongCode        *bool                                       `form:"name=FallbackToLongCode"`
-	FallbackURL               *string                                     `form:"name=FallbackUrl"`
-	FriendlyName              *string                                     `form:"name=FriendlyName"`
-	InboundMethod             *UpdateServiceRequestBodyInboundMethodEnum  `form:"name=InboundMethod"`
-	InboundRequestURL         *string                                     `form:"name=InboundRequestUrl"`
-	MmsConverter              *bool                                       `form:"name=MmsConverter"`
-	ScanMessageContent        *shared.ServiceEnumScanMessageContentEnum   `form:"name=ScanMessageContent"`
-	SmartEncoding             *bool                                       `form:"name=SmartEncoding"`
-	StatusCallback            *string                                     `form:"name=StatusCallback"`
-	StickySender              *bool                                       `form:"name=StickySender"`
-	SynchronousValidation     *bool                                       `form:"name=SynchronousValidation"`
-	UseInboundWebhookOnNumber *bool                                       `form:"name=UseInboundWebhookOnNumber"`
-	Usecase                   *string                                     `form:"name=Usecase"`
-	ValidityPeriod            *int64                                      `form:"name=ValidityPeriod"`
+type UpdateServiceUpdateServiceRequest struct {
+	AreaCodeGeomatch          *bool                                                `form:"name=AreaCodeGeomatch"`
+	FallbackMethod            *UpdateServiceUpdateServiceRequestFallbackMethodEnum `form:"name=FallbackMethod"`
+	FallbackToLongCode        *bool                                                `form:"name=FallbackToLongCode"`
+	FallbackURL               *string                                              `form:"name=FallbackUrl"`
+	FriendlyName              *string                                              `form:"name=FriendlyName"`
+	InboundMethod             *UpdateServiceUpdateServiceRequestInboundMethodEnum  `form:"name=InboundMethod"`
+	InboundRequestURL         *string                                              `form:"name=InboundRequestUrl"`
+	MmsConverter              *bool                                                `form:"name=MmsConverter"`
+	ScanMessageContent        *shared.ServiceEnumScanMessageContentEnum            `form:"name=ScanMessageContent"`
+	SmartEncoding             *bool                                                `form:"name=SmartEncoding"`
+	StatusCallback            *string                                              `form:"name=StatusCallback"`
+	StickySender              *bool                                                `form:"name=StickySender"`
+	SynchronousValidation     *bool                                                `form:"name=SynchronousValidation"`
+	UseInboundWebhookOnNumber *bool                                                `form:"name=UseInboundWebhookOnNumber"`
+	Usecase                   *string                                              `form:"name=Usecase"`
+	ValidityPeriod            *int64                                               `form:"name=ValidityPeriod"`
 }
 
 type UpdateServiceSecurity struct {
@@ -60,7 +60,7 @@ type UpdateServiceSecurity struct {
 type UpdateServiceRequest struct {
 	ServerURL  *string
 	PathParams UpdateServicePathParams
-	Request    *UpdateServiceRequestBodyUpdateServiceRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateServiceUpdateServiceRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateServiceSecurity
 }
 

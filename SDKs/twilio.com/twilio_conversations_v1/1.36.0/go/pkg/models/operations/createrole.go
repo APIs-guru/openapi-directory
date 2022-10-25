@@ -8,7 +8,7 @@ var CreateRoleServers = []string{
 	"https://conversations.twilio.com",
 }
 
-type CreateRoleRequestBodyCreateRoleRequest struct {
+type CreateRoleCreateRoleRequest struct {
 	FriendlyName string                      `form:"name=FriendlyName"`
 	Permission   []string                    `form:"name=Permission"`
 	Type         shared.RoleEnumRoleTypeEnum `form:"name=Type"`
@@ -20,7 +20,7 @@ type CreateRoleSecurity struct {
 
 type CreateRoleRequest struct {
 	ServerURL *string
-	Request   *CreateRoleRequestBodyCreateRoleRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request   *CreateRoleCreateRoleRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security  CreateRoleSecurity
 }
 

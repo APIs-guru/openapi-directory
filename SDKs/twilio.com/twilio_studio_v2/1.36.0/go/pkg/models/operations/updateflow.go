@@ -12,7 +12,7 @@ type UpdateFlowPathParams struct {
 	Sid string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
-type UpdateFlowRequestBodyUpdateFlowRequest struct {
+type UpdateFlowUpdateFlowRequest struct {
 	CommitMessage *string                   `form:"name=CommitMessage"`
 	Definition    *interface{}              `form:"name=Definition"`
 	FriendlyName  *string                   `form:"name=FriendlyName"`
@@ -26,7 +26,7 @@ type UpdateFlowSecurity struct {
 type UpdateFlowRequest struct {
 	ServerURL  *string
 	PathParams UpdateFlowPathParams
-	Request    *UpdateFlowRequestBodyUpdateFlowRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateFlowUpdateFlowRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateFlowSecurity
 }
 

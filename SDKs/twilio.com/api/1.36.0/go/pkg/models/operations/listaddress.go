@@ -30,7 +30,7 @@ type ListAddressRequest struct {
 	Security    ListAddressSecurity
 }
 
-type ListAddress200ApplicationJSONListAddressResponse struct {
+type ListAddressListAddressResponse struct {
 	Addresses       []shared.APIV2010AccountAddress `json:"addresses,omitempty"`
 	End             *int64                          `json:"end,omitempty"`
 	FirstPageURI    *string                         `json:"first_page_uri,omitempty"`
@@ -44,6 +44,6 @@ type ListAddress200ApplicationJSONListAddressResponse struct {
 
 type ListAddressResponse struct {
 	ContentType         string
-	ListAddressResponse *ListAddress200ApplicationJSONListAddressResponse
+	ListAddressResponse *ListAddressListAddressResponse
 	StatusCode          int64
 }

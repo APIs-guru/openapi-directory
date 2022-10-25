@@ -12,7 +12,7 @@ class UpdateUserPathParams:
     
 
 @dataclass
-class UpdateUserRequestBodyUpdateUserRequest:
+class UpdateUserUpdateUserRequest:
     avatar: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Avatar' }})
     friendly_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
     is_available: Optional[bool] = field(default=None, metadata={'form': { 'field_name': 'IsAvailable' }})
@@ -28,7 +28,7 @@ class UpdateUserSecurity:
 class UpdateUserRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateUserPathParams = field(default=None)
-    request: Optional[UpdateUserRequestBodyUpdateUserRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateUserUpdateUserRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateUserSecurity = field(default=None)
     
 

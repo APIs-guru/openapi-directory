@@ -9,41 +9,41 @@ type GetFirewallsIDActionsActionIDRequest struct {
 	PathParams GetFirewallsIDActionsActionIDPathParams
 }
 
-type GetFirewallsIDActionsActionID200ApplicationJSONActionError struct {
+type GetFirewallsIDActionsActionIDActionResponseActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
 }
 
-type GetFirewallsIDActionsActionID200ApplicationJSONActionResources struct {
+type GetFirewallsIDActionsActionIDActionResponseActionResources struct {
 	ID   int64  `json:"id"`
 	Type string `json:"type"`
 }
 
-type GetFirewallsIDActionsActionID200ApplicationJSONActionStatusEnum string
+type GetFirewallsIDActionsActionIDActionResponseActionStatusEnum string
 
 const (
-	GetFirewallsIDActionsActionID200ApplicationJSONActionStatusEnumSuccess GetFirewallsIDActionsActionID200ApplicationJSONActionStatusEnum = "success"
-	GetFirewallsIDActionsActionID200ApplicationJSONActionStatusEnumRunning GetFirewallsIDActionsActionID200ApplicationJSONActionStatusEnum = "running"
-	GetFirewallsIDActionsActionID200ApplicationJSONActionStatusEnumError   GetFirewallsIDActionsActionID200ApplicationJSONActionStatusEnum = "error"
+	GetFirewallsIDActionsActionIDActionResponseActionStatusEnumSuccess GetFirewallsIDActionsActionIDActionResponseActionStatusEnum = "success"
+	GetFirewallsIDActionsActionIDActionResponseActionStatusEnumRunning GetFirewallsIDActionsActionIDActionResponseActionStatusEnum = "running"
+	GetFirewallsIDActionsActionIDActionResponseActionStatusEnumError   GetFirewallsIDActionsActionIDActionResponseActionStatusEnum = "error"
 )
 
-type GetFirewallsIDActionsActionID200ApplicationJSONActionAction struct {
-	Command   string                                                           `json:"command"`
-	Error     GetFirewallsIDActionsActionID200ApplicationJSONActionError       `json:"error"`
-	Finished  string                                                           `json:"finished"`
-	ID        int64                                                            `json:"id"`
-	Progress  float64                                                          `json:"progress"`
-	Resources []GetFirewallsIDActionsActionID200ApplicationJSONActionResources `json:"resources"`
-	Started   string                                                           `json:"started"`
-	Status    GetFirewallsIDActionsActionID200ApplicationJSONActionStatusEnum  `json:"status"`
+type GetFirewallsIDActionsActionIDActionResponseAction struct {
+	Command   string                                                       `json:"command"`
+	Error     GetFirewallsIDActionsActionIDActionResponseActionError       `json:"error"`
+	Finished  string                                                       `json:"finished"`
+	ID        int64                                                        `json:"id"`
+	Progress  float64                                                      `json:"progress"`
+	Resources []GetFirewallsIDActionsActionIDActionResponseActionResources `json:"resources"`
+	Started   string                                                       `json:"started"`
+	Status    GetFirewallsIDActionsActionIDActionResponseActionStatusEnum  `json:"status"`
 }
 
-type GetFirewallsIDActionsActionID200ApplicationJSONActionResponse struct {
-	Action GetFirewallsIDActionsActionID200ApplicationJSONActionAction `json:"action"`
+type GetFirewallsIDActionsActionIDActionResponse struct {
+	Action GetFirewallsIDActionsActionIDActionResponseAction `json:"action"`
 }
 
 type GetFirewallsIDActionsActionIDResponse struct {
-	ActionResponse *GetFirewallsIDActionsActionID200ApplicationJSONActionResponse
+	ActionResponse *GetFirewallsIDActionsActionIDActionResponse
 	ContentType    string
 	StatusCode     int64
 }

@@ -25,7 +25,7 @@ type ListSmsCommandRequest struct {
 	Security    ListSmsCommandSecurity
 }
 
-type ListSmsCommand200ApplicationJSONMeta struct {
+type ListSmsCommandListSmsCommandResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -35,13 +35,13 @@ type ListSmsCommand200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListSmsCommand200ApplicationJSONListSmsCommandResponse struct {
-	Meta        *ListSmsCommand200ApplicationJSONMeta `json:"meta,omitempty"`
-	SmsCommands []shared.SupersimV1SmsCommand         `json:"sms_commands,omitempty"`
+type ListSmsCommandListSmsCommandResponse struct {
+	Meta        *ListSmsCommandListSmsCommandResponseMeta `json:"meta,omitempty"`
+	SmsCommands []shared.SupersimV1SmsCommand             `json:"sms_commands,omitempty"`
 }
 
 type ListSmsCommandResponse struct {
 	ContentType            string
-	ListSmsCommandResponse *ListSmsCommand200ApplicationJSONListSmsCommandResponse
+	ListSmsCommandResponse *ListSmsCommandListSmsCommandResponse
 	StatusCode             int64
 }

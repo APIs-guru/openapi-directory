@@ -10,7 +10,7 @@ class PostFloatingIpsIDActionsChangeDNSPtrPathParams:
 
 @dataclass_json
 @dataclass
-class PostFloatingIpsIDActionsChangeDNSPtrRequestBodyChangeDnsptrRequest:
+class PostFloatingIpsIDActionsChangeDNSPtrChangeDnsptrRequest:
     dns_ptr: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dns_ptr' }})
     ip: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ip' }})
     
@@ -18,23 +18,23 @@ class PostFloatingIpsIDActionsChangeDNSPtrRequestBodyChangeDnsptrRequest:
 @dataclass
 class PostFloatingIpsIDActionsChangeDNSPtrRequest:
     path_params: PostFloatingIpsIDActionsChangeDNSPtrPathParams = field(default=None)
-    request: Optional[PostFloatingIpsIDActionsChangeDNSPtrRequestBodyChangeDnsptrRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: Optional[PostFloatingIpsIDActionsChangeDNSPtrChangeDnsptrRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass_json
 @dataclass
-class PostFloatingIpsIDActionsChangeDNSPtr201ApplicationJSONActionError:
+class PostFloatingIpsIDActionsChangeDNSPtrActionResponseActionError:
     code: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'code' }})
     message: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'message' }})
     
 
 @dataclass_json
 @dataclass
-class PostFloatingIpsIDActionsChangeDNSPtr201ApplicationJSONActionResources:
+class PostFloatingIpsIDActionsChangeDNSPtrActionResponseActionResources:
     id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     type: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     
-class PostFloatingIpsIDActionsChangeDNSPtr201ApplicationJSONActionStatusEnum(str, Enum):
+class PostFloatingIpsIDActionsChangeDNSPtrActionResponseActionStatusEnum(str, Enum):
     SUCCESS = "success"
     RUNNING = "running"
     ERROR = "error"
@@ -42,26 +42,26 @@ class PostFloatingIpsIDActionsChangeDNSPtr201ApplicationJSONActionStatusEnum(str
 
 @dataclass_json
 @dataclass
-class PostFloatingIpsIDActionsChangeDNSPtr201ApplicationJSONActionAction:
+class PostFloatingIpsIDActionsChangeDNSPtrActionResponseAction:
     command: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'command' }})
-    error: PostFloatingIpsIDActionsChangeDNSPtr201ApplicationJSONActionError = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
+    error: PostFloatingIpsIDActionsChangeDNSPtrActionResponseActionError = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
     finished: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'finished' }})
     id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     progress: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'progress' }})
-    resources: List[PostFloatingIpsIDActionsChangeDNSPtr201ApplicationJSONActionResources] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resources' }})
+    resources: List[PostFloatingIpsIDActionsChangeDNSPtrActionResponseActionResources] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resources' }})
     started: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'started' }})
-    status: PostFloatingIpsIDActionsChangeDNSPtr201ApplicationJSONActionStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    status: PostFloatingIpsIDActionsChangeDNSPtrActionResponseActionStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
     
 
 @dataclass_json
 @dataclass
-class PostFloatingIpsIDActionsChangeDNSPtr201ApplicationJSONActionResponse:
-    action: PostFloatingIpsIDActionsChangeDNSPtr201ApplicationJSONActionAction = field(default=None, metadata={'dataclasses_json': { 'field_name': 'action' }})
+class PostFloatingIpsIDActionsChangeDNSPtrActionResponse:
+    action: PostFloatingIpsIDActionsChangeDNSPtrActionResponseAction = field(default=None, metadata={'dataclasses_json': { 'field_name': 'action' }})
     
 
 @dataclass
 class PostFloatingIpsIDActionsChangeDNSPtrResponse:
-    action_response: Optional[PostFloatingIpsIDActionsChangeDNSPtr201ApplicationJSONActionResponse] = field(default=None)
+    action_response: Optional[PostFloatingIpsIDActionsChangeDNSPtrActionResponse] = field(default=None)
     content_type: str = field(default=None)
     status_code: int = field(default=None)
     

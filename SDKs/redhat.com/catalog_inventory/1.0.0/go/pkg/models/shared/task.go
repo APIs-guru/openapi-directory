@@ -4,23 +4,23 @@ import (
 	"time"
 )
 
-type TaskStateStateEnum string
+type TaskStateEnum string
 
 const (
-	TaskStateStateEnumPending   TaskStateStateEnum = "pending"
-	TaskStateStateEnumQueued    TaskStateStateEnum = "queued"
-	TaskStateStateEnumRunning   TaskStateStateEnum = "running"
-	TaskStateStateEnumTimedout  TaskStateStateEnum = "timedout"
-	TaskStateStateEnumCompleted TaskStateStateEnum = "completed"
+	TaskStateEnumPending   TaskStateEnum = "pending"
+	TaskStateEnumQueued    TaskStateEnum = "queued"
+	TaskStateEnumRunning   TaskStateEnum = "running"
+	TaskStateEnumTimedout  TaskStateEnum = "timedout"
+	TaskStateEnumCompleted TaskStateEnum = "completed"
 )
 
-type TaskStatusStatusEnum string
+type TaskStatusEnum string
 
 const (
-	TaskStatusStatusEnumOk        TaskStatusStatusEnum = "ok"
-	TaskStatusStatusEnumWarn      TaskStatusStatusEnum = "warn"
-	TaskStatusStatusEnumUnchanged TaskStatusStatusEnum = "unchanged"
-	TaskStatusStatusEnumError     TaskStatusStatusEnum = "error"
+	TaskStatusEnumOk        TaskStatusEnum = "ok"
+	TaskStatusEnumWarn      TaskStatusEnum = "warn"
+	TaskStatusEnumUnchanged TaskStatusEnum = "unchanged"
+	TaskStatusEnumError     TaskStatusEnum = "error"
 )
 
 type Task struct {
@@ -36,8 +36,8 @@ type Task struct {
 	Output              map[string]interface{} `json:"output,omitempty"`
 	Owner               *string                `json:"owner,omitempty"`
 	SourceID            *string                `json:"source_id,omitempty"`
-	State               *TaskStateStateEnum    `json:"state,omitempty"`
-	Status              *TaskStatusStatusEnum  `json:"status,omitempty"`
+	State               *TaskStateEnum         `json:"state,omitempty"`
+	Status              *TaskStatusEnum        `json:"status,omitempty"`
 	TargetSourceRef     *string                `json:"target_source_ref,omitempty"`
 	TargetType          *string                `json:"target_type,omitempty"`
 	Type                *string                `json:"type,omitempty"`

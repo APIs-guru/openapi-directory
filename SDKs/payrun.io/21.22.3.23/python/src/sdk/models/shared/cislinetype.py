@@ -5,12 +5,12 @@ from dataclasses_json import dataclass_json
 
 @dataclass_json
 @dataclass
-class CisLineTypeCisLineTypeNominalCodeNominalCode:
+class CisLineTypeCisLineTypeNominalCode:
     at_href: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': '@href' }})
     at_rel: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': '@rel' }})
     at_title: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': '@title' }})
     
-class CisLineTypeCisLineTypeTaxTreatmentTaxTreatmentEnum(str, Enum):
+class CisLineTypeCisLineTypeTaxTreatmentEnum(str, Enum):
     TAXABLE = "Taxable"
     NON_TAXABLE = "NonTaxable"
     NOTIONAL = "Notional"
@@ -19,15 +19,15 @@ class CisLineTypeCisLineTypeTaxTreatmentTaxTreatmentEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class CisLineTypeCisLineTypeCisLineType:
+class CisLineTypeCisLineType:
     description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Description' }})
     line_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'LineType' }})
-    nominal_code: Optional[CisLineTypeCisLineTypeNominalCodeNominalCode] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NominalCode' }})
-    tax_treatment: Optional[CisLineTypeCisLineTypeTaxTreatmentTaxTreatmentEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TaxTreatment' }})
+    nominal_code: Optional[CisLineTypeCisLineTypeNominalCode] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NominalCode' }})
+    tax_treatment: Optional[CisLineTypeCisLineTypeTaxTreatmentEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TaxTreatment' }})
     
 
 @dataclass_json
 @dataclass
 class CisLineType:
-    cis_line_type: Optional[CisLineTypeCisLineTypeCisLineType] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CisLineType' }})
+    cis_line_type: Optional[CisLineTypeCisLineType] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CisLineType' }})
     

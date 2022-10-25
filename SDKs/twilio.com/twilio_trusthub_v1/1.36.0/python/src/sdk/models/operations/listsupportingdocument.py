@@ -26,7 +26,7 @@ class ListSupportingDocumentRequest:
 
 @dataclass_json
 @dataclass
-class ListSupportingDocument200ApplicationJSONMeta:
+class ListSupportingDocumentListSupportingDocumentResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -38,14 +38,14 @@ class ListSupportingDocument200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListSupportingDocument200ApplicationJSONListSupportingDocumentResponse:
-    meta: Optional[ListSupportingDocument200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+class ListSupportingDocumentListSupportingDocumentResponse:
+    meta: Optional[ListSupportingDocumentListSupportingDocumentResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     results: Optional[List[shared.TrusthubV1SupportingDocument]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'results' }})
     
 
 @dataclass
 class ListSupportingDocumentResponse:
     content_type: str = field(default=None)
-    list_supporting_document_response: Optional[ListSupportingDocument200ApplicationJSONListSupportingDocumentResponse] = field(default=None)
+    list_supporting_document_response: Optional[ListSupportingDocumentListSupportingDocumentResponse] = field(default=None)
     status_code: int = field(default=None)
     

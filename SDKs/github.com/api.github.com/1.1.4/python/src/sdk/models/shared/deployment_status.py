@@ -8,7 +8,7 @@ from dataclasses_json import dataclass_json
 
 @dataclass_json
 @dataclass
-class DeploymentStatusCreatorSimpleUser:
+class DeploymentStatusSimpleUser:
     avatar_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'avatar_url' }})
     events_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'events_url' }})
     followers_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'followers_url' }})
@@ -43,7 +43,7 @@ class DeploymentStatusStateEnum(str, Enum):
 @dataclass
 class DeploymentStatus:
     created_at: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'created_at', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    creator: DeploymentStatusCreatorSimpleUser = field(default=None, metadata={'dataclasses_json': { 'field_name': 'creator' }})
+    creator: DeploymentStatusSimpleUser = field(default=None, metadata={'dataclasses_json': { 'field_name': 'creator' }})
     deployment_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'deployment_url' }})
     description: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
     environment: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'environment' }})

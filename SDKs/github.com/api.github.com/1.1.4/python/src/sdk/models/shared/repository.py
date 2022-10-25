@@ -8,7 +8,7 @@ from dataclasses_json import dataclass_json
 
 @dataclass_json
 @dataclass
-class RepositoryLicenseLicenseSimple:
+class RepositoryLicenseSimple:
     html_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'html_url' }})
     key: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
@@ -19,7 +19,7 @@ class RepositoryLicenseLicenseSimple:
 
 @dataclass_json
 @dataclass
-class RepositoryOwnerSimpleUser:
+class RepositorySimpleUser:
     avatar_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'avatar_url' }})
     events_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'events_url' }})
     followers_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'followers_url' }})
@@ -219,7 +219,7 @@ class Repository:
     labels_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'labels_url' }})
     language: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'language' }})
     languages_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'languages_url' }})
-    license: RepositoryLicenseLicenseSimple = field(default=None, metadata={'dataclasses_json': { 'field_name': 'license' }})
+    license: RepositoryLicenseSimple = field(default=None, metadata={'dataclasses_json': { 'field_name': 'license' }})
     master_branch: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'master_branch' }})
     merges_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'merges_url' }})
     milestones_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'milestones_url' }})
@@ -230,7 +230,7 @@ class Repository:
     notifications_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'notifications_url' }})
     open_issues: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'open_issues' }})
     open_issues_count: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'open_issues_count' }})
-    owner: RepositoryOwnerSimpleUser = field(default=None, metadata={'dataclasses_json': { 'field_name': 'owner' }})
+    owner: RepositorySimpleUser = field(default=None, metadata={'dataclasses_json': { 'field_name': 'owner' }})
     permissions: Optional[RepositoryPermissions] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'permissions' }})
     private: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'private' }})
     pulls_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pulls_url' }})

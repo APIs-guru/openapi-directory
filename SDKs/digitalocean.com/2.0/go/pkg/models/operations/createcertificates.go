@@ -4,32 +4,32 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-type CreateCertificatesRequestBody1TypeEnum string
+type CreateCertificatesRequestBodyLetSEncryptCertificateRequestTypeEnum string
 
 const (
-	CreateCertificatesRequestBody1TypeEnumCustom      CreateCertificatesRequestBody1TypeEnum = "custom"
-	CreateCertificatesRequestBody1TypeEnumLetsEncrypt CreateCertificatesRequestBody1TypeEnum = "lets_encrypt"
+	CreateCertificatesRequestBodyLetSEncryptCertificateRequestTypeEnumCustom      CreateCertificatesRequestBodyLetSEncryptCertificateRequestTypeEnum = "custom"
+	CreateCertificatesRequestBodyLetSEncryptCertificateRequestTypeEnumLetsEncrypt CreateCertificatesRequestBodyLetSEncryptCertificateRequestTypeEnum = "lets_encrypt"
 )
 
-type CreateCertificatesRequestBody1 struct {
-	DNSNames []string                                `json:"dns_names"`
-	Name     string                                  `json:"name"`
-	Type     *CreateCertificatesRequestBody1TypeEnum `json:"type,omitempty"`
+type CreateCertificatesRequestBodyLetSEncryptCertificateRequest struct {
+	DNSNames []string                                                            `json:"dns_names"`
+	Name     string                                                              `json:"name"`
+	Type     *CreateCertificatesRequestBodyLetSEncryptCertificateRequestTypeEnum `json:"type,omitempty"`
 }
 
-type CreateCertificatesRequestBody2TypeEnum string
+type CreateCertificatesRequestBodyCustomCertificateRequestTypeEnum string
 
 const (
-	CreateCertificatesRequestBody2TypeEnumCustom      CreateCertificatesRequestBody2TypeEnum = "custom"
-	CreateCertificatesRequestBody2TypeEnumLetsEncrypt CreateCertificatesRequestBody2TypeEnum = "lets_encrypt"
+	CreateCertificatesRequestBodyCustomCertificateRequestTypeEnumCustom      CreateCertificatesRequestBodyCustomCertificateRequestTypeEnum = "custom"
+	CreateCertificatesRequestBodyCustomCertificateRequestTypeEnumLetsEncrypt CreateCertificatesRequestBodyCustomCertificateRequestTypeEnum = "lets_encrypt"
 )
 
-type CreateCertificatesRequestBody2 struct {
-	CertificateChain *string                                 `json:"certificate_chain,omitempty"`
-	LeafCertificate  string                                  `json:"leaf_certificate"`
-	Name             string                                  `json:"name"`
-	PrivateKey       string                                  `json:"private_key"`
-	Type             *CreateCertificatesRequestBody2TypeEnum `json:"type,omitempty"`
+type CreateCertificatesRequestBodyCustomCertificateRequest struct {
+	CertificateChain *string                                                        `json:"certificate_chain,omitempty"`
+	LeafCertificate  string                                                         `json:"leaf_certificate"`
+	Name             string                                                         `json:"name"`
+	PrivateKey       string                                                         `json:"private_key"`
+	Type             *CreateCertificatesRequestBodyCustomCertificateRequestTypeEnum `json:"type,omitempty"`
 }
 
 type CreateCertificatesRequest struct {

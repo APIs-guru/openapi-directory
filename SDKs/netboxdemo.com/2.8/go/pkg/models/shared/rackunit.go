@@ -14,14 +14,14 @@ const (
 	RackUnitFaceValueEnumRear  RackUnitFaceValueEnum = "rear"
 )
 
-type RackUnitFaceFace struct {
+type RackUnitFace struct {
 	Label RackUnitFaceLabelEnum `json:"label"`
 	Value RackUnitFaceValueEnum `json:"value"`
 }
 
 type RackUnit struct {
-	Device *NestedDevice     `json:"device,omitempty"`
-	Face   *RackUnitFaceFace `json:"face,omitempty"`
-	ID     *int64            `json:"id,omitempty"`
-	Name   *string           `json:"name,omitempty"`
+	Device *NestedDevice `json:"device,omitempty"`
+	Face   *RackUnitFace `json:"face,omitempty"`
+	ID     *int64        `json:"id,omitempty"`
+	Name   *string       `json:"name,omitempty"`
 }

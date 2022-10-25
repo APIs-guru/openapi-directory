@@ -18,7 +18,7 @@ class UpdateDocumentHeaders:
     
 
 @dataclass
-class UpdateDocumentRequestBodyUpdateDocumentRequest:
+class UpdateDocumentUpdateDocumentRequest:
     data: Optional[Any] = field(default=None, metadata={'form': { 'field_name': 'Data' }})
     ttl: Optional[int] = field(default=None, metadata={'form': { 'field_name': 'Ttl' }})
     
@@ -33,7 +33,7 @@ class UpdateDocumentRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateDocumentPathParams = field(default=None)
     headers: UpdateDocumentHeaders = field(default=None)
-    request: Optional[UpdateDocumentRequestBodyUpdateDocumentRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateDocumentUpdateDocumentRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateDocumentSecurity = field(default=None)
     
 

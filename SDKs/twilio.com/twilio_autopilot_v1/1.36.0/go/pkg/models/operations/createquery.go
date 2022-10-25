@@ -12,7 +12,7 @@ type CreateQueryPathParams struct {
 	AssistantSid string `pathParam:"style=simple,explode=false,name=AssistantSid"`
 }
 
-type CreateQueryRequestBodyCreateQueryRequest struct {
+type CreateQueryCreateQueryRequest struct {
 	Language   string  `form:"name=Language"`
 	ModelBuild *string `form:"name=ModelBuild"`
 	Query      string  `form:"name=Query"`
@@ -26,7 +26,7 @@ type CreateQuerySecurity struct {
 type CreateQueryRequest struct {
 	ServerURL  *string
 	PathParams CreateQueryPathParams
-	Request    *CreateQueryRequestBodyCreateQueryRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateQueryCreateQueryRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateQuerySecurity
 }
 

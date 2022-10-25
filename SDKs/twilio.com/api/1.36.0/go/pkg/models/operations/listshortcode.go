@@ -29,7 +29,7 @@ type ListShortCodeRequest struct {
 	Security    ListShortCodeSecurity
 }
 
-type ListShortCode200ApplicationJSONListShortCodeResponse struct {
+type ListShortCodeListShortCodeResponse struct {
 	End             *int64                            `json:"end,omitempty"`
 	FirstPageURI    *string                           `json:"first_page_uri,omitempty"`
 	NextPageURI     *string                           `json:"next_page_uri,omitempty"`
@@ -43,6 +43,6 @@ type ListShortCode200ApplicationJSONListShortCodeResponse struct {
 
 type ListShortCodeResponse struct {
 	ContentType           string
-	ListShortCodeResponse *ListShortCode200ApplicationJSONListShortCodeResponse
+	ListShortCodeResponse *ListShortCodeListShortCodeResponse
 	StatusCode            int64
 }

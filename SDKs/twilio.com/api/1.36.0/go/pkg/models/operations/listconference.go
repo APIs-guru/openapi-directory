@@ -36,7 +36,7 @@ type ListConferenceRequest struct {
 	Security    ListConferenceSecurity
 }
 
-type ListConference200ApplicationJSONListConferenceResponse struct {
+type ListConferenceListConferenceResponse struct {
 	Conferences     []shared.APIV2010AccountConference `json:"conferences,omitempty"`
 	End             *int64                             `json:"end,omitempty"`
 	FirstPageURI    *string                            `json:"first_page_uri,omitempty"`
@@ -50,6 +50,6 @@ type ListConference200ApplicationJSONListConferenceResponse struct {
 
 type ListConferenceResponse struct {
 	ContentType            string
-	ListConferenceResponse *ListConference200ApplicationJSONListConferenceResponse
+	ListConferenceResponse *ListConferenceListConferenceResponse
 	StatusCode             int64
 }

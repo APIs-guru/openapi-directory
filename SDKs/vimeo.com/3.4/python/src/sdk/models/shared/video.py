@@ -271,7 +271,7 @@ class VideoMetadata:
 
 @dataclass_json
 @dataclass
-class VideoParentFolderMetadataConnectionsVideos:
+class VideoProjectMetadataConnectionsVideos:
     options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
     total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
     uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
@@ -279,21 +279,21 @@ class VideoParentFolderMetadataConnectionsVideos:
 
 @dataclass_json
 @dataclass
-class VideoParentFolderMetadataConnections:
-    videos: VideoParentFolderMetadataConnectionsVideos = field(default=None, metadata={'dataclasses_json': { 'field_name': 'videos' }})
+class VideoProjectMetadataConnections:
+    videos: VideoProjectMetadataConnectionsVideos = field(default=None, metadata={'dataclasses_json': { 'field_name': 'videos' }})
     
 
 @dataclass_json
 @dataclass
-class VideoParentFolderMetadata:
-    connections: VideoParentFolderMetadataConnections = field(default=None, metadata={'dataclasses_json': { 'field_name': 'connections' }})
+class VideoProjectMetadata:
+    connections: VideoProjectMetadataConnections = field(default=None, metadata={'dataclasses_json': { 'field_name': 'connections' }})
     
 
 @dataclass_json
 @dataclass
-class VideoParentFolderProject:
+class VideoProject:
     created_time: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'created_time' }})
-    metadata: VideoParentFolderMetadata = field(default=None, metadata={'dataclasses_json': { 'field_name': 'metadata' }})
+    metadata: VideoProjectMetadata = field(default=None, metadata={'dataclasses_json': { 'field_name': 'metadata' }})
     modified_time: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'modified_time' }})
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
     resource_key: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resource_key' }})
@@ -743,7 +743,7 @@ class VideoUserWebsites:
 
 @dataclass_json
 @dataclass
-class VideoUserUser:
+class VideoUser:
     account: VideoUserAccountEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'account' }})
     bio: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'bio' }})
     content_filter: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'content_filter' }})
@@ -779,7 +779,7 @@ class Video:
     metadata: VideoMetadata = field(default=None, metadata={'dataclasses_json': { 'field_name': 'metadata' }})
     modified_time: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'modified_time' }})
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    parent_folder: Optional[VideoParentFolderProject] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'parent_folder' }})
+    parent_folder: Optional[VideoProject] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'parent_folder' }})
     password: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'password' }})
     pictures: picture.Picture = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pictures' }})
     privacy: VideoPrivacy = field(default=None, metadata={'dataclasses_json': { 'field_name': 'privacy' }})
@@ -792,6 +792,6 @@ class Video:
     transcode: VideoTranscode = field(default=None, metadata={'dataclasses_json': { 'field_name': 'transcode' }})
     upload: VideoUpload = field(default=None, metadata={'dataclasses_json': { 'field_name': 'upload' }})
     uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
-    user: VideoUserUser = field(default=None, metadata={'dataclasses_json': { 'field_name': 'user' }})
+    user: VideoUser = field(default=None, metadata={'dataclasses_json': { 'field_name': 'user' }})
     width: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'width' }})
     

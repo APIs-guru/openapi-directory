@@ -7,7 +7,7 @@ CREATE_SERVICE_SERVERS = [
 
 
 @dataclass
-class CreateServiceRequestBodyCreateServiceRequest:
+class CreateServiceCreateServiceRequest:
     acl_enabled: Optional[bool] = field(default=None, metadata={'form': { 'field_name': 'AclEnabled' }})
     friendly_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
     reachability_debouncing_enabled: Optional[bool] = field(default=None, metadata={'form': { 'field_name': 'ReachabilityDebouncingEnabled' }})
@@ -25,7 +25,7 @@ class CreateServiceSecurity:
 @dataclass
 class CreateServiceRequest:
     server_url: Optional[str] = field(default=None)
-    request: Optional[CreateServiceRequestBodyCreateServiceRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateServiceCreateServiceRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateServiceSecurity = field(default=None)
     
 

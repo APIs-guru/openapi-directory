@@ -4,7 +4,7 @@ import (
 	"time"
 )
 
-type MigrationOwnerSimpleUser struct {
+type MigrationSimpleUser struct {
 	AvatarURL         string  `json:"avatar_url"`
 	EventsURL         string  `json:"events_url"`
 	FollowersURL      string  `json:"followers_url"`
@@ -27,17 +27,17 @@ type MigrationOwnerSimpleUser struct {
 }
 
 type Migration struct {
-	ArchiveURL         *string                  `json:"archive_url,omitempty"`
-	CreatedAt          time.Time                `json:"created_at"`
-	Exclude            []interface{}            `json:"exclude,omitempty"`
-	ExcludeAttachments bool                     `json:"exclude_attachments"`
-	GUID               string                   `json:"guid"`
-	ID                 int64                    `json:"id"`
-	LockRepositories   bool                     `json:"lock_repositories"`
-	NodeID             string                   `json:"node_id"`
-	Owner              MigrationOwnerSimpleUser `json:"owner"`
-	Repositories       []Repository             `json:"repositories"`
-	State              string                   `json:"state"`
-	UpdatedAt          time.Time                `json:"updated_at"`
-	URL                string                   `json:"url"`
+	ArchiveURL         *string             `json:"archive_url,omitempty"`
+	CreatedAt          time.Time           `json:"created_at"`
+	Exclude            []interface{}       `json:"exclude,omitempty"`
+	ExcludeAttachments bool                `json:"exclude_attachments"`
+	GUID               string              `json:"guid"`
+	ID                 int64               `json:"id"`
+	LockRepositories   bool                `json:"lock_repositories"`
+	NodeID             string              `json:"node_id"`
+	Owner              MigrationSimpleUser `json:"owner"`
+	Repositories       []Repository        `json:"repositories"`
+	State              string              `json:"state"`
+	UpdatedAt          time.Time           `json:"updated_at"`
+	URL                string              `json:"url"`
 }

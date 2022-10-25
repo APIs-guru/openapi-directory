@@ -5461,36 +5461,36 @@ func (s *SDK) GetSnippetsWorkspaceEncodedID(ctx context.Context, request operati
 
 			res.Snippet = out
 		case utils.MatchContentType(contentType, `multipart/form-data`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `multipart/related`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 401:
 		switch {
 		case utils.MatchContentType(contentType, `multipart/form-data`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `multipart/related`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out map[string]interface{}
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -5502,19 +5502,19 @@ func (s *SDK) GetSnippetsWorkspaceEncodedID(ctx context.Context, request operati
 	case httpRes.StatusCode == 403:
 		switch {
 		case utils.MatchContentType(contentType, `multipart/form-data`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `multipart/related`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out map[string]interface{}
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -5526,19 +5526,19 @@ func (s *SDK) GetSnippetsWorkspaceEncodedID(ctx context.Context, request operati
 	case httpRes.StatusCode == 404:
 		switch {
 		case utils.MatchContentType(contentType, `multipart/form-data`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `multipart/related`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out map[string]interface{}
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -5550,19 +5550,19 @@ func (s *SDK) GetSnippetsWorkspaceEncodedID(ctx context.Context, request operati
 	case httpRes.StatusCode == 410:
 		switch {
 		case utils.MatchContentType(contentType, `multipart/form-data`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `multipart/related`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out map[string]interface{}
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -5898,36 +5898,36 @@ func (s *SDK) GetSnippetsWorkspaceEncodedIDNodeID(ctx context.Context, request o
 
 			res.Snippet = out
 		case utils.MatchContentType(contentType, `multipart/form-data`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `multipart/related`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 401:
 		switch {
 		case utils.MatchContentType(contentType, `multipart/form-data`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `multipart/related`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out map[string]interface{}
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -5939,19 +5939,19 @@ func (s *SDK) GetSnippetsWorkspaceEncodedIDNodeID(ctx context.Context, request o
 	case httpRes.StatusCode == 403:
 		switch {
 		case utils.MatchContentType(contentType, `multipart/form-data`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `multipart/related`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out map[string]interface{}
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -5963,19 +5963,19 @@ func (s *SDK) GetSnippetsWorkspaceEncodedIDNodeID(ctx context.Context, request o
 	case httpRes.StatusCode == 404:
 		switch {
 		case utils.MatchContentType(contentType, `multipart/form-data`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `multipart/related`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out map[string]interface{}
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -11449,36 +11449,36 @@ func (s *SDK) PutSnippetsWorkspaceEncodedID(ctx context.Context, request operati
 
 			res.Snippet = out
 		case utils.MatchContentType(contentType, `multipart/form-data`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `multipart/related`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 401:
 		switch {
 		case utils.MatchContentType(contentType, `multipart/form-data`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `multipart/related`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out map[string]interface{}
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -11490,19 +11490,19 @@ func (s *SDK) PutSnippetsWorkspaceEncodedID(ctx context.Context, request operati
 	case httpRes.StatusCode == 403:
 		switch {
 		case utils.MatchContentType(contentType, `multipart/form-data`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `multipart/related`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out map[string]interface{}
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -11514,19 +11514,19 @@ func (s *SDK) PutSnippetsWorkspaceEncodedID(ctx context.Context, request operati
 	case httpRes.StatusCode == 404:
 		switch {
 		case utils.MatchContentType(contentType, `multipart/form-data`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `multipart/related`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out map[string]interface{}
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -11624,36 +11624,36 @@ func (s *SDK) PutSnippetsWorkspaceEncodedIDNodeID(ctx context.Context, request o
 
 			res.Snippet = out
 		case utils.MatchContentType(contentType, `multipart/form-data`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `multipart/related`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 401:
 		switch {
 		case utils.MatchContentType(contentType, `multipart/form-data`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `multipart/related`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out map[string]interface{}
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -11665,19 +11665,19 @@ func (s *SDK) PutSnippetsWorkspaceEncodedIDNodeID(ctx context.Context, request o
 	case httpRes.StatusCode == 403:
 		switch {
 		case utils.MatchContentType(contentType, `multipart/form-data`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `multipart/related`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out map[string]interface{}
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -11689,19 +11689,19 @@ func (s *SDK) PutSnippetsWorkspaceEncodedIDNodeID(ctx context.Context, request o
 	case httpRes.StatusCode == 404:
 		switch {
 		case utils.MatchContentType(contentType, `multipart/form-data`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `multipart/related`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out map[string]interface{}
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -11713,19 +11713,19 @@ func (s *SDK) PutSnippetsWorkspaceEncodedIDNodeID(ctx context.Context, request o
 	case httpRes.StatusCode == 405:
 		switch {
 		case utils.MatchContentType(contentType, `multipart/form-data`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `multipart/related`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out map[string]interface{}
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -14041,32 +14041,32 @@ func (s *SDK) GetPipelineStepLogForRepository(ctx context.Context, request opera
 	case httpRes.StatusCode == 304:
 		switch {
 		case utils.MatchContentType(contentType, `application/octet-stream`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 404:
 		switch {
 		case utils.MatchContentType(contentType, `application/octet-stream`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 416:
 		switch {
 		case utils.MatchContentType(contentType, `application/octet-stream`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 

@@ -13,26 +13,26 @@ type UpdateConnectAppPathParams struct {
 	Sid        string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
-type UpdateConnectAppRequestBodyDeauthorizeCallbackMethodEnum string
+type UpdateConnectAppUpdateConnectAppRequestDeauthorizeCallbackMethodEnum string
 
 const (
-	UpdateConnectAppRequestBodyDeauthorizeCallbackMethodEnumHead   UpdateConnectAppRequestBodyDeauthorizeCallbackMethodEnum = "HEAD"
-	UpdateConnectAppRequestBodyDeauthorizeCallbackMethodEnumGet    UpdateConnectAppRequestBodyDeauthorizeCallbackMethodEnum = "GET"
-	UpdateConnectAppRequestBodyDeauthorizeCallbackMethodEnumPost   UpdateConnectAppRequestBodyDeauthorizeCallbackMethodEnum = "POST"
-	UpdateConnectAppRequestBodyDeauthorizeCallbackMethodEnumPatch  UpdateConnectAppRequestBodyDeauthorizeCallbackMethodEnum = "PATCH"
-	UpdateConnectAppRequestBodyDeauthorizeCallbackMethodEnumPut    UpdateConnectAppRequestBodyDeauthorizeCallbackMethodEnum = "PUT"
-	UpdateConnectAppRequestBodyDeauthorizeCallbackMethodEnumDelete UpdateConnectAppRequestBodyDeauthorizeCallbackMethodEnum = "DELETE"
+	UpdateConnectAppUpdateConnectAppRequestDeauthorizeCallbackMethodEnumHead   UpdateConnectAppUpdateConnectAppRequestDeauthorizeCallbackMethodEnum = "HEAD"
+	UpdateConnectAppUpdateConnectAppRequestDeauthorizeCallbackMethodEnumGet    UpdateConnectAppUpdateConnectAppRequestDeauthorizeCallbackMethodEnum = "GET"
+	UpdateConnectAppUpdateConnectAppRequestDeauthorizeCallbackMethodEnumPost   UpdateConnectAppUpdateConnectAppRequestDeauthorizeCallbackMethodEnum = "POST"
+	UpdateConnectAppUpdateConnectAppRequestDeauthorizeCallbackMethodEnumPatch  UpdateConnectAppUpdateConnectAppRequestDeauthorizeCallbackMethodEnum = "PATCH"
+	UpdateConnectAppUpdateConnectAppRequestDeauthorizeCallbackMethodEnumPut    UpdateConnectAppUpdateConnectAppRequestDeauthorizeCallbackMethodEnum = "PUT"
+	UpdateConnectAppUpdateConnectAppRequestDeauthorizeCallbackMethodEnumDelete UpdateConnectAppUpdateConnectAppRequestDeauthorizeCallbackMethodEnum = "DELETE"
 )
 
-type UpdateConnectAppRequestBodyUpdateConnectAppRequest struct {
-	AuthorizeRedirectURL      *string                                                   `form:"name=AuthorizeRedirectUrl"`
-	CompanyName               *string                                                   `form:"name=CompanyName"`
-	DeauthorizeCallbackMethod *UpdateConnectAppRequestBodyDeauthorizeCallbackMethodEnum `form:"name=DeauthorizeCallbackMethod"`
-	DeauthorizeCallbackURL    *string                                                   `form:"name=DeauthorizeCallbackUrl"`
-	Description               *string                                                   `form:"name=Description"`
-	FriendlyName              *string                                                   `form:"name=FriendlyName"`
-	HomepageURL               *string                                                   `form:"name=HomepageUrl"`
-	Permissions               []shared.ConnectAppEnumPermissionEnum                     `form:"name=Permissions"`
+type UpdateConnectAppUpdateConnectAppRequest struct {
+	AuthorizeRedirectURL      *string                                                               `form:"name=AuthorizeRedirectUrl"`
+	CompanyName               *string                                                               `form:"name=CompanyName"`
+	DeauthorizeCallbackMethod *UpdateConnectAppUpdateConnectAppRequestDeauthorizeCallbackMethodEnum `form:"name=DeauthorizeCallbackMethod"`
+	DeauthorizeCallbackURL    *string                                                               `form:"name=DeauthorizeCallbackUrl"`
+	Description               *string                                                               `form:"name=Description"`
+	FriendlyName              *string                                                               `form:"name=FriendlyName"`
+	HomepageURL               *string                                                               `form:"name=HomepageUrl"`
+	Permissions               []shared.ConnectAppEnumPermissionEnum                                 `form:"name=Permissions"`
 }
 
 type UpdateConnectAppSecurity struct {
@@ -42,7 +42,7 @@ type UpdateConnectAppSecurity struct {
 type UpdateConnectAppRequest struct {
 	ServerURL  *string
 	PathParams UpdateConnectAppPathParams
-	Request    *UpdateConnectAppRequestBodyUpdateConnectAppRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateConnectAppUpdateConnectAppRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateConnectAppSecurity
 }
 

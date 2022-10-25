@@ -8,7 +8,7 @@ from dataclasses_json import dataclass_json
 
 @dataclass_json
 @dataclass
-class ProjectCreatorSimpleUser:
+class ProjectSimpleUser:
     avatar_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'avatar_url' }})
     events_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'events_url' }})
     followers_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'followers_url' }})
@@ -42,7 +42,7 @@ class Project:
     body: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'body' }})
     columns_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'columns_url' }})
     created_at: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'created_at', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    creator: ProjectCreatorSimpleUser = field(default=None, metadata={'dataclasses_json': { 'field_name': 'creator' }})
+    creator: ProjectSimpleUser = field(default=None, metadata={'dataclasses_json': { 'field_name': 'creator' }})
     html_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'html_url' }})
     id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})

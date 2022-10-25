@@ -723,7 +723,7 @@ class SDK:
         res = operations.ListDocumentResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListDocument200ApplicationJSONListDocumentResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListDocumentListDocumentResponse])
                 res.list_document_response = out
 
         return res
@@ -748,7 +748,7 @@ class SDK:
         res = operations.ListDocumentPermissionResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListDocumentPermission200ApplicationJSONListDocumentPermissionResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListDocumentPermissionListDocumentPermissionResponse])
                 res.list_document_permission_response = out
 
         return res
@@ -773,7 +773,7 @@ class SDK:
         res = operations.ListServiceResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListService200ApplicationJSONListServiceResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListServiceListServiceResponse])
                 res.list_service_response = out
 
         return res
@@ -798,7 +798,7 @@ class SDK:
         res = operations.ListSyncListResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListSyncList200ApplicationJSONListSyncListResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListSyncListListSyncListResponse])
                 res.list_sync_list_response = out
 
         return res
@@ -823,7 +823,7 @@ class SDK:
         res = operations.ListSyncListItemResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListSyncListItem200ApplicationJSONListSyncListItemResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListSyncListItemListSyncListItemResponse])
                 res.list_sync_list_item_response = out
 
         return res
@@ -848,7 +848,7 @@ class SDK:
         res = operations.ListSyncListPermissionResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListSyncListPermission200ApplicationJSONListSyncListPermissionResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListSyncListPermissionListSyncListPermissionResponse])
                 res.list_sync_list_permission_response = out
 
         return res
@@ -873,7 +873,7 @@ class SDK:
         res = operations.ListSyncMapResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListSyncMap200ApplicationJSONListSyncMapResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListSyncMapListSyncMapResponse])
                 res.list_sync_map_response = out
 
         return res
@@ -898,7 +898,7 @@ class SDK:
         res = operations.ListSyncMapItemResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListSyncMapItem200ApplicationJSONListSyncMapItemResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListSyncMapItemListSyncMapItemResponse])
                 res.list_sync_map_item_response = out
 
         return res
@@ -923,7 +923,7 @@ class SDK:
         res = operations.ListSyncMapPermissionResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListSyncMapPermission200ApplicationJSONListSyncMapPermissionResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListSyncMapPermissionListSyncMapPermissionResponse])
                 res.list_sync_map_permission_response = out
 
         return res
@@ -948,7 +948,7 @@ class SDK:
         res = operations.ListSyncStreamResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListSyncStream200ApplicationJSONListSyncStreamResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListSyncStreamListSyncStreamResponse])
                 res.list_sync_stream_response = out
 
         return res

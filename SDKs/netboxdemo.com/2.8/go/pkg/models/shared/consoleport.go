@@ -7,7 +7,7 @@ const (
 	ConsolePortConnectionStatusLabelEnumConnected    ConsolePortConnectionStatusLabelEnum = "Connected"
 )
 
-type ConsolePortConnectionStatusConnectionStatus struct {
+type ConsolePortConnectionStatus struct {
 	Label ConsolePortConnectionStatusLabelEnum `json:"label"`
 	Value bool                                 `json:"value"`
 }
@@ -48,20 +48,20 @@ const (
 	ConsolePortTypeValueEnumOther     ConsolePortTypeValueEnum = "other"
 )
 
-type ConsolePortTypeType struct {
+type ConsolePortType struct {
 	Label ConsolePortTypeLabelEnum `json:"label"`
 	Value ConsolePortTypeValueEnum `json:"value"`
 }
 
 type ConsolePort struct {
-	Cable                 *NestedCable                                 `json:"cable,omitempty"`
-	ConnectedEndpoint     map[string]string                            `json:"connected_endpoint,omitempty"`
-	ConnectedEndpointType *string                                      `json:"connected_endpoint_type,omitempty"`
-	ConnectionStatus      *ConsolePortConnectionStatusConnectionStatus `json:"connection_status,omitempty"`
-	Description           *string                                      `json:"description,omitempty"`
-	Device                NestedDevice                                 `json:"device"`
-	ID                    *int64                                       `json:"id,omitempty"`
-	Name                  string                                       `json:"name"`
-	Tags                  []string                                     `json:"tags,omitempty"`
-	Type                  *ConsolePortTypeType                         `json:"type,omitempty"`
+	Cable                 *NestedCable                 `json:"cable,omitempty"`
+	ConnectedEndpoint     map[string]string            `json:"connected_endpoint,omitempty"`
+	ConnectedEndpointType *string                      `json:"connected_endpoint_type,omitempty"`
+	ConnectionStatus      *ConsolePortConnectionStatus `json:"connection_status,omitempty"`
+	Description           *string                      `json:"description,omitempty"`
+	Device                NestedDevice                 `json:"device"`
+	ID                    *int64                       `json:"id,omitempty"`
+	Name                  string                       `json:"name"`
+	Tags                  []string                     `json:"tags,omitempty"`
+	Type                  *ConsolePortType             `json:"type,omitempty"`
 }

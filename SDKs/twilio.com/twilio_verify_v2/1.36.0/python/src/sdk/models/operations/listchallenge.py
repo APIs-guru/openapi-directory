@@ -36,7 +36,7 @@ class ListChallengeRequest:
 
 @dataclass_json
 @dataclass
-class ListChallenge200ApplicationJSONMeta:
+class ListChallengeListChallengeResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -48,14 +48,14 @@ class ListChallenge200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListChallenge200ApplicationJSONListChallengeResponse:
+class ListChallengeListChallengeResponse:
     challenges: Optional[List[shared.VerifyV2ServiceEntityChallenge]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'challenges' }})
-    meta: Optional[ListChallenge200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+    meta: Optional[ListChallengeListChallengeResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     
 
 @dataclass
 class ListChallengeResponse:
     content_type: str = field(default=None)
-    list_challenge_response: Optional[ListChallenge200ApplicationJSONListChallengeResponse] = field(default=None)
+    list_challenge_response: Optional[ListChallengeListChallengeResponse] = field(default=None)
     status_code: int = field(default=None)
     

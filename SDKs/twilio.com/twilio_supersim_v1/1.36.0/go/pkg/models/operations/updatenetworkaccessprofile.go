@@ -12,7 +12,7 @@ type UpdateNetworkAccessProfilePathParams struct {
 	Sid string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
-type UpdateNetworkAccessProfileRequestBodyUpdateNetworkAccessProfileRequest struct {
+type UpdateNetworkAccessProfileUpdateNetworkAccessProfileRequest struct {
 	UniqueName *string `form:"name=UniqueName"`
 }
 
@@ -23,7 +23,7 @@ type UpdateNetworkAccessProfileSecurity struct {
 type UpdateNetworkAccessProfileRequest struct {
 	ServerURL  *string
 	PathParams UpdateNetworkAccessProfilePathParams
-	Request    *UpdateNetworkAccessProfileRequestBodyUpdateNetworkAccessProfileRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateNetworkAccessProfileUpdateNetworkAccessProfileRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateNetworkAccessProfileSecurity
 }
 

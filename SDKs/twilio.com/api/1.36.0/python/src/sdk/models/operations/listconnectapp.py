@@ -32,7 +32,7 @@ class ListConnectAppRequest:
 
 @dataclass_json
 @dataclass
-class ListConnectApp200ApplicationJSONListConnectAppResponse:
+class ListConnectAppListConnectAppResponse:
     connect_apps: Optional[List[shared.APIV2010AccountConnectApp]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'connect_apps' }})
     end: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'end' }})
     first_page_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_uri' }})
@@ -47,6 +47,6 @@ class ListConnectApp200ApplicationJSONListConnectAppResponse:
 @dataclass
 class ListConnectAppResponse:
     content_type: str = field(default=None)
-    list_connect_app_response: Optional[ListConnectApp200ApplicationJSONListConnectAppResponse] = field(default=None)
+    list_connect_app_response: Optional[ListConnectAppListConnectAppResponse] = field(default=None)
     status_code: int = field(default=None)
     

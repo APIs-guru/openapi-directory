@@ -26,5 +26,6 @@ type PostTeamsTeamIDMembershipsResendInviteMailResponse struct {
 	ErrorResponseContent                                               *shared.ErrorResponseContent
 	PostTeamsTeamIDMembershipsResendInviteMail200ApplicationJSONString *string
 	PostTeamsTeamIDMembershipsResendInviteMail200TextJSONString        *string
+	PostTeamsTeamIDMembershipsResendInviteMail200TextPlainString       *string
 	StatusCode                                                         int64
 }

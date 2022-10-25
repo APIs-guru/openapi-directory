@@ -13,7 +13,7 @@ type CreateInteractionChannelInvitePathParams struct {
 	InteractionSid string `pathParam:"style=simple,explode=false,name=InteractionSid"`
 }
 
-type CreateInteractionChannelInviteRequestBodyCreateInteractionChannelInviteRequest struct {
+type CreateInteractionChannelInviteCreateInteractionChannelInviteRequest struct {
 	Routing interface{} `form:"name=Routing"`
 }
 
@@ -24,7 +24,7 @@ type CreateInteractionChannelInviteSecurity struct {
 type CreateInteractionChannelInviteRequest struct {
 	ServerURL  *string
 	PathParams CreateInteractionChannelInvitePathParams
-	Request    *CreateInteractionChannelInviteRequestBodyCreateInteractionChannelInviteRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateInteractionChannelInviteCreateInteractionChannelInviteRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateInteractionChannelInviteSecurity
 }
 

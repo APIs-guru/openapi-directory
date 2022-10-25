@@ -4,92 +4,92 @@ import (
 	"time"
 )
 
-type PensionPensionPensionablePayCodesPensionablePayCodes struct {
+type PensionPensionPensionablePayCodes struct {
 	PayCode []string `json:"PayCode,omitempty"`
 }
 
-type PensionPensionProRataMethodProRataMethodEnum string
+type PensionPensionProRataMethodEnum string
 
 const (
-	PensionPensionProRataMethodProRataMethodEnumNotSet                      PensionPensionProRataMethodProRataMethodEnum = "NotSet"
-	PensionPensionProRataMethodProRataMethodEnumAnnual260Days               PensionPensionProRataMethodProRataMethodEnum = "Annual260Days"
-	PensionPensionProRataMethodProRataMethodEnumAnnual365Days               PensionPensionProRataMethodProRataMethodEnum = "Annual365Days"
-	PensionPensionProRataMethodProRataMethodEnumAnnualQualifyingDays        PensionPensionProRataMethodProRataMethodEnum = "AnnualQualifyingDays"
-	PensionPensionProRataMethodProRataMethodEnumDaysPerCalendarMonth        PensionPensionProRataMethodProRataMethodEnum = "DaysPerCalendarMonth"
-	PensionPensionProRataMethodProRataMethodEnumDaysPerTaxPeriod            PensionPensionProRataMethodProRataMethodEnum = "DaysPerTaxPeriod"
-	PensionPensionProRataMethodProRataMethodEnumWorkingDaysPerCalendarMonth PensionPensionProRataMethodProRataMethodEnum = "WorkingDaysPerCalendarMonth"
-	PensionPensionProRataMethodProRataMethodEnumWeekDaysPerCalendarMonth    PensionPensionProRataMethodProRataMethodEnum = "WeekDaysPerCalendarMonth"
+	PensionPensionProRataMethodEnumNotSet                      PensionPensionProRataMethodEnum = "NotSet"
+	PensionPensionProRataMethodEnumAnnual260Days               PensionPensionProRataMethodEnum = "Annual260Days"
+	PensionPensionProRataMethodEnumAnnual365Days               PensionPensionProRataMethodEnum = "Annual365Days"
+	PensionPensionProRataMethodEnumAnnualQualifyingDays        PensionPensionProRataMethodEnum = "AnnualQualifyingDays"
+	PensionPensionProRataMethodEnumDaysPerCalendarMonth        PensionPensionProRataMethodEnum = "DaysPerCalendarMonth"
+	PensionPensionProRataMethodEnumDaysPerTaxPeriod            PensionPensionProRataMethodEnum = "DaysPerTaxPeriod"
+	PensionPensionProRataMethodEnumWorkingDaysPerCalendarMonth PensionPensionProRataMethodEnum = "WorkingDaysPerCalendarMonth"
+	PensionPensionProRataMethodEnumWeekDaysPerCalendarMonth    PensionPensionProRataMethodEnum = "WeekDaysPerCalendarMonth"
 )
 
-type PensionPensionQualifyingPayCodesQualifyingPayCodes struct {
+type PensionPensionQualifyingPayCodes struct {
 	PayCode []string `json:"PayCode,omitempty"`
 }
 
-type PensionPensionRasRoundingOverrideRasRoundingOverrideEnum string
+type PensionPensionRasRoundingOverrideEnum string
 
 const (
-	PensionPensionRasRoundingOverrideRasRoundingOverrideEnumNotSet    PensionPensionRasRoundingOverrideRasRoundingOverrideEnum = "NotSet"
-	PensionPensionRasRoundingOverrideRasRoundingOverrideEnumPennyUp   PensionPensionRasRoundingOverrideRasRoundingOverrideEnum = "PennyUp"
-	PensionPensionRasRoundingOverrideRasRoundingOverrideEnumPennyDown PensionPensionRasRoundingOverrideRasRoundingOverrideEnum = "PennyDown"
-	PensionPensionRasRoundingOverrideRasRoundingOverrideEnumBankers   PensionPensionRasRoundingOverrideRasRoundingOverrideEnum = "Bankers"
-	PensionPensionRasRoundingOverrideRasRoundingOverrideEnumFiveUp    PensionPensionRasRoundingOverrideRasRoundingOverrideEnum = "FiveUp"
-	PensionPensionRasRoundingOverrideRasRoundingOverrideEnumFiveDown  PensionPensionRasRoundingOverrideRasRoundingOverrideEnum = "FiveDown"
-	PensionPensionRasRoundingOverrideRasRoundingOverrideEnumFloor     PensionPensionRasRoundingOverrideRasRoundingOverrideEnum = "Floor"
-	PensionPensionRasRoundingOverrideRasRoundingOverrideEnumCeiling   PensionPensionRasRoundingOverrideRasRoundingOverrideEnum = "Ceiling"
+	PensionPensionRasRoundingOverrideEnumNotSet    PensionPensionRasRoundingOverrideEnum = "NotSet"
+	PensionPensionRasRoundingOverrideEnumPennyUp   PensionPensionRasRoundingOverrideEnum = "PennyUp"
+	PensionPensionRasRoundingOverrideEnumPennyDown PensionPensionRasRoundingOverrideEnum = "PennyDown"
+	PensionPensionRasRoundingOverrideEnumBankers   PensionPensionRasRoundingOverrideEnum = "Bankers"
+	PensionPensionRasRoundingOverrideEnumFiveUp    PensionPensionRasRoundingOverrideEnum = "FiveUp"
+	PensionPensionRasRoundingOverrideEnumFiveDown  PensionPensionRasRoundingOverrideEnum = "FiveDown"
+	PensionPensionRasRoundingOverrideEnumFloor     PensionPensionRasRoundingOverrideEnum = "Floor"
+	PensionPensionRasRoundingOverrideEnumCeiling   PensionPensionRasRoundingOverrideEnum = "Ceiling"
 )
 
-type PensionPensionRoundingOptionRoundingOptionEnum string
+type PensionPensionRoundingOptionEnum string
 
 const (
-	PensionPensionRoundingOptionRoundingOptionEnumNotSet    PensionPensionRoundingOptionRoundingOptionEnum = "NotSet"
-	PensionPensionRoundingOptionRoundingOptionEnumPennyUp   PensionPensionRoundingOptionRoundingOptionEnum = "PennyUp"
-	PensionPensionRoundingOptionRoundingOptionEnumPennyDown PensionPensionRoundingOptionRoundingOptionEnum = "PennyDown"
-	PensionPensionRoundingOptionRoundingOptionEnumBankers   PensionPensionRoundingOptionRoundingOptionEnum = "Bankers"
-	PensionPensionRoundingOptionRoundingOptionEnumFiveUp    PensionPensionRoundingOptionRoundingOptionEnum = "FiveUp"
-	PensionPensionRoundingOptionRoundingOptionEnumFiveDown  PensionPensionRoundingOptionRoundingOptionEnum = "FiveDown"
-	PensionPensionRoundingOptionRoundingOptionEnumFloor     PensionPensionRoundingOptionRoundingOptionEnum = "Floor"
-	PensionPensionRoundingOptionRoundingOptionEnumCeiling   PensionPensionRoundingOptionRoundingOptionEnum = "Ceiling"
+	PensionPensionRoundingOptionEnumNotSet    PensionPensionRoundingOptionEnum = "NotSet"
+	PensionPensionRoundingOptionEnumPennyUp   PensionPensionRoundingOptionEnum = "PennyUp"
+	PensionPensionRoundingOptionEnumPennyDown PensionPensionRoundingOptionEnum = "PennyDown"
+	PensionPensionRoundingOptionEnumBankers   PensionPensionRoundingOptionEnum = "Bankers"
+	PensionPensionRoundingOptionEnumFiveUp    PensionPensionRoundingOptionEnum = "FiveUp"
+	PensionPensionRoundingOptionEnumFiveDown  PensionPensionRoundingOptionEnum = "FiveDown"
+	PensionPensionRoundingOptionEnumFloor     PensionPensionRoundingOptionEnum = "Floor"
+	PensionPensionRoundingOptionEnumCeiling   PensionPensionRoundingOptionEnum = "Ceiling"
 )
 
-type PensionPensionTaxationMethodTaxationMethodEnum string
+type PensionPensionTaxationMethodEnum string
 
 const (
-	PensionPensionTaxationMethodTaxationMethodEnumNotSet            PensionPensionTaxationMethodTaxationMethodEnum = "NotSet"
-	PensionPensionTaxationMethodTaxationMethodEnumNetBased          PensionPensionTaxationMethodTaxationMethodEnum = "NetBased"
-	PensionPensionTaxationMethodTaxationMethodEnumReliefAtSource    PensionPensionTaxationMethodTaxationMethodEnum = "ReliefAtSource"
-	PensionPensionTaxationMethodTaxationMethodEnumTaxReliefExcluded PensionPensionTaxationMethodTaxationMethodEnum = "TaxReliefExcluded"
+	PensionPensionTaxationMethodEnumNotSet            PensionPensionTaxationMethodEnum = "NotSet"
+	PensionPensionTaxationMethodEnumNetBased          PensionPensionTaxationMethodEnum = "NetBased"
+	PensionPensionTaxationMethodEnumReliefAtSource    PensionPensionTaxationMethodEnum = "ReliefAtSource"
+	PensionPensionTaxationMethodEnumTaxReliefExcluded PensionPensionTaxationMethodEnum = "TaxReliefExcluded"
 )
 
-type PensionPensionPension struct {
-	AeCompatible                *bool                                                     `json:"AECompatible,omitempty"`
-	Code                        *string                                                   `json:"Code,omitempty"`
-	ContributionDeductionDay    *int32                                                    `json:"ContributionDeductionDay,omitempty"`
-	EffectiveDate               *time.Time                                                `json:"EffectiveDate,omitempty"`
-	EmployeeContributionCash    *float64                                                  `json:"EmployeeContributionCash,omitempty"`
-	EmployeeContributionPercent *float64                                                  `json:"EmployeeContributionPercent,omitempty"`
-	EmployerContributionCash    *float64                                                  `json:"EmployerContributionCash,omitempty"`
-	EmployerContributionPercent *float64                                                  `json:"EmployerContributionPercent,omitempty"`
-	EmployerNiSaving            *bool                                                     `json:"EmployerNiSaving,omitempty"`
-	EmployerNiSavingPercentage  *float64                                                  `json:"EmployerNiSavingPercentage,omitempty"`
-	Group                       *string                                                   `json:"Group,omitempty"`
-	LowerThreshold              *float64                                                  `json:"LowerThreshold,omitempty"`
-	MetaData                    map[string]interface{}                                    `json:"MetaData,omitempty"`
-	PensionablePayCodes         *PensionPensionPensionablePayCodesPensionablePayCodes     `json:"PensionablePayCodes,omitempty"`
-	ProRataMethod               *PensionPensionProRataMethodProRataMethodEnum             `json:"ProRataMethod,omitempty"`
-	ProviderEmployerRef         *string                                                   `json:"ProviderEmployerRef,omitempty"`
-	ProviderName                *string                                                   `json:"ProviderName,omitempty"`
-	QualifyingPayCodes          *PensionPensionQualifyingPayCodesQualifyingPayCodes       `json:"QualifyingPayCodes,omitempty"`
-	RasRoundingOverride         *PensionPensionRasRoundingOverrideRasRoundingOverrideEnum `json:"RasRoundingOverride,omitempty"`
-	Revision                    *int32                                                    `json:"Revision,omitempty"`
-	RoundingOption              *PensionPensionRoundingOptionRoundingOptionEnum           `json:"RoundingOption,omitempty"`
-	SalarySacrifice             *bool                                                     `json:"SalarySacrifice,omitempty"`
-	SchemeName                  *string                                                   `json:"SchemeName,omitempty"`
-	SubGroup                    *string                                                   `json:"SubGroup,omitempty"`
-	TaxationMethod              *PensionPensionTaxationMethodTaxationMethodEnum           `json:"TaxationMethod,omitempty"`
-	UpperThreshold              *float64                                                  `json:"UpperThreshold,omitempty"`
-	UseAeThresholds             *bool                                                     `json:"UseAEThresholds,omitempty"`
+type PensionPension struct {
+	AeCompatible                *bool                                  `json:"AECompatible,omitempty"`
+	Code                        *string                                `json:"Code,omitempty"`
+	ContributionDeductionDay    *int32                                 `json:"ContributionDeductionDay,omitempty"`
+	EffectiveDate               *time.Time                             `json:"EffectiveDate,omitempty"`
+	EmployeeContributionCash    *float64                               `json:"EmployeeContributionCash,omitempty"`
+	EmployeeContributionPercent *float64                               `json:"EmployeeContributionPercent,omitempty"`
+	EmployerContributionCash    *float64                               `json:"EmployerContributionCash,omitempty"`
+	EmployerContributionPercent *float64                               `json:"EmployerContributionPercent,omitempty"`
+	EmployerNiSaving            *bool                                  `json:"EmployerNiSaving,omitempty"`
+	EmployerNiSavingPercentage  *float64                               `json:"EmployerNiSavingPercentage,omitempty"`
+	Group                       *string                                `json:"Group,omitempty"`
+	LowerThreshold              *float64                               `json:"LowerThreshold,omitempty"`
+	MetaData                    map[string]interface{}                 `json:"MetaData,omitempty"`
+	PensionablePayCodes         *PensionPensionPensionablePayCodes     `json:"PensionablePayCodes,omitempty"`
+	ProRataMethod               *PensionPensionProRataMethodEnum       `json:"ProRataMethod,omitempty"`
+	ProviderEmployerRef         *string                                `json:"ProviderEmployerRef,omitempty"`
+	ProviderName                *string                                `json:"ProviderName,omitempty"`
+	QualifyingPayCodes          *PensionPensionQualifyingPayCodes      `json:"QualifyingPayCodes,omitempty"`
+	RasRoundingOverride         *PensionPensionRasRoundingOverrideEnum `json:"RasRoundingOverride,omitempty"`
+	Revision                    *int32                                 `json:"Revision,omitempty"`
+	RoundingOption              *PensionPensionRoundingOptionEnum      `json:"RoundingOption,omitempty"`
+	SalarySacrifice             *bool                                  `json:"SalarySacrifice,omitempty"`
+	SchemeName                  *string                                `json:"SchemeName,omitempty"`
+	SubGroup                    *string                                `json:"SubGroup,omitempty"`
+	TaxationMethod              *PensionPensionTaxationMethodEnum      `json:"TaxationMethod,omitempty"`
+	UpperThreshold              *float64                               `json:"UpperThreshold,omitempty"`
+	UseAeThresholds             *bool                                  `json:"UseAEThresholds,omitempty"`
 }
 
 type Pension struct {
-	Pension *PensionPensionPension `json:"Pension,omitempty"`
+	Pension *PensionPension `json:"Pension,omitempty"`
 }

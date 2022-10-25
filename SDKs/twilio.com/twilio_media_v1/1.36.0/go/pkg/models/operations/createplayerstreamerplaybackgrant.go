@@ -12,7 +12,7 @@ type CreatePlayerStreamerPlaybackGrantPathParams struct {
 	Sid string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
-type CreatePlayerStreamerPlaybackGrantRequestBodyCreatePlayerStreamerPlaybackGrantRequest struct {
+type CreatePlayerStreamerPlaybackGrantCreatePlayerStreamerPlaybackGrantRequest struct {
 	AccessControlAllowOrigin *string `form:"name=AccessControlAllowOrigin"`
 	TTL                      *int64  `form:"name=Ttl"`
 }
@@ -24,7 +24,7 @@ type CreatePlayerStreamerPlaybackGrantSecurity struct {
 type CreatePlayerStreamerPlaybackGrantRequest struct {
 	ServerURL  *string
 	PathParams CreatePlayerStreamerPlaybackGrantPathParams
-	Request    *CreatePlayerStreamerPlaybackGrantRequestBodyCreatePlayerStreamerPlaybackGrantRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreatePlayerStreamerPlaybackGrantCreatePlayerStreamerPlaybackGrantRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreatePlayerStreamerPlaybackGrantSecurity
 }
 

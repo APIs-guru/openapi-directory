@@ -13,7 +13,7 @@ type CreateIncomingPhoneNumberAssignedAddOnPathParams struct {
 	ResourceSid string `pathParam:"style=simple,explode=false,name=ResourceSid"`
 }
 
-type CreateIncomingPhoneNumberAssignedAddOnRequestBodyCreateIncomingPhoneNumberAssignedAddOnRequest struct {
+type CreateIncomingPhoneNumberAssignedAddOnCreateIncomingPhoneNumberAssignedAddOnRequest struct {
 	InstalledAddOnSid string `form:"name=InstalledAddOnSid"`
 }
 
@@ -24,7 +24,7 @@ type CreateIncomingPhoneNumberAssignedAddOnSecurity struct {
 type CreateIncomingPhoneNumberAssignedAddOnRequest struct {
 	ServerURL  *string
 	PathParams CreateIncomingPhoneNumberAssignedAddOnPathParams
-	Request    *CreateIncomingPhoneNumberAssignedAddOnRequestBodyCreateIncomingPhoneNumberAssignedAddOnRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateIncomingPhoneNumberAssignedAddOnCreateIncomingPhoneNumberAssignedAddOnRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateIncomingPhoneNumberAssignedAddOnSecurity
 }
 

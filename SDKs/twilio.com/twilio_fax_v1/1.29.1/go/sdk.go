@@ -238,7 +238,7 @@ func (s *SDK) ListFax(ctx context.Context, request operations.ListFaxRequest) (*
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListFax200ApplicationJSONListFaxResponse
+			var out *operations.ListFaxListFaxResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -283,7 +283,7 @@ func (s *SDK) ListFaxMedia(ctx context.Context, request operations.ListFaxMediaR
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListFaxMedia200ApplicationJSONListFaxMediaResponse
+			var out *operations.ListFaxMediaListFaxMediaResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}

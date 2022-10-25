@@ -27,7 +27,7 @@ type ListEnvironmentRequest struct {
 	Security    ListEnvironmentSecurity
 }
 
-type ListEnvironment200ApplicationJSONMeta struct {
+type ListEnvironmentListEnvironmentResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -37,13 +37,13 @@ type ListEnvironment200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListEnvironment200ApplicationJSONListEnvironmentResponse struct {
-	Environments []shared.ServerlessV1ServiceEnvironment `json:"environments,omitempty"`
-	Meta         *ListEnvironment200ApplicationJSONMeta  `json:"meta,omitempty"`
+type ListEnvironmentListEnvironmentResponse struct {
+	Environments []shared.ServerlessV1ServiceEnvironment     `json:"environments,omitempty"`
+	Meta         *ListEnvironmentListEnvironmentResponseMeta `json:"meta,omitempty"`
 }
 
 type ListEnvironmentResponse struct {
 	ContentType             string
-	ListEnvironmentResponse *ListEnvironment200ApplicationJSONListEnvironmentResponse
+	ListEnvironmentResponse *ListEnvironmentListEnvironmentResponse
 	StatusCode              int64
 }

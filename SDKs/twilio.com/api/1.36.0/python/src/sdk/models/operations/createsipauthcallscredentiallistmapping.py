@@ -13,7 +13,7 @@ class CreateSipAuthCallsCredentialListMappingPathParams:
     
 
 @dataclass
-class CreateSipAuthCallsCredentialListMappingRequestBodyCreateSipAuthCallsCredentialListMappingRequest:
+class CreateSipAuthCallsCredentialListMappingCreateSipAuthCallsCredentialListMappingRequest:
     credential_list_sid: str = field(default=None, metadata={'form': { 'field_name': 'CredentialListSid' }})
     
 
@@ -26,7 +26,7 @@ class CreateSipAuthCallsCredentialListMappingSecurity:
 class CreateSipAuthCallsCredentialListMappingRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateSipAuthCallsCredentialListMappingPathParams = field(default=None)
-    request: Optional[CreateSipAuthCallsCredentialListMappingRequestBodyCreateSipAuthCallsCredentialListMappingRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateSipAuthCallsCredentialListMappingCreateSipAuthCallsCredentialListMappingRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateSipAuthCallsCredentialListMappingSecurity = field(default=None)
     
 

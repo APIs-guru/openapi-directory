@@ -39,7 +39,7 @@ class ListUsageRecordDailyRequest:
 
 @dataclass_json
 @dataclass
-class ListUsageRecordDaily200ApplicationJSONListUsageRecordDailyResponse:
+class ListUsageRecordDailyListUsageRecordDailyResponse:
     end: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'end' }})
     first_page_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_uri' }})
     next_page_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_uri' }})
@@ -54,6 +54,6 @@ class ListUsageRecordDaily200ApplicationJSONListUsageRecordDailyResponse:
 @dataclass
 class ListUsageRecordDailyResponse:
     content_type: str = field(default=None)
-    list_usage_record_daily_response: Optional[ListUsageRecordDaily200ApplicationJSONListUsageRecordDailyResponse] = field(default=None)
+    list_usage_record_daily_response: Optional[ListUsageRecordDailyListUsageRecordDailyResponse] = field(default=None)
     status_code: int = field(default=None)
     

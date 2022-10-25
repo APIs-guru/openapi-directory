@@ -23,7 +23,7 @@ type ListFlexFlowRequest struct {
 	Security    ListFlexFlowSecurity
 }
 
-type ListFlexFlow200ApplicationJSONMeta struct {
+type ListFlexFlowListFlexFlowResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -33,13 +33,13 @@ type ListFlexFlow200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListFlexFlow200ApplicationJSONListFlexFlowResponse struct {
-	FlexFlows []shared.FlexV1FlexFlow             `json:"flex_flows,omitempty"`
-	Meta      *ListFlexFlow200ApplicationJSONMeta `json:"meta,omitempty"`
+type ListFlexFlowListFlexFlowResponse struct {
+	FlexFlows []shared.FlexV1FlexFlow               `json:"flex_flows,omitempty"`
+	Meta      *ListFlexFlowListFlexFlowResponseMeta `json:"meta,omitempty"`
 }
 
 type ListFlexFlowResponse struct {
 	ContentType          string
-	ListFlexFlowResponse *ListFlexFlow200ApplicationJSONListFlexFlowResponse
+	ListFlexFlowResponse *ListFlexFlowListFlexFlowResponse
 	StatusCode           int64
 }

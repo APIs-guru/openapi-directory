@@ -3,12 +3,12 @@ from typing import Enum,List,Optional
 from dataclasses_json import dataclass_json
 from . import nestedcable
 
-class WritableDeviceInterfaceModeModeEnum(str, Enum):
+class WritableDeviceInterfaceModeEnum(str, Enum):
     ACCESS = "access"
     TAGGED = "tagged"
     TAGGED_ALL = "tagged-all"
 
-class WritableDeviceInterfaceTypeTypeEnum(str, Enum):
+class WritableDeviceInterfaceTypeEnum(str, Enum):
     VIRTUAL = "virtual"
     LAG = "lag"
     ONE_HUNDREDBASE_TX = "100base-tx"
@@ -98,11 +98,11 @@ class WritableDeviceInterface:
     lag: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lag' }})
     mac_address: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'mac_address' }})
     mgmt_only: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'mgmt_only' }})
-    mode: Optional[WritableDeviceInterfaceModeModeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'mode' }})
+    mode: Optional[WritableDeviceInterfaceModeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'mode' }})
     mtu: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'mtu' }})
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
     tagged_vlans: Optional[List[int]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tagged_vlans' }})
     tags: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
-    type: WritableDeviceInterfaceTypeTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    type: WritableDeviceInterfaceTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     untagged_vlan: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'untagged_vlan' }})
     

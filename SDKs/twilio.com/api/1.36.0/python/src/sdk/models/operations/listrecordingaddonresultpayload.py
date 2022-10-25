@@ -34,7 +34,7 @@ class ListRecordingAddOnResultPayloadRequest:
 
 @dataclass_json
 @dataclass
-class ListRecordingAddOnResultPayload200ApplicationJSONListRecordingAddOnResultPayloadResponse:
+class ListRecordingAddOnResultPayloadListRecordingAddOnResultPayloadResponse:
     end: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'end' }})
     first_page_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_uri' }})
     next_page_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_uri' }})
@@ -49,6 +49,6 @@ class ListRecordingAddOnResultPayload200ApplicationJSONListRecordingAddOnResultP
 @dataclass
 class ListRecordingAddOnResultPayloadResponse:
     content_type: str = field(default=None)
-    list_recording_add_on_result_payload_response: Optional[ListRecordingAddOnResultPayload200ApplicationJSONListRecordingAddOnResultPayloadResponse] = field(default=None)
+    list_recording_add_on_result_payload_response: Optional[ListRecordingAddOnResultPayloadListRecordingAddOnResultPayloadResponse] = field(default=None)
     status_code: int = field(default=None)
     

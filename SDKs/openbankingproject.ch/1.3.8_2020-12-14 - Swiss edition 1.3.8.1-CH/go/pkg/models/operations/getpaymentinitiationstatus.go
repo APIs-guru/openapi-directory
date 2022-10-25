@@ -38,7 +38,6 @@ type GetPaymentInitiationStatusRequest struct {
 }
 
 type GetPaymentInitiationStatusResponse struct {
-	Body                                   []byte
 	ContentType                            string
 	Error400NgPis                          *shared.Error400NgPis
 	Error400Pis                            *shared.Error400Pis
@@ -55,4 +54,5 @@ type GetPaymentInitiationStatusResponse struct {
 	Headers                                map[string][]string
 	StatusCode                             int64
 	PaymentInitiationStatusResponse200JSON *shared.PaymentInitiationStatusResponse200JSON
+	PaymentInitiationStatusResponse200XML  *string
 }

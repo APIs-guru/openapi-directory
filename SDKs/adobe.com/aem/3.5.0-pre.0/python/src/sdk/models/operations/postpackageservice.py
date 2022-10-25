@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-
+from typing import Optional
 
 
 @dataclass
@@ -14,7 +14,7 @@ class PostPackageServiceRequest:
 
 @dataclass
 class PostPackageServiceResponse:
-    body: bytes = field(default=None)
     content_type: str = field(default=None)
     status_code: int = field(default=None)
+    post_package_service_default_text_xml_string: Optional[str] = field(default=None)
     

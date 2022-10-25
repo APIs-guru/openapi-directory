@@ -34,7 +34,7 @@ class ListShortCodeRequest:
 
 @dataclass_json
 @dataclass
-class ListShortCode200ApplicationJSONListShortCodeResponse:
+class ListShortCodeListShortCodeResponse:
     end: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'end' }})
     first_page_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_uri' }})
     next_page_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_uri' }})
@@ -49,6 +49,6 @@ class ListShortCode200ApplicationJSONListShortCodeResponse:
 @dataclass
 class ListShortCodeResponse:
     content_type: str = field(default=None)
-    list_short_code_response: Optional[ListShortCode200ApplicationJSONListShortCodeResponse] = field(default=None)
+    list_short_code_response: Optional[ListShortCodeListShortCodeResponse] = field(default=None)
     status_code: int = field(default=None)
     

@@ -33,7 +33,7 @@ class ListSipIPAddressRequest:
 
 @dataclass_json
 @dataclass
-class ListSipIPAddress200ApplicationJSONListSipIPAddressResponse:
+class ListSipIPAddressListSipIPAddressResponse:
     end: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'end' }})
     first_page_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_uri' }})
     ip_addresses: Optional[List[shared.APIV2010AccountSipSipIPAccessControlListSipIPAddress]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ip_addresses' }})
@@ -48,6 +48,6 @@ class ListSipIPAddress200ApplicationJSONListSipIPAddressResponse:
 @dataclass
 class ListSipIPAddressResponse:
     content_type: str = field(default=None)
-    list_sip_ip_address_response: Optional[ListSipIPAddress200ApplicationJSONListSipIPAddressResponse] = field(default=None)
+    list_sip_ip_address_response: Optional[ListSipIPAddressListSipIPAddressResponse] = field(default=None)
     status_code: int = field(default=None)
     

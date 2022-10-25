@@ -13,7 +13,7 @@ type UpdateTaskPathParams struct {
 	Sid          string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
-type UpdateTaskRequestBodyUpdateTaskRequest struct {
+type UpdateTaskUpdateTaskRequest struct {
 	Actions      *interface{} `form:"name=Actions"`
 	ActionsURL   *string      `form:"name=ActionsUrl"`
 	FriendlyName *string      `form:"name=FriendlyName"`
@@ -27,7 +27,7 @@ type UpdateTaskSecurity struct {
 type UpdateTaskRequest struct {
 	ServerURL  *string
 	PathParams UpdateTaskPathParams
-	Request    *UpdateTaskRequestBodyUpdateTaskRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateTaskUpdateTaskRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateTaskSecurity
 }
 

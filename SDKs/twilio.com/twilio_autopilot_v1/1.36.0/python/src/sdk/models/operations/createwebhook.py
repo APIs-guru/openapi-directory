@@ -12,7 +12,7 @@ class CreateWebhookPathParams:
     
 
 @dataclass
-class CreateWebhookRequestBodyCreateWebhookRequest:
+class CreateWebhookCreateWebhookRequest:
     events: str = field(default=None, metadata={'form': { 'field_name': 'Events' }})
     unique_name: str = field(default=None, metadata={'form': { 'field_name': 'UniqueName' }})
     webhook_method: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'WebhookMethod' }})
@@ -28,7 +28,7 @@ class CreateWebhookSecurity:
 class CreateWebhookRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateWebhookPathParams = field(default=None)
-    request: Optional[CreateWebhookRequestBodyCreateWebhookRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateWebhookCreateWebhookRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateWebhookSecurity = field(default=None)
     
 

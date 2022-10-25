@@ -3,46 +3,46 @@ from typing import Enum,Optional
 from dataclasses_json import dataclass_json
 from sdk.models import shared
 
-class CreatePdfTemplateFromUploadRequestBodyTemplateDocumentMetadataMimeTypeEnum(str, Enum):
+class CreatePdfTemplateFromUploadCreateTemplateFromUploadDataUploadTemplateDataDocumentMetadataMimeTypeEnum(str, Enum):
     APPLICATION_PDF = "application/pdf"
 
 
 @dataclass_json
 @dataclass
-class CreatePdfTemplateFromUploadRequestBodyTemplateDocumentMetadata:
+class CreatePdfTemplateFromUploadCreateTemplateFromUploadDataUploadTemplateDataDocumentMetadata:
     filename: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'filename' }})
-    mime_type: CreatePdfTemplateFromUploadRequestBodyTemplateDocumentMetadataMimeTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'mime_type' }})
+    mime_type: CreatePdfTemplateFromUploadCreateTemplateFromUploadDataUploadTemplateDataDocumentMetadataMimeTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'mime_type' }})
     size: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'size' }})
     
-class CreatePdfTemplateFromUploadRequestBodyTemplateDocumentStorageEnum(str, Enum):
+class CreatePdfTemplateFromUploadCreateTemplateFromUploadDataUploadTemplateDataDocumentStorageEnum(str, Enum):
     CACHE = "cache"
 
 
 @dataclass_json
 @dataclass
-class CreatePdfTemplateFromUploadRequestBodyTemplateDocument:
+class CreatePdfTemplateFromUploadCreateTemplateFromUploadDataUploadTemplateDataDocument:
     id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    metadata: CreatePdfTemplateFromUploadRequestBodyTemplateDocumentMetadata = field(default=None, metadata={'dataclasses_json': { 'field_name': 'metadata' }})
-    storage: CreatePdfTemplateFromUploadRequestBodyTemplateDocumentStorageEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'storage' }})
+    metadata: CreatePdfTemplateFromUploadCreateTemplateFromUploadDataUploadTemplateDataDocumentMetadata = field(default=None, metadata={'dataclasses_json': { 'field_name': 'metadata' }})
+    storage: CreatePdfTemplateFromUploadCreateTemplateFromUploadDataUploadTemplateDataDocumentStorageEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'storage' }})
     
-class CreatePdfTemplateFromUploadRequestBodyTemplateExpirationIntervalEnum(str, Enum):
+class CreatePdfTemplateFromUploadCreateTemplateFromUploadDataUploadTemplateDataExpirationIntervalEnum(str, Enum):
     MINUTES = "minutes"
     HOURS = "hours"
     DAYS = "days"
 
-class CreatePdfTemplateFromUploadRequestBodyTemplateTemplateTypeEnum(str, Enum):
+class CreatePdfTemplateFromUploadCreateTemplateFromUploadDataUploadTemplateDataTemplateTypeEnum(str, Enum):
     PDF = "pdf"
     HTML = "html"
 
 
 @dataclass_json
 @dataclass
-class CreatePdfTemplateFromUploadRequestBodyTemplateUploadTemplateData:
+class CreatePdfTemplateFromUploadCreateTemplateFromUploadDataUploadTemplateData:
     allow_additional_properties: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'allow_additional_properties' }})
     description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    document: Optional[CreatePdfTemplateFromUploadRequestBodyTemplateDocument] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'document' }})
+    document: Optional[CreatePdfTemplateFromUploadCreateTemplateFromUploadDataUploadTemplateDataDocument] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'document' }})
     editable_submissions: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'editable_submissions' }})
-    expiration_interval: Optional[CreatePdfTemplateFromUploadRequestBodyTemplateExpirationIntervalEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'expiration_interval' }})
+    expiration_interval: Optional[CreatePdfTemplateFromUploadCreateTemplateFromUploadDataUploadTemplateDataExpirationIntervalEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'expiration_interval' }})
     expire_after: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'expire_after' }})
     expire_submissions: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'expire_submissions' }})
     footer_html: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'footer_html' }})
@@ -54,14 +54,14 @@ class CreatePdfTemplateFromUploadRequestBodyTemplateUploadTemplateData:
     redirect_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'redirect_url' }})
     scss: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'scss' }})
     slack_webhook_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'slack_webhook_url' }})
-    template_type: Optional[CreatePdfTemplateFromUploadRequestBodyTemplateTemplateTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'template_type' }})
+    template_type: Optional[CreatePdfTemplateFromUploadCreateTemplateFromUploadDataUploadTemplateDataTemplateTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'template_type' }})
     webhook_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'webhook_url' }})
     
 
 @dataclass_json
 @dataclass
-class CreatePdfTemplateFromUploadRequestBodyCreateTemplateFromUploadData:
-    template: CreatePdfTemplateFromUploadRequestBodyTemplateUploadTemplateData = field(default=None, metadata={'dataclasses_json': { 'field_name': 'template' }})
+class CreatePdfTemplateFromUploadCreateTemplateFromUploadData:
+    template: CreatePdfTemplateFromUploadCreateTemplateFromUploadDataUploadTemplateData = field(default=None, metadata={'dataclasses_json': { 'field_name': 'template' }})
     
 
 @dataclass
@@ -71,10 +71,10 @@ class CreatePdfTemplateFromUploadSecurity:
 
 @dataclass
 class CreatePdfTemplateFromUploadRequest:
-    request: CreatePdfTemplateFromUploadRequestBodyCreateTemplateFromUploadData = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: CreatePdfTemplateFromUploadCreateTemplateFromUploadData = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     security: CreatePdfTemplateFromUploadSecurity = field(default=None)
     
-class CreatePdfTemplateFromUpload201ApplicationJSONExpirationIntervalEnum(str, Enum):
+class CreatePdfTemplateFromUploadPendingTemplateExpirationIntervalEnum(str, Enum):
     MINUTES = "minutes"
     HOURS = "hours"
     DAYS = "days"
@@ -82,11 +82,11 @@ class CreatePdfTemplateFromUpload201ApplicationJSONExpirationIntervalEnum(str, E
 
 @dataclass_json
 @dataclass
-class CreatePdfTemplateFromUpload201ApplicationJSONPendingTemplate:
+class CreatePdfTemplateFromUploadPendingTemplate:
     allow_additional_properties: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'allow_additional_properties' }})
     description: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
     editable_submissions: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'editable_submissions' }})
-    expiration_interval: Optional[CreatePdfTemplateFromUpload201ApplicationJSONExpirationIntervalEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'expiration_interval' }})
+    expiration_interval: Optional[CreatePdfTemplateFromUploadPendingTemplateExpirationIntervalEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'expiration_interval' }})
     expire_after: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'expire_after' }})
     expire_submissions: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'expire_submissions' }})
     id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
@@ -107,5 +107,5 @@ class CreatePdfTemplateFromUploadResponse:
     content_type: str = field(default=None)
     status_code: int = field(default=None)
     authentication_error: Optional[shared.AuthenticationError] = field(default=None)
-    pending_template: Optional[CreatePdfTemplateFromUpload201ApplicationJSONPendingTemplate] = field(default=None)
+    pending_template: Optional[CreatePdfTemplateFromUploadPendingTemplate] = field(default=None)
     

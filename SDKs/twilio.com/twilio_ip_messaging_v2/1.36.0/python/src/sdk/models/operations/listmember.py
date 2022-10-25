@@ -34,7 +34,7 @@ class ListMemberRequest:
 
 @dataclass_json
 @dataclass
-class ListMember200ApplicationJSONMeta:
+class ListMemberListMemberResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -46,14 +46,14 @@ class ListMember200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListMember200ApplicationJSONListMemberResponse:
+class ListMemberListMemberResponse:
     members: Optional[List[shared.IPMessagingV2ServiceChannelMember]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'members' }})
-    meta: Optional[ListMember200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+    meta: Optional[ListMemberListMemberResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     
 
 @dataclass
 class ListMemberResponse:
     content_type: str = field(default=None)
-    list_member_response: Optional[ListMember200ApplicationJSONListMemberResponse] = field(default=None)
+    list_member_response: Optional[ListMemberListMemberResponse] = field(default=None)
     status_code: int = field(default=None)
     

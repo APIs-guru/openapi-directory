@@ -13,7 +13,7 @@ type CreateInvitePathParams struct {
 	ServiceSid string `pathParam:"style=simple,explode=false,name=ServiceSid"`
 }
 
-type CreateInviteRequestBodyCreateInviteRequest struct {
+type CreateInviteCreateInviteRequest struct {
 	Identity string  `form:"name=Identity"`
 	RoleSid  *string `form:"name=RoleSid"`
 }
@@ -25,7 +25,7 @@ type CreateInviteSecurity struct {
 type CreateInviteRequest struct {
 	ServerURL  *string
 	PathParams CreateInvitePathParams
-	Request    *CreateInviteRequestBodyCreateInviteRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateInviteCreateInviteRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateInviteSecurity
 }
 

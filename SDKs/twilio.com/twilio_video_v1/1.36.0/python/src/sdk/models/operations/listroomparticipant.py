@@ -39,7 +39,7 @@ class ListRoomParticipantRequest:
 
 @dataclass_json
 @dataclass
-class ListRoomParticipant200ApplicationJSONMeta:
+class ListRoomParticipantListRoomParticipantResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -51,14 +51,14 @@ class ListRoomParticipant200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListRoomParticipant200ApplicationJSONListRoomParticipantResponse:
-    meta: Optional[ListRoomParticipant200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+class ListRoomParticipantListRoomParticipantResponse:
+    meta: Optional[ListRoomParticipantListRoomParticipantResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     participants: Optional[List[shared.VideoV1RoomRoomParticipant]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'participants' }})
     
 
 @dataclass
 class ListRoomParticipantResponse:
     content_type: str = field(default=None)
-    list_room_participant_response: Optional[ListRoomParticipant200ApplicationJSONListRoomParticipantResponse] = field(default=None)
+    list_room_participant_response: Optional[ListRoomParticipantListRoomParticipantResponse] = field(default=None)
     status_code: int = field(default=None)
     

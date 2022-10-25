@@ -13,24 +13,24 @@ type CreateCallRecordingPathParams struct {
 	CallSid    string `pathParam:"style=simple,explode=false,name=CallSid"`
 }
 
-type CreateCallRecordingRequestBodyRecordingStatusCallbackMethodEnum string
+type CreateCallRecordingCreateCallRecordingRequestRecordingStatusCallbackMethodEnum string
 
 const (
-	CreateCallRecordingRequestBodyRecordingStatusCallbackMethodEnumHead   CreateCallRecordingRequestBodyRecordingStatusCallbackMethodEnum = "HEAD"
-	CreateCallRecordingRequestBodyRecordingStatusCallbackMethodEnumGet    CreateCallRecordingRequestBodyRecordingStatusCallbackMethodEnum = "GET"
-	CreateCallRecordingRequestBodyRecordingStatusCallbackMethodEnumPost   CreateCallRecordingRequestBodyRecordingStatusCallbackMethodEnum = "POST"
-	CreateCallRecordingRequestBodyRecordingStatusCallbackMethodEnumPatch  CreateCallRecordingRequestBodyRecordingStatusCallbackMethodEnum = "PATCH"
-	CreateCallRecordingRequestBodyRecordingStatusCallbackMethodEnumPut    CreateCallRecordingRequestBodyRecordingStatusCallbackMethodEnum = "PUT"
-	CreateCallRecordingRequestBodyRecordingStatusCallbackMethodEnumDelete CreateCallRecordingRequestBodyRecordingStatusCallbackMethodEnum = "DELETE"
+	CreateCallRecordingCreateCallRecordingRequestRecordingStatusCallbackMethodEnumHead   CreateCallRecordingCreateCallRecordingRequestRecordingStatusCallbackMethodEnum = "HEAD"
+	CreateCallRecordingCreateCallRecordingRequestRecordingStatusCallbackMethodEnumGet    CreateCallRecordingCreateCallRecordingRequestRecordingStatusCallbackMethodEnum = "GET"
+	CreateCallRecordingCreateCallRecordingRequestRecordingStatusCallbackMethodEnumPost   CreateCallRecordingCreateCallRecordingRequestRecordingStatusCallbackMethodEnum = "POST"
+	CreateCallRecordingCreateCallRecordingRequestRecordingStatusCallbackMethodEnumPatch  CreateCallRecordingCreateCallRecordingRequestRecordingStatusCallbackMethodEnum = "PATCH"
+	CreateCallRecordingCreateCallRecordingRequestRecordingStatusCallbackMethodEnumPut    CreateCallRecordingCreateCallRecordingRequestRecordingStatusCallbackMethodEnum = "PUT"
+	CreateCallRecordingCreateCallRecordingRequestRecordingStatusCallbackMethodEnumDelete CreateCallRecordingCreateCallRecordingRequestRecordingStatusCallbackMethodEnum = "DELETE"
 )
 
-type CreateCallRecordingRequestBodyCreateCallRecordingRequest struct {
-	RecordingChannels             *string                                                          `form:"name=RecordingChannels"`
-	RecordingStatusCallback       *string                                                          `form:"name=RecordingStatusCallback"`
-	RecordingStatusCallbackEvent  []string                                                         `form:"name=RecordingStatusCallbackEvent"`
-	RecordingStatusCallbackMethod *CreateCallRecordingRequestBodyRecordingStatusCallbackMethodEnum `form:"name=RecordingStatusCallbackMethod"`
-	RecordingTrack                *string                                                          `form:"name=RecordingTrack"`
-	Trim                          *string                                                          `form:"name=Trim"`
+type CreateCallRecordingCreateCallRecordingRequest struct {
+	RecordingChannels             *string                                                                         `form:"name=RecordingChannels"`
+	RecordingStatusCallback       *string                                                                         `form:"name=RecordingStatusCallback"`
+	RecordingStatusCallbackEvent  []string                                                                        `form:"name=RecordingStatusCallbackEvent"`
+	RecordingStatusCallbackMethod *CreateCallRecordingCreateCallRecordingRequestRecordingStatusCallbackMethodEnum `form:"name=RecordingStatusCallbackMethod"`
+	RecordingTrack                *string                                                                         `form:"name=RecordingTrack"`
+	Trim                          *string                                                                         `form:"name=Trim"`
 }
 
 type CreateCallRecordingSecurity struct {
@@ -40,7 +40,7 @@ type CreateCallRecordingSecurity struct {
 type CreateCallRecordingRequest struct {
 	ServerURL  *string
 	PathParams CreateCallRecordingPathParams
-	Request    *CreateCallRecordingRequestBodyCreateCallRecordingRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateCallRecordingCreateCallRecordingRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateCallRecordingSecurity
 }
 

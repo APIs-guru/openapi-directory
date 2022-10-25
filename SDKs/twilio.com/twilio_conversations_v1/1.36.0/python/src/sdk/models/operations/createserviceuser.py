@@ -17,7 +17,7 @@ class CreateServiceUserHeaders:
     
 
 @dataclass
-class CreateServiceUserRequestBodyCreateServiceUserRequest:
+class CreateServiceUserCreateServiceUserRequest:
     attributes: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Attributes' }})
     friendly_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
     identity: str = field(default=None, metadata={'form': { 'field_name': 'Identity' }})
@@ -34,7 +34,7 @@ class CreateServiceUserRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateServiceUserPathParams = field(default=None)
     headers: CreateServiceUserHeaders = field(default=None)
-    request: Optional[CreateServiceUserRequestBodyCreateServiceUserRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateServiceUserCreateServiceUserRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateServiceUserSecurity = field(default=None)
     
 

@@ -12,7 +12,7 @@ class CreateExportCustomJobPathParams:
     
 
 @dataclass
-class CreateExportCustomJobRequestBodyCreateExportCustomJobRequest:
+class CreateExportCustomJobCreateExportCustomJobRequest:
     email: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Email' }})
     end_day: str = field(default=None, metadata={'form': { 'field_name': 'EndDay' }})
     friendly_name: str = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
@@ -30,7 +30,7 @@ class CreateExportCustomJobSecurity:
 class CreateExportCustomJobRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateExportCustomJobPathParams = field(default=None)
-    request: Optional[CreateExportCustomJobRequestBodyCreateExportCustomJobRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateExportCustomJobCreateExportCustomJobRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateExportCustomJobSecurity = field(default=None)
     
 

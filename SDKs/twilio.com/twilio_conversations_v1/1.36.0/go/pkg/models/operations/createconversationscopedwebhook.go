@@ -12,7 +12,7 @@ type CreateConversationScopedWebhookPathParams struct {
 	ConversationSid string `pathParam:"style=simple,explode=false,name=ConversationSid"`
 }
 
-type CreateConversationScopedWebhookRequestBodyCreateConversationScopedWebhookRequest struct {
+type CreateConversationScopedWebhookCreateConversationScopedWebhookRequest struct {
 	ConfigurationFilters     []string                                        `form:"name=Configuration.Filters"`
 	ConfigurationFlowSid     *string                                         `form:"name=Configuration.FlowSid"`
 	ConfigurationMethod      *shared.ConversationScopedWebhookEnumMethodEnum `form:"name=Configuration.Method"`
@@ -29,7 +29,7 @@ type CreateConversationScopedWebhookSecurity struct {
 type CreateConversationScopedWebhookRequest struct {
 	ServerURL  *string
 	PathParams CreateConversationScopedWebhookPathParams
-	Request    *CreateConversationScopedWebhookRequestBodyCreateConversationScopedWebhookRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateConversationScopedWebhookCreateConversationScopedWebhookRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateConversationScopedWebhookSecurity
 }
 

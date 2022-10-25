@@ -13,49 +13,49 @@ type UpdateCallPathParams struct {
 	Sid        string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
-type UpdateCallRequestBodyFallbackMethodEnum string
+type UpdateCallUpdateCallRequestFallbackMethodEnum string
 
 const (
-	UpdateCallRequestBodyFallbackMethodEnumHead   UpdateCallRequestBodyFallbackMethodEnum = "HEAD"
-	UpdateCallRequestBodyFallbackMethodEnumGet    UpdateCallRequestBodyFallbackMethodEnum = "GET"
-	UpdateCallRequestBodyFallbackMethodEnumPost   UpdateCallRequestBodyFallbackMethodEnum = "POST"
-	UpdateCallRequestBodyFallbackMethodEnumPatch  UpdateCallRequestBodyFallbackMethodEnum = "PATCH"
-	UpdateCallRequestBodyFallbackMethodEnumPut    UpdateCallRequestBodyFallbackMethodEnum = "PUT"
-	UpdateCallRequestBodyFallbackMethodEnumDelete UpdateCallRequestBodyFallbackMethodEnum = "DELETE"
+	UpdateCallUpdateCallRequestFallbackMethodEnumHead   UpdateCallUpdateCallRequestFallbackMethodEnum = "HEAD"
+	UpdateCallUpdateCallRequestFallbackMethodEnumGet    UpdateCallUpdateCallRequestFallbackMethodEnum = "GET"
+	UpdateCallUpdateCallRequestFallbackMethodEnumPost   UpdateCallUpdateCallRequestFallbackMethodEnum = "POST"
+	UpdateCallUpdateCallRequestFallbackMethodEnumPatch  UpdateCallUpdateCallRequestFallbackMethodEnum = "PATCH"
+	UpdateCallUpdateCallRequestFallbackMethodEnumPut    UpdateCallUpdateCallRequestFallbackMethodEnum = "PUT"
+	UpdateCallUpdateCallRequestFallbackMethodEnumDelete UpdateCallUpdateCallRequestFallbackMethodEnum = "DELETE"
 )
 
-type UpdateCallRequestBodyMethodEnum string
+type UpdateCallUpdateCallRequestMethodEnum string
 
 const (
-	UpdateCallRequestBodyMethodEnumHead   UpdateCallRequestBodyMethodEnum = "HEAD"
-	UpdateCallRequestBodyMethodEnumGet    UpdateCallRequestBodyMethodEnum = "GET"
-	UpdateCallRequestBodyMethodEnumPost   UpdateCallRequestBodyMethodEnum = "POST"
-	UpdateCallRequestBodyMethodEnumPatch  UpdateCallRequestBodyMethodEnum = "PATCH"
-	UpdateCallRequestBodyMethodEnumPut    UpdateCallRequestBodyMethodEnum = "PUT"
-	UpdateCallRequestBodyMethodEnumDelete UpdateCallRequestBodyMethodEnum = "DELETE"
+	UpdateCallUpdateCallRequestMethodEnumHead   UpdateCallUpdateCallRequestMethodEnum = "HEAD"
+	UpdateCallUpdateCallRequestMethodEnumGet    UpdateCallUpdateCallRequestMethodEnum = "GET"
+	UpdateCallUpdateCallRequestMethodEnumPost   UpdateCallUpdateCallRequestMethodEnum = "POST"
+	UpdateCallUpdateCallRequestMethodEnumPatch  UpdateCallUpdateCallRequestMethodEnum = "PATCH"
+	UpdateCallUpdateCallRequestMethodEnumPut    UpdateCallUpdateCallRequestMethodEnum = "PUT"
+	UpdateCallUpdateCallRequestMethodEnumDelete UpdateCallUpdateCallRequestMethodEnum = "DELETE"
 )
 
-type UpdateCallRequestBodyStatusCallbackMethodEnum string
+type UpdateCallUpdateCallRequestStatusCallbackMethodEnum string
 
 const (
-	UpdateCallRequestBodyStatusCallbackMethodEnumHead   UpdateCallRequestBodyStatusCallbackMethodEnum = "HEAD"
-	UpdateCallRequestBodyStatusCallbackMethodEnumGet    UpdateCallRequestBodyStatusCallbackMethodEnum = "GET"
-	UpdateCallRequestBodyStatusCallbackMethodEnumPost   UpdateCallRequestBodyStatusCallbackMethodEnum = "POST"
-	UpdateCallRequestBodyStatusCallbackMethodEnumPatch  UpdateCallRequestBodyStatusCallbackMethodEnum = "PATCH"
-	UpdateCallRequestBodyStatusCallbackMethodEnumPut    UpdateCallRequestBodyStatusCallbackMethodEnum = "PUT"
-	UpdateCallRequestBodyStatusCallbackMethodEnumDelete UpdateCallRequestBodyStatusCallbackMethodEnum = "DELETE"
+	UpdateCallUpdateCallRequestStatusCallbackMethodEnumHead   UpdateCallUpdateCallRequestStatusCallbackMethodEnum = "HEAD"
+	UpdateCallUpdateCallRequestStatusCallbackMethodEnumGet    UpdateCallUpdateCallRequestStatusCallbackMethodEnum = "GET"
+	UpdateCallUpdateCallRequestStatusCallbackMethodEnumPost   UpdateCallUpdateCallRequestStatusCallbackMethodEnum = "POST"
+	UpdateCallUpdateCallRequestStatusCallbackMethodEnumPatch  UpdateCallUpdateCallRequestStatusCallbackMethodEnum = "PATCH"
+	UpdateCallUpdateCallRequestStatusCallbackMethodEnumPut    UpdateCallUpdateCallRequestStatusCallbackMethodEnum = "PUT"
+	UpdateCallUpdateCallRequestStatusCallbackMethodEnumDelete UpdateCallUpdateCallRequestStatusCallbackMethodEnum = "DELETE"
 )
 
-type UpdateCallRequestBodyUpdateCallRequest struct {
-	FallbackMethod       *UpdateCallRequestBodyFallbackMethodEnum       `form:"name=FallbackMethod"`
-	FallbackURL          *string                                        `form:"name=FallbackUrl"`
-	Method               *UpdateCallRequestBodyMethodEnum               `form:"name=Method"`
-	Status               *shared.CallEnumUpdateStatusEnum               `form:"name=Status"`
-	StatusCallback       *string                                        `form:"name=StatusCallback"`
-	StatusCallbackMethod *UpdateCallRequestBodyStatusCallbackMethodEnum `form:"name=StatusCallbackMethod"`
-	TimeLimit            *int64                                         `form:"name=TimeLimit"`
-	Twiml                *string                                        `form:"name=Twiml"`
-	URL                  *string                                        `form:"name=Url"`
+type UpdateCallUpdateCallRequest struct {
+	FallbackMethod       *UpdateCallUpdateCallRequestFallbackMethodEnum       `form:"name=FallbackMethod"`
+	FallbackURL          *string                                              `form:"name=FallbackUrl"`
+	Method               *UpdateCallUpdateCallRequestMethodEnum               `form:"name=Method"`
+	Status               *shared.CallEnumUpdateStatusEnum                     `form:"name=Status"`
+	StatusCallback       *string                                              `form:"name=StatusCallback"`
+	StatusCallbackMethod *UpdateCallUpdateCallRequestStatusCallbackMethodEnum `form:"name=StatusCallbackMethod"`
+	TimeLimit            *int64                                               `form:"name=TimeLimit"`
+	Twiml                *string                                              `form:"name=Twiml"`
+	URL                  *string                                              `form:"name=Url"`
 }
 
 type UpdateCallSecurity struct {
@@ -65,7 +65,7 @@ type UpdateCallSecurity struct {
 type UpdateCallRequest struct {
 	ServerURL  *string
 	PathParams UpdateCallPathParams
-	Request    *UpdateCallRequestBodyUpdateCallRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateCallUpdateCallRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateCallSecurity
 }
 

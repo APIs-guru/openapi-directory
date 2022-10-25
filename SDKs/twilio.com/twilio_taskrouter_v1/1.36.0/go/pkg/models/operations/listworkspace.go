@@ -23,7 +23,7 @@ type ListWorkspaceRequest struct {
 	Security    ListWorkspaceSecurity
 }
 
-type ListWorkspace200ApplicationJSONMeta struct {
+type ListWorkspaceListWorkspaceResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -33,13 +33,13 @@ type ListWorkspace200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListWorkspace200ApplicationJSONListWorkspaceResponse struct {
-	Meta       *ListWorkspace200ApplicationJSONMeta `json:"meta,omitempty"`
-	Workspaces []shared.TaskrouterV1Workspace       `json:"workspaces,omitempty"`
+type ListWorkspaceListWorkspaceResponse struct {
+	Meta       *ListWorkspaceListWorkspaceResponseMeta `json:"meta,omitempty"`
+	Workspaces []shared.TaskrouterV1Workspace          `json:"workspaces,omitempty"`
 }
 
 type ListWorkspaceResponse struct {
 	ContentType           string
-	ListWorkspaceResponse *ListWorkspace200ApplicationJSONListWorkspaceResponse
+	ListWorkspaceResponse *ListWorkspaceListWorkspaceResponse
 	StatusCode            int64
 }

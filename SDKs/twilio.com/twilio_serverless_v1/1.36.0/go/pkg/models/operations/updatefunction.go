@@ -13,7 +13,7 @@ type UpdateFunctionPathParams struct {
 	Sid        string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
-type UpdateFunctionRequestBodyUpdateFunctionRequest struct {
+type UpdateFunctionUpdateFunctionRequest struct {
 	FriendlyName string `form:"name=FriendlyName"`
 }
 
@@ -24,7 +24,7 @@ type UpdateFunctionSecurity struct {
 type UpdateFunctionRequest struct {
 	ServerURL  *string
 	PathParams UpdateFunctionPathParams
-	Request    *UpdateFunctionRequestBodyUpdateFunctionRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateFunctionUpdateFunctionRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateFunctionSecurity
 }
 

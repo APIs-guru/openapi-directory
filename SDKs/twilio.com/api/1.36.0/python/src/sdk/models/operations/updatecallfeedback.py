@@ -13,7 +13,7 @@ class UpdateCallFeedbackPathParams:
     
 
 @dataclass
-class UpdateCallFeedbackRequestBodyUpdateCallFeedbackRequest:
+class UpdateCallFeedbackUpdateCallFeedbackRequest:
     issue: Optional[List[shared.CallFeedbackEnumIssuesEnum]] = field(default=None, metadata={'form': { 'field_name': 'Issue' }})
     quality_score: Optional[int] = field(default=None, metadata={'form': { 'field_name': 'QualityScore' }})
     
@@ -27,7 +27,7 @@ class UpdateCallFeedbackSecurity:
 class UpdateCallFeedbackRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateCallFeedbackPathParams = field(default=None)
-    request: Optional[UpdateCallFeedbackRequestBodyUpdateCallFeedbackRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateCallFeedbackUpdateCallFeedbackRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateCallFeedbackSecurity = field(default=None)
     
 

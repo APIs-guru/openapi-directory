@@ -1,36 +1,36 @@
 package shared
 
-type InvoiceInvoiceTypeTypeOfInvoiceEnum string
+type InvoiceTypeOfInvoiceEnum string
 
 const (
-	InvoiceInvoiceTypeTypeOfInvoiceEnumThreeHundredAndEighty     InvoiceInvoiceTypeTypeOfInvoiceEnum = "380"
-	InvoiceInvoiceTypeTypeOfInvoiceEnumThreeHundredAndEightyOne  InvoiceInvoiceTypeTypeOfInvoiceEnum = "381"
-	InvoiceInvoiceTypeTypeOfInvoiceEnumThreeHundredAndEightyFour InvoiceInvoiceTypeTypeOfInvoiceEnum = "384"
+	InvoiceTypeOfInvoiceEnumThreeHundredAndEighty     InvoiceTypeOfInvoiceEnum = "380"
+	InvoiceTypeOfInvoiceEnumThreeHundredAndEightyOne  InvoiceTypeOfInvoiceEnum = "381"
+	InvoiceTypeOfInvoiceEnumThreeHundredAndEightyFour InvoiceTypeOfInvoiceEnum = "384"
 )
 
-type InvoicePaymentMeansCodePaymentMeansCodeEnum string
+type InvoicePaymentMeansCodeEnum string
 
 const (
-	InvoicePaymentMeansCodePaymentMeansCodeEnumOnlinePaymentService InvoicePaymentMeansCodePaymentMeansCodeEnum = "online_payment_service"
-	InvoicePaymentMeansCodePaymentMeansCodeEnumBankCard             InvoicePaymentMeansCodePaymentMeansCodeEnum = "bank_card"
-	InvoicePaymentMeansCodePaymentMeansCodeEnumDirectDebit          InvoicePaymentMeansCodePaymentMeansCodeEnum = "direct_debit"
-	InvoicePaymentMeansCodePaymentMeansCodeEnumStandingAgreement    InvoicePaymentMeansCodePaymentMeansCodeEnum = "standing_agreement"
-	InvoicePaymentMeansCodePaymentMeansCodeEnumCreditTransfer       InvoicePaymentMeansCodePaymentMeansCodeEnum = "credit_transfer"
-	InvoicePaymentMeansCodePaymentMeansCodeEnumSeBankgiro           InvoicePaymentMeansCodePaymentMeansCodeEnum = "se_bankgiro"
-	InvoicePaymentMeansCodePaymentMeansCodeEnumSePlusgiro           InvoicePaymentMeansCodePaymentMeansCodeEnum = "se_plusgiro"
-	InvoicePaymentMeansCodePaymentMeansCodeEnumAunzNpp              InvoicePaymentMeansCodePaymentMeansCodeEnum = "aunz_npp"
-	InvoicePaymentMeansCodePaymentMeansCodeEnumUnknown              InvoicePaymentMeansCodePaymentMeansCodeEnum = ""
-	InvoicePaymentMeansCodePaymentMeansCodeEnumOne                  InvoicePaymentMeansCodePaymentMeansCodeEnum = "1"
-	InvoicePaymentMeansCodePaymentMeansCodeEnumThirty               InvoicePaymentMeansCodePaymentMeansCodeEnum = "30"
-	InvoicePaymentMeansCodePaymentMeansCodeEnumThirtyOne            InvoicePaymentMeansCodePaymentMeansCodeEnum = "31"
-	InvoicePaymentMeansCodePaymentMeansCodeEnumFortyTwo             InvoicePaymentMeansCodePaymentMeansCodeEnum = "42"
-	InvoicePaymentMeansCodePaymentMeansCodeEnumFortyEight           InvoicePaymentMeansCodePaymentMeansCodeEnum = "48"
-	InvoicePaymentMeansCodePaymentMeansCodeEnumFortyNine            InvoicePaymentMeansCodePaymentMeansCodeEnum = "49"
-	InvoicePaymentMeansCodePaymentMeansCodeEnumFiftySeven           InvoicePaymentMeansCodePaymentMeansCodeEnum = "57"
-	InvoicePaymentMeansCodePaymentMeansCodeEnumFiftyEight           InvoicePaymentMeansCodePaymentMeansCodeEnum = "58"
+	InvoicePaymentMeansCodeEnumOnlinePaymentService InvoicePaymentMeansCodeEnum = "online_payment_service"
+	InvoicePaymentMeansCodeEnumBankCard             InvoicePaymentMeansCodeEnum = "bank_card"
+	InvoicePaymentMeansCodeEnumDirectDebit          InvoicePaymentMeansCodeEnum = "direct_debit"
+	InvoicePaymentMeansCodeEnumStandingAgreement    InvoicePaymentMeansCodeEnum = "standing_agreement"
+	InvoicePaymentMeansCodeEnumCreditTransfer       InvoicePaymentMeansCodeEnum = "credit_transfer"
+	InvoicePaymentMeansCodeEnumSeBankgiro           InvoicePaymentMeansCodeEnum = "se_bankgiro"
+	InvoicePaymentMeansCodeEnumSePlusgiro           InvoicePaymentMeansCodeEnum = "se_plusgiro"
+	InvoicePaymentMeansCodeEnumAunzNpp              InvoicePaymentMeansCodeEnum = "aunz_npp"
+	InvoicePaymentMeansCodeEnumUnknown              InvoicePaymentMeansCodeEnum = ""
+	InvoicePaymentMeansCodeEnumOne                  InvoicePaymentMeansCodeEnum = "1"
+	InvoicePaymentMeansCodeEnumThirty               InvoicePaymentMeansCodeEnum = "30"
+	InvoicePaymentMeansCodeEnumThirtyOne            InvoicePaymentMeansCodeEnum = "31"
+	InvoicePaymentMeansCodeEnumFortyTwo             InvoicePaymentMeansCodeEnum = "42"
+	InvoicePaymentMeansCodeEnumFortyEight           InvoicePaymentMeansCodeEnum = "48"
+	InvoicePaymentMeansCodeEnumFortyNine            InvoicePaymentMeansCodeEnum = "49"
+	InvoicePaymentMeansCodeEnumFiftySeven           InvoicePaymentMeansCodeEnum = "57"
+	InvoicePaymentMeansCodeEnumFiftyEight           InvoicePaymentMeansCodeEnum = "58"
 )
 
-type InvoicePaymentTermsThePaymentTerms struct {
+type InvoiceThePaymentTerms struct {
 	Note *string `json:"note,omitempty"`
 }
 
@@ -45,47 +45,47 @@ const (
 	InvoiceTaxExemptReasonEnumIntraCommunity InvoiceTaxExemptReasonEnum = "intra_community"
 )
 
-type InvoiceTaxSystemTaxSystemEnum string
+type InvoiceTaxSystemEnum string
 
 const (
-	InvoiceTaxSystemTaxSystemEnumTaxLineAmounts     InvoiceTaxSystemTaxSystemEnum = "tax_line_amounts"
-	InvoiceTaxSystemTaxSystemEnumTaxLinePercentages InvoiceTaxSystemTaxSystemEnum = "tax_line_percentages"
-	InvoiceTaxSystemTaxSystemEnumTaxNoTax           InvoiceTaxSystemTaxSystemEnum = "tax_no_tax"
+	InvoiceTaxSystemEnumTaxLineAmounts     InvoiceTaxSystemEnum = "tax_line_amounts"
+	InvoiceTaxSystemEnumTaxLinePercentages InvoiceTaxSystemEnum = "tax_line_percentages"
+	InvoiceTaxSystemEnumTaxNoTax           InvoiceTaxSystemEnum = "tax_no_tax"
 )
 
 type Invoice struct {
-	AccountingCost            *string                                      `json:"accountingCost,omitempty"`
-	AccountingCustomerParty   AccountingCustomerParty                      `json:"accountingCustomerParty"`
-	AccountingSupplierParty   *AccountingSupplierParty                     `json:"accountingSupplierParty,omitempty"`
-	AllowanceCharges          []AllowanceCharge                            `json:"allowanceCharges,omitempty"`
-	AmountIncludingVat        float64                                      `json:"amountIncludingVat"`
-	BillingReference          *string                                      `json:"billingReference,omitempty"`
-	BuyerReference            *string                                      `json:"buyerReference,omitempty"`
-	ConsumerTaxMode           *bool                                        `json:"consumerTaxMode,omitempty"`
-	ContractDocumentReference *string                                      `json:"contractDocumentReference,omitempty"`
-	Delivery                  *Delivery                                    `json:"delivery,omitempty"`
-	DocumentCurrencyCode      *CurrencyCodeEnum                            `json:"documentCurrencyCode,omitempty"`
-	DueDate                   *string                                      `json:"dueDate,omitempty"`
-	InvoiceLines              []InvoiceLine                                `json:"invoiceLines"`
-	InvoiceNumber             string                                       `json:"invoiceNumber"`
-	InvoicePeriod             *string                                      `json:"invoicePeriod,omitempty"`
-	InvoiceType               *InvoiceInvoiceTypeTypeOfInvoiceEnum         `json:"invoiceType,omitempty"`
-	IssueDate                 string                                       `json:"issueDate"`
-	Note                      *string                                      `json:"note,omitempty"`
-	OrderReference            *string                                      `json:"orderReference,omitempty"`
-	PaymentMeansArray         []PaymentMeans                               `json:"paymentMeansArray,omitempty"`
-	PaymentMeansBic           *string                                      `json:"paymentMeansBic,omitempty"`
-	PaymentMeansCode          *InvoicePaymentMeansCodePaymentMeansCodeEnum `json:"paymentMeansCode,omitempty"`
-	PaymentMeansIban          *string                                      `json:"paymentMeansIban,omitempty"`
-	PaymentMeansPaymentID     *string                                      `json:"paymentMeansPaymentId,omitempty"`
-	PaymentTerms              *InvoicePaymentTermsThePaymentTerms          `json:"paymentTerms,omitempty"`
-	PrepaidAmount             *float64                                     `json:"prepaidAmount,omitempty"`
-	ProjectReference          *string                                      `json:"projectReference,omitempty"`
-	SalesOrderID              *string                                      `json:"salesOrderId,omitempty"`
-	TaxExemptReason           *InvoiceTaxExemptReasonEnum                  `json:"taxExemptReason,omitempty"`
-	TaxPointDate              *string                                      `json:"taxPointDate,omitempty"`
-	TaxSubtotals              []TaxSubtotal                                `json:"taxSubtotals,omitempty"`
-	TaxSystem                 *InvoiceTaxSystemTaxSystemEnum               `json:"taxSystem,omitempty"`
-	UblExtensions             []string                                     `json:"ublExtensions,omitempty"`
-	VatReverseCharge          *bool                                        `json:"vatReverseCharge,omitempty"`
+	AccountingCost            *string                      `json:"accountingCost,omitempty"`
+	AccountingCustomerParty   AccountingCustomerParty      `json:"accountingCustomerParty"`
+	AccountingSupplierParty   *AccountingSupplierParty     `json:"accountingSupplierParty,omitempty"`
+	AllowanceCharges          []AllowanceCharge            `json:"allowanceCharges,omitempty"`
+	AmountIncludingVat        float64                      `json:"amountIncludingVat"`
+	BillingReference          *string                      `json:"billingReference,omitempty"`
+	BuyerReference            *string                      `json:"buyerReference,omitempty"`
+	ConsumerTaxMode           *bool                        `json:"consumerTaxMode,omitempty"`
+	ContractDocumentReference *string                      `json:"contractDocumentReference,omitempty"`
+	Delivery                  *Delivery                    `json:"delivery,omitempty"`
+	DocumentCurrencyCode      *CurrencyCodeEnum            `json:"documentCurrencyCode,omitempty"`
+	DueDate                   *string                      `json:"dueDate,omitempty"`
+	InvoiceLines              []InvoiceLine                `json:"invoiceLines"`
+	InvoiceNumber             string                       `json:"invoiceNumber"`
+	InvoicePeriod             *string                      `json:"invoicePeriod,omitempty"`
+	InvoiceType               *InvoiceTypeOfInvoiceEnum    `json:"invoiceType,omitempty"`
+	IssueDate                 string                       `json:"issueDate"`
+	Note                      *string                      `json:"note,omitempty"`
+	OrderReference            *string                      `json:"orderReference,omitempty"`
+	PaymentMeansArray         []PaymentMeans               `json:"paymentMeansArray,omitempty"`
+	PaymentMeansBic           *string                      `json:"paymentMeansBic,omitempty"`
+	PaymentMeansCode          *InvoicePaymentMeansCodeEnum `json:"paymentMeansCode,omitempty"`
+	PaymentMeansIban          *string                      `json:"paymentMeansIban,omitempty"`
+	PaymentMeansPaymentID     *string                      `json:"paymentMeansPaymentId,omitempty"`
+	PaymentTerms              *InvoiceThePaymentTerms      `json:"paymentTerms,omitempty"`
+	PrepaidAmount             *float64                     `json:"prepaidAmount,omitempty"`
+	ProjectReference          *string                      `json:"projectReference,omitempty"`
+	SalesOrderID              *string                      `json:"salesOrderId,omitempty"`
+	TaxExemptReason           *InvoiceTaxExemptReasonEnum  `json:"taxExemptReason,omitempty"`
+	TaxPointDate              *string                      `json:"taxPointDate,omitempty"`
+	TaxSubtotals              []TaxSubtotal                `json:"taxSubtotals,omitempty"`
+	TaxSystem                 *InvoiceTaxSystemEnum        `json:"taxSystem,omitempty"`
+	UblExtensions             []string                     `json:"ublExtensions,omitempty"`
+	VatReverseCharge          *bool                        `json:"vatReverseCharge,omitempty"`
 }

@@ -20,41 +20,41 @@ type PostLoadBalancersIDActionsChangeAlgorithmRequest struct {
 	Request    *PostLoadBalancersIDActionsChangeAlgorithmRequestBody `request:"mediaType=application/json"`
 }
 
-type PostLoadBalancersIDActionsChangeAlgorithm201ApplicationJSONActionError struct {
+type PostLoadBalancersIDActionsChangeAlgorithmActionResponseActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
 }
 
-type PostLoadBalancersIDActionsChangeAlgorithm201ApplicationJSONActionResources struct {
+type PostLoadBalancersIDActionsChangeAlgorithmActionResponseActionResources struct {
 	ID   int64  `json:"id"`
 	Type string `json:"type"`
 }
 
-type PostLoadBalancersIDActionsChangeAlgorithm201ApplicationJSONActionStatusEnum string
+type PostLoadBalancersIDActionsChangeAlgorithmActionResponseActionStatusEnum string
 
 const (
-	PostLoadBalancersIDActionsChangeAlgorithm201ApplicationJSONActionStatusEnumSuccess PostLoadBalancersIDActionsChangeAlgorithm201ApplicationJSONActionStatusEnum = "success"
-	PostLoadBalancersIDActionsChangeAlgorithm201ApplicationJSONActionStatusEnumRunning PostLoadBalancersIDActionsChangeAlgorithm201ApplicationJSONActionStatusEnum = "running"
-	PostLoadBalancersIDActionsChangeAlgorithm201ApplicationJSONActionStatusEnumError   PostLoadBalancersIDActionsChangeAlgorithm201ApplicationJSONActionStatusEnum = "error"
+	PostLoadBalancersIDActionsChangeAlgorithmActionResponseActionStatusEnumSuccess PostLoadBalancersIDActionsChangeAlgorithmActionResponseActionStatusEnum = "success"
+	PostLoadBalancersIDActionsChangeAlgorithmActionResponseActionStatusEnumRunning PostLoadBalancersIDActionsChangeAlgorithmActionResponseActionStatusEnum = "running"
+	PostLoadBalancersIDActionsChangeAlgorithmActionResponseActionStatusEnumError   PostLoadBalancersIDActionsChangeAlgorithmActionResponseActionStatusEnum = "error"
 )
 
-type PostLoadBalancersIDActionsChangeAlgorithm201ApplicationJSONActionAction struct {
-	Command   string                                                                       `json:"command"`
-	Error     PostLoadBalancersIDActionsChangeAlgorithm201ApplicationJSONActionError       `json:"error"`
-	Finished  string                                                                       `json:"finished"`
-	ID        int64                                                                        `json:"id"`
-	Progress  float64                                                                      `json:"progress"`
-	Resources []PostLoadBalancersIDActionsChangeAlgorithm201ApplicationJSONActionResources `json:"resources"`
-	Started   string                                                                       `json:"started"`
-	Status    PostLoadBalancersIDActionsChangeAlgorithm201ApplicationJSONActionStatusEnum  `json:"status"`
+type PostLoadBalancersIDActionsChangeAlgorithmActionResponseAction struct {
+	Command   string                                                                   `json:"command"`
+	Error     PostLoadBalancersIDActionsChangeAlgorithmActionResponseActionError       `json:"error"`
+	Finished  string                                                                   `json:"finished"`
+	ID        int64                                                                    `json:"id"`
+	Progress  float64                                                                  `json:"progress"`
+	Resources []PostLoadBalancersIDActionsChangeAlgorithmActionResponseActionResources `json:"resources"`
+	Started   string                                                                   `json:"started"`
+	Status    PostLoadBalancersIDActionsChangeAlgorithmActionResponseActionStatusEnum  `json:"status"`
 }
 
-type PostLoadBalancersIDActionsChangeAlgorithm201ApplicationJSONActionResponse struct {
-	Action PostLoadBalancersIDActionsChangeAlgorithm201ApplicationJSONActionAction `json:"action"`
+type PostLoadBalancersIDActionsChangeAlgorithmActionResponse struct {
+	Action PostLoadBalancersIDActionsChangeAlgorithmActionResponseAction `json:"action"`
 }
 
 type PostLoadBalancersIDActionsChangeAlgorithmResponse struct {
-	ActionResponse *PostLoadBalancersIDActionsChangeAlgorithm201ApplicationJSONActionResponse
+	ActionResponse *PostLoadBalancersIDActionsChangeAlgorithmActionResponse
 	ContentType    string
 	StatusCode     int64
 }

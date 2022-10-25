@@ -9,41 +9,41 @@ type GetCertificatesIDActionsActionIDRequest struct {
 	PathParams GetCertificatesIDActionsActionIDPathParams
 }
 
-type GetCertificatesIDActionsActionID200ApplicationJSONActionError struct {
+type GetCertificatesIDActionsActionIDActionResponseActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
 }
 
-type GetCertificatesIDActionsActionID200ApplicationJSONActionResources struct {
+type GetCertificatesIDActionsActionIDActionResponseActionResources struct {
 	ID   int64  `json:"id"`
 	Type string `json:"type"`
 }
 
-type GetCertificatesIDActionsActionID200ApplicationJSONActionStatusEnum string
+type GetCertificatesIDActionsActionIDActionResponseActionStatusEnum string
 
 const (
-	GetCertificatesIDActionsActionID200ApplicationJSONActionStatusEnumSuccess GetCertificatesIDActionsActionID200ApplicationJSONActionStatusEnum = "success"
-	GetCertificatesIDActionsActionID200ApplicationJSONActionStatusEnumRunning GetCertificatesIDActionsActionID200ApplicationJSONActionStatusEnum = "running"
-	GetCertificatesIDActionsActionID200ApplicationJSONActionStatusEnumError   GetCertificatesIDActionsActionID200ApplicationJSONActionStatusEnum = "error"
+	GetCertificatesIDActionsActionIDActionResponseActionStatusEnumSuccess GetCertificatesIDActionsActionIDActionResponseActionStatusEnum = "success"
+	GetCertificatesIDActionsActionIDActionResponseActionStatusEnumRunning GetCertificatesIDActionsActionIDActionResponseActionStatusEnum = "running"
+	GetCertificatesIDActionsActionIDActionResponseActionStatusEnumError   GetCertificatesIDActionsActionIDActionResponseActionStatusEnum = "error"
 )
 
-type GetCertificatesIDActionsActionID200ApplicationJSONActionAction struct {
-	Command   string                                                              `json:"command"`
-	Error     GetCertificatesIDActionsActionID200ApplicationJSONActionError       `json:"error"`
-	Finished  string                                                              `json:"finished"`
-	ID        int64                                                               `json:"id"`
-	Progress  float64                                                             `json:"progress"`
-	Resources []GetCertificatesIDActionsActionID200ApplicationJSONActionResources `json:"resources"`
-	Started   string                                                              `json:"started"`
-	Status    GetCertificatesIDActionsActionID200ApplicationJSONActionStatusEnum  `json:"status"`
+type GetCertificatesIDActionsActionIDActionResponseAction struct {
+	Command   string                                                          `json:"command"`
+	Error     GetCertificatesIDActionsActionIDActionResponseActionError       `json:"error"`
+	Finished  string                                                          `json:"finished"`
+	ID        int64                                                           `json:"id"`
+	Progress  float64                                                         `json:"progress"`
+	Resources []GetCertificatesIDActionsActionIDActionResponseActionResources `json:"resources"`
+	Started   string                                                          `json:"started"`
+	Status    GetCertificatesIDActionsActionIDActionResponseActionStatusEnum  `json:"status"`
 }
 
-type GetCertificatesIDActionsActionID200ApplicationJSONActionResponse struct {
-	Action GetCertificatesIDActionsActionID200ApplicationJSONActionAction `json:"action"`
+type GetCertificatesIDActionsActionIDActionResponse struct {
+	Action GetCertificatesIDActionsActionIDActionResponseAction `json:"action"`
 }
 
 type GetCertificatesIDActionsActionIDResponse struct {
-	ActionResponse *GetCertificatesIDActionsActionID200ApplicationJSONActionResponse
+	ActionResponse *GetCertificatesIDActionsActionIDActionResponse
 	ContentType    string
 	StatusCode     int64
 }

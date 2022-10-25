@@ -8,7 +8,7 @@ from dataclasses_json import dataclass_json
 
 @dataclass_json
 @dataclass
-class StargazerUserSimpleUser:
+class StargazerSimpleUser:
     avatar_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'avatar_url' }})
     events_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'events_url' }})
     followers_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'followers_url' }})
@@ -34,5 +34,5 @@ class StargazerUserSimpleUser:
 @dataclass
 class Stargazer:
     starred_at: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'starred_at', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    user: StargazerUserSimpleUser = field(default=None, metadata={'dataclasses_json': { 'field_name': 'user' }})
+    user: StargazerSimpleUser = field(default=None, metadata={'dataclasses_json': { 'field_name': 'user' }})
     

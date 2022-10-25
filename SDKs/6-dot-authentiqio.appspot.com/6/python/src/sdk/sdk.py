@@ -137,7 +137,7 @@ class SDK:
         res = operations.KeyRetrieveResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.KeyRetrieve200ApplicationJSONJwt])
+                out = utils.unmarshal_json(r.text, Optional[operations.KeyRetrieveJwt])
                 res.jwt = out
         elif r.status_code == 404:
             if utils.match_content_type(content_type, "application/json"):
@@ -410,7 +410,7 @@ class SDK:
         res = operations.SignRetrieveResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.SignRetrieve200ApplicationJSONJwt])
+                out = utils.unmarshal_json(r.text, Optional[operations.SignRetrieveJwt])
                 res.jwt = out
             if utils.match_content_type(content_type, "application/jwt"):
                 res.body = r.content

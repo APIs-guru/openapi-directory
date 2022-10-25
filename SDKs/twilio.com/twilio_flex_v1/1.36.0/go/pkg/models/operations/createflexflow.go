@@ -8,7 +8,7 @@ var CreateFlexFlowServers = []string{
 	"https://flex-api.twilio.com",
 }
 
-type CreateFlexFlowRequestBodyCreateFlexFlowRequest struct {
+type CreateFlexFlowCreateFlexFlowRequest struct {
 	ChannelType                  shared.FlexFlowEnumChannelTypeEnum      `form:"name=ChannelType"`
 	ChatServiceSid               string                                  `form:"name=ChatServiceSid"`
 	ContactIdentity              *string                                 `form:"name=ContactIdentity"`
@@ -34,7 +34,7 @@ type CreateFlexFlowSecurity struct {
 
 type CreateFlexFlowRequest struct {
 	ServerURL *string
-	Request   *CreateFlexFlowRequestBodyCreateFlexFlowRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request   *CreateFlexFlowCreateFlexFlowRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security  CreateFlexFlowSecurity
 }
 

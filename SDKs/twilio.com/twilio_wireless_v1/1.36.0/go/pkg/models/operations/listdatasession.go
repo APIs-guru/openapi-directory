@@ -27,7 +27,7 @@ type ListDataSessionRequest struct {
 	Security    ListDataSessionSecurity
 }
 
-type ListDataSession200ApplicationJSONMeta struct {
+type ListDataSessionListDataSessionResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -37,13 +37,13 @@ type ListDataSession200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListDataSession200ApplicationJSONListDataSessionResponse struct {
-	DataSessions []shared.WirelessV1SimDataSession      `json:"data_sessions,omitempty"`
-	Meta         *ListDataSession200ApplicationJSONMeta `json:"meta,omitempty"`
+type ListDataSessionListDataSessionResponse struct {
+	DataSessions []shared.WirelessV1SimDataSession           `json:"data_sessions,omitempty"`
+	Meta         *ListDataSessionListDataSessionResponseMeta `json:"meta,omitempty"`
 }
 
 type ListDataSessionResponse struct {
 	ContentType             string
-	ListDataSessionResponse *ListDataSession200ApplicationJSONListDataSessionResponse
+	ListDataSessionResponse *ListDataSessionListDataSessionResponse
 	StatusCode              int64
 }

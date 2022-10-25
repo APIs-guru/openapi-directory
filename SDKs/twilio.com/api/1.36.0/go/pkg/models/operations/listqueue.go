@@ -27,7 +27,7 @@ type ListQueueRequest struct {
 	Security    ListQueueSecurity
 }
 
-type ListQueue200ApplicationJSONListQueueResponse struct {
+type ListQueueListQueueResponse struct {
 	End             *int64                        `json:"end,omitempty"`
 	FirstPageURI    *string                       `json:"first_page_uri,omitempty"`
 	NextPageURI     *string                       `json:"next_page_uri,omitempty"`
@@ -41,6 +41,6 @@ type ListQueue200ApplicationJSONListQueueResponse struct {
 
 type ListQueueResponse struct {
 	ContentType       string
-	ListQueueResponse *ListQueue200ApplicationJSONListQueueResponse
+	ListQueueResponse *ListQueueListQueueResponse
 	StatusCode        int64
 }

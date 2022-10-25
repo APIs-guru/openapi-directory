@@ -22,7 +22,7 @@ type ListVoiceCountryRequest struct {
 	Security    ListVoiceCountrySecurity
 }
 
-type ListVoiceCountry200ApplicationJSONMeta struct {
+type ListVoiceCountryListVoiceCountryResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -32,13 +32,13 @@ type ListVoiceCountry200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListVoiceCountry200ApplicationJSONListVoiceCountryResponse struct {
-	Countries []shared.PricingV2VoiceVoiceCountry     `json:"countries,omitempty"`
-	Meta      *ListVoiceCountry200ApplicationJSONMeta `json:"meta,omitempty"`
+type ListVoiceCountryListVoiceCountryResponse struct {
+	Countries []shared.PricingV2VoiceVoiceCountry           `json:"countries,omitempty"`
+	Meta      *ListVoiceCountryListVoiceCountryResponseMeta `json:"meta,omitempty"`
 }
 
 type ListVoiceCountryResponse struct {
 	ContentType              string
-	ListVoiceCountryResponse *ListVoiceCountry200ApplicationJSONListVoiceCountryResponse
+	ListVoiceCountryResponse *ListVoiceCountryListVoiceCountryResponse
 	StatusCode               int64
 }

@@ -12,7 +12,7 @@ type UpdateWebChannelPathParams struct {
 	Sid string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
-type UpdateWebChannelRequestBodyUpdateWebChannelRequest struct {
+type UpdateWebChannelUpdateWebChannelRequest struct {
 	ChatStatus         *shared.WebChannelEnumChatStatusEnum `form:"name=ChatStatus"`
 	PostEngagementData *string                              `form:"name=PostEngagementData"`
 }
@@ -24,7 +24,7 @@ type UpdateWebChannelSecurity struct {
 type UpdateWebChannelRequest struct {
 	ServerURL  *string
 	PathParams UpdateWebChannelPathParams
-	Request    *UpdateWebChannelRequestBodyUpdateWebChannelRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateWebChannelUpdateWebChannelRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateWebChannelSecurity
 }
 

@@ -12,7 +12,7 @@ class CreateActivityPathParams:
     
 
 @dataclass
-class CreateActivityRequestBodyCreateActivityRequest:
+class CreateActivityCreateActivityRequest:
     available: Optional[bool] = field(default=None, metadata={'form': { 'field_name': 'Available' }})
     friendly_name: str = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
     
@@ -26,7 +26,7 @@ class CreateActivitySecurity:
 class CreateActivityRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateActivityPathParams = field(default=None)
-    request: Optional[CreateActivityRequestBodyCreateActivityRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateActivityCreateActivityRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateActivitySecurity = field(default=None)
     
 

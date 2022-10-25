@@ -13,7 +13,7 @@ class UpdateShortCodePathParams:
     
 
 @dataclass
-class UpdateShortCodeRequestBodyUpdateShortCodeRequest:
+class UpdateShortCodeUpdateShortCodeRequest:
     is_reserved: Optional[bool] = field(default=None, metadata={'form': { 'field_name': 'IsReserved' }})
     
 
@@ -26,7 +26,7 @@ class UpdateShortCodeSecurity:
 class UpdateShortCodeRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateShortCodePathParams = field(default=None)
-    request: Optional[UpdateShortCodeRequestBodyUpdateShortCodeRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateShortCodeUpdateShortCodeRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateShortCodeSecurity = field(default=None)
     
 

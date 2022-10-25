@@ -29,7 +29,7 @@ type ListRecordingRequest struct {
 	Security    ListRecordingSecurity
 }
 
-type ListRecording200ApplicationJSONMeta struct {
+type ListRecordingListRecordingResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -39,13 +39,13 @@ type ListRecording200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListRecording200ApplicationJSONListRecordingResponse struct {
-	Meta       *ListRecording200ApplicationJSONMeta `json:"meta,omitempty"`
-	Recordings []shared.VideoV1Recording            `json:"recordings,omitempty"`
+type ListRecordingListRecordingResponse struct {
+	Meta       *ListRecordingListRecordingResponseMeta `json:"meta,omitempty"`
+	Recordings []shared.VideoV1Recording               `json:"recordings,omitempty"`
 }
 
 type ListRecordingResponse struct {
 	ContentType           string
-	ListRecordingResponse *ListRecording200ApplicationJSONListRecordingResponse
+	ListRecordingResponse *ListRecordingListRecordingResponse
 	StatusCode            int64
 }

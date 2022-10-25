@@ -13,7 +13,7 @@ class UpdateVerificationPathParams:
     
 
 @dataclass
-class UpdateVerificationRequestBodyUpdateVerificationRequest:
+class UpdateVerificationUpdateVerificationRequest:
     status: shared.VerificationEnumStatusEnum = field(default=None, metadata={'form': { 'field_name': 'Status' }})
     
 
@@ -26,7 +26,7 @@ class UpdateVerificationSecurity:
 class UpdateVerificationRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateVerificationPathParams = field(default=None)
-    request: Optional[UpdateVerificationRequestBodyUpdateVerificationRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateVerificationUpdateVerificationRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateVerificationSecurity = field(default=None)
     
 

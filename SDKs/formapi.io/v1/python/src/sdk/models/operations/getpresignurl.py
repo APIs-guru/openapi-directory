@@ -16,7 +16,7 @@ class GetPresignURLRequest:
 
 @dataclass_json
 @dataclass
-class GetPresignURL200ApplicationJSONFields:
+class GetPresignURLUploadPresignFields:
     key: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     policy: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'policy' }})
     x_amz_algorithm: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'x-amz-algorithm' }})
@@ -24,16 +24,16 @@ class GetPresignURL200ApplicationJSONFields:
     x_amz_date: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'x-amz-date' }})
     x_amz_signature: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'x-amz-signature' }})
     
-class GetPresignURL200ApplicationJSONMethodEnum(str, Enum):
+class GetPresignURLUploadPresignMethodEnum(str, Enum):
     POST = "post"
 
 
 @dataclass_json
 @dataclass
-class GetPresignURL200ApplicationJSONUploadPresign:
-    fields: GetPresignURL200ApplicationJSONFields = field(default=None, metadata={'dataclasses_json': { 'field_name': 'fields' }})
+class GetPresignURLUploadPresign:
+    fields: GetPresignURLUploadPresignFields = field(default=None, metadata={'dataclasses_json': { 'field_name': 'fields' }})
     headers: dict[str, Any] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'headers' }})
-    method: Optional[GetPresignURL200ApplicationJSONMethodEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'method' }})
+    method: Optional[GetPresignURLUploadPresignMethodEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'method' }})
     url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'url' }})
     
 
@@ -42,5 +42,5 @@ class GetPresignURLResponse:
     content_type: str = field(default=None)
     status_code: int = field(default=None)
     authentication_error: Optional[shared.AuthenticationError] = field(default=None)
-    upload_presign: Optional[GetPresignURL200ApplicationJSONUploadPresign] = field(default=None)
+    upload_presign: Optional[GetPresignURLUploadPresign] = field(default=None)
     

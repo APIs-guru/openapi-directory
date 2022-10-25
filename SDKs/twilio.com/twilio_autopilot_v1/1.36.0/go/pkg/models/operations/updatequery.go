@@ -13,7 +13,7 @@ type UpdateQueryPathParams struct {
 	Sid          string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
-type UpdateQueryRequestBodyUpdateQueryRequest struct {
+type UpdateQueryUpdateQueryRequest struct {
 	SampleSid *string `form:"name=SampleSid"`
 	Status    *string `form:"name=Status"`
 }
@@ -25,7 +25,7 @@ type UpdateQuerySecurity struct {
 type UpdateQueryRequest struct {
 	ServerURL  *string
 	PathParams UpdateQueryPathParams
-	Request    *UpdateQueryRequestBodyUpdateQueryRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateQueryUpdateQueryRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateQuerySecurity
 }
 

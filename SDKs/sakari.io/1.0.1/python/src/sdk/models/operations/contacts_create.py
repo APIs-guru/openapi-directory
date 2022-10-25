@@ -21,7 +21,7 @@ class ContactsCreateQueryParams:
 @dataclass
 class ContactsCreateRequests:
     contact_request: Optional[shared.ContactRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
-    text_csv: bytes = field(default=None, metadata={'request': { 'media_type': 'text/csv' }})
+    string: Optional[str] = field(default=None, metadata={'request': { 'media_type': 'text/csv' }})
     
 
 @dataclass

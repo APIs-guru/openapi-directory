@@ -12,7 +12,7 @@ type UpdateCredentialAwsPathParams struct {
 	Sid string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
-type UpdateCredentialAwsRequestBodyUpdateCredentialAwsRequest struct {
+type UpdateCredentialAwsUpdateCredentialAwsRequest struct {
 	FriendlyName *string `form:"name=FriendlyName"`
 }
 
@@ -23,7 +23,7 @@ type UpdateCredentialAwsSecurity struct {
 type UpdateCredentialAwsRequest struct {
 	ServerURL  *string
 	PathParams UpdateCredentialAwsPathParams
-	Request    *UpdateCredentialAwsRequestBodyUpdateCredentialAwsRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateCredentialAwsUpdateCredentialAwsRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateCredentialAwsSecurity
 }
 

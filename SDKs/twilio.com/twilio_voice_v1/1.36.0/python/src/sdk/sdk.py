@@ -507,7 +507,7 @@ class SDK:
         res = operations.ListByocTrunkResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListByocTrunk200ApplicationJSONListByocTrunkResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListByocTrunkListByocTrunkResponse])
                 res.list_byoc_trunk_response = out
 
         return res
@@ -532,7 +532,7 @@ class SDK:
         res = operations.ListConnectionPolicyResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListConnectionPolicy200ApplicationJSONListConnectionPolicyResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListConnectionPolicyListConnectionPolicyResponse])
                 res.list_connection_policy_response = out
 
         return res
@@ -557,7 +557,7 @@ class SDK:
         res = operations.ListConnectionPolicyTargetResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListConnectionPolicyTarget200ApplicationJSONListConnectionPolicyTargetResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListConnectionPolicyTargetListConnectionPolicyTargetResponse])
                 res.list_connection_policy_target_response = out
 
         return res
@@ -582,7 +582,7 @@ class SDK:
         res = operations.ListDialingPermissionsCountryResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListDialingPermissionsCountry200ApplicationJSONListDialingPermissionsCountryResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListDialingPermissionsCountryListDialingPermissionsCountryResponse])
                 res.list_dialing_permissions_country_response = out
 
         return res
@@ -607,7 +607,7 @@ class SDK:
         res = operations.ListDialingPermissionsHrsPrefixesResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListDialingPermissionsHrsPrefixes200ApplicationJSONListDialingPermissionsHrsPrefixesResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListDialingPermissionsHrsPrefixesListDialingPermissionsHrsPrefixesResponse])
                 res.list_dialing_permissions_hrs_prefixes_response = out
 
         return res
@@ -632,7 +632,7 @@ class SDK:
         res = operations.ListIPRecordResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListIPRecord200ApplicationJSONListIPRecordResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListIPRecordListIPRecordResponse])
                 res.list_ip_record_response = out
 
         return res
@@ -657,7 +657,7 @@ class SDK:
         res = operations.ListSourceIPMappingResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListSourceIPMapping200ApplicationJSONListSourceIPMappingResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListSourceIPMappingListSourceIPMappingResponse])
                 res.list_source_ip_mapping_response = out
 
         return res

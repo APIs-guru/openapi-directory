@@ -27,7 +27,7 @@ type ListAuthorizedConnectAppRequest struct {
 	Security    ListAuthorizedConnectAppSecurity
 }
 
-type ListAuthorizedConnectApp200ApplicationJSONListAuthorizedConnectAppResponse struct {
+type ListAuthorizedConnectAppListAuthorizedConnectAppResponse struct {
 	AuthorizedConnectApps []shared.APIV2010AccountAuthorizedConnectApp `json:"authorized_connect_apps,omitempty"`
 	End                   *int64                                       `json:"end,omitempty"`
 	FirstPageURI          *string                                      `json:"first_page_uri,omitempty"`
@@ -41,6 +41,6 @@ type ListAuthorizedConnectApp200ApplicationJSONListAuthorizedConnectAppResponse 
 
 type ListAuthorizedConnectAppResponse struct {
 	ContentType                      string
-	ListAuthorizedConnectAppResponse *ListAuthorizedConnectApp200ApplicationJSONListAuthorizedConnectAppResponse
+	ListAuthorizedConnectAppResponse *ListAuthorizedConnectAppListAuthorizedConnectAppResponse
 	StatusCode                       int64
 }

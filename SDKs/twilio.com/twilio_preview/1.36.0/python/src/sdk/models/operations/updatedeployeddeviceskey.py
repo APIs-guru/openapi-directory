@@ -13,7 +13,7 @@ class UpdateDeployedDevicesKeyPathParams:
     
 
 @dataclass
-class UpdateDeployedDevicesKeyRequestBodyUpdateDeployedDevicesKeyRequest:
+class UpdateDeployedDevicesKeyUpdateDeployedDevicesKeyRequest:
     device_sid: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'DeviceSid' }})
     friendly_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
     
@@ -27,7 +27,7 @@ class UpdateDeployedDevicesKeySecurity:
 class UpdateDeployedDevicesKeyRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateDeployedDevicesKeyPathParams = field(default=None)
-    request: Optional[UpdateDeployedDevicesKeyRequestBodyUpdateDeployedDevicesKeyRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateDeployedDevicesKeyUpdateDeployedDevicesKeyRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateDeployedDevicesKeySecurity = field(default=None)
     
 

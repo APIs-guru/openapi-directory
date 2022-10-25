@@ -26,7 +26,7 @@ class ListTrunkingCountryRequest:
 
 @dataclass_json
 @dataclass
-class ListTrunkingCountry200ApplicationJSONMeta:
+class ListTrunkingCountryListTrunkingCountryResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -38,14 +38,14 @@ class ListTrunkingCountry200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListTrunkingCountry200ApplicationJSONListTrunkingCountryResponse:
+class ListTrunkingCountryListTrunkingCountryResponse:
     countries: Optional[List[shared.PricingV2TrunkingCountry]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'countries' }})
-    meta: Optional[ListTrunkingCountry200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+    meta: Optional[ListTrunkingCountryListTrunkingCountryResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     
 
 @dataclass
 class ListTrunkingCountryResponse:
     content_type: str = field(default=None)
-    list_trunking_country_response: Optional[ListTrunkingCountry200ApplicationJSONListTrunkingCountryResponse] = field(default=None)
+    list_trunking_country_response: Optional[ListTrunkingCountryListTrunkingCountryResponse] = field(default=None)
     status_code: int = field(default=None)
     

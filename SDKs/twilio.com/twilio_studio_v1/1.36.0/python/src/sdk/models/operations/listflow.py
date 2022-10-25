@@ -26,7 +26,7 @@ class ListFlowRequest:
 
 @dataclass_json
 @dataclass
-class ListFlow200ApplicationJSONMeta:
+class ListFlowListFlowResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -38,14 +38,14 @@ class ListFlow200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListFlow200ApplicationJSONListFlowResponse:
+class ListFlowListFlowResponse:
     flows: Optional[List[shared.StudioV1Flow]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'flows' }})
-    meta: Optional[ListFlow200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+    meta: Optional[ListFlowListFlowResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     
 
 @dataclass
 class ListFlowResponse:
     content_type: str = field(default=None)
-    list_flow_response: Optional[ListFlow200ApplicationJSONListFlowResponse] = field(default=None)
+    list_flow_response: Optional[ListFlowListFlowResponse] = field(default=None)
     status_code: int = field(default=None)
     

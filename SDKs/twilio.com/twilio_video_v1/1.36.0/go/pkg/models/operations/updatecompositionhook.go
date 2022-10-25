@@ -12,28 +12,28 @@ type UpdateCompositionHookPathParams struct {
 	Sid string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
-type UpdateCompositionHookRequestBodyStatusCallbackMethodEnum string
+type UpdateCompositionHookUpdateCompositionHookRequestStatusCallbackMethodEnum string
 
 const (
-	UpdateCompositionHookRequestBodyStatusCallbackMethodEnumHead   UpdateCompositionHookRequestBodyStatusCallbackMethodEnum = "HEAD"
-	UpdateCompositionHookRequestBodyStatusCallbackMethodEnumGet    UpdateCompositionHookRequestBodyStatusCallbackMethodEnum = "GET"
-	UpdateCompositionHookRequestBodyStatusCallbackMethodEnumPost   UpdateCompositionHookRequestBodyStatusCallbackMethodEnum = "POST"
-	UpdateCompositionHookRequestBodyStatusCallbackMethodEnumPatch  UpdateCompositionHookRequestBodyStatusCallbackMethodEnum = "PATCH"
-	UpdateCompositionHookRequestBodyStatusCallbackMethodEnumPut    UpdateCompositionHookRequestBodyStatusCallbackMethodEnum = "PUT"
-	UpdateCompositionHookRequestBodyStatusCallbackMethodEnumDelete UpdateCompositionHookRequestBodyStatusCallbackMethodEnum = "DELETE"
+	UpdateCompositionHookUpdateCompositionHookRequestStatusCallbackMethodEnumHead   UpdateCompositionHookUpdateCompositionHookRequestStatusCallbackMethodEnum = "HEAD"
+	UpdateCompositionHookUpdateCompositionHookRequestStatusCallbackMethodEnumGet    UpdateCompositionHookUpdateCompositionHookRequestStatusCallbackMethodEnum = "GET"
+	UpdateCompositionHookUpdateCompositionHookRequestStatusCallbackMethodEnumPost   UpdateCompositionHookUpdateCompositionHookRequestStatusCallbackMethodEnum = "POST"
+	UpdateCompositionHookUpdateCompositionHookRequestStatusCallbackMethodEnumPatch  UpdateCompositionHookUpdateCompositionHookRequestStatusCallbackMethodEnum = "PATCH"
+	UpdateCompositionHookUpdateCompositionHookRequestStatusCallbackMethodEnumPut    UpdateCompositionHookUpdateCompositionHookRequestStatusCallbackMethodEnum = "PUT"
+	UpdateCompositionHookUpdateCompositionHookRequestStatusCallbackMethodEnumDelete UpdateCompositionHookUpdateCompositionHookRequestStatusCallbackMethodEnum = "DELETE"
 )
 
-type UpdateCompositionHookRequestBodyUpdateCompositionHookRequest struct {
-	AudioSources         []string                                                  `form:"name=AudioSources"`
-	AudioSourcesExcluded []string                                                  `form:"name=AudioSourcesExcluded"`
-	Enabled              *bool                                                     `form:"name=Enabled"`
-	Format               *shared.CompositionHookEnumFormatEnum                     `form:"name=Format"`
-	FriendlyName         string                                                    `form:"name=FriendlyName"`
-	Resolution           *string                                                   `form:"name=Resolution"`
-	StatusCallback       *string                                                   `form:"name=StatusCallback"`
-	StatusCallbackMethod *UpdateCompositionHookRequestBodyStatusCallbackMethodEnum `form:"name=StatusCallbackMethod"`
-	Trim                 *bool                                                     `form:"name=Trim"`
-	VideoLayout          *interface{}                                              `form:"name=VideoLayout"`
+type UpdateCompositionHookUpdateCompositionHookRequest struct {
+	AudioSources         []string                                                                   `form:"name=AudioSources"`
+	AudioSourcesExcluded []string                                                                   `form:"name=AudioSourcesExcluded"`
+	Enabled              *bool                                                                      `form:"name=Enabled"`
+	Format               *shared.CompositionHookEnumFormatEnum                                      `form:"name=Format"`
+	FriendlyName         string                                                                     `form:"name=FriendlyName"`
+	Resolution           *string                                                                    `form:"name=Resolution"`
+	StatusCallback       *string                                                                    `form:"name=StatusCallback"`
+	StatusCallbackMethod *UpdateCompositionHookUpdateCompositionHookRequestStatusCallbackMethodEnum `form:"name=StatusCallbackMethod"`
+	Trim                 *bool                                                                      `form:"name=Trim"`
+	VideoLayout          *interface{}                                                               `form:"name=VideoLayout"`
 }
 
 type UpdateCompositionHookSecurity struct {
@@ -43,7 +43,7 @@ type UpdateCompositionHookSecurity struct {
 type UpdateCompositionHookRequest struct {
 	ServerURL  *string
 	PathParams UpdateCompositionHookPathParams
-	Request    *UpdateCompositionHookRequestBodyUpdateCompositionHookRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateCompositionHookUpdateCompositionHookRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateCompositionHookSecurity
 }
 

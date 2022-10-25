@@ -13,41 +13,41 @@ type PostVolumesIDActionsChangeProtectionRequest struct {
 	Request    *PostVolumesIDActionsChangeProtectionRequestBody `request:"mediaType=application/json"`
 }
 
-type PostVolumesIDActionsChangeProtection201ApplicationJSONActionError struct {
+type PostVolumesIDActionsChangeProtectionActionResponseActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
 }
 
-type PostVolumesIDActionsChangeProtection201ApplicationJSONActionResources struct {
+type PostVolumesIDActionsChangeProtectionActionResponseActionResources struct {
 	ID   int64  `json:"id"`
 	Type string `json:"type"`
 }
 
-type PostVolumesIDActionsChangeProtection201ApplicationJSONActionStatusEnum string
+type PostVolumesIDActionsChangeProtectionActionResponseActionStatusEnum string
 
 const (
-	PostVolumesIDActionsChangeProtection201ApplicationJSONActionStatusEnumSuccess PostVolumesIDActionsChangeProtection201ApplicationJSONActionStatusEnum = "success"
-	PostVolumesIDActionsChangeProtection201ApplicationJSONActionStatusEnumRunning PostVolumesIDActionsChangeProtection201ApplicationJSONActionStatusEnum = "running"
-	PostVolumesIDActionsChangeProtection201ApplicationJSONActionStatusEnumError   PostVolumesIDActionsChangeProtection201ApplicationJSONActionStatusEnum = "error"
+	PostVolumesIDActionsChangeProtectionActionResponseActionStatusEnumSuccess PostVolumesIDActionsChangeProtectionActionResponseActionStatusEnum = "success"
+	PostVolumesIDActionsChangeProtectionActionResponseActionStatusEnumRunning PostVolumesIDActionsChangeProtectionActionResponseActionStatusEnum = "running"
+	PostVolumesIDActionsChangeProtectionActionResponseActionStatusEnumError   PostVolumesIDActionsChangeProtectionActionResponseActionStatusEnum = "error"
 )
 
-type PostVolumesIDActionsChangeProtection201ApplicationJSONActionAction struct {
-	Command   string                                                                  `json:"command"`
-	Error     PostVolumesIDActionsChangeProtection201ApplicationJSONActionError       `json:"error"`
-	Finished  string                                                                  `json:"finished"`
-	ID        int64                                                                   `json:"id"`
-	Progress  float64                                                                 `json:"progress"`
-	Resources []PostVolumesIDActionsChangeProtection201ApplicationJSONActionResources `json:"resources"`
-	Started   string                                                                  `json:"started"`
-	Status    PostVolumesIDActionsChangeProtection201ApplicationJSONActionStatusEnum  `json:"status"`
+type PostVolumesIDActionsChangeProtectionActionResponseAction struct {
+	Command   string                                                              `json:"command"`
+	Error     PostVolumesIDActionsChangeProtectionActionResponseActionError       `json:"error"`
+	Finished  string                                                              `json:"finished"`
+	ID        int64                                                               `json:"id"`
+	Progress  float64                                                             `json:"progress"`
+	Resources []PostVolumesIDActionsChangeProtectionActionResponseActionResources `json:"resources"`
+	Started   string                                                              `json:"started"`
+	Status    PostVolumesIDActionsChangeProtectionActionResponseActionStatusEnum  `json:"status"`
 }
 
-type PostVolumesIDActionsChangeProtection201ApplicationJSONActionResponse struct {
-	Action PostVolumesIDActionsChangeProtection201ApplicationJSONActionAction `json:"action"`
+type PostVolumesIDActionsChangeProtectionActionResponse struct {
+	Action PostVolumesIDActionsChangeProtectionActionResponseAction `json:"action"`
 }
 
 type PostVolumesIDActionsChangeProtectionResponse struct {
-	ActionResponse *PostVolumesIDActionsChangeProtection201ApplicationJSONActionResponse
+	ActionResponse *PostVolumesIDActionsChangeProtectionActionResponse
 	ContentType    string
 	StatusCode     int64
 }

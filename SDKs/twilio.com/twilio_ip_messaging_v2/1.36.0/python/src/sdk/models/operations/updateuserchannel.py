@@ -17,7 +17,7 @@ class UpdateUserChannelPathParams:
     
 
 @dataclass
-class UpdateUserChannelRequestBodyUpdateUserChannelRequest:
+class UpdateUserChannelUpdateUserChannelRequest:
     last_consumed_message_index: Optional[int] = field(default=None, metadata={'form': { 'field_name': 'LastConsumedMessageIndex' }})
     last_consumption_timestamp: Optional[datetime] = field(default=None, metadata={'form': { 'field_name': 'LastConsumptionTimestamp' }})
     notification_level: Optional[shared.UserChannelEnumNotificationLevelEnum] = field(default=None, metadata={'form': { 'field_name': 'NotificationLevel' }})
@@ -32,7 +32,7 @@ class UpdateUserChannelSecurity:
 class UpdateUserChannelRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateUserChannelPathParams = field(default=None)
-    request: Optional[UpdateUserChannelRequestBodyUpdateUserChannelRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateUserChannelUpdateUserChannelRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateUserChannelSecurity = field(default=None)
     
 

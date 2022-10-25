@@ -3,7 +3,7 @@ from typing import Enum,Optional
 from dataclasses_json import dataclass_json
 from . import nestedcable
 
-class WritableCircuitTerminationTermSideTerminationEnum(str, Enum):
+class WritableCircuitTerminationTerminationEnum(str, Enum):
     A = "A"
     Z = "Z"
 
@@ -21,7 +21,7 @@ class WritableCircuitTermination:
     port_speed: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'port_speed' }})
     pp_info: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pp_info' }})
     site: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'site' }})
-    term_side: WritableCircuitTerminationTermSideTerminationEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'term_side' }})
+    term_side: WritableCircuitTerminationTerminationEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'term_side' }})
     upstream_speed: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'upstream_speed' }})
     xconnect_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'xconnect_id' }})
     

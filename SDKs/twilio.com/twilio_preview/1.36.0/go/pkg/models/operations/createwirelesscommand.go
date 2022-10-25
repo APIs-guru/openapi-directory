@@ -8,7 +8,7 @@ var CreateWirelessCommandServers = []string{
 	"https://preview.twilio.com",
 }
 
-type CreateWirelessCommandRequestBodyCreateWirelessCommandRequest struct {
+type CreateWirelessCommandCreateWirelessCommandRequest struct {
 	CallbackMethod *string `form:"name=CallbackMethod"`
 	CallbackURL    *string `form:"name=CallbackUrl"`
 	Command        string  `form:"name=Command"`
@@ -24,7 +24,7 @@ type CreateWirelessCommandSecurity struct {
 
 type CreateWirelessCommandRequest struct {
 	ServerURL *string
-	Request   *CreateWirelessCommandRequestBodyCreateWirelessCommandRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request   *CreateWirelessCommandCreateWirelessCommandRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security  CreateWirelessCommandSecurity
 }
 

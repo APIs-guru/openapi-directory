@@ -26,7 +26,7 @@ class ListCredentialPublicKeyRequest:
 
 @dataclass_json
 @dataclass
-class ListCredentialPublicKey200ApplicationJSONMeta:
+class ListCredentialPublicKeyListCredentialPublicKeyResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -38,14 +38,14 @@ class ListCredentialPublicKey200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListCredentialPublicKey200ApplicationJSONListCredentialPublicKeyResponse:
+class ListCredentialPublicKeyListCredentialPublicKeyResponse:
     credentials: Optional[List[shared.AccountsV1CredentialCredentialPublicKey]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'credentials' }})
-    meta: Optional[ListCredentialPublicKey200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+    meta: Optional[ListCredentialPublicKeyListCredentialPublicKeyResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     
 
 @dataclass
 class ListCredentialPublicKeyResponse:
     content_type: str = field(default=None)
-    list_credential_public_key_response: Optional[ListCredentialPublicKey200ApplicationJSONListCredentialPublicKeyResponse] = field(default=None)
+    list_credential_public_key_response: Optional[ListCredentialPublicKeyListCredentialPublicKeyResponse] = field(default=None)
     status_code: int = field(default=None)
     

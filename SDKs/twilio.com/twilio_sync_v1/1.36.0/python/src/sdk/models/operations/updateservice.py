@@ -12,7 +12,7 @@ class UpdateServicePathParams:
     
 
 @dataclass
-class UpdateServiceRequestBodyUpdateServiceRequest:
+class UpdateServiceUpdateServiceRequest:
     acl_enabled: Optional[bool] = field(default=None, metadata={'form': { 'field_name': 'AclEnabled' }})
     friendly_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
     reachability_debouncing_enabled: Optional[bool] = field(default=None, metadata={'form': { 'field_name': 'ReachabilityDebouncingEnabled' }})
@@ -31,7 +31,7 @@ class UpdateServiceSecurity:
 class UpdateServiceRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateServicePathParams = field(default=None)
-    request: Optional[UpdateServiceRequestBodyUpdateServiceRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateServiceUpdateServiceRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateServiceSecurity = field(default=None)
     
 

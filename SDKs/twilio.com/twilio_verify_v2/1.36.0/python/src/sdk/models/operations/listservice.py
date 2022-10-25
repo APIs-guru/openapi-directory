@@ -26,7 +26,7 @@ class ListServiceRequest:
 
 @dataclass_json
 @dataclass
-class ListService200ApplicationJSONMeta:
+class ListServiceListServiceResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -38,14 +38,14 @@ class ListService200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListService200ApplicationJSONListServiceResponse:
-    meta: Optional[ListService200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+class ListServiceListServiceResponse:
+    meta: Optional[ListServiceListServiceResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     services: Optional[List[shared.VerifyV2Service]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'services' }})
     
 
 @dataclass
 class ListServiceResponse:
     content_type: str = field(default=None)
-    list_service_response: Optional[ListService200ApplicationJSONListServiceResponse] = field(default=None)
+    list_service_response: Optional[ListServiceListServiceResponse] = field(default=None)
     status_code: int = field(default=None)
     

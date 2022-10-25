@@ -11,7 +11,7 @@ from . import search_result_text_matches
 
 @dataclass_json
 @dataclass
-class CommitSearchResultItemAuthorSimpleUser:
+class CommitSearchResultItemSimpleUser:
     avatar_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'avatar_url' }})
     events_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'events_url' }})
     followers_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'followers_url' }})
@@ -43,7 +43,7 @@ class CommitSearchResultItemCommitAuthor:
 
 @dataclass_json
 @dataclass
-class CommitSearchResultItemCommitCommitterGitUser:
+class CommitSearchResultItemCommitGitUser:
     date: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'date' }})
     email: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'email' }})
     name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
@@ -61,7 +61,7 @@ class CommitSearchResultItemCommitTree:
 class CommitSearchResultItemCommit:
     author: CommitSearchResultItemCommitAuthor = field(default=None, metadata={'dataclasses_json': { 'field_name': 'author' }})
     comment_count: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'comment_count' }})
-    committer: CommitSearchResultItemCommitCommitterGitUser = field(default=None, metadata={'dataclasses_json': { 'field_name': 'committer' }})
+    committer: CommitSearchResultItemCommitGitUser = field(default=None, metadata={'dataclasses_json': { 'field_name': 'committer' }})
     message: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'message' }})
     tree: CommitSearchResultItemCommitTree = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tree' }})
     url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'url' }})
@@ -70,7 +70,7 @@ class CommitSearchResultItemCommit:
 
 @dataclass_json
 @dataclass
-class CommitSearchResultItemCommitterGitUser:
+class CommitSearchResultItemGitUser:
     date: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'date' }})
     email: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'email' }})
     name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
@@ -87,10 +87,10 @@ class CommitSearchResultItemParents:
 @dataclass_json
 @dataclass
 class CommitSearchResultItem:
-    author: CommitSearchResultItemAuthorSimpleUser = field(default=None, metadata={'dataclasses_json': { 'field_name': 'author' }})
+    author: CommitSearchResultItemSimpleUser = field(default=None, metadata={'dataclasses_json': { 'field_name': 'author' }})
     comments_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'comments_url' }})
     commit: CommitSearchResultItemCommit = field(default=None, metadata={'dataclasses_json': { 'field_name': 'commit' }})
-    committer: CommitSearchResultItemCommitterGitUser = field(default=None, metadata={'dataclasses_json': { 'field_name': 'committer' }})
+    committer: CommitSearchResultItemGitUser = field(default=None, metadata={'dataclasses_json': { 'field_name': 'committer' }})
     html_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'html_url' }})
     node_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'node_id' }})
     parents: List[CommitSearchResultItemParents] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'parents' }})

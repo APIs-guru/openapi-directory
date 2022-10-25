@@ -26,7 +26,7 @@ class ListPhoneNumberCountryRequest:
 
 @dataclass_json
 @dataclass
-class ListPhoneNumberCountry200ApplicationJSONMeta:
+class ListPhoneNumberCountryListPhoneNumberCountryResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -38,14 +38,14 @@ class ListPhoneNumberCountry200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListPhoneNumberCountry200ApplicationJSONListPhoneNumberCountryResponse:
+class ListPhoneNumberCountryListPhoneNumberCountryResponse:
     countries: Optional[List[shared.PricingV1PhoneNumberPhoneNumberCountry]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'countries' }})
-    meta: Optional[ListPhoneNumberCountry200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+    meta: Optional[ListPhoneNumberCountryListPhoneNumberCountryResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     
 
 @dataclass
 class ListPhoneNumberCountryResponse:
     content_type: str = field(default=None)
-    list_phone_number_country_response: Optional[ListPhoneNumberCountry200ApplicationJSONListPhoneNumberCountryResponse] = field(default=None)
+    list_phone_number_country_response: Optional[ListPhoneNumberCountryListPhoneNumberCountryResponse] = field(default=None)
     status_code: int = field(default=None)
     

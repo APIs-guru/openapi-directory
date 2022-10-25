@@ -22,7 +22,7 @@ type ListRatePlanRequest struct {
 	Security    ListRatePlanSecurity
 }
 
-type ListRatePlan200ApplicationJSONMeta struct {
+type ListRatePlanListRatePlanResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -32,13 +32,13 @@ type ListRatePlan200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListRatePlan200ApplicationJSONListRatePlanResponse struct {
-	Meta      *ListRatePlan200ApplicationJSONMeta `json:"meta,omitempty"`
-	RatePlans []shared.WirelessV1RatePlan         `json:"rate_plans,omitempty"`
+type ListRatePlanListRatePlanResponse struct {
+	Meta      *ListRatePlanListRatePlanResponseMeta `json:"meta,omitempty"`
+	RatePlans []shared.WirelessV1RatePlan           `json:"rate_plans,omitempty"`
 }
 
 type ListRatePlanResponse struct {
 	ContentType          string
-	ListRatePlanResponse *ListRatePlan200ApplicationJSONListRatePlanResponse
+	ListRatePlanResponse *ListRatePlanListRatePlanResponse
 	StatusCode           int64
 }

@@ -5,7 +5,7 @@ import dateutil.parser
 from typing import Any,Enum,List,Optional
 from dataclasses_json import dataclass_json
 
-class WritableIPAddressRoleRoleEnum(str, Enum):
+class WritableIPAddressRoleEnum(str, Enum):
     LOOPBACK = "loopback"
     SECONDARY = "secondary"
     ANYCAST = "anycast"
@@ -15,7 +15,7 @@ class WritableIPAddressRoleRoleEnum(str, Enum):
     GLBP = "glbp"
     CARP = "carp"
 
-class WritableIPAddressStatusStatusEnum(str, Enum):
+class WritableIPAddressStatusEnum(str, Enum):
     ACTIVE = "active"
     RESERVED = "reserved"
     DEPRECATED = "deprecated"
@@ -36,8 +36,8 @@ class WritableIPAddress:
     last_updated: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'last_updated', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     nat_inside: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nat_inside' }})
     nat_outside: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nat_outside' }})
-    role: Optional[WritableIPAddressRoleRoleEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'role' }})
-    status: Optional[WritableIPAddressStatusStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    role: Optional[WritableIPAddressRoleEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'role' }})
+    status: Optional[WritableIPAddressStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
     tags: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
     tenant: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tenant' }})
     vrf: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'vrf' }})

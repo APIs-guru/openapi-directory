@@ -7,7 +7,7 @@ CREATE_IP_RECORD_SERVERS = [
 
 
 @dataclass
-class CreateIPRecordRequestBodyCreateIPRecordRequest:
+class CreateIPRecordCreateIPRecordRequest:
     cidr_prefix_length: Optional[int] = field(default=None, metadata={'form': { 'field_name': 'CidrPrefixLength' }})
     friendly_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
     ip_address: str = field(default=None, metadata={'form': { 'field_name': 'IpAddress' }})
@@ -21,7 +21,7 @@ class CreateIPRecordSecurity:
 @dataclass
 class CreateIPRecordRequest:
     server_url: Optional[str] = field(default=None)
-    request: Optional[CreateIPRecordRequestBodyCreateIPRecordRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateIPRecordCreateIPRecordRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateIPRecordSecurity = field(default=None)
     
 

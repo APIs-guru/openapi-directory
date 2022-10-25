@@ -10,7 +10,7 @@ from dataclasses_json import dataclass_json
 class RegistrationsForksCreatePathParams:
     registration_id: str = field(default=None, metadata={'path_param': { 'field_name': 'registration_id', 'style': 'simple', 'explode': False }})
     
-class RegistrationsForksCreateRequestBodyAttributesCategoryEnum(str, Enum):
+class RegistrationsForksCreateRegistrationAttributesCategoryEnum(str, Enum):
     ANALYSIS = "analysis"
     COMMUNICATION = "communication"
     DATA = "data"
@@ -25,8 +25,8 @@ class RegistrationsForksCreateRequestBodyAttributesCategoryEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class RegistrationsForksCreateRequestBodyAttributesAttributes:
-    category: Optional[RegistrationsForksCreateRequestBodyAttributesCategoryEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'category' }})
+class RegistrationsForksCreateRegistrationAttributes:
+    category: Optional[RegistrationsForksCreateRegistrationAttributesCategoryEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'category' }})
     collection: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'collection' }})
     current_user_can_comment: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'current_user_can_comment' }})
     current_user_permissions: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'current_user_permissions' }})
@@ -55,14 +55,14 @@ class RegistrationsForksCreateRequestBodyAttributesAttributes:
 
 @dataclass_json
 @dataclass
-class RegistrationsForksCreateRequestBodyLinksLinks:
+class RegistrationsForksCreateRegistrationLinks:
     html: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'html' }})
     self: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'self' }})
     
 
 @dataclass_json
 @dataclass
-class RegistrationsForksCreateRequestBodyRelationshipsRelationships:
+class RegistrationsForksCreateRegistrationRelationships:
     affiliated_institutions: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'affiliated_institutions' }})
     children: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'children' }})
     citation: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'citation' }})
@@ -85,18 +85,18 @@ class RegistrationsForksCreateRequestBodyRelationshipsRelationships:
 
 @dataclass_json
 @dataclass
-class RegistrationsForksCreateRequestBodyRegistration:
-    attributes: RegistrationsForksCreateRequestBodyAttributesAttributes = field(default=None, metadata={'dataclasses_json': { 'field_name': 'attributes' }})
+class RegistrationsForksCreateRegistration:
+    attributes: RegistrationsForksCreateRegistrationAttributes = field(default=None, metadata={'dataclasses_json': { 'field_name': 'attributes' }})
     id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    links: RegistrationsForksCreateRequestBodyLinksLinks = field(default=None, metadata={'dataclasses_json': { 'field_name': 'links' }})
-    relationships: RegistrationsForksCreateRequestBodyRelationshipsRelationships = field(default=None, metadata={'dataclasses_json': { 'field_name': 'relationships' }})
+    links: RegistrationsForksCreateRegistrationLinks = field(default=None, metadata={'dataclasses_json': { 'field_name': 'links' }})
+    relationships: RegistrationsForksCreateRegistrationRelationships = field(default=None, metadata={'dataclasses_json': { 'field_name': 'relationships' }})
     type: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     
 
 @dataclass
 class RegistrationsForksCreateRequest:
     path_params: RegistrationsForksCreatePathParams = field(default=None)
-    request: RegistrationsForksCreateRequestBodyRegistration = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: RegistrationsForksCreateRegistration = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass

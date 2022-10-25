@@ -22,7 +22,7 @@ type ListTrunkingCountryRequest struct {
 	Security    ListTrunkingCountrySecurity
 }
 
-type ListTrunkingCountry200ApplicationJSONMeta struct {
+type ListTrunkingCountryListTrunkingCountryResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -32,13 +32,13 @@ type ListTrunkingCountry200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListTrunkingCountry200ApplicationJSONListTrunkingCountryResponse struct {
-	Countries []shared.PricingV2TrunkingCountry          `json:"countries,omitempty"`
-	Meta      *ListTrunkingCountry200ApplicationJSONMeta `json:"meta,omitempty"`
+type ListTrunkingCountryListTrunkingCountryResponse struct {
+	Countries []shared.PricingV2TrunkingCountry                   `json:"countries,omitempty"`
+	Meta      *ListTrunkingCountryListTrunkingCountryResponseMeta `json:"meta,omitempty"`
 }
 
 type ListTrunkingCountryResponse struct {
 	ContentType                 string
-	ListTrunkingCountryResponse *ListTrunkingCountry200ApplicationJSONListTrunkingCountryResponse
+	ListTrunkingCountryResponse *ListTrunkingCountryListTrunkingCountryResponse
 	StatusCode                  int64
 }

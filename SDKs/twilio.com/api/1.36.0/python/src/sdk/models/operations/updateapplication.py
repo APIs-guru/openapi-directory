@@ -11,7 +11,7 @@ class UpdateApplicationPathParams:
     account_sid: str = field(default=None, metadata={'path_param': { 'field_name': 'AccountSid', 'style': 'simple', 'explode': False }})
     sid: str = field(default=None, metadata={'path_param': { 'field_name': 'Sid', 'style': 'simple', 'explode': False }})
     
-class UpdateApplicationRequestBodySmsFallbackMethodEnum(str, Enum):
+class UpdateApplicationUpdateApplicationRequestSmsFallbackMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -19,7 +19,7 @@ class UpdateApplicationRequestBodySmsFallbackMethodEnum(str, Enum):
     PUT = "PUT"
     DELETE = "DELETE"
 
-class UpdateApplicationRequestBodySmsMethodEnum(str, Enum):
+class UpdateApplicationUpdateApplicationRequestSmsMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -27,7 +27,7 @@ class UpdateApplicationRequestBodySmsMethodEnum(str, Enum):
     PUT = "PUT"
     DELETE = "DELETE"
 
-class UpdateApplicationRequestBodyStatusCallbackMethodEnum(str, Enum):
+class UpdateApplicationUpdateApplicationRequestStatusCallbackMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -35,7 +35,7 @@ class UpdateApplicationRequestBodyStatusCallbackMethodEnum(str, Enum):
     PUT = "PUT"
     DELETE = "DELETE"
 
-class UpdateApplicationRequestBodyVoiceFallbackMethodEnum(str, Enum):
+class UpdateApplicationUpdateApplicationRequestVoiceFallbackMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -43,7 +43,7 @@ class UpdateApplicationRequestBodyVoiceFallbackMethodEnum(str, Enum):
     PUT = "PUT"
     DELETE = "DELETE"
 
-class UpdateApplicationRequestBodyVoiceMethodEnum(str, Enum):
+class UpdateApplicationUpdateApplicationRequestVoiceMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -53,21 +53,21 @@ class UpdateApplicationRequestBodyVoiceMethodEnum(str, Enum):
 
 
 @dataclass
-class UpdateApplicationRequestBodyUpdateApplicationRequest:
+class UpdateApplicationUpdateApplicationRequest:
     api_version: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'ApiVersion' }})
     friendly_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
     message_status_callback: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'MessageStatusCallback' }})
-    sms_fallback_method: Optional[UpdateApplicationRequestBodySmsFallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'SmsFallbackMethod' }})
+    sms_fallback_method: Optional[UpdateApplicationUpdateApplicationRequestSmsFallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'SmsFallbackMethod' }})
     sms_fallback_url: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'SmsFallbackUrl' }})
-    sms_method: Optional[UpdateApplicationRequestBodySmsMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'SmsMethod' }})
+    sms_method: Optional[UpdateApplicationUpdateApplicationRequestSmsMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'SmsMethod' }})
     sms_status_callback: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'SmsStatusCallback' }})
     sms_url: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'SmsUrl' }})
     status_callback: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'StatusCallback' }})
-    status_callback_method: Optional[UpdateApplicationRequestBodyStatusCallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'StatusCallbackMethod' }})
+    status_callback_method: Optional[UpdateApplicationUpdateApplicationRequestStatusCallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'StatusCallbackMethod' }})
     voice_caller_id_lookup: Optional[bool] = field(default=None, metadata={'form': { 'field_name': 'VoiceCallerIdLookup' }})
-    voice_fallback_method: Optional[UpdateApplicationRequestBodyVoiceFallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'VoiceFallbackMethod' }})
+    voice_fallback_method: Optional[UpdateApplicationUpdateApplicationRequestVoiceFallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'VoiceFallbackMethod' }})
     voice_fallback_url: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'VoiceFallbackUrl' }})
-    voice_method: Optional[UpdateApplicationRequestBodyVoiceMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'VoiceMethod' }})
+    voice_method: Optional[UpdateApplicationUpdateApplicationRequestVoiceMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'VoiceMethod' }})
     voice_url: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'VoiceUrl' }})
     
 
@@ -80,7 +80,7 @@ class UpdateApplicationSecurity:
 class UpdateApplicationRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateApplicationPathParams = field(default=None)
-    request: Optional[UpdateApplicationRequestBodyUpdateApplicationRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateApplicationUpdateApplicationRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateApplicationSecurity = field(default=None)
     
 

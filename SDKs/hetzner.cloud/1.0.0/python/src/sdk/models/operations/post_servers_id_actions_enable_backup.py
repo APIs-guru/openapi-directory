@@ -15,18 +15,18 @@ class PostServersIDActionsEnableBackupRequest:
 
 @dataclass_json
 @dataclass
-class PostServersIDActionsEnableBackup201ApplicationJSONActionError:
+class PostServersIDActionsEnableBackupActionResponseActionError:
     code: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'code' }})
     message: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'message' }})
     
 
 @dataclass_json
 @dataclass
-class PostServersIDActionsEnableBackup201ApplicationJSONActionResources:
+class PostServersIDActionsEnableBackupActionResponseActionResources:
     id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     type: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     
-class PostServersIDActionsEnableBackup201ApplicationJSONActionStatusEnum(str, Enum):
+class PostServersIDActionsEnableBackupActionResponseActionStatusEnum(str, Enum):
     SUCCESS = "success"
     RUNNING = "running"
     ERROR = "error"
@@ -34,26 +34,26 @@ class PostServersIDActionsEnableBackup201ApplicationJSONActionStatusEnum(str, En
 
 @dataclass_json
 @dataclass
-class PostServersIDActionsEnableBackup201ApplicationJSONActionAction:
+class PostServersIDActionsEnableBackupActionResponseAction:
     command: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'command' }})
-    error: PostServersIDActionsEnableBackup201ApplicationJSONActionError = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
+    error: PostServersIDActionsEnableBackupActionResponseActionError = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
     finished: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'finished' }})
     id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     progress: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'progress' }})
-    resources: List[PostServersIDActionsEnableBackup201ApplicationJSONActionResources] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resources' }})
+    resources: List[PostServersIDActionsEnableBackupActionResponseActionResources] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resources' }})
     started: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'started' }})
-    status: PostServersIDActionsEnableBackup201ApplicationJSONActionStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    status: PostServersIDActionsEnableBackupActionResponseActionStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
     
 
 @dataclass_json
 @dataclass
-class PostServersIDActionsEnableBackup201ApplicationJSONActionResponse:
-    action: PostServersIDActionsEnableBackup201ApplicationJSONActionAction = field(default=None, metadata={'dataclasses_json': { 'field_name': 'action' }})
+class PostServersIDActionsEnableBackupActionResponse:
+    action: PostServersIDActionsEnableBackupActionResponseAction = field(default=None, metadata={'dataclasses_json': { 'field_name': 'action' }})
     
 
 @dataclass
 class PostServersIDActionsEnableBackupResponse:
-    action_response: Optional[PostServersIDActionsEnableBackup201ApplicationJSONActionResponse] = field(default=None)
+    action_response: Optional[PostServersIDActionsEnableBackupActionResponse] = field(default=None)
     content_type: str = field(default=None)
     status_code: int = field(default=None)
     

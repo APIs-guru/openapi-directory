@@ -22,7 +22,7 @@ type ListWirelessRatePlanRequest struct {
 	Security    ListWirelessRatePlanSecurity
 }
 
-type ListWirelessRatePlan200ApplicationJSONMeta struct {
+type ListWirelessRatePlanListWirelessRatePlanResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -32,13 +32,13 @@ type ListWirelessRatePlan200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListWirelessRatePlan200ApplicationJSONListWirelessRatePlanResponse struct {
-	Meta      *ListWirelessRatePlan200ApplicationJSONMeta `json:"meta,omitempty"`
-	RatePlans []shared.PreviewWirelessRatePlan            `json:"rate_plans,omitempty"`
+type ListWirelessRatePlanListWirelessRatePlanResponse struct {
+	Meta      *ListWirelessRatePlanListWirelessRatePlanResponseMeta `json:"meta,omitempty"`
+	RatePlans []shared.PreviewWirelessRatePlan                      `json:"rate_plans,omitempty"`
 }
 
 type ListWirelessRatePlanResponse struct {
 	ContentType                  string
-	ListWirelessRatePlanResponse *ListWirelessRatePlan200ApplicationJSONListWirelessRatePlanResponse
+	ListWirelessRatePlanResponse *ListWirelessRatePlanListWirelessRatePlanResponse
 	StatusCode                   int64
 }

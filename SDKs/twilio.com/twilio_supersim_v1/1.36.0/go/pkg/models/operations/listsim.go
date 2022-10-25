@@ -25,7 +25,7 @@ type ListSimRequest struct {
 	Security    ListSimSecurity
 }
 
-type ListSim200ApplicationJSONMeta struct {
+type ListSimListSimResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -35,13 +35,13 @@ type ListSim200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListSim200ApplicationJSONListSimResponse struct {
-	Meta *ListSim200ApplicationJSONMeta `json:"meta,omitempty"`
-	Sims []shared.SupersimV1Sim         `json:"sims,omitempty"`
+type ListSimListSimResponse struct {
+	Meta *ListSimListSimResponseMeta `json:"meta,omitempty"`
+	Sims []shared.SupersimV1Sim      `json:"sims,omitempty"`
 }
 
 type ListSimResponse struct {
 	ContentType     string
-	ListSimResponse *ListSim200ApplicationJSONListSimResponse
+	ListSimResponse *ListSimListSimResponse
 	StatusCode      int64
 }

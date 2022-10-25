@@ -23,7 +23,7 @@ type ListConfigurationAddressRequest struct {
 	Security    ListConfigurationAddressSecurity
 }
 
-type ListConfigurationAddress200ApplicationJSONMeta struct {
+type ListConfigurationAddressListConfigurationAddressResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -33,13 +33,13 @@ type ListConfigurationAddress200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListConfigurationAddress200ApplicationJSONListConfigurationAddressResponse struct {
-	AddressConfigurations []shared.ConversationsV1ConfigurationAddress    `json:"address_configurations,omitempty"`
-	Meta                  *ListConfigurationAddress200ApplicationJSONMeta `json:"meta,omitempty"`
+type ListConfigurationAddressListConfigurationAddressResponse struct {
+	AddressConfigurations []shared.ConversationsV1ConfigurationAddress                  `json:"address_configurations,omitempty"`
+	Meta                  *ListConfigurationAddressListConfigurationAddressResponseMeta `json:"meta,omitempty"`
 }
 
 type ListConfigurationAddressResponse struct {
 	ContentType                      string
-	ListConfigurationAddressResponse *ListConfigurationAddress200ApplicationJSONListConfigurationAddressResponse
+	ListConfigurationAddressResponse *ListConfigurationAddressListConfigurationAddressResponse
 	StatusCode                       int64
 }

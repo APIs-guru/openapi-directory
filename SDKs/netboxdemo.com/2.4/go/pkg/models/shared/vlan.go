@@ -4,7 +4,7 @@ import (
 	"time"
 )
 
-type VlanStatusStatus struct {
+type VlanStatus struct {
 	Label string `json:"label"`
 	Value int64  `json:"value"`
 }
@@ -20,7 +20,7 @@ type Vlan struct {
 	Name         string                 `json:"name"`
 	Role         *NestedRole            `json:"role,omitempty"`
 	Site         *NestedSite            `json:"site,omitempty"`
-	Status       *VlanStatusStatus      `json:"status,omitempty"`
+	Status       *VlanStatus            `json:"status,omitempty"`
 	Tags         []string               `json:"tags,omitempty"`
 	Tenant       *NestedTenant          `json:"tenant,omitempty"`
 	Vid          int64                  `json:"vid"`

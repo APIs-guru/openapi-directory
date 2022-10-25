@@ -12,7 +12,7 @@ type UpdateDeployedDevicesFleetPathParams struct {
 	Sid string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
-type UpdateDeployedDevicesFleetRequestBodyUpdateDeployedDevicesFleetRequest struct {
+type UpdateDeployedDevicesFleetUpdateDeployedDevicesFleetRequest struct {
 	DefaultDeploymentSid *string `form:"name=DefaultDeploymentSid"`
 	FriendlyName         *string `form:"name=FriendlyName"`
 }
@@ -24,7 +24,7 @@ type UpdateDeployedDevicesFleetSecurity struct {
 type UpdateDeployedDevicesFleetRequest struct {
 	ServerURL  *string
 	PathParams UpdateDeployedDevicesFleetPathParams
-	Request    *UpdateDeployedDevicesFleetRequestBodyUpdateDeployedDevicesFleetRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateDeployedDevicesFleetUpdateDeployedDevicesFleetRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateDeployedDevicesFleetSecurity
 }
 

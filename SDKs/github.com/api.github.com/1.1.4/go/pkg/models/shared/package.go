@@ -4,7 +4,7 @@ import (
 	"time"
 )
 
-type PackageOwnerSimpleUser struct {
+type PackageSimpleUser struct {
 	AvatarURL         string  `json:"avatar_url"`
 	EventsURL         string  `json:"events_url"`
 	FollowersURL      string  `json:"followers_url"`
@@ -37,7 +37,7 @@ const (
 	PackagePackageTypeEnumContainer PackagePackageTypeEnum = "container"
 )
 
-type PackageRepositoryLicense struct {
+type PackageMinimalRepositoryLicense struct {
 	Key    *string `json:"key,omitempty"`
 	Name   *string `json:"name,omitempty"`
 	NodeID *string `json:"node_id,omitempty"`
@@ -45,7 +45,7 @@ type PackageRepositoryLicense struct {
 	URL    *string `json:"url,omitempty"`
 }
 
-type PackageRepositoryOwnerSimpleUser struct {
+type PackageMinimalRepositorySimpleUser struct {
 	AvatarURL         string  `json:"avatar_url"`
 	EventsURL         string  `json:"events_url"`
 	FollowersURL      string  `json:"followers_url"`
@@ -67,13 +67,13 @@ type PackageRepositoryOwnerSimpleUser struct {
 	URL               string  `json:"url"`
 }
 
-type PackageRepositoryPermissions struct {
+type PackageMinimalRepositoryPermissions struct {
 	Admin *bool `json:"admin,omitempty"`
 	Pull  *bool `json:"pull,omitempty"`
 	Push  *bool `json:"push,omitempty"`
 }
 
-type PackageRepositoryTemplateRepositoryLicenseLicenseSimple struct {
+type PackageMinimalRepositoryRepositoryLicenseSimple struct {
 	HTMLURL *string `json:"html_url,omitempty"`
 	Key     string  `json:"key"`
 	Name    string  `json:"name"`
@@ -82,7 +82,7 @@ type PackageRepositoryTemplateRepositoryLicenseLicenseSimple struct {
 	URL     string  `json:"url"`
 }
 
-type PackageRepositoryTemplateRepositoryOwnerSimpleUser struct {
+type PackageMinimalRepositoryRepositorySimpleUser struct {
 	AvatarURL         string  `json:"avatar_url"`
 	EventsURL         string  `json:"events_url"`
 	FollowersURL      string  `json:"followers_url"`
@@ -104,7 +104,7 @@ type PackageRepositoryTemplateRepositoryOwnerSimpleUser struct {
 	URL               string  `json:"url"`
 }
 
-type PackageRepositoryTemplateRepositoryPermissions struct {
+type PackageMinimalRepositoryRepositoryPermissions struct {
 	Admin    bool  `json:"admin"`
 	Maintain *bool `json:"maintain,omitempty"`
 	Pull     bool  `json:"pull"`
@@ -112,7 +112,7 @@ type PackageRepositoryTemplateRepositoryPermissions struct {
 	Triage   *bool `json:"triage,omitempty"`
 }
 
-type PackageRepositoryTemplateRepositoryTemplateRepositoryOwner struct {
+type PackageMinimalRepositoryRepositoryTemplateRepositoryOwner struct {
 	AvatarURL         *string `json:"avatar_url,omitempty"`
 	EventsURL         *string `json:"events_url,omitempty"`
 	FollowersURL      *string `json:"followers_url,omitempty"`
@@ -133,268 +133,268 @@ type PackageRepositoryTemplateRepositoryTemplateRepositoryOwner struct {
 	URL               *string `json:"url,omitempty"`
 }
 
-type PackageRepositoryTemplateRepositoryTemplateRepositoryPermissions struct {
+type PackageMinimalRepositoryRepositoryTemplateRepositoryPermissions struct {
 	Admin *bool `json:"admin,omitempty"`
 	Pull  *bool `json:"pull,omitempty"`
 	Push  *bool `json:"push,omitempty"`
 }
 
-type PackageRepositoryTemplateRepositoryTemplateRepository struct {
-	AllowMergeCommit    *bool                                                             `json:"allow_merge_commit,omitempty"`
-	AllowRebaseMerge    *bool                                                             `json:"allow_rebase_merge,omitempty"`
-	AllowSquashMerge    *bool                                                             `json:"allow_squash_merge,omitempty"`
-	ArchiveURL          *string                                                           `json:"archive_url,omitempty"`
-	Archived            *bool                                                             `json:"archived,omitempty"`
-	AssigneesURL        *string                                                           `json:"assignees_url,omitempty"`
-	BlobsURL            *string                                                           `json:"blobs_url,omitempty"`
-	BranchesURL         *string                                                           `json:"branches_url,omitempty"`
-	CloneURL            *string                                                           `json:"clone_url,omitempty"`
-	CollaboratorsURL    *string                                                           `json:"collaborators_url,omitempty"`
-	CommentsURL         *string                                                           `json:"comments_url,omitempty"`
-	CommitsURL          *string                                                           `json:"commits_url,omitempty"`
-	CompareURL          *string                                                           `json:"compare_url,omitempty"`
-	ContentsURL         *string                                                           `json:"contents_url,omitempty"`
-	ContributorsURL     *string                                                           `json:"contributors_url,omitempty"`
-	CreatedAt           *string                                                           `json:"created_at,omitempty"`
-	DefaultBranch       *string                                                           `json:"default_branch,omitempty"`
-	DeleteBranchOnMerge *bool                                                             `json:"delete_branch_on_merge,omitempty"`
-	DeploymentsURL      *string                                                           `json:"deployments_url,omitempty"`
-	Description         *string                                                           `json:"description,omitempty"`
-	Disabled            *bool                                                             `json:"disabled,omitempty"`
-	DownloadsURL        *string                                                           `json:"downloads_url,omitempty"`
-	EventsURL           *string                                                           `json:"events_url,omitempty"`
-	Fork                *bool                                                             `json:"fork,omitempty"`
-	ForksCount          *int64                                                            `json:"forks_count,omitempty"`
-	ForksURL            *string                                                           `json:"forks_url,omitempty"`
-	FullName            *string                                                           `json:"full_name,omitempty"`
-	GitCommitsURL       *string                                                           `json:"git_commits_url,omitempty"`
-	GitRefsURL          *string                                                           `json:"git_refs_url,omitempty"`
-	GitTagsURL          *string                                                           `json:"git_tags_url,omitempty"`
-	GitURL              *string                                                           `json:"git_url,omitempty"`
-	HasDownloads        *bool                                                             `json:"has_downloads,omitempty"`
-	HasIssues           *bool                                                             `json:"has_issues,omitempty"`
-	HasPages            *bool                                                             `json:"has_pages,omitempty"`
-	HasProjects         *bool                                                             `json:"has_projects,omitempty"`
-	HasWiki             *bool                                                             `json:"has_wiki,omitempty"`
-	Homepage            *string                                                           `json:"homepage,omitempty"`
-	HooksURL            *string                                                           `json:"hooks_url,omitempty"`
-	HTMLURL             *string                                                           `json:"html_url,omitempty"`
-	ID                  *int64                                                            `json:"id,omitempty"`
-	IsTemplate          *bool                                                             `json:"is_template,omitempty"`
-	IssueCommentURL     *string                                                           `json:"issue_comment_url,omitempty"`
-	IssueEventsURL      *string                                                           `json:"issue_events_url,omitempty"`
-	IssuesURL           *string                                                           `json:"issues_url,omitempty"`
-	KeysURL             *string                                                           `json:"keys_url,omitempty"`
-	LabelsURL           *string                                                           `json:"labels_url,omitempty"`
-	Language            *string                                                           `json:"language,omitempty"`
-	LanguagesURL        *string                                                           `json:"languages_url,omitempty"`
-	MergesURL           *string                                                           `json:"merges_url,omitempty"`
-	MilestonesURL       *string                                                           `json:"milestones_url,omitempty"`
-	MirrorURL           *string                                                           `json:"mirror_url,omitempty"`
-	Name                *string                                                           `json:"name,omitempty"`
-	NetworkCount        *int64                                                            `json:"network_count,omitempty"`
-	NodeID              *string                                                           `json:"node_id,omitempty"`
-	NotificationsURL    *string                                                           `json:"notifications_url,omitempty"`
-	OpenIssuesCount     *int64                                                            `json:"open_issues_count,omitempty"`
-	Owner               *PackageRepositoryTemplateRepositoryTemplateRepositoryOwner       `json:"owner,omitempty"`
-	Permissions         *PackageRepositoryTemplateRepositoryTemplateRepositoryPermissions `json:"permissions,omitempty"`
-	Private             *bool                                                             `json:"private,omitempty"`
-	PullsURL            *string                                                           `json:"pulls_url,omitempty"`
-	PushedAt            *string                                                           `json:"pushed_at,omitempty"`
-	ReleasesURL         *string                                                           `json:"releases_url,omitempty"`
-	Size                *int64                                                            `json:"size,omitempty"`
-	SSHURL              *string                                                           `json:"ssh_url,omitempty"`
-	StargazersCount     *int64                                                            `json:"stargazers_count,omitempty"`
-	StargazersURL       *string                                                           `json:"stargazers_url,omitempty"`
-	StatusesURL         *string                                                           `json:"statuses_url,omitempty"`
-	SubscribersCount    *int64                                                            `json:"subscribers_count,omitempty"`
-	SubscribersURL      *string                                                           `json:"subscribers_url,omitempty"`
-	SubscriptionURL     *string                                                           `json:"subscription_url,omitempty"`
-	SvnURL              *string                                                           `json:"svn_url,omitempty"`
-	TagsURL             *string                                                           `json:"tags_url,omitempty"`
-	TeamsURL            *string                                                           `json:"teams_url,omitempty"`
-	TempCloneToken      *string                                                           `json:"temp_clone_token,omitempty"`
-	Topics              []string                                                          `json:"topics,omitempty"`
-	TreesURL            *string                                                           `json:"trees_url,omitempty"`
-	UpdatedAt           *string                                                           `json:"updated_at,omitempty"`
-	URL                 *string                                                           `json:"url,omitempty"`
-	Visibility          *string                                                           `json:"visibility,omitempty"`
-	WatchersCount       *int64                                                            `json:"watchers_count,omitempty"`
+type PackageMinimalRepositoryRepositoryTemplateRepository struct {
+	AllowMergeCommit    *bool                                                            `json:"allow_merge_commit,omitempty"`
+	AllowRebaseMerge    *bool                                                            `json:"allow_rebase_merge,omitempty"`
+	AllowSquashMerge    *bool                                                            `json:"allow_squash_merge,omitempty"`
+	ArchiveURL          *string                                                          `json:"archive_url,omitempty"`
+	Archived            *bool                                                            `json:"archived,omitempty"`
+	AssigneesURL        *string                                                          `json:"assignees_url,omitempty"`
+	BlobsURL            *string                                                          `json:"blobs_url,omitempty"`
+	BranchesURL         *string                                                          `json:"branches_url,omitempty"`
+	CloneURL            *string                                                          `json:"clone_url,omitempty"`
+	CollaboratorsURL    *string                                                          `json:"collaborators_url,omitempty"`
+	CommentsURL         *string                                                          `json:"comments_url,omitempty"`
+	CommitsURL          *string                                                          `json:"commits_url,omitempty"`
+	CompareURL          *string                                                          `json:"compare_url,omitempty"`
+	ContentsURL         *string                                                          `json:"contents_url,omitempty"`
+	ContributorsURL     *string                                                          `json:"contributors_url,omitempty"`
+	CreatedAt           *string                                                          `json:"created_at,omitempty"`
+	DefaultBranch       *string                                                          `json:"default_branch,omitempty"`
+	DeleteBranchOnMerge *bool                                                            `json:"delete_branch_on_merge,omitempty"`
+	DeploymentsURL      *string                                                          `json:"deployments_url,omitempty"`
+	Description         *string                                                          `json:"description,omitempty"`
+	Disabled            *bool                                                            `json:"disabled,omitempty"`
+	DownloadsURL        *string                                                          `json:"downloads_url,omitempty"`
+	EventsURL           *string                                                          `json:"events_url,omitempty"`
+	Fork                *bool                                                            `json:"fork,omitempty"`
+	ForksCount          *int64                                                           `json:"forks_count,omitempty"`
+	ForksURL            *string                                                          `json:"forks_url,omitempty"`
+	FullName            *string                                                          `json:"full_name,omitempty"`
+	GitCommitsURL       *string                                                          `json:"git_commits_url,omitempty"`
+	GitRefsURL          *string                                                          `json:"git_refs_url,omitempty"`
+	GitTagsURL          *string                                                          `json:"git_tags_url,omitempty"`
+	GitURL              *string                                                          `json:"git_url,omitempty"`
+	HasDownloads        *bool                                                            `json:"has_downloads,omitempty"`
+	HasIssues           *bool                                                            `json:"has_issues,omitempty"`
+	HasPages            *bool                                                            `json:"has_pages,omitempty"`
+	HasProjects         *bool                                                            `json:"has_projects,omitempty"`
+	HasWiki             *bool                                                            `json:"has_wiki,omitempty"`
+	Homepage            *string                                                          `json:"homepage,omitempty"`
+	HooksURL            *string                                                          `json:"hooks_url,omitempty"`
+	HTMLURL             *string                                                          `json:"html_url,omitempty"`
+	ID                  *int64                                                           `json:"id,omitempty"`
+	IsTemplate          *bool                                                            `json:"is_template,omitempty"`
+	IssueCommentURL     *string                                                          `json:"issue_comment_url,omitempty"`
+	IssueEventsURL      *string                                                          `json:"issue_events_url,omitempty"`
+	IssuesURL           *string                                                          `json:"issues_url,omitempty"`
+	KeysURL             *string                                                          `json:"keys_url,omitempty"`
+	LabelsURL           *string                                                          `json:"labels_url,omitempty"`
+	Language            *string                                                          `json:"language,omitempty"`
+	LanguagesURL        *string                                                          `json:"languages_url,omitempty"`
+	MergesURL           *string                                                          `json:"merges_url,omitempty"`
+	MilestonesURL       *string                                                          `json:"milestones_url,omitempty"`
+	MirrorURL           *string                                                          `json:"mirror_url,omitempty"`
+	Name                *string                                                          `json:"name,omitempty"`
+	NetworkCount        *int64                                                           `json:"network_count,omitempty"`
+	NodeID              *string                                                          `json:"node_id,omitempty"`
+	NotificationsURL    *string                                                          `json:"notifications_url,omitempty"`
+	OpenIssuesCount     *int64                                                           `json:"open_issues_count,omitempty"`
+	Owner               *PackageMinimalRepositoryRepositoryTemplateRepositoryOwner       `json:"owner,omitempty"`
+	Permissions         *PackageMinimalRepositoryRepositoryTemplateRepositoryPermissions `json:"permissions,omitempty"`
+	Private             *bool                                                            `json:"private,omitempty"`
+	PullsURL            *string                                                          `json:"pulls_url,omitempty"`
+	PushedAt            *string                                                          `json:"pushed_at,omitempty"`
+	ReleasesURL         *string                                                          `json:"releases_url,omitempty"`
+	Size                *int64                                                           `json:"size,omitempty"`
+	SSHURL              *string                                                          `json:"ssh_url,omitempty"`
+	StargazersCount     *int64                                                           `json:"stargazers_count,omitempty"`
+	StargazersURL       *string                                                          `json:"stargazers_url,omitempty"`
+	StatusesURL         *string                                                          `json:"statuses_url,omitempty"`
+	SubscribersCount    *int64                                                           `json:"subscribers_count,omitempty"`
+	SubscribersURL      *string                                                          `json:"subscribers_url,omitempty"`
+	SubscriptionURL     *string                                                          `json:"subscription_url,omitempty"`
+	SvnURL              *string                                                          `json:"svn_url,omitempty"`
+	TagsURL             *string                                                          `json:"tags_url,omitempty"`
+	TeamsURL            *string                                                          `json:"teams_url,omitempty"`
+	TempCloneToken      *string                                                          `json:"temp_clone_token,omitempty"`
+	Topics              []string                                                         `json:"topics,omitempty"`
+	TreesURL            *string                                                          `json:"trees_url,omitempty"`
+	UpdatedAt           *string                                                          `json:"updated_at,omitempty"`
+	URL                 *string                                                          `json:"url,omitempty"`
+	Visibility          *string                                                          `json:"visibility,omitempty"`
+	WatchersCount       *int64                                                           `json:"watchers_count,omitempty"`
 }
 
-type PackageRepositoryTemplateRepositoryRepository struct {
-	AllowMergeCommit    *bool                                                   `json:"allow_merge_commit,omitempty"`
-	AllowRebaseMerge    *bool                                                   `json:"allow_rebase_merge,omitempty"`
-	AllowSquashMerge    *bool                                                   `json:"allow_squash_merge,omitempty"`
-	ArchiveURL          string                                                  `json:"archive_url"`
-	Archived            bool                                                    `json:"archived"`
-	AssigneesURL        string                                                  `json:"assignees_url"`
-	BlobsURL            string                                                  `json:"blobs_url"`
-	BranchesURL         string                                                  `json:"branches_url"`
-	CloneURL            string                                                  `json:"clone_url"`
-	CollaboratorsURL    string                                                  `json:"collaborators_url"`
-	CommentsURL         string                                                  `json:"comments_url"`
-	CommitsURL          string                                                  `json:"commits_url"`
-	CompareURL          string                                                  `json:"compare_url"`
-	ContentsURL         string                                                  `json:"contents_url"`
-	ContributorsURL     string                                                  `json:"contributors_url"`
-	CreatedAt           time.Time                                               `json:"created_at"`
-	DefaultBranch       string                                                  `json:"default_branch"`
-	DeleteBranchOnMerge *bool                                                   `json:"delete_branch_on_merge,omitempty"`
-	DeploymentsURL      string                                                  `json:"deployments_url"`
-	Description         string                                                  `json:"description"`
-	Disabled            bool                                                    `json:"disabled"`
-	DownloadsURL        string                                                  `json:"downloads_url"`
-	EventsURL           string                                                  `json:"events_url"`
-	Fork                bool                                                    `json:"fork"`
-	Forks               int64                                                   `json:"forks"`
-	ForksCount          int64                                                   `json:"forks_count"`
-	ForksURL            string                                                  `json:"forks_url"`
-	FullName            string                                                  `json:"full_name"`
-	GitCommitsURL       string                                                  `json:"git_commits_url"`
-	GitRefsURL          string                                                  `json:"git_refs_url"`
-	GitTagsURL          string                                                  `json:"git_tags_url"`
-	GitURL              string                                                  `json:"git_url"`
-	HasDownloads        bool                                                    `json:"has_downloads"`
-	HasIssues           bool                                                    `json:"has_issues"`
-	HasPages            bool                                                    `json:"has_pages"`
-	HasProjects         bool                                                    `json:"has_projects"`
-	HasWiki             bool                                                    `json:"has_wiki"`
-	Homepage            string                                                  `json:"homepage"`
-	HooksURL            string                                                  `json:"hooks_url"`
-	HTMLURL             string                                                  `json:"html_url"`
-	ID                  int64                                                   `json:"id"`
-	IsTemplate          *bool                                                   `json:"is_template,omitempty"`
-	IssueCommentURL     string                                                  `json:"issue_comment_url"`
-	IssueEventsURL      string                                                  `json:"issue_events_url"`
-	IssuesURL           string                                                  `json:"issues_url"`
-	KeysURL             string                                                  `json:"keys_url"`
-	LabelsURL           string                                                  `json:"labels_url"`
-	Language            string                                                  `json:"language"`
-	LanguagesURL        string                                                  `json:"languages_url"`
-	License             PackageRepositoryTemplateRepositoryLicenseLicenseSimple `json:"license"`
-	MasterBranch        *string                                                 `json:"master_branch,omitempty"`
-	MergesURL           string                                                  `json:"merges_url"`
-	MilestonesURL       string                                                  `json:"milestones_url"`
-	MirrorURL           string                                                  `json:"mirror_url"`
-	Name                string                                                  `json:"name"`
-	NetworkCount        *int64                                                  `json:"network_count,omitempty"`
-	NodeID              string                                                  `json:"node_id"`
-	NotificationsURL    string                                                  `json:"notifications_url"`
-	OpenIssues          int64                                                   `json:"open_issues"`
-	OpenIssuesCount     int64                                                   `json:"open_issues_count"`
-	Owner               PackageRepositoryTemplateRepositoryOwnerSimpleUser      `json:"owner"`
-	Permissions         *PackageRepositoryTemplateRepositoryPermissions         `json:"permissions,omitempty"`
-	Private             bool                                                    `json:"private"`
-	PullsURL            string                                                  `json:"pulls_url"`
-	PushedAt            time.Time                                               `json:"pushed_at"`
-	ReleasesURL         string                                                  `json:"releases_url"`
-	Size                int64                                                   `json:"size"`
-	SSHURL              string                                                  `json:"ssh_url"`
-	StargazersCount     int64                                                   `json:"stargazers_count"`
-	StargazersURL       string                                                  `json:"stargazers_url"`
-	StarredAt           *string                                                 `json:"starred_at,omitempty"`
-	StatusesURL         string                                                  `json:"statuses_url"`
-	SubscribersCount    *int64                                                  `json:"subscribers_count,omitempty"`
-	SubscribersURL      string                                                  `json:"subscribers_url"`
-	SubscriptionURL     string                                                  `json:"subscription_url"`
-	SvnURL              string                                                  `json:"svn_url"`
-	TagsURL             string                                                  `json:"tags_url"`
-	TeamsURL            string                                                  `json:"teams_url"`
-	TempCloneToken      *string                                                 `json:"temp_clone_token,omitempty"`
-	TemplateRepository  *PackageRepositoryTemplateRepositoryTemplateRepository  `json:"template_repository,omitempty"`
-	Topics              []string                                                `json:"topics,omitempty"`
-	TreesURL            string                                                  `json:"trees_url"`
-	UpdatedAt           time.Time                                               `json:"updated_at"`
-	URL                 string                                                  `json:"url"`
-	Visibility          *string                                                 `json:"visibility,omitempty"`
-	Watchers            int64                                                   `json:"watchers"`
-	WatchersCount       int64                                                   `json:"watchers_count"`
+type PackageMinimalRepositoryRepository struct {
+	AllowMergeCommit    *bool                                                 `json:"allow_merge_commit,omitempty"`
+	AllowRebaseMerge    *bool                                                 `json:"allow_rebase_merge,omitempty"`
+	AllowSquashMerge    *bool                                                 `json:"allow_squash_merge,omitempty"`
+	ArchiveURL          string                                                `json:"archive_url"`
+	Archived            bool                                                  `json:"archived"`
+	AssigneesURL        string                                                `json:"assignees_url"`
+	BlobsURL            string                                                `json:"blobs_url"`
+	BranchesURL         string                                                `json:"branches_url"`
+	CloneURL            string                                                `json:"clone_url"`
+	CollaboratorsURL    string                                                `json:"collaborators_url"`
+	CommentsURL         string                                                `json:"comments_url"`
+	CommitsURL          string                                                `json:"commits_url"`
+	CompareURL          string                                                `json:"compare_url"`
+	ContentsURL         string                                                `json:"contents_url"`
+	ContributorsURL     string                                                `json:"contributors_url"`
+	CreatedAt           time.Time                                             `json:"created_at"`
+	DefaultBranch       string                                                `json:"default_branch"`
+	DeleteBranchOnMerge *bool                                                 `json:"delete_branch_on_merge,omitempty"`
+	DeploymentsURL      string                                                `json:"deployments_url"`
+	Description         string                                                `json:"description"`
+	Disabled            bool                                                  `json:"disabled"`
+	DownloadsURL        string                                                `json:"downloads_url"`
+	EventsURL           string                                                `json:"events_url"`
+	Fork                bool                                                  `json:"fork"`
+	Forks               int64                                                 `json:"forks"`
+	ForksCount          int64                                                 `json:"forks_count"`
+	ForksURL            string                                                `json:"forks_url"`
+	FullName            string                                                `json:"full_name"`
+	GitCommitsURL       string                                                `json:"git_commits_url"`
+	GitRefsURL          string                                                `json:"git_refs_url"`
+	GitTagsURL          string                                                `json:"git_tags_url"`
+	GitURL              string                                                `json:"git_url"`
+	HasDownloads        bool                                                  `json:"has_downloads"`
+	HasIssues           bool                                                  `json:"has_issues"`
+	HasPages            bool                                                  `json:"has_pages"`
+	HasProjects         bool                                                  `json:"has_projects"`
+	HasWiki             bool                                                  `json:"has_wiki"`
+	Homepage            string                                                `json:"homepage"`
+	HooksURL            string                                                `json:"hooks_url"`
+	HTMLURL             string                                                `json:"html_url"`
+	ID                  int64                                                 `json:"id"`
+	IsTemplate          *bool                                                 `json:"is_template,omitempty"`
+	IssueCommentURL     string                                                `json:"issue_comment_url"`
+	IssueEventsURL      string                                                `json:"issue_events_url"`
+	IssuesURL           string                                                `json:"issues_url"`
+	KeysURL             string                                                `json:"keys_url"`
+	LabelsURL           string                                                `json:"labels_url"`
+	Language            string                                                `json:"language"`
+	LanguagesURL        string                                                `json:"languages_url"`
+	License             PackageMinimalRepositoryRepositoryLicenseSimple       `json:"license"`
+	MasterBranch        *string                                               `json:"master_branch,omitempty"`
+	MergesURL           string                                                `json:"merges_url"`
+	MilestonesURL       string                                                `json:"milestones_url"`
+	MirrorURL           string                                                `json:"mirror_url"`
+	Name                string                                                `json:"name"`
+	NetworkCount        *int64                                                `json:"network_count,omitempty"`
+	NodeID              string                                                `json:"node_id"`
+	NotificationsURL    string                                                `json:"notifications_url"`
+	OpenIssues          int64                                                 `json:"open_issues"`
+	OpenIssuesCount     int64                                                 `json:"open_issues_count"`
+	Owner               PackageMinimalRepositoryRepositorySimpleUser          `json:"owner"`
+	Permissions         *PackageMinimalRepositoryRepositoryPermissions        `json:"permissions,omitempty"`
+	Private             bool                                                  `json:"private"`
+	PullsURL            string                                                `json:"pulls_url"`
+	PushedAt            time.Time                                             `json:"pushed_at"`
+	ReleasesURL         string                                                `json:"releases_url"`
+	Size                int64                                                 `json:"size"`
+	SSHURL              string                                                `json:"ssh_url"`
+	StargazersCount     int64                                                 `json:"stargazers_count"`
+	StargazersURL       string                                                `json:"stargazers_url"`
+	StarredAt           *string                                               `json:"starred_at,omitempty"`
+	StatusesURL         string                                                `json:"statuses_url"`
+	SubscribersCount    *int64                                                `json:"subscribers_count,omitempty"`
+	SubscribersURL      string                                                `json:"subscribers_url"`
+	SubscriptionURL     string                                                `json:"subscription_url"`
+	SvnURL              string                                                `json:"svn_url"`
+	TagsURL             string                                                `json:"tags_url"`
+	TeamsURL            string                                                `json:"teams_url"`
+	TempCloneToken      *string                                               `json:"temp_clone_token,omitempty"`
+	TemplateRepository  *PackageMinimalRepositoryRepositoryTemplateRepository `json:"template_repository,omitempty"`
+	Topics              []string                                              `json:"topics,omitempty"`
+	TreesURL            string                                                `json:"trees_url"`
+	UpdatedAt           time.Time                                             `json:"updated_at"`
+	URL                 string                                                `json:"url"`
+	Visibility          *string                                               `json:"visibility,omitempty"`
+	Watchers            int64                                                 `json:"watchers"`
+	WatchersCount       int64                                                 `json:"watchers_count"`
 }
 
-type PackageRepositoryMinimalRepository struct {
-	ArchiveURL          string                                         `json:"archive_url"`
-	Archived            *bool                                          `json:"archived,omitempty"`
-	AssigneesURL        string                                         `json:"assignees_url"`
-	BlobsURL            string                                         `json:"blobs_url"`
-	BranchesURL         string                                         `json:"branches_url"`
-	CloneURL            *string                                        `json:"clone_url,omitempty"`
-	CollaboratorsURL    string                                         `json:"collaborators_url"`
-	CommentsURL         string                                         `json:"comments_url"`
-	CommitsURL          string                                         `json:"commits_url"`
-	CompareURL          string                                         `json:"compare_url"`
-	ContentsURL         string                                         `json:"contents_url"`
-	ContributorsURL     string                                         `json:"contributors_url"`
-	CreatedAt           *time.Time                                     `json:"created_at,omitempty"`
-	DefaultBranch       *string                                        `json:"default_branch,omitempty"`
-	DeleteBranchOnMerge *bool                                          `json:"delete_branch_on_merge,omitempty"`
-	DeploymentsURL      string                                         `json:"deployments_url"`
-	Description         string                                         `json:"description"`
-	Disabled            *bool                                          `json:"disabled,omitempty"`
-	DownloadsURL        string                                         `json:"downloads_url"`
-	EventsURL           string                                         `json:"events_url"`
-	Fork                bool                                           `json:"fork"`
-	Forks               *int64                                         `json:"forks,omitempty"`
-	ForksCount          *int64                                         `json:"forks_count,omitempty"`
-	ForksURL            string                                         `json:"forks_url"`
-	FullName            string                                         `json:"full_name"`
-	GitCommitsURL       string                                         `json:"git_commits_url"`
-	GitRefsURL          string                                         `json:"git_refs_url"`
-	GitTagsURL          string                                         `json:"git_tags_url"`
-	GitURL              *string                                        `json:"git_url,omitempty"`
-	HasDownloads        *bool                                          `json:"has_downloads,omitempty"`
-	HasIssues           *bool                                          `json:"has_issues,omitempty"`
-	HasPages            *bool                                          `json:"has_pages,omitempty"`
-	HasProjects         *bool                                          `json:"has_projects,omitempty"`
-	HasWiki             *bool                                          `json:"has_wiki,omitempty"`
-	Homepage            *string                                        `json:"homepage,omitempty"`
-	HooksURL            string                                         `json:"hooks_url"`
-	HTMLURL             string                                         `json:"html_url"`
-	ID                  int64                                          `json:"id"`
-	IsTemplate          *bool                                          `json:"is_template,omitempty"`
-	IssueCommentURL     string                                         `json:"issue_comment_url"`
-	IssueEventsURL      string                                         `json:"issue_events_url"`
-	IssuesURL           string                                         `json:"issues_url"`
-	KeysURL             string                                         `json:"keys_url"`
-	LabelsURL           string                                         `json:"labels_url"`
-	Language            *string                                        `json:"language,omitempty"`
-	LanguagesURL        string                                         `json:"languages_url"`
-	License             *PackageRepositoryLicense                      `json:"license,omitempty"`
-	MergesURL           string                                         `json:"merges_url"`
-	MilestonesURL       string                                         `json:"milestones_url"`
-	MirrorURL           *string                                        `json:"mirror_url,omitempty"`
-	Name                string                                         `json:"name"`
-	NetworkCount        *int64                                         `json:"network_count,omitempty"`
-	NodeID              string                                         `json:"node_id"`
-	NotificationsURL    string                                         `json:"notifications_url"`
-	OpenIssues          *int64                                         `json:"open_issues,omitempty"`
-	OpenIssuesCount     *int64                                         `json:"open_issues_count,omitempty"`
-	Owner               PackageRepositoryOwnerSimpleUser               `json:"owner"`
-	Permissions         *PackageRepositoryPermissions                  `json:"permissions,omitempty"`
-	Private             bool                                           `json:"private"`
-	PullsURL            string                                         `json:"pulls_url"`
-	PushedAt            *time.Time                                     `json:"pushed_at,omitempty"`
-	ReleasesURL         string                                         `json:"releases_url"`
-	Size                *int64                                         `json:"size,omitempty"`
-	SSHURL              *string                                        `json:"ssh_url,omitempty"`
-	StargazersCount     *int64                                         `json:"stargazers_count,omitempty"`
-	StargazersURL       string                                         `json:"stargazers_url"`
-	StatusesURL         string                                         `json:"statuses_url"`
-	SubscribersCount    *int64                                         `json:"subscribers_count,omitempty"`
-	SubscribersURL      string                                         `json:"subscribers_url"`
-	SubscriptionURL     string                                         `json:"subscription_url"`
-	SvnURL              *string                                        `json:"svn_url,omitempty"`
-	TagsURL             string                                         `json:"tags_url"`
-	TeamsURL            string                                         `json:"teams_url"`
-	TempCloneToken      *string                                        `json:"temp_clone_token,omitempty"`
-	TemplateRepository  *PackageRepositoryTemplateRepositoryRepository `json:"template_repository,omitempty"`
-	Topics              []string                                       `json:"topics,omitempty"`
-	TreesURL            string                                         `json:"trees_url"`
-	UpdatedAt           *time.Time                                     `json:"updated_at,omitempty"`
-	URL                 string                                         `json:"url"`
-	Visibility          *string                                        `json:"visibility,omitempty"`
-	Watchers            *int64                                         `json:"watchers,omitempty"`
-	WatchersCount       *int64                                         `json:"watchers_count,omitempty"`
+type PackageMinimalRepository struct {
+	ArchiveURL          string                               `json:"archive_url"`
+	Archived            *bool                                `json:"archived,omitempty"`
+	AssigneesURL        string                               `json:"assignees_url"`
+	BlobsURL            string                               `json:"blobs_url"`
+	BranchesURL         string                               `json:"branches_url"`
+	CloneURL            *string                              `json:"clone_url,omitempty"`
+	CollaboratorsURL    string                               `json:"collaborators_url"`
+	CommentsURL         string                               `json:"comments_url"`
+	CommitsURL          string                               `json:"commits_url"`
+	CompareURL          string                               `json:"compare_url"`
+	ContentsURL         string                               `json:"contents_url"`
+	ContributorsURL     string                               `json:"contributors_url"`
+	CreatedAt           *time.Time                           `json:"created_at,omitempty"`
+	DefaultBranch       *string                              `json:"default_branch,omitempty"`
+	DeleteBranchOnMerge *bool                                `json:"delete_branch_on_merge,omitempty"`
+	DeploymentsURL      string                               `json:"deployments_url"`
+	Description         string                               `json:"description"`
+	Disabled            *bool                                `json:"disabled,omitempty"`
+	DownloadsURL        string                               `json:"downloads_url"`
+	EventsURL           string                               `json:"events_url"`
+	Fork                bool                                 `json:"fork"`
+	Forks               *int64                               `json:"forks,omitempty"`
+	ForksCount          *int64                               `json:"forks_count,omitempty"`
+	ForksURL            string                               `json:"forks_url"`
+	FullName            string                               `json:"full_name"`
+	GitCommitsURL       string                               `json:"git_commits_url"`
+	GitRefsURL          string                               `json:"git_refs_url"`
+	GitTagsURL          string                               `json:"git_tags_url"`
+	GitURL              *string                              `json:"git_url,omitempty"`
+	HasDownloads        *bool                                `json:"has_downloads,omitempty"`
+	HasIssues           *bool                                `json:"has_issues,omitempty"`
+	HasPages            *bool                                `json:"has_pages,omitempty"`
+	HasProjects         *bool                                `json:"has_projects,omitempty"`
+	HasWiki             *bool                                `json:"has_wiki,omitempty"`
+	Homepage            *string                              `json:"homepage,omitempty"`
+	HooksURL            string                               `json:"hooks_url"`
+	HTMLURL             string                               `json:"html_url"`
+	ID                  int64                                `json:"id"`
+	IsTemplate          *bool                                `json:"is_template,omitempty"`
+	IssueCommentURL     string                               `json:"issue_comment_url"`
+	IssueEventsURL      string                               `json:"issue_events_url"`
+	IssuesURL           string                               `json:"issues_url"`
+	KeysURL             string                               `json:"keys_url"`
+	LabelsURL           string                               `json:"labels_url"`
+	Language            *string                              `json:"language,omitempty"`
+	LanguagesURL        string                               `json:"languages_url"`
+	License             *PackageMinimalRepositoryLicense     `json:"license,omitempty"`
+	MergesURL           string                               `json:"merges_url"`
+	MilestonesURL       string                               `json:"milestones_url"`
+	MirrorURL           *string                              `json:"mirror_url,omitempty"`
+	Name                string                               `json:"name"`
+	NetworkCount        *int64                               `json:"network_count,omitempty"`
+	NodeID              string                               `json:"node_id"`
+	NotificationsURL    string                               `json:"notifications_url"`
+	OpenIssues          *int64                               `json:"open_issues,omitempty"`
+	OpenIssuesCount     *int64                               `json:"open_issues_count,omitempty"`
+	Owner               PackageMinimalRepositorySimpleUser   `json:"owner"`
+	Permissions         *PackageMinimalRepositoryPermissions `json:"permissions,omitempty"`
+	Private             bool                                 `json:"private"`
+	PullsURL            string                               `json:"pulls_url"`
+	PushedAt            *time.Time                           `json:"pushed_at,omitempty"`
+	ReleasesURL         string                               `json:"releases_url"`
+	Size                *int64                               `json:"size,omitempty"`
+	SSHURL              *string                              `json:"ssh_url,omitempty"`
+	StargazersCount     *int64                               `json:"stargazers_count,omitempty"`
+	StargazersURL       string                               `json:"stargazers_url"`
+	StatusesURL         string                               `json:"statuses_url"`
+	SubscribersCount    *int64                               `json:"subscribers_count,omitempty"`
+	SubscribersURL      string                               `json:"subscribers_url"`
+	SubscriptionURL     string                               `json:"subscription_url"`
+	SvnURL              *string                              `json:"svn_url,omitempty"`
+	TagsURL             string                               `json:"tags_url"`
+	TeamsURL            string                               `json:"teams_url"`
+	TempCloneToken      *string                              `json:"temp_clone_token,omitempty"`
+	TemplateRepository  *PackageMinimalRepositoryRepository  `json:"template_repository,omitempty"`
+	Topics              []string                             `json:"topics,omitempty"`
+	TreesURL            string                               `json:"trees_url"`
+	UpdatedAt           *time.Time                           `json:"updated_at,omitempty"`
+	URL                 string                               `json:"url"`
+	Visibility          *string                              `json:"visibility,omitempty"`
+	Watchers            *int64                               `json:"watchers,omitempty"`
+	WatchersCount       *int64                               `json:"watchers_count,omitempty"`
 }
 
 type PackageVisibilityEnum string
@@ -405,15 +405,15 @@ const (
 )
 
 type Package struct {
-	CreatedAt    time.Time                           `json:"created_at"`
-	HTMLURL      string                              `json:"html_url"`
-	ID           int64                               `json:"id"`
-	Name         string                              `json:"name"`
-	Owner        *PackageOwnerSimpleUser             `json:"owner,omitempty"`
-	PackageType  PackagePackageTypeEnum              `json:"package_type"`
-	Repository   *PackageRepositoryMinimalRepository `json:"repository,omitempty"`
-	UpdatedAt    time.Time                           `json:"updated_at"`
-	URL          string                              `json:"url"`
-	VersionCount int64                               `json:"version_count"`
-	Visibility   PackageVisibilityEnum               `json:"visibility"`
+	CreatedAt    time.Time                 `json:"created_at"`
+	HTMLURL      string                    `json:"html_url"`
+	ID           int64                     `json:"id"`
+	Name         string                    `json:"name"`
+	Owner        *PackageSimpleUser        `json:"owner,omitempty"`
+	PackageType  PackagePackageTypeEnum    `json:"package_type"`
+	Repository   *PackageMinimalRepository `json:"repository,omitempty"`
+	UpdatedAt    time.Time                 `json:"updated_at"`
+	URL          string                    `json:"url"`
+	VersionCount int64                     `json:"version_count"`
+	Visibility   PackageVisibilityEnum     `json:"visibility"`
 }

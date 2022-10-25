@@ -13,7 +13,7 @@ type CreateNewFactorPathParams struct {
 	ServiceSid string `pathParam:"style=simple,explode=false,name=ServiceSid"`
 }
 
-type CreateNewFactorRequestBodyCreateNewFactorRequest struct {
+type CreateNewFactorCreateNewFactorRequest struct {
 	BindingAlg                 *string                                        `form:"name=Binding.Alg"`
 	BindingPublicKey           *string                                        `form:"name=Binding.PublicKey"`
 	BindingSecret              *string                                        `form:"name=Binding.Secret"`
@@ -37,7 +37,7 @@ type CreateNewFactorSecurity struct {
 type CreateNewFactorRequest struct {
 	ServerURL  *string
 	PathParams CreateNewFactorPathParams
-	Request    *CreateNewFactorRequestBodyCreateNewFactorRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateNewFactorCreateNewFactorRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateNewFactorSecurity
 }
 

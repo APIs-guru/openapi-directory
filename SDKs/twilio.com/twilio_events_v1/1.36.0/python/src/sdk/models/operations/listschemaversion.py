@@ -32,7 +32,7 @@ class ListSchemaVersionRequest:
 
 @dataclass_json
 @dataclass
-class ListSchemaVersion200ApplicationJSONMeta:
+class ListSchemaVersionListSchemaVersionResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -44,14 +44,14 @@ class ListSchemaVersion200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListSchemaVersion200ApplicationJSONListSchemaVersionResponse:
-    meta: Optional[ListSchemaVersion200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+class ListSchemaVersionListSchemaVersionResponse:
+    meta: Optional[ListSchemaVersionListSchemaVersionResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     schema_versions: Optional[List[shared.EventsV1SchemaSchemaVersion]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'schema_versions' }})
     
 
 @dataclass
 class ListSchemaVersionResponse:
     content_type: str = field(default=None)
-    list_schema_version_response: Optional[ListSchemaVersion200ApplicationJSONListSchemaVersionResponse] = field(default=None)
+    list_schema_version_response: Optional[ListSchemaVersionListSchemaVersionResponse] = field(default=None)
     status_code: int = field(default=None)
     

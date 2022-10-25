@@ -33,7 +33,7 @@ class ListRecordingTranscriptionRequest:
 
 @dataclass_json
 @dataclass
-class ListRecordingTranscription200ApplicationJSONListRecordingTranscriptionResponse:
+class ListRecordingTranscriptionListRecordingTranscriptionResponse:
     end: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'end' }})
     first_page_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_uri' }})
     next_page_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_uri' }})
@@ -48,6 +48,6 @@ class ListRecordingTranscription200ApplicationJSONListRecordingTranscriptionResp
 @dataclass
 class ListRecordingTranscriptionResponse:
     content_type: str = field(default=None)
-    list_recording_transcription_response: Optional[ListRecordingTranscription200ApplicationJSONListRecordingTranscriptionResponse] = field(default=None)
+    list_recording_transcription_response: Optional[ListRecordingTranscriptionListRecordingTranscriptionResponse] = field(default=None)
     status_code: int = field(default=None)
     

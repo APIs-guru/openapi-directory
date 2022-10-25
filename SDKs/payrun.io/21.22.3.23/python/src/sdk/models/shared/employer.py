@@ -8,7 +8,7 @@ from dataclasses_json import dataclass_json
 
 @dataclass_json
 @dataclass
-class EmployerEmployerAddressAddress:
+class EmployerEmployerAddress:
     address1: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Address1' }})
     address2: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Address2' }})
     address3: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Address3' }})
@@ -19,7 +19,7 @@ class EmployerEmployerAddressAddress:
 
 @dataclass_json
 @dataclass
-class EmployerEmployerAutoEnrolmentPensionPension:
+class EmployerEmployerAutoEnrolmentPension:
     at_href: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': '@href' }})
     at_rel: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': '@rel' }})
     at_title: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': '@title' }})
@@ -27,8 +27,8 @@ class EmployerEmployerAutoEnrolmentPensionPension:
 
 @dataclass_json
 @dataclass
-class EmployerEmployerAutoEnrolmentAutoEnrolment:
-    pension: Optional[EmployerEmployerAutoEnrolmentPensionPension] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Pension' }})
+class EmployerEmployerAutoEnrolment:
+    pension: Optional[EmployerEmployerAutoEnrolmentPension] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Pension' }})
     postponement_date: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PostponementDate', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     primary_email: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PrimaryEmail' }})
     primary_first_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PrimaryFirstName' }})
@@ -47,13 +47,13 @@ class EmployerEmployerAutoEnrolmentAutoEnrolment:
 
 @dataclass_json
 @dataclass
-class EmployerEmployerBankAccountBankAccount:
+class EmployerEmployerBankAccount:
     account_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AccountName' }})
     account_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AccountNumber' }})
     reference: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Reference' }})
     sort_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SortCode' }})
     
-class EmployerEmployerHmrcSettingsSenderSenderEnum(str, Enum):
+class EmployerEmployerHmrcSettingsSenderEnum(str, Enum):
     EMPLOYER = "Employer"
     INDIVIDUAL = "Individual"
     COMPANY = "Company"
@@ -65,7 +65,7 @@ class EmployerEmployerHmrcSettingsSenderSenderEnum(str, Enum):
     ACTING_IN_CAPACITY = "ActingInCapacity"
     OTHER = "Other"
 
-class EmployerEmployerHmrcSettingsStateAidSectorStateAidSectorEnum(str, Enum):
+class EmployerEmployerHmrcSettingsStateAidSectorEnum(str, Enum):
     AGRICULTURE = "Agriculture"
     FISHERIES_AQUACULTURE = "FisheriesAquaculture"
     ROAD_TRANSPORT = "RoadTransport"
@@ -75,7 +75,7 @@ class EmployerEmployerHmrcSettingsStateAidSectorStateAidSectorEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class EmployerEmployerHmrcSettingsHmrcSettings:
+class EmployerEmployerHmrcSettings:
     accounting_office_ref: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AccountingOfficeRef' }})
     cotax_ref: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'COTAXRef' }})
     contact_email: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ContactEmail' }})
@@ -86,19 +86,19 @@ class EmployerEmployerHmrcSettingsHmrcSettings:
     employment_allowance_override: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'EmploymentAllowanceOverride' }})
     password: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Password' }})
     sautr: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SAUTR' }})
-    sender: Optional[EmployerEmployerHmrcSettingsSenderSenderEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Sender' }})
+    sender: Optional[EmployerEmployerHmrcSettingsSenderEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Sender' }})
     sender_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SenderId' }})
-    state_aid_sector: Optional[EmployerEmployerHmrcSettingsStateAidSectorStateAidSectorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'StateAidSector' }})
+    state_aid_sector: Optional[EmployerEmployerHmrcSettingsStateAidSectorEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'StateAidSector' }})
     tax_office_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TaxOfficeNumber' }})
     tax_office_reference: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TaxOfficeReference' }})
     
-class EmployerEmployerRegionRegionEnum(str, Enum):
+class EmployerEmployerRegionEnum(str, Enum):
     NOT_SET = "NotSet"
     ENGLAND = "England"
     SCOTLAND = "Scotland"
     WALES = "Wales"
 
-class EmployerEmployerRuleExclusionsRuleExclusionsEnum(str, Enum):
+class EmployerEmployerRuleExclusionsEnum(str, Enum):
     NONE = "None"
     NI_MISSING_PAY_INSTRUCTION_RULE = "NiMissingPayInstructionRule"
     TAX_MISSING_PAY_INSTRUCTION_RULE = "TaxMissingPayInstructionRule"
@@ -118,33 +118,33 @@ class EmployerEmployerRuleExclusionsRuleExclusionsEnum(str, Enum):
     EMPLOYEE_DECEASED_RULE = "EmployeeDeceasedRule"
     BENEFIT_INSTRUCTION_AUTO_END_RULE = "BenefitInstructionAutoEndRule"
 
-class EmployerEmployerTerritoryTerritoryEnum(str, Enum):
+class EmployerEmployerTerritoryEnum(str, Enum):
     UNITED_KINGDOM = "UnitedKingdom"
 
 
 @dataclass_json
 @dataclass
-class EmployerEmployerEmployer:
-    address: Optional[EmployerEmployerAddressAddress] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Address' }})
+class EmployerEmployer:
+    address: Optional[EmployerEmployerAddress] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Address' }})
     apprenticeship_levy_allowance: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ApprenticeshipLevyAllowance' }})
-    auto_enrolment: Optional[EmployerEmployerAutoEnrolmentAutoEnrolment] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AutoEnrolment' }})
+    auto_enrolment: Optional[EmployerEmployerAutoEnrolment] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AutoEnrolment' }})
     bacs_service_user_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'BacsServiceUserNumber' }})
-    bank_account: Optional[EmployerEmployerBankAccountBankAccount] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'BankAccount' }})
+    bank_account: Optional[EmployerEmployerBankAccount] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'BankAccount' }})
     calculate_apprenticeship_levy: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CalculateApprenticeshipLevy' }})
     claim_employment_allowance: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ClaimEmploymentAllowance' }})
     claim_small_employer_relief: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ClaimSmallEmployerRelief' }})
     effective_date: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'EffectiveDate', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    hmrc_settings: Optional[EmployerEmployerHmrcSettingsHmrcSettings] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'HmrcSettings' }})
+    hmrc_settings: Optional[EmployerEmployerHmrcSettings] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'HmrcSettings' }})
     meta_data: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MetaData' }})
     name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
-    region: Optional[EmployerEmployerRegionRegionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Region' }})
+    region: Optional[EmployerEmployerRegionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Region' }})
     revision: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Revision' }})
-    rule_exclusions: Optional[EmployerEmployerRuleExclusionsRuleExclusionsEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RuleExclusions' }})
-    territory: Optional[EmployerEmployerTerritoryTerritoryEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Territory' }})
+    rule_exclusions: Optional[EmployerEmployerRuleExclusionsEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RuleExclusions' }})
+    territory: Optional[EmployerEmployerTerritoryEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Territory' }})
     
 
 @dataclass_json
 @dataclass
 class Employer:
-    employer: Optional[EmployerEmployerEmployer] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Employer' }})
+    employer: Optional[EmployerEmployer] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Employer' }})
     

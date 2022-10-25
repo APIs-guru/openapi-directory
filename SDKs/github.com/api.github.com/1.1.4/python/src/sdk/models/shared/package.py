@@ -8,7 +8,7 @@ from dataclasses_json import dataclass_json
 
 @dataclass_json
 @dataclass
-class PackageOwnerSimpleUser:
+class PackageSimpleUser:
     avatar_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'avatar_url' }})
     events_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'events_url' }})
     followers_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'followers_url' }})
@@ -40,7 +40,7 @@ class PackagePackageTypeEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class PackageRepositoryLicense:
+class PackageMinimalRepositoryLicense:
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
     node_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'node_id' }})
@@ -50,7 +50,7 @@ class PackageRepositoryLicense:
 
 @dataclass_json
 @dataclass
-class PackageRepositoryOwnerSimpleUser:
+class PackageMinimalRepositorySimpleUser:
     avatar_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'avatar_url' }})
     events_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'events_url' }})
     followers_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'followers_url' }})
@@ -74,7 +74,7 @@ class PackageRepositoryOwnerSimpleUser:
 
 @dataclass_json
 @dataclass
-class PackageRepositoryPermissions:
+class PackageMinimalRepositoryPermissions:
     admin: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'admin' }})
     pull: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pull' }})
     push: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'push' }})
@@ -82,7 +82,7 @@ class PackageRepositoryPermissions:
 
 @dataclass_json
 @dataclass
-class PackageRepositoryTemplateRepositoryLicenseLicenseSimple:
+class PackageMinimalRepositoryRepositoryLicenseSimple:
     html_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'html_url' }})
     key: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
@@ -93,7 +93,7 @@ class PackageRepositoryTemplateRepositoryLicenseLicenseSimple:
 
 @dataclass_json
 @dataclass
-class PackageRepositoryTemplateRepositoryOwnerSimpleUser:
+class PackageMinimalRepositoryRepositorySimpleUser:
     avatar_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'avatar_url' }})
     events_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'events_url' }})
     followers_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'followers_url' }})
@@ -117,7 +117,7 @@ class PackageRepositoryTemplateRepositoryOwnerSimpleUser:
 
 @dataclass_json
 @dataclass
-class PackageRepositoryTemplateRepositoryPermissions:
+class PackageMinimalRepositoryRepositoryPermissions:
     admin: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'admin' }})
     maintain: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'maintain' }})
     pull: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pull' }})
@@ -127,7 +127,7 @@ class PackageRepositoryTemplateRepositoryPermissions:
 
 @dataclass_json
 @dataclass
-class PackageRepositoryTemplateRepositoryTemplateRepositoryOwner:
+class PackageMinimalRepositoryRepositoryTemplateRepositoryOwner:
     avatar_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'avatar_url' }})
     events_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'events_url' }})
     followers_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'followers_url' }})
@@ -150,7 +150,7 @@ class PackageRepositoryTemplateRepositoryTemplateRepositoryOwner:
 
 @dataclass_json
 @dataclass
-class PackageRepositoryTemplateRepositoryTemplateRepositoryPermissions:
+class PackageMinimalRepositoryRepositoryTemplateRepositoryPermissions:
     admin: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'admin' }})
     pull: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pull' }})
     push: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'push' }})
@@ -158,7 +158,7 @@ class PackageRepositoryTemplateRepositoryTemplateRepositoryPermissions:
 
 @dataclass_json
 @dataclass
-class PackageRepositoryTemplateRepositoryTemplateRepository:
+class PackageMinimalRepositoryRepositoryTemplateRepository:
     allow_merge_commit: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'allow_merge_commit' }})
     allow_rebase_merge: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'allow_rebase_merge' }})
     allow_squash_merge: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'allow_squash_merge' }})
@@ -215,8 +215,8 @@ class PackageRepositoryTemplateRepositoryTemplateRepository:
     node_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'node_id' }})
     notifications_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'notifications_url' }})
     open_issues_count: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'open_issues_count' }})
-    owner: Optional[PackageRepositoryTemplateRepositoryTemplateRepositoryOwner] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'owner' }})
-    permissions: Optional[PackageRepositoryTemplateRepositoryTemplateRepositoryPermissions] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'permissions' }})
+    owner: Optional[PackageMinimalRepositoryRepositoryTemplateRepositoryOwner] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'owner' }})
+    permissions: Optional[PackageMinimalRepositoryRepositoryTemplateRepositoryPermissions] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'permissions' }})
     private: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'private' }})
     pulls_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pulls_url' }})
     pushed_at: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pushed_at' }})
@@ -243,7 +243,7 @@ class PackageRepositoryTemplateRepositoryTemplateRepository:
 
 @dataclass_json
 @dataclass
-class PackageRepositoryTemplateRepositoryRepository:
+class PackageMinimalRepositoryRepository:
     allow_merge_commit: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'allow_merge_commit' }})
     allow_rebase_merge: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'allow_rebase_merge' }})
     allow_squash_merge: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'allow_squash_merge' }})
@@ -293,7 +293,7 @@ class PackageRepositoryTemplateRepositoryRepository:
     labels_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'labels_url' }})
     language: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'language' }})
     languages_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'languages_url' }})
-    license: PackageRepositoryTemplateRepositoryLicenseLicenseSimple = field(default=None, metadata={'dataclasses_json': { 'field_name': 'license' }})
+    license: PackageMinimalRepositoryRepositoryLicenseSimple = field(default=None, metadata={'dataclasses_json': { 'field_name': 'license' }})
     master_branch: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'master_branch' }})
     merges_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'merges_url' }})
     milestones_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'milestones_url' }})
@@ -304,8 +304,8 @@ class PackageRepositoryTemplateRepositoryRepository:
     notifications_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'notifications_url' }})
     open_issues: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'open_issues' }})
     open_issues_count: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'open_issues_count' }})
-    owner: PackageRepositoryTemplateRepositoryOwnerSimpleUser = field(default=None, metadata={'dataclasses_json': { 'field_name': 'owner' }})
-    permissions: Optional[PackageRepositoryTemplateRepositoryPermissions] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'permissions' }})
+    owner: PackageMinimalRepositoryRepositorySimpleUser = field(default=None, metadata={'dataclasses_json': { 'field_name': 'owner' }})
+    permissions: Optional[PackageMinimalRepositoryRepositoryPermissions] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'permissions' }})
     private: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'private' }})
     pulls_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pulls_url' }})
     pushed_at: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pushed_at', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
@@ -323,7 +323,7 @@ class PackageRepositoryTemplateRepositoryRepository:
     tags_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags_url' }})
     teams_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'teams_url' }})
     temp_clone_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'temp_clone_token' }})
-    template_repository: Optional[PackageRepositoryTemplateRepositoryTemplateRepository] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'template_repository' }})
+    template_repository: Optional[PackageMinimalRepositoryRepositoryTemplateRepository] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'template_repository' }})
     topics: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'topics' }})
     trees_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'trees_url' }})
     updated_at: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updated_at', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
@@ -335,7 +335,7 @@ class PackageRepositoryTemplateRepositoryRepository:
 
 @dataclass_json
 @dataclass
-class PackageRepositoryMinimalRepository:
+class PackageMinimalRepository:
     archive_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'archive_url' }})
     archived: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'archived' }})
     assignees_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'assignees_url' }})
@@ -382,7 +382,7 @@ class PackageRepositoryMinimalRepository:
     labels_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'labels_url' }})
     language: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'language' }})
     languages_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'languages_url' }})
-    license: Optional[PackageRepositoryLicense] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'license' }})
+    license: Optional[PackageMinimalRepositoryLicense] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'license' }})
     merges_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'merges_url' }})
     milestones_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'milestones_url' }})
     mirror_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'mirror_url' }})
@@ -392,8 +392,8 @@ class PackageRepositoryMinimalRepository:
     notifications_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'notifications_url' }})
     open_issues: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'open_issues' }})
     open_issues_count: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'open_issues_count' }})
-    owner: PackageRepositoryOwnerSimpleUser = field(default=None, metadata={'dataclasses_json': { 'field_name': 'owner' }})
-    permissions: Optional[PackageRepositoryPermissions] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'permissions' }})
+    owner: PackageMinimalRepositorySimpleUser = field(default=None, metadata={'dataclasses_json': { 'field_name': 'owner' }})
+    permissions: Optional[PackageMinimalRepositoryPermissions] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'permissions' }})
     private: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'private' }})
     pulls_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pulls_url' }})
     pushed_at: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pushed_at', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
@@ -410,7 +410,7 @@ class PackageRepositoryMinimalRepository:
     tags_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags_url' }})
     teams_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'teams_url' }})
     temp_clone_token: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'temp_clone_token' }})
-    template_repository: Optional[PackageRepositoryTemplateRepositoryRepository] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'template_repository' }})
+    template_repository: Optional[PackageMinimalRepositoryRepository] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'template_repository' }})
     topics: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'topics' }})
     trees_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'trees_url' }})
     updated_at: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updated_at', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
@@ -431,9 +431,9 @@ class Package:
     html_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'html_url' }})
     id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    owner: Optional[PackageOwnerSimpleUser] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'owner' }})
+    owner: Optional[PackageSimpleUser] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'owner' }})
     package_type: PackagePackageTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'package_type' }})
-    repository: Optional[PackageRepositoryMinimalRepository] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'repository' }})
+    repository: Optional[PackageMinimalRepository] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'repository' }})
     updated_at: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updated_at', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'url' }})
     version_count: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'version_count' }})

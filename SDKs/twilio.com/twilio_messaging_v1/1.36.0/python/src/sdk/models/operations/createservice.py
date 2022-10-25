@@ -5,7 +5,7 @@ CREATE_SERVICE_SERVERS = [
 	"https://messaging.twilio.com",
 ]
 
-class CreateServiceRequestBodyFallbackMethodEnum(str, Enum):
+class CreateServiceCreateServiceRequestFallbackMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -13,7 +13,7 @@ class CreateServiceRequestBodyFallbackMethodEnum(str, Enum):
     PUT = "PUT"
     DELETE = "DELETE"
 
-class CreateServiceRequestBodyInboundMethodEnum(str, Enum):
+class CreateServiceCreateServiceRequestInboundMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -23,13 +23,13 @@ class CreateServiceRequestBodyInboundMethodEnum(str, Enum):
 
 
 @dataclass
-class CreateServiceRequestBodyCreateServiceRequest:
+class CreateServiceCreateServiceRequest:
     area_code_geomatch: Optional[bool] = field(default=None, metadata={'form': { 'field_name': 'AreaCodeGeomatch' }})
-    fallback_method: Optional[CreateServiceRequestBodyFallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'FallbackMethod' }})
+    fallback_method: Optional[CreateServiceCreateServiceRequestFallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'FallbackMethod' }})
     fallback_to_long_code: Optional[bool] = field(default=None, metadata={'form': { 'field_name': 'FallbackToLongCode' }})
     fallback_url: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'FallbackUrl' }})
     friendly_name: str = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
-    inbound_method: Optional[CreateServiceRequestBodyInboundMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'InboundMethod' }})
+    inbound_method: Optional[CreateServiceCreateServiceRequestInboundMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'InboundMethod' }})
     inbound_request_url: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'InboundRequestUrl' }})
     mms_converter: Optional[bool] = field(default=None, metadata={'form': { 'field_name': 'MmsConverter' }})
     scan_message_content: Optional[shared.ServiceEnumScanMessageContentEnum] = field(default=None, metadata={'form': { 'field_name': 'ScanMessageContent' }})
@@ -50,7 +50,7 @@ class CreateServiceSecurity:
 @dataclass
 class CreateServiceRequest:
     server_url: Optional[str] = field(default=None)
-    request: Optional[CreateServiceRequestBodyCreateServiceRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateServiceCreateServiceRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateServiceSecurity = field(default=None)
     
 

@@ -14,7 +14,7 @@ type UpdateVariablePathParams struct {
 	Sid            string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
-type UpdateVariableRequestBodyUpdateVariableRequest struct {
+type UpdateVariableUpdateVariableRequest struct {
 	Key   *string `form:"name=Key"`
 	Value *string `form:"name=Value"`
 }
@@ -26,7 +26,7 @@ type UpdateVariableSecurity struct {
 type UpdateVariableRequest struct {
 	ServerURL  *string
 	PathParams UpdateVariablePathParams
-	Request    *UpdateVariableRequestBodyUpdateVariableRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateVariableUpdateVariableRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateVariableSecurity
 }
 

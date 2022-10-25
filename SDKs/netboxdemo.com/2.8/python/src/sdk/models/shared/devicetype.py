@@ -17,7 +17,7 @@ class DeviceTypeSubdeviceRoleValueEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class DeviceTypeSubdeviceRoleSubdeviceRole:
+class DeviceTypeSubdeviceRole:
     label: DeviceTypeSubdeviceRoleLabelEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label' }})
     value: DeviceTypeSubdeviceRoleValueEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
     
@@ -39,7 +39,7 @@ class DeviceType:
     part_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'part_number' }})
     rear_image: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rear_image' }})
     slug: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'slug' }})
-    subdevice_role: Optional[DeviceTypeSubdeviceRoleSubdeviceRole] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'subdevice_role' }})
+    subdevice_role: Optional[DeviceTypeSubdeviceRole] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'subdevice_role' }})
     tags: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
     u_height: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'u_height' }})
     

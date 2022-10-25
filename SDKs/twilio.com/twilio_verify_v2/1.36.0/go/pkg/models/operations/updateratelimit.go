@@ -13,7 +13,7 @@ type UpdateRateLimitPathParams struct {
 	Sid        string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
-type UpdateRateLimitRequestBodyUpdateRateLimitRequest struct {
+type UpdateRateLimitUpdateRateLimitRequest struct {
 	Description *string `form:"name=Description"`
 }
 
@@ -24,7 +24,7 @@ type UpdateRateLimitSecurity struct {
 type UpdateRateLimitRequest struct {
 	ServerURL  *string
 	PathParams UpdateRateLimitPathParams
-	Request    *UpdateRateLimitRequestBodyUpdateRateLimitRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateRateLimitUpdateRateLimitRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateRateLimitSecurity
 }
 

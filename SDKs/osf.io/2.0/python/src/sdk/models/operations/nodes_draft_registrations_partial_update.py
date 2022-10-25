@@ -14,7 +14,7 @@ class NodesDraftRegistrationsPartialUpdatePathParams:
 
 @dataclass_json
 @dataclass
-class NodesDraftRegistrationsPartialUpdateRequestBodyAttributesAttributes:
+class NodesDraftRegistrationsPartialUpdateDraftRegistrationAttributes:
     datetime_initiated: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'datetime_initiated', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     datetime_updated: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'datetime_updated', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     registration_metadata: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'registration_metadata' }})
@@ -23,13 +23,13 @@ class NodesDraftRegistrationsPartialUpdateRequestBodyAttributesAttributes:
 
 @dataclass_json
 @dataclass
-class NodesDraftRegistrationsPartialUpdateRequestBodyLinksLinks:
+class NodesDraftRegistrationsPartialUpdateDraftRegistrationLinks:
     html: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'html' }})
     
 
 @dataclass_json
 @dataclass
-class NodesDraftRegistrationsPartialUpdateRequestBodyRelationshipsRelationships:
+class NodesDraftRegistrationsPartialUpdateDraftRegistrationRelationships:
     branched_from: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'branched_from' }})
     initiator: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'initiator' }})
     registration_schema: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'registration_schema' }})
@@ -37,18 +37,18 @@ class NodesDraftRegistrationsPartialUpdateRequestBodyRelationshipsRelationships:
 
 @dataclass_json
 @dataclass
-class NodesDraftRegistrationsPartialUpdateRequestBodyDraftRegistration:
-    attributes: NodesDraftRegistrationsPartialUpdateRequestBodyAttributesAttributes = field(default=None, metadata={'dataclasses_json': { 'field_name': 'attributes' }})
+class NodesDraftRegistrationsPartialUpdateDraftRegistration:
+    attributes: NodesDraftRegistrationsPartialUpdateDraftRegistrationAttributes = field(default=None, metadata={'dataclasses_json': { 'field_name': 'attributes' }})
     id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    links: NodesDraftRegistrationsPartialUpdateRequestBodyLinksLinks = field(default=None, metadata={'dataclasses_json': { 'field_name': 'links' }})
-    relationships: NodesDraftRegistrationsPartialUpdateRequestBodyRelationshipsRelationships = field(default=None, metadata={'dataclasses_json': { 'field_name': 'relationships' }})
+    links: NodesDraftRegistrationsPartialUpdateDraftRegistrationLinks = field(default=None, metadata={'dataclasses_json': { 'field_name': 'links' }})
+    relationships: NodesDraftRegistrationsPartialUpdateDraftRegistrationRelationships = field(default=None, metadata={'dataclasses_json': { 'field_name': 'relationships' }})
     type: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     
 
 @dataclass
 class NodesDraftRegistrationsPartialUpdateRequest:
     path_params: NodesDraftRegistrationsPartialUpdatePathParams = field(default=None)
-    request: NodesDraftRegistrationsPartialUpdateRequestBodyDraftRegistration = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: NodesDraftRegistrationsPartialUpdateDraftRegistration = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass

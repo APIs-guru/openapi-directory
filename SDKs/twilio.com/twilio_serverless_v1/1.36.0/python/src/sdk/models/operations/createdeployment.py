@@ -13,7 +13,7 @@ class CreateDeploymentPathParams:
     
 
 @dataclass
-class CreateDeploymentRequestBodyCreateDeploymentRequest:
+class CreateDeploymentCreateDeploymentRequest:
     build_sid: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'BuildSid' }})
     
 
@@ -26,7 +26,7 @@ class CreateDeploymentSecurity:
 class CreateDeploymentRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateDeploymentPathParams = field(default=None)
-    request: Optional[CreateDeploymentRequestBodyCreateDeploymentRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateDeploymentCreateDeploymentRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateDeploymentSecurity = field(default=None)
     
 

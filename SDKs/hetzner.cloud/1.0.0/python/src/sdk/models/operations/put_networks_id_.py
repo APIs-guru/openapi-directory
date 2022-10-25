@@ -10,21 +10,21 @@ class PutNetworksIDPathParams:
 
 @dataclass_json
 @dataclass
-class PutNetworksIDRequestBodyLabels:
+class PutNetworksIDUpdateNetworkRequestLabels:
     labelkey: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'labelkey' }})
     
 
 @dataclass_json
 @dataclass
-class PutNetworksIDRequestBodyUpdateNetworkRequest:
-    labels: Optional[PutNetworksIDRequestBodyLabels] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'labels' }})
+class PutNetworksIDUpdateNetworkRequest:
+    labels: Optional[PutNetworksIDUpdateNetworkRequestLabels] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'labels' }})
     name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
     
 
 @dataclass
 class PutNetworksIDRequest:
     path_params: PutNetworksIDPathParams = field(default=None)
-    request: Optional[PutNetworksIDRequestBodyUpdateNetworkRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: Optional[PutNetworksIDUpdateNetworkRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass_json

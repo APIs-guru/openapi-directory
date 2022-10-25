@@ -32,7 +32,7 @@ class ListAssetRequest:
 
 @dataclass_json
 @dataclass
-class ListAsset200ApplicationJSONMeta:
+class ListAssetListAssetResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -44,14 +44,14 @@ class ListAsset200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListAsset200ApplicationJSONListAssetResponse:
+class ListAssetListAssetResponse:
     assets: Optional[List[shared.ServerlessV1ServiceAsset]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'assets' }})
-    meta: Optional[ListAsset200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+    meta: Optional[ListAssetListAssetResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     
 
 @dataclass
 class ListAssetResponse:
     content_type: str = field(default=None)
-    list_asset_response: Optional[ListAsset200ApplicationJSONListAssetResponse] = field(default=None)
+    list_asset_response: Optional[ListAssetListAssetResponse] = field(default=None)
     status_code: int = field(default=None)
     

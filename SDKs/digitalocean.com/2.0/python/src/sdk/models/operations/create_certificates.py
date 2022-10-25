@@ -3,31 +3,31 @@ from typing import Any,Enum,List,Optional
 from dataclasses_json import dataclass_json
 from sdk.models import shared
 
-class CreateCertificatesRequestBody1TypeEnum(str, Enum):
+class CreateCertificatesRequestBodyLetSEncryptCertificateRequestTypeEnum(str, Enum):
     CUSTOM = "custom"
     LETS_ENCRYPT = "lets_encrypt"
 
 
 @dataclass_json
 @dataclass
-class CreateCertificatesRequestBody1:
+class CreateCertificatesRequestBodyLetSEncryptCertificateRequest:
     dns_names: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dns_names' }})
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    type: Optional[CreateCertificatesRequestBody1TypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    type: Optional[CreateCertificatesRequestBodyLetSEncryptCertificateRequestTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     
-class CreateCertificatesRequestBody2TypeEnum(str, Enum):
+class CreateCertificatesRequestBodyCustomCertificateRequestTypeEnum(str, Enum):
     CUSTOM = "custom"
     LETS_ENCRYPT = "lets_encrypt"
 
 
 @dataclass_json
 @dataclass
-class CreateCertificatesRequestBody2:
+class CreateCertificatesRequestBodyCustomCertificateRequest:
     certificate_chain: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'certificate_chain' }})
     leaf_certificate: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'leaf_certificate' }})
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
     private_key: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'private_key' }})
-    type: Optional[CreateCertificatesRequestBody2TypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    type: Optional[CreateCertificatesRequestBodyCustomCertificateRequestTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     
 
 @dataclass

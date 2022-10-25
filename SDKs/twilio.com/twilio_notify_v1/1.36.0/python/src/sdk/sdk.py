@@ -289,7 +289,7 @@ class SDK:
         res = operations.ListBindingResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListBinding200ApplicationJSONListBindingResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListBindingListBindingResponse])
                 res.list_binding_response = out
 
         return res
@@ -314,7 +314,7 @@ class SDK:
         res = operations.ListCredentialResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListCredential200ApplicationJSONListCredentialResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListCredentialListCredentialResponse])
                 res.list_credential_response = out
 
         return res
@@ -339,7 +339,7 @@ class SDK:
         res = operations.ListServiceResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListService200ApplicationJSONListServiceResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListServiceListServiceResponse])
                 res.list_service_response = out
 
         return res

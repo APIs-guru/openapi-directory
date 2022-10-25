@@ -12,7 +12,7 @@ class CreateNotificationPathParams:
     
 
 @dataclass
-class CreateNotificationRequestBodyCreateNotificationRequest:
+class CreateNotificationCreateNotificationRequest:
     action: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Action' }})
     alexa: Optional[Any] = field(default=None, metadata={'form': { 'field_name': 'Alexa' }})
     apn: Optional[Any] = field(default=None, metadata={'form': { 'field_name': 'Apn' }})
@@ -42,7 +42,7 @@ class CreateNotificationSecurity:
 class CreateNotificationRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateNotificationPathParams = field(default=None)
-    request: Optional[CreateNotificationRequestBodyCreateNotificationRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateNotificationCreateNotificationRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateNotificationSecurity = field(default=None)
     
 

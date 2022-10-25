@@ -32,7 +32,7 @@ class ListKeyRequest:
 
 @dataclass_json
 @dataclass
-class ListKey200ApplicationJSONListKeyResponse:
+class ListKeyListKeyResponse:
     end: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'end' }})
     first_page_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_uri' }})
     keys: Optional[List[shared.APIV2010AccountKey]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'keys' }})
@@ -47,6 +47,6 @@ class ListKey200ApplicationJSONListKeyResponse:
 @dataclass
 class ListKeyResponse:
     content_type: str = field(default=None)
-    list_key_response: Optional[ListKey200ApplicationJSONListKeyResponse] = field(default=None)
+    list_key_response: Optional[ListKeyListKeyResponse] = field(default=None)
     status_code: int = field(default=None)
     

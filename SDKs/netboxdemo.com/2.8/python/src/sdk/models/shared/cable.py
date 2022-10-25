@@ -17,7 +17,7 @@ class CableLengthUnitValueEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class CableLengthUnitLengthUnit:
+class CableLengthUnit:
     label: CableLengthUnitLabelEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label' }})
     value: CableLengthUnitValueEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
     
@@ -34,11 +34,11 @@ class CableStatusValueEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class CableStatusStatus:
+class CableStatus:
     label: CableStatusLabelEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label' }})
     value: CableStatusValueEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
     
-class CableTypeTypeEnum(str, Enum):
+class CableTypeEnum(str, Enum):
     CAT3 = "cat3"
     CAT5 = "cat5"
     CAT5E = "cat5e"
@@ -68,13 +68,13 @@ class Cable:
     id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     label: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label' }})
     length: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'length' }})
-    length_unit: Optional[CableLengthUnitLengthUnit] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'length_unit' }})
-    status: Optional[CableStatusStatus] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    length_unit: Optional[CableLengthUnit] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'length_unit' }})
+    status: Optional[CableStatus] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
     termination_a: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'termination_a' }})
     termination_a_id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'termination_a_id' }})
     termination_a_type: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'termination_a_type' }})
     termination_b: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'termination_b' }})
     termination_b_id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'termination_b_id' }})
     termination_b_type: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'termination_b_type' }})
-    type: Optional[CableTypeTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    type: Optional[CableTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     

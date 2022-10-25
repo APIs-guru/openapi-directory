@@ -22,7 +22,7 @@ const (
 	InstallationGhes2RepositorySelectionEnumSelected InstallationGhes2RepositorySelectionEnum = "selected"
 )
 
-type InstallationGhes2SuspendedBySimpleUser struct {
+type InstallationGhes2SimpleUser struct {
 	AvatarURL         string  `json:"avatar_url"`
 	EventsURL         string  `json:"events_url"`
 	FollowersURL      string  `json:"followers_url"`
@@ -59,7 +59,7 @@ type InstallationGhes2 struct {
 	RepositorySelection InstallationGhes2RepositorySelectionEnum `json:"repository_selection"`
 	SingleFileName      string                                   `json:"single_file_name"`
 	SuspendedAt         *time.Time                               `json:"suspended_at,omitempty"`
-	SuspendedBy         *InstallationGhes2SuspendedBySimpleUser  `json:"suspended_by,omitempty"`
+	SuspendedBy         *InstallationGhes2SimpleUser             `json:"suspended_by,omitempty"`
 	TargetID            int64                                    `json:"target_id"`
 	TargetType          string                                   `json:"target_type"`
 	UpdatedAt           time.Time                                `json:"updated_at"`

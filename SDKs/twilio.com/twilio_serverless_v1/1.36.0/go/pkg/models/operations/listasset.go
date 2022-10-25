@@ -27,7 +27,7 @@ type ListAssetRequest struct {
 	Security    ListAssetSecurity
 }
 
-type ListAsset200ApplicationJSONMeta struct {
+type ListAssetListAssetResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -37,13 +37,13 @@ type ListAsset200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListAsset200ApplicationJSONListAssetResponse struct {
+type ListAssetListAssetResponse struct {
 	Assets []shared.ServerlessV1ServiceAsset `json:"assets,omitempty"`
-	Meta   *ListAsset200ApplicationJSONMeta  `json:"meta,omitempty"`
+	Meta   *ListAssetListAssetResponseMeta   `json:"meta,omitempty"`
 }
 
 type ListAssetResponse struct {
 	ContentType       string
-	ListAssetResponse *ListAsset200ApplicationJSONListAssetResponse
+	ListAssetResponse *ListAssetListAssetResponse
 	StatusCode        int64
 }

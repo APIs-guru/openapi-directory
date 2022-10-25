@@ -29,7 +29,7 @@ type ListServiceConversationMessageReceiptRequest struct {
 	Security    ListServiceConversationMessageReceiptSecurity
 }
 
-type ListServiceConversationMessageReceipt200ApplicationJSONMeta struct {
+type ListServiceConversationMessageReceiptListServiceConversationMessageReceiptResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -39,13 +39,13 @@ type ListServiceConversationMessageReceipt200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListServiceConversationMessageReceipt200ApplicationJSONListServiceConversationMessageReceiptResponse struct {
+type ListServiceConversationMessageReceiptListServiceConversationMessageReceiptResponse struct {
 	DeliveryReceipts []shared.ConversationsV1ServiceServiceConversationServiceConversationMessageServiceConversationMessageReceipt `json:"delivery_receipts,omitempty"`
-	Meta             *ListServiceConversationMessageReceipt200ApplicationJSONMeta                                                  `json:"meta,omitempty"`
+	Meta             *ListServiceConversationMessageReceiptListServiceConversationMessageReceiptResponseMeta                       `json:"meta,omitempty"`
 }
 
 type ListServiceConversationMessageReceiptResponse struct {
 	ContentType                                   string
-	ListServiceConversationMessageReceiptResponse *ListServiceConversationMessageReceipt200ApplicationJSONListServiceConversationMessageReceiptResponse
+	ListServiceConversationMessageReceiptResponse *ListServiceConversationMessageReceiptListServiceConversationMessageReceiptResponse
 	StatusCode                                    int64
 }

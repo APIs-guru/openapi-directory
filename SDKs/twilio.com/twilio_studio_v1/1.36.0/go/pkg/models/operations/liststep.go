@@ -28,7 +28,7 @@ type ListStepRequest struct {
 	Security    ListStepSecurity
 }
 
-type ListStep200ApplicationJSONMeta struct {
+type ListStepListStepResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -38,13 +38,13 @@ type ListStep200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListStep200ApplicationJSONListStepResponse struct {
-	Meta  *ListStep200ApplicationJSONMeta     `json:"meta,omitempty"`
+type ListStepListStepResponse struct {
+	Meta  *ListStepListStepResponseMeta       `json:"meta,omitempty"`
 	Steps []shared.StudioV1FlowEngagementStep `json:"steps,omitempty"`
 }
 
 type ListStepResponse struct {
 	ContentType      string
-	ListStepResponse *ListStep200ApplicationJSONListStepResponse
+	ListStepResponse *ListStepListStepResponse
 	StatusCode       int64
 }

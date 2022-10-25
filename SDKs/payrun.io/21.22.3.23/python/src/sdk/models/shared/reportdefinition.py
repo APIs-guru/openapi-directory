@@ -5,32 +5,32 @@ from dataclasses_json import dataclass_json
 
 @dataclass_json
 @dataclass
-class ReportDefinitionReportDefinitionReportQueryGroupsGroup:
+class ReportDefinitionReportDefinitionReportQueryGroup:
     group: Optional[List[Any]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Group' }})
     
 
 @dataclass_json
 @dataclass
-class ReportDefinitionReportDefinitionReportQueryVariablesVariable:
+class ReportDefinitionReportDefinitionReportQueryVariable:
     variable: Optional[List[Any]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Variable' }})
     
 
 @dataclass_json
 @dataclass
-class ReportDefinitionReportDefinitionReportQueryReportQuery:
+class ReportDefinitionReportDefinitionReportQuery:
     exclude_null_or_empty_elements: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ExcludeNullOrEmptyElements' }})
-    groups: Optional[ReportDefinitionReportDefinitionReportQueryGroupsGroup] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Groups' }})
+    groups: Optional[ReportDefinitionReportDefinitionReportQueryGroup] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Groups' }})
     root_node_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RootNodeName' }})
     suppress_metric_attributes: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SuppressMetricAttributes' }})
-    variables: Optional[ReportDefinitionReportDefinitionReportQueryVariablesVariable] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Variables' }})
+    variables: Optional[ReportDefinitionReportDefinitionReportQueryVariable] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Variables' }})
     
 
 @dataclass_json
 @dataclass
-class ReportDefinitionReportDefinitionReportDefinition:
+class ReportDefinitionReportDefinition:
     active: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Active' }})
     readonly: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Readonly' }})
-    report_query: Optional[ReportDefinitionReportDefinitionReportQueryReportQuery] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ReportQuery' }})
+    report_query: Optional[ReportDefinitionReportDefinitionReportQuery] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ReportQuery' }})
     supported_transforms: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'SupportedTransforms' }})
     title: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Title' }})
     version: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Version' }})
@@ -39,5 +39,5 @@ class ReportDefinitionReportDefinitionReportDefinition:
 @dataclass_json
 @dataclass
 class ReportDefinition:
-    report_definition: Optional[ReportDefinitionReportDefinitionReportDefinition] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ReportDefinition' }})
+    report_definition: Optional[ReportDefinitionReportDefinition] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ReportDefinition' }})
     

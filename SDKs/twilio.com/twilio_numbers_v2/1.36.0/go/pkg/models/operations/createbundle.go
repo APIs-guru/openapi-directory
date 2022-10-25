@@ -8,7 +8,7 @@ var CreateBundleServers = []string{
 	"https://numbers.twilio.com",
 }
 
-type CreateBundleRequestBodyCreateBundleRequest struct {
+type CreateBundleCreateBundleRequest struct {
 	Email          string                            `form:"name=Email"`
 	EndUserType    *shared.BundleEnumEndUserTypeEnum `form:"name=EndUserType"`
 	FriendlyName   string                            `form:"name=FriendlyName"`
@@ -24,7 +24,7 @@ type CreateBundleSecurity struct {
 
 type CreateBundleRequest struct {
 	ServerURL *string
-	Request   *CreateBundleRequestBodyCreateBundleRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request   *CreateBundleCreateBundleRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security  CreateBundleSecurity
 }
 

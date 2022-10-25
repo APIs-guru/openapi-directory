@@ -12,7 +12,7 @@ class UpdateHostedNumbersHostedNumberOrderPathParams:
     
 
 @dataclass
-class UpdateHostedNumbersHostedNumberOrderRequestBodyUpdateHostedNumbersHostedNumberOrderRequest:
+class UpdateHostedNumbersHostedNumberOrderUpdateHostedNumbersHostedNumberOrderRequest:
     call_delay: Optional[int] = field(default=None, metadata={'form': { 'field_name': 'CallDelay' }})
     cc_emails: Optional[List[str]] = field(default=None, metadata={'form': { 'field_name': 'CcEmails' }})
     email: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Email' }})
@@ -34,7 +34,7 @@ class UpdateHostedNumbersHostedNumberOrderSecurity:
 class UpdateHostedNumbersHostedNumberOrderRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateHostedNumbersHostedNumberOrderPathParams = field(default=None)
-    request: Optional[UpdateHostedNumbersHostedNumberOrderRequestBodyUpdateHostedNumbersHostedNumberOrderRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateHostedNumbersHostedNumberOrderUpdateHostedNumbersHostedNumberOrderRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateHostedNumbersHostedNumberOrderSecurity = field(default=None)
     
 

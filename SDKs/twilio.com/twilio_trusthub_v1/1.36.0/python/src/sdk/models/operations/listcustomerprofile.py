@@ -29,7 +29,7 @@ class ListCustomerProfileRequest:
 
 @dataclass_json
 @dataclass
-class ListCustomerProfile200ApplicationJSONMeta:
+class ListCustomerProfileListCustomerProfileResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -41,14 +41,14 @@ class ListCustomerProfile200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListCustomerProfile200ApplicationJSONListCustomerProfileResponse:
-    meta: Optional[ListCustomerProfile200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+class ListCustomerProfileListCustomerProfileResponse:
+    meta: Optional[ListCustomerProfileListCustomerProfileResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     results: Optional[List[shared.TrusthubV1CustomerProfile]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'results' }})
     
 
 @dataclass
 class ListCustomerProfileResponse:
     content_type: str = field(default=None)
-    list_customer_profile_response: Optional[ListCustomerProfile200ApplicationJSONListCustomerProfileResponse] = field(default=None)
+    list_customer_profile_response: Optional[ListCustomerProfileListCustomerProfileResponse] = field(default=None)
     status_code: int = field(default=None)
     

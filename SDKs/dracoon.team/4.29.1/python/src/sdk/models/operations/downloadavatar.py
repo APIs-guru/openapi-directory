@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-
+from typing import Optional
 
 
 @dataclass
@@ -18,4 +18,5 @@ class DownloadAvatarResponse:
     body: bytes = field(default=None)
     content_type: str = field(default=None)
     status_code: int = field(default=None)
+    download_avatar_200_application_octet_stream_string: Optional[str] = field(default=None)
     

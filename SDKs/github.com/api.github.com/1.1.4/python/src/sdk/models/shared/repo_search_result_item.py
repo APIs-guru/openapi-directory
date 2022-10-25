@@ -9,7 +9,7 @@ from . import search_result_text_matches
 
 @dataclass_json
 @dataclass
-class RepoSearchResultItemLicenseLicenseSimple:
+class RepoSearchResultItemLicenseSimple:
     html_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'html_url' }})
     key: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
@@ -20,7 +20,7 @@ class RepoSearchResultItemLicenseLicenseSimple:
 
 @dataclass_json
 @dataclass
-class RepoSearchResultItemOwnerSimpleUser:
+class RepoSearchResultItemSimpleUser:
     avatar_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'avatar_url' }})
     events_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'events_url' }})
     followers_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'followers_url' }})
@@ -101,7 +101,7 @@ class RepoSearchResultItem:
     labels_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'labels_url' }})
     language: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'language' }})
     languages_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'languages_url' }})
-    license: RepoSearchResultItemLicenseLicenseSimple = field(default=None, metadata={'dataclasses_json': { 'field_name': 'license' }})
+    license: RepoSearchResultItemLicenseSimple = field(default=None, metadata={'dataclasses_json': { 'field_name': 'license' }})
     master_branch: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'master_branch' }})
     merges_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'merges_url' }})
     milestones_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'milestones_url' }})
@@ -111,7 +111,7 @@ class RepoSearchResultItem:
     notifications_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'notifications_url' }})
     open_issues: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'open_issues' }})
     open_issues_count: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'open_issues_count' }})
-    owner: RepoSearchResultItemOwnerSimpleUser = field(default=None, metadata={'dataclasses_json': { 'field_name': 'owner' }})
+    owner: RepoSearchResultItemSimpleUser = field(default=None, metadata={'dataclasses_json': { 'field_name': 'owner' }})
     permissions: Optional[RepoSearchResultItemPermissions] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'permissions' }})
     private: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'private' }})
     pulls_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pulls_url' }})

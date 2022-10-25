@@ -1,27 +1,27 @@
 package shared
 
-type PlanDataPlanTypeOfPlanBasedOnTheSourceEnum string
+type PlanDataTypeOfPlanBasedOnTheSourceEnum string
 
 const (
-	PlanDataPlanTypeOfPlanBasedOnTheSourceEnumStarter         PlanDataPlanTypeOfPlanBasedOnTheSourceEnum = "STARTER"
-	PlanDataPlanTypeOfPlanBasedOnTheSourceEnumSfdc1MEdition   PlanDataPlanTypeOfPlanBasedOnTheSourceEnum = "SFDC_1M_EDITION"
-	PlanDataPlanTypeOfPlanBasedOnTheSourceEnumBronze          PlanDataPlanTypeOfPlanBasedOnTheSourceEnum = "BRONZE"
-	PlanDataPlanTypeOfPlanBasedOnTheSourceEnumSilver          PlanDataPlanTypeOfPlanBasedOnTheSourceEnum = "SILVER"
-	PlanDataPlanTypeOfPlanBasedOnTheSourceEnumGold            PlanDataPlanTypeOfPlanBasedOnTheSourceEnum = "GOLD"
-	PlanDataPlanTypeOfPlanBasedOnTheSourceEnumDatasetDownload PlanDataPlanTypeOfPlanBasedOnTheSourceEnum = "DATASET_DOWNLOAD"
+	PlanDataTypeOfPlanBasedOnTheSourceEnumStarter         PlanDataTypeOfPlanBasedOnTheSourceEnum = "STARTER"
+	PlanDataTypeOfPlanBasedOnTheSourceEnumSfdc1MEdition   PlanDataTypeOfPlanBasedOnTheSourceEnum = "SFDC_1M_EDITION"
+	PlanDataTypeOfPlanBasedOnTheSourceEnumBronze          PlanDataTypeOfPlanBasedOnTheSourceEnum = "BRONZE"
+	PlanDataTypeOfPlanBasedOnTheSourceEnumSilver          PlanDataTypeOfPlanBasedOnTheSourceEnum = "SILVER"
+	PlanDataTypeOfPlanBasedOnTheSourceEnumGold            PlanDataTypeOfPlanBasedOnTheSourceEnum = "GOLD"
+	PlanDataTypeOfPlanBasedOnTheSourceEnumDatasetDownload PlanDataTypeOfPlanBasedOnTheSourceEnum = "DATASET_DOWNLOAD"
 )
 
-type PlanDataSourceServiceThatProvisionedThePlanEnum string
+type PlanDataServiceThatProvisionedThePlanEnum string
 
 const (
-	PlanDataSourceServiceThatProvisionedThePlanEnumSalesforce           PlanDataSourceServiceThatProvisionedThePlanEnum = "SALESFORCE"
-	PlanDataSourceServiceThatProvisionedThePlanEnumHeroku               PlanDataSourceServiceThatProvisionedThePlanEnum = "HEROKU"
-	PlanDataSourceServiceThatProvisionedThePlanEnumSfAutoProvision      PlanDataSourceServiceThatProvisionedThePlanEnum = "SF_AUTO_PROVISION"
-	PlanDataSourceServiceThatProvisionedThePlanEnumSfAutoProvisionBound PlanDataSourceServiceThatProvisionedThePlanEnum = "SF_AUTO_PROVISION_BOUND"
+	PlanDataServiceThatProvisionedThePlanEnumSalesforce           PlanDataServiceThatProvisionedThePlanEnum = "SALESFORCE"
+	PlanDataServiceThatProvisionedThePlanEnumHeroku               PlanDataServiceThatProvisionedThePlanEnum = "HEROKU"
+	PlanDataServiceThatProvisionedThePlanEnumSfAutoProvision      PlanDataServiceThatProvisionedThePlanEnum = "SF_AUTO_PROVISION"
+	PlanDataServiceThatProvisionedThePlanEnumSfAutoProvisionBound PlanDataServiceThatProvisionedThePlanEnum = "SF_AUTO_PROVISION_BOUND"
 )
 
 type PlanData struct {
-	Amount *int32                                           `json:"amount,omitempty"`
-	Plan   *PlanDataPlanTypeOfPlanBasedOnTheSourceEnum      `json:"plan,omitempty"`
-	Source *PlanDataSourceServiceThatProvisionedThePlanEnum `json:"source,omitempty"`
+	Amount *int32                                     `json:"amount,omitempty"`
+	Plan   *PlanDataTypeOfPlanBasedOnTheSourceEnum    `json:"plan,omitempty"`
+	Source *PlanDataServiceThatProvisionedThePlanEnum `json:"source,omitempty"`
 }

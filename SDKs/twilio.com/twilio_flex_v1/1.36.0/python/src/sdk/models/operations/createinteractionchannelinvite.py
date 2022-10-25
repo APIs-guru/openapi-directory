@@ -13,7 +13,7 @@ class CreateInteractionChannelInvitePathParams:
     
 
 @dataclass
-class CreateInteractionChannelInviteRequestBodyCreateInteractionChannelInviteRequest:
+class CreateInteractionChannelInviteCreateInteractionChannelInviteRequest:
     routing: Any = field(default=None, metadata={'form': { 'field_name': 'Routing' }})
     
 
@@ -26,7 +26,7 @@ class CreateInteractionChannelInviteSecurity:
 class CreateInteractionChannelInviteRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateInteractionChannelInvitePathParams = field(default=None)
-    request: Optional[CreateInteractionChannelInviteRequestBodyCreateInteractionChannelInviteRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateInteractionChannelInviteCreateInteractionChannelInviteRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateInteractionChannelInviteSecurity = field(default=None)
     
 

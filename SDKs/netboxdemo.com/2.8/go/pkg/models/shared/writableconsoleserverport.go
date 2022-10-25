@@ -1,32 +1,32 @@
 package shared
 
-type WritableConsoleServerPortTypeTypeEnum string
+type WritableConsoleServerPortTypeEnum string
 
 const (
-	WritableConsoleServerPortTypeTypeEnumDe9       WritableConsoleServerPortTypeTypeEnum = "de-9"
-	WritableConsoleServerPortTypeTypeEnumDb25      WritableConsoleServerPortTypeTypeEnum = "db-25"
-	WritableConsoleServerPortTypeTypeEnumRj11      WritableConsoleServerPortTypeTypeEnum = "rj-11"
-	WritableConsoleServerPortTypeTypeEnumRj12      WritableConsoleServerPortTypeTypeEnum = "rj-12"
-	WritableConsoleServerPortTypeTypeEnumRj45      WritableConsoleServerPortTypeTypeEnum = "rj-45"
-	WritableConsoleServerPortTypeTypeEnumUsbA      WritableConsoleServerPortTypeTypeEnum = "usb-a"
-	WritableConsoleServerPortTypeTypeEnumUsbB      WritableConsoleServerPortTypeTypeEnum = "usb-b"
-	WritableConsoleServerPortTypeTypeEnumUsbC      WritableConsoleServerPortTypeTypeEnum = "usb-c"
-	WritableConsoleServerPortTypeTypeEnumUsbMiniA  WritableConsoleServerPortTypeTypeEnum = "usb-mini-a"
-	WritableConsoleServerPortTypeTypeEnumUsbMiniB  WritableConsoleServerPortTypeTypeEnum = "usb-mini-b"
-	WritableConsoleServerPortTypeTypeEnumUsbMicroA WritableConsoleServerPortTypeTypeEnum = "usb-micro-a"
-	WritableConsoleServerPortTypeTypeEnumUsbMicroB WritableConsoleServerPortTypeTypeEnum = "usb-micro-b"
-	WritableConsoleServerPortTypeTypeEnumOther     WritableConsoleServerPortTypeTypeEnum = "other"
+	WritableConsoleServerPortTypeEnumDe9       WritableConsoleServerPortTypeEnum = "de-9"
+	WritableConsoleServerPortTypeEnumDb25      WritableConsoleServerPortTypeEnum = "db-25"
+	WritableConsoleServerPortTypeEnumRj11      WritableConsoleServerPortTypeEnum = "rj-11"
+	WritableConsoleServerPortTypeEnumRj12      WritableConsoleServerPortTypeEnum = "rj-12"
+	WritableConsoleServerPortTypeEnumRj45      WritableConsoleServerPortTypeEnum = "rj-45"
+	WritableConsoleServerPortTypeEnumUsbA      WritableConsoleServerPortTypeEnum = "usb-a"
+	WritableConsoleServerPortTypeEnumUsbB      WritableConsoleServerPortTypeEnum = "usb-b"
+	WritableConsoleServerPortTypeEnumUsbC      WritableConsoleServerPortTypeEnum = "usb-c"
+	WritableConsoleServerPortTypeEnumUsbMiniA  WritableConsoleServerPortTypeEnum = "usb-mini-a"
+	WritableConsoleServerPortTypeEnumUsbMiniB  WritableConsoleServerPortTypeEnum = "usb-mini-b"
+	WritableConsoleServerPortTypeEnumUsbMicroA WritableConsoleServerPortTypeEnum = "usb-micro-a"
+	WritableConsoleServerPortTypeEnumUsbMicroB WritableConsoleServerPortTypeEnum = "usb-micro-b"
+	WritableConsoleServerPortTypeEnumOther     WritableConsoleServerPortTypeEnum = "other"
 )
 
 type WritableConsoleServerPort struct {
-	Cable                 *NestedCable                           `json:"cable,omitempty"`
-	ConnectedEndpoint     map[string]string                      `json:"connected_endpoint,omitempty"`
-	ConnectedEndpointType *string                                `json:"connected_endpoint_type,omitempty"`
-	ConnectionStatus      *bool                                  `json:"connection_status,omitempty"`
-	Description           *string                                `json:"description,omitempty"`
-	Device                int64                                  `json:"device"`
-	ID                    *int64                                 `json:"id,omitempty"`
-	Name                  string                                 `json:"name"`
-	Tags                  []string                               `json:"tags,omitempty"`
-	Type                  *WritableConsoleServerPortTypeTypeEnum `json:"type,omitempty"`
+	Cable                 *NestedCable                       `json:"cable,omitempty"`
+	ConnectedEndpoint     map[string]string                  `json:"connected_endpoint,omitempty"`
+	ConnectedEndpointType *string                            `json:"connected_endpoint_type,omitempty"`
+	ConnectionStatus      *bool                              `json:"connection_status,omitempty"`
+	Description           *string                            `json:"description,omitempty"`
+	Device                int64                              `json:"device"`
+	ID                    *int64                             `json:"id,omitempty"`
+	Name                  string                             `json:"name"`
+	Tags                  []string                           `json:"tags,omitempty"`
+	Type                  *WritableConsoleServerPortTypeEnum `json:"type,omitempty"`
 }

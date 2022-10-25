@@ -13,7 +13,7 @@ CREATE_CALL_FEEDBACK_SUMMARY_SERVERS = [
 class CreateCallFeedbackSummaryPathParams:
     account_sid: str = field(default=None, metadata={'path_param': { 'field_name': 'AccountSid', 'style': 'simple', 'explode': False }})
     
-class CreateCallFeedbackSummaryRequestBodyStatusCallbackMethodEnum(str, Enum):
+class CreateCallFeedbackSummaryCreateCallFeedbackSummaryRequestStatusCallbackMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -23,12 +23,12 @@ class CreateCallFeedbackSummaryRequestBodyStatusCallbackMethodEnum(str, Enum):
 
 
 @dataclass
-class CreateCallFeedbackSummaryRequestBodyCreateCallFeedbackSummaryRequest:
+class CreateCallFeedbackSummaryCreateCallFeedbackSummaryRequest:
     end_date: datetime = field(default=None, metadata={'form': { 'field_name': 'EndDate' }})
     include_subaccounts: Optional[bool] = field(default=None, metadata={'form': { 'field_name': 'IncludeSubaccounts' }})
     start_date: datetime = field(default=None, metadata={'form': { 'field_name': 'StartDate' }})
     status_callback: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'StatusCallback' }})
-    status_callback_method: Optional[CreateCallFeedbackSummaryRequestBodyStatusCallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'StatusCallbackMethod' }})
+    status_callback_method: Optional[CreateCallFeedbackSummaryCreateCallFeedbackSummaryRequestStatusCallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'StatusCallbackMethod' }})
     
 
 @dataclass
@@ -40,7 +40,7 @@ class CreateCallFeedbackSummarySecurity:
 class CreateCallFeedbackSummaryRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateCallFeedbackSummaryPathParams = field(default=None)
-    request: Optional[CreateCallFeedbackSummaryRequestBodyCreateCallFeedbackSummaryRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateCallFeedbackSummaryCreateCallFeedbackSummaryRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateCallFeedbackSummarySecurity = field(default=None)
     
 

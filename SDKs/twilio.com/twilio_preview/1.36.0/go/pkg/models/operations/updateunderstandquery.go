@@ -13,7 +13,7 @@ type UpdateUnderstandQueryPathParams struct {
 	Sid          string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
-type UpdateUnderstandQueryRequestBodyUpdateUnderstandQueryRequest struct {
+type UpdateUnderstandQueryUpdateUnderstandQueryRequest struct {
 	SampleSid *string `form:"name=SampleSid"`
 	Status    *string `form:"name=Status"`
 }
@@ -25,7 +25,7 @@ type UpdateUnderstandQuerySecurity struct {
 type UpdateUnderstandQueryRequest struct {
 	ServerURL  *string
 	PathParams UpdateUnderstandQueryPathParams
-	Request    *UpdateUnderstandQueryRequestBodyUpdateUnderstandQueryRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateUnderstandQueryUpdateUnderstandQueryRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateUnderstandQuerySecurity
 }
 

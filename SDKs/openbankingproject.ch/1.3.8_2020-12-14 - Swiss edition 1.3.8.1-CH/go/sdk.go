@@ -2594,19 +2594,19 @@ func (s *SDK) GetPaymentInformation(ctx context.Context, request operations.GetP
 
 			res.GetPaymentInformation200ApplicationJSONOneOf = out
 		case utils.MatchContentType(contentType, `application/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `multipart/form-data`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 400:
 		res.Headers = httpRes.Header
@@ -3301,7 +3301,8 @@ func (s *SDK) GetPaymentInitiationStatus(ctx context.Context, request operations
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			out := string(data)
+			res.PaymentInitiationStatusResponse200XML = &out
 		}
 	case httpRes.StatusCode == 400:
 		res.Headers = httpRes.Header
@@ -4369,19 +4370,19 @@ func (s *SDK) GetTransactionList(ctx context.Context, request operations.GetTran
 
 			res.TransactionsResponse200JSON = out
 		case utils.MatchContentType(contentType, `application/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `text/plain`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 400:
 		res.Headers = httpRes.Header

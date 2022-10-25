@@ -39,7 +39,7 @@ class ListUsageRecordAllTimeRequest:
 
 @dataclass_json
 @dataclass
-class ListUsageRecordAllTime200ApplicationJSONListUsageRecordAllTimeResponse:
+class ListUsageRecordAllTimeListUsageRecordAllTimeResponse:
     end: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'end' }})
     first_page_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_uri' }})
     next_page_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_uri' }})
@@ -54,6 +54,6 @@ class ListUsageRecordAllTime200ApplicationJSONListUsageRecordAllTimeResponse:
 @dataclass
 class ListUsageRecordAllTimeResponse:
     content_type: str = field(default=None)
-    list_usage_record_all_time_response: Optional[ListUsageRecordAllTime200ApplicationJSONListUsageRecordAllTimeResponse] = field(default=None)
+    list_usage_record_all_time_response: Optional[ListUsageRecordAllTimeListUsageRecordAllTimeResponse] = field(default=None)
     status_code: int = field(default=None)
     

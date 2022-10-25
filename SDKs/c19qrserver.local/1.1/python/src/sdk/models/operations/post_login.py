@@ -3,7 +3,7 @@ from typing import Enum,Optional
 from dataclasses_json import dataclass_json
 from sdk.models import shared
 
-class PostLoginRequestBodySourceEnum(str, Enum):
+class PostLoginSampleSourceEnum(str, Enum):
     I_OS = "iOS"
     ANDROID = "android"
     WEB = "web"
@@ -11,15 +11,15 @@ class PostLoginRequestBodySourceEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class PostLoginRequestBodySample:
+class PostLoginSample:
     email: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'email' }})
     password: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'password' }})
-    source: Optional[PostLoginRequestBodySourceEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'source' }})
+    source: Optional[PostLoginSampleSourceEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'source' }})
     
 
 @dataclass
 class PostLoginRequest:
-    request: PostLoginRequestBodySample = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: PostLoginSample = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass

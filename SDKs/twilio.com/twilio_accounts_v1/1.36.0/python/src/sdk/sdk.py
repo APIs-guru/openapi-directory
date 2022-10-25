@@ -233,7 +233,7 @@ class SDK:
         res = operations.ListCredentialAwsResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListCredentialAws200ApplicationJSONListCredentialAwsResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListCredentialAwsListCredentialAwsResponse])
                 res.list_credential_aws_response = out
 
         return res
@@ -258,7 +258,7 @@ class SDK:
         res = operations.ListCredentialPublicKeyResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListCredentialPublicKey200ApplicationJSONListCredentialPublicKeyResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListCredentialPublicKeyListCredentialPublicKeyResponse])
                 res.list_credential_public_key_response = out
 
         return res

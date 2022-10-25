@@ -7,7 +7,7 @@ CREATE_SERVICE_SERVERS = [
 
 
 @dataclass
-class CreateServiceRequestBodyCreateServiceRequest:
+class CreateServiceCreateServiceRequest:
     friendly_name: str = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
     
 
@@ -19,7 +19,7 @@ class CreateServiceSecurity:
 @dataclass
 class CreateServiceRequest:
     server_url: Optional[str] = field(default=None)
-    request: Optional[CreateServiceRequestBodyCreateServiceRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateServiceCreateServiceRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateServiceSecurity = field(default=None)
     
 

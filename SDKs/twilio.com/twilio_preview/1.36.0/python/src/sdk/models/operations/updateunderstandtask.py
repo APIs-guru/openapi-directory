@@ -13,7 +13,7 @@ class UpdateUnderstandTaskPathParams:
     
 
 @dataclass
-class UpdateUnderstandTaskRequestBodyUpdateUnderstandTaskRequest:
+class UpdateUnderstandTaskUpdateUnderstandTaskRequest:
     actions: Optional[Any] = field(default=None, metadata={'form': { 'field_name': 'Actions' }})
     actions_url: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'ActionsUrl' }})
     friendly_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
@@ -29,7 +29,7 @@ class UpdateUnderstandTaskSecurity:
 class UpdateUnderstandTaskRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateUnderstandTaskPathParams = field(default=None)
-    request: Optional[UpdateUnderstandTaskRequestBodyUpdateUnderstandTaskRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateUnderstandTaskUpdateUnderstandTaskRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateUnderstandTaskSecurity = field(default=None)
     
 

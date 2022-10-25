@@ -3,7 +3,7 @@ from typing import Enum,Optional
 from dataclasses_json import dataclass_json
 from . import nestedmanufacturer
 
-class PlatformRPCClientLegacyRPCClientEnum(str, Enum):
+class PlatformLegacyRPCClientEnum(str, Enum):
     JUNIPER_JUNOS = "juniper-junos"
     CISCO_IOS = "cisco-ios"
     OPENGEAR = "opengear"
@@ -17,6 +17,6 @@ class Platform:
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
     napalm_args: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'napalm_args' }})
     napalm_driver: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'napalm_driver' }})
-    rpc_client: Optional[PlatformRPCClientLegacyRPCClientEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rpc_client' }})
+    rpc_client: Optional[PlatformLegacyRPCClientEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rpc_client' }})
     slug: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'slug' }})
     

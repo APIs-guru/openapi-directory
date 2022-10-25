@@ -13,7 +13,7 @@ type CreateChannelWebhookPathParams struct {
 	ServiceSid string `pathParam:"style=simple,explode=false,name=ServiceSid"`
 }
 
-type CreateChannelWebhookRequestBodyCreateChannelWebhookRequest struct {
+type CreateChannelWebhookCreateChannelWebhookRequest struct {
 	ConfigurationFilters    []string                             `form:"name=Configuration.Filters"`
 	ConfigurationFlowSid    *string                              `form:"name=Configuration.FlowSid"`
 	ConfigurationMethod     *shared.ChannelWebhookEnumMethodEnum `form:"name=Configuration.Method"`
@@ -30,7 +30,7 @@ type CreateChannelWebhookSecurity struct {
 type CreateChannelWebhookRequest struct {
 	ServerURL  *string
 	PathParams CreateChannelWebhookPathParams
-	Request    *CreateChannelWebhookRequestBodyCreateChannelWebhookRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateChannelWebhookCreateChannelWebhookRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateChannelWebhookSecurity
 }
 

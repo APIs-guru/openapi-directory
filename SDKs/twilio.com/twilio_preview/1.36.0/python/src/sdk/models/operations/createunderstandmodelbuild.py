@@ -12,7 +12,7 @@ class CreateUnderstandModelBuildPathParams:
     
 
 @dataclass
-class CreateUnderstandModelBuildRequestBodyCreateUnderstandModelBuildRequest:
+class CreateUnderstandModelBuildCreateUnderstandModelBuildRequest:
     status_callback: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'StatusCallback' }})
     unique_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'UniqueName' }})
     
@@ -26,7 +26,7 @@ class CreateUnderstandModelBuildSecurity:
 class CreateUnderstandModelBuildRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateUnderstandModelBuildPathParams = field(default=None)
-    request: Optional[CreateUnderstandModelBuildRequestBodyCreateUnderstandModelBuildRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateUnderstandModelBuildCreateUnderstandModelBuildRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateUnderstandModelBuildSecurity = field(default=None)
     
 

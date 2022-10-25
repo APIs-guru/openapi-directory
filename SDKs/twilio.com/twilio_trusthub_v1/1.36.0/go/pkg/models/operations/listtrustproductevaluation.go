@@ -27,7 +27,7 @@ type ListTrustProductEvaluationRequest struct {
 	Security    ListTrustProductEvaluationSecurity
 }
 
-type ListTrustProductEvaluation200ApplicationJSONMeta struct {
+type ListTrustProductEvaluationListTrustProductEvaluationResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -37,13 +37,13 @@ type ListTrustProductEvaluation200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListTrustProductEvaluation200ApplicationJSONListTrustProductEvaluationResponse struct {
-	Meta    *ListTrustProductEvaluation200ApplicationJSONMeta     `json:"meta,omitempty"`
-	Results []shared.TrusthubV1TrustProductTrustProductEvaluation `json:"results,omitempty"`
+type ListTrustProductEvaluationListTrustProductEvaluationResponse struct {
+	Meta    *ListTrustProductEvaluationListTrustProductEvaluationResponseMeta `json:"meta,omitempty"`
+	Results []shared.TrusthubV1TrustProductTrustProductEvaluation             `json:"results,omitempty"`
 }
 
 type ListTrustProductEvaluationResponse struct {
 	ContentType                        string
-	ListTrustProductEvaluationResponse *ListTrustProductEvaluation200ApplicationJSONListTrustProductEvaluationResponse
+	ListTrustProductEvaluationResponse *ListTrustProductEvaluationListTrustProductEvaluationResponse
 	StatusCode                         int64
 }

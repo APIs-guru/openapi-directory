@@ -12,7 +12,7 @@ type UpdateTestUserPathParams struct {
 	Sid string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
-type UpdateTestUserRequestBodyUpdateTestUserRequest struct {
+type UpdateTestUserUpdateTestUserRequest struct {
 	TestUsers []string `form:"name=TestUsers"`
 }
 
@@ -23,7 +23,7 @@ type UpdateTestUserSecurity struct {
 type UpdateTestUserRequest struct {
 	ServerURL  *string
 	PathParams UpdateTestUserPathParams
-	Request    *UpdateTestUserRequestBodyUpdateTestUserRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateTestUserUpdateTestUserRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateTestUserSecurity
 }
 

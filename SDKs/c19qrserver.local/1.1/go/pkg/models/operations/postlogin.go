@@ -4,22 +4,22 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-type PostLoginRequestBodySourceEnum string
+type PostLoginSampleSourceEnum string
 
 const (
-	PostLoginRequestBodySourceEnumIOs     PostLoginRequestBodySourceEnum = "iOS"
-	PostLoginRequestBodySourceEnumAndroid PostLoginRequestBodySourceEnum = "android"
-	PostLoginRequestBodySourceEnumWeb     PostLoginRequestBodySourceEnum = "web"
+	PostLoginSampleSourceEnumIOs     PostLoginSampleSourceEnum = "iOS"
+	PostLoginSampleSourceEnumAndroid PostLoginSampleSourceEnum = "android"
+	PostLoginSampleSourceEnumWeb     PostLoginSampleSourceEnum = "web"
 )
 
-type PostLoginRequestBodySample struct {
-	Email    *string                         `json:"email,omitempty"`
-	Password *string                         `json:"password,omitempty"`
-	Source   *PostLoginRequestBodySourceEnum `json:"source,omitempty"`
+type PostLoginSample struct {
+	Email    *string                    `json:"email,omitempty"`
+	Password *string                    `json:"password,omitempty"`
+	Source   *PostLoginSampleSourceEnum `json:"source,omitempty"`
 }
 
 type PostLoginRequest struct {
-	Request PostLoginRequestBodySample `request:"mediaType=application/json"`
+	Request PostLoginSample `request:"mediaType=application/json"`
 }
 
 type PostLoginResponse struct {

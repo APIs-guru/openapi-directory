@@ -5,7 +5,7 @@ import dateutil.parser
 from typing import Any,Enum,List,Optional
 from dataclasses_json import dataclass_json
 
-class TaxRateStatusTaxRateStatusEnum(str, Enum):
+class TaxRateTaxRateStatusEnum(str, Enum):
     ACTIVE = "active"
     INACTIVE = "inactive"
     ARCHIVED = "archived"
@@ -25,7 +25,7 @@ class TaxRate:
     original_tax_rate_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'original_tax_rate_id' }})
     report_tax_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'report_tax_type' }})
     row_version: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'row_version' }})
-    status: Optional[TaxRateStatusTaxRateStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    status: Optional[TaxRateTaxRateStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
     tax_payable_account_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tax_payable_account_id' }})
     tax_remitted_account_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tax_remitted_account_id' }})
     total_tax_rate: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total_tax_rate' }})

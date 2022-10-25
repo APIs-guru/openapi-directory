@@ -13,7 +13,7 @@ class UpdateOriginationURLPathParams:
     
 
 @dataclass
-class UpdateOriginationURLRequestBodyUpdateOriginationURLRequest:
+class UpdateOriginationURLUpdateOriginationURLRequest:
     enabled: Optional[bool] = field(default=None, metadata={'form': { 'field_name': 'Enabled' }})
     friendly_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
     priority: Optional[int] = field(default=None, metadata={'form': { 'field_name': 'Priority' }})
@@ -30,7 +30,7 @@ class UpdateOriginationURLSecurity:
 class UpdateOriginationURLRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateOriginationURLPathParams = field(default=None)
-    request: Optional[UpdateOriginationURLRequestBodyUpdateOriginationURLRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateOriginationURLUpdateOriginationURLRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateOriginationURLSecurity = field(default=None)
     
 

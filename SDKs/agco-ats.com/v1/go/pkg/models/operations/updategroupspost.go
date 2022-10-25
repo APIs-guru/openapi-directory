@@ -22,5 +22,7 @@ type UpdateGroupsPostResponse struct {
 	ContentType                              string
 	StatusCode                               int64
 	UpdateGroupsPost200ApplicationJSONString *string
+	UpdateGroupsPost200ApplicationXMLString  *string
 	UpdateGroupsPost200TextJSONString        *string
+	UpdateGroupsPost200TextXMLString         *string
 }

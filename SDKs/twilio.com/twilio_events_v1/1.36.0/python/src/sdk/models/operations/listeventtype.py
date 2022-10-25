@@ -27,7 +27,7 @@ class ListEventTypeRequest:
 
 @dataclass_json
 @dataclass
-class ListEventType200ApplicationJSONMeta:
+class ListEventTypeListEventTypeResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -39,14 +39,14 @@ class ListEventType200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListEventType200ApplicationJSONListEventTypeResponse:
-    meta: Optional[ListEventType200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+class ListEventTypeListEventTypeResponse:
+    meta: Optional[ListEventTypeListEventTypeResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     types: Optional[List[shared.EventsV1EventType]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'types' }})
     
 
 @dataclass
 class ListEventTypeResponse:
     content_type: str = field(default=None)
-    list_event_type_response: Optional[ListEventType200ApplicationJSONListEventTypeResponse] = field(default=None)
+    list_event_type_response: Optional[ListEventTypeListEventTypeResponse] = field(default=None)
     status_code: int = field(default=None)
     

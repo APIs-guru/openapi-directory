@@ -27,7 +27,7 @@ class ListConfigurationAddressRequest:
 
 @dataclass_json
 @dataclass
-class ListConfigurationAddress200ApplicationJSONMeta:
+class ListConfigurationAddressListConfigurationAddressResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -39,14 +39,14 @@ class ListConfigurationAddress200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListConfigurationAddress200ApplicationJSONListConfigurationAddressResponse:
+class ListConfigurationAddressListConfigurationAddressResponse:
     address_configurations: Optional[List[shared.ConversationsV1ConfigurationAddress]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'address_configurations' }})
-    meta: Optional[ListConfigurationAddress200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+    meta: Optional[ListConfigurationAddressListConfigurationAddressResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     
 
 @dataclass
 class ListConfigurationAddressResponse:
     content_type: str = field(default=None)
-    list_configuration_address_response: Optional[ListConfigurationAddress200ApplicationJSONListConfigurationAddressResponse] = field(default=None)
+    list_configuration_address_response: Optional[ListConfigurationAddressListConfigurationAddressResponse] = field(default=None)
     status_code: int = field(default=None)
     

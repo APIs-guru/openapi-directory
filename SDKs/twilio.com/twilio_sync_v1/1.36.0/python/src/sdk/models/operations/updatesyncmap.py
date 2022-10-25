@@ -13,7 +13,7 @@ class UpdateSyncMapPathParams:
     
 
 @dataclass
-class UpdateSyncMapRequestBodyUpdateSyncMapRequest:
+class UpdateSyncMapUpdateSyncMapRequest:
     collection_ttl: Optional[int] = field(default=None, metadata={'form': { 'field_name': 'CollectionTtl' }})
     ttl: Optional[int] = field(default=None, metadata={'form': { 'field_name': 'Ttl' }})
     
@@ -27,7 +27,7 @@ class UpdateSyncMapSecurity:
 class UpdateSyncMapRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateSyncMapPathParams = field(default=None)
-    request: Optional[UpdateSyncMapRequestBodyUpdateSyncMapRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateSyncMapUpdateSyncMapRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateSyncMapSecurity = field(default=None)
     
 

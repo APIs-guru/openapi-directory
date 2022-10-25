@@ -12,7 +12,7 @@ type CreateTaskChannelPathParams struct {
 	WorkspaceSid string `pathParam:"style=simple,explode=false,name=WorkspaceSid"`
 }
 
-type CreateTaskChannelRequestBodyCreateTaskChannelRequest struct {
+type CreateTaskChannelCreateTaskChannelRequest struct {
 	ChannelOptimizedRouting *bool  `form:"name=ChannelOptimizedRouting"`
 	FriendlyName            string `form:"name=FriendlyName"`
 	UniqueName              string `form:"name=UniqueName"`
@@ -25,7 +25,7 @@ type CreateTaskChannelSecurity struct {
 type CreateTaskChannelRequest struct {
 	ServerURL  *string
 	PathParams CreateTaskChannelPathParams
-	Request    *CreateTaskChannelRequestBodyCreateTaskChannelRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateTaskChannelCreateTaskChannelRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateTaskChannelSecurity
 }
 

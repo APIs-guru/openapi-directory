@@ -12,7 +12,7 @@ class UpdateMarketplaceInstalledAddOnPathParams:
     
 
 @dataclass
-class UpdateMarketplaceInstalledAddOnRequestBodyUpdateMarketplaceInstalledAddOnRequest:
+class UpdateMarketplaceInstalledAddOnUpdateMarketplaceInstalledAddOnRequest:
     configuration: Optional[Any] = field(default=None, metadata={'form': { 'field_name': 'Configuration' }})
     unique_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'UniqueName' }})
     
@@ -26,7 +26,7 @@ class UpdateMarketplaceInstalledAddOnSecurity:
 class UpdateMarketplaceInstalledAddOnRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateMarketplaceInstalledAddOnPathParams = field(default=None)
-    request: Optional[UpdateMarketplaceInstalledAddOnRequestBodyUpdateMarketplaceInstalledAddOnRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateMarketplaceInstalledAddOnUpdateMarketplaceInstalledAddOnRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateMarketplaceInstalledAddOnSecurity = field(default=None)
     
 

@@ -441,7 +441,8 @@ func (s *SDK) DemoV2LocationsTilesViewerGet(ctx context.Context) (*operations.De
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			out := string(data)
+			res.DemoV2LocationsTilesViewerGet200TextHTMLString = &out
 		}
 	}
 

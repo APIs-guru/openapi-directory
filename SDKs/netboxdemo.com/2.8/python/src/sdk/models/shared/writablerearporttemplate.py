@@ -2,7 +2,7 @@ from dataclasses import dataclass, field
 from typing import Enum,Optional
 from dataclasses_json import dataclass_json
 
-class WritableRearPortTemplateTypeTypeEnum(str, Enum):
+class WritableRearPortTemplateTypeEnum(str, Enum):
     EIGHTP8C = "8p8c"
     ONE_HUNDRED_AND_TEN_PUNCH = "110-punch"
     BNC = "bnc"
@@ -26,5 +26,5 @@ class WritableRearPortTemplate:
     id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
     positions: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'positions' }})
-    type: WritableRearPortTemplateTypeTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    type: WritableRearPortTemplateTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     

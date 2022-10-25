@@ -12,7 +12,7 @@ type GetListofApproversForBatchRequest struct {
 	PathParams GetListofApproversForBatchPathParams
 }
 
-type GetListofApproversForBatch200ApplicationJSONApprovals struct {
+type GetListofApproversForBatchBatchApproversApprovals struct {
 	EmailAddress *string    `json:"emailAddress,omitempty"`
 	FirstName    *string    `json:"firstName,omitempty"`
 	LastName     *string    `json:"lastName,omitempty"`
@@ -22,12 +22,12 @@ type GetListofApproversForBatch200ApplicationJSONApprovals struct {
 	UserID       *int64     `json:"userId,omitempty"`
 }
 
-type GetListofApproversForBatch200ApplicationJSONBatchApprovers struct {
-	Approvals []GetListofApproversForBatch200ApplicationJSONApprovals `json:"approvals,omitempty"`
+type GetListofApproversForBatchBatchApprovers struct {
+	Approvals []GetListofApproversForBatchBatchApproversApprovals `json:"approvals,omitempty"`
 }
 
 type GetListofApproversForBatchResponse struct {
-	BatchApprovers *GetListofApproversForBatch200ApplicationJSONBatchApprovers
+	BatchApprovers *GetListofApproversForBatchBatchApprovers
 	ContentType    string
 	StatusCode     int64
 }

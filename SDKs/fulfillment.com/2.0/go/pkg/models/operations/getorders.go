@@ -24,54 +24,54 @@ type GetOrdersRequest struct {
 	Security    GetOrdersSecurity
 }
 
-type GetOrders404ApplicationJSONErrorStandardV2 struct {
+type GetOrdersErrorStandardV2 struct {
 	Message *string `json:"message,omitempty"`
 }
 
-type GetOrders200ApplicationJSON2CurrentStatusStatusActionRequiredBy struct {
+type GetOrders200ApplicationJSONOrderResponseV2StatusEventV2StatusTypeV2ActionRequiredBy struct {
 	ID   *int64  `json:"id,omitempty"`
 	Name *string `json:"name,omitempty"`
 }
 
-type GetOrders200ApplicationJSON2CurrentStatusStatusStage struct {
+type GetOrders200ApplicationJSONOrderResponseV2StatusEventV2StatusTypeV2Stage struct {
 	Code *string `json:"code,omitempty"`
 	Name *string `json:"name,omitempty"`
 }
 
-type GetOrders200ApplicationJSON2CurrentStatusStatusState struct {
+type GetOrders200ApplicationJSONOrderResponseV2StatusEventV2StatusTypeV2State struct {
 	Code *string `json:"code,omitempty"`
 	Name *string `json:"name,omitempty"`
 }
 
-type GetOrders200ApplicationJSON2CurrentStatusStatusStatusTypeV2 struct {
-	ActionRequiredBy *GetOrders200ApplicationJSON2CurrentStatusStatusActionRequiredBy `json:"actionRequiredBy,omitempty"`
-	Code             string                                                           `json:"code"`
-	Detail           *string                                                          `json:"detail,omitempty"`
-	DetailCode       string                                                           `json:"detailCode"`
-	ID               *int64                                                           `json:"id,omitempty"`
-	IsClosed         *bool                                                            `json:"isClosed,omitempty"`
-	Name             *string                                                          `json:"name,omitempty"`
-	Reason           *string                                                          `json:"reason,omitempty"`
-	Stage            GetOrders200ApplicationJSON2CurrentStatusStatusStage             `json:"stage"`
-	State            GetOrders200ApplicationJSON2CurrentStatusStatusState             `json:"state"`
+type GetOrders200ApplicationJSONOrderResponseV2StatusEventV2StatusTypeV2 struct {
+	ActionRequiredBy *GetOrders200ApplicationJSONOrderResponseV2StatusEventV2StatusTypeV2ActionRequiredBy `json:"actionRequiredBy,omitempty"`
+	Code             string                                                                               `json:"code"`
+	Detail           *string                                                                              `json:"detail,omitempty"`
+	DetailCode       string                                                                               `json:"detailCode"`
+	ID               *int64                                                                               `json:"id,omitempty"`
+	IsClosed         *bool                                                                                `json:"isClosed,omitempty"`
+	Name             *string                                                                              `json:"name,omitempty"`
+	Reason           *string                                                                              `json:"reason,omitempty"`
+	Stage            GetOrders200ApplicationJSONOrderResponseV2StatusEventV2StatusTypeV2Stage             `json:"stage"`
+	State            GetOrders200ApplicationJSONOrderResponseV2StatusEventV2StatusTypeV2State             `json:"state"`
 }
 
-type GetOrders200ApplicationJSON2CurrentStatusStatusEventV2 struct {
+type GetOrders200ApplicationJSONOrderResponseV2StatusEventV2 struct {
 	CreatedBy *shared.OnereturnsGetResponses200ContentApplication1jsonSchemaPropertiesDataItemsPropertiesUpdatedBy `json:"createdBy,omitempty"`
 	Date      *time.Time                                                                                           `json:"date,omitempty"`
 	ID        int64                                                                                                `json:"id"`
 	Reason    *string                                                                                              `json:"reason,omitempty"`
-	Status    *GetOrders200ApplicationJSON2CurrentStatusStatusStatusTypeV2                                         `json:"status,omitempty"`
+	Status    *GetOrders200ApplicationJSONOrderResponseV2StatusEventV2StatusTypeV2                                 `json:"status,omitempty"`
 }
 
-type GetOrders200ApplicationJSON2LineItemsInventoryDetails struct {
+type GetOrders200ApplicationJSONOrderResponseV2LineItemsResponseV2InventoryDetails struct {
 	ExpirationDate *time.Time `json:"expirationDate,omitempty"`
 	LotNum         *string    `json:"lotNum,omitempty"`
 	Quantity       *int64     `json:"quantity,omitempty"`
 	SerialNum      *string    `json:"serialNum,omitempty"`
 }
 
-type GetOrders200ApplicationJSON2LineItemsLineDetails struct {
+type GetOrders200ApplicationJSONOrderResponseV2LineItemsResponseV2LineDetails struct {
 	Description   *string `json:"description,omitempty"`
 	ExternalSku   *string `json:"externalSku,omitempty"`
 	ID            *int64  `json:"id,omitempty"`
@@ -79,32 +79,32 @@ type GetOrders200ApplicationJSON2LineItemsLineDetails struct {
 	TotalQuantity *int64  `json:"totalQuantity,omitempty"`
 }
 
-type GetOrders200ApplicationJSON2LineItemsRequestedSkuData struct {
+type GetOrders200ApplicationJSONOrderResponseV2LineItemsResponseV2RequestedSkuData struct {
 	DeclaredValue *string `json:"declaredValue,omitempty"`
 	ID            *int64  `json:"id,omitempty"`
 	Quantity      *int64  `json:"quantity,omitempty"`
 	Sku           *string `json:"sku,omitempty"`
 }
 
-type GetOrders200ApplicationJSON2LineItemsLineItemsResponseV2 struct {
-	ID               *int64                                                  `json:"id,omitempty"`
-	InventoryDetails []GetOrders200ApplicationJSON2LineItemsInventoryDetails `json:"inventoryDetails,omitempty"`
-	LineDetails      *GetOrders200ApplicationJSON2LineItemsLineDetails       `json:"lineDetails,omitempty"`
-	RequestedSkuData *GetOrders200ApplicationJSON2LineItemsRequestedSkuData  `json:"requestedSkuData,omitempty"`
+type GetOrders200ApplicationJSONOrderResponseV2LineItemsResponseV2 struct {
+	ID               *int64                                                                          `json:"id,omitempty"`
+	InventoryDetails []GetOrders200ApplicationJSONOrderResponseV2LineItemsResponseV2InventoryDetails `json:"inventoryDetails,omitempty"`
+	LineDetails      *GetOrders200ApplicationJSONOrderResponseV2LineItemsResponseV2LineDetails       `json:"lineDetails,omitempty"`
+	RequestedSkuData *GetOrders200ApplicationJSONOrderResponseV2LineItemsResponseV2RequestedSkuData  `json:"requestedSkuData,omitempty"`
 }
 
-type GetOrders200ApplicationJSON2MerchantMerchantV2 struct {
+type GetOrders200ApplicationJSONOrderResponseV2MerchantV2 struct {
 	ID   int64  `json:"id"`
 	Name string `json:"name"`
 }
 
-type GetOrders200ApplicationJSON2OriginalConsigneeIsoIsoCountryV2 struct {
+type GetOrders200ApplicationJSONOrderResponseV2ConsigneeV2IsoCountryV2 struct {
 	ID   *int64  `json:"id,omitempty"`
 	Iso2 *string `json:"iso2,omitempty"`
 	Name *string `json:"name,omitempty"`
 }
 
-type GetOrders200ApplicationJSON2OriginalConsigneeConsigneeV2 struct {
+type GetOrders200ApplicationJSONOrderResponseV2ConsigneeV2 struct {
 	Address1        string                                                                                               `json:"address1"`
 	Address2        *string                                                                                              `json:"address2,omitempty"`
 	AddressLocality string                                                                                               `json:"addressLocality"`
@@ -114,7 +114,7 @@ type GetOrders200ApplicationJSON2OriginalConsigneeConsigneeV2 struct {
 	Email           *string                                                                                              `json:"email,omitempty"`
 	FirstName       string                                                                                               `json:"firstName"`
 	ID              int64                                                                                                `json:"id"`
-	Iso             *GetOrders200ApplicationJSON2OriginalConsigneeIsoIsoCountryV2                                        `json:"iso,omitempty"`
+	Iso             *GetOrders200ApplicationJSONOrderResponseV2ConsigneeV2IsoCountryV2                                   `json:"iso,omitempty"`
 	LastName        string                                                                                               `json:"lastName"`
 	Phone           *string                                                                                              `json:"phone,omitempty"`
 	PostalCode      string                                                                                               `json:"postalCode"`
@@ -122,11 +122,11 @@ type GetOrders200ApplicationJSON2OriginalConsigneeConsigneeV2 struct {
 	UpdatedBy       *shared.OnereturnsGetResponses200ContentApplication1jsonSchemaPropertiesDataItemsPropertiesUpdatedBy `json:"updatedBy,omitempty"`
 }
 
-type GetOrders200ApplicationJSON2ParentOrder struct {
+type GetOrders200ApplicationJSONOrderResponseV2ParentOrder struct {
 	ID *int64 `json:"id,omitempty"`
 }
 
-type GetOrders200ApplicationJSON2TrackingNumbersCarrierCarrierHydratedV2 struct {
+type GetOrders200ApplicationJSONOrderResponseV2TrackingNumbersCarrierHydratedV2 struct {
 	CanReprintPostage  *bool  `json:"canReprintPostage,omitempty"`
 	Enabled            *bool  `json:"enabled,omitempty"`
 	ID                 int64  `json:"id"`
@@ -137,36 +137,36 @@ type GetOrders200ApplicationJSON2TrackingNumbersCarrierCarrierHydratedV2 struct 
 	Symbol             string `json:"symbol"`
 }
 
-type GetOrders200ApplicationJSON2TrackingNumbers struct {
-	Carrier *GetOrders200ApplicationJSON2TrackingNumbersCarrierCarrierHydratedV2 `json:"carrier,omitempty"`
+type GetOrders200ApplicationJSONOrderResponseV2TrackingNumbers struct {
+	Carrier *GetOrders200ApplicationJSONOrderResponseV2TrackingNumbersCarrierHydratedV2 `json:"carrier,omitempty"`
 }
 
-type GetOrders200ApplicationJSON2WarehouseWarehouseV2 struct {
+type GetOrders200ApplicationJSONOrderResponseV2WarehouseV2 struct {
 	ID int64 `json:"id"`
 }
 
-type GetOrders200ApplicationJSON2 struct {
-	CurrentStatus          GetOrders200ApplicationJSON2CurrentStatusStatusEventV2                                   `json:"currentStatus"`
+type GetOrders200ApplicationJSONOrderResponseV2 struct {
+	CurrentStatus          GetOrders200ApplicationJSONOrderResponseV2StatusEventV2                                  `json:"currentStatus"`
 	DepartDate             *time.Time                                                                               `json:"departDate,omitempty"`
 	DispatchDate           *time.Time                                                                               `json:"dispatchDate,omitempty"`
 	ID                     int64                                                                                    `json:"id"`
 	Integrator             *string                                                                                  `json:"integrator,omitempty"`
-	LineItems              []GetOrders200ApplicationJSON2LineItemsLineItemsResponseV2                               `json:"lineItems,omitempty"`
-	Merchant               GetOrders200ApplicationJSON2MerchantMerchantV2                                           `json:"merchant"`
+	LineItems              []GetOrders200ApplicationJSONOrderResponseV2LineItemsResponseV2                          `json:"lineItems,omitempty"`
+	Merchant               GetOrders200ApplicationJSONOrderResponseV2MerchantV2                                     `json:"merchant"`
 	MerchantOrderID        string                                                                                   `json:"merchantOrderId"`
 	MerchantShippingMethod string                                                                                   `json:"merchantShippingMethod"`
-	OriginalConsignee      GetOrders200ApplicationJSON2OriginalConsigneeConsigneeV2                                 `json:"originalConsignee"`
-	ParentOrder            *GetOrders200ApplicationJSON2ParentOrder                                                 `json:"parentOrder,omitempty"`
+	OriginalConsignee      GetOrders200ApplicationJSONOrderResponseV2ConsigneeV2                                    `json:"originalConsignee"`
+	ParentOrder            *GetOrders200ApplicationJSONOrderResponseV2ParentOrder                                   `json:"parentOrder,omitempty"`
 	PurchaseOrderNum       *string                                                                                  `json:"purchaseOrderNum,omitempty"`
 	RecordedOn             time.Time                                                                                `json:"recordedOn"`
-	TrackingNumbers        []GetOrders200ApplicationJSON2TrackingNumbers                                            `json:"trackingNumbers,omitempty"`
+	TrackingNumbers        []GetOrders200ApplicationJSONOrderResponseV2TrackingNumbers                              `json:"trackingNumbers,omitempty"`
 	ValidatedConsignee     shared.OneordersPostResponses201ContentApplication1jsonSchemaPropertiesOriginalConsignee `json:"validatedConsignee"`
-	Warehouse              *GetOrders200ApplicationJSON2WarehouseWarehouseV2                                        `json:"warehouse,omitempty"`
+	Warehouse              *GetOrders200ApplicationJSONOrderResponseV2WarehouseV2                                   `json:"warehouse,omitempty"`
 }
 
 type GetOrdersResponse struct {
 	ContentType          string
-	ErrorStandardV2      *GetOrders404ApplicationJSONErrorStandardV2
+	ErrorStandardV2      *GetOrdersErrorStandardV2
 	OrderResponseOneOfV2 *interface{}
 	StatusCode           int64
 }

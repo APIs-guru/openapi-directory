@@ -44,7 +44,7 @@ class ListCallSummariesRequest:
 
 @dataclass_json
 @dataclass
-class ListCallSummaries200ApplicationJSONMeta:
+class ListCallSummariesListCallSummariesResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -56,14 +56,14 @@ class ListCallSummaries200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListCallSummaries200ApplicationJSONListCallSummariesResponse:
+class ListCallSummariesListCallSummariesResponse:
     call_summaries: Optional[List[shared.InsightsV1CallSummaries]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'call_summaries' }})
-    meta: Optional[ListCallSummaries200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+    meta: Optional[ListCallSummariesListCallSummariesResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     
 
 @dataclass
 class ListCallSummariesResponse:
     content_type: str = field(default=None)
-    list_call_summaries_response: Optional[ListCallSummaries200ApplicationJSONListCallSummariesResponse] = field(default=None)
+    list_call_summaries_response: Optional[ListCallSummariesListCallSummariesResponse] = field(default=None)
     status_code: int = field(default=None)
     

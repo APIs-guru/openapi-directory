@@ -27,7 +27,7 @@ type ListCustomerProfileEvaluationRequest struct {
 	Security    ListCustomerProfileEvaluationSecurity
 }
 
-type ListCustomerProfileEvaluation200ApplicationJSONMeta struct {
+type ListCustomerProfileEvaluationListCustomerProfileEvaluationResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -37,13 +37,13 @@ type ListCustomerProfileEvaluation200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListCustomerProfileEvaluation200ApplicationJSONListCustomerProfileEvaluationResponse struct {
-	Meta    *ListCustomerProfileEvaluation200ApplicationJSONMeta        `json:"meta,omitempty"`
-	Results []shared.TrusthubV1CustomerProfileCustomerProfileEvaluation `json:"results,omitempty"`
+type ListCustomerProfileEvaluationListCustomerProfileEvaluationResponse struct {
+	Meta    *ListCustomerProfileEvaluationListCustomerProfileEvaluationResponseMeta `json:"meta,omitempty"`
+	Results []shared.TrusthubV1CustomerProfileCustomerProfileEvaluation             `json:"results,omitempty"`
 }
 
 type ListCustomerProfileEvaluationResponse struct {
 	ContentType                           string
-	ListCustomerProfileEvaluationResponse *ListCustomerProfileEvaluation200ApplicationJSONListCustomerProfileEvaluationResponse
+	ListCustomerProfileEvaluationResponse *ListCustomerProfileEvaluationListCustomerProfileEvaluationResponse
 	StatusCode                            int64
 }

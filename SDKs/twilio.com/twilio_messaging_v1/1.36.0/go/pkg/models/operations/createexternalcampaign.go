@@ -8,7 +8,7 @@ var CreateExternalCampaignServers = []string{
 	"https://messaging.twilio.com",
 }
 
-type CreateExternalCampaignRequestBodyCreateExternalCampaignRequest struct {
+type CreateExternalCampaignCreateExternalCampaignRequest struct {
 	CampaignID          string `form:"name=CampaignId"`
 	MessagingServiceSid string `form:"name=MessagingServiceSid"`
 }
@@ -19,7 +19,7 @@ type CreateExternalCampaignSecurity struct {
 
 type CreateExternalCampaignRequest struct {
 	ServerURL *string
-	Request   *CreateExternalCampaignRequestBodyCreateExternalCampaignRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request   *CreateExternalCampaignCreateExternalCampaignRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security  CreateExternalCampaignSecurity
 }
 

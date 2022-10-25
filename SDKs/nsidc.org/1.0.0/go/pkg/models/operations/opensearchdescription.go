@@ -1,7 +1,7 @@
 package operations
 
 type OpensearchDescriptionResponse struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+	ContentType                                                           string
+	StatusCode                                                            int64
+	OpensearchDescription200ApplicationOpensearchdescriptionPlusXMLString *string
 }

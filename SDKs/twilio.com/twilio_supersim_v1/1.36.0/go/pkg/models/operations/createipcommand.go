@@ -8,24 +8,24 @@ var CreateIPCommandServers = []string{
 	"https://supersim.twilio.com",
 }
 
-type CreateIPCommandRequestBodyCallbackMethodEnum string
+type CreateIPCommandCreateIPCommandRequestCallbackMethodEnum string
 
 const (
-	CreateIPCommandRequestBodyCallbackMethodEnumHead   CreateIPCommandRequestBodyCallbackMethodEnum = "HEAD"
-	CreateIPCommandRequestBodyCallbackMethodEnumGet    CreateIPCommandRequestBodyCallbackMethodEnum = "GET"
-	CreateIPCommandRequestBodyCallbackMethodEnumPost   CreateIPCommandRequestBodyCallbackMethodEnum = "POST"
-	CreateIPCommandRequestBodyCallbackMethodEnumPatch  CreateIPCommandRequestBodyCallbackMethodEnum = "PATCH"
-	CreateIPCommandRequestBodyCallbackMethodEnumPut    CreateIPCommandRequestBodyCallbackMethodEnum = "PUT"
-	CreateIPCommandRequestBodyCallbackMethodEnumDelete CreateIPCommandRequestBodyCallbackMethodEnum = "DELETE"
+	CreateIPCommandCreateIPCommandRequestCallbackMethodEnumHead   CreateIPCommandCreateIPCommandRequestCallbackMethodEnum = "HEAD"
+	CreateIPCommandCreateIPCommandRequestCallbackMethodEnumGet    CreateIPCommandCreateIPCommandRequestCallbackMethodEnum = "GET"
+	CreateIPCommandCreateIPCommandRequestCallbackMethodEnumPost   CreateIPCommandCreateIPCommandRequestCallbackMethodEnum = "POST"
+	CreateIPCommandCreateIPCommandRequestCallbackMethodEnumPatch  CreateIPCommandCreateIPCommandRequestCallbackMethodEnum = "PATCH"
+	CreateIPCommandCreateIPCommandRequestCallbackMethodEnumPut    CreateIPCommandCreateIPCommandRequestCallbackMethodEnum = "PUT"
+	CreateIPCommandCreateIPCommandRequestCallbackMethodEnumDelete CreateIPCommandCreateIPCommandRequestCallbackMethodEnum = "DELETE"
 )
 
-type CreateIPCommandRequestBodyCreateIPCommandRequest struct {
-	CallbackMethod *CreateIPCommandRequestBodyCallbackMethodEnum `form:"name=CallbackMethod"`
-	CallbackURL    *string                                       `form:"name=CallbackUrl"`
-	DevicePort     int64                                         `form:"name=DevicePort"`
-	Payload        string                                        `form:"name=Payload"`
-	PayloadType    *shared.IPCommandEnumPayloadTypeEnum          `form:"name=PayloadType"`
-	Sim            string                                        `form:"name=Sim"`
+type CreateIPCommandCreateIPCommandRequest struct {
+	CallbackMethod *CreateIPCommandCreateIPCommandRequestCallbackMethodEnum `form:"name=CallbackMethod"`
+	CallbackURL    *string                                                  `form:"name=CallbackUrl"`
+	DevicePort     int64                                                    `form:"name=DevicePort"`
+	Payload        string                                                   `form:"name=Payload"`
+	PayloadType    *shared.IPCommandEnumPayloadTypeEnum                     `form:"name=PayloadType"`
+	Sim            string                                                   `form:"name=Sim"`
 }
 
 type CreateIPCommandSecurity struct {
@@ -34,7 +34,7 @@ type CreateIPCommandSecurity struct {
 
 type CreateIPCommandRequest struct {
 	ServerURL *string
-	Request   *CreateIPCommandRequestBodyCreateIPCommandRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request   *CreateIPCommandCreateIPCommandRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security  CreateIPCommandSecurity
 }
 

@@ -29,7 +29,7 @@ class ListEsimProfileRequest:
 
 @dataclass_json
 @dataclass
-class ListEsimProfile200ApplicationJSONMeta:
+class ListEsimProfileListEsimProfileResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -41,14 +41,14 @@ class ListEsimProfile200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListEsimProfile200ApplicationJSONListEsimProfileResponse:
+class ListEsimProfileListEsimProfileResponse:
     esim_profiles: Optional[List[shared.SupersimV1EsimProfile]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'esim_profiles' }})
-    meta: Optional[ListEsimProfile200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+    meta: Optional[ListEsimProfileListEsimProfileResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     
 
 @dataclass
 class ListEsimProfileResponse:
     content_type: str = field(default=None)
-    list_esim_profile_response: Optional[ListEsimProfile200ApplicationJSONListEsimProfileResponse] = field(default=None)
+    list_esim_profile_response: Optional[ListEsimProfileListEsimProfileResponse] = field(default=None)
     status_code: int = field(default=None)
     

@@ -17,7 +17,7 @@ type DeleteFolderRequest struct {
 	Security   DeleteFolderSecurity
 }
 
-type DeleteFolder200ApplicationJSONFolder struct {
+type DeleteFolderFolder struct {
 	ID             *string `json:"id,omitempty"`
 	Name           *string `json:"name,omitempty"`
 	ParentFolderID *string `json:"parent_folder_id,omitempty"`
@@ -29,5 +29,5 @@ type DeleteFolderResponse struct {
 	StatusCode          int64
 	AuthenticationError *shared.AuthenticationError
 	Error               *shared.Error
-	Folder              *DeleteFolder200ApplicationJSONFolder
+	Folder              *DeleteFolderFolder
 }

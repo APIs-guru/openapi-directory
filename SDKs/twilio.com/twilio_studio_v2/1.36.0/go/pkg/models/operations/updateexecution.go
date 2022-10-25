@@ -13,7 +13,7 @@ type UpdateExecutionPathParams struct {
 	Sid     string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
-type UpdateExecutionRequestBodyUpdateExecutionRequest struct {
+type UpdateExecutionUpdateExecutionRequest struct {
 	Status shared.ExecutionEnumStatusEnum `form:"name=Status"`
 }
 
@@ -24,7 +24,7 @@ type UpdateExecutionSecurity struct {
 type UpdateExecutionRequest struct {
 	ServerURL  *string
 	PathParams UpdateExecutionPathParams
-	Request    *UpdateExecutionRequestBodyUpdateExecutionRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateExecutionUpdateExecutionRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateExecutionSecurity
 }
 

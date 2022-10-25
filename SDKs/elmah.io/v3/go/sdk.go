@@ -105,12 +105,12 @@ func (s *SDK) DeploymentsCreate(ctx context.Context, request operations.Deployme
 
 			res.CreateDeploymentResult = out
 		case utils.MatchContentType(contentType, `text/plain`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 400:
 	case httpRes.StatusCode == 401:
@@ -198,12 +198,12 @@ func (s *SDK) DeploymentsGet(ctx context.Context, request operations.Deployments
 
 			res.Deployment = out
 		case utils.MatchContentType(contentType, `text/plain`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 400:
 	case httpRes.StatusCode == 401:
@@ -255,12 +255,12 @@ func (s *SDK) DeploymentsGetAll(ctx context.Context) (*operations.DeploymentsGet
 
 			res.Deployments = out
 		case utils.MatchContentType(contentType, `text/plain`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 401:
 	case httpRes.StatusCode == 402:
@@ -358,12 +358,12 @@ func (s *SDK) LogsCreate(ctx context.Context, request operations.LogsCreateReque
 
 			res.CreateLogResult = out
 		case utils.MatchContentType(contentType, `text/plain`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 400:
 	case httpRes.StatusCode == 401:
@@ -483,12 +483,12 @@ func (s *SDK) LogsGet(ctx context.Context, request operations.LogsGetRequest) (*
 
 			res.Log = out
 		case utils.MatchContentType(contentType, `text/plain`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 401:
 	case httpRes.StatusCode == 402:
@@ -540,12 +540,12 @@ func (s *SDK) LogsGetAll(ctx context.Context) (*operations.LogsGetAllResponse, e
 
 			res.Logs = out
 		case utils.MatchContentType(contentType, `text/plain`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 401:
 	case httpRes.StatusCode == 402:
@@ -602,12 +602,12 @@ func (s *SDK) MessagesCreate(ctx context.Context, request operations.MessagesCre
 
 			res.CreateMessageResult = out
 		case utils.MatchContentType(contentType, `text/plain`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 201:
 		switch {
@@ -626,12 +626,12 @@ func (s *SDK) MessagesCreate(ctx context.Context, request operations.MessagesCre
 
 			res.CreateMessageResult = out
 		case utils.MatchContentType(contentType, `text/plain`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 400:
 	case httpRes.StatusCode == 401:
@@ -691,12 +691,12 @@ func (s *SDK) MessagesCreateBulk(ctx context.Context, request operations.Message
 
 			res.CreateBulkMessageResults = out
 		case utils.MatchContentType(contentType, `text/plain`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 400:
 	case httpRes.StatusCode == 401:
@@ -862,12 +862,12 @@ func (s *SDK) MessagesGet(ctx context.Context, request operations.MessagesGetReq
 
 			res.Message = out
 		case utils.MatchContentType(contentType, `text/plain`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 400:
 	case httpRes.StatusCode == 401:
@@ -922,12 +922,12 @@ func (s *SDK) MessagesGetAll(ctx context.Context, request operations.MessagesGet
 
 			res.MessagesResult = out
 		case utils.MatchContentType(contentType, `text/plain`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 400:
 	case httpRes.StatusCode == 401:
@@ -1058,12 +1058,12 @@ func (s *SDK) UptimeChecksGetAll(ctx context.Context) (*operations.UptimeChecksG
 
 			res.UptimeChecks = out
 		case utils.MatchContentType(contentType, `text/plain`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 401:
 	case httpRes.StatusCode == 402:

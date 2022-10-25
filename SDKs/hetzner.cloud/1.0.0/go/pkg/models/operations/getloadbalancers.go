@@ -99,7 +99,7 @@ type GetLoadBalancers200ApplicationJSONLoadBalancersPublicNet struct {
 	Ipv6    GetLoadBalancers200ApplicationJSONLoadBalancersPublicNetIpv6 `json:"ipv6"`
 }
 
-type GetLoadBalancers200ApplicationJSONLoadBalancersServicesHealthCheckHTTP struct {
+type GetLoadBalancers200ApplicationJSONLoadBalancersLoadBalancerServiceLoadBalancerServiceHealthCheckHTTP struct {
 	Domain      string   `json:"domain"`
 	Path        string   `json:"path"`
 	Response    *string  `json:"response,omitempty"`
@@ -107,23 +107,23 @@ type GetLoadBalancers200ApplicationJSONLoadBalancersServicesHealthCheckHTTP stru
 	TLS         *bool    `json:"tls,omitempty"`
 }
 
-type GetLoadBalancers200ApplicationJSONLoadBalancersServicesHealthCheckProtocolEnum string
+type GetLoadBalancers200ApplicationJSONLoadBalancersLoadBalancerServiceLoadBalancerServiceHealthCheckProtocolEnum string
 
 const (
-	GetLoadBalancers200ApplicationJSONLoadBalancersServicesHealthCheckProtocolEnumTCP  GetLoadBalancers200ApplicationJSONLoadBalancersServicesHealthCheckProtocolEnum = "tcp"
-	GetLoadBalancers200ApplicationJSONLoadBalancersServicesHealthCheckProtocolEnumHTTP GetLoadBalancers200ApplicationJSONLoadBalancersServicesHealthCheckProtocolEnum = "http"
+	GetLoadBalancers200ApplicationJSONLoadBalancersLoadBalancerServiceLoadBalancerServiceHealthCheckProtocolEnumTCP  GetLoadBalancers200ApplicationJSONLoadBalancersLoadBalancerServiceLoadBalancerServiceHealthCheckProtocolEnum = "tcp"
+	GetLoadBalancers200ApplicationJSONLoadBalancersLoadBalancerServiceLoadBalancerServiceHealthCheckProtocolEnumHTTP GetLoadBalancers200ApplicationJSONLoadBalancersLoadBalancerServiceLoadBalancerServiceHealthCheckProtocolEnum = "http"
 )
 
-type GetLoadBalancers200ApplicationJSONLoadBalancersServicesHealthCheckLoadBalancerServiceHealthCheck struct {
-	HTTP     *GetLoadBalancers200ApplicationJSONLoadBalancersServicesHealthCheckHTTP        `json:"http,omitempty"`
-	Interval int64                                                                          `json:"interval"`
-	Port     int64                                                                          `json:"port"`
-	Protocol GetLoadBalancers200ApplicationJSONLoadBalancersServicesHealthCheckProtocolEnum `json:"protocol"`
-	Retries  int64                                                                          `json:"retries"`
-	Timeout  int64                                                                          `json:"timeout"`
+type GetLoadBalancers200ApplicationJSONLoadBalancersLoadBalancerServiceLoadBalancerServiceHealthCheck struct {
+	HTTP     *GetLoadBalancers200ApplicationJSONLoadBalancersLoadBalancerServiceLoadBalancerServiceHealthCheckHTTP        `json:"http,omitempty"`
+	Interval int64                                                                                                        `json:"interval"`
+	Port     int64                                                                                                        `json:"port"`
+	Protocol GetLoadBalancers200ApplicationJSONLoadBalancersLoadBalancerServiceLoadBalancerServiceHealthCheckProtocolEnum `json:"protocol"`
+	Retries  int64                                                                                                        `json:"retries"`
+	Timeout  int64                                                                                                        `json:"timeout"`
 }
 
-type GetLoadBalancers200ApplicationJSONLoadBalancersServicesHTTP struct {
+type GetLoadBalancers200ApplicationJSONLoadBalancersLoadBalancerServiceHTTP struct {
 	Certificates   []int64 `json:"certificates,omitempty"`
 	CookieLifetime int64   `json:"cookie_lifetime"`
 	CookieName     string  `json:"cookie_name"`
@@ -131,90 +131,90 @@ type GetLoadBalancers200ApplicationJSONLoadBalancersServicesHTTP struct {
 	StickySessions *bool   `json:"sticky_sessions,omitempty"`
 }
 
-type GetLoadBalancers200ApplicationJSONLoadBalancersServicesProtocolEnum string
+type GetLoadBalancers200ApplicationJSONLoadBalancersLoadBalancerServiceProtocolEnum string
 
 const (
-	GetLoadBalancers200ApplicationJSONLoadBalancersServicesProtocolEnumTCP   GetLoadBalancers200ApplicationJSONLoadBalancersServicesProtocolEnum = "tcp"
-	GetLoadBalancers200ApplicationJSONLoadBalancersServicesProtocolEnumHTTP  GetLoadBalancers200ApplicationJSONLoadBalancersServicesProtocolEnum = "http"
-	GetLoadBalancers200ApplicationJSONLoadBalancersServicesProtocolEnumHTTPS GetLoadBalancers200ApplicationJSONLoadBalancersServicesProtocolEnum = "https"
+	GetLoadBalancers200ApplicationJSONLoadBalancersLoadBalancerServiceProtocolEnumTCP   GetLoadBalancers200ApplicationJSONLoadBalancersLoadBalancerServiceProtocolEnum = "tcp"
+	GetLoadBalancers200ApplicationJSONLoadBalancersLoadBalancerServiceProtocolEnumHTTP  GetLoadBalancers200ApplicationJSONLoadBalancersLoadBalancerServiceProtocolEnum = "http"
+	GetLoadBalancers200ApplicationJSONLoadBalancersLoadBalancerServiceProtocolEnumHTTPS GetLoadBalancers200ApplicationJSONLoadBalancersLoadBalancerServiceProtocolEnum = "https"
 )
 
-type GetLoadBalancers200ApplicationJSONLoadBalancersServicesLoadBalancerService struct {
+type GetLoadBalancers200ApplicationJSONLoadBalancersLoadBalancerService struct {
 	DestinationPort int64                                                                                            `json:"destination_port"`
-	HealthCheck     GetLoadBalancers200ApplicationJSONLoadBalancersServicesHealthCheckLoadBalancerServiceHealthCheck `json:"health_check"`
-	HTTP            *GetLoadBalancers200ApplicationJSONLoadBalancersServicesHTTP                                     `json:"http,omitempty"`
+	HealthCheck     GetLoadBalancers200ApplicationJSONLoadBalancersLoadBalancerServiceLoadBalancerServiceHealthCheck `json:"health_check"`
+	HTTP            *GetLoadBalancers200ApplicationJSONLoadBalancersLoadBalancerServiceHTTP                          `json:"http,omitempty"`
 	ListenPort      int64                                                                                            `json:"listen_port"`
-	Protocol        GetLoadBalancers200ApplicationJSONLoadBalancersServicesProtocolEnum                              `json:"protocol"`
+	Protocol        GetLoadBalancers200ApplicationJSONLoadBalancersLoadBalancerServiceProtocolEnum                   `json:"protocol"`
 	Proxyprotocol   bool                                                                                             `json:"proxyprotocol"`
 }
 
-type GetLoadBalancers200ApplicationJSONLoadBalancersTargetsHealthStatus struct {
+type GetLoadBalancers200ApplicationJSONLoadBalancersLoadBalancerTargetHealthStatus struct {
 	ListenPort *int64  `json:"listen_port,omitempty"`
 	Status     *string `json:"status,omitempty"`
 }
 
-type GetLoadBalancers200ApplicationJSONLoadBalancersTargetsIP struct {
+type GetLoadBalancers200ApplicationJSONLoadBalancersLoadBalancerTargetIP struct {
 	IP string `json:"ip"`
 }
 
-type GetLoadBalancers200ApplicationJSONLoadBalancersTargetsLabelSelector struct {
+type GetLoadBalancers200ApplicationJSONLoadBalancersLoadBalancerTargetLabelSelector struct {
 	Selector string `json:"selector"`
 }
 
-type GetLoadBalancers200ApplicationJSONLoadBalancersTargetsServerLoadBalancerTargetServer struct {
+type GetLoadBalancers200ApplicationJSONLoadBalancersLoadBalancerTargetLoadBalancerTargetServer struct {
 	ID int64 `json:"id"`
 }
 
-type GetLoadBalancers200ApplicationJSONLoadBalancersTargetsTargetsHealthStatus struct {
+type GetLoadBalancers200ApplicationJSONLoadBalancersLoadBalancerTargetTargetsHealthStatus struct {
 	ListenPort *int64  `json:"listen_port,omitempty"`
 	Status     *string `json:"status,omitempty"`
 }
 
-type GetLoadBalancers200ApplicationJSONLoadBalancersTargetsTargetsServer struct {
+type GetLoadBalancers200ApplicationJSONLoadBalancersLoadBalancerTargetTargetsServer struct {
 	ID int64 `json:"id"`
 }
 
-type GetLoadBalancers200ApplicationJSONLoadBalancersTargetsTargets struct {
-	HealthStatus []GetLoadBalancers200ApplicationJSONLoadBalancersTargetsTargetsHealthStatus `json:"health_status,omitempty"`
-	Server       *GetLoadBalancers200ApplicationJSONLoadBalancersTargetsTargetsServer        `json:"server,omitempty"`
-	Type         *string                                                                     `json:"type,omitempty"`
-	UsePrivateIP *bool                                                                       `json:"use_private_ip,omitempty"`
+type GetLoadBalancers200ApplicationJSONLoadBalancersLoadBalancerTargetTargets struct {
+	HealthStatus []GetLoadBalancers200ApplicationJSONLoadBalancersLoadBalancerTargetTargetsHealthStatus `json:"health_status,omitempty"`
+	Server       *GetLoadBalancers200ApplicationJSONLoadBalancersLoadBalancerTargetTargetsServer        `json:"server,omitempty"`
+	Type         *string                                                                                `json:"type,omitempty"`
+	UsePrivateIP *bool                                                                                  `json:"use_private_ip,omitempty"`
 }
 
-type GetLoadBalancers200ApplicationJSONLoadBalancersTargetsTypeEnum string
+type GetLoadBalancers200ApplicationJSONLoadBalancersLoadBalancerTargetTypeEnum string
 
 const (
-	GetLoadBalancers200ApplicationJSONLoadBalancersTargetsTypeEnumServer        GetLoadBalancers200ApplicationJSONLoadBalancersTargetsTypeEnum = "server"
-	GetLoadBalancers200ApplicationJSONLoadBalancersTargetsTypeEnumLabelSelector GetLoadBalancers200ApplicationJSONLoadBalancersTargetsTypeEnum = "label_selector"
-	GetLoadBalancers200ApplicationJSONLoadBalancersTargetsTypeEnumIP            GetLoadBalancers200ApplicationJSONLoadBalancersTargetsTypeEnum = "ip"
+	GetLoadBalancers200ApplicationJSONLoadBalancersLoadBalancerTargetTypeEnumServer        GetLoadBalancers200ApplicationJSONLoadBalancersLoadBalancerTargetTypeEnum = "server"
+	GetLoadBalancers200ApplicationJSONLoadBalancersLoadBalancerTargetTypeEnumLabelSelector GetLoadBalancers200ApplicationJSONLoadBalancersLoadBalancerTargetTypeEnum = "label_selector"
+	GetLoadBalancers200ApplicationJSONLoadBalancersLoadBalancerTargetTypeEnumIP            GetLoadBalancers200ApplicationJSONLoadBalancersLoadBalancerTargetTypeEnum = "ip"
 )
 
-type GetLoadBalancers200ApplicationJSONLoadBalancersTargetsLoadBalancerTarget struct {
-	HealthStatus  []GetLoadBalancers200ApplicationJSONLoadBalancersTargetsHealthStatus                  `json:"health_status,omitempty"`
-	IP            *GetLoadBalancers200ApplicationJSONLoadBalancersTargetsIP                             `json:"ip,omitempty"`
-	LabelSelector *GetLoadBalancers200ApplicationJSONLoadBalancersTargetsLabelSelector                  `json:"label_selector,omitempty"`
-	Server        *GetLoadBalancers200ApplicationJSONLoadBalancersTargetsServerLoadBalancerTargetServer `json:"server,omitempty"`
-	Targets       []GetLoadBalancers200ApplicationJSONLoadBalancersTargetsTargets                       `json:"targets,omitempty"`
-	Type          GetLoadBalancers200ApplicationJSONLoadBalancersTargetsTypeEnum                        `json:"type"`
-	UsePrivateIP  *bool                                                                                 `json:"use_private_ip,omitempty"`
+type GetLoadBalancers200ApplicationJSONLoadBalancersLoadBalancerTarget struct {
+	HealthStatus  []GetLoadBalancers200ApplicationJSONLoadBalancersLoadBalancerTargetHealthStatus            `json:"health_status,omitempty"`
+	IP            *GetLoadBalancers200ApplicationJSONLoadBalancersLoadBalancerTargetIP                       `json:"ip,omitempty"`
+	LabelSelector *GetLoadBalancers200ApplicationJSONLoadBalancersLoadBalancerTargetLabelSelector            `json:"label_selector,omitempty"`
+	Server        *GetLoadBalancers200ApplicationJSONLoadBalancersLoadBalancerTargetLoadBalancerTargetServer `json:"server,omitempty"`
+	Targets       []GetLoadBalancers200ApplicationJSONLoadBalancersLoadBalancerTargetTargets                 `json:"targets,omitempty"`
+	Type          GetLoadBalancers200ApplicationJSONLoadBalancersLoadBalancerTargetTypeEnum                  `json:"type"`
+	UsePrivateIP  *bool                                                                                      `json:"use_private_ip,omitempty"`
 }
 
 type GetLoadBalancers200ApplicationJSONLoadBalancers struct {
-	Algorithm        GetLoadBalancers200ApplicationJSONLoadBalancersAlgorithm                     `json:"algorithm"`
-	Created          string                                                                       `json:"created"`
-	ID               int64                                                                        `json:"id"`
-	IncludedTraffic  int64                                                                        `json:"included_traffic"`
-	IngoingTraffic   int64                                                                        `json:"ingoing_traffic"`
-	Labels           map[string]string                                                            `json:"labels"`
-	LoadBalancerType GetLoadBalancers200ApplicationJSONLoadBalancersLoadBalancerType              `json:"load_balancer_type"`
-	Location         GetLoadBalancers200ApplicationJSONLoadBalancersLocation                      `json:"location"`
-	Name             string                                                                       `json:"name"`
-	OutgoingTraffic  int64                                                                        `json:"outgoing_traffic"`
-	PrivateNet       []GetLoadBalancers200ApplicationJSONLoadBalancersPrivateNet                  `json:"private_net"`
-	Protection       GetLoadBalancers200ApplicationJSONLoadBalancersProtection                    `json:"protection"`
-	PublicNet        GetLoadBalancers200ApplicationJSONLoadBalancersPublicNet                     `json:"public_net"`
-	Services         []GetLoadBalancers200ApplicationJSONLoadBalancersServicesLoadBalancerService `json:"services"`
-	Targets          []GetLoadBalancers200ApplicationJSONLoadBalancersTargetsLoadBalancerTarget   `json:"targets"`
+	Algorithm        GetLoadBalancers200ApplicationJSONLoadBalancersAlgorithm             `json:"algorithm"`
+	Created          string                                                               `json:"created"`
+	ID               int64                                                                `json:"id"`
+	IncludedTraffic  int64                                                                `json:"included_traffic"`
+	IngoingTraffic   int64                                                                `json:"ingoing_traffic"`
+	Labels           map[string]string                                                    `json:"labels"`
+	LoadBalancerType GetLoadBalancers200ApplicationJSONLoadBalancersLoadBalancerType      `json:"load_balancer_type"`
+	Location         GetLoadBalancers200ApplicationJSONLoadBalancersLocation              `json:"location"`
+	Name             string                                                               `json:"name"`
+	OutgoingTraffic  int64                                                                `json:"outgoing_traffic"`
+	PrivateNet       []GetLoadBalancers200ApplicationJSONLoadBalancersPrivateNet          `json:"private_net"`
+	Protection       GetLoadBalancers200ApplicationJSONLoadBalancersProtection            `json:"protection"`
+	PublicNet        GetLoadBalancers200ApplicationJSONLoadBalancersPublicNet             `json:"public_net"`
+	Services         []GetLoadBalancers200ApplicationJSONLoadBalancersLoadBalancerService `json:"services"`
+	Targets          []GetLoadBalancers200ApplicationJSONLoadBalancersLoadBalancerTarget  `json:"targets"`
 }
 
 type GetLoadBalancers200ApplicationJSONMetaPagination struct {

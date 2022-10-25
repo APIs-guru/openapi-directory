@@ -11,7 +11,7 @@ class CreateParticipantPathParams:
     account_sid: str = field(default=None, metadata={'path_param': { 'field_name': 'AccountSid', 'style': 'simple', 'explode': False }})
     conference_sid: str = field(default=None, metadata={'path_param': { 'field_name': 'ConferenceSid', 'style': 'simple', 'explode': False }})
     
-class CreateParticipantRequestBodyAmdStatusCallbackMethodEnum(str, Enum):
+class CreateParticipantCreateParticipantRequestAmdStatusCallbackMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -19,7 +19,7 @@ class CreateParticipantRequestBodyAmdStatusCallbackMethodEnum(str, Enum):
     PUT = "PUT"
     DELETE = "DELETE"
 
-class CreateParticipantRequestBodyConferenceRecordingStatusCallbackMethodEnum(str, Enum):
+class CreateParticipantCreateParticipantRequestConferenceRecordingStatusCallbackMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -27,7 +27,7 @@ class CreateParticipantRequestBodyConferenceRecordingStatusCallbackMethodEnum(st
     PUT = "PUT"
     DELETE = "DELETE"
 
-class CreateParticipantRequestBodyConferenceStatusCallbackMethodEnum(str, Enum):
+class CreateParticipantCreateParticipantRequestConferenceStatusCallbackMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -35,7 +35,7 @@ class CreateParticipantRequestBodyConferenceStatusCallbackMethodEnum(str, Enum):
     PUT = "PUT"
     DELETE = "DELETE"
 
-class CreateParticipantRequestBodyRecordingStatusCallbackMethodEnum(str, Enum):
+class CreateParticipantCreateParticipantRequestRecordingStatusCallbackMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -43,7 +43,7 @@ class CreateParticipantRequestBodyRecordingStatusCallbackMethodEnum(str, Enum):
     PUT = "PUT"
     DELETE = "DELETE"
 
-class CreateParticipantRequestBodyStatusCallbackMethodEnum(str, Enum):
+class CreateParticipantCreateParticipantRequestStatusCallbackMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -51,7 +51,7 @@ class CreateParticipantRequestBodyStatusCallbackMethodEnum(str, Enum):
     PUT = "PUT"
     DELETE = "DELETE"
 
-class CreateParticipantRequestBodyWaitMethodEnum(str, Enum):
+class CreateParticipantCreateParticipantRequestWaitMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -61,9 +61,9 @@ class CreateParticipantRequestBodyWaitMethodEnum(str, Enum):
 
 
 @dataclass
-class CreateParticipantRequestBodyCreateParticipantRequest:
+class CreateParticipantCreateParticipantRequest:
     amd_status_callback: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'AmdStatusCallback' }})
-    amd_status_callback_method: Optional[CreateParticipantRequestBodyAmdStatusCallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'AmdStatusCallbackMethod' }})
+    amd_status_callback_method: Optional[CreateParticipantCreateParticipantRequestAmdStatusCallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'AmdStatusCallbackMethod' }})
     beep: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Beep' }})
     byoc: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Byoc' }})
     call_reason: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'CallReason' }})
@@ -73,10 +73,10 @@ class CreateParticipantRequestBodyCreateParticipantRequest:
     conference_record: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'ConferenceRecord' }})
     conference_recording_status_callback: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'ConferenceRecordingStatusCallback' }})
     conference_recording_status_callback_event: Optional[List[str]] = field(default=None, metadata={'form': { 'field_name': 'ConferenceRecordingStatusCallbackEvent' }})
-    conference_recording_status_callback_method: Optional[CreateParticipantRequestBodyConferenceRecordingStatusCallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'ConferenceRecordingStatusCallbackMethod' }})
+    conference_recording_status_callback_method: Optional[CreateParticipantCreateParticipantRequestConferenceRecordingStatusCallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'ConferenceRecordingStatusCallbackMethod' }})
     conference_status_callback: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'ConferenceStatusCallback' }})
     conference_status_callback_event: Optional[List[str]] = field(default=None, metadata={'form': { 'field_name': 'ConferenceStatusCallbackEvent' }})
-    conference_status_callback_method: Optional[CreateParticipantRequestBodyConferenceStatusCallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'ConferenceStatusCallbackMethod' }})
+    conference_status_callback_method: Optional[CreateParticipantCreateParticipantRequestConferenceStatusCallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'ConferenceStatusCallbackMethod' }})
     conference_trim: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'ConferenceTrim' }})
     early_media: Optional[bool] = field(default=None, metadata={'form': { 'field_name': 'EarlyMedia' }})
     end_conference_on_exit: Optional[bool] = field(default=None, metadata={'form': { 'field_name': 'EndConferenceOnExit' }})
@@ -94,7 +94,7 @@ class CreateParticipantRequestBodyCreateParticipantRequest:
     recording_channels: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'RecordingChannels' }})
     recording_status_callback: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'RecordingStatusCallback' }})
     recording_status_callback_event: Optional[List[str]] = field(default=None, metadata={'form': { 'field_name': 'RecordingStatusCallbackEvent' }})
-    recording_status_callback_method: Optional[CreateParticipantRequestBodyRecordingStatusCallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'RecordingStatusCallbackMethod' }})
+    recording_status_callback_method: Optional[CreateParticipantCreateParticipantRequestRecordingStatusCallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'RecordingStatusCallbackMethod' }})
     recording_track: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'RecordingTrack' }})
     region: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Region' }})
     sip_auth_password: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'SipAuthPassword' }})
@@ -102,11 +102,11 @@ class CreateParticipantRequestBodyCreateParticipantRequest:
     start_conference_on_enter: Optional[bool] = field(default=None, metadata={'form': { 'field_name': 'StartConferenceOnEnter' }})
     status_callback: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'StatusCallback' }})
     status_callback_event: Optional[List[str]] = field(default=None, metadata={'form': { 'field_name': 'StatusCallbackEvent' }})
-    status_callback_method: Optional[CreateParticipantRequestBodyStatusCallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'StatusCallbackMethod' }})
+    status_callback_method: Optional[CreateParticipantCreateParticipantRequestStatusCallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'StatusCallbackMethod' }})
     time_limit: Optional[int] = field(default=None, metadata={'form': { 'field_name': 'TimeLimit' }})
     timeout: Optional[int] = field(default=None, metadata={'form': { 'field_name': 'Timeout' }})
     to: str = field(default=None, metadata={'form': { 'field_name': 'To' }})
-    wait_method: Optional[CreateParticipantRequestBodyWaitMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'WaitMethod' }})
+    wait_method: Optional[CreateParticipantCreateParticipantRequestWaitMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'WaitMethod' }})
     wait_url: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'WaitUrl' }})
     
 
@@ -119,7 +119,7 @@ class CreateParticipantSecurity:
 class CreateParticipantRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateParticipantPathParams = field(default=None)
-    request: Optional[CreateParticipantRequestBodyCreateParticipantRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateParticipantCreateParticipantRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateParticipantSecurity = field(default=None)
     
 

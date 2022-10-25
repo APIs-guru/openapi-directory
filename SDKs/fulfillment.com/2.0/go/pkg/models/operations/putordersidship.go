@@ -8,7 +8,7 @@ type PutOrdersIDShipPathParams struct {
 	ID int32 `pathParam:"style=simple,explode=false,name=id"`
 }
 
-type PutOrdersIDShipRequestBodyOrderShipV2 struct {
+type PutOrdersIDShipOrderShipV2 struct {
 	TrackingNumber string   `json:"trackingNumber"`
 	WeightOverride *float32 `json:"weightOverride,omitempty"`
 }
@@ -19,7 +19,7 @@ type PutOrdersIDShipSecurity struct {
 
 type PutOrdersIDShipRequest struct {
 	PathParams PutOrdersIDShipPathParams
-	Request    PutOrdersIDShipRequestBodyOrderShipV2 `request:"mediaType=application/json"`
+	Request    PutOrdersIDShipOrderShipV2 `request:"mediaType=application/json"`
 	Security   PutOrdersIDShipSecurity
 }
 

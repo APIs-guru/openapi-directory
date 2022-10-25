@@ -17,7 +17,7 @@ class UpdateWorkerReservationPathParams:
 class UpdateWorkerReservationHeaders:
     if_match: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'If-Match' }})
     
-class UpdateWorkerReservationRequestBodyConferenceRecordingStatusCallbackMethodEnum(str, Enum):
+class UpdateWorkerReservationUpdateWorkerReservationRequestConferenceRecordingStatusCallbackMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -25,7 +25,7 @@ class UpdateWorkerReservationRequestBodyConferenceRecordingStatusCallbackMethodE
     PUT = "PUT"
     DELETE = "DELETE"
 
-class UpdateWorkerReservationRequestBodyConferenceStatusCallbackMethodEnum(str, Enum):
+class UpdateWorkerReservationUpdateWorkerReservationRequestConferenceStatusCallbackMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -33,7 +33,7 @@ class UpdateWorkerReservationRequestBodyConferenceStatusCallbackMethodEnum(str, 
     PUT = "PUT"
     DELETE = "DELETE"
 
-class UpdateWorkerReservationRequestBodyRecordingStatusCallbackMethodEnum(str, Enum):
+class UpdateWorkerReservationUpdateWorkerReservationRequestRecordingStatusCallbackMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -41,7 +41,7 @@ class UpdateWorkerReservationRequestBodyRecordingStatusCallbackMethodEnum(str, E
     PUT = "PUT"
     DELETE = "DELETE"
 
-class UpdateWorkerReservationRequestBodyStatusCallbackMethodEnum(str, Enum):
+class UpdateWorkerReservationUpdateWorkerReservationRequestStatusCallbackMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -49,7 +49,7 @@ class UpdateWorkerReservationRequestBodyStatusCallbackMethodEnum(str, Enum):
     PUT = "PUT"
     DELETE = "DELETE"
 
-class UpdateWorkerReservationRequestBodyWaitMethodEnum(str, Enum):
+class UpdateWorkerReservationUpdateWorkerReservationRequestWaitMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -59,7 +59,7 @@ class UpdateWorkerReservationRequestBodyWaitMethodEnum(str, Enum):
 
 
 @dataclass
-class UpdateWorkerReservationRequestBodyUpdateWorkerReservationRequest:
+class UpdateWorkerReservationUpdateWorkerReservationRequest:
     beep: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Beep' }})
     beep_on_customer_entrance: Optional[bool] = field(default=None, metadata={'form': { 'field_name': 'BeepOnCustomerEntrance' }})
     call_accept: Optional[bool] = field(default=None, metadata={'form': { 'field_name': 'CallAccept' }})
@@ -71,10 +71,10 @@ class UpdateWorkerReservationRequestBodyUpdateWorkerReservationRequest:
     call_url: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'CallUrl' }})
     conference_record: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'ConferenceRecord' }})
     conference_recording_status_callback: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'ConferenceRecordingStatusCallback' }})
-    conference_recording_status_callback_method: Optional[UpdateWorkerReservationRequestBodyConferenceRecordingStatusCallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'ConferenceRecordingStatusCallbackMethod' }})
+    conference_recording_status_callback_method: Optional[UpdateWorkerReservationUpdateWorkerReservationRequestConferenceRecordingStatusCallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'ConferenceRecordingStatusCallbackMethod' }})
     conference_status_callback: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'ConferenceStatusCallback' }})
     conference_status_callback_event: Optional[List[shared.WorkerReservationEnumConferenceEventEnum]] = field(default=None, metadata={'form': { 'field_name': 'ConferenceStatusCallbackEvent' }})
-    conference_status_callback_method: Optional[UpdateWorkerReservationRequestBodyConferenceStatusCallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'ConferenceStatusCallbackMethod' }})
+    conference_status_callback_method: Optional[UpdateWorkerReservationUpdateWorkerReservationRequestConferenceStatusCallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'ConferenceStatusCallbackMethod' }})
     conference_trim: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'ConferenceTrim' }})
     dequeue_from: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'DequeueFrom' }})
     dequeue_post_work_activity_sid: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'DequeuePostWorkActivitySid' }})
@@ -94,7 +94,7 @@ class UpdateWorkerReservationRequestBodyUpdateWorkerReservationRequest:
     record: Optional[bool] = field(default=None, metadata={'form': { 'field_name': 'Record' }})
     recording_channels: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'RecordingChannels' }})
     recording_status_callback: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'RecordingStatusCallback' }})
-    recording_status_callback_method: Optional[UpdateWorkerReservationRequestBodyRecordingStatusCallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'RecordingStatusCallbackMethod' }})
+    recording_status_callback_method: Optional[UpdateWorkerReservationUpdateWorkerReservationRequestRecordingStatusCallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'RecordingStatusCallbackMethod' }})
     redirect_accept: Optional[bool] = field(default=None, metadata={'form': { 'field_name': 'RedirectAccept' }})
     redirect_call_sid: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'RedirectCallSid' }})
     redirect_url: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'RedirectUrl' }})
@@ -105,10 +105,10 @@ class UpdateWorkerReservationRequestBodyUpdateWorkerReservationRequest:
     start_conference_on_enter: Optional[bool] = field(default=None, metadata={'form': { 'field_name': 'StartConferenceOnEnter' }})
     status_callback: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'StatusCallback' }})
     status_callback_event: Optional[List[shared.WorkerReservationEnumCallStatusEnum]] = field(default=None, metadata={'form': { 'field_name': 'StatusCallbackEvent' }})
-    status_callback_method: Optional[UpdateWorkerReservationRequestBodyStatusCallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'StatusCallbackMethod' }})
+    status_callback_method: Optional[UpdateWorkerReservationUpdateWorkerReservationRequestStatusCallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'StatusCallbackMethod' }})
     timeout: Optional[int] = field(default=None, metadata={'form': { 'field_name': 'Timeout' }})
     to: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'To' }})
-    wait_method: Optional[UpdateWorkerReservationRequestBodyWaitMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'WaitMethod' }})
+    wait_method: Optional[UpdateWorkerReservationUpdateWorkerReservationRequestWaitMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'WaitMethod' }})
     wait_url: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'WaitUrl' }})
     worker_activity_sid: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'WorkerActivitySid' }})
     
@@ -123,7 +123,7 @@ class UpdateWorkerReservationRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateWorkerReservationPathParams = field(default=None)
     headers: UpdateWorkerReservationHeaders = field(default=None)
-    request: Optional[UpdateWorkerReservationRequestBodyUpdateWorkerReservationRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateWorkerReservationUpdateWorkerReservationRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateWorkerReservationSecurity = field(default=None)
     
 

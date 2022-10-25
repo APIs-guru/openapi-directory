@@ -13,7 +13,7 @@ type CreateMessagePathParams struct {
 	AccountSid string `pathParam:"style=simple,explode=false,name=AccountSid"`
 }
 
-type CreateMessageRequestBodyCreateMessageRequest struct {
+type CreateMessageCreateMessageRequest struct {
 	AddressRetention    *shared.MessageEnumAddressRetentionEnum `form:"name=AddressRetention"`
 	ApplicationSid      *string                                 `form:"name=ApplicationSid"`
 	Attempt             *int64                                  `form:"name=Attempt"`
@@ -42,7 +42,7 @@ type CreateMessageSecurity struct {
 type CreateMessageRequest struct {
 	ServerURL  *string
 	PathParams CreateMessagePathParams
-	Request    *CreateMessageRequestBodyCreateMessageRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateMessageCreateMessageRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateMessageSecurity
 }
 

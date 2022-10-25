@@ -32,7 +32,7 @@ class ListDeployedDevicesDeploymentRequest:
 
 @dataclass_json
 @dataclass
-class ListDeployedDevicesDeployment200ApplicationJSONMeta:
+class ListDeployedDevicesDeploymentListDeployedDevicesDeploymentResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -44,14 +44,14 @@ class ListDeployedDevicesDeployment200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListDeployedDevicesDeployment200ApplicationJSONListDeployedDevicesDeploymentResponse:
+class ListDeployedDevicesDeploymentListDeployedDevicesDeploymentResponse:
     deployments: Optional[List[shared.PreviewDeployedDevicesFleetDeployment]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'deployments' }})
-    meta: Optional[ListDeployedDevicesDeployment200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+    meta: Optional[ListDeployedDevicesDeploymentListDeployedDevicesDeploymentResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     
 
 @dataclass
 class ListDeployedDevicesDeploymentResponse:
     content_type: str = field(default=None)
-    list_deployed_devices_deployment_response: Optional[ListDeployedDevicesDeployment200ApplicationJSONListDeployedDevicesDeploymentResponse] = field(default=None)
+    list_deployed_devices_deployment_response: Optional[ListDeployedDevicesDeploymentListDeployedDevicesDeploymentResponse] = field(default=None)
     status_code: int = field(default=None)
     

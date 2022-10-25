@@ -27,7 +27,7 @@ type ListWirelessSimRequest struct {
 	Security    ListWirelessSimSecurity
 }
 
-type ListWirelessSim200ApplicationJSONMeta struct {
+type ListWirelessSimListWirelessSimResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -37,13 +37,13 @@ type ListWirelessSim200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListWirelessSim200ApplicationJSONListWirelessSimResponse struct {
-	Meta *ListWirelessSim200ApplicationJSONMeta `json:"meta,omitempty"`
-	Sims []shared.PreviewWirelessSim            `json:"sims,omitempty"`
+type ListWirelessSimListWirelessSimResponse struct {
+	Meta *ListWirelessSimListWirelessSimResponseMeta `json:"meta,omitempty"`
+	Sims []shared.PreviewWirelessSim                 `json:"sims,omitempty"`
 }
 
 type ListWirelessSimResponse struct {
 	ContentType             string
-	ListWirelessSimResponse *ListWirelessSim200ApplicationJSONListWirelessSimResponse
+	ListWirelessSimResponse *ListWirelessSimListWirelessSimResponse
 	StatusCode              int64
 }

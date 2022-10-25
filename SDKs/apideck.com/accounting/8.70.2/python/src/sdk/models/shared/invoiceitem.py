@@ -28,7 +28,7 @@ class InvoiceItemSalesDetails:
     unit_of_measure: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'unit_of_measure' }})
     unit_price: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'unit_price' }})
     
-class InvoiceItemTypeTypeEnum(str, Enum):
+class InvoiceItemTypeEnum(str, Enum):
     INVENTORY = "inventory"
     SERVICE = "service"
     OTHER = "other"
@@ -55,7 +55,7 @@ class InvoiceItem:
     sales_details: Optional[InvoiceItemSalesDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sales_details' }})
     sold: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sold' }})
     tracked: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tracked' }})
-    type: Optional[InvoiceItemTypeTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    type: Optional[InvoiceItemTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     unit_price: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'unit_price' }})
     updated_at: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updated_at', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     updated_by: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updated_by' }})

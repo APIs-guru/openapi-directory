@@ -12,7 +12,7 @@ class UpdateConnectionPolicyPathParams:
     
 
 @dataclass
-class UpdateConnectionPolicyRequestBodyUpdateConnectionPolicyRequest:
+class UpdateConnectionPolicyUpdateConnectionPolicyRequest:
     friendly_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
     
 
@@ -25,7 +25,7 @@ class UpdateConnectionPolicySecurity:
 class UpdateConnectionPolicyRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateConnectionPolicyPathParams = field(default=None)
-    request: Optional[UpdateConnectionPolicyRequestBodyUpdateConnectionPolicyRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateConnectionPolicyUpdateConnectionPolicyRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateConnectionPolicySecurity = field(default=None)
     
 

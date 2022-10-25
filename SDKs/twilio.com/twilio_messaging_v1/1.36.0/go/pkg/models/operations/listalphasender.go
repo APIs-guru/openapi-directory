@@ -27,7 +27,7 @@ type ListAlphaSenderRequest struct {
 	Security    ListAlphaSenderSecurity
 }
 
-type ListAlphaSender200ApplicationJSONMeta struct {
+type ListAlphaSenderListAlphaSenderResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -37,13 +37,13 @@ type ListAlphaSender200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListAlphaSender200ApplicationJSONListAlphaSenderResponse struct {
-	AlphaSenders []shared.MessagingV1ServiceAlphaSender `json:"alpha_senders,omitempty"`
-	Meta         *ListAlphaSender200ApplicationJSONMeta `json:"meta,omitempty"`
+type ListAlphaSenderListAlphaSenderResponse struct {
+	AlphaSenders []shared.MessagingV1ServiceAlphaSender      `json:"alpha_senders,omitempty"`
+	Meta         *ListAlphaSenderListAlphaSenderResponseMeta `json:"meta,omitempty"`
 }
 
 type ListAlphaSenderResponse struct {
 	ContentType             string
-	ListAlphaSenderResponse *ListAlphaSender200ApplicationJSONListAlphaSenderResponse
+	ListAlphaSenderResponse *ListAlphaSenderListAlphaSenderResponse
 	StatusCode              int64
 }

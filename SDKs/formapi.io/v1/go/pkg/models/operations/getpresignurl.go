@@ -12,7 +12,7 @@ type GetPresignURLRequest struct {
 	Security GetPresignURLSecurity
 }
 
-type GetPresignURL200ApplicationJSONFields struct {
+type GetPresignURLUploadPresignFields struct {
 	Key            string `json:"key"`
 	Policy         string `json:"policy"`
 	XAmzAlgorithm  string `json:"x-amz-algorithm"`
@@ -21,22 +21,22 @@ type GetPresignURL200ApplicationJSONFields struct {
 	XAmzSignature  string `json:"x-amz-signature"`
 }
 
-type GetPresignURL200ApplicationJSONMethodEnum string
+type GetPresignURLUploadPresignMethodEnum string
 
 const (
-	GetPresignURL200ApplicationJSONMethodEnumPost GetPresignURL200ApplicationJSONMethodEnum = "post"
+	GetPresignURLUploadPresignMethodEnumPost GetPresignURLUploadPresignMethodEnum = "post"
 )
 
-type GetPresignURL200ApplicationJSONUploadPresign struct {
-	Fields  GetPresignURL200ApplicationJSONFields      `json:"fields"`
-	Headers map[string]interface{}                     `json:"headers"`
-	Method  *GetPresignURL200ApplicationJSONMethodEnum `json:"method,omitempty"`
-	URL     string                                     `json:"url"`
+type GetPresignURLUploadPresign struct {
+	Fields  GetPresignURLUploadPresignFields      `json:"fields"`
+	Headers map[string]interface{}                `json:"headers"`
+	Method  *GetPresignURLUploadPresignMethodEnum `json:"method,omitempty"`
+	URL     string                                `json:"url"`
 }
 
 type GetPresignURLResponse struct {
 	ContentType         string
 	StatusCode          int64
 	AuthenticationError *shared.AuthenticationError
-	UploadPresign       *GetPresignURL200ApplicationJSONUploadPresign
+	UploadPresign       *GetPresignURLUploadPresign
 }

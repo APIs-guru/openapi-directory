@@ -8,7 +8,7 @@ var CreateEndUserServers = []string{
 	"https://trusthub.twilio.com",
 }
 
-type CreateEndUserRequestBodyCreateEndUserRequest struct {
+type CreateEndUserCreateEndUserRequest struct {
 	Attributes   *interface{} `form:"name=Attributes"`
 	FriendlyName string       `form:"name=FriendlyName"`
 	Type         string       `form:"name=Type"`
@@ -20,7 +20,7 @@ type CreateEndUserSecurity struct {
 
 type CreateEndUserRequest struct {
 	ServerURL *string
-	Request   *CreateEndUserRequestBodyCreateEndUserRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request   *CreateEndUserCreateEndUserRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security  CreateEndUserSecurity
 }
 

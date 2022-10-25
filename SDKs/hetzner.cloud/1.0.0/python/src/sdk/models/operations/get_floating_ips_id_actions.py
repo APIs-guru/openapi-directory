@@ -47,18 +47,18 @@ class GetFloatingIpsIDActionsRequest:
 
 @dataclass_json
 @dataclass
-class GetFloatingIpsIDActions200ApplicationJSONActionsError:
+class GetFloatingIpsIDActions200ApplicationJSONActionError:
     code: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'code' }})
     message: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'message' }})
     
 
 @dataclass_json
 @dataclass
-class GetFloatingIpsIDActions200ApplicationJSONActionsResources:
+class GetFloatingIpsIDActions200ApplicationJSONActionResources:
     id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     type: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     
-class GetFloatingIpsIDActions200ApplicationJSONActionsStatusEnum(str, Enum):
+class GetFloatingIpsIDActions200ApplicationJSONActionStatusEnum(str, Enum):
     SUCCESS = "success"
     RUNNING = "running"
     ERROR = "error"
@@ -66,21 +66,21 @@ class GetFloatingIpsIDActions200ApplicationJSONActionsStatusEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class GetFloatingIpsIDActions200ApplicationJSONActionsAction:
+class GetFloatingIpsIDActions200ApplicationJSONAction:
     command: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'command' }})
-    error: GetFloatingIpsIDActions200ApplicationJSONActionsError = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
+    error: GetFloatingIpsIDActions200ApplicationJSONActionError = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
     finished: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'finished' }})
     id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     progress: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'progress' }})
-    resources: List[GetFloatingIpsIDActions200ApplicationJSONActionsResources] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resources' }})
+    resources: List[GetFloatingIpsIDActions200ApplicationJSONActionResources] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resources' }})
     started: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'started' }})
-    status: GetFloatingIpsIDActions200ApplicationJSONActionsStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    status: GetFloatingIpsIDActions200ApplicationJSONActionStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
     
 
 @dataclass_json
 @dataclass
 class GetFloatingIpsIDActions200ApplicationJSON:
-    actions: List[GetFloatingIpsIDActions200ApplicationJSONActionsAction] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'actions' }})
+    actions: List[GetFloatingIpsIDActions200ApplicationJSONAction] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'actions' }})
     
 
 @dataclass

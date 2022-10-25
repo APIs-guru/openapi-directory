@@ -12,7 +12,7 @@ class PostCoursesRootContentIDPermissionsUserEmailPathParams:
 
 @dataclass_json
 @dataclass
-class PostCoursesRootContentIDPermissionsUserEmailRequestBodyPermissionToBeGrantedToTheUser:
+class PostCoursesRootContentIDPermissionsUserEmailPermissionToBeGrantedToTheUser:
     is_builder: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'isBuilder' }})
     is_reviewer: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'isReviewer' }})
     
@@ -20,7 +20,7 @@ class PostCoursesRootContentIDPermissionsUserEmailRequestBodyPermissionToBeGrant
 @dataclass
 class PostCoursesRootContentIDPermissionsUserEmailRequest:
     path_params: PostCoursesRootContentIDPermissionsUserEmailPathParams = field(default=None)
-    request: PostCoursesRootContentIDPermissionsUserEmailRequestBodyPermissionToBeGrantedToTheUser = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: PostCoursesRootContentIDPermissionsUserEmailPermissionToBeGrantedToTheUser = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass_json

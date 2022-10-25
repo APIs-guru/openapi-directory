@@ -11,7 +11,7 @@ class CreateStreamPathParams:
     account_sid: str = field(default=None, metadata={'path_param': { 'field_name': 'AccountSid', 'style': 'simple', 'explode': False }})
     call_sid: str = field(default=None, metadata={'path_param': { 'field_name': 'CallSid', 'style': 'simple', 'explode': False }})
     
-class CreateStreamRequestBodyStatusCallbackMethodEnum(str, Enum):
+class CreateStreamCreateStreamRequestStatusCallbackMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -21,7 +21,7 @@ class CreateStreamRequestBodyStatusCallbackMethodEnum(str, Enum):
 
 
 @dataclass
-class CreateStreamRequestBodyCreateStreamRequest:
+class CreateStreamCreateStreamRequest:
     name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Name' }})
     parameter1_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Parameter1.Name' }})
     parameter1_value: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Parameter1.Value' }})
@@ -222,7 +222,7 @@ class CreateStreamRequestBodyCreateStreamRequest:
     parameter99_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Parameter99.Name' }})
     parameter99_value: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Parameter99.Value' }})
     status_callback: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'StatusCallback' }})
-    status_callback_method: Optional[CreateStreamRequestBodyStatusCallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'StatusCallbackMethod' }})
+    status_callback_method: Optional[CreateStreamCreateStreamRequestStatusCallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'StatusCallbackMethod' }})
     track: Optional[shared.StreamEnumTrackEnum] = field(default=None, metadata={'form': { 'field_name': 'Track' }})
     url: str = field(default=None, metadata={'form': { 'field_name': 'Url' }})
     
@@ -236,7 +236,7 @@ class CreateStreamSecurity:
 class CreateStreamRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateStreamPathParams = field(default=None)
-    request: Optional[CreateStreamRequestBodyCreateStreamRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateStreamCreateStreamRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateStreamSecurity = field(default=None)
     
 

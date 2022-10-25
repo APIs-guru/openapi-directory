@@ -4,94 +4,94 @@ type PutFirewallsIDPathParams struct {
 	ID int64 `pathParam:"style=simple,explode=false,name=id"`
 }
 
-type PutFirewallsIDRequestBodyUpdateFirewallRequest struct {
+type PutFirewallsIDUpdateFirewallRequest struct {
 	Labels map[string]interface{} `json:"labels,omitempty"`
 	Name   *string                `json:"name,omitempty"`
 }
 
 type PutFirewallsIDRequest struct {
 	PathParams PutFirewallsIDPathParams
-	Request    *PutFirewallsIDRequestBodyUpdateFirewallRequest `request:"mediaType=application/json"`
+	Request    *PutFirewallsIDUpdateFirewallRequest `request:"mediaType=application/json"`
 }
 
-type PutFirewallsID200ApplicationJSONFirewallAppliedToAppliedToResourcesServer struct {
+type PutFirewallsIDFirewallResponseFirewallAppliedToAppliedToResourcesServer struct {
 	ID int64 `json:"id"`
 }
 
-type PutFirewallsID200ApplicationJSONFirewallAppliedToAppliedToResourcesTypeEnum string
+type PutFirewallsIDFirewallResponseFirewallAppliedToAppliedToResourcesTypeEnum string
 
 const (
-	PutFirewallsID200ApplicationJSONFirewallAppliedToAppliedToResourcesTypeEnumServer PutFirewallsID200ApplicationJSONFirewallAppliedToAppliedToResourcesTypeEnum = "server"
+	PutFirewallsIDFirewallResponseFirewallAppliedToAppliedToResourcesTypeEnumServer PutFirewallsIDFirewallResponseFirewallAppliedToAppliedToResourcesTypeEnum = "server"
 )
 
-type PutFirewallsID200ApplicationJSONFirewallAppliedToAppliedToResources struct {
-	Server *PutFirewallsID200ApplicationJSONFirewallAppliedToAppliedToResourcesServer   `json:"server,omitempty"`
-	Type   *PutFirewallsID200ApplicationJSONFirewallAppliedToAppliedToResourcesTypeEnum `json:"type,omitempty"`
+type PutFirewallsIDFirewallResponseFirewallAppliedToAppliedToResources struct {
+	Server *PutFirewallsIDFirewallResponseFirewallAppliedToAppliedToResourcesServer   `json:"server,omitempty"`
+	Type   *PutFirewallsIDFirewallResponseFirewallAppliedToAppliedToResourcesTypeEnum `json:"type,omitempty"`
 }
 
-type PutFirewallsID200ApplicationJSONFirewallAppliedToLabelSelector struct {
+type PutFirewallsIDFirewallResponseFirewallAppliedToLabelSelector struct {
 	Selector string `json:"selector"`
 }
 
-type PutFirewallsID200ApplicationJSONFirewallAppliedToServer struct {
+type PutFirewallsIDFirewallResponseFirewallAppliedToServer struct {
 	ID int64 `json:"id"`
 }
 
-type PutFirewallsID200ApplicationJSONFirewallAppliedToTypeEnum string
+type PutFirewallsIDFirewallResponseFirewallAppliedToTypeEnum string
 
 const (
-	PutFirewallsID200ApplicationJSONFirewallAppliedToTypeEnumServer        PutFirewallsID200ApplicationJSONFirewallAppliedToTypeEnum = "server"
-	PutFirewallsID200ApplicationJSONFirewallAppliedToTypeEnumLabelSelector PutFirewallsID200ApplicationJSONFirewallAppliedToTypeEnum = "label_selector"
+	PutFirewallsIDFirewallResponseFirewallAppliedToTypeEnumServer        PutFirewallsIDFirewallResponseFirewallAppliedToTypeEnum = "server"
+	PutFirewallsIDFirewallResponseFirewallAppliedToTypeEnumLabelSelector PutFirewallsIDFirewallResponseFirewallAppliedToTypeEnum = "label_selector"
 )
 
-type PutFirewallsID200ApplicationJSONFirewallAppliedTo struct {
-	AppliedToResources []PutFirewallsID200ApplicationJSONFirewallAppliedToAppliedToResources `json:"applied_to_resources,omitempty"`
-	LabelSelector      *PutFirewallsID200ApplicationJSONFirewallAppliedToLabelSelector       `json:"label_selector,omitempty"`
-	Server             *PutFirewallsID200ApplicationJSONFirewallAppliedToServer              `json:"server,omitempty"`
-	Type               PutFirewallsID200ApplicationJSONFirewallAppliedToTypeEnum             `json:"type"`
+type PutFirewallsIDFirewallResponseFirewallAppliedTo struct {
+	AppliedToResources []PutFirewallsIDFirewallResponseFirewallAppliedToAppliedToResources `json:"applied_to_resources,omitempty"`
+	LabelSelector      *PutFirewallsIDFirewallResponseFirewallAppliedToLabelSelector       `json:"label_selector,omitempty"`
+	Server             *PutFirewallsIDFirewallResponseFirewallAppliedToServer              `json:"server,omitempty"`
+	Type               PutFirewallsIDFirewallResponseFirewallAppliedToTypeEnum             `json:"type"`
 }
 
-type PutFirewallsID200ApplicationJSONFirewallRulesDirectionEnum string
+type PutFirewallsIDFirewallResponseFirewallRuleDirectionEnum string
 
 const (
-	PutFirewallsID200ApplicationJSONFirewallRulesDirectionEnumIn  PutFirewallsID200ApplicationJSONFirewallRulesDirectionEnum = "in"
-	PutFirewallsID200ApplicationJSONFirewallRulesDirectionEnumOut PutFirewallsID200ApplicationJSONFirewallRulesDirectionEnum = "out"
+	PutFirewallsIDFirewallResponseFirewallRuleDirectionEnumIn  PutFirewallsIDFirewallResponseFirewallRuleDirectionEnum = "in"
+	PutFirewallsIDFirewallResponseFirewallRuleDirectionEnumOut PutFirewallsIDFirewallResponseFirewallRuleDirectionEnum = "out"
 )
 
-type PutFirewallsID200ApplicationJSONFirewallRulesProtocolEnum string
+type PutFirewallsIDFirewallResponseFirewallRuleProtocolEnum string
 
 const (
-	PutFirewallsID200ApplicationJSONFirewallRulesProtocolEnumTCP  PutFirewallsID200ApplicationJSONFirewallRulesProtocolEnum = "tcp"
-	PutFirewallsID200ApplicationJSONFirewallRulesProtocolEnumUDP  PutFirewallsID200ApplicationJSONFirewallRulesProtocolEnum = "udp"
-	PutFirewallsID200ApplicationJSONFirewallRulesProtocolEnumIcmp PutFirewallsID200ApplicationJSONFirewallRulesProtocolEnum = "icmp"
-	PutFirewallsID200ApplicationJSONFirewallRulesProtocolEnumEsp  PutFirewallsID200ApplicationJSONFirewallRulesProtocolEnum = "esp"
-	PutFirewallsID200ApplicationJSONFirewallRulesProtocolEnumGre  PutFirewallsID200ApplicationJSONFirewallRulesProtocolEnum = "gre"
+	PutFirewallsIDFirewallResponseFirewallRuleProtocolEnumTCP  PutFirewallsIDFirewallResponseFirewallRuleProtocolEnum = "tcp"
+	PutFirewallsIDFirewallResponseFirewallRuleProtocolEnumUDP  PutFirewallsIDFirewallResponseFirewallRuleProtocolEnum = "udp"
+	PutFirewallsIDFirewallResponseFirewallRuleProtocolEnumIcmp PutFirewallsIDFirewallResponseFirewallRuleProtocolEnum = "icmp"
+	PutFirewallsIDFirewallResponseFirewallRuleProtocolEnumEsp  PutFirewallsIDFirewallResponseFirewallRuleProtocolEnum = "esp"
+	PutFirewallsIDFirewallResponseFirewallRuleProtocolEnumGre  PutFirewallsIDFirewallResponseFirewallRuleProtocolEnum = "gre"
 )
 
-type PutFirewallsID200ApplicationJSONFirewallRulesRule struct {
-	Description    *string                                                    `json:"description,omitempty"`
-	DestinationIps []string                                                   `json:"destination_ips,omitempty"`
-	Direction      PutFirewallsID200ApplicationJSONFirewallRulesDirectionEnum `json:"direction"`
-	Port           *string                                                    `json:"port,omitempty"`
-	Protocol       PutFirewallsID200ApplicationJSONFirewallRulesProtocolEnum  `json:"protocol"`
-	SourceIps      []string                                                   `json:"source_ips,omitempty"`
+type PutFirewallsIDFirewallResponseFirewallRule struct {
+	Description    *string                                                 `json:"description,omitempty"`
+	DestinationIps []string                                                `json:"destination_ips,omitempty"`
+	Direction      PutFirewallsIDFirewallResponseFirewallRuleDirectionEnum `json:"direction"`
+	Port           *string                                                 `json:"port,omitempty"`
+	Protocol       PutFirewallsIDFirewallResponseFirewallRuleProtocolEnum  `json:"protocol"`
+	SourceIps      []string                                                `json:"source_ips,omitempty"`
 }
 
-type PutFirewallsID200ApplicationJSONFirewallFirewall struct {
-	AppliedTo []PutFirewallsID200ApplicationJSONFirewallAppliedTo `json:"applied_to"`
-	Created   string                                              `json:"created"`
-	ID        int64                                               `json:"id"`
-	Labels    map[string]string                                   `json:"labels,omitempty"`
-	Name      string                                              `json:"name"`
-	Rules     []PutFirewallsID200ApplicationJSONFirewallRulesRule `json:"rules"`
+type PutFirewallsIDFirewallResponseFirewall struct {
+	AppliedTo []PutFirewallsIDFirewallResponseFirewallAppliedTo `json:"applied_to"`
+	Created   string                                            `json:"created"`
+	ID        int64                                             `json:"id"`
+	Labels    map[string]string                                 `json:"labels,omitempty"`
+	Name      string                                            `json:"name"`
+	Rules     []PutFirewallsIDFirewallResponseFirewallRule      `json:"rules"`
 }
 
-type PutFirewallsID200ApplicationJSONFirewallResponse struct {
-	Firewall PutFirewallsID200ApplicationJSONFirewallFirewall `json:"firewall"`
+type PutFirewallsIDFirewallResponse struct {
+	Firewall PutFirewallsIDFirewallResponseFirewall `json:"firewall"`
 }
 
 type PutFirewallsIDResponse struct {
 	ContentType      string
-	FirewallResponse *PutFirewallsID200ApplicationJSONFirewallResponse
+	FirewallResponse *PutFirewallsIDFirewallResponse
 	StatusCode       int64
 }

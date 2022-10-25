@@ -10,30 +10,30 @@ class PostNetworksIDActionsDeleteSubnetPathParams:
 
 @dataclass_json
 @dataclass
-class PostNetworksIDActionsDeleteSubnetRequestBodyDeleteSubnetRequest:
+class PostNetworksIDActionsDeleteSubnetDeleteSubnetRequest:
     ip_range: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ip_range' }})
     
 
 @dataclass
 class PostNetworksIDActionsDeleteSubnetRequest:
     path_params: PostNetworksIDActionsDeleteSubnetPathParams = field(default=None)
-    request: Optional[PostNetworksIDActionsDeleteSubnetRequestBodyDeleteSubnetRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: Optional[PostNetworksIDActionsDeleteSubnetDeleteSubnetRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass_json
 @dataclass
-class PostNetworksIDActionsDeleteSubnet201ApplicationJSONActionError:
+class PostNetworksIDActionsDeleteSubnetActionResponseActionError:
     code: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'code' }})
     message: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'message' }})
     
 
 @dataclass_json
 @dataclass
-class PostNetworksIDActionsDeleteSubnet201ApplicationJSONActionResources:
+class PostNetworksIDActionsDeleteSubnetActionResponseActionResources:
     id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     type: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     
-class PostNetworksIDActionsDeleteSubnet201ApplicationJSONActionStatusEnum(str, Enum):
+class PostNetworksIDActionsDeleteSubnetActionResponseActionStatusEnum(str, Enum):
     SUCCESS = "success"
     RUNNING = "running"
     ERROR = "error"
@@ -41,26 +41,26 @@ class PostNetworksIDActionsDeleteSubnet201ApplicationJSONActionStatusEnum(str, E
 
 @dataclass_json
 @dataclass
-class PostNetworksIDActionsDeleteSubnet201ApplicationJSONActionAction:
+class PostNetworksIDActionsDeleteSubnetActionResponseAction:
     command: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'command' }})
-    error: PostNetworksIDActionsDeleteSubnet201ApplicationJSONActionError = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
+    error: PostNetworksIDActionsDeleteSubnetActionResponseActionError = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
     finished: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'finished' }})
     id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     progress: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'progress' }})
-    resources: List[PostNetworksIDActionsDeleteSubnet201ApplicationJSONActionResources] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resources' }})
+    resources: List[PostNetworksIDActionsDeleteSubnetActionResponseActionResources] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resources' }})
     started: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'started' }})
-    status: PostNetworksIDActionsDeleteSubnet201ApplicationJSONActionStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    status: PostNetworksIDActionsDeleteSubnetActionResponseActionStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
     
 
 @dataclass_json
 @dataclass
-class PostNetworksIDActionsDeleteSubnet201ApplicationJSONActionResponse:
-    action: PostNetworksIDActionsDeleteSubnet201ApplicationJSONActionAction = field(default=None, metadata={'dataclasses_json': { 'field_name': 'action' }})
+class PostNetworksIDActionsDeleteSubnetActionResponse:
+    action: PostNetworksIDActionsDeleteSubnetActionResponseAction = field(default=None, metadata={'dataclasses_json': { 'field_name': 'action' }})
     
 
 @dataclass
 class PostNetworksIDActionsDeleteSubnetResponse:
-    action_response: Optional[PostNetworksIDActionsDeleteSubnet201ApplicationJSONActionResponse] = field(default=None)
+    action_response: Optional[PostNetworksIDActionsDeleteSubnetActionResponse] = field(default=None)
     content_type: str = field(default=None)
     status_code: int = field(default=None)
     

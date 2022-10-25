@@ -10,7 +10,7 @@ from . import linkedtaxrate
 from . import email
 from . import phonenumber
 
-class CompanyInfoFiscalYearStartMonthTheStartMonthOfFiscalYearEnum(str, Enum):
+class CompanyInfoTheStartMonthOfFiscalYearEnum(str, Enum):
     JANUARY = "January"
     FEBRUARY = "February"
     MARCH = "March"
@@ -24,7 +24,7 @@ class CompanyInfoFiscalYearStartMonthTheStartMonthOfFiscalYearEnum(str, Enum):
     NOVEMBER = "November"
     DECEMBER = "December"
 
-class CompanyInfoStatusCompanyStatusEnum(str, Enum):
+class CompanyInfoCompanyStatusEnum(str, Enum):
     ACTIVE = "active"
     INACTIVE = "inactive"
 
@@ -42,7 +42,7 @@ class CompanyInfo:
     currency: Optional[currency_enum.CurrencyEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'currency' }})
     default_sales_tax: Optional[linkedtaxrate.LinkedTaxRate] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'default_sales_tax' }})
     emails: Optional[List[email.Email]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'emails' }})
-    fiscal_year_start_month: Optional[CompanyInfoFiscalYearStartMonthTheStartMonthOfFiscalYearEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'fiscal_year_start_month' }})
+    fiscal_year_start_month: Optional[CompanyInfoTheStartMonthOfFiscalYearEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'fiscal_year_start_month' }})
     id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     language: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'language' }})
     legal_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'legal_name' }})
@@ -50,7 +50,7 @@ class CompanyInfo:
     row_version: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'row_version' }})
     sales_tax_enabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sales_tax_enabled' }})
     sales_tax_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sales_tax_number' }})
-    status: Optional[CompanyInfoStatusCompanyStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    status: Optional[CompanyInfoCompanyStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
     updated_at: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updated_at', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     updated_by: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updated_by' }})
     

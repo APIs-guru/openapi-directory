@@ -8,7 +8,7 @@ type MoveFolderToFolderPathParams struct {
 	FolderID string `pathParam:"style=simple,explode=false,name=folder_id"`
 }
 
-type MoveFolderToFolderRequestBodyMoveFolderData struct {
+type MoveFolderToFolderMoveFolderData struct {
 	ParentFolderID *string `json:"parent_folder_id,omitempty"`
 }
 
@@ -18,11 +18,11 @@ type MoveFolderToFolderSecurity struct {
 
 type MoveFolderToFolderRequest struct {
 	PathParams MoveFolderToFolderPathParams
-	Request    MoveFolderToFolderRequestBodyMoveFolderData `request:"mediaType=application/json"`
+	Request    MoveFolderToFolderMoveFolderData `request:"mediaType=application/json"`
 	Security   MoveFolderToFolderSecurity
 }
 
-type MoveFolderToFolder200ApplicationJSONFolder struct {
+type MoveFolderToFolderFolder struct {
 	ID             *string `json:"id,omitempty"`
 	Name           *string `json:"name,omitempty"`
 	ParentFolderID *string `json:"parent_folder_id,omitempty"`
@@ -34,5 +34,5 @@ type MoveFolderToFolderResponse struct {
 	StatusCode          int64
 	AuthenticationError *shared.AuthenticationError
 	Error               *shared.Error
-	Folder              *MoveFolderToFolder200ApplicationJSONFolder
+	Folder              *MoveFolderToFolderFolder
 }

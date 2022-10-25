@@ -20,7 +20,7 @@ const (
 	SiteStatusValueEnumRetired SiteStatusValueEnum = "retired"
 )
 
-type SiteStatusStatus struct {
+type SiteStatus struct {
 	Label SiteStatusLabelEnum `json:"label"`
 	Value SiteStatusValueEnum `json:"value"`
 }
@@ -48,7 +48,7 @@ type Site struct {
 	Region              *NestedRegion          `json:"region,omitempty"`
 	ShippingAddress     *string                `json:"shipping_address,omitempty"`
 	Slug                string                 `json:"slug"`
-	Status              *SiteStatusStatus      `json:"status,omitempty"`
+	Status              *SiteStatus            `json:"status,omitempty"`
 	Tags                []string               `json:"tags,omitempty"`
 	Tenant              *NestedTenant          `json:"tenant,omitempty"`
 	TimeZone            *string                `json:"time_zone,omitempty"`

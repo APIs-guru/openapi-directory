@@ -4,51 +4,51 @@ import (
 	"time"
 )
 
-type WritablePowerFeedPhasePhaseEnum string
+type WritablePowerFeedPhaseEnum string
 
 const (
-	WritablePowerFeedPhasePhaseEnumSinglePhase WritablePowerFeedPhasePhaseEnum = "single-phase"
-	WritablePowerFeedPhasePhaseEnumThreePhase  WritablePowerFeedPhasePhaseEnum = "three-phase"
+	WritablePowerFeedPhaseEnumSinglePhase WritablePowerFeedPhaseEnum = "single-phase"
+	WritablePowerFeedPhaseEnumThreePhase  WritablePowerFeedPhaseEnum = "three-phase"
 )
 
-type WritablePowerFeedStatusStatusEnum string
+type WritablePowerFeedStatusEnum string
 
 const (
-	WritablePowerFeedStatusStatusEnumOffline WritablePowerFeedStatusStatusEnum = "offline"
-	WritablePowerFeedStatusStatusEnumActive  WritablePowerFeedStatusStatusEnum = "active"
-	WritablePowerFeedStatusStatusEnumPlanned WritablePowerFeedStatusStatusEnum = "planned"
-	WritablePowerFeedStatusStatusEnumFailed  WritablePowerFeedStatusStatusEnum = "failed"
+	WritablePowerFeedStatusEnumOffline WritablePowerFeedStatusEnum = "offline"
+	WritablePowerFeedStatusEnumActive  WritablePowerFeedStatusEnum = "active"
+	WritablePowerFeedStatusEnumPlanned WritablePowerFeedStatusEnum = "planned"
+	WritablePowerFeedStatusEnumFailed  WritablePowerFeedStatusEnum = "failed"
 )
 
-type WritablePowerFeedSupplySupplyEnum string
+type WritablePowerFeedSupplyEnum string
 
 const (
-	WritablePowerFeedSupplySupplyEnumAc WritablePowerFeedSupplySupplyEnum = "ac"
-	WritablePowerFeedSupplySupplyEnumDc WritablePowerFeedSupplySupplyEnum = "dc"
+	WritablePowerFeedSupplyEnumAc WritablePowerFeedSupplyEnum = "ac"
+	WritablePowerFeedSupplyEnumDc WritablePowerFeedSupplyEnum = "dc"
 )
 
-type WritablePowerFeedTypeTypeEnum string
+type WritablePowerFeedTypeEnum string
 
 const (
-	WritablePowerFeedTypeTypeEnumPrimary   WritablePowerFeedTypeTypeEnum = "primary"
-	WritablePowerFeedTypeTypeEnumRedundant WritablePowerFeedTypeTypeEnum = "redundant"
+	WritablePowerFeedTypeEnumPrimary   WritablePowerFeedTypeEnum = "primary"
+	WritablePowerFeedTypeEnumRedundant WritablePowerFeedTypeEnum = "redundant"
 )
 
 type WritablePowerFeed struct {
-	Amperage       *int64                             `json:"amperage,omitempty"`
-	Comments       *string                            `json:"comments,omitempty"`
-	Created        *time.Time                         `json:"created,omitempty"`
-	CustomFields   map[string]interface{}             `json:"custom_fields,omitempty"`
-	ID             *int64                             `json:"id,omitempty"`
-	LastUpdated    *time.Time                         `json:"last_updated,omitempty"`
-	MaxUtilization *int64                             `json:"max_utilization,omitempty"`
-	Name           string                             `json:"name"`
-	Phase          *WritablePowerFeedPhasePhaseEnum   `json:"phase,omitempty"`
-	PowerPanel     int64                              `json:"power_panel"`
-	Rack           *int64                             `json:"rack,omitempty"`
-	Status         *WritablePowerFeedStatusStatusEnum `json:"status,omitempty"`
-	Supply         *WritablePowerFeedSupplySupplyEnum `json:"supply,omitempty"`
-	Tags           []string                           `json:"tags,omitempty"`
-	Type           *WritablePowerFeedTypeTypeEnum     `json:"type,omitempty"`
-	Voltage        *int64                             `json:"voltage,omitempty"`
+	Amperage       *int64                       `json:"amperage,omitempty"`
+	Comments       *string                      `json:"comments,omitempty"`
+	Created        *time.Time                   `json:"created,omitempty"`
+	CustomFields   map[string]interface{}       `json:"custom_fields,omitempty"`
+	ID             *int64                       `json:"id,omitempty"`
+	LastUpdated    *time.Time                   `json:"last_updated,omitempty"`
+	MaxUtilization *int64                       `json:"max_utilization,omitempty"`
+	Name           string                       `json:"name"`
+	Phase          *WritablePowerFeedPhaseEnum  `json:"phase,omitempty"`
+	PowerPanel     int64                        `json:"power_panel"`
+	Rack           *int64                       `json:"rack,omitempty"`
+	Status         *WritablePowerFeedStatusEnum `json:"status,omitempty"`
+	Supply         *WritablePowerFeedSupplyEnum `json:"supply,omitempty"`
+	Tags           []string                     `json:"tags,omitempty"`
+	Type           *WritablePowerFeedTypeEnum   `json:"type,omitempty"`
+	Voltage        *int64                       `json:"voltage,omitempty"`
 }

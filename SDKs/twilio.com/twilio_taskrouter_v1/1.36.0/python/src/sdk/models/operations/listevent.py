@@ -46,7 +46,7 @@ class ListEventRequest:
 
 @dataclass_json
 @dataclass
-class ListEvent200ApplicationJSONMeta:
+class ListEventListEventResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -58,14 +58,14 @@ class ListEvent200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListEvent200ApplicationJSONListEventResponse:
+class ListEventListEventResponse:
     events: Optional[List[shared.TaskrouterV1WorkspaceEvent]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'events' }})
-    meta: Optional[ListEvent200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+    meta: Optional[ListEventListEventResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     
 
 @dataclass
 class ListEventResponse:
     content_type: str = field(default=None)
-    list_event_response: Optional[ListEvent200ApplicationJSONListEventResponse] = field(default=None)
+    list_event_response: Optional[ListEventListEventResponse] = field(default=None)
     status_code: int = field(default=None)
     

@@ -14,41 +14,41 @@ type PostServersIDActionsChangeProtectionRequest struct {
 	Request    *PostServersIDActionsChangeProtectionRequestBody `request:"mediaType=application/json"`
 }
 
-type PostServersIDActionsChangeProtection201ApplicationJSONActionError struct {
+type PostServersIDActionsChangeProtectionActionResponseActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
 }
 
-type PostServersIDActionsChangeProtection201ApplicationJSONActionResources struct {
+type PostServersIDActionsChangeProtectionActionResponseActionResources struct {
 	ID   int64  `json:"id"`
 	Type string `json:"type"`
 }
 
-type PostServersIDActionsChangeProtection201ApplicationJSONActionStatusEnum string
+type PostServersIDActionsChangeProtectionActionResponseActionStatusEnum string
 
 const (
-	PostServersIDActionsChangeProtection201ApplicationJSONActionStatusEnumSuccess PostServersIDActionsChangeProtection201ApplicationJSONActionStatusEnum = "success"
-	PostServersIDActionsChangeProtection201ApplicationJSONActionStatusEnumRunning PostServersIDActionsChangeProtection201ApplicationJSONActionStatusEnum = "running"
-	PostServersIDActionsChangeProtection201ApplicationJSONActionStatusEnumError   PostServersIDActionsChangeProtection201ApplicationJSONActionStatusEnum = "error"
+	PostServersIDActionsChangeProtectionActionResponseActionStatusEnumSuccess PostServersIDActionsChangeProtectionActionResponseActionStatusEnum = "success"
+	PostServersIDActionsChangeProtectionActionResponseActionStatusEnumRunning PostServersIDActionsChangeProtectionActionResponseActionStatusEnum = "running"
+	PostServersIDActionsChangeProtectionActionResponseActionStatusEnumError   PostServersIDActionsChangeProtectionActionResponseActionStatusEnum = "error"
 )
 
-type PostServersIDActionsChangeProtection201ApplicationJSONActionAction struct {
-	Command   string                                                                  `json:"command"`
-	Error     PostServersIDActionsChangeProtection201ApplicationJSONActionError       `json:"error"`
-	Finished  string                                                                  `json:"finished"`
-	ID        int64                                                                   `json:"id"`
-	Progress  float64                                                                 `json:"progress"`
-	Resources []PostServersIDActionsChangeProtection201ApplicationJSONActionResources `json:"resources"`
-	Started   string                                                                  `json:"started"`
-	Status    PostServersIDActionsChangeProtection201ApplicationJSONActionStatusEnum  `json:"status"`
+type PostServersIDActionsChangeProtectionActionResponseAction struct {
+	Command   string                                                              `json:"command"`
+	Error     PostServersIDActionsChangeProtectionActionResponseActionError       `json:"error"`
+	Finished  string                                                              `json:"finished"`
+	ID        int64                                                               `json:"id"`
+	Progress  float64                                                             `json:"progress"`
+	Resources []PostServersIDActionsChangeProtectionActionResponseActionResources `json:"resources"`
+	Started   string                                                              `json:"started"`
+	Status    PostServersIDActionsChangeProtectionActionResponseActionStatusEnum  `json:"status"`
 }
 
-type PostServersIDActionsChangeProtection201ApplicationJSONActionResponse struct {
-	Action PostServersIDActionsChangeProtection201ApplicationJSONActionAction `json:"action"`
+type PostServersIDActionsChangeProtectionActionResponse struct {
+	Action PostServersIDActionsChangeProtectionActionResponseAction `json:"action"`
 }
 
 type PostServersIDActionsChangeProtectionResponse struct {
-	ActionResponse *PostServersIDActionsChangeProtection201ApplicationJSONActionResponse
+	ActionResponse *PostServersIDActionsChangeProtectionActionResponse
 	ContentType    string
 	StatusCode     int64
 }

@@ -13,7 +13,7 @@ class UpdateQueuePathParams:
     
 
 @dataclass
-class UpdateQueueRequestBodyUpdateQueueRequest:
+class UpdateQueueUpdateQueueRequest:
     friendly_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
     max_size: Optional[int] = field(default=None, metadata={'form': { 'field_name': 'MaxSize' }})
     
@@ -27,7 +27,7 @@ class UpdateQueueSecurity:
 class UpdateQueueRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateQueuePathParams = field(default=None)
-    request: Optional[UpdateQueueRequestBodyUpdateQueueRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateQueueUpdateQueueRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateQueueSecurity = field(default=None)
     
 

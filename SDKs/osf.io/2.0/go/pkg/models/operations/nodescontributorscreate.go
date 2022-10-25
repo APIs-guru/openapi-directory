@@ -4,41 +4,41 @@ type NodesContributorsCreatePathParams struct {
 	NodeID string `pathParam:"style=simple,explode=false,name=node_id"`
 }
 
-type NodesContributorsCreateRequestBodyAttributesPermissionEnum string
+type NodesContributorsCreateContributorAttributesPermissionEnum string
 
 const (
-	NodesContributorsCreateRequestBodyAttributesPermissionEnumRead  NodesContributorsCreateRequestBodyAttributesPermissionEnum = "read"
-	NodesContributorsCreateRequestBodyAttributesPermissionEnumWrite NodesContributorsCreateRequestBodyAttributesPermissionEnum = "write"
-	NodesContributorsCreateRequestBodyAttributesPermissionEnumAdmin NodesContributorsCreateRequestBodyAttributesPermissionEnum = "admin"
+	NodesContributorsCreateContributorAttributesPermissionEnumRead  NodesContributorsCreateContributorAttributesPermissionEnum = "read"
+	NodesContributorsCreateContributorAttributesPermissionEnumWrite NodesContributorsCreateContributorAttributesPermissionEnum = "write"
+	NodesContributorsCreateContributorAttributesPermissionEnumAdmin NodesContributorsCreateContributorAttributesPermissionEnum = "admin"
 )
 
-type NodesContributorsCreateRequestBodyAttributesAttributes struct {
+type NodesContributorsCreateContributorAttributes struct {
 	Bibliographic           *bool                                                       `json:"bibliographic,omitempty"`
 	Index                   *int64                                                      `json:"index,omitempty"`
-	Permission              *NodesContributorsCreateRequestBodyAttributesPermissionEnum `json:"permission,omitempty"`
+	Permission              *NodesContributorsCreateContributorAttributesPermissionEnum `json:"permission,omitempty"`
 	UnregisteredContributor *string                                                     `json:"unregistered_contributor,omitempty"`
 }
 
-type NodesContributorsCreateRequestBodyLinksLinks struct {
+type NodesContributorsCreateContributorLinks struct {
 	Self *string `json:"self,omitempty"`
 }
 
-type NodesContributorsCreateRequestBodyRelationshipsRelationships struct {
+type NodesContributorsCreateContributorRelationships struct {
 	Node string `json:"node"`
 	User string `json:"user"`
 }
 
-type NodesContributorsCreateRequestBodyContributor struct {
-	Attributes    *NodesContributorsCreateRequestBodyAttributesAttributes      `json:"attributes,omitempty"`
-	ID            *string                                                      `json:"id,omitempty"`
-	Links         *NodesContributorsCreateRequestBodyLinksLinks                `json:"links,omitempty"`
-	Relationships NodesContributorsCreateRequestBodyRelationshipsRelationships `json:"relationships"`
-	Type          string                                                       `json:"type"`
+type NodesContributorsCreateContributor struct {
+	Attributes    *NodesContributorsCreateContributorAttributes   `json:"attributes,omitempty"`
+	ID            *string                                         `json:"id,omitempty"`
+	Links         *NodesContributorsCreateContributorLinks        `json:"links,omitempty"`
+	Relationships NodesContributorsCreateContributorRelationships `json:"relationships"`
+	Type          string                                          `json:"type"`
 }
 
 type NodesContributorsCreateRequest struct {
 	PathParams NodesContributorsCreatePathParams
-	Request    NodesContributorsCreateRequestBodyContributor `request:"mediaType=application/json"`
+	Request    NodesContributorsCreateContributor `request:"mediaType=application/json"`
 }
 
 type NodesContributorsCreateResponse struct {

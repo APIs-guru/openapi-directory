@@ -33,7 +33,7 @@ type ListMessageRequest struct {
 	Security    ListMessageSecurity
 }
 
-type ListMessage200ApplicationJSONListMessageResponse struct {
+type ListMessageListMessageResponse struct {
 	End             *int64                          `json:"end,omitempty"`
 	FirstPageURI    *string                         `json:"first_page_uri,omitempty"`
 	Messages        []shared.APIV2010AccountMessage `json:"messages,omitempty"`
@@ -47,6 +47,6 @@ type ListMessage200ApplicationJSONListMessageResponse struct {
 
 type ListMessageResponse struct {
 	ContentType         string
-	ListMessageResponse *ListMessage200ApplicationJSONListMessageResponse
+	ListMessageResponse *ListMessageListMessageResponse
 	StatusCode          int64
 }

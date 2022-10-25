@@ -6,7 +6,7 @@ from sdk.models import shared
 
 @dataclass_json
 @dataclass
-class CreateCustomFileFromUploadRequestBodyCreateCustomFileData:
+class CreateCustomFileFromUploadCreateCustomFileData:
     cache_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cache_id' }})
     
 
@@ -17,27 +17,27 @@ class CreateCustomFileFromUploadSecurity:
 
 @dataclass
 class CreateCustomFileFromUploadRequest:
-    request: CreateCustomFileFromUploadRequestBodyCreateCustomFileData = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: CreateCustomFileFromUploadCreateCustomFileData = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     security: CreateCustomFileFromUploadSecurity = field(default=None)
     
 
 @dataclass_json
 @dataclass
-class CreateCustomFileFromUpload201ApplicationJSONCustomFileCustomFile:
+class CreateCustomFileFromUploadCreateCustomFileResponseCustomFile:
     id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'url' }})
     
-class CreateCustomFileFromUpload201ApplicationJSONStatusEnum(str, Enum):
+class CreateCustomFileFromUploadCreateCustomFileResponseStatusEnum(str, Enum):
     SUCCESS = "success"
     ERROR = "error"
 
 
 @dataclass_json
 @dataclass
-class CreateCustomFileFromUpload201ApplicationJSONCreateCustomFileResponse:
-    custom_file: CreateCustomFileFromUpload201ApplicationJSONCustomFileCustomFile = field(default=None, metadata={'dataclasses_json': { 'field_name': 'custom_file' }})
+class CreateCustomFileFromUploadCreateCustomFileResponse:
+    custom_file: CreateCustomFileFromUploadCreateCustomFileResponseCustomFile = field(default=None, metadata={'dataclasses_json': { 'field_name': 'custom_file' }})
     errors: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'errors' }})
-    status: CreateCustomFileFromUpload201ApplicationJSONStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    status: CreateCustomFileFromUploadCreateCustomFileResponseStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
     
 
 @dataclass
@@ -45,5 +45,5 @@ class CreateCustomFileFromUploadResponse:
     content_type: str = field(default=None)
     status_code: int = field(default=None)
     authentication_error: Optional[shared.AuthenticationError] = field(default=None)
-    create_custom_file_response: Optional[CreateCustomFileFromUpload201ApplicationJSONCreateCustomFileResponse] = field(default=None)
+    create_custom_file_response: Optional[CreateCustomFileFromUploadCreateCustomFileResponse] = field(default=None)
     

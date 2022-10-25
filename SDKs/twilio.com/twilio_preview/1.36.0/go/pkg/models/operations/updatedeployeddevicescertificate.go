@@ -13,7 +13,7 @@ type UpdateDeployedDevicesCertificatePathParams struct {
 	Sid      string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
-type UpdateDeployedDevicesCertificateRequestBodyUpdateDeployedDevicesCertificateRequest struct {
+type UpdateDeployedDevicesCertificateUpdateDeployedDevicesCertificateRequest struct {
 	DeviceSid    *string `form:"name=DeviceSid"`
 	FriendlyName *string `form:"name=FriendlyName"`
 }
@@ -25,7 +25,7 @@ type UpdateDeployedDevicesCertificateSecurity struct {
 type UpdateDeployedDevicesCertificateRequest struct {
 	ServerURL  *string
 	PathParams UpdateDeployedDevicesCertificatePathParams
-	Request    *UpdateDeployedDevicesCertificateRequestBodyUpdateDeployedDevicesCertificateRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateDeployedDevicesCertificateUpdateDeployedDevicesCertificateRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateDeployedDevicesCertificateSecurity
 }
 

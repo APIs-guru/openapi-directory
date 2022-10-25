@@ -28,7 +28,7 @@ type ListWorkerChannelRequest struct {
 	Security    ListWorkerChannelSecurity
 }
 
-type ListWorkerChannel200ApplicationJSONMeta struct {
+type ListWorkerChannelListWorkerChannelResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -38,13 +38,13 @@ type ListWorkerChannel200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListWorkerChannel200ApplicationJSONListWorkerChannelResponse struct {
+type ListWorkerChannelListWorkerChannelResponse struct {
 	Channels []shared.TaskrouterV1WorkspaceWorkerWorkerChannel `json:"channels,omitempty"`
-	Meta     *ListWorkerChannel200ApplicationJSONMeta          `json:"meta,omitempty"`
+	Meta     *ListWorkerChannelListWorkerChannelResponseMeta   `json:"meta,omitempty"`
 }
 
 type ListWorkerChannelResponse struct {
 	ContentType               string
-	ListWorkerChannelResponse *ListWorkerChannel200ApplicationJSONListWorkerChannelResponse
+	ListWorkerChannelResponse *ListWorkerChannelListWorkerChannelResponse
 	StatusCode                int64
 }

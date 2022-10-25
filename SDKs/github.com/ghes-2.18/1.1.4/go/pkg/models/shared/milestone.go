@@ -4,7 +4,7 @@ import (
 	"time"
 )
 
-type MilestoneCreatorSimpleUser struct {
+type MilestoneSimpleUser struct {
 	AvatarURL         string  `json:"avatar_url"`
 	EventsURL         string  `json:"events_url"`
 	FollowersURL      string  `json:"followers_url"`
@@ -34,20 +34,20 @@ const (
 )
 
 type Milestone struct {
-	ClosedAt     time.Time                  `json:"closed_at"`
-	ClosedIssues int64                      `json:"closed_issues"`
-	CreatedAt    time.Time                  `json:"created_at"`
-	Creator      MilestoneCreatorSimpleUser `json:"creator"`
-	Description  string                     `json:"description"`
-	DueOn        time.Time                  `json:"due_on"`
-	HTMLURL      string                     `json:"html_url"`
-	ID           int64                      `json:"id"`
-	LabelsURL    string                     `json:"labels_url"`
-	NodeID       string                     `json:"node_id"`
-	Number       int64                      `json:"number"`
-	OpenIssues   int64                      `json:"open_issues"`
-	State        MilestoneStateEnum         `json:"state"`
-	Title        string                     `json:"title"`
-	UpdatedAt    time.Time                  `json:"updated_at"`
-	URL          string                     `json:"url"`
+	ClosedAt     time.Time           `json:"closed_at"`
+	ClosedIssues int64               `json:"closed_issues"`
+	CreatedAt    time.Time           `json:"created_at"`
+	Creator      MilestoneSimpleUser `json:"creator"`
+	Description  string              `json:"description"`
+	DueOn        time.Time           `json:"due_on"`
+	HTMLURL      string              `json:"html_url"`
+	ID           int64               `json:"id"`
+	LabelsURL    string              `json:"labels_url"`
+	NodeID       string              `json:"node_id"`
+	Number       int64               `json:"number"`
+	OpenIssues   int64               `json:"open_issues"`
+	State        MilestoneStateEnum  `json:"state"`
+	Title        string              `json:"title"`
+	UpdatedAt    time.Time           `json:"updated_at"`
+	URL          string              `json:"url"`
 }

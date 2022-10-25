@@ -18,6 +18,7 @@ class GetAPIV1EnvironmentsEnvironmentIDLogsResponse:
     content_type: str = field(default=None)
     get_api_v1_environments_environment_id_logs_200_application_json_string: Optional[str] = field(default=None)
     get_api_v1_environments_environment_id_logs_200_text_json_string: Optional[str] = field(default=None)
+    get_api_v1_environments_environment_id_logs_200_text_plain_string: Optional[str] = field(default=None)
     problem_details: Optional[dict[str, Any]] = field(default=None)
     status_code: int = field(default=None)
     

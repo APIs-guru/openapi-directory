@@ -21,8 +21,8 @@ type ContactsPostRequest struct {
 }
 
 type ContactsPostResponse struct {
-	Body                                 []byte
 	ContactsPost200ApplicationJSONString *string
+	ContactsPost200TextPlainString       *string
 	ContentType                          string
 	StatusCode                           int64
 }

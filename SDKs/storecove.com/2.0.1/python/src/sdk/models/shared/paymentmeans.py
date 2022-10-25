@@ -2,7 +2,7 @@ from dataclasses import dataclass, field
 from typing import Enum,Optional
 from dataclasses_json import dataclass_json
 
-class PaymentMeansCodeCodeEnum(str, Enum):
+class PaymentMeansCodeEnum(str, Enum):
     CREDIT_TRANSFER = "credit_transfer"
     DIRECT_DEBIT = "direct_debit"
     BANK_CARD = "bank_card"
@@ -27,7 +27,7 @@ class PaymentMeansCodeCodeEnum(str, Enum):
 class PaymentMeans:
     account: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'account' }})
     branche_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'branche_code' }})
-    code: PaymentMeansCodeCodeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'code' }})
+    code: PaymentMeansCodeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'code' }})
     holder: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'holder' }})
     mandate: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'mandate' }})
     network: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'network' }})

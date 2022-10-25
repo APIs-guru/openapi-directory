@@ -13,7 +13,7 @@ type UpdateWebhookPathParams struct {
 	Sid        string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
-type UpdateWebhookRequestBodyUpdateWebhookRequest struct {
+type UpdateWebhookUpdateWebhookRequest struct {
 	EventTypes   []string                       `form:"name=EventTypes"`
 	FriendlyName *string                        `form:"name=FriendlyName"`
 	Status       *shared.WebhookEnumStatusEnum  `form:"name=Status"`
@@ -28,7 +28,7 @@ type UpdateWebhookSecurity struct {
 type UpdateWebhookRequest struct {
 	ServerURL  *string
 	PathParams UpdateWebhookPathParams
-	Request    *UpdateWebhookRequestBodyUpdateWebhookRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateWebhookUpdateWebhookRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateWebhookSecurity
 }
 

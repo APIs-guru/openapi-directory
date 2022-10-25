@@ -12,7 +12,7 @@ class CreateSipCredentialListPathParams:
     
 
 @dataclass
-class CreateSipCredentialListRequestBodyCreateSipCredentialListRequest:
+class CreateSipCredentialListCreateSipCredentialListRequest:
     friendly_name: str = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
     
 
@@ -25,7 +25,7 @@ class CreateSipCredentialListSecurity:
 class CreateSipCredentialListRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateSipCredentialListPathParams = field(default=None)
-    request: Optional[CreateSipCredentialListRequestBodyCreateSipCredentialListRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateSipCredentialListCreateSipCredentialListRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateSipCredentialListSecurity = field(default=None)
     
 

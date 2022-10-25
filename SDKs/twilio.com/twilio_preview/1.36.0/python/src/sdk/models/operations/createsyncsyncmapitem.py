@@ -13,7 +13,7 @@ class CreateSyncSyncMapItemPathParams:
     
 
 @dataclass
-class CreateSyncSyncMapItemRequestBodyCreateSyncSyncMapItemRequest:
+class CreateSyncSyncMapItemCreateSyncSyncMapItemRequest:
     data: Any = field(default=None, metadata={'form': { 'field_name': 'Data' }})
     key: str = field(default=None, metadata={'form': { 'field_name': 'Key' }})
     
@@ -27,7 +27,7 @@ class CreateSyncSyncMapItemSecurity:
 class CreateSyncSyncMapItemRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateSyncSyncMapItemPathParams = field(default=None)
-    request: Optional[CreateSyncSyncMapItemRequestBodyCreateSyncSyncMapItemRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateSyncSyncMapItemCreateSyncSyncMapItemRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateSyncSyncMapItemSecurity = field(default=None)
     
 

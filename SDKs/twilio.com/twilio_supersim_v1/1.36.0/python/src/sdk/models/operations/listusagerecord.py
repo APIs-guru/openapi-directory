@@ -37,7 +37,7 @@ class ListUsageRecordRequest:
 
 @dataclass_json
 @dataclass
-class ListUsageRecord200ApplicationJSONMeta:
+class ListUsageRecordListUsageRecordResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -49,14 +49,14 @@ class ListUsageRecord200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListUsageRecord200ApplicationJSONListUsageRecordResponse:
-    meta: Optional[ListUsageRecord200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+class ListUsageRecordListUsageRecordResponse:
+    meta: Optional[ListUsageRecordListUsageRecordResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     usage_records: Optional[List[shared.SupersimV1UsageRecord]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'usage_records' }})
     
 
 @dataclass
 class ListUsageRecordResponse:
     content_type: str = field(default=None)
-    list_usage_record_response: Optional[ListUsageRecord200ApplicationJSONListUsageRecordResponse] = field(default=None)
+    list_usage_record_response: Optional[ListUsageRecordListUsageRecordResponse] = field(default=None)
     status_code: int = field(default=None)
     

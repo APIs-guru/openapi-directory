@@ -32,7 +32,7 @@ class ListSyncSyncMapRequest:
 
 @dataclass_json
 @dataclass
-class ListSyncSyncMap200ApplicationJSONMeta:
+class ListSyncSyncMapListSyncSyncMapResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -44,14 +44,14 @@ class ListSyncSyncMap200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListSyncSyncMap200ApplicationJSONListSyncSyncMapResponse:
+class ListSyncSyncMapListSyncSyncMapResponse:
     maps: Optional[List[shared.PreviewSyncServiceSyncMap]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'maps' }})
-    meta: Optional[ListSyncSyncMap200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+    meta: Optional[ListSyncSyncMapListSyncSyncMapResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     
 
 @dataclass
 class ListSyncSyncMapResponse:
     content_type: str = field(default=None)
-    list_sync_sync_map_response: Optional[ListSyncSyncMap200ApplicationJSONListSyncSyncMapResponse] = field(default=None)
+    list_sync_sync_map_response: Optional[ListSyncSyncMapListSyncSyncMapResponse] = field(default=None)
     status_code: int = field(default=None)
     

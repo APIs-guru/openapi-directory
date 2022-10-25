@@ -4,7 +4,7 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-type PostUserRequestBodySample struct {
+type PostUserSample struct {
 	Admin    *bool   `json:"admin,omitempty"`
 	Email    *string `json:"email,omitempty"`
 	Name     *string `json:"name,omitempty"`
@@ -12,7 +12,7 @@ type PostUserRequestBodySample struct {
 }
 
 type PostUserRequest struct {
-	Request PostUserRequestBodySample `request:"mediaType=application/json"`
+	Request PostUserSample `request:"mediaType=application/json"`
 }
 
 type PostUserResponse struct {

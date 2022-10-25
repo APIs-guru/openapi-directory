@@ -17,40 +17,40 @@ type GetCombinedSubmissionRequest struct {
 	Security   GetCombinedSubmissionSecurity
 }
 
-type GetCombinedSubmission200ApplicationJSONSourcePdfs1TypeEnum string
+type GetCombinedSubmissionCombinedSubmissionSourcePdfs1TypeEnum string
 
 const (
-	GetCombinedSubmission200ApplicationJSONSourcePdfs1TypeEnumSubmission         GetCombinedSubmission200ApplicationJSONSourcePdfs1TypeEnum = "submission"
-	GetCombinedSubmission200ApplicationJSONSourcePdfs1TypeEnumCombinedSubmission GetCombinedSubmission200ApplicationJSONSourcePdfs1TypeEnum = "combined_submission"
-	GetCombinedSubmission200ApplicationJSONSourcePdfs1TypeEnumTemplate           GetCombinedSubmission200ApplicationJSONSourcePdfs1TypeEnum = "template"
-	GetCombinedSubmission200ApplicationJSONSourcePdfs1TypeEnumCustomFile         GetCombinedSubmission200ApplicationJSONSourcePdfs1TypeEnum = "custom_file"
+	GetCombinedSubmissionCombinedSubmissionSourcePdfs1TypeEnumSubmission         GetCombinedSubmissionCombinedSubmissionSourcePdfs1TypeEnum = "submission"
+	GetCombinedSubmissionCombinedSubmissionSourcePdfs1TypeEnumCombinedSubmission GetCombinedSubmissionCombinedSubmissionSourcePdfs1TypeEnum = "combined_submission"
+	GetCombinedSubmissionCombinedSubmissionSourcePdfs1TypeEnumTemplate           GetCombinedSubmissionCombinedSubmissionSourcePdfs1TypeEnum = "template"
+	GetCombinedSubmissionCombinedSubmissionSourcePdfs1TypeEnumCustomFile         GetCombinedSubmissionCombinedSubmissionSourcePdfs1TypeEnum = "custom_file"
 )
 
-type GetCombinedSubmission200ApplicationJSONSourcePdfs1 struct {
+type GetCombinedSubmissionCombinedSubmissionSourcePdfs1 struct {
 	ID   string                                                     `json:"id"`
-	Type GetCombinedSubmission200ApplicationJSONSourcePdfs1TypeEnum `json:"type"`
+	Type GetCombinedSubmissionCombinedSubmissionSourcePdfs1TypeEnum `json:"type"`
 }
 
-type GetCombinedSubmission200ApplicationJSONSourcePdfs2TypeEnum string
+type GetCombinedSubmissionCombinedSubmissionSourcePdfs2TypeEnum string
 
 const (
-	GetCombinedSubmission200ApplicationJSONSourcePdfs2TypeEnumURL GetCombinedSubmission200ApplicationJSONSourcePdfs2TypeEnum = "url"
+	GetCombinedSubmissionCombinedSubmissionSourcePdfs2TypeEnumURL GetCombinedSubmissionCombinedSubmissionSourcePdfs2TypeEnum = "url"
 )
 
-type GetCombinedSubmission200ApplicationJSONSourcePdfs2 struct {
-	Type GetCombinedSubmission200ApplicationJSONSourcePdfs2TypeEnum `json:"type"`
+type GetCombinedSubmissionCombinedSubmissionSourcePdfs2 struct {
+	Type GetCombinedSubmissionCombinedSubmissionSourcePdfs2TypeEnum `json:"type"`
 	URL  string                                                     `json:"url"`
 }
 
-type GetCombinedSubmission200ApplicationJSONStateEnum string
+type GetCombinedSubmissionCombinedSubmissionStateEnum string
 
 const (
-	GetCombinedSubmission200ApplicationJSONStateEnumPending   GetCombinedSubmission200ApplicationJSONStateEnum = "pending"
-	GetCombinedSubmission200ApplicationJSONStateEnumProcessed GetCombinedSubmission200ApplicationJSONStateEnum = "processed"
-	GetCombinedSubmission200ApplicationJSONStateEnumError     GetCombinedSubmission200ApplicationJSONStateEnum = "error"
+	GetCombinedSubmissionCombinedSubmissionStateEnumPending   GetCombinedSubmissionCombinedSubmissionStateEnum = "pending"
+	GetCombinedSubmissionCombinedSubmissionStateEnumProcessed GetCombinedSubmissionCombinedSubmissionStateEnum = "processed"
+	GetCombinedSubmissionCombinedSubmissionStateEnumError     GetCombinedSubmissionCombinedSubmissionStateEnum = "error"
 )
 
-type GetCombinedSubmission200ApplicationJSONCombinedSubmission struct {
+type GetCombinedSubmissionCombinedSubmission struct {
 	Actions       []shared.CombinedSubmissionAction                `json:"actions,omitempty"`
 	DownloadURL   *string                                          `json:"download_url,omitempty"`
 	Expired       bool                                             `json:"expired"`
@@ -59,7 +59,7 @@ type GetCombinedSubmission200ApplicationJSONCombinedSubmission struct {
 	Metadata      map[string]interface{}                           `json:"metadata,omitempty"`
 	PdfHash       *string                                          `json:"pdf_hash,omitempty"`
 	SourcePdfs    []interface{}                                    `json:"source_pdfs"`
-	State         GetCombinedSubmission200ApplicationJSONStateEnum `json:"state"`
+	State         GetCombinedSubmissionCombinedSubmissionStateEnum `json:"state"`
 	SubmissionIds []string                                         `json:"submission_ids"`
 }
 
@@ -67,6 +67,6 @@ type GetCombinedSubmissionResponse struct {
 	ContentType         string
 	StatusCode          int64
 	AuthenticationError *shared.AuthenticationError
-	CombinedSubmission  *GetCombinedSubmission200ApplicationJSONCombinedSubmission
+	CombinedSubmission  *GetCombinedSubmissionCombinedSubmission
 	Error               *shared.Error
 }

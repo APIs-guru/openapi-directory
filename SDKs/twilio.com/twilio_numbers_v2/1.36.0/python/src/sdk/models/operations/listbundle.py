@@ -40,7 +40,7 @@ class ListBundleRequest:
 
 @dataclass_json
 @dataclass
-class ListBundle200ApplicationJSONMeta:
+class ListBundleListBundleResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -52,14 +52,14 @@ class ListBundle200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListBundle200ApplicationJSONListBundleResponse:
-    meta: Optional[ListBundle200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+class ListBundleListBundleResponse:
+    meta: Optional[ListBundleListBundleResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     results: Optional[List[shared.NumbersV2RegulatoryComplianceBundle]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'results' }})
     
 
 @dataclass
 class ListBundleResponse:
     content_type: str = field(default=None)
-    list_bundle_response: Optional[ListBundle200ApplicationJSONListBundleResponse] = field(default=None)
+    list_bundle_response: Optional[ListBundleListBundleResponse] = field(default=None)
     status_code: int = field(default=None)
     

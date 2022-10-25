@@ -3,12 +3,12 @@ from typing import Enum,List,Optional
 from dataclasses_json import dataclass_json
 from . import nestedcable
 
-class WritablePowerOutletFeedLegFeedLegEnum(str, Enum):
+class WritablePowerOutletFeedLegEnum(str, Enum):
     A = "A"
     B = "B"
     C = "C"
 
-class WritablePowerOutletTypeTypeEnum(str, Enum):
+class WritablePowerOutletTypeEnum(str, Enum):
     IEC_60320_C5 = "iec-60320-c5"
     IEC_60320_C7 = "iec-60320-c7"
     IEC_60320_C13 = "iec-60320-c13"
@@ -86,10 +86,10 @@ class WritablePowerOutlet:
     connection_status: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'connection_status' }})
     description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
     device: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'device' }})
-    feed_leg: Optional[WritablePowerOutletFeedLegFeedLegEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'feed_leg' }})
+    feed_leg: Optional[WritablePowerOutletFeedLegEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'feed_leg' }})
     id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
     power_port: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'power_port' }})
     tags: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
-    type: Optional[WritablePowerOutletTypeTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    type: Optional[WritablePowerOutletTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     

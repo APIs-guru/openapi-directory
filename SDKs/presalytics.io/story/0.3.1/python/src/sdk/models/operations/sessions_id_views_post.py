@@ -14,7 +14,7 @@ class SessionsIDViewsPostPathParams:
 
 @dataclass_json
 @dataclass
-class SessionsIDViewsPostRequestBodyRequiredParametersToCreateAView:
+class SessionsIDViewsPostRequiredParametersToCreateAView:
     active_m_secs: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'activeMSecs' }})
     additional: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'additional' }})
     end_time: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'endTime', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
@@ -25,7 +25,7 @@ class SessionsIDViewsPostRequestBodyRequiredParametersToCreateAView:
 @dataclass
 class SessionsIDViewsPostRequest:
     path_params: SessionsIDViewsPostPathParams = field(default=None)
-    request: SessionsIDViewsPostRequestBodyRequiredParametersToCreateAView = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: SessionsIDViewsPostRequiredParametersToCreateAView = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass

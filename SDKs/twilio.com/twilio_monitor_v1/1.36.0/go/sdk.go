@@ -170,7 +170,7 @@ func (s *SDK) ListAlert(ctx context.Context, request operations.ListAlertRequest
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListAlert200ApplicationJSONListAlertResponse
+			var out *operations.ListAlertListAlertResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -215,7 +215,7 @@ func (s *SDK) ListEvent(ctx context.Context, request operations.ListEventRequest
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListEvent200ApplicationJSONListEventResponse
+			var out *operations.ListEventListEventResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}

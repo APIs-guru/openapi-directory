@@ -7,7 +7,7 @@ CREATE_BRAND_REGISTRATIONS_SERVERS = [
 
 
 @dataclass
-class CreateBrandRegistrationsRequestBodyCreateBrandRegistrationsRequest:
+class CreateBrandRegistrationsCreateBrandRegistrationsRequest:
     a2_p_profile_bundle_sid: str = field(default=None, metadata={'form': { 'field_name': 'A2PProfileBundleSid' }})
     brand_type: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'BrandType' }})
     customer_profile_bundle_sid: str = field(default=None, metadata={'form': { 'field_name': 'CustomerProfileBundleSid' }})
@@ -23,7 +23,7 @@ class CreateBrandRegistrationsSecurity:
 @dataclass
 class CreateBrandRegistrationsRequest:
     server_url: Optional[str] = field(default=None)
-    request: Optional[CreateBrandRegistrationsRequestBodyCreateBrandRegistrationsRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateBrandRegistrationsCreateBrandRegistrationsRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateBrandRegistrationsSecurity = field(default=None)
     
 

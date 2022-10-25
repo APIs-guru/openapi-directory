@@ -21,7 +21,7 @@ class UpdateServiceConversationHeaders:
     
 
 @dataclass
-class UpdateServiceConversationRequestBodyUpdateServiceConversationRequest:
+class UpdateServiceConversationUpdateServiceConversationRequest:
     attributes: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Attributes' }})
     date_created: Optional[datetime] = field(default=None, metadata={'form': { 'field_name': 'DateCreated' }})
     date_updated: Optional[datetime] = field(default=None, metadata={'form': { 'field_name': 'DateUpdated' }})
@@ -43,7 +43,7 @@ class UpdateServiceConversationRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateServiceConversationPathParams = field(default=None)
     headers: UpdateServiceConversationHeaders = field(default=None)
-    request: Optional[UpdateServiceConversationRequestBodyUpdateServiceConversationRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateServiceConversationUpdateServiceConversationRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateServiceConversationSecurity = field(default=None)
     
 

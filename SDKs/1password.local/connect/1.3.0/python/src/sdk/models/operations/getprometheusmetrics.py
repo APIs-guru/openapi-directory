@@ -12,7 +12,7 @@ class GetPrometheusMetricsRequest:
 
 @dataclass
 class GetPrometheusMetricsResponse:
-    body: bytes = field(default=None)
     content_type: str = field(default=None)
+    get_prometheus_metrics_200_text_plain_string: Optional[str] = field(default=None)
     status_code: int = field(default=None)
     

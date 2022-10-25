@@ -14,7 +14,7 @@ type CreateChallengePathParams struct {
 	ServiceSid string `pathParam:"style=simple,explode=false,name=ServiceSid"`
 }
 
-type CreateChallengeRequestBodyCreateChallengeRequest struct {
+type CreateChallengeCreateChallengeRequest struct {
 	AuthPayload    *string       `form:"name=AuthPayload"`
 	DetailsFields  []interface{} `form:"name=Details.Fields"`
 	DetailsMessage *string       `form:"name=Details.Message"`
@@ -30,7 +30,7 @@ type CreateChallengeSecurity struct {
 type CreateChallengeRequest struct {
 	ServerURL  *string
 	PathParams CreateChallengePathParams
-	Request    *CreateChallengeRequestBodyCreateChallengeRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateChallengeCreateChallengeRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateChallengeSecurity
 }
 

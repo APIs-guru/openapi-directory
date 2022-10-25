@@ -14,7 +14,7 @@ class UpdateInteractionChannelParticipantPathParams:
     
 
 @dataclass
-class UpdateInteractionChannelParticipantRequestBodyUpdateInteractionChannelParticipantRequest:
+class UpdateInteractionChannelParticipantUpdateInteractionChannelParticipantRequest:
     status: shared.InteractionChannelParticipantEnumStatusEnum = field(default=None, metadata={'form': { 'field_name': 'Status' }})
     
 
@@ -27,7 +27,7 @@ class UpdateInteractionChannelParticipantSecurity:
 class UpdateInteractionChannelParticipantRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateInteractionChannelParticipantPathParams = field(default=None)
-    request: Optional[UpdateInteractionChannelParticipantRequestBodyUpdateInteractionChannelParticipantRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateInteractionChannelParticipantUpdateInteractionChannelParticipantRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateInteractionChannelParticipantSecurity = field(default=None)
     
 

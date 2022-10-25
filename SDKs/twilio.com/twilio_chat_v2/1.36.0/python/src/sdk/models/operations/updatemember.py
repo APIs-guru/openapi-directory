@@ -22,7 +22,7 @@ class UpdateMemberHeaders:
     
 
 @dataclass
-class UpdateMemberRequestBodyUpdateMemberRequest:
+class UpdateMemberUpdateMemberRequest:
     attributes: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Attributes' }})
     date_created: Optional[datetime] = field(default=None, metadata={'form': { 'field_name': 'DateCreated' }})
     date_updated: Optional[datetime] = field(default=None, metadata={'form': { 'field_name': 'DateUpdated' }})
@@ -41,7 +41,7 @@ class UpdateMemberRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateMemberPathParams = field(default=None)
     headers: UpdateMemberHeaders = field(default=None)
-    request: Optional[UpdateMemberRequestBodyUpdateMemberRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateMemberUpdateMemberRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateMemberSecurity = field(default=None)
     
 

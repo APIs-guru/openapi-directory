@@ -3,7 +3,7 @@ from typing import Any,Enum,List,Optional
 from dataclasses_json import dataclass_json
 from . import country_enum
 
-class LegalEntityAdvertisementsDocumentTypeEnum(str, Enum):
+class LegalEntityDocumentTypeEnum(str, Enum):
     INVOICE = "invoice"
     INVOICE_RESPONSE = "invoice_response"
 
@@ -11,7 +11,7 @@ class LegalEntityAdvertisementsDocumentTypeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class LegalEntity:
-    advertisements: Optional[List[LegalEntityAdvertisementsDocumentTypeEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'advertisements' }})
+    advertisements: Optional[List[LegalEntityDocumentTypeEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'advertisements' }})
     city: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'city' }})
     country: Optional[country_enum.CountryEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'country' }})
     county: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'county' }})

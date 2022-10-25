@@ -23,18 +23,18 @@ class PostServersIDActionsChangeDNSPtrRequest:
 
 @dataclass_json
 @dataclass
-class PostServersIDActionsChangeDNSPtr201ApplicationJSONActionError:
+class PostServersIDActionsChangeDNSPtrActionResponseActionError:
     code: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'code' }})
     message: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'message' }})
     
 
 @dataclass_json
 @dataclass
-class PostServersIDActionsChangeDNSPtr201ApplicationJSONActionResources:
+class PostServersIDActionsChangeDNSPtrActionResponseActionResources:
     id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     type: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     
-class PostServersIDActionsChangeDNSPtr201ApplicationJSONActionStatusEnum(str, Enum):
+class PostServersIDActionsChangeDNSPtrActionResponseActionStatusEnum(str, Enum):
     SUCCESS = "success"
     RUNNING = "running"
     ERROR = "error"
@@ -42,26 +42,26 @@ class PostServersIDActionsChangeDNSPtr201ApplicationJSONActionStatusEnum(str, En
 
 @dataclass_json
 @dataclass
-class PostServersIDActionsChangeDNSPtr201ApplicationJSONActionAction:
+class PostServersIDActionsChangeDNSPtrActionResponseAction:
     command: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'command' }})
-    error: PostServersIDActionsChangeDNSPtr201ApplicationJSONActionError = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
+    error: PostServersIDActionsChangeDNSPtrActionResponseActionError = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
     finished: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'finished' }})
     id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     progress: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'progress' }})
-    resources: List[PostServersIDActionsChangeDNSPtr201ApplicationJSONActionResources] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resources' }})
+    resources: List[PostServersIDActionsChangeDNSPtrActionResponseActionResources] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resources' }})
     started: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'started' }})
-    status: PostServersIDActionsChangeDNSPtr201ApplicationJSONActionStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    status: PostServersIDActionsChangeDNSPtrActionResponseActionStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
     
 
 @dataclass_json
 @dataclass
-class PostServersIDActionsChangeDNSPtr201ApplicationJSONActionResponse:
-    action: PostServersIDActionsChangeDNSPtr201ApplicationJSONActionAction = field(default=None, metadata={'dataclasses_json': { 'field_name': 'action' }})
+class PostServersIDActionsChangeDNSPtrActionResponse:
+    action: PostServersIDActionsChangeDNSPtrActionResponseAction = field(default=None, metadata={'dataclasses_json': { 'field_name': 'action' }})
     
 
 @dataclass
 class PostServersIDActionsChangeDNSPtrResponse:
-    action_response: Optional[PostServersIDActionsChangeDNSPtr201ApplicationJSONActionResponse] = field(default=None)
+    action_response: Optional[PostServersIDActionsChangeDNSPtrActionResponse] = field(default=None)
     content_type: str = field(default=None)
     status_code: int = field(default=None)
     

@@ -27,7 +27,7 @@ type ListShortCodeRequest struct {
 	Security    ListShortCodeSecurity
 }
 
-type ListShortCode200ApplicationJSONMeta struct {
+type ListShortCodeListShortCodeResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -37,13 +37,13 @@ type ListShortCode200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListShortCode200ApplicationJSONListShortCodeResponse struct {
-	Meta       *ListShortCode200ApplicationJSONMeta `json:"meta,omitempty"`
-	ShortCodes []shared.ProxyV1ServiceShortCode     `json:"short_codes,omitempty"`
+type ListShortCodeListShortCodeResponse struct {
+	Meta       *ListShortCodeListShortCodeResponseMeta `json:"meta,omitempty"`
+	ShortCodes []shared.ProxyV1ServiceShortCode        `json:"short_codes,omitempty"`
 }
 
 type ListShortCodeResponse struct {
 	ContentType           string
-	ListShortCodeResponse *ListShortCode200ApplicationJSONListShortCodeResponse
+	ListShortCodeResponse *ListShortCodeListShortCodeResponse
 	StatusCode            int64
 }

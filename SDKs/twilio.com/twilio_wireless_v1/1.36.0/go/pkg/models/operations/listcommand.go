@@ -26,7 +26,7 @@ type ListCommandRequest struct {
 	Security    ListCommandSecurity
 }
 
-type ListCommand200ApplicationJSONMeta struct {
+type ListCommandListCommandResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -36,13 +36,13 @@ type ListCommand200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListCommand200ApplicationJSONListCommandResponse struct {
-	Commands []shared.WirelessV1Command         `json:"commands,omitempty"`
-	Meta     *ListCommand200ApplicationJSONMeta `json:"meta,omitempty"`
+type ListCommandListCommandResponse struct {
+	Commands []shared.WirelessV1Command          `json:"commands,omitempty"`
+	Meta     *ListCommandListCommandResponseMeta `json:"meta,omitempty"`
 }
 
 type ListCommandResponse struct {
 	ContentType         string
-	ListCommandResponse *ListCommand200ApplicationJSONListCommandResponse
+	ListCommandResponse *ListCommandListCommandResponse
 	StatusCode          int64
 }

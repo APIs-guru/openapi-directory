@@ -32,7 +32,7 @@ type ListUsageRecordRequest struct {
 	Security    ListUsageRecordSecurity
 }
 
-type ListUsageRecord200ApplicationJSONListUsageRecordResponse struct {
+type ListUsageRecordListUsageRecordResponse struct {
 	End             *int64                                   `json:"end,omitempty"`
 	FirstPageURI    *string                                  `json:"first_page_uri,omitempty"`
 	NextPageURI     *string                                  `json:"next_page_uri,omitempty"`
@@ -46,6 +46,6 @@ type ListUsageRecord200ApplicationJSONListUsageRecordResponse struct {
 
 type ListUsageRecordResponse struct {
 	ContentType             string
-	ListUsageRecordResponse *ListUsageRecord200ApplicationJSONListUsageRecordResponse
+	ListUsageRecordResponse *ListUsageRecordListUsageRecordResponse
 	StatusCode              int64
 }

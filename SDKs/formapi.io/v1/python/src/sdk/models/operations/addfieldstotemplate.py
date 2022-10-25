@@ -7,19 +7,19 @@ from dataclasses_json import dataclass_json
 class AddFieldsToTemplatePathParams:
     template_id: str = field(default=None, metadata={'path_param': { 'field_name': 'template_id', 'style': 'simple', 'explode': False }})
     
-class AddFieldsToTemplateRequestBodyFieldsAlignmentEnum(str, Enum):
+class AddFieldsToTemplateAddFieldsDataFieldsAlignmentEnum(str, Enum):
     LEFT = "left"
     CENTER = "center"
     RIGHT = "right"
 
-class AddFieldsToTemplateRequestBodyFieldsCheckCharacterEnum(str, Enum):
+class AddFieldsToTemplateAddFieldsDataFieldsCheckCharacterEnum(str, Enum):
     AND_NUMBER_10003_ = "&#10003;"
     AND_NUMBER_10004_ = "&#10004;"
     AND_NUMBER_10006_ = "&#10006;"
     AND_NUMBER_10007_ = "&#10007;"
     AND_NUMBER_10008_ = "&#10008;"
 
-class AddFieldsToTemplateRequestBodyFieldsDisplayTypeEnum(str, Enum):
+class AddFieldsToTemplateAddFieldsDataFieldsDisplayTypeEnum(str, Enum):
     TEXT = "text"
     CHECK = "check"
     QRCODE = "qrcode"
@@ -27,7 +27,7 @@ class AddFieldsToTemplateRequestBodyFieldsDisplayTypeEnum(str, Enum):
     IMAGE = "image"
     SHAPE = "shape"
 
-class AddFieldsToTemplateRequestBodyFieldsImageGravityEnum(str, Enum):
+class AddFieldsToTemplateAddFieldsDataFieldsImageGravityEnum(str, Enum):
     NORTH_WEST = "NorthWest"
     NORTH = "North"
     NORTH_EAST = "NorthEast"
@@ -38,12 +38,12 @@ class AddFieldsToTemplateRequestBodyFieldsImageGravityEnum(str, Enum):
     SOUTH = "South"
     SOUTH_EAST = "SouthEast"
 
-class AddFieldsToTemplateRequestBodyFieldsImageScaleTypeEnum(str, Enum):
+class AddFieldsToTemplateAddFieldsDataFieldsImageScaleTypeEnum(str, Enum):
     FIT = "fit"
     FILL = "fill"
     STRETCH = "stretch"
 
-class AddFieldsToTemplateRequestBodyFieldsNumberConditionTypeEnum(str, Enum):
+class AddFieldsToTemplateAddFieldsDataFieldsNumberConditionTypeEnum(str, Enum):
     EQUALS = "equals"
     RANGE = "range"
     GTE = "gte"
@@ -51,24 +51,24 @@ class AddFieldsToTemplateRequestBodyFieldsNumberConditionTypeEnum(str, Enum):
     LTE = "lte"
     LT = "lt"
 
-class AddFieldsToTemplateRequestBodyFieldsOverflowEnum(str, Enum):
+class AddFieldsToTemplateAddFieldsDataFieldsOverflowEnum(str, Enum):
     SHRINK_TO_FIT = "shrink_to_fit"
     TRUNCATE = "truncate"
 
-class AddFieldsToTemplateRequestBodyFieldsShapeTypeEnum(str, Enum):
+class AddFieldsToTemplateAddFieldsDataFieldsShapeTypeEnum(str, Enum):
     SQUARE = "square"
     RECTANGLE = "rectangle"
     CIRCLE = "circle"
     ELLIPSE = "ellipse"
 
-class AddFieldsToTemplateRequestBodyFieldsStringConditionTypeEnum(str, Enum):
+class AddFieldsToTemplateAddFieldsDataFieldsStringConditionTypeEnum(str, Enum):
     EQUALS = "equals"
     CONTAINS = "contains"
     STARTS_WITH = "starts_with"
     ENDS_WITH = "ends_with"
     REGEX = "regex"
 
-class AddFieldsToTemplateRequestBodyFieldsTypeEnum(str, Enum):
+class AddFieldsToTemplateAddFieldsDataFieldsTypeEnum(str, Enum):
     STRING = "string"
     NUMBER = "number"
     BOOLEAN = "boolean"
@@ -82,7 +82,7 @@ class AddFieldsToTemplateRequestBodyFieldsTypeEnum(str, Enum):
     BARCODE = "barcode"
     COMBINED = "combined"
 
-class AddFieldsToTemplateRequestBodyFieldsVAlignmentEnum(str, Enum):
+class AddFieldsToTemplateAddFieldsDataFieldsVAlignmentEnum(str, Enum):
     BOTTOM = "bottom"
     CENTER = "center"
     TOP = "top"
@@ -90,8 +90,8 @@ class AddFieldsToTemplateRequestBodyFieldsVAlignmentEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class AddFieldsToTemplateRequestBodyFields:
-    alignment: Optional[AddFieldsToTemplateRequestBodyFieldsAlignmentEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'alignment' }})
+class AddFieldsToTemplateAddFieldsDataFields:
+    alignment: Optional[AddFieldsToTemplateAddFieldsDataFieldsAlignmentEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'alignment' }})
     auto_calculate_max_length: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'autoCalculateMaxLength' }})
     background_color: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'backgroundColor' }})
     background_color_field_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'backgroundColorFieldName' }})
@@ -99,7 +99,7 @@ class AddFieldsToTemplateRequestBodyFields:
     barcode_symbology: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'barcodeSymbology' }})
     bold: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'bold' }})
     character_spacing: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'characterSpacing' }})
-    check_character: Optional[AddFieldsToTemplateRequestBodyFieldsCheckCharacterEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'checkCharacter' }})
+    check_character: Optional[AddFieldsToTemplateAddFieldsDataFieldsCheckCharacterEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'checkCharacter' }})
     check_color: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'checkColor' }})
     check_color_field_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'checkColorFieldName' }})
     check_color_field_required: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'checkColorFieldRequired' }})
@@ -119,7 +119,7 @@ class AddFieldsToTemplateRequestBodyFields:
     decimal_places: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'decimalPlaces' }})
     default: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'default' }})
     description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    display_type: Optional[AddFieldsToTemplateRequestBodyFieldsDisplayTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'displayType' }})
+    display_type: Optional[AddFieldsToTemplateAddFieldsDataFieldsDisplayTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'displayType' }})
     exclusive_maximum: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'exclusiveMaximum' }})
     exclusive_minimum: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'exclusiveMinimum' }})
     false_text: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'falseText' }})
@@ -127,8 +127,8 @@ class AddFieldsToTemplateRequestBodyFields:
     height: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'height' }})
     hidden: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'hidden' }})
     id: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    image_gravity: Optional[AddFieldsToTemplateRequestBodyFieldsImageGravityEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'imageGravity' }})
-    image_scale_type: Optional[AddFieldsToTemplateRequestBodyFieldsImageScaleTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'imageScaleType' }})
+    image_gravity: Optional[AddFieldsToTemplateAddFieldsDataFieldsImageGravityEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'imageGravity' }})
+    image_scale_type: Optional[AddFieldsToTemplateAddFieldsDataFieldsImageScaleTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'imageScaleType' }})
     include_time: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'includeTime' }})
     integer: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'integer' }})
     invert_boolean_condition: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'invertBooleanCondition' }})
@@ -144,10 +144,10 @@ class AddFieldsToTemplateRequestBodyFields:
     number_condition_range_exclusive_min: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'numberConditionRangeExclusiveMin' }})
     number_condition_range_max: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'numberConditionRangeMax' }})
     number_condition_range_min: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'numberConditionRangeMin' }})
-    number_condition_type: Optional[AddFieldsToTemplateRequestBodyFieldsNumberConditionTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'numberConditionType' }})
+    number_condition_type: Optional[AddFieldsToTemplateAddFieldsDataFieldsNumberConditionTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'numberConditionType' }})
     opacity: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'opacity' }})
     option_list: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'optionList' }})
-    overflow: Optional[AddFieldsToTemplateRequestBodyFieldsOverflowEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'overflow' }})
+    overflow: Optional[AddFieldsToTemplateAddFieldsDataFieldsOverflowEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'overflow' }})
     page: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'page' }})
     qrcode_color: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'qrcodeColor' }})
     qrcode_color_field_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'qrcodeColorFieldName' }})
@@ -161,18 +161,18 @@ class AddFieldsToTemplateRequestBodyFields:
     shape_fill_color: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'shapeFillColor' }})
     shape_fill_color_field_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'shapeFillColorFieldName' }})
     shape_fill_color_field_required: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'shapeFillColorFieldRequired' }})
-    shape_type: Optional[AddFieldsToTemplateRequestBodyFieldsShapeTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'shapeType' }})
+    shape_type: Optional[AddFieldsToTemplateAddFieldsDataFieldsShapeTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'shapeType' }})
     signature_allow_draw: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'signatureAllowDraw' }})
     signature_allow_type: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'signatureAllowType' }})
     static: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'static' }})
     strikethrough: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'strikethrough' }})
-    string_condition_type: Optional[AddFieldsToTemplateRequestBodyFieldsStringConditionTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'stringConditionType' }})
+    string_condition_type: Optional[AddFieldsToTemplateAddFieldsDataFieldsStringConditionTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'stringConditionType' }})
     title: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'title' }})
     true_text: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'trueText' }})
-    type: Optional[AddFieldsToTemplateRequestBodyFieldsTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    type: Optional[AddFieldsToTemplateAddFieldsDataFieldsTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     typeface: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'typeface' }})
     uppercase: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uppercase' }})
-    v_alignment: Optional[AddFieldsToTemplateRequestBodyFieldsVAlignmentEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'vAlignment' }})
+    v_alignment: Optional[AddFieldsToTemplateAddFieldsDataFieldsVAlignmentEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'vAlignment' }})
     width: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'width' }})
     x: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'x' }})
     y: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'y' }})
@@ -180,8 +180,8 @@ class AddFieldsToTemplateRequestBodyFields:
 
 @dataclass_json
 @dataclass
-class AddFieldsToTemplateRequestBodyAddFieldsData:
-    fields: List[AddFieldsToTemplateRequestBodyFields] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'fields' }})
+class AddFieldsToTemplateAddFieldsData:
+    fields: List[AddFieldsToTemplateAddFieldsDataFields] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'fields' }})
     
 
 @dataclass
@@ -192,25 +192,25 @@ class AddFieldsToTemplateSecurity:
 @dataclass
 class AddFieldsToTemplateRequest:
     path_params: AddFieldsToTemplatePathParams = field(default=None)
-    request: AddFieldsToTemplateRequestBodyAddFieldsData = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: AddFieldsToTemplateAddFieldsData = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     security: AddFieldsToTemplateSecurity = field(default=None)
     
-class AddFieldsToTemplate200ApplicationJSONStatusEnum(str, Enum):
+class AddFieldsToTemplateAddFieldsTemplateResponseStatusEnum(str, Enum):
     SUCCESS = "success"
     ERROR = "error"
 
 
 @dataclass_json
 @dataclass
-class AddFieldsToTemplate200ApplicationJSONAddFieldsTemplateResponse:
+class AddFieldsToTemplateAddFieldsTemplateResponse:
     errors: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'errors' }})
     new_field_ids: Optional[List[int]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'new_field_ids' }})
-    status: AddFieldsToTemplate200ApplicationJSONStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    status: AddFieldsToTemplateAddFieldsTemplateResponseStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
     
 
 @dataclass
 class AddFieldsToTemplateResponse:
     content_type: str = field(default=None)
     status_code: int = field(default=None)
-    add_fields_template_response: Optional[AddFieldsToTemplate200ApplicationJSONAddFieldsTemplateResponse] = field(default=None)
+    add_fields_template_response: Optional[AddFieldsToTemplateAddFieldsTemplateResponse] = field(default=None)
     

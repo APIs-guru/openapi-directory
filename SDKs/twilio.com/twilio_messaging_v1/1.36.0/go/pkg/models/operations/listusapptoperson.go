@@ -27,7 +27,7 @@ type ListUsAppToPersonRequest struct {
 	Security    ListUsAppToPersonSecurity
 }
 
-type ListUsAppToPerson200ApplicationJSONMeta struct {
+type ListUsAppToPersonListUsAppToPersonResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -37,13 +37,13 @@ type ListUsAppToPerson200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListUsAppToPerson200ApplicationJSONListUsAppToPersonResponse struct {
-	Compliance []shared.MessagingV1ServiceUsAppToPerson `json:"compliance,omitempty"`
-	Meta       *ListUsAppToPerson200ApplicationJSONMeta `json:"meta,omitempty"`
+type ListUsAppToPersonListUsAppToPersonResponse struct {
+	Compliance []shared.MessagingV1ServiceUsAppToPerson        `json:"compliance,omitempty"`
+	Meta       *ListUsAppToPersonListUsAppToPersonResponseMeta `json:"meta,omitempty"`
 }
 
 type ListUsAppToPersonResponse struct {
 	ContentType               string
-	ListUsAppToPersonResponse *ListUsAppToPerson200ApplicationJSONListUsAppToPersonResponse
+	ListUsAppToPersonResponse *ListUsAppToPersonListUsAppToPersonResponse
 	StatusCode                int64
 }

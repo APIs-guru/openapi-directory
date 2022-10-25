@@ -86,7 +86,7 @@ func (s *SDK) Svgconvert(ctx context.Context, request operations.SvgconvertReque
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.Svgconvert200ApplicationJSONFileURL
+			var out *operations.SvgconvertFileURL
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}

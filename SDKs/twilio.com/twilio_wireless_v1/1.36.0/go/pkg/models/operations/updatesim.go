@@ -12,91 +12,91 @@ type UpdateSimPathParams struct {
 	Sid string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
-type UpdateSimRequestBodyCallbackMethodEnum string
+type UpdateSimUpdateSimRequestCallbackMethodEnum string
 
 const (
-	UpdateSimRequestBodyCallbackMethodEnumHead   UpdateSimRequestBodyCallbackMethodEnum = "HEAD"
-	UpdateSimRequestBodyCallbackMethodEnumGet    UpdateSimRequestBodyCallbackMethodEnum = "GET"
-	UpdateSimRequestBodyCallbackMethodEnumPost   UpdateSimRequestBodyCallbackMethodEnum = "POST"
-	UpdateSimRequestBodyCallbackMethodEnumPatch  UpdateSimRequestBodyCallbackMethodEnum = "PATCH"
-	UpdateSimRequestBodyCallbackMethodEnumPut    UpdateSimRequestBodyCallbackMethodEnum = "PUT"
-	UpdateSimRequestBodyCallbackMethodEnumDelete UpdateSimRequestBodyCallbackMethodEnum = "DELETE"
+	UpdateSimUpdateSimRequestCallbackMethodEnumHead   UpdateSimUpdateSimRequestCallbackMethodEnum = "HEAD"
+	UpdateSimUpdateSimRequestCallbackMethodEnumGet    UpdateSimUpdateSimRequestCallbackMethodEnum = "GET"
+	UpdateSimUpdateSimRequestCallbackMethodEnumPost   UpdateSimUpdateSimRequestCallbackMethodEnum = "POST"
+	UpdateSimUpdateSimRequestCallbackMethodEnumPatch  UpdateSimUpdateSimRequestCallbackMethodEnum = "PATCH"
+	UpdateSimUpdateSimRequestCallbackMethodEnumPut    UpdateSimUpdateSimRequestCallbackMethodEnum = "PUT"
+	UpdateSimUpdateSimRequestCallbackMethodEnumDelete UpdateSimUpdateSimRequestCallbackMethodEnum = "DELETE"
 )
 
-type UpdateSimRequestBodyCommandsCallbackMethodEnum string
+type UpdateSimUpdateSimRequestCommandsCallbackMethodEnum string
 
 const (
-	UpdateSimRequestBodyCommandsCallbackMethodEnumHead   UpdateSimRequestBodyCommandsCallbackMethodEnum = "HEAD"
-	UpdateSimRequestBodyCommandsCallbackMethodEnumGet    UpdateSimRequestBodyCommandsCallbackMethodEnum = "GET"
-	UpdateSimRequestBodyCommandsCallbackMethodEnumPost   UpdateSimRequestBodyCommandsCallbackMethodEnum = "POST"
-	UpdateSimRequestBodyCommandsCallbackMethodEnumPatch  UpdateSimRequestBodyCommandsCallbackMethodEnum = "PATCH"
-	UpdateSimRequestBodyCommandsCallbackMethodEnumPut    UpdateSimRequestBodyCommandsCallbackMethodEnum = "PUT"
-	UpdateSimRequestBodyCommandsCallbackMethodEnumDelete UpdateSimRequestBodyCommandsCallbackMethodEnum = "DELETE"
+	UpdateSimUpdateSimRequestCommandsCallbackMethodEnumHead   UpdateSimUpdateSimRequestCommandsCallbackMethodEnum = "HEAD"
+	UpdateSimUpdateSimRequestCommandsCallbackMethodEnumGet    UpdateSimUpdateSimRequestCommandsCallbackMethodEnum = "GET"
+	UpdateSimUpdateSimRequestCommandsCallbackMethodEnumPost   UpdateSimUpdateSimRequestCommandsCallbackMethodEnum = "POST"
+	UpdateSimUpdateSimRequestCommandsCallbackMethodEnumPatch  UpdateSimUpdateSimRequestCommandsCallbackMethodEnum = "PATCH"
+	UpdateSimUpdateSimRequestCommandsCallbackMethodEnumPut    UpdateSimUpdateSimRequestCommandsCallbackMethodEnum = "PUT"
+	UpdateSimUpdateSimRequestCommandsCallbackMethodEnumDelete UpdateSimUpdateSimRequestCommandsCallbackMethodEnum = "DELETE"
 )
 
-type UpdateSimRequestBodySmsFallbackMethodEnum string
+type UpdateSimUpdateSimRequestSmsFallbackMethodEnum string
 
 const (
-	UpdateSimRequestBodySmsFallbackMethodEnumHead   UpdateSimRequestBodySmsFallbackMethodEnum = "HEAD"
-	UpdateSimRequestBodySmsFallbackMethodEnumGet    UpdateSimRequestBodySmsFallbackMethodEnum = "GET"
-	UpdateSimRequestBodySmsFallbackMethodEnumPost   UpdateSimRequestBodySmsFallbackMethodEnum = "POST"
-	UpdateSimRequestBodySmsFallbackMethodEnumPatch  UpdateSimRequestBodySmsFallbackMethodEnum = "PATCH"
-	UpdateSimRequestBodySmsFallbackMethodEnumPut    UpdateSimRequestBodySmsFallbackMethodEnum = "PUT"
-	UpdateSimRequestBodySmsFallbackMethodEnumDelete UpdateSimRequestBodySmsFallbackMethodEnum = "DELETE"
+	UpdateSimUpdateSimRequestSmsFallbackMethodEnumHead   UpdateSimUpdateSimRequestSmsFallbackMethodEnum = "HEAD"
+	UpdateSimUpdateSimRequestSmsFallbackMethodEnumGet    UpdateSimUpdateSimRequestSmsFallbackMethodEnum = "GET"
+	UpdateSimUpdateSimRequestSmsFallbackMethodEnumPost   UpdateSimUpdateSimRequestSmsFallbackMethodEnum = "POST"
+	UpdateSimUpdateSimRequestSmsFallbackMethodEnumPatch  UpdateSimUpdateSimRequestSmsFallbackMethodEnum = "PATCH"
+	UpdateSimUpdateSimRequestSmsFallbackMethodEnumPut    UpdateSimUpdateSimRequestSmsFallbackMethodEnum = "PUT"
+	UpdateSimUpdateSimRequestSmsFallbackMethodEnumDelete UpdateSimUpdateSimRequestSmsFallbackMethodEnum = "DELETE"
 )
 
-type UpdateSimRequestBodySmsMethodEnum string
+type UpdateSimUpdateSimRequestSmsMethodEnum string
 
 const (
-	UpdateSimRequestBodySmsMethodEnumHead   UpdateSimRequestBodySmsMethodEnum = "HEAD"
-	UpdateSimRequestBodySmsMethodEnumGet    UpdateSimRequestBodySmsMethodEnum = "GET"
-	UpdateSimRequestBodySmsMethodEnumPost   UpdateSimRequestBodySmsMethodEnum = "POST"
-	UpdateSimRequestBodySmsMethodEnumPatch  UpdateSimRequestBodySmsMethodEnum = "PATCH"
-	UpdateSimRequestBodySmsMethodEnumPut    UpdateSimRequestBodySmsMethodEnum = "PUT"
-	UpdateSimRequestBodySmsMethodEnumDelete UpdateSimRequestBodySmsMethodEnum = "DELETE"
+	UpdateSimUpdateSimRequestSmsMethodEnumHead   UpdateSimUpdateSimRequestSmsMethodEnum = "HEAD"
+	UpdateSimUpdateSimRequestSmsMethodEnumGet    UpdateSimUpdateSimRequestSmsMethodEnum = "GET"
+	UpdateSimUpdateSimRequestSmsMethodEnumPost   UpdateSimUpdateSimRequestSmsMethodEnum = "POST"
+	UpdateSimUpdateSimRequestSmsMethodEnumPatch  UpdateSimUpdateSimRequestSmsMethodEnum = "PATCH"
+	UpdateSimUpdateSimRequestSmsMethodEnumPut    UpdateSimUpdateSimRequestSmsMethodEnum = "PUT"
+	UpdateSimUpdateSimRequestSmsMethodEnumDelete UpdateSimUpdateSimRequestSmsMethodEnum = "DELETE"
 )
 
-type UpdateSimRequestBodyVoiceFallbackMethodEnum string
+type UpdateSimUpdateSimRequestVoiceFallbackMethodEnum string
 
 const (
-	UpdateSimRequestBodyVoiceFallbackMethodEnumHead   UpdateSimRequestBodyVoiceFallbackMethodEnum = "HEAD"
-	UpdateSimRequestBodyVoiceFallbackMethodEnumGet    UpdateSimRequestBodyVoiceFallbackMethodEnum = "GET"
-	UpdateSimRequestBodyVoiceFallbackMethodEnumPost   UpdateSimRequestBodyVoiceFallbackMethodEnum = "POST"
-	UpdateSimRequestBodyVoiceFallbackMethodEnumPatch  UpdateSimRequestBodyVoiceFallbackMethodEnum = "PATCH"
-	UpdateSimRequestBodyVoiceFallbackMethodEnumPut    UpdateSimRequestBodyVoiceFallbackMethodEnum = "PUT"
-	UpdateSimRequestBodyVoiceFallbackMethodEnumDelete UpdateSimRequestBodyVoiceFallbackMethodEnum = "DELETE"
+	UpdateSimUpdateSimRequestVoiceFallbackMethodEnumHead   UpdateSimUpdateSimRequestVoiceFallbackMethodEnum = "HEAD"
+	UpdateSimUpdateSimRequestVoiceFallbackMethodEnumGet    UpdateSimUpdateSimRequestVoiceFallbackMethodEnum = "GET"
+	UpdateSimUpdateSimRequestVoiceFallbackMethodEnumPost   UpdateSimUpdateSimRequestVoiceFallbackMethodEnum = "POST"
+	UpdateSimUpdateSimRequestVoiceFallbackMethodEnumPatch  UpdateSimUpdateSimRequestVoiceFallbackMethodEnum = "PATCH"
+	UpdateSimUpdateSimRequestVoiceFallbackMethodEnumPut    UpdateSimUpdateSimRequestVoiceFallbackMethodEnum = "PUT"
+	UpdateSimUpdateSimRequestVoiceFallbackMethodEnumDelete UpdateSimUpdateSimRequestVoiceFallbackMethodEnum = "DELETE"
 )
 
-type UpdateSimRequestBodyVoiceMethodEnum string
+type UpdateSimUpdateSimRequestVoiceMethodEnum string
 
 const (
-	UpdateSimRequestBodyVoiceMethodEnumHead   UpdateSimRequestBodyVoiceMethodEnum = "HEAD"
-	UpdateSimRequestBodyVoiceMethodEnumGet    UpdateSimRequestBodyVoiceMethodEnum = "GET"
-	UpdateSimRequestBodyVoiceMethodEnumPost   UpdateSimRequestBodyVoiceMethodEnum = "POST"
-	UpdateSimRequestBodyVoiceMethodEnumPatch  UpdateSimRequestBodyVoiceMethodEnum = "PATCH"
-	UpdateSimRequestBodyVoiceMethodEnumPut    UpdateSimRequestBodyVoiceMethodEnum = "PUT"
-	UpdateSimRequestBodyVoiceMethodEnumDelete UpdateSimRequestBodyVoiceMethodEnum = "DELETE"
+	UpdateSimUpdateSimRequestVoiceMethodEnumHead   UpdateSimUpdateSimRequestVoiceMethodEnum = "HEAD"
+	UpdateSimUpdateSimRequestVoiceMethodEnumGet    UpdateSimUpdateSimRequestVoiceMethodEnum = "GET"
+	UpdateSimUpdateSimRequestVoiceMethodEnumPost   UpdateSimUpdateSimRequestVoiceMethodEnum = "POST"
+	UpdateSimUpdateSimRequestVoiceMethodEnumPatch  UpdateSimUpdateSimRequestVoiceMethodEnum = "PATCH"
+	UpdateSimUpdateSimRequestVoiceMethodEnumPut    UpdateSimUpdateSimRequestVoiceMethodEnum = "PUT"
+	UpdateSimUpdateSimRequestVoiceMethodEnumDelete UpdateSimUpdateSimRequestVoiceMethodEnum = "DELETE"
 )
 
-type UpdateSimRequestBodyUpdateSimRequest struct {
-	AccountSid             *string                                         `form:"name=AccountSid"`
-	CallbackMethod         *UpdateSimRequestBodyCallbackMethodEnum         `form:"name=CallbackMethod"`
-	CallbackURL            *string                                         `form:"name=CallbackUrl"`
-	CommandsCallbackMethod *UpdateSimRequestBodyCommandsCallbackMethodEnum `form:"name=CommandsCallbackMethod"`
-	CommandsCallbackURL    *string                                         `form:"name=CommandsCallbackUrl"`
-	FriendlyName           *string                                         `form:"name=FriendlyName"`
-	RatePlan               *string                                         `form:"name=RatePlan"`
-	ResetStatus            *shared.SimEnumResetStatusEnum                  `form:"name=ResetStatus"`
-	SmsFallbackMethod      *UpdateSimRequestBodySmsFallbackMethodEnum      `form:"name=SmsFallbackMethod"`
-	SmsFallbackURL         *string                                         `form:"name=SmsFallbackUrl"`
-	SmsMethod              *UpdateSimRequestBodySmsMethodEnum              `form:"name=SmsMethod"`
-	SmsURL                 *string                                         `form:"name=SmsUrl"`
-	Status                 *shared.SimEnumStatusEnum                       `form:"name=Status"`
-	UniqueName             *string                                         `form:"name=UniqueName"`
-	VoiceFallbackMethod    *UpdateSimRequestBodyVoiceFallbackMethodEnum    `form:"name=VoiceFallbackMethod"`
-	VoiceFallbackURL       *string                                         `form:"name=VoiceFallbackUrl"`
-	VoiceMethod            *UpdateSimRequestBodyVoiceMethodEnum            `form:"name=VoiceMethod"`
-	VoiceURL               *string                                         `form:"name=VoiceUrl"`
+type UpdateSimUpdateSimRequest struct {
+	AccountSid             *string                                              `form:"name=AccountSid"`
+	CallbackMethod         *UpdateSimUpdateSimRequestCallbackMethodEnum         `form:"name=CallbackMethod"`
+	CallbackURL            *string                                              `form:"name=CallbackUrl"`
+	CommandsCallbackMethod *UpdateSimUpdateSimRequestCommandsCallbackMethodEnum `form:"name=CommandsCallbackMethod"`
+	CommandsCallbackURL    *string                                              `form:"name=CommandsCallbackUrl"`
+	FriendlyName           *string                                              `form:"name=FriendlyName"`
+	RatePlan               *string                                              `form:"name=RatePlan"`
+	ResetStatus            *shared.SimEnumResetStatusEnum                       `form:"name=ResetStatus"`
+	SmsFallbackMethod      *UpdateSimUpdateSimRequestSmsFallbackMethodEnum      `form:"name=SmsFallbackMethod"`
+	SmsFallbackURL         *string                                              `form:"name=SmsFallbackUrl"`
+	SmsMethod              *UpdateSimUpdateSimRequestSmsMethodEnum              `form:"name=SmsMethod"`
+	SmsURL                 *string                                              `form:"name=SmsUrl"`
+	Status                 *shared.SimEnumStatusEnum                            `form:"name=Status"`
+	UniqueName             *string                                              `form:"name=UniqueName"`
+	VoiceFallbackMethod    *UpdateSimUpdateSimRequestVoiceFallbackMethodEnum    `form:"name=VoiceFallbackMethod"`
+	VoiceFallbackURL       *string                                              `form:"name=VoiceFallbackUrl"`
+	VoiceMethod            *UpdateSimUpdateSimRequestVoiceMethodEnum            `form:"name=VoiceMethod"`
+	VoiceURL               *string                                              `form:"name=VoiceUrl"`
 }
 
 type UpdateSimSecurity struct {
@@ -106,7 +106,7 @@ type UpdateSimSecurity struct {
 type UpdateSimRequest struct {
 	ServerURL  *string
 	PathParams UpdateSimPathParams
-	Request    *UpdateSimRequestBodyUpdateSimRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateSimUpdateSimRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateSimSecurity
 }
 

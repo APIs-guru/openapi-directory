@@ -7,7 +7,7 @@ CREATE_TRUST_PRODUCT_SERVERS = [
 
 
 @dataclass
-class CreateTrustProductRequestBodyCreateTrustProductRequest:
+class CreateTrustProductCreateTrustProductRequest:
     email: str = field(default=None, metadata={'form': { 'field_name': 'Email' }})
     friendly_name: str = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
     policy_sid: str = field(default=None, metadata={'form': { 'field_name': 'PolicySid' }})
@@ -22,7 +22,7 @@ class CreateTrustProductSecurity:
 @dataclass
 class CreateTrustProductRequest:
     server_url: Optional[str] = field(default=None)
-    request: Optional[CreateTrustProductRequestBodyCreateTrustProductRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateTrustProductCreateTrustProductRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateTrustProductSecurity = field(default=None)
     
 

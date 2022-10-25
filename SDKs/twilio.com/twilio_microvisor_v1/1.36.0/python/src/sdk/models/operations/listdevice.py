@@ -26,7 +26,7 @@ class ListDeviceRequest:
 
 @dataclass_json
 @dataclass
-class ListDevice200ApplicationJSONMeta:
+class ListDeviceListDeviceResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -38,14 +38,14 @@ class ListDevice200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListDevice200ApplicationJSONListDeviceResponse:
+class ListDeviceListDeviceResponse:
     devices: Optional[List[shared.MicrovisorV1Device]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'devices' }})
-    meta: Optional[ListDevice200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+    meta: Optional[ListDeviceListDeviceResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     
 
 @dataclass
 class ListDeviceResponse:
     content_type: str = field(default=None)
-    list_device_response: Optional[ListDevice200ApplicationJSONListDeviceResponse] = field(default=None)
+    list_device_response: Optional[ListDeviceListDeviceResponse] = field(default=None)
     status_code: int = field(default=None)
     

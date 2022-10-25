@@ -91,7 +91,7 @@ func (s *SDK) GetAtms(ctx context.Context, request operations.GetAtmsRequest) (*
 
 		switch {
 		case utils.MatchContentType(contentType, `application/prs.openbanking.opendata.v1.3+json`):
-			var out *operations.GetAtms400ApplicationPrsOpenbankingOpendataV13PlusJSON400ErrorObject
+			var out *operations.GetAtms400ErrorObject
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -103,7 +103,7 @@ func (s *SDK) GetAtms(ctx context.Context, request operations.GetAtmsRequest) (*
 
 		switch {
 		case utils.MatchContentType(contentType, `application/prs.openbanking.opendata.v1.3+json`):
-			var out *operations.GetAtms408ApplicationPrsOpenbankingOpendataV13PlusJSON408ErrorObject
+			var out *operations.GetAtms408ErrorObject
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -115,7 +115,7 @@ func (s *SDK) GetAtms(ctx context.Context, request operations.GetAtmsRequest) (*
 
 		switch {
 		case utils.MatchContentType(contentType, `application/prs.openbanking.opendata.v1.3+json`):
-			var out *operations.GetAtms429ApplicationPrsOpenbankingOpendataV13PlusJSON429ErrorObject
+			var out *operations.GetAtms429ErrorObject
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -127,7 +127,7 @@ func (s *SDK) GetAtms(ctx context.Context, request operations.GetAtmsRequest) (*
 
 		switch {
 		case utils.MatchContentType(contentType, `application/prs.openbanking.opendata.v1.3+json`):
-			var out *operations.GetAtms500ApplicationPrsOpenbankingOpendataV13PlusJSON500ErrorObject
+			var out *operations.GetAtms500ErrorObject
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -139,7 +139,7 @@ func (s *SDK) GetAtms(ctx context.Context, request operations.GetAtmsRequest) (*
 
 		switch {
 		case utils.MatchContentType(contentType, `application/prs.openbanking.opendata.v1.3+json`):
-			var out *operations.GetAtms503ApplicationPrsOpenbankingOpendataV13PlusJSON503ErrorObject
+			var out *operations.GetAtms503ErrorObject
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -151,7 +151,7 @@ func (s *SDK) GetAtms(ctx context.Context, request operations.GetAtmsRequest) (*
 
 		switch {
 		case utils.MatchContentType(contentType, `application/prs.openbanking.opendata.v1.3+json`):
-			var out *operations.GetAtmsDefaultApplicationPrsOpenbankingOpendataV13PlusJSONErrorObject
+			var out *operations.GetAtmsErrorObject
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -204,7 +204,7 @@ func (s *SDK) GetBranches(ctx context.Context, request operations.GetBranchesReq
 
 		switch {
 		case utils.MatchContentType(contentType, `application/prs.openbanking.opendata.v1.3+json`):
-			var out *operations.GetBranches400ApplicationPrsOpenbankingOpendataV13PlusJSON400ErrorObject
+			var out *operations.GetBranches400ErrorObject
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -216,7 +216,7 @@ func (s *SDK) GetBranches(ctx context.Context, request operations.GetBranchesReq
 
 		switch {
 		case utils.MatchContentType(contentType, `application/prs.openbanking.opendata.v1.3+json`):
-			var out *operations.GetBranches408ApplicationPrsOpenbankingOpendataV13PlusJSON408ErrorObject
+			var out *operations.GetBranches408ErrorObject
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -228,7 +228,7 @@ func (s *SDK) GetBranches(ctx context.Context, request operations.GetBranchesReq
 
 		switch {
 		case utils.MatchContentType(contentType, `application/prs.openbanking.opendata.v1.3+json`):
-			var out *operations.GetBranches429ApplicationPrsOpenbankingOpendataV13PlusJSON429ErrorObject
+			var out *operations.GetBranches429ErrorObject
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -240,7 +240,7 @@ func (s *SDK) GetBranches(ctx context.Context, request operations.GetBranchesReq
 
 		switch {
 		case utils.MatchContentType(contentType, `application/prs.openbanking.opendata.v1.3+json`):
-			var out *operations.GetBranches500ApplicationPrsOpenbankingOpendataV13PlusJSON500ErrorObject
+			var out *operations.GetBranches500ErrorObject
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -252,7 +252,7 @@ func (s *SDK) GetBranches(ctx context.Context, request operations.GetBranchesReq
 
 		switch {
 		case utils.MatchContentType(contentType, `application/prs.openbanking.opendata.v1.3+json`):
-			var out *operations.GetBranches503ApplicationPrsOpenbankingOpendataV13PlusJSON503ErrorObject
+			var out *operations.GetBranches503ErrorObject
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -264,7 +264,7 @@ func (s *SDK) GetBranches(ctx context.Context, request operations.GetBranchesReq
 
 		switch {
 		case utils.MatchContentType(contentType, `application/prs.openbanking.opendata.v1.3+json`):
-			var out *operations.GetBranchesDefaultApplicationPrsOpenbankingOpendataV13PlusJSONErrorObject
+			var out *operations.GetBranchesErrorObject
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -317,7 +317,7 @@ func (s *SDK) GetBusinessCurrentAccounts(ctx context.Context, request operations
 
 		switch {
 		case utils.MatchContentType(contentType, `application/prs.openbanking.opendata.v1.3+json`):
-			var out *operations.GetBusinessCurrentAccounts400ApplicationPrsOpenbankingOpendataV13PlusJSON400ErrorObject
+			var out *operations.GetBusinessCurrentAccounts400ErrorObject
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -329,7 +329,7 @@ func (s *SDK) GetBusinessCurrentAccounts(ctx context.Context, request operations
 
 		switch {
 		case utils.MatchContentType(contentType, `application/prs.openbanking.opendata.v1.3+json`):
-			var out *operations.GetBusinessCurrentAccounts408ApplicationPrsOpenbankingOpendataV13PlusJSON408ErrorObject
+			var out *operations.GetBusinessCurrentAccounts408ErrorObject
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -341,7 +341,7 @@ func (s *SDK) GetBusinessCurrentAccounts(ctx context.Context, request operations
 
 		switch {
 		case utils.MatchContentType(contentType, `application/prs.openbanking.opendata.v1.3+json`):
-			var out *operations.GetBusinessCurrentAccounts429ApplicationPrsOpenbankingOpendataV13PlusJSON429ErrorObject
+			var out *operations.GetBusinessCurrentAccounts429ErrorObject
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -353,7 +353,7 @@ func (s *SDK) GetBusinessCurrentAccounts(ctx context.Context, request operations
 
 		switch {
 		case utils.MatchContentType(contentType, `application/prs.openbanking.opendata.v1.3+json`):
-			var out *operations.GetBusinessCurrentAccounts500ApplicationPrsOpenbankingOpendataV13PlusJSON500ErrorObject
+			var out *operations.GetBusinessCurrentAccounts500ErrorObject
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -365,7 +365,7 @@ func (s *SDK) GetBusinessCurrentAccounts(ctx context.Context, request operations
 
 		switch {
 		case utils.MatchContentType(contentType, `application/prs.openbanking.opendata.v1.3+json`):
-			var out *operations.GetBusinessCurrentAccounts503ApplicationPrsOpenbankingOpendataV13PlusJSON503ErrorObject
+			var out *operations.GetBusinessCurrentAccounts503ErrorObject
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -377,7 +377,7 @@ func (s *SDK) GetBusinessCurrentAccounts(ctx context.Context, request operations
 
 		switch {
 		case utils.MatchContentType(contentType, `application/prs.openbanking.opendata.v1.3+json`):
-			var out *operations.GetBusinessCurrentAccountsDefaultApplicationPrsOpenbankingOpendataV13PlusJSONErrorObject
+			var out *operations.GetBusinessCurrentAccountsErrorObject
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -430,7 +430,7 @@ func (s *SDK) GetCommercialCreditCards(ctx context.Context, request operations.G
 
 		switch {
 		case utils.MatchContentType(contentType, `application/prs.openbanking.opendata.v1.3+json`):
-			var out *operations.GetCommercialCreditCards400ApplicationPrsOpenbankingOpendataV13PlusJSON400ErrorObject
+			var out *operations.GetCommercialCreditCards400ErrorObject
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -442,7 +442,7 @@ func (s *SDK) GetCommercialCreditCards(ctx context.Context, request operations.G
 
 		switch {
 		case utils.MatchContentType(contentType, `application/prs.openbanking.opendata.v1.3+json`):
-			var out *operations.GetCommercialCreditCards408ApplicationPrsOpenbankingOpendataV13PlusJSON408ErrorObject
+			var out *operations.GetCommercialCreditCards408ErrorObject
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -454,7 +454,7 @@ func (s *SDK) GetCommercialCreditCards(ctx context.Context, request operations.G
 
 		switch {
 		case utils.MatchContentType(contentType, `application/prs.openbanking.opendata.v1.3+json`):
-			var out *operations.GetCommercialCreditCards429ApplicationPrsOpenbankingOpendataV13PlusJSON429ErrorObject
+			var out *operations.GetCommercialCreditCards429ErrorObject
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -466,7 +466,7 @@ func (s *SDK) GetCommercialCreditCards(ctx context.Context, request operations.G
 
 		switch {
 		case utils.MatchContentType(contentType, `application/prs.openbanking.opendata.v1.3+json`):
-			var out *operations.GetCommercialCreditCards500ApplicationPrsOpenbankingOpendataV13PlusJSON500ErrorObject
+			var out *operations.GetCommercialCreditCards500ErrorObject
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -478,7 +478,7 @@ func (s *SDK) GetCommercialCreditCards(ctx context.Context, request operations.G
 
 		switch {
 		case utils.MatchContentType(contentType, `application/prs.openbanking.opendata.v1.3+json`):
-			var out *operations.GetCommercialCreditCards503ApplicationPrsOpenbankingOpendataV13PlusJSON503ErrorObject
+			var out *operations.GetCommercialCreditCards503ErrorObject
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -490,7 +490,7 @@ func (s *SDK) GetCommercialCreditCards(ctx context.Context, request operations.G
 
 		switch {
 		case utils.MatchContentType(contentType, `application/prs.openbanking.opendata.v1.3+json`):
-			var out *operations.GetCommercialCreditCardsDefaultApplicationPrsOpenbankingOpendataV13PlusJSONErrorObject
+			var out *operations.GetCommercialCreditCardsErrorObject
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -543,7 +543,7 @@ func (s *SDK) GetPersonalCurrentAccounts(ctx context.Context, request operations
 
 		switch {
 		case utils.MatchContentType(contentType, `application/prs.openbanking.opendata.v1.3+json`):
-			var out *operations.GetPersonalCurrentAccounts400ApplicationPrsOpenbankingOpendataV13PlusJSON400ErrorObject
+			var out *operations.GetPersonalCurrentAccounts400ErrorObject
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -555,7 +555,7 @@ func (s *SDK) GetPersonalCurrentAccounts(ctx context.Context, request operations
 
 		switch {
 		case utils.MatchContentType(contentType, `application/prs.openbanking.opendata.v1.3+json`):
-			var out *operations.GetPersonalCurrentAccounts408ApplicationPrsOpenbankingOpendataV13PlusJSON408ErrorObject
+			var out *operations.GetPersonalCurrentAccounts408ErrorObject
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -567,7 +567,7 @@ func (s *SDK) GetPersonalCurrentAccounts(ctx context.Context, request operations
 
 		switch {
 		case utils.MatchContentType(contentType, `application/prs.openbanking.opendata.v1.3+json`):
-			var out *operations.GetPersonalCurrentAccounts429ApplicationPrsOpenbankingOpendataV13PlusJSON429ErrorObject
+			var out *operations.GetPersonalCurrentAccounts429ErrorObject
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -579,7 +579,7 @@ func (s *SDK) GetPersonalCurrentAccounts(ctx context.Context, request operations
 
 		switch {
 		case utils.MatchContentType(contentType, `application/prs.openbanking.opendata.v1.3+json`):
-			var out *operations.GetPersonalCurrentAccounts500ApplicationPrsOpenbankingOpendataV13PlusJSON500ErrorObject
+			var out *operations.GetPersonalCurrentAccounts500ErrorObject
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -591,7 +591,7 @@ func (s *SDK) GetPersonalCurrentAccounts(ctx context.Context, request operations
 
 		switch {
 		case utils.MatchContentType(contentType, `application/prs.openbanking.opendata.v1.3+json`):
-			var out *operations.GetPersonalCurrentAccounts503ApplicationPrsOpenbankingOpendataV13PlusJSON503ErrorObject
+			var out *operations.GetPersonalCurrentAccounts503ErrorObject
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -603,7 +603,7 @@ func (s *SDK) GetPersonalCurrentAccounts(ctx context.Context, request operations
 
 		switch {
 		case utils.MatchContentType(contentType, `application/prs.openbanking.opendata.v1.3+json`):
-			var out *operations.GetPersonalCurrentAccountsDefaultApplicationPrsOpenbankingOpendataV13PlusJSONErrorObject
+			var out *operations.GetPersonalCurrentAccountsErrorObject
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -656,7 +656,7 @@ func (s *SDK) GetUnsecuredSmeLoans(ctx context.Context, request operations.GetUn
 
 		switch {
 		case utils.MatchContentType(contentType, `application/prs.openbanking.opendata.v1.3+json`):
-			var out *operations.GetUnsecuredSmeLoans400ApplicationPrsOpenbankingOpendataV13PlusJSON400ErrorObject
+			var out *operations.GetUnsecuredSmeLoans400ErrorObject
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -668,7 +668,7 @@ func (s *SDK) GetUnsecuredSmeLoans(ctx context.Context, request operations.GetUn
 
 		switch {
 		case utils.MatchContentType(contentType, `application/prs.openbanking.opendata.v1.3+json`):
-			var out *operations.GetUnsecuredSmeLoans408ApplicationPrsOpenbankingOpendataV13PlusJSON408ErrorObject
+			var out *operations.GetUnsecuredSmeLoans408ErrorObject
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -680,7 +680,7 @@ func (s *SDK) GetUnsecuredSmeLoans(ctx context.Context, request operations.GetUn
 
 		switch {
 		case utils.MatchContentType(contentType, `application/prs.openbanking.opendata.v1.3+json`):
-			var out *operations.GetUnsecuredSmeLoans429ApplicationPrsOpenbankingOpendataV13PlusJSON429ErrorObject
+			var out *operations.GetUnsecuredSmeLoans429ErrorObject
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -692,7 +692,7 @@ func (s *SDK) GetUnsecuredSmeLoans(ctx context.Context, request operations.GetUn
 
 		switch {
 		case utils.MatchContentType(contentType, `application/prs.openbanking.opendata.v1.3+json`):
-			var out *operations.GetUnsecuredSmeLoans500ApplicationPrsOpenbankingOpendataV13PlusJSON500ErrorObject
+			var out *operations.GetUnsecuredSmeLoans500ErrorObject
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -704,7 +704,7 @@ func (s *SDK) GetUnsecuredSmeLoans(ctx context.Context, request operations.GetUn
 
 		switch {
 		case utils.MatchContentType(contentType, `application/prs.openbanking.opendata.v1.3+json`):
-			var out *operations.GetUnsecuredSmeLoans503ApplicationPrsOpenbankingOpendataV13PlusJSON503ErrorObject
+			var out *operations.GetUnsecuredSmeLoans503ErrorObject
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -716,7 +716,7 @@ func (s *SDK) GetUnsecuredSmeLoans(ctx context.Context, request operations.GetUn
 
 		switch {
 		case utils.MatchContentType(contentType, `application/prs.openbanking.opendata.v1.3+json`):
-			var out *operations.GetUnsecuredSmeLoansDefaultApplicationPrsOpenbankingOpendataV13PlusJSONErrorObject
+			var out *operations.GetUnsecuredSmeLoansErrorObject
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}

@@ -4,51 +4,51 @@ type PostLoadBalancersIDActionsChangeDNSPtrPathParams struct {
 	ID int64 `pathParam:"style=simple,explode=false,name=id"`
 }
 
-type PostLoadBalancersIDActionsChangeDNSPtrRequestBodyChangeLoadbalancerDNSPtrRequest struct {
+type PostLoadBalancersIDActionsChangeDNSPtrChangeLoadbalancerDNSPtrRequest struct {
 	DNSPtr string `json:"dns_ptr"`
 	IP     string `json:"ip"`
 }
 
 type PostLoadBalancersIDActionsChangeDNSPtrRequest struct {
 	PathParams PostLoadBalancersIDActionsChangeDNSPtrPathParams
-	Request    *PostLoadBalancersIDActionsChangeDNSPtrRequestBodyChangeLoadbalancerDNSPtrRequest `request:"mediaType=application/json"`
+	Request    *PostLoadBalancersIDActionsChangeDNSPtrChangeLoadbalancerDNSPtrRequest `request:"mediaType=application/json"`
 }
 
-type PostLoadBalancersIDActionsChangeDNSPtr201ApplicationJSONActionError struct {
+type PostLoadBalancersIDActionsChangeDNSPtrActionResponseActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
 }
 
-type PostLoadBalancersIDActionsChangeDNSPtr201ApplicationJSONActionResources struct {
+type PostLoadBalancersIDActionsChangeDNSPtrActionResponseActionResources struct {
 	ID   int64  `json:"id"`
 	Type string `json:"type"`
 }
 
-type PostLoadBalancersIDActionsChangeDNSPtr201ApplicationJSONActionStatusEnum string
+type PostLoadBalancersIDActionsChangeDNSPtrActionResponseActionStatusEnum string
 
 const (
-	PostLoadBalancersIDActionsChangeDNSPtr201ApplicationJSONActionStatusEnumSuccess PostLoadBalancersIDActionsChangeDNSPtr201ApplicationJSONActionStatusEnum = "success"
-	PostLoadBalancersIDActionsChangeDNSPtr201ApplicationJSONActionStatusEnumRunning PostLoadBalancersIDActionsChangeDNSPtr201ApplicationJSONActionStatusEnum = "running"
-	PostLoadBalancersIDActionsChangeDNSPtr201ApplicationJSONActionStatusEnumError   PostLoadBalancersIDActionsChangeDNSPtr201ApplicationJSONActionStatusEnum = "error"
+	PostLoadBalancersIDActionsChangeDNSPtrActionResponseActionStatusEnumSuccess PostLoadBalancersIDActionsChangeDNSPtrActionResponseActionStatusEnum = "success"
+	PostLoadBalancersIDActionsChangeDNSPtrActionResponseActionStatusEnumRunning PostLoadBalancersIDActionsChangeDNSPtrActionResponseActionStatusEnum = "running"
+	PostLoadBalancersIDActionsChangeDNSPtrActionResponseActionStatusEnumError   PostLoadBalancersIDActionsChangeDNSPtrActionResponseActionStatusEnum = "error"
 )
 
-type PostLoadBalancersIDActionsChangeDNSPtr201ApplicationJSONActionAction struct {
-	Command   string                                                                    `json:"command"`
-	Error     PostLoadBalancersIDActionsChangeDNSPtr201ApplicationJSONActionError       `json:"error"`
-	Finished  string                                                                    `json:"finished"`
-	ID        int64                                                                     `json:"id"`
-	Progress  float64                                                                   `json:"progress"`
-	Resources []PostLoadBalancersIDActionsChangeDNSPtr201ApplicationJSONActionResources `json:"resources"`
-	Started   string                                                                    `json:"started"`
-	Status    PostLoadBalancersIDActionsChangeDNSPtr201ApplicationJSONActionStatusEnum  `json:"status"`
+type PostLoadBalancersIDActionsChangeDNSPtrActionResponseAction struct {
+	Command   string                                                                `json:"command"`
+	Error     PostLoadBalancersIDActionsChangeDNSPtrActionResponseActionError       `json:"error"`
+	Finished  string                                                                `json:"finished"`
+	ID        int64                                                                 `json:"id"`
+	Progress  float64                                                               `json:"progress"`
+	Resources []PostLoadBalancersIDActionsChangeDNSPtrActionResponseActionResources `json:"resources"`
+	Started   string                                                                `json:"started"`
+	Status    PostLoadBalancersIDActionsChangeDNSPtrActionResponseActionStatusEnum  `json:"status"`
 }
 
-type PostLoadBalancersIDActionsChangeDNSPtr201ApplicationJSONActionResponse struct {
-	Action PostLoadBalancersIDActionsChangeDNSPtr201ApplicationJSONActionAction `json:"action"`
+type PostLoadBalancersIDActionsChangeDNSPtrActionResponse struct {
+	Action PostLoadBalancersIDActionsChangeDNSPtrActionResponseAction `json:"action"`
 }
 
 type PostLoadBalancersIDActionsChangeDNSPtrResponse struct {
-	ActionResponse *PostLoadBalancersIDActionsChangeDNSPtr201ApplicationJSONActionResponse
+	ActionResponse *PostLoadBalancersIDActionsChangeDNSPtrActionResponse
 	ContentType    string
 	StatusCode     int64
 }

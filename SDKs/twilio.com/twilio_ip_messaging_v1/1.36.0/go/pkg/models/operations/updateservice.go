@@ -12,248 +12,248 @@ type UpdateServicePathParams struct {
 	Sid string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
-type UpdateServiceRequestBodyWebhookMethodEnum string
+type UpdateServiceUpdateServiceRequestWebhookMethodEnum string
 
 const (
-	UpdateServiceRequestBodyWebhookMethodEnumHead   UpdateServiceRequestBodyWebhookMethodEnum = "HEAD"
-	UpdateServiceRequestBodyWebhookMethodEnumGet    UpdateServiceRequestBodyWebhookMethodEnum = "GET"
-	UpdateServiceRequestBodyWebhookMethodEnumPost   UpdateServiceRequestBodyWebhookMethodEnum = "POST"
-	UpdateServiceRequestBodyWebhookMethodEnumPatch  UpdateServiceRequestBodyWebhookMethodEnum = "PATCH"
-	UpdateServiceRequestBodyWebhookMethodEnumPut    UpdateServiceRequestBodyWebhookMethodEnum = "PUT"
-	UpdateServiceRequestBodyWebhookMethodEnumDelete UpdateServiceRequestBodyWebhookMethodEnum = "DELETE"
+	UpdateServiceUpdateServiceRequestWebhookMethodEnumHead   UpdateServiceUpdateServiceRequestWebhookMethodEnum = "HEAD"
+	UpdateServiceUpdateServiceRequestWebhookMethodEnumGet    UpdateServiceUpdateServiceRequestWebhookMethodEnum = "GET"
+	UpdateServiceUpdateServiceRequestWebhookMethodEnumPost   UpdateServiceUpdateServiceRequestWebhookMethodEnum = "POST"
+	UpdateServiceUpdateServiceRequestWebhookMethodEnumPatch  UpdateServiceUpdateServiceRequestWebhookMethodEnum = "PATCH"
+	UpdateServiceUpdateServiceRequestWebhookMethodEnumPut    UpdateServiceUpdateServiceRequestWebhookMethodEnum = "PUT"
+	UpdateServiceUpdateServiceRequestWebhookMethodEnumDelete UpdateServiceUpdateServiceRequestWebhookMethodEnum = "DELETE"
 )
 
-type UpdateServiceRequestBodyWebhooksOnChannelAddMethodEnum string
+type UpdateServiceUpdateServiceRequestWebhooksOnChannelAddMethodEnum string
 
 const (
-	UpdateServiceRequestBodyWebhooksOnChannelAddMethodEnumHead   UpdateServiceRequestBodyWebhooksOnChannelAddMethodEnum = "HEAD"
-	UpdateServiceRequestBodyWebhooksOnChannelAddMethodEnumGet    UpdateServiceRequestBodyWebhooksOnChannelAddMethodEnum = "GET"
-	UpdateServiceRequestBodyWebhooksOnChannelAddMethodEnumPost   UpdateServiceRequestBodyWebhooksOnChannelAddMethodEnum = "POST"
-	UpdateServiceRequestBodyWebhooksOnChannelAddMethodEnumPatch  UpdateServiceRequestBodyWebhooksOnChannelAddMethodEnum = "PATCH"
-	UpdateServiceRequestBodyWebhooksOnChannelAddMethodEnumPut    UpdateServiceRequestBodyWebhooksOnChannelAddMethodEnum = "PUT"
-	UpdateServiceRequestBodyWebhooksOnChannelAddMethodEnumDelete UpdateServiceRequestBodyWebhooksOnChannelAddMethodEnum = "DELETE"
+	UpdateServiceUpdateServiceRequestWebhooksOnChannelAddMethodEnumHead   UpdateServiceUpdateServiceRequestWebhooksOnChannelAddMethodEnum = "HEAD"
+	UpdateServiceUpdateServiceRequestWebhooksOnChannelAddMethodEnumGet    UpdateServiceUpdateServiceRequestWebhooksOnChannelAddMethodEnum = "GET"
+	UpdateServiceUpdateServiceRequestWebhooksOnChannelAddMethodEnumPost   UpdateServiceUpdateServiceRequestWebhooksOnChannelAddMethodEnum = "POST"
+	UpdateServiceUpdateServiceRequestWebhooksOnChannelAddMethodEnumPatch  UpdateServiceUpdateServiceRequestWebhooksOnChannelAddMethodEnum = "PATCH"
+	UpdateServiceUpdateServiceRequestWebhooksOnChannelAddMethodEnumPut    UpdateServiceUpdateServiceRequestWebhooksOnChannelAddMethodEnum = "PUT"
+	UpdateServiceUpdateServiceRequestWebhooksOnChannelAddMethodEnumDelete UpdateServiceUpdateServiceRequestWebhooksOnChannelAddMethodEnum = "DELETE"
 )
 
-type UpdateServiceRequestBodyWebhooksOnChannelAddedMethodEnum string
+type UpdateServiceUpdateServiceRequestWebhooksOnChannelAddedMethodEnum string
 
 const (
-	UpdateServiceRequestBodyWebhooksOnChannelAddedMethodEnumHead   UpdateServiceRequestBodyWebhooksOnChannelAddedMethodEnum = "HEAD"
-	UpdateServiceRequestBodyWebhooksOnChannelAddedMethodEnumGet    UpdateServiceRequestBodyWebhooksOnChannelAddedMethodEnum = "GET"
-	UpdateServiceRequestBodyWebhooksOnChannelAddedMethodEnumPost   UpdateServiceRequestBodyWebhooksOnChannelAddedMethodEnum = "POST"
-	UpdateServiceRequestBodyWebhooksOnChannelAddedMethodEnumPatch  UpdateServiceRequestBodyWebhooksOnChannelAddedMethodEnum = "PATCH"
-	UpdateServiceRequestBodyWebhooksOnChannelAddedMethodEnumPut    UpdateServiceRequestBodyWebhooksOnChannelAddedMethodEnum = "PUT"
-	UpdateServiceRequestBodyWebhooksOnChannelAddedMethodEnumDelete UpdateServiceRequestBodyWebhooksOnChannelAddedMethodEnum = "DELETE"
+	UpdateServiceUpdateServiceRequestWebhooksOnChannelAddedMethodEnumHead   UpdateServiceUpdateServiceRequestWebhooksOnChannelAddedMethodEnum = "HEAD"
+	UpdateServiceUpdateServiceRequestWebhooksOnChannelAddedMethodEnumGet    UpdateServiceUpdateServiceRequestWebhooksOnChannelAddedMethodEnum = "GET"
+	UpdateServiceUpdateServiceRequestWebhooksOnChannelAddedMethodEnumPost   UpdateServiceUpdateServiceRequestWebhooksOnChannelAddedMethodEnum = "POST"
+	UpdateServiceUpdateServiceRequestWebhooksOnChannelAddedMethodEnumPatch  UpdateServiceUpdateServiceRequestWebhooksOnChannelAddedMethodEnum = "PATCH"
+	UpdateServiceUpdateServiceRequestWebhooksOnChannelAddedMethodEnumPut    UpdateServiceUpdateServiceRequestWebhooksOnChannelAddedMethodEnum = "PUT"
+	UpdateServiceUpdateServiceRequestWebhooksOnChannelAddedMethodEnumDelete UpdateServiceUpdateServiceRequestWebhooksOnChannelAddedMethodEnum = "DELETE"
 )
 
-type UpdateServiceRequestBodyWebhooksOnChannelDestroyMethodEnum string
+type UpdateServiceUpdateServiceRequestWebhooksOnChannelDestroyMethodEnum string
 
 const (
-	UpdateServiceRequestBodyWebhooksOnChannelDestroyMethodEnumHead   UpdateServiceRequestBodyWebhooksOnChannelDestroyMethodEnum = "HEAD"
-	UpdateServiceRequestBodyWebhooksOnChannelDestroyMethodEnumGet    UpdateServiceRequestBodyWebhooksOnChannelDestroyMethodEnum = "GET"
-	UpdateServiceRequestBodyWebhooksOnChannelDestroyMethodEnumPost   UpdateServiceRequestBodyWebhooksOnChannelDestroyMethodEnum = "POST"
-	UpdateServiceRequestBodyWebhooksOnChannelDestroyMethodEnumPatch  UpdateServiceRequestBodyWebhooksOnChannelDestroyMethodEnum = "PATCH"
-	UpdateServiceRequestBodyWebhooksOnChannelDestroyMethodEnumPut    UpdateServiceRequestBodyWebhooksOnChannelDestroyMethodEnum = "PUT"
-	UpdateServiceRequestBodyWebhooksOnChannelDestroyMethodEnumDelete UpdateServiceRequestBodyWebhooksOnChannelDestroyMethodEnum = "DELETE"
+	UpdateServiceUpdateServiceRequestWebhooksOnChannelDestroyMethodEnumHead   UpdateServiceUpdateServiceRequestWebhooksOnChannelDestroyMethodEnum = "HEAD"
+	UpdateServiceUpdateServiceRequestWebhooksOnChannelDestroyMethodEnumGet    UpdateServiceUpdateServiceRequestWebhooksOnChannelDestroyMethodEnum = "GET"
+	UpdateServiceUpdateServiceRequestWebhooksOnChannelDestroyMethodEnumPost   UpdateServiceUpdateServiceRequestWebhooksOnChannelDestroyMethodEnum = "POST"
+	UpdateServiceUpdateServiceRequestWebhooksOnChannelDestroyMethodEnumPatch  UpdateServiceUpdateServiceRequestWebhooksOnChannelDestroyMethodEnum = "PATCH"
+	UpdateServiceUpdateServiceRequestWebhooksOnChannelDestroyMethodEnumPut    UpdateServiceUpdateServiceRequestWebhooksOnChannelDestroyMethodEnum = "PUT"
+	UpdateServiceUpdateServiceRequestWebhooksOnChannelDestroyMethodEnumDelete UpdateServiceUpdateServiceRequestWebhooksOnChannelDestroyMethodEnum = "DELETE"
 )
 
-type UpdateServiceRequestBodyWebhooksOnChannelDestroyedMethodEnum string
+type UpdateServiceUpdateServiceRequestWebhooksOnChannelDestroyedMethodEnum string
 
 const (
-	UpdateServiceRequestBodyWebhooksOnChannelDestroyedMethodEnumHead   UpdateServiceRequestBodyWebhooksOnChannelDestroyedMethodEnum = "HEAD"
-	UpdateServiceRequestBodyWebhooksOnChannelDestroyedMethodEnumGet    UpdateServiceRequestBodyWebhooksOnChannelDestroyedMethodEnum = "GET"
-	UpdateServiceRequestBodyWebhooksOnChannelDestroyedMethodEnumPost   UpdateServiceRequestBodyWebhooksOnChannelDestroyedMethodEnum = "POST"
-	UpdateServiceRequestBodyWebhooksOnChannelDestroyedMethodEnumPatch  UpdateServiceRequestBodyWebhooksOnChannelDestroyedMethodEnum = "PATCH"
-	UpdateServiceRequestBodyWebhooksOnChannelDestroyedMethodEnumPut    UpdateServiceRequestBodyWebhooksOnChannelDestroyedMethodEnum = "PUT"
-	UpdateServiceRequestBodyWebhooksOnChannelDestroyedMethodEnumDelete UpdateServiceRequestBodyWebhooksOnChannelDestroyedMethodEnum = "DELETE"
+	UpdateServiceUpdateServiceRequestWebhooksOnChannelDestroyedMethodEnumHead   UpdateServiceUpdateServiceRequestWebhooksOnChannelDestroyedMethodEnum = "HEAD"
+	UpdateServiceUpdateServiceRequestWebhooksOnChannelDestroyedMethodEnumGet    UpdateServiceUpdateServiceRequestWebhooksOnChannelDestroyedMethodEnum = "GET"
+	UpdateServiceUpdateServiceRequestWebhooksOnChannelDestroyedMethodEnumPost   UpdateServiceUpdateServiceRequestWebhooksOnChannelDestroyedMethodEnum = "POST"
+	UpdateServiceUpdateServiceRequestWebhooksOnChannelDestroyedMethodEnumPatch  UpdateServiceUpdateServiceRequestWebhooksOnChannelDestroyedMethodEnum = "PATCH"
+	UpdateServiceUpdateServiceRequestWebhooksOnChannelDestroyedMethodEnumPut    UpdateServiceUpdateServiceRequestWebhooksOnChannelDestroyedMethodEnum = "PUT"
+	UpdateServiceUpdateServiceRequestWebhooksOnChannelDestroyedMethodEnumDelete UpdateServiceUpdateServiceRequestWebhooksOnChannelDestroyedMethodEnum = "DELETE"
 )
 
-type UpdateServiceRequestBodyWebhooksOnChannelUpdateMethodEnum string
+type UpdateServiceUpdateServiceRequestWebhooksOnChannelUpdateMethodEnum string
 
 const (
-	UpdateServiceRequestBodyWebhooksOnChannelUpdateMethodEnumHead   UpdateServiceRequestBodyWebhooksOnChannelUpdateMethodEnum = "HEAD"
-	UpdateServiceRequestBodyWebhooksOnChannelUpdateMethodEnumGet    UpdateServiceRequestBodyWebhooksOnChannelUpdateMethodEnum = "GET"
-	UpdateServiceRequestBodyWebhooksOnChannelUpdateMethodEnumPost   UpdateServiceRequestBodyWebhooksOnChannelUpdateMethodEnum = "POST"
-	UpdateServiceRequestBodyWebhooksOnChannelUpdateMethodEnumPatch  UpdateServiceRequestBodyWebhooksOnChannelUpdateMethodEnum = "PATCH"
-	UpdateServiceRequestBodyWebhooksOnChannelUpdateMethodEnumPut    UpdateServiceRequestBodyWebhooksOnChannelUpdateMethodEnum = "PUT"
-	UpdateServiceRequestBodyWebhooksOnChannelUpdateMethodEnumDelete UpdateServiceRequestBodyWebhooksOnChannelUpdateMethodEnum = "DELETE"
+	UpdateServiceUpdateServiceRequestWebhooksOnChannelUpdateMethodEnumHead   UpdateServiceUpdateServiceRequestWebhooksOnChannelUpdateMethodEnum = "HEAD"
+	UpdateServiceUpdateServiceRequestWebhooksOnChannelUpdateMethodEnumGet    UpdateServiceUpdateServiceRequestWebhooksOnChannelUpdateMethodEnum = "GET"
+	UpdateServiceUpdateServiceRequestWebhooksOnChannelUpdateMethodEnumPost   UpdateServiceUpdateServiceRequestWebhooksOnChannelUpdateMethodEnum = "POST"
+	UpdateServiceUpdateServiceRequestWebhooksOnChannelUpdateMethodEnumPatch  UpdateServiceUpdateServiceRequestWebhooksOnChannelUpdateMethodEnum = "PATCH"
+	UpdateServiceUpdateServiceRequestWebhooksOnChannelUpdateMethodEnumPut    UpdateServiceUpdateServiceRequestWebhooksOnChannelUpdateMethodEnum = "PUT"
+	UpdateServiceUpdateServiceRequestWebhooksOnChannelUpdateMethodEnumDelete UpdateServiceUpdateServiceRequestWebhooksOnChannelUpdateMethodEnum = "DELETE"
 )
 
-type UpdateServiceRequestBodyWebhooksOnChannelUpdatedMethodEnum string
+type UpdateServiceUpdateServiceRequestWebhooksOnChannelUpdatedMethodEnum string
 
 const (
-	UpdateServiceRequestBodyWebhooksOnChannelUpdatedMethodEnumHead   UpdateServiceRequestBodyWebhooksOnChannelUpdatedMethodEnum = "HEAD"
-	UpdateServiceRequestBodyWebhooksOnChannelUpdatedMethodEnumGet    UpdateServiceRequestBodyWebhooksOnChannelUpdatedMethodEnum = "GET"
-	UpdateServiceRequestBodyWebhooksOnChannelUpdatedMethodEnumPost   UpdateServiceRequestBodyWebhooksOnChannelUpdatedMethodEnum = "POST"
-	UpdateServiceRequestBodyWebhooksOnChannelUpdatedMethodEnumPatch  UpdateServiceRequestBodyWebhooksOnChannelUpdatedMethodEnum = "PATCH"
-	UpdateServiceRequestBodyWebhooksOnChannelUpdatedMethodEnumPut    UpdateServiceRequestBodyWebhooksOnChannelUpdatedMethodEnum = "PUT"
-	UpdateServiceRequestBodyWebhooksOnChannelUpdatedMethodEnumDelete UpdateServiceRequestBodyWebhooksOnChannelUpdatedMethodEnum = "DELETE"
+	UpdateServiceUpdateServiceRequestWebhooksOnChannelUpdatedMethodEnumHead   UpdateServiceUpdateServiceRequestWebhooksOnChannelUpdatedMethodEnum = "HEAD"
+	UpdateServiceUpdateServiceRequestWebhooksOnChannelUpdatedMethodEnumGet    UpdateServiceUpdateServiceRequestWebhooksOnChannelUpdatedMethodEnum = "GET"
+	UpdateServiceUpdateServiceRequestWebhooksOnChannelUpdatedMethodEnumPost   UpdateServiceUpdateServiceRequestWebhooksOnChannelUpdatedMethodEnum = "POST"
+	UpdateServiceUpdateServiceRequestWebhooksOnChannelUpdatedMethodEnumPatch  UpdateServiceUpdateServiceRequestWebhooksOnChannelUpdatedMethodEnum = "PATCH"
+	UpdateServiceUpdateServiceRequestWebhooksOnChannelUpdatedMethodEnumPut    UpdateServiceUpdateServiceRequestWebhooksOnChannelUpdatedMethodEnum = "PUT"
+	UpdateServiceUpdateServiceRequestWebhooksOnChannelUpdatedMethodEnumDelete UpdateServiceUpdateServiceRequestWebhooksOnChannelUpdatedMethodEnum = "DELETE"
 )
 
-type UpdateServiceRequestBodyWebhooksOnMemberAddMethodEnum string
+type UpdateServiceUpdateServiceRequestWebhooksOnMemberAddMethodEnum string
 
 const (
-	UpdateServiceRequestBodyWebhooksOnMemberAddMethodEnumHead   UpdateServiceRequestBodyWebhooksOnMemberAddMethodEnum = "HEAD"
-	UpdateServiceRequestBodyWebhooksOnMemberAddMethodEnumGet    UpdateServiceRequestBodyWebhooksOnMemberAddMethodEnum = "GET"
-	UpdateServiceRequestBodyWebhooksOnMemberAddMethodEnumPost   UpdateServiceRequestBodyWebhooksOnMemberAddMethodEnum = "POST"
-	UpdateServiceRequestBodyWebhooksOnMemberAddMethodEnumPatch  UpdateServiceRequestBodyWebhooksOnMemberAddMethodEnum = "PATCH"
-	UpdateServiceRequestBodyWebhooksOnMemberAddMethodEnumPut    UpdateServiceRequestBodyWebhooksOnMemberAddMethodEnum = "PUT"
-	UpdateServiceRequestBodyWebhooksOnMemberAddMethodEnumDelete UpdateServiceRequestBodyWebhooksOnMemberAddMethodEnum = "DELETE"
+	UpdateServiceUpdateServiceRequestWebhooksOnMemberAddMethodEnumHead   UpdateServiceUpdateServiceRequestWebhooksOnMemberAddMethodEnum = "HEAD"
+	UpdateServiceUpdateServiceRequestWebhooksOnMemberAddMethodEnumGet    UpdateServiceUpdateServiceRequestWebhooksOnMemberAddMethodEnum = "GET"
+	UpdateServiceUpdateServiceRequestWebhooksOnMemberAddMethodEnumPost   UpdateServiceUpdateServiceRequestWebhooksOnMemberAddMethodEnum = "POST"
+	UpdateServiceUpdateServiceRequestWebhooksOnMemberAddMethodEnumPatch  UpdateServiceUpdateServiceRequestWebhooksOnMemberAddMethodEnum = "PATCH"
+	UpdateServiceUpdateServiceRequestWebhooksOnMemberAddMethodEnumPut    UpdateServiceUpdateServiceRequestWebhooksOnMemberAddMethodEnum = "PUT"
+	UpdateServiceUpdateServiceRequestWebhooksOnMemberAddMethodEnumDelete UpdateServiceUpdateServiceRequestWebhooksOnMemberAddMethodEnum = "DELETE"
 )
 
-type UpdateServiceRequestBodyWebhooksOnMemberAddedMethodEnum string
+type UpdateServiceUpdateServiceRequestWebhooksOnMemberAddedMethodEnum string
 
 const (
-	UpdateServiceRequestBodyWebhooksOnMemberAddedMethodEnumHead   UpdateServiceRequestBodyWebhooksOnMemberAddedMethodEnum = "HEAD"
-	UpdateServiceRequestBodyWebhooksOnMemberAddedMethodEnumGet    UpdateServiceRequestBodyWebhooksOnMemberAddedMethodEnum = "GET"
-	UpdateServiceRequestBodyWebhooksOnMemberAddedMethodEnumPost   UpdateServiceRequestBodyWebhooksOnMemberAddedMethodEnum = "POST"
-	UpdateServiceRequestBodyWebhooksOnMemberAddedMethodEnumPatch  UpdateServiceRequestBodyWebhooksOnMemberAddedMethodEnum = "PATCH"
-	UpdateServiceRequestBodyWebhooksOnMemberAddedMethodEnumPut    UpdateServiceRequestBodyWebhooksOnMemberAddedMethodEnum = "PUT"
-	UpdateServiceRequestBodyWebhooksOnMemberAddedMethodEnumDelete UpdateServiceRequestBodyWebhooksOnMemberAddedMethodEnum = "DELETE"
+	UpdateServiceUpdateServiceRequestWebhooksOnMemberAddedMethodEnumHead   UpdateServiceUpdateServiceRequestWebhooksOnMemberAddedMethodEnum = "HEAD"
+	UpdateServiceUpdateServiceRequestWebhooksOnMemberAddedMethodEnumGet    UpdateServiceUpdateServiceRequestWebhooksOnMemberAddedMethodEnum = "GET"
+	UpdateServiceUpdateServiceRequestWebhooksOnMemberAddedMethodEnumPost   UpdateServiceUpdateServiceRequestWebhooksOnMemberAddedMethodEnum = "POST"
+	UpdateServiceUpdateServiceRequestWebhooksOnMemberAddedMethodEnumPatch  UpdateServiceUpdateServiceRequestWebhooksOnMemberAddedMethodEnum = "PATCH"
+	UpdateServiceUpdateServiceRequestWebhooksOnMemberAddedMethodEnumPut    UpdateServiceUpdateServiceRequestWebhooksOnMemberAddedMethodEnum = "PUT"
+	UpdateServiceUpdateServiceRequestWebhooksOnMemberAddedMethodEnumDelete UpdateServiceUpdateServiceRequestWebhooksOnMemberAddedMethodEnum = "DELETE"
 )
 
-type UpdateServiceRequestBodyWebhooksOnMemberRemoveMethodEnum string
+type UpdateServiceUpdateServiceRequestWebhooksOnMemberRemoveMethodEnum string
 
 const (
-	UpdateServiceRequestBodyWebhooksOnMemberRemoveMethodEnumHead   UpdateServiceRequestBodyWebhooksOnMemberRemoveMethodEnum = "HEAD"
-	UpdateServiceRequestBodyWebhooksOnMemberRemoveMethodEnumGet    UpdateServiceRequestBodyWebhooksOnMemberRemoveMethodEnum = "GET"
-	UpdateServiceRequestBodyWebhooksOnMemberRemoveMethodEnumPost   UpdateServiceRequestBodyWebhooksOnMemberRemoveMethodEnum = "POST"
-	UpdateServiceRequestBodyWebhooksOnMemberRemoveMethodEnumPatch  UpdateServiceRequestBodyWebhooksOnMemberRemoveMethodEnum = "PATCH"
-	UpdateServiceRequestBodyWebhooksOnMemberRemoveMethodEnumPut    UpdateServiceRequestBodyWebhooksOnMemberRemoveMethodEnum = "PUT"
-	UpdateServiceRequestBodyWebhooksOnMemberRemoveMethodEnumDelete UpdateServiceRequestBodyWebhooksOnMemberRemoveMethodEnum = "DELETE"
+	UpdateServiceUpdateServiceRequestWebhooksOnMemberRemoveMethodEnumHead   UpdateServiceUpdateServiceRequestWebhooksOnMemberRemoveMethodEnum = "HEAD"
+	UpdateServiceUpdateServiceRequestWebhooksOnMemberRemoveMethodEnumGet    UpdateServiceUpdateServiceRequestWebhooksOnMemberRemoveMethodEnum = "GET"
+	UpdateServiceUpdateServiceRequestWebhooksOnMemberRemoveMethodEnumPost   UpdateServiceUpdateServiceRequestWebhooksOnMemberRemoveMethodEnum = "POST"
+	UpdateServiceUpdateServiceRequestWebhooksOnMemberRemoveMethodEnumPatch  UpdateServiceUpdateServiceRequestWebhooksOnMemberRemoveMethodEnum = "PATCH"
+	UpdateServiceUpdateServiceRequestWebhooksOnMemberRemoveMethodEnumPut    UpdateServiceUpdateServiceRequestWebhooksOnMemberRemoveMethodEnum = "PUT"
+	UpdateServiceUpdateServiceRequestWebhooksOnMemberRemoveMethodEnumDelete UpdateServiceUpdateServiceRequestWebhooksOnMemberRemoveMethodEnum = "DELETE"
 )
 
-type UpdateServiceRequestBodyWebhooksOnMemberRemovedMethodEnum string
+type UpdateServiceUpdateServiceRequestWebhooksOnMemberRemovedMethodEnum string
 
 const (
-	UpdateServiceRequestBodyWebhooksOnMemberRemovedMethodEnumHead   UpdateServiceRequestBodyWebhooksOnMemberRemovedMethodEnum = "HEAD"
-	UpdateServiceRequestBodyWebhooksOnMemberRemovedMethodEnumGet    UpdateServiceRequestBodyWebhooksOnMemberRemovedMethodEnum = "GET"
-	UpdateServiceRequestBodyWebhooksOnMemberRemovedMethodEnumPost   UpdateServiceRequestBodyWebhooksOnMemberRemovedMethodEnum = "POST"
-	UpdateServiceRequestBodyWebhooksOnMemberRemovedMethodEnumPatch  UpdateServiceRequestBodyWebhooksOnMemberRemovedMethodEnum = "PATCH"
-	UpdateServiceRequestBodyWebhooksOnMemberRemovedMethodEnumPut    UpdateServiceRequestBodyWebhooksOnMemberRemovedMethodEnum = "PUT"
-	UpdateServiceRequestBodyWebhooksOnMemberRemovedMethodEnumDelete UpdateServiceRequestBodyWebhooksOnMemberRemovedMethodEnum = "DELETE"
+	UpdateServiceUpdateServiceRequestWebhooksOnMemberRemovedMethodEnumHead   UpdateServiceUpdateServiceRequestWebhooksOnMemberRemovedMethodEnum = "HEAD"
+	UpdateServiceUpdateServiceRequestWebhooksOnMemberRemovedMethodEnumGet    UpdateServiceUpdateServiceRequestWebhooksOnMemberRemovedMethodEnum = "GET"
+	UpdateServiceUpdateServiceRequestWebhooksOnMemberRemovedMethodEnumPost   UpdateServiceUpdateServiceRequestWebhooksOnMemberRemovedMethodEnum = "POST"
+	UpdateServiceUpdateServiceRequestWebhooksOnMemberRemovedMethodEnumPatch  UpdateServiceUpdateServiceRequestWebhooksOnMemberRemovedMethodEnum = "PATCH"
+	UpdateServiceUpdateServiceRequestWebhooksOnMemberRemovedMethodEnumPut    UpdateServiceUpdateServiceRequestWebhooksOnMemberRemovedMethodEnum = "PUT"
+	UpdateServiceUpdateServiceRequestWebhooksOnMemberRemovedMethodEnumDelete UpdateServiceUpdateServiceRequestWebhooksOnMemberRemovedMethodEnum = "DELETE"
 )
 
-type UpdateServiceRequestBodyWebhooksOnMessageRemoveMethodEnum string
+type UpdateServiceUpdateServiceRequestWebhooksOnMessageRemoveMethodEnum string
 
 const (
-	UpdateServiceRequestBodyWebhooksOnMessageRemoveMethodEnumHead   UpdateServiceRequestBodyWebhooksOnMessageRemoveMethodEnum = "HEAD"
-	UpdateServiceRequestBodyWebhooksOnMessageRemoveMethodEnumGet    UpdateServiceRequestBodyWebhooksOnMessageRemoveMethodEnum = "GET"
-	UpdateServiceRequestBodyWebhooksOnMessageRemoveMethodEnumPost   UpdateServiceRequestBodyWebhooksOnMessageRemoveMethodEnum = "POST"
-	UpdateServiceRequestBodyWebhooksOnMessageRemoveMethodEnumPatch  UpdateServiceRequestBodyWebhooksOnMessageRemoveMethodEnum = "PATCH"
-	UpdateServiceRequestBodyWebhooksOnMessageRemoveMethodEnumPut    UpdateServiceRequestBodyWebhooksOnMessageRemoveMethodEnum = "PUT"
-	UpdateServiceRequestBodyWebhooksOnMessageRemoveMethodEnumDelete UpdateServiceRequestBodyWebhooksOnMessageRemoveMethodEnum = "DELETE"
+	UpdateServiceUpdateServiceRequestWebhooksOnMessageRemoveMethodEnumHead   UpdateServiceUpdateServiceRequestWebhooksOnMessageRemoveMethodEnum = "HEAD"
+	UpdateServiceUpdateServiceRequestWebhooksOnMessageRemoveMethodEnumGet    UpdateServiceUpdateServiceRequestWebhooksOnMessageRemoveMethodEnum = "GET"
+	UpdateServiceUpdateServiceRequestWebhooksOnMessageRemoveMethodEnumPost   UpdateServiceUpdateServiceRequestWebhooksOnMessageRemoveMethodEnum = "POST"
+	UpdateServiceUpdateServiceRequestWebhooksOnMessageRemoveMethodEnumPatch  UpdateServiceUpdateServiceRequestWebhooksOnMessageRemoveMethodEnum = "PATCH"
+	UpdateServiceUpdateServiceRequestWebhooksOnMessageRemoveMethodEnumPut    UpdateServiceUpdateServiceRequestWebhooksOnMessageRemoveMethodEnum = "PUT"
+	UpdateServiceUpdateServiceRequestWebhooksOnMessageRemoveMethodEnumDelete UpdateServiceUpdateServiceRequestWebhooksOnMessageRemoveMethodEnum = "DELETE"
 )
 
-type UpdateServiceRequestBodyWebhooksOnMessageRemovedMethodEnum string
+type UpdateServiceUpdateServiceRequestWebhooksOnMessageRemovedMethodEnum string
 
 const (
-	UpdateServiceRequestBodyWebhooksOnMessageRemovedMethodEnumHead   UpdateServiceRequestBodyWebhooksOnMessageRemovedMethodEnum = "HEAD"
-	UpdateServiceRequestBodyWebhooksOnMessageRemovedMethodEnumGet    UpdateServiceRequestBodyWebhooksOnMessageRemovedMethodEnum = "GET"
-	UpdateServiceRequestBodyWebhooksOnMessageRemovedMethodEnumPost   UpdateServiceRequestBodyWebhooksOnMessageRemovedMethodEnum = "POST"
-	UpdateServiceRequestBodyWebhooksOnMessageRemovedMethodEnumPatch  UpdateServiceRequestBodyWebhooksOnMessageRemovedMethodEnum = "PATCH"
-	UpdateServiceRequestBodyWebhooksOnMessageRemovedMethodEnumPut    UpdateServiceRequestBodyWebhooksOnMessageRemovedMethodEnum = "PUT"
-	UpdateServiceRequestBodyWebhooksOnMessageRemovedMethodEnumDelete UpdateServiceRequestBodyWebhooksOnMessageRemovedMethodEnum = "DELETE"
+	UpdateServiceUpdateServiceRequestWebhooksOnMessageRemovedMethodEnumHead   UpdateServiceUpdateServiceRequestWebhooksOnMessageRemovedMethodEnum = "HEAD"
+	UpdateServiceUpdateServiceRequestWebhooksOnMessageRemovedMethodEnumGet    UpdateServiceUpdateServiceRequestWebhooksOnMessageRemovedMethodEnum = "GET"
+	UpdateServiceUpdateServiceRequestWebhooksOnMessageRemovedMethodEnumPost   UpdateServiceUpdateServiceRequestWebhooksOnMessageRemovedMethodEnum = "POST"
+	UpdateServiceUpdateServiceRequestWebhooksOnMessageRemovedMethodEnumPatch  UpdateServiceUpdateServiceRequestWebhooksOnMessageRemovedMethodEnum = "PATCH"
+	UpdateServiceUpdateServiceRequestWebhooksOnMessageRemovedMethodEnumPut    UpdateServiceUpdateServiceRequestWebhooksOnMessageRemovedMethodEnum = "PUT"
+	UpdateServiceUpdateServiceRequestWebhooksOnMessageRemovedMethodEnumDelete UpdateServiceUpdateServiceRequestWebhooksOnMessageRemovedMethodEnum = "DELETE"
 )
 
-type UpdateServiceRequestBodyWebhooksOnMessageSendMethodEnum string
+type UpdateServiceUpdateServiceRequestWebhooksOnMessageSendMethodEnum string
 
 const (
-	UpdateServiceRequestBodyWebhooksOnMessageSendMethodEnumHead   UpdateServiceRequestBodyWebhooksOnMessageSendMethodEnum = "HEAD"
-	UpdateServiceRequestBodyWebhooksOnMessageSendMethodEnumGet    UpdateServiceRequestBodyWebhooksOnMessageSendMethodEnum = "GET"
-	UpdateServiceRequestBodyWebhooksOnMessageSendMethodEnumPost   UpdateServiceRequestBodyWebhooksOnMessageSendMethodEnum = "POST"
-	UpdateServiceRequestBodyWebhooksOnMessageSendMethodEnumPatch  UpdateServiceRequestBodyWebhooksOnMessageSendMethodEnum = "PATCH"
-	UpdateServiceRequestBodyWebhooksOnMessageSendMethodEnumPut    UpdateServiceRequestBodyWebhooksOnMessageSendMethodEnum = "PUT"
-	UpdateServiceRequestBodyWebhooksOnMessageSendMethodEnumDelete UpdateServiceRequestBodyWebhooksOnMessageSendMethodEnum = "DELETE"
+	UpdateServiceUpdateServiceRequestWebhooksOnMessageSendMethodEnumHead   UpdateServiceUpdateServiceRequestWebhooksOnMessageSendMethodEnum = "HEAD"
+	UpdateServiceUpdateServiceRequestWebhooksOnMessageSendMethodEnumGet    UpdateServiceUpdateServiceRequestWebhooksOnMessageSendMethodEnum = "GET"
+	UpdateServiceUpdateServiceRequestWebhooksOnMessageSendMethodEnumPost   UpdateServiceUpdateServiceRequestWebhooksOnMessageSendMethodEnum = "POST"
+	UpdateServiceUpdateServiceRequestWebhooksOnMessageSendMethodEnumPatch  UpdateServiceUpdateServiceRequestWebhooksOnMessageSendMethodEnum = "PATCH"
+	UpdateServiceUpdateServiceRequestWebhooksOnMessageSendMethodEnumPut    UpdateServiceUpdateServiceRequestWebhooksOnMessageSendMethodEnum = "PUT"
+	UpdateServiceUpdateServiceRequestWebhooksOnMessageSendMethodEnumDelete UpdateServiceUpdateServiceRequestWebhooksOnMessageSendMethodEnum = "DELETE"
 )
 
-type UpdateServiceRequestBodyWebhooksOnMessageSentMethodEnum string
+type UpdateServiceUpdateServiceRequestWebhooksOnMessageSentMethodEnum string
 
 const (
-	UpdateServiceRequestBodyWebhooksOnMessageSentMethodEnumHead   UpdateServiceRequestBodyWebhooksOnMessageSentMethodEnum = "HEAD"
-	UpdateServiceRequestBodyWebhooksOnMessageSentMethodEnumGet    UpdateServiceRequestBodyWebhooksOnMessageSentMethodEnum = "GET"
-	UpdateServiceRequestBodyWebhooksOnMessageSentMethodEnumPost   UpdateServiceRequestBodyWebhooksOnMessageSentMethodEnum = "POST"
-	UpdateServiceRequestBodyWebhooksOnMessageSentMethodEnumPatch  UpdateServiceRequestBodyWebhooksOnMessageSentMethodEnum = "PATCH"
-	UpdateServiceRequestBodyWebhooksOnMessageSentMethodEnumPut    UpdateServiceRequestBodyWebhooksOnMessageSentMethodEnum = "PUT"
-	UpdateServiceRequestBodyWebhooksOnMessageSentMethodEnumDelete UpdateServiceRequestBodyWebhooksOnMessageSentMethodEnum = "DELETE"
+	UpdateServiceUpdateServiceRequestWebhooksOnMessageSentMethodEnumHead   UpdateServiceUpdateServiceRequestWebhooksOnMessageSentMethodEnum = "HEAD"
+	UpdateServiceUpdateServiceRequestWebhooksOnMessageSentMethodEnumGet    UpdateServiceUpdateServiceRequestWebhooksOnMessageSentMethodEnum = "GET"
+	UpdateServiceUpdateServiceRequestWebhooksOnMessageSentMethodEnumPost   UpdateServiceUpdateServiceRequestWebhooksOnMessageSentMethodEnum = "POST"
+	UpdateServiceUpdateServiceRequestWebhooksOnMessageSentMethodEnumPatch  UpdateServiceUpdateServiceRequestWebhooksOnMessageSentMethodEnum = "PATCH"
+	UpdateServiceUpdateServiceRequestWebhooksOnMessageSentMethodEnumPut    UpdateServiceUpdateServiceRequestWebhooksOnMessageSentMethodEnum = "PUT"
+	UpdateServiceUpdateServiceRequestWebhooksOnMessageSentMethodEnumDelete UpdateServiceUpdateServiceRequestWebhooksOnMessageSentMethodEnum = "DELETE"
 )
 
-type UpdateServiceRequestBodyWebhooksOnMessageUpdateMethodEnum string
+type UpdateServiceUpdateServiceRequestWebhooksOnMessageUpdateMethodEnum string
 
 const (
-	UpdateServiceRequestBodyWebhooksOnMessageUpdateMethodEnumHead   UpdateServiceRequestBodyWebhooksOnMessageUpdateMethodEnum = "HEAD"
-	UpdateServiceRequestBodyWebhooksOnMessageUpdateMethodEnumGet    UpdateServiceRequestBodyWebhooksOnMessageUpdateMethodEnum = "GET"
-	UpdateServiceRequestBodyWebhooksOnMessageUpdateMethodEnumPost   UpdateServiceRequestBodyWebhooksOnMessageUpdateMethodEnum = "POST"
-	UpdateServiceRequestBodyWebhooksOnMessageUpdateMethodEnumPatch  UpdateServiceRequestBodyWebhooksOnMessageUpdateMethodEnum = "PATCH"
-	UpdateServiceRequestBodyWebhooksOnMessageUpdateMethodEnumPut    UpdateServiceRequestBodyWebhooksOnMessageUpdateMethodEnum = "PUT"
-	UpdateServiceRequestBodyWebhooksOnMessageUpdateMethodEnumDelete UpdateServiceRequestBodyWebhooksOnMessageUpdateMethodEnum = "DELETE"
+	UpdateServiceUpdateServiceRequestWebhooksOnMessageUpdateMethodEnumHead   UpdateServiceUpdateServiceRequestWebhooksOnMessageUpdateMethodEnum = "HEAD"
+	UpdateServiceUpdateServiceRequestWebhooksOnMessageUpdateMethodEnumGet    UpdateServiceUpdateServiceRequestWebhooksOnMessageUpdateMethodEnum = "GET"
+	UpdateServiceUpdateServiceRequestWebhooksOnMessageUpdateMethodEnumPost   UpdateServiceUpdateServiceRequestWebhooksOnMessageUpdateMethodEnum = "POST"
+	UpdateServiceUpdateServiceRequestWebhooksOnMessageUpdateMethodEnumPatch  UpdateServiceUpdateServiceRequestWebhooksOnMessageUpdateMethodEnum = "PATCH"
+	UpdateServiceUpdateServiceRequestWebhooksOnMessageUpdateMethodEnumPut    UpdateServiceUpdateServiceRequestWebhooksOnMessageUpdateMethodEnum = "PUT"
+	UpdateServiceUpdateServiceRequestWebhooksOnMessageUpdateMethodEnumDelete UpdateServiceUpdateServiceRequestWebhooksOnMessageUpdateMethodEnum = "DELETE"
 )
 
-type UpdateServiceRequestBodyWebhooksOnMessageUpdatedMethodEnum string
+type UpdateServiceUpdateServiceRequestWebhooksOnMessageUpdatedMethodEnum string
 
 const (
-	UpdateServiceRequestBodyWebhooksOnMessageUpdatedMethodEnumHead   UpdateServiceRequestBodyWebhooksOnMessageUpdatedMethodEnum = "HEAD"
-	UpdateServiceRequestBodyWebhooksOnMessageUpdatedMethodEnumGet    UpdateServiceRequestBodyWebhooksOnMessageUpdatedMethodEnum = "GET"
-	UpdateServiceRequestBodyWebhooksOnMessageUpdatedMethodEnumPost   UpdateServiceRequestBodyWebhooksOnMessageUpdatedMethodEnum = "POST"
-	UpdateServiceRequestBodyWebhooksOnMessageUpdatedMethodEnumPatch  UpdateServiceRequestBodyWebhooksOnMessageUpdatedMethodEnum = "PATCH"
-	UpdateServiceRequestBodyWebhooksOnMessageUpdatedMethodEnumPut    UpdateServiceRequestBodyWebhooksOnMessageUpdatedMethodEnum = "PUT"
-	UpdateServiceRequestBodyWebhooksOnMessageUpdatedMethodEnumDelete UpdateServiceRequestBodyWebhooksOnMessageUpdatedMethodEnum = "DELETE"
+	UpdateServiceUpdateServiceRequestWebhooksOnMessageUpdatedMethodEnumHead   UpdateServiceUpdateServiceRequestWebhooksOnMessageUpdatedMethodEnum = "HEAD"
+	UpdateServiceUpdateServiceRequestWebhooksOnMessageUpdatedMethodEnumGet    UpdateServiceUpdateServiceRequestWebhooksOnMessageUpdatedMethodEnum = "GET"
+	UpdateServiceUpdateServiceRequestWebhooksOnMessageUpdatedMethodEnumPost   UpdateServiceUpdateServiceRequestWebhooksOnMessageUpdatedMethodEnum = "POST"
+	UpdateServiceUpdateServiceRequestWebhooksOnMessageUpdatedMethodEnumPatch  UpdateServiceUpdateServiceRequestWebhooksOnMessageUpdatedMethodEnum = "PATCH"
+	UpdateServiceUpdateServiceRequestWebhooksOnMessageUpdatedMethodEnumPut    UpdateServiceUpdateServiceRequestWebhooksOnMessageUpdatedMethodEnum = "PUT"
+	UpdateServiceUpdateServiceRequestWebhooksOnMessageUpdatedMethodEnumDelete UpdateServiceUpdateServiceRequestWebhooksOnMessageUpdatedMethodEnum = "DELETE"
 )
 
-type UpdateServiceRequestBodyUpdateServiceRequest struct {
-	ConsumptionReportInterval               *int64                                                        `form:"name=ConsumptionReportInterval"`
-	DefaultChannelCreatorRoleSid            *string                                                       `form:"name=DefaultChannelCreatorRoleSid"`
-	DefaultChannelRoleSid                   *string                                                       `form:"name=DefaultChannelRoleSid"`
-	DefaultServiceRoleSid                   *string                                                       `form:"name=DefaultServiceRoleSid"`
-	FriendlyName                            *string                                                       `form:"name=FriendlyName"`
-	LimitsChannelMembers                    *int64                                                        `form:"name=Limits.ChannelMembers"`
-	LimitsUserChannels                      *int64                                                        `form:"name=Limits.UserChannels"`
-	NotificationsAddedToChannelEnabled      *bool                                                         `form:"name=Notifications.AddedToChannel.Enabled"`
-	NotificationsAddedToChannelTemplate     *string                                                       `form:"name=Notifications.AddedToChannel.Template"`
-	NotificationsInvitedToChannelEnabled    *bool                                                         `form:"name=Notifications.InvitedToChannel.Enabled"`
-	NotificationsInvitedToChannelTemplate   *string                                                       `form:"name=Notifications.InvitedToChannel.Template"`
-	NotificationsNewMessageEnabled          *bool                                                         `form:"name=Notifications.NewMessage.Enabled"`
-	NotificationsNewMessageTemplate         *string                                                       `form:"name=Notifications.NewMessage.Template"`
-	NotificationsRemovedFromChannelEnabled  *bool                                                         `form:"name=Notifications.RemovedFromChannel.Enabled"`
-	NotificationsRemovedFromChannelTemplate *string                                                       `form:"name=Notifications.RemovedFromChannel.Template"`
-	PostWebhookURL                          *string                                                       `form:"name=PostWebhookUrl"`
-	PreWebhookURL                           *string                                                       `form:"name=PreWebhookUrl"`
-	ReachabilityEnabled                     *bool                                                         `form:"name=ReachabilityEnabled"`
-	ReadStatusEnabled                       *bool                                                         `form:"name=ReadStatusEnabled"`
-	TypingIndicatorTimeout                  *int64                                                        `form:"name=TypingIndicatorTimeout"`
-	WebhookFilters                          []string                                                      `form:"name=WebhookFilters"`
-	WebhookMethod                           *UpdateServiceRequestBodyWebhookMethodEnum                    `form:"name=WebhookMethod"`
-	WebhooksOnChannelAddMethod              *UpdateServiceRequestBodyWebhooksOnChannelAddMethodEnum       `form:"name=Webhooks.OnChannelAdd.Method"`
-	WebhooksOnChannelAddURL                 *string                                                       `form:"name=Webhooks.OnChannelAdd.Url"`
-	WebhooksOnChannelAddedMethod            *UpdateServiceRequestBodyWebhooksOnChannelAddedMethodEnum     `form:"name=Webhooks.OnChannelAdded.Method"`
-	WebhooksOnChannelAddedURL               *string                                                       `form:"name=Webhooks.OnChannelAdded.Url"`
-	WebhooksOnChannelDestroyMethod          *UpdateServiceRequestBodyWebhooksOnChannelDestroyMethodEnum   `form:"name=Webhooks.OnChannelDestroy.Method"`
-	WebhooksOnChannelDestroyURL             *string                                                       `form:"name=Webhooks.OnChannelDestroy.Url"`
-	WebhooksOnChannelDestroyedMethod        *UpdateServiceRequestBodyWebhooksOnChannelDestroyedMethodEnum `form:"name=Webhooks.OnChannelDestroyed.Method"`
-	WebhooksOnChannelDestroyedURL           *string                                                       `form:"name=Webhooks.OnChannelDestroyed.Url"`
-	WebhooksOnChannelUpdateMethod           *UpdateServiceRequestBodyWebhooksOnChannelUpdateMethodEnum    `form:"name=Webhooks.OnChannelUpdate.Method"`
-	WebhooksOnChannelUpdateURL              *string                                                       `form:"name=Webhooks.OnChannelUpdate.Url"`
-	WebhooksOnChannelUpdatedMethod          *UpdateServiceRequestBodyWebhooksOnChannelUpdatedMethodEnum   `form:"name=Webhooks.OnChannelUpdated.Method"`
-	WebhooksOnChannelUpdatedURL             *string                                                       `form:"name=Webhooks.OnChannelUpdated.Url"`
-	WebhooksOnMemberAddMethod               *UpdateServiceRequestBodyWebhooksOnMemberAddMethodEnum        `form:"name=Webhooks.OnMemberAdd.Method"`
-	WebhooksOnMemberAddURL                  *string                                                       `form:"name=Webhooks.OnMemberAdd.Url"`
-	WebhooksOnMemberAddedMethod             *UpdateServiceRequestBodyWebhooksOnMemberAddedMethodEnum      `form:"name=Webhooks.OnMemberAdded.Method"`
-	WebhooksOnMemberAddedURL                *string                                                       `form:"name=Webhooks.OnMemberAdded.Url"`
-	WebhooksOnMemberRemoveMethod            *UpdateServiceRequestBodyWebhooksOnMemberRemoveMethodEnum     `form:"name=Webhooks.OnMemberRemove.Method"`
-	WebhooksOnMemberRemoveURL               *string                                                       `form:"name=Webhooks.OnMemberRemove.Url"`
-	WebhooksOnMemberRemovedMethod           *UpdateServiceRequestBodyWebhooksOnMemberRemovedMethodEnum    `form:"name=Webhooks.OnMemberRemoved.Method"`
-	WebhooksOnMemberRemovedURL              *string                                                       `form:"name=Webhooks.OnMemberRemoved.Url"`
-	WebhooksOnMessageRemoveMethod           *UpdateServiceRequestBodyWebhooksOnMessageRemoveMethodEnum    `form:"name=Webhooks.OnMessageRemove.Method"`
-	WebhooksOnMessageRemoveURL              *string                                                       `form:"name=Webhooks.OnMessageRemove.Url"`
-	WebhooksOnMessageRemovedMethod          *UpdateServiceRequestBodyWebhooksOnMessageRemovedMethodEnum   `form:"name=Webhooks.OnMessageRemoved.Method"`
-	WebhooksOnMessageRemovedURL             *string                                                       `form:"name=Webhooks.OnMessageRemoved.Url"`
-	WebhooksOnMessageSendMethod             *UpdateServiceRequestBodyWebhooksOnMessageSendMethodEnum      `form:"name=Webhooks.OnMessageSend.Method"`
-	WebhooksOnMessageSendURL                *string                                                       `form:"name=Webhooks.OnMessageSend.Url"`
-	WebhooksOnMessageSentMethod             *UpdateServiceRequestBodyWebhooksOnMessageSentMethodEnum      `form:"name=Webhooks.OnMessageSent.Method"`
-	WebhooksOnMessageSentURL                *string                                                       `form:"name=Webhooks.OnMessageSent.Url"`
-	WebhooksOnMessageUpdateMethod           *UpdateServiceRequestBodyWebhooksOnMessageUpdateMethodEnum    `form:"name=Webhooks.OnMessageUpdate.Method"`
-	WebhooksOnMessageUpdateURL              *string                                                       `form:"name=Webhooks.OnMessageUpdate.Url"`
-	WebhooksOnMessageUpdatedMethod          *UpdateServiceRequestBodyWebhooksOnMessageUpdatedMethodEnum   `form:"name=Webhooks.OnMessageUpdated.Method"`
-	WebhooksOnMessageUpdatedURL             *string                                                       `form:"name=Webhooks.OnMessageUpdated.Url"`
+type UpdateServiceUpdateServiceRequest struct {
+	ConsumptionReportInterval               *int64                                                                 `form:"name=ConsumptionReportInterval"`
+	DefaultChannelCreatorRoleSid            *string                                                                `form:"name=DefaultChannelCreatorRoleSid"`
+	DefaultChannelRoleSid                   *string                                                                `form:"name=DefaultChannelRoleSid"`
+	DefaultServiceRoleSid                   *string                                                                `form:"name=DefaultServiceRoleSid"`
+	FriendlyName                            *string                                                                `form:"name=FriendlyName"`
+	LimitsChannelMembers                    *int64                                                                 `form:"name=Limits.ChannelMembers"`
+	LimitsUserChannels                      *int64                                                                 `form:"name=Limits.UserChannels"`
+	NotificationsAddedToChannelEnabled      *bool                                                                  `form:"name=Notifications.AddedToChannel.Enabled"`
+	NotificationsAddedToChannelTemplate     *string                                                                `form:"name=Notifications.AddedToChannel.Template"`
+	NotificationsInvitedToChannelEnabled    *bool                                                                  `form:"name=Notifications.InvitedToChannel.Enabled"`
+	NotificationsInvitedToChannelTemplate   *string                                                                `form:"name=Notifications.InvitedToChannel.Template"`
+	NotificationsNewMessageEnabled          *bool                                                                  `form:"name=Notifications.NewMessage.Enabled"`
+	NotificationsNewMessageTemplate         *string                                                                `form:"name=Notifications.NewMessage.Template"`
+	NotificationsRemovedFromChannelEnabled  *bool                                                                  `form:"name=Notifications.RemovedFromChannel.Enabled"`
+	NotificationsRemovedFromChannelTemplate *string                                                                `form:"name=Notifications.RemovedFromChannel.Template"`
+	PostWebhookURL                          *string                                                                `form:"name=PostWebhookUrl"`
+	PreWebhookURL                           *string                                                                `form:"name=PreWebhookUrl"`
+	ReachabilityEnabled                     *bool                                                                  `form:"name=ReachabilityEnabled"`
+	ReadStatusEnabled                       *bool                                                                  `form:"name=ReadStatusEnabled"`
+	TypingIndicatorTimeout                  *int64                                                                 `form:"name=TypingIndicatorTimeout"`
+	WebhookFilters                          []string                                                               `form:"name=WebhookFilters"`
+	WebhookMethod                           *UpdateServiceUpdateServiceRequestWebhookMethodEnum                    `form:"name=WebhookMethod"`
+	WebhooksOnChannelAddMethod              *UpdateServiceUpdateServiceRequestWebhooksOnChannelAddMethodEnum       `form:"name=Webhooks.OnChannelAdd.Method"`
+	WebhooksOnChannelAddURL                 *string                                                                `form:"name=Webhooks.OnChannelAdd.Url"`
+	WebhooksOnChannelAddedMethod            *UpdateServiceUpdateServiceRequestWebhooksOnChannelAddedMethodEnum     `form:"name=Webhooks.OnChannelAdded.Method"`
+	WebhooksOnChannelAddedURL               *string                                                                `form:"name=Webhooks.OnChannelAdded.Url"`
+	WebhooksOnChannelDestroyMethod          *UpdateServiceUpdateServiceRequestWebhooksOnChannelDestroyMethodEnum   `form:"name=Webhooks.OnChannelDestroy.Method"`
+	WebhooksOnChannelDestroyURL             *string                                                                `form:"name=Webhooks.OnChannelDestroy.Url"`
+	WebhooksOnChannelDestroyedMethod        *UpdateServiceUpdateServiceRequestWebhooksOnChannelDestroyedMethodEnum `form:"name=Webhooks.OnChannelDestroyed.Method"`
+	WebhooksOnChannelDestroyedURL           *string                                                                `form:"name=Webhooks.OnChannelDestroyed.Url"`
+	WebhooksOnChannelUpdateMethod           *UpdateServiceUpdateServiceRequestWebhooksOnChannelUpdateMethodEnum    `form:"name=Webhooks.OnChannelUpdate.Method"`
+	WebhooksOnChannelUpdateURL              *string                                                                `form:"name=Webhooks.OnChannelUpdate.Url"`
+	WebhooksOnChannelUpdatedMethod          *UpdateServiceUpdateServiceRequestWebhooksOnChannelUpdatedMethodEnum   `form:"name=Webhooks.OnChannelUpdated.Method"`
+	WebhooksOnChannelUpdatedURL             *string                                                                `form:"name=Webhooks.OnChannelUpdated.Url"`
+	WebhooksOnMemberAddMethod               *UpdateServiceUpdateServiceRequestWebhooksOnMemberAddMethodEnum        `form:"name=Webhooks.OnMemberAdd.Method"`
+	WebhooksOnMemberAddURL                  *string                                                                `form:"name=Webhooks.OnMemberAdd.Url"`
+	WebhooksOnMemberAddedMethod             *UpdateServiceUpdateServiceRequestWebhooksOnMemberAddedMethodEnum      `form:"name=Webhooks.OnMemberAdded.Method"`
+	WebhooksOnMemberAddedURL                *string                                                                `form:"name=Webhooks.OnMemberAdded.Url"`
+	WebhooksOnMemberRemoveMethod            *UpdateServiceUpdateServiceRequestWebhooksOnMemberRemoveMethodEnum     `form:"name=Webhooks.OnMemberRemove.Method"`
+	WebhooksOnMemberRemoveURL               *string                                                                `form:"name=Webhooks.OnMemberRemove.Url"`
+	WebhooksOnMemberRemovedMethod           *UpdateServiceUpdateServiceRequestWebhooksOnMemberRemovedMethodEnum    `form:"name=Webhooks.OnMemberRemoved.Method"`
+	WebhooksOnMemberRemovedURL              *string                                                                `form:"name=Webhooks.OnMemberRemoved.Url"`
+	WebhooksOnMessageRemoveMethod           *UpdateServiceUpdateServiceRequestWebhooksOnMessageRemoveMethodEnum    `form:"name=Webhooks.OnMessageRemove.Method"`
+	WebhooksOnMessageRemoveURL              *string                                                                `form:"name=Webhooks.OnMessageRemove.Url"`
+	WebhooksOnMessageRemovedMethod          *UpdateServiceUpdateServiceRequestWebhooksOnMessageRemovedMethodEnum   `form:"name=Webhooks.OnMessageRemoved.Method"`
+	WebhooksOnMessageRemovedURL             *string                                                                `form:"name=Webhooks.OnMessageRemoved.Url"`
+	WebhooksOnMessageSendMethod             *UpdateServiceUpdateServiceRequestWebhooksOnMessageSendMethodEnum      `form:"name=Webhooks.OnMessageSend.Method"`
+	WebhooksOnMessageSendURL                *string                                                                `form:"name=Webhooks.OnMessageSend.Url"`
+	WebhooksOnMessageSentMethod             *UpdateServiceUpdateServiceRequestWebhooksOnMessageSentMethodEnum      `form:"name=Webhooks.OnMessageSent.Method"`
+	WebhooksOnMessageSentURL                *string                                                                `form:"name=Webhooks.OnMessageSent.Url"`
+	WebhooksOnMessageUpdateMethod           *UpdateServiceUpdateServiceRequestWebhooksOnMessageUpdateMethodEnum    `form:"name=Webhooks.OnMessageUpdate.Method"`
+	WebhooksOnMessageUpdateURL              *string                                                                `form:"name=Webhooks.OnMessageUpdate.Url"`
+	WebhooksOnMessageUpdatedMethod          *UpdateServiceUpdateServiceRequestWebhooksOnMessageUpdatedMethodEnum   `form:"name=Webhooks.OnMessageUpdated.Method"`
+	WebhooksOnMessageUpdatedURL             *string                                                                `form:"name=Webhooks.OnMessageUpdated.Url"`
 }
 
 type UpdateServiceSecurity struct {
@@ -263,7 +263,7 @@ type UpdateServiceSecurity struct {
 type UpdateServiceRequest struct {
 	ServerURL  *string
 	PathParams UpdateServicePathParams
-	Request    *UpdateServiceRequestBodyUpdateServiceRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateServiceUpdateServiceRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateServiceSecurity
 }
 

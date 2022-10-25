@@ -8,7 +8,7 @@ from dataclasses_json import dataclass_json
 
 @dataclass_json
 @dataclass
-class DeploymentCreatorSimpleUser:
+class DeploymentSimpleUser:
     avatar_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'avatar_url' }})
     events_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'events_url' }})
     followers_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'followers_url' }})
@@ -34,7 +34,7 @@ class DeploymentCreatorSimpleUser:
 @dataclass
 class Deployment:
     created_at: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'created_at', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    creator: DeploymentCreatorSimpleUser = field(default=None, metadata={'dataclasses_json': { 'field_name': 'creator' }})
+    creator: DeploymentSimpleUser = field(default=None, metadata={'dataclasses_json': { 'field_name': 'creator' }})
     description: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
     environment: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'environment' }})
     id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})

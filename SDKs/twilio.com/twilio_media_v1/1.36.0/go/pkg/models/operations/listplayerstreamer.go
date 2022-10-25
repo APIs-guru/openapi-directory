@@ -24,7 +24,7 @@ type ListPlayerStreamerRequest struct {
 	Security    ListPlayerStreamerSecurity
 }
 
-type ListPlayerStreamer200ApplicationJSONMeta struct {
+type ListPlayerStreamerListPlayerStreamerResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -34,13 +34,13 @@ type ListPlayerStreamer200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListPlayerStreamer200ApplicationJSONListPlayerStreamerResponse struct {
-	Meta            *ListPlayerStreamer200ApplicationJSONMeta `json:"meta,omitempty"`
-	PlayerStreamers []shared.MediaV1PlayerStreamer            `json:"player_streamers,omitempty"`
+type ListPlayerStreamerListPlayerStreamerResponse struct {
+	Meta            *ListPlayerStreamerListPlayerStreamerResponseMeta `json:"meta,omitempty"`
+	PlayerStreamers []shared.MediaV1PlayerStreamer                    `json:"player_streamers,omitempty"`
 }
 
 type ListPlayerStreamerResponse struct {
 	ContentType                string
-	ListPlayerStreamerResponse *ListPlayerStreamer200ApplicationJSONListPlayerStreamerResponse
+	ListPlayerStreamerResponse *ListPlayerStreamerListPlayerStreamerResponse
 	StatusCode                 int64
 }

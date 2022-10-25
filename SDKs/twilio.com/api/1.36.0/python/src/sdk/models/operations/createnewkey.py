@@ -12,7 +12,7 @@ class CreateNewKeyPathParams:
     
 
 @dataclass
-class CreateNewKeyRequestBodyCreateNewKeyRequest:
+class CreateNewKeyCreateNewKeyRequest:
     friendly_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
     
 
@@ -25,7 +25,7 @@ class CreateNewKeySecurity:
 class CreateNewKeyRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateNewKeyPathParams = field(default=None)
-    request: Optional[CreateNewKeyRequestBodyCreateNewKeyRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateNewKeyCreateNewKeyRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateNewKeySecurity = field(default=None)
     
 

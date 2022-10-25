@@ -12,7 +12,7 @@ class CreateDeployedDevicesCertificatePathParams:
     
 
 @dataclass
-class CreateDeployedDevicesCertificateRequestBodyCreateDeployedDevicesCertificateRequest:
+class CreateDeployedDevicesCertificateCreateDeployedDevicesCertificateRequest:
     certificate_data: str = field(default=None, metadata={'form': { 'field_name': 'CertificateData' }})
     device_sid: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'DeviceSid' }})
     friendly_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
@@ -27,7 +27,7 @@ class CreateDeployedDevicesCertificateSecurity:
 class CreateDeployedDevicesCertificateRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateDeployedDevicesCertificatePathParams = field(default=None)
-    request: Optional[CreateDeployedDevicesCertificateRequestBodyCreateDeployedDevicesCertificateRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateDeployedDevicesCertificateCreateDeployedDevicesCertificateRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateDeployedDevicesCertificateSecurity = field(default=None)
     
 

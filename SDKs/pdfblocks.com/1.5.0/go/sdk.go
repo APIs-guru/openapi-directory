@@ -95,12 +95,12 @@ func (s *SDK) AddImageWatermarkV1(ctx context.Context, request operations.AddIma
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/pdf`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.AddImageWatermarkV1200ApplicationPdfBinaryString = data
+			res.AddImageWatermarkV1200ApplicationPdfBinaryString = out
 		}
 	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
 		switch {
@@ -153,12 +153,12 @@ func (s *SDK) AddPasswordV1(ctx context.Context, request operations.AddPasswordV
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/pdf`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.AddPasswordV1200ApplicationPdfBinaryString = data
+			res.AddPasswordV1200ApplicationPdfBinaryString = out
 		}
 	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
 		switch {
@@ -211,12 +211,12 @@ func (s *SDK) AddRestrictionsV1(ctx context.Context, request operations.AddRestr
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/pdf`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.AddRestrictionsV1200ApplicationPdfBinaryString = data
+			res.AddRestrictionsV1200ApplicationPdfBinaryString = out
 		}
 	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
 		switch {
@@ -269,12 +269,12 @@ func (s *SDK) AddTextWatermarkV1(ctx context.Context, request operations.AddText
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/pdf`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.AddTextWatermarkV1200ApplicationPdfBinaryString = data
+			res.AddTextWatermarkV1200ApplicationPdfBinaryString = out
 		}
 	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
 		switch {
@@ -327,12 +327,12 @@ func (s *SDK) ExtractPagesV1(ctx context.Context, request operations.ExtractPage
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/pdf`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ExtractPagesV1200ApplicationPdfBinaryString = data
+			res.ExtractPagesV1200ApplicationPdfBinaryString = out
 		}
 	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
 		switch {
@@ -385,12 +385,12 @@ func (s *SDK) MergeDocumentsV1(ctx context.Context, request operations.MergeDocu
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/pdf`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.MergeDocumentsV1200ApplicationPdfBinaryString = data
+			res.MergeDocumentsV1200ApplicationPdfBinaryString = out
 		}
 	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
 		switch {
@@ -443,12 +443,12 @@ func (s *SDK) RemovePagesV1(ctx context.Context, request operations.RemovePagesV
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/pdf`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.RemovePagesV1200ApplicationPdfBinaryString = data
+			res.RemovePagesV1200ApplicationPdfBinaryString = out
 		}
 	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
 		switch {
@@ -501,12 +501,12 @@ func (s *SDK) RemovePasswordV1(ctx context.Context, request operations.RemovePas
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/pdf`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.RemovePasswordV1200ApplicationPdfBinaryString = data
+			res.RemovePasswordV1200ApplicationPdfBinaryString = out
 		}
 	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
 		switch {
@@ -559,12 +559,12 @@ func (s *SDK) RemoveRestrictionsV1(ctx context.Context, request operations.Remov
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/pdf`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.RemoveRestrictionsV1200ApplicationPdfBinaryString = data
+			res.RemoveRestrictionsV1200ApplicationPdfBinaryString = out
 		}
 	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
 		switch {
@@ -617,12 +617,12 @@ func (s *SDK) RemoveSignaturesV1(ctx context.Context, request operations.RemoveS
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/pdf`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.RemoveSignaturesV1200ApplicationPdfBinaryString = data
+			res.RemoveSignaturesV1200ApplicationPdfBinaryString = out
 		}
 	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
 		switch {
@@ -675,12 +675,12 @@ func (s *SDK) ReversePagesV1(ctx context.Context, request operations.ReversePage
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/pdf`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ReversePagesV1200ApplicationPdfBinaryString = data
+			res.ReversePagesV1200ApplicationPdfBinaryString = out
 		}
 	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
 		switch {
@@ -733,12 +733,12 @@ func (s *SDK) RotatePagesV1(ctx context.Context, request operations.RotatePagesV
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/pdf`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.RotatePagesV1200ApplicationPdfBinaryString = data
+			res.RotatePagesV1200ApplicationPdfBinaryString = out
 		}
 	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
 		switch {

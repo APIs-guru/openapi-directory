@@ -426,12 +426,12 @@ func (s *SDK) GetInputFile(ctx context.Context, request operations.GetInputFileR
 
 		switch {
 		case utils.MatchContentType(contentType, `application/octet-stream`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 400:
 	case httpRes.StatusCode == 403:
@@ -558,12 +558,12 @@ func (s *SDK) GetLatestResultFile(ctx context.Context, request operations.GetLat
 
 		switch {
 		case utils.MatchContentType(contentType, `application/octet-stream`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 400:
 	case httpRes.StatusCode == 403:
@@ -690,12 +690,12 @@ func (s *SDK) GetResultFile(ctx context.Context, request operations.GetResultFil
 
 		switch {
 		case utils.MatchContentType(contentType, `application/octet-stream`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 400:
 	case httpRes.StatusCode == 403:

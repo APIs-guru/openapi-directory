@@ -7,7 +7,7 @@ CREATE_SYNC_SERVICE_SERVERS = [
 
 
 @dataclass
-class CreateSyncServiceRequestBodyCreateSyncServiceRequest:
+class CreateSyncServiceCreateSyncServiceRequest:
     acl_enabled: Optional[bool] = field(default=None, metadata={'form': { 'field_name': 'AclEnabled' }})
     friendly_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
     reachability_webhooks_enabled: Optional[bool] = field(default=None, metadata={'form': { 'field_name': 'ReachabilityWebhooksEnabled' }})
@@ -22,7 +22,7 @@ class CreateSyncServiceSecurity:
 @dataclass
 class CreateSyncServiceRequest:
     server_url: Optional[str] = field(default=None)
-    request: Optional[CreateSyncServiceRequestBodyCreateSyncServiceRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateSyncServiceCreateSyncServiceRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateSyncServiceSecurity = field(default=None)
     
 

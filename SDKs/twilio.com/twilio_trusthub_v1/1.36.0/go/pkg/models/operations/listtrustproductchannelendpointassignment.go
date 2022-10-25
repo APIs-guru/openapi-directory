@@ -29,7 +29,7 @@ type ListTrustProductChannelEndpointAssignmentRequest struct {
 	Security    ListTrustProductChannelEndpointAssignmentSecurity
 }
 
-type ListTrustProductChannelEndpointAssignment200ApplicationJSONMeta struct {
+type ListTrustProductChannelEndpointAssignmentListTrustProductChannelEndpointAssignmentResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -39,13 +39,13 @@ type ListTrustProductChannelEndpointAssignment200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListTrustProductChannelEndpointAssignment200ApplicationJSONListTrustProductChannelEndpointAssignmentResponse struct {
-	Meta    *ListTrustProductChannelEndpointAssignment200ApplicationJSONMeta     `json:"meta,omitempty"`
-	Results []shared.TrusthubV1TrustProductTrustProductChannelEndpointAssignment `json:"results,omitempty"`
+type ListTrustProductChannelEndpointAssignmentListTrustProductChannelEndpointAssignmentResponse struct {
+	Meta    *ListTrustProductChannelEndpointAssignmentListTrustProductChannelEndpointAssignmentResponseMeta `json:"meta,omitempty"`
+	Results []shared.TrusthubV1TrustProductTrustProductChannelEndpointAssignment                            `json:"results,omitempty"`
 }
 
 type ListTrustProductChannelEndpointAssignmentResponse struct {
 	ContentType                                       string
-	ListTrustProductChannelEndpointAssignmentResponse *ListTrustProductChannelEndpointAssignment200ApplicationJSONListTrustProductChannelEndpointAssignmentResponse
+	ListTrustProductChannelEndpointAssignmentResponse *ListTrustProductChannelEndpointAssignmentListTrustProductChannelEndpointAssignmentResponse
 	StatusCode                                        int64
 }

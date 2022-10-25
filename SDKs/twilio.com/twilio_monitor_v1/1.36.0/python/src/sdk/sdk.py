@@ -87,7 +87,7 @@ class SDK:
         res = operations.ListAlertResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListAlert200ApplicationJSONListAlertResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListAlertListAlertResponse])
                 res.list_alert_response = out
 
         return res
@@ -112,7 +112,7 @@ class SDK:
         res = operations.ListEventResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListEvent200ApplicationJSONListEventResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListEventListEventResponse])
                 res.list_event_response = out
 
         return res

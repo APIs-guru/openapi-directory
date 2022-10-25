@@ -19,7 +19,7 @@ type UpdateMessageHeaders struct {
 	XTwilioWebhookEnabled *shared.MessageEnumWebhookEnabledTypeEnum `header:"name=X-Twilio-Webhook-Enabled"`
 }
 
-type UpdateMessageRequestBodyUpdateMessageRequest struct {
+type UpdateMessageUpdateMessageRequest struct {
 	Attributes    *string    `form:"name=Attributes"`
 	Body          *string    `form:"name=Body"`
 	DateCreated   *time.Time `form:"name=DateCreated"`
@@ -36,7 +36,7 @@ type UpdateMessageRequest struct {
 	ServerURL  *string
 	PathParams UpdateMessagePathParams
 	Headers    UpdateMessageHeaders
-	Request    *UpdateMessageRequestBodyUpdateMessageRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateMessageUpdateMessageRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateMessageSecurity
 }
 

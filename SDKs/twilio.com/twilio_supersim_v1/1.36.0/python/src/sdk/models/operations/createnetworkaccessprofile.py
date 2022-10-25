@@ -7,7 +7,7 @@ CREATE_NETWORK_ACCESS_PROFILE_SERVERS = [
 
 
 @dataclass
-class CreateNetworkAccessProfileRequestBodyCreateNetworkAccessProfileRequest:
+class CreateNetworkAccessProfileCreateNetworkAccessProfileRequest:
     networks: Optional[List[str]] = field(default=None, metadata={'form': { 'field_name': 'Networks' }})
     unique_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'UniqueName' }})
     
@@ -20,7 +20,7 @@ class CreateNetworkAccessProfileSecurity:
 @dataclass
 class CreateNetworkAccessProfileRequest:
     server_url: Optional[str] = field(default=None)
-    request: Optional[CreateNetworkAccessProfileRequestBodyCreateNetworkAccessProfileRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateNetworkAccessProfileCreateNetworkAccessProfileRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateNetworkAccessProfileSecurity = field(default=None)
     
 

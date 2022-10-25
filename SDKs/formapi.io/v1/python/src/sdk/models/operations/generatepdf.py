@@ -8,7 +8,7 @@ from sdk.models import shared
 class GeneratePdfPathParams:
     template_id: str = field(default=None, metadata={'path_param': { 'field_name': 'template_id', 'style': 'simple', 'explode': False }})
     
-class GeneratePdfRequestBodyDataRequestsAuthSecondFactorTypeEnum(str, Enum):
+class GeneratePdfSubmissionDataCreateSubmissionDataRequestDataAuthSecondFactorTypeEnum(str, Enum):
     NONE = "none"
     PHONE_NUMBER = "phone_number"
     TOTP = "totp"
@@ -16,7 +16,7 @@ class GeneratePdfRequestBodyDataRequestsAuthSecondFactorTypeEnum(str, Enum):
     SECURITY_KEY = "security_key"
     FINGERPRINT = "fingerprint"
 
-class GeneratePdfRequestBodyDataRequestsAuthTypeEnum(str, Enum):
+class GeneratePdfSubmissionDataCreateSubmissionDataRequestDataAuthTypeEnum(str, Enum):
     NONE = "none"
     PASSWORD = "password"
     OAUTH = "oauth"
@@ -28,13 +28,13 @@ class GeneratePdfRequestBodyDataRequestsAuthTypeEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class GeneratePdfRequestBodyDataRequestsCreateSubmissionDataRequestData:
+class GeneratePdfSubmissionDataCreateSubmissionDataRequestData:
     auth_phone_number_hash: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'auth_phone_number_hash' }})
     auth_provider: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'auth_provider' }})
-    auth_second_factor_type: Optional[GeneratePdfRequestBodyDataRequestsAuthSecondFactorTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'auth_second_factor_type' }})
+    auth_second_factor_type: Optional[GeneratePdfSubmissionDataCreateSubmissionDataRequestDataAuthSecondFactorTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'auth_second_factor_type' }})
     auth_session_id_hash: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'auth_session_id_hash' }})
     auth_session_started_at: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'auth_session_started_at' }})
-    auth_type: GeneratePdfRequestBodyDataRequestsAuthTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'auth_type' }})
+    auth_type: GeneratePdfSubmissionDataCreateSubmissionDataRequestDataAuthTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'auth_type' }})
     auth_user_id_hash: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'auth_user_id_hash' }})
     auth_username_hash: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'auth_username_hash' }})
     email: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'email' }})
@@ -46,10 +46,10 @@ class GeneratePdfRequestBodyDataRequestsCreateSubmissionDataRequestData:
 
 @dataclass_json
 @dataclass
-class GeneratePdfRequestBodySubmissionData:
+class GeneratePdfSubmissionData:
     css: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'css' }})
     data: dict[str, Any] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'data' }})
-    data_requests: Optional[List[GeneratePdfRequestBodyDataRequestsCreateSubmissionDataRequestData]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'data_requests' }})
+    data_requests: Optional[List[GeneratePdfSubmissionDataCreateSubmissionDataRequestData]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'data_requests' }})
     field_overrides: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'field_overrides' }})
     html: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'html' }})
     metadata: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'metadata' }})
@@ -64,19 +64,19 @@ class GeneratePdfSecurity:
 @dataclass
 class GeneratePdfRequest:
     path_params: GeneratePdfPathParams = field(default=None)
-    request: GeneratePdfRequestBodySubmissionData = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: GeneratePdfSubmissionData = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     security: GeneratePdfSecurity = field(default=None)
     
-class GeneratePdf201ApplicationJSONStatusEnum(str, Enum):
+class GeneratePdfCreateSubmissionResponseStatusEnum(str, Enum):
     SUCCESS = "success"
     ERROR = "error"
 
 
 @dataclass_json
 @dataclass
-class GeneratePdf201ApplicationJSONCreateSubmissionResponse:
+class GeneratePdfCreateSubmissionResponse:
     errors: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'errors' }})
-    status: GeneratePdf201ApplicationJSONStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    status: GeneratePdfCreateSubmissionResponseStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
     submission: shared.Submission = field(default=None, metadata={'dataclasses_json': { 'field_name': 'submission' }})
     
 
@@ -85,7 +85,7 @@ class GeneratePdfResponse:
     content_type: str = field(default=None)
     status_code: int = field(default=None)
     authentication_error: Optional[shared.AuthenticationError] = field(default=None)
-    create_submission_response: Optional[GeneratePdf201ApplicationJSONCreateSubmissionResponse] = field(default=None)
+    create_submission_response: Optional[GeneratePdfCreateSubmissionResponse] = field(default=None)
     error: Optional[shared.Error] = field(default=None)
     invalid_request: Optional[shared.InvalidRequest] = field(default=None)
     

@@ -17,29 +17,29 @@ type CreateDataRequestTokenRequest struct {
 	Security   CreateDataRequestTokenSecurity
 }
 
-type CreateDataRequestToken201ApplicationJSONStatusEnum string
+type CreateDataRequestTokenCreateSubmissionDataRequestTokenResponseStatusEnum string
 
 const (
-	CreateDataRequestToken201ApplicationJSONStatusEnumSuccess CreateDataRequestToken201ApplicationJSONStatusEnum = "success"
-	CreateDataRequestToken201ApplicationJSONStatusEnumError   CreateDataRequestToken201ApplicationJSONStatusEnum = "error"
+	CreateDataRequestTokenCreateSubmissionDataRequestTokenResponseStatusEnumSuccess CreateDataRequestTokenCreateSubmissionDataRequestTokenResponseStatusEnum = "success"
+	CreateDataRequestTokenCreateSubmissionDataRequestTokenResponseStatusEnumError   CreateDataRequestTokenCreateSubmissionDataRequestTokenResponseStatusEnum = "error"
 )
 
-type CreateDataRequestToken201ApplicationJSONToken struct {
+type CreateDataRequestTokenCreateSubmissionDataRequestTokenResponseToken struct {
 	DataRequestURL string `json:"data_request_url"`
 	ExpiresAt      string `json:"expires_at"`
 	ID             string `json:"id"`
 	Secret         string `json:"secret"`
 }
 
-type CreateDataRequestToken201ApplicationJSONCreateSubmissionDataRequestTokenResponse struct {
-	Errors []string                                           `json:"errors,omitempty"`
-	Status CreateDataRequestToken201ApplicationJSONStatusEnum `json:"status"`
-	Token  CreateDataRequestToken201ApplicationJSONToken      `json:"token"`
+type CreateDataRequestTokenCreateSubmissionDataRequestTokenResponse struct {
+	Errors []string                                                                 `json:"errors,omitempty"`
+	Status CreateDataRequestTokenCreateSubmissionDataRequestTokenResponseStatusEnum `json:"status"`
+	Token  CreateDataRequestTokenCreateSubmissionDataRequestTokenResponseToken      `json:"token"`
 }
 
 type CreateDataRequestTokenResponse struct {
 	ContentType                              string
 	StatusCode                               int64
 	AuthenticationError                      *shared.AuthenticationError
-	CreateSubmissionDataRequestTokenResponse *CreateDataRequestToken201ApplicationJSONCreateSubmissionDataRequestTokenResponse
+	CreateSubmissionDataRequestTokenResponse *CreateDataRequestTokenCreateSubmissionDataRequestTokenResponse
 }

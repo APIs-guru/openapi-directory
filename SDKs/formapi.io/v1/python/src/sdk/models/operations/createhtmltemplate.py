@@ -3,23 +3,23 @@ from typing import Enum,Optional
 from dataclasses_json import dataclass_json
 from sdk.models import shared
 
-class CreateHTMLTemplateRequestBodyTemplateExpirationIntervalEnum(str, Enum):
+class CreateHTMLTemplateCreateHTMLTemplateDataHTMLTemplateDataExpirationIntervalEnum(str, Enum):
     MINUTES = "minutes"
     HOURS = "hours"
     DAYS = "days"
 
-class CreateHTMLTemplateRequestBodyTemplateTemplateTypeEnum(str, Enum):
+class CreateHTMLTemplateCreateHTMLTemplateDataHTMLTemplateDataTemplateTypeEnum(str, Enum):
     PDF = "pdf"
     HTML = "html"
 
 
 @dataclass_json
 @dataclass
-class CreateHTMLTemplateRequestBodyTemplateHTMLTemplateData:
+class CreateHTMLTemplateCreateHTMLTemplateDataHTMLTemplateData:
     allow_additional_properties: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'allow_additional_properties' }})
     description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
     editable_submissions: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'editable_submissions' }})
-    expiration_interval: Optional[CreateHTMLTemplateRequestBodyTemplateExpirationIntervalEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'expiration_interval' }})
+    expiration_interval: Optional[CreateHTMLTemplateCreateHTMLTemplateDataHTMLTemplateDataExpirationIntervalEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'expiration_interval' }})
     expire_after: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'expire_after' }})
     expire_submissions: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'expire_submissions' }})
     footer_html: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'footer_html' }})
@@ -31,14 +31,14 @@ class CreateHTMLTemplateRequestBodyTemplateHTMLTemplateData:
     redirect_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'redirect_url' }})
     scss: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'scss' }})
     slack_webhook_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'slack_webhook_url' }})
-    template_type: Optional[CreateHTMLTemplateRequestBodyTemplateTemplateTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'template_type' }})
+    template_type: Optional[CreateHTMLTemplateCreateHTMLTemplateDataHTMLTemplateDataTemplateTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'template_type' }})
     webhook_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'webhook_url' }})
     
 
 @dataclass_json
 @dataclass
-class CreateHTMLTemplateRequestBodyCreateHTMLTemplateData:
-    template: CreateHTMLTemplateRequestBodyTemplateHTMLTemplateData = field(default=None, metadata={'dataclasses_json': { 'field_name': 'template' }})
+class CreateHTMLTemplateCreateHTMLTemplateData:
+    template: CreateHTMLTemplateCreateHTMLTemplateDataHTMLTemplateData = field(default=None, metadata={'dataclasses_json': { 'field_name': 'template' }})
     
 
 @dataclass
@@ -48,10 +48,10 @@ class CreateHTMLTemplateSecurity:
 
 @dataclass
 class CreateHTMLTemplateRequest:
-    request: CreateHTMLTemplateRequestBodyCreateHTMLTemplateData = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: CreateHTMLTemplateCreateHTMLTemplateData = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     security: CreateHTMLTemplateSecurity = field(default=None)
     
-class CreateHTMLTemplate201ApplicationJSONExpirationIntervalEnum(str, Enum):
+class CreateHTMLTemplatePendingTemplateExpirationIntervalEnum(str, Enum):
     MINUTES = "minutes"
     HOURS = "hours"
     DAYS = "days"
@@ -59,11 +59,11 @@ class CreateHTMLTemplate201ApplicationJSONExpirationIntervalEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class CreateHTMLTemplate201ApplicationJSONPendingTemplate:
+class CreateHTMLTemplatePendingTemplate:
     allow_additional_properties: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'allow_additional_properties' }})
     description: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
     editable_submissions: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'editable_submissions' }})
-    expiration_interval: Optional[CreateHTMLTemplate201ApplicationJSONExpirationIntervalEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'expiration_interval' }})
+    expiration_interval: Optional[CreateHTMLTemplatePendingTemplateExpirationIntervalEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'expiration_interval' }})
     expire_after: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'expire_after' }})
     expire_submissions: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'expire_submissions' }})
     id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
@@ -84,5 +84,5 @@ class CreateHTMLTemplateResponse:
     content_type: str = field(default=None)
     status_code: int = field(default=None)
     authentication_error: Optional[shared.AuthenticationError] = field(default=None)
-    pending_template: Optional[CreateHTMLTemplate201ApplicationJSONPendingTemplate] = field(default=None)
+    pending_template: Optional[CreateHTMLTemplatePendingTemplate] = field(default=None)
     

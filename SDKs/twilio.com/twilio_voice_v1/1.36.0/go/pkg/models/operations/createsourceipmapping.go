@@ -8,7 +8,7 @@ var CreateSourceIPMappingServers = []string{
 	"https://voice.twilio.com",
 }
 
-type CreateSourceIPMappingRequestBodyCreateSourceIPMappingRequest struct {
+type CreateSourceIPMappingCreateSourceIPMappingRequest struct {
 	IPRecordSid  string `form:"name=IpRecordSid"`
 	SipDomainSid string `form:"name=SipDomainSid"`
 }
@@ -19,7 +19,7 @@ type CreateSourceIPMappingSecurity struct {
 
 type CreateSourceIPMappingRequest struct {
 	ServerURL *string
-	Request   *CreateSourceIPMappingRequestBodyCreateSourceIPMappingRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request   *CreateSourceIPMappingCreateSourceIPMappingRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security  CreateSourceIPMappingSecurity
 }
 

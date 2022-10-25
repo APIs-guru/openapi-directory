@@ -142,7 +142,7 @@ class PowerPortTemplateTypeValueEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class PowerPortTemplateTypeType:
+class PowerPortTemplateType:
     label: PowerPortTemplateTypeLabelEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label' }})
     value: PowerPortTemplateTypeValueEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
     
@@ -155,5 +155,5 @@ class PowerPortTemplate:
     id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     maximum_draw: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'maximum_draw' }})
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    type: Optional[PowerPortTemplateTypeType] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    type: Optional[PowerPortTemplateType] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     

@@ -28,7 +28,7 @@ type ListSyncSyncMapPermissionRequest struct {
 	Security    ListSyncSyncMapPermissionSecurity
 }
 
-type ListSyncSyncMapPermission200ApplicationJSONMeta struct {
+type ListSyncSyncMapPermissionListSyncSyncMapPermissionResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -38,13 +38,13 @@ type ListSyncSyncMapPermission200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListSyncSyncMapPermission200ApplicationJSONListSyncSyncMapPermissionResponse struct {
-	Meta        *ListSyncSyncMapPermission200ApplicationJSONMeta    `json:"meta,omitempty"`
-	Permissions []shared.PreviewSyncServiceSyncMapSyncMapPermission `json:"permissions,omitempty"`
+type ListSyncSyncMapPermissionListSyncSyncMapPermissionResponse struct {
+	Meta        *ListSyncSyncMapPermissionListSyncSyncMapPermissionResponseMeta `json:"meta,omitempty"`
+	Permissions []shared.PreviewSyncServiceSyncMapSyncMapPermission             `json:"permissions,omitempty"`
 }
 
 type ListSyncSyncMapPermissionResponse struct {
 	ContentType                       string
-	ListSyncSyncMapPermissionResponse *ListSyncSyncMapPermission200ApplicationJSONListSyncSyncMapPermissionResponse
+	ListSyncSyncMapPermissionResponse *ListSyncSyncMapPermissionListSyncSyncMapPermissionResponse
 	StatusCode                        int64
 }

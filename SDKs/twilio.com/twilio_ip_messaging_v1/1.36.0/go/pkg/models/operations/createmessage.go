@@ -13,7 +13,7 @@ type CreateMessagePathParams struct {
 	ServiceSid string `pathParam:"style=simple,explode=false,name=ServiceSid"`
 }
 
-type CreateMessageRequestBodyCreateMessageRequest struct {
+type CreateMessageCreateMessageRequest struct {
 	Attributes *string `form:"name=Attributes"`
 	Body       string  `form:"name=Body"`
 	From       *string `form:"name=From"`
@@ -26,7 +26,7 @@ type CreateMessageSecurity struct {
 type CreateMessageRequest struct {
 	ServerURL  *string
 	PathParams CreateMessagePathParams
-	Request    *CreateMessageRequestBodyCreateMessageRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateMessageCreateMessageRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateMessageSecurity
 }
 

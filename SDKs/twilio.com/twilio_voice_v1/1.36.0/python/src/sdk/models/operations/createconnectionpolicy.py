@@ -7,7 +7,7 @@ CREATE_CONNECTION_POLICY_SERVERS = [
 
 
 @dataclass
-class CreateConnectionPolicyRequestBodyCreateConnectionPolicyRequest:
+class CreateConnectionPolicyCreateConnectionPolicyRequest:
     friendly_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
     
 
@@ -19,7 +19,7 @@ class CreateConnectionPolicySecurity:
 @dataclass
 class CreateConnectionPolicyRequest:
     server_url: Optional[str] = field(default=None)
-    request: Optional[CreateConnectionPolicyRequestBodyCreateConnectionPolicyRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateConnectionPolicyCreateConnectionPolicyRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateConnectionPolicySecurity = field(default=None)
     
 

@@ -8,7 +8,7 @@ var CreateSimServers = []string{
 	"https://supersim.twilio.com",
 }
 
-type CreateSimRequestBodyCreateSimRequest struct {
+type CreateSimCreateSimRequest struct {
 	Iccid            string `form:"name=Iccid"`
 	RegistrationCode string `form:"name=RegistrationCode"`
 }
@@ -19,7 +19,7 @@ type CreateSimSecurity struct {
 
 type CreateSimRequest struct {
 	ServerURL *string
-	Request   *CreateSimRequestBodyCreateSimRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request   *CreateSimCreateSimRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security  CreateSimSecurity
 }
 

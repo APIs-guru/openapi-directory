@@ -12,7 +12,7 @@ class UpdateUnderstandStyleSheetPathParams:
     
 
 @dataclass
-class UpdateUnderstandStyleSheetRequestBodyUpdateUnderstandStyleSheetRequest:
+class UpdateUnderstandStyleSheetUpdateUnderstandStyleSheetRequest:
     style_sheet: Optional[Any] = field(default=None, metadata={'form': { 'field_name': 'StyleSheet' }})
     
 
@@ -25,7 +25,7 @@ class UpdateUnderstandStyleSheetSecurity:
 class UpdateUnderstandStyleSheetRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateUnderstandStyleSheetPathParams = field(default=None)
-    request: Optional[UpdateUnderstandStyleSheetRequestBodyUpdateUnderstandStyleSheetRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateUnderstandStyleSheetUpdateUnderstandStyleSheetRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateUnderstandStyleSheetSecurity = field(default=None)
     
 

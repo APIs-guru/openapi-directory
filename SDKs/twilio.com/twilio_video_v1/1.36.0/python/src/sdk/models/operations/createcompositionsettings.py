@@ -7,7 +7,7 @@ CREATE_COMPOSITION_SETTINGS_SERVERS = [
 
 
 @dataclass
-class CreateCompositionSettingsRequestBodyCreateCompositionSettingsRequest:
+class CreateCompositionSettingsCreateCompositionSettingsRequest:
     aws_credentials_sid: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'AwsCredentialsSid' }})
     aws_s3_url: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'AwsS3Url' }})
     aws_storage_enabled: Optional[bool] = field(default=None, metadata={'form': { 'field_name': 'AwsStorageEnabled' }})
@@ -24,7 +24,7 @@ class CreateCompositionSettingsSecurity:
 @dataclass
 class CreateCompositionSettingsRequest:
     server_url: Optional[str] = field(default=None)
-    request: Optional[CreateCompositionSettingsRequestBodyCreateCompositionSettingsRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateCompositionSettingsCreateCompositionSettingsRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateCompositionSettingsSecurity = field(default=None)
     
 

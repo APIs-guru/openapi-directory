@@ -12,7 +12,7 @@ type UpdateDefaultsPathParams struct {
 	AssistantSid string `pathParam:"style=simple,explode=false,name=AssistantSid"`
 }
 
-type UpdateDefaultsRequestBodyUpdateDefaultsRequest struct {
+type UpdateDefaultsUpdateDefaultsRequest struct {
 	Defaults *interface{} `form:"name=Defaults"`
 }
 
@@ -23,7 +23,7 @@ type UpdateDefaultsSecurity struct {
 type UpdateDefaultsRequest struct {
 	ServerURL  *string
 	PathParams UpdateDefaultsPathParams
-	Request    *UpdateDefaultsRequestBodyUpdateDefaultsRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateDefaultsUpdateDefaultsRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateDefaultsSecurity
 }
 

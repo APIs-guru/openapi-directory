@@ -28,7 +28,7 @@ type ListBrandVettingRequest struct {
 	Security    ListBrandVettingSecurity
 }
 
-type ListBrandVetting200ApplicationJSONMeta struct {
+type ListBrandVettingListBrandVettingResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -38,13 +38,13 @@ type ListBrandVetting200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListBrandVetting200ApplicationJSONListBrandVettingResponse struct {
+type ListBrandVettingListBrandVettingResponse struct {
 	Data []shared.MessagingV1BrandRegistrationsBrandVetting `json:"data,omitempty"`
-	Meta *ListBrandVetting200ApplicationJSONMeta            `json:"meta,omitempty"`
+	Meta *ListBrandVettingListBrandVettingResponseMeta      `json:"meta,omitempty"`
 }
 
 type ListBrandVettingResponse struct {
 	ContentType              string
-	ListBrandVettingResponse *ListBrandVetting200ApplicationJSONListBrandVettingResponse
+	ListBrandVettingResponse *ListBrandVettingListBrandVettingResponse
 	StatusCode               int64
 }

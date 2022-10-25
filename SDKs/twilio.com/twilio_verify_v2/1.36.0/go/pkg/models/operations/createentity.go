@@ -12,7 +12,7 @@ type CreateEntityPathParams struct {
 	ServiceSid string `pathParam:"style=simple,explode=false,name=ServiceSid"`
 }
 
-type CreateEntityRequestBodyCreateEntityRequest struct {
+type CreateEntityCreateEntityRequest struct {
 	Identity string `form:"name=Identity"`
 }
 
@@ -23,7 +23,7 @@ type CreateEntitySecurity struct {
 type CreateEntityRequest struct {
 	ServerURL  *string
 	PathParams CreateEntityPathParams
-	Request    *CreateEntityRequestBodyCreateEntityRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateEntityCreateEntityRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateEntitySecurity
 }
 

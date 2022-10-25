@@ -28,7 +28,7 @@ type ListDeploymentRequest struct {
 	Security    ListDeploymentSecurity
 }
 
-type ListDeployment200ApplicationJSONMeta struct {
+type ListDeploymentListDeploymentResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -38,13 +38,13 @@ type ListDeployment200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListDeployment200ApplicationJSONListDeploymentResponse struct {
+type ListDeploymentListDeploymentResponse struct {
 	Deployments []shared.ServerlessV1ServiceEnvironmentDeployment `json:"deployments,omitempty"`
-	Meta        *ListDeployment200ApplicationJSONMeta             `json:"meta,omitempty"`
+	Meta        *ListDeploymentListDeploymentResponseMeta         `json:"meta,omitempty"`
 }
 
 type ListDeploymentResponse struct {
 	ContentType            string
-	ListDeploymentResponse *ListDeployment200ApplicationJSONListDeploymentResponse
+	ListDeploymentResponse *ListDeploymentListDeploymentResponse
 	StatusCode             int64
 }

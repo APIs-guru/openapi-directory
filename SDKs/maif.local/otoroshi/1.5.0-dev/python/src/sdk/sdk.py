@@ -122,8 +122,7 @@ class SDK:
         res = operations.AllLinesResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.environment = out
+                res.environment = r.content
         elif r.status_code == 400:
             pass
         elif r.status_code == 401:

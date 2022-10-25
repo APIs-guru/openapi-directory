@@ -28,7 +28,7 @@ type ListSipCredentialRequest struct {
 	Security    ListSipCredentialSecurity
 }
 
-type ListSipCredential200ApplicationJSONListSipCredentialResponse struct {
+type ListSipCredentialListSipCredentialResponse struct {
 	Credentials     []shared.APIV2010AccountSipSipCredentialListSipCredential `json:"credentials,omitempty"`
 	End             *int64                                                    `json:"end,omitempty"`
 	FirstPageURI    *string                                                   `json:"first_page_uri,omitempty"`
@@ -42,6 +42,6 @@ type ListSipCredential200ApplicationJSONListSipCredentialResponse struct {
 
 type ListSipCredentialResponse struct {
 	ContentType               string
-	ListSipCredentialResponse *ListSipCredential200ApplicationJSONListSipCredentialResponse
+	ListSipCredentialResponse *ListSipCredentialListSipCredentialResponse
 	StatusCode                int64
 }

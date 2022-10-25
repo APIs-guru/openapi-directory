@@ -12,7 +12,7 @@ type CreateSipCredentialListPathParams struct {
 	AccountSid string `pathParam:"style=simple,explode=false,name=AccountSid"`
 }
 
-type CreateSipCredentialListRequestBodyCreateSipCredentialListRequest struct {
+type CreateSipCredentialListCreateSipCredentialListRequest struct {
 	FriendlyName string `form:"name=FriendlyName"`
 }
 
@@ -23,7 +23,7 @@ type CreateSipCredentialListSecurity struct {
 type CreateSipCredentialListRequest struct {
 	ServerURL  *string
 	PathParams CreateSipCredentialListPathParams
-	Request    *CreateSipCredentialListRequestBodyCreateSipCredentialListRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateSipCredentialListCreateSipCredentialListRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateSipCredentialListSecurity
 }
 

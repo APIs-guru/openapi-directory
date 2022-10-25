@@ -46,7 +46,7 @@ type ListAvailablePhoneNumberTollFreeRequest struct {
 	Security    ListAvailablePhoneNumberTollFreeSecurity
 }
 
-type ListAvailablePhoneNumberTollFree200ApplicationJSONListAvailablePhoneNumberTollFreeResponse struct {
+type ListAvailablePhoneNumberTollFreeListAvailablePhoneNumberTollFreeResponse struct {
 	AvailablePhoneNumbers []shared.APIV2010AccountAvailablePhoneNumberCountryAvailablePhoneNumberTollFree `json:"available_phone_numbers,omitempty"`
 	End                   *int64                                                                          `json:"end,omitempty"`
 	FirstPageURI          *string                                                                         `json:"first_page_uri,omitempty"`
@@ -60,6 +60,6 @@ type ListAvailablePhoneNumberTollFree200ApplicationJSONListAvailablePhoneNumberT
 
 type ListAvailablePhoneNumberTollFreeResponse struct {
 	ContentType                              string
-	ListAvailablePhoneNumberTollFreeResponse *ListAvailablePhoneNumberTollFree200ApplicationJSONListAvailablePhoneNumberTollFreeResponse
+	ListAvailablePhoneNumberTollFreeResponse *ListAvailablePhoneNumberTollFreeListAvailablePhoneNumberTollFreeResponse
 	StatusCode                               int64
 }

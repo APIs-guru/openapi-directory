@@ -65,7 +65,7 @@ class SDK:
         res = operations.GetInventoryResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.GetInventory200ApplicationJSONItemInventoryArrayV2])
+                out = utils.unmarshal_json(r.text, Optional[operations.GetInventoryItemInventoryArrayV2])
                 res.item_inventory_array_v2 = out
         elif r.status_code == 400:
             if utils.match_content_type(content_type, "application/json"):
@@ -108,7 +108,7 @@ class SDK:
                 res.order_response_one_of_v2 = out
         elif r.status_code == 404:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.GetOrders404ApplicationJSONErrorStandardV2])
+                out = utils.unmarshal_json(r.text, Optional[operations.GetOrdersErrorStandardV2])
                 res.error_standard_v2 = out
 
         return res
@@ -131,7 +131,7 @@ class SDK:
         res = operations.GetReturnsResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.GetReturns200ApplicationJSONReturnsArrayV2])
+                out = utils.unmarshal_json(r.text, Optional[operations.GetReturnsReturnsArrayV2])
                 res.returns_array_v2 = out
 
         return res
@@ -153,7 +153,7 @@ class SDK:
         res = operations.GetTrackResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.GetTrack200ApplicationJSONTrackingResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.GetTrackTrackingResponse])
                 res.tracking_response = out
         elif r.status_code == 404:
             pass
@@ -179,7 +179,7 @@ class SDK:
         res = operations.GetUsersMeResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.GetUsersMe200ApplicationJSONUserContactV2])
+                out = utils.unmarshal_json(r.text, Optional[operations.GetUsersMeUserContactV2])
                 res.user_contact_v2 = out
 
         return res
@@ -232,7 +232,7 @@ class SDK:
         res = operations.PostOauthAccessTokenResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.PostOauthAccessToken200ApplicationJSONAccessTokenResponseV2])
+                out = utils.unmarshal_json(r.text, Optional[operations.PostOauthAccessTokenAccessTokenResponseV2])
                 res.access_token_response_v2 = out
         elif r.status_code == 401:
             if utils.match_content_type(content_type, "application/json"):
@@ -265,7 +265,7 @@ class SDK:
         res = operations.PostOrdersResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.PostOrders201ApplicationJSONOrderResponseV2])
+                out = utils.unmarshal_json(r.text, Optional[operations.PostOrdersOrderResponseV2])
                 res.order_response_v2 = out
         elif r.status_code == 400:
             if utils.match_content_type(content_type, "application/json"):
@@ -279,7 +279,7 @@ class SDK:
                 res.oneorders_get_responses_404_content_application_1json_schema = out
         elif r.status_code == 409:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.PostOrders409ApplicationJSONErrorStandardWithContextV2])
+                out = utils.unmarshal_json(r.text, Optional[operations.PostOrdersErrorStandardWithContextV2])
                 res.error_standard_with_context_v2 = out
 
         return res
@@ -370,7 +370,7 @@ class SDK:
         res = operations.PutReturnsResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.PutReturns201ApplicationJSONRmaResponseV2])
+                out = utils.unmarshal_json(r.text, Optional[operations.PutReturnsRmaResponseV2])
                 res.rma_response_v2 = out
         elif r.status_code == 202:
             if utils.match_content_type(content_type, "application/json"):

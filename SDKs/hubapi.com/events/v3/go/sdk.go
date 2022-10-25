@@ -91,12 +91,12 @@ func (s *SDK) GetEventsV3EventsGetPage(ctx context.Context, request operations.G
 	default:
 		switch {
 		case utils.MatchContentType(contentType, `*/*`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 

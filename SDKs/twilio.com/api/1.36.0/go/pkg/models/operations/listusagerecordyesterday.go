@@ -32,7 +32,7 @@ type ListUsageRecordYesterdayRequest struct {
 	Security    ListUsageRecordYesterdaySecurity
 }
 
-type ListUsageRecordYesterday200ApplicationJSONListUsageRecordYesterdayResponse struct {
+type ListUsageRecordYesterdayListUsageRecordYesterdayResponse struct {
 	End             *int64                                                       `json:"end,omitempty"`
 	FirstPageURI    *string                                                      `json:"first_page_uri,omitempty"`
 	NextPageURI     *string                                                      `json:"next_page_uri,omitempty"`
@@ -46,6 +46,6 @@ type ListUsageRecordYesterday200ApplicationJSONListUsageRecordYesterdayResponse 
 
 type ListUsageRecordYesterdayResponse struct {
 	ContentType                      string
-	ListUsageRecordYesterdayResponse *ListUsageRecordYesterday200ApplicationJSONListUsageRecordYesterdayResponse
+	ListUsageRecordYesterdayResponse *ListUsageRecordYesterdayListUsageRecordYesterdayResponse
 	StatusCode                       int64
 }

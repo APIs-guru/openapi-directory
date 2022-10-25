@@ -13,7 +13,7 @@ type UpdateChannelPathParams struct {
 	Sid        string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
-type UpdateChannelRequestBodyUpdateChannelRequest struct {
+type UpdateChannelUpdateChannelRequest struct {
 	Attributes   *string `form:"name=Attributes"`
 	FriendlyName *string `form:"name=FriendlyName"`
 	UniqueName   *string `form:"name=UniqueName"`
@@ -26,7 +26,7 @@ type UpdateChannelSecurity struct {
 type UpdateChannelRequest struct {
 	ServerURL  *string
 	PathParams UpdateChannelPathParams
-	Request    *UpdateChannelRequestBodyUpdateChannelRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateChannelUpdateChannelRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateChannelSecurity
 }
 

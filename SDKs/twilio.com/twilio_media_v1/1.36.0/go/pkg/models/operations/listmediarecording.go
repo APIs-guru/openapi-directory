@@ -26,7 +26,7 @@ type ListMediaRecordingRequest struct {
 	Security    ListMediaRecordingSecurity
 }
 
-type ListMediaRecording200ApplicationJSONMeta struct {
+type ListMediaRecordingListMediaRecordingResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -36,13 +36,13 @@ type ListMediaRecording200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListMediaRecording200ApplicationJSONListMediaRecordingResponse struct {
-	MediaRecordings []shared.MediaV1MediaRecording            `json:"media_recordings,omitempty"`
-	Meta            *ListMediaRecording200ApplicationJSONMeta `json:"meta,omitempty"`
+type ListMediaRecordingListMediaRecordingResponse struct {
+	MediaRecordings []shared.MediaV1MediaRecording                    `json:"media_recordings,omitempty"`
+	Meta            *ListMediaRecordingListMediaRecordingResponseMeta `json:"meta,omitempty"`
 }
 
 type ListMediaRecordingResponse struct {
 	ContentType                string
-	ListMediaRecordingResponse *ListMediaRecording200ApplicationJSONListMediaRecordingResponse
+	ListMediaRecordingResponse *ListMediaRecordingListMediaRecordingResponse
 	StatusCode                 int64
 }

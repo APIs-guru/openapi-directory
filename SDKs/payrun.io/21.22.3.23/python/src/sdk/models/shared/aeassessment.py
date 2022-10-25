@@ -5,20 +5,20 @@ import dateutil.parser
 from typing import Enum,Optional
 from dataclasses_json import dataclass_json
 
-class AeAssessmentAeAssessmentAssessmentCodeAssessmentCodeEnum(str, Enum):
+class AeAssessmentAeAssessmentAssessmentCodeEnum(str, Enum):
     EXCLUDED = "Excluded"
     ELIGIBLE_JOB_HOLDER = "EligibleJobHolder"
     NON_ELIGIBLE_JOB_HOLDER = "NonEligibleJobHolder"
     ENTITLED_WORKER = "EntitledWorker"
 
-class AeAssessmentAeAssessmentAssessmentEventAssessmentEventEnum(str, Enum):
+class AeAssessmentAeAssessmentAssessmentEventEnum(str, Enum):
     NON_ENROLMENT_EVENT = "NonEnrolmentEvent"
     AUTOMATIC_ENROLMENT = "AutomaticEnrolment"
     OPT_IN = "OptIn"
     VOLUNTARY_JOINER = "VoluntaryJoiner"
     CONTRACTUAL_ENROLMENT = "ContractualEnrolment"
 
-class AeAssessmentAeAssessmentAssessmentOverrideAssessmentOverrideEnum(str, Enum):
+class AeAssessmentAeAssessmentAssessmentOverrideEnum(str, Enum):
     NONE = "None"
     OPT_OUT = "OptOut"
     OPT_IN = "OptIn"
@@ -28,7 +28,7 @@ class AeAssessmentAeAssessmentAssessmentOverrideAssessmentOverrideEnum(str, Enum
     LEAVER = "Leaver"
     EXCLUDED = "Excluded"
 
-class AeAssessmentAeAssessmentAssessmentResultAssessmentResultEnum(str, Enum):
+class AeAssessmentAeAssessmentAssessmentResultEnum(str, Enum):
     INCONCLUSIVE = "Inconclusive"
     NO_CHANGE = "NoChange"
     ENROL = "Enrol"
@@ -37,13 +37,13 @@ class AeAssessmentAeAssessmentAssessmentResultAssessmentResultEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class AeAssessmentAeAssessmentAeAssessment:
+class AeAssessmentAeAssessment:
     age: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Age' }})
-    assessment_code: Optional[AeAssessmentAeAssessmentAssessmentCodeAssessmentCodeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AssessmentCode' }})
+    assessment_code: Optional[AeAssessmentAeAssessmentAssessmentCodeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AssessmentCode' }})
     assessment_date: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AssessmentDate', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    assessment_event: Optional[AeAssessmentAeAssessmentAssessmentEventAssessmentEventEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AssessmentEvent' }})
-    assessment_override: Optional[AeAssessmentAeAssessmentAssessmentOverrideAssessmentOverrideEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AssessmentOverride' }})
-    assessment_result: Optional[AeAssessmentAeAssessmentAssessmentResultAssessmentResultEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AssessmentResult' }})
+    assessment_event: Optional[AeAssessmentAeAssessmentAssessmentEventEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AssessmentEvent' }})
+    assessment_override: Optional[AeAssessmentAeAssessmentAssessmentOverrideEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AssessmentOverride' }})
+    assessment_result: Optional[AeAssessmentAeAssessmentAssessmentResultEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AssessmentResult' }})
     is_member_of_alternative_pension_scheme: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'IsMemberOfAlternativePensionScheme' }})
     opt_out_window_end_date: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OptOutWindowEndDate', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     qualifying_earnings: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'QualifyingEarnings' }})
@@ -57,5 +57,5 @@ class AeAssessmentAeAssessmentAeAssessment:
 @dataclass_json
 @dataclass
 class AeAssessment:
-    ae_assessment: Optional[AeAssessmentAeAssessmentAeAssessment] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AEAssessment' }})
+    ae_assessment: Optional[AeAssessmentAeAssessment] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AEAssessment' }})
     

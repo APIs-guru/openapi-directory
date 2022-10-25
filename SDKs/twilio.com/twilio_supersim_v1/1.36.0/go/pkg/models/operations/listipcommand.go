@@ -26,7 +26,7 @@ type ListIPCommandRequest struct {
 	Security    ListIPCommandSecurity
 }
 
-type ListIPCommand200ApplicationJSONMeta struct {
+type ListIPCommandListIPCommandResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -36,13 +36,13 @@ type ListIPCommand200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListIPCommand200ApplicationJSONListIPCommandResponse struct {
-	IPCommands []shared.SupersimV1IPCommand         `json:"ip_commands,omitempty"`
-	Meta       *ListIPCommand200ApplicationJSONMeta `json:"meta,omitempty"`
+type ListIPCommandListIPCommandResponse struct {
+	IPCommands []shared.SupersimV1IPCommand            `json:"ip_commands,omitempty"`
+	Meta       *ListIPCommandListIPCommandResponseMeta `json:"meta,omitempty"`
 }
 
 type ListIPCommandResponse struct {
 	ContentType           string
-	ListIPCommandResponse *ListIPCommand200ApplicationJSONListIPCommandResponse
+	ListIPCommandResponse *ListIPCommandListIPCommandResponse
 	StatusCode            int64
 }

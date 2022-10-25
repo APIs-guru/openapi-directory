@@ -13,7 +13,7 @@ class AggregateFamilyLabelEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class AggregateFamilyFamily:
+class AggregateFamily:
     label: AggregateFamilyLabelEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label' }})
     value: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
     
@@ -25,7 +25,7 @@ class Aggregate:
     custom_fields: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'custom_fields' }})
     date_added: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'date_added', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    family: Optional[AggregateFamilyFamily] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'family' }})
+    family: Optional[AggregateFamily] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'family' }})
     id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     last_updated: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'last_updated', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     prefix: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'prefix' }})

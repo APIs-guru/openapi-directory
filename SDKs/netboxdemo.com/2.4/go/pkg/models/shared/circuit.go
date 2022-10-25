@@ -4,7 +4,7 @@ import (
 	"time"
 )
 
-type CircuitStatusStatus struct {
+type CircuitStatus struct {
 	Label string `json:"label"`
 	Value int64  `json:"value"`
 }
@@ -20,7 +20,7 @@ type Circuit struct {
 	InstallDate  *time.Time             `json:"install_date,omitempty"`
 	LastUpdated  *time.Time             `json:"last_updated,omitempty"`
 	Provider     NestedProvider         `json:"provider"`
-	Status       *CircuitStatusStatus   `json:"status,omitempty"`
+	Status       *CircuitStatus         `json:"status,omitempty"`
 	Tags         []string               `json:"tags,omitempty"`
 	Tenant       *NestedTenant          `json:"tenant,omitempty"`
 	Type         NestedCircuitType      `json:"type"`

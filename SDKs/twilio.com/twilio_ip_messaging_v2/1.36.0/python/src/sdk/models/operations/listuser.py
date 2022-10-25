@@ -32,7 +32,7 @@ class ListUserRequest:
 
 @dataclass_json
 @dataclass
-class ListUser200ApplicationJSONMeta:
+class ListUserListUserResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -44,14 +44,14 @@ class ListUser200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListUser200ApplicationJSONListUserResponse:
-    meta: Optional[ListUser200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+class ListUserListUserResponse:
+    meta: Optional[ListUserListUserResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     users: Optional[List[shared.IPMessagingV2ServiceUser]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'users' }})
     
 
 @dataclass
 class ListUserResponse:
     content_type: str = field(default=None)
-    list_user_response: Optional[ListUser200ApplicationJSONListUserResponse] = field(default=None)
+    list_user_response: Optional[ListUserListUserResponse] = field(default=None)
     status_code: int = field(default=None)
     

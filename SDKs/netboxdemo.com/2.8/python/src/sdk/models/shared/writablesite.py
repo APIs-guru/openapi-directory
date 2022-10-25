@@ -5,7 +5,7 @@ import dateutil.parser
 from typing import Any,Enum,List,Optional
 from dataclasses_json import dataclass_json
 
-class WritableSiteStatusStatusEnum(str, Enum):
+class WritableSiteStatusEnum(str, Enum):
     ACTIVE = "active"
     PLANNED = "planned"
     RETIRED = "retired"
@@ -36,7 +36,7 @@ class WritableSite:
     region: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'region' }})
     shipping_address: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'shipping_address' }})
     slug: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'slug' }})
-    status: Optional[WritableSiteStatusStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    status: Optional[WritableSiteStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
     tags: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
     tenant: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tenant' }})
     time_zone: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'time_zone' }})

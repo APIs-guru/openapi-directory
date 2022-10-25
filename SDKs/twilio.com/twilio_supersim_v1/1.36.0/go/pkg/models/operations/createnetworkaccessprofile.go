@@ -8,7 +8,7 @@ var CreateNetworkAccessProfileServers = []string{
 	"https://supersim.twilio.com",
 }
 
-type CreateNetworkAccessProfileRequestBodyCreateNetworkAccessProfileRequest struct {
+type CreateNetworkAccessProfileCreateNetworkAccessProfileRequest struct {
 	Networks   []string `form:"name=Networks"`
 	UniqueName *string  `form:"name=UniqueName"`
 }
@@ -19,7 +19,7 @@ type CreateNetworkAccessProfileSecurity struct {
 
 type CreateNetworkAccessProfileRequest struct {
 	ServerURL *string
-	Request   *CreateNetworkAccessProfileRequestBodyCreateNetworkAccessProfileRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request   *CreateNetworkAccessProfileCreateNetworkAccessProfileRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security  CreateNetworkAccessProfileSecurity
 }
 

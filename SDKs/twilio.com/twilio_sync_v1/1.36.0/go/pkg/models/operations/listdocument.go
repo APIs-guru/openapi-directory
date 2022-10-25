@@ -27,7 +27,7 @@ type ListDocumentRequest struct {
 	Security    ListDocumentSecurity
 }
 
-type ListDocument200ApplicationJSONMeta struct {
+type ListDocumentListDocumentResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -37,13 +37,13 @@ type ListDocument200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListDocument200ApplicationJSONListDocumentResponse struct {
-	Documents []shared.SyncV1ServiceDocument      `json:"documents,omitempty"`
-	Meta      *ListDocument200ApplicationJSONMeta `json:"meta,omitempty"`
+type ListDocumentListDocumentResponse struct {
+	Documents []shared.SyncV1ServiceDocument        `json:"documents,omitempty"`
+	Meta      *ListDocumentListDocumentResponseMeta `json:"meta,omitempty"`
 }
 
 type ListDocumentResponse struct {
 	ContentType          string
-	ListDocumentResponse *ListDocument200ApplicationJSONListDocumentResponse
+	ListDocumentResponse *ListDocumentListDocumentResponse
 	StatusCode           int64
 }

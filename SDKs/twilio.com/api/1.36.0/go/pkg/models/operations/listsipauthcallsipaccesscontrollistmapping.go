@@ -28,7 +28,7 @@ type ListSipAuthCallsIPAccessControlListMappingRequest struct {
 	Security    ListSipAuthCallsIPAccessControlListMappingSecurity
 }
 
-type ListSipAuthCallsIPAccessControlListMapping200ApplicationJSONListSipAuthCallsIPAccessControlListMappingResponse struct {
+type ListSipAuthCallsIPAccessControlListMappingListSipAuthCallsIPAccessControlListMappingResponse struct {
 	Contents        []shared.APIV2010AccountSipSipDomainSipAuthSipAuthCallsSipAuthCallsIPAccessControlListMapping `json:"contents,omitempty"`
 	End             *int64                                                                                        `json:"end,omitempty"`
 	FirstPageURI    *string                                                                                       `json:"first_page_uri,omitempty"`
@@ -42,6 +42,6 @@ type ListSipAuthCallsIPAccessControlListMapping200ApplicationJSONListSipAuthCall
 
 type ListSipAuthCallsIPAccessControlListMappingResponse struct {
 	ContentType                                        string
-	ListSipAuthCallsIPAccessControlListMappingResponse *ListSipAuthCallsIPAccessControlListMapping200ApplicationJSONListSipAuthCallsIPAccessControlListMappingResponse
+	ListSipAuthCallsIPAccessControlListMappingResponse *ListSipAuthCallsIPAccessControlListMappingListSipAuthCallsIPAccessControlListMappingResponse
 	StatusCode                                         int64
 }

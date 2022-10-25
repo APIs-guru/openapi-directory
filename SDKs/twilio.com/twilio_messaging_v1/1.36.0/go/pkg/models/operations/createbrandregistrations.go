@@ -8,7 +8,7 @@ var CreateBrandRegistrationsServers = []string{
 	"https://messaging.twilio.com",
 }
 
-type CreateBrandRegistrationsRequestBodyCreateBrandRegistrationsRequest struct {
+type CreateBrandRegistrationsCreateBrandRegistrationsRequest struct {
 	A2PProfileBundleSid      string  `form:"name=A2PProfileBundleSid"`
 	BrandType                *string `form:"name=BrandType"`
 	CustomerProfileBundleSid string  `form:"name=CustomerProfileBundleSid"`
@@ -22,7 +22,7 @@ type CreateBrandRegistrationsSecurity struct {
 
 type CreateBrandRegistrationsRequest struct {
 	ServerURL *string
-	Request   *CreateBrandRegistrationsRequestBodyCreateBrandRegistrationsRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request   *CreateBrandRegistrationsCreateBrandRegistrationsRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security  CreateBrandRegistrationsSecurity
 }
 

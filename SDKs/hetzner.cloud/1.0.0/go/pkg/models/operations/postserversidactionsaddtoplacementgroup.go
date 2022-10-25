@@ -4,50 +4,50 @@ type PostServersIDActionsAddToPlacementGroupPathParams struct {
 	ID int64 `pathParam:"style=simple,explode=false,name=id"`
 }
 
-type PostServersIDActionsAddToPlacementGroupRequestBodyAddToPlacementGroupRequest struct {
+type PostServersIDActionsAddToPlacementGroupAddToPlacementGroupRequest struct {
 	PlacementGroup int64 `json:"placement_group"`
 }
 
 type PostServersIDActionsAddToPlacementGroupRequest struct {
 	PathParams PostServersIDActionsAddToPlacementGroupPathParams
-	Request    *PostServersIDActionsAddToPlacementGroupRequestBodyAddToPlacementGroupRequest `request:"mediaType=application/json"`
+	Request    *PostServersIDActionsAddToPlacementGroupAddToPlacementGroupRequest `request:"mediaType=application/json"`
 }
 
-type PostServersIDActionsAddToPlacementGroup201ApplicationJSONActionError struct {
+type PostServersIDActionsAddToPlacementGroupActionResponseActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
 }
 
-type PostServersIDActionsAddToPlacementGroup201ApplicationJSONActionResources struct {
+type PostServersIDActionsAddToPlacementGroupActionResponseActionResources struct {
 	ID   int64  `json:"id"`
 	Type string `json:"type"`
 }
 
-type PostServersIDActionsAddToPlacementGroup201ApplicationJSONActionStatusEnum string
+type PostServersIDActionsAddToPlacementGroupActionResponseActionStatusEnum string
 
 const (
-	PostServersIDActionsAddToPlacementGroup201ApplicationJSONActionStatusEnumSuccess PostServersIDActionsAddToPlacementGroup201ApplicationJSONActionStatusEnum = "success"
-	PostServersIDActionsAddToPlacementGroup201ApplicationJSONActionStatusEnumRunning PostServersIDActionsAddToPlacementGroup201ApplicationJSONActionStatusEnum = "running"
-	PostServersIDActionsAddToPlacementGroup201ApplicationJSONActionStatusEnumError   PostServersIDActionsAddToPlacementGroup201ApplicationJSONActionStatusEnum = "error"
+	PostServersIDActionsAddToPlacementGroupActionResponseActionStatusEnumSuccess PostServersIDActionsAddToPlacementGroupActionResponseActionStatusEnum = "success"
+	PostServersIDActionsAddToPlacementGroupActionResponseActionStatusEnumRunning PostServersIDActionsAddToPlacementGroupActionResponseActionStatusEnum = "running"
+	PostServersIDActionsAddToPlacementGroupActionResponseActionStatusEnumError   PostServersIDActionsAddToPlacementGroupActionResponseActionStatusEnum = "error"
 )
 
-type PostServersIDActionsAddToPlacementGroup201ApplicationJSONActionAction struct {
-	Command   string                                                                     `json:"command"`
-	Error     PostServersIDActionsAddToPlacementGroup201ApplicationJSONActionError       `json:"error"`
-	Finished  string                                                                     `json:"finished"`
-	ID        int64                                                                      `json:"id"`
-	Progress  float64                                                                    `json:"progress"`
-	Resources []PostServersIDActionsAddToPlacementGroup201ApplicationJSONActionResources `json:"resources"`
-	Started   string                                                                     `json:"started"`
-	Status    PostServersIDActionsAddToPlacementGroup201ApplicationJSONActionStatusEnum  `json:"status"`
+type PostServersIDActionsAddToPlacementGroupActionResponseAction struct {
+	Command   string                                                                 `json:"command"`
+	Error     PostServersIDActionsAddToPlacementGroupActionResponseActionError       `json:"error"`
+	Finished  string                                                                 `json:"finished"`
+	ID        int64                                                                  `json:"id"`
+	Progress  float64                                                                `json:"progress"`
+	Resources []PostServersIDActionsAddToPlacementGroupActionResponseActionResources `json:"resources"`
+	Started   string                                                                 `json:"started"`
+	Status    PostServersIDActionsAddToPlacementGroupActionResponseActionStatusEnum  `json:"status"`
 }
 
-type PostServersIDActionsAddToPlacementGroup201ApplicationJSONActionResponse struct {
-	Action PostServersIDActionsAddToPlacementGroup201ApplicationJSONActionAction `json:"action"`
+type PostServersIDActionsAddToPlacementGroupActionResponse struct {
+	Action PostServersIDActionsAddToPlacementGroupActionResponseAction `json:"action"`
 }
 
 type PostServersIDActionsAddToPlacementGroupResponse struct {
-	ActionResponse *PostServersIDActionsAddToPlacementGroup201ApplicationJSONActionResponse
+	ActionResponse *PostServersIDActionsAddToPlacementGroupActionResponse
 	ContentType    string
 	StatusCode     int64
 }

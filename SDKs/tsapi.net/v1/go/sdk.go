@@ -99,12 +99,12 @@ func (s *SDK) GetSurveys(ctx context.Context) (*operations.GetSurveysResponse, e
 
 			res.SurveyDetails = out
 		case utils.MatchContentType(contentType, `text/plain`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -154,12 +154,12 @@ func (s *SDK) GetSurveysSurveyIDInterviews(ctx context.Context, request operatio
 
 			res.Interviews = out
 		case utils.MatchContentType(contentType, `text/plain`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 
@@ -207,12 +207,12 @@ func (s *SDK) GetSurveysSurveyIDMetadata(ctx context.Context, request operations
 
 			res.SurveyMetadata = out
 		case utils.MatchContentType(contentType, `text/plain`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	}
 

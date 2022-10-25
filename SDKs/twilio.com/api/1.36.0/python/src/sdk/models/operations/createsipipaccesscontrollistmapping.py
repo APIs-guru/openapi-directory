@@ -13,7 +13,7 @@ class CreateSipIPAccessControlListMappingPathParams:
     
 
 @dataclass
-class CreateSipIPAccessControlListMappingRequestBodyCreateSipIPAccessControlListMappingRequest:
+class CreateSipIPAccessControlListMappingCreateSipIPAccessControlListMappingRequest:
     ip_access_control_list_sid: str = field(default=None, metadata={'form': { 'field_name': 'IpAccessControlListSid' }})
     
 
@@ -26,7 +26,7 @@ class CreateSipIPAccessControlListMappingSecurity:
 class CreateSipIPAccessControlListMappingRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateSipIPAccessControlListMappingPathParams = field(default=None)
-    request: Optional[CreateSipIPAccessControlListMappingRequestBodyCreateSipIPAccessControlListMappingRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateSipIPAccessControlListMappingCreateSipIPAccessControlListMappingRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateSipIPAccessControlListMappingSecurity = field(default=None)
     
 

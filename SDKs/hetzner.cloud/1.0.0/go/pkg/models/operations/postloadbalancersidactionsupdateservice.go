@@ -4,7 +4,7 @@ type PostLoadBalancersIDActionsUpdateServicePathParams struct {
 	ID int64 `pathParam:"style=simple,explode=false,name=id"`
 }
 
-type PostLoadBalancersIDActionsUpdateServiceRequestBodyHealthCheckHTTP struct {
+type PostLoadBalancersIDActionsUpdateServiceLoadBalancerServiceLoadBalancerServiceHealthCheckHTTP struct {
 	Domain      string   `json:"domain"`
 	Path        string   `json:"path"`
 	Response    *string  `json:"response,omitempty"`
@@ -12,23 +12,23 @@ type PostLoadBalancersIDActionsUpdateServiceRequestBodyHealthCheckHTTP struct {
 	TLS         *bool    `json:"tls,omitempty"`
 }
 
-type PostLoadBalancersIDActionsUpdateServiceRequestBodyHealthCheckProtocolEnum string
+type PostLoadBalancersIDActionsUpdateServiceLoadBalancerServiceLoadBalancerServiceHealthCheckProtocolEnum string
 
 const (
-	PostLoadBalancersIDActionsUpdateServiceRequestBodyHealthCheckProtocolEnumTCP  PostLoadBalancersIDActionsUpdateServiceRequestBodyHealthCheckProtocolEnum = "tcp"
-	PostLoadBalancersIDActionsUpdateServiceRequestBodyHealthCheckProtocolEnumHTTP PostLoadBalancersIDActionsUpdateServiceRequestBodyHealthCheckProtocolEnum = "http"
+	PostLoadBalancersIDActionsUpdateServiceLoadBalancerServiceLoadBalancerServiceHealthCheckProtocolEnumTCP  PostLoadBalancersIDActionsUpdateServiceLoadBalancerServiceLoadBalancerServiceHealthCheckProtocolEnum = "tcp"
+	PostLoadBalancersIDActionsUpdateServiceLoadBalancerServiceLoadBalancerServiceHealthCheckProtocolEnumHTTP PostLoadBalancersIDActionsUpdateServiceLoadBalancerServiceLoadBalancerServiceHealthCheckProtocolEnum = "http"
 )
 
-type PostLoadBalancersIDActionsUpdateServiceRequestBodyHealthCheckLoadBalancerServiceHealthCheck struct {
-	HTTP     *PostLoadBalancersIDActionsUpdateServiceRequestBodyHealthCheckHTTP        `json:"http,omitempty"`
-	Interval int64                                                                     `json:"interval"`
-	Port     int64                                                                     `json:"port"`
-	Protocol PostLoadBalancersIDActionsUpdateServiceRequestBodyHealthCheckProtocolEnum `json:"protocol"`
-	Retries  int64                                                                     `json:"retries"`
-	Timeout  int64                                                                     `json:"timeout"`
+type PostLoadBalancersIDActionsUpdateServiceLoadBalancerServiceLoadBalancerServiceHealthCheck struct {
+	HTTP     *PostLoadBalancersIDActionsUpdateServiceLoadBalancerServiceLoadBalancerServiceHealthCheckHTTP        `json:"http,omitempty"`
+	Interval int64                                                                                                `json:"interval"`
+	Port     int64                                                                                                `json:"port"`
+	Protocol PostLoadBalancersIDActionsUpdateServiceLoadBalancerServiceLoadBalancerServiceHealthCheckProtocolEnum `json:"protocol"`
+	Retries  int64                                                                                                `json:"retries"`
+	Timeout  int64                                                                                                `json:"timeout"`
 }
 
-type PostLoadBalancersIDActionsUpdateServiceRequestBodyHTTP struct {
+type PostLoadBalancersIDActionsUpdateServiceLoadBalancerServiceHTTP struct {
 	Certificates   []int64 `json:"certificates,omitempty"`
 	CookieLifetime int64   `json:"cookie_lifetime"`
 	CookieName     string  `json:"cookie_name"`
@@ -36,63 +36,63 @@ type PostLoadBalancersIDActionsUpdateServiceRequestBodyHTTP struct {
 	StickySessions *bool   `json:"sticky_sessions,omitempty"`
 }
 
-type PostLoadBalancersIDActionsUpdateServiceRequestBodyProtocolEnum string
+type PostLoadBalancersIDActionsUpdateServiceLoadBalancerServiceProtocolEnum string
 
 const (
-	PostLoadBalancersIDActionsUpdateServiceRequestBodyProtocolEnumTCP   PostLoadBalancersIDActionsUpdateServiceRequestBodyProtocolEnum = "tcp"
-	PostLoadBalancersIDActionsUpdateServiceRequestBodyProtocolEnumHTTP  PostLoadBalancersIDActionsUpdateServiceRequestBodyProtocolEnum = "http"
-	PostLoadBalancersIDActionsUpdateServiceRequestBodyProtocolEnumHTTPS PostLoadBalancersIDActionsUpdateServiceRequestBodyProtocolEnum = "https"
+	PostLoadBalancersIDActionsUpdateServiceLoadBalancerServiceProtocolEnumTCP   PostLoadBalancersIDActionsUpdateServiceLoadBalancerServiceProtocolEnum = "tcp"
+	PostLoadBalancersIDActionsUpdateServiceLoadBalancerServiceProtocolEnumHTTP  PostLoadBalancersIDActionsUpdateServiceLoadBalancerServiceProtocolEnum = "http"
+	PostLoadBalancersIDActionsUpdateServiceLoadBalancerServiceProtocolEnumHTTPS PostLoadBalancersIDActionsUpdateServiceLoadBalancerServiceProtocolEnum = "https"
 )
 
-type PostLoadBalancersIDActionsUpdateServiceRequestBodyLoadBalancerService struct {
-	DestinationPort int64                                                                                       `json:"destination_port"`
-	HealthCheck     PostLoadBalancersIDActionsUpdateServiceRequestBodyHealthCheckLoadBalancerServiceHealthCheck `json:"health_check"`
-	HTTP            *PostLoadBalancersIDActionsUpdateServiceRequestBodyHTTP                                     `json:"http,omitempty"`
-	ListenPort      int64                                                                                       `json:"listen_port"`
-	Protocol        PostLoadBalancersIDActionsUpdateServiceRequestBodyProtocolEnum                              `json:"protocol"`
-	Proxyprotocol   bool                                                                                        `json:"proxyprotocol"`
+type PostLoadBalancersIDActionsUpdateServiceLoadBalancerService struct {
+	DestinationPort int64                                                                                    `json:"destination_port"`
+	HealthCheck     PostLoadBalancersIDActionsUpdateServiceLoadBalancerServiceLoadBalancerServiceHealthCheck `json:"health_check"`
+	HTTP            *PostLoadBalancersIDActionsUpdateServiceLoadBalancerServiceHTTP                          `json:"http,omitempty"`
+	ListenPort      int64                                                                                    `json:"listen_port"`
+	Protocol        PostLoadBalancersIDActionsUpdateServiceLoadBalancerServiceProtocolEnum                   `json:"protocol"`
+	Proxyprotocol   bool                                                                                     `json:"proxyprotocol"`
 }
 
 type PostLoadBalancersIDActionsUpdateServiceRequest struct {
 	PathParams PostLoadBalancersIDActionsUpdateServicePathParams
-	Request    *PostLoadBalancersIDActionsUpdateServiceRequestBodyLoadBalancerService `request:"mediaType=application/json"`
+	Request    *PostLoadBalancersIDActionsUpdateServiceLoadBalancerService `request:"mediaType=application/json"`
 }
 
-type PostLoadBalancersIDActionsUpdateService201ApplicationJSONActionError struct {
+type PostLoadBalancersIDActionsUpdateServiceActionResponseActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
 }
 
-type PostLoadBalancersIDActionsUpdateService201ApplicationJSONActionResources struct {
+type PostLoadBalancersIDActionsUpdateServiceActionResponseActionResources struct {
 	ID   int64  `json:"id"`
 	Type string `json:"type"`
 }
 
-type PostLoadBalancersIDActionsUpdateService201ApplicationJSONActionStatusEnum string
+type PostLoadBalancersIDActionsUpdateServiceActionResponseActionStatusEnum string
 
 const (
-	PostLoadBalancersIDActionsUpdateService201ApplicationJSONActionStatusEnumSuccess PostLoadBalancersIDActionsUpdateService201ApplicationJSONActionStatusEnum = "success"
-	PostLoadBalancersIDActionsUpdateService201ApplicationJSONActionStatusEnumRunning PostLoadBalancersIDActionsUpdateService201ApplicationJSONActionStatusEnum = "running"
-	PostLoadBalancersIDActionsUpdateService201ApplicationJSONActionStatusEnumError   PostLoadBalancersIDActionsUpdateService201ApplicationJSONActionStatusEnum = "error"
+	PostLoadBalancersIDActionsUpdateServiceActionResponseActionStatusEnumSuccess PostLoadBalancersIDActionsUpdateServiceActionResponseActionStatusEnum = "success"
+	PostLoadBalancersIDActionsUpdateServiceActionResponseActionStatusEnumRunning PostLoadBalancersIDActionsUpdateServiceActionResponseActionStatusEnum = "running"
+	PostLoadBalancersIDActionsUpdateServiceActionResponseActionStatusEnumError   PostLoadBalancersIDActionsUpdateServiceActionResponseActionStatusEnum = "error"
 )
 
-type PostLoadBalancersIDActionsUpdateService201ApplicationJSONActionAction struct {
-	Command   string                                                                     `json:"command"`
-	Error     PostLoadBalancersIDActionsUpdateService201ApplicationJSONActionError       `json:"error"`
-	Finished  string                                                                     `json:"finished"`
-	ID        int64                                                                      `json:"id"`
-	Progress  float64                                                                    `json:"progress"`
-	Resources []PostLoadBalancersIDActionsUpdateService201ApplicationJSONActionResources `json:"resources"`
-	Started   string                                                                     `json:"started"`
-	Status    PostLoadBalancersIDActionsUpdateService201ApplicationJSONActionStatusEnum  `json:"status"`
+type PostLoadBalancersIDActionsUpdateServiceActionResponseAction struct {
+	Command   string                                                                 `json:"command"`
+	Error     PostLoadBalancersIDActionsUpdateServiceActionResponseActionError       `json:"error"`
+	Finished  string                                                                 `json:"finished"`
+	ID        int64                                                                  `json:"id"`
+	Progress  float64                                                                `json:"progress"`
+	Resources []PostLoadBalancersIDActionsUpdateServiceActionResponseActionResources `json:"resources"`
+	Started   string                                                                 `json:"started"`
+	Status    PostLoadBalancersIDActionsUpdateServiceActionResponseActionStatusEnum  `json:"status"`
 }
 
-type PostLoadBalancersIDActionsUpdateService201ApplicationJSONActionResponse struct {
-	Action PostLoadBalancersIDActionsUpdateService201ApplicationJSONActionAction `json:"action"`
+type PostLoadBalancersIDActionsUpdateServiceActionResponse struct {
+	Action PostLoadBalancersIDActionsUpdateServiceActionResponseAction `json:"action"`
 }
 
 type PostLoadBalancersIDActionsUpdateServiceResponse struct {
-	ActionResponse *PostLoadBalancersIDActionsUpdateService201ApplicationJSONActionResponse
+	ActionResponse *PostLoadBalancersIDActionsUpdateServiceActionResponse
 	ContentType    string
 	StatusCode     int64
 }

@@ -14,7 +14,7 @@ class UpdateSiprecPathParams:
     
 
 @dataclass
-class UpdateSiprecRequestBodyUpdateSiprecRequest:
+class UpdateSiprecUpdateSiprecRequest:
     status: shared.SiprecEnumUpdateStatusEnum = field(default=None, metadata={'form': { 'field_name': 'Status' }})
     
 
@@ -27,7 +27,7 @@ class UpdateSiprecSecurity:
 class UpdateSiprecRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateSiprecPathParams = field(default=None)
-    request: Optional[UpdateSiprecRequestBodyUpdateSiprecRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateSiprecUpdateSiprecRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateSiprecSecurity = field(default=None)
     
 

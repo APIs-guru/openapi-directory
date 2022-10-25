@@ -11,7 +11,7 @@ const (
 	OnetrackGetResponses200ContentApplication1jsonSchemaPropertiesOriginGeometryTypeEnumMultiPolygon    OnetrackGetResponses200ContentApplication1jsonSchemaPropertiesOriginGeometryTypeEnum = "MultiPolygon"
 )
 
-type OnetrackGetResponses200ContentApplication1jsonSchemaPropertiesOriginGeometryGeometry struct {
+type OnetrackGetResponses200ContentApplication1jsonSchemaPropertiesOriginGeometry struct {
 	Coordinates interface{}                                                                          `json:"coordinates"`
 	Type        OnetrackGetResponses200ContentApplication1jsonSchemaPropertiesOriginGeometryTypeEnum `json:"type"`
 }
@@ -29,7 +29,7 @@ const (
 type OnetrackGetResponses200ContentApplication1jsonSchemaPropertiesOrigin struct {
 	Bbox       []interface{}                                                                           `json:"bbox,omitempty"`
 	Centerline *OnetrackGetResponses200ContentApplication1jsonSchemaPropertiesOriginPropertiesGeometry `json:"centerline,omitempty"`
-	Geometry   OnetrackGetResponses200ContentApplication1jsonSchemaPropertiesOriginGeometryGeometry    `json:"geometry"`
+	Geometry   OnetrackGetResponses200ContentApplication1jsonSchemaPropertiesOriginGeometry            `json:"geometry"`
 	ID         *int64                                                                                  `json:"id,omitempty"`
 	Properties OnetrackGetResponses200ContentApplication1jsonSchemaPropertiesOriginProperties          `json:"properties"`
 	Title      *string                                                                                 `json:"title,omitempty"`

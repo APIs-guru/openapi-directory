@@ -29,7 +29,7 @@ class ListSmsCommandRequest:
 
 @dataclass_json
 @dataclass
-class ListSmsCommand200ApplicationJSONMeta:
+class ListSmsCommandListSmsCommandResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -41,14 +41,14 @@ class ListSmsCommand200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListSmsCommand200ApplicationJSONListSmsCommandResponse:
-    meta: Optional[ListSmsCommand200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+class ListSmsCommandListSmsCommandResponse:
+    meta: Optional[ListSmsCommandListSmsCommandResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     sms_commands: Optional[List[shared.SupersimV1SmsCommand]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sms_commands' }})
     
 
 @dataclass
 class ListSmsCommandResponse:
     content_type: str = field(default=None)
-    list_sms_command_response: Optional[ListSmsCommand200ApplicationJSONListSmsCommandResponse] = field(default=None)
+    list_sms_command_response: Optional[ListSmsCommandListSmsCommandResponse] = field(default=None)
     status_code: int = field(default=None)
     

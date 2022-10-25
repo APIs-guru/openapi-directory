@@ -28,7 +28,7 @@ type ListFactorRequest struct {
 	Security    ListFactorSecurity
 }
 
-type ListFactor200ApplicationJSONMeta struct {
+type ListFactorListFactorResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -38,13 +38,13 @@ type ListFactor200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListFactor200ApplicationJSONListFactorResponse struct {
+type ListFactorListFactorResponse struct {
 	Factors []shared.VerifyV2ServiceEntityFactor `json:"factors,omitempty"`
-	Meta    *ListFactor200ApplicationJSONMeta    `json:"meta,omitempty"`
+	Meta    *ListFactorListFactorResponseMeta    `json:"meta,omitempty"`
 }
 
 type ListFactorResponse struct {
 	ContentType        string
-	ListFactorResponse *ListFactor200ApplicationJSONListFactorResponse
+	ListFactorResponse *ListFactorListFactorResponse
 	StatusCode         int64
 }

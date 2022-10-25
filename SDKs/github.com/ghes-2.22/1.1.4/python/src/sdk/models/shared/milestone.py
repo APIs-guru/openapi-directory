@@ -8,7 +8,7 @@ from dataclasses_json import dataclass_json
 
 @dataclass_json
 @dataclass
-class MilestoneCreatorSimpleUser:
+class MilestoneSimpleUser:
     avatar_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'avatar_url' }})
     events_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'events_url' }})
     followers_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'followers_url' }})
@@ -40,7 +40,7 @@ class Milestone:
     closed_at: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'closed_at', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     closed_issues: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'closed_issues' }})
     created_at: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'created_at', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    creator: MilestoneCreatorSimpleUser = field(default=None, metadata={'dataclasses_json': { 'field_name': 'creator' }})
+    creator: MilestoneSimpleUser = field(default=None, metadata={'dataclasses_json': { 'field_name': 'creator' }})
     description: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
     due_on: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'due_on', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     html_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'html_url' }})

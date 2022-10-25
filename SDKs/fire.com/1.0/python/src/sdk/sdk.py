@@ -120,7 +120,7 @@ class SDK:
         res = operations.AddInternalTransferBatchPaymentResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.AddInternalTransferBatchPayment200ApplicationJSONNewBatchItemResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.AddInternalTransferBatchPaymentNewBatchItemResponse])
                 res.new_batch_item_response = out
 
         return res
@@ -148,7 +148,7 @@ class SDK:
         res = operations.AuthenticateResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.Authenticate200ApplicationJSONAccessToken])
+                out = utils.unmarshal_json(r.text, Optional[operations.AuthenticateAccessToken])
                 res.access_token = out
 
         return res
@@ -214,7 +214,7 @@ class SDK:
         res = operations.CreateAPIApplicationResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.CreateAPIApplication200ApplicationJSONAPIApplication])
+                out = utils.unmarshal_json(r.text, Optional[operations.CreateAPIApplicationAPIApplication])
                 res.api_application = out
 
         return res
@@ -242,7 +242,7 @@ class SDK:
         res = operations.CreateBatchPaymentResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.CreateBatchPayment200ApplicationJSONNewBatchResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.CreateBatchPaymentNewBatchResponse])
                 res.new_batch_response = out
 
         return res
@@ -270,7 +270,7 @@ class SDK:
         res = operations.CreateNewCardResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.CreateNewCard200ApplicationJSONNewCardResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.CreateNewCardNewCardResponse])
                 res.new_card_response = out
 
         return res
@@ -352,7 +352,7 @@ class SDK:
         res = operations.GetAccountsResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.GetAccounts200ApplicationJSONAccounts])
+                out = utils.unmarshal_json(r.text, Optional[operations.GetAccountsAccounts])
                 res.accounts = out
         elif r.status_code == 401:
             pass
@@ -376,7 +376,7 @@ class SDK:
         res = operations.GetBatchesResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.GetBatches200ApplicationJSONBatchItems])
+                out = utils.unmarshal_json(r.text, Optional[operations.GetBatchesBatchItems])
                 res.batch_items = out
 
         return res
@@ -439,7 +439,7 @@ class SDK:
         res = operations.GetDirectDebitMandatesResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.GetDirectDebitMandates200ApplicationJSONMandates])
+                out = utils.unmarshal_json(r.text, Optional[operations.GetDirectDebitMandatesMandates])
                 res.mandates = out
 
         return res
@@ -461,7 +461,7 @@ class SDK:
         res = operations.GetDirectDebitsForMandateUUIDResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.GetDirectDebitsForMandateUUID200ApplicationJSONDirectDebits])
+                out = utils.unmarshal_json(r.text, Optional[operations.GetDirectDebitsForMandateUUIDDirectDebits])
                 res.direct_debits = out
 
         return res
@@ -527,7 +527,7 @@ class SDK:
         res = operations.GetListOfAspspsResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.GetListOfAspsps200ApplicationJSONAspsps])
+                out = utils.unmarshal_json(r.text, Optional[operations.GetListOfAspspsAspsps])
                 res.aspsps = out
 
         return res
@@ -548,7 +548,7 @@ class SDK:
         res = operations.GetListofApproversForBatchResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.GetListofApproversForBatch200ApplicationJSONBatchApprovers])
+                out = utils.unmarshal_json(r.text, Optional[operations.GetListofApproversForBatchBatchApprovers])
                 res.batch_approvers = out
 
         return res
@@ -569,7 +569,7 @@ class SDK:
         res = operations.GetListofCardsResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.GetListofCards200ApplicationJSONCards])
+                out = utils.unmarshal_json(r.text, Optional[operations.GetListofCardsCards])
                 res.cards = out
         elif r.status_code == 401:
             pass
@@ -615,7 +615,7 @@ class SDK:
         res = operations.GetPayeesResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.GetPayees200ApplicationJSONPayee])
+                out = utils.unmarshal_json(r.text, Optional[operations.GetPayeesPayee])
                 res.payee = out
 
         return res
@@ -636,7 +636,7 @@ class SDK:
         res = operations.GetPaymentDetailsResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.GetPaymentDetails200ApplicationJSONPaymentRequest])
+                out = utils.unmarshal_json(r.text, Optional[operations.GetPaymentDetailsPaymentRequest])
                 res.payment_request = out
 
         return res
@@ -657,7 +657,7 @@ class SDK:
         res = operations.GetTransactionsByIDResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.GetTransactionsByID200ApplicationJSONTransaction])
+                out = utils.unmarshal_json(r.text, Optional[operations.GetTransactionsByIDTransaction])
                 res.transaction = out
 
         return res
@@ -721,7 +721,7 @@ class SDK:
         res = operations.GetUsersResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[List[operations.GetUsers200ApplicationJSONUser]])
+                out = utils.unmarshal_json(r.text, Optional[List[operations.GetUsersUser]])
                 res.users = out
 
         return res
@@ -749,7 +749,7 @@ class SDK:
         res = operations.NewPaymentRequestResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.NewPaymentRequest200ApplicationJSONNewPaymentRequestResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.NewPaymentRequestNewPaymentRequestResponse])
                 res.new_payment_request_response = out
 
         return res

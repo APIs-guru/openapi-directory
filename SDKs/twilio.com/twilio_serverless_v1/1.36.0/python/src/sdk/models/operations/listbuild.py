@@ -32,7 +32,7 @@ class ListBuildRequest:
 
 @dataclass_json
 @dataclass
-class ListBuild200ApplicationJSONMeta:
+class ListBuildListBuildResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -44,14 +44,14 @@ class ListBuild200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListBuild200ApplicationJSONListBuildResponse:
+class ListBuildListBuildResponse:
     builds: Optional[List[shared.ServerlessV1ServiceBuild]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'builds' }})
-    meta: Optional[ListBuild200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+    meta: Optional[ListBuildListBuildResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     
 
 @dataclass
 class ListBuildResponse:
     content_type: str = field(default=None)
-    list_build_response: Optional[ListBuild200ApplicationJSONListBuildResponse] = field(default=None)
+    list_build_response: Optional[ListBuildListBuildResponse] = field(default=None)
     status_code: int = field(default=None)
     

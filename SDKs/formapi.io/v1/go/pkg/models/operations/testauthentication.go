@@ -12,19 +12,19 @@ type TestAuthenticationRequest struct {
 	Security TestAuthenticationSecurity
 }
 
-type TestAuthentication200ApplicationJSONStatusEnum string
+type TestAuthenticationAuthenticationSuccessResponseStatusEnum string
 
 const (
-	TestAuthentication200ApplicationJSONStatusEnumSuccess TestAuthentication200ApplicationJSONStatusEnum = "success"
+	TestAuthenticationAuthenticationSuccessResponseStatusEnumSuccess TestAuthenticationAuthenticationSuccessResponseStatusEnum = "success"
 )
 
-type TestAuthentication200ApplicationJSONAuthenticationSuccessResponse struct {
-	Status TestAuthentication200ApplicationJSONStatusEnum `json:"status"`
+type TestAuthenticationAuthenticationSuccessResponse struct {
+	Status TestAuthenticationAuthenticationSuccessResponseStatusEnum `json:"status"`
 }
 
 type TestAuthenticationResponse struct {
 	ContentType                   string
 	StatusCode                    int64
 	AuthenticationError           *shared.AuthenticationError
-	AuthenticationSuccessResponse *TestAuthentication200ApplicationJSONAuthenticationSuccessResponse
+	AuthenticationSuccessResponse *TestAuthenticationAuthenticationSuccessResponse
 }

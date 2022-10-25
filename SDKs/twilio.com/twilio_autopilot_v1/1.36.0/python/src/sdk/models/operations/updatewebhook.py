@@ -13,7 +13,7 @@ class UpdateWebhookPathParams:
     
 
 @dataclass
-class UpdateWebhookRequestBodyUpdateWebhookRequest:
+class UpdateWebhookUpdateWebhookRequest:
     events: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Events' }})
     unique_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'UniqueName' }})
     webhook_method: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'WebhookMethod' }})
@@ -29,7 +29,7 @@ class UpdateWebhookSecurity:
 class UpdateWebhookRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateWebhookPathParams = field(default=None)
-    request: Optional[UpdateWebhookRequestBodyUpdateWebhookRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateWebhookUpdateWebhookRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateWebhookSecurity = field(default=None)
     
 

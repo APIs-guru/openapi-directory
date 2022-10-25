@@ -14,7 +14,7 @@ class UpdateVariablePathParams:
     
 
 @dataclass
-class UpdateVariableRequestBodyUpdateVariableRequest:
+class UpdateVariableUpdateVariableRequest:
     key: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Key' }})
     value: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Value' }})
     
@@ -28,7 +28,7 @@ class UpdateVariableSecurity:
 class UpdateVariableRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateVariablePathParams = field(default=None)
-    request: Optional[UpdateVariableRequestBodyUpdateVariableRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateVariableUpdateVariableRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateVariableSecurity = field(default=None)
     
 

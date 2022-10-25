@@ -11,7 +11,7 @@ const (
 	ReleaseAssetStateEnumOpen     ReleaseAssetStateEnum = "open"
 )
 
-type ReleaseAssetUploaderSimpleUser struct {
+type ReleaseAssetSimpleUser struct {
 	AvatarURL         string  `json:"avatar_url"`
 	EventsURL         string  `json:"events_url"`
 	FollowersURL      string  `json:"followers_url"`
@@ -34,17 +34,17 @@ type ReleaseAssetUploaderSimpleUser struct {
 }
 
 type ReleaseAsset struct {
-	BrowserDownloadURL string                         `json:"browser_download_url"`
-	ContentType        string                         `json:"content_type"`
-	CreatedAt          time.Time                      `json:"created_at"`
-	DownloadCount      int64                          `json:"download_count"`
-	ID                 int64                          `json:"id"`
-	Label              string                         `json:"label"`
-	Name               string                         `json:"name"`
-	NodeID             string                         `json:"node_id"`
-	Size               int64                          `json:"size"`
-	State              ReleaseAssetStateEnum          `json:"state"`
-	UpdatedAt          time.Time                      `json:"updated_at"`
-	Uploader           ReleaseAssetUploaderSimpleUser `json:"uploader"`
-	URL                string                         `json:"url"`
+	BrowserDownloadURL string                 `json:"browser_download_url"`
+	ContentType        string                 `json:"content_type"`
+	CreatedAt          time.Time              `json:"created_at"`
+	DownloadCount      int64                  `json:"download_count"`
+	ID                 int64                  `json:"id"`
+	Label              string                 `json:"label"`
+	Name               string                 `json:"name"`
+	NodeID             string                 `json:"node_id"`
+	Size               int64                  `json:"size"`
+	State              ReleaseAssetStateEnum  `json:"state"`
+	UpdatedAt          time.Time              `json:"updated_at"`
+	Uploader           ReleaseAssetSimpleUser `json:"uploader"`
+	URL                string                 `json:"url"`
 }

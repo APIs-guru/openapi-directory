@@ -7,7 +7,7 @@ CREATE_CREDENTIAL_AWS_SERVERS = [
 
 
 @dataclass
-class CreateCredentialAwsRequestBodyCreateCredentialAwsRequest:
+class CreateCredentialAwsCreateCredentialAwsRequest:
     account_sid: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'AccountSid' }})
     credentials: str = field(default=None, metadata={'form': { 'field_name': 'Credentials' }})
     friendly_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
@@ -21,7 +21,7 @@ class CreateCredentialAwsSecurity:
 @dataclass
 class CreateCredentialAwsRequest:
     server_url: Optional[str] = field(default=None)
-    request: Optional[CreateCredentialAwsRequestBodyCreateCredentialAwsRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateCredentialAwsCreateCredentialAwsRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateCredentialAwsSecurity = field(default=None)
     
 

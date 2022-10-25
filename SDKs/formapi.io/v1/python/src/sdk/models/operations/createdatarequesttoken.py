@@ -19,14 +19,14 @@ class CreateDataRequestTokenRequest:
     path_params: CreateDataRequestTokenPathParams = field(default=None)
     security: CreateDataRequestTokenSecurity = field(default=None)
     
-class CreateDataRequestToken201ApplicationJSONStatusEnum(str, Enum):
+class CreateDataRequestTokenCreateSubmissionDataRequestTokenResponseStatusEnum(str, Enum):
     SUCCESS = "success"
     ERROR = "error"
 
 
 @dataclass_json
 @dataclass
-class CreateDataRequestToken201ApplicationJSONToken:
+class CreateDataRequestTokenCreateSubmissionDataRequestTokenResponseToken:
     data_request_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'data_request_url' }})
     expires_at: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'expires_at' }})
     id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
@@ -35,10 +35,10 @@ class CreateDataRequestToken201ApplicationJSONToken:
 
 @dataclass_json
 @dataclass
-class CreateDataRequestToken201ApplicationJSONCreateSubmissionDataRequestTokenResponse:
+class CreateDataRequestTokenCreateSubmissionDataRequestTokenResponse:
     errors: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'errors' }})
-    status: CreateDataRequestToken201ApplicationJSONStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
-    token: CreateDataRequestToken201ApplicationJSONToken = field(default=None, metadata={'dataclasses_json': { 'field_name': 'token' }})
+    status: CreateDataRequestTokenCreateSubmissionDataRequestTokenResponseStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    token: CreateDataRequestTokenCreateSubmissionDataRequestTokenResponseToken = field(default=None, metadata={'dataclasses_json': { 'field_name': 'token' }})
     
 
 @dataclass
@@ -46,5 +46,5 @@ class CreateDataRequestTokenResponse:
     content_type: str = field(default=None)
     status_code: int = field(default=None)
     authentication_error: Optional[shared.AuthenticationError] = field(default=None)
-    create_submission_data_request_token_response: Optional[CreateDataRequestToken201ApplicationJSONCreateSubmissionDataRequestTokenResponse] = field(default=None)
+    create_submission_data_request_token_response: Optional[CreateDataRequestTokenCreateSubmissionDataRequestTokenResponse] = field(default=None)
     

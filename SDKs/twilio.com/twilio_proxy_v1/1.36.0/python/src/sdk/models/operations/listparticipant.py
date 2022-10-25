@@ -33,7 +33,7 @@ class ListParticipantRequest:
 
 @dataclass_json
 @dataclass
-class ListParticipant200ApplicationJSONMeta:
+class ListParticipantListParticipantResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -45,14 +45,14 @@ class ListParticipant200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListParticipant200ApplicationJSONListParticipantResponse:
-    meta: Optional[ListParticipant200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+class ListParticipantListParticipantResponse:
+    meta: Optional[ListParticipantListParticipantResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     participants: Optional[List[shared.ProxyV1ServiceSessionParticipant]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'participants' }})
     
 
 @dataclass
 class ListParticipantResponse:
     content_type: str = field(default=None)
-    list_participant_response: Optional[ListParticipant200ApplicationJSONListParticipantResponse] = field(default=None)
+    list_participant_response: Optional[ListParticipantListParticipantResponse] = field(default=None)
     status_code: int = field(default=None)
     

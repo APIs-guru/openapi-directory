@@ -12,7 +12,7 @@ type UpdateServiceNotificationPathParams struct {
 	ChatServiceSid string `pathParam:"style=simple,explode=false,name=ChatServiceSid"`
 }
 
-type UpdateServiceNotificationRequestBodyUpdateServiceNotificationRequest struct {
+type UpdateServiceNotificationUpdateServiceNotificationRequest struct {
 	AddedToConversationEnabled      *bool   `form:"name=AddedToConversation.Enabled"`
 	AddedToConversationSound        *string `form:"name=AddedToConversation.Sound"`
 	AddedToConversationTemplate     *string `form:"name=AddedToConversation.Template"`
@@ -35,7 +35,7 @@ type UpdateServiceNotificationSecurity struct {
 type UpdateServiceNotificationRequest struct {
 	ServerURL  *string
 	PathParams UpdateServiceNotificationPathParams
-	Request    *UpdateServiceNotificationRequestBodyUpdateServiceNotificationRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateServiceNotificationUpdateServiceNotificationRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateServiceNotificationSecurity
 }
 

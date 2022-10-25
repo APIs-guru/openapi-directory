@@ -5,7 +5,7 @@ import dateutil.parser
 from typing import Any,Enum,Optional
 from dataclasses_json import dataclass_json
 
-class EmployeeEmployeeAeAssessmentOverrideAeAssessmentOverrideEnum(str, Enum):
+class EmployeeEmployeeAeAssessmentOverrideEnum(str, Enum):
     NONE = "None"
     OPT_OUT = "OptOut"
     OPT_IN = "OptIn"
@@ -15,7 +15,7 @@ class EmployeeEmployeeAeAssessmentOverrideAeAssessmentOverrideEnum(str, Enum):
     LEAVER = "Leaver"
     EXCLUDED = "Excluded"
 
-class EmployeeEmployeeAeExclusionReasonCodeAeExclusionReasonCodeEnum(str, Enum):
+class EmployeeEmployeeAeExclusionReasonCodeEnum(str, Enum):
     OTHER_NOT_KNOWN = "OtherNotKnown"
     NOT_A_WORKER = "NotAWorker"
     NOT_UK_WORKER = "NotUKWorker"
@@ -32,7 +32,7 @@ class EmployeeEmployeeAeExclusionReasonCodeAeExclusionReasonCodeEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class EmployeeEmployeeAddressAddress:
+class EmployeeEmployeeAddress:
     address1: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Address1' }})
     address2: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Address2' }})
     address3: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Address3' }})
@@ -43,7 +43,7 @@ class EmployeeEmployeeAddressAddress:
 
 @dataclass_json
 @dataclass
-class EmployeeEmployeeBankAccountBankAccount:
+class EmployeeEmployeeBankAccount:
     account_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AccountName' }})
     account_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AccountNumber' }})
     reference: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Reference' }})
@@ -52,19 +52,19 @@ class EmployeeEmployeeBankAccountBankAccount:
 
 @dataclass_json
 @dataclass
-class EmployeeEmployeeEmployeePartnerEmployeePartner:
+class EmployeeEmployeeEmployeePartner:
     first_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FirstName' }})
     initials: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Initials' }})
     last_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'LastName' }})
     middle_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MiddleName' }})
     ni_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NiNumber' }})
     
-class EmployeeEmployeeGenderGenderEnum(str, Enum):
+class EmployeeEmployeeGenderEnum(str, Enum):
     UNKNOWN = "Unknown"
     MALE = "Male"
     FEMALE = "Female"
 
-class EmployeeEmployeeLeaverReasonLeaverReasonEnum(str, Enum):
+class EmployeeEmployeeLeaverReasonEnum(str, Enum):
     RESIGNED = "Resigned"
     DISMISSED = "Dismissed"
     REDUNDANT = "Redundant"
@@ -73,14 +73,14 @@ class EmployeeEmployeeLeaverReasonLeaverReasonEnum(str, Enum):
     LEGAL_CUSTODY = "LegalCustody"
     OTHER = "Other"
 
-class EmployeeEmployeeMaritalStatusMaritalStatusEnum(str, Enum):
+class EmployeeEmployeeMaritalStatusEnum(str, Enum):
     NOT_SET = "NotSet"
     SINGLE = "Single"
     MARRIED = "Married"
     DIVORCED = "Divorced"
     WIDOWED = "Widowed"
 
-class EmployeeEmployeeNicLiabilityNicLiabilityEnum(str, Enum):
+class EmployeeEmployeeNicLiabilityEnum(str, Enum):
     HAS_OTHER_JOB = "HasOtherJob"
     IS_FEMALE_ENTITLED_TO_REDUCED_RATE = "IsFemaleEntitledToReducedRate"
     IS_NOT_LIABLE = "IsNotLiable"
@@ -93,12 +93,12 @@ class EmployeeEmployeeNicLiabilityNicLiabilityEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class EmployeeEmployeePaySchedulePaySchedule:
+class EmployeeEmployeePaySchedule:
     at_href: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': '@href' }})
     at_rel: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': '@rel' }})
     at_title: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': '@title' }})
     
-class EmployeeEmployeePaymentMethodPaymentMethodEnum(str, Enum):
+class EmployeeEmployeePaymentMethodEnum(str, Enum):
     NOT_SET = "NotSet"
     CASH = "Cash"
     CHEQUE = "Cheque"
@@ -106,13 +106,13 @@ class EmployeeEmployeePaymentMethodPaymentMethodEnum(str, Enum):
     FASTER_PAYMENTS = "FasterPayments"
     OTHER = "Other"
 
-class EmployeeEmployeeRegionRegionEnum(str, Enum):
+class EmployeeEmployeeRegionEnum(str, Enum):
     NOT_SET = "NotSet"
     ENGLAND = "England"
     SCOTLAND = "Scotland"
     WALES = "Wales"
 
-class EmployeeEmployeeRuleExclusionsRuleExclusionsEnum(str, Enum):
+class EmployeeEmployeeRuleExclusionsEnum(str, Enum):
     NONE = "None"
     NI_MISSING_PAY_INSTRUCTION_RULE = "NiMissingPayInstructionRule"
     TAX_MISSING_PAY_INSTRUCTION_RULE = "TaxMissingPayInstructionRule"
@@ -132,22 +132,22 @@ class EmployeeEmployeeRuleExclusionsRuleExclusionsEnum(str, Enum):
     EMPLOYEE_DECEASED_RULE = "EmployeeDeceasedRule"
     BENEFIT_INSTRUCTION_AUTO_END_RULE = "BenefitInstructionAutoEndRule"
 
-class EmployeeEmployeeSecondedSecondedEnum(str, Enum):
+class EmployeeEmployeeSecondedEnum(str, Enum):
     NOT_SET = "NotSet"
     STAY183_DAYS_OR_MORE = "Stay183DaysOrMore"
     STAY_LESS_THAN183_DAYS = "StayLessThan183Days"
     IN_OUT_UK = "InOutUk"
 
-class EmployeeEmployeeStarterDeclarationStarterDeclarationEnum(str, Enum):
+class EmployeeEmployeeStarterDeclarationEnum(str, Enum):
     PREVIOUSLY_REPORTED = "PreviouslyReported"
     A = "A"
     B = "B"
     C = "C"
 
-class EmployeeEmployeeTerritoryTerritoryEnum(str, Enum):
+class EmployeeEmployeeTerritoryEnum(str, Enum):
     UNITED_KINGDOM = "UnitedKingdom"
 
-class EmployeeEmployeeWorkingWeekWorkingWeekEnum(str, Enum):
+class EmployeeEmployeeWorkingWeekEnum(str, Enum):
     NONE = "None"
     MONDAY = "Monday"
     TUESDAY = "Tuesday"
@@ -162,13 +162,13 @@ class EmployeeEmployeeWorkingWeekWorkingWeekEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class EmployeeEmployeeEmployee:
-    ae_assessment_override: Optional[EmployeeEmployeeAeAssessmentOverrideAeAssessmentOverrideEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AEAssessmentOverride' }})
+class EmployeeEmployee:
+    ae_assessment_override: Optional[EmployeeEmployeeAeAssessmentOverrideEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AEAssessmentOverride' }})
     ae_assessment_override_date: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AEAssessmentOverrideDate', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    ae_exclusion_reason_code: Optional[EmployeeEmployeeAeExclusionReasonCodeAeExclusionReasonCodeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AEExclusionReasonCode' }})
+    ae_exclusion_reason_code: Optional[EmployeeEmployeeAeExclusionReasonCodeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AEExclusionReasonCode' }})
     ae_postponement_date: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AEPostponementDate', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    address: Optional[EmployeeEmployeeAddressAddress] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Address' }})
-    bank_account: Optional[EmployeeEmployeeBankAccountBankAccount] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'BankAccount' }})
+    address: Optional[EmployeeEmployeeAddress] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Address' }})
+    bank_account: Optional[EmployeeEmployeeBankAccount] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'BankAccount' }})
     code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Code' }})
     date_of_birth: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DateOfBirth', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     deactivated: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Deactivated' }})
@@ -176,40 +176,40 @@ class EmployeeEmployeeEmployee:
     eea_citizen: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'EEACitizen' }})
     epm6: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'EPM6' }})
     effective_date: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'EffectiveDate', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    employee_partner: Optional[EmployeeEmployeeEmployeePartnerEmployeePartner] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'EmployeePartner' }})
+    employee_partner: Optional[EmployeeEmployeeEmployeePartner] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'EmployeePartner' }})
     first_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FirstName' }})
-    gender: Optional[EmployeeEmployeeGenderGenderEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Gender' }})
+    gender: Optional[EmployeeEmployeeGenderEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Gender' }})
     hours_per_week: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'HoursPerWeek' }})
     initials: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Initials' }})
     irregular_employment: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'IrregularEmployment' }})
     is_agency_worker: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'IsAgencyWorker' }})
     last_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'LastName' }})
-    leaver_reason: Optional[EmployeeEmployeeLeaverReasonLeaverReasonEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'LeaverReason' }})
+    leaver_reason: Optional[EmployeeEmployeeLeaverReasonEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'LeaverReason' }})
     leaving_date: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'LeavingDate', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    marital_status: Optional[EmployeeEmployeeMaritalStatusMaritalStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MaritalStatus' }})
+    marital_status: Optional[EmployeeEmployeeMaritalStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MaritalStatus' }})
     meta_data: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MetaData' }})
     middle_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MiddleName' }})
     ni_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NiNumber' }})
-    nic_liability: Optional[EmployeeEmployeeNicLiabilityNicLiabilityEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NicLiability' }})
+    nic_liability: Optional[EmployeeEmployeeNicLiabilityEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NicLiability' }})
     off_payroll_worker: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OffPayrollWorker' }})
     on_strike: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OnStrike' }})
     passport_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PassportNumber' }})
-    pay_schedule: Optional[EmployeeEmployeePaySchedulePaySchedule] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PaySchedule' }})
-    payment_method: Optional[EmployeeEmployeePaymentMethodPaymentMethodEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PaymentMethod' }})
+    pay_schedule: Optional[EmployeeEmployeePaySchedule] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PaySchedule' }})
+    payment_method: Optional[EmployeeEmployeePaymentMethodEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PaymentMethod' }})
     payment_to_a_non_individual: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PaymentToANonIndividual' }})
-    region: Optional[EmployeeEmployeeRegionRegionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Region' }})
+    region: Optional[EmployeeEmployeeRegionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Region' }})
     revision: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Revision' }})
-    rule_exclusions: Optional[EmployeeEmployeeRuleExclusionsRuleExclusionsEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RuleExclusions' }})
-    seconded: Optional[EmployeeEmployeeSecondedSecondedEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Seconded' }})
+    rule_exclusions: Optional[EmployeeEmployeeRuleExclusionsEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RuleExclusions' }})
+    seconded: Optional[EmployeeEmployeeSecondedEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Seconded' }})
     start_date: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'StartDate', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    starter_declaration: Optional[EmployeeEmployeeStarterDeclarationStarterDeclarationEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'StarterDeclaration' }})
-    territory: Optional[EmployeeEmployeeTerritoryTerritoryEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Territory' }})
+    starter_declaration: Optional[EmployeeEmployeeStarterDeclarationEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'StarterDeclaration' }})
+    territory: Optional[EmployeeEmployeeTerritoryEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Territory' }})
     title: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Title' }})
-    working_week: Optional[EmployeeEmployeeWorkingWeekWorkingWeekEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'WorkingWeek' }})
+    working_week: Optional[EmployeeEmployeeWorkingWeekEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'WorkingWeek' }})
     
 
 @dataclass_json
 @dataclass
 class Employee:
-    employee: Optional[EmployeeEmployeeEmployee] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Employee' }})
+    employee: Optional[EmployeeEmployee] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Employee' }})
     

@@ -12,7 +12,7 @@ type CreateBindingPathParams struct {
 	ServiceSid string `pathParam:"style=simple,explode=false,name=ServiceSid"`
 }
 
-type CreateBindingRequestBodyCreateBindingRequest struct {
+type CreateBindingCreateBindingRequest struct {
 	Address                     string                            `form:"name=Address"`
 	BindingType                 shared.BindingEnumBindingTypeEnum `form:"name=BindingType"`
 	CredentialSid               *string                           `form:"name=CredentialSid"`
@@ -29,7 +29,7 @@ type CreateBindingSecurity struct {
 type CreateBindingRequest struct {
 	ServerURL  *string
 	PathParams CreateBindingPathParams
-	Request    *CreateBindingRequestBodyCreateBindingRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateBindingCreateBindingRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateBindingSecurity
 }
 

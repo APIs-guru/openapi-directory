@@ -32,7 +32,7 @@ class ListCredentialListRequest:
 
 @dataclass_json
 @dataclass
-class ListCredentialList200ApplicationJSONMeta:
+class ListCredentialListListCredentialListResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -44,14 +44,14 @@ class ListCredentialList200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListCredentialList200ApplicationJSONListCredentialListResponse:
+class ListCredentialListListCredentialListResponse:
     credential_lists: Optional[List[shared.TrunkingV1TrunkCredentialList]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'credential_lists' }})
-    meta: Optional[ListCredentialList200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+    meta: Optional[ListCredentialListListCredentialListResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     
 
 @dataclass
 class ListCredentialListResponse:
     content_type: str = field(default=None)
-    list_credential_list_response: Optional[ListCredentialList200ApplicationJSONListCredentialListResponse] = field(default=None)
+    list_credential_list_response: Optional[ListCredentialListListCredentialListResponse] = field(default=None)
     status_code: int = field(default=None)
     

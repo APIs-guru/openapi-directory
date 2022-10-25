@@ -20,7 +20,7 @@ class CreateConversationMessageHeaders:
     
 
 @dataclass
-class CreateConversationMessageRequestBodyCreateConversationMessageRequest:
+class CreateConversationMessageCreateConversationMessageRequest:
     attributes: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Attributes' }})
     author: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Author' }})
     body: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Body' }})
@@ -39,7 +39,7 @@ class CreateConversationMessageRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateConversationMessagePathParams = field(default=None)
     headers: CreateConversationMessageHeaders = field(default=None)
-    request: Optional[CreateConversationMessageRequestBodyCreateConversationMessageRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateConversationMessageCreateConversationMessageRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateConversationMessageSecurity = field(default=None)
     
 

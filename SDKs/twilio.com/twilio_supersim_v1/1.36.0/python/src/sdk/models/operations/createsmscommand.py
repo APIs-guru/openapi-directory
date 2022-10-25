@@ -5,7 +5,7 @@ CREATE_SMS_COMMAND_SERVERS = [
 	"https://supersim.twilio.com",
 ]
 
-class CreateSmsCommandRequestBodyCallbackMethodEnum(str, Enum):
+class CreateSmsCommandCreateSmsCommandRequestCallbackMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -15,8 +15,8 @@ class CreateSmsCommandRequestBodyCallbackMethodEnum(str, Enum):
 
 
 @dataclass
-class CreateSmsCommandRequestBodyCreateSmsCommandRequest:
-    callback_method: Optional[CreateSmsCommandRequestBodyCallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'CallbackMethod' }})
+class CreateSmsCommandCreateSmsCommandRequest:
+    callback_method: Optional[CreateSmsCommandCreateSmsCommandRequestCallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'CallbackMethod' }})
     callback_url: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'CallbackUrl' }})
     payload: str = field(default=None, metadata={'form': { 'field_name': 'Payload' }})
     sim: str = field(default=None, metadata={'form': { 'field_name': 'Sim' }})
@@ -30,7 +30,7 @@ class CreateSmsCommandSecurity:
 @dataclass
 class CreateSmsCommandRequest:
     server_url: Optional[str] = field(default=None)
-    request: Optional[CreateSmsCommandRequestBodyCreateSmsCommandRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateSmsCommandCreateSmsCommandRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateSmsCommandSecurity = field(default=None)
     
 

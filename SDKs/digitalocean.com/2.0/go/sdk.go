@@ -11343,7 +11343,8 @@ func (s *SDK) GetInvoiceCsvByUUID(ctx context.Context, request operations.GetInv
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			out := string(data)
+			res.GetInvoiceCsvByUUID200TextCsvString = &out
 		}
 	case httpRes.StatusCode == 401:
 		res.Headers = httpRes.Header
@@ -11439,12 +11440,12 @@ func (s *SDK) GetInvoicePdfByUUID(ctx context.Context, request operations.GetInv
 
 		switch {
 		case utils.MatchContentType(contentType, `application/pdf`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetInvoicePdfByUUID200ApplicationPdfBinaryString = data
+			res.GetInvoicePdfByUUID200ApplicationPdfBinaryString = out
 		}
 	case httpRes.StatusCode == 401:
 		res.Headers = httpRes.Header
@@ -11648,7 +11649,8 @@ func (s *SDK) GetKubeconfig(ctx context.Context, request operations.GetKubeconfi
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			out := string(data)
+			res.GetKubeconfig200ApplicationYamlString = &out
 		}
 	case httpRes.StatusCode == 401:
 		res.Headers = httpRes.Header

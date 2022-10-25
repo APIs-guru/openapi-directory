@@ -2,7 +2,7 @@ from dataclasses import dataclass, field
 from typing import Enum,Optional
 from dataclasses_json import dataclass_json
 
-class PreflightInvoiceRecipientResultCodeResultCodeEnum(str, Enum):
+class PreflightInvoiceRecipientResultResultCodeEnum(str, Enum):
     OK = "ok"
     NOK = "nok"
 
@@ -10,5 +10,5 @@ class PreflightInvoiceRecipientResultCodeResultCodeEnum(str, Enum):
 @dataclass_json
 @dataclass
 class PreflightInvoiceRecipientResult:
-    code: Optional[PreflightInvoiceRecipientResultCodeResultCodeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'code' }})
+    code: Optional[PreflightInvoiceRecipientResultResultCodeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'code' }})
     

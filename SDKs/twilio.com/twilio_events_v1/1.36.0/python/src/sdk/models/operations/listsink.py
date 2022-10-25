@@ -28,7 +28,7 @@ class ListSinkRequest:
 
 @dataclass_json
 @dataclass
-class ListSink200ApplicationJSONMeta:
+class ListSinkListSinkResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -40,14 +40,14 @@ class ListSink200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListSink200ApplicationJSONListSinkResponse:
-    meta: Optional[ListSink200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+class ListSinkListSinkResponse:
+    meta: Optional[ListSinkListSinkResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     sinks: Optional[List[shared.EventsV1Sink]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sinks' }})
     
 
 @dataclass
 class ListSinkResponse:
     content_type: str = field(default=None)
-    list_sink_response: Optional[ListSink200ApplicationJSONListSinkResponse] = field(default=None)
+    list_sink_response: Optional[ListSinkListSinkResponse] = field(default=None)
     status_code: int = field(default=None)
     

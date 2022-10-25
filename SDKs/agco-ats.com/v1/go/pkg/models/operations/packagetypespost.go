@@ -21,6 +21,8 @@ type PackageTypesPostResponse struct {
 	Body                                     []byte
 	ContentType                              string
 	PackageTypesPost200ApplicationJSONString *string
+	PackageTypesPost200ApplicationXMLString  *string
 	PackageTypesPost200TextJSONString        *string
+	PackageTypesPost200TextXMLString         *string
 	StatusCode                               int64
 }

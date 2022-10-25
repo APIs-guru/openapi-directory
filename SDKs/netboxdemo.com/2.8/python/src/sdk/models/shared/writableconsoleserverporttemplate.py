@@ -2,7 +2,7 @@ from dataclasses import dataclass, field
 from typing import Enum,Optional
 from dataclasses_json import dataclass_json
 
-class WritableConsoleServerPortTemplateTypeTypeEnum(str, Enum):
+class WritableConsoleServerPortTemplateTypeEnum(str, Enum):
     DE_9 = "de-9"
     DB_25 = "db-25"
     RJ_11 = "rj-11"
@@ -24,5 +24,5 @@ class WritableConsoleServerPortTemplate:
     device_type: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'device_type' }})
     id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    type: Optional[WritableConsoleServerPortTemplateTypeTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    type: Optional[WritableConsoleServerPortTemplateTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     

@@ -35,7 +35,7 @@ class ListAddressRequest:
 
 @dataclass_json
 @dataclass
-class ListAddress200ApplicationJSONListAddressResponse:
+class ListAddressListAddressResponse:
     addresses: Optional[List[shared.APIV2010AccountAddress]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'addresses' }})
     end: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'end' }})
     first_page_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_uri' }})
@@ -50,6 +50,6 @@ class ListAddress200ApplicationJSONListAddressResponse:
 @dataclass
 class ListAddressResponse:
     content_type: str = field(default=None)
-    list_address_response: Optional[ListAddress200ApplicationJSONListAddressResponse] = field(default=None)
+    list_address_response: Optional[ListAddressListAddressResponse] = field(default=None)
     status_code: int = field(default=None)
     

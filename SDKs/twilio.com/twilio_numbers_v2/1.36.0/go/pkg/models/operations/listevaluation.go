@@ -27,7 +27,7 @@ type ListEvaluationRequest struct {
 	Security    ListEvaluationSecurity
 }
 
-type ListEvaluation200ApplicationJSONMeta struct {
+type ListEvaluationListEvaluationResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -37,13 +37,13 @@ type ListEvaluation200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListEvaluation200ApplicationJSONListEvaluationResponse struct {
-	Meta    *ListEvaluation200ApplicationJSONMeta                  `json:"meta,omitempty"`
+type ListEvaluationListEvaluationResponse struct {
+	Meta    *ListEvaluationListEvaluationResponseMeta              `json:"meta,omitempty"`
 	Results []shared.NumbersV2RegulatoryComplianceBundleEvaluation `json:"results,omitempty"`
 }
 
 type ListEvaluationResponse struct {
 	ContentType            string
-	ListEvaluationResponse *ListEvaluation200ApplicationJSONListEvaluationResponse
+	ListEvaluationResponse *ListEvaluationListEvaluationResponse
 	StatusCode             int64
 }

@@ -8,7 +8,7 @@ var CreateServiceServers = []string{
 	"https://chat.twilio.com",
 }
 
-type CreateServiceRequestBodyCreateServiceRequest struct {
+type CreateServiceCreateServiceRequest struct {
 	FriendlyName string `form:"name=FriendlyName"`
 }
 
@@ -18,7 +18,7 @@ type CreateServiceSecurity struct {
 
 type CreateServiceRequest struct {
 	ServerURL *string
-	Request   *CreateServiceRequestBodyCreateServiceRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request   *CreateServiceCreateServiceRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security  CreateServiceSecurity
 }
 

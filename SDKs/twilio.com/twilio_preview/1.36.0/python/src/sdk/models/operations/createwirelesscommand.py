@@ -7,7 +7,7 @@ CREATE_WIRELESS_COMMAND_SERVERS = [
 
 
 @dataclass
-class CreateWirelessCommandRequestBodyCreateWirelessCommandRequest:
+class CreateWirelessCommandCreateWirelessCommandRequest:
     callback_method: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'CallbackMethod' }})
     callback_url: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'CallbackUrl' }})
     command: str = field(default=None, metadata={'form': { 'field_name': 'Command' }})
@@ -25,7 +25,7 @@ class CreateWirelessCommandSecurity:
 @dataclass
 class CreateWirelessCommandRequest:
     server_url: Optional[str] = field(default=None)
-    request: Optional[CreateWirelessCommandRequestBodyCreateWirelessCommandRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateWirelessCommandCreateWirelessCommandRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateWirelessCommandSecurity = field(default=None)
     
 

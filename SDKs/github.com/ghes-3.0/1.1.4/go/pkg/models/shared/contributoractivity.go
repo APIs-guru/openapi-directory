@@ -1,6 +1,6 @@
 package shared
 
-type ContributorActivityAuthorSimpleUser struct {
+type ContributorActivitySimpleUser struct {
 	AvatarURL         string  `json:"avatar_url"`
 	EventsURL         string  `json:"events_url"`
 	FollowersURL      string  `json:"followers_url"`
@@ -30,7 +30,7 @@ type ContributorActivityWeeks struct {
 }
 
 type ContributorActivity struct {
-	Author ContributorActivityAuthorSimpleUser `json:"author"`
-	Total  int64                               `json:"total"`
-	Weeks  []ContributorActivityWeeks          `json:"weeks"`
+	Author ContributorActivitySimpleUser `json:"author"`
+	Total  int64                         `json:"total"`
+	Weeks  []ContributorActivityWeeks    `json:"weeks"`
 }

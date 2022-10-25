@@ -12,7 +12,7 @@ type CreateEnvironmentPathParams struct {
 	ServiceSid string `pathParam:"style=simple,explode=false,name=ServiceSid"`
 }
 
-type CreateEnvironmentRequestBodyCreateEnvironmentRequest struct {
+type CreateEnvironmentCreateEnvironmentRequest struct {
 	DomainSuffix *string `form:"name=DomainSuffix"`
 	UniqueName   string  `form:"name=UniqueName"`
 }
@@ -24,7 +24,7 @@ type CreateEnvironmentSecurity struct {
 type CreateEnvironmentRequest struct {
 	ServerURL  *string
 	PathParams CreateEnvironmentPathParams
-	Request    *CreateEnvironmentRequestBodyCreateEnvironmentRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateEnvironmentCreateEnvironmentRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateEnvironmentSecurity
 }
 

@@ -12,7 +12,7 @@ type UpdatePlayerStreamerPathParams struct {
 	Sid string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
-type UpdatePlayerStreamerRequestBodyUpdatePlayerStreamerRequest struct {
+type UpdatePlayerStreamerUpdatePlayerStreamerRequest struct {
 	Status shared.PlayerStreamerEnumUpdateStatusEnum `form:"name=Status"`
 }
 
@@ -23,7 +23,7 @@ type UpdatePlayerStreamerSecurity struct {
 type UpdatePlayerStreamerRequest struct {
 	ServerURL  *string
 	PathParams UpdatePlayerStreamerPathParams
-	Request    *UpdatePlayerStreamerRequestBodyUpdatePlayerStreamerRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdatePlayerStreamerUpdatePlayerStreamerRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdatePlayerStreamerSecurity
 }
 

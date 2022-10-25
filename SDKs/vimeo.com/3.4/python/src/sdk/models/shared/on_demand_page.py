@@ -15,13 +15,13 @@ from . import picture
 
 @dataclass_json
 @dataclass
-class OnDemandPageBackgroundSizes:
+class OnDemandPagePictureSizes:
     height: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'height' }})
     link: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'link' }})
     link_with_play_button: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'link_with_play_button' }})
     width: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'width' }})
     
-class OnDemandPageBackgroundTypeEnum(str, Enum):
+class OnDemandPagePictureTypeEnum(str, Enum):
     CAUTION = "caution"
     CUSTOM = "custom"
     DEFAULT = "default"
@@ -29,12 +29,12 @@ class OnDemandPageBackgroundTypeEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class OnDemandPageBackgroundPicture:
+class OnDemandPagePicture:
     active: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'active' }})
     link: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'link' }})
     resource_key: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resource_key' }})
-    sizes: List[OnDemandPageBackgroundSizes] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sizes' }})
-    type: OnDemandPageBackgroundTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    sizes: List[OnDemandPagePictureSizes] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sizes' }})
+    type: OnDemandPagePictureTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
     
 
@@ -166,31 +166,6 @@ class OnDemandPageMetadata:
 
 @dataclass_json
 @dataclass
-class OnDemandPagePicturesSizes:
-    height: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'height' }})
-    link: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'link' }})
-    link_with_play_button: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'link_with_play_button' }})
-    width: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'width' }})
-    
-class OnDemandPagePicturesTypeEnum(str, Enum):
-    CAUTION = "caution"
-    CUSTOM = "custom"
-    DEFAULT = "default"
-
-
-@dataclass_json
-@dataclass
-class OnDemandPagePicturesPicture:
-    active: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'active' }})
-    link: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'link' }})
-    resource_key: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resource_key' }})
-    sizes: List[OnDemandPagePicturesSizes] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sizes' }})
-    type: OnDemandPagePicturesTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
-    
-
-@dataclass_json
-@dataclass
 class OnDemandPagePreorder:
     active: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'active' }})
     cancel_time: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cancel_time' }})
@@ -213,32 +188,7 @@ class OnDemandPageSubscription:
     period: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'period' }})
     price: dict[str, Any] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'price' }})
     
-
-@dataclass_json
-@dataclass
-class OnDemandPageThumbnailSizes:
-    height: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'height' }})
-    link: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'link' }})
-    link_with_play_button: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'link_with_play_button' }})
-    width: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'width' }})
-    
-class OnDemandPageThumbnailTypeEnum(str, Enum):
-    CAUTION = "caution"
-    CUSTOM = "custom"
-    DEFAULT = "default"
-
-
-@dataclass_json
-@dataclass
-class OnDemandPageThumbnailPicture:
-    active: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'active' }})
-    link: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'link' }})
-    resource_key: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resource_key' }})
-    sizes: List[OnDemandPageThumbnailSizes] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sizes' }})
-    type: OnDemandPageThumbnailTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
-    
-class OnDemandPageTrailerContextActionEnum(str, Enum):
+class OnDemandPageVideoContextActionEnum(str, Enum):
     ADDED_TO = "Added to"
     APPEARANCE_BY = "Appearance by"
     LIKED_BY = "Liked by"
@@ -247,12 +197,12 @@ class OnDemandPageTrailerContextActionEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class OnDemandPageTrailerContext:
-    action: OnDemandPageTrailerContextActionEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'action' }})
+class OnDemandPageVideoContext:
+    action: OnDemandPageVideoContextActionEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'action' }})
     resource: dict[str, Any] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resource' }})
     resource_type: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resource_type' }})
     
-class OnDemandPageTrailerLicenseEnum(str, Enum):
+class OnDemandPageVideoLicenseEnum(str, Enum):
     BY = "by"
     BY_NC = "by-nc"
     BY_NC_ND = "by-nc-nd"
@@ -264,7 +214,7 @@ class OnDemandPageTrailerLicenseEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class OnDemandPageTrailerMetadataConnectionsComments:
+class OnDemandPageVideoMetadataConnectionsComments:
     options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
     total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
     uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
@@ -272,7 +222,7 @@ class OnDemandPageTrailerMetadataConnectionsComments:
 
 @dataclass_json
 @dataclass
-class OnDemandPageTrailerMetadataConnectionsCredits:
+class OnDemandPageVideoMetadataConnectionsCredits:
     options: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
     total: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
     uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
@@ -280,7 +230,7 @@ class OnDemandPageTrailerMetadataConnectionsCredits:
 
 @dataclass_json
 @dataclass
-class OnDemandPageTrailerMetadataConnectionsLikes:
+class OnDemandPageVideoMetadataConnectionsLikes:
     options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
     total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
     uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
@@ -288,7 +238,7 @@ class OnDemandPageTrailerMetadataConnectionsLikes:
 
 @dataclass_json
 @dataclass
-class OnDemandPageTrailerMetadataConnectionsOndemand:
+class OnDemandPageVideoMetadataConnectionsOndemand:
     options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
     resource_key: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resource_key' }})
     uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
@@ -296,7 +246,7 @@ class OnDemandPageTrailerMetadataConnectionsOndemand:
 
 @dataclass_json
 @dataclass
-class OnDemandPageTrailerMetadataConnectionsPictures:
+class OnDemandPageVideoMetadataConnectionsPictures:
     options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
     total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
     uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
@@ -304,28 +254,28 @@ class OnDemandPageTrailerMetadataConnectionsPictures:
 
 @dataclass_json
 @dataclass
-class OnDemandPageTrailerMetadataConnectionsPlayback:
+class OnDemandPageVideoMetadataConnectionsPlayback:
     options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
     uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
     
 
 @dataclass_json
 @dataclass
-class OnDemandPageTrailerMetadataConnectionsRecommendations:
+class OnDemandPageVideoMetadataConnectionsRecommendations:
     options: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
     uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
     
 
 @dataclass_json
 @dataclass
-class OnDemandPageTrailerMetadataConnectionsRelated:
+class OnDemandPageVideoMetadataConnectionsRelated:
     options: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
     uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
     
 
 @dataclass_json
 @dataclass
-class OnDemandPageTrailerMetadataConnectionsSeason:
+class OnDemandPageVideoMetadataConnectionsSeason:
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
     options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
     uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
@@ -333,7 +283,7 @@ class OnDemandPageTrailerMetadataConnectionsSeason:
 
 @dataclass_json
 @dataclass
-class OnDemandPageTrailerMetadataConnectionsTexttracks:
+class OnDemandPageVideoMetadataConnectionsTexttracks:
     options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
     total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
     uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
@@ -341,7 +291,7 @@ class OnDemandPageTrailerMetadataConnectionsTexttracks:
 
 @dataclass_json
 @dataclass
-class OnDemandPageTrailerMetadataConnectionsTrailer:
+class OnDemandPageVideoMetadataConnectionsTrailer:
     options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
     resource_key: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resource_key' }})
     uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
@@ -349,7 +299,7 @@ class OnDemandPageTrailerMetadataConnectionsTrailer:
 
 @dataclass_json
 @dataclass
-class OnDemandPageTrailerMetadataConnectionsUsersWithAccess:
+class OnDemandPageVideoMetadataConnectionsUsersWithAccess:
     options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
     total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
     uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
@@ -357,7 +307,7 @@ class OnDemandPageTrailerMetadataConnectionsUsersWithAccess:
 
 @dataclass_json
 @dataclass
-class OnDemandPageTrailerMetadataConnectionsVersions:
+class OnDemandPageVideoMetadataConnectionsVersions:
     current_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'current_uri' }})
     options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
     total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
@@ -366,28 +316,28 @@ class OnDemandPageTrailerMetadataConnectionsVersions:
 
 @dataclass_json
 @dataclass
-class OnDemandPageTrailerMetadataConnections:
-    comments: OnDemandPageTrailerMetadataConnectionsComments = field(default=None, metadata={'dataclasses_json': { 'field_name': 'comments' }})
-    credits: OnDemandPageTrailerMetadataConnectionsCredits = field(default=None, metadata={'dataclasses_json': { 'field_name': 'credits' }})
-    likes: OnDemandPageTrailerMetadataConnectionsLikes = field(default=None, metadata={'dataclasses_json': { 'field_name': 'likes' }})
-    ondemand: OnDemandPageTrailerMetadataConnectionsOndemand = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ondemand' }})
-    pictures: OnDemandPageTrailerMetadataConnectionsPictures = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pictures' }})
-    playback: OnDemandPageTrailerMetadataConnectionsPlayback = field(default=None, metadata={'dataclasses_json': { 'field_name': 'playback' }})
-    recommendations: OnDemandPageTrailerMetadataConnectionsRecommendations = field(default=None, metadata={'dataclasses_json': { 'field_name': 'recommendations' }})
-    related: OnDemandPageTrailerMetadataConnectionsRelated = field(default=None, metadata={'dataclasses_json': { 'field_name': 'related' }})
-    season: OnDemandPageTrailerMetadataConnectionsSeason = field(default=None, metadata={'dataclasses_json': { 'field_name': 'season' }})
-    texttracks: OnDemandPageTrailerMetadataConnectionsTexttracks = field(default=None, metadata={'dataclasses_json': { 'field_name': 'texttracks' }})
-    trailer: OnDemandPageTrailerMetadataConnectionsTrailer = field(default=None, metadata={'dataclasses_json': { 'field_name': 'trailer' }})
-    users_with_access: OnDemandPageTrailerMetadataConnectionsUsersWithAccess = field(default=None, metadata={'dataclasses_json': { 'field_name': 'users_with_access' }})
-    versions: OnDemandPageTrailerMetadataConnectionsVersions = field(default=None, metadata={'dataclasses_json': { 'field_name': 'versions' }})
+class OnDemandPageVideoMetadataConnections:
+    comments: OnDemandPageVideoMetadataConnectionsComments = field(default=None, metadata={'dataclasses_json': { 'field_name': 'comments' }})
+    credits: OnDemandPageVideoMetadataConnectionsCredits = field(default=None, metadata={'dataclasses_json': { 'field_name': 'credits' }})
+    likes: OnDemandPageVideoMetadataConnectionsLikes = field(default=None, metadata={'dataclasses_json': { 'field_name': 'likes' }})
+    ondemand: OnDemandPageVideoMetadataConnectionsOndemand = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ondemand' }})
+    pictures: OnDemandPageVideoMetadataConnectionsPictures = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pictures' }})
+    playback: OnDemandPageVideoMetadataConnectionsPlayback = field(default=None, metadata={'dataclasses_json': { 'field_name': 'playback' }})
+    recommendations: OnDemandPageVideoMetadataConnectionsRecommendations = field(default=None, metadata={'dataclasses_json': { 'field_name': 'recommendations' }})
+    related: OnDemandPageVideoMetadataConnectionsRelated = field(default=None, metadata={'dataclasses_json': { 'field_name': 'related' }})
+    season: OnDemandPageVideoMetadataConnectionsSeason = field(default=None, metadata={'dataclasses_json': { 'field_name': 'season' }})
+    texttracks: OnDemandPageVideoMetadataConnectionsTexttracks = field(default=None, metadata={'dataclasses_json': { 'field_name': 'texttracks' }})
+    trailer: OnDemandPageVideoMetadataConnectionsTrailer = field(default=None, metadata={'dataclasses_json': { 'field_name': 'trailer' }})
+    users_with_access: OnDemandPageVideoMetadataConnectionsUsersWithAccess = field(default=None, metadata={'dataclasses_json': { 'field_name': 'users_with_access' }})
+    versions: OnDemandPageVideoMetadataConnectionsVersions = field(default=None, metadata={'dataclasses_json': { 'field_name': 'versions' }})
     
-class OnDemandPageTrailerMetadataInteractionsBuyDownloadEnum(str, Enum):
+class OnDemandPageVideoMetadataInteractionsBuyDownloadEnum(str, Enum):
     AVAILABLE = "available"
     PURCHASED = "purchased"
     RESTRICTED = "restricted"
     UNAVAILABLE = "unavailable"
 
-class OnDemandPageTrailerMetadataInteractionsBuyStreamEnum(str, Enum):
+class OnDemandPageVideoMetadataInteractionsBuyStreamEnum(str, Enum):
     AVAILABLE = "available"
     PURCHASED = "purchased"
     RESTRICTED = "restricted"
@@ -396,34 +346,34 @@ class OnDemandPageTrailerMetadataInteractionsBuyStreamEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class OnDemandPageTrailerMetadataInteractionsBuy:
+class OnDemandPageVideoMetadataInteractionsBuy:
     currency: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'currency' }})
     display_price: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'display_price' }})
-    download: OnDemandPageTrailerMetadataInteractionsBuyDownloadEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'download' }})
+    download: OnDemandPageVideoMetadataInteractionsBuyDownloadEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'download' }})
     drm: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'drm' }})
     link: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'link' }})
     price: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'price' }})
     purchase_time: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'purchase_time' }})
-    stream: OnDemandPageTrailerMetadataInteractionsBuyStreamEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'stream' }})
+    stream: OnDemandPageVideoMetadataInteractionsBuyStreamEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'stream' }})
     uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
     
 
 @dataclass_json
 @dataclass
-class OnDemandPageTrailerMetadataInteractionsChannel:
+class OnDemandPageVideoMetadataInteractionsChannel:
     options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
     uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
     
 
 @dataclass_json
 @dataclass
-class OnDemandPageTrailerMetadataInteractionsLike:
+class OnDemandPageVideoMetadataInteractionsLike:
     added: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'added' }})
     added_time: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'added_time' }})
     options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
     uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
     
-class OnDemandPageTrailerMetadataInteractionsRentStreamEnum(str, Enum):
+class OnDemandPageVideoMetadataInteractionsRentStreamEnum(str, Enum):
     AVAILABLE = "available"
     PURCHASED = "purchased"
     RESTRICTED = "restricted"
@@ -432,7 +382,7 @@ class OnDemandPageTrailerMetadataInteractionsRentStreamEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class OnDemandPageTrailerMetadataInteractionsRent:
+class OnDemandPageVideoMetadataInteractionsRent:
     currency: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'currency' }})
     display_price: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'display_price' }})
     drm: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'drm' }})
@@ -440,13 +390,13 @@ class OnDemandPageTrailerMetadataInteractionsRent:
     link: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'link' }})
     price: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'price' }})
     purchase_time: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'purchase_time' }})
-    stream: OnDemandPageTrailerMetadataInteractionsRentStreamEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'stream' }})
+    stream: OnDemandPageVideoMetadataInteractionsRentStreamEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'stream' }})
     uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
     
 
 @dataclass_json
 @dataclass
-class OnDemandPageTrailerMetadataInteractionsReport:
+class OnDemandPageVideoMetadataInteractionsReport:
     options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
     reason: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'reason' }})
     uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
@@ -454,7 +404,7 @@ class OnDemandPageTrailerMetadataInteractionsReport:
 
 @dataclass_json
 @dataclass
-class OnDemandPageTrailerMetadataInteractionsSubscribe:
+class OnDemandPageVideoMetadataInteractionsSubscribe:
     drm: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'drm' }})
     expires_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'expires_time' }})
     purchase_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'purchase_time' }})
@@ -463,7 +413,7 @@ class OnDemandPageTrailerMetadataInteractionsSubscribe:
 
 @dataclass_json
 @dataclass
-class OnDemandPageTrailerMetadataInteractionsWatched:
+class OnDemandPageVideoMetadataInteractionsWatched:
     added: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'added' }})
     added_time: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'added_time' }})
     options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
@@ -472,7 +422,7 @@ class OnDemandPageTrailerMetadataInteractionsWatched:
 
 @dataclass_json
 @dataclass
-class OnDemandPageTrailerMetadataInteractionsWatchlater:
+class OnDemandPageVideoMetadataInteractionsWatchlater:
     added: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'added' }})
     added_time: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'added_time' }})
     options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
@@ -481,27 +431,27 @@ class OnDemandPageTrailerMetadataInteractionsWatchlater:
 
 @dataclass_json
 @dataclass
-class OnDemandPageTrailerMetadataInteractions:
-    buy: OnDemandPageTrailerMetadataInteractionsBuy = field(default=None, metadata={'dataclasses_json': { 'field_name': 'buy' }})
-    channel: OnDemandPageTrailerMetadataInteractionsChannel = field(default=None, metadata={'dataclasses_json': { 'field_name': 'channel' }})
-    like: OnDemandPageTrailerMetadataInteractionsLike = field(default=None, metadata={'dataclasses_json': { 'field_name': 'like' }})
-    rent: OnDemandPageTrailerMetadataInteractionsRent = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rent' }})
-    report: OnDemandPageTrailerMetadataInteractionsReport = field(default=None, metadata={'dataclasses_json': { 'field_name': 'report' }})
-    subscribe: Optional[OnDemandPageTrailerMetadataInteractionsSubscribe] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'subscribe' }})
-    watched: OnDemandPageTrailerMetadataInteractionsWatched = field(default=None, metadata={'dataclasses_json': { 'field_name': 'watched' }})
-    watchlater: OnDemandPageTrailerMetadataInteractionsWatchlater = field(default=None, metadata={'dataclasses_json': { 'field_name': 'watchlater' }})
+class OnDemandPageVideoMetadataInteractions:
+    buy: OnDemandPageVideoMetadataInteractionsBuy = field(default=None, metadata={'dataclasses_json': { 'field_name': 'buy' }})
+    channel: OnDemandPageVideoMetadataInteractionsChannel = field(default=None, metadata={'dataclasses_json': { 'field_name': 'channel' }})
+    like: OnDemandPageVideoMetadataInteractionsLike = field(default=None, metadata={'dataclasses_json': { 'field_name': 'like' }})
+    rent: OnDemandPageVideoMetadataInteractionsRent = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rent' }})
+    report: OnDemandPageVideoMetadataInteractionsReport = field(default=None, metadata={'dataclasses_json': { 'field_name': 'report' }})
+    subscribe: Optional[OnDemandPageVideoMetadataInteractionsSubscribe] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'subscribe' }})
+    watched: OnDemandPageVideoMetadataInteractionsWatched = field(default=None, metadata={'dataclasses_json': { 'field_name': 'watched' }})
+    watchlater: OnDemandPageVideoMetadataInteractionsWatchlater = field(default=None, metadata={'dataclasses_json': { 'field_name': 'watchlater' }})
     
 
 @dataclass_json
 @dataclass
-class OnDemandPageTrailerMetadata:
-    connections: OnDemandPageTrailerMetadataConnections = field(default=None, metadata={'dataclasses_json': { 'field_name': 'connections' }})
-    interactions: OnDemandPageTrailerMetadataInteractions = field(default=None, metadata={'dataclasses_json': { 'field_name': 'interactions' }})
+class OnDemandPageVideoMetadata:
+    connections: OnDemandPageVideoMetadataConnections = field(default=None, metadata={'dataclasses_json': { 'field_name': 'connections' }})
+    interactions: OnDemandPageVideoMetadataInteractions = field(default=None, metadata={'dataclasses_json': { 'field_name': 'interactions' }})
     
 
 @dataclass_json
 @dataclass
-class OnDemandPageTrailerParentFolderMetadataConnectionsVideos:
+class OnDemandPageVideoProjectMetadataConnectionsVideos:
     options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
     total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
     uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
@@ -509,37 +459,37 @@ class OnDemandPageTrailerParentFolderMetadataConnectionsVideos:
 
 @dataclass_json
 @dataclass
-class OnDemandPageTrailerParentFolderMetadataConnections:
-    videos: OnDemandPageTrailerParentFolderMetadataConnectionsVideos = field(default=None, metadata={'dataclasses_json': { 'field_name': 'videos' }})
+class OnDemandPageVideoProjectMetadataConnections:
+    videos: OnDemandPageVideoProjectMetadataConnectionsVideos = field(default=None, metadata={'dataclasses_json': { 'field_name': 'videos' }})
     
 
 @dataclass_json
 @dataclass
-class OnDemandPageTrailerParentFolderMetadata:
-    connections: OnDemandPageTrailerParentFolderMetadataConnections = field(default=None, metadata={'dataclasses_json': { 'field_name': 'connections' }})
+class OnDemandPageVideoProjectMetadata:
+    connections: OnDemandPageVideoProjectMetadataConnections = field(default=None, metadata={'dataclasses_json': { 'field_name': 'connections' }})
     
 
 @dataclass_json
 @dataclass
-class OnDemandPageTrailerParentFolderProject:
+class OnDemandPageVideoProject:
     created_time: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'created_time' }})
-    metadata: OnDemandPageTrailerParentFolderMetadata = field(default=None, metadata={'dataclasses_json': { 'field_name': 'metadata' }})
+    metadata: OnDemandPageVideoProjectMetadata = field(default=None, metadata={'dataclasses_json': { 'field_name': 'metadata' }})
     modified_time: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'modified_time' }})
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
     resource_key: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resource_key' }})
     uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
     user: user.User = field(default=None, metadata={'dataclasses_json': { 'field_name': 'user' }})
     
-class OnDemandPageTrailerPrivacyCommentsEnum(str, Enum):
+class OnDemandPageVideoPrivacyCommentsEnum(str, Enum):
     ANYBODY = "anybody"
     CONTACTS = "contacts"
     NOBODY = "nobody"
 
-class OnDemandPageTrailerPrivacyEmbedEnum(str, Enum):
+class OnDemandPageVideoPrivacyEmbedEnum(str, Enum):
     PRIVATE = "private"
     PUBLIC = "public"
 
-class OnDemandPageTrailerPrivacyViewEnum(str, Enum):
+class OnDemandPageVideoPrivacyViewEnum(str, Enum):
     ANYBODY = "anybody"
     CONTACTS = "contacts"
     DISABLE = "disable"
@@ -551,30 +501,30 @@ class OnDemandPageTrailerPrivacyViewEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class OnDemandPageTrailerPrivacy:
+class OnDemandPageVideoPrivacy:
     add: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'add' }})
-    comments: OnDemandPageTrailerPrivacyCommentsEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'comments' }})
+    comments: OnDemandPageVideoPrivacyCommentsEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'comments' }})
     download: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'download' }})
-    embed: OnDemandPageTrailerPrivacyEmbedEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'embed' }})
-    view: OnDemandPageTrailerPrivacyViewEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'view' }})
+    embed: OnDemandPageVideoPrivacyEmbedEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'embed' }})
+    view: OnDemandPageVideoPrivacyViewEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'view' }})
     
 
 @dataclass_json
 @dataclass
-class OnDemandPageTrailerSpatialDirectorTimeline:
+class OnDemandPageVideoSpatialDirectorTimeline:
     pitch: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pitch' }})
     roll: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'roll' }})
     time_code: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'time_code' }})
     yaw: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'yaw' }})
     
-class OnDemandPageTrailerSpatialProjectionEnum(str, Enum):
+class OnDemandPageVideoSpatialProjectionEnum(str, Enum):
     CUBICAL = "cubical"
     CYLINDRICAL = "cylindrical"
     DOME = "dome"
     EQUIRECTANGULAR = "equirectangular"
     PYRAMID = "pyramid"
 
-class OnDemandPageTrailerSpatialStereoFormatEnum(str, Enum):
+class OnDemandPageVideoSpatialStereoFormatEnum(str, Enum):
     LEFT_RIGHT = "left-right"
     MONO = "mono"
     TOP_BOTTOM = "top-bottom"
@@ -582,19 +532,19 @@ class OnDemandPageTrailerSpatialStereoFormatEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class OnDemandPageTrailerSpatial:
-    director_timeline: List[OnDemandPageTrailerSpatialDirectorTimeline] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'director_timeline' }})
+class OnDemandPageVideoSpatial:
+    director_timeline: List[OnDemandPageVideoSpatialDirectorTimeline] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'director_timeline' }})
     field_of_view: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'field_of_view' }})
-    projection: OnDemandPageTrailerSpatialProjectionEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'projection' }})
-    stereo_format: OnDemandPageTrailerSpatialStereoFormatEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'stereo_format' }})
+    projection: OnDemandPageVideoSpatialProjectionEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'projection' }})
+    stereo_format: OnDemandPageVideoSpatialStereoFormatEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'stereo_format' }})
     
 
 @dataclass_json
 @dataclass
-class OnDemandPageTrailerStats:
+class OnDemandPageVideoStats:
     plays: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'plays' }})
     
-class OnDemandPageTrailerStatusEnum(str, Enum):
+class OnDemandPageVideoStatusEnum(str, Enum):
     AVAILABLE = "available"
     QUOTA_EXCEEDED = "quota_exceeded"
     TOTAL_CAP_EXCEEDED = "total_cap_exceeded"
@@ -605,7 +555,7 @@ class OnDemandPageTrailerStatusEnum(str, Enum):
     UPLOADING = "uploading"
     UPLOADING_ERROR = "uploading_error"
 
-class OnDemandPageTrailerTranscodeStatusEnum(str, Enum):
+class OnDemandPageVideoTranscodeStatusEnum(str, Enum):
     COMPLETE = "complete"
     ERROR = "error"
     IN_PROGRESS = "in_progress"
@@ -613,16 +563,16 @@ class OnDemandPageTrailerTranscodeStatusEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class OnDemandPageTrailerTranscode:
-    status: Optional[OnDemandPageTrailerTranscodeStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+class OnDemandPageVideoTranscode:
+    status: Optional[OnDemandPageVideoTranscodeStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
     
-class OnDemandPageTrailerUploadApproachEnum(str, Enum):
+class OnDemandPageVideoUploadApproachEnum(str, Enum):
     POST = "post"
     PULL = "pull"
     STREAMING = "streaming"
     TUS = "tus"
 
-class OnDemandPageTrailerUploadStatusEnum(str, Enum):
+class OnDemandPageVideoUploadStatusEnum(str, Enum):
     COMPLETE = "complete"
     ERROR = "error"
     IN_PROGRESS = "in_progress"
@@ -630,17 +580,17 @@ class OnDemandPageTrailerUploadStatusEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class OnDemandPageTrailerUpload:
-    approach: Optional[OnDemandPageTrailerUploadApproachEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'approach' }})
+class OnDemandPageVideoUpload:
+    approach: Optional[OnDemandPageVideoUploadApproachEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'approach' }})
     complete_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'complete_uri' }})
     form: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'form' }})
     link: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'link' }})
     redirect_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'redirect_url' }})
     size: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'size' }})
-    status: OnDemandPageTrailerUploadStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    status: OnDemandPageVideoUploadStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
     upload_link: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'upload_link' }})
     
-class OnDemandPageTrailerUserAccountEnum(str, Enum):
+class OnDemandPageVideoUserAccountEnum(str, Enum):
     BASIC = "basic"
     BUSINESS = "business"
     LIVE_BUSINESS = "live_business"
@@ -654,7 +604,7 @@ class OnDemandPageTrailerUserAccountEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class OnDemandPageTrailerUserMetadataConnectionsAlbums:
+class OnDemandPageVideoUserMetadataConnectionsAlbums:
     options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
     total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
     uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
@@ -662,7 +612,7 @@ class OnDemandPageTrailerUserMetadataConnectionsAlbums:
 
 @dataclass_json
 @dataclass
-class OnDemandPageTrailerUserMetadataConnectionsAppearances:
+class OnDemandPageVideoUserMetadataConnectionsAppearances:
     options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
     total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
     uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
@@ -670,7 +620,7 @@ class OnDemandPageTrailerUserMetadataConnectionsAppearances:
 
 @dataclass_json
 @dataclass
-class OnDemandPageTrailerUserMetadataConnectionsBlock:
+class OnDemandPageVideoUserMetadataConnectionsBlock:
     options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
     total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
     uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
@@ -678,7 +628,7 @@ class OnDemandPageTrailerUserMetadataConnectionsBlock:
 
 @dataclass_json
 @dataclass
-class OnDemandPageTrailerUserMetadataConnectionsCategories:
+class OnDemandPageVideoUserMetadataConnectionsCategories:
     options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
     total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
     uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
@@ -686,7 +636,7 @@ class OnDemandPageTrailerUserMetadataConnectionsCategories:
 
 @dataclass_json
 @dataclass
-class OnDemandPageTrailerUserMetadataConnectionsChannels:
+class OnDemandPageVideoUserMetadataConnectionsChannels:
     options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
     total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
     uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
@@ -694,22 +644,14 @@ class OnDemandPageTrailerUserMetadataConnectionsChannels:
 
 @dataclass_json
 @dataclass
-class OnDemandPageTrailerUserMetadataConnectionsFeed:
+class OnDemandPageVideoUserMetadataConnectionsFeed:
     options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
     uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
     
 
 @dataclass_json
 @dataclass
-class OnDemandPageTrailerUserMetadataConnectionsFolders:
-    options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
-    total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
-    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
-    
-
-@dataclass_json
-@dataclass
-class OnDemandPageTrailerUserMetadataConnectionsFollowers:
+class OnDemandPageVideoUserMetadataConnectionsFolders:
     options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
     total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
     uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
@@ -717,7 +659,7 @@ class OnDemandPageTrailerUserMetadataConnectionsFollowers:
 
 @dataclass_json
 @dataclass
-class OnDemandPageTrailerUserMetadataConnectionsFollowing:
+class OnDemandPageVideoUserMetadataConnectionsFollowers:
     options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
     total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
     uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
@@ -725,7 +667,7 @@ class OnDemandPageTrailerUserMetadataConnectionsFollowing:
 
 @dataclass_json
 @dataclass
-class OnDemandPageTrailerUserMetadataConnectionsGroups:
+class OnDemandPageVideoUserMetadataConnectionsFollowing:
     options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
     total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
     uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
@@ -733,7 +675,7 @@ class OnDemandPageTrailerUserMetadataConnectionsGroups:
 
 @dataclass_json
 @dataclass
-class OnDemandPageTrailerUserMetadataConnectionsLikes:
+class OnDemandPageVideoUserMetadataConnectionsGroups:
     options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
     total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
     uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
@@ -741,7 +683,7 @@ class OnDemandPageTrailerUserMetadataConnectionsLikes:
 
 @dataclass_json
 @dataclass
-class OnDemandPageTrailerUserMetadataConnectionsModeratedChannels:
+class OnDemandPageVideoUserMetadataConnectionsLikes:
     options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
     total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
     uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
@@ -749,7 +691,7 @@ class OnDemandPageTrailerUserMetadataConnectionsModeratedChannels:
 
 @dataclass_json
 @dataclass
-class OnDemandPageTrailerUserMetadataConnectionsPictures:
+class OnDemandPageVideoUserMetadataConnectionsModeratedChannels:
     options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
     total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
     uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
@@ -757,7 +699,7 @@ class OnDemandPageTrailerUserMetadataConnectionsPictures:
 
 @dataclass_json
 @dataclass
-class OnDemandPageTrailerUserMetadataConnectionsPortfolios:
+class OnDemandPageVideoUserMetadataConnectionsPictures:
     options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
     total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
     uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
@@ -765,7 +707,7 @@ class OnDemandPageTrailerUserMetadataConnectionsPortfolios:
 
 @dataclass_json
 @dataclass
-class OnDemandPageTrailerUserMetadataConnectionsRecommendedChannels:
+class OnDemandPageVideoUserMetadataConnectionsPortfolios:
     options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
     total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
     uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
@@ -773,7 +715,7 @@ class OnDemandPageTrailerUserMetadataConnectionsRecommendedChannels:
 
 @dataclass_json
 @dataclass
-class OnDemandPageTrailerUserMetadataConnectionsRecommendedUsers:
+class OnDemandPageVideoUserMetadataConnectionsRecommendedChannels:
     options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
     total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
     uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
@@ -781,7 +723,7 @@ class OnDemandPageTrailerUserMetadataConnectionsRecommendedUsers:
 
 @dataclass_json
 @dataclass
-class OnDemandPageTrailerUserMetadataConnectionsShared:
+class OnDemandPageVideoUserMetadataConnectionsRecommendedUsers:
     options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
     total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
     uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
@@ -789,7 +731,7 @@ class OnDemandPageTrailerUserMetadataConnectionsShared:
 
 @dataclass_json
 @dataclass
-class OnDemandPageTrailerUserMetadataConnectionsVideos:
+class OnDemandPageVideoUserMetadataConnectionsShared:
     options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
     total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
     uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
@@ -797,7 +739,7 @@ class OnDemandPageTrailerUserMetadataConnectionsVideos:
 
 @dataclass_json
 @dataclass
-class OnDemandPageTrailerUserMetadataConnectionsWatchedVideos:
+class OnDemandPageVideoUserMetadataConnectionsVideos:
     options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
     total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
     uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
@@ -805,7 +747,7 @@ class OnDemandPageTrailerUserMetadataConnectionsWatchedVideos:
 
 @dataclass_json
 @dataclass
-class OnDemandPageTrailerUserMetadataConnectionsWatchlater:
+class OnDemandPageVideoUserMetadataConnectionsWatchedVideos:
     options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
     total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
     uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
@@ -813,39 +755,47 @@ class OnDemandPageTrailerUserMetadataConnectionsWatchlater:
 
 @dataclass_json
 @dataclass
-class OnDemandPageTrailerUserMetadataConnections:
-    albums: OnDemandPageTrailerUserMetadataConnectionsAlbums = field(default=None, metadata={'dataclasses_json': { 'field_name': 'albums' }})
-    appearances: OnDemandPageTrailerUserMetadataConnectionsAppearances = field(default=None, metadata={'dataclasses_json': { 'field_name': 'appearances' }})
-    block: OnDemandPageTrailerUserMetadataConnectionsBlock = field(default=None, metadata={'dataclasses_json': { 'field_name': 'block' }})
-    categories: OnDemandPageTrailerUserMetadataConnectionsCategories = field(default=None, metadata={'dataclasses_json': { 'field_name': 'categories' }})
-    channels: OnDemandPageTrailerUserMetadataConnectionsChannels = field(default=None, metadata={'dataclasses_json': { 'field_name': 'channels' }})
-    feed: OnDemandPageTrailerUserMetadataConnectionsFeed = field(default=None, metadata={'dataclasses_json': { 'field_name': 'feed' }})
-    folders: OnDemandPageTrailerUserMetadataConnectionsFolders = field(default=None, metadata={'dataclasses_json': { 'field_name': 'folders' }})
-    followers: OnDemandPageTrailerUserMetadataConnectionsFollowers = field(default=None, metadata={'dataclasses_json': { 'field_name': 'followers' }})
-    following: OnDemandPageTrailerUserMetadataConnectionsFollowing = field(default=None, metadata={'dataclasses_json': { 'field_name': 'following' }})
-    groups: OnDemandPageTrailerUserMetadataConnectionsGroups = field(default=None, metadata={'dataclasses_json': { 'field_name': 'groups' }})
-    likes: OnDemandPageTrailerUserMetadataConnectionsLikes = field(default=None, metadata={'dataclasses_json': { 'field_name': 'likes' }})
-    moderated_channels: OnDemandPageTrailerUserMetadataConnectionsModeratedChannels = field(default=None, metadata={'dataclasses_json': { 'field_name': 'moderated_channels' }})
-    pictures: OnDemandPageTrailerUserMetadataConnectionsPictures = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pictures' }})
-    portfolios: OnDemandPageTrailerUserMetadataConnectionsPortfolios = field(default=None, metadata={'dataclasses_json': { 'field_name': 'portfolios' }})
-    recommended_channels: OnDemandPageTrailerUserMetadataConnectionsRecommendedChannels = field(default=None, metadata={'dataclasses_json': { 'field_name': 'recommended_channels' }})
-    recommended_users: OnDemandPageTrailerUserMetadataConnectionsRecommendedUsers = field(default=None, metadata={'dataclasses_json': { 'field_name': 'recommended_users' }})
-    shared: OnDemandPageTrailerUserMetadataConnectionsShared = field(default=None, metadata={'dataclasses_json': { 'field_name': 'shared' }})
-    videos: OnDemandPageTrailerUserMetadataConnectionsVideos = field(default=None, metadata={'dataclasses_json': { 'field_name': 'videos' }})
-    watched_videos: OnDemandPageTrailerUserMetadataConnectionsWatchedVideos = field(default=None, metadata={'dataclasses_json': { 'field_name': 'watched_videos' }})
-    watchlater: OnDemandPageTrailerUserMetadataConnectionsWatchlater = field(default=None, metadata={'dataclasses_json': { 'field_name': 'watchlater' }})
+class OnDemandPageVideoUserMetadataConnectionsWatchlater:
+    options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
+    total: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
+    uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
     
 
 @dataclass_json
 @dataclass
-class OnDemandPageTrailerUserMetadataInteractionsAddPrivacyUser:
+class OnDemandPageVideoUserMetadataConnections:
+    albums: OnDemandPageVideoUserMetadataConnectionsAlbums = field(default=None, metadata={'dataclasses_json': { 'field_name': 'albums' }})
+    appearances: OnDemandPageVideoUserMetadataConnectionsAppearances = field(default=None, metadata={'dataclasses_json': { 'field_name': 'appearances' }})
+    block: OnDemandPageVideoUserMetadataConnectionsBlock = field(default=None, metadata={'dataclasses_json': { 'field_name': 'block' }})
+    categories: OnDemandPageVideoUserMetadataConnectionsCategories = field(default=None, metadata={'dataclasses_json': { 'field_name': 'categories' }})
+    channels: OnDemandPageVideoUserMetadataConnectionsChannels = field(default=None, metadata={'dataclasses_json': { 'field_name': 'channels' }})
+    feed: OnDemandPageVideoUserMetadataConnectionsFeed = field(default=None, metadata={'dataclasses_json': { 'field_name': 'feed' }})
+    folders: OnDemandPageVideoUserMetadataConnectionsFolders = field(default=None, metadata={'dataclasses_json': { 'field_name': 'folders' }})
+    followers: OnDemandPageVideoUserMetadataConnectionsFollowers = field(default=None, metadata={'dataclasses_json': { 'field_name': 'followers' }})
+    following: OnDemandPageVideoUserMetadataConnectionsFollowing = field(default=None, metadata={'dataclasses_json': { 'field_name': 'following' }})
+    groups: OnDemandPageVideoUserMetadataConnectionsGroups = field(default=None, metadata={'dataclasses_json': { 'field_name': 'groups' }})
+    likes: OnDemandPageVideoUserMetadataConnectionsLikes = field(default=None, metadata={'dataclasses_json': { 'field_name': 'likes' }})
+    moderated_channels: OnDemandPageVideoUserMetadataConnectionsModeratedChannels = field(default=None, metadata={'dataclasses_json': { 'field_name': 'moderated_channels' }})
+    pictures: OnDemandPageVideoUserMetadataConnectionsPictures = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pictures' }})
+    portfolios: OnDemandPageVideoUserMetadataConnectionsPortfolios = field(default=None, metadata={'dataclasses_json': { 'field_name': 'portfolios' }})
+    recommended_channels: OnDemandPageVideoUserMetadataConnectionsRecommendedChannels = field(default=None, metadata={'dataclasses_json': { 'field_name': 'recommended_channels' }})
+    recommended_users: OnDemandPageVideoUserMetadataConnectionsRecommendedUsers = field(default=None, metadata={'dataclasses_json': { 'field_name': 'recommended_users' }})
+    shared: OnDemandPageVideoUserMetadataConnectionsShared = field(default=None, metadata={'dataclasses_json': { 'field_name': 'shared' }})
+    videos: OnDemandPageVideoUserMetadataConnectionsVideos = field(default=None, metadata={'dataclasses_json': { 'field_name': 'videos' }})
+    watched_videos: OnDemandPageVideoUserMetadataConnectionsWatchedVideos = field(default=None, metadata={'dataclasses_json': { 'field_name': 'watched_videos' }})
+    watchlater: OnDemandPageVideoUserMetadataConnectionsWatchlater = field(default=None, metadata={'dataclasses_json': { 'field_name': 'watchlater' }})
+    
+
+@dataclass_json
+@dataclass
+class OnDemandPageVideoUserMetadataInteractionsAddPrivacyUser:
     options: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
     uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
     
 
 @dataclass_json
 @dataclass
-class OnDemandPageTrailerUserMetadataInteractionsBlock:
+class OnDemandPageVideoUserMetadataInteractionsBlock:
     added: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'added' }})
     added_time: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'added_time' }})
     options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
@@ -854,7 +804,7 @@ class OnDemandPageTrailerUserMetadataInteractionsBlock:
 
 @dataclass_json
 @dataclass
-class OnDemandPageTrailerUserMetadataInteractionsFollow:
+class OnDemandPageVideoUserMetadataInteractionsFollow:
     added: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'added' }})
     options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
     uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
@@ -862,7 +812,7 @@ class OnDemandPageTrailerUserMetadataInteractionsFollow:
 
 @dataclass_json
 @dataclass
-class OnDemandPageTrailerUserMetadataInteractionsReport:
+class OnDemandPageVideoUserMetadataInteractionsReport:
     options: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'options' }})
     reason: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'reason' }})
     uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
@@ -870,30 +820,30 @@ class OnDemandPageTrailerUserMetadataInteractionsReport:
 
 @dataclass_json
 @dataclass
-class OnDemandPageTrailerUserMetadataInteractions:
-    add_privacy_user: Optional[OnDemandPageTrailerUserMetadataInteractionsAddPrivacyUser] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'add_privacy_user' }})
-    block: OnDemandPageTrailerUserMetadataInteractionsBlock = field(default=None, metadata={'dataclasses_json': { 'field_name': 'block' }})
-    follow: OnDemandPageTrailerUserMetadataInteractionsFollow = field(default=None, metadata={'dataclasses_json': { 'field_name': 'follow' }})
-    report: OnDemandPageTrailerUserMetadataInteractionsReport = field(default=None, metadata={'dataclasses_json': { 'field_name': 'report' }})
+class OnDemandPageVideoUserMetadataInteractions:
+    add_privacy_user: Optional[OnDemandPageVideoUserMetadataInteractionsAddPrivacyUser] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'add_privacy_user' }})
+    block: OnDemandPageVideoUserMetadataInteractionsBlock = field(default=None, metadata={'dataclasses_json': { 'field_name': 'block' }})
+    follow: OnDemandPageVideoUserMetadataInteractionsFollow = field(default=None, metadata={'dataclasses_json': { 'field_name': 'follow' }})
+    report: OnDemandPageVideoUserMetadataInteractionsReport = field(default=None, metadata={'dataclasses_json': { 'field_name': 'report' }})
     
 
 @dataclass_json
 @dataclass
-class OnDemandPageTrailerUserMetadata:
-    connections: OnDemandPageTrailerUserMetadataConnections = field(default=None, metadata={'dataclasses_json': { 'field_name': 'connections' }})
-    interactions: OnDemandPageTrailerUserMetadataInteractions = field(default=None, metadata={'dataclasses_json': { 'field_name': 'interactions' }})
+class OnDemandPageVideoUserMetadata:
+    connections: OnDemandPageVideoUserMetadataConnections = field(default=None, metadata={'dataclasses_json': { 'field_name': 'connections' }})
+    interactions: OnDemandPageVideoUserMetadataInteractions = field(default=None, metadata={'dataclasses_json': { 'field_name': 'interactions' }})
     
-class OnDemandPageTrailerUserPreferencesVideosPrivacyCommentsEnum(str, Enum):
+class OnDemandPageVideoUserPreferencesVideosPrivacyCommentsEnum(str, Enum):
     ANYBODY = "anybody"
     CONTACTS = "contacts"
     NOBODY = "nobody"
 
-class OnDemandPageTrailerUserPreferencesVideosPrivacyEmbedEnum(str, Enum):
+class OnDemandPageVideoUserPreferencesVideosPrivacyEmbedEnum(str, Enum):
     PRIVATE = "private"
     PUBLIC = "public"
     WHITELIST = "whitelist"
 
-class OnDemandPageTrailerUserPreferencesVideosPrivacyViewEnum(str, Enum):
+class OnDemandPageVideoUserPreferencesVideosPrivacyViewEnum(str, Enum):
     ANYBODY = "anybody"
     CONTACTS = "contacts"
     DISABLE = "disable"
@@ -905,29 +855,29 @@ class OnDemandPageTrailerUserPreferencesVideosPrivacyViewEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class OnDemandPageTrailerUserPreferencesVideosPrivacy:
+class OnDemandPageVideoUserPreferencesVideosPrivacy:
     add: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'add' }})
-    comments: Optional[OnDemandPageTrailerUserPreferencesVideosPrivacyCommentsEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'comments' }})
+    comments: Optional[OnDemandPageVideoUserPreferencesVideosPrivacyCommentsEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'comments' }})
     download: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'download' }})
-    embed: Optional[OnDemandPageTrailerUserPreferencesVideosPrivacyEmbedEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'embed' }})
-    view: Optional[OnDemandPageTrailerUserPreferencesVideosPrivacyViewEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'view' }})
+    embed: Optional[OnDemandPageVideoUserPreferencesVideosPrivacyEmbedEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'embed' }})
+    view: Optional[OnDemandPageVideoUserPreferencesVideosPrivacyViewEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'view' }})
     
 
 @dataclass_json
 @dataclass
-class OnDemandPageTrailerUserPreferencesVideos:
-    privacy: Optional[OnDemandPageTrailerUserPreferencesVideosPrivacy] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'privacy' }})
+class OnDemandPageVideoUserPreferencesVideos:
+    privacy: Optional[OnDemandPageVideoUserPreferencesVideosPrivacy] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'privacy' }})
     
 
 @dataclass_json
 @dataclass
-class OnDemandPageTrailerUserPreferences:
-    videos: Optional[OnDemandPageTrailerUserPreferencesVideos] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'videos' }})
+class OnDemandPageVideoUserPreferences:
+    videos: Optional[OnDemandPageVideoUserPreferencesVideos] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'videos' }})
     
 
 @dataclass_json
 @dataclass
-class OnDemandPageTrailerUserUploadQuotaLifetime:
+class OnDemandPageVideoUserUploadQuotaLifetime:
     free: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'free' }})
     max: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'max' }})
     used: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'used' }})
@@ -935,37 +885,37 @@ class OnDemandPageTrailerUserUploadQuotaLifetime:
 
 @dataclass_json
 @dataclass
-class OnDemandPageTrailerUserUploadQuotaPeriodic:
+class OnDemandPageVideoUserUploadQuotaPeriodic:
     free: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'free' }})
     max: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'max' }})
     reset_date: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'reset_date' }})
     used: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'used' }})
     
-class OnDemandPageTrailerUserUploadQuotaSpaceShowingEnum(str, Enum):
+class OnDemandPageVideoUserUploadQuotaSpaceShowingEnum(str, Enum):
     LIFETIME = "lifetime"
     PERIODIC = "periodic"
 
 
 @dataclass_json
 @dataclass
-class OnDemandPageTrailerUserUploadQuotaSpace:
+class OnDemandPageVideoUserUploadQuotaSpace:
     free: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'free' }})
     max: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'max' }})
-    showing: OnDemandPageTrailerUserUploadQuotaSpaceShowingEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'showing' }})
+    showing: OnDemandPageVideoUserUploadQuotaSpaceShowingEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'showing' }})
     used: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'used' }})
     
 
 @dataclass_json
 @dataclass
-class OnDemandPageTrailerUserUploadQuota:
-    lifetime: OnDemandPageTrailerUserUploadQuotaLifetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lifetime' }})
-    periodic: OnDemandPageTrailerUserUploadQuotaPeriodic = field(default=None, metadata={'dataclasses_json': { 'field_name': 'periodic' }})
-    space: OnDemandPageTrailerUserUploadQuotaSpace = field(default=None, metadata={'dataclasses_json': { 'field_name': 'space' }})
+class OnDemandPageVideoUserUploadQuota:
+    lifetime: OnDemandPageVideoUserUploadQuotaLifetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lifetime' }})
+    periodic: OnDemandPageVideoUserUploadQuotaPeriodic = field(default=None, metadata={'dataclasses_json': { 'field_name': 'periodic' }})
+    space: OnDemandPageVideoUserUploadQuotaSpace = field(default=None, metadata={'dataclasses_json': { 'field_name': 'space' }})
     
 
 @dataclass_json
 @dataclass
-class OnDemandPageTrailerUserWebsites:
+class OnDemandPageVideoUserWebsites:
     description: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
     link: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'link' }})
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
@@ -973,30 +923,30 @@ class OnDemandPageTrailerUserWebsites:
 
 @dataclass_json
 @dataclass
-class OnDemandPageTrailerUserUser:
-    account: OnDemandPageTrailerUserAccountEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'account' }})
+class OnDemandPageVideoUser:
+    account: OnDemandPageVideoUserAccountEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'account' }})
     bio: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'bio' }})
     content_filter: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'content_filter' }})
     created_time: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'created_time' }})
     email: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'email' }})
     link: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'link' }})
     location: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'location' }})
-    metadata: OnDemandPageTrailerUserMetadata = field(default=None, metadata={'dataclasses_json': { 'field_name': 'metadata' }})
+    metadata: OnDemandPageVideoUserMetadata = field(default=None, metadata={'dataclasses_json': { 'field_name': 'metadata' }})
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
     pictures: picture.Picture = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pictures' }})
-    preferences: Optional[OnDemandPageTrailerUserPreferences] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'preferences' }})
+    preferences: Optional[OnDemandPageVideoUserPreferences] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'preferences' }})
     resource_key: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resource_key' }})
-    upload_quota: OnDemandPageTrailerUserUploadQuota = field(default=None, metadata={'dataclasses_json': { 'field_name': 'upload_quota' }})
+    upload_quota: OnDemandPageVideoUserUploadQuota = field(default=None, metadata={'dataclasses_json': { 'field_name': 'upload_quota' }})
     uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
-    websites: List[OnDemandPageTrailerUserWebsites] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'websites' }})
+    websites: List[OnDemandPageVideoUserWebsites] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'websites' }})
     
 
 @dataclass_json
 @dataclass
-class OnDemandPageTrailerVideo:
+class OnDemandPageVideo:
     categories: List[category.Category] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'categories' }})
     content_rating: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'content_rating' }})
-    context: OnDemandPageTrailerContext = field(default=None, metadata={'dataclasses_json': { 'field_name': 'context' }})
+    context: OnDemandPageVideoContext = field(default=None, metadata={'dataclasses_json': { 'field_name': 'context' }})
     created_time: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'created_time' }})
     description: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
     duration: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'duration' }})
@@ -1004,25 +954,25 @@ class OnDemandPageTrailerVideo:
     height: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'height' }})
     language: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'language' }})
     last_user_action_event_date: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'last_user_action_event_date' }})
-    license: OnDemandPageTrailerLicenseEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'license' }})
+    license: OnDemandPageVideoLicenseEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'license' }})
     link: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'link' }})
-    metadata: OnDemandPageTrailerMetadata = field(default=None, metadata={'dataclasses_json': { 'field_name': 'metadata' }})
+    metadata: OnDemandPageVideoMetadata = field(default=None, metadata={'dataclasses_json': { 'field_name': 'metadata' }})
     modified_time: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'modified_time' }})
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    parent_folder: Optional[OnDemandPageTrailerParentFolderProject] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'parent_folder' }})
+    parent_folder: Optional[OnDemandPageVideoProject] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'parent_folder' }})
     password: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'password' }})
     pictures: picture.Picture = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pictures' }})
-    privacy: OnDemandPageTrailerPrivacy = field(default=None, metadata={'dataclasses_json': { 'field_name': 'privacy' }})
+    privacy: OnDemandPageVideoPrivacy = field(default=None, metadata={'dataclasses_json': { 'field_name': 'privacy' }})
     release_time: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'release_time' }})
     resource_key: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resource_key' }})
-    spatial: OnDemandPageTrailerSpatial = field(default=None, metadata={'dataclasses_json': { 'field_name': 'spatial' }})
-    stats: OnDemandPageTrailerStats = field(default=None, metadata={'dataclasses_json': { 'field_name': 'stats' }})
-    status: OnDemandPageTrailerStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    spatial: OnDemandPageVideoSpatial = field(default=None, metadata={'dataclasses_json': { 'field_name': 'spatial' }})
+    stats: OnDemandPageVideoStats = field(default=None, metadata={'dataclasses_json': { 'field_name': 'stats' }})
+    status: OnDemandPageVideoStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
     tags: List[tag.Tag] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
-    transcode: OnDemandPageTrailerTranscode = field(default=None, metadata={'dataclasses_json': { 'field_name': 'transcode' }})
-    upload: OnDemandPageTrailerUpload = field(default=None, metadata={'dataclasses_json': { 'field_name': 'upload' }})
+    transcode: OnDemandPageVideoTranscode = field(default=None, metadata={'dataclasses_json': { 'field_name': 'transcode' }})
+    upload: OnDemandPageVideoUpload = field(default=None, metadata={'dataclasses_json': { 'field_name': 'upload' }})
     uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
-    user: OnDemandPageTrailerUserUser = field(default=None, metadata={'dataclasses_json': { 'field_name': 'user' }})
+    user: OnDemandPageVideoUser = field(default=None, metadata={'dataclasses_json': { 'field_name': 'user' }})
     width: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'width' }})
     
 class OnDemandPageTypeEnum(str, Enum):
@@ -1362,7 +1312,7 @@ class OnDemandPageUserWebsites:
 
 @dataclass_json
 @dataclass
-class OnDemandPageUserUser:
+class OnDemandPageUser:
     account: OnDemandPageUserAccountEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'account' }})
     bio: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'bio' }})
     content_filter: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'content_filter' }})
@@ -1383,7 +1333,7 @@ class OnDemandPageUserUser:
 @dataclass_json
 @dataclass
 class OnDemandPage:
-    background: OnDemandPageBackgroundPicture = field(default=None, metadata={'dataclasses_json': { 'field_name': 'background' }})
+    background: OnDemandPagePicture = field(default=None, metadata={'dataclasses_json': { 'field_name': 'background' }})
     colors: OnDemandPageColors = field(default=None, metadata={'dataclasses_json': { 'field_name': 'colors' }})
     content_rating: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'content_rating' }})
     created_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'created_time' }})
@@ -1396,7 +1346,7 @@ class OnDemandPage:
     metadata: OnDemandPageMetadata = field(default=None, metadata={'dataclasses_json': { 'field_name': 'metadata' }})
     modified_time: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'modified_time' }})
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    pictures: OnDemandPagePicturesPicture = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pictures' }})
+    pictures: OnDemandPagePicture = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pictures' }})
     preorder: OnDemandPagePreorder = field(default=None, metadata={'dataclasses_json': { 'field_name': 'preorder' }})
     published: OnDemandPagePublished = field(default=None, metadata={'dataclasses_json': { 'field_name': 'published' }})
     rating: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rating' }})
@@ -1404,9 +1354,9 @@ class OnDemandPage:
     sku: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sku' }})
     subscription: OnDemandPageSubscription = field(default=None, metadata={'dataclasses_json': { 'field_name': 'subscription' }})
     theme: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'theme' }})
-    thumbnail: OnDemandPageThumbnailPicture = field(default=None, metadata={'dataclasses_json': { 'field_name': 'thumbnail' }})
-    trailer: OnDemandPageTrailerVideo = field(default=None, metadata={'dataclasses_json': { 'field_name': 'trailer' }})
+    thumbnail: OnDemandPagePicture = field(default=None, metadata={'dataclasses_json': { 'field_name': 'thumbnail' }})
+    trailer: OnDemandPageVideo = field(default=None, metadata={'dataclasses_json': { 'field_name': 'trailer' }})
     type: OnDemandPageTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
-    user: OnDemandPageUserUser = field(default=None, metadata={'dataclasses_json': { 'field_name': 'user' }})
+    user: OnDemandPageUser = field(default=None, metadata={'dataclasses_json': { 'field_name': 'user' }})
     

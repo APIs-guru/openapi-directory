@@ -12,7 +12,7 @@ class CreateQueryPathParams:
     
 
 @dataclass
-class CreateQueryRequestBodyCreateQueryRequest:
+class CreateQueryCreateQueryRequest:
     language: str = field(default=None, metadata={'form': { 'field_name': 'Language' }})
     model_build: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'ModelBuild' }})
     query: str = field(default=None, metadata={'form': { 'field_name': 'Query' }})
@@ -28,7 +28,7 @@ class CreateQuerySecurity:
 class CreateQueryRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateQueryPathParams = field(default=None)
-    request: Optional[CreateQueryRequestBodyCreateQueryRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateQueryCreateQueryRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateQuerySecurity = field(default=None)
     
 

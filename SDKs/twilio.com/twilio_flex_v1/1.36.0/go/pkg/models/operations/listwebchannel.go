@@ -22,7 +22,7 @@ type ListWebChannelRequest struct {
 	Security    ListWebChannelSecurity
 }
 
-type ListWebChannel200ApplicationJSONMeta struct {
+type ListWebChannelListWebChannelResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -32,13 +32,13 @@ type ListWebChannel200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListWebChannel200ApplicationJSONListWebChannelResponse struct {
-	FlexChatChannels []shared.FlexV1WebChannel             `json:"flex_chat_channels,omitempty"`
-	Meta             *ListWebChannel200ApplicationJSONMeta `json:"meta,omitempty"`
+type ListWebChannelListWebChannelResponse struct {
+	FlexChatChannels []shared.FlexV1WebChannel                 `json:"flex_chat_channels,omitempty"`
+	Meta             *ListWebChannelListWebChannelResponseMeta `json:"meta,omitempty"`
 }
 
 type ListWebChannelResponse struct {
 	ContentType            string
-	ListWebChannelResponse *ListWebChannel200ApplicationJSONListWebChannelResponse
+	ListWebChannelResponse *ListWebChannelListWebChannelResponse
 	StatusCode             int64
 }

@@ -14,7 +14,7 @@ class UpdateCallRecordingPathParams:
     
 
 @dataclass
-class UpdateCallRecordingRequestBodyUpdateCallRecordingRequest:
+class UpdateCallRecordingUpdateCallRecordingRequest:
     pause_behavior: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'PauseBehavior' }})
     status: shared.CallRecordingEnumStatusEnum = field(default=None, metadata={'form': { 'field_name': 'Status' }})
     
@@ -28,7 +28,7 @@ class UpdateCallRecordingSecurity:
 class UpdateCallRecordingRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateCallRecordingPathParams = field(default=None)
-    request: Optional[UpdateCallRecordingRequestBodyUpdateCallRecordingRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateCallRecordingUpdateCallRecordingRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateCallRecordingSecurity = field(default=None)
     
 

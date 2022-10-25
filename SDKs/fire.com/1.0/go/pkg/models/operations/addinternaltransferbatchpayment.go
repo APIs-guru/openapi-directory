@@ -4,7 +4,7 @@ type AddInternalTransferBatchPaymentPathParams struct {
 	BatchUUID string `pathParam:"style=simple,explode=false,name=batchUuid"`
 }
 
-type AddInternalTransferBatchPaymentRequestBodyBatchItemInternalTransfer struct {
+type AddInternalTransferBatchPaymentBatchItemInternalTransfer struct {
 	Amount   *int64  `json:"amount,omitempty"`
 	IcanFrom *int64  `json:"icanFrom,omitempty"`
 	IcanTo   *int64  `json:"icanTo,omitempty"`
@@ -13,15 +13,15 @@ type AddInternalTransferBatchPaymentRequestBodyBatchItemInternalTransfer struct 
 
 type AddInternalTransferBatchPaymentRequest struct {
 	PathParams AddInternalTransferBatchPaymentPathParams
-	Request    AddInternalTransferBatchPaymentRequestBodyBatchItemInternalTransfer `request:"mediaType=application/json"`
+	Request    AddInternalTransferBatchPaymentBatchItemInternalTransfer `request:"mediaType=application/json"`
 }
 
-type AddInternalTransferBatchPayment200ApplicationJSONNewBatchItemResponse struct {
+type AddInternalTransferBatchPaymentNewBatchItemResponse struct {
 	BatchItemUUID *string `json:"batchItemUuid,omitempty"`
 }
 
 type AddInternalTransferBatchPaymentResponse struct {
 	ContentType          string
-	NewBatchItemResponse *AddInternalTransferBatchPayment200ApplicationJSONNewBatchItemResponse
+	NewBatchItemResponse *AddInternalTransferBatchPaymentNewBatchItemResponse
 	StatusCode           int64
 }

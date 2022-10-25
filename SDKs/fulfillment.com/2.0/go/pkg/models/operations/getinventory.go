@@ -20,48 +20,48 @@ type GetInventoryRequest struct {
 	Security    GetInventorySecurity
 }
 
-type GetInventory200ApplicationJSONDataItem struct {
+type GetInventoryItemInventoryArrayV2ItemInventoryV2Item struct {
 	ID           *int64  `json:"id,omitempty"`
 	SkuReference *string `json:"skuReference,omitempty"`
 }
 
-type GetInventory200ApplicationJSONDataMerchant struct {
+type GetInventoryItemInventoryArrayV2ItemInventoryV2Merchant struct {
 	Name *string `json:"name,omitempty"`
 }
 
-type GetInventory200ApplicationJSONDataQuantityTotal struct {
+type GetInventoryItemInventoryArrayV2ItemInventoryV2QuantityTotal struct {
 	AvailableToPromise *int64 `json:"availableToPromise,omitempty"`
 }
 
-type GetInventory200ApplicationJSONDataQuantity struct {
-	Total *GetInventory200ApplicationJSONDataQuantityTotal `json:"total,omitempty"`
+type GetInventoryItemInventoryArrayV2ItemInventoryV2Quantity struct {
+	Total *GetInventoryItemInventoryArrayV2ItemInventoryV2QuantityTotal `json:"total,omitempty"`
 }
 
-type GetInventory200ApplicationJSONDataItemInventoryV2 struct {
-	Item     *GetInventory200ApplicationJSONDataItem     `json:"item,omitempty"`
-	Merchant *GetInventory200ApplicationJSONDataMerchant `json:"merchant,omitempty"`
-	Quantity *GetInventory200ApplicationJSONDataQuantity `json:"quantity,omitempty"`
+type GetInventoryItemInventoryArrayV2ItemInventoryV2 struct {
+	Item     *GetInventoryItemInventoryArrayV2ItemInventoryV2Item     `json:"item,omitempty"`
+	Merchant *GetInventoryItemInventoryArrayV2ItemInventoryV2Merchant `json:"merchant,omitempty"`
+	Quantity *GetInventoryItemInventoryArrayV2ItemInventoryV2Quantity `json:"quantity,omitempty"`
 }
 
-type GetInventory200ApplicationJSONMetaPaginationPaginationV2 struct {
+type GetInventoryItemInventoryArrayV2MetaPaginationV2 struct {
 	Count       *int64 `json:"count,omitempty"`
 	CurrentPage *int64 `json:"currentPage,omitempty"`
 	Total       *int64 `json:"total,omitempty"`
 	TotalPages  *int64 `json:"totalPages,omitempty"`
 }
 
-type GetInventory200ApplicationJSONMeta struct {
-	Pagination *GetInventory200ApplicationJSONMetaPaginationPaginationV2 `json:"pagination,omitempty"`
+type GetInventoryItemInventoryArrayV2Meta struct {
+	Pagination *GetInventoryItemInventoryArrayV2MetaPaginationV2 `json:"pagination,omitempty"`
 }
 
-type GetInventory200ApplicationJSONItemInventoryArrayV2 struct {
-	Data []GetInventory200ApplicationJSONDataItemInventoryV2 `json:"data,omitempty"`
-	Meta *GetInventory200ApplicationJSONMeta                 `json:"meta,omitempty"`
+type GetInventoryItemInventoryArrayV2 struct {
+	Data []GetInventoryItemInventoryArrayV2ItemInventoryV2 `json:"data,omitempty"`
+	Meta *GetInventoryItemInventoryArrayV2Meta             `json:"meta,omitempty"`
 }
 
 type GetInventoryResponse struct {
 	ContentType                                           string
-	ItemInventoryArrayV2                                  *GetInventory200ApplicationJSONItemInventoryArrayV2
+	ItemInventoryArrayV2                                  *GetInventoryItemInventoryArrayV2
 	StatusCode                                            int64
 	OneordersGetResponses404ContentApplication1jsonSchema *shared.OneordersGetResponses404ContentApplication1jsonSchema
 }

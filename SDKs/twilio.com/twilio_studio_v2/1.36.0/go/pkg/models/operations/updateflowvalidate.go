@@ -8,7 +8,7 @@ var UpdateFlowValidateServers = []string{
 	"https://studio.twilio.com",
 }
 
-type UpdateFlowValidateRequestBodyUpdateFlowValidateRequest struct {
+type UpdateFlowValidateUpdateFlowValidateRequest struct {
 	CommitMessage *string                           `form:"name=CommitMessage"`
 	Definition    interface{}                       `form:"name=Definition"`
 	FriendlyName  string                            `form:"name=FriendlyName"`
@@ -21,7 +21,7 @@ type UpdateFlowValidateSecurity struct {
 
 type UpdateFlowValidateRequest struct {
 	ServerURL *string
-	Request   *UpdateFlowValidateRequestBodyUpdateFlowValidateRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request   *UpdateFlowValidateUpdateFlowValidateRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security  UpdateFlowValidateSecurity
 }
 

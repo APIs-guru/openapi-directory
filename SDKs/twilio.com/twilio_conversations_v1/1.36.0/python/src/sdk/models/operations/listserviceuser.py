@@ -32,7 +32,7 @@ class ListServiceUserRequest:
 
 @dataclass_json
 @dataclass
-class ListServiceUser200ApplicationJSONMeta:
+class ListServiceUserListServiceUserResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -44,14 +44,14 @@ class ListServiceUser200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListServiceUser200ApplicationJSONListServiceUserResponse:
-    meta: Optional[ListServiceUser200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+class ListServiceUserListServiceUserResponse:
+    meta: Optional[ListServiceUserListServiceUserResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     users: Optional[List[shared.ConversationsV1ServiceServiceUser]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'users' }})
     
 
 @dataclass
 class ListServiceUserResponse:
     content_type: str = field(default=None)
-    list_service_user_response: Optional[ListServiceUser200ApplicationJSONListServiceUserResponse] = field(default=None)
+    list_service_user_response: Optional[ListServiceUserListServiceUserResponse] = field(default=None)
     status_code: int = field(default=None)
     

@@ -12,7 +12,7 @@ type UpdateSubscriptionPathParams struct {
 	Sid string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
-type UpdateSubscriptionRequestBodyUpdateSubscriptionRequest struct {
+type UpdateSubscriptionUpdateSubscriptionRequest struct {
 	Description *string `form:"name=Description"`
 	SinkSid     *string `form:"name=SinkSid"`
 }
@@ -24,7 +24,7 @@ type UpdateSubscriptionSecurity struct {
 type UpdateSubscriptionRequest struct {
 	ServerURL  *string
 	PathParams UpdateSubscriptionPathParams
-	Request    *UpdateSubscriptionRequestBodyUpdateSubscriptionRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateSubscriptionUpdateSubscriptionRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateSubscriptionSecurity
 }
 

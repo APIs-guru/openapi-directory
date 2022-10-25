@@ -41,36 +41,36 @@ type GetActionsRequest struct {
 	QueryParams GetActionsQueryParams
 }
 
-type GetActions200ApplicationJSONActionsError struct {
+type GetActionsActionsResponseActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
 }
 
-type GetActions200ApplicationJSONActionsResources struct {
+type GetActionsActionsResponseActionResources struct {
 	ID   int64  `json:"id"`
 	Type string `json:"type"`
 }
 
-type GetActions200ApplicationJSONActionsStatusEnum string
+type GetActionsActionsResponseActionStatusEnum string
 
 const (
-	GetActions200ApplicationJSONActionsStatusEnumSuccess GetActions200ApplicationJSONActionsStatusEnum = "success"
-	GetActions200ApplicationJSONActionsStatusEnumRunning GetActions200ApplicationJSONActionsStatusEnum = "running"
-	GetActions200ApplicationJSONActionsStatusEnumError   GetActions200ApplicationJSONActionsStatusEnum = "error"
+	GetActionsActionsResponseActionStatusEnumSuccess GetActionsActionsResponseActionStatusEnum = "success"
+	GetActionsActionsResponseActionStatusEnumRunning GetActionsActionsResponseActionStatusEnum = "running"
+	GetActionsActionsResponseActionStatusEnumError   GetActionsActionsResponseActionStatusEnum = "error"
 )
 
-type GetActions200ApplicationJSONActionsAction struct {
-	Command   string                                         `json:"command"`
-	Error     GetActions200ApplicationJSONActionsError       `json:"error"`
-	Finished  string                                         `json:"finished"`
-	ID        int64                                          `json:"id"`
-	Progress  float64                                        `json:"progress"`
-	Resources []GetActions200ApplicationJSONActionsResources `json:"resources"`
-	Started   string                                         `json:"started"`
-	Status    GetActions200ApplicationJSONActionsStatusEnum  `json:"status"`
+type GetActionsActionsResponseAction struct {
+	Command   string                                     `json:"command"`
+	Error     GetActionsActionsResponseActionError       `json:"error"`
+	Finished  string                                     `json:"finished"`
+	ID        int64                                      `json:"id"`
+	Progress  float64                                    `json:"progress"`
+	Resources []GetActionsActionsResponseActionResources `json:"resources"`
+	Started   string                                     `json:"started"`
+	Status    GetActionsActionsResponseActionStatusEnum  `json:"status"`
 }
 
-type GetActions200ApplicationJSONMetaPagination struct {
+type GetActionsActionsResponseMetaPagination struct {
 	LastPage     float64 `json:"last_page"`
 	NextPage     float64 `json:"next_page"`
 	Page         float64 `json:"page"`
@@ -79,17 +79,17 @@ type GetActions200ApplicationJSONMetaPagination struct {
 	TotalEntries float64 `json:"total_entries"`
 }
 
-type GetActions200ApplicationJSONMeta struct {
-	Pagination GetActions200ApplicationJSONMetaPagination `json:"pagination"`
+type GetActionsActionsResponseMeta struct {
+	Pagination GetActionsActionsResponseMetaPagination `json:"pagination"`
 }
 
-type GetActions200ApplicationJSONActionsResponse struct {
-	Actions []GetActions200ApplicationJSONActionsAction `json:"actions"`
-	Meta    *GetActions200ApplicationJSONMeta           `json:"meta,omitempty"`
+type GetActionsActionsResponse struct {
+	Actions []GetActionsActionsResponseAction `json:"actions"`
+	Meta    *GetActionsActionsResponseMeta    `json:"meta,omitempty"`
 }
 
 type GetActionsResponse struct {
-	ActionsResponse *GetActions200ApplicationJSONActionsResponse
+	ActionsResponse *GetActionsActionsResponse
 	ContentType     string
 	StatusCode      int64
 }

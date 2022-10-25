@@ -12,7 +12,7 @@ class UpdateDeployedDevicesFleetPathParams:
     
 
 @dataclass
-class UpdateDeployedDevicesFleetRequestBodyUpdateDeployedDevicesFleetRequest:
+class UpdateDeployedDevicesFleetUpdateDeployedDevicesFleetRequest:
     default_deployment_sid: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'DefaultDeploymentSid' }})
     friendly_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
     
@@ -26,7 +26,7 @@ class UpdateDeployedDevicesFleetSecurity:
 class UpdateDeployedDevicesFleetRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateDeployedDevicesFleetPathParams = field(default=None)
-    request: Optional[UpdateDeployedDevicesFleetRequestBodyUpdateDeployedDevicesFleetRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateDeployedDevicesFleetUpdateDeployedDevicesFleetRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateDeployedDevicesFleetSecurity = field(default=None)
     
 

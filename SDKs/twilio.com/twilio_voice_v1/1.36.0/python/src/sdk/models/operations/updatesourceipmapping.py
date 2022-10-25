@@ -12,7 +12,7 @@ class UpdateSourceIPMappingPathParams:
     
 
 @dataclass
-class UpdateSourceIPMappingRequestBodyUpdateSourceIPMappingRequest:
+class UpdateSourceIPMappingUpdateSourceIPMappingRequest:
     sip_domain_sid: str = field(default=None, metadata={'form': { 'field_name': 'SipDomainSid' }})
     
 
@@ -25,7 +25,7 @@ class UpdateSourceIPMappingSecurity:
 class UpdateSourceIPMappingRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateSourceIPMappingPathParams = field(default=None)
-    request: Optional[UpdateSourceIPMappingRequestBodyUpdateSourceIPMappingRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateSourceIPMappingUpdateSourceIPMappingRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateSourceIPMappingSecurity = field(default=None)
     
 

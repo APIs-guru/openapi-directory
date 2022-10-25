@@ -9,7 +9,7 @@ type GetMapsUsingGet1Request struct {
 }
 
 type GetMapsUsingGet1Response struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+	ContentType                       string
+	StatusCode                        int64
+	GetMapsUsingGet1200WildcardString *string
 }

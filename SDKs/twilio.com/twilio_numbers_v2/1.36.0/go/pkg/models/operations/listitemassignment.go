@@ -27,7 +27,7 @@ type ListItemAssignmentRequest struct {
 	Security    ListItemAssignmentSecurity
 }
 
-type ListItemAssignment200ApplicationJSONMeta struct {
+type ListItemAssignmentListItemAssignmentResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -37,13 +37,13 @@ type ListItemAssignment200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListItemAssignment200ApplicationJSONListItemAssignmentResponse struct {
-	Meta    *ListItemAssignment200ApplicationJSONMeta                  `json:"meta,omitempty"`
+type ListItemAssignmentListItemAssignmentResponse struct {
+	Meta    *ListItemAssignmentListItemAssignmentResponseMeta          `json:"meta,omitempty"`
 	Results []shared.NumbersV2RegulatoryComplianceBundleItemAssignment `json:"results,omitempty"`
 }
 
 type ListItemAssignmentResponse struct {
 	ContentType                string
-	ListItemAssignmentResponse *ListItemAssignment200ApplicationJSONListItemAssignmentResponse
+	ListItemAssignmentResponse *ListItemAssignmentListItemAssignmentResponse
 	StatusCode                 int64
 }

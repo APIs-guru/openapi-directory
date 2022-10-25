@@ -12,7 +12,7 @@ class UpdateStyleSheetPathParams:
     
 
 @dataclass
-class UpdateStyleSheetRequestBodyUpdateStyleSheetRequest:
+class UpdateStyleSheetUpdateStyleSheetRequest:
     style_sheet: Optional[Any] = field(default=None, metadata={'form': { 'field_name': 'StyleSheet' }})
     
 
@@ -25,7 +25,7 @@ class UpdateStyleSheetSecurity:
 class UpdateStyleSheetRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateStyleSheetPathParams = field(default=None)
-    request: Optional[UpdateStyleSheetRequestBodyUpdateStyleSheetRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateStyleSheetUpdateStyleSheetRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateStyleSheetSecurity = field(default=None)
     
 

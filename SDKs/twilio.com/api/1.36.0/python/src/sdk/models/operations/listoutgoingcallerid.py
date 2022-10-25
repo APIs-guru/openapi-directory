@@ -34,7 +34,7 @@ class ListOutgoingCallerIDRequest:
 
 @dataclass_json
 @dataclass
-class ListOutgoingCallerID200ApplicationJSONListOutgoingCallerIDResponse:
+class ListOutgoingCallerIDListOutgoingCallerIDResponse:
     end: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'end' }})
     first_page_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_uri' }})
     next_page_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_uri' }})
@@ -49,6 +49,6 @@ class ListOutgoingCallerID200ApplicationJSONListOutgoingCallerIDResponse:
 @dataclass
 class ListOutgoingCallerIDResponse:
     content_type: str = field(default=None)
-    list_outgoing_caller_id_response: Optional[ListOutgoingCallerID200ApplicationJSONListOutgoingCallerIDResponse] = field(default=None)
+    list_outgoing_caller_id_response: Optional[ListOutgoingCallerIDListOutgoingCallerIDResponse] = field(default=None)
     status_code: int = field(default=None)
     

@@ -27,7 +27,7 @@ type ListVideoParticipantSummaryRequest struct {
 	Security    ListVideoParticipantSummarySecurity
 }
 
-type ListVideoParticipantSummary200ApplicationJSONMeta struct {
+type ListVideoParticipantSummaryListVideoParticipantSummaryResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -37,13 +37,13 @@ type ListVideoParticipantSummary200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListVideoParticipantSummary200ApplicationJSONListVideoParticipantSummaryResponse struct {
-	Meta         *ListVideoParticipantSummary200ApplicationJSONMeta         `json:"meta,omitempty"`
-	Participants []shared.InsightsV1VideoRoomSummaryVideoParticipantSummary `json:"participants,omitempty"`
+type ListVideoParticipantSummaryListVideoParticipantSummaryResponse struct {
+	Meta         *ListVideoParticipantSummaryListVideoParticipantSummaryResponseMeta `json:"meta,omitempty"`
+	Participants []shared.InsightsV1VideoRoomSummaryVideoParticipantSummary          `json:"participants,omitempty"`
 }
 
 type ListVideoParticipantSummaryResponse struct {
 	ContentType                         string
-	ListVideoParticipantSummaryResponse *ListVideoParticipantSummary200ApplicationJSONListVideoParticipantSummaryResponse
+	ListVideoParticipantSummaryResponse *ListVideoParticipantSummaryListVideoParticipantSummaryResponse
 	StatusCode                          int64
 }

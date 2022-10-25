@@ -7,7 +7,7 @@ UPDATE_RESTORE_ASSISTANT_SERVERS = [
 
 
 @dataclass
-class UpdateRestoreAssistantRequestBodyUpdateRestoreAssistantRequest:
+class UpdateRestoreAssistantUpdateRestoreAssistantRequest:
     assistant: str = field(default=None, metadata={'form': { 'field_name': 'Assistant' }})
     
 
@@ -19,7 +19,7 @@ class UpdateRestoreAssistantSecurity:
 @dataclass
 class UpdateRestoreAssistantRequest:
     server_url: Optional[str] = field(default=None)
-    request: Optional[UpdateRestoreAssistantRequestBodyUpdateRestoreAssistantRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateRestoreAssistantUpdateRestoreAssistantRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateRestoreAssistantSecurity = field(default=None)
     
 

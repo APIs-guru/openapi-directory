@@ -25,7 +25,7 @@ type ListNetworkRequest struct {
 	Security    ListNetworkSecurity
 }
 
-type ListNetwork200ApplicationJSONMeta struct {
+type ListNetworkListNetworkResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -35,13 +35,13 @@ type ListNetwork200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListNetwork200ApplicationJSONListNetworkResponse struct {
-	Meta     *ListNetwork200ApplicationJSONMeta `json:"meta,omitempty"`
-	Networks []shared.SupersimV1Network         `json:"networks,omitempty"`
+type ListNetworkListNetworkResponse struct {
+	Meta     *ListNetworkListNetworkResponseMeta `json:"meta,omitempty"`
+	Networks []shared.SupersimV1Network          `json:"networks,omitempty"`
 }
 
 type ListNetworkResponse struct {
 	ContentType         string
-	ListNetworkResponse *ListNetwork200ApplicationJSONListNetworkResponse
+	ListNetworkResponse *ListNetworkListNetworkResponse
 	StatusCode          int64
 }

@@ -27,7 +27,7 @@ type ListFlowRevisionRequest struct {
 	Security    ListFlowRevisionSecurity
 }
 
-type ListFlowRevision200ApplicationJSONMeta struct {
+type ListFlowRevisionListFlowRevisionResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -37,13 +37,13 @@ type ListFlowRevision200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListFlowRevision200ApplicationJSONListFlowRevisionResponse struct {
-	Meta      *ListFlowRevision200ApplicationJSONMeta `json:"meta,omitempty"`
-	Revisions []shared.StudioV2FlowFlowRevision       `json:"revisions,omitempty"`
+type ListFlowRevisionListFlowRevisionResponse struct {
+	Meta      *ListFlowRevisionListFlowRevisionResponseMeta `json:"meta,omitempty"`
+	Revisions []shared.StudioV2FlowFlowRevision             `json:"revisions,omitempty"`
 }
 
 type ListFlowRevisionResponse struct {
 	ContentType              string
-	ListFlowRevisionResponse *ListFlowRevision200ApplicationJSONListFlowRevisionResponse
+	ListFlowRevisionResponse *ListFlowRevisionListFlowRevisionResponse
 	StatusCode               int64
 }

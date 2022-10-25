@@ -21,7 +21,7 @@ class CreateServiceConversationMessageHeaders:
     
 
 @dataclass
-class CreateServiceConversationMessageRequestBodyCreateServiceConversationMessageRequest:
+class CreateServiceConversationMessageCreateServiceConversationMessageRequest:
     attributes: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Attributes' }})
     author: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Author' }})
     body: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Body' }})
@@ -40,7 +40,7 @@ class CreateServiceConversationMessageRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateServiceConversationMessagePathParams = field(default=None)
     headers: CreateServiceConversationMessageHeaders = field(default=None)
-    request: Optional[CreateServiceConversationMessageRequestBodyCreateServiceConversationMessageRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateServiceConversationMessageCreateServiceConversationMessageRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateServiceConversationMessageSecurity = field(default=None)
     
 

@@ -1,30 +1,30 @@
 package shared
 
-type ReportDefinitionReportDefinitionReportQueryGroupsGroup struct {
+type ReportDefinitionReportDefinitionReportQueryGroup struct {
 	Group []interface{} `json:"Group,omitempty"`
 }
 
-type ReportDefinitionReportDefinitionReportQueryVariablesVariable struct {
+type ReportDefinitionReportDefinitionReportQueryVariable struct {
 	Variable []interface{} `json:"Variable,omitempty"`
 }
 
-type ReportDefinitionReportDefinitionReportQueryReportQuery struct {
-	ExcludeNullOrEmptyElements *bool                                                         `json:"ExcludeNullOrEmptyElements,omitempty"`
-	Groups                     *ReportDefinitionReportDefinitionReportQueryGroupsGroup       `json:"Groups,omitempty"`
-	RootNodeName               *string                                                       `json:"RootNodeName,omitempty"`
-	SuppressMetricAttributes   *bool                                                         `json:"SuppressMetricAttributes,omitempty"`
-	Variables                  *ReportDefinitionReportDefinitionReportQueryVariablesVariable `json:"Variables,omitempty"`
+type ReportDefinitionReportDefinitionReportQuery struct {
+	ExcludeNullOrEmptyElements *bool                                                `json:"ExcludeNullOrEmptyElements,omitempty"`
+	Groups                     *ReportDefinitionReportDefinitionReportQueryGroup    `json:"Groups,omitempty"`
+	RootNodeName               *string                                              `json:"RootNodeName,omitempty"`
+	SuppressMetricAttributes   *bool                                                `json:"SuppressMetricAttributes,omitempty"`
+	Variables                  *ReportDefinitionReportDefinitionReportQueryVariable `json:"Variables,omitempty"`
 }
 
-type ReportDefinitionReportDefinitionReportDefinition struct {
-	Active              *bool                                                   `json:"Active,omitempty"`
-	Readonly            *bool                                                   `json:"Readonly,omitempty"`
-	ReportQuery         *ReportDefinitionReportDefinitionReportQueryReportQuery `json:"ReportQuery,omitempty"`
-	SupportedTransforms *string                                                 `json:"SupportedTransforms,omitempty"`
-	Title               *string                                                 `json:"Title,omitempty"`
-	Version             *string                                                 `json:"Version,omitempty"`
+type ReportDefinitionReportDefinition struct {
+	Active              *bool                                        `json:"Active,omitempty"`
+	Readonly            *bool                                        `json:"Readonly,omitempty"`
+	ReportQuery         *ReportDefinitionReportDefinitionReportQuery `json:"ReportQuery,omitempty"`
+	SupportedTransforms *string                                      `json:"SupportedTransforms,omitempty"`
+	Title               *string                                      `json:"Title,omitempty"`
+	Version             *string                                      `json:"Version,omitempty"`
 }
 
 type ReportDefinition struct {
-	ReportDefinition *ReportDefinitionReportDefinitionReportDefinition `json:"ReportDefinition,omitempty"`
+	ReportDefinition *ReportDefinitionReportDefinition `json:"ReportDefinition,omitempty"`
 }

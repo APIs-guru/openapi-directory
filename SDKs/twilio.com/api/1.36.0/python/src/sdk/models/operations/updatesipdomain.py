@@ -11,7 +11,7 @@ class UpdateSipDomainPathParams:
     account_sid: str = field(default=None, metadata={'path_param': { 'field_name': 'AccountSid', 'style': 'simple', 'explode': False }})
     sid: str = field(default=None, metadata={'path_param': { 'field_name': 'Sid', 'style': 'simple', 'explode': False }})
     
-class UpdateSipDomainRequestBodyVoiceFallbackMethodEnum(str, Enum):
+class UpdateSipDomainUpdateSipDomainRequestVoiceFallbackMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -19,7 +19,7 @@ class UpdateSipDomainRequestBodyVoiceFallbackMethodEnum(str, Enum):
     PUT = "PUT"
     DELETE = "DELETE"
 
-class UpdateSipDomainRequestBodyVoiceMethodEnum(str, Enum):
+class UpdateSipDomainUpdateSipDomainRequestVoiceMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -27,7 +27,7 @@ class UpdateSipDomainRequestBodyVoiceMethodEnum(str, Enum):
     PUT = "PUT"
     DELETE = "DELETE"
 
-class UpdateSipDomainRequestBodyVoiceStatusCallbackMethodEnum(str, Enum):
+class UpdateSipDomainUpdateSipDomainRequestVoiceStatusCallbackMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -37,7 +37,7 @@ class UpdateSipDomainRequestBodyVoiceStatusCallbackMethodEnum(str, Enum):
 
 
 @dataclass
-class UpdateSipDomainRequestBodyUpdateSipDomainRequest:
+class UpdateSipDomainUpdateSipDomainRequest:
     byoc_trunk_sid: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'ByocTrunkSid' }})
     domain_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'DomainName' }})
     emergency_caller_sid: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'EmergencyCallerSid' }})
@@ -45,10 +45,10 @@ class UpdateSipDomainRequestBodyUpdateSipDomainRequest:
     friendly_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
     secure: Optional[bool] = field(default=None, metadata={'form': { 'field_name': 'Secure' }})
     sip_registration: Optional[bool] = field(default=None, metadata={'form': { 'field_name': 'SipRegistration' }})
-    voice_fallback_method: Optional[UpdateSipDomainRequestBodyVoiceFallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'VoiceFallbackMethod' }})
+    voice_fallback_method: Optional[UpdateSipDomainUpdateSipDomainRequestVoiceFallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'VoiceFallbackMethod' }})
     voice_fallback_url: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'VoiceFallbackUrl' }})
-    voice_method: Optional[UpdateSipDomainRequestBodyVoiceMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'VoiceMethod' }})
-    voice_status_callback_method: Optional[UpdateSipDomainRequestBodyVoiceStatusCallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'VoiceStatusCallbackMethod' }})
+    voice_method: Optional[UpdateSipDomainUpdateSipDomainRequestVoiceMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'VoiceMethod' }})
+    voice_status_callback_method: Optional[UpdateSipDomainUpdateSipDomainRequestVoiceStatusCallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'VoiceStatusCallbackMethod' }})
     voice_status_callback_url: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'VoiceStatusCallbackUrl' }})
     voice_url: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'VoiceUrl' }})
     
@@ -62,7 +62,7 @@ class UpdateSipDomainSecurity:
 class UpdateSipDomainRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateSipDomainPathParams = field(default=None)
-    request: Optional[UpdateSipDomainRequestBodyUpdateSipDomainRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateSipDomainUpdateSipDomainRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateSipDomainSecurity = field(default=None)
     
 

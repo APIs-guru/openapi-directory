@@ -33,7 +33,7 @@ class ListInteractionChannelInviteRequest:
 
 @dataclass_json
 @dataclass
-class ListInteractionChannelInvite200ApplicationJSONMeta:
+class ListInteractionChannelInviteListInteractionChannelInviteResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -45,14 +45,14 @@ class ListInteractionChannelInvite200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListInteractionChannelInvite200ApplicationJSONListInteractionChannelInviteResponse:
+class ListInteractionChannelInviteListInteractionChannelInviteResponse:
     invites: Optional[List[shared.FlexV1InteractionInteractionChannelInteractionChannelInvite]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'invites' }})
-    meta: Optional[ListInteractionChannelInvite200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+    meta: Optional[ListInteractionChannelInviteListInteractionChannelInviteResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     
 
 @dataclass
 class ListInteractionChannelInviteResponse:
     content_type: str = field(default=None)
-    list_interaction_channel_invite_response: Optional[ListInteractionChannelInvite200ApplicationJSONListInteractionChannelInviteResponse] = field(default=None)
+    list_interaction_channel_invite_response: Optional[ListInteractionChannelInviteListInteractionChannelInviteResponse] = field(default=None)
     status_code: int = field(default=None)
     

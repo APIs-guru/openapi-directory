@@ -37,5 +37,6 @@ class PostRequestIDCmdEqualDiffRequest:
 class PostRequestIDCmdEqualDiffResponse:
     body: bytes = field(default=None)
     content_type: str = field(default=None)
+    post_request_id_cmd_equal_diff_200_text_plain_string: Optional[str] = field(default=None)
     status_code: int = field(default=None)
     

@@ -12,7 +12,7 @@ class CreateTokenPathParams:
     
 
 @dataclass
-class CreateTokenRequestBodyCreateTokenRequest:
+class CreateTokenCreateTokenRequest:
     ttl: Optional[int] = field(default=None, metadata={'form': { 'field_name': 'Ttl' }})
     
 
@@ -25,7 +25,7 @@ class CreateTokenSecurity:
 class CreateTokenRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateTokenPathParams = field(default=None)
-    request: Optional[CreateTokenRequestBodyCreateTokenRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateTokenCreateTokenRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateTokenSecurity = field(default=None)
     
 

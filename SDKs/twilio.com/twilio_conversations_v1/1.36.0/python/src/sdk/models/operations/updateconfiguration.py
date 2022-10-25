@@ -7,7 +7,7 @@ UPDATE_CONFIGURATION_SERVERS = [
 
 
 @dataclass
-class UpdateConfigurationRequestBodyUpdateConfigurationRequest:
+class UpdateConfigurationUpdateConfigurationRequest:
     default_chat_service_sid: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'DefaultChatServiceSid' }})
     default_closed_timer: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'DefaultClosedTimer' }})
     default_inactive_timer: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'DefaultInactiveTimer' }})
@@ -22,7 +22,7 @@ class UpdateConfigurationSecurity:
 @dataclass
 class UpdateConfigurationRequest:
     server_url: Optional[str] = field(default=None)
-    request: Optional[UpdateConfigurationRequestBodyUpdateConfigurationRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateConfigurationUpdateConfigurationRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateConfigurationSecurity = field(default=None)
     
 

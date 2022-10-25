@@ -8,7 +8,7 @@ var CreateAccountServers = []string{
 	"https://api.twilio.com",
 }
 
-type CreateAccountRequestBodyCreateAccountRequest struct {
+type CreateAccountCreateAccountRequest struct {
 	FriendlyName *string `form:"name=FriendlyName"`
 }
 
@@ -18,7 +18,7 @@ type CreateAccountSecurity struct {
 
 type CreateAccountRequest struct {
 	ServerURL *string
-	Request   *CreateAccountRequestBodyCreateAccountRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request   *CreateAccountCreateAccountRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security  CreateAccountSecurity
 }
 

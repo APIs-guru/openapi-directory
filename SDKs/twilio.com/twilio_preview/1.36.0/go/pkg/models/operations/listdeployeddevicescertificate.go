@@ -28,7 +28,7 @@ type ListDeployedDevicesCertificateRequest struct {
 	Security    ListDeployedDevicesCertificateSecurity
 }
 
-type ListDeployedDevicesCertificate200ApplicationJSONMeta struct {
+type ListDeployedDevicesCertificateListDeployedDevicesCertificateResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -38,13 +38,13 @@ type ListDeployedDevicesCertificate200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListDeployedDevicesCertificate200ApplicationJSONListDeployedDevicesCertificateResponse struct {
-	Certificates []shared.PreviewDeployedDevicesFleetCertificate       `json:"certificates,omitempty"`
-	Meta         *ListDeployedDevicesCertificate200ApplicationJSONMeta `json:"meta,omitempty"`
+type ListDeployedDevicesCertificateListDeployedDevicesCertificateResponse struct {
+	Certificates []shared.PreviewDeployedDevicesFleetCertificate                           `json:"certificates,omitempty"`
+	Meta         *ListDeployedDevicesCertificateListDeployedDevicesCertificateResponseMeta `json:"meta,omitempty"`
 }
 
 type ListDeployedDevicesCertificateResponse struct {
 	ContentType                            string
-	ListDeployedDevicesCertificateResponse *ListDeployedDevicesCertificate200ApplicationJSONListDeployedDevicesCertificateResponse
+	ListDeployedDevicesCertificateResponse *ListDeployedDevicesCertificateListDeployedDevicesCertificateResponse
 	StatusCode                             int64
 }

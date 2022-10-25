@@ -12,7 +12,7 @@ class CreateEntityPathParams:
     
 
 @dataclass
-class CreateEntityRequestBodyCreateEntityRequest:
+class CreateEntityCreateEntityRequest:
     identity: str = field(default=None, metadata={'form': { 'field_name': 'Identity' }})
     
 
@@ -25,7 +25,7 @@ class CreateEntitySecurity:
 class CreateEntityRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateEntityPathParams = field(default=None)
-    request: Optional[CreateEntityRequestBodyCreateEntityRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateEntityCreateEntityRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateEntitySecurity = field(default=None)
     
 

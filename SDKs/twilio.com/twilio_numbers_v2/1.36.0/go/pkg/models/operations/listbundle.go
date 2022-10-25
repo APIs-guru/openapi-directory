@@ -34,7 +34,7 @@ type ListBundleRequest struct {
 	Security    ListBundleSecurity
 }
 
-type ListBundle200ApplicationJSONMeta struct {
+type ListBundleListBundleResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -44,13 +44,13 @@ type ListBundle200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListBundle200ApplicationJSONListBundleResponse struct {
-	Meta    *ListBundle200ApplicationJSONMeta            `json:"meta,omitempty"`
+type ListBundleListBundleResponse struct {
+	Meta    *ListBundleListBundleResponseMeta            `json:"meta,omitempty"`
 	Results []shared.NumbersV2RegulatoryComplianceBundle `json:"results,omitempty"`
 }
 
 type ListBundleResponse struct {
 	ContentType        string
-	ListBundleResponse *ListBundle200ApplicationJSONListBundleResponse
+	ListBundleResponse *ListBundleListBundleResponse
 	StatusCode         int64
 }

@@ -4,46 +4,46 @@ import (
 	"time"
 )
 
-type NodesCreateRequestBodyAttributesCategoryEnum string
+type NodesCreateNodeAttributesCategoryEnum string
 
 const (
-	NodesCreateRequestBodyAttributesCategoryEnumAnalysis           NodesCreateRequestBodyAttributesCategoryEnum = "analysis"
-	NodesCreateRequestBodyAttributesCategoryEnumCommunication      NodesCreateRequestBodyAttributesCategoryEnum = "communication"
-	NodesCreateRequestBodyAttributesCategoryEnumData               NodesCreateRequestBodyAttributesCategoryEnum = "data"
-	NodesCreateRequestBodyAttributesCategoryEnumHypothesis         NodesCreateRequestBodyAttributesCategoryEnum = "hypothesis"
-	NodesCreateRequestBodyAttributesCategoryEnumInstrumentation    NodesCreateRequestBodyAttributesCategoryEnum = "instrumentation"
-	NodesCreateRequestBodyAttributesCategoryEnumMethodsAndMeasures NodesCreateRequestBodyAttributesCategoryEnum = "methods and measures"
-	NodesCreateRequestBodyAttributesCategoryEnumProcedure          NodesCreateRequestBodyAttributesCategoryEnum = "procedure"
-	NodesCreateRequestBodyAttributesCategoryEnumProject            NodesCreateRequestBodyAttributesCategoryEnum = "project"
-	NodesCreateRequestBodyAttributesCategoryEnumSoftware           NodesCreateRequestBodyAttributesCategoryEnum = "software"
-	NodesCreateRequestBodyAttributesCategoryEnumOther              NodesCreateRequestBodyAttributesCategoryEnum = "other"
+	NodesCreateNodeAttributesCategoryEnumAnalysis           NodesCreateNodeAttributesCategoryEnum = "analysis"
+	NodesCreateNodeAttributesCategoryEnumCommunication      NodesCreateNodeAttributesCategoryEnum = "communication"
+	NodesCreateNodeAttributesCategoryEnumData               NodesCreateNodeAttributesCategoryEnum = "data"
+	NodesCreateNodeAttributesCategoryEnumHypothesis         NodesCreateNodeAttributesCategoryEnum = "hypothesis"
+	NodesCreateNodeAttributesCategoryEnumInstrumentation    NodesCreateNodeAttributesCategoryEnum = "instrumentation"
+	NodesCreateNodeAttributesCategoryEnumMethodsAndMeasures NodesCreateNodeAttributesCategoryEnum = "methods and measures"
+	NodesCreateNodeAttributesCategoryEnumProcedure          NodesCreateNodeAttributesCategoryEnum = "procedure"
+	NodesCreateNodeAttributesCategoryEnumProject            NodesCreateNodeAttributesCategoryEnum = "project"
+	NodesCreateNodeAttributesCategoryEnumSoftware           NodesCreateNodeAttributesCategoryEnum = "software"
+	NodesCreateNodeAttributesCategoryEnumOther              NodesCreateNodeAttributesCategoryEnum = "other"
 )
 
-type NodesCreateRequestBodyAttributesAttributes struct {
-	Category               NodesCreateRequestBodyAttributesCategoryEnum `json:"category"`
-	Collection             *bool                                        `json:"collection,omitempty"`
-	CurrentUserCanComment  *bool                                        `json:"current_user_can_comment,omitempty"`
-	CurrentUserPermissions []string                                     `json:"current_user_permissions,omitempty"`
-	DateCreated            *time.Time                                   `json:"date_created,omitempty"`
-	DateModified           *time.Time                                   `json:"date_modified,omitempty"`
-	Description            *string                                      `json:"description,omitempty"`
-	Fork                   *bool                                        `json:"fork,omitempty"`
-	ForkedDate             *time.Time                                   `json:"forked_date,omitempty"`
-	NodeLicense            *string                                      `json:"node_license,omitempty"`
-	Preprint               *bool                                        `json:"preprint,omitempty"`
-	Public                 *bool                                        `json:"public,omitempty"`
-	Registration           *bool                                        `json:"registration,omitempty"`
-	Tags                   []string                                     `json:"tags,omitempty"`
-	TemplateFrom           *string                                      `json:"template_from,omitempty"`
-	Title                  string                                       `json:"title"`
+type NodesCreateNodeAttributes struct {
+	Category               NodesCreateNodeAttributesCategoryEnum `json:"category"`
+	Collection             *bool                                 `json:"collection,omitempty"`
+	CurrentUserCanComment  *bool                                 `json:"current_user_can_comment,omitempty"`
+	CurrentUserPermissions []string                              `json:"current_user_permissions,omitempty"`
+	DateCreated            *time.Time                            `json:"date_created,omitempty"`
+	DateModified           *time.Time                            `json:"date_modified,omitempty"`
+	Description            *string                               `json:"description,omitempty"`
+	Fork                   *bool                                 `json:"fork,omitempty"`
+	ForkedDate             *time.Time                            `json:"forked_date,omitempty"`
+	NodeLicense            *string                               `json:"node_license,omitempty"`
+	Preprint               *bool                                 `json:"preprint,omitempty"`
+	Public                 *bool                                 `json:"public,omitempty"`
+	Registration           *bool                                 `json:"registration,omitempty"`
+	Tags                   []string                              `json:"tags,omitempty"`
+	TemplateFrom           *string                               `json:"template_from,omitempty"`
+	Title                  string                                `json:"title"`
 }
 
-type NodesCreateRequestBodyLinksLinks struct {
+type NodesCreateNodeLinks struct {
 	HTML *string `json:"html,omitempty"`
 	Self *string `json:"self,omitempty"`
 }
 
-type NodesCreateRequestBodyRelationshipsRelationships struct {
+type NodesCreateNodeRelationships struct {
 	AffiliatedInstitutions *string `json:"affiliated_institutions,omitempty"`
 	Children               *string `json:"children,omitempty"`
 	Citation               *string `json:"citation,omitempty"`
@@ -67,16 +67,16 @@ type NodesCreateRequestBodyRelationshipsRelationships struct {
 	Wikis                  *string `json:"wikis,omitempty"`
 }
 
-type NodesCreateRequestBodyNode struct {
-	Attributes    NodesCreateRequestBodyAttributesAttributes        `json:"attributes"`
-	ID            *string                                           `json:"id,omitempty"`
-	Links         *NodesCreateRequestBodyLinksLinks                 `json:"links,omitempty"`
-	Relationships *NodesCreateRequestBodyRelationshipsRelationships `json:"relationships,omitempty"`
-	Type          string                                            `json:"type"`
+type NodesCreateNode struct {
+	Attributes    NodesCreateNodeAttributes     `json:"attributes"`
+	ID            *string                       `json:"id,omitempty"`
+	Links         *NodesCreateNodeLinks         `json:"links,omitempty"`
+	Relationships *NodesCreateNodeRelationships `json:"relationships,omitempty"`
+	Type          string                        `json:"type"`
 }
 
 type NodesCreateRequest struct {
-	Request NodesCreateRequestBodyNode `request:"mediaType=application/json"`
+	Request NodesCreateNode `request:"mediaType=application/json"`
 }
 
 type NodesCreateResponse struct {

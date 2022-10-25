@@ -3,7 +3,7 @@ from typing import Enum,List,Optional
 from dataclasses_json import dataclass_json
 from . import nestedcable
 
-class WritableRearPortTypeTypeEnum(str, Enum):
+class WritableRearPortTypeEnum(str, Enum):
     EIGHTP8C = "8p8c"
     ONE_HUNDRED_AND_TEN_PUNCH = "110-punch"
     BNC = "bnc"
@@ -30,5 +30,5 @@ class WritableRearPort:
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
     positions: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'positions' }})
     tags: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
-    type: WritableRearPortTypeTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    type: WritableRearPortTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     

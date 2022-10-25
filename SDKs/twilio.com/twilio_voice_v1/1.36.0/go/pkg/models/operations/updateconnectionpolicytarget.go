@@ -13,7 +13,7 @@ type UpdateConnectionPolicyTargetPathParams struct {
 	Sid                 string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
-type UpdateConnectionPolicyTargetRequestBodyUpdateConnectionPolicyTargetRequest struct {
+type UpdateConnectionPolicyTargetUpdateConnectionPolicyTargetRequest struct {
 	Enabled      *bool   `form:"name=Enabled"`
 	FriendlyName *string `form:"name=FriendlyName"`
 	Priority     *int64  `form:"name=Priority"`
@@ -28,7 +28,7 @@ type UpdateConnectionPolicyTargetSecurity struct {
 type UpdateConnectionPolicyTargetRequest struct {
 	ServerURL  *string
 	PathParams UpdateConnectionPolicyTargetPathParams
-	Request    *UpdateConnectionPolicyTargetRequestBodyUpdateConnectionPolicyTargetRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateConnectionPolicyTargetUpdateConnectionPolicyTargetRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateConnectionPolicyTargetSecurity
 }
 

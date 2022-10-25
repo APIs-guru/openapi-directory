@@ -17,7 +17,7 @@ type CreateConversationMessageHeaders struct {
 	XTwilioWebhookEnabled *shared.ConversationMessageEnumWebhookEnabledTypeEnum `header:"name=X-Twilio-Webhook-Enabled"`
 }
 
-type CreateConversationMessageRequestBodyCreateConversationMessageRequest struct {
+type CreateConversationMessageCreateConversationMessageRequest struct {
 	Attributes  *string    `form:"name=Attributes"`
 	Author      *string    `form:"name=Author"`
 	Body        *string    `form:"name=Body"`
@@ -34,7 +34,7 @@ type CreateConversationMessageRequest struct {
 	ServerURL  *string
 	PathParams CreateConversationMessagePathParams
 	Headers    CreateConversationMessageHeaders
-	Request    *CreateConversationMessageRequestBodyCreateConversationMessageRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateConversationMessageCreateConversationMessageRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateConversationMessageSecurity
 }
 

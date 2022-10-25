@@ -26,7 +26,7 @@ const (
 	DeleteServersID200ApplicationJSONActionStatusEnumError   DeleteServersID200ApplicationJSONActionStatusEnum = "error"
 )
 
-type DeleteServersID200ApplicationJSONActionAction struct {
+type DeleteServersID200ApplicationJSONAction struct {
 	Command   string                                             `json:"command"`
 	Error     DeleteServersID200ApplicationJSONActionError       `json:"error"`
 	Finished  string                                             `json:"finished"`
@@ -38,7 +38,7 @@ type DeleteServersID200ApplicationJSONActionAction struct {
 }
 
 type DeleteServersID200ApplicationJSON struct {
-	Action *DeleteServersID200ApplicationJSONActionAction `json:"action,omitempty"`
+	Action *DeleteServersID200ApplicationJSONAction `json:"action,omitempty"`
 }
 
 type DeleteServersIDResponse struct {

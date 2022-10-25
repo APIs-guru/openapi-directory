@@ -28,7 +28,7 @@ type ListIncomingPhoneNumberAssignedAddOnRequest struct {
 	Security    ListIncomingPhoneNumberAssignedAddOnSecurity
 }
 
-type ListIncomingPhoneNumberAssignedAddOn200ApplicationJSONListIncomingPhoneNumberAssignedAddOnResponse struct {
+type ListIncomingPhoneNumberAssignedAddOnListIncomingPhoneNumberAssignedAddOnResponse struct {
 	AssignedAddOns  []shared.APIV2010AccountIncomingPhoneNumberIncomingPhoneNumberAssignedAddOn `json:"assigned_add_ons,omitempty"`
 	End             *int64                                                                      `json:"end,omitempty"`
 	FirstPageURI    *string                                                                     `json:"first_page_uri,omitempty"`
@@ -42,6 +42,6 @@ type ListIncomingPhoneNumberAssignedAddOn200ApplicationJSONListIncomingPhoneNumb
 
 type ListIncomingPhoneNumberAssignedAddOnResponse struct {
 	ContentType                                  string
-	ListIncomingPhoneNumberAssignedAddOnResponse *ListIncomingPhoneNumberAssignedAddOn200ApplicationJSONListIncomingPhoneNumberAssignedAddOnResponse
+	ListIncomingPhoneNumberAssignedAddOnResponse *ListIncomingPhoneNumberAssignedAddOnListIncomingPhoneNumberAssignedAddOnResponse
 	StatusCode                                   int64
 }

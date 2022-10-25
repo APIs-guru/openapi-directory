@@ -12,7 +12,7 @@ type UpdateCredentialPublicKeyPathParams struct {
 	Sid string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
-type UpdateCredentialPublicKeyRequestBodyUpdateCredentialPublicKeyRequest struct {
+type UpdateCredentialPublicKeyUpdateCredentialPublicKeyRequest struct {
 	FriendlyName *string `form:"name=FriendlyName"`
 }
 
@@ -23,7 +23,7 @@ type UpdateCredentialPublicKeySecurity struct {
 type UpdateCredentialPublicKeyRequest struct {
 	ServerURL  *string
 	PathParams UpdateCredentialPublicKeyPathParams
-	Request    *UpdateCredentialPublicKeyRequestBodyUpdateCredentialPublicKeyRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateCredentialPublicKeyUpdateCredentialPublicKeyRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateCredentialPublicKeySecurity
 }
 

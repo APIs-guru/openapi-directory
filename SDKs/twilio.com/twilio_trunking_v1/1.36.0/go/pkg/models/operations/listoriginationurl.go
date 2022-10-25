@@ -27,7 +27,7 @@ type ListOriginationURLRequest struct {
 	Security    ListOriginationURLSecurity
 }
 
-type ListOriginationURL200ApplicationJSONMeta struct {
+type ListOriginationURLListOriginationURLResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -37,13 +37,13 @@ type ListOriginationURL200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListOriginationURL200ApplicationJSONListOriginationURLResponse struct {
-	Meta            *ListOriginationURL200ApplicationJSONMeta `json:"meta,omitempty"`
-	OriginationUrls []shared.TrunkingV1TrunkOriginationURL    `json:"origination_urls,omitempty"`
+type ListOriginationURLListOriginationURLResponse struct {
+	Meta            *ListOriginationURLListOriginationURLResponseMeta `json:"meta,omitempty"`
+	OriginationUrls []shared.TrunkingV1TrunkOriginationURL            `json:"origination_urls,omitempty"`
 }
 
 type ListOriginationURLResponse struct {
 	ContentType                string
-	ListOriginationURLResponse *ListOriginationURL200ApplicationJSONListOriginationURLResponse
+	ListOriginationURLResponse *ListOriginationURLListOriginationURLResponse
 	StatusCode                 int64
 }

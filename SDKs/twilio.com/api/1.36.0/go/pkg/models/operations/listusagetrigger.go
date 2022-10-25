@@ -30,7 +30,7 @@ type ListUsageTriggerRequest struct {
 	Security    ListUsageTriggerSecurity
 }
 
-type ListUsageTrigger200ApplicationJSONListUsageTriggerResponse struct {
+type ListUsageTriggerListUsageTriggerResponse struct {
 	End             *int64                                    `json:"end,omitempty"`
 	FirstPageURI    *string                                   `json:"first_page_uri,omitempty"`
 	NextPageURI     *string                                   `json:"next_page_uri,omitempty"`
@@ -44,6 +44,6 @@ type ListUsageTrigger200ApplicationJSONListUsageTriggerResponse struct {
 
 type ListUsageTriggerResponse struct {
 	ContentType              string
-	ListUsageTriggerResponse *ListUsageTrigger200ApplicationJSONListUsageTriggerResponse
+	ListUsageTriggerResponse *ListUsageTriggerListUsageTriggerResponse
 	StatusCode               int64
 }

@@ -26,7 +26,7 @@ class ListMarketplaceAvailableAddOnRequest:
 
 @dataclass_json
 @dataclass
-class ListMarketplaceAvailableAddOn200ApplicationJSONMeta:
+class ListMarketplaceAvailableAddOnListMarketplaceAvailableAddOnResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -38,14 +38,14 @@ class ListMarketplaceAvailableAddOn200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListMarketplaceAvailableAddOn200ApplicationJSONListMarketplaceAvailableAddOnResponse:
+class ListMarketplaceAvailableAddOnListMarketplaceAvailableAddOnResponse:
     available_add_ons: Optional[List[shared.PreviewMarketplaceAvailableAddOn]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'available_add_ons' }})
-    meta: Optional[ListMarketplaceAvailableAddOn200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+    meta: Optional[ListMarketplaceAvailableAddOnListMarketplaceAvailableAddOnResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     
 
 @dataclass
 class ListMarketplaceAvailableAddOnResponse:
     content_type: str = field(default=None)
-    list_marketplace_available_add_on_response: Optional[ListMarketplaceAvailableAddOn200ApplicationJSONListMarketplaceAvailableAddOnResponse] = field(default=None)
+    list_marketplace_available_add_on_response: Optional[ListMarketplaceAvailableAddOnListMarketplaceAvailableAddOnResponse] = field(default=None)
     status_code: int = field(default=None)
     

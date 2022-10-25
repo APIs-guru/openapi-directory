@@ -18,7 +18,7 @@ class ReactionContentEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class ReactionUserSimpleUser:
+class ReactionSimpleUser:
     avatar_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'avatar_url' }})
     events_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'events_url' }})
     followers_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'followers_url' }})
@@ -47,5 +47,5 @@ class Reaction:
     created_at: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'created_at', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     node_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'node_id' }})
-    user: ReactionUserSimpleUser = field(default=None, metadata={'dataclasses_json': { 'field_name': 'user' }})
+    user: ReactionSimpleUser = field(default=None, metadata={'dataclasses_json': { 'field_name': 'user' }})
     

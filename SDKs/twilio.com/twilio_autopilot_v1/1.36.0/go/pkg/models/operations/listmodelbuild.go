@@ -27,7 +27,7 @@ type ListModelBuildRequest struct {
 	Security    ListModelBuildSecurity
 }
 
-type ListModelBuild200ApplicationJSONMeta struct {
+type ListModelBuildListModelBuildResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -37,13 +37,13 @@ type ListModelBuild200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListModelBuild200ApplicationJSONListModelBuildResponse struct {
-	Meta        *ListModelBuild200ApplicationJSONMeta   `json:"meta,omitempty"`
-	ModelBuilds []shared.AutopilotV1AssistantModelBuild `json:"model_builds,omitempty"`
+type ListModelBuildListModelBuildResponse struct {
+	Meta        *ListModelBuildListModelBuildResponseMeta `json:"meta,omitempty"`
+	ModelBuilds []shared.AutopilotV1AssistantModelBuild   `json:"model_builds,omitempty"`
 }
 
 type ListModelBuildResponse struct {
 	ContentType            string
-	ListModelBuildResponse *ListModelBuild200ApplicationJSONListModelBuildResponse
+	ListModelBuildResponse *ListModelBuildListModelBuildResponse
 	StatusCode             int64
 }

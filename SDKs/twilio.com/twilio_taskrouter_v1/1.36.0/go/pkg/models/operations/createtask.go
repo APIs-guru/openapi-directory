@@ -12,7 +12,7 @@ type CreateTaskPathParams struct {
 	WorkspaceSid string `pathParam:"style=simple,explode=false,name=WorkspaceSid"`
 }
 
-type CreateTaskRequestBodyCreateTaskRequest struct {
+type CreateTaskCreateTaskRequest struct {
 	Attributes  *string `form:"name=Attributes"`
 	Priority    *int64  `form:"name=Priority"`
 	TaskChannel *string `form:"name=TaskChannel"`
@@ -27,7 +27,7 @@ type CreateTaskSecurity struct {
 type CreateTaskRequest struct {
 	ServerURL  *string
 	PathParams CreateTaskPathParams
-	Request    *CreateTaskRequestBodyCreateTaskRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateTaskCreateTaskRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateTaskSecurity
 }
 

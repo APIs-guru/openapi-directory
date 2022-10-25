@@ -17,40 +17,40 @@ type ExpireCombinedSubmissionRequest struct {
 	Security   ExpireCombinedSubmissionSecurity
 }
 
-type ExpireCombinedSubmission200ApplicationJSONSourcePdfs1TypeEnum string
+type ExpireCombinedSubmissionCombinedSubmissionSourcePdfs1TypeEnum string
 
 const (
-	ExpireCombinedSubmission200ApplicationJSONSourcePdfs1TypeEnumSubmission         ExpireCombinedSubmission200ApplicationJSONSourcePdfs1TypeEnum = "submission"
-	ExpireCombinedSubmission200ApplicationJSONSourcePdfs1TypeEnumCombinedSubmission ExpireCombinedSubmission200ApplicationJSONSourcePdfs1TypeEnum = "combined_submission"
-	ExpireCombinedSubmission200ApplicationJSONSourcePdfs1TypeEnumTemplate           ExpireCombinedSubmission200ApplicationJSONSourcePdfs1TypeEnum = "template"
-	ExpireCombinedSubmission200ApplicationJSONSourcePdfs1TypeEnumCustomFile         ExpireCombinedSubmission200ApplicationJSONSourcePdfs1TypeEnum = "custom_file"
+	ExpireCombinedSubmissionCombinedSubmissionSourcePdfs1TypeEnumSubmission         ExpireCombinedSubmissionCombinedSubmissionSourcePdfs1TypeEnum = "submission"
+	ExpireCombinedSubmissionCombinedSubmissionSourcePdfs1TypeEnumCombinedSubmission ExpireCombinedSubmissionCombinedSubmissionSourcePdfs1TypeEnum = "combined_submission"
+	ExpireCombinedSubmissionCombinedSubmissionSourcePdfs1TypeEnumTemplate           ExpireCombinedSubmissionCombinedSubmissionSourcePdfs1TypeEnum = "template"
+	ExpireCombinedSubmissionCombinedSubmissionSourcePdfs1TypeEnumCustomFile         ExpireCombinedSubmissionCombinedSubmissionSourcePdfs1TypeEnum = "custom_file"
 )
 
-type ExpireCombinedSubmission200ApplicationJSONSourcePdfs1 struct {
+type ExpireCombinedSubmissionCombinedSubmissionSourcePdfs1 struct {
 	ID   string                                                        `json:"id"`
-	Type ExpireCombinedSubmission200ApplicationJSONSourcePdfs1TypeEnum `json:"type"`
+	Type ExpireCombinedSubmissionCombinedSubmissionSourcePdfs1TypeEnum `json:"type"`
 }
 
-type ExpireCombinedSubmission200ApplicationJSONSourcePdfs2TypeEnum string
+type ExpireCombinedSubmissionCombinedSubmissionSourcePdfs2TypeEnum string
 
 const (
-	ExpireCombinedSubmission200ApplicationJSONSourcePdfs2TypeEnumURL ExpireCombinedSubmission200ApplicationJSONSourcePdfs2TypeEnum = "url"
+	ExpireCombinedSubmissionCombinedSubmissionSourcePdfs2TypeEnumURL ExpireCombinedSubmissionCombinedSubmissionSourcePdfs2TypeEnum = "url"
 )
 
-type ExpireCombinedSubmission200ApplicationJSONSourcePdfs2 struct {
-	Type ExpireCombinedSubmission200ApplicationJSONSourcePdfs2TypeEnum `json:"type"`
+type ExpireCombinedSubmissionCombinedSubmissionSourcePdfs2 struct {
+	Type ExpireCombinedSubmissionCombinedSubmissionSourcePdfs2TypeEnum `json:"type"`
 	URL  string                                                        `json:"url"`
 }
 
-type ExpireCombinedSubmission200ApplicationJSONStateEnum string
+type ExpireCombinedSubmissionCombinedSubmissionStateEnum string
 
 const (
-	ExpireCombinedSubmission200ApplicationJSONStateEnumPending   ExpireCombinedSubmission200ApplicationJSONStateEnum = "pending"
-	ExpireCombinedSubmission200ApplicationJSONStateEnumProcessed ExpireCombinedSubmission200ApplicationJSONStateEnum = "processed"
-	ExpireCombinedSubmission200ApplicationJSONStateEnumError     ExpireCombinedSubmission200ApplicationJSONStateEnum = "error"
+	ExpireCombinedSubmissionCombinedSubmissionStateEnumPending   ExpireCombinedSubmissionCombinedSubmissionStateEnum = "pending"
+	ExpireCombinedSubmissionCombinedSubmissionStateEnumProcessed ExpireCombinedSubmissionCombinedSubmissionStateEnum = "processed"
+	ExpireCombinedSubmissionCombinedSubmissionStateEnumError     ExpireCombinedSubmissionCombinedSubmissionStateEnum = "error"
 )
 
-type ExpireCombinedSubmission200ApplicationJSONCombinedSubmission struct {
+type ExpireCombinedSubmissionCombinedSubmission struct {
 	Actions       []shared.CombinedSubmissionAction                   `json:"actions,omitempty"`
 	DownloadURL   *string                                             `json:"download_url,omitempty"`
 	Expired       bool                                                `json:"expired"`
@@ -59,7 +59,7 @@ type ExpireCombinedSubmission200ApplicationJSONCombinedSubmission struct {
 	Metadata      map[string]interface{}                              `json:"metadata,omitempty"`
 	PdfHash       *string                                             `json:"pdf_hash,omitempty"`
 	SourcePdfs    []interface{}                                       `json:"source_pdfs"`
-	State         ExpireCombinedSubmission200ApplicationJSONStateEnum `json:"state"`
+	State         ExpireCombinedSubmissionCombinedSubmissionStateEnum `json:"state"`
 	SubmissionIds []string                                            `json:"submission_ids"`
 }
 
@@ -67,6 +67,6 @@ type ExpireCombinedSubmissionResponse struct {
 	ContentType         string
 	StatusCode          int64
 	AuthenticationError *shared.AuthenticationError
-	CombinedSubmission  *ExpireCombinedSubmission200ApplicationJSONCombinedSubmission
+	CombinedSubmission  *ExpireCombinedSubmissionCombinedSubmission
 	Error               *shared.Error
 }

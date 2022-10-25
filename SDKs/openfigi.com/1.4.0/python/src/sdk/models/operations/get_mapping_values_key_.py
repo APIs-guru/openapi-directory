@@ -30,8 +30,9 @@ class GetMappingValuesKey200ApplicationJSON:
 
 @dataclass
 class GetMappingValuesKeyResponse:
-    body: bytes = field(default=None)
     content_type: str = field(default=None)
     get_mapping_values_key_200_application_json_object: Optional[GetMappingValuesKey200ApplicationJSON] = field(default=None)
+    get_mapping_values_key_400_wildcard_string: Optional[str] = field(default=None)
+    get_mapping_values_key_500_wildcard_string: Optional[str] = field(default=None)
     status_code: int = field(default=None)
     

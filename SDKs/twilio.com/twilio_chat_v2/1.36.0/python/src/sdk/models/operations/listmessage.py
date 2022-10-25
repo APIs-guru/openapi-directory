@@ -34,7 +34,7 @@ class ListMessageRequest:
 
 @dataclass_json
 @dataclass
-class ListMessage200ApplicationJSONMeta:
+class ListMessageListMessageResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -46,14 +46,14 @@ class ListMessage200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListMessage200ApplicationJSONListMessageResponse:
+class ListMessageListMessageResponse:
     messages: Optional[List[shared.ChatV2ServiceChannelMessage]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'messages' }})
-    meta: Optional[ListMessage200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+    meta: Optional[ListMessageListMessageResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     
 
 @dataclass
 class ListMessageResponse:
     content_type: str = field(default=None)
-    list_message_response: Optional[ListMessage200ApplicationJSONListMessageResponse] = field(default=None)
+    list_message_response: Optional[ListMessageListMessageResponse] = field(default=None)
     status_code: int = field(default=None)
     

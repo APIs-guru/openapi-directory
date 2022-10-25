@@ -13,7 +13,7 @@ class ExportTemplateTemplateLanguageValueEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class ExportTemplateTemplateLanguageTemplateLanguage:
+class ExportTemplateTemplateLanguage:
     label: ExportTemplateTemplateLanguageLabelEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label' }})
     value: ExportTemplateTemplateLanguageValueEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
     
@@ -28,5 +28,5 @@ class ExportTemplate:
     mime_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'mime_type' }})
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
     template_code: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'template_code' }})
-    template_language: Optional[ExportTemplateTemplateLanguageTemplateLanguage] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'template_language' }})
+    template_language: Optional[ExportTemplateTemplateLanguage] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'template_language' }})
     

@@ -14,7 +14,7 @@ type UpdateSessionPathParams struct {
 	Sid        string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
-type UpdateSessionRequestBodyUpdateSessionRequest struct {
+type UpdateSessionUpdateSessionRequest struct {
 	DateExpiry                *time.Time                    `form:"name=DateExpiry"`
 	FailOnParticipantConflict *bool                         `form:"name=FailOnParticipantConflict"`
 	Status                    *shared.SessionEnumStatusEnum `form:"name=Status"`
@@ -28,7 +28,7 @@ type UpdateSessionSecurity struct {
 type UpdateSessionRequest struct {
 	ServerURL  *string
 	PathParams UpdateSessionPathParams
-	Request    *UpdateSessionRequestBodyUpdateSessionRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateSessionUpdateSessionRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateSessionSecurity
 }
 

@@ -34,7 +34,7 @@ class Onev21appsGetResponses200ContentApplication1jsonSchemaPropertiesAppsItemsD
 
 @dataclass_json
 @dataclass
-class Onev21appsGetResponses200ContentApplication1jsonSchemaPropertiesAppsItemsRegionGeographicalInformationAboutAnAppOrigin:
+class Onev21appsGetResponses200ContentApplication1jsonSchemaPropertiesAppsItemsGeographicalInformationAboutAnAppOrigin:
     continent: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'continent' }})
     data_centers: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'data_centers' }})
     default: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'default' }})
@@ -59,7 +59,7 @@ class Onev21appsGetResponses200ContentApplication1jsonSchemaPropertiesAppsItems:
     live_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'live_url' }})
     live_url_base: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'live_url_base' }})
     owner_uuid: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'owner_uuid' }})
-    region: Optional[Onev21appsGetResponses200ContentApplication1jsonSchemaPropertiesAppsItemsRegionGeographicalInformationAboutAnAppOrigin] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'region' }})
+    region: Optional[Onev21appsGetResponses200ContentApplication1jsonSchemaPropertiesAppsItemsGeographicalInformationAboutAnAppOrigin] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'region' }})
     spec: _1v2_1apps_1_7bapp_id_7d_1deployments_get_responses_200_content_application_1json_schema_properties_deployments_items_properties_spec.Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpec = field(default=None, metadata={'dataclasses_json': { 'field_name': 'spec' }})
     tier_slug: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tier_slug' }})
     updated_at: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updated_at', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})

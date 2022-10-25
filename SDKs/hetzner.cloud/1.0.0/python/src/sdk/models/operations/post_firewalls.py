@@ -5,32 +5,32 @@ from dataclasses_json import dataclass_json
 
 @dataclass_json
 @dataclass
-class PostFirewallsRequestBodyApplyToLabelSelector:
+class PostFirewallsCreateFirewallRequestApplyToLabelSelector:
     selector: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'selector' }})
     
 
 @dataclass_json
 @dataclass
-class PostFirewallsRequestBodyApplyToServer:
+class PostFirewallsCreateFirewallRequestApplyToServer:
     id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     
-class PostFirewallsRequestBodyApplyToTypeEnum(str, Enum):
+class PostFirewallsCreateFirewallRequestApplyToTypeEnum(str, Enum):
     SERVER = "server"
     LABEL_SELECTOR = "label_selector"
 
 
 @dataclass_json
 @dataclass
-class PostFirewallsRequestBodyApplyTo:
-    label_selector: Optional[PostFirewallsRequestBodyApplyToLabelSelector] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label_selector' }})
-    server: Optional[PostFirewallsRequestBodyApplyToServer] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'server' }})
-    type: PostFirewallsRequestBodyApplyToTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+class PostFirewallsCreateFirewallRequestApplyTo:
+    label_selector: Optional[PostFirewallsCreateFirewallRequestApplyToLabelSelector] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label_selector' }})
+    server: Optional[PostFirewallsCreateFirewallRequestApplyToServer] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'server' }})
+    type: PostFirewallsCreateFirewallRequestApplyToTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     
-class PostFirewallsRequestBodyRulesDirectionEnum(str, Enum):
+class PostFirewallsCreateFirewallRequestRuleDirectionEnum(str, Enum):
     IN = "in"
     OUT = "out"
 
-class PostFirewallsRequestBodyRulesProtocolEnum(str, Enum):
+class PostFirewallsCreateFirewallRequestRuleProtocolEnum(str, Enum):
     TCP = "tcp"
     UDP = "udp"
     ICMP = "icmp"
@@ -40,43 +40,43 @@ class PostFirewallsRequestBodyRulesProtocolEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class PostFirewallsRequestBodyRulesRule:
+class PostFirewallsCreateFirewallRequestRule:
     description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
     destination_ips: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'destination_ips' }})
-    direction: PostFirewallsRequestBodyRulesDirectionEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'direction' }})
+    direction: PostFirewallsCreateFirewallRequestRuleDirectionEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'direction' }})
     port: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'port' }})
-    protocol: PostFirewallsRequestBodyRulesProtocolEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'protocol' }})
+    protocol: PostFirewallsCreateFirewallRequestRuleProtocolEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'protocol' }})
     source_ips: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'source_ips' }})
     
 
 @dataclass_json
 @dataclass
-class PostFirewallsRequestBodyCreateFirewallRequest:
-    apply_to: Optional[List[PostFirewallsRequestBodyApplyTo]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'apply_to' }})
+class PostFirewallsCreateFirewallRequest:
+    apply_to: Optional[List[PostFirewallsCreateFirewallRequestApplyTo]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'apply_to' }})
     labels: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'labels' }})
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    rules: Optional[List[PostFirewallsRequestBodyRulesRule]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rules' }})
+    rules: Optional[List[PostFirewallsCreateFirewallRequestRule]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rules' }})
     
 
 @dataclass
 class PostFirewallsRequest:
-    request: Optional[PostFirewallsRequestBodyCreateFirewallRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: Optional[PostFirewallsCreateFirewallRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass_json
 @dataclass
-class PostFirewalls201ApplicationJSONActionsError:
+class PostFirewallsCreateFirewallResponseActionError:
     code: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'code' }})
     message: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'message' }})
     
 
 @dataclass_json
 @dataclass
-class PostFirewalls201ApplicationJSONActionsResources:
+class PostFirewallsCreateFirewallResponseActionResources:
     id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     type: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     
-class PostFirewalls201ApplicationJSONActionsStatusEnum(str, Enum):
+class PostFirewallsCreateFirewallResponseActionStatusEnum(str, Enum):
     SUCCESS = "success"
     RUNNING = "running"
     ERROR = "error"
@@ -84,62 +84,62 @@ class PostFirewalls201ApplicationJSONActionsStatusEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class PostFirewalls201ApplicationJSONActionsAction:
+class PostFirewallsCreateFirewallResponseAction:
     command: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'command' }})
-    error: PostFirewalls201ApplicationJSONActionsError = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
+    error: PostFirewallsCreateFirewallResponseActionError = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
     finished: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'finished' }})
     id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     progress: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'progress' }})
-    resources: List[PostFirewalls201ApplicationJSONActionsResources] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resources' }})
+    resources: List[PostFirewallsCreateFirewallResponseActionResources] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resources' }})
     started: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'started' }})
-    status: PostFirewalls201ApplicationJSONActionsStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    status: PostFirewallsCreateFirewallResponseActionStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
     
 
 @dataclass_json
 @dataclass
-class PostFirewalls201ApplicationJSONFirewallAppliedToAppliedToResourcesServer:
+class PostFirewallsCreateFirewallResponseFirewallAppliedToAppliedToResourcesServer:
     id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     
-class PostFirewalls201ApplicationJSONFirewallAppliedToAppliedToResourcesTypeEnum(str, Enum):
+class PostFirewallsCreateFirewallResponseFirewallAppliedToAppliedToResourcesTypeEnum(str, Enum):
     SERVER = "server"
 
 
 @dataclass_json
 @dataclass
-class PostFirewalls201ApplicationJSONFirewallAppliedToAppliedToResources:
-    server: Optional[PostFirewalls201ApplicationJSONFirewallAppliedToAppliedToResourcesServer] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'server' }})
-    type: Optional[PostFirewalls201ApplicationJSONFirewallAppliedToAppliedToResourcesTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+class PostFirewallsCreateFirewallResponseFirewallAppliedToAppliedToResources:
+    server: Optional[PostFirewallsCreateFirewallResponseFirewallAppliedToAppliedToResourcesServer] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'server' }})
+    type: Optional[PostFirewallsCreateFirewallResponseFirewallAppliedToAppliedToResourcesTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     
 
 @dataclass_json
 @dataclass
-class PostFirewalls201ApplicationJSONFirewallAppliedToLabelSelector:
+class PostFirewallsCreateFirewallResponseFirewallAppliedToLabelSelector:
     selector: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'selector' }})
     
 
 @dataclass_json
 @dataclass
-class PostFirewalls201ApplicationJSONFirewallAppliedToServer:
+class PostFirewallsCreateFirewallResponseFirewallAppliedToServer:
     id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     
-class PostFirewalls201ApplicationJSONFirewallAppliedToTypeEnum(str, Enum):
+class PostFirewallsCreateFirewallResponseFirewallAppliedToTypeEnum(str, Enum):
     SERVER = "server"
     LABEL_SELECTOR = "label_selector"
 
 
 @dataclass_json
 @dataclass
-class PostFirewalls201ApplicationJSONFirewallAppliedTo:
-    applied_to_resources: Optional[List[PostFirewalls201ApplicationJSONFirewallAppliedToAppliedToResources]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'applied_to_resources' }})
-    label_selector: Optional[PostFirewalls201ApplicationJSONFirewallAppliedToLabelSelector] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label_selector' }})
-    server: Optional[PostFirewalls201ApplicationJSONFirewallAppliedToServer] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'server' }})
-    type: PostFirewalls201ApplicationJSONFirewallAppliedToTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+class PostFirewallsCreateFirewallResponseFirewallAppliedTo:
+    applied_to_resources: Optional[List[PostFirewallsCreateFirewallResponseFirewallAppliedToAppliedToResources]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'applied_to_resources' }})
+    label_selector: Optional[PostFirewallsCreateFirewallResponseFirewallAppliedToLabelSelector] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label_selector' }})
+    server: Optional[PostFirewallsCreateFirewallResponseFirewallAppliedToServer] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'server' }})
+    type: PostFirewallsCreateFirewallResponseFirewallAppliedToTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     
-class PostFirewalls201ApplicationJSONFirewallRulesDirectionEnum(str, Enum):
+class PostFirewallsCreateFirewallResponseFirewallRuleDirectionEnum(str, Enum):
     IN = "in"
     OUT = "out"
 
-class PostFirewalls201ApplicationJSONFirewallRulesProtocolEnum(str, Enum):
+class PostFirewallsCreateFirewallResponseFirewallRuleProtocolEnum(str, Enum):
     TCP = "tcp"
     UDP = "udp"
     ICMP = "icmp"
@@ -149,36 +149,36 @@ class PostFirewalls201ApplicationJSONFirewallRulesProtocolEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class PostFirewalls201ApplicationJSONFirewallRulesRule:
+class PostFirewallsCreateFirewallResponseFirewallRule:
     description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
     destination_ips: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'destination_ips' }})
-    direction: PostFirewalls201ApplicationJSONFirewallRulesDirectionEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'direction' }})
+    direction: PostFirewallsCreateFirewallResponseFirewallRuleDirectionEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'direction' }})
     port: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'port' }})
-    protocol: PostFirewalls201ApplicationJSONFirewallRulesProtocolEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'protocol' }})
+    protocol: PostFirewallsCreateFirewallResponseFirewallRuleProtocolEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'protocol' }})
     source_ips: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'source_ips' }})
     
 
 @dataclass_json
 @dataclass
-class PostFirewalls201ApplicationJSONFirewallFirewall:
-    applied_to: List[PostFirewalls201ApplicationJSONFirewallAppliedTo] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'applied_to' }})
+class PostFirewallsCreateFirewallResponseFirewall:
+    applied_to: List[PostFirewallsCreateFirewallResponseFirewallAppliedTo] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'applied_to' }})
     created: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'created' }})
     id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     labels: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'labels' }})
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    rules: List[PostFirewalls201ApplicationJSONFirewallRulesRule] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rules' }})
+    rules: List[PostFirewallsCreateFirewallResponseFirewallRule] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rules' }})
     
 
 @dataclass_json
 @dataclass
-class PostFirewalls201ApplicationJSONCreateFirewallResponse:
-    actions: Optional[List[PostFirewalls201ApplicationJSONActionsAction]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'actions' }})
-    firewall: Optional[PostFirewalls201ApplicationJSONFirewallFirewall] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'firewall' }})
+class PostFirewallsCreateFirewallResponse:
+    actions: Optional[List[PostFirewallsCreateFirewallResponseAction]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'actions' }})
+    firewall: Optional[PostFirewallsCreateFirewallResponseFirewall] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'firewall' }})
     
 
 @dataclass
 class PostFirewallsResponse:
     content_type: str = field(default=None)
-    create_firewall_response: Optional[PostFirewalls201ApplicationJSONCreateFirewallResponse] = field(default=None)
+    create_firewall_response: Optional[PostFirewallsCreateFirewallResponse] = field(default=None)
     status_code: int = field(default=None)
     

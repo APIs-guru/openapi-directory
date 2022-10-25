@@ -12,7 +12,7 @@ class UpdateDevicePathParams:
     
 
 @dataclass
-class UpdateDeviceRequestBodyUpdateDeviceRequest:
+class UpdateDeviceUpdateDeviceRequest:
     logging_enabled: Optional[bool] = field(default=None, metadata={'form': { 'field_name': 'LoggingEnabled' }})
     target_app: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'TargetApp' }})
     unique_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'UniqueName' }})
@@ -27,7 +27,7 @@ class UpdateDeviceSecurity:
 class UpdateDeviceRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateDevicePathParams = field(default=None)
-    request: Optional[UpdateDeviceRequestBodyUpdateDeviceRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateDeviceUpdateDeviceRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateDeviceSecurity = field(default=None)
     
 

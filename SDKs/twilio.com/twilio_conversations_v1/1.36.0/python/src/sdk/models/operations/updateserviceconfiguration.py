@@ -12,7 +12,7 @@ class UpdateServiceConfigurationPathParams:
     
 
 @dataclass
-class UpdateServiceConfigurationRequestBodyUpdateServiceConfigurationRequest:
+class UpdateServiceConfigurationUpdateServiceConfigurationRequest:
     default_chat_service_role_sid: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'DefaultChatServiceRoleSid' }})
     default_conversation_creator_role_sid: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'DefaultConversationCreatorRoleSid' }})
     default_conversation_role_sid: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'DefaultConversationRoleSid' }})
@@ -28,7 +28,7 @@ class UpdateServiceConfigurationSecurity:
 class UpdateServiceConfigurationRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateServiceConfigurationPathParams = field(default=None)
-    request: Optional[UpdateServiceConfigurationRequestBodyUpdateServiceConfigurationRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateServiceConfigurationUpdateServiceConfigurationRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateServiceConfigurationSecurity = field(default=None)
     
 

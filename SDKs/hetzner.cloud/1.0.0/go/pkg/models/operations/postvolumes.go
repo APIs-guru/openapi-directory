@@ -1,6 +1,6 @@
 package operations
 
-type PostVolumesRequestBodyCreateVolumeRequest struct {
+type PostVolumesCreateVolumeRequest struct {
 	Automount *bool                  `json:"automount,omitempty"`
 	Format    *string                `json:"format,omitempty"`
 	Labels    map[string]interface{} `json:"labels,omitempty"`
@@ -11,7 +11,7 @@ type PostVolumesRequestBodyCreateVolumeRequest struct {
 }
 
 type PostVolumesRequest struct {
-	Request *PostVolumesRequestBodyCreateVolumeRequest `request:"mediaType=application/json"`
+	Request *PostVolumesCreateVolumeRequest `request:"mediaType=application/json"`
 }
 
 type PostVolumes201ApplicationJSONActionError struct {
@@ -32,7 +32,7 @@ const (
 	PostVolumes201ApplicationJSONActionStatusEnumError   PostVolumes201ApplicationJSONActionStatusEnum = "error"
 )
 
-type PostVolumes201ApplicationJSONActionAction struct {
+type PostVolumes201ApplicationJSONAction struct {
 	Command   string                                         `json:"command"`
 	Error     PostVolumes201ApplicationJSONActionError       `json:"error"`
 	Finished  string                                         `json:"finished"`
@@ -41,35 +41,6 @@ type PostVolumes201ApplicationJSONActionAction struct {
 	Resources []PostVolumes201ApplicationJSONActionResources `json:"resources"`
 	Started   string                                         `json:"started"`
 	Status    PostVolumes201ApplicationJSONActionStatusEnum  `json:"status"`
-}
-
-type PostVolumes201ApplicationJSONNextActionsError struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
-type PostVolumes201ApplicationJSONNextActionsResources struct {
-	ID   int64  `json:"id"`
-	Type string `json:"type"`
-}
-
-type PostVolumes201ApplicationJSONNextActionsStatusEnum string
-
-const (
-	PostVolumes201ApplicationJSONNextActionsStatusEnumSuccess PostVolumes201ApplicationJSONNextActionsStatusEnum = "success"
-	PostVolumes201ApplicationJSONNextActionsStatusEnumRunning PostVolumes201ApplicationJSONNextActionsStatusEnum = "running"
-	PostVolumes201ApplicationJSONNextActionsStatusEnumError   PostVolumes201ApplicationJSONNextActionsStatusEnum = "error"
-)
-
-type PostVolumes201ApplicationJSONNextActionsAction struct {
-	Command   string                                              `json:"command"`
-	Error     PostVolumes201ApplicationJSONNextActionsError       `json:"error"`
-	Finished  string                                              `json:"finished"`
-	ID        int64                                               `json:"id"`
-	Progress  float64                                             `json:"progress"`
-	Resources []PostVolumes201ApplicationJSONNextActionsResources `json:"resources"`
-	Started   string                                              `json:"started"`
-	Status    PostVolumes201ApplicationJSONNextActionsStatusEnum  `json:"status"`
 }
 
 type PostVolumes201ApplicationJSONVolumeLocation struct {
@@ -109,9 +80,9 @@ type PostVolumes201ApplicationJSONVolume struct {
 }
 
 type PostVolumes201ApplicationJSON struct {
-	Action      PostVolumes201ApplicationJSONActionAction        `json:"action"`
-	NextActions []PostVolumes201ApplicationJSONNextActionsAction `json:"next_actions"`
-	Volume      PostVolumes201ApplicationJSONVolume              `json:"volume"`
+	Action      PostVolumes201ApplicationJSONAction   `json:"action"`
+	NextActions []PostVolumes201ApplicationJSONAction `json:"next_actions"`
+	Volume      PostVolumes201ApplicationJSONVolume   `json:"volume"`
 }
 
 type PostVolumesResponse struct {

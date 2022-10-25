@@ -32,7 +32,7 @@ class ListUnderstandTaskRequest:
 
 @dataclass_json
 @dataclass
-class ListUnderstandTask200ApplicationJSONMeta:
+class ListUnderstandTaskListUnderstandTaskResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -44,14 +44,14 @@ class ListUnderstandTask200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListUnderstandTask200ApplicationJSONListUnderstandTaskResponse:
-    meta: Optional[ListUnderstandTask200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+class ListUnderstandTaskListUnderstandTaskResponse:
+    meta: Optional[ListUnderstandTaskListUnderstandTaskResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     tasks: Optional[List[shared.PreviewUnderstandAssistantTask]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tasks' }})
     
 
 @dataclass
 class ListUnderstandTaskResponse:
     content_type: str = field(default=None)
-    list_understand_task_response: Optional[ListUnderstandTask200ApplicationJSONListUnderstandTaskResponse] = field(default=None)
+    list_understand_task_response: Optional[ListUnderstandTaskListUnderstandTaskResponse] = field(default=None)
     status_code: int = field(default=None)
     

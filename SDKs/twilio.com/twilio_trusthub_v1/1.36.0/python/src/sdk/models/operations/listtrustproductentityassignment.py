@@ -32,7 +32,7 @@ class ListTrustProductEntityAssignmentRequest:
 
 @dataclass_json
 @dataclass
-class ListTrustProductEntityAssignment200ApplicationJSONMeta:
+class ListTrustProductEntityAssignmentListTrustProductEntityAssignmentResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -44,14 +44,14 @@ class ListTrustProductEntityAssignment200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListTrustProductEntityAssignment200ApplicationJSONListTrustProductEntityAssignmentResponse:
-    meta: Optional[ListTrustProductEntityAssignment200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+class ListTrustProductEntityAssignmentListTrustProductEntityAssignmentResponse:
+    meta: Optional[ListTrustProductEntityAssignmentListTrustProductEntityAssignmentResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     results: Optional[List[shared.TrusthubV1TrustProductTrustProductEntityAssignment]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'results' }})
     
 
 @dataclass
 class ListTrustProductEntityAssignmentResponse:
     content_type: str = field(default=None)
-    list_trust_product_entity_assignment_response: Optional[ListTrustProductEntityAssignment200ApplicationJSONListTrustProductEntityAssignmentResponse] = field(default=None)
+    list_trust_product_entity_assignment_response: Optional[ListTrustProductEntityAssignmentListTrustProductEntityAssignmentResponse] = field(default=None)
     status_code: int = field(default=None)
     

@@ -19,7 +19,7 @@ class ExpireCombinedSubmissionRequest:
     path_params: ExpireCombinedSubmissionPathParams = field(default=None)
     security: ExpireCombinedSubmissionSecurity = field(default=None)
     
-class ExpireCombinedSubmission200ApplicationJSONSourcePdfs1TypeEnum(str, Enum):
+class ExpireCombinedSubmissionCombinedSubmissionSourcePdfs1TypeEnum(str, Enum):
     SUBMISSION = "submission"
     COMBINED_SUBMISSION = "combined_submission"
     TEMPLATE = "template"
@@ -28,21 +28,21 @@ class ExpireCombinedSubmission200ApplicationJSONSourcePdfs1TypeEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class ExpireCombinedSubmission200ApplicationJSONSourcePdfs1:
+class ExpireCombinedSubmissionCombinedSubmissionSourcePdfs1:
     id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    type: ExpireCombinedSubmission200ApplicationJSONSourcePdfs1TypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    type: ExpireCombinedSubmissionCombinedSubmissionSourcePdfs1TypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     
-class ExpireCombinedSubmission200ApplicationJSONSourcePdfs2TypeEnum(str, Enum):
+class ExpireCombinedSubmissionCombinedSubmissionSourcePdfs2TypeEnum(str, Enum):
     URL = "url"
 
 
 @dataclass_json
 @dataclass
-class ExpireCombinedSubmission200ApplicationJSONSourcePdfs2:
-    type: ExpireCombinedSubmission200ApplicationJSONSourcePdfs2TypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+class ExpireCombinedSubmissionCombinedSubmissionSourcePdfs2:
+    type: ExpireCombinedSubmissionCombinedSubmissionSourcePdfs2TypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'url' }})
     
-class ExpireCombinedSubmission200ApplicationJSONStateEnum(str, Enum):
+class ExpireCombinedSubmissionCombinedSubmissionStateEnum(str, Enum):
     PENDING = "pending"
     PROCESSED = "processed"
     ERROR = "error"
@@ -50,7 +50,7 @@ class ExpireCombinedSubmission200ApplicationJSONStateEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class ExpireCombinedSubmission200ApplicationJSONCombinedSubmission:
+class ExpireCombinedSubmissionCombinedSubmission:
     actions: Optional[List[shared.CombinedSubmissionAction]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'actions' }})
     download_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'download_url' }})
     expired: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'expired' }})
@@ -59,7 +59,7 @@ class ExpireCombinedSubmission200ApplicationJSONCombinedSubmission:
     metadata: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'metadata' }})
     pdf_hash: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pdf_hash' }})
     source_pdfs: List[Any] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'source_pdfs' }})
-    state: ExpireCombinedSubmission200ApplicationJSONStateEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'state' }})
+    state: ExpireCombinedSubmissionCombinedSubmissionStateEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'state' }})
     submission_ids: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'submission_ids' }})
     
 
@@ -68,6 +68,6 @@ class ExpireCombinedSubmissionResponse:
     content_type: str = field(default=None)
     status_code: int = field(default=None)
     authentication_error: Optional[shared.AuthenticationError] = field(default=None)
-    combined_submission: Optional[ExpireCombinedSubmission200ApplicationJSONCombinedSubmission] = field(default=None)
+    combined_submission: Optional[ExpireCombinedSubmissionCombinedSubmission] = field(default=None)
     error: Optional[shared.Error] = field(default=None)
     

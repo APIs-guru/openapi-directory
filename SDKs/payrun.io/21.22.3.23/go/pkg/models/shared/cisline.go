@@ -4,53 +4,53 @@ import (
 	"time"
 )
 
-type CisLineCisLinePayFrequencyPayFrequencyEnum string
+type CisLineCisLinePayFrequencyEnum string
 
 const (
-	CisLineCisLinePayFrequencyPayFrequencyEnumMonthly CisLineCisLinePayFrequencyPayFrequencyEnum = "Monthly"
-	CisLineCisLinePayFrequencyPayFrequencyEnumWeekly  CisLineCisLinePayFrequencyPayFrequencyEnum = "Weekly"
+	CisLineCisLinePayFrequencyEnumMonthly CisLineCisLinePayFrequencyEnum = "Monthly"
+	CisLineCisLinePayFrequencyEnumWeekly  CisLineCisLinePayFrequencyEnum = "Weekly"
 )
 
-type CisLineCisLineTaxTreatmentTaxTreatmentEnum string
+type CisLineCisLineTaxTreatmentEnum string
 
 const (
-	CisLineCisLineTaxTreatmentTaxTreatmentEnumTaxable    CisLineCisLineTaxTreatmentTaxTreatmentEnum = "Taxable"
-	CisLineCisLineTaxTreatmentTaxTreatmentEnumNonTaxable CisLineCisLineTaxTreatmentTaxTreatmentEnum = "NonTaxable"
-	CisLineCisLineTaxTreatmentTaxTreatmentEnumNotional   CisLineCisLineTaxTreatmentTaxTreatmentEnum = "Notional"
-	CisLineCisLineTaxTreatmentTaxTreatmentEnumMaterials  CisLineCisLineTaxTreatmentTaxTreatmentEnum = "Materials"
+	CisLineCisLineTaxTreatmentEnumTaxable    CisLineCisLineTaxTreatmentEnum = "Taxable"
+	CisLineCisLineTaxTreatmentEnumNonTaxable CisLineCisLineTaxTreatmentEnum = "NonTaxable"
+	CisLineCisLineTaxTreatmentEnumNotional   CisLineCisLineTaxTreatmentEnum = "Notional"
+	CisLineCisLineTaxTreatmentEnumMaterials  CisLineCisLineTaxTreatmentEnum = "Materials"
 )
 
-type CisLineCisLineUomUomEnum string
+type CisLineCisLineUomEnum string
 
 const (
-	CisLineCisLineUomUomEnumNotSet CisLineCisLineUomUomEnum = "NotSet"
-	CisLineCisLineUomUomEnumMinute CisLineCisLineUomUomEnum = "Minute"
-	CisLineCisLineUomUomEnumHour   CisLineCisLineUomUomEnum = "Hour"
-	CisLineCisLineUomUomEnumDay    CisLineCisLineUomUomEnum = "Day"
-	CisLineCisLineUomUomEnumWeek   CisLineCisLineUomUomEnum = "Week"
-	CisLineCisLineUomUomEnumMonth  CisLineCisLineUomUomEnum = "Month"
-	CisLineCisLineUomUomEnumYear   CisLineCisLineUomUomEnum = "Year"
-	CisLineCisLineUomUomEnumUnit   CisLineCisLineUomUomEnum = "Unit"
+	CisLineCisLineUomEnumNotSet CisLineCisLineUomEnum = "NotSet"
+	CisLineCisLineUomEnumMinute CisLineCisLineUomEnum = "Minute"
+	CisLineCisLineUomEnumHour   CisLineCisLineUomEnum = "Hour"
+	CisLineCisLineUomEnumDay    CisLineCisLineUomEnum = "Day"
+	CisLineCisLineUomEnumWeek   CisLineCisLineUomEnum = "Week"
+	CisLineCisLineUomEnumMonth  CisLineCisLineUomEnum = "Month"
+	CisLineCisLineUomEnumYear   CisLineCisLineUomEnum = "Year"
+	CisLineCisLineUomEnumUnit   CisLineCisLineUomEnum = "Unit"
 )
 
-type CisLineCisLineCisLine struct {
-	CisDeduction   *float64                                    `json:"CisDeduction,omitempty"`
-	CisLineType    *string                                     `json:"CisLineType,omitempty"`
-	Description    *string                                     `json:"Description,omitempty"`
-	Generated      *time.Time                                  `json:"Generated,omitempty"`
-	GrossPay       *float64                                    `json:"GrossPay,omitempty"`
-	NominalCodeKey *string                                     `json:"NominalCodeKey,omitempty"`
-	PayFrequency   *CisLineCisLinePayFrequencyPayFrequencyEnum `json:"PayFrequency,omitempty"`
-	TaxMonth       *int32                                      `json:"TaxMonth,omitempty"`
-	TaxPeriod      *int32                                      `json:"TaxPeriod,omitempty"`
-	TaxTreatment   *CisLineCisLineTaxTreatmentTaxTreatmentEnum `json:"TaxTreatment,omitempty"`
-	TaxYear        *int32                                      `json:"TaxYear,omitempty"`
-	Uom            *CisLineCisLineUomUomEnum                   `json:"UOM,omitempty"`
-	UnitRate       *float64                                    `json:"UnitRate,omitempty"`
-	Units          *float64                                    `json:"Units,omitempty"`
-	Vat            *float64                                    `json:"VAT,omitempty"`
+type CisLineCisLine struct {
+	CisDeduction   *float64                        `json:"CisDeduction,omitempty"`
+	CisLineType    *string                         `json:"CisLineType,omitempty"`
+	Description    *string                         `json:"Description,omitempty"`
+	Generated      *time.Time                      `json:"Generated,omitempty"`
+	GrossPay       *float64                        `json:"GrossPay,omitempty"`
+	NominalCodeKey *string                         `json:"NominalCodeKey,omitempty"`
+	PayFrequency   *CisLineCisLinePayFrequencyEnum `json:"PayFrequency,omitempty"`
+	TaxMonth       *int32                          `json:"TaxMonth,omitempty"`
+	TaxPeriod      *int32                          `json:"TaxPeriod,omitempty"`
+	TaxTreatment   *CisLineCisLineTaxTreatmentEnum `json:"TaxTreatment,omitempty"`
+	TaxYear        *int32                          `json:"TaxYear,omitempty"`
+	Uom            *CisLineCisLineUomEnum          `json:"UOM,omitempty"`
+	UnitRate       *float64                        `json:"UnitRate,omitempty"`
+	Units          *float64                        `json:"Units,omitempty"`
+	Vat            *float64                        `json:"VAT,omitempty"`
 }
 
 type CisLine struct {
-	CisLine *CisLineCisLineCisLine `json:"CisLine,omitempty"`
+	CisLine *CisLineCisLine `json:"CisLine,omitempty"`
 }

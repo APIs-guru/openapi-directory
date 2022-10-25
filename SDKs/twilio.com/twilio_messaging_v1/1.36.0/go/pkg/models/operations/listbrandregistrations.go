@@ -22,7 +22,7 @@ type ListBrandRegistrationsRequest struct {
 	Security    ListBrandRegistrationsSecurity
 }
 
-type ListBrandRegistrations200ApplicationJSONMeta struct {
+type ListBrandRegistrationsListBrandRegistrationsResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -32,13 +32,13 @@ type ListBrandRegistrations200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListBrandRegistrations200ApplicationJSONListBrandRegistrationsResponse struct {
-	Data []shared.MessagingV1BrandRegistrations        `json:"data,omitempty"`
-	Meta *ListBrandRegistrations200ApplicationJSONMeta `json:"meta,omitempty"`
+type ListBrandRegistrationsListBrandRegistrationsResponse struct {
+	Data []shared.MessagingV1BrandRegistrations                    `json:"data,omitempty"`
+	Meta *ListBrandRegistrationsListBrandRegistrationsResponseMeta `json:"meta,omitempty"`
 }
 
 type ListBrandRegistrationsResponse struct {
 	ContentType                    string
-	ListBrandRegistrationsResponse *ListBrandRegistrations200ApplicationJSONListBrandRegistrationsResponse
+	ListBrandRegistrationsResponse *ListBrandRegistrationsListBrandRegistrationsResponse
 	StatusCode                     int64
 }

@@ -26,7 +26,7 @@ class ListBrandRegistrationsRequest:
 
 @dataclass_json
 @dataclass
-class ListBrandRegistrations200ApplicationJSONMeta:
+class ListBrandRegistrationsListBrandRegistrationsResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -38,14 +38,14 @@ class ListBrandRegistrations200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListBrandRegistrations200ApplicationJSONListBrandRegistrationsResponse:
+class ListBrandRegistrationsListBrandRegistrationsResponse:
     data: Optional[List[shared.MessagingV1BrandRegistrations]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'data' }})
-    meta: Optional[ListBrandRegistrations200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+    meta: Optional[ListBrandRegistrationsListBrandRegistrationsResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     
 
 @dataclass
 class ListBrandRegistrationsResponse:
     content_type: str = field(default=None)
-    list_brand_registrations_response: Optional[ListBrandRegistrations200ApplicationJSONListBrandRegistrationsResponse] = field(default=None)
+    list_brand_registrations_response: Optional[ListBrandRegistrationsListBrandRegistrationsResponse] = field(default=None)
     status_code: int = field(default=None)
     

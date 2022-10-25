@@ -7,7 +7,7 @@ CREATE_SOURCE_IP_MAPPING_SERVERS = [
 
 
 @dataclass
-class CreateSourceIPMappingRequestBodyCreateSourceIPMappingRequest:
+class CreateSourceIPMappingCreateSourceIPMappingRequest:
     ip_record_sid: str = field(default=None, metadata={'form': { 'field_name': 'IpRecordSid' }})
     sip_domain_sid: str = field(default=None, metadata={'form': { 'field_name': 'SipDomainSid' }})
     
@@ -20,7 +20,7 @@ class CreateSourceIPMappingSecurity:
 @dataclass
 class CreateSourceIPMappingRequest:
     server_url: Optional[str] = field(default=None)
-    request: Optional[CreateSourceIPMappingRequestBodyCreateSourceIPMappingRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateSourceIPMappingCreateSourceIPMappingRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateSourceIPMappingSecurity = field(default=None)
     
 

@@ -12,7 +12,7 @@ class CreatePlayerStreamerPlaybackGrantPathParams:
     
 
 @dataclass
-class CreatePlayerStreamerPlaybackGrantRequestBodyCreatePlayerStreamerPlaybackGrantRequest:
+class CreatePlayerStreamerPlaybackGrantCreatePlayerStreamerPlaybackGrantRequest:
     access_control_allow_origin: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'AccessControlAllowOrigin' }})
     ttl: Optional[int] = field(default=None, metadata={'form': { 'field_name': 'Ttl' }})
     
@@ -26,7 +26,7 @@ class CreatePlayerStreamerPlaybackGrantSecurity:
 class CreatePlayerStreamerPlaybackGrantRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreatePlayerStreamerPlaybackGrantPathParams = field(default=None)
-    request: Optional[CreatePlayerStreamerPlaybackGrantRequestBodyCreatePlayerStreamerPlaybackGrantRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreatePlayerStreamerPlaybackGrantCreatePlayerStreamerPlaybackGrantRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreatePlayerStreamerPlaybackGrantSecurity = field(default=None)
     
 

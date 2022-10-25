@@ -4,14 +4,14 @@ import (
 	"time"
 )
 
-type NewPaymentRequestRequestBodyCurrencyEnum string
+type NewPaymentRequestNewPaymentRequestCurrencyEnum string
 
 const (
-	NewPaymentRequestRequestBodyCurrencyEnumEur NewPaymentRequestRequestBodyCurrencyEnum = "EUR"
-	NewPaymentRequestRequestBodyCurrencyEnumGbp NewPaymentRequestRequestBodyCurrencyEnum = "GBP"
+	NewPaymentRequestNewPaymentRequestCurrencyEnumEur NewPaymentRequestNewPaymentRequestCurrencyEnum = "EUR"
+	NewPaymentRequestNewPaymentRequestCurrencyEnumGbp NewPaymentRequestNewPaymentRequestCurrencyEnum = "GBP"
 )
 
-type NewPaymentRequestRequestBodyOrderDetailsOrderDetails struct {
+type NewPaymentRequestNewPaymentRequestOrderDetails struct {
 	Comment1                       *string `json:"comment1,omitempty"`
 	Comment2                       *string `json:"comment2,omitempty"`
 	CustomerNumber                 *string `json:"customerNumber,omitempty"`
@@ -27,45 +27,45 @@ type NewPaymentRequestRequestBodyOrderDetailsOrderDetails struct {
 	VariableReference              *string `json:"variableReference,omitempty"`
 }
 
-type NewPaymentRequestRequestBodyTypeEnum string
+type NewPaymentRequestNewPaymentRequestTypeEnum string
 
 const (
-	NewPaymentRequestRequestBodyTypeEnumOther NewPaymentRequestRequestBodyTypeEnum = "OTHER"
+	NewPaymentRequestNewPaymentRequestTypeEnumOther NewPaymentRequestNewPaymentRequestTypeEnum = "OTHER"
 )
 
-type NewPaymentRequestRequestBodyNewPaymentRequest struct {
-	AdditionalFields  *string                                               `json:"additionalFields,omitempty"`
-	Amount            *int64                                                `json:"amount,omitempty"`
-	CollectFields     *string                                               `json:"collectFields,omitempty"`
-	Currency          NewPaymentRequestRequestBodyCurrencyEnum              `json:"currency"`
-	Description       string                                                `json:"description"`
-	Expiry            *time.Time                                            `json:"expiry,omitempty"`
-	IcanTo            int64                                                 `json:"icanTo"`
-	MandatoryFields   *string                                               `json:"mandatoryFields,omitempty"`
-	MaxNumberPayments *int64                                                `json:"maxNumberPayments,omitempty"`
-	MyRef             string                                                `json:"myRef"`
-	OrderDetails      *NewPaymentRequestRequestBodyOrderDetailsOrderDetails `json:"orderDetails,omitempty"`
-	ReturnURL         *string                                               `json:"returnUrl,omitempty"`
-	Type              NewPaymentRequestRequestBodyTypeEnum                  `json:"type"`
+type NewPaymentRequestNewPaymentRequest struct {
+	AdditionalFields  *string                                         `json:"additionalFields,omitempty"`
+	Amount            *int64                                          `json:"amount,omitempty"`
+	CollectFields     *string                                         `json:"collectFields,omitempty"`
+	Currency          NewPaymentRequestNewPaymentRequestCurrencyEnum  `json:"currency"`
+	Description       string                                          `json:"description"`
+	Expiry            *time.Time                                      `json:"expiry,omitempty"`
+	IcanTo            int64                                           `json:"icanTo"`
+	MandatoryFields   *string                                         `json:"mandatoryFields,omitempty"`
+	MaxNumberPayments *int64                                          `json:"maxNumberPayments,omitempty"`
+	MyRef             string                                          `json:"myRef"`
+	OrderDetails      *NewPaymentRequestNewPaymentRequestOrderDetails `json:"orderDetails,omitempty"`
+	ReturnURL         *string                                         `json:"returnUrl,omitempty"`
+	Type              NewPaymentRequestNewPaymentRequestTypeEnum      `json:"type"`
 }
 
 type NewPaymentRequestRequest struct {
-	Request NewPaymentRequestRequestBodyNewPaymentRequest `request:"mediaType=application/json"`
+	Request NewPaymentRequestNewPaymentRequest `request:"mediaType=application/json"`
 }
 
-type NewPaymentRequest200ApplicationJSONTypeEnum string
+type NewPaymentRequestNewPaymentRequestResponseTypeEnum string
 
 const (
-	NewPaymentRequest200ApplicationJSONTypeEnumOther NewPaymentRequest200ApplicationJSONTypeEnum = "OTHER"
+	NewPaymentRequestNewPaymentRequestResponseTypeEnumOther NewPaymentRequestNewPaymentRequestResponseTypeEnum = "OTHER"
 )
 
-type NewPaymentRequest200ApplicationJSONNewPaymentRequestResponse struct {
-	Code *string                                      `json:"code,omitempty"`
-	Type *NewPaymentRequest200ApplicationJSONTypeEnum `json:"type,omitempty"`
+type NewPaymentRequestNewPaymentRequestResponse struct {
+	Code *string                                             `json:"code,omitempty"`
+	Type *NewPaymentRequestNewPaymentRequestResponseTypeEnum `json:"type,omitempty"`
 }
 
 type NewPaymentRequestResponse struct {
 	ContentType               string
-	NewPaymentRequestResponse *NewPaymentRequest200ApplicationJSONNewPaymentRequestResponse
+	NewPaymentRequestResponse *NewPaymentRequestNewPaymentRequestResponse
 	StatusCode                int64
 }

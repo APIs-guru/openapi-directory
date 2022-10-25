@@ -10,7 +10,7 @@ from . import linkedcustomer
 from . import invoicelineitem
 from . import address
 
-class InvoiceStatusStatusEnum(str, Enum):
+class InvoiceStatusEnum(str, Enum):
     DRAFT = "draft"
     SUBMITTED = "submitted"
     AUTHORISED = "authorised"
@@ -20,7 +20,7 @@ class InvoiceStatusStatusEnum(str, Enum):
     CREDIT = "credit"
     DELETED = "deleted"
 
-class InvoiceTypeInvoiceTypeEnum(str, Enum):
+class InvoiceInvoiceTypeEnum(str, Enum):
     STANDARD = "standard"
     CREDIT = "credit"
     SERVICE = "service"
@@ -54,7 +54,7 @@ class Invoice:
     row_version: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'row_version' }})
     shipping_address: Optional[address.Address] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'shipping_address' }})
     source_document_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'source_document_url' }})
-    status: Optional[InvoiceStatusStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    status: Optional[InvoiceStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
     sub_total: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sub_total' }})
     tax_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tax_code' }})
     tax_inclusive: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tax_inclusive' }})
@@ -62,7 +62,7 @@ class Invoice:
     terms: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'terms' }})
     total: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
     total_tax: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total_tax' }})
-    type: Optional[InvoiceTypeInvoiceTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    type: Optional[InvoiceInvoiceTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     updated_at: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updated_at', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     updated_by: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updated_by' }})
     

@@ -13,41 +13,41 @@ type PostLoadBalancersIDActionsChangeProtectionRequest struct {
 	Request    *PostLoadBalancersIDActionsChangeProtectionRequestBody `request:"mediaType=application/json"`
 }
 
-type PostLoadBalancersIDActionsChangeProtection201ApplicationJSONActionError struct {
+type PostLoadBalancersIDActionsChangeProtectionActionResponseActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
 }
 
-type PostLoadBalancersIDActionsChangeProtection201ApplicationJSONActionResources struct {
+type PostLoadBalancersIDActionsChangeProtectionActionResponseActionResources struct {
 	ID   int64  `json:"id"`
 	Type string `json:"type"`
 }
 
-type PostLoadBalancersIDActionsChangeProtection201ApplicationJSONActionStatusEnum string
+type PostLoadBalancersIDActionsChangeProtectionActionResponseActionStatusEnum string
 
 const (
-	PostLoadBalancersIDActionsChangeProtection201ApplicationJSONActionStatusEnumSuccess PostLoadBalancersIDActionsChangeProtection201ApplicationJSONActionStatusEnum = "success"
-	PostLoadBalancersIDActionsChangeProtection201ApplicationJSONActionStatusEnumRunning PostLoadBalancersIDActionsChangeProtection201ApplicationJSONActionStatusEnum = "running"
-	PostLoadBalancersIDActionsChangeProtection201ApplicationJSONActionStatusEnumError   PostLoadBalancersIDActionsChangeProtection201ApplicationJSONActionStatusEnum = "error"
+	PostLoadBalancersIDActionsChangeProtectionActionResponseActionStatusEnumSuccess PostLoadBalancersIDActionsChangeProtectionActionResponseActionStatusEnum = "success"
+	PostLoadBalancersIDActionsChangeProtectionActionResponseActionStatusEnumRunning PostLoadBalancersIDActionsChangeProtectionActionResponseActionStatusEnum = "running"
+	PostLoadBalancersIDActionsChangeProtectionActionResponseActionStatusEnumError   PostLoadBalancersIDActionsChangeProtectionActionResponseActionStatusEnum = "error"
 )
 
-type PostLoadBalancersIDActionsChangeProtection201ApplicationJSONActionAction struct {
-	Command   string                                                                        `json:"command"`
-	Error     PostLoadBalancersIDActionsChangeProtection201ApplicationJSONActionError       `json:"error"`
-	Finished  string                                                                        `json:"finished"`
-	ID        int64                                                                         `json:"id"`
-	Progress  float64                                                                       `json:"progress"`
-	Resources []PostLoadBalancersIDActionsChangeProtection201ApplicationJSONActionResources `json:"resources"`
-	Started   string                                                                        `json:"started"`
-	Status    PostLoadBalancersIDActionsChangeProtection201ApplicationJSONActionStatusEnum  `json:"status"`
+type PostLoadBalancersIDActionsChangeProtectionActionResponseAction struct {
+	Command   string                                                                    `json:"command"`
+	Error     PostLoadBalancersIDActionsChangeProtectionActionResponseActionError       `json:"error"`
+	Finished  string                                                                    `json:"finished"`
+	ID        int64                                                                     `json:"id"`
+	Progress  float64                                                                   `json:"progress"`
+	Resources []PostLoadBalancersIDActionsChangeProtectionActionResponseActionResources `json:"resources"`
+	Started   string                                                                    `json:"started"`
+	Status    PostLoadBalancersIDActionsChangeProtectionActionResponseActionStatusEnum  `json:"status"`
 }
 
-type PostLoadBalancersIDActionsChangeProtection201ApplicationJSONActionResponse struct {
-	Action PostLoadBalancersIDActionsChangeProtection201ApplicationJSONActionAction `json:"action"`
+type PostLoadBalancersIDActionsChangeProtectionActionResponse struct {
+	Action PostLoadBalancersIDActionsChangeProtectionActionResponseAction `json:"action"`
 }
 
 type PostLoadBalancersIDActionsChangeProtectionResponse struct {
-	ActionResponse *PostLoadBalancersIDActionsChangeProtection201ApplicationJSONActionResponse
+	ActionResponse *PostLoadBalancersIDActionsChangeProtectionActionResponse
 	ContentType    string
 	StatusCode     int64
 }

@@ -13,7 +13,7 @@ class UpdateTaskQueuePathParams:
     
 
 @dataclass
-class UpdateTaskQueueRequestBodyUpdateTaskQueueRequest:
+class UpdateTaskQueueUpdateTaskQueueRequest:
     assignment_activity_sid: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'AssignmentActivitySid' }})
     friendly_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
     max_reserved_workers: Optional[int] = field(default=None, metadata={'form': { 'field_name': 'MaxReservedWorkers' }})
@@ -31,7 +31,7 @@ class UpdateTaskQueueSecurity:
 class UpdateTaskQueueRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateTaskQueuePathParams = field(default=None)
-    request: Optional[UpdateTaskQueueRequestBodyUpdateTaskQueueRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateTaskQueueUpdateTaskQueueRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateTaskQueueSecurity = field(default=None)
     
 

@@ -33,7 +33,7 @@ class ListRoomRequest:
 
 @dataclass_json
 @dataclass
-class ListRoom200ApplicationJSONMeta:
+class ListRoomListRoomResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -45,14 +45,14 @@ class ListRoom200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListRoom200ApplicationJSONListRoomResponse:
-    meta: Optional[ListRoom200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+class ListRoomListRoomResponse:
+    meta: Optional[ListRoomListRoomResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     rooms: Optional[List[shared.VideoV1Room]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rooms' }})
     
 
 @dataclass
 class ListRoomResponse:
     content_type: str = field(default=None)
-    list_room_response: Optional[ListRoom200ApplicationJSONListRoomResponse] = field(default=None)
+    list_room_response: Optional[ListRoomListRoomResponse] = field(default=None)
     status_code: int = field(default=None)
     

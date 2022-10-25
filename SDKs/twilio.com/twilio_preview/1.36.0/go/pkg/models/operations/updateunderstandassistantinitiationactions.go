@@ -12,7 +12,7 @@ type UpdateUnderstandAssistantInitiationActionsPathParams struct {
 	AssistantSid string `pathParam:"style=simple,explode=false,name=AssistantSid"`
 }
 
-type UpdateUnderstandAssistantInitiationActionsRequestBodyUpdateUnderstandAssistantInitiationActionsRequest struct {
+type UpdateUnderstandAssistantInitiationActionsUpdateUnderstandAssistantInitiationActionsRequest struct {
 	InitiationActions *interface{} `form:"name=InitiationActions"`
 }
 
@@ -23,7 +23,7 @@ type UpdateUnderstandAssistantInitiationActionsSecurity struct {
 type UpdateUnderstandAssistantInitiationActionsRequest struct {
 	ServerURL  *string
 	PathParams UpdateUnderstandAssistantInitiationActionsPathParams
-	Request    *UpdateUnderstandAssistantInitiationActionsRequestBodyUpdateUnderstandAssistantInitiationActionsRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateUnderstandAssistantInitiationActionsUpdateUnderstandAssistantInitiationActionsRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateUnderstandAssistantInitiationActionsSecurity
 }
 

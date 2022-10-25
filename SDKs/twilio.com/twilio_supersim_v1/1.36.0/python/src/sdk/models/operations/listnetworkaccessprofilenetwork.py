@@ -32,7 +32,7 @@ class ListNetworkAccessProfileNetworkRequest:
 
 @dataclass_json
 @dataclass
-class ListNetworkAccessProfileNetwork200ApplicationJSONMeta:
+class ListNetworkAccessProfileNetworkListNetworkAccessProfileNetworkResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -44,14 +44,14 @@ class ListNetworkAccessProfileNetwork200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListNetworkAccessProfileNetwork200ApplicationJSONListNetworkAccessProfileNetworkResponse:
-    meta: Optional[ListNetworkAccessProfileNetwork200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+class ListNetworkAccessProfileNetworkListNetworkAccessProfileNetworkResponse:
+    meta: Optional[ListNetworkAccessProfileNetworkListNetworkAccessProfileNetworkResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     networks: Optional[List[shared.SupersimV1NetworkAccessProfileNetworkAccessProfileNetwork]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'networks' }})
     
 
 @dataclass
 class ListNetworkAccessProfileNetworkResponse:
     content_type: str = field(default=None)
-    list_network_access_profile_network_response: Optional[ListNetworkAccessProfileNetwork200ApplicationJSONListNetworkAccessProfileNetworkResponse] = field(default=None)
+    list_network_access_profile_network_response: Optional[ListNetworkAccessProfileNetworkListNetworkAccessProfileNetworkResponse] = field(default=None)
     status_code: int = field(default=None)
     

@@ -12,7 +12,7 @@ class CreateShortCodePathParams:
     
 
 @dataclass
-class CreateShortCodeRequestBodyCreateShortCodeRequest:
+class CreateShortCodeCreateShortCodeRequest:
     sid: str = field(default=None, metadata={'form': { 'field_name': 'Sid' }})
     
 
@@ -25,7 +25,7 @@ class CreateShortCodeSecurity:
 class CreateShortCodeRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateShortCodePathParams = field(default=None)
-    request: Optional[CreateShortCodeRequestBodyCreateShortCodeRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateShortCodeCreateShortCodeRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateShortCodeSecurity = field(default=None)
     
 

@@ -22,7 +22,7 @@ class GetTemplateSchemaRequest:
 
 @dataclass_json
 @dataclass
-class GetTemplateSchema200ApplicationJSONTemplateSchema:
+class GetTemplateSchemaTemplateSchema:
     dollar_schema: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': '$schema' }})
     additional_properties: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'additionalProperties' }})
     definitions: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'definitions' }})
@@ -40,5 +40,5 @@ class GetTemplateSchemaResponse:
     status_code: int = field(default=None)
     authentication_error: Optional[shared.AuthenticationError] = field(default=None)
     error: Optional[shared.Error] = field(default=None)
-    template_schema: Optional[GetTemplateSchema200ApplicationJSONTemplateSchema] = field(default=None)
+    template_schema: Optional[GetTemplateSchemaTemplateSchema] = field(default=None)
     

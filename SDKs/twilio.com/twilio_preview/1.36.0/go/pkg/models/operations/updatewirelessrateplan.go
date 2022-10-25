@@ -12,7 +12,7 @@ type UpdateWirelessRatePlanPathParams struct {
 	Sid string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
-type UpdateWirelessRatePlanRequestBodyUpdateWirelessRatePlanRequest struct {
+type UpdateWirelessRatePlanUpdateWirelessRatePlanRequest struct {
 	FriendlyName *string `form:"name=FriendlyName"`
 	UniqueName   *string `form:"name=UniqueName"`
 }
@@ -24,7 +24,7 @@ type UpdateWirelessRatePlanSecurity struct {
 type UpdateWirelessRatePlanRequest struct {
 	ServerURL  *string
 	PathParams UpdateWirelessRatePlanPathParams
-	Request    *UpdateWirelessRatePlanRequestBodyUpdateWirelessRatePlanRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateWirelessRatePlanUpdateWirelessRatePlanRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateWirelessRatePlanSecurity
 }
 

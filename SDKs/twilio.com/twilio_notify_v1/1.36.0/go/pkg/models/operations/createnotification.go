@@ -12,7 +12,7 @@ type CreateNotificationPathParams struct {
 	ServiceSid string `pathParam:"style=simple,explode=false,name=ServiceSid"`
 }
 
-type CreateNotificationRequestBodyCreateNotificationRequest struct {
+type CreateNotificationCreateNotificationRequest struct {
 	Action              *string                              `form:"name=Action"`
 	Alexa               *interface{}                         `form:"name=Alexa"`
 	Apn                 *interface{}                         `form:"name=Apn"`
@@ -40,7 +40,7 @@ type CreateNotificationSecurity struct {
 type CreateNotificationRequest struct {
 	ServerURL  *string
 	PathParams CreateNotificationPathParams
-	Request    *CreateNotificationRequestBodyCreateNotificationRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateNotificationCreateNotificationRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateNotificationSecurity
 }
 

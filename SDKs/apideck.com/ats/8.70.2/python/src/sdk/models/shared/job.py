@@ -12,7 +12,7 @@ from . import jobstatus_enum
 
 @dataclass_json
 @dataclass
-class JobBranchBranch:
+class JobBranch:
     id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
     
@@ -47,7 +47,7 @@ class Job:
     addresses: Optional[List[address.Address]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'addresses' }})
     available_to_employees: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'available_to_employees' }})
     blocks: Optional[List[Any]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'blocks' }})
-    branch: Optional[JobBranchBranch] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'branch' }})
+    branch: Optional[JobBranch] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'branch' }})
     closing: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'closing' }})
     closing_date: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'closing_date', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     closing_html: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'closing_html' }})

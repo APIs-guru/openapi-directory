@@ -13,7 +13,7 @@ type CreatePaymentsPathParams struct {
 	CallSid    string `pathParam:"style=simple,explode=false,name=CallSid"`
 }
 
-type CreatePaymentsRequestBodyCreatePaymentsRequest struct {
+type CreatePaymentsCreatePaymentsRequest struct {
 	BankAccountType     *shared.PaymentsEnumBankAccountTypeEnum `form:"name=BankAccountType"`
 	ChargeAmount        *float64                                `form:"name=ChargeAmount"`
 	Currency            *string                                 `form:"name=Currency"`
@@ -39,7 +39,7 @@ type CreatePaymentsSecurity struct {
 type CreatePaymentsRequest struct {
 	ServerURL  *string
 	PathParams CreatePaymentsPathParams
-	Request    *CreatePaymentsRequestBodyCreatePaymentsRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreatePaymentsCreatePaymentsRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreatePaymentsSecurity
 }
 

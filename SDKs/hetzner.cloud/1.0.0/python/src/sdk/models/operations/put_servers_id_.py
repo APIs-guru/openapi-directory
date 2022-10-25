@@ -10,7 +10,7 @@ class PutServersIDPathParams:
 
 @dataclass_json
 @dataclass
-class PutServersIDRequestBodyUpdateServerRequest:
+class PutServersIDUpdateServerRequest:
     labels: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'labels' }})
     name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
     
@@ -18,7 +18,7 @@ class PutServersIDRequestBodyUpdateServerRequest:
 @dataclass
 class PutServersIDRequest:
     path_params: PutServersIDPathParams = field(default=None)
-    request: Optional[PutServersIDRequestBodyUpdateServerRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: Optional[PutServersIDUpdateServerRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass_json
@@ -120,19 +120,19 @@ class PutServersID200ApplicationJSONServerIso:
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
     type: PutServersID200ApplicationJSONServerIsoTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     
-class PutServersID200ApplicationJSONServerPlacementGroupTypeEnum(str, Enum):
+class PutServersID200ApplicationJSONServerPlacementGroupNullableTypeEnum(str, Enum):
     SPREAD = "spread"
 
 
 @dataclass_json
 @dataclass
-class PutServersID200ApplicationJSONServerPlacementGroupPlacementGroupNullable:
+class PutServersID200ApplicationJSONServerPlacementGroupNullable:
     created: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'created' }})
     id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     labels: dict[str, str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'labels' }})
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
     servers: List[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'servers' }})
-    type: PutServersID200ApplicationJSONServerPlacementGroupTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    type: PutServersID200ApplicationJSONServerPlacementGroupNullableTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     
 
 @dataclass_json
@@ -150,16 +150,16 @@ class PutServersID200ApplicationJSONServerProtection:
     delete: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'delete' }})
     rebuild: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rebuild' }})
     
-class PutServersID200ApplicationJSONServerPublicNetFirewallsStatusEnum(str, Enum):
+class PutServersID200ApplicationJSONServerPublicNetServerPublicNetFirewallStatusEnum(str, Enum):
     APPLIED = "applied"
     PENDING = "pending"
 
 
 @dataclass_json
 @dataclass
-class PutServersID200ApplicationJSONServerPublicNetFirewallsServerPublicNetFirewall:
+class PutServersID200ApplicationJSONServerPublicNetServerPublicNetFirewall:
     id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    status: Optional[PutServersID200ApplicationJSONServerPublicNetFirewallsStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    status: Optional[PutServersID200ApplicationJSONServerPublicNetServerPublicNetFirewallStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
     
 
 @dataclass_json
@@ -188,7 +188,7 @@ class PutServersID200ApplicationJSONServerPublicNetIpv6:
 @dataclass_json
 @dataclass
 class PutServersID200ApplicationJSONServerPublicNet:
-    firewalls: Optional[List[PutServersID200ApplicationJSONServerPublicNetFirewallsServerPublicNetFirewall]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'firewalls' }})
+    firewalls: Optional[List[PutServersID200ApplicationJSONServerPublicNetServerPublicNetFirewall]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'firewalls' }})
     floating_ips: List[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'floating_ips' }})
     ipv4: PutServersID200ApplicationJSONServerPublicNetIpv4 = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ipv4' }})
     ipv6: PutServersID200ApplicationJSONServerPublicNetIpv6 = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ipv6' }})
@@ -266,7 +266,7 @@ class PutServersID200ApplicationJSONServer:
     locked: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'locked' }})
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
     outgoing_traffic: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'outgoing_traffic' }})
-    placement_group: Optional[PutServersID200ApplicationJSONServerPlacementGroupPlacementGroupNullable] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'placement_group' }})
+    placement_group: Optional[PutServersID200ApplicationJSONServerPlacementGroupNullable] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'placement_group' }})
     primary_disk_size: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'primary_disk_size' }})
     private_net: List[PutServersID200ApplicationJSONServerPrivateNet] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'private_net' }})
     protection: PutServersID200ApplicationJSONServerProtection = field(default=None, metadata={'dataclasses_json': { 'field_name': 'protection' }})

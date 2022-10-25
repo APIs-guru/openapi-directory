@@ -12,7 +12,7 @@ type CreateNetworkAccessProfileNetworkPathParams struct {
 	NetworkAccessProfileSid string `pathParam:"style=simple,explode=false,name=NetworkAccessProfileSid"`
 }
 
-type CreateNetworkAccessProfileNetworkRequestBodyCreateNetworkAccessProfileNetworkRequest struct {
+type CreateNetworkAccessProfileNetworkCreateNetworkAccessProfileNetworkRequest struct {
 	Network string `form:"name=Network"`
 }
 
@@ -23,7 +23,7 @@ type CreateNetworkAccessProfileNetworkSecurity struct {
 type CreateNetworkAccessProfileNetworkRequest struct {
 	ServerURL  *string
 	PathParams CreateNetworkAccessProfileNetworkPathParams
-	Request    *CreateNetworkAccessProfileNetworkRequestBodyCreateNetworkAccessProfileNetworkRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateNetworkAccessProfileNetworkCreateNetworkAccessProfileNetworkRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateNetworkAccessProfileNetworkSecurity
 }
 

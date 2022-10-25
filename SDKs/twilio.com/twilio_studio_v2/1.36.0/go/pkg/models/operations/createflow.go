@@ -8,7 +8,7 @@ var CreateFlowServers = []string{
 	"https://studio.twilio.com",
 }
 
-type CreateFlowRequestBodyCreateFlowRequest struct {
+type CreateFlowCreateFlowRequest struct {
 	CommitMessage *string                   `form:"name=CommitMessage"`
 	Definition    interface{}               `form:"name=Definition"`
 	FriendlyName  string                    `form:"name=FriendlyName"`
@@ -21,7 +21,7 @@ type CreateFlowSecurity struct {
 
 type CreateFlowRequest struct {
 	ServerURL *string
-	Request   *CreateFlowRequestBodyCreateFlowRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request   *CreateFlowCreateFlowRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security  CreateFlowSecurity
 }
 

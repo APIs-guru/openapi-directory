@@ -12,7 +12,7 @@ type CreateSipIPAccessControlListPathParams struct {
 	AccountSid string `pathParam:"style=simple,explode=false,name=AccountSid"`
 }
 
-type CreateSipIPAccessControlListRequestBodyCreateSipIPAccessControlListRequest struct {
+type CreateSipIPAccessControlListCreateSipIPAccessControlListRequest struct {
 	FriendlyName string `form:"name=FriendlyName"`
 }
 
@@ -23,7 +23,7 @@ type CreateSipIPAccessControlListSecurity struct {
 type CreateSipIPAccessControlListRequest struct {
 	ServerURL  *string
 	PathParams CreateSipIPAccessControlListPathParams
-	Request    *CreateSipIPAccessControlListRequestBodyCreateSipIPAccessControlListRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateSipIPAccessControlListCreateSipIPAccessControlListRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateSipIPAccessControlListSecurity
 }
 

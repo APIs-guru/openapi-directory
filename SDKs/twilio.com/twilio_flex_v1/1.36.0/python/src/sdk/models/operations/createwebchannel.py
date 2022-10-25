@@ -7,7 +7,7 @@ CREATE_WEB_CHANNEL_SERVERS = [
 
 
 @dataclass
-class CreateWebChannelRequestBodyCreateWebChannelRequest:
+class CreateWebChannelCreateWebChannelRequest:
     chat_friendly_name: str = field(default=None, metadata={'form': { 'field_name': 'ChatFriendlyName' }})
     chat_unique_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'ChatUniqueName' }})
     customer_friendly_name: str = field(default=None, metadata={'form': { 'field_name': 'CustomerFriendlyName' }})
@@ -24,7 +24,7 @@ class CreateWebChannelSecurity:
 @dataclass
 class CreateWebChannelRequest:
     server_url: Optional[str] = field(default=None)
-    request: Optional[CreateWebChannelRequestBodyCreateWebChannelRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateWebChannelCreateWebChannelRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateWebChannelSecurity = field(default=None)
     
 

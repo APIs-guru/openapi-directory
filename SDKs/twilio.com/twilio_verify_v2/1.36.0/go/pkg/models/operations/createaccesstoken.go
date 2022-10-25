@@ -12,7 +12,7 @@ type CreateAccessTokenPathParams struct {
 	ServiceSid string `pathParam:"style=simple,explode=false,name=ServiceSid"`
 }
 
-type CreateAccessTokenRequestBodyCreateAccessTokenRequest struct {
+type CreateAccessTokenCreateAccessTokenRequest struct {
 	FactorFriendlyName *string                               `form:"name=FactorFriendlyName"`
 	FactorType         shared.AccessTokenEnumFactorTypesEnum `form:"name=FactorType"`
 	Identity           string                                `form:"name=Identity"`
@@ -26,7 +26,7 @@ type CreateAccessTokenSecurity struct {
 type CreateAccessTokenRequest struct {
 	ServerURL  *string
 	PathParams CreateAccessTokenPathParams
-	Request    *CreateAccessTokenRequestBodyCreateAccessTokenRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateAccessTokenCreateAccessTokenRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateAccessTokenSecurity
 }
 

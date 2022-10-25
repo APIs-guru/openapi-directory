@@ -12,7 +12,7 @@ class CreateConnectionPolicyTargetPathParams:
     
 
 @dataclass
-class CreateConnectionPolicyTargetRequestBodyCreateConnectionPolicyTargetRequest:
+class CreateConnectionPolicyTargetCreateConnectionPolicyTargetRequest:
     enabled: Optional[bool] = field(default=None, metadata={'form': { 'field_name': 'Enabled' }})
     friendly_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
     priority: Optional[int] = field(default=None, metadata={'form': { 'field_name': 'Priority' }})
@@ -29,7 +29,7 @@ class CreateConnectionPolicyTargetSecurity:
 class CreateConnectionPolicyTargetRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateConnectionPolicyTargetPathParams = field(default=None)
-    request: Optional[CreateConnectionPolicyTargetRequestBodyCreateConnectionPolicyTargetRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateConnectionPolicyTargetCreateConnectionPolicyTargetRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateConnectionPolicyTargetSecurity = field(default=None)
     
 

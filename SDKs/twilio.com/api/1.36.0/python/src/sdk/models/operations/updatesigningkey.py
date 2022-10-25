@@ -13,7 +13,7 @@ class UpdateSigningKeyPathParams:
     
 
 @dataclass
-class UpdateSigningKeyRequestBodyUpdateSigningKeyRequest:
+class UpdateSigningKeyUpdateSigningKeyRequest:
     friendly_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
     
 
@@ -26,7 +26,7 @@ class UpdateSigningKeySecurity:
 class UpdateSigningKeyRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateSigningKeyPathParams = field(default=None)
-    request: Optional[UpdateSigningKeyRequestBodyUpdateSigningKeyRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateSigningKeyUpdateSigningKeyRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateSigningKeySecurity = field(default=None)
     
 

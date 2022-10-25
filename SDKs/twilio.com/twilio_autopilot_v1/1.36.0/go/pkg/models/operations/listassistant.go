@@ -22,7 +22,7 @@ type ListAssistantRequest struct {
 	Security    ListAssistantSecurity
 }
 
-type ListAssistant200ApplicationJSONMeta struct {
+type ListAssistantListAssistantResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -32,13 +32,13 @@ type ListAssistant200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListAssistant200ApplicationJSONListAssistantResponse struct {
-	Assistants []shared.AutopilotV1Assistant        `json:"assistants,omitempty"`
-	Meta       *ListAssistant200ApplicationJSONMeta `json:"meta,omitempty"`
+type ListAssistantListAssistantResponse struct {
+	Assistants []shared.AutopilotV1Assistant           `json:"assistants,omitempty"`
+	Meta       *ListAssistantListAssistantResponseMeta `json:"meta,omitempty"`
 }
 
 type ListAssistantResponse struct {
 	ContentType           string
-	ListAssistantResponse *ListAssistant200ApplicationJSONListAssistantResponse
+	ListAssistantResponse *ListAssistantListAssistantResponse
 	StatusCode            int64
 }

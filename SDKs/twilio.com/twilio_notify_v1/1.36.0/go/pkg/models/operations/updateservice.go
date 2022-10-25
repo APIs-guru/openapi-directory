@@ -12,7 +12,7 @@ type UpdateServicePathParams struct {
 	Sid string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
-type UpdateServiceRequestBodyUpdateServiceRequest struct {
+type UpdateServiceUpdateServiceRequest struct {
 	AlexaSkillID                            *string `form:"name=AlexaSkillId"`
 	ApnCredentialSid                        *string `form:"name=ApnCredentialSid"`
 	DefaultAlexaNotificationProtocolVersion *string `form:"name=DefaultAlexaNotificationProtocolVersion"`
@@ -36,7 +36,7 @@ type UpdateServiceSecurity struct {
 type UpdateServiceRequest struct {
 	ServerURL  *string
 	PathParams UpdateServicePathParams
-	Request    *UpdateServiceRequestBodyUpdateServiceRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateServiceUpdateServiceRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateServiceSecurity
 }
 

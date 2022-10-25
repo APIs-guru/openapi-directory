@@ -43,11 +43,11 @@ class SDK:
         res = operations.AddFieldsToTemplateResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.AddFieldsToTemplate200ApplicationJSONAddFieldsTemplateResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.AddFieldsToTemplateAddFieldsTemplateResponse])
                 res.add_fields_template_response = out
         elif r.status_code == 422:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.AddFieldsToTemplate200ApplicationJSONAddFieldsTemplateResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.AddFieldsToTemplateAddFieldsTemplateResponse])
                 res.add_fields_template_response = out
 
         return res
@@ -76,7 +76,7 @@ class SDK:
         res = operations.BatchGeneratePdfV1Response(status_code=r.status_code, content_type=content_type)
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[List[operations.BatchGeneratePdfV1201ApplicationJSONCreateSubmissionResponse]])
+                out = utils.unmarshal_json(r.text, Optional[List[operations.BatchGeneratePdfV1CreateSubmissionResponse]])
                 res.create_submission_responses = out
         elif r.status_code == 400:
             if utils.match_content_type(content_type, "application/json"):
@@ -117,11 +117,11 @@ class SDK:
         res = operations.BatchGeneratePdfsResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.BatchGeneratePdfs200ApplicationJSONCreateSubmissionBatchResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.BatchGeneratePdfsCreateSubmissionBatchResponse])
                 res.create_submission_batch_response = out
         elif r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.BatchGeneratePdfs200ApplicationJSONCreateSubmissionBatchResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.BatchGeneratePdfsCreateSubmissionBatchResponse])
                 res.create_submission_batch_response = out
         elif r.status_code == 400:
             if utils.match_content_type(content_type, "application/json"):
@@ -158,7 +158,7 @@ class SDK:
         res = operations.CombinePdfsResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.CombinePdfs201ApplicationJSONCreateCombinedSubmissionResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.CombinePdfsCreateCombinedSubmissionResponse])
                 res.create_combined_submission_response = out
         elif r.status_code == 400:
             if utils.match_content_type(content_type, "application/json"):
@@ -199,7 +199,7 @@ class SDK:
         res = operations.CombineSubmissionsResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.CombineSubmissions201ApplicationJSONCreateCombinedSubmissionResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.CombineSubmissionsCreateCombinedSubmissionResponse])
                 res.create_combined_submission_response = out
         elif r.status_code == 400:
             if utils.match_content_type(content_type, "application/json"):
@@ -237,7 +237,7 @@ class SDK:
         res = operations.CopyTemplateResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.CopyTemplate200ApplicationJSONTemplate])
+                out = utils.unmarshal_json(r.text, Optional[operations.CopyTemplateTemplate])
                 res.template = out
         elif r.status_code == 404:
             if utils.match_content_type(content_type, "application/json"):
@@ -270,7 +270,7 @@ class SDK:
         res = operations.CreateCustomFileFromUploadResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.CreateCustomFileFromUpload201ApplicationJSONCreateCustomFileResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.CreateCustomFileFromUploadCreateCustomFileResponse])
                 res.create_custom_file_response = out
         elif r.status_code == 401:
             if utils.match_content_type(content_type, "application/json"):
@@ -296,7 +296,7 @@ class SDK:
         res = operations.CreateDataRequestTokenResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.CreateDataRequestToken201ApplicationJSONCreateSubmissionDataRequestTokenResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.CreateDataRequestTokenCreateSubmissionDataRequestTokenResponse])
                 res.create_submission_data_request_token_response = out
         elif r.status_code == 401:
             if utils.match_content_type(content_type, "application/json"):
@@ -329,7 +329,7 @@ class SDK:
         res = operations.CreateFolderResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.CreateFolder200ApplicationJSONFolder])
+                out = utils.unmarshal_json(r.text, Optional[operations.CreateFolderFolder])
                 res.folder = out
         elif r.status_code == 401:
             if utils.match_content_type(content_type, "application/json"):
@@ -341,7 +341,7 @@ class SDK:
                 res.error = out
         elif r.status_code == 422:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.CreateFolder200ApplicationJSONFolder])
+                out = utils.unmarshal_json(r.text, Optional[operations.CreateFolderFolder])
                 res.folder = out
 
         return res
@@ -370,7 +370,7 @@ class SDK:
         res = operations.CreateHTMLTemplateResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.CreateHTMLTemplate201ApplicationJSONPendingTemplate])
+                out = utils.unmarshal_json(r.text, Optional[operations.CreateHTMLTemplatePendingTemplate])
                 res.pending_template = out
         elif r.status_code == 401:
             if utils.match_content_type(content_type, "application/json"):
@@ -403,7 +403,7 @@ class SDK:
         res = operations.CreatePdfTemplateResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.CreatePdfTemplate201ApplicationJSONPendingTemplate])
+                out = utils.unmarshal_json(r.text, Optional[operations.CreatePdfTemplatePendingTemplate])
                 res.pending_template = out
         elif r.status_code == 401:
             if utils.match_content_type(content_type, "application/json"):
@@ -436,7 +436,7 @@ class SDK:
         res = operations.CreatePdfTemplateFromUploadResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.CreatePdfTemplateFromUpload201ApplicationJSONPendingTemplate])
+                out = utils.unmarshal_json(r.text, Optional[operations.CreatePdfTemplateFromUploadPendingTemplate])
                 res.pending_template = out
         elif r.status_code == 401:
             if utils.match_content_type(content_type, "application/json"):
@@ -462,7 +462,7 @@ class SDK:
         res = operations.DeleteFolderResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.DeleteFolder200ApplicationJSONFolder])
+                out = utils.unmarshal_json(r.text, Optional[operations.DeleteFolderFolder])
                 res.folder = out
         elif r.status_code == 401:
             if utils.match_content_type(content_type, "application/json"):
@@ -496,7 +496,7 @@ class SDK:
         res = operations.ExpireCombinedSubmissionResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ExpireCombinedSubmission200ApplicationJSONCombinedSubmission])
+                out = utils.unmarshal_json(r.text, Optional[operations.ExpireCombinedSubmissionCombinedSubmission])
                 res.combined_submission = out
         elif r.status_code == 401:
             if utils.match_content_type(content_type, "application/json"):
@@ -571,7 +571,7 @@ class SDK:
         res = operations.GeneratePdfResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.GeneratePdf201ApplicationJSONCreateSubmissionResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.GeneratePdfCreateSubmissionResponse])
                 res.create_submission_response = out
         elif r.status_code == 400:
             if utils.match_content_type(content_type, "application/json"):
@@ -605,7 +605,7 @@ class SDK:
         res = operations.GetCombinedSubmissionResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.GetCombinedSubmission200ApplicationJSONCombinedSubmission])
+                out = utils.unmarshal_json(r.text, Optional[operations.GetCombinedSubmissionCombinedSubmission])
                 res.combined_submission = out
         elif r.status_code == 401:
             if utils.match_content_type(content_type, "application/json"):
@@ -665,7 +665,7 @@ class SDK:
         res = operations.GetPresignURLResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.GetPresignURL200ApplicationJSONUploadPresign])
+                out = utils.unmarshal_json(r.text, Optional[operations.GetPresignURLUploadPresign])
                 res.upload_presign = out
         elif r.status_code == 401:
             if utils.match_content_type(content_type, "application/json"):
@@ -723,7 +723,7 @@ class SDK:
         res = operations.GetSubmissionBatchResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.GetSubmissionBatch200ApplicationJSONSubmissionBatch])
+                out = utils.unmarshal_json(r.text, Optional[operations.GetSubmissionBatchSubmissionBatch])
                 res.submission_batch = out
         elif r.status_code == 401:
             if utils.match_content_type(content_type, "application/json"):
@@ -753,7 +753,7 @@ class SDK:
         res = operations.GetTemplateResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.GetTemplate200ApplicationJSONTemplate])
+                out = utils.unmarshal_json(r.text, Optional[operations.GetTemplateTemplate])
                 res.template = out
         elif r.status_code == 401:
             if utils.match_content_type(content_type, "application/json"):
@@ -783,7 +783,7 @@ class SDK:
         res = operations.GetTemplateSchemaResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.GetTemplateSchema200ApplicationJSONTemplateSchema])
+                out = utils.unmarshal_json(r.text, Optional[operations.GetTemplateSchemaTemplateSchema])
                 res.template_schema = out
         elif r.status_code == 401:
             if utils.match_content_type(content_type, "application/json"):
@@ -814,7 +814,7 @@ class SDK:
         res = operations.ListFoldersResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[List[operations.ListFolders200ApplicationJSONFolder]])
+                out = utils.unmarshal_json(r.text, Optional[List[operations.ListFoldersFolder]])
                 res.folders = out
         elif r.status_code == 401:
             if utils.match_content_type(content_type, "application/json"):
@@ -841,7 +841,7 @@ class SDK:
         res = operations.ListTemplatesResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[List[operations.ListTemplates200ApplicationJSONTemplate]])
+                out = utils.unmarshal_json(r.text, Optional[List[operations.ListTemplatesTemplate]])
                 res.templates = out
         elif r.status_code == 401:
             if utils.match_content_type(content_type, "application/json"):
@@ -878,7 +878,7 @@ class SDK:
         res = operations.MoveFolderToFolderResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.MoveFolderToFolder200ApplicationJSONFolder])
+                out = utils.unmarshal_json(r.text, Optional[operations.MoveFolderToFolderFolder])
                 res.folder = out
         elif r.status_code == 401:
             if utils.match_content_type(content_type, "application/json"):
@@ -915,7 +915,7 @@ class SDK:
         res = operations.MoveTemplateToFolderResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.MoveTemplateToFolder200ApplicationJSONTemplate])
+                out = utils.unmarshal_json(r.text, Optional[operations.MoveTemplateToFolderTemplate])
                 res.template = out
         elif r.status_code == 404:
             if utils.match_content_type(content_type, "application/json"):
@@ -976,7 +976,7 @@ class SDK:
         res = operations.TestAuthenticationResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.TestAuthentication200ApplicationJSONAuthenticationSuccessResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.TestAuthenticationAuthenticationSuccessResponse])
                 res.authentication_success_response = out
         elif r.status_code == 401:
             if utils.match_content_type(content_type, "application/json"):
@@ -1009,7 +1009,7 @@ class SDK:
         res = operations.UpdateDataRequestResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.UpdateDataRequest200ApplicationJSONUpdateDataRequestResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.UpdateDataRequestUpdateDataRequestResponse])
                 res.update_data_request_response = out
         elif r.status_code == 401:
             if utils.match_content_type(content_type, "application/json"):
@@ -1050,7 +1050,7 @@ class SDK:
         res = operations.UpdateTemplateResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.UpdateTemplate200ApplicationJSONUpdateTemplateResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.UpdateTemplateUpdateTemplateResponse])
                 res.update_template_response = out
 
         return res

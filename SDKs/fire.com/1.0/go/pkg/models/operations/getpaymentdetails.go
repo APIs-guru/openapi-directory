@@ -13,33 +13,33 @@ type GetPaymentDetailsRequest struct {
 	PathParams GetPaymentDetailsPathParams
 }
 
-type GetPaymentDetails200ApplicationJSONStatusEnum string
+type GetPaymentDetailsPaymentRequestStatusEnum string
 
 const (
-	GetPaymentDetails200ApplicationJSONStatusEnumAwaitingAuthorisation      GetPaymentDetails200ApplicationJSONStatusEnum = "AWAITING_AUTHORISATION"
-	GetPaymentDetails200ApplicationJSONStatusEnumAuthorised                 GetPaymentDetails200ApplicationJSONStatusEnum = "AUTHORISED"
-	GetPaymentDetails200ApplicationJSONStatusEnumAwaitingMultiAuthorisation GetPaymentDetails200ApplicationJSONStatusEnum = "AWAITING_MULTI_AUTHORISATION"
-	GetPaymentDetails200ApplicationJSONStatusEnumNotAuthorised              GetPaymentDetails200ApplicationJSONStatusEnum = "NOT_AUTHORISED"
-	GetPaymentDetails200ApplicationJSONStatusEnumPaid                       GetPaymentDetails200ApplicationJSONStatusEnum = "PAID"
-	GetPaymentDetails200ApplicationJSONStatusEnumRejected                   GetPaymentDetails200ApplicationJSONStatusEnum = "REJECTED"
-	GetPaymentDetails200ApplicationJSONStatusEnumAccepted                   GetPaymentDetails200ApplicationJSONStatusEnum = "ACCEPTED"
-	GetPaymentDetails200ApplicationJSONStatusEnumReceived                   GetPaymentDetails200ApplicationJSONStatusEnum = "RECEIVED"
+	GetPaymentDetailsPaymentRequestStatusEnumAwaitingAuthorisation      GetPaymentDetailsPaymentRequestStatusEnum = "AWAITING_AUTHORISATION"
+	GetPaymentDetailsPaymentRequestStatusEnumAuthorised                 GetPaymentDetailsPaymentRequestStatusEnum = "AUTHORISED"
+	GetPaymentDetailsPaymentRequestStatusEnumAwaitingMultiAuthorisation GetPaymentDetailsPaymentRequestStatusEnum = "AWAITING_MULTI_AUTHORISATION"
+	GetPaymentDetailsPaymentRequestStatusEnumNotAuthorised              GetPaymentDetailsPaymentRequestStatusEnum = "NOT_AUTHORISED"
+	GetPaymentDetailsPaymentRequestStatusEnumPaid                       GetPaymentDetailsPaymentRequestStatusEnum = "PAID"
+	GetPaymentDetailsPaymentRequestStatusEnumRejected                   GetPaymentDetailsPaymentRequestStatusEnum = "REJECTED"
+	GetPaymentDetailsPaymentRequestStatusEnumAccepted                   GetPaymentDetailsPaymentRequestStatusEnum = "ACCEPTED"
+	GetPaymentDetailsPaymentRequestStatusEnumReceived                   GetPaymentDetailsPaymentRequestStatusEnum = "RECEIVED"
 )
 
-type GetPaymentDetails200ApplicationJSONTransactionTypeEnum string
+type GetPaymentDetailsPaymentRequestTransactionTypeEnum string
 
 const (
-	GetPaymentDetails200ApplicationJSONTransactionTypeEnumRefundRequest GetPaymentDetails200ApplicationJSONTransactionTypeEnum = "REFUND_REQUEST"
-	GetPaymentDetails200ApplicationJSONTransactionTypeEnumPayment       GetPaymentDetails200ApplicationJSONTransactionTypeEnum = "PAYMENT"
+	GetPaymentDetailsPaymentRequestTransactionTypeEnumRefundRequest GetPaymentDetailsPaymentRequestTransactionTypeEnum = "REFUND_REQUEST"
+	GetPaymentDetailsPaymentRequestTransactionTypeEnumPayment       GetPaymentDetailsPaymentRequestTransactionTypeEnum = "PAYMENT"
 )
 
-type GetPaymentDetails200ApplicationJSONTypeEnum string
+type GetPaymentDetailsPaymentRequestTypeEnum string
 
 const (
-	GetPaymentDetails200ApplicationJSONTypeEnumOther GetPaymentDetails200ApplicationJSONTypeEnum = "OTHER"
+	GetPaymentDetailsPaymentRequestTypeEnumOther GetPaymentDetailsPaymentRequestTypeEnum = "OTHER"
 )
 
-type GetPaymentDetails200ApplicationJSONPaymentRequest struct {
+type GetPaymentDetailsPaymentRequest struct {
 	AdditionalFields   *string                                                                                                  `json:"additionalFields,omitempty"`
 	Amount             *int64                                                                                                   `json:"amount,omitempty"`
 	CollectFields      *string                                                                                                  `json:"collectFields,omitempty"`
@@ -54,14 +54,14 @@ type GetPaymentDetails200ApplicationJSONPaymentRequest struct {
 	PaymentRequestCode *string                                                                                                  `json:"paymentRequestCode,omitempty"`
 	PaymentUUID        *string                                                                                                  `json:"paymentUuid,omitempty"`
 	ReturnURL          *string                                                                                                  `json:"returnUrl,omitempty"`
-	Status             *GetPaymentDetails200ApplicationJSONStatusEnum                                                           `json:"status,omitempty"`
-	TransactionType    *GetPaymentDetails200ApplicationJSONTransactionTypeEnum                                                  `json:"transactionType,omitempty"`
-	Type               *GetPaymentDetails200ApplicationJSONTypeEnum                                                             `json:"type,omitempty"`
+	Status             *GetPaymentDetailsPaymentRequestStatusEnum                                                               `json:"status,omitempty"`
+	TransactionType    *GetPaymentDetailsPaymentRequestTransactionTypeEnum                                                      `json:"transactionType,omitempty"`
+	Type               *GetPaymentDetailsPaymentRequestTypeEnum                                                                 `json:"type,omitempty"`
 	WebhookURL         *string                                                                                                  `json:"webhookUrl,omitempty"`
 }
 
 type GetPaymentDetailsResponse struct {
 	ContentType    string
-	PaymentRequest *GetPaymentDetails200ApplicationJSONPaymentRequest
+	PaymentRequest *GetPaymentDetailsPaymentRequest
 	StatusCode     int64
 }

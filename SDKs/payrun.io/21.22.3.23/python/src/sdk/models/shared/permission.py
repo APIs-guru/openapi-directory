@@ -2,11 +2,11 @@ from dataclasses import dataclass, field
 from typing import Enum,Optional
 from dataclasses_json import dataclass_json
 
-class PermissionPermissionPolicyPolicyEnum(str, Enum):
+class PermissionPermissionPolicyEnum(str, Enum):
     ALLOW = "Allow"
     DENY = "Deny"
 
-class PermissionPermissionVerbsVerbsEnum(str, Enum):
+class PermissionPermissionVerbsEnum(str, Enum):
     READ = "Read"
     WRITE = "Write"
     DELETE = "Delete"
@@ -15,16 +15,16 @@ class PermissionPermissionVerbsVerbsEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class PermissionPermissionPermission:
+class PermissionPermission:
     description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Description' }})
     expression: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Expression' }})
     name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
-    policy: Optional[PermissionPermissionPolicyPolicyEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Policy' }})
-    verbs: Optional[PermissionPermissionVerbsVerbsEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Verbs' }})
+    policy: Optional[PermissionPermissionPolicyEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Policy' }})
+    verbs: Optional[PermissionPermissionVerbsEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Verbs' }})
     
 
 @dataclass_json
 @dataclass
 class Permission:
-    permission: Optional[PermissionPermissionPermission] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Permission' }})
+    permission: Optional[PermissionPermission] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Permission' }})
     

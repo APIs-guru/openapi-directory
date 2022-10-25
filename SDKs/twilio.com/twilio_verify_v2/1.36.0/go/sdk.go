@@ -1597,7 +1597,7 @@ func (s *SDK) ListBucket(ctx context.Context, request operations.ListBucketReque
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListBucket200ApplicationJSONListBucketResponse
+			var out *operations.ListBucketListBucketResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -1642,7 +1642,7 @@ func (s *SDK) ListChallenge(ctx context.Context, request operations.ListChalleng
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListChallenge200ApplicationJSONListChallengeResponse
+			var out *operations.ListChallengeListChallengeResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -1687,7 +1687,7 @@ func (s *SDK) ListEntity(ctx context.Context, request operations.ListEntityReque
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListEntity200ApplicationJSONListEntityResponse
+			var out *operations.ListEntityListEntityResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -1732,7 +1732,7 @@ func (s *SDK) ListFactor(ctx context.Context, request operations.ListFactorReque
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListFactor200ApplicationJSONListFactorResponse
+			var out *operations.ListFactorListFactorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -1777,7 +1777,7 @@ func (s *SDK) ListMessagingConfiguration(ctx context.Context, request operations
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListMessagingConfiguration200ApplicationJSONListMessagingConfigurationResponse
+			var out *operations.ListMessagingConfigurationListMessagingConfigurationResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -1822,7 +1822,7 @@ func (s *SDK) ListRateLimit(ctx context.Context, request operations.ListRateLimi
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListRateLimit200ApplicationJSONListRateLimitResponse
+			var out *operations.ListRateLimitListRateLimitResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -1867,7 +1867,7 @@ func (s *SDK) ListService(ctx context.Context, request operations.ListServiceReq
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListService200ApplicationJSONListServiceResponse
+			var out *operations.ListServiceListServiceResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -1912,7 +1912,7 @@ func (s *SDK) ListVerificationAttempt(ctx context.Context, request operations.Li
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListVerificationAttempt200ApplicationJSONListVerificationAttemptResponse
+			var out *operations.ListVerificationAttemptListVerificationAttemptResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -1957,7 +1957,7 @@ func (s *SDK) ListVerificationTemplate(ctx context.Context, request operations.L
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListVerificationTemplate200ApplicationJSONListVerificationTemplateResponse
+			var out *operations.ListVerificationTemplateListVerificationTemplateResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -2002,7 +2002,7 @@ func (s *SDK) ListWebhook(ctx context.Context, request operations.ListWebhookReq
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListWebhook200ApplicationJSONListWebhookResponse
+			var out *operations.ListWebhookListWebhookResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}

@@ -22,7 +22,7 @@ type ListPhoneNumberCountryRequest struct {
 	Security    ListPhoneNumberCountrySecurity
 }
 
-type ListPhoneNumberCountry200ApplicationJSONMeta struct {
+type ListPhoneNumberCountryListPhoneNumberCountryResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -32,13 +32,13 @@ type ListPhoneNumberCountry200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListPhoneNumberCountry200ApplicationJSONListPhoneNumberCountryResponse struct {
-	Countries []shared.PricingV1PhoneNumberPhoneNumberCountry `json:"countries,omitempty"`
-	Meta      *ListPhoneNumberCountry200ApplicationJSONMeta   `json:"meta,omitempty"`
+type ListPhoneNumberCountryListPhoneNumberCountryResponse struct {
+	Countries []shared.PricingV1PhoneNumberPhoneNumberCountry           `json:"countries,omitempty"`
+	Meta      *ListPhoneNumberCountryListPhoneNumberCountryResponseMeta `json:"meta,omitempty"`
 }
 
 type ListPhoneNumberCountryResponse struct {
 	ContentType                    string
-	ListPhoneNumberCountryResponse *ListPhoneNumberCountry200ApplicationJSONListPhoneNumberCountryResponse
+	ListPhoneNumberCountryResponse *ListPhoneNumberCountryListPhoneNumberCountryResponse
 	StatusCode                     int64
 }

@@ -28,7 +28,7 @@ type ListApplicationRequest struct {
 	Security    ListApplicationSecurity
 }
 
-type ListApplication200ApplicationJSONListApplicationResponse struct {
+type ListApplicationListApplicationResponse struct {
 	Applications    []shared.APIV2010AccountApplication `json:"applications,omitempty"`
 	End             *int64                              `json:"end,omitempty"`
 	FirstPageURI    *string                             `json:"first_page_uri,omitempty"`
@@ -42,6 +42,6 @@ type ListApplication200ApplicationJSONListApplicationResponse struct {
 
 type ListApplicationResponse struct {
 	ContentType             string
-	ListApplicationResponse *ListApplication200ApplicationJSONListApplicationResponse
+	ListApplicationResponse *ListApplicationListApplicationResponse
 	StatusCode              int64
 }

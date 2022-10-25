@@ -26,7 +26,7 @@ type ListWirelessCommandRequest struct {
 	Security    ListWirelessCommandSecurity
 }
 
-type ListWirelessCommand200ApplicationJSONMeta struct {
+type ListWirelessCommandListWirelessCommandResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -36,13 +36,13 @@ type ListWirelessCommand200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListWirelessCommand200ApplicationJSONListWirelessCommandResponse struct {
-	Commands []shared.PreviewWirelessCommand            `json:"commands,omitempty"`
-	Meta     *ListWirelessCommand200ApplicationJSONMeta `json:"meta,omitempty"`
+type ListWirelessCommandListWirelessCommandResponse struct {
+	Commands []shared.PreviewWirelessCommand                     `json:"commands,omitempty"`
+	Meta     *ListWirelessCommandListWirelessCommandResponseMeta `json:"meta,omitempty"`
 }
 
 type ListWirelessCommandResponse struct {
 	ContentType                 string
-	ListWirelessCommandResponse *ListWirelessCommand200ApplicationJSONListWirelessCommandResponse
+	ListWirelessCommandResponse *ListWirelessCommandListWirelessCommandResponse
 	StatusCode                  int64
 }

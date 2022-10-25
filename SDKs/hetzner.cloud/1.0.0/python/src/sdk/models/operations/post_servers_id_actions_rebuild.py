@@ -10,14 +10,14 @@ class PostServersIDActionsRebuildPathParams:
 
 @dataclass_json
 @dataclass
-class PostServersIDActionsRebuildRequestBodyRebuildServerRequest:
+class PostServersIDActionsRebuildRebuildServerRequest:
     image: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'image' }})
     
 
 @dataclass
 class PostServersIDActionsRebuildRequest:
     path_params: PostServersIDActionsRebuildPathParams = field(default=None)
-    request: Optional[PostServersIDActionsRebuildRequestBodyRebuildServerRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: Optional[PostServersIDActionsRebuildRebuildServerRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass_json
@@ -41,7 +41,7 @@ class PostServersIDActionsRebuild201ApplicationJSONActionStatusEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class PostServersIDActionsRebuild201ApplicationJSONActionAction:
+class PostServersIDActionsRebuild201ApplicationJSONAction:
     command: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'command' }})
     error: PostServersIDActionsRebuild201ApplicationJSONActionError = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
     finished: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'finished' }})
@@ -55,7 +55,7 @@ class PostServersIDActionsRebuild201ApplicationJSONActionAction:
 @dataclass_json
 @dataclass
 class PostServersIDActionsRebuild201ApplicationJSON:
-    action: Optional[PostServersIDActionsRebuild201ApplicationJSONActionAction] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'action' }})
+    action: Optional[PostServersIDActionsRebuild201ApplicationJSONAction] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'action' }})
     root_password: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'root_password' }})
     
 

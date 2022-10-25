@@ -9,41 +9,41 @@ type GetImagesIDActionsActionIDRequest struct {
 	PathParams GetImagesIDActionsActionIDPathParams
 }
 
-type GetImagesIDActionsActionID200ApplicationJSONActionError struct {
+type GetImagesIDActionsActionIDActionResponseActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
 }
 
-type GetImagesIDActionsActionID200ApplicationJSONActionResources struct {
+type GetImagesIDActionsActionIDActionResponseActionResources struct {
 	ID   int64  `json:"id"`
 	Type string `json:"type"`
 }
 
-type GetImagesIDActionsActionID200ApplicationJSONActionStatusEnum string
+type GetImagesIDActionsActionIDActionResponseActionStatusEnum string
 
 const (
-	GetImagesIDActionsActionID200ApplicationJSONActionStatusEnumSuccess GetImagesIDActionsActionID200ApplicationJSONActionStatusEnum = "success"
-	GetImagesIDActionsActionID200ApplicationJSONActionStatusEnumRunning GetImagesIDActionsActionID200ApplicationJSONActionStatusEnum = "running"
-	GetImagesIDActionsActionID200ApplicationJSONActionStatusEnumError   GetImagesIDActionsActionID200ApplicationJSONActionStatusEnum = "error"
+	GetImagesIDActionsActionIDActionResponseActionStatusEnumSuccess GetImagesIDActionsActionIDActionResponseActionStatusEnum = "success"
+	GetImagesIDActionsActionIDActionResponseActionStatusEnumRunning GetImagesIDActionsActionIDActionResponseActionStatusEnum = "running"
+	GetImagesIDActionsActionIDActionResponseActionStatusEnumError   GetImagesIDActionsActionIDActionResponseActionStatusEnum = "error"
 )
 
-type GetImagesIDActionsActionID200ApplicationJSONActionAction struct {
-	Command   string                                                        `json:"command"`
-	Error     GetImagesIDActionsActionID200ApplicationJSONActionError       `json:"error"`
-	Finished  string                                                        `json:"finished"`
-	ID        int64                                                         `json:"id"`
-	Progress  float64                                                       `json:"progress"`
-	Resources []GetImagesIDActionsActionID200ApplicationJSONActionResources `json:"resources"`
-	Started   string                                                        `json:"started"`
-	Status    GetImagesIDActionsActionID200ApplicationJSONActionStatusEnum  `json:"status"`
+type GetImagesIDActionsActionIDActionResponseAction struct {
+	Command   string                                                    `json:"command"`
+	Error     GetImagesIDActionsActionIDActionResponseActionError       `json:"error"`
+	Finished  string                                                    `json:"finished"`
+	ID        int64                                                     `json:"id"`
+	Progress  float64                                                   `json:"progress"`
+	Resources []GetImagesIDActionsActionIDActionResponseActionResources `json:"resources"`
+	Started   string                                                    `json:"started"`
+	Status    GetImagesIDActionsActionIDActionResponseActionStatusEnum  `json:"status"`
 }
 
-type GetImagesIDActionsActionID200ApplicationJSONActionResponse struct {
-	Action GetImagesIDActionsActionID200ApplicationJSONActionAction `json:"action"`
+type GetImagesIDActionsActionIDActionResponse struct {
+	Action GetImagesIDActionsActionIDActionResponseAction `json:"action"`
 }
 
 type GetImagesIDActionsActionIDResponse struct {
-	ActionResponse *GetImagesIDActionsActionID200ApplicationJSONActionResponse
+	ActionResponse *GetImagesIDActionsActionIDActionResponse
 	ContentType    string
 	StatusCode     int64
 }

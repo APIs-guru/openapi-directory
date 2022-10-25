@@ -4,41 +4,41 @@ import (
 	"time"
 )
 
-type PackageVersionMetadataContainerContainerMetadata struct {
+type PackageVersionPackageVersionMetadataContainerMetadata struct {
 	Tags []interface{} `json:"tags"`
 }
 
-type PackageVersionMetadataDockerDockerMetadata struct {
+type PackageVersionPackageVersionMetadataDockerMetadata struct {
 	Tag []interface{} `json:"tag,omitempty"`
 }
 
-type PackageVersionMetadataPackageTypeEnum string
+type PackageVersionPackageVersionMetadataPackageTypeEnum string
 
 const (
-	PackageVersionMetadataPackageTypeEnumNpm       PackageVersionMetadataPackageTypeEnum = "npm"
-	PackageVersionMetadataPackageTypeEnumMaven     PackageVersionMetadataPackageTypeEnum = "maven"
-	PackageVersionMetadataPackageTypeEnumRubygems  PackageVersionMetadataPackageTypeEnum = "rubygems"
-	PackageVersionMetadataPackageTypeEnumDocker    PackageVersionMetadataPackageTypeEnum = "docker"
-	PackageVersionMetadataPackageTypeEnumNuget     PackageVersionMetadataPackageTypeEnum = "nuget"
-	PackageVersionMetadataPackageTypeEnumContainer PackageVersionMetadataPackageTypeEnum = "container"
+	PackageVersionPackageVersionMetadataPackageTypeEnumNpm       PackageVersionPackageVersionMetadataPackageTypeEnum = "npm"
+	PackageVersionPackageVersionMetadataPackageTypeEnumMaven     PackageVersionPackageVersionMetadataPackageTypeEnum = "maven"
+	PackageVersionPackageVersionMetadataPackageTypeEnumRubygems  PackageVersionPackageVersionMetadataPackageTypeEnum = "rubygems"
+	PackageVersionPackageVersionMetadataPackageTypeEnumDocker    PackageVersionPackageVersionMetadataPackageTypeEnum = "docker"
+	PackageVersionPackageVersionMetadataPackageTypeEnumNuget     PackageVersionPackageVersionMetadataPackageTypeEnum = "nuget"
+	PackageVersionPackageVersionMetadataPackageTypeEnumContainer PackageVersionPackageVersionMetadataPackageTypeEnum = "container"
 )
 
-type PackageVersionMetadataPackageVersionMetadata struct {
-	Container   *PackageVersionMetadataContainerContainerMetadata `json:"container,omitempty"`
-	Docker      *PackageVersionMetadataDockerDockerMetadata       `json:"docker,omitempty"`
-	PackageType PackageVersionMetadataPackageTypeEnum             `json:"package_type"`
+type PackageVersionPackageVersionMetadata struct {
+	Container   *PackageVersionPackageVersionMetadataContainerMetadata `json:"container,omitempty"`
+	Docker      *PackageVersionPackageVersionMetadataDockerMetadata    `json:"docker,omitempty"`
+	PackageType PackageVersionPackageVersionMetadataPackageTypeEnum    `json:"package_type"`
 }
 
 type PackageVersion struct {
-	CreatedAt      time.Time                                     `json:"created_at"`
-	DeletedAt      *time.Time                                    `json:"deleted_at,omitempty"`
-	Description    *string                                       `json:"description,omitempty"`
-	HTMLURL        *string                                       `json:"html_url,omitempty"`
-	ID             int64                                         `json:"id"`
-	License        *string                                       `json:"license,omitempty"`
-	Metadata       *PackageVersionMetadataPackageVersionMetadata `json:"metadata,omitempty"`
-	Name           string                                        `json:"name"`
-	PackageHTMLURL string                                        `json:"package_html_url"`
-	UpdatedAt      time.Time                                     `json:"updated_at"`
-	URL            string                                        `json:"url"`
+	CreatedAt      time.Time                             `json:"created_at"`
+	DeletedAt      *time.Time                            `json:"deleted_at,omitempty"`
+	Description    *string                               `json:"description,omitempty"`
+	HTMLURL        *string                               `json:"html_url,omitempty"`
+	ID             int64                                 `json:"id"`
+	License        *string                               `json:"license,omitempty"`
+	Metadata       *PackageVersionPackageVersionMetadata `json:"metadata,omitempty"`
+	Name           string                                `json:"name"`
+	PackageHTMLURL string                                `json:"package_html_url"`
+	UpdatedAt      time.Time                             `json:"updated_at"`
+	URL            string                                `json:"url"`
 }

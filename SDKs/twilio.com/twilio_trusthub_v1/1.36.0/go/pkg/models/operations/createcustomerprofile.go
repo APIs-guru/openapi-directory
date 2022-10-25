@@ -8,7 +8,7 @@ var CreateCustomerProfileServers = []string{
 	"https://trusthub.twilio.com",
 }
 
-type CreateCustomerProfileRequestBodyCreateCustomerProfileRequest struct {
+type CreateCustomerProfileCreateCustomerProfileRequest struct {
 	Email          string  `form:"name=Email"`
 	FriendlyName   string  `form:"name=FriendlyName"`
 	PolicySid      string  `form:"name=PolicySid"`
@@ -21,7 +21,7 @@ type CreateCustomerProfileSecurity struct {
 
 type CreateCustomerProfileRequest struct {
 	ServerURL *string
-	Request   *CreateCustomerProfileRequestBodyCreateCustomerProfileRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request   *CreateCustomerProfileCreateCustomerProfileRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security  CreateCustomerProfileSecurity
 }
 

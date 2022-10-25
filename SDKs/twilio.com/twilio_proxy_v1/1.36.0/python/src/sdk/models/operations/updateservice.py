@@ -12,7 +12,7 @@ class UpdateServicePathParams:
     
 
 @dataclass
-class UpdateServiceRequestBodyUpdateServiceRequest:
+class UpdateServiceUpdateServiceRequest:
     callback_url: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'CallbackUrl' }})
     chat_instance_sid: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'ChatInstanceSid' }})
     default_ttl: Optional[int] = field(default=None, metadata={'form': { 'field_name': 'DefaultTtl' }})
@@ -32,7 +32,7 @@ class UpdateServiceSecurity:
 class UpdateServiceRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateServicePathParams = field(default=None)
-    request: Optional[UpdateServiceRequestBodyUpdateServiceRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateServiceUpdateServiceRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateServiceSecurity = field(default=None)
     
 

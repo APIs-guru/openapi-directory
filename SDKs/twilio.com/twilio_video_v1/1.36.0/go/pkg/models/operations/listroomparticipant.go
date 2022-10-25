@@ -32,7 +32,7 @@ type ListRoomParticipantRequest struct {
 	Security    ListRoomParticipantSecurity
 }
 
-type ListRoomParticipant200ApplicationJSONMeta struct {
+type ListRoomParticipantListRoomParticipantResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -42,13 +42,13 @@ type ListRoomParticipant200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListRoomParticipant200ApplicationJSONListRoomParticipantResponse struct {
-	Meta         *ListRoomParticipant200ApplicationJSONMeta `json:"meta,omitempty"`
-	Participants []shared.VideoV1RoomRoomParticipant        `json:"participants,omitempty"`
+type ListRoomParticipantListRoomParticipantResponse struct {
+	Meta         *ListRoomParticipantListRoomParticipantResponseMeta `json:"meta,omitempty"`
+	Participants []shared.VideoV1RoomRoomParticipant                 `json:"participants,omitempty"`
 }
 
 type ListRoomParticipantResponse struct {
 	ContentType                 string
-	ListRoomParticipantResponse *ListRoomParticipant200ApplicationJSONListRoomParticipantResponse
+	ListRoomParticipantResponse *ListRoomParticipantListRoomParticipantResponse
 	StatusCode                  int64
 }

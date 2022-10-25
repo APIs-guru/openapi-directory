@@ -35,7 +35,7 @@ class ListUsageTriggerRequest:
 
 @dataclass_json
 @dataclass
-class ListUsageTrigger200ApplicationJSONListUsageTriggerResponse:
+class ListUsageTriggerListUsageTriggerResponse:
     end: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'end' }})
     first_page_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_uri' }})
     next_page_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_uri' }})
@@ -50,6 +50,6 @@ class ListUsageTrigger200ApplicationJSONListUsageTriggerResponse:
 @dataclass
 class ListUsageTriggerResponse:
     content_type: str = field(default=None)
-    list_usage_trigger_response: Optional[ListUsageTrigger200ApplicationJSONListUsageTriggerResponse] = field(default=None)
+    list_usage_trigger_response: Optional[ListUsageTriggerListUsageTriggerResponse] = field(default=None)
     status_code: int = field(default=None)
     

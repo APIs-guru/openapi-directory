@@ -14,7 +14,7 @@ type UpdateSamplePathParams struct {
 	TaskSid      string `pathParam:"style=simple,explode=false,name=TaskSid"`
 }
 
-type UpdateSampleRequestBodyUpdateSampleRequest struct {
+type UpdateSampleUpdateSampleRequest struct {
 	Language      *string `form:"name=Language"`
 	SourceChannel *string `form:"name=SourceChannel"`
 	TaggedText    *string `form:"name=TaggedText"`
@@ -27,7 +27,7 @@ type UpdateSampleSecurity struct {
 type UpdateSampleRequest struct {
 	ServerURL  *string
 	PathParams UpdateSamplePathParams
-	Request    *UpdateSampleRequestBodyUpdateSampleRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateSampleUpdateSampleRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateSampleSecurity
 }
 

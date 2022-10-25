@@ -12,7 +12,7 @@ class CreateTrustProductEvaluationPathParams:
     
 
 @dataclass
-class CreateTrustProductEvaluationRequestBodyCreateTrustProductEvaluationRequest:
+class CreateTrustProductEvaluationCreateTrustProductEvaluationRequest:
     policy_sid: str = field(default=None, metadata={'form': { 'field_name': 'PolicySid' }})
     
 
@@ -25,7 +25,7 @@ class CreateTrustProductEvaluationSecurity:
 class CreateTrustProductEvaluationRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateTrustProductEvaluationPathParams = field(default=None)
-    request: Optional[CreateTrustProductEvaluationRequestBodyCreateTrustProductEvaluationRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateTrustProductEvaluationCreateTrustProductEvaluationRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateTrustProductEvaluationSecurity = field(default=None)
     
 

@@ -16,7 +16,7 @@ class GetPaymentDetailsPathParams:
 class GetPaymentDetailsRequest:
     path_params: GetPaymentDetailsPathParams = field(default=None)
     
-class GetPaymentDetails200ApplicationJSONStatusEnum(str, Enum):
+class GetPaymentDetailsPaymentRequestStatusEnum(str, Enum):
     AWAITING_AUTHORISATION = "AWAITING_AUTHORISATION"
     AUTHORISED = "AUTHORISED"
     AWAITING_MULTI_AUTHORISATION = "AWAITING_MULTI_AUTHORISATION"
@@ -26,17 +26,17 @@ class GetPaymentDetails200ApplicationJSONStatusEnum(str, Enum):
     ACCEPTED = "ACCEPTED"
     RECEIVED = "RECEIVED"
 
-class GetPaymentDetails200ApplicationJSONTransactionTypeEnum(str, Enum):
+class GetPaymentDetailsPaymentRequestTransactionTypeEnum(str, Enum):
     REFUND_REQUEST = "REFUND_REQUEST"
     PAYMENT = "PAYMENT"
 
-class GetPaymentDetails200ApplicationJSONTypeEnum(str, Enum):
+class GetPaymentDetailsPaymentRequestTypeEnum(str, Enum):
     OTHER = "OTHER"
 
 
 @dataclass_json
 @dataclass
-class GetPaymentDetails200ApplicationJSONPaymentRequest:
+class GetPaymentDetailsPaymentRequest:
     additional_fields: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'additionalFields' }})
     amount: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'amount' }})
     collect_fields: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'collectFields' }})
@@ -51,15 +51,15 @@ class GetPaymentDetails200ApplicationJSONPaymentRequest:
     payment_request_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'paymentRequestCode' }})
     payment_uuid: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'paymentUuid' }})
     return_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'returnUrl' }})
-    status: Optional[GetPaymentDetails200ApplicationJSONStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
-    transaction_type: Optional[GetPaymentDetails200ApplicationJSONTransactionTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'transactionType' }})
-    type: Optional[GetPaymentDetails200ApplicationJSONTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    status: Optional[GetPaymentDetailsPaymentRequestStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    transaction_type: Optional[GetPaymentDetailsPaymentRequestTransactionTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'transactionType' }})
+    type: Optional[GetPaymentDetailsPaymentRequestTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     webhook_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'webhookUrl' }})
     
 
 @dataclass
 class GetPaymentDetailsResponse:
     content_type: str = field(default=None)
-    payment_request: Optional[GetPaymentDetails200ApplicationJSONPaymentRequest] = field(default=None)
+    payment_request: Optional[GetPaymentDetailsPaymentRequest] = field(default=None)
     status_code: int = field(default=None)
     

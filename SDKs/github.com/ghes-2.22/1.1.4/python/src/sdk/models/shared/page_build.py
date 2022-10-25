@@ -14,7 +14,7 @@ class PageBuildError:
 
 @dataclass_json
 @dataclass
-class PageBuildPusherSimpleUser:
+class PageBuildSimpleUser:
     avatar_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'avatar_url' }})
     events_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'events_url' }})
     followers_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'followers_url' }})
@@ -43,7 +43,7 @@ class PageBuild:
     created_at: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'created_at', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     duration: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'duration' }})
     error: PageBuildError = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
-    pusher: PageBuildPusherSimpleUser = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pusher' }})
+    pusher: PageBuildSimpleUser = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pusher' }})
     status: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
     updated_at: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updated_at', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'url' }})

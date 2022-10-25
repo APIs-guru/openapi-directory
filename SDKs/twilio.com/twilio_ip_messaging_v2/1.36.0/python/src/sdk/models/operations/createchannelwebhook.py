@@ -13,7 +13,7 @@ class CreateChannelWebhookPathParams:
     
 
 @dataclass
-class CreateChannelWebhookRequestBodyCreateChannelWebhookRequest:
+class CreateChannelWebhookCreateChannelWebhookRequest:
     configuration_filters: Optional[List[str]] = field(default=None, metadata={'form': { 'field_name': 'Configuration.Filters' }})
     configuration_flow_sid: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Configuration.FlowSid' }})
     configuration_method: Optional[shared.ChannelWebhookEnumMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'Configuration.Method' }})
@@ -32,7 +32,7 @@ class CreateChannelWebhookSecurity:
 class CreateChannelWebhookRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateChannelWebhookPathParams = field(default=None)
-    request: Optional[CreateChannelWebhookRequestBodyCreateChannelWebhookRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateChannelWebhookCreateChannelWebhookRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateChannelWebhookSecurity = field(default=None)
     
 

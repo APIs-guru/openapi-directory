@@ -42,7 +42,7 @@ class SDK:
         res = operations.SvgconvertResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.Svgconvert200ApplicationJSONFileURL])
+                out = utils.unmarshal_json(r.text, Optional[operations.SvgconvertFileURL])
                 res.file_url = out
         elif r.status_code == 400:
             pass

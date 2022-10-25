@@ -25,7 +25,7 @@ class GetSubmissionBatchRequest:
     query_params: GetSubmissionBatchQueryParams = field(default=None)
     security: GetSubmissionBatchSecurity = field(default=None)
     
-class GetSubmissionBatch200ApplicationJSONStateEnum(str, Enum):
+class GetSubmissionBatchSubmissionBatchStateEnum(str, Enum):
     PENDING = "pending"
     PROCESSED = "processed"
     ERROR = "error"
@@ -33,14 +33,14 @@ class GetSubmissionBatch200ApplicationJSONStateEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class GetSubmissionBatch200ApplicationJSONSubmissionBatch:
+class GetSubmissionBatchSubmissionBatch:
     completion_percentage: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'completion_percentage' }})
     error_count: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error_count' }})
     id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     metadata: dict[str, Any] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'metadata' }})
     pending_count: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pending_count' }})
     processed_at: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'processed_at' }})
-    state: GetSubmissionBatch200ApplicationJSONStateEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'state' }})
+    state: GetSubmissionBatchSubmissionBatchStateEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'state' }})
     submissions: Optional[List[shared.Submission]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'submissions' }})
     total_count: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total_count' }})
     
@@ -51,5 +51,5 @@ class GetSubmissionBatchResponse:
     status_code: int = field(default=None)
     authentication_error: Optional[shared.AuthenticationError] = field(default=None)
     error: Optional[shared.Error] = field(default=None)
-    submission_batch: Optional[GetSubmissionBatch200ApplicationJSONSubmissionBatch] = field(default=None)
+    submission_batch: Optional[GetSubmissionBatchSubmissionBatch] = field(default=None)
     

@@ -32,7 +32,7 @@ class ListSipDomainRequest:
 
 @dataclass_json
 @dataclass
-class ListSipDomain200ApplicationJSONListSipDomainResponse:
+class ListSipDomainListSipDomainResponse:
     domains: Optional[List[shared.APIV2010AccountSipSipDomain]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'domains' }})
     end: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'end' }})
     first_page_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_uri' }})
@@ -47,6 +47,6 @@ class ListSipDomain200ApplicationJSONListSipDomainResponse:
 @dataclass
 class ListSipDomainResponse:
     content_type: str = field(default=None)
-    list_sip_domain_response: Optional[ListSipDomain200ApplicationJSONListSipDomainResponse] = field(default=None)
+    list_sip_domain_response: Optional[ListSipDomainListSipDomainResponse] = field(default=None)
     status_code: int = field(default=None)
     

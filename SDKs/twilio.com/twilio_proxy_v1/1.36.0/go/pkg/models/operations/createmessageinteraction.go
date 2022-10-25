@@ -14,7 +14,7 @@ type CreateMessageInteractionPathParams struct {
 	SessionSid     string `pathParam:"style=simple,explode=false,name=SessionSid"`
 }
 
-type CreateMessageInteractionRequestBodyCreateMessageInteractionRequest struct {
+type CreateMessageInteractionCreateMessageInteractionRequest struct {
 	Body     *string  `form:"name=Body"`
 	MediaURL []string `form:"name=MediaUrl"`
 }
@@ -26,7 +26,7 @@ type CreateMessageInteractionSecurity struct {
 type CreateMessageInteractionRequest struct {
 	ServerURL  *string
 	PathParams CreateMessageInteractionPathParams
-	Request    *CreateMessageInteractionRequestBodyCreateMessageInteractionRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateMessageInteractionCreateMessageInteractionRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateMessageInteractionSecurity
 }
 

@@ -12,7 +12,7 @@ type CreateOriginationURLPathParams struct {
 	TrunkSid string `pathParam:"style=simple,explode=false,name=TrunkSid"`
 }
 
-type CreateOriginationURLRequestBodyCreateOriginationURLRequest struct {
+type CreateOriginationURLCreateOriginationURLRequest struct {
 	Enabled      bool   `form:"name=Enabled"`
 	FriendlyName string `form:"name=FriendlyName"`
 	Priority     int64  `form:"name=Priority"`
@@ -27,7 +27,7 @@ type CreateOriginationURLSecurity struct {
 type CreateOriginationURLRequest struct {
 	ServerURL  *string
 	PathParams CreateOriginationURLPathParams
-	Request    *CreateOriginationURLRequestBodyCreateOriginationURLRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateOriginationURLCreateOriginationURLRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateOriginationURLSecurity
 }
 

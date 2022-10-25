@@ -418,7 +418,7 @@ class SDK:
         res = operations.ListChannelResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListChannel200ApplicationJSONListChannelResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListChannelListChannelResponse])
                 res.list_channel_response = out
 
         return res
@@ -443,7 +443,7 @@ class SDK:
         res = operations.ListFlexFlowResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListFlexFlow200ApplicationJSONListFlexFlowResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListFlexFlowListFlexFlowResponse])
                 res.list_flex_flow_response = out
 
         return res
@@ -468,7 +468,7 @@ class SDK:
         res = operations.ListInteractionChannelResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListInteractionChannel200ApplicationJSONListInteractionChannelResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListInteractionChannelListInteractionChannelResponse])
                 res.list_interaction_channel_response = out
 
         return res
@@ -493,7 +493,7 @@ class SDK:
         res = operations.ListInteractionChannelInviteResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListInteractionChannelInvite200ApplicationJSONListInteractionChannelInviteResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListInteractionChannelInviteListInteractionChannelInviteResponse])
                 res.list_interaction_channel_invite_response = out
 
         return res
@@ -518,7 +518,7 @@ class SDK:
         res = operations.ListInteractionChannelParticipantResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListInteractionChannelParticipant200ApplicationJSONListInteractionChannelParticipantResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListInteractionChannelParticipantListInteractionChannelParticipantResponse])
                 res.list_interaction_channel_participant_response = out
 
         return res
@@ -543,7 +543,7 @@ class SDK:
         res = operations.ListWebChannelResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListWebChannel200ApplicationJSONListWebChannelResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListWebChannelListWebChannelResponse])
                 res.list_web_channel_response = out
 
         return res

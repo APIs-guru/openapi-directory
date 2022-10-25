@@ -29,7 +29,7 @@ type ListServiceBindingRequest struct {
 	Security    ListServiceBindingSecurity
 }
 
-type ListServiceBinding200ApplicationJSONMeta struct {
+type ListServiceBindingListServiceBindingResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -39,13 +39,13 @@ type ListServiceBinding200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListServiceBinding200ApplicationJSONListServiceBindingResponse struct {
-	Bindings []shared.ConversationsV1ServiceServiceBinding `json:"bindings,omitempty"`
-	Meta     *ListServiceBinding200ApplicationJSONMeta     `json:"meta,omitempty"`
+type ListServiceBindingListServiceBindingResponse struct {
+	Bindings []shared.ConversationsV1ServiceServiceBinding     `json:"bindings,omitempty"`
+	Meta     *ListServiceBindingListServiceBindingResponseMeta `json:"meta,omitempty"`
 }
 
 type ListServiceBindingResponse struct {
 	ContentType                string
-	ListServiceBindingResponse *ListServiceBinding200ApplicationJSONListServiceBindingResponse
+	ListServiceBindingResponse *ListServiceBindingListServiceBindingResponse
 	StatusCode                 int64
 }

@@ -13,7 +13,7 @@ class UpdateRoomParticipantSubscribeRulePathParams:
     
 
 @dataclass
-class UpdateRoomParticipantSubscribeRuleRequestBodyUpdateRoomParticipantSubscribeRuleRequest:
+class UpdateRoomParticipantSubscribeRuleUpdateRoomParticipantSubscribeRuleRequest:
     rules: Optional[Any] = field(default=None, metadata={'form': { 'field_name': 'Rules' }})
     
 
@@ -26,7 +26,7 @@ class UpdateRoomParticipantSubscribeRuleSecurity:
 class UpdateRoomParticipantSubscribeRuleRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateRoomParticipantSubscribeRulePathParams = field(default=None)
-    request: Optional[UpdateRoomParticipantSubscribeRuleRequestBodyUpdateRoomParticipantSubscribeRuleRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateRoomParticipantSubscribeRuleUpdateRoomParticipantSubscribeRuleRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateRoomParticipantSubscribeRuleSecurity = field(default=None)
     
 

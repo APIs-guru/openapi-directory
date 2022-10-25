@@ -32,7 +32,7 @@ class ListVideoParticipantSummaryRequest:
 
 @dataclass_json
 @dataclass
-class ListVideoParticipantSummary200ApplicationJSONMeta:
+class ListVideoParticipantSummaryListVideoParticipantSummaryResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -44,14 +44,14 @@ class ListVideoParticipantSummary200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListVideoParticipantSummary200ApplicationJSONListVideoParticipantSummaryResponse:
-    meta: Optional[ListVideoParticipantSummary200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+class ListVideoParticipantSummaryListVideoParticipantSummaryResponse:
+    meta: Optional[ListVideoParticipantSummaryListVideoParticipantSummaryResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     participants: Optional[List[shared.InsightsV1VideoRoomSummaryVideoParticipantSummary]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'participants' }})
     
 
 @dataclass
 class ListVideoParticipantSummaryResponse:
     content_type: str = field(default=None)
-    list_video_participant_summary_response: Optional[ListVideoParticipantSummary200ApplicationJSONListVideoParticipantSummaryResponse] = field(default=None)
+    list_video_participant_summary_response: Optional[ListVideoParticipantSummaryListVideoParticipantSummaryResponse] = field(default=None)
     status_code: int = field(default=None)
     

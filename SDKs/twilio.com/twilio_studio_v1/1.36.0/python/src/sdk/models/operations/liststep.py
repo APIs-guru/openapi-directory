@@ -33,7 +33,7 @@ class ListStepRequest:
 
 @dataclass_json
 @dataclass
-class ListStep200ApplicationJSONMeta:
+class ListStepListStepResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -45,14 +45,14 @@ class ListStep200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListStep200ApplicationJSONListStepResponse:
-    meta: Optional[ListStep200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+class ListStepListStepResponse:
+    meta: Optional[ListStepListStepResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     steps: Optional[List[shared.StudioV1FlowEngagementStep]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'steps' }})
     
 
 @dataclass
 class ListStepResponse:
     content_type: str = field(default=None)
-    list_step_response: Optional[ListStep200ApplicationJSONListStepResponse] = field(default=None)
+    list_step_response: Optional[ListStepListStepResponse] = field(default=None)
     status_code: int = field(default=None)
     

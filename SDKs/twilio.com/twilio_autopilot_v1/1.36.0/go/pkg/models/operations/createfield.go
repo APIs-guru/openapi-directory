@@ -13,7 +13,7 @@ type CreateFieldPathParams struct {
 	TaskSid      string `pathParam:"style=simple,explode=false,name=TaskSid"`
 }
 
-type CreateFieldRequestBodyCreateFieldRequest struct {
+type CreateFieldCreateFieldRequest struct {
 	FieldType  string `form:"name=FieldType"`
 	UniqueName string `form:"name=UniqueName"`
 }
@@ -25,7 +25,7 @@ type CreateFieldSecurity struct {
 type CreateFieldRequest struct {
 	ServerURL  *string
 	PathParams CreateFieldPathParams
-	Request    *CreateFieldRequestBodyCreateFieldRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateFieldCreateFieldRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateFieldSecurity
 }
 

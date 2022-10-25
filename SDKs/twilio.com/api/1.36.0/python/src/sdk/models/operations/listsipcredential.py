@@ -33,7 +33,7 @@ class ListSipCredentialRequest:
 
 @dataclass_json
 @dataclass
-class ListSipCredential200ApplicationJSONListSipCredentialResponse:
+class ListSipCredentialListSipCredentialResponse:
     credentials: Optional[List[shared.APIV2010AccountSipSipCredentialListSipCredential]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'credentials' }})
     end: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'end' }})
     first_page_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_uri' }})
@@ -48,6 +48,6 @@ class ListSipCredential200ApplicationJSONListSipCredentialResponse:
 @dataclass
 class ListSipCredentialResponse:
     content_type: str = field(default=None)
-    list_sip_credential_response: Optional[ListSipCredential200ApplicationJSONListSipCredentialResponse] = field(default=None)
+    list_sip_credential_response: Optional[ListSipCredentialListSipCredentialResponse] = field(default=None)
     status_code: int = field(default=None)
     

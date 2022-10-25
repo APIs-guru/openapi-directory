@@ -12,7 +12,7 @@ class CreateSyncListPathParams:
     
 
 @dataclass
-class CreateSyncListRequestBodyCreateSyncListRequest:
+class CreateSyncListCreateSyncListRequest:
     collection_ttl: Optional[int] = field(default=None, metadata={'form': { 'field_name': 'CollectionTtl' }})
     ttl: Optional[int] = field(default=None, metadata={'form': { 'field_name': 'Ttl' }})
     unique_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'UniqueName' }})
@@ -27,7 +27,7 @@ class CreateSyncListSecurity:
 class CreateSyncListRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateSyncListPathParams = field(default=None)
-    request: Optional[CreateSyncListRequestBodyCreateSyncListRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateSyncListCreateSyncListRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateSyncListSecurity = field(default=None)
     
 

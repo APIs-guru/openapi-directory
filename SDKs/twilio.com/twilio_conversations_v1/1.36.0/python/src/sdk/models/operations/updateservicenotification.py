@@ -12,7 +12,7 @@ class UpdateServiceNotificationPathParams:
     
 
 @dataclass
-class UpdateServiceNotificationRequestBodyUpdateServiceNotificationRequest:
+class UpdateServiceNotificationUpdateServiceNotificationRequest:
     added_to_conversation_enabled: Optional[bool] = field(default=None, metadata={'form': { 'field_name': 'AddedToConversation.Enabled' }})
     added_to_conversation_sound: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'AddedToConversation.Sound' }})
     added_to_conversation_template: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'AddedToConversation.Template' }})
@@ -37,7 +37,7 @@ class UpdateServiceNotificationSecurity:
 class UpdateServiceNotificationRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateServiceNotificationPathParams = field(default=None)
-    request: Optional[UpdateServiceNotificationRequestBodyUpdateServiceNotificationRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateServiceNotificationUpdateServiceNotificationRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateServiceNotificationSecurity = field(default=None)
     
 

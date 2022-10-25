@@ -12,7 +12,7 @@ type UpdateWorkspacePathParams struct {
 	Sid string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
-type UpdateWorkspaceRequestBodyUpdateWorkspaceRequest struct {
+type UpdateWorkspaceUpdateWorkspaceRequest struct {
 	DefaultActivitySid   *string                             `form:"name=DefaultActivitySid"`
 	EventCallbackURL     *string                             `form:"name=EventCallbackUrl"`
 	EventsFilter         *string                             `form:"name=EventsFilter"`
@@ -29,7 +29,7 @@ type UpdateWorkspaceSecurity struct {
 type UpdateWorkspaceRequest struct {
 	ServerURL  *string
 	PathParams UpdateWorkspacePathParams
-	Request    *UpdateWorkspaceRequestBodyUpdateWorkspaceRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateWorkspaceUpdateWorkspaceRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateWorkspaceSecurity
 }
 

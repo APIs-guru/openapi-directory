@@ -1,38 +1,38 @@
 package operations
 
-type PostNetworksRequestBodyLabels struct {
+type PostNetworksCreateNetworkRequestLabels struct {
 	Labelkey *string `json:"labelkey,omitempty"`
 }
 
-type PostNetworksRequestBodyRoutes struct {
+type PostNetworksCreateNetworkRequestRoutes struct {
 	Destination string `json:"destination"`
 	Gateway     string `json:"gateway"`
 }
 
-type PostNetworksRequestBodySubnetsTypeEnum string
+type PostNetworksCreateNetworkRequestSubnetsTypeEnum string
 
 const (
-	PostNetworksRequestBodySubnetsTypeEnumCloud   PostNetworksRequestBodySubnetsTypeEnum = "cloud"
-	PostNetworksRequestBodySubnetsTypeEnumServer  PostNetworksRequestBodySubnetsTypeEnum = "server"
-	PostNetworksRequestBodySubnetsTypeEnumVswitch PostNetworksRequestBodySubnetsTypeEnum = "vswitch"
+	PostNetworksCreateNetworkRequestSubnetsTypeEnumCloud   PostNetworksCreateNetworkRequestSubnetsTypeEnum = "cloud"
+	PostNetworksCreateNetworkRequestSubnetsTypeEnumServer  PostNetworksCreateNetworkRequestSubnetsTypeEnum = "server"
+	PostNetworksCreateNetworkRequestSubnetsTypeEnumVswitch PostNetworksCreateNetworkRequestSubnetsTypeEnum = "vswitch"
 )
 
-type PostNetworksRequestBodySubnets struct {
-	IPRange     *string                                `json:"ip_range,omitempty"`
-	NetworkZone string                                 `json:"network_zone"`
-	Type        PostNetworksRequestBodySubnetsTypeEnum `json:"type"`
+type PostNetworksCreateNetworkRequestSubnets struct {
+	IPRange     *string                                         `json:"ip_range,omitempty"`
+	NetworkZone string                                          `json:"network_zone"`
+	Type        PostNetworksCreateNetworkRequestSubnetsTypeEnum `json:"type"`
 }
 
-type PostNetworksRequestBodyCreateNetworkRequest struct {
-	IPRange string                           `json:"ip_range"`
-	Labels  *PostNetworksRequestBodyLabels   `json:"labels,omitempty"`
-	Name    string                           `json:"name"`
-	Routes  []PostNetworksRequestBodyRoutes  `json:"routes,omitempty"`
-	Subnets []PostNetworksRequestBodySubnets `json:"subnets,omitempty"`
+type PostNetworksCreateNetworkRequest struct {
+	IPRange string                                    `json:"ip_range"`
+	Labels  *PostNetworksCreateNetworkRequestLabels   `json:"labels,omitempty"`
+	Name    string                                    `json:"name"`
+	Routes  []PostNetworksCreateNetworkRequestRoutes  `json:"routes,omitempty"`
+	Subnets []PostNetworksCreateNetworkRequestSubnets `json:"subnets,omitempty"`
 }
 
 type PostNetworksRequest struct {
-	Request *PostNetworksRequestBodyCreateNetworkRequest `request:"mediaType=application/json"`
+	Request *PostNetworksCreateNetworkRequest `request:"mediaType=application/json"`
 }
 
 type PostNetworks201ApplicationJSONNetworkProtection struct {

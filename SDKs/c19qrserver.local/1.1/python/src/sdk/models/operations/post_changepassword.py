@@ -6,14 +6,14 @@ from sdk.models import shared
 
 @dataclass_json
 @dataclass
-class PostChangePasswordRequestBodySample:
+class PostChangePasswordSample:
     old_password: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'old_password' }})
     password: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'password' }})
     
 
 @dataclass
 class PostChangePasswordRequest:
-    request: PostChangePasswordRequestBodySample = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: PostChangePasswordSample = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass

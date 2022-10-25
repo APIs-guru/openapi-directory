@@ -225,28 +225,28 @@ type VideoMetadata struct {
 	Interactions VideoMetadataInteractions `json:"interactions"`
 }
 
-type VideoParentFolderMetadataConnectionsVideos struct {
+type VideoProjectMetadataConnectionsVideos struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
-type VideoParentFolderMetadataConnections struct {
-	Videos VideoParentFolderMetadataConnectionsVideos `json:"videos"`
+type VideoProjectMetadataConnections struct {
+	Videos VideoProjectMetadataConnectionsVideos `json:"videos"`
 }
 
-type VideoParentFolderMetadata struct {
-	Connections VideoParentFolderMetadataConnections `json:"connections"`
+type VideoProjectMetadata struct {
+	Connections VideoProjectMetadataConnections `json:"connections"`
 }
 
-type VideoParentFolderProject struct {
-	CreatedTime  string                    `json:"created_time"`
-	Metadata     VideoParentFolderMetadata `json:"metadata"`
-	ModifiedTime string                    `json:"modified_time"`
-	Name         string                    `json:"name"`
-	ResourceKey  string                    `json:"resource_key"`
-	URI          string                    `json:"uri"`
-	User         User                      `json:"user"`
+type VideoProject struct {
+	CreatedTime  string               `json:"created_time"`
+	Metadata     VideoProjectMetadata `json:"metadata"`
+	ModifiedTime string               `json:"modified_time"`
+	Name         string               `json:"name"`
+	ResourceKey  string               `json:"resource_key"`
+	URI          string               `json:"uri"`
+	User         User                 `json:"user"`
 }
 
 type VideoPrivacyCommentsEnum string
@@ -649,7 +649,7 @@ type VideoUserWebsites struct {
 	Name        string `json:"name"`
 }
 
-type VideoUserUser struct {
+type VideoUser struct {
 	Account       VideoUserAccountEnum  `json:"account"`
 	Bio           string                `json:"bio"`
 	ContentFilter []string              `json:"content_filter,omitempty"`
@@ -668,34 +668,34 @@ type VideoUserUser struct {
 }
 
 type Video struct {
-	Categories              []Category                `json:"categories"`
-	ContentRating           []string                  `json:"content_rating"`
-	Context                 VideoContext              `json:"context"`
-	CreatedTime             string                    `json:"created_time"`
-	Description             string                    `json:"description"`
-	Duration                float64                   `json:"duration"`
-	Embed                   EmbedSettings             `json:"embed"`
-	Height                  float64                   `json:"height"`
-	Language                string                    `json:"language"`
-	LastUserActionEventDate *string                   `json:"last_user_action_event_date,omitempty"`
-	License                 VideoLicenseEnum          `json:"license"`
-	Link                    string                    `json:"link"`
-	Metadata                VideoMetadata             `json:"metadata"`
-	ModifiedTime            string                    `json:"modified_time"`
-	Name                    string                    `json:"name"`
-	ParentFolder            *VideoParentFolderProject `json:"parent_folder,omitempty"`
-	Password                *string                   `json:"password,omitempty"`
-	Pictures                Picture                   `json:"pictures"`
-	Privacy                 VideoPrivacy              `json:"privacy"`
-	ReleaseTime             string                    `json:"release_time"`
-	ResourceKey             string                    `json:"resource_key"`
-	Spatial                 VideoSpatial              `json:"spatial"`
-	Stats                   VideoStats                `json:"stats"`
-	Status                  VideoStatusEnum           `json:"status"`
-	Tags                    []Tag                     `json:"tags"`
-	Transcode               VideoTranscode            `json:"transcode"`
-	Upload                  VideoUpload               `json:"upload"`
-	URI                     string                    `json:"uri"`
-	User                    VideoUserUser             `json:"user"`
-	Width                   float64                   `json:"width"`
+	Categories              []Category       `json:"categories"`
+	ContentRating           []string         `json:"content_rating"`
+	Context                 VideoContext     `json:"context"`
+	CreatedTime             string           `json:"created_time"`
+	Description             string           `json:"description"`
+	Duration                float64          `json:"duration"`
+	Embed                   EmbedSettings    `json:"embed"`
+	Height                  float64          `json:"height"`
+	Language                string           `json:"language"`
+	LastUserActionEventDate *string          `json:"last_user_action_event_date,omitempty"`
+	License                 VideoLicenseEnum `json:"license"`
+	Link                    string           `json:"link"`
+	Metadata                VideoMetadata    `json:"metadata"`
+	ModifiedTime            string           `json:"modified_time"`
+	Name                    string           `json:"name"`
+	ParentFolder            *VideoProject    `json:"parent_folder,omitempty"`
+	Password                *string          `json:"password,omitempty"`
+	Pictures                Picture          `json:"pictures"`
+	Privacy                 VideoPrivacy     `json:"privacy"`
+	ReleaseTime             string           `json:"release_time"`
+	ResourceKey             string           `json:"resource_key"`
+	Spatial                 VideoSpatial     `json:"spatial"`
+	Stats                   VideoStats       `json:"stats"`
+	Status                  VideoStatusEnum  `json:"status"`
+	Tags                    []Tag            `json:"tags"`
+	Transcode               VideoTranscode   `json:"transcode"`
+	Upload                  VideoUpload      `json:"upload"`
+	URI                     string           `json:"uri"`
+	User                    VideoUser        `json:"user"`
+	Width                   float64          `json:"width"`
 }

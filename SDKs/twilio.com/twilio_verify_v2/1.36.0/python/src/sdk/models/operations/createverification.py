@@ -12,7 +12,7 @@ class CreateVerificationPathParams:
     
 
 @dataclass
-class CreateVerificationRequestBodyCreateVerificationRequest:
+class CreateVerificationCreateVerificationRequest:
     amount: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Amount' }})
     app_hash: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'AppHash' }})
     channel: str = field(default=None, metadata={'form': { 'field_name': 'Channel' }})
@@ -38,7 +38,7 @@ class CreateVerificationSecurity:
 class CreateVerificationRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateVerificationPathParams = field(default=None)
-    request: Optional[CreateVerificationRequestBodyCreateVerificationRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateVerificationCreateVerificationRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateVerificationSecurity = field(default=None)
     
 

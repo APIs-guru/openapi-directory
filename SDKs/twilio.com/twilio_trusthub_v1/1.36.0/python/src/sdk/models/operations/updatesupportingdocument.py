@@ -12,7 +12,7 @@ class UpdateSupportingDocumentPathParams:
     
 
 @dataclass
-class UpdateSupportingDocumentRequestBodyUpdateSupportingDocumentRequest:
+class UpdateSupportingDocumentUpdateSupportingDocumentRequest:
     attributes: Optional[Any] = field(default=None, metadata={'form': { 'field_name': 'Attributes' }})
     friendly_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
     
@@ -26,7 +26,7 @@ class UpdateSupportingDocumentSecurity:
 class UpdateSupportingDocumentRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateSupportingDocumentPathParams = field(default=None)
-    request: Optional[UpdateSupportingDocumentRequestBodyUpdateSupportingDocumentRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateSupportingDocumentUpdateSupportingDocumentRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateSupportingDocumentSecurity = field(default=None)
     
 

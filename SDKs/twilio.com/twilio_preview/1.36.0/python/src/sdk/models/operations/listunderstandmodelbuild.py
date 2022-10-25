@@ -32,7 +32,7 @@ class ListUnderstandModelBuildRequest:
 
 @dataclass_json
 @dataclass
-class ListUnderstandModelBuild200ApplicationJSONMeta:
+class ListUnderstandModelBuildListUnderstandModelBuildResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -44,14 +44,14 @@ class ListUnderstandModelBuild200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListUnderstandModelBuild200ApplicationJSONListUnderstandModelBuildResponse:
-    meta: Optional[ListUnderstandModelBuild200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+class ListUnderstandModelBuildListUnderstandModelBuildResponse:
+    meta: Optional[ListUnderstandModelBuildListUnderstandModelBuildResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     model_builds: Optional[List[shared.PreviewUnderstandAssistantModelBuild]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'model_builds' }})
     
 
 @dataclass
 class ListUnderstandModelBuildResponse:
     content_type: str = field(default=None)
-    list_understand_model_build_response: Optional[ListUnderstandModelBuild200ApplicationJSONListUnderstandModelBuildResponse] = field(default=None)
+    list_understand_model_build_response: Optional[ListUnderstandModelBuildListUnderstandModelBuildResponse] = field(default=None)
     status_code: int = field(default=None)
     

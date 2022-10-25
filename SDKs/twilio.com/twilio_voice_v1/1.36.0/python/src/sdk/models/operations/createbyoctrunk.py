@@ -5,7 +5,7 @@ CREATE_BYOC_TRUNK_SERVERS = [
 	"https://voice.twilio.com",
 ]
 
-class CreateByocTrunkRequestBodyStatusCallbackMethodEnum(str, Enum):
+class CreateByocTrunkCreateByocTrunkRequestStatusCallbackMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -13,7 +13,7 @@ class CreateByocTrunkRequestBodyStatusCallbackMethodEnum(str, Enum):
     PUT = "PUT"
     DELETE = "DELETE"
 
-class CreateByocTrunkRequestBodyVoiceFallbackMethodEnum(str, Enum):
+class CreateByocTrunkCreateByocTrunkRequestVoiceFallbackMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -21,7 +21,7 @@ class CreateByocTrunkRequestBodyVoiceFallbackMethodEnum(str, Enum):
     PUT = "PUT"
     DELETE = "DELETE"
 
-class CreateByocTrunkRequestBodyVoiceMethodEnum(str, Enum):
+class CreateByocTrunkCreateByocTrunkRequestVoiceMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -31,16 +31,16 @@ class CreateByocTrunkRequestBodyVoiceMethodEnum(str, Enum):
 
 
 @dataclass
-class CreateByocTrunkRequestBodyCreateByocTrunkRequest:
+class CreateByocTrunkCreateByocTrunkRequest:
     cnam_lookup_enabled: Optional[bool] = field(default=None, metadata={'form': { 'field_name': 'CnamLookupEnabled' }})
     connection_policy_sid: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'ConnectionPolicySid' }})
     friendly_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
     from_domain_sid: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'FromDomainSid' }})
-    status_callback_method: Optional[CreateByocTrunkRequestBodyStatusCallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'StatusCallbackMethod' }})
+    status_callback_method: Optional[CreateByocTrunkCreateByocTrunkRequestStatusCallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'StatusCallbackMethod' }})
     status_callback_url: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'StatusCallbackUrl' }})
-    voice_fallback_method: Optional[CreateByocTrunkRequestBodyVoiceFallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'VoiceFallbackMethod' }})
+    voice_fallback_method: Optional[CreateByocTrunkCreateByocTrunkRequestVoiceFallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'VoiceFallbackMethod' }})
     voice_fallback_url: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'VoiceFallbackUrl' }})
-    voice_method: Optional[CreateByocTrunkRequestBodyVoiceMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'VoiceMethod' }})
+    voice_method: Optional[CreateByocTrunkCreateByocTrunkRequestVoiceMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'VoiceMethod' }})
     voice_url: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'VoiceUrl' }})
     
 
@@ -52,7 +52,7 @@ class CreateByocTrunkSecurity:
 @dataclass
 class CreateByocTrunkRequest:
     server_url: Optional[str] = field(default=None)
-    request: Optional[CreateByocTrunkRequestBodyCreateByocTrunkRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateByocTrunkCreateByocTrunkRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateByocTrunkSecurity = field(default=None)
     
 

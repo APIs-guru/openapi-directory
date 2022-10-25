@@ -2,15 +2,15 @@ from dataclasses import dataclass, field
 from typing import Enum,List,Optional
 from dataclasses_json import dataclass_json
 
-class ObbcaData1CreditInterestTierBandSetCalculationMethodCalculationMethodEnum(str, Enum):
+class ObbcaData1CreditInterestTierBandSetCalculationMethodEnum(str, Enum):
     COMPOUND = "Compound"
     SIMPLE_INTEREST = "SimpleInterest"
 
-class ObbcaData1CreditInterestTierBandSetDestinationDestinationEnum(str, Enum):
+class ObbcaData1CreditInterestTierBandSetDestinationEnum(str, Enum):
     PAY_AWAY = "PayAway"
     SELF_CREDIT = "SelfCredit"
 
-class ObbcaData1CreditInterestTierBandSetTierBandApplicationFrequencyApplicationFrequencyEnum(str, Enum):
+class ObbcaData1CreditInterestTierBandSetTierBandApplicationFrequencyEnum(str, Enum):
     DAILY = "Daily"
     HALF_YEARLY = "HalfYearly"
     MONTHLY = "Monthly"
@@ -20,11 +20,11 @@ class ObbcaData1CreditInterestTierBandSetTierBandApplicationFrequencyApplication
     WEEKLY = "Weekly"
     YEARLY = "Yearly"
 
-class ObbcaData1CreditInterestTierBandSetTierBandBankInterestRateTypeBankInterestRateTypeEnum(str, Enum):
+class ObbcaData1CreditInterestTierBandSetTierBandBankInterestRateTypeEnum(str, Enum):
     GROSS = "Gross"
     OTHER = "Other"
 
-class ObbcaData1CreditInterestTierBandSetTierBandCalculationFrequencyCalculationFrequencyEnum(str, Enum):
+class ObbcaData1CreditInterestTierBandSetTierBandCalculationFrequencyEnum(str, Enum):
     DAILY = "Daily"
     HALF_YEARLY = "HalfYearly"
     MONTHLY = "Monthly"
@@ -34,19 +34,19 @@ class ObbcaData1CreditInterestTierBandSetTierBandCalculationFrequencyCalculation
     WEEKLY = "Weekly"
     YEARLY = "Yearly"
 
-class ObbcaData1CreditInterestTierBandSetTierBandDepositInterestAppliedCoverageDepositInterestAppliedCoverageEnum(str, Enum):
+class ObbcaData1CreditInterestTierBandSetTierBandDepositInterestAppliedCoverageEnum(str, Enum):
     BANDED = "Banded"
     TIERED = "Tiered"
     WHOLE = "Whole"
 
-class ObbcaData1CreditInterestTierBandSetTierBandFixedVariableInterestRateTypeFixedVariableInterestRateTypeEnum(str, Enum):
+class ObbcaData1CreditInterestTierBandSetTierBandFixedVariableInterestRateTypeEnum(str, Enum):
     FIXED = "Fixed"
     VARIABLE = "Variable"
 
 
 @dataclass_json
 @dataclass
-class ObbcaData1CreditInterestTierBandSetTierBandOtherApplicationFrequencyOtherApplicationFrequency:
+class ObbcaData1CreditInterestTierBandSetTierBandOtherApplicationFrequency:
     code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Code' }})
     description: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Description' }})
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
@@ -54,7 +54,7 @@ class ObbcaData1CreditInterestTierBandSetTierBandOtherApplicationFrequencyOtherA
 
 @dataclass_json
 @dataclass
-class ObbcaData1CreditInterestTierBandSetTierBandOtherBankInterestTypeOtherBankInterestType:
+class ObbcaData1CreditInterestTierBandSetTierBandOtherBankInterestType:
     code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Code' }})
     description: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Description' }})
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
@@ -62,7 +62,7 @@ class ObbcaData1CreditInterestTierBandSetTierBandOtherBankInterestTypeOtherBankI
 
 @dataclass_json
 @dataclass
-class ObbcaData1CreditInterestTierBandSetTierBandOtherCalculationFrequencyOtherCalculationFrequency:
+class ObbcaData1CreditInterestTierBandSetTierBandOtherCalculationFrequency:
     code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Code' }})
     description: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Description' }})
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
@@ -72,21 +72,21 @@ class ObbcaData1CreditInterestTierBandSetTierBandOtherCalculationFrequencyOtherC
 @dataclass
 class ObbcaData1CreditInterestTierBandSetTierBand:
     aer: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AER' }})
-    application_frequency: ObbcaData1CreditInterestTierBandSetTierBandApplicationFrequencyApplicationFrequencyEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ApplicationFrequency' }})
+    application_frequency: ObbcaData1CreditInterestTierBandSetTierBandApplicationFrequencyEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ApplicationFrequency' }})
     bank_interest_rate: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'BankInterestRate' }})
-    bank_interest_rate_type: Optional[ObbcaData1CreditInterestTierBandSetTierBandBankInterestRateTypeBankInterestRateTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'BankInterestRateType' }})
-    calculation_frequency: Optional[ObbcaData1CreditInterestTierBandSetTierBandCalculationFrequencyCalculationFrequencyEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CalculationFrequency' }})
-    deposit_interest_applied_coverage: Optional[ObbcaData1CreditInterestTierBandSetTierBandDepositInterestAppliedCoverageDepositInterestAppliedCoverageEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DepositInterestAppliedCoverage' }})
-    fixed_variable_interest_rate_type: ObbcaData1CreditInterestTierBandSetTierBandFixedVariableInterestRateTypeFixedVariableInterestRateTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FixedVariableInterestRateType' }})
+    bank_interest_rate_type: Optional[ObbcaData1CreditInterestTierBandSetTierBandBankInterestRateTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'BankInterestRateType' }})
+    calculation_frequency: Optional[ObbcaData1CreditInterestTierBandSetTierBandCalculationFrequencyEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CalculationFrequency' }})
+    deposit_interest_applied_coverage: Optional[ObbcaData1CreditInterestTierBandSetTierBandDepositInterestAppliedCoverageEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'DepositInterestAppliedCoverage' }})
+    fixed_variable_interest_rate_type: ObbcaData1CreditInterestTierBandSetTierBandFixedVariableInterestRateTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FixedVariableInterestRateType' }})
     identification: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Identification' }})
     notes: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Notes' }})
-    other_application_frequency: Optional[ObbcaData1CreditInterestTierBandSetTierBandOtherApplicationFrequencyOtherApplicationFrequency] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OtherApplicationFrequency' }})
-    other_bank_interest_type: Optional[ObbcaData1CreditInterestTierBandSetTierBandOtherBankInterestTypeOtherBankInterestType] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OtherBankInterestType' }})
-    other_calculation_frequency: Optional[ObbcaData1CreditInterestTierBandSetTierBandOtherCalculationFrequencyOtherCalculationFrequency] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OtherCalculationFrequency' }})
+    other_application_frequency: Optional[ObbcaData1CreditInterestTierBandSetTierBandOtherApplicationFrequency] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OtherApplicationFrequency' }})
+    other_bank_interest_type: Optional[ObbcaData1CreditInterestTierBandSetTierBandOtherBankInterestType] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OtherBankInterestType' }})
+    other_calculation_frequency: Optional[ObbcaData1CreditInterestTierBandSetTierBandOtherCalculationFrequency] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OtherCalculationFrequency' }})
     tier_value_maximum: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TierValueMaximum' }})
     tier_value_minimum: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TierValueMinimum' }})
     
-class ObbcaData1CreditInterestTierBandSetTierBandMethodTierBandMethodEnum(str, Enum):
+class ObbcaData1CreditInterestTierBandSetTierBandMethodEnum(str, Enum):
     BANDED = "Banded"
     TIERED = "Tiered"
     WHOLE = "Whole"
@@ -95,19 +95,19 @@ class ObbcaData1CreditInterestTierBandSetTierBandMethodTierBandMethodEnum(str, E
 @dataclass_json
 @dataclass
 class ObbcaData1CreditInterestTierBandSet:
-    calculation_method: Optional[ObbcaData1CreditInterestTierBandSetCalculationMethodCalculationMethodEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CalculationMethod' }})
-    destination: ObbcaData1CreditInterestTierBandSetDestinationDestinationEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Destination' }})
+    calculation_method: Optional[ObbcaData1CreditInterestTierBandSetCalculationMethodEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CalculationMethod' }})
+    destination: ObbcaData1CreditInterestTierBandSetDestinationEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Destination' }})
     notes: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Notes' }})
     tier_band: List[ObbcaData1CreditInterestTierBandSetTierBand] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TierBand' }})
-    tier_band_method: ObbcaData1CreditInterestTierBandSetTierBandMethodTierBandMethodEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TierBandMethod' }})
+    tier_band_method: ObbcaData1CreditInterestTierBandSetTierBandMethodEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TierBandMethod' }})
     
 
 @dataclass_json
 @dataclass
-class ObbcaData1CreditInterestCreditInterest:
+class ObbcaData1CreditInterest:
     tier_band_set: List[ObbcaData1CreditInterestTierBandSet] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TierBandSet' }})
     
-class ObbcaData1OtherFeesChargesFeeChargeCapCappingPeriodCappingPeriodEnum(str, Enum):
+class ObbcaData1OtherFeesChargesFeeChargeCapCappingPeriodEnum(str, Enum):
     DAY = "Day"
     HALF_YEAR = "Half Year"
     MONTH = "Month"
@@ -125,7 +125,7 @@ class ObbcaData1OtherFeesChargesFeeChargeCapFeeTypeEnum(str, Enum):
     SERVICE_C_MINIMUM_MONTHLY_FEE = "ServiceCMinimumMonthlyFee"
     SERVICE_C_OTHER = "ServiceCOther"
 
-class ObbcaData1OtherFeesChargesFeeChargeCapMinMaxTypeMinMaxTypeEnum(str, Enum):
+class ObbcaData1OtherFeesChargesFeeChargeCapMinMaxTypeEnum(str, Enum):
     MINIMUM = "Minimum"
     MAXIMUM = "Maximum"
 
@@ -141,15 +141,15 @@ class ObbcaData1OtherFeesChargesFeeChargeCapOtherFeeType:
 @dataclass_json
 @dataclass
 class ObbcaData1OtherFeesChargesFeeChargeCap:
-    capping_period: Optional[ObbcaData1OtherFeesChargesFeeChargeCapCappingPeriodCappingPeriodEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CappingPeriod' }})
+    capping_period: Optional[ObbcaData1OtherFeesChargesFeeChargeCapCappingPeriodEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CappingPeriod' }})
     fee_cap_amount: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeeCapAmount' }})
     fee_cap_occurrence: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeeCapOccurrence' }})
     fee_type: List[ObbcaData1OtherFeesChargesFeeChargeCapFeeTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeeType' }})
-    min_max_type: ObbcaData1OtherFeesChargesFeeChargeCapMinMaxTypeMinMaxTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MinMaxType' }})
+    min_max_type: ObbcaData1OtherFeesChargesFeeChargeCapMinMaxTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MinMaxType' }})
     notes: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Notes' }})
     other_fee_type: Optional[List[ObbcaData1OtherFeesChargesFeeChargeCapOtherFeeType]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OtherFeeType' }})
     
-class ObbcaData1OtherFeesChargesFeeChargeDetailApplicationFrequencyApplicationFrequencyEnum(str, Enum):
+class ObbcaData1OtherFeesChargesFeeChargeDetailApplicationFrequencyEnum(str, Enum):
     ON_CLOSING = "OnClosing"
     ON_OPENING = "OnOpening"
     CHARGING_PERIOD = "ChargingPeriod"
@@ -171,7 +171,7 @@ class ObbcaData1OtherFeesChargesFeeChargeDetailApplicationFrequencyApplicationFr
     WEEKLY = "Weekly"
     YEARLY = "Yearly"
 
-class ObbcaData1OtherFeesChargesFeeChargeDetailCalculationFrequencyCalculationFrequencyEnum(str, Enum):
+class ObbcaData1OtherFeesChargesFeeChargeDetailCalculationFrequencyEnum(str, Enum):
     ON_CLOSING = "OnClosing"
     ON_OPENING = "OnOpening"
     CHARGING_PERIOD = "ChargingPeriod"
@@ -196,17 +196,17 @@ class ObbcaData1OtherFeesChargesFeeChargeDetailCalculationFrequencyCalculationFr
 
 @dataclass_json
 @dataclass
-class ObbcaData1OtherFeesChargesFeeChargeDetailFeeApplicableRangeFeeApplicableRange:
+class ObbcaData1OtherFeesChargesFeeChargeDetailFeeApplicableRange:
     maximum_amount: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MaximumAmount' }})
     maximum_rate: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MaximumRate' }})
     minimum_amount: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MinimumAmount' }})
     minimum_rate: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MinimumRate' }})
     
-class ObbcaData1OtherFeesChargesFeeChargeDetailFeeCategoryFeeCategoryEnum(str, Enum):
+class ObbcaData1OtherFeesChargesFeeChargeDetailFeeCategoryEnum(str, Enum):
     OTHER = "Other"
     SERVICING = "Servicing"
 
-class ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapCappingPeriodCappingPeriodEnum(str, Enum):
+class ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapCappingPeriodEnum(str, Enum):
     DAY = "Day"
     HALF_YEAR = "Half Year"
     MONTH = "Month"
@@ -224,7 +224,7 @@ class ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapFeeTypeEnum(str, Enum
     SERVICE_C_MINIMUM_MONTHLY_FEE = "ServiceCMinimumMonthlyFee"
     SERVICE_C_OTHER = "ServiceCOther"
 
-class ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapMinMaxTypeMinMaxTypeEnum(str, Enum):
+class ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapMinMaxTypeEnum(str, Enum):
     MINIMUM = "Minimum"
     MAXIMUM = "Maximum"
 
@@ -240,19 +240,19 @@ class ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapOtherFeeType:
 @dataclass_json
 @dataclass
 class ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCap:
-    capping_period: Optional[ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapCappingPeriodCappingPeriodEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CappingPeriod' }})
+    capping_period: Optional[ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapCappingPeriodEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CappingPeriod' }})
     fee_cap_amount: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeeCapAmount' }})
     fee_cap_occurrence: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeeCapOccurrence' }})
     fee_type: List[ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapFeeTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeeType' }})
-    min_max_type: ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapMinMaxTypeMinMaxTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MinMaxType' }})
+    min_max_type: ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapMinMaxTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MinMaxType' }})
     notes: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Notes' }})
     other_fee_type: Optional[List[ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapOtherFeeType]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OtherFeeType' }})
     
-class ObbcaData1OtherFeesChargesFeeChargeDetailFeeRateTypeFeeRateTypeEnum(str, Enum):
+class ObbcaData1OtherFeesChargesFeeChargeDetailFeeRateTypeEnum(str, Enum):
     GROSS = "Gross"
     OTHER = "Other"
 
-class ObbcaData1OtherFeesChargesFeeChargeDetailFeeTypeFeeTypeEnum(str, Enum):
+class ObbcaData1OtherFeesChargesFeeChargeDetailFeeTypeEnum(str, Enum):
     OTHER = "Other"
     SERVICE_C_ACCOUNT_FEE = "ServiceCAccountFee"
     SERVICE_C_ACCOUNT_FEE_MONTHLY = "ServiceCAccountFeeMonthly"
@@ -265,7 +265,7 @@ class ObbcaData1OtherFeesChargesFeeChargeDetailFeeTypeFeeTypeEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class ObbcaData1OtherFeesChargesFeeChargeDetailOtherApplicationFrequencyOtherApplicationFrequency:
+class ObbcaData1OtherFeesChargesFeeChargeDetailOtherApplicationFrequency:
     code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Code' }})
     description: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Description' }})
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
@@ -273,7 +273,7 @@ class ObbcaData1OtherFeesChargesFeeChargeDetailOtherApplicationFrequencyOtherApp
 
 @dataclass_json
 @dataclass
-class ObbcaData1OtherFeesChargesFeeChargeDetailOtherCalculationFrequencyOtherCalculationFrequency:
+class ObbcaData1OtherFeesChargesFeeChargeDetailOtherCalculationFrequency:
     code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Code' }})
     description: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Description' }})
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
@@ -281,7 +281,7 @@ class ObbcaData1OtherFeesChargesFeeChargeDetailOtherCalculationFrequencyOtherCal
 
 @dataclass_json
 @dataclass
-class ObbcaData1OtherFeesChargesFeeChargeDetailOtherFeeCategoryTypeOtherFeeCategoryType:
+class ObbcaData1OtherFeesChargesFeeChargeDetailOtherFeeCategoryType:
     code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Code' }})
     description: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Description' }})
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
@@ -289,54 +289,54 @@ class ObbcaData1OtherFeesChargesFeeChargeDetailOtherFeeCategoryTypeOtherFeeCateg
 
 @dataclass_json
 @dataclass
-class ObbcaData1OtherFeesChargesFeeChargeDetailOtherFeeRateTypeOtherFeeRateType:
+class ObbcaData1OtherFeesChargesFeeChargeDetailOtherFeeRateType:
     code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Code' }})
     description: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Description' }})
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
     
-class ObbcaData1OtherFeesChargesFeeChargeDetailOtherFeeTypeFeeCategoryFeeCategoryEnum(str, Enum):
+class ObbcaData1OtherFeesChargesFeeChargeDetailOtherFeeTypeFeeCategoryEnum(str, Enum):
     OTHER = "Other"
     SERVICING = "Servicing"
 
 
 @dataclass_json
 @dataclass
-class ObbcaData1OtherFeesChargesFeeChargeDetailOtherFeeTypeOtherFeeType:
+class ObbcaData1OtherFeesChargesFeeChargeDetailOtherFeeType:
     code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Code' }})
     description: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Description' }})
-    fee_category: ObbcaData1OtherFeesChargesFeeChargeDetailOtherFeeTypeFeeCategoryFeeCategoryEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeeCategory' }})
+    fee_category: ObbcaData1OtherFeesChargesFeeChargeDetailOtherFeeTypeFeeCategoryEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeeCategory' }})
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
     
 
 @dataclass_json
 @dataclass
 class ObbcaData1OtherFeesChargesFeeChargeDetail:
-    application_frequency: ObbcaData1OtherFeesChargesFeeChargeDetailApplicationFrequencyApplicationFrequencyEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ApplicationFrequency' }})
-    calculation_frequency: Optional[ObbcaData1OtherFeesChargesFeeChargeDetailCalculationFrequencyCalculationFrequencyEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CalculationFrequency' }})
+    application_frequency: ObbcaData1OtherFeesChargesFeeChargeDetailApplicationFrequencyEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ApplicationFrequency' }})
+    calculation_frequency: Optional[ObbcaData1OtherFeesChargesFeeChargeDetailCalculationFrequencyEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CalculationFrequency' }})
     fee_amount: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeeAmount' }})
-    fee_applicable_range: Optional[ObbcaData1OtherFeesChargesFeeChargeDetailFeeApplicableRangeFeeApplicableRange] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeeApplicableRange' }})
-    fee_category: ObbcaData1OtherFeesChargesFeeChargeDetailFeeCategoryFeeCategoryEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeeCategory' }})
+    fee_applicable_range: Optional[ObbcaData1OtherFeesChargesFeeChargeDetailFeeApplicableRange] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeeApplicableRange' }})
+    fee_category: ObbcaData1OtherFeesChargesFeeChargeDetailFeeCategoryEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeeCategory' }})
     fee_charge_cap: Optional[List[ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCap]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeeChargeCap' }})
     fee_rate: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeeRate' }})
-    fee_rate_type: Optional[ObbcaData1OtherFeesChargesFeeChargeDetailFeeRateTypeFeeRateTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeeRateType' }})
-    fee_type: ObbcaData1OtherFeesChargesFeeChargeDetailFeeTypeFeeTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeeType' }})
+    fee_rate_type: Optional[ObbcaData1OtherFeesChargesFeeChargeDetailFeeRateTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeeRateType' }})
+    fee_type: ObbcaData1OtherFeesChargesFeeChargeDetailFeeTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeeType' }})
     negotiable_indicator: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NegotiableIndicator' }})
     notes: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Notes' }})
-    other_application_frequency: Optional[ObbcaData1OtherFeesChargesFeeChargeDetailOtherApplicationFrequencyOtherApplicationFrequency] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OtherApplicationFrequency' }})
-    other_calculation_frequency: Optional[ObbcaData1OtherFeesChargesFeeChargeDetailOtherCalculationFrequencyOtherCalculationFrequency] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OtherCalculationFrequency' }})
-    other_fee_category_type: Optional[ObbcaData1OtherFeesChargesFeeChargeDetailOtherFeeCategoryTypeOtherFeeCategoryType] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OtherFeeCategoryType' }})
-    other_fee_rate_type: Optional[ObbcaData1OtherFeesChargesFeeChargeDetailOtherFeeRateTypeOtherFeeRateType] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OtherFeeRateType' }})
-    other_fee_type: Optional[ObbcaData1OtherFeesChargesFeeChargeDetailOtherFeeTypeOtherFeeType] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OtherFeeType' }})
+    other_application_frequency: Optional[ObbcaData1OtherFeesChargesFeeChargeDetailOtherApplicationFrequency] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OtherApplicationFrequency' }})
+    other_calculation_frequency: Optional[ObbcaData1OtherFeesChargesFeeChargeDetailOtherCalculationFrequency] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OtherCalculationFrequency' }})
+    other_fee_category_type: Optional[ObbcaData1OtherFeesChargesFeeChargeDetailOtherFeeCategoryType] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OtherFeeCategoryType' }})
+    other_fee_rate_type: Optional[ObbcaData1OtherFeesChargesFeeChargeDetailOtherFeeRateType] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OtherFeeRateType' }})
+    other_fee_type: Optional[ObbcaData1OtherFeesChargesFeeChargeDetailOtherFeeType] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OtherFeeType' }})
     
 
 @dataclass_json
 @dataclass
-class ObbcaData1OtherFeesChargesOtherTariffTypeOtherTariffType:
+class ObbcaData1OtherFeesChargesOtherTariffType:
     code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Code' }})
     description: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Description' }})
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
     
-class ObbcaData1OtherFeesChargesTariffTypeTariffTypeEnum(str, Enum):
+class ObbcaData1OtherFeesChargesTariffTypeEnum(str, Enum):
     ELECTRONIC = "Electronic"
     MIXED = "Mixed"
     OTHER = "Other"
@@ -347,11 +347,11 @@ class ObbcaData1OtherFeesChargesTariffTypeTariffTypeEnum(str, Enum):
 class ObbcaData1OtherFeesCharges:
     fee_charge_cap: Optional[List[ObbcaData1OtherFeesChargesFeeChargeCap]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeeChargeCap' }})
     fee_charge_detail: List[ObbcaData1OtherFeesChargesFeeChargeDetail] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeeChargeDetail' }})
-    other_tariff_type: Optional[ObbcaData1OtherFeesChargesOtherTariffTypeOtherTariffType] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OtherTariffType' }})
+    other_tariff_type: Optional[ObbcaData1OtherFeesChargesOtherTariffType] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OtherTariffType' }})
     tariff_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TariffName' }})
-    tariff_type: Optional[ObbcaData1OtherFeesChargesTariffTypeTariffTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TariffType' }})
+    tariff_type: Optional[ObbcaData1OtherFeesChargesTariffTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TariffType' }})
     
-class ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapCappingPeriodCappingPeriodEnum(str, Enum):
+class ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapCappingPeriodEnum(str, Enum):
     DAY = "Day"
     HALF_YEAR = "Half Year"
     MONTH = "Month"
@@ -373,7 +373,7 @@ class ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeCha
     OTHER = "Other"
     UNAUTHORISED_UNPAID_TRANS = "UnauthorisedUnpaidTrans"
 
-class ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapMinMaxTypeMinMaxTypeEnum(str, Enum):
+class ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapMinMaxTypeEnum(str, Enum):
     MINIMUM = "Minimum"
     MAXIMUM = "Maximum"
 
@@ -389,15 +389,15 @@ class ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeCha
 @dataclass_json
 @dataclass
 class ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCap:
-    capping_period: Optional[ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapCappingPeriodCappingPeriodEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CappingPeriod' }})
+    capping_period: Optional[ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapCappingPeriodEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CappingPeriod' }})
     fee_cap_amount: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeeCapAmount' }})
     fee_cap_occurrence: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeeCapOccurrence' }})
     fee_type: List[ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeeType' }})
-    min_max_type: ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapMinMaxTypeMinMaxTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MinMaxType' }})
+    min_max_type: ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapMinMaxTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MinMaxType' }})
     notes: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Notes' }})
     other_fee_type: Optional[List[ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapOtherFeeType]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OtherFeeType' }})
     
-class ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyApplicationFrequencyEnum(str, Enum):
+class ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnum(str, Enum):
     ON_CLOSING = "OnClosing"
     ON_OPENING = "OnOpening"
     CHARGING_PERIOD = "ChargingPeriod"
@@ -419,7 +419,7 @@ class ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeCha
     WEEKLY = "Weekly"
     YEARLY = "Yearly"
 
-class ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyCalculationFrequencyEnum(str, Enum):
+class ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnum(str, Enum):
     ON_CLOSING = "OnClosing"
     ON_OPENING = "OnOpening"
     CHARGING_PERIOD = "ChargingPeriod"
@@ -441,11 +441,11 @@ class ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeCha
     WEEKLY = "Weekly"
     YEARLY = "Yearly"
 
-class ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailFeeRateTypeFeeRateTypeEnum(str, Enum):
+class ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailFeeRateTypeEnum(str, Enum):
     GROSS = "Gross"
     OTHER = "Other"
 
-class ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeFeeTypeEnum(str, Enum):
+class ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnum(str, Enum):
     ARRANGED_OVERDRAFT = "ArrangedOverdraft"
     ANNUAL_REVIEW = "AnnualReview"
     EMERGENCY_BORROWING = "EmergencyBorrowing"
@@ -462,7 +462,7 @@ class ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeCha
 
 @dataclass_json
 @dataclass
-class ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOtherApplicationFrequencyOtherApplicationFrequency:
+class ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOtherApplicationFrequency:
     code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Code' }})
     description: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Description' }})
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
@@ -470,7 +470,7 @@ class ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeCha
 
 @dataclass_json
 @dataclass
-class ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOtherCalculationFrequencyOtherCalculationFrequency:
+class ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOtherCalculationFrequency:
     code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Code' }})
     description: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Description' }})
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
@@ -478,7 +478,7 @@ class ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeCha
 
 @dataclass_json
 @dataclass
-class ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOtherFeeRateTypeOtherFeeRateType:
+class ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOtherFeeRateType:
     code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Code' }})
     description: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Description' }})
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
@@ -486,12 +486,12 @@ class ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeCha
 
 @dataclass_json
 @dataclass
-class ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOtherFeeTypeOtherFeeType:
+class ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOtherFeeType:
     code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Code' }})
     description: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Description' }})
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
     
-class ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapCappingPeriodCappingPeriodEnum(str, Enum):
+class ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapCappingPeriodEnum(str, Enum):
     DAY = "Day"
     HALF_YEAR = "Half Year"
     MONTH = "Month"
@@ -513,7 +513,7 @@ class ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeCha
     OTHER = "Other"
     UNAUTHORISED_UNPAID_TRANS = "UnauthorisedUnpaidTrans"
 
-class ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapMinMaxTypeMinMaxTypeEnum(str, Enum):
+class ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapMinMaxTypeEnum(str, Enum):
     MINIMUM = "Minimum"
     MAXIMUM = "Maximum"
 
@@ -529,11 +529,11 @@ class ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeCha
 @dataclass_json
 @dataclass
 class ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCap:
-    capping_period: Optional[ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapCappingPeriodCappingPeriodEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CappingPeriod' }})
+    capping_period: Optional[ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapCappingPeriodEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CappingPeriod' }})
     fee_cap_amount: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeeCapAmount' }})
     fee_cap_occurrence: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeeCapOccurrence' }})
     fee_type: List[ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeeType' }})
-    min_max_type: ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapMinMaxTypeMinMaxTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MinMaxType' }})
+    min_max_type: ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapMinMaxTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MinMaxType' }})
     notes: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Notes' }})
     other_fee_type: Optional[List[ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapOtherFeeType]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OtherFeeType' }})
     
@@ -541,19 +541,19 @@ class ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeCha
 @dataclass_json
 @dataclass
 class ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetail:
-    application_frequency: ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyApplicationFrequencyEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ApplicationFrequency' }})
-    calculation_frequency: Optional[ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyCalculationFrequencyEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CalculationFrequency' }})
+    application_frequency: ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ApplicationFrequency' }})
+    calculation_frequency: Optional[ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CalculationFrequency' }})
     fee_amount: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeeAmount' }})
     fee_rate: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeeRate' }})
-    fee_rate_type: Optional[ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailFeeRateTypeFeeRateTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeeRateType' }})
-    fee_type: ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeFeeTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeeType' }})
+    fee_rate_type: Optional[ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailFeeRateTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeeRateType' }})
+    fee_type: ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeeType' }})
     incremental_borrowing_amount: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'IncrementalBorrowingAmount' }})
     negotiable_indicator: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NegotiableIndicator' }})
     notes: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Notes' }})
-    other_application_frequency: Optional[ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOtherApplicationFrequencyOtherApplicationFrequency] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OtherApplicationFrequency' }})
-    other_calculation_frequency: Optional[ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOtherCalculationFrequencyOtherCalculationFrequency] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OtherCalculationFrequency' }})
-    other_fee_rate_type: Optional[ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOtherFeeRateTypeOtherFeeRateType] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OtherFeeRateType' }})
-    other_fee_type: Optional[ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOtherFeeTypeOtherFeeType] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OtherFeeType' }})
+    other_application_frequency: Optional[ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOtherApplicationFrequency] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OtherApplicationFrequency' }})
+    other_calculation_frequency: Optional[ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOtherCalculationFrequency] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OtherCalculationFrequency' }})
+    other_fee_rate_type: Optional[ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOtherFeeRateType] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OtherFeeRateType' }})
+    other_fee_type: Optional[ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOtherFeeType] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OtherFeeType' }})
     overdraft_control_indicator: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OverdraftControlIndicator' }})
     overdraft_fee_charge_cap: Optional[List[ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCap]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OverdraftFeeChargeCap' }})
     
@@ -564,7 +564,7 @@ class ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesCharges:
     overdraft_fee_charge_cap: Optional[List[ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCap]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OverdraftFeeChargeCap' }})
     overdraft_fee_charge_detail: List[ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetail] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OverdraftFeeChargeDetail' }})
     
-class ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandAgreementPeriodAgreementPeriodEnum(str, Enum):
+class ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandAgreementPeriodEnum(str, Enum):
     DAY = "Day"
     HALF_YEAR = "Half Year"
     MONTH = "Month"
@@ -572,7 +572,7 @@ class ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandAgreementPeriodAgr
     WEEK = "Week"
     YEAR = "Year"
 
-class ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapCappingPeriodCappingPeriodEnum(str, Enum):
+class ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapCappingPeriodEnum(str, Enum):
     DAY = "Day"
     HALF_YEAR = "Half Year"
     MONTH = "Month"
@@ -594,7 +594,7 @@ class ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesCharg
     OTHER = "Other"
     UNAUTHORISED_UNPAID_TRANS = "UnauthorisedUnpaidTrans"
 
-class ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapMinMaxTypeMinMaxTypeEnum(str, Enum):
+class ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapMinMaxTypeEnum(str, Enum):
     MINIMUM = "Minimum"
     MAXIMUM = "Maximum"
 
@@ -610,15 +610,15 @@ class ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesCharg
 @dataclass_json
 @dataclass
 class ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCap:
-    capping_period: Optional[ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapCappingPeriodCappingPeriodEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CappingPeriod' }})
+    capping_period: Optional[ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapCappingPeriodEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CappingPeriod' }})
     fee_cap_amount: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeeCapAmount' }})
     fee_cap_occurrence: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeeCapOccurrence' }})
     fee_type: List[ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeeType' }})
-    min_max_type: ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapMinMaxTypeMinMaxTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MinMaxType' }})
+    min_max_type: ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapMinMaxTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MinMaxType' }})
     notes: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Notes' }})
     other_fee_type: Optional[List[ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapOtherFeeType]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OtherFeeType' }})
     
-class ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyApplicationFrequencyEnum(str, Enum):
+class ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnum(str, Enum):
     ON_CLOSING = "OnClosing"
     ON_OPENING = "OnOpening"
     CHARGING_PERIOD = "ChargingPeriod"
@@ -640,7 +640,7 @@ class ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesCharg
     WEEKLY = "Weekly"
     YEARLY = "Yearly"
 
-class ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyCalculationFrequencyEnum(str, Enum):
+class ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnum(str, Enum):
     ON_CLOSING = "OnClosing"
     ON_OPENING = "OnOpening"
     CHARGING_PERIOD = "ChargingPeriod"
@@ -662,11 +662,11 @@ class ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesCharg
     WEEKLY = "Weekly"
     YEARLY = "Yearly"
 
-class ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailFeeRateTypeFeeRateTypeEnum(str, Enum):
+class ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailFeeRateTypeEnum(str, Enum):
     GROSS = "Gross"
     OTHER = "Other"
 
-class ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeFeeTypeEnum(str, Enum):
+class ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnum(str, Enum):
     ARRANGED_OVERDRAFT = "ArrangedOverdraft"
     ANNUAL_REVIEW = "AnnualReview"
     EMERGENCY_BORROWING = "EmergencyBorrowing"
@@ -683,7 +683,7 @@ class ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesCharg
 
 @dataclass_json
 @dataclass
-class ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOtherApplicationFrequencyOtherApplicationFrequency:
+class ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOtherApplicationFrequency:
     code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Code' }})
     description: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Description' }})
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
@@ -691,7 +691,7 @@ class ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesCharg
 
 @dataclass_json
 @dataclass
-class ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOtherCalculationFrequencyOtherCalculationFrequency:
+class ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOtherCalculationFrequency:
     code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Code' }})
     description: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Description' }})
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
@@ -699,7 +699,7 @@ class ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesCharg
 
 @dataclass_json
 @dataclass
-class ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOtherFeeRateTypeOtherFeeRateType:
+class ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOtherFeeRateType:
     code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Code' }})
     description: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Description' }})
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
@@ -707,12 +707,12 @@ class ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesCharg
 
 @dataclass_json
 @dataclass
-class ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOtherFeeTypeOtherFeeType:
+class ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOtherFeeType:
     code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Code' }})
     description: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Description' }})
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Name' }})
     
-class ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapCappingPeriodCappingPeriodEnum(str, Enum):
+class ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapCappingPeriodEnum(str, Enum):
     DAY = "Day"
     HALF_YEAR = "Half Year"
     MONTH = "Month"
@@ -734,7 +734,7 @@ class ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesCharg
     OTHER = "Other"
     UNAUTHORISED_UNPAID_TRANS = "UnauthorisedUnpaidTrans"
 
-class ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapMinMaxTypeMinMaxTypeEnum(str, Enum):
+class ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapMinMaxTypeEnum(str, Enum):
     MINIMUM = "Minimum"
     MAXIMUM = "Maximum"
 
@@ -750,11 +750,11 @@ class ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesCharg
 @dataclass_json
 @dataclass
 class ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCap:
-    capping_period: Optional[ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapCappingPeriodCappingPeriodEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CappingPeriod' }})
+    capping_period: Optional[ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapCappingPeriodEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CappingPeriod' }})
     fee_cap_amount: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeeCapAmount' }})
     fee_cap_occurrence: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeeCapOccurrence' }})
     fee_type: List[ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeeType' }})
-    min_max_type: ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapMinMaxTypeMinMaxTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MinMaxType' }})
+    min_max_type: ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapMinMaxTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'MinMaxType' }})
     notes: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Notes' }})
     other_fee_type: Optional[List[ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapOtherFeeType]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OtherFeeType' }})
     
@@ -762,19 +762,19 @@ class ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesCharg
 @dataclass_json
 @dataclass
 class ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetail:
-    application_frequency: ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyApplicationFrequencyEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ApplicationFrequency' }})
-    calculation_frequency: Optional[ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyCalculationFrequencyEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CalculationFrequency' }})
+    application_frequency: ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ApplicationFrequency' }})
+    calculation_frequency: Optional[ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CalculationFrequency' }})
     fee_amount: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeeAmount' }})
     fee_rate: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeeRate' }})
-    fee_rate_type: Optional[ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailFeeRateTypeFeeRateTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeeRateType' }})
-    fee_type: ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeFeeTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeeType' }})
+    fee_rate_type: Optional[ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailFeeRateTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeeRateType' }})
+    fee_type: ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeeType' }})
     incremental_borrowing_amount: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'IncrementalBorrowingAmount' }})
     negotiable_indicator: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'NegotiableIndicator' }})
     notes: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Notes' }})
-    other_application_frequency: Optional[ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOtherApplicationFrequencyOtherApplicationFrequency] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OtherApplicationFrequency' }})
-    other_calculation_frequency: Optional[ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOtherCalculationFrequencyOtherCalculationFrequency] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OtherCalculationFrequency' }})
-    other_fee_rate_type: Optional[ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOtherFeeRateTypeOtherFeeRateType] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OtherFeeRateType' }})
-    other_fee_type: Optional[ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOtherFeeTypeOtherFeeType] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OtherFeeType' }})
+    other_application_frequency: Optional[ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOtherApplicationFrequency] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OtherApplicationFrequency' }})
+    other_calculation_frequency: Optional[ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOtherCalculationFrequency] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OtherCalculationFrequency' }})
+    other_fee_rate_type: Optional[ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOtherFeeRateType] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OtherFeeRateType' }})
+    other_fee_type: Optional[ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOtherFeeType] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OtherFeeType' }})
     overdraft_control_indicator: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OverdraftControlIndicator' }})
     overdraft_fee_charge_cap: Optional[List[ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCap]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OverdraftFeeChargeCap' }})
     
@@ -785,7 +785,7 @@ class ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesCharg
     overdraft_fee_charge_cap: Optional[List[ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCap]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OverdraftFeeChargeCap' }})
     overdraft_fee_charge_detail: List[ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetail] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OverdraftFeeChargeDetail' }})
     
-class ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftInterestChargingCoverageOverdraftInterestChargingCoverageEnum(str, Enum):
+class ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftInterestChargingCoverageEnum(str, Enum):
     BANDED = "Banded"
     TIERED = "Tiered"
     WHOLE = "Whole"
@@ -796,22 +796,22 @@ class ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftInterestC
 class ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBand:
     agreement_length_max: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AgreementLengthMax' }})
     agreement_length_min: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AgreementLengthMin' }})
-    agreement_period: Optional[ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandAgreementPeriodAgreementPeriodEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AgreementPeriod' }})
+    agreement_period: Optional[ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandAgreementPeriodEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'AgreementPeriod' }})
     bank_guaranteed_indicator: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'BankGuaranteedIndicator' }})
     ear: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'EAR' }})
     identification: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Identification' }})
     notes: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Notes' }})
     overdraft_fees_charges: Optional[List[ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesCharges]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OverdraftFeesCharges' }})
-    overdraft_interest_charging_coverage: Optional[ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftInterestChargingCoverageOverdraftInterestChargingCoverageEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OverdraftInterestChargingCoverage' }})
+    overdraft_interest_charging_coverage: Optional[ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftInterestChargingCoverageEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OverdraftInterestChargingCoverage' }})
     representative_apr: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'RepresentativeAPR' }})
     tier_value_max: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TierValueMax' }})
     tier_value_min: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TierValueMin' }})
     
-class ObbcaData1OverdraftOverdraftTierBandSetOverdraftTypeOverdraftTypeEnum(str, Enum):
+class ObbcaData1OverdraftOverdraftTierBandSetOverdraftTypeEnum(str, Enum):
     COMMITTED = "Committed"
     ON_DEMAND = "OnDemand"
 
-class ObbcaData1OverdraftOverdraftTierBandSetTierBandMethodTierBandMethodEnum(str, Enum):
+class ObbcaData1OverdraftOverdraftTierBandSetTierBandMethodEnum(str, Enum):
     BANDED = "Banded"
     TIERED = "Tiered"
     WHOLE = "Whole"
@@ -826,17 +826,17 @@ class ObbcaData1OverdraftOverdraftTierBandSet:
     notes: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Notes' }})
     overdraft_fees_charges: Optional[List[ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesCharges]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OverdraftFeesCharges' }})
     overdraft_tier_band: List[ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBand] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OverdraftTierBand' }})
-    overdraft_type: Optional[ObbcaData1OverdraftOverdraftTierBandSetOverdraftTypeOverdraftTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OverdraftType' }})
-    tier_band_method: ObbcaData1OverdraftOverdraftTierBandSetTierBandMethodTierBandMethodEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TierBandMethod' }})
+    overdraft_type: Optional[ObbcaData1OverdraftOverdraftTierBandSetOverdraftTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OverdraftType' }})
+    tier_band_method: ObbcaData1OverdraftOverdraftTierBandSetTierBandMethodEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TierBandMethod' }})
     
 
 @dataclass_json
 @dataclass
-class ObbcaData1OverdraftOverdraft:
+class ObbcaData1Overdraft:
     notes: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Notes' }})
     overdraft_tier_band_set: List[ObbcaData1OverdraftOverdraftTierBandSet] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OverdraftTierBandSet' }})
     
-class ObbcaData1ProductDetailsFeeFreeLengthPeriodFeeFreeLengthPeriodEnum(str, Enum):
+class ObbcaData1ProductDetailsFeeFreeLengthPeriodEnum(str, Enum):
     DAY = "Day"
     HALF_YEAR = "Half Year"
     MONTH = "Month"
@@ -857,9 +857,9 @@ class ObbcaData1ProductDetailsSegmentEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class ObbcaData1ProductDetailsProductDetails:
+class ObbcaData1ProductDetails:
     fee_free_length: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeeFreeLength' }})
-    fee_free_length_period: Optional[ObbcaData1ProductDetailsFeeFreeLengthPeriodFeeFreeLengthPeriodEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeeFreeLengthPeriod' }})
+    fee_free_length_period: Optional[ObbcaData1ProductDetailsFeeFreeLengthPeriodEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'FeeFreeLengthPeriod' }})
     notes: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Notes' }})
     segment: Optional[List[ObbcaData1ProductDetailsSegmentEnum]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Segment' }})
     
@@ -867,8 +867,8 @@ class ObbcaData1ProductDetailsProductDetails:
 @dataclass_json
 @dataclass
 class ObbcaData1:
-    credit_interest: Optional[ObbcaData1CreditInterestCreditInterest] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CreditInterest' }})
+    credit_interest: Optional[ObbcaData1CreditInterest] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'CreditInterest' }})
     other_fees_charges: Optional[List[ObbcaData1OtherFeesCharges]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'OtherFeesCharges' }})
-    overdraft: Optional[ObbcaData1OverdraftOverdraft] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Overdraft' }})
-    product_details: Optional[ObbcaData1ProductDetailsProductDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ProductDetails' }})
+    overdraft: Optional[ObbcaData1Overdraft] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Overdraft' }})
+    product_details: Optional[ObbcaData1ProductDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ProductDetails' }})
     

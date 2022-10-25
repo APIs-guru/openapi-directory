@@ -12,7 +12,7 @@ class CreateNewSigningKeyPathParams:
     
 
 @dataclass
-class CreateNewSigningKeyRequestBodyCreateNewSigningKeyRequest:
+class CreateNewSigningKeyCreateNewSigningKeyRequest:
     friendly_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
     
 
@@ -25,7 +25,7 @@ class CreateNewSigningKeySecurity:
 class CreateNewSigningKeyRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateNewSigningKeyPathParams = field(default=None)
-    request: Optional[CreateNewSigningKeyRequestBodyCreateNewSigningKeyRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateNewSigningKeyCreateNewSigningKeyRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateNewSigningKeySecurity = field(default=None)
     
 

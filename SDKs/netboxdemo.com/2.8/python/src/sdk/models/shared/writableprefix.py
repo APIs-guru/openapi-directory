@@ -5,7 +5,7 @@ import dateutil.parser
 from typing import Any,Enum,List,Optional
 from dataclasses_json import dataclass_json
 
-class WritablePrefixStatusStatusEnum(str, Enum):
+class WritablePrefixStatusEnum(str, Enum):
     CONTAINER = "container"
     ACTIVE = "active"
     RESERVED = "reserved"
@@ -25,7 +25,7 @@ class WritablePrefix:
     prefix: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'prefix' }})
     role: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'role' }})
     site: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'site' }})
-    status: Optional[WritablePrefixStatusStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    status: Optional[WritablePrefixStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
     tags: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
     tenant: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tenant' }})
     vlan: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'vlan' }})

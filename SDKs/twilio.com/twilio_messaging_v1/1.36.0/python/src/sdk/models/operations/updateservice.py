@@ -10,7 +10,7 @@ UPDATE_SERVICE_SERVERS = [
 class UpdateServicePathParams:
     sid: str = field(default=None, metadata={'path_param': { 'field_name': 'Sid', 'style': 'simple', 'explode': False }})
     
-class UpdateServiceRequestBodyFallbackMethodEnum(str, Enum):
+class UpdateServiceUpdateServiceRequestFallbackMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -18,7 +18,7 @@ class UpdateServiceRequestBodyFallbackMethodEnum(str, Enum):
     PUT = "PUT"
     DELETE = "DELETE"
 
-class UpdateServiceRequestBodyInboundMethodEnum(str, Enum):
+class UpdateServiceUpdateServiceRequestInboundMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -28,13 +28,13 @@ class UpdateServiceRequestBodyInboundMethodEnum(str, Enum):
 
 
 @dataclass
-class UpdateServiceRequestBodyUpdateServiceRequest:
+class UpdateServiceUpdateServiceRequest:
     area_code_geomatch: Optional[bool] = field(default=None, metadata={'form': { 'field_name': 'AreaCodeGeomatch' }})
-    fallback_method: Optional[UpdateServiceRequestBodyFallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'FallbackMethod' }})
+    fallback_method: Optional[UpdateServiceUpdateServiceRequestFallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'FallbackMethod' }})
     fallback_to_long_code: Optional[bool] = field(default=None, metadata={'form': { 'field_name': 'FallbackToLongCode' }})
     fallback_url: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'FallbackUrl' }})
     friendly_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
-    inbound_method: Optional[UpdateServiceRequestBodyInboundMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'InboundMethod' }})
+    inbound_method: Optional[UpdateServiceUpdateServiceRequestInboundMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'InboundMethod' }})
     inbound_request_url: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'InboundRequestUrl' }})
     mms_converter: Optional[bool] = field(default=None, metadata={'form': { 'field_name': 'MmsConverter' }})
     scan_message_content: Optional[shared.ServiceEnumScanMessageContentEnum] = field(default=None, metadata={'form': { 'field_name': 'ScanMessageContent' }})
@@ -56,7 +56,7 @@ class UpdateServiceSecurity:
 class UpdateServiceRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateServicePathParams = field(default=None)
-    request: Optional[UpdateServiceRequestBodyUpdateServiceRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateServiceUpdateServiceRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateServiceSecurity = field(default=None)
     
 

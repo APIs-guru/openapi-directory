@@ -16,7 +16,7 @@ class GetDirectDebitsForMandateUUIDQueryParams:
 class GetDirectDebitsForMandateUUIDRequest:
     query_params: GetDirectDebitsForMandateUUIDQueryParams = field(default=None)
     
-class GetDirectDebitsForMandateUUID200ApplicationJSONDirectdebitsSchemeRejectReasonCodeEnum(str, Enum):
+class GetDirectDebitsForMandateUUIDDirectDebitsDirectDebitSchemeRejectReasonCodeEnum(str, Enum):
     ZERO = "0"
     ONE = "1"
     TWO = "2"
@@ -30,7 +30,7 @@ class GetDirectDebitsForMandateUUID200ApplicationJSONDirectdebitsSchemeRejectRea
     A = "A"
     B = "B"
 
-class GetDirectDebitsForMandateUUID200ApplicationJSONDirectdebitsStatusEnum(str, Enum):
+class GetDirectDebitsForMandateUUIDDirectDebitsDirectDebitStatusEnum(str, Enum):
     RECIEVED = "RECIEVED"
     REJECT_REQUESTED = "REJECT_REQUESTED"
     REJECT_READY_FOR_PROCESSING = "REJECT_READY_FOR_PROCESSING"
@@ -45,7 +45,7 @@ class GetDirectDebitsForMandateUUID200ApplicationJSONDirectdebitsStatusEnum(str,
     REFUND_FILE_CREATED = "REFUND_FILE_CREATED"
     REFUND_FILE_SENT = "REFUND_FILE_SENT"
 
-class GetDirectDebitsForMandateUUID200ApplicationJSONDirectdebitsTypeEnum(str, Enum):
+class GetDirectDebitsForMandateUUIDDirectDebitsDirectDebitTypeEnum(str, Enum):
     FIRST_COLLECTION = "FIRST_COLLECTION"
     ONGOING_COLLECTION = "ONGOING_COLLECTION"
     REPRESENTED_COLLECTION = "REPRESENTED_COLLECTION"
@@ -54,7 +54,7 @@ class GetDirectDebitsForMandateUUID200ApplicationJSONDirectdebitsTypeEnum(str, E
 
 @dataclass_json
 @dataclass
-class GetDirectDebitsForMandateUUID200ApplicationJSONDirectdebitsDirectDebit:
+class GetDirectDebitsForMandateUUIDDirectDebitsDirectDebit:
     amount: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'amount' }})
     currency: Optional[shared.OneaccountsGetResponses200ContentApplication1jsonSchemaPropertiesAccountsItemsPropertiesCurrency] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'currency' }})
     date_created: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dateCreated', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
@@ -67,23 +67,23 @@ class GetDirectDebitsForMandateUUID200ApplicationJSONDirectdebitsDirectDebit:
     originator_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'originatorName' }})
     originator_reference: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'originatorReference' }})
     scheme_reject_reason: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'schemeRejectReason' }})
-    scheme_reject_reason_code: Optional[GetDirectDebitsForMandateUUID200ApplicationJSONDirectdebitsSchemeRejectReasonCodeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'schemeRejectReasonCode' }})
-    status: Optional[GetDirectDebitsForMandateUUID200ApplicationJSONDirectdebitsStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    scheme_reject_reason_code: Optional[GetDirectDebitsForMandateUUIDDirectDebitsDirectDebitSchemeRejectReasonCodeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'schemeRejectReasonCode' }})
+    status: Optional[GetDirectDebitsForMandateUUIDDirectDebitsDirectDebitStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
     target_ican: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'targetIcan' }})
     target_payee_id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'targetPayeeId' }})
-    type: Optional[GetDirectDebitsForMandateUUID200ApplicationJSONDirectdebitsTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    type: Optional[GetDirectDebitsForMandateUUIDDirectDebitsDirectDebitTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     
 
 @dataclass_json
 @dataclass
-class GetDirectDebitsForMandateUUID200ApplicationJSONDirectDebits:
-    directdebits: Optional[List[GetDirectDebitsForMandateUUID200ApplicationJSONDirectdebitsDirectDebit]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'directdebits' }})
+class GetDirectDebitsForMandateUUIDDirectDebits:
+    directdebits: Optional[List[GetDirectDebitsForMandateUUIDDirectDebitsDirectDebit]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'directdebits' }})
     total: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
     
 
 @dataclass
 class GetDirectDebitsForMandateUUIDResponse:
     content_type: str = field(default=None)
-    direct_debits: Optional[GetDirectDebitsForMandateUUID200ApplicationJSONDirectDebits] = field(default=None)
+    direct_debits: Optional[GetDirectDebitsForMandateUUIDDirectDebits] = field(default=None)
     status_code: int = field(default=None)
     

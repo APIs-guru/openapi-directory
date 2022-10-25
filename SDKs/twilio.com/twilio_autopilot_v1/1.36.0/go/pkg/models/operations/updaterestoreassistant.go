@@ -8,7 +8,7 @@ var UpdateRestoreAssistantServers = []string{
 	"https://autopilot.twilio.com",
 }
 
-type UpdateRestoreAssistantRequestBodyUpdateRestoreAssistantRequest struct {
+type UpdateRestoreAssistantUpdateRestoreAssistantRequest struct {
 	Assistant string `form:"name=Assistant"`
 }
 
@@ -18,7 +18,7 @@ type UpdateRestoreAssistantSecurity struct {
 
 type UpdateRestoreAssistantRequest struct {
 	ServerURL *string
-	Request   *UpdateRestoreAssistantRequestBodyUpdateRestoreAssistantRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request   *UpdateRestoreAssistantUpdateRestoreAssistantRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security  UpdateRestoreAssistantSecurity
 }
 

@@ -12,7 +12,7 @@ class CreateVerificationCheckPathParams:
     
 
 @dataclass
-class CreateVerificationCheckRequestBodyCreateVerificationCheckRequest:
+class CreateVerificationCheckCreateVerificationCheckRequest:
     amount: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Amount' }})
     code: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Code' }})
     payee: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Payee' }})
@@ -29,7 +29,7 @@ class CreateVerificationCheckSecurity:
 class CreateVerificationCheckRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateVerificationCheckPathParams = field(default=None)
-    request: Optional[CreateVerificationCheckRequestBodyCreateVerificationCheckRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateVerificationCheckCreateVerificationCheckRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateVerificationCheckSecurity = field(default=None)
     
 

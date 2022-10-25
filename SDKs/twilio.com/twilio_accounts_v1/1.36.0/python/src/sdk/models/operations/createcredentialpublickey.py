@@ -7,7 +7,7 @@ CREATE_CREDENTIAL_PUBLIC_KEY_SERVERS = [
 
 
 @dataclass
-class CreateCredentialPublicKeyRequestBodyCreateCredentialPublicKeyRequest:
+class CreateCredentialPublicKeyCreateCredentialPublicKeyRequest:
     account_sid: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'AccountSid' }})
     friendly_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
     public_key: str = field(default=None, metadata={'form': { 'field_name': 'PublicKey' }})
@@ -21,7 +21,7 @@ class CreateCredentialPublicKeySecurity:
 @dataclass
 class CreateCredentialPublicKeyRequest:
     server_url: Optional[str] = field(default=None)
-    request: Optional[CreateCredentialPublicKeyRequestBodyCreateCredentialPublicKeyRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateCredentialPublicKeyCreateCredentialPublicKeyRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateCredentialPublicKeySecurity = field(default=None)
     
 

@@ -5,7 +5,7 @@ from . import nestedcircuit
 from . import nestedinterface
 from . import nestedsite
 
-class CircuitTerminationTermSideTerminationEnum(str, Enum):
+class CircuitTerminationTerminationEnum(str, Enum):
     A = "A"
     Z = "Z"
 
@@ -19,7 +19,7 @@ class CircuitTermination:
     port_speed: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'port_speed' }})
     pp_info: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pp_info' }})
     site: nestedsite.NestedSite = field(default=None, metadata={'dataclasses_json': { 'field_name': 'site' }})
-    term_side: CircuitTerminationTermSideTerminationEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'term_side' }})
+    term_side: CircuitTerminationTerminationEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'term_side' }})
     upstream_speed: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'upstream_speed' }})
     xconnect_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'xconnect_id' }})
     

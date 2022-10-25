@@ -12,7 +12,7 @@ class UpdateWirelessRatePlanPathParams:
     
 
 @dataclass
-class UpdateWirelessRatePlanRequestBodyUpdateWirelessRatePlanRequest:
+class UpdateWirelessRatePlanUpdateWirelessRatePlanRequest:
     friendly_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
     unique_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'UniqueName' }})
     
@@ -26,7 +26,7 @@ class UpdateWirelessRatePlanSecurity:
 class UpdateWirelessRatePlanRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateWirelessRatePlanPathParams = field(default=None)
-    request: Optional[UpdateWirelessRatePlanRequestBodyUpdateWirelessRatePlanRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateWirelessRatePlanUpdateWirelessRatePlanRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateWirelessRatePlanSecurity = field(default=None)
     
 

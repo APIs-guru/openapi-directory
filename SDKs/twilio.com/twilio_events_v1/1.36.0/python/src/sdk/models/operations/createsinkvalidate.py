@@ -12,7 +12,7 @@ class CreateSinkValidatePathParams:
     
 
 @dataclass
-class CreateSinkValidateRequestBodyCreateSinkValidateRequest:
+class CreateSinkValidateCreateSinkValidateRequest:
     test_id: str = field(default=None, metadata={'form': { 'field_name': 'TestId' }})
     
 
@@ -25,7 +25,7 @@ class CreateSinkValidateSecurity:
 class CreateSinkValidateRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateSinkValidatePathParams = field(default=None)
-    request: Optional[CreateSinkValidateRequestBodyCreateSinkValidateRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateSinkValidateCreateSinkValidateRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateSinkValidateSecurity = field(default=None)
     
 

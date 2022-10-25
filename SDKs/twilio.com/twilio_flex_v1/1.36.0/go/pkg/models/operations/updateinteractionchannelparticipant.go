@@ -14,7 +14,7 @@ type UpdateInteractionChannelParticipantPathParams struct {
 	Sid            string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
-type UpdateInteractionChannelParticipantRequestBodyUpdateInteractionChannelParticipantRequest struct {
+type UpdateInteractionChannelParticipantUpdateInteractionChannelParticipantRequest struct {
 	Status shared.InteractionChannelParticipantEnumStatusEnum `form:"name=Status"`
 }
 
@@ -25,7 +25,7 @@ type UpdateInteractionChannelParticipantSecurity struct {
 type UpdateInteractionChannelParticipantRequest struct {
 	ServerURL  *string
 	PathParams UpdateInteractionChannelParticipantPathParams
-	Request    *UpdateInteractionChannelParticipantRequestBodyUpdateInteractionChannelParticipantRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateInteractionChannelParticipantUpdateInteractionChannelParticipantRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateInteractionChannelParticipantSecurity
 }
 

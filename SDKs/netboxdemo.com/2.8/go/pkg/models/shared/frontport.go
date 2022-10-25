@@ -38,7 +38,7 @@ const (
 	FrontPortTypeValueEnumSt                    FrontPortTypeValueEnum = "st"
 )
 
-type FrontPortTypeType struct {
+type FrontPortType struct {
 	Label FrontPortTypeLabelEnum `json:"label"`
 	Value FrontPortTypeValueEnum `json:"value"`
 }
@@ -52,5 +52,5 @@ type FrontPort struct {
 	RearPort         FrontPortRearPort `json:"rear_port"`
 	RearPortPosition *int64            `json:"rear_port_position,omitempty"`
 	Tags             []string          `json:"tags,omitempty"`
-	Type             FrontPortTypeType `json:"type"`
+	Type             FrontPortType     `json:"type"`
 }

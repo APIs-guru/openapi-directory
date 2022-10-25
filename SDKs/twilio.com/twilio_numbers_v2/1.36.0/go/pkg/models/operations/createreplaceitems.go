@@ -12,7 +12,7 @@ type CreateReplaceItemsPathParams struct {
 	BundleSid string `pathParam:"style=simple,explode=false,name=BundleSid"`
 }
 
-type CreateReplaceItemsRequestBodyCreateReplaceItemsRequest struct {
+type CreateReplaceItemsCreateReplaceItemsRequest struct {
 	FromBundleSid string `form:"name=FromBundleSid"`
 }
 
@@ -23,7 +23,7 @@ type CreateReplaceItemsSecurity struct {
 type CreateReplaceItemsRequest struct {
 	ServerURL  *string
 	PathParams CreateReplaceItemsPathParams
-	Request    *CreateReplaceItemsRequestBodyCreateReplaceItemsRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateReplaceItemsCreateReplaceItemsRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateReplaceItemsSecurity
 }
 

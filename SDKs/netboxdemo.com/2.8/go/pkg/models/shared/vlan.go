@@ -20,7 +20,7 @@ const (
 	VlanStatusValueEnumDeprecated VlanStatusValueEnum = "deprecated"
 )
 
-type VlanStatusStatus struct {
+type VlanStatus struct {
 	Label VlanStatusLabelEnum `json:"label"`
 	Value VlanStatusValueEnum `json:"value"`
 }
@@ -37,7 +37,7 @@ type Vlan struct {
 	PrefixCount  *int64                 `json:"prefix_count,omitempty"`
 	Role         *NestedRole            `json:"role,omitempty"`
 	Site         *NestedSite            `json:"site,omitempty"`
-	Status       *VlanStatusStatus      `json:"status,omitempty"`
+	Status       *VlanStatus            `json:"status,omitempty"`
 	Tags         []string               `json:"tags,omitempty"`
 	Tenant       *NestedTenant          `json:"tenant,omitempty"`
 	Vid          int64                  `json:"vid"`

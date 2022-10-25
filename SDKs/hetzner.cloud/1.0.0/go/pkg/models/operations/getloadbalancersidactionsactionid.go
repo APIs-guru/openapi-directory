@@ -9,41 +9,41 @@ type GetLoadBalancersIDActionsActionIDRequest struct {
 	PathParams GetLoadBalancersIDActionsActionIDPathParams
 }
 
-type GetLoadBalancersIDActionsActionID200ApplicationJSONActionError struct {
+type GetLoadBalancersIDActionsActionIDActionResponseActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
 }
 
-type GetLoadBalancersIDActionsActionID200ApplicationJSONActionResources struct {
+type GetLoadBalancersIDActionsActionIDActionResponseActionResources struct {
 	ID   int64  `json:"id"`
 	Type string `json:"type"`
 }
 
-type GetLoadBalancersIDActionsActionID200ApplicationJSONActionStatusEnum string
+type GetLoadBalancersIDActionsActionIDActionResponseActionStatusEnum string
 
 const (
-	GetLoadBalancersIDActionsActionID200ApplicationJSONActionStatusEnumSuccess GetLoadBalancersIDActionsActionID200ApplicationJSONActionStatusEnum = "success"
-	GetLoadBalancersIDActionsActionID200ApplicationJSONActionStatusEnumRunning GetLoadBalancersIDActionsActionID200ApplicationJSONActionStatusEnum = "running"
-	GetLoadBalancersIDActionsActionID200ApplicationJSONActionStatusEnumError   GetLoadBalancersIDActionsActionID200ApplicationJSONActionStatusEnum = "error"
+	GetLoadBalancersIDActionsActionIDActionResponseActionStatusEnumSuccess GetLoadBalancersIDActionsActionIDActionResponseActionStatusEnum = "success"
+	GetLoadBalancersIDActionsActionIDActionResponseActionStatusEnumRunning GetLoadBalancersIDActionsActionIDActionResponseActionStatusEnum = "running"
+	GetLoadBalancersIDActionsActionIDActionResponseActionStatusEnumError   GetLoadBalancersIDActionsActionIDActionResponseActionStatusEnum = "error"
 )
 
-type GetLoadBalancersIDActionsActionID200ApplicationJSONActionAction struct {
-	Command   string                                                               `json:"command"`
-	Error     GetLoadBalancersIDActionsActionID200ApplicationJSONActionError       `json:"error"`
-	Finished  string                                                               `json:"finished"`
-	ID        int64                                                                `json:"id"`
-	Progress  float64                                                              `json:"progress"`
-	Resources []GetLoadBalancersIDActionsActionID200ApplicationJSONActionResources `json:"resources"`
-	Started   string                                                               `json:"started"`
-	Status    GetLoadBalancersIDActionsActionID200ApplicationJSONActionStatusEnum  `json:"status"`
+type GetLoadBalancersIDActionsActionIDActionResponseAction struct {
+	Command   string                                                           `json:"command"`
+	Error     GetLoadBalancersIDActionsActionIDActionResponseActionError       `json:"error"`
+	Finished  string                                                           `json:"finished"`
+	ID        int64                                                            `json:"id"`
+	Progress  float64                                                          `json:"progress"`
+	Resources []GetLoadBalancersIDActionsActionIDActionResponseActionResources `json:"resources"`
+	Started   string                                                           `json:"started"`
+	Status    GetLoadBalancersIDActionsActionIDActionResponseActionStatusEnum  `json:"status"`
 }
 
-type GetLoadBalancersIDActionsActionID200ApplicationJSONActionResponse struct {
-	Action GetLoadBalancersIDActionsActionID200ApplicationJSONActionAction `json:"action"`
+type GetLoadBalancersIDActionsActionIDActionResponse struct {
+	Action GetLoadBalancersIDActionsActionIDActionResponseAction `json:"action"`
 }
 
 type GetLoadBalancersIDActionsActionIDResponse struct {
-	ActionResponse *GetLoadBalancersIDActionsActionID200ApplicationJSONActionResponse
+	ActionResponse *GetLoadBalancersIDActionsActionIDActionResponse
 	ContentType    string
 	StatusCode     int64
 }

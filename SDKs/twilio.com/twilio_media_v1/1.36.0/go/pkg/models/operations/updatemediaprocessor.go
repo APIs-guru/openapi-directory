@@ -12,7 +12,7 @@ type UpdateMediaProcessorPathParams struct {
 	Sid string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
-type UpdateMediaProcessorRequestBodyUpdateMediaProcessorRequest struct {
+type UpdateMediaProcessorUpdateMediaProcessorRequest struct {
 	Status shared.MediaProcessorEnumUpdateStatusEnum `form:"name=Status"`
 }
 
@@ -23,7 +23,7 @@ type UpdateMediaProcessorSecurity struct {
 type UpdateMediaProcessorRequest struct {
 	ServerURL  *string
 	PathParams UpdateMediaProcessorPathParams
-	Request    *UpdateMediaProcessorRequestBodyUpdateMediaProcessorRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateMediaProcessorUpdateMediaProcessorRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateMediaProcessorSecurity
 }
 

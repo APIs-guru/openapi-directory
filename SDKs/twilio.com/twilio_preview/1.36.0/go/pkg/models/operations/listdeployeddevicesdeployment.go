@@ -27,7 +27,7 @@ type ListDeployedDevicesDeploymentRequest struct {
 	Security    ListDeployedDevicesDeploymentSecurity
 }
 
-type ListDeployedDevicesDeployment200ApplicationJSONMeta struct {
+type ListDeployedDevicesDeploymentListDeployedDevicesDeploymentResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -37,13 +37,13 @@ type ListDeployedDevicesDeployment200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListDeployedDevicesDeployment200ApplicationJSONListDeployedDevicesDeploymentResponse struct {
-	Deployments []shared.PreviewDeployedDevicesFleetDeployment       `json:"deployments,omitempty"`
-	Meta        *ListDeployedDevicesDeployment200ApplicationJSONMeta `json:"meta,omitempty"`
+type ListDeployedDevicesDeploymentListDeployedDevicesDeploymentResponse struct {
+	Deployments []shared.PreviewDeployedDevicesFleetDeployment                          `json:"deployments,omitempty"`
+	Meta        *ListDeployedDevicesDeploymentListDeployedDevicesDeploymentResponseMeta `json:"meta,omitempty"`
 }
 
 type ListDeployedDevicesDeploymentResponse struct {
 	ContentType                           string
-	ListDeployedDevicesDeploymentResponse *ListDeployedDevicesDeployment200ApplicationJSONListDeployedDevicesDeploymentResponse
+	ListDeployedDevicesDeploymentResponse *ListDeployedDevicesDeploymentListDeployedDevicesDeploymentResponse
 	StatusCode                            int64
 }

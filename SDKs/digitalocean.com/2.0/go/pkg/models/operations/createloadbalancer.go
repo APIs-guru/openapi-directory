@@ -5,202 +5,202 @@ import (
 	"time"
 )
 
-type CreateLoadBalancerRequestBody1AlgorithmEnum string
+type CreateLoadBalancerRequestBodyAssignDropletsByIDAlgorithmEnum string
 
 const (
-	CreateLoadBalancerRequestBody1AlgorithmEnumRoundRobin       CreateLoadBalancerRequestBody1AlgorithmEnum = "round_robin"
-	CreateLoadBalancerRequestBody1AlgorithmEnumLeastConnections CreateLoadBalancerRequestBody1AlgorithmEnum = "least_connections"
+	CreateLoadBalancerRequestBodyAssignDropletsByIDAlgorithmEnumRoundRobin       CreateLoadBalancerRequestBodyAssignDropletsByIDAlgorithmEnum = "round_robin"
+	CreateLoadBalancerRequestBodyAssignDropletsByIDAlgorithmEnumLeastConnections CreateLoadBalancerRequestBodyAssignDropletsByIDAlgorithmEnum = "least_connections"
 )
 
-type CreateLoadBalancerRequestBody1ForwardingRulesEntryProtocolEnum string
+type CreateLoadBalancerRequestBodyAssignDropletsByIDForwardingRulesEntryProtocolEnum string
 
 const (
-	CreateLoadBalancerRequestBody1ForwardingRulesEntryProtocolEnumHTTP  CreateLoadBalancerRequestBody1ForwardingRulesEntryProtocolEnum = "http"
-	CreateLoadBalancerRequestBody1ForwardingRulesEntryProtocolEnumHTTPS CreateLoadBalancerRequestBody1ForwardingRulesEntryProtocolEnum = "https"
-	CreateLoadBalancerRequestBody1ForwardingRulesEntryProtocolEnumHttp2 CreateLoadBalancerRequestBody1ForwardingRulesEntryProtocolEnum = "http2"
-	CreateLoadBalancerRequestBody1ForwardingRulesEntryProtocolEnumTCP   CreateLoadBalancerRequestBody1ForwardingRulesEntryProtocolEnum = "tcp"
+	CreateLoadBalancerRequestBodyAssignDropletsByIDForwardingRulesEntryProtocolEnumHTTP  CreateLoadBalancerRequestBodyAssignDropletsByIDForwardingRulesEntryProtocolEnum = "http"
+	CreateLoadBalancerRequestBodyAssignDropletsByIDForwardingRulesEntryProtocolEnumHTTPS CreateLoadBalancerRequestBodyAssignDropletsByIDForwardingRulesEntryProtocolEnum = "https"
+	CreateLoadBalancerRequestBodyAssignDropletsByIDForwardingRulesEntryProtocolEnumHttp2 CreateLoadBalancerRequestBodyAssignDropletsByIDForwardingRulesEntryProtocolEnum = "http2"
+	CreateLoadBalancerRequestBodyAssignDropletsByIDForwardingRulesEntryProtocolEnumTCP   CreateLoadBalancerRequestBodyAssignDropletsByIDForwardingRulesEntryProtocolEnum = "tcp"
 )
 
-type CreateLoadBalancerRequestBody1ForwardingRulesTargetProtocolEnum string
+type CreateLoadBalancerRequestBodyAssignDropletsByIDForwardingRulesTargetProtocolEnum string
 
 const (
-	CreateLoadBalancerRequestBody1ForwardingRulesTargetProtocolEnumHTTP  CreateLoadBalancerRequestBody1ForwardingRulesTargetProtocolEnum = "http"
-	CreateLoadBalancerRequestBody1ForwardingRulesTargetProtocolEnumHTTPS CreateLoadBalancerRequestBody1ForwardingRulesTargetProtocolEnum = "https"
-	CreateLoadBalancerRequestBody1ForwardingRulesTargetProtocolEnumHttp2 CreateLoadBalancerRequestBody1ForwardingRulesTargetProtocolEnum = "http2"
-	CreateLoadBalancerRequestBody1ForwardingRulesTargetProtocolEnumTCP   CreateLoadBalancerRequestBody1ForwardingRulesTargetProtocolEnum = "tcp"
+	CreateLoadBalancerRequestBodyAssignDropletsByIDForwardingRulesTargetProtocolEnumHTTP  CreateLoadBalancerRequestBodyAssignDropletsByIDForwardingRulesTargetProtocolEnum = "http"
+	CreateLoadBalancerRequestBodyAssignDropletsByIDForwardingRulesTargetProtocolEnumHTTPS CreateLoadBalancerRequestBodyAssignDropletsByIDForwardingRulesTargetProtocolEnum = "https"
+	CreateLoadBalancerRequestBodyAssignDropletsByIDForwardingRulesTargetProtocolEnumHttp2 CreateLoadBalancerRequestBodyAssignDropletsByIDForwardingRulesTargetProtocolEnum = "http2"
+	CreateLoadBalancerRequestBodyAssignDropletsByIDForwardingRulesTargetProtocolEnumTCP   CreateLoadBalancerRequestBodyAssignDropletsByIDForwardingRulesTargetProtocolEnum = "tcp"
 )
 
-type CreateLoadBalancerRequestBody1ForwardingRules struct {
-	CertificateID  *string                                                         `json:"certificate_id,omitempty"`
-	EntryPort      int64                                                           `json:"entry_port"`
-	EntryProtocol  CreateLoadBalancerRequestBody1ForwardingRulesEntryProtocolEnum  `json:"entry_protocol"`
-	TargetPort     int64                                                           `json:"target_port"`
-	TargetProtocol CreateLoadBalancerRequestBody1ForwardingRulesTargetProtocolEnum `json:"target_protocol"`
-	TLSPassthrough *bool                                                           `json:"tls_passthrough,omitempty"`
+type CreateLoadBalancerRequestBodyAssignDropletsByIDForwardingRules struct {
+	CertificateID  *string                                                                          `json:"certificate_id,omitempty"`
+	EntryPort      int64                                                                            `json:"entry_port"`
+	EntryProtocol  CreateLoadBalancerRequestBodyAssignDropletsByIDForwardingRulesEntryProtocolEnum  `json:"entry_protocol"`
+	TargetPort     int64                                                                            `json:"target_port"`
+	TargetProtocol CreateLoadBalancerRequestBodyAssignDropletsByIDForwardingRulesTargetProtocolEnum `json:"target_protocol"`
+	TLSPassthrough *bool                                                                            `json:"tls_passthrough,omitempty"`
 }
 
-type CreateLoadBalancerRequestBody1HealthCheckProtocolEnum string
+type CreateLoadBalancerRequestBodyAssignDropletsByIDHealthCheckProtocolEnum string
 
 const (
-	CreateLoadBalancerRequestBody1HealthCheckProtocolEnumHTTP  CreateLoadBalancerRequestBody1HealthCheckProtocolEnum = "http"
-	CreateLoadBalancerRequestBody1HealthCheckProtocolEnumHTTPS CreateLoadBalancerRequestBody1HealthCheckProtocolEnum = "https"
-	CreateLoadBalancerRequestBody1HealthCheckProtocolEnumTCP   CreateLoadBalancerRequestBody1HealthCheckProtocolEnum = "tcp"
+	CreateLoadBalancerRequestBodyAssignDropletsByIDHealthCheckProtocolEnumHTTP  CreateLoadBalancerRequestBodyAssignDropletsByIDHealthCheckProtocolEnum = "http"
+	CreateLoadBalancerRequestBodyAssignDropletsByIDHealthCheckProtocolEnumHTTPS CreateLoadBalancerRequestBodyAssignDropletsByIDHealthCheckProtocolEnum = "https"
+	CreateLoadBalancerRequestBodyAssignDropletsByIDHealthCheckProtocolEnumTCP   CreateLoadBalancerRequestBodyAssignDropletsByIDHealthCheckProtocolEnum = "tcp"
 )
 
-type CreateLoadBalancerRequestBody1HealthCheck struct {
-	CheckIntervalSeconds   *int64                                                 `json:"check_interval_seconds,omitempty"`
-	HealthyThreshold       *int64                                                 `json:"healthy_threshold,omitempty"`
-	Path                   *string                                                `json:"path,omitempty"`
-	Port                   *int64                                                 `json:"port,omitempty"`
-	Protocol               *CreateLoadBalancerRequestBody1HealthCheckProtocolEnum `json:"protocol,omitempty"`
-	ResponseTimeoutSeconds *int64                                                 `json:"response_timeout_seconds,omitempty"`
-	UnhealthyThreshold     *int64                                                 `json:"unhealthy_threshold,omitempty"`
+type CreateLoadBalancerRequestBodyAssignDropletsByIDHealthCheck struct {
+	CheckIntervalSeconds   *int64                                                                  `json:"check_interval_seconds,omitempty"`
+	HealthyThreshold       *int64                                                                  `json:"healthy_threshold,omitempty"`
+	Path                   *string                                                                 `json:"path,omitempty"`
+	Port                   *int64                                                                  `json:"port,omitempty"`
+	Protocol               *CreateLoadBalancerRequestBodyAssignDropletsByIDHealthCheckProtocolEnum `json:"protocol,omitempty"`
+	ResponseTimeoutSeconds *int64                                                                  `json:"response_timeout_seconds,omitempty"`
+	UnhealthyThreshold     *int64                                                                  `json:"unhealthy_threshold,omitempty"`
 }
 
-type CreateLoadBalancerRequestBody1SizeEnum string
+type CreateLoadBalancerRequestBodyAssignDropletsByIDSizeEnum string
 
 const (
-	CreateLoadBalancerRequestBody1SizeEnumLbSmall  CreateLoadBalancerRequestBody1SizeEnum = "lb-small"
-	CreateLoadBalancerRequestBody1SizeEnumLbMedium CreateLoadBalancerRequestBody1SizeEnum = "lb-medium"
-	CreateLoadBalancerRequestBody1SizeEnumLbLarge  CreateLoadBalancerRequestBody1SizeEnum = "lb-large"
+	CreateLoadBalancerRequestBodyAssignDropletsByIDSizeEnumLbSmall  CreateLoadBalancerRequestBodyAssignDropletsByIDSizeEnum = "lb-small"
+	CreateLoadBalancerRequestBodyAssignDropletsByIDSizeEnumLbMedium CreateLoadBalancerRequestBodyAssignDropletsByIDSizeEnum = "lb-medium"
+	CreateLoadBalancerRequestBodyAssignDropletsByIDSizeEnumLbLarge  CreateLoadBalancerRequestBodyAssignDropletsByIDSizeEnum = "lb-large"
 )
 
-type CreateLoadBalancerRequestBody1StatusEnum string
+type CreateLoadBalancerRequestBodyAssignDropletsByIDStatusEnum string
 
 const (
-	CreateLoadBalancerRequestBody1StatusEnumNew     CreateLoadBalancerRequestBody1StatusEnum = "new"
-	CreateLoadBalancerRequestBody1StatusEnumActive  CreateLoadBalancerRequestBody1StatusEnum = "active"
-	CreateLoadBalancerRequestBody1StatusEnumErrored CreateLoadBalancerRequestBody1StatusEnum = "errored"
+	CreateLoadBalancerRequestBodyAssignDropletsByIDStatusEnumNew     CreateLoadBalancerRequestBodyAssignDropletsByIDStatusEnum = "new"
+	CreateLoadBalancerRequestBodyAssignDropletsByIDStatusEnumActive  CreateLoadBalancerRequestBodyAssignDropletsByIDStatusEnum = "active"
+	CreateLoadBalancerRequestBodyAssignDropletsByIDStatusEnumErrored CreateLoadBalancerRequestBodyAssignDropletsByIDStatusEnum = "errored"
 )
 
-type CreateLoadBalancerRequestBody1StickySessionsTypeEnum string
+type CreateLoadBalancerRequestBodyAssignDropletsByIDStickySessionsTypeEnum string
 
 const (
-	CreateLoadBalancerRequestBody1StickySessionsTypeEnumCookies CreateLoadBalancerRequestBody1StickySessionsTypeEnum = "cookies"
-	CreateLoadBalancerRequestBody1StickySessionsTypeEnumNone    CreateLoadBalancerRequestBody1StickySessionsTypeEnum = "none"
+	CreateLoadBalancerRequestBodyAssignDropletsByIDStickySessionsTypeEnumCookies CreateLoadBalancerRequestBodyAssignDropletsByIDStickySessionsTypeEnum = "cookies"
+	CreateLoadBalancerRequestBodyAssignDropletsByIDStickySessionsTypeEnumNone    CreateLoadBalancerRequestBodyAssignDropletsByIDStickySessionsTypeEnum = "none"
 )
 
-type CreateLoadBalancerRequestBody1StickySessions struct {
-	CookieName       *string                                               `json:"cookie_name,omitempty"`
-	CookieTTLSeconds *int64                                                `json:"cookie_ttl_seconds,omitempty"`
-	Type             *CreateLoadBalancerRequestBody1StickySessionsTypeEnum `json:"type,omitempty"`
+type CreateLoadBalancerRequestBodyAssignDropletsByIDStickySessions struct {
+	CookieName       *string                                                                `json:"cookie_name,omitempty"`
+	CookieTTLSeconds *int64                                                                 `json:"cookie_ttl_seconds,omitempty"`
+	Type             *CreateLoadBalancerRequestBodyAssignDropletsByIDStickySessionsTypeEnum `json:"type,omitempty"`
 }
 
-type CreateLoadBalancerRequestBody1 struct {
-	Algorithm              *CreateLoadBalancerRequestBody1AlgorithmEnum                                                                                            `json:"algorithm,omitempty"`
+type CreateLoadBalancerRequestBodyAssignDropletsByID struct {
+	Algorithm              *CreateLoadBalancerRequestBodyAssignDropletsByIDAlgorithmEnum                                                                           `json:"algorithm,omitempty"`
 	CreatedAt              *time.Time                                                                                                                              `json:"created_at,omitempty"`
 	DropletIds             []int64                                                                                                                                 `json:"droplet_ids"`
 	EnableBackendKeepalive *bool                                                                                                                                   `json:"enable_backend_keepalive,omitempty"`
 	EnableProxyProtocol    *bool                                                                                                                                   `json:"enable_proxy_protocol,omitempty"`
-	ForwardingRules        []CreateLoadBalancerRequestBody1ForwardingRules                                                                                         `json:"forwarding_rules"`
-	HealthCheck            *CreateLoadBalancerRequestBody1HealthCheck                                                                                              `json:"health_check,omitempty"`
+	ForwardingRules        []CreateLoadBalancerRequestBodyAssignDropletsByIDForwardingRules                                                                        `json:"forwarding_rules"`
+	HealthCheck            *CreateLoadBalancerRequestBodyAssignDropletsByIDHealthCheck                                                                             `json:"health_check,omitempty"`
 	ID                     *string                                                                                                                                 `json:"id,omitempty"`
 	IP                     *string                                                                                                                                 `json:"ip,omitempty"`
 	Name                   *string                                                                                                                                 `json:"name,omitempty"`
 	RedirectHTTPToHTTPS    *bool                                                                                                                                   `json:"redirect_http_to_https,omitempty"`
 	Region                 shared.Onev21dropletsGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesDropletsItemsPropertiesImagePropertiesRegionsItemsEnum `json:"region"`
-	Size                   *CreateLoadBalancerRequestBody1SizeEnum                                                                                                 `json:"size,omitempty"`
-	Status                 *CreateLoadBalancerRequestBody1StatusEnum                                                                                               `json:"status,omitempty"`
-	StickySessions         *CreateLoadBalancerRequestBody1StickySessions                                                                                           `json:"sticky_sessions,omitempty"`
+	Size                   *CreateLoadBalancerRequestBodyAssignDropletsByIDSizeEnum                                                                                `json:"size,omitempty"`
+	Status                 *CreateLoadBalancerRequestBodyAssignDropletsByIDStatusEnum                                                                              `json:"status,omitempty"`
+	StickySessions         *CreateLoadBalancerRequestBodyAssignDropletsByIDStickySessions                                                                          `json:"sticky_sessions,omitempty"`
 	VpcUUID                *string                                                                                                                                 `json:"vpc_uuid,omitempty"`
 }
 
-type CreateLoadBalancerRequestBody2AlgorithmEnum string
+type CreateLoadBalancerRequestBodyAssignDropletsByTagAlgorithmEnum string
 
 const (
-	CreateLoadBalancerRequestBody2AlgorithmEnumRoundRobin       CreateLoadBalancerRequestBody2AlgorithmEnum = "round_robin"
-	CreateLoadBalancerRequestBody2AlgorithmEnumLeastConnections CreateLoadBalancerRequestBody2AlgorithmEnum = "least_connections"
+	CreateLoadBalancerRequestBodyAssignDropletsByTagAlgorithmEnumRoundRobin       CreateLoadBalancerRequestBodyAssignDropletsByTagAlgorithmEnum = "round_robin"
+	CreateLoadBalancerRequestBodyAssignDropletsByTagAlgorithmEnumLeastConnections CreateLoadBalancerRequestBodyAssignDropletsByTagAlgorithmEnum = "least_connections"
 )
 
-type CreateLoadBalancerRequestBody2ForwardingRulesEntryProtocolEnum string
+type CreateLoadBalancerRequestBodyAssignDropletsByTagForwardingRulesEntryProtocolEnum string
 
 const (
-	CreateLoadBalancerRequestBody2ForwardingRulesEntryProtocolEnumHTTP  CreateLoadBalancerRequestBody2ForwardingRulesEntryProtocolEnum = "http"
-	CreateLoadBalancerRequestBody2ForwardingRulesEntryProtocolEnumHTTPS CreateLoadBalancerRequestBody2ForwardingRulesEntryProtocolEnum = "https"
-	CreateLoadBalancerRequestBody2ForwardingRulesEntryProtocolEnumHttp2 CreateLoadBalancerRequestBody2ForwardingRulesEntryProtocolEnum = "http2"
-	CreateLoadBalancerRequestBody2ForwardingRulesEntryProtocolEnumTCP   CreateLoadBalancerRequestBody2ForwardingRulesEntryProtocolEnum = "tcp"
+	CreateLoadBalancerRequestBodyAssignDropletsByTagForwardingRulesEntryProtocolEnumHTTP  CreateLoadBalancerRequestBodyAssignDropletsByTagForwardingRulesEntryProtocolEnum = "http"
+	CreateLoadBalancerRequestBodyAssignDropletsByTagForwardingRulesEntryProtocolEnumHTTPS CreateLoadBalancerRequestBodyAssignDropletsByTagForwardingRulesEntryProtocolEnum = "https"
+	CreateLoadBalancerRequestBodyAssignDropletsByTagForwardingRulesEntryProtocolEnumHttp2 CreateLoadBalancerRequestBodyAssignDropletsByTagForwardingRulesEntryProtocolEnum = "http2"
+	CreateLoadBalancerRequestBodyAssignDropletsByTagForwardingRulesEntryProtocolEnumTCP   CreateLoadBalancerRequestBodyAssignDropletsByTagForwardingRulesEntryProtocolEnum = "tcp"
 )
 
-type CreateLoadBalancerRequestBody2ForwardingRulesTargetProtocolEnum string
+type CreateLoadBalancerRequestBodyAssignDropletsByTagForwardingRulesTargetProtocolEnum string
 
 const (
-	CreateLoadBalancerRequestBody2ForwardingRulesTargetProtocolEnumHTTP  CreateLoadBalancerRequestBody2ForwardingRulesTargetProtocolEnum = "http"
-	CreateLoadBalancerRequestBody2ForwardingRulesTargetProtocolEnumHTTPS CreateLoadBalancerRequestBody2ForwardingRulesTargetProtocolEnum = "https"
-	CreateLoadBalancerRequestBody2ForwardingRulesTargetProtocolEnumHttp2 CreateLoadBalancerRequestBody2ForwardingRulesTargetProtocolEnum = "http2"
-	CreateLoadBalancerRequestBody2ForwardingRulesTargetProtocolEnumTCP   CreateLoadBalancerRequestBody2ForwardingRulesTargetProtocolEnum = "tcp"
+	CreateLoadBalancerRequestBodyAssignDropletsByTagForwardingRulesTargetProtocolEnumHTTP  CreateLoadBalancerRequestBodyAssignDropletsByTagForwardingRulesTargetProtocolEnum = "http"
+	CreateLoadBalancerRequestBodyAssignDropletsByTagForwardingRulesTargetProtocolEnumHTTPS CreateLoadBalancerRequestBodyAssignDropletsByTagForwardingRulesTargetProtocolEnum = "https"
+	CreateLoadBalancerRequestBodyAssignDropletsByTagForwardingRulesTargetProtocolEnumHttp2 CreateLoadBalancerRequestBodyAssignDropletsByTagForwardingRulesTargetProtocolEnum = "http2"
+	CreateLoadBalancerRequestBodyAssignDropletsByTagForwardingRulesTargetProtocolEnumTCP   CreateLoadBalancerRequestBodyAssignDropletsByTagForwardingRulesTargetProtocolEnum = "tcp"
 )
 
-type CreateLoadBalancerRequestBody2ForwardingRules struct {
-	CertificateID  *string                                                         `json:"certificate_id,omitempty"`
-	EntryPort      int64                                                           `json:"entry_port"`
-	EntryProtocol  CreateLoadBalancerRequestBody2ForwardingRulesEntryProtocolEnum  `json:"entry_protocol"`
-	TargetPort     int64                                                           `json:"target_port"`
-	TargetProtocol CreateLoadBalancerRequestBody2ForwardingRulesTargetProtocolEnum `json:"target_protocol"`
-	TLSPassthrough *bool                                                           `json:"tls_passthrough,omitempty"`
+type CreateLoadBalancerRequestBodyAssignDropletsByTagForwardingRules struct {
+	CertificateID  *string                                                                           `json:"certificate_id,omitempty"`
+	EntryPort      int64                                                                             `json:"entry_port"`
+	EntryProtocol  CreateLoadBalancerRequestBodyAssignDropletsByTagForwardingRulesEntryProtocolEnum  `json:"entry_protocol"`
+	TargetPort     int64                                                                             `json:"target_port"`
+	TargetProtocol CreateLoadBalancerRequestBodyAssignDropletsByTagForwardingRulesTargetProtocolEnum `json:"target_protocol"`
+	TLSPassthrough *bool                                                                             `json:"tls_passthrough,omitempty"`
 }
 
-type CreateLoadBalancerRequestBody2HealthCheckProtocolEnum string
+type CreateLoadBalancerRequestBodyAssignDropletsByTagHealthCheckProtocolEnum string
 
 const (
-	CreateLoadBalancerRequestBody2HealthCheckProtocolEnumHTTP  CreateLoadBalancerRequestBody2HealthCheckProtocolEnum = "http"
-	CreateLoadBalancerRequestBody2HealthCheckProtocolEnumHTTPS CreateLoadBalancerRequestBody2HealthCheckProtocolEnum = "https"
-	CreateLoadBalancerRequestBody2HealthCheckProtocolEnumTCP   CreateLoadBalancerRequestBody2HealthCheckProtocolEnum = "tcp"
+	CreateLoadBalancerRequestBodyAssignDropletsByTagHealthCheckProtocolEnumHTTP  CreateLoadBalancerRequestBodyAssignDropletsByTagHealthCheckProtocolEnum = "http"
+	CreateLoadBalancerRequestBodyAssignDropletsByTagHealthCheckProtocolEnumHTTPS CreateLoadBalancerRequestBodyAssignDropletsByTagHealthCheckProtocolEnum = "https"
+	CreateLoadBalancerRequestBodyAssignDropletsByTagHealthCheckProtocolEnumTCP   CreateLoadBalancerRequestBodyAssignDropletsByTagHealthCheckProtocolEnum = "tcp"
 )
 
-type CreateLoadBalancerRequestBody2HealthCheck struct {
-	CheckIntervalSeconds   *int64                                                 `json:"check_interval_seconds,omitempty"`
-	HealthyThreshold       *int64                                                 `json:"healthy_threshold,omitempty"`
-	Path                   *string                                                `json:"path,omitempty"`
-	Port                   *int64                                                 `json:"port,omitempty"`
-	Protocol               *CreateLoadBalancerRequestBody2HealthCheckProtocolEnum `json:"protocol,omitempty"`
-	ResponseTimeoutSeconds *int64                                                 `json:"response_timeout_seconds,omitempty"`
-	UnhealthyThreshold     *int64                                                 `json:"unhealthy_threshold,omitempty"`
+type CreateLoadBalancerRequestBodyAssignDropletsByTagHealthCheck struct {
+	CheckIntervalSeconds   *int64                                                                   `json:"check_interval_seconds,omitempty"`
+	HealthyThreshold       *int64                                                                   `json:"healthy_threshold,omitempty"`
+	Path                   *string                                                                  `json:"path,omitempty"`
+	Port                   *int64                                                                   `json:"port,omitempty"`
+	Protocol               *CreateLoadBalancerRequestBodyAssignDropletsByTagHealthCheckProtocolEnum `json:"protocol,omitempty"`
+	ResponseTimeoutSeconds *int64                                                                   `json:"response_timeout_seconds,omitempty"`
+	UnhealthyThreshold     *int64                                                                   `json:"unhealthy_threshold,omitempty"`
 }
 
-type CreateLoadBalancerRequestBody2SizeEnum string
+type CreateLoadBalancerRequestBodyAssignDropletsByTagSizeEnum string
 
 const (
-	CreateLoadBalancerRequestBody2SizeEnumLbSmall  CreateLoadBalancerRequestBody2SizeEnum = "lb-small"
-	CreateLoadBalancerRequestBody2SizeEnumLbMedium CreateLoadBalancerRequestBody2SizeEnum = "lb-medium"
-	CreateLoadBalancerRequestBody2SizeEnumLbLarge  CreateLoadBalancerRequestBody2SizeEnum = "lb-large"
+	CreateLoadBalancerRequestBodyAssignDropletsByTagSizeEnumLbSmall  CreateLoadBalancerRequestBodyAssignDropletsByTagSizeEnum = "lb-small"
+	CreateLoadBalancerRequestBodyAssignDropletsByTagSizeEnumLbMedium CreateLoadBalancerRequestBodyAssignDropletsByTagSizeEnum = "lb-medium"
+	CreateLoadBalancerRequestBodyAssignDropletsByTagSizeEnumLbLarge  CreateLoadBalancerRequestBodyAssignDropletsByTagSizeEnum = "lb-large"
 )
 
-type CreateLoadBalancerRequestBody2StatusEnum string
+type CreateLoadBalancerRequestBodyAssignDropletsByTagStatusEnum string
 
 const (
-	CreateLoadBalancerRequestBody2StatusEnumNew     CreateLoadBalancerRequestBody2StatusEnum = "new"
-	CreateLoadBalancerRequestBody2StatusEnumActive  CreateLoadBalancerRequestBody2StatusEnum = "active"
-	CreateLoadBalancerRequestBody2StatusEnumErrored CreateLoadBalancerRequestBody2StatusEnum = "errored"
+	CreateLoadBalancerRequestBodyAssignDropletsByTagStatusEnumNew     CreateLoadBalancerRequestBodyAssignDropletsByTagStatusEnum = "new"
+	CreateLoadBalancerRequestBodyAssignDropletsByTagStatusEnumActive  CreateLoadBalancerRequestBodyAssignDropletsByTagStatusEnum = "active"
+	CreateLoadBalancerRequestBodyAssignDropletsByTagStatusEnumErrored CreateLoadBalancerRequestBodyAssignDropletsByTagStatusEnum = "errored"
 )
 
-type CreateLoadBalancerRequestBody2StickySessionsTypeEnum string
+type CreateLoadBalancerRequestBodyAssignDropletsByTagStickySessionsTypeEnum string
 
 const (
-	CreateLoadBalancerRequestBody2StickySessionsTypeEnumCookies CreateLoadBalancerRequestBody2StickySessionsTypeEnum = "cookies"
-	CreateLoadBalancerRequestBody2StickySessionsTypeEnumNone    CreateLoadBalancerRequestBody2StickySessionsTypeEnum = "none"
+	CreateLoadBalancerRequestBodyAssignDropletsByTagStickySessionsTypeEnumCookies CreateLoadBalancerRequestBodyAssignDropletsByTagStickySessionsTypeEnum = "cookies"
+	CreateLoadBalancerRequestBodyAssignDropletsByTagStickySessionsTypeEnumNone    CreateLoadBalancerRequestBodyAssignDropletsByTagStickySessionsTypeEnum = "none"
 )
 
-type CreateLoadBalancerRequestBody2StickySessions struct {
-	CookieName       *string                                               `json:"cookie_name,omitempty"`
-	CookieTTLSeconds *int64                                                `json:"cookie_ttl_seconds,omitempty"`
-	Type             *CreateLoadBalancerRequestBody2StickySessionsTypeEnum `json:"type,omitempty"`
+type CreateLoadBalancerRequestBodyAssignDropletsByTagStickySessions struct {
+	CookieName       *string                                                                 `json:"cookie_name,omitempty"`
+	CookieTTLSeconds *int64                                                                  `json:"cookie_ttl_seconds,omitempty"`
+	Type             *CreateLoadBalancerRequestBodyAssignDropletsByTagStickySessionsTypeEnum `json:"type,omitempty"`
 }
 
-type CreateLoadBalancerRequestBody2 struct {
-	Algorithm              *CreateLoadBalancerRequestBody2AlgorithmEnum                                                                                            `json:"algorithm,omitempty"`
+type CreateLoadBalancerRequestBodyAssignDropletsByTag struct {
+	Algorithm              *CreateLoadBalancerRequestBodyAssignDropletsByTagAlgorithmEnum                                                                          `json:"algorithm,omitempty"`
 	CreatedAt              *time.Time                                                                                                                              `json:"created_at,omitempty"`
 	EnableBackendKeepalive *bool                                                                                                                                   `json:"enable_backend_keepalive,omitempty"`
 	EnableProxyProtocol    *bool                                                                                                                                   `json:"enable_proxy_protocol,omitempty"`
-	ForwardingRules        []CreateLoadBalancerRequestBody2ForwardingRules                                                                                         `json:"forwarding_rules"`
-	HealthCheck            *CreateLoadBalancerRequestBody2HealthCheck                                                                                              `json:"health_check,omitempty"`
+	ForwardingRules        []CreateLoadBalancerRequestBodyAssignDropletsByTagForwardingRules                                                                       `json:"forwarding_rules"`
+	HealthCheck            *CreateLoadBalancerRequestBodyAssignDropletsByTagHealthCheck                                                                            `json:"health_check,omitempty"`
 	ID                     *string                                                                                                                                 `json:"id,omitempty"`
 	IP                     *string                                                                                                                                 `json:"ip,omitempty"`
 	Name                   *string                                                                                                                                 `json:"name,omitempty"`
 	RedirectHTTPToHTTPS    *bool                                                                                                                                   `json:"redirect_http_to_https,omitempty"`
 	Region                 shared.Onev21dropletsGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesDropletsItemsPropertiesImagePropertiesRegionsItemsEnum `json:"region"`
-	Size                   *CreateLoadBalancerRequestBody2SizeEnum                                                                                                 `json:"size,omitempty"`
-	Status                 *CreateLoadBalancerRequestBody2StatusEnum                                                                                               `json:"status,omitempty"`
-	StickySessions         *CreateLoadBalancerRequestBody2StickySessions                                                                                           `json:"sticky_sessions,omitempty"`
+	Size                   *CreateLoadBalancerRequestBodyAssignDropletsByTagSizeEnum                                                                               `json:"size,omitempty"`
+	Status                 *CreateLoadBalancerRequestBodyAssignDropletsByTagStatusEnum                                                                             `json:"status,omitempty"`
+	StickySessions         *CreateLoadBalancerRequestBodyAssignDropletsByTagStickySessions                                                                         `json:"sticky_sessions,omitempty"`
 	Tag                    string                                                                                                                                  `json:"tag"`
 	VpcUUID                *string                                                                                                                                 `json:"vpc_uuid,omitempty"`
 }

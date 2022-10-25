@@ -12,7 +12,7 @@ class UpdateCustomerProfilePathParams:
     
 
 @dataclass
-class UpdateCustomerProfileRequestBodyUpdateCustomerProfileRequest:
+class UpdateCustomerProfileUpdateCustomerProfileRequest:
     email: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Email' }})
     friendly_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
     status: Optional[shared.CustomerProfileEnumStatusEnum] = field(default=None, metadata={'form': { 'field_name': 'Status' }})
@@ -28,7 +28,7 @@ class UpdateCustomerProfileSecurity:
 class UpdateCustomerProfileRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateCustomerProfilePathParams = field(default=None)
-    request: Optional[UpdateCustomerProfileRequestBodyUpdateCustomerProfileRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateCustomerProfileUpdateCustomerProfileRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateCustomerProfileSecurity = field(default=None)
     
 

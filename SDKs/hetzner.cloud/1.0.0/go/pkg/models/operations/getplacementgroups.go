@@ -31,7 +31,7 @@ type GetPlacementGroupsRequest struct {
 	QueryParams GetPlacementGroupsQueryParams
 }
 
-type GetPlacementGroups200ApplicationJSONMetaPagination struct {
+type GetPlacementGroupsPlacementGroupsResponseMetaPagination struct {
 	LastPage     float64 `json:"last_page"`
 	NextPage     float64 `json:"next_page"`
 	Page         float64 `json:"page"`
@@ -40,32 +40,32 @@ type GetPlacementGroups200ApplicationJSONMetaPagination struct {
 	TotalEntries float64 `json:"total_entries"`
 }
 
-type GetPlacementGroups200ApplicationJSONMeta struct {
-	Pagination GetPlacementGroups200ApplicationJSONMetaPagination `json:"pagination"`
+type GetPlacementGroupsPlacementGroupsResponseMeta struct {
+	Pagination GetPlacementGroupsPlacementGroupsResponseMetaPagination `json:"pagination"`
 }
 
-type GetPlacementGroups200ApplicationJSONPlacementGroupsTypeEnum string
+type GetPlacementGroupsPlacementGroupsResponsePlacementGroupTypeEnum string
 
 const (
-	GetPlacementGroups200ApplicationJSONPlacementGroupsTypeEnumSpread GetPlacementGroups200ApplicationJSONPlacementGroupsTypeEnum = "spread"
+	GetPlacementGroupsPlacementGroupsResponsePlacementGroupTypeEnumSpread GetPlacementGroupsPlacementGroupsResponsePlacementGroupTypeEnum = "spread"
 )
 
-type GetPlacementGroups200ApplicationJSONPlacementGroupsPlacementGroup struct {
-	Created string                                                      `json:"created"`
-	ID      int64                                                       `json:"id"`
-	Labels  map[string]string                                           `json:"labels"`
-	Name    string                                                      `json:"name"`
-	Servers []int64                                                     `json:"servers"`
-	Type    GetPlacementGroups200ApplicationJSONPlacementGroupsTypeEnum `json:"type"`
+type GetPlacementGroupsPlacementGroupsResponsePlacementGroup struct {
+	Created string                                                          `json:"created"`
+	ID      int64                                                           `json:"id"`
+	Labels  map[string]string                                               `json:"labels"`
+	Name    string                                                          `json:"name"`
+	Servers []int64                                                         `json:"servers"`
+	Type    GetPlacementGroupsPlacementGroupsResponsePlacementGroupTypeEnum `json:"type"`
 }
 
-type GetPlacementGroups200ApplicationJSONPlacementGroupsResponse struct {
-	Meta            *GetPlacementGroups200ApplicationJSONMeta                           `json:"meta,omitempty"`
-	PlacementGroups []GetPlacementGroups200ApplicationJSONPlacementGroupsPlacementGroup `json:"placement_groups"`
+type GetPlacementGroupsPlacementGroupsResponse struct {
+	Meta            *GetPlacementGroupsPlacementGroupsResponseMeta            `json:"meta,omitempty"`
+	PlacementGroups []GetPlacementGroupsPlacementGroupsResponsePlacementGroup `json:"placement_groups"`
 }
 
 type GetPlacementGroupsResponse struct {
 	ContentType             string
-	PlacementGroupsResponse *GetPlacementGroups200ApplicationJSONPlacementGroupsResponse
+	PlacementGroupsResponse *GetPlacementGroupsPlacementGroupsResponse
 	StatusCode              int64
 }

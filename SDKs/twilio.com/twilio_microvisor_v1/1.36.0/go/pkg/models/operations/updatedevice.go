@@ -12,7 +12,7 @@ type UpdateDevicePathParams struct {
 	Sid string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
-type UpdateDeviceRequestBodyUpdateDeviceRequest struct {
+type UpdateDeviceUpdateDeviceRequest struct {
 	LoggingEnabled *bool   `form:"name=LoggingEnabled"`
 	TargetApp      *string `form:"name=TargetApp"`
 	UniqueName     *string `form:"name=UniqueName"`
@@ -25,7 +25,7 @@ type UpdateDeviceSecurity struct {
 type UpdateDeviceRequest struct {
 	ServerURL  *string
 	PathParams UpdateDevicePathParams
-	Request    *UpdateDeviceRequestBodyUpdateDeviceRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateDeviceUpdateDeviceRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateDeviceSecurity
 }
 

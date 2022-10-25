@@ -7,7 +7,7 @@ CREATE_SERVICE_SERVERS = [
 
 
 @dataclass
-class CreateServiceRequestBodyCreateServiceRequest:
+class CreateServiceCreateServiceRequest:
     code_length: Optional[int] = field(default=None, metadata={'form': { 'field_name': 'CodeLength' }})
     custom_code_enabled: Optional[bool] = field(default=None, metadata={'form': { 'field_name': 'CustomCodeEnabled' }})
     default_template_sid: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'DefaultTemplateSid' }})
@@ -35,7 +35,7 @@ class CreateServiceSecurity:
 @dataclass
 class CreateServiceRequest:
     server_url: Optional[str] = field(default=None)
-    request: Optional[CreateServiceRequestBodyCreateServiceRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateServiceCreateServiceRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateServiceSecurity = field(default=None)
     
 

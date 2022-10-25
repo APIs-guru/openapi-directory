@@ -12,7 +12,7 @@ class CreateTaskPathParams:
     
 
 @dataclass
-class CreateTaskRequestBodyCreateTaskRequest:
+class CreateTaskCreateTaskRequest:
     actions: Optional[Any] = field(default=None, metadata={'form': { 'field_name': 'Actions' }})
     actions_url: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'ActionsUrl' }})
     friendly_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
@@ -28,7 +28,7 @@ class CreateTaskSecurity:
 class CreateTaskRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateTaskPathParams = field(default=None)
-    request: Optional[CreateTaskRequestBodyCreateTaskRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateTaskCreateTaskRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateTaskSecurity = field(default=None)
     
 

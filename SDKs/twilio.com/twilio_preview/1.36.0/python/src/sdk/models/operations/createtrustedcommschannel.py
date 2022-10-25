@@ -12,7 +12,7 @@ class CreateTrustedCommsChannelPathParams:
     
 
 @dataclass
-class CreateTrustedCommsChannelRequestBodyCreateTrustedCommsChannelRequest:
+class CreateTrustedCommsChannelCreateTrustedCommsChannelRequest:
     phone_number_sid: str = field(default=None, metadata={'form': { 'field_name': 'PhoneNumberSid' }})
     
 
@@ -25,7 +25,7 @@ class CreateTrustedCommsChannelSecurity:
 class CreateTrustedCommsChannelRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateTrustedCommsChannelPathParams = field(default=None)
-    request: Optional[CreateTrustedCommsChannelRequestBodyCreateTrustedCommsChannelRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateTrustedCommsChannelCreateTrustedCommsChannelRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateTrustedCommsChannelSecurity = field(default=None)
     
 

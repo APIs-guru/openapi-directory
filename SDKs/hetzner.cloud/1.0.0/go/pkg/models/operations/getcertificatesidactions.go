@@ -45,36 +45,36 @@ type GetCertificatesIDActionsRequest struct {
 	QueryParams GetCertificatesIDActionsQueryParams
 }
 
-type GetCertificatesIDActions200ApplicationJSONActionsError struct {
+type GetCertificatesIDActionsActionsResponseActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
 }
 
-type GetCertificatesIDActions200ApplicationJSONActionsResources struct {
+type GetCertificatesIDActionsActionsResponseActionResources struct {
 	ID   int64  `json:"id"`
 	Type string `json:"type"`
 }
 
-type GetCertificatesIDActions200ApplicationJSONActionsStatusEnum string
+type GetCertificatesIDActionsActionsResponseActionStatusEnum string
 
 const (
-	GetCertificatesIDActions200ApplicationJSONActionsStatusEnumSuccess GetCertificatesIDActions200ApplicationJSONActionsStatusEnum = "success"
-	GetCertificatesIDActions200ApplicationJSONActionsStatusEnumRunning GetCertificatesIDActions200ApplicationJSONActionsStatusEnum = "running"
-	GetCertificatesIDActions200ApplicationJSONActionsStatusEnumError   GetCertificatesIDActions200ApplicationJSONActionsStatusEnum = "error"
+	GetCertificatesIDActionsActionsResponseActionStatusEnumSuccess GetCertificatesIDActionsActionsResponseActionStatusEnum = "success"
+	GetCertificatesIDActionsActionsResponseActionStatusEnumRunning GetCertificatesIDActionsActionsResponseActionStatusEnum = "running"
+	GetCertificatesIDActionsActionsResponseActionStatusEnumError   GetCertificatesIDActionsActionsResponseActionStatusEnum = "error"
 )
 
-type GetCertificatesIDActions200ApplicationJSONActionsAction struct {
-	Command   string                                                       `json:"command"`
-	Error     GetCertificatesIDActions200ApplicationJSONActionsError       `json:"error"`
-	Finished  string                                                       `json:"finished"`
-	ID        int64                                                        `json:"id"`
-	Progress  float64                                                      `json:"progress"`
-	Resources []GetCertificatesIDActions200ApplicationJSONActionsResources `json:"resources"`
-	Started   string                                                       `json:"started"`
-	Status    GetCertificatesIDActions200ApplicationJSONActionsStatusEnum  `json:"status"`
+type GetCertificatesIDActionsActionsResponseAction struct {
+	Command   string                                                   `json:"command"`
+	Error     GetCertificatesIDActionsActionsResponseActionError       `json:"error"`
+	Finished  string                                                   `json:"finished"`
+	ID        int64                                                    `json:"id"`
+	Progress  float64                                                  `json:"progress"`
+	Resources []GetCertificatesIDActionsActionsResponseActionResources `json:"resources"`
+	Started   string                                                   `json:"started"`
+	Status    GetCertificatesIDActionsActionsResponseActionStatusEnum  `json:"status"`
 }
 
-type GetCertificatesIDActions200ApplicationJSONMetaPagination struct {
+type GetCertificatesIDActionsActionsResponseMetaPagination struct {
 	LastPage     float64 `json:"last_page"`
 	NextPage     float64 `json:"next_page"`
 	Page         float64 `json:"page"`
@@ -83,17 +83,17 @@ type GetCertificatesIDActions200ApplicationJSONMetaPagination struct {
 	TotalEntries float64 `json:"total_entries"`
 }
 
-type GetCertificatesIDActions200ApplicationJSONMeta struct {
-	Pagination GetCertificatesIDActions200ApplicationJSONMetaPagination `json:"pagination"`
+type GetCertificatesIDActionsActionsResponseMeta struct {
+	Pagination GetCertificatesIDActionsActionsResponseMetaPagination `json:"pagination"`
 }
 
-type GetCertificatesIDActions200ApplicationJSONActionsResponse struct {
-	Actions []GetCertificatesIDActions200ApplicationJSONActionsAction `json:"actions"`
-	Meta    *GetCertificatesIDActions200ApplicationJSONMeta           `json:"meta,omitempty"`
+type GetCertificatesIDActionsActionsResponse struct {
+	Actions []GetCertificatesIDActionsActionsResponseAction `json:"actions"`
+	Meta    *GetCertificatesIDActionsActionsResponseMeta    `json:"meta,omitempty"`
 }
 
 type GetCertificatesIDActionsResponse struct {
-	ActionsResponse *GetCertificatesIDActions200ApplicationJSONActionsResponse
+	ActionsResponse *GetCertificatesIDActionsActionsResponse
 	ContentType     string
 	StatusCode      int64
 }

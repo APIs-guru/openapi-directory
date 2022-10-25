@@ -12,7 +12,7 @@ class CreateWorkerPathParams:
     
 
 @dataclass
-class CreateWorkerRequestBodyCreateWorkerRequest:
+class CreateWorkerCreateWorkerRequest:
     activity_sid: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'ActivitySid' }})
     attributes: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Attributes' }})
     friendly_name: str = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
@@ -27,7 +27,7 @@ class CreateWorkerSecurity:
 class CreateWorkerRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateWorkerPathParams = field(default=None)
-    request: Optional[CreateWorkerRequestBodyCreateWorkerRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateWorkerCreateWorkerRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateWorkerSecurity = field(default=None)
     
 

@@ -12,7 +12,7 @@ type CreateDocumentPathParams struct {
 	ServiceSid string `pathParam:"style=simple,explode=false,name=ServiceSid"`
 }
 
-type CreateDocumentRequestBodyCreateDocumentRequest struct {
+type CreateDocumentCreateDocumentRequest struct {
 	Data       *interface{} `form:"name=Data"`
 	TTL        *int64       `form:"name=Ttl"`
 	UniqueName *string      `form:"name=UniqueName"`
@@ -25,7 +25,7 @@ type CreateDocumentSecurity struct {
 type CreateDocumentRequest struct {
 	ServerURL  *string
 	PathParams CreateDocumentPathParams
-	Request    *CreateDocumentRequestBodyCreateDocumentRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateDocumentCreateDocumentRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateDocumentSecurity
 }
 

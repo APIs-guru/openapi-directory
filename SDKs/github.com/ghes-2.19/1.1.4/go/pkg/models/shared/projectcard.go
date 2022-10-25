@@ -4,7 +4,7 @@ import (
 	"time"
 )
 
-type ProjectCardCreatorSimpleUser struct {
+type ProjectCardSimpleUser struct {
 	AvatarURL         string  `json:"avatar_url"`
 	EventsURL         string  `json:"events_url"`
 	FollowersURL      string  `json:"followers_url"`
@@ -27,15 +27,15 @@ type ProjectCardCreatorSimpleUser struct {
 }
 
 type ProjectCard struct {
-	Archived   *bool                        `json:"archived,omitempty"`
-	ColumnURL  string                       `json:"column_url"`
-	ContentURL *string                      `json:"content_url,omitempty"`
-	CreatedAt  time.Time                    `json:"created_at"`
-	Creator    ProjectCardCreatorSimpleUser `json:"creator"`
-	ID         int64                        `json:"id"`
-	NodeID     string                       `json:"node_id"`
-	Note       string                       `json:"note"`
-	ProjectURL string                       `json:"project_url"`
-	UpdatedAt  time.Time                    `json:"updated_at"`
-	URL        string                       `json:"url"`
+	Archived   *bool                 `json:"archived,omitempty"`
+	ColumnURL  string                `json:"column_url"`
+	ContentURL *string               `json:"content_url,omitempty"`
+	CreatedAt  time.Time             `json:"created_at"`
+	Creator    ProjectCardSimpleUser `json:"creator"`
+	ID         int64                 `json:"id"`
+	NodeID     string                `json:"node_id"`
+	Note       string                `json:"note"`
+	ProjectURL string                `json:"project_url"`
+	UpdatedAt  time.Time             `json:"updated_at"`
+	URL        string                `json:"url"`
 }

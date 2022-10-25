@@ -13,51 +13,51 @@ type GetDirectDebitsForMandateUUIDRequest struct {
 	QueryParams GetDirectDebitsForMandateUUIDQueryParams
 }
 
-type GetDirectDebitsForMandateUUID200ApplicationJSONDirectdebitsSchemeRejectReasonCodeEnum string
+type GetDirectDebitsForMandateUUIDDirectDebitsDirectDebitSchemeRejectReasonCodeEnum string
 
 const (
-	GetDirectDebitsForMandateUUID200ApplicationJSONDirectdebitsSchemeRejectReasonCodeEnumZero  GetDirectDebitsForMandateUUID200ApplicationJSONDirectdebitsSchemeRejectReasonCodeEnum = "0"
-	GetDirectDebitsForMandateUUID200ApplicationJSONDirectdebitsSchemeRejectReasonCodeEnumOne   GetDirectDebitsForMandateUUID200ApplicationJSONDirectdebitsSchemeRejectReasonCodeEnum = "1"
-	GetDirectDebitsForMandateUUID200ApplicationJSONDirectdebitsSchemeRejectReasonCodeEnumTwo   GetDirectDebitsForMandateUUID200ApplicationJSONDirectdebitsSchemeRejectReasonCodeEnum = "2"
-	GetDirectDebitsForMandateUUID200ApplicationJSONDirectdebitsSchemeRejectReasonCodeEnumThree GetDirectDebitsForMandateUUID200ApplicationJSONDirectdebitsSchemeRejectReasonCodeEnum = "3"
-	GetDirectDebitsForMandateUUID200ApplicationJSONDirectdebitsSchemeRejectReasonCodeEnumFour  GetDirectDebitsForMandateUUID200ApplicationJSONDirectdebitsSchemeRejectReasonCodeEnum = "4"
-	GetDirectDebitsForMandateUUID200ApplicationJSONDirectdebitsSchemeRejectReasonCodeEnumFive  GetDirectDebitsForMandateUUID200ApplicationJSONDirectdebitsSchemeRejectReasonCodeEnum = "5"
-	GetDirectDebitsForMandateUUID200ApplicationJSONDirectdebitsSchemeRejectReasonCodeEnumSix   GetDirectDebitsForMandateUUID200ApplicationJSONDirectdebitsSchemeRejectReasonCodeEnum = "6"
-	GetDirectDebitsForMandateUUID200ApplicationJSONDirectdebitsSchemeRejectReasonCodeEnumSeven GetDirectDebitsForMandateUUID200ApplicationJSONDirectdebitsSchemeRejectReasonCodeEnum = "7"
-	GetDirectDebitsForMandateUUID200ApplicationJSONDirectdebitsSchemeRejectReasonCodeEnumEight GetDirectDebitsForMandateUUID200ApplicationJSONDirectdebitsSchemeRejectReasonCodeEnum = "8"
-	GetDirectDebitsForMandateUUID200ApplicationJSONDirectdebitsSchemeRejectReasonCodeEnumNine  GetDirectDebitsForMandateUUID200ApplicationJSONDirectdebitsSchemeRejectReasonCodeEnum = "9"
-	GetDirectDebitsForMandateUUID200ApplicationJSONDirectdebitsSchemeRejectReasonCodeEnumA     GetDirectDebitsForMandateUUID200ApplicationJSONDirectdebitsSchemeRejectReasonCodeEnum = "A"
-	GetDirectDebitsForMandateUUID200ApplicationJSONDirectdebitsSchemeRejectReasonCodeEnumB     GetDirectDebitsForMandateUUID200ApplicationJSONDirectdebitsSchemeRejectReasonCodeEnum = "B"
+	GetDirectDebitsForMandateUUIDDirectDebitsDirectDebitSchemeRejectReasonCodeEnumZero  GetDirectDebitsForMandateUUIDDirectDebitsDirectDebitSchemeRejectReasonCodeEnum = "0"
+	GetDirectDebitsForMandateUUIDDirectDebitsDirectDebitSchemeRejectReasonCodeEnumOne   GetDirectDebitsForMandateUUIDDirectDebitsDirectDebitSchemeRejectReasonCodeEnum = "1"
+	GetDirectDebitsForMandateUUIDDirectDebitsDirectDebitSchemeRejectReasonCodeEnumTwo   GetDirectDebitsForMandateUUIDDirectDebitsDirectDebitSchemeRejectReasonCodeEnum = "2"
+	GetDirectDebitsForMandateUUIDDirectDebitsDirectDebitSchemeRejectReasonCodeEnumThree GetDirectDebitsForMandateUUIDDirectDebitsDirectDebitSchemeRejectReasonCodeEnum = "3"
+	GetDirectDebitsForMandateUUIDDirectDebitsDirectDebitSchemeRejectReasonCodeEnumFour  GetDirectDebitsForMandateUUIDDirectDebitsDirectDebitSchemeRejectReasonCodeEnum = "4"
+	GetDirectDebitsForMandateUUIDDirectDebitsDirectDebitSchemeRejectReasonCodeEnumFive  GetDirectDebitsForMandateUUIDDirectDebitsDirectDebitSchemeRejectReasonCodeEnum = "5"
+	GetDirectDebitsForMandateUUIDDirectDebitsDirectDebitSchemeRejectReasonCodeEnumSix   GetDirectDebitsForMandateUUIDDirectDebitsDirectDebitSchemeRejectReasonCodeEnum = "6"
+	GetDirectDebitsForMandateUUIDDirectDebitsDirectDebitSchemeRejectReasonCodeEnumSeven GetDirectDebitsForMandateUUIDDirectDebitsDirectDebitSchemeRejectReasonCodeEnum = "7"
+	GetDirectDebitsForMandateUUIDDirectDebitsDirectDebitSchemeRejectReasonCodeEnumEight GetDirectDebitsForMandateUUIDDirectDebitsDirectDebitSchemeRejectReasonCodeEnum = "8"
+	GetDirectDebitsForMandateUUIDDirectDebitsDirectDebitSchemeRejectReasonCodeEnumNine  GetDirectDebitsForMandateUUIDDirectDebitsDirectDebitSchemeRejectReasonCodeEnum = "9"
+	GetDirectDebitsForMandateUUIDDirectDebitsDirectDebitSchemeRejectReasonCodeEnumA     GetDirectDebitsForMandateUUIDDirectDebitsDirectDebitSchemeRejectReasonCodeEnum = "A"
+	GetDirectDebitsForMandateUUIDDirectDebitsDirectDebitSchemeRejectReasonCodeEnumB     GetDirectDebitsForMandateUUIDDirectDebitsDirectDebitSchemeRejectReasonCodeEnum = "B"
 )
 
-type GetDirectDebitsForMandateUUID200ApplicationJSONDirectdebitsStatusEnum string
+type GetDirectDebitsForMandateUUIDDirectDebitsDirectDebitStatusEnum string
 
 const (
-	GetDirectDebitsForMandateUUID200ApplicationJSONDirectdebitsStatusEnumRecieved                 GetDirectDebitsForMandateUUID200ApplicationJSONDirectdebitsStatusEnum = "RECIEVED"
-	GetDirectDebitsForMandateUUID200ApplicationJSONDirectdebitsStatusEnumRejectRequested          GetDirectDebitsForMandateUUID200ApplicationJSONDirectdebitsStatusEnum = "REJECT_REQUESTED"
-	GetDirectDebitsForMandateUUID200ApplicationJSONDirectdebitsStatusEnumRejectReadyForProcessing GetDirectDebitsForMandateUUID200ApplicationJSONDirectdebitsStatusEnum = "REJECT_READY_FOR_PROCESSING"
-	GetDirectDebitsForMandateUUID200ApplicationJSONDirectdebitsStatusEnumRejectRecordInProgress   GetDirectDebitsForMandateUUID200ApplicationJSONDirectdebitsStatusEnum = "REJECT_RECORD_IN_PROGRESS"
-	GetDirectDebitsForMandateUUID200ApplicationJSONDirectdebitsStatusEnumRejectRecorded           GetDirectDebitsForMandateUUID200ApplicationJSONDirectdebitsStatusEnum = "REJECT_RECORDED"
-	GetDirectDebitsForMandateUUID200ApplicationJSONDirectdebitsStatusEnumRejectFileCreated        GetDirectDebitsForMandateUUID200ApplicationJSONDirectdebitsStatusEnum = "REJECT_FILE_CREATED"
-	GetDirectDebitsForMandateUUID200ApplicationJSONDirectdebitsStatusEnumRejectFileSent           GetDirectDebitsForMandateUUID200ApplicationJSONDirectdebitsStatusEnum = "REJECT_FILE_SENT"
-	GetDirectDebitsForMandateUUID200ApplicationJSONDirectdebitsStatusEnumCollected                GetDirectDebitsForMandateUUID200ApplicationJSONDirectdebitsStatusEnum = "COLLECTED"
-	GetDirectDebitsForMandateUUID200ApplicationJSONDirectdebitsStatusEnumRefundRequested          GetDirectDebitsForMandateUUID200ApplicationJSONDirectdebitsStatusEnum = "REFUND_REQUESTED"
-	GetDirectDebitsForMandateUUID200ApplicationJSONDirectdebitsStatusEnumRefundRecordInProgress   GetDirectDebitsForMandateUUID200ApplicationJSONDirectdebitsStatusEnum = "REFUND_RECORD_IN_PROGRESS"
-	GetDirectDebitsForMandateUUID200ApplicationJSONDirectdebitsStatusEnumRefundRecorded           GetDirectDebitsForMandateUUID200ApplicationJSONDirectdebitsStatusEnum = "REFUND_RECORDED"
-	GetDirectDebitsForMandateUUID200ApplicationJSONDirectdebitsStatusEnumRefundFileCreated        GetDirectDebitsForMandateUUID200ApplicationJSONDirectdebitsStatusEnum = "REFUND_FILE_CREATED"
-	GetDirectDebitsForMandateUUID200ApplicationJSONDirectdebitsStatusEnumRefundFileSent           GetDirectDebitsForMandateUUID200ApplicationJSONDirectdebitsStatusEnum = "REFUND_FILE_SENT"
+	GetDirectDebitsForMandateUUIDDirectDebitsDirectDebitStatusEnumRecieved                 GetDirectDebitsForMandateUUIDDirectDebitsDirectDebitStatusEnum = "RECIEVED"
+	GetDirectDebitsForMandateUUIDDirectDebitsDirectDebitStatusEnumRejectRequested          GetDirectDebitsForMandateUUIDDirectDebitsDirectDebitStatusEnum = "REJECT_REQUESTED"
+	GetDirectDebitsForMandateUUIDDirectDebitsDirectDebitStatusEnumRejectReadyForProcessing GetDirectDebitsForMandateUUIDDirectDebitsDirectDebitStatusEnum = "REJECT_READY_FOR_PROCESSING"
+	GetDirectDebitsForMandateUUIDDirectDebitsDirectDebitStatusEnumRejectRecordInProgress   GetDirectDebitsForMandateUUIDDirectDebitsDirectDebitStatusEnum = "REJECT_RECORD_IN_PROGRESS"
+	GetDirectDebitsForMandateUUIDDirectDebitsDirectDebitStatusEnumRejectRecorded           GetDirectDebitsForMandateUUIDDirectDebitsDirectDebitStatusEnum = "REJECT_RECORDED"
+	GetDirectDebitsForMandateUUIDDirectDebitsDirectDebitStatusEnumRejectFileCreated        GetDirectDebitsForMandateUUIDDirectDebitsDirectDebitStatusEnum = "REJECT_FILE_CREATED"
+	GetDirectDebitsForMandateUUIDDirectDebitsDirectDebitStatusEnumRejectFileSent           GetDirectDebitsForMandateUUIDDirectDebitsDirectDebitStatusEnum = "REJECT_FILE_SENT"
+	GetDirectDebitsForMandateUUIDDirectDebitsDirectDebitStatusEnumCollected                GetDirectDebitsForMandateUUIDDirectDebitsDirectDebitStatusEnum = "COLLECTED"
+	GetDirectDebitsForMandateUUIDDirectDebitsDirectDebitStatusEnumRefundRequested          GetDirectDebitsForMandateUUIDDirectDebitsDirectDebitStatusEnum = "REFUND_REQUESTED"
+	GetDirectDebitsForMandateUUIDDirectDebitsDirectDebitStatusEnumRefundRecordInProgress   GetDirectDebitsForMandateUUIDDirectDebitsDirectDebitStatusEnum = "REFUND_RECORD_IN_PROGRESS"
+	GetDirectDebitsForMandateUUIDDirectDebitsDirectDebitStatusEnumRefundRecorded           GetDirectDebitsForMandateUUIDDirectDebitsDirectDebitStatusEnum = "REFUND_RECORDED"
+	GetDirectDebitsForMandateUUIDDirectDebitsDirectDebitStatusEnumRefundFileCreated        GetDirectDebitsForMandateUUIDDirectDebitsDirectDebitStatusEnum = "REFUND_FILE_CREATED"
+	GetDirectDebitsForMandateUUIDDirectDebitsDirectDebitStatusEnumRefundFileSent           GetDirectDebitsForMandateUUIDDirectDebitsDirectDebitStatusEnum = "REFUND_FILE_SENT"
 )
 
-type GetDirectDebitsForMandateUUID200ApplicationJSONDirectdebitsTypeEnum string
+type GetDirectDebitsForMandateUUIDDirectDebitsDirectDebitTypeEnum string
 
 const (
-	GetDirectDebitsForMandateUUID200ApplicationJSONDirectdebitsTypeEnumFirstCollection       GetDirectDebitsForMandateUUID200ApplicationJSONDirectdebitsTypeEnum = "FIRST_COLLECTION"
-	GetDirectDebitsForMandateUUID200ApplicationJSONDirectdebitsTypeEnumOngoingCollection     GetDirectDebitsForMandateUUID200ApplicationJSONDirectdebitsTypeEnum = "ONGOING_COLLECTION"
-	GetDirectDebitsForMandateUUID200ApplicationJSONDirectdebitsTypeEnumRepresentedCollection GetDirectDebitsForMandateUUID200ApplicationJSONDirectdebitsTypeEnum = "REPRESENTED_COLLECTION"
-	GetDirectDebitsForMandateUUID200ApplicationJSONDirectdebitsTypeEnumFinalCollection       GetDirectDebitsForMandateUUID200ApplicationJSONDirectdebitsTypeEnum = "FINAL_COLLECTION"
+	GetDirectDebitsForMandateUUIDDirectDebitsDirectDebitTypeEnumFirstCollection       GetDirectDebitsForMandateUUIDDirectDebitsDirectDebitTypeEnum = "FIRST_COLLECTION"
+	GetDirectDebitsForMandateUUIDDirectDebitsDirectDebitTypeEnumOngoingCollection     GetDirectDebitsForMandateUUIDDirectDebitsDirectDebitTypeEnum = "ONGOING_COLLECTION"
+	GetDirectDebitsForMandateUUIDDirectDebitsDirectDebitTypeEnumRepresentedCollection GetDirectDebitsForMandateUUIDDirectDebitsDirectDebitTypeEnum = "REPRESENTED_COLLECTION"
+	GetDirectDebitsForMandateUUIDDirectDebitsDirectDebitTypeEnumFinalCollection       GetDirectDebitsForMandateUUIDDirectDebitsDirectDebitTypeEnum = "FINAL_COLLECTION"
 )
 
-type GetDirectDebitsForMandateUUID200ApplicationJSONDirectdebitsDirectDebit struct {
+type GetDirectDebitsForMandateUUIDDirectDebitsDirectDebit struct {
 	Amount                 *int64                                                                                                   `json:"amount,omitempty"`
 	Currency               *shared.OneaccountsGetResponses200ContentApplication1jsonSchemaPropertiesAccountsItemsPropertiesCurrency `json:"currency,omitempty"`
 	DateCreated            *time.Time                                                                                               `json:"dateCreated,omitempty"`
@@ -70,20 +70,20 @@ type GetDirectDebitsForMandateUUID200ApplicationJSONDirectdebitsDirectDebit stru
 	OriginatorName         *string                                                                                                  `json:"originatorName,omitempty"`
 	OriginatorReference    *string                                                                                                  `json:"originatorReference,omitempty"`
 	SchemeRejectReason     *string                                                                                                  `json:"schemeRejectReason,omitempty"`
-	SchemeRejectReasonCode *GetDirectDebitsForMandateUUID200ApplicationJSONDirectdebitsSchemeRejectReasonCodeEnum                   `json:"schemeRejectReasonCode,omitempty"`
-	Status                 *GetDirectDebitsForMandateUUID200ApplicationJSONDirectdebitsStatusEnum                                   `json:"status,omitempty"`
+	SchemeRejectReasonCode *GetDirectDebitsForMandateUUIDDirectDebitsDirectDebitSchemeRejectReasonCodeEnum                          `json:"schemeRejectReasonCode,omitempty"`
+	Status                 *GetDirectDebitsForMandateUUIDDirectDebitsDirectDebitStatusEnum                                          `json:"status,omitempty"`
 	TargetIcan             *int64                                                                                                   `json:"targetIcan,omitempty"`
 	TargetPayeeID          *int64                                                                                                   `json:"targetPayeeId,omitempty"`
-	Type                   *GetDirectDebitsForMandateUUID200ApplicationJSONDirectdebitsTypeEnum                                     `json:"type,omitempty"`
+	Type                   *GetDirectDebitsForMandateUUIDDirectDebitsDirectDebitTypeEnum                                            `json:"type,omitempty"`
 }
 
-type GetDirectDebitsForMandateUUID200ApplicationJSONDirectDebits struct {
-	Directdebits []GetDirectDebitsForMandateUUID200ApplicationJSONDirectdebitsDirectDebit `json:"directdebits,omitempty"`
-	Total        *int64                                                                   `json:"total,omitempty"`
+type GetDirectDebitsForMandateUUIDDirectDebits struct {
+	Directdebits []GetDirectDebitsForMandateUUIDDirectDebitsDirectDebit `json:"directdebits,omitempty"`
+	Total        *int64                                                 `json:"total,omitempty"`
 }
 
 type GetDirectDebitsForMandateUUIDResponse struct {
 	ContentType  string
-	DirectDebits *GetDirectDebitsForMandateUUID200ApplicationJSONDirectDebits
+	DirectDebits *GetDirectDebitsForMandateUUIDDirectDebits
 	StatusCode   int64
 }

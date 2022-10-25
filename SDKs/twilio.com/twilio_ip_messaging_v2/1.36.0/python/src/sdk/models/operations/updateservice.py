@@ -10,7 +10,7 @@ UPDATE_SERVICE_SERVERS = [
 class UpdateServicePathParams:
     sid: str = field(default=None, metadata={'path_param': { 'field_name': 'Sid', 'style': 'simple', 'explode': False }})
     
-class UpdateServiceRequestBodyWebhookMethodEnum(str, Enum):
+class UpdateServiceUpdateServiceRequestWebhookMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -20,7 +20,7 @@ class UpdateServiceRequestBodyWebhookMethodEnum(str, Enum):
 
 
 @dataclass
-class UpdateServiceRequestBodyUpdateServiceRequest:
+class UpdateServiceUpdateServiceRequest:
     consumption_report_interval: Optional[int] = field(default=None, metadata={'form': { 'field_name': 'ConsumptionReportInterval' }})
     default_channel_creator_role_sid: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'DefaultChannelCreatorRoleSid' }})
     default_channel_role_sid: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'DefaultChannelRoleSid' }})
@@ -51,7 +51,7 @@ class UpdateServiceRequestBodyUpdateServiceRequest:
     read_status_enabled: Optional[bool] = field(default=None, metadata={'form': { 'field_name': 'ReadStatusEnabled' }})
     typing_indicator_timeout: Optional[int] = field(default=None, metadata={'form': { 'field_name': 'TypingIndicatorTimeout' }})
     webhook_filters: Optional[List[str]] = field(default=None, metadata={'form': { 'field_name': 'WebhookFilters' }})
-    webhook_method: Optional[UpdateServiceRequestBodyWebhookMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'WebhookMethod' }})
+    webhook_method: Optional[UpdateServiceUpdateServiceRequestWebhookMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'WebhookMethod' }})
     
 
 @dataclass
@@ -63,7 +63,7 @@ class UpdateServiceSecurity:
 class UpdateServiceRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateServicePathParams = field(default=None)
-    request: Optional[UpdateServiceRequestBodyUpdateServiceRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateServiceUpdateServiceRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateServiceSecurity = field(default=None)
     
 

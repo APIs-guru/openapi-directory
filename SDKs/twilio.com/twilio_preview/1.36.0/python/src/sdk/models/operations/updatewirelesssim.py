@@ -10,7 +10,7 @@ UPDATE_WIRELESS_SIM_SERVERS = [
 class UpdateWirelessSimPathParams:
     sid: str = field(default=None, metadata={'path_param': { 'field_name': 'Sid', 'style': 'simple', 'explode': False }})
     
-class UpdateWirelessSimRequestBodyCommandsCallbackMethodEnum(str, Enum):
+class UpdateWirelessSimUpdateWirelessSimRequestCommandsCallbackMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -18,7 +18,7 @@ class UpdateWirelessSimRequestBodyCommandsCallbackMethodEnum(str, Enum):
     PUT = "PUT"
     DELETE = "DELETE"
 
-class UpdateWirelessSimRequestBodySmsFallbackMethodEnum(str, Enum):
+class UpdateWirelessSimUpdateWirelessSimRequestSmsFallbackMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -26,7 +26,7 @@ class UpdateWirelessSimRequestBodySmsFallbackMethodEnum(str, Enum):
     PUT = "PUT"
     DELETE = "DELETE"
 
-class UpdateWirelessSimRequestBodySmsMethodEnum(str, Enum):
+class UpdateWirelessSimUpdateWirelessSimRequestSmsMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -34,7 +34,7 @@ class UpdateWirelessSimRequestBodySmsMethodEnum(str, Enum):
     PUT = "PUT"
     DELETE = "DELETE"
 
-class UpdateWirelessSimRequestBodyVoiceFallbackMethodEnum(str, Enum):
+class UpdateWirelessSimUpdateWirelessSimRequestVoiceFallbackMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -42,7 +42,7 @@ class UpdateWirelessSimRequestBodyVoiceFallbackMethodEnum(str, Enum):
     PUT = "PUT"
     DELETE = "DELETE"
 
-class UpdateWirelessSimRequestBodyVoiceMethodEnum(str, Enum):
+class UpdateWirelessSimUpdateWirelessSimRequestVoiceMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -52,22 +52,22 @@ class UpdateWirelessSimRequestBodyVoiceMethodEnum(str, Enum):
 
 
 @dataclass
-class UpdateWirelessSimRequestBodyUpdateWirelessSimRequest:
+class UpdateWirelessSimUpdateWirelessSimRequest:
     callback_method: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'CallbackMethod' }})
     callback_url: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'CallbackUrl' }})
-    commands_callback_method: Optional[UpdateWirelessSimRequestBodyCommandsCallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'CommandsCallbackMethod' }})
+    commands_callback_method: Optional[UpdateWirelessSimUpdateWirelessSimRequestCommandsCallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'CommandsCallbackMethod' }})
     commands_callback_url: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'CommandsCallbackUrl' }})
     friendly_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
     rate_plan: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'RatePlan' }})
-    sms_fallback_method: Optional[UpdateWirelessSimRequestBodySmsFallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'SmsFallbackMethod' }})
+    sms_fallback_method: Optional[UpdateWirelessSimUpdateWirelessSimRequestSmsFallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'SmsFallbackMethod' }})
     sms_fallback_url: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'SmsFallbackUrl' }})
-    sms_method: Optional[UpdateWirelessSimRequestBodySmsMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'SmsMethod' }})
+    sms_method: Optional[UpdateWirelessSimUpdateWirelessSimRequestSmsMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'SmsMethod' }})
     sms_url: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'SmsUrl' }})
     status: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Status' }})
     unique_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'UniqueName' }})
-    voice_fallback_method: Optional[UpdateWirelessSimRequestBodyVoiceFallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'VoiceFallbackMethod' }})
+    voice_fallback_method: Optional[UpdateWirelessSimUpdateWirelessSimRequestVoiceFallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'VoiceFallbackMethod' }})
     voice_fallback_url: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'VoiceFallbackUrl' }})
-    voice_method: Optional[UpdateWirelessSimRequestBodyVoiceMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'VoiceMethod' }})
+    voice_method: Optional[UpdateWirelessSimUpdateWirelessSimRequestVoiceMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'VoiceMethod' }})
     voice_url: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'VoiceUrl' }})
     
 
@@ -80,7 +80,7 @@ class UpdateWirelessSimSecurity:
 class UpdateWirelessSimRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateWirelessSimPathParams = field(default=None)
-    request: Optional[UpdateWirelessSimRequestBodyUpdateWirelessSimRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateWirelessSimUpdateWirelessSimRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateWirelessSimSecurity = field(default=None)
     
 

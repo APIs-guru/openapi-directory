@@ -13,7 +13,7 @@ class CreateSipAuthCallsIPAccessControlListMappingPathParams:
     
 
 @dataclass
-class CreateSipAuthCallsIPAccessControlListMappingRequestBodyCreateSipAuthCallsIPAccessControlListMappingRequest:
+class CreateSipAuthCallsIPAccessControlListMappingCreateSipAuthCallsIPAccessControlListMappingRequest:
     ip_access_control_list_sid: str = field(default=None, metadata={'form': { 'field_name': 'IpAccessControlListSid' }})
     
 
@@ -26,7 +26,7 @@ class CreateSipAuthCallsIPAccessControlListMappingSecurity:
 class CreateSipAuthCallsIPAccessControlListMappingRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateSipAuthCallsIPAccessControlListMappingPathParams = field(default=None)
-    request: Optional[CreateSipAuthCallsIPAccessControlListMappingRequestBodyCreateSipAuthCallsIPAccessControlListMappingRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateSipAuthCallsIPAccessControlListMappingCreateSipAuthCallsIPAccessControlListMappingRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateSipAuthCallsIPAccessControlListMappingSecurity = field(default=None)
     
 

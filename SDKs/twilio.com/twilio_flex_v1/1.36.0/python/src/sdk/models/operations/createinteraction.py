@@ -7,7 +7,7 @@ CREATE_INTERACTION_SERVERS = [
 
 
 @dataclass
-class CreateInteractionRequestBodyCreateInteractionRequest:
+class CreateInteractionCreateInteractionRequest:
     channel: Any = field(default=None, metadata={'form': { 'field_name': 'Channel' }})
     routing: Any = field(default=None, metadata={'form': { 'field_name': 'Routing' }})
     
@@ -20,7 +20,7 @@ class CreateInteractionSecurity:
 @dataclass
 class CreateInteractionRequest:
     server_url: Optional[str] = field(default=None)
-    request: Optional[CreateInteractionRequestBodyCreateInteractionRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateInteractionCreateInteractionRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateInteractionSecurity = field(default=None)
     
 

@@ -30,7 +30,7 @@ type ListTaskQueueRequest struct {
 	Security    ListTaskQueueSecurity
 }
 
-type ListTaskQueue200ApplicationJSONMeta struct {
+type ListTaskQueueListTaskQueueResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -40,13 +40,13 @@ type ListTaskQueue200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListTaskQueue200ApplicationJSONListTaskQueueResponse struct {
-	Meta       *ListTaskQueue200ApplicationJSONMeta    `json:"meta,omitempty"`
+type ListTaskQueueListTaskQueueResponse struct {
+	Meta       *ListTaskQueueListTaskQueueResponseMeta `json:"meta,omitempty"`
 	TaskQueues []shared.TaskrouterV1WorkspaceTaskQueue `json:"task_queues,omitempty"`
 }
 
 type ListTaskQueueResponse struct {
 	ContentType           string
-	ListTaskQueueResponse *ListTaskQueue200ApplicationJSONListTaskQueueResponse
+	ListTaskQueueResponse *ListTaskQueueListTaskQueueResponse
 	StatusCode            int64
 }

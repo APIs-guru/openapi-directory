@@ -30,7 +30,7 @@ type SslSetupRequest struct {
 }
 
 type SslSetupResponse struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+	ContentType                    string
+	StatusCode                     int64
+	SslSetupDefaultTextPlainString *string
 }

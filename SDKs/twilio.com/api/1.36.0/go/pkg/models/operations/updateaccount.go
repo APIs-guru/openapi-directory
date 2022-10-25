@@ -12,7 +12,7 @@ type UpdateAccountPathParams struct {
 	Sid string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
-type UpdateAccountRequestBodyUpdateAccountRequest struct {
+type UpdateAccountUpdateAccountRequest struct {
 	FriendlyName *string                       `form:"name=FriendlyName"`
 	Status       *shared.AccountEnumStatusEnum `form:"name=Status"`
 }
@@ -24,7 +24,7 @@ type UpdateAccountSecurity struct {
 type UpdateAccountRequest struct {
 	ServerURL  *string
 	PathParams UpdateAccountPathParams
-	Request    *UpdateAccountRequestBodyUpdateAccountRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateAccountUpdateAccountRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateAccountSecurity
 }
 

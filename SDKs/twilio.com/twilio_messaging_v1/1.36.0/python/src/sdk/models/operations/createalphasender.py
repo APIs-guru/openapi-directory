@@ -12,7 +12,7 @@ class CreateAlphaSenderPathParams:
     
 
 @dataclass
-class CreateAlphaSenderRequestBodyCreateAlphaSenderRequest:
+class CreateAlphaSenderCreateAlphaSenderRequest:
     alpha_sender: str = field(default=None, metadata={'form': { 'field_name': 'AlphaSender' }})
     
 
@@ -25,7 +25,7 @@ class CreateAlphaSenderSecurity:
 class CreateAlphaSenderRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateAlphaSenderPathParams = field(default=None)
-    request: Optional[CreateAlphaSenderRequestBodyCreateAlphaSenderRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateAlphaSenderCreateAlphaSenderRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateAlphaSenderSecurity = field(default=None)
     
 

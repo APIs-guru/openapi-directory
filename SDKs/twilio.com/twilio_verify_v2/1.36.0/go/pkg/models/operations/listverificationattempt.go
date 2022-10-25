@@ -31,7 +31,7 @@ type ListVerificationAttemptRequest struct {
 	Security    ListVerificationAttemptSecurity
 }
 
-type ListVerificationAttempt200ApplicationJSONMeta struct {
+type ListVerificationAttemptListVerificationAttemptResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -41,13 +41,13 @@ type ListVerificationAttempt200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListVerificationAttempt200ApplicationJSONListVerificationAttemptResponse struct {
-	Attempts []shared.VerifyV2VerificationAttempt           `json:"attempts,omitempty"`
-	Meta     *ListVerificationAttempt200ApplicationJSONMeta `json:"meta,omitempty"`
+type ListVerificationAttemptListVerificationAttemptResponse struct {
+	Attempts []shared.VerifyV2VerificationAttempt                        `json:"attempts,omitempty"`
+	Meta     *ListVerificationAttemptListVerificationAttemptResponseMeta `json:"meta,omitempty"`
 }
 
 type ListVerificationAttemptResponse struct {
 	ContentType                     string
-	ListVerificationAttemptResponse *ListVerificationAttempt200ApplicationJSONListVerificationAttemptResponse
+	ListVerificationAttemptResponse *ListVerificationAttemptListVerificationAttemptResponse
 	StatusCode                      int64
 }

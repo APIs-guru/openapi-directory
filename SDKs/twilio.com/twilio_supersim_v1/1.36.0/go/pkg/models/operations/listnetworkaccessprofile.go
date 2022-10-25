@@ -22,7 +22,7 @@ type ListNetworkAccessProfileRequest struct {
 	Security    ListNetworkAccessProfileSecurity
 }
 
-type ListNetworkAccessProfile200ApplicationJSONMeta struct {
+type ListNetworkAccessProfileListNetworkAccessProfileResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -32,13 +32,13 @@ type ListNetworkAccessProfile200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListNetworkAccessProfile200ApplicationJSONListNetworkAccessProfileResponse struct {
-	Meta                  *ListNetworkAccessProfile200ApplicationJSONMeta `json:"meta,omitempty"`
-	NetworkAccessProfiles []shared.SupersimV1NetworkAccessProfile         `json:"network_access_profiles,omitempty"`
+type ListNetworkAccessProfileListNetworkAccessProfileResponse struct {
+	Meta                  *ListNetworkAccessProfileListNetworkAccessProfileResponseMeta `json:"meta,omitempty"`
+	NetworkAccessProfiles []shared.SupersimV1NetworkAccessProfile                       `json:"network_access_profiles,omitempty"`
 }
 
 type ListNetworkAccessProfileResponse struct {
 	ContentType                      string
-	ListNetworkAccessProfileResponse *ListNetworkAccessProfile200ApplicationJSONListNetworkAccessProfileResponse
+	ListNetworkAccessProfileResponse *ListNetworkAccessProfileListNetworkAccessProfileResponse
 	StatusCode                       int64
 }

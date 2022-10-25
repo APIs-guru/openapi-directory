@@ -7,7 +7,7 @@ CREATE_RATE_PLAN_SERVERS = [
 
 
 @dataclass
-class CreateRatePlanRequestBodyCreateRatePlanRequest:
+class CreateRatePlanCreateRatePlanRequest:
     data_enabled: Optional[bool] = field(default=None, metadata={'form': { 'field_name': 'DataEnabled' }})
     data_limit: Optional[int] = field(default=None, metadata={'form': { 'field_name': 'DataLimit' }})
     data_metering: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'DataMetering' }})
@@ -29,7 +29,7 @@ class CreateRatePlanSecurity:
 @dataclass
 class CreateRatePlanRequest:
     server_url: Optional[str] = field(default=None)
-    request: Optional[CreateRatePlanRequestBodyCreateRatePlanRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateRatePlanCreateRatePlanRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateRatePlanSecurity = field(default=None)
     
 

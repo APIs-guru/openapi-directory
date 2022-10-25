@@ -26,7 +26,7 @@ class ListAppRequest:
 
 @dataclass_json
 @dataclass
-class ListApp200ApplicationJSONMeta:
+class ListAppListAppResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -38,14 +38,14 @@ class ListApp200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListApp200ApplicationJSONListAppResponse:
+class ListAppListAppResponse:
     apps: Optional[List[shared.MicrovisorV1App]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'apps' }})
-    meta: Optional[ListApp200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+    meta: Optional[ListAppListAppResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     
 
 @dataclass
 class ListAppResponse:
     content_type: str = field(default=None)
-    list_app_response: Optional[ListApp200ApplicationJSONListAppResponse] = field(default=None)
+    list_app_response: Optional[ListAppListAppResponse] = field(default=None)
     status_code: int = field(default=None)
     

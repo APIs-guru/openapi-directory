@@ -12,7 +12,7 @@ class UpdateCredentialAwsPathParams:
     
 
 @dataclass
-class UpdateCredentialAwsRequestBodyUpdateCredentialAwsRequest:
+class UpdateCredentialAwsUpdateCredentialAwsRequest:
     friendly_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
     
 
@@ -25,7 +25,7 @@ class UpdateCredentialAwsSecurity:
 class UpdateCredentialAwsRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateCredentialAwsPathParams = field(default=None)
-    request: Optional[UpdateCredentialAwsRequestBodyUpdateCredentialAwsRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateCredentialAwsUpdateCredentialAwsRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateCredentialAwsSecurity = field(default=None)
     
 

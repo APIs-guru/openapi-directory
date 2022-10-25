@@ -13,7 +13,7 @@ type CreateParticipantPathParams struct {
 	SessionSid string `pathParam:"style=simple,explode=false,name=SessionSid"`
 }
 
-type CreateParticipantRequestBodyCreateParticipantRequest struct {
+type CreateParticipantCreateParticipantRequest struct {
 	FailOnParticipantConflict *bool   `form:"name=FailOnParticipantConflict"`
 	FriendlyName              *string `form:"name=FriendlyName"`
 	Identifier                string  `form:"name=Identifier"`
@@ -28,7 +28,7 @@ type CreateParticipantSecurity struct {
 type CreateParticipantRequest struct {
 	ServerURL  *string
 	PathParams CreateParticipantPathParams
-	Request    *CreateParticipantRequestBodyCreateParticipantRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateParticipantCreateParticipantRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateParticipantSecurity
 }
 

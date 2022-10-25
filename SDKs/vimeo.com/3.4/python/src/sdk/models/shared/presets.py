@@ -407,7 +407,7 @@ class PresetsUserWebsites:
 
 @dataclass_json
 @dataclass
-class PresetsUserUser:
+class PresetsUser:
     account: PresetsUserAccountEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'account' }})
     bio: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'bio' }})
     content_filter: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'content_filter' }})
@@ -432,5 +432,5 @@ class Presets:
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
     settings: PresetsSettings = field(default=None, metadata={'dataclasses_json': { 'field_name': 'settings' }})
     uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
-    user: PresetsUserUser = field(default=None, metadata={'dataclasses_json': { 'field_name': 'user' }})
+    user: PresetsUser = field(default=None, metadata={'dataclasses_json': { 'field_name': 'user' }})
     

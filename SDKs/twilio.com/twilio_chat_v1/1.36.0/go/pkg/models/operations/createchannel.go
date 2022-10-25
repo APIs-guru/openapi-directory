@@ -12,7 +12,7 @@ type CreateChannelPathParams struct {
 	ServiceSid string `pathParam:"style=simple,explode=false,name=ServiceSid"`
 }
 
-type CreateChannelRequestBodyCreateChannelRequest struct {
+type CreateChannelCreateChannelRequest struct {
 	Attributes   *string                            `form:"name=Attributes"`
 	FriendlyName *string                            `form:"name=FriendlyName"`
 	Type         *shared.ChannelEnumChannelTypeEnum `form:"name=Type"`
@@ -26,7 +26,7 @@ type CreateChannelSecurity struct {
 type CreateChannelRequest struct {
 	ServerURL  *string
 	PathParams CreateChannelPathParams
-	Request    *CreateChannelRequestBodyCreateChannelRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateChannelCreateChannelRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateChannelSecurity
 }
 

@@ -26,7 +26,7 @@ class ListPoliciesRequest:
 
 @dataclass_json
 @dataclass
-class ListPolicies200ApplicationJSONMeta:
+class ListPoliciesListPoliciesResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -38,14 +38,14 @@ class ListPolicies200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListPolicies200ApplicationJSONListPoliciesResponse:
-    meta: Optional[ListPolicies200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+class ListPoliciesListPoliciesResponse:
+    meta: Optional[ListPoliciesListPoliciesResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     results: Optional[List[shared.TrusthubV1Policies]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'results' }})
     
 
 @dataclass
 class ListPoliciesResponse:
     content_type: str = field(default=None)
-    list_policies_response: Optional[ListPolicies200ApplicationJSONListPoliciesResponse] = field(default=None)
+    list_policies_response: Optional[ListPoliciesListPoliciesResponse] = field(default=None)
     status_code: int = field(default=None)
     

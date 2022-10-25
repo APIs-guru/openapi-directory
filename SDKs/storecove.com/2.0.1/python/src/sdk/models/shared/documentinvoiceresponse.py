@@ -3,7 +3,7 @@ from typing import Enum,List,Optional
 from dataclasses_json import dataclass_json
 from . import invoiceresponseclarification
 
-class DocumentInvoiceResponseResponseCodeResponseCodeEnum(str, Enum):
+class DocumentInvoiceResponseResponseCodeEnum(str, Enum):
     AB = "AB"
     IP = "IP"
     UQ = "UQ"
@@ -18,5 +18,5 @@ class DocumentInvoiceResponse:
     clarifications: Optional[List[invoiceresponseclarification.InvoiceResponseClarification]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'clarifications' }})
     effective_date: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'effectiveDate' }})
     note: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'note' }})
-    response_code: DocumentInvoiceResponseResponseCodeResponseCodeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'responseCode' }})
+    response_code: DocumentInvoiceResponseResponseCodeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'responseCode' }})
     

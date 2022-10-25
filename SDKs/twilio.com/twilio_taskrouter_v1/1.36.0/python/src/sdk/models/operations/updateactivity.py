@@ -13,7 +13,7 @@ class UpdateActivityPathParams:
     
 
 @dataclass
-class UpdateActivityRequestBodyUpdateActivityRequest:
+class UpdateActivityUpdateActivityRequest:
     friendly_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
     
 
@@ -26,7 +26,7 @@ class UpdateActivitySecurity:
 class UpdateActivityRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateActivityPathParams = field(default=None)
-    request: Optional[UpdateActivityRequestBodyUpdateActivityRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateActivityUpdateActivityRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateActivitySecurity = field(default=None)
     
 

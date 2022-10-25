@@ -9,7 +9,7 @@ from . import linkedledgeraccount
 from . import billlineitem
 from . import linkedsupplier
 
-class BillStatusStatusEnum(str, Enum):
+class BillStatusEnum(str, Enum):
     DRAFT = "draft"
     SUBMITTED = "submitted"
     AUTHORISED = "authorised"
@@ -40,7 +40,7 @@ class Bill:
     po_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'po_number' }})
     reference: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'reference' }})
     row_version: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'row_version' }})
-    status: Optional[BillStatusStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    status: Optional[BillStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
     sub_total: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sub_total' }})
     supplier: Optional[linkedsupplier.LinkedSupplier] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'supplier' }})
     tax_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tax_code' }})

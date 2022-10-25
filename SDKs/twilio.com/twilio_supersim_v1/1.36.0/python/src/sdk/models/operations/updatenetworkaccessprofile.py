@@ -12,7 +12,7 @@ class UpdateNetworkAccessProfilePathParams:
     
 
 @dataclass
-class UpdateNetworkAccessProfileRequestBodyUpdateNetworkAccessProfileRequest:
+class UpdateNetworkAccessProfileUpdateNetworkAccessProfileRequest:
     unique_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'UniqueName' }})
     
 
@@ -25,7 +25,7 @@ class UpdateNetworkAccessProfileSecurity:
 class UpdateNetworkAccessProfileRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateNetworkAccessProfilePathParams = field(default=None)
-    request: Optional[UpdateNetworkAccessProfileRequestBodyUpdateNetworkAccessProfileRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateNetworkAccessProfileUpdateNetworkAccessProfileRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateNetworkAccessProfileSecurity = field(default=None)
     
 

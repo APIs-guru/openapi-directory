@@ -8,7 +8,7 @@ from dataclasses_json import dataclass_json
 
 @dataclass_json
 @dataclass
-class ReportingInstructionReportingInstructionReportingInstruction:
+class ReportingInstructionReportingInstruction:
     end_date: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'EndDate', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     start_date: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'StartDate', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     tax_month: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TaxMonth' }})
@@ -19,5 +19,5 @@ class ReportingInstructionReportingInstructionReportingInstruction:
 @dataclass_json
 @dataclass
 class ReportingInstruction:
-    reporting_instruction: Optional[ReportingInstructionReportingInstructionReportingInstruction] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ReportingInstruction' }})
+    reporting_instruction: Optional[ReportingInstructionReportingInstruction] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ReportingInstruction' }})
     

@@ -11,7 +11,7 @@ class UpdateCallPathParams:
     account_sid: str = field(default=None, metadata={'path_param': { 'field_name': 'AccountSid', 'style': 'simple', 'explode': False }})
     sid: str = field(default=None, metadata={'path_param': { 'field_name': 'Sid', 'style': 'simple', 'explode': False }})
     
-class UpdateCallRequestBodyFallbackMethodEnum(str, Enum):
+class UpdateCallUpdateCallRequestFallbackMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -19,7 +19,7 @@ class UpdateCallRequestBodyFallbackMethodEnum(str, Enum):
     PUT = "PUT"
     DELETE = "DELETE"
 
-class UpdateCallRequestBodyMethodEnum(str, Enum):
+class UpdateCallUpdateCallRequestMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -27,7 +27,7 @@ class UpdateCallRequestBodyMethodEnum(str, Enum):
     PUT = "PUT"
     DELETE = "DELETE"
 
-class UpdateCallRequestBodyStatusCallbackMethodEnum(str, Enum):
+class UpdateCallUpdateCallRequestStatusCallbackMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -37,13 +37,13 @@ class UpdateCallRequestBodyStatusCallbackMethodEnum(str, Enum):
 
 
 @dataclass
-class UpdateCallRequestBodyUpdateCallRequest:
-    fallback_method: Optional[UpdateCallRequestBodyFallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'FallbackMethod' }})
+class UpdateCallUpdateCallRequest:
+    fallback_method: Optional[UpdateCallUpdateCallRequestFallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'FallbackMethod' }})
     fallback_url: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'FallbackUrl' }})
-    method: Optional[UpdateCallRequestBodyMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'Method' }})
+    method: Optional[UpdateCallUpdateCallRequestMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'Method' }})
     status: Optional[shared.CallEnumUpdateStatusEnum] = field(default=None, metadata={'form': { 'field_name': 'Status' }})
     status_callback: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'StatusCallback' }})
-    status_callback_method: Optional[UpdateCallRequestBodyStatusCallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'StatusCallbackMethod' }})
+    status_callback_method: Optional[UpdateCallUpdateCallRequestStatusCallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'StatusCallbackMethod' }})
     time_limit: Optional[int] = field(default=None, metadata={'form': { 'field_name': 'TimeLimit' }})
     twiml: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Twiml' }})
     url: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Url' }})
@@ -58,7 +58,7 @@ class UpdateCallSecurity:
 class UpdateCallRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateCallPathParams = field(default=None)
-    request: Optional[UpdateCallRequestBodyUpdateCallRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateCallUpdateCallRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateCallSecurity = field(default=None)
     
 

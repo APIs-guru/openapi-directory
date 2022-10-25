@@ -13,7 +13,7 @@ type CreateUnderstandFieldPathParams struct {
 	TaskSid      string `pathParam:"style=simple,explode=false,name=TaskSid"`
 }
 
-type CreateUnderstandFieldRequestBodyCreateUnderstandFieldRequest struct {
+type CreateUnderstandFieldCreateUnderstandFieldRequest struct {
 	FieldType  string `form:"name=FieldType"`
 	UniqueName string `form:"name=UniqueName"`
 }
@@ -25,7 +25,7 @@ type CreateUnderstandFieldSecurity struct {
 type CreateUnderstandFieldRequest struct {
 	ServerURL  *string
 	PathParams CreateUnderstandFieldPathParams
-	Request    *CreateUnderstandFieldRequestBodyCreateUnderstandFieldRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateUnderstandFieldCreateUnderstandFieldRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateUnderstandFieldSecurity
 }
 

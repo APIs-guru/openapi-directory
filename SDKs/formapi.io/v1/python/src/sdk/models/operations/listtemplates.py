@@ -22,7 +22,7 @@ class ListTemplatesRequest:
     query_params: ListTemplatesQueryParams = field(default=None)
     security: ListTemplatesSecurity = field(default=None)
     
-class ListTemplates200ApplicationJSONExpirationIntervalEnum(str, Enum):
+class ListTemplatesTemplateExpirationIntervalEnum(str, Enum):
     MINUTES = "minutes"
     HOURS = "hours"
     DAYS = "days"
@@ -30,12 +30,12 @@ class ListTemplates200ApplicationJSONExpirationIntervalEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class ListTemplates200ApplicationJSONTemplate:
+class ListTemplatesTemplate:
     allow_additional_properties: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'allow_additional_properties' }})
     description: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
     document_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'document_url' }})
     editable_submissions: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'editable_submissions' }})
-    expiration_interval: Optional[ListTemplates200ApplicationJSONExpirationIntervalEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'expiration_interval' }})
+    expiration_interval: Optional[ListTemplatesTemplateExpirationIntervalEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'expiration_interval' }})
     expire_after: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'expire_after' }})
     expire_submissions: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'expire_submissions' }})
     id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
@@ -59,5 +59,5 @@ class ListTemplatesResponse:
     status_code: int = field(default=None)
     authentication_error: Optional[shared.AuthenticationError] = field(default=None)
     error: Optional[shared.Error] = field(default=None)
-    templates: Optional[List[ListTemplates200ApplicationJSONTemplate]] = field(default=None)
+    templates: Optional[List[ListTemplatesTemplate]] = field(default=None)
     

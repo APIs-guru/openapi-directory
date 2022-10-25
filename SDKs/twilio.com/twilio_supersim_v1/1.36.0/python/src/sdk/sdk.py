@@ -449,7 +449,7 @@ class SDK:
         res = operations.ListBillingPeriodResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListBillingPeriod200ApplicationJSONListBillingPeriodResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListBillingPeriodListBillingPeriodResponse])
                 res.list_billing_period_response = out
 
         return res
@@ -474,7 +474,7 @@ class SDK:
         res = operations.ListEsimProfileResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListEsimProfile200ApplicationJSONListEsimProfileResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListEsimProfileListEsimProfileResponse])
                 res.list_esim_profile_response = out
 
         return res
@@ -499,7 +499,7 @@ class SDK:
         res = operations.ListFleetResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListFleet200ApplicationJSONListFleetResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListFleetListFleetResponse])
                 res.list_fleet_response = out
 
         return res
@@ -524,7 +524,7 @@ class SDK:
         res = operations.ListIPCommandResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListIPCommand200ApplicationJSONListIPCommandResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListIPCommandListIPCommandResponse])
                 res.list_ip_command_response = out
 
         return res
@@ -549,7 +549,7 @@ class SDK:
         res = operations.ListNetworkResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListNetwork200ApplicationJSONListNetworkResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListNetworkListNetworkResponse])
                 res.list_network_response = out
 
         return res
@@ -574,7 +574,7 @@ class SDK:
         res = operations.ListNetworkAccessProfileResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListNetworkAccessProfile200ApplicationJSONListNetworkAccessProfileResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListNetworkAccessProfileListNetworkAccessProfileResponse])
                 res.list_network_access_profile_response = out
 
         return res
@@ -599,7 +599,7 @@ class SDK:
         res = operations.ListNetworkAccessProfileNetworkResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListNetworkAccessProfileNetwork200ApplicationJSONListNetworkAccessProfileNetworkResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListNetworkAccessProfileNetworkListNetworkAccessProfileNetworkResponse])
                 res.list_network_access_profile_network_response = out
 
         return res
@@ -624,7 +624,7 @@ class SDK:
         res = operations.ListSimResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListSim200ApplicationJSONListSimResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListSimListSimResponse])
                 res.list_sim_response = out
 
         return res
@@ -649,7 +649,7 @@ class SDK:
         res = operations.ListSimIPAddressResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListSimIPAddress200ApplicationJSONListSimIPAddressResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListSimIPAddressListSimIPAddressResponse])
                 res.list_sim_ip_address_response = out
 
         return res
@@ -674,7 +674,7 @@ class SDK:
         res = operations.ListSmsCommandResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListSmsCommand200ApplicationJSONListSmsCommandResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListSmsCommandListSmsCommandResponse])
                 res.list_sms_command_response = out
 
         return res
@@ -699,7 +699,7 @@ class SDK:
         res = operations.ListUsageRecordResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListUsageRecord200ApplicationJSONListUsageRecordResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListUsageRecordListUsageRecordResponse])
                 res.list_usage_record_response = out
 
         return res

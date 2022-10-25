@@ -13,85 +13,85 @@ type UpdateIncomingPhoneNumberPathParams struct {
 	Sid        string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
-type UpdateIncomingPhoneNumberRequestBodySmsFallbackMethodEnum string
+type UpdateIncomingPhoneNumberUpdateIncomingPhoneNumberRequestSmsFallbackMethodEnum string
 
 const (
-	UpdateIncomingPhoneNumberRequestBodySmsFallbackMethodEnumHead   UpdateIncomingPhoneNumberRequestBodySmsFallbackMethodEnum = "HEAD"
-	UpdateIncomingPhoneNumberRequestBodySmsFallbackMethodEnumGet    UpdateIncomingPhoneNumberRequestBodySmsFallbackMethodEnum = "GET"
-	UpdateIncomingPhoneNumberRequestBodySmsFallbackMethodEnumPost   UpdateIncomingPhoneNumberRequestBodySmsFallbackMethodEnum = "POST"
-	UpdateIncomingPhoneNumberRequestBodySmsFallbackMethodEnumPatch  UpdateIncomingPhoneNumberRequestBodySmsFallbackMethodEnum = "PATCH"
-	UpdateIncomingPhoneNumberRequestBodySmsFallbackMethodEnumPut    UpdateIncomingPhoneNumberRequestBodySmsFallbackMethodEnum = "PUT"
-	UpdateIncomingPhoneNumberRequestBodySmsFallbackMethodEnumDelete UpdateIncomingPhoneNumberRequestBodySmsFallbackMethodEnum = "DELETE"
+	UpdateIncomingPhoneNumberUpdateIncomingPhoneNumberRequestSmsFallbackMethodEnumHead   UpdateIncomingPhoneNumberUpdateIncomingPhoneNumberRequestSmsFallbackMethodEnum = "HEAD"
+	UpdateIncomingPhoneNumberUpdateIncomingPhoneNumberRequestSmsFallbackMethodEnumGet    UpdateIncomingPhoneNumberUpdateIncomingPhoneNumberRequestSmsFallbackMethodEnum = "GET"
+	UpdateIncomingPhoneNumberUpdateIncomingPhoneNumberRequestSmsFallbackMethodEnumPost   UpdateIncomingPhoneNumberUpdateIncomingPhoneNumberRequestSmsFallbackMethodEnum = "POST"
+	UpdateIncomingPhoneNumberUpdateIncomingPhoneNumberRequestSmsFallbackMethodEnumPatch  UpdateIncomingPhoneNumberUpdateIncomingPhoneNumberRequestSmsFallbackMethodEnum = "PATCH"
+	UpdateIncomingPhoneNumberUpdateIncomingPhoneNumberRequestSmsFallbackMethodEnumPut    UpdateIncomingPhoneNumberUpdateIncomingPhoneNumberRequestSmsFallbackMethodEnum = "PUT"
+	UpdateIncomingPhoneNumberUpdateIncomingPhoneNumberRequestSmsFallbackMethodEnumDelete UpdateIncomingPhoneNumberUpdateIncomingPhoneNumberRequestSmsFallbackMethodEnum = "DELETE"
 )
 
-type UpdateIncomingPhoneNumberRequestBodySmsMethodEnum string
+type UpdateIncomingPhoneNumberUpdateIncomingPhoneNumberRequestSmsMethodEnum string
 
 const (
-	UpdateIncomingPhoneNumberRequestBodySmsMethodEnumHead   UpdateIncomingPhoneNumberRequestBodySmsMethodEnum = "HEAD"
-	UpdateIncomingPhoneNumberRequestBodySmsMethodEnumGet    UpdateIncomingPhoneNumberRequestBodySmsMethodEnum = "GET"
-	UpdateIncomingPhoneNumberRequestBodySmsMethodEnumPost   UpdateIncomingPhoneNumberRequestBodySmsMethodEnum = "POST"
-	UpdateIncomingPhoneNumberRequestBodySmsMethodEnumPatch  UpdateIncomingPhoneNumberRequestBodySmsMethodEnum = "PATCH"
-	UpdateIncomingPhoneNumberRequestBodySmsMethodEnumPut    UpdateIncomingPhoneNumberRequestBodySmsMethodEnum = "PUT"
-	UpdateIncomingPhoneNumberRequestBodySmsMethodEnumDelete UpdateIncomingPhoneNumberRequestBodySmsMethodEnum = "DELETE"
+	UpdateIncomingPhoneNumberUpdateIncomingPhoneNumberRequestSmsMethodEnumHead   UpdateIncomingPhoneNumberUpdateIncomingPhoneNumberRequestSmsMethodEnum = "HEAD"
+	UpdateIncomingPhoneNumberUpdateIncomingPhoneNumberRequestSmsMethodEnumGet    UpdateIncomingPhoneNumberUpdateIncomingPhoneNumberRequestSmsMethodEnum = "GET"
+	UpdateIncomingPhoneNumberUpdateIncomingPhoneNumberRequestSmsMethodEnumPost   UpdateIncomingPhoneNumberUpdateIncomingPhoneNumberRequestSmsMethodEnum = "POST"
+	UpdateIncomingPhoneNumberUpdateIncomingPhoneNumberRequestSmsMethodEnumPatch  UpdateIncomingPhoneNumberUpdateIncomingPhoneNumberRequestSmsMethodEnum = "PATCH"
+	UpdateIncomingPhoneNumberUpdateIncomingPhoneNumberRequestSmsMethodEnumPut    UpdateIncomingPhoneNumberUpdateIncomingPhoneNumberRequestSmsMethodEnum = "PUT"
+	UpdateIncomingPhoneNumberUpdateIncomingPhoneNumberRequestSmsMethodEnumDelete UpdateIncomingPhoneNumberUpdateIncomingPhoneNumberRequestSmsMethodEnum = "DELETE"
 )
 
-type UpdateIncomingPhoneNumberRequestBodyStatusCallbackMethodEnum string
+type UpdateIncomingPhoneNumberUpdateIncomingPhoneNumberRequestStatusCallbackMethodEnum string
 
 const (
-	UpdateIncomingPhoneNumberRequestBodyStatusCallbackMethodEnumHead   UpdateIncomingPhoneNumberRequestBodyStatusCallbackMethodEnum = "HEAD"
-	UpdateIncomingPhoneNumberRequestBodyStatusCallbackMethodEnumGet    UpdateIncomingPhoneNumberRequestBodyStatusCallbackMethodEnum = "GET"
-	UpdateIncomingPhoneNumberRequestBodyStatusCallbackMethodEnumPost   UpdateIncomingPhoneNumberRequestBodyStatusCallbackMethodEnum = "POST"
-	UpdateIncomingPhoneNumberRequestBodyStatusCallbackMethodEnumPatch  UpdateIncomingPhoneNumberRequestBodyStatusCallbackMethodEnum = "PATCH"
-	UpdateIncomingPhoneNumberRequestBodyStatusCallbackMethodEnumPut    UpdateIncomingPhoneNumberRequestBodyStatusCallbackMethodEnum = "PUT"
-	UpdateIncomingPhoneNumberRequestBodyStatusCallbackMethodEnumDelete UpdateIncomingPhoneNumberRequestBodyStatusCallbackMethodEnum = "DELETE"
+	UpdateIncomingPhoneNumberUpdateIncomingPhoneNumberRequestStatusCallbackMethodEnumHead   UpdateIncomingPhoneNumberUpdateIncomingPhoneNumberRequestStatusCallbackMethodEnum = "HEAD"
+	UpdateIncomingPhoneNumberUpdateIncomingPhoneNumberRequestStatusCallbackMethodEnumGet    UpdateIncomingPhoneNumberUpdateIncomingPhoneNumberRequestStatusCallbackMethodEnum = "GET"
+	UpdateIncomingPhoneNumberUpdateIncomingPhoneNumberRequestStatusCallbackMethodEnumPost   UpdateIncomingPhoneNumberUpdateIncomingPhoneNumberRequestStatusCallbackMethodEnum = "POST"
+	UpdateIncomingPhoneNumberUpdateIncomingPhoneNumberRequestStatusCallbackMethodEnumPatch  UpdateIncomingPhoneNumberUpdateIncomingPhoneNumberRequestStatusCallbackMethodEnum = "PATCH"
+	UpdateIncomingPhoneNumberUpdateIncomingPhoneNumberRequestStatusCallbackMethodEnumPut    UpdateIncomingPhoneNumberUpdateIncomingPhoneNumberRequestStatusCallbackMethodEnum = "PUT"
+	UpdateIncomingPhoneNumberUpdateIncomingPhoneNumberRequestStatusCallbackMethodEnumDelete UpdateIncomingPhoneNumberUpdateIncomingPhoneNumberRequestStatusCallbackMethodEnum = "DELETE"
 )
 
-type UpdateIncomingPhoneNumberRequestBodyVoiceFallbackMethodEnum string
+type UpdateIncomingPhoneNumberUpdateIncomingPhoneNumberRequestVoiceFallbackMethodEnum string
 
 const (
-	UpdateIncomingPhoneNumberRequestBodyVoiceFallbackMethodEnumHead   UpdateIncomingPhoneNumberRequestBodyVoiceFallbackMethodEnum = "HEAD"
-	UpdateIncomingPhoneNumberRequestBodyVoiceFallbackMethodEnumGet    UpdateIncomingPhoneNumberRequestBodyVoiceFallbackMethodEnum = "GET"
-	UpdateIncomingPhoneNumberRequestBodyVoiceFallbackMethodEnumPost   UpdateIncomingPhoneNumberRequestBodyVoiceFallbackMethodEnum = "POST"
-	UpdateIncomingPhoneNumberRequestBodyVoiceFallbackMethodEnumPatch  UpdateIncomingPhoneNumberRequestBodyVoiceFallbackMethodEnum = "PATCH"
-	UpdateIncomingPhoneNumberRequestBodyVoiceFallbackMethodEnumPut    UpdateIncomingPhoneNumberRequestBodyVoiceFallbackMethodEnum = "PUT"
-	UpdateIncomingPhoneNumberRequestBodyVoiceFallbackMethodEnumDelete UpdateIncomingPhoneNumberRequestBodyVoiceFallbackMethodEnum = "DELETE"
+	UpdateIncomingPhoneNumberUpdateIncomingPhoneNumberRequestVoiceFallbackMethodEnumHead   UpdateIncomingPhoneNumberUpdateIncomingPhoneNumberRequestVoiceFallbackMethodEnum = "HEAD"
+	UpdateIncomingPhoneNumberUpdateIncomingPhoneNumberRequestVoiceFallbackMethodEnumGet    UpdateIncomingPhoneNumberUpdateIncomingPhoneNumberRequestVoiceFallbackMethodEnum = "GET"
+	UpdateIncomingPhoneNumberUpdateIncomingPhoneNumberRequestVoiceFallbackMethodEnumPost   UpdateIncomingPhoneNumberUpdateIncomingPhoneNumberRequestVoiceFallbackMethodEnum = "POST"
+	UpdateIncomingPhoneNumberUpdateIncomingPhoneNumberRequestVoiceFallbackMethodEnumPatch  UpdateIncomingPhoneNumberUpdateIncomingPhoneNumberRequestVoiceFallbackMethodEnum = "PATCH"
+	UpdateIncomingPhoneNumberUpdateIncomingPhoneNumberRequestVoiceFallbackMethodEnumPut    UpdateIncomingPhoneNumberUpdateIncomingPhoneNumberRequestVoiceFallbackMethodEnum = "PUT"
+	UpdateIncomingPhoneNumberUpdateIncomingPhoneNumberRequestVoiceFallbackMethodEnumDelete UpdateIncomingPhoneNumberUpdateIncomingPhoneNumberRequestVoiceFallbackMethodEnum = "DELETE"
 )
 
-type UpdateIncomingPhoneNumberRequestBodyVoiceMethodEnum string
+type UpdateIncomingPhoneNumberUpdateIncomingPhoneNumberRequestVoiceMethodEnum string
 
 const (
-	UpdateIncomingPhoneNumberRequestBodyVoiceMethodEnumHead   UpdateIncomingPhoneNumberRequestBodyVoiceMethodEnum = "HEAD"
-	UpdateIncomingPhoneNumberRequestBodyVoiceMethodEnumGet    UpdateIncomingPhoneNumberRequestBodyVoiceMethodEnum = "GET"
-	UpdateIncomingPhoneNumberRequestBodyVoiceMethodEnumPost   UpdateIncomingPhoneNumberRequestBodyVoiceMethodEnum = "POST"
-	UpdateIncomingPhoneNumberRequestBodyVoiceMethodEnumPatch  UpdateIncomingPhoneNumberRequestBodyVoiceMethodEnum = "PATCH"
-	UpdateIncomingPhoneNumberRequestBodyVoiceMethodEnumPut    UpdateIncomingPhoneNumberRequestBodyVoiceMethodEnum = "PUT"
-	UpdateIncomingPhoneNumberRequestBodyVoiceMethodEnumDelete UpdateIncomingPhoneNumberRequestBodyVoiceMethodEnum = "DELETE"
+	UpdateIncomingPhoneNumberUpdateIncomingPhoneNumberRequestVoiceMethodEnumHead   UpdateIncomingPhoneNumberUpdateIncomingPhoneNumberRequestVoiceMethodEnum = "HEAD"
+	UpdateIncomingPhoneNumberUpdateIncomingPhoneNumberRequestVoiceMethodEnumGet    UpdateIncomingPhoneNumberUpdateIncomingPhoneNumberRequestVoiceMethodEnum = "GET"
+	UpdateIncomingPhoneNumberUpdateIncomingPhoneNumberRequestVoiceMethodEnumPost   UpdateIncomingPhoneNumberUpdateIncomingPhoneNumberRequestVoiceMethodEnum = "POST"
+	UpdateIncomingPhoneNumberUpdateIncomingPhoneNumberRequestVoiceMethodEnumPatch  UpdateIncomingPhoneNumberUpdateIncomingPhoneNumberRequestVoiceMethodEnum = "PATCH"
+	UpdateIncomingPhoneNumberUpdateIncomingPhoneNumberRequestVoiceMethodEnumPut    UpdateIncomingPhoneNumberUpdateIncomingPhoneNumberRequestVoiceMethodEnum = "PUT"
+	UpdateIncomingPhoneNumberUpdateIncomingPhoneNumberRequestVoiceMethodEnumDelete UpdateIncomingPhoneNumberUpdateIncomingPhoneNumberRequestVoiceMethodEnum = "DELETE"
 )
 
-type UpdateIncomingPhoneNumberRequestBodyUpdateIncomingPhoneNumberRequest struct {
-	AccountSid           *string                                                       `form:"name=AccountSid"`
-	AddressSid           *string                                                       `form:"name=AddressSid"`
-	APIVersion           *string                                                       `form:"name=ApiVersion"`
-	BundleSid            *string                                                       `form:"name=BundleSid"`
-	EmergencyAddressSid  *string                                                       `form:"name=EmergencyAddressSid"`
-	EmergencyStatus      *shared.IncomingPhoneNumberEnumEmergencyStatusEnum            `form:"name=EmergencyStatus"`
-	FriendlyName         *string                                                       `form:"name=FriendlyName"`
-	IdentitySid          *string                                                       `form:"name=IdentitySid"`
-	SmsApplicationSid    *string                                                       `form:"name=SmsApplicationSid"`
-	SmsFallbackMethod    *UpdateIncomingPhoneNumberRequestBodySmsFallbackMethodEnum    `form:"name=SmsFallbackMethod"`
-	SmsFallbackURL       *string                                                       `form:"name=SmsFallbackUrl"`
-	SmsMethod            *UpdateIncomingPhoneNumberRequestBodySmsMethodEnum            `form:"name=SmsMethod"`
-	SmsURL               *string                                                       `form:"name=SmsUrl"`
-	StatusCallback       *string                                                       `form:"name=StatusCallback"`
-	StatusCallbackMethod *UpdateIncomingPhoneNumberRequestBodyStatusCallbackMethodEnum `form:"name=StatusCallbackMethod"`
-	TrunkSid             *string                                                       `form:"name=TrunkSid"`
-	VoiceApplicationSid  *string                                                       `form:"name=VoiceApplicationSid"`
-	VoiceCallerIDLookup  *bool                                                         `form:"name=VoiceCallerIdLookup"`
-	VoiceFallbackMethod  *UpdateIncomingPhoneNumberRequestBodyVoiceFallbackMethodEnum  `form:"name=VoiceFallbackMethod"`
-	VoiceFallbackURL     *string                                                       `form:"name=VoiceFallbackUrl"`
-	VoiceMethod          *UpdateIncomingPhoneNumberRequestBodyVoiceMethodEnum          `form:"name=VoiceMethod"`
-	VoiceReceiveMode     *shared.IncomingPhoneNumberEnumVoiceReceiveModeEnum           `form:"name=VoiceReceiveMode"`
-	VoiceURL             *string                                                       `form:"name=VoiceUrl"`
+type UpdateIncomingPhoneNumberUpdateIncomingPhoneNumberRequest struct {
+	AccountSid           *string                                                                            `form:"name=AccountSid"`
+	AddressSid           *string                                                                            `form:"name=AddressSid"`
+	APIVersion           *string                                                                            `form:"name=ApiVersion"`
+	BundleSid            *string                                                                            `form:"name=BundleSid"`
+	EmergencyAddressSid  *string                                                                            `form:"name=EmergencyAddressSid"`
+	EmergencyStatus      *shared.IncomingPhoneNumberEnumEmergencyStatusEnum                                 `form:"name=EmergencyStatus"`
+	FriendlyName         *string                                                                            `form:"name=FriendlyName"`
+	IdentitySid          *string                                                                            `form:"name=IdentitySid"`
+	SmsApplicationSid    *string                                                                            `form:"name=SmsApplicationSid"`
+	SmsFallbackMethod    *UpdateIncomingPhoneNumberUpdateIncomingPhoneNumberRequestSmsFallbackMethodEnum    `form:"name=SmsFallbackMethod"`
+	SmsFallbackURL       *string                                                                            `form:"name=SmsFallbackUrl"`
+	SmsMethod            *UpdateIncomingPhoneNumberUpdateIncomingPhoneNumberRequestSmsMethodEnum            `form:"name=SmsMethod"`
+	SmsURL               *string                                                                            `form:"name=SmsUrl"`
+	StatusCallback       *string                                                                            `form:"name=StatusCallback"`
+	StatusCallbackMethod *UpdateIncomingPhoneNumberUpdateIncomingPhoneNumberRequestStatusCallbackMethodEnum `form:"name=StatusCallbackMethod"`
+	TrunkSid             *string                                                                            `form:"name=TrunkSid"`
+	VoiceApplicationSid  *string                                                                            `form:"name=VoiceApplicationSid"`
+	VoiceCallerIDLookup  *bool                                                                              `form:"name=VoiceCallerIdLookup"`
+	VoiceFallbackMethod  *UpdateIncomingPhoneNumberUpdateIncomingPhoneNumberRequestVoiceFallbackMethodEnum  `form:"name=VoiceFallbackMethod"`
+	VoiceFallbackURL     *string                                                                            `form:"name=VoiceFallbackUrl"`
+	VoiceMethod          *UpdateIncomingPhoneNumberUpdateIncomingPhoneNumberRequestVoiceMethodEnum          `form:"name=VoiceMethod"`
+	VoiceReceiveMode     *shared.IncomingPhoneNumberEnumVoiceReceiveModeEnum                                `form:"name=VoiceReceiveMode"`
+	VoiceURL             *string                                                                            `form:"name=VoiceUrl"`
 }
 
 type UpdateIncomingPhoneNumberSecurity struct {
@@ -101,7 +101,7 @@ type UpdateIncomingPhoneNumberSecurity struct {
 type UpdateIncomingPhoneNumberRequest struct {
 	ServerURL  *string
 	PathParams UpdateIncomingPhoneNumberPathParams
-	Request    *UpdateIncomingPhoneNumberRequestBodyUpdateIncomingPhoneNumberRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateIncomingPhoneNumberUpdateIncomingPhoneNumberRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateIncomingPhoneNumberSecurity
 }
 

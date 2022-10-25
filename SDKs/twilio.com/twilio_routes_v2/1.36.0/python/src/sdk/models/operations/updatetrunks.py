@@ -12,7 +12,7 @@ class UpdateTrunksPathParams:
     
 
 @dataclass
-class UpdateTrunksRequestBodyUpdateTrunksRequest:
+class UpdateTrunksUpdateTrunksRequest:
     friendly_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
     voice_region: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'VoiceRegion' }})
     
@@ -26,7 +26,7 @@ class UpdateTrunksSecurity:
 class UpdateTrunksRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateTrunksPathParams = field(default=None)
-    request: Optional[UpdateTrunksRequestBodyUpdateTrunksRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateTrunksUpdateTrunksRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateTrunksSecurity = field(default=None)
     
 

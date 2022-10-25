@@ -21,7 +21,7 @@ class UpdateChannelHeaders:
     
 
 @dataclass
-class UpdateChannelRequestBodyUpdateChannelRequest:
+class UpdateChannelUpdateChannelRequest:
     attributes: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Attributes' }})
     created_by: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'CreatedBy' }})
     date_created: Optional[datetime] = field(default=None, metadata={'form': { 'field_name': 'DateCreated' }})
@@ -40,7 +40,7 @@ class UpdateChannelRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateChannelPathParams = field(default=None)
     headers: UpdateChannelHeaders = field(default=None)
-    request: Optional[UpdateChannelRequestBodyUpdateChannelRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateChannelUpdateChannelRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateChannelSecurity = field(default=None)
     
 

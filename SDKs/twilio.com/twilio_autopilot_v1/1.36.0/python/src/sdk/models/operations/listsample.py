@@ -34,7 +34,7 @@ class ListSampleRequest:
 
 @dataclass_json
 @dataclass
-class ListSample200ApplicationJSONMeta:
+class ListSampleListSampleResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -46,14 +46,14 @@ class ListSample200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListSample200ApplicationJSONListSampleResponse:
-    meta: Optional[ListSample200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+class ListSampleListSampleResponse:
+    meta: Optional[ListSampleListSampleResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     samples: Optional[List[shared.AutopilotV1AssistantTaskSample]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'samples' }})
     
 
 @dataclass
 class ListSampleResponse:
     content_type: str = field(default=None)
-    list_sample_response: Optional[ListSample200ApplicationJSONListSampleResponse] = field(default=None)
+    list_sample_response: Optional[ListSampleListSampleResponse] = field(default=None)
     status_code: int = field(default=None)
     

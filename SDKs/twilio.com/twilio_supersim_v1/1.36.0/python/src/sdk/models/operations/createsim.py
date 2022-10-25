@@ -7,7 +7,7 @@ CREATE_SIM_SERVERS = [
 
 
 @dataclass
-class CreateSimRequestBodyCreateSimRequest:
+class CreateSimCreateSimRequest:
     iccid: str = field(default=None, metadata={'form': { 'field_name': 'Iccid' }})
     registration_code: str = field(default=None, metadata={'form': { 'field_name': 'RegistrationCode' }})
     
@@ -20,7 +20,7 @@ class CreateSimSecurity:
 @dataclass
 class CreateSimRequest:
     server_url: Optional[str] = field(default=None)
-    request: Optional[CreateSimRequestBodyCreateSimRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateSimCreateSimRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateSimSecurity = field(default=None)
     
 

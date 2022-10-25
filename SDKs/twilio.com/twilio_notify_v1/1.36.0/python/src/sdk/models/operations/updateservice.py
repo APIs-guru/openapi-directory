@@ -12,7 +12,7 @@ class UpdateServicePathParams:
     
 
 @dataclass
-class UpdateServiceRequestBodyUpdateServiceRequest:
+class UpdateServiceUpdateServiceRequest:
     alexa_skill_id: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'AlexaSkillId' }})
     apn_credential_sid: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'ApnCredentialSid' }})
     default_alexa_notification_protocol_version: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'DefaultAlexaNotificationProtocolVersion' }})
@@ -38,7 +38,7 @@ class UpdateServiceSecurity:
 class UpdateServiceRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateServicePathParams = field(default=None)
-    request: Optional[UpdateServiceRequestBodyUpdateServiceRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateServiceUpdateServiceRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateServiceSecurity = field(default=None)
     
 

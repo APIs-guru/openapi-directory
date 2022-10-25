@@ -11,7 +11,7 @@ class UpdateConferencePathParams:
     account_sid: str = field(default=None, metadata={'path_param': { 'field_name': 'AccountSid', 'style': 'simple', 'explode': False }})
     sid: str = field(default=None, metadata={'path_param': { 'field_name': 'Sid', 'style': 'simple', 'explode': False }})
     
-class UpdateConferenceRequestBodyAnnounceMethodEnum(str, Enum):
+class UpdateConferenceUpdateConferenceRequestAnnounceMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -21,8 +21,8 @@ class UpdateConferenceRequestBodyAnnounceMethodEnum(str, Enum):
 
 
 @dataclass
-class UpdateConferenceRequestBodyUpdateConferenceRequest:
-    announce_method: Optional[UpdateConferenceRequestBodyAnnounceMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'AnnounceMethod' }})
+class UpdateConferenceUpdateConferenceRequest:
+    announce_method: Optional[UpdateConferenceUpdateConferenceRequestAnnounceMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'AnnounceMethod' }})
     announce_url: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'AnnounceUrl' }})
     status: Optional[shared.ConferenceEnumUpdateStatusEnum] = field(default=None, metadata={'form': { 'field_name': 'Status' }})
     
@@ -36,7 +36,7 @@ class UpdateConferenceSecurity:
 class UpdateConferenceRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateConferencePathParams = field(default=None)
-    request: Optional[UpdateConferenceRequestBodyUpdateConferenceRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateConferenceUpdateConferenceRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateConferenceSecurity = field(default=None)
     
 

@@ -34,7 +34,7 @@ type ListTaskQueuesStatisticsRequest struct {
 	Security    ListTaskQueuesStatisticsSecurity
 }
 
-type ListTaskQueuesStatistics200ApplicationJSONMeta struct {
+type ListTaskQueuesStatisticsListTaskQueuesStatisticsResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -44,13 +44,13 @@ type ListTaskQueuesStatistics200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListTaskQueuesStatistics200ApplicationJSONListTaskQueuesStatisticsResponse struct {
-	Meta                 *ListTaskQueuesStatistics200ApplicationJSONMeta             `json:"meta,omitempty"`
-	TaskQueuesStatistics []shared.TaskrouterV1WorkspaceTaskQueueTaskQueuesStatistics `json:"task_queues_statistics,omitempty"`
+type ListTaskQueuesStatisticsListTaskQueuesStatisticsResponse struct {
+	Meta                 *ListTaskQueuesStatisticsListTaskQueuesStatisticsResponseMeta `json:"meta,omitempty"`
+	TaskQueuesStatistics []shared.TaskrouterV1WorkspaceTaskQueueTaskQueuesStatistics   `json:"task_queues_statistics,omitempty"`
 }
 
 type ListTaskQueuesStatisticsResponse struct {
 	ContentType                      string
-	ListTaskQueuesStatisticsResponse *ListTaskQueuesStatistics200ApplicationJSONListTaskQueuesStatisticsResponse
+	ListTaskQueuesStatisticsResponse *ListTaskQueuesStatisticsListTaskQueuesStatisticsResponse
 	StatusCode                       int64
 }

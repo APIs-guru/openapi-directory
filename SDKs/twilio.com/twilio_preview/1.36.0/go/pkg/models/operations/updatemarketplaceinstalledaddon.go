@@ -12,7 +12,7 @@ type UpdateMarketplaceInstalledAddOnPathParams struct {
 	Sid string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
-type UpdateMarketplaceInstalledAddOnRequestBodyUpdateMarketplaceInstalledAddOnRequest struct {
+type UpdateMarketplaceInstalledAddOnUpdateMarketplaceInstalledAddOnRequest struct {
 	Configuration *interface{} `form:"name=Configuration"`
 	UniqueName    *string      `form:"name=UniqueName"`
 }
@@ -24,7 +24,7 @@ type UpdateMarketplaceInstalledAddOnSecurity struct {
 type UpdateMarketplaceInstalledAddOnRequest struct {
 	ServerURL  *string
 	PathParams UpdateMarketplaceInstalledAddOnPathParams
-	Request    *UpdateMarketplaceInstalledAddOnRequestBodyUpdateMarketplaceInstalledAddOnRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateMarketplaceInstalledAddOnUpdateMarketplaceInstalledAddOnRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateMarketplaceInstalledAddOnSecurity
 }
 

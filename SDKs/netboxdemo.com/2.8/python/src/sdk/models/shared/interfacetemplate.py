@@ -154,7 +154,7 @@ class InterfaceTemplateTypeValueEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class InterfaceTemplateTypeType:
+class InterfaceTemplateType:
     label: InterfaceTemplateTypeLabelEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label' }})
     value: InterfaceTemplateTypeValueEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
     
@@ -166,5 +166,5 @@ class InterfaceTemplate:
     id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     mgmt_only: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'mgmt_only' }})
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    type: InterfaceTemplateTypeType = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    type: InterfaceTemplateType = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     

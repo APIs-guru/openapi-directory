@@ -22,7 +22,7 @@ const (
 	InstallationRepositorySelectionEnumSelected InstallationRepositorySelectionEnum = "selected"
 )
 
-type InstallationSuspendedBySimpleUser struct {
+type InstallationSimpleUser struct {
 	AvatarURL         string  `json:"avatar_url"`
 	EventsURL         string  `json:"events_url"`
 	FollowersURL      string  `json:"followers_url"`
@@ -61,7 +61,7 @@ type Installation struct {
 	SingleFileName         string                              `json:"single_file_name"`
 	SingleFilePaths        []string                            `json:"single_file_paths,omitempty"`
 	SuspendedAt            *time.Time                          `json:"suspended_at,omitempty"`
-	SuspendedBy            *InstallationSuspendedBySimpleUser  `json:"suspended_by,omitempty"`
+	SuspendedBy            *InstallationSimpleUser             `json:"suspended_by,omitempty"`
 	TargetID               int64                               `json:"target_id"`
 	TargetType             string                              `json:"target_type"`
 	UpdatedAt              time.Time                           `json:"updated_at"`

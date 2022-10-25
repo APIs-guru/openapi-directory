@@ -18,7 +18,7 @@ const (
 	DeviceFaceValueEnumRear  DeviceFaceValueEnum = "rear"
 )
 
-type DeviceFaceFace struct {
+type DeviceFace struct {
 	Label DeviceFaceLabelEnum `json:"label"`
 	Value DeviceFaceValueEnum `json:"value"`
 }
@@ -47,7 +47,7 @@ const (
 	DeviceStatusValueEnumDecommissioning DeviceStatusValueEnum = "decommissioning"
 )
 
-type DeviceStatusStatus struct {
+type DeviceStatus struct {
 	Label DeviceStatusLabelEnum `json:"label"`
 	Value DeviceStatusValueEnum `json:"value"`
 }
@@ -61,7 +61,7 @@ type Device struct {
 	DeviceRole       NestedDeviceRole       `json:"device_role"`
 	DeviceType       NestedDeviceType       `json:"device_type"`
 	DisplayName      *string                `json:"display_name,omitempty"`
-	Face             *DeviceFaceFace        `json:"face,omitempty"`
+	Face             *DeviceFace            `json:"face,omitempty"`
 	ID               *int64                 `json:"id,omitempty"`
 	LastUpdated      *time.Time             `json:"last_updated,omitempty"`
 	LocalContextData *string                `json:"local_context_data,omitempty"`
@@ -75,7 +75,7 @@ type Device struct {
 	Rack             *NestedRack            `json:"rack,omitempty"`
 	Serial           *string                `json:"serial,omitempty"`
 	Site             NestedSite             `json:"site"`
-	Status           *DeviceStatusStatus    `json:"status,omitempty"`
+	Status           *DeviceStatus          `json:"status,omitempty"`
 	Tags             []string               `json:"tags,omitempty"`
 	Tenant           *NestedTenant          `json:"tenant,omitempty"`
 	VcPosition       *int64                 `json:"vc_position,omitempty"`

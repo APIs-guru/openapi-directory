@@ -9,8 +9,8 @@ type StoryIDRevealRequest struct {
 }
 
 type StoryIDRevealResponse struct {
-	Body                []byte
 	ContentType         string
+	LoginButton         *string
 	StatusCode          int64
 	ProblemDetail       *interface{}
 	RevealJsPresenation *string

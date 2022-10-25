@@ -8,7 +8,7 @@ var CreateDeployedDevicesFleetServers = []string{
 	"https://preview.twilio.com",
 }
 
-type CreateDeployedDevicesFleetRequestBodyCreateDeployedDevicesFleetRequest struct {
+type CreateDeployedDevicesFleetCreateDeployedDevicesFleetRequest struct {
 	FriendlyName *string `form:"name=FriendlyName"`
 }
 
@@ -18,7 +18,7 @@ type CreateDeployedDevicesFleetSecurity struct {
 
 type CreateDeployedDevicesFleetRequest struct {
 	ServerURL *string
-	Request   *CreateDeployedDevicesFleetRequestBodyCreateDeployedDevicesFleetRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request   *CreateDeployedDevicesFleetCreateDeployedDevicesFleetRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security  CreateDeployedDevicesFleetSecurity
 }
 

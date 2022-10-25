@@ -805,7 +805,7 @@ func (s *SDK) ListBillingPeriod(ctx context.Context, request operations.ListBill
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListBillingPeriod200ApplicationJSONListBillingPeriodResponse
+			var out *operations.ListBillingPeriodListBillingPeriodResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -850,7 +850,7 @@ func (s *SDK) ListEsimProfile(ctx context.Context, request operations.ListEsimPr
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListEsimProfile200ApplicationJSONListEsimProfileResponse
+			var out *operations.ListEsimProfileListEsimProfileResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -895,7 +895,7 @@ func (s *SDK) ListFleet(ctx context.Context, request operations.ListFleetRequest
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListFleet200ApplicationJSONListFleetResponse
+			var out *operations.ListFleetListFleetResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -940,7 +940,7 @@ func (s *SDK) ListIPCommand(ctx context.Context, request operations.ListIPComman
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListIPCommand200ApplicationJSONListIPCommandResponse
+			var out *operations.ListIPCommandListIPCommandResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -985,7 +985,7 @@ func (s *SDK) ListNetwork(ctx context.Context, request operations.ListNetworkReq
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListNetwork200ApplicationJSONListNetworkResponse
+			var out *operations.ListNetworkListNetworkResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -1030,7 +1030,7 @@ func (s *SDK) ListNetworkAccessProfile(ctx context.Context, request operations.L
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListNetworkAccessProfile200ApplicationJSONListNetworkAccessProfileResponse
+			var out *operations.ListNetworkAccessProfileListNetworkAccessProfileResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -1075,7 +1075,7 @@ func (s *SDK) ListNetworkAccessProfileNetwork(ctx context.Context, request opera
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListNetworkAccessProfileNetwork200ApplicationJSONListNetworkAccessProfileNetworkResponse
+			var out *operations.ListNetworkAccessProfileNetworkListNetworkAccessProfileNetworkResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -1120,7 +1120,7 @@ func (s *SDK) ListSim(ctx context.Context, request operations.ListSimRequest) (*
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListSim200ApplicationJSONListSimResponse
+			var out *operations.ListSimListSimResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -1165,7 +1165,7 @@ func (s *SDK) ListSimIPAddress(ctx context.Context, request operations.ListSimIP
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListSimIPAddress200ApplicationJSONListSimIPAddressResponse
+			var out *operations.ListSimIPAddressListSimIPAddressResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -1210,7 +1210,7 @@ func (s *SDK) ListSmsCommand(ctx context.Context, request operations.ListSmsComm
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListSmsCommand200ApplicationJSONListSmsCommandResponse
+			var out *operations.ListSmsCommandListSmsCommandResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -1255,7 +1255,7 @@ func (s *SDK) ListUsageRecord(ctx context.Context, request operations.ListUsageR
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListUsageRecord200ApplicationJSONListUsageRecordResponse
+			var out *operations.ListUsageRecordListUsageRecordResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}

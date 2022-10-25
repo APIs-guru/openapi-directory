@@ -27,7 +27,7 @@ class InstallationRepositorySelectionEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class InstallationSuspendedBySimpleUser:
+class InstallationSimpleUser:
     avatar_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'avatar_url' }})
     events_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'events_url' }})
     followers_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'followers_url' }})
@@ -68,7 +68,7 @@ class Installation:
     single_file_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'single_file_name' }})
     single_file_paths: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'single_file_paths' }})
     suspended_at: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'suspended_at', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    suspended_by: Optional[InstallationSuspendedBySimpleUser] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'suspended_by' }})
+    suspended_by: Optional[InstallationSimpleUser] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'suspended_by' }})
     target_id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'target_id' }})
     target_type: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'target_type' }})
     updated_at: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updated_at', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})

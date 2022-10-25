@@ -63,7 +63,7 @@ class SDK:
         res = operations.GetHTMLResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "text/html"):
-                res.body = r.content
+                res.get_html_200_text_html_string = r.content
         elif r.status_code == 400:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.Error])
@@ -112,7 +112,7 @@ class SDK:
         res = operations.GetSelectedResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "text/html"):
-                res.body = r.content
+                res.get_selected_200_text_html_string = r.content
         elif r.status_code == 400:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.Error])

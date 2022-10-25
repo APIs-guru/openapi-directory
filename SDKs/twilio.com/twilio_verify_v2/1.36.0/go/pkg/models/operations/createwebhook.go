@@ -12,7 +12,7 @@ type CreateWebhookPathParams struct {
 	ServiceSid string `pathParam:"style=simple,explode=false,name=ServiceSid"`
 }
 
-type CreateWebhookRequestBodyCreateWebhookRequest struct {
+type CreateWebhookCreateWebhookRequest struct {
 	EventTypes   []string                       `form:"name=EventTypes"`
 	FriendlyName string                         `form:"name=FriendlyName"`
 	Status       *shared.WebhookEnumStatusEnum  `form:"name=Status"`
@@ -27,7 +27,7 @@ type CreateWebhookSecurity struct {
 type CreateWebhookRequest struct {
 	ServerURL  *string
 	PathParams CreateWebhookPathParams
-	Request    *CreateWebhookRequestBodyCreateWebhookRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateWebhookCreateWebhookRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateWebhookSecurity
 }
 

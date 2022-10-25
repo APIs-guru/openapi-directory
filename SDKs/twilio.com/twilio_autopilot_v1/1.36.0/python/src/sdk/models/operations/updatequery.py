@@ -13,7 +13,7 @@ class UpdateQueryPathParams:
     
 
 @dataclass
-class UpdateQueryRequestBodyUpdateQueryRequest:
+class UpdateQueryUpdateQueryRequest:
     sample_sid: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'SampleSid' }})
     status: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Status' }})
     
@@ -27,7 +27,7 @@ class UpdateQuerySecurity:
 class UpdateQueryRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateQueryPathParams = field(default=None)
-    request: Optional[UpdateQueryRequestBodyUpdateQueryRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateQueryUpdateQueryRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateQuerySecurity = field(default=None)
     
 

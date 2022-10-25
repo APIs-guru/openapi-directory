@@ -8,7 +8,7 @@ var CreateInteractionServers = []string{
 	"https://flex-api.twilio.com",
 }
 
-type CreateInteractionRequestBodyCreateInteractionRequest struct {
+type CreateInteractionCreateInteractionRequest struct {
 	Channel interface{} `form:"name=Channel"`
 	Routing interface{} `form:"name=Routing"`
 }
@@ -19,7 +19,7 @@ type CreateInteractionSecurity struct {
 
 type CreateInteractionRequest struct {
 	ServerURL *string
-	Request   *CreateInteractionRequestBodyCreateInteractionRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request   *CreateInteractionCreateInteractionRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security  CreateInteractionSecurity
 }
 

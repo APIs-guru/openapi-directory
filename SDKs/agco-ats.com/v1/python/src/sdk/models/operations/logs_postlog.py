@@ -19,6 +19,8 @@ class LogsPostLogResponse:
     body: bytes = field(default=None)
     content_type: str = field(default=None)
     logs_post_log_200_application_json_string: Optional[str] = field(default=None)
+    logs_post_log_200_application_xml_string: Optional[str] = field(default=None)
     logs_post_log_200_text_json_string: Optional[str] = field(default=None)
+    logs_post_log_200_text_xml_string: Optional[str] = field(default=None)
     status_code: int = field(default=None)
     

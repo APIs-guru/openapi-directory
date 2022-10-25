@@ -16,18 +16,18 @@ class GetVolumesIDActionsActionIDRequest:
 
 @dataclass_json
 @dataclass
-class GetVolumesIDActionsActionID200ApplicationJSONActionError:
+class GetVolumesIDActionsActionIDActionResponseActionError:
     code: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'code' }})
     message: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'message' }})
     
 
 @dataclass_json
 @dataclass
-class GetVolumesIDActionsActionID200ApplicationJSONActionResources:
+class GetVolumesIDActionsActionIDActionResponseActionResources:
     id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     type: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     
-class GetVolumesIDActionsActionID200ApplicationJSONActionStatusEnum(str, Enum):
+class GetVolumesIDActionsActionIDActionResponseActionStatusEnum(str, Enum):
     SUCCESS = "success"
     RUNNING = "running"
     ERROR = "error"
@@ -35,26 +35,26 @@ class GetVolumesIDActionsActionID200ApplicationJSONActionStatusEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class GetVolumesIDActionsActionID200ApplicationJSONActionAction:
+class GetVolumesIDActionsActionIDActionResponseAction:
     command: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'command' }})
-    error: GetVolumesIDActionsActionID200ApplicationJSONActionError = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
+    error: GetVolumesIDActionsActionIDActionResponseActionError = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
     finished: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'finished' }})
     id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     progress: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'progress' }})
-    resources: List[GetVolumesIDActionsActionID200ApplicationJSONActionResources] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resources' }})
+    resources: List[GetVolumesIDActionsActionIDActionResponseActionResources] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resources' }})
     started: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'started' }})
-    status: GetVolumesIDActionsActionID200ApplicationJSONActionStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    status: GetVolumesIDActionsActionIDActionResponseActionStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
     
 
 @dataclass_json
 @dataclass
-class GetVolumesIDActionsActionID200ApplicationJSONActionResponse:
-    action: GetVolumesIDActionsActionID200ApplicationJSONActionAction = field(default=None, metadata={'dataclasses_json': { 'field_name': 'action' }})
+class GetVolumesIDActionsActionIDActionResponse:
+    action: GetVolumesIDActionsActionIDActionResponseAction = field(default=None, metadata={'dataclasses_json': { 'field_name': 'action' }})
     
 
 @dataclass
 class GetVolumesIDActionsActionIDResponse:
-    action_response: Optional[GetVolumesIDActionsActionID200ApplicationJSONActionResponse] = field(default=None)
+    action_response: Optional[GetVolumesIDActionsActionIDActionResponse] = field(default=None)
     content_type: str = field(default=None)
     status_code: int = field(default=None)
     

@@ -33,7 +33,7 @@ class ListFunctionVersionRequest:
 
 @dataclass_json
 @dataclass
-class ListFunctionVersion200ApplicationJSONMeta:
+class ListFunctionVersionListFunctionVersionResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -45,14 +45,14 @@ class ListFunctionVersion200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListFunctionVersion200ApplicationJSONListFunctionVersionResponse:
+class ListFunctionVersionListFunctionVersionResponse:
     function_versions: Optional[List[shared.ServerlessV1ServiceFunctionFunctionVersion]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'function_versions' }})
-    meta: Optional[ListFunctionVersion200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+    meta: Optional[ListFunctionVersionListFunctionVersionResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     
 
 @dataclass
 class ListFunctionVersionResponse:
     content_type: str = field(default=None)
-    list_function_version_response: Optional[ListFunctionVersion200ApplicationJSONListFunctionVersionResponse] = field(default=None)
+    list_function_version_response: Optional[ListFunctionVersionListFunctionVersionResponse] = field(default=None)
     status_code: int = field(default=None)
     

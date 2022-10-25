@@ -12,7 +12,7 @@ type CreateTaskQueuePathParams struct {
 	WorkspaceSid string `pathParam:"style=simple,explode=false,name=WorkspaceSid"`
 }
 
-type CreateTaskQueueRequestBodyCreateTaskQueueRequest struct {
+type CreateTaskQueueCreateTaskQueueRequest struct {
 	AssignmentActivitySid  *string                            `form:"name=AssignmentActivitySid"`
 	FriendlyName           string                             `form:"name=FriendlyName"`
 	MaxReservedWorkers     *int64                             `form:"name=MaxReservedWorkers"`
@@ -28,7 +28,7 @@ type CreateTaskQueueSecurity struct {
 type CreateTaskQueueRequest struct {
 	ServerURL  *string
 	PathParams CreateTaskQueuePathParams
-	Request    *CreateTaskQueueRequestBodyCreateTaskQueueRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateTaskQueueCreateTaskQueueRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateTaskQueueSecurity
 }
 

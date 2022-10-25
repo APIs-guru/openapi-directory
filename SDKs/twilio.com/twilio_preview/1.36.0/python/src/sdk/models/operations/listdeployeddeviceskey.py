@@ -33,7 +33,7 @@ class ListDeployedDevicesKeyRequest:
 
 @dataclass_json
 @dataclass
-class ListDeployedDevicesKey200ApplicationJSONMeta:
+class ListDeployedDevicesKeyListDeployedDevicesKeyResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -45,14 +45,14 @@ class ListDeployedDevicesKey200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListDeployedDevicesKey200ApplicationJSONListDeployedDevicesKeyResponse:
+class ListDeployedDevicesKeyListDeployedDevicesKeyResponse:
     keys: Optional[List[shared.PreviewDeployedDevicesFleetKey]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'keys' }})
-    meta: Optional[ListDeployedDevicesKey200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+    meta: Optional[ListDeployedDevicesKeyListDeployedDevicesKeyResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     
 
 @dataclass
 class ListDeployedDevicesKeyResponse:
     content_type: str = field(default=None)
-    list_deployed_devices_key_response: Optional[ListDeployedDevicesKey200ApplicationJSONListDeployedDevicesKeyResponse] = field(default=None)
+    list_deployed_devices_key_response: Optional[ListDeployedDevicesKeyListDeployedDevicesKeyResponse] = field(default=None)
     status_code: int = field(default=None)
     

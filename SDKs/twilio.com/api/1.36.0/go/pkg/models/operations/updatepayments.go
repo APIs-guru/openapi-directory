@@ -14,7 +14,7 @@ type UpdatePaymentsPathParams struct {
 	Sid        string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
-type UpdatePaymentsRequestBodyUpdatePaymentsRequest struct {
+type UpdatePaymentsUpdatePaymentsRequest struct {
 	Capture        *shared.PaymentsEnumCaptureEnum `form:"name=Capture"`
 	IdempotencyKey string                          `form:"name=IdempotencyKey"`
 	Status         *shared.PaymentsEnumStatusEnum  `form:"name=Status"`
@@ -28,7 +28,7 @@ type UpdatePaymentsSecurity struct {
 type UpdatePaymentsRequest struct {
 	ServerURL  *string
 	PathParams UpdatePaymentsPathParams
-	Request    *UpdatePaymentsRequestBodyUpdatePaymentsRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdatePaymentsUpdatePaymentsRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdatePaymentsSecurity
 }
 

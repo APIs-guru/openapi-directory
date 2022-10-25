@@ -27,7 +27,7 @@ type ListRoleRequest struct {
 	Security    ListRoleSecurity
 }
 
-type ListRole200ApplicationJSONMeta struct {
+type ListRoleListRoleResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -37,13 +37,13 @@ type ListRole200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListRole200ApplicationJSONListRoleResponse struct {
-	Meta  *ListRole200ApplicationJSONMeta `json:"meta,omitempty"`
-	Roles []shared.ChatV2ServiceRole      `json:"roles,omitempty"`
+type ListRoleListRoleResponse struct {
+	Meta  *ListRoleListRoleResponseMeta `json:"meta,omitempty"`
+	Roles []shared.ChatV2ServiceRole    `json:"roles,omitempty"`
 }
 
 type ListRoleResponse struct {
 	ContentType      string
-	ListRoleResponse *ListRole200ApplicationJSONListRoleResponse
+	ListRoleResponse *ListRoleListRoleResponse
 	StatusCode       int64
 }

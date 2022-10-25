@@ -170,13 +170,13 @@ class SDK:
         res = operations.GetFileFromURIIDResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/pdf"):
-                res.body = r.content
+                res.get_file_from_uri_id_200_application_pdf_string = r.content
             if utils.match_content_type(content_type, "image/jpeg"):
-                res.body = r.content
+                res.get_file_from_uri_id_200_image_jpeg_string = r.content
             if utils.match_content_type(content_type, "image/jpg"):
-                res.body = r.content
+                res.get_file_from_uri_id_200_image_jpg_string = r.content
             if utils.match_content_type(content_type, "image/png"):
-                res.body = r.content
+                res.get_file_from_uri_id_200_image_png_string = r.content
         elif r.status_code == 400:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetFileFromURIID400ApplicationJSON])

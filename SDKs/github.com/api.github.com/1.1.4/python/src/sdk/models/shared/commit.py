@@ -6,7 +6,7 @@ from . import verification
 
 @dataclass_json
 @dataclass
-class CommitAuthorSimpleUser:
+class CommitSimpleUser:
     avatar_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'avatar_url' }})
     events_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'events_url' }})
     followers_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'followers_url' }})
@@ -30,15 +30,7 @@ class CommitAuthorSimpleUser:
 
 @dataclass_json
 @dataclass
-class CommitCommitAuthorGitUser:
-    date: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'date' }})
-    email: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'email' }})
-    name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    
-
-@dataclass_json
-@dataclass
-class CommitCommitCommitterGitUser:
+class CommitCommitGitUser:
     date: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'date' }})
     email: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'email' }})
     name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
@@ -54,37 +46,13 @@ class CommitCommitTree:
 @dataclass_json
 @dataclass
 class CommitCommit:
-    author: CommitCommitAuthorGitUser = field(default=None, metadata={'dataclasses_json': { 'field_name': 'author' }})
+    author: CommitCommitGitUser = field(default=None, metadata={'dataclasses_json': { 'field_name': 'author' }})
     comment_count: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'comment_count' }})
-    committer: CommitCommitCommitterGitUser = field(default=None, metadata={'dataclasses_json': { 'field_name': 'committer' }})
+    committer: CommitCommitGitUser = field(default=None, metadata={'dataclasses_json': { 'field_name': 'committer' }})
     message: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'message' }})
     tree: CommitCommitTree = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tree' }})
     url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'url' }})
     verification: Optional[verification.Verification] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'verification' }})
-    
-
-@dataclass_json
-@dataclass
-class CommitCommitterSimpleUser:
-    avatar_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'avatar_url' }})
-    events_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'events_url' }})
-    followers_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'followers_url' }})
-    following_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'following_url' }})
-    gists_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'gists_url' }})
-    gravatar_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'gravatar_id' }})
-    html_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'html_url' }})
-    id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    login: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'login' }})
-    node_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'node_id' }})
-    organizations_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'organizations_url' }})
-    received_events_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'received_events_url' }})
-    repos_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'repos_url' }})
-    site_admin: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'site_admin' }})
-    starred_at: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'starred_at' }})
-    starred_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'starred_url' }})
-    subscriptions_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'subscriptions_url' }})
-    type: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
-    url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'url' }})
     
 
 @dataclass_json
@@ -122,10 +90,10 @@ class CommitStats:
 @dataclass_json
 @dataclass
 class Commit:
-    author: CommitAuthorSimpleUser = field(default=None, metadata={'dataclasses_json': { 'field_name': 'author' }})
+    author: CommitSimpleUser = field(default=None, metadata={'dataclasses_json': { 'field_name': 'author' }})
     comments_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'comments_url' }})
     commit: CommitCommit = field(default=None, metadata={'dataclasses_json': { 'field_name': 'commit' }})
-    committer: CommitCommitterSimpleUser = field(default=None, metadata={'dataclasses_json': { 'field_name': 'committer' }})
+    committer: CommitSimpleUser = field(default=None, metadata={'dataclasses_json': { 'field_name': 'committer' }})
     files: Optional[List[CommitFiles]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'files' }})
     html_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'html_url' }})
     node_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'node_id' }})

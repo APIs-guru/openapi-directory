@@ -12,7 +12,7 @@ type CreateAssetPathParams struct {
 	ServiceSid string `pathParam:"style=simple,explode=false,name=ServiceSid"`
 }
 
-type CreateAssetRequestBodyCreateAssetRequest struct {
+type CreateAssetCreateAssetRequest struct {
 	FriendlyName string `form:"name=FriendlyName"`
 }
 
@@ -23,7 +23,7 @@ type CreateAssetSecurity struct {
 type CreateAssetRequest struct {
 	ServerURL  *string
 	PathParams CreateAssetPathParams
-	Request    *CreateAssetRequestBodyCreateAssetRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateAssetCreateAssetRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateAssetSecurity
 }
 

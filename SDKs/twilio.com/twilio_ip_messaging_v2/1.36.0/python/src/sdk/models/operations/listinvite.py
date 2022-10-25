@@ -34,7 +34,7 @@ class ListInviteRequest:
 
 @dataclass_json
 @dataclass
-class ListInvite200ApplicationJSONMeta:
+class ListInviteListInviteResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -46,14 +46,14 @@ class ListInvite200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListInvite200ApplicationJSONListInviteResponse:
+class ListInviteListInviteResponse:
     invites: Optional[List[shared.IPMessagingV2ServiceChannelInvite]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'invites' }})
-    meta: Optional[ListInvite200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+    meta: Optional[ListInviteListInviteResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     
 
 @dataclass
 class ListInviteResponse:
     content_type: str = field(default=None)
-    list_invite_response: Optional[ListInvite200ApplicationJSONListInviteResponse] = field(default=None)
+    list_invite_response: Optional[ListInviteListInviteResponse] = field(default=None)
     status_code: int = field(default=None)
     

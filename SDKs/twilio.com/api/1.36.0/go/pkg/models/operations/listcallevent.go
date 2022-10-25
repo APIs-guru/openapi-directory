@@ -28,7 +28,7 @@ type ListCallEventRequest struct {
 	Security    ListCallEventSecurity
 }
 
-type ListCallEvent200ApplicationJSONListCallEventResponse struct {
+type ListCallEventListCallEventResponse struct {
 	End             *int64                                `json:"end,omitempty"`
 	Events          []shared.APIV2010AccountCallCallEvent `json:"events,omitempty"`
 	FirstPageURI    *string                               `json:"first_page_uri,omitempty"`
@@ -42,6 +42,6 @@ type ListCallEvent200ApplicationJSONListCallEventResponse struct {
 
 type ListCallEventResponse struct {
 	ContentType           string
-	ListCallEventResponse *ListCallEvent200ApplicationJSONListCallEventResponse
+	ListCallEventResponse *ListCallEventListCallEventResponse
 	StatusCode            int64
 }

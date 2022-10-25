@@ -13,7 +13,7 @@ type GetTransactionsByIDRequest struct {
 	PathParams GetTransactionsByIDPathParams
 }
 
-type GetTransactionsByID200ApplicationJSONCardRelatedCard struct {
+type GetTransactionsByIDTransactionRelatedCard struct {
 	Alias              *string    `json:"alias,omitempty"`
 	CardID             *float64   `json:"cardId,omitempty"`
 	EmbossBusinessName *string    `json:"embossBusinessName,omitempty"`
@@ -23,7 +23,7 @@ type GetTransactionsByID200ApplicationJSONCardRelatedCard struct {
 	Provider           *string    `json:"provider,omitempty"`
 }
 
-type GetTransactionsByID200ApplicationJSONFxTradeDetailsFxTrade struct {
+type GetTransactionsByIDTransactionFxTrade struct {
 	BuyAmount    *int64  `json:"buyAmount,omitempty"`
 	BuyCurrency  *string `json:"buyCurrency,omitempty"`
 	FixedSide    *string `json:"fixedSide,omitempty"`
@@ -32,7 +32,7 @@ type GetTransactionsByID200ApplicationJSONFxTradeDetailsFxTrade struct {
 	SellCurrency *string `json:"sellCurrency,omitempty"`
 }
 
-type GetTransactionsByID200ApplicationJSONRelatedParty1Account struct {
+type GetTransactionsByIDTransactionRelatedPartyRelatedPartyFireAccountAccount struct {
 	AccountNumber *string `json:"accountNumber,omitempty"`
 	Alias         *string `json:"alias,omitempty"`
 	Bic           *string `json:"bic,omitempty"`
@@ -41,18 +41,18 @@ type GetTransactionsByID200ApplicationJSONRelatedParty1Account struct {
 	Nsc           *string `json:"nsc,omitempty"`
 }
 
-type GetTransactionsByID200ApplicationJSONRelatedParty1TypeEnum string
+type GetTransactionsByIDTransactionRelatedPartyRelatedPartyFireAccountTypeEnum string
 
 const (
-	GetTransactionsByID200ApplicationJSONRelatedParty1TypeEnumFireAccount GetTransactionsByID200ApplicationJSONRelatedParty1TypeEnum = "FIRE_ACCOUNT"
+	GetTransactionsByIDTransactionRelatedPartyRelatedPartyFireAccountTypeEnumFireAccount GetTransactionsByIDTransactionRelatedPartyRelatedPartyFireAccountTypeEnum = "FIRE_ACCOUNT"
 )
 
-type GetTransactionsByID200ApplicationJSONRelatedParty1RelatedPartyFireAccount struct {
-	Account *GetTransactionsByID200ApplicationJSONRelatedParty1Account  `json:"account,omitempty"`
-	Type    *GetTransactionsByID200ApplicationJSONRelatedParty1TypeEnum `json:"type,omitempty"`
+type GetTransactionsByIDTransactionRelatedPartyRelatedPartyFireAccount struct {
+	Account *GetTransactionsByIDTransactionRelatedPartyRelatedPartyFireAccountAccount  `json:"account,omitempty"`
+	Type    *GetTransactionsByIDTransactionRelatedPartyRelatedPartyFireAccountTypeEnum `json:"type,omitempty"`
 }
 
-type GetTransactionsByID200ApplicationJSONRelatedParty2Account struct {
+type GetTransactionsByIDTransactionRelatedPartyRelatedPartyExternalAccountAccount struct {
 	AccountNumber *string `json:"accountNumber,omitempty"`
 	Alias         *string `json:"alias,omitempty"`
 	Bic           *string `json:"bic,omitempty"`
@@ -61,18 +61,18 @@ type GetTransactionsByID200ApplicationJSONRelatedParty2Account struct {
 	Nsc           *string `json:"nsc,omitempty"`
 }
 
-type GetTransactionsByID200ApplicationJSONRelatedParty2TypeEnum string
+type GetTransactionsByIDTransactionRelatedPartyRelatedPartyExternalAccountTypeEnum string
 
 const (
-	GetTransactionsByID200ApplicationJSONRelatedParty2TypeEnumExternalAccount GetTransactionsByID200ApplicationJSONRelatedParty2TypeEnum = "EXTERNAL_ACCOUNT"
+	GetTransactionsByIDTransactionRelatedPartyRelatedPartyExternalAccountTypeEnumExternalAccount GetTransactionsByIDTransactionRelatedPartyRelatedPartyExternalAccountTypeEnum = "EXTERNAL_ACCOUNT"
 )
 
-type GetTransactionsByID200ApplicationJSONRelatedParty2RelatedPartyExternalAccount struct {
-	Account *GetTransactionsByID200ApplicationJSONRelatedParty2Account  `json:"account,omitempty"`
-	Type    *GetTransactionsByID200ApplicationJSONRelatedParty2TypeEnum `json:"type,omitempty"`
+type GetTransactionsByIDTransactionRelatedPartyRelatedPartyExternalAccount struct {
+	Account *GetTransactionsByIDTransactionRelatedPartyRelatedPartyExternalAccountAccount  `json:"account,omitempty"`
+	Type    *GetTransactionsByIDTransactionRelatedPartyRelatedPartyExternalAccountTypeEnum `json:"type,omitempty"`
 }
 
-type GetTransactionsByID200ApplicationJSONRelatedParty3Account struct {
+type GetTransactionsByIDTransactionRelatedPartyRelatedPartyPayeeAccount struct {
 	AccountNumber *string `json:"accountNumber,omitempty"`
 	Alias         *string `json:"alias,omitempty"`
 	Bic           *string `json:"bic,omitempty"`
@@ -81,18 +81,18 @@ type GetTransactionsByID200ApplicationJSONRelatedParty3Account struct {
 	Nsc           *string `json:"nsc,omitempty"`
 }
 
-type GetTransactionsByID200ApplicationJSONRelatedParty3TypeEnum string
+type GetTransactionsByIDTransactionRelatedPartyRelatedPartyPayeeTypeEnum string
 
 const (
-	GetTransactionsByID200ApplicationJSONRelatedParty3TypeEnumWithdrawalAccount GetTransactionsByID200ApplicationJSONRelatedParty3TypeEnum = "WITHDRAWAL_ACCOUNT"
+	GetTransactionsByIDTransactionRelatedPartyRelatedPartyPayeeTypeEnumWithdrawalAccount GetTransactionsByIDTransactionRelatedPartyRelatedPartyPayeeTypeEnum = "WITHDRAWAL_ACCOUNT"
 )
 
-type GetTransactionsByID200ApplicationJSONRelatedParty3RelatedPartyPayee struct {
-	Account *GetTransactionsByID200ApplicationJSONRelatedParty3Account  `json:"account,omitempty"`
-	Type    *GetTransactionsByID200ApplicationJSONRelatedParty3TypeEnum `json:"type,omitempty"`
+type GetTransactionsByIDTransactionRelatedPartyRelatedPartyPayee struct {
+	Account *GetTransactionsByIDTransactionRelatedPartyRelatedPartyPayeeAccount  `json:"account,omitempty"`
+	Type    *GetTransactionsByIDTransactionRelatedPartyRelatedPartyPayeeTypeEnum `json:"type,omitempty"`
 }
 
-type GetTransactionsByID200ApplicationJSONRelatedParty4CardMerchant struct {
+type GetTransactionsByIDTransactionRelatedPartyRelatedPartyCardPaymentCardMerchant struct {
 	AcquirerIDDe32      *string  `json:"acquirerIdDe32,omitempty"`
 	AdditionalAmtDe54   *string  `json:"additionalAmtDe54,omitempty"`
 	AdditionalDataDe124 *string  `json:"additionalDataDe124,omitempty"`
@@ -124,28 +124,28 @@ type GetTransactionsByID200ApplicationJSONRelatedParty4CardMerchant struct {
 	TxnType             *string  `json:"txnType,omitempty"`
 }
 
-type GetTransactionsByID200ApplicationJSONRelatedParty4TypeEnum string
+type GetTransactionsByIDTransactionRelatedPartyRelatedPartyCardPaymentTypeEnum string
 
 const (
-	GetTransactionsByID200ApplicationJSONRelatedParty4TypeEnumCardMerchant GetTransactionsByID200ApplicationJSONRelatedParty4TypeEnum = "CARD_MERCHANT"
-	GetTransactionsByID200ApplicationJSONRelatedParty4TypeEnumCardAtm      GetTransactionsByID200ApplicationJSONRelatedParty4TypeEnum = "CARD_ATM"
+	GetTransactionsByIDTransactionRelatedPartyRelatedPartyCardPaymentTypeEnumCardMerchant GetTransactionsByIDTransactionRelatedPartyRelatedPartyCardPaymentTypeEnum = "CARD_MERCHANT"
+	GetTransactionsByIDTransactionRelatedPartyRelatedPartyCardPaymentTypeEnumCardAtm      GetTransactionsByIDTransactionRelatedPartyRelatedPartyCardPaymentTypeEnum = "CARD_ATM"
 )
 
-type GetTransactionsByID200ApplicationJSONRelatedParty4RelatedPartyCardPayment struct {
-	CardMerchant *GetTransactionsByID200ApplicationJSONRelatedParty4CardMerchant `json:"cardMerchant,omitempty"`
-	Type         *GetTransactionsByID200ApplicationJSONRelatedParty4TypeEnum     `json:"type,omitempty"`
+type GetTransactionsByIDTransactionRelatedPartyRelatedPartyCardPayment struct {
+	CardMerchant *GetTransactionsByIDTransactionRelatedPartyRelatedPartyCardPaymentCardMerchant `json:"cardMerchant,omitempty"`
+	Type         *GetTransactionsByIDTransactionRelatedPartyRelatedPartyCardPaymentTypeEnum     `json:"type,omitempty"`
 }
 
-type GetTransactionsByID200ApplicationJSONTransaction struct {
+type GetTransactionsByIDTransaction struct {
 	AmountAfterCharges       *int64                                                                                                   `json:"amountAfterCharges,omitempty"`
 	AmountBeforeCharges      *int64                                                                                                   `json:"amountBeforeCharges,omitempty"`
 	Balance                  *int64                                                                                                   `json:"balance,omitempty"`
-	Card                     *GetTransactionsByID200ApplicationJSONCardRelatedCard                                                    `json:"card,omitempty"`
+	Card                     *GetTransactionsByIDTransactionRelatedCard                                                               `json:"card,omitempty"`
 	Currency                 *shared.OneaccountsGetResponses200ContentApplication1jsonSchemaPropertiesAccountsItemsPropertiesCurrency `json:"currency,omitempty"`
 	Date                     *time.Time                                                                                               `json:"date,omitempty"`
 	DateAcknowledged         *time.Time                                                                                               `json:"dateAcknowledged,omitempty"`
 	FeeAmount                *int64                                                                                                   `json:"feeAmount,omitempty"`
-	FxTradeDetails           *GetTransactionsByID200ApplicationJSONFxTradeDetailsFxTrade                                              `json:"fxTradeDetails,omitempty"`
+	FxTradeDetails           *GetTransactionsByIDTransactionFxTrade                                                                   `json:"fxTradeDetails,omitempty"`
 	Ican                     *int64                                                                                                   `json:"ican,omitempty"`
 	MyRef                    *string                                                                                                  `json:"myRef,omitempty"`
 	PaymentRequestPublicCode *string                                                                                                  `json:"paymentRequestPublicCode,omitempty"`
@@ -159,5 +159,5 @@ type GetTransactionsByID200ApplicationJSONTransaction struct {
 type GetTransactionsByIDResponse struct {
 	ContentType string
 	StatusCode  int64
-	Transaction *GetTransactionsByID200ApplicationJSONTransaction
+	Transaction *GetTransactionsByIDTransaction
 }

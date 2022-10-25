@@ -90,7 +90,7 @@ class OrderFulfillmentsPickupDetails:
     rejected_at: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rejected_at', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     schedule_type: Optional[OrderFulfillmentsPickupDetailsScheduleTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'schedule_type' }})
     
-class OrderFulfillmentsStatusFulfillmentStatusEnum(str, Enum):
+class OrderFulfillmentsFulfillmentStatusEnum(str, Enum):
     PROPOSED = "proposed"
     RESERVED = "reserved"
     PREPARED = "prepared"
@@ -110,7 +110,7 @@ class OrderFulfillments:
     id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     pickup_details: Optional[OrderFulfillmentsPickupDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pickup_details' }})
     shipment_details: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'shipment_details' }})
-    status: Optional[OrderFulfillmentsStatusFulfillmentStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    status: Optional[OrderFulfillmentsFulfillmentStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
     type: Optional[OrderFulfillmentsTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     
 
@@ -129,7 +129,7 @@ class OrderLineItems:
     total_tax: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total_tax' }})
     unit_price: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'unit_price' }})
     
-class OrderPaymentStatusPosPaymentStatusEnum(str, Enum):
+class OrderPosPaymentStatusEnum(str, Enum):
     OPEN = "open"
     PAID = "paid"
     REFUNDED = "refunded"
@@ -175,7 +175,7 @@ class OrderSourceEnum(str, Enum):
     GOOGLE = "google"
     INVOICE = "invoice"
 
-class OrderStatusStatusEnum(str, Enum):
+class OrderStatusEnum(str, Enum):
     OPEN = "open"
     DRAFT = "draft"
     DELIVERED = "delivered"
@@ -251,7 +251,7 @@ class Order:
     order_date: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'order_date', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     order_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'order_number' }})
     order_type_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'order_type_id' }})
-    payment_status: Optional[OrderPaymentStatusPosPaymentStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'payment_status' }})
+    payment_status: Optional[OrderPosPaymentStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'payment_status' }})
     payments: Optional[List[OrderPayments]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'payments' }})
     reference_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'reference_id' }})
     refunded: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'refunded' }})
@@ -259,7 +259,7 @@ class Order:
     seat: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'seat' }})
     service_charges: Optional[List[servicecharge.ServiceCharge]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'service_charges' }})
     source: Optional[OrderSourceEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'source' }})
-    status: Optional[OrderStatusStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    status: Optional[OrderStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
     table: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'table' }})
     taxes: Optional[List[Any]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'taxes' }})
     tenders: Optional[List[OrderTenders]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tenders' }})

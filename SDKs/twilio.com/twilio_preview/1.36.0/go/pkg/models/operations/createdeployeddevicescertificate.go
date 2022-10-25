@@ -12,7 +12,7 @@ type CreateDeployedDevicesCertificatePathParams struct {
 	FleetSid string `pathParam:"style=simple,explode=false,name=FleetSid"`
 }
 
-type CreateDeployedDevicesCertificateRequestBodyCreateDeployedDevicesCertificateRequest struct {
+type CreateDeployedDevicesCertificateCreateDeployedDevicesCertificateRequest struct {
 	CertificateData string  `form:"name=CertificateData"`
 	DeviceSid       *string `form:"name=DeviceSid"`
 	FriendlyName    *string `form:"name=FriendlyName"`
@@ -25,7 +25,7 @@ type CreateDeployedDevicesCertificateSecurity struct {
 type CreateDeployedDevicesCertificateRequest struct {
 	ServerURL  *string
 	PathParams CreateDeployedDevicesCertificatePathParams
-	Request    *CreateDeployedDevicesCertificateRequestBodyCreateDeployedDevicesCertificateRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateDeployedDevicesCertificateCreateDeployedDevicesCertificateRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateDeployedDevicesCertificateSecurity
 }
 

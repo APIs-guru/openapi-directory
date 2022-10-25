@@ -13,7 +13,7 @@ type CreateUnderstandSamplePathParams struct {
 	TaskSid      string `pathParam:"style=simple,explode=false,name=TaskSid"`
 }
 
-type CreateUnderstandSampleRequestBodyCreateUnderstandSampleRequest struct {
+type CreateUnderstandSampleCreateUnderstandSampleRequest struct {
 	Language      string  `form:"name=Language"`
 	SourceChannel *string `form:"name=SourceChannel"`
 	TaggedText    string  `form:"name=TaggedText"`
@@ -26,7 +26,7 @@ type CreateUnderstandSampleSecurity struct {
 type CreateUnderstandSampleRequest struct {
 	ServerURL  *string
 	PathParams CreateUnderstandSamplePathParams
-	Request    *CreateUnderstandSampleRequestBodyCreateUnderstandSampleRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateUnderstandSampleCreateUnderstandSampleRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateUnderstandSampleSecurity
 }
 

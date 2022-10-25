@@ -12,7 +12,7 @@ from . import repository
 
 @dataclass_json
 @dataclass
-class FullRepositoryLicenseLicenseSimple:
+class FullRepositoryLicenseSimple:
     html_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'html_url' }})
     key: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
@@ -23,7 +23,7 @@ class FullRepositoryLicenseLicenseSimple:
 
 @dataclass_json
 @dataclass
-class FullRepositoryOrganizationSimpleUser:
+class FullRepositorySimpleUser:
     avatar_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'avatar_url' }})
     events_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'events_url' }})
     followers_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'followers_url' }})
@@ -55,7 +55,7 @@ class FullRepositoryPermissions:
 
 @dataclass_json
 @dataclass
-class FullRepositoryTemplateRepositoryLicenseLicenseSimple:
+class FullRepositoryRepositoryLicenseSimple:
     html_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'html_url' }})
     key: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
@@ -66,7 +66,7 @@ class FullRepositoryTemplateRepositoryLicenseLicenseSimple:
 
 @dataclass_json
 @dataclass
-class FullRepositoryTemplateRepositoryOrganizationSimpleUser:
+class FullRepositoryRepositorySimpleUser:
     avatar_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'avatar_url' }})
     events_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'events_url' }})
     followers_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'followers_url' }})
@@ -90,31 +90,7 @@ class FullRepositoryTemplateRepositoryOrganizationSimpleUser:
 
 @dataclass_json
 @dataclass
-class FullRepositoryTemplateRepositoryOwnerSimpleUser:
-    avatar_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'avatar_url' }})
-    events_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'events_url' }})
-    followers_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'followers_url' }})
-    following_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'following_url' }})
-    gists_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'gists_url' }})
-    gravatar_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'gravatar_id' }})
-    html_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'html_url' }})
-    id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    login: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'login' }})
-    node_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'node_id' }})
-    organizations_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'organizations_url' }})
-    received_events_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'received_events_url' }})
-    repos_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'repos_url' }})
-    site_admin: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'site_admin' }})
-    starred_at: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'starred_at' }})
-    starred_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'starred_url' }})
-    subscriptions_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'subscriptions_url' }})
-    type: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
-    url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'url' }})
-    
-
-@dataclass_json
-@dataclass
-class FullRepositoryTemplateRepositoryPermissions:
+class FullRepositoryRepositoryPermissions:
     admin: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'admin' }})
     maintain: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'maintain' }})
     pull: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pull' }})
@@ -124,7 +100,7 @@ class FullRepositoryTemplateRepositoryPermissions:
 
 @dataclass_json
 @dataclass
-class FullRepositoryTemplateRepositoryTemplateRepositoryOwner:
+class FullRepositoryRepositoryTemplateRepositoryOwner:
     avatar_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'avatar_url' }})
     events_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'events_url' }})
     followers_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'followers_url' }})
@@ -147,7 +123,7 @@ class FullRepositoryTemplateRepositoryTemplateRepositoryOwner:
 
 @dataclass_json
 @dataclass
-class FullRepositoryTemplateRepositoryTemplateRepositoryPermissions:
+class FullRepositoryRepositoryTemplateRepositoryPermissions:
     admin: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'admin' }})
     pull: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pull' }})
     push: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'push' }})
@@ -155,7 +131,7 @@ class FullRepositoryTemplateRepositoryTemplateRepositoryPermissions:
 
 @dataclass_json
 @dataclass
-class FullRepositoryTemplateRepositoryTemplateRepository:
+class FullRepositoryRepositoryTemplateRepository:
     allow_merge_commit: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'allow_merge_commit' }})
     allow_rebase_merge: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'allow_rebase_merge' }})
     allow_squash_merge: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'allow_squash_merge' }})
@@ -213,8 +189,8 @@ class FullRepositoryTemplateRepositoryTemplateRepository:
     node_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'node_id' }})
     notifications_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'notifications_url' }})
     open_issues_count: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'open_issues_count' }})
-    owner: Optional[FullRepositoryTemplateRepositoryTemplateRepositoryOwner] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'owner' }})
-    permissions: Optional[FullRepositoryTemplateRepositoryTemplateRepositoryPermissions] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'permissions' }})
+    owner: Optional[FullRepositoryRepositoryTemplateRepositoryOwner] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'owner' }})
+    permissions: Optional[FullRepositoryRepositoryTemplateRepositoryPermissions] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'permissions' }})
     private: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'private' }})
     pulls_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pulls_url' }})
     pushed_at: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pushed_at' }})
@@ -240,7 +216,7 @@ class FullRepositoryTemplateRepositoryTemplateRepository:
 
 @dataclass_json
 @dataclass
-class FullRepositoryTemplateRepositoryRepository:
+class FullRepositoryRepository:
     allow_merge_commit: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'allow_merge_commit' }})
     allow_rebase_merge: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'allow_rebase_merge' }})
     allow_squash_merge: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'allow_squash_merge' }})
@@ -291,7 +267,7 @@ class FullRepositoryTemplateRepositoryRepository:
     labels_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'labels_url' }})
     language: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'language' }})
     languages_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'languages_url' }})
-    license: FullRepositoryTemplateRepositoryLicenseLicenseSimple = field(default=None, metadata={'dataclasses_json': { 'field_name': 'license' }})
+    license: FullRepositoryRepositoryLicenseSimple = field(default=None, metadata={'dataclasses_json': { 'field_name': 'license' }})
     master_branch: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'master_branch' }})
     merges_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'merges_url' }})
     milestones_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'milestones_url' }})
@@ -302,9 +278,9 @@ class FullRepositoryTemplateRepositoryRepository:
     notifications_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'notifications_url' }})
     open_issues: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'open_issues' }})
     open_issues_count: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'open_issues_count' }})
-    organization: Optional[FullRepositoryTemplateRepositoryOrganizationSimpleUser] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'organization' }})
-    owner: FullRepositoryTemplateRepositoryOwnerSimpleUser = field(default=None, metadata={'dataclasses_json': { 'field_name': 'owner' }})
-    permissions: Optional[FullRepositoryTemplateRepositoryPermissions] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'permissions' }})
+    organization: Optional[FullRepositoryRepositorySimpleUser] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'organization' }})
+    owner: FullRepositoryRepositorySimpleUser = field(default=None, metadata={'dataclasses_json': { 'field_name': 'owner' }})
+    permissions: Optional[FullRepositoryRepositoryPermissions] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'permissions' }})
     private: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'private' }})
     pulls_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pulls_url' }})
     pushed_at: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pushed_at', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
@@ -321,7 +297,7 @@ class FullRepositoryTemplateRepositoryRepository:
     svn_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'svn_url' }})
     tags_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags_url' }})
     teams_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'teams_url' }})
-    template_repository: Optional[FullRepositoryTemplateRepositoryTemplateRepository] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'template_repository' }})
+    template_repository: Optional[FullRepositoryRepositoryTemplateRepository] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'template_repository' }})
     topics: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'topics' }})
     trees_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'trees_url' }})
     updated_at: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updated_at', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
@@ -386,7 +362,7 @@ class FullRepository:
     labels_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'labels_url' }})
     language: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'language' }})
     languages_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'languages_url' }})
-    license: FullRepositoryLicenseLicenseSimple = field(default=None, metadata={'dataclasses_json': { 'field_name': 'license' }})
+    license: FullRepositoryLicenseSimple = field(default=None, metadata={'dataclasses_json': { 'field_name': 'license' }})
     master_branch: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'master_branch' }})
     merges_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'merges_url' }})
     milestones_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'milestones_url' }})
@@ -397,7 +373,7 @@ class FullRepository:
     notifications_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'notifications_url' }})
     open_issues: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'open_issues' }})
     open_issues_count: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'open_issues_count' }})
-    organization: Optional[FullRepositoryOrganizationSimpleUser] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'organization' }})
+    organization: Optional[FullRepositorySimpleUser] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'organization' }})
     owner: simple_user.SimpleUser = field(default=None, metadata={'dataclasses_json': { 'field_name': 'owner' }})
     parent: Optional[repository.Repository] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'parent' }})
     permissions: Optional[FullRepositoryPermissions] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'permissions' }})
@@ -417,7 +393,7 @@ class FullRepository:
     svn_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'svn_url' }})
     tags_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags_url' }})
     teams_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'teams_url' }})
-    template_repository: Optional[FullRepositoryTemplateRepositoryRepository] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'template_repository' }})
+    template_repository: Optional[FullRepositoryRepository] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'template_repository' }})
     topics: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'topics' }})
     trees_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'trees_url' }})
     updated_at: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updated_at', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})

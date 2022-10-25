@@ -12,7 +12,7 @@ class CreateBuildPathParams:
     
 
 @dataclass
-class CreateBuildRequestBodyCreateBuildRequest:
+class CreateBuildCreateBuildRequest:
     asset_versions: Optional[List[str]] = field(default=None, metadata={'form': { 'field_name': 'AssetVersions' }})
     dependencies: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Dependencies' }})
     function_versions: Optional[List[str]] = field(default=None, metadata={'form': { 'field_name': 'FunctionVersions' }})
@@ -28,7 +28,7 @@ class CreateBuildSecurity:
 class CreateBuildRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateBuildPathParams = field(default=None)
-    request: Optional[CreateBuildRequestBodyCreateBuildRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateBuildCreateBuildRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateBuildSecurity = field(default=None)
     
 

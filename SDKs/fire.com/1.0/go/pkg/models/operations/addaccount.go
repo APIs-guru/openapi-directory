@@ -4,21 +4,21 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-type AddAccountRequestBodyCurrencyEnum string
+type AddAccountNewAccountCurrencyEnum string
 
 const (
-	AddAccountRequestBodyCurrencyEnumEur AddAccountRequestBodyCurrencyEnum = "EUR"
-	AddAccountRequestBodyCurrencyEnumGbp AddAccountRequestBodyCurrencyEnum = "GBP"
+	AddAccountNewAccountCurrencyEnumEur AddAccountNewAccountCurrencyEnum = "EUR"
+	AddAccountNewAccountCurrencyEnumGbp AddAccountNewAccountCurrencyEnum = "GBP"
 )
 
-type AddAccountRequestBodyNewAccount struct {
-	AcceptFeesAndCharges *bool                              `json:"acceptFeesAndCharges,omitempty"`
-	AccountName          *string                            `json:"accountName,omitempty"`
-	Currency             *AddAccountRequestBodyCurrencyEnum `json:"currency,omitempty"`
+type AddAccountNewAccount struct {
+	AcceptFeesAndCharges *bool                             `json:"acceptFeesAndCharges,omitempty"`
+	AccountName          *string                           `json:"accountName,omitempty"`
+	Currency             *AddAccountNewAccountCurrencyEnum `json:"currency,omitempty"`
 }
 
 type AddAccountRequest struct {
-	Request AddAccountRequestBodyNewAccount `request:"mediaType=application/json"`
+	Request AddAccountNewAccount `request:"mediaType=application/json"`
 }
 
 type AddAccountResponse struct {

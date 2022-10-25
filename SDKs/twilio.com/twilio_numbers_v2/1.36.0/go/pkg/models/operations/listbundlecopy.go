@@ -27,7 +27,7 @@ type ListBundleCopyRequest struct {
 	Security    ListBundleCopySecurity
 }
 
-type ListBundleCopy200ApplicationJSONMeta struct {
+type ListBundleCopyListBundleCopyResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -37,13 +37,13 @@ type ListBundleCopy200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListBundleCopy200ApplicationJSONListBundleCopyResponse struct {
-	Meta    *ListBundleCopy200ApplicationJSONMeta                  `json:"meta,omitempty"`
+type ListBundleCopyListBundleCopyResponse struct {
+	Meta    *ListBundleCopyListBundleCopyResponseMeta              `json:"meta,omitempty"`
 	Results []shared.NumbersV2RegulatoryComplianceBundleBundleCopy `json:"results,omitempty"`
 }
 
 type ListBundleCopyResponse struct {
 	ContentType            string
-	ListBundleCopyResponse *ListBundleCopy200ApplicationJSONListBundleCopyResponse
+	ListBundleCopyResponse *ListBundleCopyListBundleCopyResponse
 	StatusCode             int64
 }

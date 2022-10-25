@@ -382,7 +382,7 @@ class VideoVersionsUserWebsites:
 
 @dataclass_json
 @dataclass
-class VideoVersionsUserUser:
+class VideoVersionsUser:
     account: VideoVersionsUserAccountEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'account' }})
     bio: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'bio' }})
     content_filter: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'content_filter' }})
@@ -415,5 +415,5 @@ class VideoVersions:
     upload: VideoVersionsUpload = field(default=None, metadata={'dataclasses_json': { 'field_name': 'upload' }})
     upload_date: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'upload_date' }})
     uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
-    user: VideoVersionsUserUser = field(default=None, metadata={'dataclasses_json': { 'field_name': 'user' }})
+    user: VideoVersionsUser = field(default=None, metadata={'dataclasses_json': { 'field_name': 'user' }})
     

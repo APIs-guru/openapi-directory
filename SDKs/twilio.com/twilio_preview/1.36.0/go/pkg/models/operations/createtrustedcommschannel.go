@@ -12,7 +12,7 @@ type CreateTrustedCommsChannelPathParams struct {
 	BrandedChannelSid string `pathParam:"style=simple,explode=false,name=BrandedChannelSid"`
 }
 
-type CreateTrustedCommsChannelRequestBodyCreateTrustedCommsChannelRequest struct {
+type CreateTrustedCommsChannelCreateTrustedCommsChannelRequest struct {
 	PhoneNumberSid string `form:"name=PhoneNumberSid"`
 }
 
@@ -23,7 +23,7 @@ type CreateTrustedCommsChannelSecurity struct {
 type CreateTrustedCommsChannelRequest struct {
 	ServerURL  *string
 	PathParams CreateTrustedCommsChannelPathParams
-	Request    *CreateTrustedCommsChannelRequestBodyCreateTrustedCommsChannelRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateTrustedCommsChannelCreateTrustedCommsChannelRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateTrustedCommsChannelSecurity
 }
 

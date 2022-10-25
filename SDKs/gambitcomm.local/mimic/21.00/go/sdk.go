@@ -3,6 +3,7 @@ package sdk
 import (
 	"context"
 	"fmt"
+	"io"
 	"net/http"
 	"openapi/internal/utils"
 	"openapi/pkg/models/operations"
@@ -85,12 +86,13 @@ func (s *SDK) AccessAdd(ctx context.Context, request operations.AccessAddRequest
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.AccessAdd200ApplicationJSONString = out
+			out := string(data)
+			res.AccessAdd200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -125,12 +127,13 @@ func (s *SDK) AccessDel(ctx context.Context, request operations.AccessDelRequest
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.AccessDel200ApplicationJSONString = out
+			out := string(data)
+			res.AccessDel200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -165,12 +168,13 @@ func (s *SDK) AccessGetAcldb(ctx context.Context) (*operations.AccessGetAcldbRes
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.AccessGetAcldb200ApplicationJSONString = out
+			out := string(data)
+			res.AccessGetAcldb200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -205,12 +209,13 @@ func (s *SDK) AccessGetAdmindir(ctx context.Context) (*operations.AccessGetAdmin
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.AccessGetAdmindir200ApplicationJSONString = out
+			out := string(data)
+			res.AccessGetAdmindir200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -245,12 +250,13 @@ func (s *SDK) AccessGetAdminuser(ctx context.Context) (*operations.AccessGetAdmi
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.AccessGetAdminuser200ApplicationJSONString = out
+			out := string(data)
+			res.AccessGetAdminuser200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -285,12 +291,13 @@ func (s *SDK) AccessGetEnabled(ctx context.Context) (*operations.AccessGetEnable
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.AccessGetEnabled200ApplicationJSONString = out
+			out := string(data)
+			res.AccessGetEnabled200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -445,12 +452,13 @@ func (s *SDK) AccessSetAcldb(ctx context.Context, request operations.AccessSetAc
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.AccessSetAcldb200ApplicationJSONString = out
+			out := string(data)
+			res.AccessSetAcldb200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -485,12 +493,13 @@ func (s *SDK) AccessSetEnabled(ctx context.Context, request operations.AccessSet
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.AccessSetEnabled200ApplicationJSONString = out
+			out := string(data)
+			res.AccessSetEnabled200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -525,12 +534,13 @@ func (s *SDK) Add(ctx context.Context, request operations.AddRequest) (*operatio
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Add200ApplicationJSONString = out
+			out := string(data)
+			res.Add200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -565,12 +575,13 @@ func (s *SDK) AddDaemonTimerScript(ctx context.Context, request operations.AddDa
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.AddDaemonTimerScript200ApplicationJSONString = out
+			out := string(data)
+			res.AddDaemonTimerScript200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -605,12 +616,13 @@ func (s *SDK) AddIpalias(ctx context.Context, request operations.AddIpaliasReque
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.AddIpalias200ApplicationJSONString = out
+			out := string(data)
+			res.AddIpalias200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -645,12 +657,13 @@ func (s *SDK) AddTimerScript(ctx context.Context, request operations.AddTimerScr
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.AddTimerScript200ApplicationJSONString = out
+			out := string(data)
+			res.AddTimerScript200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -685,12 +698,13 @@ func (s *SDK) AgentRemove(ctx context.Context, request operations.AgentRemoveReq
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.AgentRemove200ApplicationJSONString = out
+			out := string(data)
+			res.AgentRemove200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -725,12 +739,13 @@ func (s *SDK) AgentStoreCopy(ctx context.Context, request operations.AgentStoreC
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.AgentStoreCopy200ApplicationJSONString = out
+			out := string(data)
+			res.AgentStoreCopy200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -765,12 +780,13 @@ func (s *SDK) AgentStoreExists(ctx context.Context, request operations.AgentStor
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.AgentStoreExists200ApplicationJSONString = out
+			out := string(data)
+			res.AgentStoreExists200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -805,12 +821,13 @@ func (s *SDK) AgentStoreGet(ctx context.Context, request operations.AgentStoreGe
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.AgentStoreGet200ApplicationJSONString = out
+			out := string(data)
+			res.AgentStoreGet200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -891,12 +908,13 @@ func (s *SDK) AgentStoreLreplace(ctx context.Context, request operations.AgentSt
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.AgentStoreLreplace200ApplicationJSONString = out
+			out := string(data)
+			res.AgentStoreLreplace200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -931,12 +949,13 @@ func (s *SDK) AgentStorePersists(ctx context.Context, request operations.AgentSt
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.AgentStorePersists200ApplicationJSONString = out
+			out := string(data)
+			res.AgentStorePersists200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -977,12 +996,13 @@ func (s *SDK) AgentStoreSet(ctx context.Context, request operations.AgentStoreSe
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.AgentStoreSet200ApplicationJSONString = out
+			out := string(data)
+			res.AgentStoreSet200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -1017,12 +1037,13 @@ func (s *SDK) AgentStoreUnset(ctx context.Context, request operations.AgentStore
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.AgentStoreUnset200ApplicationJSONString = out
+			out := string(data)
+			res.AgentStoreUnset200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -1213,12 +1234,13 @@ func (s *SDK) DelDaemonTimerScript(ctx context.Context, request operations.DelDa
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.DelDaemonTimerScript200ApplicationJSONString = out
+			out := string(data)
+			res.DelDaemonTimerScript200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -1253,12 +1275,13 @@ func (s *SDK) DelIpalias(ctx context.Context, request operations.DelIpaliasReque
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.DelIpalias200ApplicationJSONString = out
+			out := string(data)
+			res.DelIpalias200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -1293,12 +1316,13 @@ func (s *SDK) DelTimerScript(ctx context.Context, request operations.DelTimerScr
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.DelTimerScript200ApplicationJSONString = out
+			out := string(data)
+			res.DelTimerScript200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -1333,12 +1357,13 @@ func (s *SDK) EvalValue(ctx context.Context, request operations.EvalValueRequest
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.EvalValue200ApplicationJSONString = out
+			out := string(data)
+			res.EvalValue200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -1373,12 +1398,13 @@ func (s *SDK) FromAdd(ctx context.Context, request operations.FromAddRequest) (*
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.FromAdd200ApplicationJSONString = out
+			out := string(data)
+			res.FromAdd200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -1413,12 +1439,13 @@ func (s *SDK) FromDel(ctx context.Context, request operations.FromDelRequest) (*
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.FromDel200ApplicationJSONString = out
+			out := string(data)
+			res.FromDel200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -2044,12 +2071,13 @@ func (s *SDK) GetHost(ctx context.Context, request operations.GetHostRequest) (*
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetHost200ApplicationJSONString = out
+			out := string(data)
+			res.GetHost200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -2084,12 +2112,13 @@ func (s *SDK) GetInfo(ctx context.Context, request operations.GetInfoRequest) (*
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetInfo200ApplicationJSONString = out
+			out := string(data)
+			res.GetInfo200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -2204,12 +2233,13 @@ func (s *SDK) GetInterface(ctx context.Context, request operations.GetInterfaceR
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetInterface200ApplicationJSONString = out
+			out := string(data)
+			res.GetInterface200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -2361,12 +2391,13 @@ func (s *SDK) GetMask(ctx context.Context, request operations.GetMaskRequest) (*
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetMask200ApplicationJSONString = out
+			out := string(data)
+			res.GetMask200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -2440,12 +2471,13 @@ func (s *SDK) GetMib(ctx context.Context, request operations.GetMibRequest) (*op
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetMib200ApplicationJSONString = out
+			out := string(data)
+			res.GetMib200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -2520,12 +2552,13 @@ func (s *SDK) GetName(ctx context.Context, request operations.GetNameRequest) (*
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetName200ApplicationJSONString = out
+			out := string(data)
+			res.GetName200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -2718,12 +2751,13 @@ func (s *SDK) GetOid(ctx context.Context, request operations.GetOidRequest) (*op
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetOid200ApplicationJSONString = out
+			out := string(data)
+			res.GetOid200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -2758,12 +2792,13 @@ func (s *SDK) GetOiddir(ctx context.Context, request operations.GetOiddirRequest
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetOiddir200ApplicationJSONString = out
+			out := string(data)
+			res.GetOiddir200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -2798,12 +2833,13 @@ func (s *SDK) GetOwner(ctx context.Context, request operations.GetOwnerRequest) 
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetOwner200ApplicationJSONString = out
+			out := string(data)
+			res.GetOwner200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -2878,12 +2914,13 @@ func (s *SDK) GetPort(ctx context.Context, request operations.GetPortRequest) (*
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetPort200ApplicationJSONString = out
+			out := string(data)
+			res.GetPort200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -2918,12 +2955,13 @@ func (s *SDK) GetPrivdir(ctx context.Context, request operations.GetPrivdirReque
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetPrivdir200ApplicationJSONString = out
+			out := string(data)
+			res.GetPrivdir200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -3037,12 +3075,13 @@ func (s *SDK) GetReadCommunity(ctx context.Context, request operations.GetReadCo
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetReadCommunity200ApplicationJSONString = out
+			out := string(data)
+			res.GetReadCommunity200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -3156,12 +3195,13 @@ func (s *SDK) GetSim(ctx context.Context, request operations.GetSimRequest) (*op
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetSim200ApplicationJSONString = out
+			out := string(data)
+			res.GetSim200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -3196,12 +3236,13 @@ func (s *SDK) GetStarttime(ctx context.Context, request operations.GetStarttimeR
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetStarttime200ApplicationJSONString = out
+			out := string(data)
+			res.GetStarttime200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -3236,12 +3277,13 @@ func (s *SDK) GetState(ctx context.Context, request operations.GetStateRequest) 
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetState200ApplicationJSONString = out
+			out := string(data)
+			res.GetState200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -3436,12 +3478,13 @@ func (s *SDK) GetValue(ctx context.Context, request operations.GetValueRequest) 
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetValue200ApplicationJSONString = out
+			out := string(data)
+			res.GetValue200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -3516,12 +3559,13 @@ func (s *SDK) GetVersion(ctx context.Context) (*operations.GetVersionResponse, e
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetVersion200ApplicationJSONString = out
+			out := string(data)
+			res.GetVersion200ApplicationJSONString = &out
 		}
 	}
 
@@ -3555,12 +3599,13 @@ func (s *SDK) GetWriteCommunity(ctx context.Context, request operations.GetWrite
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.GetWriteCommunity200ApplicationJSONString = out
+			out := string(data)
+			res.GetWriteCommunity200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -3595,12 +3640,13 @@ func (s *SDK) Halt(ctx context.Context, request operations.HaltRequest) (*operat
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Halt200ApplicationJSONString = out
+			out := string(data)
+			res.Halt200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -3761,12 +3807,13 @@ func (s *SDK) MsetValue(ctx context.Context, request operations.MsetValueRequest
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.MsetValue200ApplicationJSONString = out
+			out := string(data)
+			res.MsetValue200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -3807,12 +3854,13 @@ func (s *SDK) MunsetValue(ctx context.Context, request operations.MunsetValueReq
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.MunsetValue200ApplicationJSONString = out
+			out := string(data)
+			res.MunsetValue200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -3856,12 +3904,13 @@ func (s *SDK) New(ctx context.Context, request operations.NewRequest) (*operatio
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.New200ApplicationJSONString = out
+			out := string(data)
+			res.New200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -3896,12 +3945,13 @@ func (s *SDK) PauseNow(ctx context.Context, request operations.PauseNowRequest) 
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.PauseNow200ApplicationJSONString = out
+			out := string(data)
+			res.PauseNow200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -4136,12 +4186,13 @@ func (s *SDK) ProtocolCoapSetConfig(ctx context.Context, request operations.Prot
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ProtocolCoapSetConfig200ApplicationJSONString = out
+			out := string(data)
+			res.ProtocolCoapSetConfig200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -4176,12 +4227,13 @@ func (s *SDK) ProtocolCoapSetTrace(ctx context.Context, request operations.Proto
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ProtocolCoapSetTrace200ApplicationJSONString = out
+			out := string(data)
+			res.ProtocolCoapSetTrace200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -4456,12 +4508,13 @@ func (s *SDK) ProtocolDhcpSetConfig(ctx context.Context, request operations.Prot
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ProtocolDhcpSetConfig200ApplicationJSONString = out
+			out := string(data)
+			res.ProtocolDhcpSetConfig200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -4496,12 +4549,13 @@ func (s *SDK) ProtocolDhcpSetTrace(ctx context.Context, request operations.Proto
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ProtocolDhcpSetTrace200ApplicationJSONString = out
+			out := string(data)
+			res.ProtocolDhcpSetTrace200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -4616,12 +4670,13 @@ func (s *SDK) ProtocolIpmiGetAttr(ctx context.Context, request operations.Protoc
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ProtocolIpmiGetAttr200ApplicationJSONString = out
+			out := string(data)
+			res.ProtocolIpmiGetAttr200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -4816,12 +4871,13 @@ func (s *SDK) ProtocolIpmiSetAttr(ctx context.Context, request operations.Protoc
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ProtocolIpmiSetAttr200ApplicationJSONString = out
+			out := string(data)
+			res.ProtocolIpmiSetAttr200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -4856,12 +4912,13 @@ func (s *SDK) ProtocolIpmiSetConfig(ctx context.Context, request operations.Prot
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ProtocolIpmiSetConfig200ApplicationJSONString = out
+			out := string(data)
+			res.ProtocolIpmiSetConfig200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -4896,12 +4953,13 @@ func (s *SDK) ProtocolIpmiSetTrace(ctx context.Context, request operations.Proto
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ProtocolIpmiSetTrace200ApplicationJSONString = out
+			out := string(data)
+			res.ProtocolIpmiSetTrace200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -5136,12 +5194,13 @@ func (s *SDK) ProtocolMqttClientResubscribe(ctx context.Context, request operati
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ProtocolMqttClientResubscribe200ApplicationJSONString = out
+			out := string(data)
+			res.ProtocolMqttClientResubscribe200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -5896,12 +5955,13 @@ func (s *SDK) ProtocolMqttClientUnsubscribe(ctx context.Context, request operati
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ProtocolMqttClientUnsubscribe200ApplicationJSONString = out
+			out := string(data)
+			res.ProtocolMqttClientUnsubscribe200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -6136,12 +6196,13 @@ func (s *SDK) ProtocolMqttSetConfig(ctx context.Context, request operations.Prot
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ProtocolMqttSetConfig200ApplicationJSONString = out
+			out := string(data)
+			res.ProtocolMqttSetConfig200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -6176,12 +6237,13 @@ func (s *SDK) ProtocolMqttSetTrace(ctx context.Context, request operations.Proto
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ProtocolMqttSetTrace200ApplicationJSONString = out
+			out := string(data)
+			res.ProtocolMqttSetTrace200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -6216,12 +6278,13 @@ func (s *SDK) ProtocolNetflowChangeAttr(ctx context.Context, request operations.
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ProtocolNetflowChangeAttr200ApplicationJSONString = out
+			out := string(data)
+			res.ProtocolNetflowChangeAttr200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -6256,12 +6319,13 @@ func (s *SDK) ProtocolNetflowChangeDfs(ctx context.Context, request operations.P
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ProtocolNetflowChangeDfs200ApplicationJSONString = out
+			out := string(data)
+			res.ProtocolNetflowChangeDfs200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -6296,12 +6360,13 @@ func (s *SDK) ProtocolNetflowChangeTfs(ctx context.Context, request operations.P
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ProtocolNetflowChangeTfs200ApplicationJSONString = out
+			out := string(data)
+			res.ProtocolNetflowChangeTfs200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -6536,12 +6601,13 @@ func (s *SDK) ProtocolNetflowHalt(ctx context.Context, request operations.Protoc
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ProtocolNetflowHalt200ApplicationJSONString = out
+			out := string(data)
+			res.ProtocolNetflowHalt200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -6616,12 +6682,13 @@ func (s *SDK) ProtocolNetflowReload(ctx context.Context, request operations.Prot
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ProtocolNetflowReload200ApplicationJSONString = out
+			out := string(data)
+			res.ProtocolNetflowReload200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -6656,12 +6723,13 @@ func (s *SDK) ProtocolNetflowResume(ctx context.Context, request operations.Prot
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ProtocolNetflowResume200ApplicationJSONString = out
+			out := string(data)
+			res.ProtocolNetflowResume200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -6696,12 +6764,13 @@ func (s *SDK) ProtocolNetflowSetCollector(ctx context.Context, request operation
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ProtocolNetflowSetCollector200ApplicationJSONString = out
+			out := string(data)
+			res.ProtocolNetflowSetCollector200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -6736,12 +6805,13 @@ func (s *SDK) ProtocolNetflowSetConfig(ctx context.Context, request operations.P
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ProtocolNetflowSetConfig200ApplicationJSONString = out
+			out := string(data)
+			res.ProtocolNetflowSetConfig200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -6776,12 +6846,13 @@ func (s *SDK) ProtocolNetflowSetFileName(ctx context.Context, request operations
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ProtocolNetflowSetFileName200ApplicationJSONString = out
+			out := string(data)
+			res.ProtocolNetflowSetFileName200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -6816,12 +6887,13 @@ func (s *SDK) ProtocolNetflowSetTrace(ctx context.Context, request operations.Pr
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ProtocolNetflowSetTrace200ApplicationJSONString = out
+			out := string(data)
+			res.ProtocolNetflowSetTrace200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -7056,12 +7128,13 @@ func (s *SDK) ProtocolProxyPortAdd(ctx context.Context, request operations.Proto
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ProtocolProxyPortAdd200ApplicationJSONString = out
+			out := string(data)
+			res.ProtocolProxyPortAdd200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -7096,12 +7169,13 @@ func (s *SDK) ProtocolProxyPortIsstarted(ctx context.Context, request operations
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ProtocolProxyPortIsstarted200ApplicationJSONString = out
+			out := string(data)
+			res.ProtocolProxyPortIsstarted200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -7176,12 +7250,13 @@ func (s *SDK) ProtocolProxyPortRemove(ctx context.Context, request operations.Pr
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ProtocolProxyPortRemove200ApplicationJSONString = out
+			out := string(data)
+			res.ProtocolProxyPortRemove200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -7216,12 +7291,13 @@ func (s *SDK) ProtocolProxyPortStart(ctx context.Context, request operations.Pro
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ProtocolProxyPortStart200ApplicationJSONString = out
+			out := string(data)
+			res.ProtocolProxyPortStart200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -7256,12 +7332,13 @@ func (s *SDK) ProtocolProxyPortStop(ctx context.Context, request operations.Prot
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ProtocolProxyPortStop200ApplicationJSONString = out
+			out := string(data)
+			res.ProtocolProxyPortStop200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -7296,12 +7373,13 @@ func (s *SDK) ProtocolProxySetConfig(ctx context.Context, request operations.Pro
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ProtocolProxySetConfig200ApplicationJSONString = out
+			out := string(data)
+			res.ProtocolProxySetConfig200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -7336,12 +7414,13 @@ func (s *SDK) ProtocolProxySetTrace(ctx context.Context, request operations.Prot
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ProtocolProxySetTrace200ApplicationJSONString = out
+			out := string(data)
+			res.ProtocolProxySetTrace200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -7576,12 +7655,13 @@ func (s *SDK) ProtocolSflowHalt(ctx context.Context, request operations.Protocol
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ProtocolSflowHalt200ApplicationJSONString = out
+			out := string(data)
+			res.ProtocolSflowHalt200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -7616,12 +7696,13 @@ func (s *SDK) ProtocolSflowReload(ctx context.Context, request operations.Protoc
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ProtocolSflowReload200ApplicationJSONString = out
+			out := string(data)
+			res.ProtocolSflowReload200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -7656,12 +7737,13 @@ func (s *SDK) ProtocolSflowResume(ctx context.Context, request operations.Protoc
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ProtocolSflowResume200ApplicationJSONString = out
+			out := string(data)
+			res.ProtocolSflowResume200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -7696,12 +7778,13 @@ func (s *SDK) ProtocolSflowSetConfig(ctx context.Context, request operations.Pro
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ProtocolSflowSetConfig200ApplicationJSONString = out
+			out := string(data)
+			res.ProtocolSflowSetConfig200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -7736,12 +7819,13 @@ func (s *SDK) ProtocolSflowSetTrace(ctx context.Context, request operations.Prot
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ProtocolSflowSetTrace200ApplicationJSONString = out
+			out := string(data)
+			res.ProtocolSflowSetTrace200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -7976,12 +8060,13 @@ func (s *SDK) ProtocolSnmptcpIpaliasDisable(ctx context.Context, request operati
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ProtocolSnmptcpIpaliasDisable200ApplicationJSONString = out
+			out := string(data)
+			res.ProtocolSnmptcpIpaliasDisable200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -8016,12 +8101,13 @@ func (s *SDK) ProtocolSnmptcpIpaliasEnable(ctx context.Context, request operatio
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ProtocolSnmptcpIpaliasEnable200ApplicationJSONString = out
+			out := string(data)
+			res.ProtocolSnmptcpIpaliasEnable200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -8056,12 +8142,13 @@ func (s *SDK) ProtocolSnmptcpIpaliasIsenabled(ctx context.Context, request opera
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ProtocolSnmptcpIpaliasIsenabled200ApplicationJSONString = out
+			out := string(data)
+			res.ProtocolSnmptcpIpaliasIsenabled200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -8136,12 +8223,13 @@ func (s *SDK) ProtocolSnmptcpSetConfig(ctx context.Context, request operations.P
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ProtocolSnmptcpSetConfig200ApplicationJSONString = out
+			out := string(data)
+			res.ProtocolSnmptcpSetConfig200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -8176,12 +8264,13 @@ func (s *SDK) ProtocolSnmptcpSetTrace(ctx context.Context, request operations.Pr
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ProtocolSnmptcpSetTrace200ApplicationJSONString = out
+			out := string(data)
+			res.ProtocolSnmptcpSetTrace200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -8216,12 +8305,13 @@ func (s *SDK) ProtocolSnmpv3AccessAdd(ctx context.Context, request operations.Pr
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ProtocolSnmpv3AccessAdd200ApplicationJSONString = out
+			out := string(data)
+			res.ProtocolSnmpv3AccessAdd200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -8256,12 +8346,13 @@ func (s *SDK) ProtocolSnmpv3AccessClear(ctx context.Context, request operations.
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ProtocolSnmpv3AccessClear200ApplicationJSONString = out
+			out := string(data)
+			res.ProtocolSnmpv3AccessClear200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -8296,12 +8387,13 @@ func (s *SDK) ProtocolSnmpv3AccessDel(ctx context.Context, request operations.Pr
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ProtocolSnmpv3AccessDel200ApplicationJSONString = out
+			out := string(data)
+			res.ProtocolSnmpv3AccessDel200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -8416,12 +8508,13 @@ func (s *SDK) ProtocolSnmpv3GetContextEngineid(ctx context.Context, request oper
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ProtocolSnmpv3GetContextEngineid200ApplicationJSONString = out
+			out := string(data)
+			res.ProtocolSnmpv3GetContextEngineid200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -8496,12 +8589,13 @@ func (s *SDK) ProtocolSnmpv3GetEngineid(ctx context.Context, request operations.
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ProtocolSnmpv3GetEngineid200ApplicationJSONString = out
+			out := string(data)
+			res.ProtocolSnmpv3GetEngineid200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -8576,12 +8670,13 @@ func (s *SDK) ProtocolSnmpv3GroupAdd(ctx context.Context, request operations.Pro
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ProtocolSnmpv3GroupAdd200ApplicationJSONString = out
+			out := string(data)
+			res.ProtocolSnmpv3GroupAdd200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -8616,12 +8711,13 @@ func (s *SDK) ProtocolSnmpv3GroupClear(ctx context.Context, request operations.P
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ProtocolSnmpv3GroupClear200ApplicationJSONString = out
+			out := string(data)
+			res.ProtocolSnmpv3GroupClear200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -8656,12 +8752,13 @@ func (s *SDK) ProtocolSnmpv3GroupDel(ctx context.Context, request operations.Pro
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ProtocolSnmpv3GroupDel200ApplicationJSONString = out
+			out := string(data)
+			res.ProtocolSnmpv3GroupDel200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -8736,12 +8833,13 @@ func (s *SDK) ProtocolSnmpv3SetConfig(ctx context.Context, request operations.Pr
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ProtocolSnmpv3SetConfig200ApplicationJSONString = out
+			out := string(data)
+			res.ProtocolSnmpv3SetConfig200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -8776,12 +8874,13 @@ func (s *SDK) ProtocolSnmpv3UserAdd(ctx context.Context, request operations.Prot
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ProtocolSnmpv3UserAdd200ApplicationJSONString = out
+			out := string(data)
+			res.ProtocolSnmpv3UserAdd200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -8816,12 +8915,13 @@ func (s *SDK) ProtocolSnmpv3UserClear(ctx context.Context, request operations.Pr
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ProtocolSnmpv3UserClear200ApplicationJSONString = out
+			out := string(data)
+			res.ProtocolSnmpv3UserClear200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -8856,12 +8956,13 @@ func (s *SDK) ProtocolSnmpv3UserDel(ctx context.Context, request operations.Prot
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ProtocolSnmpv3UserDel200ApplicationJSONString = out
+			out := string(data)
+			res.ProtocolSnmpv3UserDel200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -9096,12 +9197,13 @@ func (s *SDK) ProtocolSnmpv3ViewAdd(ctx context.Context, request operations.Prot
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ProtocolSnmpv3ViewAdd200ApplicationJSONString = out
+			out := string(data)
+			res.ProtocolSnmpv3ViewAdd200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -9136,12 +9238,13 @@ func (s *SDK) ProtocolSnmpv3ViewClear(ctx context.Context, request operations.Pr
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ProtocolSnmpv3ViewClear200ApplicationJSONString = out
+			out := string(data)
+			res.ProtocolSnmpv3ViewClear200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -9176,12 +9279,13 @@ func (s *SDK) ProtocolSnmpv3ViewDel(ctx context.Context, request operations.Prot
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ProtocolSnmpv3ViewDel200ApplicationJSONString = out
+			out := string(data)
+			res.ProtocolSnmpv3ViewDel200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -9456,12 +9560,13 @@ func (s *SDK) ProtocolSSHIpaliasDisable(ctx context.Context, request operations.
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ProtocolSSHIpaliasDisable200ApplicationJSONString = out
+			out := string(data)
+			res.ProtocolSSHIpaliasDisable200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -9496,12 +9601,13 @@ func (s *SDK) ProtocolSSHIpaliasEnable(ctx context.Context, request operations.P
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ProtocolSSHIpaliasEnable200ApplicationJSONString = out
+			out := string(data)
+			res.ProtocolSSHIpaliasEnable200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -9536,12 +9642,13 @@ func (s *SDK) ProtocolSSHIpaliasIsenabled(ctx context.Context, request operation
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ProtocolSSHIpaliasIsenabled200ApplicationJSONString = out
+			out := string(data)
+			res.ProtocolSSHIpaliasIsenabled200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -9616,12 +9723,13 @@ func (s *SDK) ProtocolSSHSetConfig(ctx context.Context, request operations.Proto
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ProtocolSSHSetConfig200ApplicationJSONString = out
+			out := string(data)
+			res.ProtocolSSHSetConfig200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -9656,12 +9764,13 @@ func (s *SDK) ProtocolSSHSetTrace(ctx context.Context, request operations.Protoc
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ProtocolSSHSetTrace200ApplicationJSONString = out
+			out := string(data)
+			res.ProtocolSSHSetTrace200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -9736,12 +9845,13 @@ func (s *SDK) ProtocolSyslogGetAttr(ctx context.Context, request operations.Prot
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ProtocolSyslogGetAttr200ApplicationJSONString = out
+			out := string(data)
+			res.ProtocolSyslogGetAttr200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -9945,12 +10055,13 @@ func (s *SDK) ProtocolSyslogSend(ctx context.Context, request operations.Protoco
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ProtocolSyslogSend200ApplicationJSONString = out
+			out := string(data)
+			res.ProtocolSyslogSend200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -9985,12 +10096,13 @@ func (s *SDK) ProtocolSyslogSetAttr(ctx context.Context, request operations.Prot
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ProtocolSyslogSetAttr200ApplicationJSONString = out
+			out := string(data)
+			res.ProtocolSyslogSetAttr200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -10025,12 +10137,13 @@ func (s *SDK) ProtocolSyslogSetConfig(ctx context.Context, request operations.Pr
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ProtocolSyslogSetConfig200ApplicationJSONString = out
+			out := string(data)
+			res.ProtocolSyslogSetConfig200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -10065,12 +10178,13 @@ func (s *SDK) ProtocolSyslogSetTrace(ctx context.Context, request operations.Pro
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ProtocolSyslogSetTrace200ApplicationJSONString = out
+			out := string(data)
+			res.ProtocolSyslogSetTrace200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -10425,12 +10539,13 @@ func (s *SDK) ProtocolTelnetIpaliasDisable(ctx context.Context, request operatio
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ProtocolTelnetIpaliasDisable200ApplicationJSONString = out
+			out := string(data)
+			res.ProtocolTelnetIpaliasDisable200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -10465,12 +10580,13 @@ func (s *SDK) ProtocolTelnetIpaliasEnable(ctx context.Context, request operation
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ProtocolTelnetIpaliasEnable200ApplicationJSONString = out
+			out := string(data)
+			res.ProtocolTelnetIpaliasEnable200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -10505,12 +10621,13 @@ func (s *SDK) ProtocolTelnetIpaliasIsenabled(ctx context.Context, request operat
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ProtocolTelnetIpaliasIsenabled200ApplicationJSONString = out
+			out := string(data)
+			res.ProtocolTelnetIpaliasIsenabled200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -10825,12 +10942,13 @@ func (s *SDK) ProtocolTelnetSetConfig(ctx context.Context, request operations.Pr
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ProtocolTelnetSetConfig200ApplicationJSONString = out
+			out := string(data)
+			res.ProtocolTelnetSetConfig200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -10865,12 +10983,13 @@ func (s *SDK) ProtocolTelnetSetTrace(ctx context.Context, request operations.Pro
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ProtocolTelnetSetTrace200ApplicationJSONString = out
+			out := string(data)
+			res.ProtocolTelnetSetTrace200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -11105,12 +11224,13 @@ func (s *SDK) ProtocolTftpSessionGetParameter(ctx context.Context, request opera
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ProtocolTftpSessionGetParameter200ApplicationJSONString = out
+			out := string(data)
+			res.ProtocolTftpSessionGetParameter200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -11185,12 +11305,13 @@ func (s *SDK) ProtocolTftpSessionSetParameter(ctx context.Context, request opera
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ProtocolTftpSessionSetParameter200ApplicationJSONString = out
+			out := string(data)
+			res.ProtocolTftpSessionSetParameter200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -11225,12 +11346,13 @@ func (s *SDK) ProtocolTftpSessionStart(ctx context.Context, request operations.P
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ProtocolTftpSessionStart200ApplicationJSONString = out
+			out := string(data)
+			res.ProtocolTftpSessionStart200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -11265,12 +11387,13 @@ func (s *SDK) ProtocolTftpSessionStatus(ctx context.Context, request operations.
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ProtocolTftpSessionStatus200ApplicationJSONString = out
+			out := string(data)
+			res.ProtocolTftpSessionStatus200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -11305,12 +11428,13 @@ func (s *SDK) ProtocolTftpSessionStop(ctx context.Context, request operations.Pr
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ProtocolTftpSessionStop200ApplicationJSONString = out
+			out := string(data)
+			res.ProtocolTftpSessionStop200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -11385,12 +11509,13 @@ func (s *SDK) ProtocolTftpSetConfig(ctx context.Context, request operations.Prot
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ProtocolTftpSetConfig200ApplicationJSONString = out
+			out := string(data)
+			res.ProtocolTftpSetConfig200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -11425,12 +11550,13 @@ func (s *SDK) ProtocolTftpSetTrace(ctx context.Context, request operations.Proto
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ProtocolTftpSetTrace200ApplicationJSONString = out
+			out := string(data)
+			res.ProtocolTftpSetTrace200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -11705,12 +11831,13 @@ func (s *SDK) ProtocolTodSetConfig(ctx context.Context, request operations.Proto
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ProtocolTodSetConfig200ApplicationJSONString = out
+			out := string(data)
+			res.ProtocolTodSetConfig200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -11745,12 +11872,13 @@ func (s *SDK) ProtocolTodSetTrace(ctx context.Context, request operations.Protoc
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ProtocolTodSetTrace200ApplicationJSONString = out
+			out := string(data)
+			res.ProtocolTodSetTrace200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -11985,12 +12113,13 @@ func (s *SDK) ProtocolWebPortAdd(ctx context.Context, request operations.Protoco
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ProtocolWebPortAdd200ApplicationJSONString = out
+			out := string(data)
+			res.ProtocolWebPortAdd200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -12065,12 +12194,13 @@ func (s *SDK) ProtocolWebPortRemove(ctx context.Context, request operations.Prot
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ProtocolWebPortRemove200ApplicationJSONString = out
+			out := string(data)
+			res.ProtocolWebPortRemove200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -12105,12 +12235,13 @@ func (s *SDK) ProtocolWebPortSet(ctx context.Context, request operations.Protoco
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ProtocolWebPortSet200ApplicationJSONString = out
+			out := string(data)
+			res.ProtocolWebPortSet200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -12145,12 +12276,13 @@ func (s *SDK) ProtocolWebPortStart(ctx context.Context, request operations.Proto
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ProtocolWebPortStart200ApplicationJSONString = out
+			out := string(data)
+			res.ProtocolWebPortStart200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -12185,12 +12317,13 @@ func (s *SDK) ProtocolWebPortStop(ctx context.Context, request operations.Protoc
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ProtocolWebPortStop200ApplicationJSONString = out
+			out := string(data)
+			res.ProtocolWebPortStop200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -12225,12 +12358,13 @@ func (s *SDK) ProtocolWebSetConfig(ctx context.Context, request operations.Proto
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ProtocolWebSetConfig200ApplicationJSONString = out
+			out := string(data)
+			res.ProtocolWebSetConfig200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -12265,12 +12399,13 @@ func (s *SDK) ProtocolWebSetTrace(ctx context.Context, request operations.Protoc
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ProtocolWebSetTrace200ApplicationJSONString = out
+			out := string(data)
+			res.ProtocolWebSetTrace200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -12305,12 +12440,13 @@ func (s *SDK) Reload(ctx context.Context, request operations.ReloadRequest) (*op
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Reload200ApplicationJSONString = out
+			out := string(data)
+			res.Reload200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -12345,12 +12481,13 @@ func (s *SDK) Remove(ctx context.Context, request operations.RemoveRequest) (*op
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Remove200ApplicationJSONString = out
+			out := string(data)
+			res.Remove200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -12385,12 +12522,13 @@ func (s *SDK) Resume(ctx context.Context, request operations.ResumeRequest) (*op
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Resume200ApplicationJSONString = out
+			out := string(data)
+			res.Resume200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -12425,12 +12563,13 @@ func (s *SDK) Save(ctx context.Context, request operations.SaveRequest) (*operat
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Save200ApplicationJSONString = out
+			out := string(data)
+			res.Save200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -12545,12 +12684,13 @@ func (s *SDK) SetHost(ctx context.Context, request operations.SetHostRequest) (*
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.SetHost200ApplicationJSONString = out
+			out := string(data)
+			res.SetHost200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -12625,12 +12765,13 @@ func (s *SDK) SetInterface(ctx context.Context, request operations.SetInterfaceR
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.SetInterface200ApplicationJSONString = out
+			out := string(data)
+			res.SetInterface200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -12674,12 +12815,13 @@ func (s *SDK) SetLog(ctx context.Context, request operations.SetLogRequest) (*op
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.SetLog200ApplicationJSONString = out
+			out := string(data)
+			res.SetLog200ApplicationJSONString = &out
 		}
 	}
 
@@ -12713,12 +12855,13 @@ func (s *SDK) SetMask(ctx context.Context, request operations.SetMaskRequest) (*
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.SetMask200ApplicationJSONString = out
+			out := string(data)
+			res.SetMask200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -12762,12 +12905,13 @@ func (s *SDK) SetMibs(ctx context.Context, request operations.SetMibsRequest) (*
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.SetMibs200ApplicationJSONString = out
+			out := string(data)
+			res.SetMibs200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -12841,12 +12985,13 @@ func (s *SDK) SetOiddir(ctx context.Context, request operations.SetOiddirRequest
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.SetOiddir200ApplicationJSONString = out
+			out := string(data)
+			res.SetOiddir200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -12881,12 +13026,13 @@ func (s *SDK) SetOwner(ctx context.Context, request operations.SetOwnerRequest) 
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.SetOwner200ApplicationJSONString = out
+			out := string(data)
+			res.SetOwner200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -12961,12 +13107,13 @@ func (s *SDK) SetPort(ctx context.Context, request operations.SetPortRequest) (*
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.SetPort200ApplicationJSONString = out
+			out := string(data)
+			res.SetPort200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -13001,12 +13148,13 @@ func (s *SDK) SetPrivdir(ctx context.Context, request operations.SetPrivdirReque
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.SetPrivdir200ApplicationJSONString = out
+			out := string(data)
+			res.SetPrivdir200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -13090,12 +13238,13 @@ func (s *SDK) SetReadCommunity(ctx context.Context, request operations.SetReadCo
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.SetReadCommunity200ApplicationJSONString = out
+			out := string(data)
+			res.SetReadCommunity200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -13130,12 +13279,13 @@ func (s *SDK) SetStarttime(ctx context.Context, request operations.SetStarttimeR
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.SetStarttime200ApplicationJSONString = out
+			out := string(data)
+			res.SetStarttime200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -13170,12 +13320,13 @@ func (s *SDK) SetState(ctx context.Context, request operations.SetStateRequest) 
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.SetState200ApplicationJSONString = out
+			out := string(data)
+			res.SetState200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -13296,12 +13447,13 @@ func (s *SDK) SetValue(ctx context.Context, request operations.SetValueRequest) 
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.SetValue200ApplicationJSONString = out
+			out := string(data)
+			res.SetValue200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -13336,12 +13488,13 @@ func (s *SDK) SetWriteCommunity(ctx context.Context, request operations.SetWrite
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.SetWriteCommunity200ApplicationJSONString = out
+			out := string(data)
+			res.SetWriteCommunity200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -13416,12 +13569,13 @@ func (s *SDK) Start(ctx context.Context, request operations.StartRequest) (*oper
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Start200ApplicationJSONString = out
+			out := string(data)
+			res.Start200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -13495,12 +13649,13 @@ func (s *SDK) StartIpalias(ctx context.Context, request operations.StartIpaliasR
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.StartIpalias200ApplicationJSONString = out
+			out := string(data)
+			res.StartIpalias200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -13535,12 +13690,13 @@ func (s *SDK) StatusIpalias(ctx context.Context, request operations.StatusIpalia
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.StatusIpalias200ApplicationJSONString = out
+			out := string(data)
+			res.StatusIpalias200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -13575,12 +13731,13 @@ func (s *SDK) Stop(ctx context.Context, request operations.StopRequest) (*operat
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Stop200ApplicationJSONString = out
+			out := string(data)
+			res.Stop200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -13654,12 +13811,13 @@ func (s *SDK) StopIpalias(ctx context.Context, request operations.StopIpaliasReq
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.StopIpalias200ApplicationJSONString = out
+			out := string(data)
+			res.StopIpalias200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -13694,12 +13852,13 @@ func (s *SDK) StoreExists(ctx context.Context, request operations.StoreExistsReq
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.StoreExists200ApplicationJSONString = out
+			out := string(data)
+			res.StoreExists200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -13734,12 +13893,13 @@ func (s *SDK) StoreGet(ctx context.Context, request operations.StoreGetRequest) 
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.StoreGet200ApplicationJSONString = out
+			out := string(data)
+			res.StoreGet200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -13820,12 +13980,13 @@ func (s *SDK) StoreLreplace(ctx context.Context, request operations.StoreLreplac
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.StoreLreplace200ApplicationJSONString = out
+			out := string(data)
+			res.StoreLreplace200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -13860,12 +14021,13 @@ func (s *SDK) StorePersists(ctx context.Context, request operations.StorePersist
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.StorePersists200ApplicationJSONString = out
+			out := string(data)
+			res.StorePersists200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -13945,12 +14107,13 @@ func (s *SDK) StoreSet(ctx context.Context, request operations.StoreSetRequest) 
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.StoreSet200ApplicationJSONString = out
+			out := string(data)
+			res.StoreSet200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -13985,12 +14148,13 @@ func (s *SDK) StoreUnset(ctx context.Context, request operations.StoreUnsetReque
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.StoreUnset200ApplicationJSONString = out
+			out := string(data)
+			res.StoreUnset200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -14064,12 +14228,13 @@ func (s *SDK) TrapConfigAdd(ctx context.Context, request operations.TrapConfigAd
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.TrapConfigAdd200ApplicationJSONString = out
+			out := string(data)
+			res.TrapConfigAdd200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -14104,12 +14269,13 @@ func (s *SDK) TrapConfigDel(ctx context.Context, request operations.TrapConfigDe
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.TrapConfigDel200ApplicationJSONString = out
+			out := string(data)
+			res.TrapConfigDel200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}
@@ -14223,12 +14389,13 @@ func (s *SDK) UnsetValue(ctx context.Context, request operations.UnsetValueReque
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *string
-			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
-				return nil, err
+			data, err := io.ReadAll(httpRes.Body)
+			if err != nil {
+				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.UnsetValue200ApplicationJSONString = out
+			out := string(data)
+			res.UnsetValue200ApplicationJSONString = &out
 		}
 	case httpRes.StatusCode == 400:
 	}

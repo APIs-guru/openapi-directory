@@ -27,7 +27,7 @@ type ListConnectionPolicyTargetRequest struct {
 	Security    ListConnectionPolicyTargetSecurity
 }
 
-type ListConnectionPolicyTarget200ApplicationJSONMeta struct {
+type ListConnectionPolicyTargetListConnectionPolicyTargetResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -37,13 +37,13 @@ type ListConnectionPolicyTarget200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListConnectionPolicyTarget200ApplicationJSONListConnectionPolicyTargetResponse struct {
-	Meta    *ListConnectionPolicyTarget200ApplicationJSONMeta      `json:"meta,omitempty"`
-	Targets []shared.VoiceV1ConnectionPolicyConnectionPolicyTarget `json:"targets,omitempty"`
+type ListConnectionPolicyTargetListConnectionPolicyTargetResponse struct {
+	Meta    *ListConnectionPolicyTargetListConnectionPolicyTargetResponseMeta `json:"meta,omitempty"`
+	Targets []shared.VoiceV1ConnectionPolicyConnectionPolicyTarget            `json:"targets,omitempty"`
 }
 
 type ListConnectionPolicyTargetResponse struct {
 	ContentType                        string
-	ListConnectionPolicyTargetResponse *ListConnectionPolicyTarget200ApplicationJSONListConnectionPolicyTargetResponse
+	ListConnectionPolicyTargetResponse *ListConnectionPolicyTargetListConnectionPolicyTargetResponse
 	StatusCode                         int64
 }

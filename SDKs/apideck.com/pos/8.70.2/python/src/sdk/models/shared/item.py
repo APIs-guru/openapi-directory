@@ -6,13 +6,13 @@ from typing import Any,Enum,List,Optional
 from dataclasses_json import dataclass_json
 from . import currency_enum
 
-class ItemPricingTypePricingTypeEnum(str, Enum):
+class ItemPricingTypeEnum(str, Enum):
     FIXED = "fixed"
     VARIABLE = "variable"
     PER_UNIT = "per_unit"
     OTHER = "other"
 
-class ItemProductTypeProductTypeEnum(str, Enum):
+class ItemProductTypeEnum(str, Enum):
     REGULAR = "regular"
     OTHER = "other"
 
@@ -41,8 +41,8 @@ class Item:
     present_at_all_locations: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'present_at_all_locations' }})
     price_amount: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'price_amount' }})
     price_currency: Optional[currency_enum.CurrencyEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'price_currency' }})
-    pricing_type: Optional[ItemPricingTypePricingTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pricing_type' }})
-    product_type: Optional[ItemProductTypeProductTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'product_type' }})
+    pricing_type: Optional[ItemPricingTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pricing_type' }})
+    product_type: Optional[ItemProductTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'product_type' }})
     sku: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sku' }})
     tax_ids: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tax_ids' }})
     updated_at: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updated_at', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})

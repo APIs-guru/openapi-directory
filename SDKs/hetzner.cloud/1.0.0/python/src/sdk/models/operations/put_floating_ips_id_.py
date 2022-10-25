@@ -10,7 +10,7 @@ class PutFloatingIpsIDPathParams:
 
 @dataclass_json
 @dataclass
-class PutFloatingIpsIDRequestBodyUpdateFloatingIPRequest:
+class PutFloatingIpsIDUpdateFloatingIPRequest:
     description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
     labels: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'labels' }})
     name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
@@ -19,7 +19,7 @@ class PutFloatingIpsIDRequestBodyUpdateFloatingIPRequest:
 @dataclass
 class PutFloatingIpsIDRequest:
     path_params: PutFloatingIpsIDPathParams = field(default=None)
-    request: Optional[PutFloatingIpsIDRequestBodyUpdateFloatingIPRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: Optional[PutFloatingIpsIDUpdateFloatingIPRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass_json

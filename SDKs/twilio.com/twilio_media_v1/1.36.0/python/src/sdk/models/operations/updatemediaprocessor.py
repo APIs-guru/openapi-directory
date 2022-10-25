@@ -12,7 +12,7 @@ class UpdateMediaProcessorPathParams:
     
 
 @dataclass
-class UpdateMediaProcessorRequestBodyUpdateMediaProcessorRequest:
+class UpdateMediaProcessorUpdateMediaProcessorRequest:
     status: shared.MediaProcessorEnumUpdateStatusEnum = field(default=None, metadata={'form': { 'field_name': 'Status' }})
     
 
@@ -25,7 +25,7 @@ class UpdateMediaProcessorSecurity:
 class UpdateMediaProcessorRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateMediaProcessorPathParams = field(default=None)
-    request: Optional[UpdateMediaProcessorRequestBodyUpdateMediaProcessorRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateMediaProcessorUpdateMediaProcessorRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateMediaProcessorSecurity = field(default=None)
     
 

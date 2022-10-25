@@ -13,7 +13,7 @@ type UpdateOriginationURLPathParams struct {
 	TrunkSid string `pathParam:"style=simple,explode=false,name=TrunkSid"`
 }
 
-type UpdateOriginationURLRequestBodyUpdateOriginationURLRequest struct {
+type UpdateOriginationURLUpdateOriginationURLRequest struct {
 	Enabled      *bool   `form:"name=Enabled"`
 	FriendlyName *string `form:"name=FriendlyName"`
 	Priority     *int64  `form:"name=Priority"`
@@ -28,7 +28,7 @@ type UpdateOriginationURLSecurity struct {
 type UpdateOriginationURLRequest struct {
 	ServerURL  *string
 	PathParams UpdateOriginationURLPathParams
-	Request    *UpdateOriginationURLRequestBodyUpdateOriginationURLRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateOriginationURLUpdateOriginationURLRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateOriginationURLSecurity
 }
 

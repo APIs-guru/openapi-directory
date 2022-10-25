@@ -14,7 +14,7 @@ type UpdateSyncListPermissionPathParams struct {
 	ServiceSid string `pathParam:"style=simple,explode=false,name=ServiceSid"`
 }
 
-type UpdateSyncListPermissionRequestBodyUpdateSyncListPermissionRequest struct {
+type UpdateSyncListPermissionUpdateSyncListPermissionRequest struct {
 	Manage bool `form:"name=Manage"`
 	Read   bool `form:"name=Read"`
 	Write  bool `form:"name=Write"`
@@ -27,7 +27,7 @@ type UpdateSyncListPermissionSecurity struct {
 type UpdateSyncListPermissionRequest struct {
 	ServerURL  *string
 	PathParams UpdateSyncListPermissionPathParams
-	Request    *UpdateSyncListPermissionRequestBodyUpdateSyncListPermissionRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateSyncListPermissionUpdateSyncListPermissionRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateSyncListPermissionSecurity
 }
 

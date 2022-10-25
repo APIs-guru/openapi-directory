@@ -109,7 +109,7 @@ class SDK:
         res = operations.ListAppResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListApp200ApplicationJSONListAppResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListAppListAppResponse])
                 res.list_app_response = out
 
         return res
@@ -134,7 +134,7 @@ class SDK:
         res = operations.ListDeviceResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListDevice200ApplicationJSONListDeviceResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListDeviceListDeviceResponse])
                 res.list_device_response = out
 
         return res

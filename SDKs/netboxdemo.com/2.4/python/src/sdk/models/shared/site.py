@@ -10,7 +10,7 @@ from . import nestedtenant
 
 @dataclass_json
 @dataclass
-class SiteStatusStatus:
+class SiteStatus:
     label: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label' }})
     value: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
     
@@ -41,7 +41,7 @@ class Site:
     region: Optional[nestedregion.NestedRegion] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'region' }})
     shipping_address: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'shipping_address' }})
     slug: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'slug' }})
-    status: Optional[SiteStatusStatus] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    status: Optional[SiteStatus] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
     tags: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
     tenant: Optional[nestedtenant.NestedTenant] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tenant' }})
     time_zone: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'time_zone' }})

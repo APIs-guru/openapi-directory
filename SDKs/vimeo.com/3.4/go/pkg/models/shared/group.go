@@ -359,7 +359,7 @@ type GroupUserWebsites struct {
 	Name        string `json:"name"`
 }
 
-type GroupUserUser struct {
+type GroupUser struct {
 	Account       GroupUserAccountEnum  `json:"account"`
 	Bio           string                `json:"bio"`
 	ContentFilter []string              `json:"content_filter,omitempty"`
@@ -378,15 +378,15 @@ type GroupUserUser struct {
 }
 
 type Group struct {
-	CreatedTime  string         `json:"created_time"`
-	Description  string         `json:"description"`
-	Link         string         `json:"link"`
-	Metadata     GroupMetadata  `json:"metadata"`
-	ModifiedTime string         `json:"modified_time"`
-	Name         string         `json:"name"`
-	Pictures     Picture        `json:"pictures"`
-	Privacy      GroupPrivacy   `json:"privacy"`
-	ResourceKey  string         `json:"resource_key"`
-	URI          string         `json:"uri"`
-	User         *GroupUserUser `json:"user,omitempty"`
+	CreatedTime  string        `json:"created_time"`
+	Description  string        `json:"description"`
+	Link         string        `json:"link"`
+	Metadata     GroupMetadata `json:"metadata"`
+	ModifiedTime string        `json:"modified_time"`
+	Name         string        `json:"name"`
+	Pictures     Picture       `json:"pictures"`
+	Privacy      GroupPrivacy  `json:"privacy"`
+	ResourceKey  string        `json:"resource_key"`
+	URI          string        `json:"uri"`
+	User         *GroupUser    `json:"user,omitempty"`
 }

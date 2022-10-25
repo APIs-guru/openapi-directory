@@ -13,7 +13,7 @@ type UpdateRoomParticipantSubscribeRulePathParams struct {
 	RoomSid        string `pathParam:"style=simple,explode=false,name=RoomSid"`
 }
 
-type UpdateRoomParticipantSubscribeRuleRequestBodyUpdateRoomParticipantSubscribeRuleRequest struct {
+type UpdateRoomParticipantSubscribeRuleUpdateRoomParticipantSubscribeRuleRequest struct {
 	Rules *interface{} `form:"name=Rules"`
 }
 
@@ -24,7 +24,7 @@ type UpdateRoomParticipantSubscribeRuleSecurity struct {
 type UpdateRoomParticipantSubscribeRuleRequest struct {
 	ServerURL  *string
 	PathParams UpdateRoomParticipantSubscribeRulePathParams
-	Request    *UpdateRoomParticipantSubscribeRuleRequestBodyUpdateRoomParticipantSubscribeRuleRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateRoomParticipantSubscribeRuleUpdateRoomParticipantSubscribeRuleRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateRoomParticipantSubscribeRuleSecurity
 }
 

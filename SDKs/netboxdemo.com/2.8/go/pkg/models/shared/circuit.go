@@ -26,7 +26,7 @@ const (
 	CircuitStatusValueEnumDecommissioned CircuitStatusValueEnum = "decommissioned"
 )
 
-type CircuitStatusStatus struct {
+type CircuitStatus struct {
 	Label CircuitStatusLabelEnum `json:"label"`
 	Value CircuitStatusValueEnum `json:"value"`
 }
@@ -42,7 +42,7 @@ type Circuit struct {
 	InstallDate  *time.Time                 `json:"install_date,omitempty"`
 	LastUpdated  *time.Time                 `json:"last_updated,omitempty"`
 	Provider     NestedProvider             `json:"provider"`
-	Status       *CircuitStatusStatus       `json:"status,omitempty"`
+	Status       *CircuitStatus             `json:"status,omitempty"`
 	Tags         []string                   `json:"tags,omitempty"`
 	Tenant       *NestedTenant              `json:"tenant,omitempty"`
 	TerminationA *CircuitCircuitTermination `json:"termination_a,omitempty"`

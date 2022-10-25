@@ -13,35 +13,35 @@ type UpdateShortCodePathParams struct {
 	Sid        string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
-type UpdateShortCodeRequestBodySmsFallbackMethodEnum string
+type UpdateShortCodeUpdateShortCodeRequestSmsFallbackMethodEnum string
 
 const (
-	UpdateShortCodeRequestBodySmsFallbackMethodEnumHead   UpdateShortCodeRequestBodySmsFallbackMethodEnum = "HEAD"
-	UpdateShortCodeRequestBodySmsFallbackMethodEnumGet    UpdateShortCodeRequestBodySmsFallbackMethodEnum = "GET"
-	UpdateShortCodeRequestBodySmsFallbackMethodEnumPost   UpdateShortCodeRequestBodySmsFallbackMethodEnum = "POST"
-	UpdateShortCodeRequestBodySmsFallbackMethodEnumPatch  UpdateShortCodeRequestBodySmsFallbackMethodEnum = "PATCH"
-	UpdateShortCodeRequestBodySmsFallbackMethodEnumPut    UpdateShortCodeRequestBodySmsFallbackMethodEnum = "PUT"
-	UpdateShortCodeRequestBodySmsFallbackMethodEnumDelete UpdateShortCodeRequestBodySmsFallbackMethodEnum = "DELETE"
+	UpdateShortCodeUpdateShortCodeRequestSmsFallbackMethodEnumHead   UpdateShortCodeUpdateShortCodeRequestSmsFallbackMethodEnum = "HEAD"
+	UpdateShortCodeUpdateShortCodeRequestSmsFallbackMethodEnumGet    UpdateShortCodeUpdateShortCodeRequestSmsFallbackMethodEnum = "GET"
+	UpdateShortCodeUpdateShortCodeRequestSmsFallbackMethodEnumPost   UpdateShortCodeUpdateShortCodeRequestSmsFallbackMethodEnum = "POST"
+	UpdateShortCodeUpdateShortCodeRequestSmsFallbackMethodEnumPatch  UpdateShortCodeUpdateShortCodeRequestSmsFallbackMethodEnum = "PATCH"
+	UpdateShortCodeUpdateShortCodeRequestSmsFallbackMethodEnumPut    UpdateShortCodeUpdateShortCodeRequestSmsFallbackMethodEnum = "PUT"
+	UpdateShortCodeUpdateShortCodeRequestSmsFallbackMethodEnumDelete UpdateShortCodeUpdateShortCodeRequestSmsFallbackMethodEnum = "DELETE"
 )
 
-type UpdateShortCodeRequestBodySmsMethodEnum string
+type UpdateShortCodeUpdateShortCodeRequestSmsMethodEnum string
 
 const (
-	UpdateShortCodeRequestBodySmsMethodEnumHead   UpdateShortCodeRequestBodySmsMethodEnum = "HEAD"
-	UpdateShortCodeRequestBodySmsMethodEnumGet    UpdateShortCodeRequestBodySmsMethodEnum = "GET"
-	UpdateShortCodeRequestBodySmsMethodEnumPost   UpdateShortCodeRequestBodySmsMethodEnum = "POST"
-	UpdateShortCodeRequestBodySmsMethodEnumPatch  UpdateShortCodeRequestBodySmsMethodEnum = "PATCH"
-	UpdateShortCodeRequestBodySmsMethodEnumPut    UpdateShortCodeRequestBodySmsMethodEnum = "PUT"
-	UpdateShortCodeRequestBodySmsMethodEnumDelete UpdateShortCodeRequestBodySmsMethodEnum = "DELETE"
+	UpdateShortCodeUpdateShortCodeRequestSmsMethodEnumHead   UpdateShortCodeUpdateShortCodeRequestSmsMethodEnum = "HEAD"
+	UpdateShortCodeUpdateShortCodeRequestSmsMethodEnumGet    UpdateShortCodeUpdateShortCodeRequestSmsMethodEnum = "GET"
+	UpdateShortCodeUpdateShortCodeRequestSmsMethodEnumPost   UpdateShortCodeUpdateShortCodeRequestSmsMethodEnum = "POST"
+	UpdateShortCodeUpdateShortCodeRequestSmsMethodEnumPatch  UpdateShortCodeUpdateShortCodeRequestSmsMethodEnum = "PATCH"
+	UpdateShortCodeUpdateShortCodeRequestSmsMethodEnumPut    UpdateShortCodeUpdateShortCodeRequestSmsMethodEnum = "PUT"
+	UpdateShortCodeUpdateShortCodeRequestSmsMethodEnumDelete UpdateShortCodeUpdateShortCodeRequestSmsMethodEnum = "DELETE"
 )
 
-type UpdateShortCodeRequestBodyUpdateShortCodeRequest struct {
-	APIVersion        *string                                          `form:"name=ApiVersion"`
-	FriendlyName      *string                                          `form:"name=FriendlyName"`
-	SmsFallbackMethod *UpdateShortCodeRequestBodySmsFallbackMethodEnum `form:"name=SmsFallbackMethod"`
-	SmsFallbackURL    *string                                          `form:"name=SmsFallbackUrl"`
-	SmsMethod         *UpdateShortCodeRequestBodySmsMethodEnum         `form:"name=SmsMethod"`
-	SmsURL            *string                                          `form:"name=SmsUrl"`
+type UpdateShortCodeUpdateShortCodeRequest struct {
+	APIVersion        *string                                                     `form:"name=ApiVersion"`
+	FriendlyName      *string                                                     `form:"name=FriendlyName"`
+	SmsFallbackMethod *UpdateShortCodeUpdateShortCodeRequestSmsFallbackMethodEnum `form:"name=SmsFallbackMethod"`
+	SmsFallbackURL    *string                                                     `form:"name=SmsFallbackUrl"`
+	SmsMethod         *UpdateShortCodeUpdateShortCodeRequestSmsMethodEnum         `form:"name=SmsMethod"`
+	SmsURL            *string                                                     `form:"name=SmsUrl"`
 }
 
 type UpdateShortCodeSecurity struct {
@@ -51,7 +51,7 @@ type UpdateShortCodeSecurity struct {
 type UpdateShortCodeRequest struct {
 	ServerURL  *string
 	PathParams UpdateShortCodePathParams
-	Request    *UpdateShortCodeRequestBodyUpdateShortCodeRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateShortCodeUpdateShortCodeRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateShortCodeSecurity
 }
 

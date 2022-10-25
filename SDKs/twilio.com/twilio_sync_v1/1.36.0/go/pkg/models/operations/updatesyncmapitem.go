@@ -18,7 +18,7 @@ type UpdateSyncMapItemHeaders struct {
 	IfMatch *string `header:"name=If-Match"`
 }
 
-type UpdateSyncMapItemRequestBodyUpdateSyncMapItemRequest struct {
+type UpdateSyncMapItemUpdateSyncMapItemRequest struct {
 	CollectionTTL *int64       `form:"name=CollectionTtl"`
 	Data          *interface{} `form:"name=Data"`
 	ItemTTL       *int64       `form:"name=ItemTtl"`
@@ -33,7 +33,7 @@ type UpdateSyncMapItemRequest struct {
 	ServerURL  *string
 	PathParams UpdateSyncMapItemPathParams
 	Headers    UpdateSyncMapItemHeaders
-	Request    *UpdateSyncMapItemRequestBodyUpdateSyncMapItemRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateSyncMapItemUpdateSyncMapItemRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateSyncMapItemSecurity
 }
 

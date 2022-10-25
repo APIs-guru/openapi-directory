@@ -1,14 +1,14 @@
 package shared
 
-type InvoiceDataConversionStrategyConversionStrategyEnum string
+type InvoiceDataConversionStrategyEnum string
 
 const (
-	InvoiceDataConversionStrategyConversionStrategyEnumUbl  InvoiceDataConversionStrategyConversionStrategyEnum = "ubl"
-	InvoiceDataConversionStrategyConversionStrategyEnumCii  InvoiceDataConversionStrategyConversionStrategyEnum = "cii"
-	InvoiceDataConversionStrategyConversionStrategyEnumIdoc InvoiceDataConversionStrategyConversionStrategyEnum = "idoc"
+	InvoiceDataConversionStrategyEnumUbl  InvoiceDataConversionStrategyEnum = "ubl"
+	InvoiceDataConversionStrategyEnumCii  InvoiceDataConversionStrategyEnum = "cii"
+	InvoiceDataConversionStrategyEnumIdoc InvoiceDataConversionStrategyEnum = "idoc"
 )
 
 type InvoiceData struct {
-	ConversionStrategy *InvoiceDataConversionStrategyConversionStrategyEnum `json:"conversionStrategy,omitempty"`
-	Document           *string                                              `json:"document,omitempty"`
+	ConversionStrategy *InvoiceDataConversionStrategyEnum `json:"conversionStrategy,omitempty"`
+	Document           *string                            `json:"document,omitempty"`
 }

@@ -27,7 +27,7 @@ type ListCredentialListRequest struct {
 	Security    ListCredentialListSecurity
 }
 
-type ListCredentialList200ApplicationJSONMeta struct {
+type ListCredentialListListCredentialListResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -37,13 +37,13 @@ type ListCredentialList200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListCredentialList200ApplicationJSONListCredentialListResponse struct {
-	CredentialLists []shared.TrunkingV1TrunkCredentialList    `json:"credential_lists,omitempty"`
-	Meta            *ListCredentialList200ApplicationJSONMeta `json:"meta,omitempty"`
+type ListCredentialListListCredentialListResponse struct {
+	CredentialLists []shared.TrunkingV1TrunkCredentialList            `json:"credential_lists,omitempty"`
+	Meta            *ListCredentialListListCredentialListResponseMeta `json:"meta,omitempty"`
 }
 
 type ListCredentialListResponse struct {
 	ContentType                string
-	ListCredentialListResponse *ListCredentialList200ApplicationJSONListCredentialListResponse
+	ListCredentialListResponse *ListCredentialListListCredentialListResponse
 	StatusCode                 int64
 }

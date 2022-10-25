@@ -7,7 +7,7 @@ const (
 	ConsoleServerPortConnectionStatusLabelEnumConnected    ConsoleServerPortConnectionStatusLabelEnum = "Connected"
 )
 
-type ConsoleServerPortConnectionStatusConnectionStatus struct {
+type ConsoleServerPortConnectionStatus struct {
 	Label ConsoleServerPortConnectionStatusLabelEnum `json:"label"`
 	Value bool                                       `json:"value"`
 }
@@ -48,20 +48,20 @@ const (
 	ConsoleServerPortTypeValueEnumOther     ConsoleServerPortTypeValueEnum = "other"
 )
 
-type ConsoleServerPortTypeType struct {
+type ConsoleServerPortType struct {
 	Label ConsoleServerPortTypeLabelEnum `json:"label"`
 	Value ConsoleServerPortTypeValueEnum `json:"value"`
 }
 
 type ConsoleServerPort struct {
-	Cable                 *NestedCable                                       `json:"cable,omitempty"`
-	ConnectedEndpoint     map[string]string                                  `json:"connected_endpoint,omitempty"`
-	ConnectedEndpointType *string                                            `json:"connected_endpoint_type,omitempty"`
-	ConnectionStatus      *ConsoleServerPortConnectionStatusConnectionStatus `json:"connection_status,omitempty"`
-	Description           *string                                            `json:"description,omitempty"`
-	Device                NestedDevice                                       `json:"device"`
-	ID                    *int64                                             `json:"id,omitempty"`
-	Name                  string                                             `json:"name"`
-	Tags                  []string                                           `json:"tags,omitempty"`
-	Type                  *ConsoleServerPortTypeType                         `json:"type,omitempty"`
+	Cable                 *NestedCable                       `json:"cable,omitempty"`
+	ConnectedEndpoint     map[string]string                  `json:"connected_endpoint,omitempty"`
+	ConnectedEndpointType *string                            `json:"connected_endpoint_type,omitempty"`
+	ConnectionStatus      *ConsoleServerPortConnectionStatus `json:"connection_status,omitempty"`
+	Description           *string                            `json:"description,omitempty"`
+	Device                NestedDevice                       `json:"device"`
+	ID                    *int64                             `json:"id,omitempty"`
+	Name                  string                             `json:"name"`
+	Tags                  []string                           `json:"tags,omitempty"`
+	Type                  *ConsoleServerPortType             `json:"type,omitempty"`
 }

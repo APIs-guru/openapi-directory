@@ -4,7 +4,7 @@ import (
 	"time"
 )
 
-type ReportingInstructionReportingInstructionReportingInstruction struct {
+type ReportingInstructionReportingInstruction struct {
 	EndDate   *time.Time `json:"EndDate,omitempty"`
 	StartDate *time.Time `json:"StartDate,omitempty"`
 	TaxMonth  *int32     `json:"TaxMonth,omitempty"`
@@ -13,5 +13,5 @@ type ReportingInstructionReportingInstructionReportingInstruction struct {
 }
 
 type ReportingInstruction struct {
-	ReportingInstruction *ReportingInstructionReportingInstructionReportingInstruction `json:"ReportingInstruction,omitempty"`
+	ReportingInstruction *ReportingInstructionReportingInstruction `json:"ReportingInstruction,omitempty"`
 }

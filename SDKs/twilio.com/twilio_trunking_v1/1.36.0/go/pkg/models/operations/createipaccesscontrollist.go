@@ -12,7 +12,7 @@ type CreateIPAccessControlListPathParams struct {
 	TrunkSid string `pathParam:"style=simple,explode=false,name=TrunkSid"`
 }
 
-type CreateIPAccessControlListRequestBodyCreateIPAccessControlListRequest struct {
+type CreateIPAccessControlListCreateIPAccessControlListRequest struct {
 	IPAccessControlListSid string `form:"name=IpAccessControlListSid"`
 }
 
@@ -23,7 +23,7 @@ type CreateIPAccessControlListSecurity struct {
 type CreateIPAccessControlListRequest struct {
 	ServerURL  *string
 	PathParams CreateIPAccessControlListPathParams
-	Request    *CreateIPAccessControlListRequestBodyCreateIPAccessControlListRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateIPAccessControlListCreateIPAccessControlListRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateIPAccessControlListSecurity
 }
 

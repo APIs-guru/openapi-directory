@@ -18,7 +18,7 @@ class UpdateWorkerHeaders:
     
 
 @dataclass
-class UpdateWorkerRequestBodyUpdateWorkerRequest:
+class UpdateWorkerUpdateWorkerRequest:
     activity_sid: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'ActivitySid' }})
     attributes: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Attributes' }})
     friendly_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
@@ -35,7 +35,7 @@ class UpdateWorkerRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateWorkerPathParams = field(default=None)
     headers: UpdateWorkerHeaders = field(default=None)
-    request: Optional[UpdateWorkerRequestBodyUpdateWorkerRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateWorkerUpdateWorkerRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateWorkerSecurity = field(default=None)
     
 

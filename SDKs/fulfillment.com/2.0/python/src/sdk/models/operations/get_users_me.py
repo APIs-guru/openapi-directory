@@ -19,19 +19,19 @@ class GetUsersMeRequest:
 
 @dataclass_json
 @dataclass
-class GetUsersMe200ApplicationJSONContactInfoMerchant:
+class GetUsersMeUserContactV2UserContactV2Merchant:
     id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     
 
 @dataclass_json
 @dataclass
-class GetUsersMe200ApplicationJSONContactInfoUserContactV2:
+class GetUsersMeUserContactV2UserContactV2:
     api_key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'apiKey' }})
     contact_info: Optional[shared.OneordersPostResponses201ContentApplication1jsonSchemaPropertiesOriginalConsignee] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'contactInfo' }})
     create_date: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'createDate', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     dept_leader: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'deptLeader' }})
     id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    merchant: Optional[GetUsersMe200ApplicationJSONContactInfoMerchant] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'merchant' }})
+    merchant: Optional[GetUsersMeUserContactV2UserContactV2Merchant] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'merchant' }})
     name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
     status: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
     updated_at: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updatedAt', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
@@ -41,19 +41,19 @@ class GetUsersMe200ApplicationJSONContactInfoUserContactV2:
 
 @dataclass_json
 @dataclass
-class GetUsersMe200ApplicationJSONMerchant:
+class GetUsersMeUserContactV2Merchant:
     id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     
 
 @dataclass_json
 @dataclass
-class GetUsersMe200ApplicationJSONUserContactV2:
+class GetUsersMeUserContactV2:
     api_key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'apiKey' }})
-    contact_info: Optional[GetUsersMe200ApplicationJSONContactInfoUserContactV2] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'contactInfo' }})
+    contact_info: Optional[GetUsersMeUserContactV2UserContactV2] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'contactInfo' }})
     create_date: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'createDate', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     dept_leader: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'deptLeader' }})
     id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    merchant: Optional[GetUsersMe200ApplicationJSONMerchant] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'merchant' }})
+    merchant: Optional[GetUsersMeUserContactV2Merchant] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'merchant' }})
     name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
     status: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
     updated_at: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updatedAt', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
@@ -65,5 +65,5 @@ class GetUsersMe200ApplicationJSONUserContactV2:
 class GetUsersMeResponse:
     content_type: str = field(default=None)
     status_code: int = field(default=None)
-    user_contact_v2: Optional[GetUsersMe200ApplicationJSONUserContactV2] = field(default=None)
+    user_contact_v2: Optional[GetUsersMeUserContactV2] = field(default=None)
     

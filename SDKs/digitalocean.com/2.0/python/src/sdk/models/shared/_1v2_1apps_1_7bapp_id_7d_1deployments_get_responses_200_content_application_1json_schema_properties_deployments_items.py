@@ -29,11 +29,11 @@ class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplic
 
 @dataclass_json
 @dataclass
-class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsProgressStepsReason:
+class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsProgressAStepThatIsRunAsPartOfTheDeploymentSLifecycleReason:
     code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'code' }})
     message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'message' }})
     
-class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsProgressStepsStatusEnum(str, Enum):
+class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsProgressAStepThatIsRunAsPartOfTheDeploymentSLifecycleStatusEnum(str, Enum):
     UNKNOWN = "UNKNOWN"
     PENDING = "PENDING"
     RUNNING = "RUNNING"
@@ -43,14 +43,14 @@ class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplic
 
 @dataclass_json
 @dataclass
-class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsProgressStepsAStepThatIsRunAsPartOfTheDeploymentSLifecycle:
+class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsProgressAStepThatIsRunAsPartOfTheDeploymentSLifecycle:
     component_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'component_name' }})
     ended_at: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ended_at', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     message_base: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'message_base' }})
     name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    reason: Optional[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsProgressStepsReason] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'reason' }})
+    reason: Optional[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsProgressAStepThatIsRunAsPartOfTheDeploymentSLifecycleReason] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'reason' }})
     started_at: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'started_at', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    status: Optional[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsProgressStepsStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    status: Optional[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsProgressAStepThatIsRunAsPartOfTheDeploymentSLifecycleStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
     steps: Optional[List[dict[str, Any]]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'steps' }})
     
 
@@ -60,7 +60,7 @@ class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplic
     error_steps: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error_steps' }})
     pending_steps: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pending_steps' }})
     running_steps: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'running_steps' }})
-    steps: Optional[List[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsProgressStepsAStepThatIsRunAsPartOfTheDeploymentSLifecycle]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'steps' }})
+    steps: Optional[List[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsProgressAStepThatIsRunAsPartOfTheDeploymentSLifecycle]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'steps' }})
     success_steps: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'success_steps' }})
     summary_steps: Optional[List[_1v2_1apps_1_7bapp_id_7d_1deployments_get_responses_200_content_application_1json_schema_properties_deployments_items_properties_progress_properties_steps_items.Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesProgressPropertiesStepsItems]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'summary_steps' }})
     total_steps: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total_steps' }})
@@ -72,7 +72,7 @@ class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplic
     name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
     source_commit_hash: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'source_commit_hash' }})
     
-class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecDatabasesEngineEnum(str, Enum):
+class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecDatabasesEngineEnum(str, Enum):
     UNSET = "UNSET"
     MYSQL = "MYSQL"
     PG = "PG"
@@ -81,16 +81,16 @@ class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplic
 
 @dataclass_json
 @dataclass
-class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecDatabases:
+class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecDatabases:
     cluster_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cluster_name' }})
     db_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'db_name' }})
     db_user: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'db_user' }})
-    engine: Optional[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecDatabasesEngineEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'engine' }})
+    engine: Optional[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecDatabasesEngineEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'engine' }})
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
     production: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'production' }})
     version: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'version' }})
     
-class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecDomainsTypeEnum(str, Enum):
+class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecDomainsTypeEnum(str, Enum):
     UNSPECIFIED = "UNSPECIFIED"
     DEFAULT = "DEFAULT"
     PRIMARY = "PRIMARY"
@@ -99,42 +99,42 @@ class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplic
 
 @dataclass_json
 @dataclass
-class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecDomains:
+class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecDomains:
     domain: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'domain' }})
-    type: Optional[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecDomainsTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    type: Optional[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecDomainsTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     wildcard: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'wildcard' }})
     zone: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'zone' }})
     
-class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecJobsEnvsScopeEnum(str, Enum):
+class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecJobsEnvsScopeEnum(str, Enum):
     UNSET = "UNSET"
     RUN_TIME = "RUN_TIME"
     BUILD_TIME = "BUILD_TIME"
     RUN_AND_BUILD_TIME = "RUN_AND_BUILD_TIME"
 
-class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecJobsEnvsTypeEnum(str, Enum):
+class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecJobsEnvsTypeEnum(str, Enum):
     GENERAL = "GENERAL"
     SECRET = "SECRET"
 
 
 @dataclass_json
 @dataclass
-class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecJobsEnvs:
+class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecJobsEnvs:
     key: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
-    scope: Optional[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecJobsEnvsScopeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'scope' }})
-    type: Optional[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecJobsEnvsTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    scope: Optional[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecJobsEnvsScopeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'scope' }})
+    type: Optional[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecJobsEnvsTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     value: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
     
 
 @dataclass_json
 @dataclass
-class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecJobsGit:
+class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecJobsGit:
     branch: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'branch' }})
     repo_clone_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'repo_clone_url' }})
     
 
 @dataclass_json
 @dataclass
-class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecJobsGithub:
+class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecJobsGithub:
     branch: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'branch' }})
     deploy_on_push: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'deploy_on_push' }})
     repo: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'repo' }})
@@ -142,25 +142,25 @@ class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplic
 
 @dataclass_json
 @dataclass
-class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecJobsGitlab:
+class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecJobsGitlab:
     branch: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'branch' }})
     deploy_on_push: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'deploy_on_push' }})
     repo: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'repo' }})
     
-class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecJobsImageRegistryTypeEnum(str, Enum):
+class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecJobsImageRegistryTypeEnum(str, Enum):
     DOCKER_HUB = "DOCKER_HUB"
     DOCR = "DOCR"
 
 
 @dataclass_json
 @dataclass
-class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecJobsImage:
+class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecJobsImage:
     registry: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'registry' }})
-    registry_type: Optional[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecJobsImageRegistryTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'registry_type' }})
+    registry_type: Optional[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecJobsImageRegistryTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'registry_type' }})
     repository: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'repository' }})
     tag: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tag' }})
     
-class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecJobsInstanceSizeSlugEnum(str, Enum):
+class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecJobsInstanceSizeSlugEnum(str, Enum):
     BASIC_XXS = "basic-xxs"
     BASIC_XS = "basic-xs"
     BASIC_S = "basic-s"
@@ -172,7 +172,7 @@ class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplic
     PROFESSIONAL_L = "professional-l"
     PROFESSIONAL_XL = "professional-xl"
 
-class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecJobsKindEnum(str, Enum):
+class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecJobsKindEnum(str, Enum):
     UNSPECIFIED = "UNSPECIFIED"
     PRE_DEPLOY = "PRE_DEPLOY"
     POST_DEPLOY = "POST_DEPLOY"
@@ -181,23 +181,23 @@ class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplic
 
 @dataclass_json
 @dataclass
-class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecJobs:
+class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecJobs:
     build_command: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'build_command' }})
     dockerfile_path: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dockerfile_path' }})
     environment_slug: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'environment_slug' }})
-    envs: Optional[List[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecJobsEnvs]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'envs' }})
-    git: Optional[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecJobsGit] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'git' }})
-    github: Optional[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecJobsGithub] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'github' }})
-    gitlab: Optional[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecJobsGitlab] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'gitlab' }})
-    image: Optional[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecJobsImage] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'image' }})
+    envs: Optional[List[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecJobsEnvs]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'envs' }})
+    git: Optional[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecJobsGit] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'git' }})
+    github: Optional[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecJobsGithub] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'github' }})
+    gitlab: Optional[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecJobsGitlab] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'gitlab' }})
+    image: Optional[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecJobsImage] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'image' }})
     instance_count: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'instance_count' }})
-    instance_size_slug: Optional[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecJobsInstanceSizeSlugEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'instance_size_slug' }})
-    kind: Optional[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecJobsKindEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'kind' }})
+    instance_size_slug: Optional[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecJobsInstanceSizeSlugEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'instance_size_slug' }})
+    kind: Optional[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecJobsKindEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'kind' }})
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
     run_command: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'run_command' }})
     source_dir: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'source_dir' }})
     
-class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecRegionEnum(str, Enum):
+class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecRegionEnum(str, Enum):
     AMS = "ams"
     NYC = "nyc"
     FRA = "fra"
@@ -205,7 +205,7 @@ class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplic
 
 @dataclass_json
 @dataclass
-class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecServicesCorsAllowOrigins:
+class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecServicesCorsAllowOrigins:
     exact: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'exact' }})
     prefix: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'prefix' }})
     regex: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'regex' }})
@@ -213,44 +213,44 @@ class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplic
 
 @dataclass_json
 @dataclass
-class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecServicesCors:
+class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecServicesCors:
     allow_credentials: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'allow_credentials' }})
     allow_headers: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'allow_headers' }})
     allow_methods: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'allow_methods' }})
-    allow_origins: Optional[List[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecServicesCorsAllowOrigins]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'allow_origins' }})
+    allow_origins: Optional[List[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecServicesCorsAllowOrigins]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'allow_origins' }})
     expose_headers: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'expose_headers' }})
     max_age: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'max_age' }})
     
-class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecServicesEnvsScopeEnum(str, Enum):
+class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecServicesEnvsScopeEnum(str, Enum):
     UNSET = "UNSET"
     RUN_TIME = "RUN_TIME"
     BUILD_TIME = "BUILD_TIME"
     RUN_AND_BUILD_TIME = "RUN_AND_BUILD_TIME"
 
-class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecServicesEnvsTypeEnum(str, Enum):
+class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecServicesEnvsTypeEnum(str, Enum):
     GENERAL = "GENERAL"
     SECRET = "SECRET"
 
 
 @dataclass_json
 @dataclass
-class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecServicesEnvs:
+class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecServicesEnvs:
     key: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
-    scope: Optional[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecServicesEnvsScopeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'scope' }})
-    type: Optional[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecServicesEnvsTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    scope: Optional[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecServicesEnvsScopeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'scope' }})
+    type: Optional[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecServicesEnvsTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     value: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
     
 
 @dataclass_json
 @dataclass
-class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecServicesGit:
+class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecServicesGit:
     branch: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'branch' }})
     repo_clone_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'repo_clone_url' }})
     
 
 @dataclass_json
 @dataclass
-class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecServicesGithub:
+class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecServicesGithub:
     branch: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'branch' }})
     deploy_on_push: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'deploy_on_push' }})
     repo: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'repo' }})
@@ -258,7 +258,7 @@ class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplic
 
 @dataclass_json
 @dataclass
-class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecServicesGitlab:
+class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecServicesGitlab:
     branch: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'branch' }})
     deploy_on_push: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'deploy_on_push' }})
     repo: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'repo' }})
@@ -266,7 +266,7 @@ class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplic
 
 @dataclass_json
 @dataclass
-class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecServicesHealthCheck:
+class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecServicesHealthCheck:
     failure_threshold: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'failure_threshold' }})
     http_path: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'http_path' }})
     initial_delay_seconds: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'initial_delay_seconds' }})
@@ -274,20 +274,20 @@ class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplic
     success_threshold: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'success_threshold' }})
     timeout_seconds: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'timeout_seconds' }})
     
-class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecServicesImageRegistryTypeEnum(str, Enum):
+class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecServicesImageRegistryTypeEnum(str, Enum):
     DOCKER_HUB = "DOCKER_HUB"
     DOCR = "DOCR"
 
 
 @dataclass_json
 @dataclass
-class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecServicesImage:
+class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecServicesImage:
     registry: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'registry' }})
-    registry_type: Optional[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecServicesImageRegistryTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'registry_type' }})
+    registry_type: Optional[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecServicesImageRegistryTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'registry_type' }})
     repository: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'repository' }})
     tag: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tag' }})
     
-class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecServicesInstanceSizeSlugEnum(str, Enum):
+class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecServicesInstanceSizeSlugEnum(str, Enum):
     BASIC_XXS = "basic-xxs"
     BASIC_XS = "basic-xs"
     BASIC_S = "basic-s"
@@ -302,62 +302,62 @@ class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplic
 
 @dataclass_json
 @dataclass
-class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecServicesRoutesACriterionForRoutingHTTPTrafficToAComponent:
+class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecServicesACriterionForRoutingHTTPTrafficToAComponent:
     path: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'path' }})
     
 
 @dataclass_json
 @dataclass
-class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecServices:
+class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecServices:
     build_command: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'build_command' }})
-    cors: Optional[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecServicesCors] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cors' }})
+    cors: Optional[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecServicesCors] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cors' }})
     dockerfile_path: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dockerfile_path' }})
     environment_slug: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'environment_slug' }})
-    envs: Optional[List[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecServicesEnvs]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'envs' }})
-    git: Optional[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecServicesGit] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'git' }})
-    github: Optional[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecServicesGithub] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'github' }})
-    gitlab: Optional[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecServicesGitlab] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'gitlab' }})
-    health_check: Optional[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecServicesHealthCheck] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'health_check' }})
+    envs: Optional[List[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecServicesEnvs]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'envs' }})
+    git: Optional[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecServicesGit] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'git' }})
+    github: Optional[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecServicesGithub] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'github' }})
+    gitlab: Optional[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecServicesGitlab] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'gitlab' }})
+    health_check: Optional[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecServicesHealthCheck] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'health_check' }})
     http_port: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'http_port' }})
-    image: Optional[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecServicesImage] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'image' }})
+    image: Optional[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecServicesImage] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'image' }})
     instance_count: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'instance_count' }})
-    instance_size_slug: Optional[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecServicesInstanceSizeSlugEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'instance_size_slug' }})
+    instance_size_slug: Optional[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecServicesInstanceSizeSlugEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'instance_size_slug' }})
     internal_ports: Optional[List[int]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'internal_ports' }})
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    routes: Optional[List[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecServicesRoutesACriterionForRoutingHTTPTrafficToAComponent]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'routes' }})
+    routes: Optional[List[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecServicesACriterionForRoutingHTTPTrafficToAComponent]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'routes' }})
     run_command: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'run_command' }})
     source_dir: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'source_dir' }})
     
-class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecStaticSitesEnvsScopeEnum(str, Enum):
+class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecStaticSitesEnvsScopeEnum(str, Enum):
     UNSET = "UNSET"
     RUN_TIME = "RUN_TIME"
     BUILD_TIME = "BUILD_TIME"
     RUN_AND_BUILD_TIME = "RUN_AND_BUILD_TIME"
 
-class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecStaticSitesEnvsTypeEnum(str, Enum):
+class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecStaticSitesEnvsTypeEnum(str, Enum):
     GENERAL = "GENERAL"
     SECRET = "SECRET"
 
 
 @dataclass_json
 @dataclass
-class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecStaticSitesEnvs:
+class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecStaticSitesEnvs:
     key: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
-    scope: Optional[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecStaticSitesEnvsScopeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'scope' }})
-    type: Optional[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecStaticSitesEnvsTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    scope: Optional[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecStaticSitesEnvsScopeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'scope' }})
+    type: Optional[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecStaticSitesEnvsTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     value: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
     
 
 @dataclass_json
 @dataclass
-class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecStaticSitesGit:
+class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecStaticSitesGit:
     branch: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'branch' }})
     repo_clone_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'repo_clone_url' }})
     
 
 @dataclass_json
 @dataclass
-class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecStaticSitesGithub:
+class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecStaticSitesGithub:
     branch: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'branch' }})
     deploy_on_push: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'deploy_on_push' }})
     repo: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'repo' }})
@@ -365,39 +365,39 @@ class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplic
 
 @dataclass_json
 @dataclass
-class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecStaticSitesGitlab:
+class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecStaticSitesGitlab:
     branch: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'branch' }})
     deploy_on_push: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'deploy_on_push' }})
     repo: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'repo' }})
     
-class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecStaticSitesImageRegistryTypeEnum(str, Enum):
+class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecStaticSitesImageRegistryTypeEnum(str, Enum):
     DOCKER_HUB = "DOCKER_HUB"
     DOCR = "DOCR"
 
 
 @dataclass_json
 @dataclass
-class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecStaticSitesImage:
+class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecStaticSitesImage:
     registry: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'registry' }})
-    registry_type: Optional[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecStaticSitesImageRegistryTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'registry_type' }})
+    registry_type: Optional[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecStaticSitesImageRegistryTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'registry_type' }})
     repository: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'repository' }})
     tag: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tag' }})
     
 
 @dataclass_json
 @dataclass
-class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecStaticSites:
+class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecStaticSites:
     build_command: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'build_command' }})
     catchall_document: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'catchall_document' }})
     cors: Optional[_1v2_1apps_1_7bapp_id_7d_1deployments_get_responses_200_content_application_1json_schema_properties_deployments_items_properties_spec_properties_services_items_allof_2_properties_cors.Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecPropertiesServicesItemsAllOf2PropertiesCors] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cors' }})
     dockerfile_path: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dockerfile_path' }})
     environment_slug: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'environment_slug' }})
-    envs: Optional[List[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecStaticSitesEnvs]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'envs' }})
+    envs: Optional[List[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecStaticSitesEnvs]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'envs' }})
     error_document: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error_document' }})
-    git: Optional[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecStaticSitesGit] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'git' }})
-    github: Optional[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecStaticSitesGithub] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'github' }})
-    gitlab: Optional[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecStaticSitesGitlab] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'gitlab' }})
-    image: Optional[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecStaticSitesImage] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'image' }})
+    git: Optional[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecStaticSitesGit] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'git' }})
+    github: Optional[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecStaticSitesGithub] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'github' }})
+    gitlab: Optional[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecStaticSitesGitlab] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'gitlab' }})
+    image: Optional[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecStaticSitesImage] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'image' }})
     index_document: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'index_document' }})
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
     output_dir: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'output_dir' }})
@@ -405,36 +405,36 @@ class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplic
     run_command: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'run_command' }})
     source_dir: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'source_dir' }})
     
-class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecWorkersEnvsScopeEnum(str, Enum):
+class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecWorkersEnvsScopeEnum(str, Enum):
     UNSET = "UNSET"
     RUN_TIME = "RUN_TIME"
     BUILD_TIME = "BUILD_TIME"
     RUN_AND_BUILD_TIME = "RUN_AND_BUILD_TIME"
 
-class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecWorkersEnvsTypeEnum(str, Enum):
+class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecWorkersEnvsTypeEnum(str, Enum):
     GENERAL = "GENERAL"
     SECRET = "SECRET"
 
 
 @dataclass_json
 @dataclass
-class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecWorkersEnvs:
+class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecWorkersEnvs:
     key: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
-    scope: Optional[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecWorkersEnvsScopeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'scope' }})
-    type: Optional[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecWorkersEnvsTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    scope: Optional[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecWorkersEnvsScopeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'scope' }})
+    type: Optional[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecWorkersEnvsTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     value: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
     
 
 @dataclass_json
 @dataclass
-class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecWorkersGit:
+class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecWorkersGit:
     branch: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'branch' }})
     repo_clone_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'repo_clone_url' }})
     
 
 @dataclass_json
 @dataclass
-class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecWorkersGithub:
+class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecWorkersGithub:
     branch: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'branch' }})
     deploy_on_push: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'deploy_on_push' }})
     repo: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'repo' }})
@@ -442,25 +442,25 @@ class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplic
 
 @dataclass_json
 @dataclass
-class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecWorkersGitlab:
+class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecWorkersGitlab:
     branch: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'branch' }})
     deploy_on_push: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'deploy_on_push' }})
     repo: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'repo' }})
     
-class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecWorkersImageRegistryTypeEnum(str, Enum):
+class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecWorkersImageRegistryTypeEnum(str, Enum):
     DOCKER_HUB = "DOCKER_HUB"
     DOCR = "DOCR"
 
 
 @dataclass_json
 @dataclass
-class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecWorkersImage:
+class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecWorkersImage:
     registry: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'registry' }})
-    registry_type: Optional[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecWorkersImageRegistryTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'registry_type' }})
+    registry_type: Optional[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecWorkersImageRegistryTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'registry_type' }})
     repository: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'repository' }})
     tag: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tag' }})
     
-class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecWorkersInstanceSizeSlugEnum(str, Enum):
+class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecWorkersInstanceSizeSlugEnum(str, Enum):
     BASIC_XXS = "basic-xxs"
     BASIC_XS = "basic-xs"
     BASIC_S = "basic-s"
@@ -475,17 +475,17 @@ class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplic
 
 @dataclass_json
 @dataclass
-class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecWorkers:
+class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecWorkers:
     build_command: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'build_command' }})
     dockerfile_path: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dockerfile_path' }})
     environment_slug: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'environment_slug' }})
-    envs: Optional[List[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecWorkersEnvs]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'envs' }})
-    git: Optional[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecWorkersGit] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'git' }})
-    github: Optional[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecWorkersGithub] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'github' }})
-    gitlab: Optional[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecWorkersGitlab] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'gitlab' }})
-    image: Optional[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecWorkersImage] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'image' }})
+    envs: Optional[List[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecWorkersEnvs]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'envs' }})
+    git: Optional[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecWorkersGit] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'git' }})
+    github: Optional[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecWorkersGithub] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'github' }})
+    gitlab: Optional[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecWorkersGitlab] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'gitlab' }})
+    image: Optional[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecWorkersImage] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'image' }})
     instance_count: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'instance_count' }})
-    instance_size_slug: Optional[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecWorkersInstanceSizeSlugEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'instance_size_slug' }})
+    instance_size_slug: Optional[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecWorkersInstanceSizeSlugEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'instance_size_slug' }})
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
     run_command: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'run_command' }})
     source_dir: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'source_dir' }})
@@ -493,15 +493,15 @@ class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplic
 
 @dataclass_json
 @dataclass
-class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecAppSpec:
-    databases: Optional[List[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecDatabases]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'databases' }})
-    domains: Optional[List[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecDomains]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'domains' }})
-    jobs: Optional[List[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecJobs]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'jobs' }})
+class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpec:
+    databases: Optional[List[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecDatabases]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'databases' }})
+    domains: Optional[List[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecDomains]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'domains' }})
+    jobs: Optional[List[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecJobs]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'jobs' }})
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    region: Optional[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecRegionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'region' }})
-    services: Optional[List[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecServices]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'services' }})
-    static_sites: Optional[List[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecStaticSites]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'static_sites' }})
-    workers: Optional[List[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecWorkers]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'workers' }})
+    region: Optional[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecRegionEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'region' }})
+    services: Optional[List[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecServices]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'services' }})
+    static_sites: Optional[List[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecStaticSites]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'static_sites' }})
+    workers: Optional[List[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpecWorkers]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'workers' }})
     
 
 @dataclass_json
@@ -530,7 +530,7 @@ class Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplic
     phase_last_updated_at: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'phase_last_updated_at', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     progress: Optional[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsProgress] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'progress' }})
     services: Optional[List[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsServices]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'services' }})
-    spec: Optional[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsSpecAppSpec] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'spec' }})
+    spec: Optional[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsAppSpec] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'spec' }})
     static_sites: Optional[List[Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsStaticSites]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'static_sites' }})
     tier_slug: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tier_slug' }})
     updated_at: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updated_at', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})

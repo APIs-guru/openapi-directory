@@ -5,14 +5,14 @@ import dateutil.parser
 from typing import Any,Enum,Optional
 from dataclasses_json import dataclass_json
 
-class TaskStateStateEnum(str, Enum):
+class TaskStateEnum(str, Enum):
     PENDING = "pending"
     QUEUED = "queued"
     RUNNING = "running"
     TIMEDOUT = "timedout"
     COMPLETED = "completed"
 
-class TaskStatusStatusEnum(str, Enum):
+class TaskStatusEnum(str, Enum):
     OK = "ok"
     WARN = "warn"
     UNCHANGED = "unchanged"
@@ -34,8 +34,8 @@ class Task:
     output: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'output' }})
     owner: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'owner' }})
     source_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'source_id' }})
-    state: Optional[TaskStateStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'state' }})
-    status: Optional[TaskStatusStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    state: Optional[TaskStateEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'state' }})
+    status: Optional[TaskStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
     target_source_ref: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'target_source_ref' }})
     target_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'target_type' }})
     type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})

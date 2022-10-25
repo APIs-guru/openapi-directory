@@ -16,7 +16,7 @@ type CreateUserHeaders struct {
 	XTwilioWebhookEnabled *shared.UserEnumWebhookEnabledTypeEnum `header:"name=X-Twilio-Webhook-Enabled"`
 }
 
-type CreateUserRequestBodyCreateUserRequest struct {
+type CreateUserCreateUserRequest struct {
 	Attributes   *string `form:"name=Attributes"`
 	FriendlyName *string `form:"name=FriendlyName"`
 	Identity     string  `form:"name=Identity"`
@@ -31,7 +31,7 @@ type CreateUserRequest struct {
 	ServerURL  *string
 	PathParams CreateUserPathParams
 	Headers    CreateUserHeaders
-	Request    *CreateUserRequestBodyCreateUserRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateUserCreateUserRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateUserSecurity
 }
 

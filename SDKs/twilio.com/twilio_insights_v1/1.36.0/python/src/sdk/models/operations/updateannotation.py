@@ -12,7 +12,7 @@ class UpdateAnnotationPathParams:
     
 
 @dataclass
-class UpdateAnnotationRequestBodyUpdateAnnotationRequest:
+class UpdateAnnotationUpdateAnnotationRequest:
     answered_by: Optional[shared.AnnotationEnumAnsweredByEnum] = field(default=None, metadata={'form': { 'field_name': 'AnsweredBy' }})
     call_score: Optional[int] = field(default=None, metadata={'form': { 'field_name': 'CallScore' }})
     comment: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Comment' }})
@@ -31,7 +31,7 @@ class UpdateAnnotationSecurity:
 class UpdateAnnotationRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateAnnotationPathParams = field(default=None)
-    request: Optional[UpdateAnnotationRequestBodyUpdateAnnotationRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateAnnotationUpdateAnnotationRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateAnnotationSecurity = field(default=None)
     
 

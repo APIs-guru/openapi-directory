@@ -12,7 +12,7 @@ class CreateCustomerProfileEntityAssignmentPathParams:
     
 
 @dataclass
-class CreateCustomerProfileEntityAssignmentRequestBodyCreateCustomerProfileEntityAssignmentRequest:
+class CreateCustomerProfileEntityAssignmentCreateCustomerProfileEntityAssignmentRequest:
     object_sid: str = field(default=None, metadata={'form': { 'field_name': 'ObjectSid' }})
     
 
@@ -25,7 +25,7 @@ class CreateCustomerProfileEntityAssignmentSecurity:
 class CreateCustomerProfileEntityAssignmentRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateCustomerProfileEntityAssignmentPathParams = field(default=None)
-    request: Optional[CreateCustomerProfileEntityAssignmentRequestBodyCreateCustomerProfileEntityAssignmentRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateCustomerProfileEntityAssignmentCreateCustomerProfileEntityAssignmentRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateCustomerProfileEntityAssignmentSecurity = field(default=None)
     
 

@@ -15,49 +15,49 @@ class GetFirewallsIDRequest:
 
 @dataclass_json
 @dataclass
-class GetFirewallsID200ApplicationJSONFirewallAppliedToAppliedToResourcesServer:
+class GetFirewallsIDFirewallResponseFirewallAppliedToAppliedToResourcesServer:
     id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     
-class GetFirewallsID200ApplicationJSONFirewallAppliedToAppliedToResourcesTypeEnum(str, Enum):
+class GetFirewallsIDFirewallResponseFirewallAppliedToAppliedToResourcesTypeEnum(str, Enum):
     SERVER = "server"
 
 
 @dataclass_json
 @dataclass
-class GetFirewallsID200ApplicationJSONFirewallAppliedToAppliedToResources:
-    server: Optional[GetFirewallsID200ApplicationJSONFirewallAppliedToAppliedToResourcesServer] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'server' }})
-    type: Optional[GetFirewallsID200ApplicationJSONFirewallAppliedToAppliedToResourcesTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+class GetFirewallsIDFirewallResponseFirewallAppliedToAppliedToResources:
+    server: Optional[GetFirewallsIDFirewallResponseFirewallAppliedToAppliedToResourcesServer] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'server' }})
+    type: Optional[GetFirewallsIDFirewallResponseFirewallAppliedToAppliedToResourcesTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     
 
 @dataclass_json
 @dataclass
-class GetFirewallsID200ApplicationJSONFirewallAppliedToLabelSelector:
+class GetFirewallsIDFirewallResponseFirewallAppliedToLabelSelector:
     selector: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'selector' }})
     
 
 @dataclass_json
 @dataclass
-class GetFirewallsID200ApplicationJSONFirewallAppliedToServer:
+class GetFirewallsIDFirewallResponseFirewallAppliedToServer:
     id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     
-class GetFirewallsID200ApplicationJSONFirewallAppliedToTypeEnum(str, Enum):
+class GetFirewallsIDFirewallResponseFirewallAppliedToTypeEnum(str, Enum):
     SERVER = "server"
     LABEL_SELECTOR = "label_selector"
 
 
 @dataclass_json
 @dataclass
-class GetFirewallsID200ApplicationJSONFirewallAppliedTo:
-    applied_to_resources: Optional[List[GetFirewallsID200ApplicationJSONFirewallAppliedToAppliedToResources]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'applied_to_resources' }})
-    label_selector: Optional[GetFirewallsID200ApplicationJSONFirewallAppliedToLabelSelector] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label_selector' }})
-    server: Optional[GetFirewallsID200ApplicationJSONFirewallAppliedToServer] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'server' }})
-    type: GetFirewallsID200ApplicationJSONFirewallAppliedToTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+class GetFirewallsIDFirewallResponseFirewallAppliedTo:
+    applied_to_resources: Optional[List[GetFirewallsIDFirewallResponseFirewallAppliedToAppliedToResources]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'applied_to_resources' }})
+    label_selector: Optional[GetFirewallsIDFirewallResponseFirewallAppliedToLabelSelector] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label_selector' }})
+    server: Optional[GetFirewallsIDFirewallResponseFirewallAppliedToServer] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'server' }})
+    type: GetFirewallsIDFirewallResponseFirewallAppliedToTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     
-class GetFirewallsID200ApplicationJSONFirewallRulesDirectionEnum(str, Enum):
+class GetFirewallsIDFirewallResponseFirewallRuleDirectionEnum(str, Enum):
     IN = "in"
     OUT = "out"
 
-class GetFirewallsID200ApplicationJSONFirewallRulesProtocolEnum(str, Enum):
+class GetFirewallsIDFirewallResponseFirewallRuleProtocolEnum(str, Enum):
     TCP = "tcp"
     UDP = "udp"
     ICMP = "icmp"
@@ -67,35 +67,35 @@ class GetFirewallsID200ApplicationJSONFirewallRulesProtocolEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class GetFirewallsID200ApplicationJSONFirewallRulesRule:
+class GetFirewallsIDFirewallResponseFirewallRule:
     description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
     destination_ips: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'destination_ips' }})
-    direction: GetFirewallsID200ApplicationJSONFirewallRulesDirectionEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'direction' }})
+    direction: GetFirewallsIDFirewallResponseFirewallRuleDirectionEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'direction' }})
     port: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'port' }})
-    protocol: GetFirewallsID200ApplicationJSONFirewallRulesProtocolEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'protocol' }})
+    protocol: GetFirewallsIDFirewallResponseFirewallRuleProtocolEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'protocol' }})
     source_ips: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'source_ips' }})
     
 
 @dataclass_json
 @dataclass
-class GetFirewallsID200ApplicationJSONFirewallFirewall:
-    applied_to: List[GetFirewallsID200ApplicationJSONFirewallAppliedTo] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'applied_to' }})
+class GetFirewallsIDFirewallResponseFirewall:
+    applied_to: List[GetFirewallsIDFirewallResponseFirewallAppliedTo] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'applied_to' }})
     created: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'created' }})
     id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     labels: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'labels' }})
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    rules: List[GetFirewallsID200ApplicationJSONFirewallRulesRule] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rules' }})
+    rules: List[GetFirewallsIDFirewallResponseFirewallRule] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rules' }})
     
 
 @dataclass_json
 @dataclass
-class GetFirewallsID200ApplicationJSONFirewallResponse:
-    firewall: GetFirewallsID200ApplicationJSONFirewallFirewall = field(default=None, metadata={'dataclasses_json': { 'field_name': 'firewall' }})
+class GetFirewallsIDFirewallResponse:
+    firewall: GetFirewallsIDFirewallResponseFirewall = field(default=None, metadata={'dataclasses_json': { 'field_name': 'firewall' }})
     
 
 @dataclass
 class GetFirewallsIDResponse:
     content_type: str = field(default=None)
-    firewall_response: Optional[GetFirewallsID200ApplicationJSONFirewallResponse] = field(default=None)
+    firewall_response: Optional[GetFirewallsIDFirewallResponse] = field(default=None)
     status_code: int = field(default=None)
     

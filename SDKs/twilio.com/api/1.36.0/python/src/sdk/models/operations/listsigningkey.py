@@ -32,7 +32,7 @@ class ListSigningKeyRequest:
 
 @dataclass_json
 @dataclass
-class ListSigningKey200ApplicationJSONListSigningKeyResponse:
+class ListSigningKeyListSigningKeyResponse:
     end: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'end' }})
     first_page_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_uri' }})
     next_page_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_uri' }})
@@ -47,6 +47,6 @@ class ListSigningKey200ApplicationJSONListSigningKeyResponse:
 @dataclass
 class ListSigningKeyResponse:
     content_type: str = field(default=None)
-    list_signing_key_response: Optional[ListSigningKey200ApplicationJSONListSigningKeyResponse] = field(default=None)
+    list_signing_key_response: Optional[ListSigningKeyListSigningKeyResponse] = field(default=None)
     status_code: int = field(default=None)
     

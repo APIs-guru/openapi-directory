@@ -13,7 +13,7 @@ from . import phonenumber
 from . import linkedtaxrate
 from . import website
 
-class SupplierStatusStatusEnum(str, Enum):
+class SupplierStatusEnum(str, Enum):
     ACTIVE = "active"
     INACTIVE = "inactive"
     ARCHIVED = "archived"
@@ -41,7 +41,7 @@ class Supplier:
     notes: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'notes' }})
     phone_numbers: Optional[List[phonenumber.PhoneNumber]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'phone_numbers' }})
     row_version: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'row_version' }})
-    status: Optional[SupplierStatusStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    status: Optional[SupplierStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
     suffix: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'suffix' }})
     tax_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tax_number' }})
     tax_rate: Optional[linkedtaxrate.LinkedTaxRate] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tax_rate' }})

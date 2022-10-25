@@ -26,7 +26,7 @@ class ListUnderstandAssistantRequest:
 
 @dataclass_json
 @dataclass
-class ListUnderstandAssistant200ApplicationJSONMeta:
+class ListUnderstandAssistantListUnderstandAssistantResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -38,14 +38,14 @@ class ListUnderstandAssistant200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListUnderstandAssistant200ApplicationJSONListUnderstandAssistantResponse:
+class ListUnderstandAssistantListUnderstandAssistantResponse:
     assistants: Optional[List[shared.PreviewUnderstandAssistant]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'assistants' }})
-    meta: Optional[ListUnderstandAssistant200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+    meta: Optional[ListUnderstandAssistantListUnderstandAssistantResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     
 
 @dataclass
 class ListUnderstandAssistantResponse:
     content_type: str = field(default=None)
-    list_understand_assistant_response: Optional[ListUnderstandAssistant200ApplicationJSONListUnderstandAssistantResponse] = field(default=None)
+    list_understand_assistant_response: Optional[ListUnderstandAssistantListUnderstandAssistantResponse] = field(default=None)
     status_code: int = field(default=None)
     

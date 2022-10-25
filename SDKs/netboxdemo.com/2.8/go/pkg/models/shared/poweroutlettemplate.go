@@ -16,7 +16,7 @@ const (
 	PowerOutletTemplateFeedLegValueEnumC PowerOutletTemplateFeedLegValueEnum = "C"
 )
 
-type PowerOutletTemplateFeedLegFeedLeg struct {
+type PowerOutletTemplateFeedLeg struct {
 	Label PowerOutletTemplateFeedLegLabelEnum `json:"label"`
 	Value PowerOutletTemplateFeedLegValueEnum `json:"value"`
 }
@@ -163,16 +163,16 @@ const (
 	PowerOutletTemplateTypeValueEnumHdotCx         PowerOutletTemplateTypeValueEnum = "hdot-cx"
 )
 
-type PowerOutletTemplateTypeType struct {
+type PowerOutletTemplateType struct {
 	Label PowerOutletTemplateTypeLabelEnum `json:"label"`
 	Value PowerOutletTemplateTypeValueEnum `json:"value"`
 }
 
 type PowerOutletTemplate struct {
-	DeviceType NestedDeviceType                   `json:"device_type"`
-	FeedLeg    *PowerOutletTemplateFeedLegFeedLeg `json:"feed_leg,omitempty"`
-	ID         *int64                             `json:"id,omitempty"`
-	Name       string                             `json:"name"`
-	PowerPort  *NestedPowerPortTemplate           `json:"power_port,omitempty"`
-	Type       *PowerOutletTemplateTypeType       `json:"type,omitempty"`
+	DeviceType NestedDeviceType            `json:"device_type"`
+	FeedLeg    *PowerOutletTemplateFeedLeg `json:"feed_leg,omitempty"`
+	ID         *int64                      `json:"id,omitempty"`
+	Name       string                      `json:"name"`
+	PowerPort  *NestedPowerPortTemplate    `json:"power_port,omitempty"`
+	Type       *PowerOutletTemplateType    `json:"type,omitempty"`
 }

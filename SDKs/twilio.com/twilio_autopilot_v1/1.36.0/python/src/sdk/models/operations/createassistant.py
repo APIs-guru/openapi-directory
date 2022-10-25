@@ -7,7 +7,7 @@ CREATE_ASSISTANT_SERVERS = [
 
 
 @dataclass
-class CreateAssistantRequestBodyCreateAssistantRequest:
+class CreateAssistantCreateAssistantRequest:
     callback_events: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'CallbackEvents' }})
     callback_url: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'CallbackUrl' }})
     defaults: Optional[Any] = field(default=None, metadata={'form': { 'field_name': 'Defaults' }})
@@ -25,7 +25,7 @@ class CreateAssistantSecurity:
 @dataclass
 class CreateAssistantRequest:
     server_url: Optional[str] = field(default=None)
-    request: Optional[CreateAssistantRequestBodyCreateAssistantRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateAssistantCreateAssistantRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateAssistantSecurity = field(default=None)
     
 

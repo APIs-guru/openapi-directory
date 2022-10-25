@@ -17,7 +17,7 @@ type UpdateWorkerHeaders struct {
 	IfMatch *string `header:"name=If-Match"`
 }
 
-type UpdateWorkerRequestBodyUpdateWorkerRequest struct {
+type UpdateWorkerUpdateWorkerRequest struct {
 	ActivitySid               *string `form:"name=ActivitySid"`
 	Attributes                *string `form:"name=Attributes"`
 	FriendlyName              *string `form:"name=FriendlyName"`
@@ -32,7 +32,7 @@ type UpdateWorkerRequest struct {
 	ServerURL  *string
 	PathParams UpdateWorkerPathParams
 	Headers    UpdateWorkerHeaders
-	Request    *UpdateWorkerRequestBodyUpdateWorkerRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateWorkerUpdateWorkerRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateWorkerSecurity
 }
 

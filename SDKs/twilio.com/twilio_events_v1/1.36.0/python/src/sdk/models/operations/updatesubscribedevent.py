@@ -13,7 +13,7 @@ class UpdateSubscribedEventPathParams:
     
 
 @dataclass
-class UpdateSubscribedEventRequestBodyUpdateSubscribedEventRequest:
+class UpdateSubscribedEventUpdateSubscribedEventRequest:
     schema_version: Optional[int] = field(default=None, metadata={'form': { 'field_name': 'SchemaVersion' }})
     
 
@@ -26,7 +26,7 @@ class UpdateSubscribedEventSecurity:
 class UpdateSubscribedEventRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateSubscribedEventPathParams = field(default=None)
-    request: Optional[UpdateSubscribedEventRequestBodyUpdateSubscribedEventRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateSubscribedEventUpdateSubscribedEventRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateSubscribedEventSecurity = field(default=None)
     
 

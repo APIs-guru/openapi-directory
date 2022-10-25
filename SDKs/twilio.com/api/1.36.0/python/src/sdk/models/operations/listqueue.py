@@ -32,7 +32,7 @@ class ListQueueRequest:
 
 @dataclass_json
 @dataclass
-class ListQueue200ApplicationJSONListQueueResponse:
+class ListQueueListQueueResponse:
     end: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'end' }})
     first_page_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_uri' }})
     next_page_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_uri' }})
@@ -47,6 +47,6 @@ class ListQueue200ApplicationJSONListQueueResponse:
 @dataclass
 class ListQueueResponse:
     content_type: str = field(default=None)
-    list_queue_response: Optional[ListQueue200ApplicationJSONListQueueResponse] = field(default=None)
+    list_queue_response: Optional[ListQueueListQueueResponse] = field(default=None)
     status_code: int = field(default=None)
     

@@ -19,260 +19,260 @@ type ListDeploymentsRequest struct {
 	QueryParams ListDeploymentsQueryParams
 }
 
-type ListDeployments200ApplicationJSONDeploymentsJobs struct {
+type ListDeployments200ApplicationJSONAnAppDeploymentJobs struct {
 	Name             *string `json:"name,omitempty"`
 	SourceCommitHash *string `json:"source_commit_hash,omitempty"`
 }
 
-type ListDeployments200ApplicationJSONDeploymentsPhaseEnum string
+type ListDeployments200ApplicationJSONAnAppDeploymentPhaseEnum string
 
 const (
-	ListDeployments200ApplicationJSONDeploymentsPhaseEnumUnknown       ListDeployments200ApplicationJSONDeploymentsPhaseEnum = "UNKNOWN"
-	ListDeployments200ApplicationJSONDeploymentsPhaseEnumPendingBuild  ListDeployments200ApplicationJSONDeploymentsPhaseEnum = "PENDING_BUILD"
-	ListDeployments200ApplicationJSONDeploymentsPhaseEnumBuilding      ListDeployments200ApplicationJSONDeploymentsPhaseEnum = "BUILDING"
-	ListDeployments200ApplicationJSONDeploymentsPhaseEnumPendingDeploy ListDeployments200ApplicationJSONDeploymentsPhaseEnum = "PENDING_DEPLOY"
-	ListDeployments200ApplicationJSONDeploymentsPhaseEnumDeploying     ListDeployments200ApplicationJSONDeploymentsPhaseEnum = "DEPLOYING"
-	ListDeployments200ApplicationJSONDeploymentsPhaseEnumActive        ListDeployments200ApplicationJSONDeploymentsPhaseEnum = "ACTIVE"
-	ListDeployments200ApplicationJSONDeploymentsPhaseEnumSuperseded    ListDeployments200ApplicationJSONDeploymentsPhaseEnum = "SUPERSEDED"
-	ListDeployments200ApplicationJSONDeploymentsPhaseEnumError         ListDeployments200ApplicationJSONDeploymentsPhaseEnum = "ERROR"
-	ListDeployments200ApplicationJSONDeploymentsPhaseEnumCanceled      ListDeployments200ApplicationJSONDeploymentsPhaseEnum = "CANCELED"
+	ListDeployments200ApplicationJSONAnAppDeploymentPhaseEnumUnknown       ListDeployments200ApplicationJSONAnAppDeploymentPhaseEnum = "UNKNOWN"
+	ListDeployments200ApplicationJSONAnAppDeploymentPhaseEnumPendingBuild  ListDeployments200ApplicationJSONAnAppDeploymentPhaseEnum = "PENDING_BUILD"
+	ListDeployments200ApplicationJSONAnAppDeploymentPhaseEnumBuilding      ListDeployments200ApplicationJSONAnAppDeploymentPhaseEnum = "BUILDING"
+	ListDeployments200ApplicationJSONAnAppDeploymentPhaseEnumPendingDeploy ListDeployments200ApplicationJSONAnAppDeploymentPhaseEnum = "PENDING_DEPLOY"
+	ListDeployments200ApplicationJSONAnAppDeploymentPhaseEnumDeploying     ListDeployments200ApplicationJSONAnAppDeploymentPhaseEnum = "DEPLOYING"
+	ListDeployments200ApplicationJSONAnAppDeploymentPhaseEnumActive        ListDeployments200ApplicationJSONAnAppDeploymentPhaseEnum = "ACTIVE"
+	ListDeployments200ApplicationJSONAnAppDeploymentPhaseEnumSuperseded    ListDeployments200ApplicationJSONAnAppDeploymentPhaseEnum = "SUPERSEDED"
+	ListDeployments200ApplicationJSONAnAppDeploymentPhaseEnumError         ListDeployments200ApplicationJSONAnAppDeploymentPhaseEnum = "ERROR"
+	ListDeployments200ApplicationJSONAnAppDeploymentPhaseEnumCanceled      ListDeployments200ApplicationJSONAnAppDeploymentPhaseEnum = "CANCELED"
 )
 
-type ListDeployments200ApplicationJSONDeploymentsProgressStepsReason struct {
+type ListDeployments200ApplicationJSONAnAppDeploymentProgressAStepThatIsRunAsPartOfTheDeploymentSLifecycleReason struct {
 	Code    *string `json:"code,omitempty"`
 	Message *string `json:"message,omitempty"`
 }
 
-type ListDeployments200ApplicationJSONDeploymentsProgressStepsStatusEnum string
+type ListDeployments200ApplicationJSONAnAppDeploymentProgressAStepThatIsRunAsPartOfTheDeploymentSLifecycleStatusEnum string
 
 const (
-	ListDeployments200ApplicationJSONDeploymentsProgressStepsStatusEnumUnknown ListDeployments200ApplicationJSONDeploymentsProgressStepsStatusEnum = "UNKNOWN"
-	ListDeployments200ApplicationJSONDeploymentsProgressStepsStatusEnumPending ListDeployments200ApplicationJSONDeploymentsProgressStepsStatusEnum = "PENDING"
-	ListDeployments200ApplicationJSONDeploymentsProgressStepsStatusEnumRunning ListDeployments200ApplicationJSONDeploymentsProgressStepsStatusEnum = "RUNNING"
-	ListDeployments200ApplicationJSONDeploymentsProgressStepsStatusEnumError   ListDeployments200ApplicationJSONDeploymentsProgressStepsStatusEnum = "ERROR"
-	ListDeployments200ApplicationJSONDeploymentsProgressStepsStatusEnumSuccess ListDeployments200ApplicationJSONDeploymentsProgressStepsStatusEnum = "SUCCESS"
+	ListDeployments200ApplicationJSONAnAppDeploymentProgressAStepThatIsRunAsPartOfTheDeploymentSLifecycleStatusEnumUnknown ListDeployments200ApplicationJSONAnAppDeploymentProgressAStepThatIsRunAsPartOfTheDeploymentSLifecycleStatusEnum = "UNKNOWN"
+	ListDeployments200ApplicationJSONAnAppDeploymentProgressAStepThatIsRunAsPartOfTheDeploymentSLifecycleStatusEnumPending ListDeployments200ApplicationJSONAnAppDeploymentProgressAStepThatIsRunAsPartOfTheDeploymentSLifecycleStatusEnum = "PENDING"
+	ListDeployments200ApplicationJSONAnAppDeploymentProgressAStepThatIsRunAsPartOfTheDeploymentSLifecycleStatusEnumRunning ListDeployments200ApplicationJSONAnAppDeploymentProgressAStepThatIsRunAsPartOfTheDeploymentSLifecycleStatusEnum = "RUNNING"
+	ListDeployments200ApplicationJSONAnAppDeploymentProgressAStepThatIsRunAsPartOfTheDeploymentSLifecycleStatusEnumError   ListDeployments200ApplicationJSONAnAppDeploymentProgressAStepThatIsRunAsPartOfTheDeploymentSLifecycleStatusEnum = "ERROR"
+	ListDeployments200ApplicationJSONAnAppDeploymentProgressAStepThatIsRunAsPartOfTheDeploymentSLifecycleStatusEnumSuccess ListDeployments200ApplicationJSONAnAppDeploymentProgressAStepThatIsRunAsPartOfTheDeploymentSLifecycleStatusEnum = "SUCCESS"
 )
 
-type ListDeployments200ApplicationJSONDeploymentsProgressStepsAStepThatIsRunAsPartOfTheDeploymentSLifecycle struct {
-	ComponentName *string                                                              `json:"component_name,omitempty"`
-	EndedAt       *time.Time                                                           `json:"ended_at,omitempty"`
-	MessageBase   *string                                                              `json:"message_base,omitempty"`
-	Name          *string                                                              `json:"name,omitempty"`
-	Reason        *ListDeployments200ApplicationJSONDeploymentsProgressStepsReason     `json:"reason,omitempty"`
-	StartedAt     *time.Time                                                           `json:"started_at,omitempty"`
-	Status        *ListDeployments200ApplicationJSONDeploymentsProgressStepsStatusEnum `json:"status,omitempty"`
-	Steps         []map[string]interface{}                                             `json:"steps,omitempty"`
+type ListDeployments200ApplicationJSONAnAppDeploymentProgressAStepThatIsRunAsPartOfTheDeploymentSLifecycle struct {
+	ComponentName *string                                                                                                          `json:"component_name,omitempty"`
+	EndedAt       *time.Time                                                                                                       `json:"ended_at,omitempty"`
+	MessageBase   *string                                                                                                          `json:"message_base,omitempty"`
+	Name          *string                                                                                                          `json:"name,omitempty"`
+	Reason        *ListDeployments200ApplicationJSONAnAppDeploymentProgressAStepThatIsRunAsPartOfTheDeploymentSLifecycleReason     `json:"reason,omitempty"`
+	StartedAt     *time.Time                                                                                                       `json:"started_at,omitempty"`
+	Status        *ListDeployments200ApplicationJSONAnAppDeploymentProgressAStepThatIsRunAsPartOfTheDeploymentSLifecycleStatusEnum `json:"status,omitempty"`
+	Steps         []map[string]interface{}                                                                                         `json:"steps,omitempty"`
 }
 
-type ListDeployments200ApplicationJSONDeploymentsProgress struct {
+type ListDeployments200ApplicationJSONAnAppDeploymentProgress struct {
 	ErrorSteps   *int32                                                                                                                                                              `json:"error_steps,omitempty"`
 	PendingSteps *int32                                                                                                                                                              `json:"pending_steps,omitempty"`
 	RunningSteps *int32                                                                                                                                                              `json:"running_steps,omitempty"`
-	Steps        []ListDeployments200ApplicationJSONDeploymentsProgressStepsAStepThatIsRunAsPartOfTheDeploymentSLifecycle                                                            `json:"steps,omitempty"`
+	Steps        []ListDeployments200ApplicationJSONAnAppDeploymentProgressAStepThatIsRunAsPartOfTheDeploymentSLifecycle                                                             `json:"steps,omitempty"`
 	SuccessSteps *int32                                                                                                                                                              `json:"success_steps,omitempty"`
 	SummarySteps []shared.Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesProgressPropertiesStepsItems `json:"summary_steps,omitempty"`
 	TotalSteps   *int32                                                                                                                                                              `json:"total_steps,omitempty"`
 }
 
-type ListDeployments200ApplicationJSONDeploymentsServices struct {
+type ListDeployments200ApplicationJSONAnAppDeploymentServices struct {
 	Name             *string `json:"name,omitempty"`
 	SourceCommitHash *string `json:"source_commit_hash,omitempty"`
 }
 
-type ListDeployments200ApplicationJSONDeploymentsSpecDatabasesEngineEnum string
+type ListDeployments200ApplicationJSONAnAppDeploymentAppSpecDatabasesEngineEnum string
 
 const (
-	ListDeployments200ApplicationJSONDeploymentsSpecDatabasesEngineEnumUnset ListDeployments200ApplicationJSONDeploymentsSpecDatabasesEngineEnum = "UNSET"
-	ListDeployments200ApplicationJSONDeploymentsSpecDatabasesEngineEnumMysql ListDeployments200ApplicationJSONDeploymentsSpecDatabasesEngineEnum = "MYSQL"
-	ListDeployments200ApplicationJSONDeploymentsSpecDatabasesEngineEnumPg    ListDeployments200ApplicationJSONDeploymentsSpecDatabasesEngineEnum = "PG"
-	ListDeployments200ApplicationJSONDeploymentsSpecDatabasesEngineEnumRedis ListDeployments200ApplicationJSONDeploymentsSpecDatabasesEngineEnum = "REDIS"
+	ListDeployments200ApplicationJSONAnAppDeploymentAppSpecDatabasesEngineEnumUnset ListDeployments200ApplicationJSONAnAppDeploymentAppSpecDatabasesEngineEnum = "UNSET"
+	ListDeployments200ApplicationJSONAnAppDeploymentAppSpecDatabasesEngineEnumMysql ListDeployments200ApplicationJSONAnAppDeploymentAppSpecDatabasesEngineEnum = "MYSQL"
+	ListDeployments200ApplicationJSONAnAppDeploymentAppSpecDatabasesEngineEnumPg    ListDeployments200ApplicationJSONAnAppDeploymentAppSpecDatabasesEngineEnum = "PG"
+	ListDeployments200ApplicationJSONAnAppDeploymentAppSpecDatabasesEngineEnumRedis ListDeployments200ApplicationJSONAnAppDeploymentAppSpecDatabasesEngineEnum = "REDIS"
 )
 
-type ListDeployments200ApplicationJSONDeploymentsSpecDatabases struct {
-	ClusterName *string                                                              `json:"cluster_name,omitempty"`
-	DbName      *string                                                              `json:"db_name,omitempty"`
-	DbUser      *string                                                              `json:"db_user,omitempty"`
-	Engine      *ListDeployments200ApplicationJSONDeploymentsSpecDatabasesEngineEnum `json:"engine,omitempty"`
-	Name        string                                                               `json:"name"`
-	Production  *bool                                                                `json:"production,omitempty"`
-	Version     *string                                                              `json:"version,omitempty"`
+type ListDeployments200ApplicationJSONAnAppDeploymentAppSpecDatabases struct {
+	ClusterName *string                                                                     `json:"cluster_name,omitempty"`
+	DbName      *string                                                                     `json:"db_name,omitempty"`
+	DbUser      *string                                                                     `json:"db_user,omitempty"`
+	Engine      *ListDeployments200ApplicationJSONAnAppDeploymentAppSpecDatabasesEngineEnum `json:"engine,omitempty"`
+	Name        string                                                                      `json:"name"`
+	Production  *bool                                                                       `json:"production,omitempty"`
+	Version     *string                                                                     `json:"version,omitempty"`
 }
 
-type ListDeployments200ApplicationJSONDeploymentsSpecDomainsTypeEnum string
+type ListDeployments200ApplicationJSONAnAppDeploymentAppSpecDomainsTypeEnum string
 
 const (
-	ListDeployments200ApplicationJSONDeploymentsSpecDomainsTypeEnumUnspecified ListDeployments200ApplicationJSONDeploymentsSpecDomainsTypeEnum = "UNSPECIFIED"
-	ListDeployments200ApplicationJSONDeploymentsSpecDomainsTypeEnumDefault     ListDeployments200ApplicationJSONDeploymentsSpecDomainsTypeEnum = "DEFAULT"
-	ListDeployments200ApplicationJSONDeploymentsSpecDomainsTypeEnumPrimary     ListDeployments200ApplicationJSONDeploymentsSpecDomainsTypeEnum = "PRIMARY"
-	ListDeployments200ApplicationJSONDeploymentsSpecDomainsTypeEnumAlias       ListDeployments200ApplicationJSONDeploymentsSpecDomainsTypeEnum = "ALIAS"
+	ListDeployments200ApplicationJSONAnAppDeploymentAppSpecDomainsTypeEnumUnspecified ListDeployments200ApplicationJSONAnAppDeploymentAppSpecDomainsTypeEnum = "UNSPECIFIED"
+	ListDeployments200ApplicationJSONAnAppDeploymentAppSpecDomainsTypeEnumDefault     ListDeployments200ApplicationJSONAnAppDeploymentAppSpecDomainsTypeEnum = "DEFAULT"
+	ListDeployments200ApplicationJSONAnAppDeploymentAppSpecDomainsTypeEnumPrimary     ListDeployments200ApplicationJSONAnAppDeploymentAppSpecDomainsTypeEnum = "PRIMARY"
+	ListDeployments200ApplicationJSONAnAppDeploymentAppSpecDomainsTypeEnumAlias       ListDeployments200ApplicationJSONAnAppDeploymentAppSpecDomainsTypeEnum = "ALIAS"
 )
 
-type ListDeployments200ApplicationJSONDeploymentsSpecDomains struct {
-	Domain   string                                                           `json:"domain"`
-	Type     *ListDeployments200ApplicationJSONDeploymentsSpecDomainsTypeEnum `json:"type,omitempty"`
-	Wildcard *bool                                                            `json:"wildcard,omitempty"`
-	Zone     *string                                                          `json:"zone,omitempty"`
+type ListDeployments200ApplicationJSONAnAppDeploymentAppSpecDomains struct {
+	Domain   string                                                                  `json:"domain"`
+	Type     *ListDeployments200ApplicationJSONAnAppDeploymentAppSpecDomainsTypeEnum `json:"type,omitempty"`
+	Wildcard *bool                                                                   `json:"wildcard,omitempty"`
+	Zone     *string                                                                 `json:"zone,omitempty"`
 }
 
-type ListDeployments200ApplicationJSONDeploymentsSpecJobsEnvsScopeEnum string
+type ListDeployments200ApplicationJSONAnAppDeploymentAppSpecJobsEnvsScopeEnum string
 
 const (
-	ListDeployments200ApplicationJSONDeploymentsSpecJobsEnvsScopeEnumUnset           ListDeployments200ApplicationJSONDeploymentsSpecJobsEnvsScopeEnum = "UNSET"
-	ListDeployments200ApplicationJSONDeploymentsSpecJobsEnvsScopeEnumRunTime         ListDeployments200ApplicationJSONDeploymentsSpecJobsEnvsScopeEnum = "RUN_TIME"
-	ListDeployments200ApplicationJSONDeploymentsSpecJobsEnvsScopeEnumBuildTime       ListDeployments200ApplicationJSONDeploymentsSpecJobsEnvsScopeEnum = "BUILD_TIME"
-	ListDeployments200ApplicationJSONDeploymentsSpecJobsEnvsScopeEnumRunAndBuildTime ListDeployments200ApplicationJSONDeploymentsSpecJobsEnvsScopeEnum = "RUN_AND_BUILD_TIME"
+	ListDeployments200ApplicationJSONAnAppDeploymentAppSpecJobsEnvsScopeEnumUnset           ListDeployments200ApplicationJSONAnAppDeploymentAppSpecJobsEnvsScopeEnum = "UNSET"
+	ListDeployments200ApplicationJSONAnAppDeploymentAppSpecJobsEnvsScopeEnumRunTime         ListDeployments200ApplicationJSONAnAppDeploymentAppSpecJobsEnvsScopeEnum = "RUN_TIME"
+	ListDeployments200ApplicationJSONAnAppDeploymentAppSpecJobsEnvsScopeEnumBuildTime       ListDeployments200ApplicationJSONAnAppDeploymentAppSpecJobsEnvsScopeEnum = "BUILD_TIME"
+	ListDeployments200ApplicationJSONAnAppDeploymentAppSpecJobsEnvsScopeEnumRunAndBuildTime ListDeployments200ApplicationJSONAnAppDeploymentAppSpecJobsEnvsScopeEnum = "RUN_AND_BUILD_TIME"
 )
 
-type ListDeployments200ApplicationJSONDeploymentsSpecJobsEnvsTypeEnum string
+type ListDeployments200ApplicationJSONAnAppDeploymentAppSpecJobsEnvsTypeEnum string
 
 const (
-	ListDeployments200ApplicationJSONDeploymentsSpecJobsEnvsTypeEnumGeneral ListDeployments200ApplicationJSONDeploymentsSpecJobsEnvsTypeEnum = "GENERAL"
-	ListDeployments200ApplicationJSONDeploymentsSpecJobsEnvsTypeEnumSecret  ListDeployments200ApplicationJSONDeploymentsSpecJobsEnvsTypeEnum = "SECRET"
+	ListDeployments200ApplicationJSONAnAppDeploymentAppSpecJobsEnvsTypeEnumGeneral ListDeployments200ApplicationJSONAnAppDeploymentAppSpecJobsEnvsTypeEnum = "GENERAL"
+	ListDeployments200ApplicationJSONAnAppDeploymentAppSpecJobsEnvsTypeEnumSecret  ListDeployments200ApplicationJSONAnAppDeploymentAppSpecJobsEnvsTypeEnum = "SECRET"
 )
 
-type ListDeployments200ApplicationJSONDeploymentsSpecJobsEnvs struct {
-	Key   string                                                             `json:"key"`
-	Scope *ListDeployments200ApplicationJSONDeploymentsSpecJobsEnvsScopeEnum `json:"scope,omitempty"`
-	Type  *ListDeployments200ApplicationJSONDeploymentsSpecJobsEnvsTypeEnum  `json:"type,omitempty"`
-	Value *string                                                            `json:"value,omitempty"`
+type ListDeployments200ApplicationJSONAnAppDeploymentAppSpecJobsEnvs struct {
+	Key   string                                                                    `json:"key"`
+	Scope *ListDeployments200ApplicationJSONAnAppDeploymentAppSpecJobsEnvsScopeEnum `json:"scope,omitempty"`
+	Type  *ListDeployments200ApplicationJSONAnAppDeploymentAppSpecJobsEnvsTypeEnum  `json:"type,omitempty"`
+	Value *string                                                                   `json:"value,omitempty"`
 }
 
-type ListDeployments200ApplicationJSONDeploymentsSpecJobsGit struct {
+type ListDeployments200ApplicationJSONAnAppDeploymentAppSpecJobsGit struct {
 	Branch       *string `json:"branch,omitempty"`
 	RepoCloneURL *string `json:"repo_clone_url,omitempty"`
 }
 
-type ListDeployments200ApplicationJSONDeploymentsSpecJobsGithub struct {
+type ListDeployments200ApplicationJSONAnAppDeploymentAppSpecJobsGithub struct {
 	Branch       *string `json:"branch,omitempty"`
 	DeployOnPush *bool   `json:"deploy_on_push,omitempty"`
 	Repo         *string `json:"repo,omitempty"`
 }
 
-type ListDeployments200ApplicationJSONDeploymentsSpecJobsGitlab struct {
+type ListDeployments200ApplicationJSONAnAppDeploymentAppSpecJobsGitlab struct {
 	Branch       *string `json:"branch,omitempty"`
 	DeployOnPush *bool   `json:"deploy_on_push,omitempty"`
 	Repo         *string `json:"repo,omitempty"`
 }
 
-type ListDeployments200ApplicationJSONDeploymentsSpecJobsImageRegistryTypeEnum string
+type ListDeployments200ApplicationJSONAnAppDeploymentAppSpecJobsImageRegistryTypeEnum string
 
 const (
-	ListDeployments200ApplicationJSONDeploymentsSpecJobsImageRegistryTypeEnumDockerHub ListDeployments200ApplicationJSONDeploymentsSpecJobsImageRegistryTypeEnum = "DOCKER_HUB"
-	ListDeployments200ApplicationJSONDeploymentsSpecJobsImageRegistryTypeEnumDocr      ListDeployments200ApplicationJSONDeploymentsSpecJobsImageRegistryTypeEnum = "DOCR"
+	ListDeployments200ApplicationJSONAnAppDeploymentAppSpecJobsImageRegistryTypeEnumDockerHub ListDeployments200ApplicationJSONAnAppDeploymentAppSpecJobsImageRegistryTypeEnum = "DOCKER_HUB"
+	ListDeployments200ApplicationJSONAnAppDeploymentAppSpecJobsImageRegistryTypeEnumDocr      ListDeployments200ApplicationJSONAnAppDeploymentAppSpecJobsImageRegistryTypeEnum = "DOCR"
 )
 
-type ListDeployments200ApplicationJSONDeploymentsSpecJobsImage struct {
-	Registry     *string                                                                    `json:"registry,omitempty"`
-	RegistryType *ListDeployments200ApplicationJSONDeploymentsSpecJobsImageRegistryTypeEnum `json:"registry_type,omitempty"`
-	Repository   *string                                                                    `json:"repository,omitempty"`
-	Tag          *string                                                                    `json:"tag,omitempty"`
+type ListDeployments200ApplicationJSONAnAppDeploymentAppSpecJobsImage struct {
+	Registry     *string                                                                           `json:"registry,omitempty"`
+	RegistryType *ListDeployments200ApplicationJSONAnAppDeploymentAppSpecJobsImageRegistryTypeEnum `json:"registry_type,omitempty"`
+	Repository   *string                                                                           `json:"repository,omitempty"`
+	Tag          *string                                                                           `json:"tag,omitempty"`
 }
 
-type ListDeployments200ApplicationJSONDeploymentsSpecJobsInstanceSizeSlugEnum string
+type ListDeployments200ApplicationJSONAnAppDeploymentAppSpecJobsInstanceSizeSlugEnum string
 
 const (
-	ListDeployments200ApplicationJSONDeploymentsSpecJobsInstanceSizeSlugEnumBasicXxs       ListDeployments200ApplicationJSONDeploymentsSpecJobsInstanceSizeSlugEnum = "basic-xxs"
-	ListDeployments200ApplicationJSONDeploymentsSpecJobsInstanceSizeSlugEnumBasicXs        ListDeployments200ApplicationJSONDeploymentsSpecJobsInstanceSizeSlugEnum = "basic-xs"
-	ListDeployments200ApplicationJSONDeploymentsSpecJobsInstanceSizeSlugEnumBasicS         ListDeployments200ApplicationJSONDeploymentsSpecJobsInstanceSizeSlugEnum = "basic-s"
-	ListDeployments200ApplicationJSONDeploymentsSpecJobsInstanceSizeSlugEnumBasicM         ListDeployments200ApplicationJSONDeploymentsSpecJobsInstanceSizeSlugEnum = "basic-m"
-	ListDeployments200ApplicationJSONDeploymentsSpecJobsInstanceSizeSlugEnumProfessionalXs ListDeployments200ApplicationJSONDeploymentsSpecJobsInstanceSizeSlugEnum = "professional-xs"
-	ListDeployments200ApplicationJSONDeploymentsSpecJobsInstanceSizeSlugEnumProfessionalS  ListDeployments200ApplicationJSONDeploymentsSpecJobsInstanceSizeSlugEnum = "professional-s"
-	ListDeployments200ApplicationJSONDeploymentsSpecJobsInstanceSizeSlugEnumProfessionalM  ListDeployments200ApplicationJSONDeploymentsSpecJobsInstanceSizeSlugEnum = "professional-m"
-	ListDeployments200ApplicationJSONDeploymentsSpecJobsInstanceSizeSlugEnumProfessional1l ListDeployments200ApplicationJSONDeploymentsSpecJobsInstanceSizeSlugEnum = "professional-1l"
-	ListDeployments200ApplicationJSONDeploymentsSpecJobsInstanceSizeSlugEnumProfessionalL  ListDeployments200ApplicationJSONDeploymentsSpecJobsInstanceSizeSlugEnum = "professional-l"
-	ListDeployments200ApplicationJSONDeploymentsSpecJobsInstanceSizeSlugEnumProfessionalXl ListDeployments200ApplicationJSONDeploymentsSpecJobsInstanceSizeSlugEnum = "professional-xl"
+	ListDeployments200ApplicationJSONAnAppDeploymentAppSpecJobsInstanceSizeSlugEnumBasicXxs       ListDeployments200ApplicationJSONAnAppDeploymentAppSpecJobsInstanceSizeSlugEnum = "basic-xxs"
+	ListDeployments200ApplicationJSONAnAppDeploymentAppSpecJobsInstanceSizeSlugEnumBasicXs        ListDeployments200ApplicationJSONAnAppDeploymentAppSpecJobsInstanceSizeSlugEnum = "basic-xs"
+	ListDeployments200ApplicationJSONAnAppDeploymentAppSpecJobsInstanceSizeSlugEnumBasicS         ListDeployments200ApplicationJSONAnAppDeploymentAppSpecJobsInstanceSizeSlugEnum = "basic-s"
+	ListDeployments200ApplicationJSONAnAppDeploymentAppSpecJobsInstanceSizeSlugEnumBasicM         ListDeployments200ApplicationJSONAnAppDeploymentAppSpecJobsInstanceSizeSlugEnum = "basic-m"
+	ListDeployments200ApplicationJSONAnAppDeploymentAppSpecJobsInstanceSizeSlugEnumProfessionalXs ListDeployments200ApplicationJSONAnAppDeploymentAppSpecJobsInstanceSizeSlugEnum = "professional-xs"
+	ListDeployments200ApplicationJSONAnAppDeploymentAppSpecJobsInstanceSizeSlugEnumProfessionalS  ListDeployments200ApplicationJSONAnAppDeploymentAppSpecJobsInstanceSizeSlugEnum = "professional-s"
+	ListDeployments200ApplicationJSONAnAppDeploymentAppSpecJobsInstanceSizeSlugEnumProfessionalM  ListDeployments200ApplicationJSONAnAppDeploymentAppSpecJobsInstanceSizeSlugEnum = "professional-m"
+	ListDeployments200ApplicationJSONAnAppDeploymentAppSpecJobsInstanceSizeSlugEnumProfessional1l ListDeployments200ApplicationJSONAnAppDeploymentAppSpecJobsInstanceSizeSlugEnum = "professional-1l"
+	ListDeployments200ApplicationJSONAnAppDeploymentAppSpecJobsInstanceSizeSlugEnumProfessionalL  ListDeployments200ApplicationJSONAnAppDeploymentAppSpecJobsInstanceSizeSlugEnum = "professional-l"
+	ListDeployments200ApplicationJSONAnAppDeploymentAppSpecJobsInstanceSizeSlugEnumProfessionalXl ListDeployments200ApplicationJSONAnAppDeploymentAppSpecJobsInstanceSizeSlugEnum = "professional-xl"
 )
 
-type ListDeployments200ApplicationJSONDeploymentsSpecJobsKindEnum string
+type ListDeployments200ApplicationJSONAnAppDeploymentAppSpecJobsKindEnum string
 
 const (
-	ListDeployments200ApplicationJSONDeploymentsSpecJobsKindEnumUnspecified  ListDeployments200ApplicationJSONDeploymentsSpecJobsKindEnum = "UNSPECIFIED"
-	ListDeployments200ApplicationJSONDeploymentsSpecJobsKindEnumPreDeploy    ListDeployments200ApplicationJSONDeploymentsSpecJobsKindEnum = "PRE_DEPLOY"
-	ListDeployments200ApplicationJSONDeploymentsSpecJobsKindEnumPostDeploy   ListDeployments200ApplicationJSONDeploymentsSpecJobsKindEnum = "POST_DEPLOY"
-	ListDeployments200ApplicationJSONDeploymentsSpecJobsKindEnumFailedDeploy ListDeployments200ApplicationJSONDeploymentsSpecJobsKindEnum = "FAILED_DEPLOY"
+	ListDeployments200ApplicationJSONAnAppDeploymentAppSpecJobsKindEnumUnspecified  ListDeployments200ApplicationJSONAnAppDeploymentAppSpecJobsKindEnum = "UNSPECIFIED"
+	ListDeployments200ApplicationJSONAnAppDeploymentAppSpecJobsKindEnumPreDeploy    ListDeployments200ApplicationJSONAnAppDeploymentAppSpecJobsKindEnum = "PRE_DEPLOY"
+	ListDeployments200ApplicationJSONAnAppDeploymentAppSpecJobsKindEnumPostDeploy   ListDeployments200ApplicationJSONAnAppDeploymentAppSpecJobsKindEnum = "POST_DEPLOY"
+	ListDeployments200ApplicationJSONAnAppDeploymentAppSpecJobsKindEnumFailedDeploy ListDeployments200ApplicationJSONAnAppDeploymentAppSpecJobsKindEnum = "FAILED_DEPLOY"
 )
 
-type ListDeployments200ApplicationJSONDeploymentsSpecJobs struct {
-	BuildCommand     *string                                                                   `json:"build_command,omitempty"`
-	DockerfilePath   *string                                                                   `json:"dockerfile_path,omitempty"`
-	EnvironmentSlug  *string                                                                   `json:"environment_slug,omitempty"`
-	Envs             []ListDeployments200ApplicationJSONDeploymentsSpecJobsEnvs                `json:"envs,omitempty"`
-	Git              *ListDeployments200ApplicationJSONDeploymentsSpecJobsGit                  `json:"git,omitempty"`
-	Github           *ListDeployments200ApplicationJSONDeploymentsSpecJobsGithub               `json:"github,omitempty"`
-	Gitlab           *ListDeployments200ApplicationJSONDeploymentsSpecJobsGitlab               `json:"gitlab,omitempty"`
-	Image            *ListDeployments200ApplicationJSONDeploymentsSpecJobsImage                `json:"image,omitempty"`
-	InstanceCount    *int64                                                                    `json:"instance_count,omitempty"`
-	InstanceSizeSlug *ListDeployments200ApplicationJSONDeploymentsSpecJobsInstanceSizeSlugEnum `json:"instance_size_slug,omitempty"`
-	Kind             *ListDeployments200ApplicationJSONDeploymentsSpecJobsKindEnum             `json:"kind,omitempty"`
-	Name             string                                                                    `json:"name"`
-	RunCommand       *string                                                                   `json:"run_command,omitempty"`
-	SourceDir        *string                                                                   `json:"source_dir,omitempty"`
+type ListDeployments200ApplicationJSONAnAppDeploymentAppSpecJobs struct {
+	BuildCommand     *string                                                                          `json:"build_command,omitempty"`
+	DockerfilePath   *string                                                                          `json:"dockerfile_path,omitempty"`
+	EnvironmentSlug  *string                                                                          `json:"environment_slug,omitempty"`
+	Envs             []ListDeployments200ApplicationJSONAnAppDeploymentAppSpecJobsEnvs                `json:"envs,omitempty"`
+	Git              *ListDeployments200ApplicationJSONAnAppDeploymentAppSpecJobsGit                  `json:"git,omitempty"`
+	Github           *ListDeployments200ApplicationJSONAnAppDeploymentAppSpecJobsGithub               `json:"github,omitempty"`
+	Gitlab           *ListDeployments200ApplicationJSONAnAppDeploymentAppSpecJobsGitlab               `json:"gitlab,omitempty"`
+	Image            *ListDeployments200ApplicationJSONAnAppDeploymentAppSpecJobsImage                `json:"image,omitempty"`
+	InstanceCount    *int64                                                                           `json:"instance_count,omitempty"`
+	InstanceSizeSlug *ListDeployments200ApplicationJSONAnAppDeploymentAppSpecJobsInstanceSizeSlugEnum `json:"instance_size_slug,omitempty"`
+	Kind             *ListDeployments200ApplicationJSONAnAppDeploymentAppSpecJobsKindEnum             `json:"kind,omitempty"`
+	Name             string                                                                           `json:"name"`
+	RunCommand       *string                                                                          `json:"run_command,omitempty"`
+	SourceDir        *string                                                                          `json:"source_dir,omitempty"`
 }
 
-type ListDeployments200ApplicationJSONDeploymentsSpecRegionEnum string
+type ListDeployments200ApplicationJSONAnAppDeploymentAppSpecRegionEnum string
 
 const (
-	ListDeployments200ApplicationJSONDeploymentsSpecRegionEnumAms ListDeployments200ApplicationJSONDeploymentsSpecRegionEnum = "ams"
-	ListDeployments200ApplicationJSONDeploymentsSpecRegionEnumNyc ListDeployments200ApplicationJSONDeploymentsSpecRegionEnum = "nyc"
-	ListDeployments200ApplicationJSONDeploymentsSpecRegionEnumFra ListDeployments200ApplicationJSONDeploymentsSpecRegionEnum = "fra"
+	ListDeployments200ApplicationJSONAnAppDeploymentAppSpecRegionEnumAms ListDeployments200ApplicationJSONAnAppDeploymentAppSpecRegionEnum = "ams"
+	ListDeployments200ApplicationJSONAnAppDeploymentAppSpecRegionEnumNyc ListDeployments200ApplicationJSONAnAppDeploymentAppSpecRegionEnum = "nyc"
+	ListDeployments200ApplicationJSONAnAppDeploymentAppSpecRegionEnumFra ListDeployments200ApplicationJSONAnAppDeploymentAppSpecRegionEnum = "fra"
 )
 
-type ListDeployments200ApplicationJSONDeploymentsSpecServicesCorsAllowOrigins struct {
+type ListDeployments200ApplicationJSONAnAppDeploymentAppSpecServicesCorsAllowOrigins struct {
 	Exact  *string `json:"exact,omitempty"`
 	Prefix *string `json:"prefix,omitempty"`
 	Regex  *string `json:"regex,omitempty"`
 }
 
-type ListDeployments200ApplicationJSONDeploymentsSpecServicesCors struct {
-	AllowCredentials *bool                                                                      `json:"allow_credentials,omitempty"`
-	AllowHeaders     []string                                                                   `json:"allow_headers,omitempty"`
-	AllowMethods     []string                                                                   `json:"allow_methods,omitempty"`
-	AllowOrigins     []ListDeployments200ApplicationJSONDeploymentsSpecServicesCorsAllowOrigins `json:"allow_origins,omitempty"`
-	ExposeHeaders    []string                                                                   `json:"expose_headers,omitempty"`
-	MaxAge           *string                                                                    `json:"max_age,omitempty"`
+type ListDeployments200ApplicationJSONAnAppDeploymentAppSpecServicesCors struct {
+	AllowCredentials *bool                                                                             `json:"allow_credentials,omitempty"`
+	AllowHeaders     []string                                                                          `json:"allow_headers,omitempty"`
+	AllowMethods     []string                                                                          `json:"allow_methods,omitempty"`
+	AllowOrigins     []ListDeployments200ApplicationJSONAnAppDeploymentAppSpecServicesCorsAllowOrigins `json:"allow_origins,omitempty"`
+	ExposeHeaders    []string                                                                          `json:"expose_headers,omitempty"`
+	MaxAge           *string                                                                           `json:"max_age,omitempty"`
 }
 
-type ListDeployments200ApplicationJSONDeploymentsSpecServicesEnvsScopeEnum string
+type ListDeployments200ApplicationJSONAnAppDeploymentAppSpecServicesEnvsScopeEnum string
 
 const (
-	ListDeployments200ApplicationJSONDeploymentsSpecServicesEnvsScopeEnumUnset           ListDeployments200ApplicationJSONDeploymentsSpecServicesEnvsScopeEnum = "UNSET"
-	ListDeployments200ApplicationJSONDeploymentsSpecServicesEnvsScopeEnumRunTime         ListDeployments200ApplicationJSONDeploymentsSpecServicesEnvsScopeEnum = "RUN_TIME"
-	ListDeployments200ApplicationJSONDeploymentsSpecServicesEnvsScopeEnumBuildTime       ListDeployments200ApplicationJSONDeploymentsSpecServicesEnvsScopeEnum = "BUILD_TIME"
-	ListDeployments200ApplicationJSONDeploymentsSpecServicesEnvsScopeEnumRunAndBuildTime ListDeployments200ApplicationJSONDeploymentsSpecServicesEnvsScopeEnum = "RUN_AND_BUILD_TIME"
+	ListDeployments200ApplicationJSONAnAppDeploymentAppSpecServicesEnvsScopeEnumUnset           ListDeployments200ApplicationJSONAnAppDeploymentAppSpecServicesEnvsScopeEnum = "UNSET"
+	ListDeployments200ApplicationJSONAnAppDeploymentAppSpecServicesEnvsScopeEnumRunTime         ListDeployments200ApplicationJSONAnAppDeploymentAppSpecServicesEnvsScopeEnum = "RUN_TIME"
+	ListDeployments200ApplicationJSONAnAppDeploymentAppSpecServicesEnvsScopeEnumBuildTime       ListDeployments200ApplicationJSONAnAppDeploymentAppSpecServicesEnvsScopeEnum = "BUILD_TIME"
+	ListDeployments200ApplicationJSONAnAppDeploymentAppSpecServicesEnvsScopeEnumRunAndBuildTime ListDeployments200ApplicationJSONAnAppDeploymentAppSpecServicesEnvsScopeEnum = "RUN_AND_BUILD_TIME"
 )
 
-type ListDeployments200ApplicationJSONDeploymentsSpecServicesEnvsTypeEnum string
+type ListDeployments200ApplicationJSONAnAppDeploymentAppSpecServicesEnvsTypeEnum string
 
 const (
-	ListDeployments200ApplicationJSONDeploymentsSpecServicesEnvsTypeEnumGeneral ListDeployments200ApplicationJSONDeploymentsSpecServicesEnvsTypeEnum = "GENERAL"
-	ListDeployments200ApplicationJSONDeploymentsSpecServicesEnvsTypeEnumSecret  ListDeployments200ApplicationJSONDeploymentsSpecServicesEnvsTypeEnum = "SECRET"
+	ListDeployments200ApplicationJSONAnAppDeploymentAppSpecServicesEnvsTypeEnumGeneral ListDeployments200ApplicationJSONAnAppDeploymentAppSpecServicesEnvsTypeEnum = "GENERAL"
+	ListDeployments200ApplicationJSONAnAppDeploymentAppSpecServicesEnvsTypeEnumSecret  ListDeployments200ApplicationJSONAnAppDeploymentAppSpecServicesEnvsTypeEnum = "SECRET"
 )
 
-type ListDeployments200ApplicationJSONDeploymentsSpecServicesEnvs struct {
-	Key   string                                                                 `json:"key"`
-	Scope *ListDeployments200ApplicationJSONDeploymentsSpecServicesEnvsScopeEnum `json:"scope,omitempty"`
-	Type  *ListDeployments200ApplicationJSONDeploymentsSpecServicesEnvsTypeEnum  `json:"type,omitempty"`
-	Value *string                                                                `json:"value,omitempty"`
+type ListDeployments200ApplicationJSONAnAppDeploymentAppSpecServicesEnvs struct {
+	Key   string                                                                        `json:"key"`
+	Scope *ListDeployments200ApplicationJSONAnAppDeploymentAppSpecServicesEnvsScopeEnum `json:"scope,omitempty"`
+	Type  *ListDeployments200ApplicationJSONAnAppDeploymentAppSpecServicesEnvsTypeEnum  `json:"type,omitempty"`
+	Value *string                                                                       `json:"value,omitempty"`
 }
 
-type ListDeployments200ApplicationJSONDeploymentsSpecServicesGit struct {
+type ListDeployments200ApplicationJSONAnAppDeploymentAppSpecServicesGit struct {
 	Branch       *string `json:"branch,omitempty"`
 	RepoCloneURL *string `json:"repo_clone_url,omitempty"`
 }
 
-type ListDeployments200ApplicationJSONDeploymentsSpecServicesGithub struct {
+type ListDeployments200ApplicationJSONAnAppDeploymentAppSpecServicesGithub struct {
 	Branch       *string `json:"branch,omitempty"`
 	DeployOnPush *bool   `json:"deploy_on_push,omitempty"`
 	Repo         *string `json:"repo,omitempty"`
 }
 
-type ListDeployments200ApplicationJSONDeploymentsSpecServicesGitlab struct {
+type ListDeployments200ApplicationJSONAnAppDeploymentAppSpecServicesGitlab struct {
 	Branch       *string `json:"branch,omitempty"`
 	DeployOnPush *bool   `json:"deploy_on_push,omitempty"`
 	Repo         *string `json:"repo,omitempty"`
 }
 
-type ListDeployments200ApplicationJSONDeploymentsSpecServicesHealthCheck struct {
+type ListDeployments200ApplicationJSONAnAppDeploymentAppSpecServicesHealthCheck struct {
 	FailureThreshold    *int32  `json:"failure_threshold,omitempty"`
 	HTTPPath            *string `json:"http_path,omitempty"`
 	InitialDelaySeconds *int32  `json:"initial_delay_seconds,omitempty"`
@@ -281,126 +281,126 @@ type ListDeployments200ApplicationJSONDeploymentsSpecServicesHealthCheck struct 
 	TimeoutSeconds      *int32  `json:"timeout_seconds,omitempty"`
 }
 
-type ListDeployments200ApplicationJSONDeploymentsSpecServicesImageRegistryTypeEnum string
+type ListDeployments200ApplicationJSONAnAppDeploymentAppSpecServicesImageRegistryTypeEnum string
 
 const (
-	ListDeployments200ApplicationJSONDeploymentsSpecServicesImageRegistryTypeEnumDockerHub ListDeployments200ApplicationJSONDeploymentsSpecServicesImageRegistryTypeEnum = "DOCKER_HUB"
-	ListDeployments200ApplicationJSONDeploymentsSpecServicesImageRegistryTypeEnumDocr      ListDeployments200ApplicationJSONDeploymentsSpecServicesImageRegistryTypeEnum = "DOCR"
+	ListDeployments200ApplicationJSONAnAppDeploymentAppSpecServicesImageRegistryTypeEnumDockerHub ListDeployments200ApplicationJSONAnAppDeploymentAppSpecServicesImageRegistryTypeEnum = "DOCKER_HUB"
+	ListDeployments200ApplicationJSONAnAppDeploymentAppSpecServicesImageRegistryTypeEnumDocr      ListDeployments200ApplicationJSONAnAppDeploymentAppSpecServicesImageRegistryTypeEnum = "DOCR"
 )
 
-type ListDeployments200ApplicationJSONDeploymentsSpecServicesImage struct {
-	Registry     *string                                                                        `json:"registry,omitempty"`
-	RegistryType *ListDeployments200ApplicationJSONDeploymentsSpecServicesImageRegistryTypeEnum `json:"registry_type,omitempty"`
-	Repository   *string                                                                        `json:"repository,omitempty"`
-	Tag          *string                                                                        `json:"tag,omitempty"`
+type ListDeployments200ApplicationJSONAnAppDeploymentAppSpecServicesImage struct {
+	Registry     *string                                                                               `json:"registry,omitempty"`
+	RegistryType *ListDeployments200ApplicationJSONAnAppDeploymentAppSpecServicesImageRegistryTypeEnum `json:"registry_type,omitempty"`
+	Repository   *string                                                                               `json:"repository,omitempty"`
+	Tag          *string                                                                               `json:"tag,omitempty"`
 }
 
-type ListDeployments200ApplicationJSONDeploymentsSpecServicesInstanceSizeSlugEnum string
+type ListDeployments200ApplicationJSONAnAppDeploymentAppSpecServicesInstanceSizeSlugEnum string
 
 const (
-	ListDeployments200ApplicationJSONDeploymentsSpecServicesInstanceSizeSlugEnumBasicXxs       ListDeployments200ApplicationJSONDeploymentsSpecServicesInstanceSizeSlugEnum = "basic-xxs"
-	ListDeployments200ApplicationJSONDeploymentsSpecServicesInstanceSizeSlugEnumBasicXs        ListDeployments200ApplicationJSONDeploymentsSpecServicesInstanceSizeSlugEnum = "basic-xs"
-	ListDeployments200ApplicationJSONDeploymentsSpecServicesInstanceSizeSlugEnumBasicS         ListDeployments200ApplicationJSONDeploymentsSpecServicesInstanceSizeSlugEnum = "basic-s"
-	ListDeployments200ApplicationJSONDeploymentsSpecServicesInstanceSizeSlugEnumBasicM         ListDeployments200ApplicationJSONDeploymentsSpecServicesInstanceSizeSlugEnum = "basic-m"
-	ListDeployments200ApplicationJSONDeploymentsSpecServicesInstanceSizeSlugEnumProfessionalXs ListDeployments200ApplicationJSONDeploymentsSpecServicesInstanceSizeSlugEnum = "professional-xs"
-	ListDeployments200ApplicationJSONDeploymentsSpecServicesInstanceSizeSlugEnumProfessionalS  ListDeployments200ApplicationJSONDeploymentsSpecServicesInstanceSizeSlugEnum = "professional-s"
-	ListDeployments200ApplicationJSONDeploymentsSpecServicesInstanceSizeSlugEnumProfessionalM  ListDeployments200ApplicationJSONDeploymentsSpecServicesInstanceSizeSlugEnum = "professional-m"
-	ListDeployments200ApplicationJSONDeploymentsSpecServicesInstanceSizeSlugEnumProfessional1l ListDeployments200ApplicationJSONDeploymentsSpecServicesInstanceSizeSlugEnum = "professional-1l"
-	ListDeployments200ApplicationJSONDeploymentsSpecServicesInstanceSizeSlugEnumProfessionalL  ListDeployments200ApplicationJSONDeploymentsSpecServicesInstanceSizeSlugEnum = "professional-l"
-	ListDeployments200ApplicationJSONDeploymentsSpecServicesInstanceSizeSlugEnumProfessionalXl ListDeployments200ApplicationJSONDeploymentsSpecServicesInstanceSizeSlugEnum = "professional-xl"
+	ListDeployments200ApplicationJSONAnAppDeploymentAppSpecServicesInstanceSizeSlugEnumBasicXxs       ListDeployments200ApplicationJSONAnAppDeploymentAppSpecServicesInstanceSizeSlugEnum = "basic-xxs"
+	ListDeployments200ApplicationJSONAnAppDeploymentAppSpecServicesInstanceSizeSlugEnumBasicXs        ListDeployments200ApplicationJSONAnAppDeploymentAppSpecServicesInstanceSizeSlugEnum = "basic-xs"
+	ListDeployments200ApplicationJSONAnAppDeploymentAppSpecServicesInstanceSizeSlugEnumBasicS         ListDeployments200ApplicationJSONAnAppDeploymentAppSpecServicesInstanceSizeSlugEnum = "basic-s"
+	ListDeployments200ApplicationJSONAnAppDeploymentAppSpecServicesInstanceSizeSlugEnumBasicM         ListDeployments200ApplicationJSONAnAppDeploymentAppSpecServicesInstanceSizeSlugEnum = "basic-m"
+	ListDeployments200ApplicationJSONAnAppDeploymentAppSpecServicesInstanceSizeSlugEnumProfessionalXs ListDeployments200ApplicationJSONAnAppDeploymentAppSpecServicesInstanceSizeSlugEnum = "professional-xs"
+	ListDeployments200ApplicationJSONAnAppDeploymentAppSpecServicesInstanceSizeSlugEnumProfessionalS  ListDeployments200ApplicationJSONAnAppDeploymentAppSpecServicesInstanceSizeSlugEnum = "professional-s"
+	ListDeployments200ApplicationJSONAnAppDeploymentAppSpecServicesInstanceSizeSlugEnumProfessionalM  ListDeployments200ApplicationJSONAnAppDeploymentAppSpecServicesInstanceSizeSlugEnum = "professional-m"
+	ListDeployments200ApplicationJSONAnAppDeploymentAppSpecServicesInstanceSizeSlugEnumProfessional1l ListDeployments200ApplicationJSONAnAppDeploymentAppSpecServicesInstanceSizeSlugEnum = "professional-1l"
+	ListDeployments200ApplicationJSONAnAppDeploymentAppSpecServicesInstanceSizeSlugEnumProfessionalL  ListDeployments200ApplicationJSONAnAppDeploymentAppSpecServicesInstanceSizeSlugEnum = "professional-l"
+	ListDeployments200ApplicationJSONAnAppDeploymentAppSpecServicesInstanceSizeSlugEnumProfessionalXl ListDeployments200ApplicationJSONAnAppDeploymentAppSpecServicesInstanceSizeSlugEnum = "professional-xl"
 )
 
-type ListDeployments200ApplicationJSONDeploymentsSpecServicesRoutesACriterionForRoutingHTTPTrafficToAComponent struct {
+type ListDeployments200ApplicationJSONAnAppDeploymentAppSpecServicesACriterionForRoutingHTTPTrafficToAComponent struct {
 	Path *string `json:"path,omitempty"`
 }
 
-type ListDeployments200ApplicationJSONDeploymentsSpecServices struct {
-	BuildCommand     *string                                                                                                     `json:"build_command,omitempty"`
-	Cors             *ListDeployments200ApplicationJSONDeploymentsSpecServicesCors                                               `json:"cors,omitempty"`
-	DockerfilePath   *string                                                                                                     `json:"dockerfile_path,omitempty"`
-	EnvironmentSlug  *string                                                                                                     `json:"environment_slug,omitempty"`
-	Envs             []ListDeployments200ApplicationJSONDeploymentsSpecServicesEnvs                                              `json:"envs,omitempty"`
-	Git              *ListDeployments200ApplicationJSONDeploymentsSpecServicesGit                                                `json:"git,omitempty"`
-	Github           *ListDeployments200ApplicationJSONDeploymentsSpecServicesGithub                                             `json:"github,omitempty"`
-	Gitlab           *ListDeployments200ApplicationJSONDeploymentsSpecServicesGitlab                                             `json:"gitlab,omitempty"`
-	HealthCheck      *ListDeployments200ApplicationJSONDeploymentsSpecServicesHealthCheck                                        `json:"health_check,omitempty"`
-	HTTPPort         *int64                                                                                                      `json:"http_port,omitempty"`
-	Image            *ListDeployments200ApplicationJSONDeploymentsSpecServicesImage                                              `json:"image,omitempty"`
-	InstanceCount    *int64                                                                                                      `json:"instance_count,omitempty"`
-	InstanceSizeSlug *ListDeployments200ApplicationJSONDeploymentsSpecServicesInstanceSizeSlugEnum                               `json:"instance_size_slug,omitempty"`
-	InternalPorts    []int64                                                                                                     `json:"internal_ports,omitempty"`
-	Name             string                                                                                                      `json:"name"`
-	Routes           []ListDeployments200ApplicationJSONDeploymentsSpecServicesRoutesACriterionForRoutingHTTPTrafficToAComponent `json:"routes,omitempty"`
-	RunCommand       *string                                                                                                     `json:"run_command,omitempty"`
-	SourceDir        *string                                                                                                     `json:"source_dir,omitempty"`
+type ListDeployments200ApplicationJSONAnAppDeploymentAppSpecServices struct {
+	BuildCommand     *string                                                                                                      `json:"build_command,omitempty"`
+	Cors             *ListDeployments200ApplicationJSONAnAppDeploymentAppSpecServicesCors                                         `json:"cors,omitempty"`
+	DockerfilePath   *string                                                                                                      `json:"dockerfile_path,omitempty"`
+	EnvironmentSlug  *string                                                                                                      `json:"environment_slug,omitempty"`
+	Envs             []ListDeployments200ApplicationJSONAnAppDeploymentAppSpecServicesEnvs                                        `json:"envs,omitempty"`
+	Git              *ListDeployments200ApplicationJSONAnAppDeploymentAppSpecServicesGit                                          `json:"git,omitempty"`
+	Github           *ListDeployments200ApplicationJSONAnAppDeploymentAppSpecServicesGithub                                       `json:"github,omitempty"`
+	Gitlab           *ListDeployments200ApplicationJSONAnAppDeploymentAppSpecServicesGitlab                                       `json:"gitlab,omitempty"`
+	HealthCheck      *ListDeployments200ApplicationJSONAnAppDeploymentAppSpecServicesHealthCheck                                  `json:"health_check,omitempty"`
+	HTTPPort         *int64                                                                                                       `json:"http_port,omitempty"`
+	Image            *ListDeployments200ApplicationJSONAnAppDeploymentAppSpecServicesImage                                        `json:"image,omitempty"`
+	InstanceCount    *int64                                                                                                       `json:"instance_count,omitempty"`
+	InstanceSizeSlug *ListDeployments200ApplicationJSONAnAppDeploymentAppSpecServicesInstanceSizeSlugEnum                         `json:"instance_size_slug,omitempty"`
+	InternalPorts    []int64                                                                                                      `json:"internal_ports,omitempty"`
+	Name             string                                                                                                       `json:"name"`
+	Routes           []ListDeployments200ApplicationJSONAnAppDeploymentAppSpecServicesACriterionForRoutingHTTPTrafficToAComponent `json:"routes,omitempty"`
+	RunCommand       *string                                                                                                      `json:"run_command,omitempty"`
+	SourceDir        *string                                                                                                      `json:"source_dir,omitempty"`
 }
 
-type ListDeployments200ApplicationJSONDeploymentsSpecStaticSitesEnvsScopeEnum string
+type ListDeployments200ApplicationJSONAnAppDeploymentAppSpecStaticSitesEnvsScopeEnum string
 
 const (
-	ListDeployments200ApplicationJSONDeploymentsSpecStaticSitesEnvsScopeEnumUnset           ListDeployments200ApplicationJSONDeploymentsSpecStaticSitesEnvsScopeEnum = "UNSET"
-	ListDeployments200ApplicationJSONDeploymentsSpecStaticSitesEnvsScopeEnumRunTime         ListDeployments200ApplicationJSONDeploymentsSpecStaticSitesEnvsScopeEnum = "RUN_TIME"
-	ListDeployments200ApplicationJSONDeploymentsSpecStaticSitesEnvsScopeEnumBuildTime       ListDeployments200ApplicationJSONDeploymentsSpecStaticSitesEnvsScopeEnum = "BUILD_TIME"
-	ListDeployments200ApplicationJSONDeploymentsSpecStaticSitesEnvsScopeEnumRunAndBuildTime ListDeployments200ApplicationJSONDeploymentsSpecStaticSitesEnvsScopeEnum = "RUN_AND_BUILD_TIME"
+	ListDeployments200ApplicationJSONAnAppDeploymentAppSpecStaticSitesEnvsScopeEnumUnset           ListDeployments200ApplicationJSONAnAppDeploymentAppSpecStaticSitesEnvsScopeEnum = "UNSET"
+	ListDeployments200ApplicationJSONAnAppDeploymentAppSpecStaticSitesEnvsScopeEnumRunTime         ListDeployments200ApplicationJSONAnAppDeploymentAppSpecStaticSitesEnvsScopeEnum = "RUN_TIME"
+	ListDeployments200ApplicationJSONAnAppDeploymentAppSpecStaticSitesEnvsScopeEnumBuildTime       ListDeployments200ApplicationJSONAnAppDeploymentAppSpecStaticSitesEnvsScopeEnum = "BUILD_TIME"
+	ListDeployments200ApplicationJSONAnAppDeploymentAppSpecStaticSitesEnvsScopeEnumRunAndBuildTime ListDeployments200ApplicationJSONAnAppDeploymentAppSpecStaticSitesEnvsScopeEnum = "RUN_AND_BUILD_TIME"
 )
 
-type ListDeployments200ApplicationJSONDeploymentsSpecStaticSitesEnvsTypeEnum string
+type ListDeployments200ApplicationJSONAnAppDeploymentAppSpecStaticSitesEnvsTypeEnum string
 
 const (
-	ListDeployments200ApplicationJSONDeploymentsSpecStaticSitesEnvsTypeEnumGeneral ListDeployments200ApplicationJSONDeploymentsSpecStaticSitesEnvsTypeEnum = "GENERAL"
-	ListDeployments200ApplicationJSONDeploymentsSpecStaticSitesEnvsTypeEnumSecret  ListDeployments200ApplicationJSONDeploymentsSpecStaticSitesEnvsTypeEnum = "SECRET"
+	ListDeployments200ApplicationJSONAnAppDeploymentAppSpecStaticSitesEnvsTypeEnumGeneral ListDeployments200ApplicationJSONAnAppDeploymentAppSpecStaticSitesEnvsTypeEnum = "GENERAL"
+	ListDeployments200ApplicationJSONAnAppDeploymentAppSpecStaticSitesEnvsTypeEnumSecret  ListDeployments200ApplicationJSONAnAppDeploymentAppSpecStaticSitesEnvsTypeEnum = "SECRET"
 )
 
-type ListDeployments200ApplicationJSONDeploymentsSpecStaticSitesEnvs struct {
-	Key   string                                                                    `json:"key"`
-	Scope *ListDeployments200ApplicationJSONDeploymentsSpecStaticSitesEnvsScopeEnum `json:"scope,omitempty"`
-	Type  *ListDeployments200ApplicationJSONDeploymentsSpecStaticSitesEnvsTypeEnum  `json:"type,omitempty"`
-	Value *string                                                                   `json:"value,omitempty"`
+type ListDeployments200ApplicationJSONAnAppDeploymentAppSpecStaticSitesEnvs struct {
+	Key   string                                                                           `json:"key"`
+	Scope *ListDeployments200ApplicationJSONAnAppDeploymentAppSpecStaticSitesEnvsScopeEnum `json:"scope,omitempty"`
+	Type  *ListDeployments200ApplicationJSONAnAppDeploymentAppSpecStaticSitesEnvsTypeEnum  `json:"type,omitempty"`
+	Value *string                                                                          `json:"value,omitempty"`
 }
 
-type ListDeployments200ApplicationJSONDeploymentsSpecStaticSitesGit struct {
+type ListDeployments200ApplicationJSONAnAppDeploymentAppSpecStaticSitesGit struct {
 	Branch       *string `json:"branch,omitempty"`
 	RepoCloneURL *string `json:"repo_clone_url,omitempty"`
 }
 
-type ListDeployments200ApplicationJSONDeploymentsSpecStaticSitesGithub struct {
+type ListDeployments200ApplicationJSONAnAppDeploymentAppSpecStaticSitesGithub struct {
 	Branch       *string `json:"branch,omitempty"`
 	DeployOnPush *bool   `json:"deploy_on_push,omitempty"`
 	Repo         *string `json:"repo,omitempty"`
 }
 
-type ListDeployments200ApplicationJSONDeploymentsSpecStaticSitesGitlab struct {
+type ListDeployments200ApplicationJSONAnAppDeploymentAppSpecStaticSitesGitlab struct {
 	Branch       *string `json:"branch,omitempty"`
 	DeployOnPush *bool   `json:"deploy_on_push,omitempty"`
 	Repo         *string `json:"repo,omitempty"`
 }
 
-type ListDeployments200ApplicationJSONDeploymentsSpecStaticSitesImageRegistryTypeEnum string
+type ListDeployments200ApplicationJSONAnAppDeploymentAppSpecStaticSitesImageRegistryTypeEnum string
 
 const (
-	ListDeployments200ApplicationJSONDeploymentsSpecStaticSitesImageRegistryTypeEnumDockerHub ListDeployments200ApplicationJSONDeploymentsSpecStaticSitesImageRegistryTypeEnum = "DOCKER_HUB"
-	ListDeployments200ApplicationJSONDeploymentsSpecStaticSitesImageRegistryTypeEnumDocr      ListDeployments200ApplicationJSONDeploymentsSpecStaticSitesImageRegistryTypeEnum = "DOCR"
+	ListDeployments200ApplicationJSONAnAppDeploymentAppSpecStaticSitesImageRegistryTypeEnumDockerHub ListDeployments200ApplicationJSONAnAppDeploymentAppSpecStaticSitesImageRegistryTypeEnum = "DOCKER_HUB"
+	ListDeployments200ApplicationJSONAnAppDeploymentAppSpecStaticSitesImageRegistryTypeEnumDocr      ListDeployments200ApplicationJSONAnAppDeploymentAppSpecStaticSitesImageRegistryTypeEnum = "DOCR"
 )
 
-type ListDeployments200ApplicationJSONDeploymentsSpecStaticSitesImage struct {
-	Registry     *string                                                                           `json:"registry,omitempty"`
-	RegistryType *ListDeployments200ApplicationJSONDeploymentsSpecStaticSitesImageRegistryTypeEnum `json:"registry_type,omitempty"`
-	Repository   *string                                                                           `json:"repository,omitempty"`
-	Tag          *string                                                                           `json:"tag,omitempty"`
+type ListDeployments200ApplicationJSONAnAppDeploymentAppSpecStaticSitesImage struct {
+	Registry     *string                                                                                  `json:"registry,omitempty"`
+	RegistryType *ListDeployments200ApplicationJSONAnAppDeploymentAppSpecStaticSitesImageRegistryTypeEnum `json:"registry_type,omitempty"`
+	Repository   *string                                                                                  `json:"repository,omitempty"`
+	Tag          *string                                                                                  `json:"tag,omitempty"`
 }
 
-type ListDeployments200ApplicationJSONDeploymentsSpecStaticSites struct {
+type ListDeployments200ApplicationJSONAnAppDeploymentAppSpecStaticSites struct {
 	BuildCommand     *string                                                                                                                                                                                       `json:"build_command,omitempty"`
 	CatchallDocument *string                                                                                                                                                                                       `json:"catchall_document,omitempty"`
 	Cors             *shared.Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecPropertiesServicesItemsAllOf2PropertiesCors         `json:"cors,omitempty"`
 	DockerfilePath   *string                                                                                                                                                                                       `json:"dockerfile_path,omitempty"`
 	EnvironmentSlug  *string                                                                                                                                                                                       `json:"environment_slug,omitempty"`
-	Envs             []ListDeployments200ApplicationJSONDeploymentsSpecStaticSitesEnvs                                                                                                                             `json:"envs,omitempty"`
+	Envs             []ListDeployments200ApplicationJSONAnAppDeploymentAppSpecStaticSitesEnvs                                                                                                                      `json:"envs,omitempty"`
 	ErrorDocument    *string                                                                                                                                                                                       `json:"error_document,omitempty"`
-	Git              *ListDeployments200ApplicationJSONDeploymentsSpecStaticSitesGit                                                                                                                               `json:"git,omitempty"`
-	Github           *ListDeployments200ApplicationJSONDeploymentsSpecStaticSitesGithub                                                                                                                            `json:"github,omitempty"`
-	Gitlab           *ListDeployments200ApplicationJSONDeploymentsSpecStaticSitesGitlab                                                                                                                            `json:"gitlab,omitempty"`
-	Image            *ListDeployments200ApplicationJSONDeploymentsSpecStaticSitesImage                                                                                                                             `json:"image,omitempty"`
+	Git              *ListDeployments200ApplicationJSONAnAppDeploymentAppSpecStaticSitesGit                                                                                                                        `json:"git,omitempty"`
+	Github           *ListDeployments200ApplicationJSONAnAppDeploymentAppSpecStaticSitesGithub                                                                                                                     `json:"github,omitempty"`
+	Gitlab           *ListDeployments200ApplicationJSONAnAppDeploymentAppSpecStaticSitesGitlab                                                                                                                     `json:"gitlab,omitempty"`
+	Image            *ListDeployments200ApplicationJSONAnAppDeploymentAppSpecStaticSitesImage                                                                                                                      `json:"image,omitempty"`
 	IndexDocument    *string                                                                                                                                                                                       `json:"index_document,omitempty"`
 	Name             string                                                                                                                                                                                        `json:"name"`
 	OutputDir        *string                                                                                                                                                                                       `json:"output_dir,omitempty"`
@@ -409,131 +409,131 @@ type ListDeployments200ApplicationJSONDeploymentsSpecStaticSites struct {
 	SourceDir        *string                                                                                                                                                                                       `json:"source_dir,omitempty"`
 }
 
-type ListDeployments200ApplicationJSONDeploymentsSpecWorkersEnvsScopeEnum string
+type ListDeployments200ApplicationJSONAnAppDeploymentAppSpecWorkersEnvsScopeEnum string
 
 const (
-	ListDeployments200ApplicationJSONDeploymentsSpecWorkersEnvsScopeEnumUnset           ListDeployments200ApplicationJSONDeploymentsSpecWorkersEnvsScopeEnum = "UNSET"
-	ListDeployments200ApplicationJSONDeploymentsSpecWorkersEnvsScopeEnumRunTime         ListDeployments200ApplicationJSONDeploymentsSpecWorkersEnvsScopeEnum = "RUN_TIME"
-	ListDeployments200ApplicationJSONDeploymentsSpecWorkersEnvsScopeEnumBuildTime       ListDeployments200ApplicationJSONDeploymentsSpecWorkersEnvsScopeEnum = "BUILD_TIME"
-	ListDeployments200ApplicationJSONDeploymentsSpecWorkersEnvsScopeEnumRunAndBuildTime ListDeployments200ApplicationJSONDeploymentsSpecWorkersEnvsScopeEnum = "RUN_AND_BUILD_TIME"
+	ListDeployments200ApplicationJSONAnAppDeploymentAppSpecWorkersEnvsScopeEnumUnset           ListDeployments200ApplicationJSONAnAppDeploymentAppSpecWorkersEnvsScopeEnum = "UNSET"
+	ListDeployments200ApplicationJSONAnAppDeploymentAppSpecWorkersEnvsScopeEnumRunTime         ListDeployments200ApplicationJSONAnAppDeploymentAppSpecWorkersEnvsScopeEnum = "RUN_TIME"
+	ListDeployments200ApplicationJSONAnAppDeploymentAppSpecWorkersEnvsScopeEnumBuildTime       ListDeployments200ApplicationJSONAnAppDeploymentAppSpecWorkersEnvsScopeEnum = "BUILD_TIME"
+	ListDeployments200ApplicationJSONAnAppDeploymentAppSpecWorkersEnvsScopeEnumRunAndBuildTime ListDeployments200ApplicationJSONAnAppDeploymentAppSpecWorkersEnvsScopeEnum = "RUN_AND_BUILD_TIME"
 )
 
-type ListDeployments200ApplicationJSONDeploymentsSpecWorkersEnvsTypeEnum string
+type ListDeployments200ApplicationJSONAnAppDeploymentAppSpecWorkersEnvsTypeEnum string
 
 const (
-	ListDeployments200ApplicationJSONDeploymentsSpecWorkersEnvsTypeEnumGeneral ListDeployments200ApplicationJSONDeploymentsSpecWorkersEnvsTypeEnum = "GENERAL"
-	ListDeployments200ApplicationJSONDeploymentsSpecWorkersEnvsTypeEnumSecret  ListDeployments200ApplicationJSONDeploymentsSpecWorkersEnvsTypeEnum = "SECRET"
+	ListDeployments200ApplicationJSONAnAppDeploymentAppSpecWorkersEnvsTypeEnumGeneral ListDeployments200ApplicationJSONAnAppDeploymentAppSpecWorkersEnvsTypeEnum = "GENERAL"
+	ListDeployments200ApplicationJSONAnAppDeploymentAppSpecWorkersEnvsTypeEnumSecret  ListDeployments200ApplicationJSONAnAppDeploymentAppSpecWorkersEnvsTypeEnum = "SECRET"
 )
 
-type ListDeployments200ApplicationJSONDeploymentsSpecWorkersEnvs struct {
-	Key   string                                                                `json:"key"`
-	Scope *ListDeployments200ApplicationJSONDeploymentsSpecWorkersEnvsScopeEnum `json:"scope,omitempty"`
-	Type  *ListDeployments200ApplicationJSONDeploymentsSpecWorkersEnvsTypeEnum  `json:"type,omitempty"`
-	Value *string                                                               `json:"value,omitempty"`
+type ListDeployments200ApplicationJSONAnAppDeploymentAppSpecWorkersEnvs struct {
+	Key   string                                                                       `json:"key"`
+	Scope *ListDeployments200ApplicationJSONAnAppDeploymentAppSpecWorkersEnvsScopeEnum `json:"scope,omitempty"`
+	Type  *ListDeployments200ApplicationJSONAnAppDeploymentAppSpecWorkersEnvsTypeEnum  `json:"type,omitempty"`
+	Value *string                                                                      `json:"value,omitempty"`
 }
 
-type ListDeployments200ApplicationJSONDeploymentsSpecWorkersGit struct {
+type ListDeployments200ApplicationJSONAnAppDeploymentAppSpecWorkersGit struct {
 	Branch       *string `json:"branch,omitempty"`
 	RepoCloneURL *string `json:"repo_clone_url,omitempty"`
 }
 
-type ListDeployments200ApplicationJSONDeploymentsSpecWorkersGithub struct {
+type ListDeployments200ApplicationJSONAnAppDeploymentAppSpecWorkersGithub struct {
 	Branch       *string `json:"branch,omitempty"`
 	DeployOnPush *bool   `json:"deploy_on_push,omitempty"`
 	Repo         *string `json:"repo,omitempty"`
 }
 
-type ListDeployments200ApplicationJSONDeploymentsSpecWorkersGitlab struct {
+type ListDeployments200ApplicationJSONAnAppDeploymentAppSpecWorkersGitlab struct {
 	Branch       *string `json:"branch,omitempty"`
 	DeployOnPush *bool   `json:"deploy_on_push,omitempty"`
 	Repo         *string `json:"repo,omitempty"`
 }
 
-type ListDeployments200ApplicationJSONDeploymentsSpecWorkersImageRegistryTypeEnum string
+type ListDeployments200ApplicationJSONAnAppDeploymentAppSpecWorkersImageRegistryTypeEnum string
 
 const (
-	ListDeployments200ApplicationJSONDeploymentsSpecWorkersImageRegistryTypeEnumDockerHub ListDeployments200ApplicationJSONDeploymentsSpecWorkersImageRegistryTypeEnum = "DOCKER_HUB"
-	ListDeployments200ApplicationJSONDeploymentsSpecWorkersImageRegistryTypeEnumDocr      ListDeployments200ApplicationJSONDeploymentsSpecWorkersImageRegistryTypeEnum = "DOCR"
+	ListDeployments200ApplicationJSONAnAppDeploymentAppSpecWorkersImageRegistryTypeEnumDockerHub ListDeployments200ApplicationJSONAnAppDeploymentAppSpecWorkersImageRegistryTypeEnum = "DOCKER_HUB"
+	ListDeployments200ApplicationJSONAnAppDeploymentAppSpecWorkersImageRegistryTypeEnumDocr      ListDeployments200ApplicationJSONAnAppDeploymentAppSpecWorkersImageRegistryTypeEnum = "DOCR"
 )
 
-type ListDeployments200ApplicationJSONDeploymentsSpecWorkersImage struct {
-	Registry     *string                                                                       `json:"registry,omitempty"`
-	RegistryType *ListDeployments200ApplicationJSONDeploymentsSpecWorkersImageRegistryTypeEnum `json:"registry_type,omitempty"`
-	Repository   *string                                                                       `json:"repository,omitempty"`
-	Tag          *string                                                                       `json:"tag,omitempty"`
+type ListDeployments200ApplicationJSONAnAppDeploymentAppSpecWorkersImage struct {
+	Registry     *string                                                                              `json:"registry,omitempty"`
+	RegistryType *ListDeployments200ApplicationJSONAnAppDeploymentAppSpecWorkersImageRegistryTypeEnum `json:"registry_type,omitempty"`
+	Repository   *string                                                                              `json:"repository,omitempty"`
+	Tag          *string                                                                              `json:"tag,omitempty"`
 }
 
-type ListDeployments200ApplicationJSONDeploymentsSpecWorkersInstanceSizeSlugEnum string
+type ListDeployments200ApplicationJSONAnAppDeploymentAppSpecWorkersInstanceSizeSlugEnum string
 
 const (
-	ListDeployments200ApplicationJSONDeploymentsSpecWorkersInstanceSizeSlugEnumBasicXxs       ListDeployments200ApplicationJSONDeploymentsSpecWorkersInstanceSizeSlugEnum = "basic-xxs"
-	ListDeployments200ApplicationJSONDeploymentsSpecWorkersInstanceSizeSlugEnumBasicXs        ListDeployments200ApplicationJSONDeploymentsSpecWorkersInstanceSizeSlugEnum = "basic-xs"
-	ListDeployments200ApplicationJSONDeploymentsSpecWorkersInstanceSizeSlugEnumBasicS         ListDeployments200ApplicationJSONDeploymentsSpecWorkersInstanceSizeSlugEnum = "basic-s"
-	ListDeployments200ApplicationJSONDeploymentsSpecWorkersInstanceSizeSlugEnumBasicM         ListDeployments200ApplicationJSONDeploymentsSpecWorkersInstanceSizeSlugEnum = "basic-m"
-	ListDeployments200ApplicationJSONDeploymentsSpecWorkersInstanceSizeSlugEnumProfessionalXs ListDeployments200ApplicationJSONDeploymentsSpecWorkersInstanceSizeSlugEnum = "professional-xs"
-	ListDeployments200ApplicationJSONDeploymentsSpecWorkersInstanceSizeSlugEnumProfessionalS  ListDeployments200ApplicationJSONDeploymentsSpecWorkersInstanceSizeSlugEnum = "professional-s"
-	ListDeployments200ApplicationJSONDeploymentsSpecWorkersInstanceSizeSlugEnumProfessionalM  ListDeployments200ApplicationJSONDeploymentsSpecWorkersInstanceSizeSlugEnum = "professional-m"
-	ListDeployments200ApplicationJSONDeploymentsSpecWorkersInstanceSizeSlugEnumProfessional1l ListDeployments200ApplicationJSONDeploymentsSpecWorkersInstanceSizeSlugEnum = "professional-1l"
-	ListDeployments200ApplicationJSONDeploymentsSpecWorkersInstanceSizeSlugEnumProfessionalL  ListDeployments200ApplicationJSONDeploymentsSpecWorkersInstanceSizeSlugEnum = "professional-l"
-	ListDeployments200ApplicationJSONDeploymentsSpecWorkersInstanceSizeSlugEnumProfessionalXl ListDeployments200ApplicationJSONDeploymentsSpecWorkersInstanceSizeSlugEnum = "professional-xl"
+	ListDeployments200ApplicationJSONAnAppDeploymentAppSpecWorkersInstanceSizeSlugEnumBasicXxs       ListDeployments200ApplicationJSONAnAppDeploymentAppSpecWorkersInstanceSizeSlugEnum = "basic-xxs"
+	ListDeployments200ApplicationJSONAnAppDeploymentAppSpecWorkersInstanceSizeSlugEnumBasicXs        ListDeployments200ApplicationJSONAnAppDeploymentAppSpecWorkersInstanceSizeSlugEnum = "basic-xs"
+	ListDeployments200ApplicationJSONAnAppDeploymentAppSpecWorkersInstanceSizeSlugEnumBasicS         ListDeployments200ApplicationJSONAnAppDeploymentAppSpecWorkersInstanceSizeSlugEnum = "basic-s"
+	ListDeployments200ApplicationJSONAnAppDeploymentAppSpecWorkersInstanceSizeSlugEnumBasicM         ListDeployments200ApplicationJSONAnAppDeploymentAppSpecWorkersInstanceSizeSlugEnum = "basic-m"
+	ListDeployments200ApplicationJSONAnAppDeploymentAppSpecWorkersInstanceSizeSlugEnumProfessionalXs ListDeployments200ApplicationJSONAnAppDeploymentAppSpecWorkersInstanceSizeSlugEnum = "professional-xs"
+	ListDeployments200ApplicationJSONAnAppDeploymentAppSpecWorkersInstanceSizeSlugEnumProfessionalS  ListDeployments200ApplicationJSONAnAppDeploymentAppSpecWorkersInstanceSizeSlugEnum = "professional-s"
+	ListDeployments200ApplicationJSONAnAppDeploymentAppSpecWorkersInstanceSizeSlugEnumProfessionalM  ListDeployments200ApplicationJSONAnAppDeploymentAppSpecWorkersInstanceSizeSlugEnum = "professional-m"
+	ListDeployments200ApplicationJSONAnAppDeploymentAppSpecWorkersInstanceSizeSlugEnumProfessional1l ListDeployments200ApplicationJSONAnAppDeploymentAppSpecWorkersInstanceSizeSlugEnum = "professional-1l"
+	ListDeployments200ApplicationJSONAnAppDeploymentAppSpecWorkersInstanceSizeSlugEnumProfessionalL  ListDeployments200ApplicationJSONAnAppDeploymentAppSpecWorkersInstanceSizeSlugEnum = "professional-l"
+	ListDeployments200ApplicationJSONAnAppDeploymentAppSpecWorkersInstanceSizeSlugEnumProfessionalXl ListDeployments200ApplicationJSONAnAppDeploymentAppSpecWorkersInstanceSizeSlugEnum = "professional-xl"
 )
 
-type ListDeployments200ApplicationJSONDeploymentsSpecWorkers struct {
-	BuildCommand     *string                                                                      `json:"build_command,omitempty"`
-	DockerfilePath   *string                                                                      `json:"dockerfile_path,omitempty"`
-	EnvironmentSlug  *string                                                                      `json:"environment_slug,omitempty"`
-	Envs             []ListDeployments200ApplicationJSONDeploymentsSpecWorkersEnvs                `json:"envs,omitempty"`
-	Git              *ListDeployments200ApplicationJSONDeploymentsSpecWorkersGit                  `json:"git,omitempty"`
-	Github           *ListDeployments200ApplicationJSONDeploymentsSpecWorkersGithub               `json:"github,omitempty"`
-	Gitlab           *ListDeployments200ApplicationJSONDeploymentsSpecWorkersGitlab               `json:"gitlab,omitempty"`
-	Image            *ListDeployments200ApplicationJSONDeploymentsSpecWorkersImage                `json:"image,omitempty"`
-	InstanceCount    *int64                                                                       `json:"instance_count,omitempty"`
-	InstanceSizeSlug *ListDeployments200ApplicationJSONDeploymentsSpecWorkersInstanceSizeSlugEnum `json:"instance_size_slug,omitempty"`
-	Name             string                                                                       `json:"name"`
-	RunCommand       *string                                                                      `json:"run_command,omitempty"`
-	SourceDir        *string                                                                      `json:"source_dir,omitempty"`
+type ListDeployments200ApplicationJSONAnAppDeploymentAppSpecWorkers struct {
+	BuildCommand     *string                                                                             `json:"build_command,omitempty"`
+	DockerfilePath   *string                                                                             `json:"dockerfile_path,omitempty"`
+	EnvironmentSlug  *string                                                                             `json:"environment_slug,omitempty"`
+	Envs             []ListDeployments200ApplicationJSONAnAppDeploymentAppSpecWorkersEnvs                `json:"envs,omitempty"`
+	Git              *ListDeployments200ApplicationJSONAnAppDeploymentAppSpecWorkersGit                  `json:"git,omitempty"`
+	Github           *ListDeployments200ApplicationJSONAnAppDeploymentAppSpecWorkersGithub               `json:"github,omitempty"`
+	Gitlab           *ListDeployments200ApplicationJSONAnAppDeploymentAppSpecWorkersGitlab               `json:"gitlab,omitempty"`
+	Image            *ListDeployments200ApplicationJSONAnAppDeploymentAppSpecWorkersImage                `json:"image,omitempty"`
+	InstanceCount    *int64                                                                              `json:"instance_count,omitempty"`
+	InstanceSizeSlug *ListDeployments200ApplicationJSONAnAppDeploymentAppSpecWorkersInstanceSizeSlugEnum `json:"instance_size_slug,omitempty"`
+	Name             string                                                                              `json:"name"`
+	RunCommand       *string                                                                             `json:"run_command,omitempty"`
+	SourceDir        *string                                                                             `json:"source_dir,omitempty"`
 }
 
-type ListDeployments200ApplicationJSONDeploymentsSpecAppSpec struct {
-	Databases   []ListDeployments200ApplicationJSONDeploymentsSpecDatabases   `json:"databases,omitempty"`
-	Domains     []ListDeployments200ApplicationJSONDeploymentsSpecDomains     `json:"domains,omitempty"`
-	Jobs        []ListDeployments200ApplicationJSONDeploymentsSpecJobs        `json:"jobs,omitempty"`
-	Name        string                                                        `json:"name"`
-	Region      *ListDeployments200ApplicationJSONDeploymentsSpecRegionEnum   `json:"region,omitempty"`
-	Services    []ListDeployments200ApplicationJSONDeploymentsSpecServices    `json:"services,omitempty"`
-	StaticSites []ListDeployments200ApplicationJSONDeploymentsSpecStaticSites `json:"static_sites,omitempty"`
-	Workers     []ListDeployments200ApplicationJSONDeploymentsSpecWorkers     `json:"workers,omitempty"`
+type ListDeployments200ApplicationJSONAnAppDeploymentAppSpec struct {
+	Databases   []ListDeployments200ApplicationJSONAnAppDeploymentAppSpecDatabases   `json:"databases,omitempty"`
+	Domains     []ListDeployments200ApplicationJSONAnAppDeploymentAppSpecDomains     `json:"domains,omitempty"`
+	Jobs        []ListDeployments200ApplicationJSONAnAppDeploymentAppSpecJobs        `json:"jobs,omitempty"`
+	Name        string                                                               `json:"name"`
+	Region      *ListDeployments200ApplicationJSONAnAppDeploymentAppSpecRegionEnum   `json:"region,omitempty"`
+	Services    []ListDeployments200ApplicationJSONAnAppDeploymentAppSpecServices    `json:"services,omitempty"`
+	StaticSites []ListDeployments200ApplicationJSONAnAppDeploymentAppSpecStaticSites `json:"static_sites,omitempty"`
+	Workers     []ListDeployments200ApplicationJSONAnAppDeploymentAppSpecWorkers     `json:"workers,omitempty"`
 }
 
-type ListDeployments200ApplicationJSONDeploymentsStaticSites struct {
+type ListDeployments200ApplicationJSONAnAppDeploymentStaticSites struct {
 	Name             *string `json:"name,omitempty"`
 	SourceCommitHash *string `json:"source_commit_hash,omitempty"`
 }
 
-type ListDeployments200ApplicationJSONDeploymentsWorkers struct {
+type ListDeployments200ApplicationJSONAnAppDeploymentWorkers struct {
 	Name             *string `json:"name,omitempty"`
 	SourceCommitHash *string `json:"source_commit_hash,omitempty"`
 }
 
-type ListDeployments200ApplicationJSONDeploymentsAnAppDeployment struct {
-	Cause              *string                                                   `json:"cause,omitempty"`
-	ClonedFrom         *string                                                   `json:"cloned_from,omitempty"`
-	CreatedAt          *time.Time                                                `json:"created_at,omitempty"`
-	ID                 *string                                                   `json:"id,omitempty"`
-	Jobs               []ListDeployments200ApplicationJSONDeploymentsJobs        `json:"jobs,omitempty"`
-	Phase              *ListDeployments200ApplicationJSONDeploymentsPhaseEnum    `json:"phase,omitempty"`
-	PhaseLastUpdatedAt *time.Time                                                `json:"phase_last_updated_at,omitempty"`
-	Progress           *ListDeployments200ApplicationJSONDeploymentsProgress     `json:"progress,omitempty"`
-	Services           []ListDeployments200ApplicationJSONDeploymentsServices    `json:"services,omitempty"`
-	Spec               *ListDeployments200ApplicationJSONDeploymentsSpecAppSpec  `json:"spec,omitempty"`
-	StaticSites        []ListDeployments200ApplicationJSONDeploymentsStaticSites `json:"static_sites,omitempty"`
-	TierSlug           *string                                                   `json:"tier_slug,omitempty"`
-	UpdatedAt          *time.Time                                                `json:"updated_at,omitempty"`
-	Workers            []ListDeployments200ApplicationJSONDeploymentsWorkers     `json:"workers,omitempty"`
+type ListDeployments200ApplicationJSONAnAppDeployment struct {
+	Cause              *string                                                       `json:"cause,omitempty"`
+	ClonedFrom         *string                                                       `json:"cloned_from,omitempty"`
+	CreatedAt          *time.Time                                                    `json:"created_at,omitempty"`
+	ID                 *string                                                       `json:"id,omitempty"`
+	Jobs               []ListDeployments200ApplicationJSONAnAppDeploymentJobs        `json:"jobs,omitempty"`
+	Phase              *ListDeployments200ApplicationJSONAnAppDeploymentPhaseEnum    `json:"phase,omitempty"`
+	PhaseLastUpdatedAt *time.Time                                                    `json:"phase_last_updated_at,omitempty"`
+	Progress           *ListDeployments200ApplicationJSONAnAppDeploymentProgress     `json:"progress,omitempty"`
+	Services           []ListDeployments200ApplicationJSONAnAppDeploymentServices    `json:"services,omitempty"`
+	Spec               *ListDeployments200ApplicationJSONAnAppDeploymentAppSpec      `json:"spec,omitempty"`
+	StaticSites        []ListDeployments200ApplicationJSONAnAppDeploymentStaticSites `json:"static_sites,omitempty"`
+	TierSlug           *string                                                       `json:"tier_slug,omitempty"`
+	UpdatedAt          *time.Time                                                    `json:"updated_at,omitempty"`
+	Workers            []ListDeployments200ApplicationJSONAnAppDeploymentWorkers     `json:"workers,omitempty"`
 }
 
 type ListDeployments200ApplicationJSON struct {
-	Deployments []ListDeployments200ApplicationJSONDeploymentsAnAppDeployment                               `json:"deployments,omitempty"`
+	Deployments []ListDeployments200ApplicationJSONAnAppDeployment                                          `json:"deployments,omitempty"`
 	Links       *shared.Onev21account1keysGetResponses200ContentApplication1jsonSchemaAllOf1PropertiesLinks `json:"links,omitempty"`
 	Meta        *shared.Onev21account1keysGetResponses200ContentApplication1jsonSchemaAllOf2PropertiesMeta  `json:"meta,omitempty"`
 }

@@ -1,7 +1,7 @@
 package operations
 
 type DemoV2LocationsTilesViewerGetResponse struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+	ContentType                                    string
+	StatusCode                                     int64
+	DemoV2LocationsTilesViewerGet200TextHTMLString *string
 }

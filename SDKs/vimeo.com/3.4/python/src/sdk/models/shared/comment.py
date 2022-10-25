@@ -359,7 +359,7 @@ class CommentUserWebsites:
 
 @dataclass_json
 @dataclass
-class CommentUserUser:
+class CommentUser:
     account: CommentUserAccountEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'account' }})
     bio: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'bio' }})
     content_filter: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'content_filter' }})
@@ -386,5 +386,5 @@ class Comment:
     text: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'text' }})
     type: CommentTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
-    user: CommentUserUser = field(default=None, metadata={'dataclasses_json': { 'field_name': 'user' }})
+    user: CommentUser = field(default=None, metadata={'dataclasses_json': { 'field_name': 'user' }})
     

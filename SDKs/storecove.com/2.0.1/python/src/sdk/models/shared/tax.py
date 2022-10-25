@@ -3,7 +3,7 @@ from typing import Enum,Optional
 from dataclasses_json import dataclass_json
 from . import country_enum
 
-class TaxCategoryTaxCategoryEnum(str, Enum):
+class TaxTaxCategoryEnum(str, Enum):
     STANDARD = "standard"
     ZERO_RATED = "zero_rated"
     REVERSE_CHARGE = "reverse_charge"
@@ -36,7 +36,7 @@ class TaxCategoryTaxCategoryEnum(str, Enum):
 @dataclass
 class Tax:
     amount: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'amount' }})
-    category: Optional[TaxCategoryTaxCategoryEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'category' }})
+    category: Optional[TaxTaxCategoryEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'category' }})
     country: country_enum.CountryEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'country' }})
     percentage: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'percentage' }})
     

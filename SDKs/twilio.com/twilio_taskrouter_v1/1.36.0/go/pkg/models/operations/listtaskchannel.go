@@ -27,7 +27,7 @@ type ListTaskChannelRequest struct {
 	Security    ListTaskChannelSecurity
 }
 
-type ListTaskChannel200ApplicationJSONMeta struct {
+type ListTaskChannelListTaskChannelResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -37,13 +37,13 @@ type ListTaskChannel200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListTaskChannel200ApplicationJSONListTaskChannelResponse struct {
-	Channels []shared.TaskrouterV1WorkspaceTaskChannel `json:"channels,omitempty"`
-	Meta     *ListTaskChannel200ApplicationJSONMeta    `json:"meta,omitempty"`
+type ListTaskChannelListTaskChannelResponse struct {
+	Channels []shared.TaskrouterV1WorkspaceTaskChannel   `json:"channels,omitempty"`
+	Meta     *ListTaskChannelListTaskChannelResponseMeta `json:"meta,omitempty"`
 }
 
 type ListTaskChannelResponse struct {
 	ContentType             string
-	ListTaskChannelResponse *ListTaskChannel200ApplicationJSONListTaskChannelResponse
+	ListTaskChannelResponse *ListTaskChannelListTaskChannelResponse
 	StatusCode              int64
 }

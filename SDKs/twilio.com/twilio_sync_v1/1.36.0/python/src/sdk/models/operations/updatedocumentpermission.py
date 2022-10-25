@@ -14,7 +14,7 @@ class UpdateDocumentPermissionPathParams:
     
 
 @dataclass
-class UpdateDocumentPermissionRequestBodyUpdateDocumentPermissionRequest:
+class UpdateDocumentPermissionUpdateDocumentPermissionRequest:
     manage: bool = field(default=None, metadata={'form': { 'field_name': 'Manage' }})
     read: bool = field(default=None, metadata={'form': { 'field_name': 'Read' }})
     write: bool = field(default=None, metadata={'form': { 'field_name': 'Write' }})
@@ -29,7 +29,7 @@ class UpdateDocumentPermissionSecurity:
 class UpdateDocumentPermissionRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateDocumentPermissionPathParams = field(default=None)
-    request: Optional[UpdateDocumentPermissionRequestBodyUpdateDocumentPermissionRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateDocumentPermissionUpdateDocumentPermissionRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateDocumentPermissionSecurity = field(default=None)
     
 

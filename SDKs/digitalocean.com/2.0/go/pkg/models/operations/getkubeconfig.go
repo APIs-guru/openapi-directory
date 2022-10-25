@@ -24,10 +24,10 @@ type GetKubeconfig401ApplicationJSON struct {
 }
 
 type GetKubeconfigResponse struct {
-	Body                                                      []byte
 	ContentType                                               string
 	Headers                                                   map[string][]string
 	StatusCode                                                int64
+	GetKubeconfig200ApplicationYamlString                     *string
 	GetKubeconfig401ApplicationJSONObject                     *GetKubeconfig401ApplicationJSON
 	Onev211ClicksGetResponses401ContentApplication1jsonSchema *shared.Onev211ClicksGetResponses401ContentApplication1jsonSchema
 }

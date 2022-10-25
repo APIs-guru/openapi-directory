@@ -9,7 +9,7 @@ from . import _1accounts_get_responses_200_content_application_1json_schema_prop
 
 @dataclass_json
 @dataclass
-class Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaCardRelatedCard:
+class Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedCard:
     alias: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'alias' }})
     card_id: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cardId' }})
     emboss_business_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'embossBusinessName' }})
@@ -21,7 +21,7 @@ class Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentAppli
 
 @dataclass_json
 @dataclass
-class Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaFxTradeDetailsFxTrade:
+class Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaFxTrade:
     buy_amount: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'buyAmount' }})
     buy_currency: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'buyCurrency' }})
     fixed_side: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'fixedSide' }})
@@ -32,7 +32,7 @@ class Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentAppli
 
 @dataclass_json
 @dataclass
-class Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedParty1Account:
+class Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedPartyRelatedPartyFireAccountAccount:
     account_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'accountNumber' }})
     alias: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'alias' }})
     bic: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'bic' }})
@@ -40,20 +40,20 @@ class Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentAppli
     id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     nsc: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nsc' }})
     
-class Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedParty1TypeEnum(str, Enum):
+class Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedPartyRelatedPartyFireAccountTypeEnum(str, Enum):
     FIRE_ACCOUNT = "FIRE_ACCOUNT"
 
 
 @dataclass_json
 @dataclass
-class Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedParty1RelatedPartyFireAccount:
-    account: Optional[Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedParty1Account] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'account' }})
-    type: Optional[Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedParty1TypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+class Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedPartyRelatedPartyFireAccount:
+    account: Optional[Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedPartyRelatedPartyFireAccountAccount] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'account' }})
+    type: Optional[Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedPartyRelatedPartyFireAccountTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     
 
 @dataclass_json
 @dataclass
-class Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedParty2Account:
+class Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedPartyRelatedPartyExternalAccountAccount:
     account_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'accountNumber' }})
     alias: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'alias' }})
     bic: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'bic' }})
@@ -61,20 +61,20 @@ class Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentAppli
     id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     nsc: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nsc' }})
     
-class Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedParty2TypeEnum(str, Enum):
+class Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedPartyRelatedPartyExternalAccountTypeEnum(str, Enum):
     EXTERNAL_ACCOUNT = "EXTERNAL_ACCOUNT"
 
 
 @dataclass_json
 @dataclass
-class Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedParty2RelatedPartyExternalAccount:
-    account: Optional[Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedParty2Account] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'account' }})
-    type: Optional[Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedParty2TypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+class Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedPartyRelatedPartyExternalAccount:
+    account: Optional[Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedPartyRelatedPartyExternalAccountAccount] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'account' }})
+    type: Optional[Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedPartyRelatedPartyExternalAccountTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     
 
 @dataclass_json
 @dataclass
-class Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedParty3Account:
+class Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedPartyRelatedPartyPayeeAccount:
     account_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'accountNumber' }})
     alias: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'alias' }})
     bic: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'bic' }})
@@ -82,20 +82,20 @@ class Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentAppli
     id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     nsc: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nsc' }})
     
-class Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedParty3TypeEnum(str, Enum):
+class Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedPartyRelatedPartyPayeeTypeEnum(str, Enum):
     WITHDRAWAL_ACCOUNT = "WITHDRAWAL_ACCOUNT"
 
 
 @dataclass_json
 @dataclass
-class Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedParty3RelatedPartyPayee:
-    account: Optional[Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedParty3Account] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'account' }})
-    type: Optional[Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedParty3TypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+class Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedPartyRelatedPartyPayee:
+    account: Optional[Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedPartyRelatedPartyPayeeAccount] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'account' }})
+    type: Optional[Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedPartyRelatedPartyPayeeTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     
 
 @dataclass_json
 @dataclass
-class Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedParty4CardMerchant:
+class Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedPartyRelatedPartyCardPaymentCardMerchant:
     acquirer_id_de32: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'acquirerIdDe32' }})
     additional_amt_de54: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'additionalAmtDe54' }})
     additional_data_de124: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'additionalDataDe124' }})
@@ -126,16 +126,16 @@ class Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentAppli
     txn_stat_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'txnStatCode' }})
     txn_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'txnType' }})
     
-class Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedParty4TypeEnum(str, Enum):
+class Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedPartyRelatedPartyCardPaymentTypeEnum(str, Enum):
     CARD_MERCHANT = "CARD_MERCHANT"
     CARD_ATM = "CARD_ATM"
 
 
 @dataclass_json
 @dataclass
-class Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedParty4RelatedPartyCardPayment:
-    card_merchant: Optional[Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedParty4CardMerchant] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cardMerchant' }})
-    type: Optional[Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedParty4TypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+class Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedPartyRelatedPartyCardPayment:
+    card_merchant: Optional[Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedPartyRelatedPartyCardPaymentCardMerchant] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cardMerchant' }})
+    type: Optional[Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedPartyRelatedPartyCardPaymentTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     
 
 @dataclass_json
@@ -144,12 +144,12 @@ class Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentAppli
     amount_after_charges: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'amountAfterCharges' }})
     amount_before_charges: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'amountBeforeCharges' }})
     balance: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'balance' }})
-    card: Optional[Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaCardRelatedCard] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'card' }})
+    card: Optional[Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaRelatedCard] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'card' }})
     currency: Optional[_1accounts_get_responses_200_content_application_1json_schema_properties_accounts_items_properties_currency.OneaccountsGetResponses200ContentApplication1jsonSchemaPropertiesAccountsItemsPropertiesCurrency] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'currency' }})
     date: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'date', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     date_acknowledged: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dateAcknowledged', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     fee_amount: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'feeAmount' }})
-    fx_trade_details: Optional[Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaFxTradeDetailsFxTrade] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'fxTradeDetails' }})
+    fx_trade_details: Optional[Oneaccounts1Percent7BicanPercent7D1transactionsGetResponses200ContentApplication1jsonSchemaFxTrade] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'fxTradeDetails' }})
     ican: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ican' }})
     my_ref: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'myRef' }})
     payment_request_public_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'paymentRequestPublicCode' }})

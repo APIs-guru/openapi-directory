@@ -36,7 +36,7 @@ class ListConferenceRequest:
 
 @dataclass_json
 @dataclass
-class ListConference200ApplicationJSONMeta:
+class ListConferenceListConferenceResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -48,14 +48,14 @@ class ListConference200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListConference200ApplicationJSONListConferenceResponse:
+class ListConferenceListConferenceResponse:
     conferences: Optional[List[shared.InsightsV1Conference]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'conferences' }})
-    meta: Optional[ListConference200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+    meta: Optional[ListConferenceListConferenceResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     
 
 @dataclass
 class ListConferenceResponse:
     content_type: str = field(default=None)
-    list_conference_response: Optional[ListConference200ApplicationJSONListConferenceResponse] = field(default=None)
+    list_conference_response: Optional[ListConferenceListConferenceResponse] = field(default=None)
     status_code: int = field(default=None)
     

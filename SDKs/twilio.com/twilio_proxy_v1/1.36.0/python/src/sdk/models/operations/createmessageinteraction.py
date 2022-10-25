@@ -14,7 +14,7 @@ class CreateMessageInteractionPathParams:
     
 
 @dataclass
-class CreateMessageInteractionRequestBodyCreateMessageInteractionRequest:
+class CreateMessageInteractionCreateMessageInteractionRequest:
     body: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Body' }})
     media_url: Optional[List[str]] = field(default=None, metadata={'form': { 'field_name': 'MediaUrl' }})
     
@@ -28,7 +28,7 @@ class CreateMessageInteractionSecurity:
 class CreateMessageInteractionRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateMessageInteractionPathParams = field(default=None)
-    request: Optional[CreateMessageInteractionRequestBodyCreateMessageInteractionRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateMessageInteractionCreateMessageInteractionRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateMessageInteractionSecurity = field(default=None)
     
 

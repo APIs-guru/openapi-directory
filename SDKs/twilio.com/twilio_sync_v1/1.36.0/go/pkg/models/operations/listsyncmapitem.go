@@ -31,7 +31,7 @@ type ListSyncMapItemRequest struct {
 	Security    ListSyncMapItemSecurity
 }
 
-type ListSyncMapItem200ApplicationJSONMeta struct {
+type ListSyncMapItemListSyncMapItemResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -41,13 +41,13 @@ type ListSyncMapItem200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListSyncMapItem200ApplicationJSONListSyncMapItemResponse struct {
-	Items []shared.SyncV1ServiceSyncMapSyncMapItem `json:"items,omitempty"`
-	Meta  *ListSyncMapItem200ApplicationJSONMeta   `json:"meta,omitempty"`
+type ListSyncMapItemListSyncMapItemResponse struct {
+	Items []shared.SyncV1ServiceSyncMapSyncMapItem    `json:"items,omitempty"`
+	Meta  *ListSyncMapItemListSyncMapItemResponseMeta `json:"meta,omitempty"`
 }
 
 type ListSyncMapItemResponse struct {
 	ContentType             string
-	ListSyncMapItemResponse *ListSyncMapItem200ApplicationJSONListSyncMapItemResponse
+	ListSyncMapItemResponse *ListSyncMapItemListSyncMapItemResponse
 	StatusCode              int64
 }

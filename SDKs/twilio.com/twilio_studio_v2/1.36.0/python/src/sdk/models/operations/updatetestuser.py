@@ -12,7 +12,7 @@ class UpdateTestUserPathParams:
     
 
 @dataclass
-class UpdateTestUserRequestBodyUpdateTestUserRequest:
+class UpdateTestUserUpdateTestUserRequest:
     test_users: List[str] = field(default=None, metadata={'form': { 'field_name': 'TestUsers' }})
     
 
@@ -25,7 +25,7 @@ class UpdateTestUserSecurity:
 class UpdateTestUserRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateTestUserPathParams = field(default=None)
-    request: Optional[UpdateTestUserRequestBodyUpdateTestUserRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateTestUserUpdateTestUserRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateTestUserSecurity = field(default=None)
     
 

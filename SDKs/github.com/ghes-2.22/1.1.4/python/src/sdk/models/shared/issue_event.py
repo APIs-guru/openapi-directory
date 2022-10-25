@@ -16,103 +16,7 @@ from . import team
 
 @dataclass_json
 @dataclass
-class IssueEventActorSimpleUser:
-    avatar_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'avatar_url' }})
-    events_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'events_url' }})
-    followers_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'followers_url' }})
-    following_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'following_url' }})
-    gists_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'gists_url' }})
-    gravatar_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'gravatar_id' }})
-    html_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'html_url' }})
-    id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    login: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'login' }})
-    node_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'node_id' }})
-    organizations_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'organizations_url' }})
-    received_events_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'received_events_url' }})
-    repos_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'repos_url' }})
-    site_admin: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'site_admin' }})
-    starred_at: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'starred_at' }})
-    starred_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'starred_url' }})
-    subscriptions_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'subscriptions_url' }})
-    type: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
-    url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'url' }})
-    
-
-@dataclass_json
-@dataclass
-class IssueEventAssigneeSimpleUser:
-    avatar_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'avatar_url' }})
-    events_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'events_url' }})
-    followers_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'followers_url' }})
-    following_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'following_url' }})
-    gists_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'gists_url' }})
-    gravatar_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'gravatar_id' }})
-    html_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'html_url' }})
-    id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    login: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'login' }})
-    node_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'node_id' }})
-    organizations_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'organizations_url' }})
-    received_events_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'received_events_url' }})
-    repos_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'repos_url' }})
-    site_admin: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'site_admin' }})
-    starred_at: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'starred_at' }})
-    starred_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'starred_url' }})
-    subscriptions_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'subscriptions_url' }})
-    type: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
-    url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'url' }})
-    
-
-@dataclass_json
-@dataclass
-class IssueEventAssignerSimpleUser:
-    avatar_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'avatar_url' }})
-    events_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'events_url' }})
-    followers_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'followers_url' }})
-    following_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'following_url' }})
-    gists_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'gists_url' }})
-    gravatar_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'gravatar_id' }})
-    html_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'html_url' }})
-    id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    login: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'login' }})
-    node_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'node_id' }})
-    organizations_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'organizations_url' }})
-    received_events_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'received_events_url' }})
-    repos_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'repos_url' }})
-    site_admin: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'site_admin' }})
-    starred_at: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'starred_at' }})
-    starred_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'starred_url' }})
-    subscriptions_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'subscriptions_url' }})
-    type: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
-    url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'url' }})
-    
-
-@dataclass_json
-@dataclass
-class IssueEventRequestedReviewerSimpleUser:
-    avatar_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'avatar_url' }})
-    events_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'events_url' }})
-    followers_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'followers_url' }})
-    following_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'following_url' }})
-    gists_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'gists_url' }})
-    gravatar_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'gravatar_id' }})
-    html_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'html_url' }})
-    id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    login: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'login' }})
-    node_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'node_id' }})
-    organizations_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'organizations_url' }})
-    received_events_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'received_events_url' }})
-    repos_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'repos_url' }})
-    site_admin: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'site_admin' }})
-    starred_at: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'starred_at' }})
-    starred_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'starred_url' }})
-    subscriptions_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'subscriptions_url' }})
-    type: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
-    url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'url' }})
-    
-
-@dataclass_json
-@dataclass
-class IssueEventReviewRequesterSimpleUser:
+class IssueEventSimpleUser:
     avatar_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'avatar_url' }})
     events_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'events_url' }})
     followers_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'followers_url' }})
@@ -137,9 +41,9 @@ class IssueEventReviewRequesterSimpleUser:
 @dataclass_json
 @dataclass
 class IssueEvent:
-    actor: IssueEventActorSimpleUser = field(default=None, metadata={'dataclasses_json': { 'field_name': 'actor' }})
-    assignee: Optional[IssueEventAssigneeSimpleUser] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'assignee' }})
-    assigner: Optional[IssueEventAssignerSimpleUser] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'assigner' }})
+    actor: IssueEventSimpleUser = field(default=None, metadata={'dataclasses_json': { 'field_name': 'actor' }})
+    assignee: Optional[IssueEventSimpleUser] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'assignee' }})
+    assigner: Optional[IssueEventSimpleUser] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'assigner' }})
     author_association: Optional[author_association_enum.AuthorAssociationEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'author_association' }})
     commit_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'commit_id' }})
     commit_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'commit_url' }})
@@ -155,8 +59,8 @@ class IssueEvent:
     performed_via_github_app: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'performed_via_github_app' }})
     project_card: Optional[issue_event_project_card.IssueEventProjectCard] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'project_card' }})
     rename: Optional[issue_event_rename.IssueEventRename] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rename' }})
-    requested_reviewer: Optional[IssueEventRequestedReviewerSimpleUser] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'requested_reviewer' }})
+    requested_reviewer: Optional[IssueEventSimpleUser] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'requested_reviewer' }})
     requested_team: Optional[team.Team] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'requested_team' }})
-    review_requester: Optional[IssueEventReviewRequesterSimpleUser] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'review_requester' }})
+    review_requester: Optional[IssueEventSimpleUser] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'review_requester' }})
     url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'url' }})
     

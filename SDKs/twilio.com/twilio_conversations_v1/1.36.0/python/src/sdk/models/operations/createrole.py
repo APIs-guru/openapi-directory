@@ -7,7 +7,7 @@ CREATE_ROLE_SERVERS = [
 
 
 @dataclass
-class CreateRoleRequestBodyCreateRoleRequest:
+class CreateRoleCreateRoleRequest:
     friendly_name: str = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
     permission: List[str] = field(default=None, metadata={'form': { 'field_name': 'Permission' }})
     type: shared.RoleEnumRoleTypeEnum = field(default=None, metadata={'form': { 'field_name': 'Type' }})
@@ -21,7 +21,7 @@ class CreateRoleSecurity:
 @dataclass
 class CreateRoleRequest:
     server_url: Optional[str] = field(default=None)
-    request: Optional[CreateRoleRequestBodyCreateRoleRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateRoleCreateRoleRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateRoleSecurity = field(default=None)
     
 

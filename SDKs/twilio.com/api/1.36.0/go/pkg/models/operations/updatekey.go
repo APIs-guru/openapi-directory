@@ -13,7 +13,7 @@ type UpdateKeyPathParams struct {
 	Sid        string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
-type UpdateKeyRequestBodyUpdateKeyRequest struct {
+type UpdateKeyUpdateKeyRequest struct {
 	FriendlyName *string `form:"name=FriendlyName"`
 }
 
@@ -24,7 +24,7 @@ type UpdateKeySecurity struct {
 type UpdateKeyRequest struct {
 	ServerURL  *string
 	PathParams UpdateKeyPathParams
-	Request    *UpdateKeyRequestBodyUpdateKeyRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateKeyUpdateKeyRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateKeySecurity
 }
 

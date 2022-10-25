@@ -8,7 +8,7 @@ var UpdateAccountSettingsServers = []string{
 	"https://insights.twilio.com",
 }
 
-type UpdateAccountSettingsRequestBodyUpdateAccountSettingsRequest struct {
+type UpdateAccountSettingsUpdateAccountSettingsRequest struct {
 	AdvancedFeatures *bool   `form:"name=AdvancedFeatures"`
 	SubaccountSid    *string `form:"name=SubaccountSid"`
 	VoiceTrace       *bool   `form:"name=VoiceTrace"`
@@ -20,7 +20,7 @@ type UpdateAccountSettingsSecurity struct {
 
 type UpdateAccountSettingsRequest struct {
 	ServerURL *string
-	Request   *UpdateAccountSettingsRequestBodyUpdateAccountSettingsRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request   *UpdateAccountSettingsUpdateAccountSettingsRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security  UpdateAccountSettingsSecurity
 }
 

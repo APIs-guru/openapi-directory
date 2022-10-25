@@ -27,7 +27,7 @@ type ListFunctionRequest struct {
 	Security    ListFunctionSecurity
 }
 
-type ListFunction200ApplicationJSONMeta struct {
+type ListFunctionListFunctionResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -37,13 +37,13 @@ type ListFunction200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListFunction200ApplicationJSONListFunctionResponse struct {
-	Functions []shared.ServerlessV1ServiceFunction `json:"functions,omitempty"`
-	Meta      *ListFunction200ApplicationJSONMeta  `json:"meta,omitempty"`
+type ListFunctionListFunctionResponse struct {
+	Functions []shared.ServerlessV1ServiceFunction  `json:"functions,omitempty"`
+	Meta      *ListFunctionListFunctionResponseMeta `json:"meta,omitempty"`
 }
 
 type ListFunctionResponse struct {
 	ContentType          string
-	ListFunctionResponse *ListFunction200ApplicationJSONListFunctionResponse
+	ListFunctionResponse *ListFunctionListFunctionResponse
 	StatusCode           int64
 }

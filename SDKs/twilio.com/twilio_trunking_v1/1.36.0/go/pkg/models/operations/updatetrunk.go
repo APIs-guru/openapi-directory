@@ -12,26 +12,26 @@ type UpdateTrunkPathParams struct {
 	Sid string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
-type UpdateTrunkRequestBodyDisasterRecoveryMethodEnum string
+type UpdateTrunkUpdateTrunkRequestDisasterRecoveryMethodEnum string
 
 const (
-	UpdateTrunkRequestBodyDisasterRecoveryMethodEnumHead   UpdateTrunkRequestBodyDisasterRecoveryMethodEnum = "HEAD"
-	UpdateTrunkRequestBodyDisasterRecoveryMethodEnumGet    UpdateTrunkRequestBodyDisasterRecoveryMethodEnum = "GET"
-	UpdateTrunkRequestBodyDisasterRecoveryMethodEnumPost   UpdateTrunkRequestBodyDisasterRecoveryMethodEnum = "POST"
-	UpdateTrunkRequestBodyDisasterRecoveryMethodEnumPatch  UpdateTrunkRequestBodyDisasterRecoveryMethodEnum = "PATCH"
-	UpdateTrunkRequestBodyDisasterRecoveryMethodEnumPut    UpdateTrunkRequestBodyDisasterRecoveryMethodEnum = "PUT"
-	UpdateTrunkRequestBodyDisasterRecoveryMethodEnumDelete UpdateTrunkRequestBodyDisasterRecoveryMethodEnum = "DELETE"
+	UpdateTrunkUpdateTrunkRequestDisasterRecoveryMethodEnumHead   UpdateTrunkUpdateTrunkRequestDisasterRecoveryMethodEnum = "HEAD"
+	UpdateTrunkUpdateTrunkRequestDisasterRecoveryMethodEnumGet    UpdateTrunkUpdateTrunkRequestDisasterRecoveryMethodEnum = "GET"
+	UpdateTrunkUpdateTrunkRequestDisasterRecoveryMethodEnumPost   UpdateTrunkUpdateTrunkRequestDisasterRecoveryMethodEnum = "POST"
+	UpdateTrunkUpdateTrunkRequestDisasterRecoveryMethodEnumPatch  UpdateTrunkUpdateTrunkRequestDisasterRecoveryMethodEnum = "PATCH"
+	UpdateTrunkUpdateTrunkRequestDisasterRecoveryMethodEnumPut    UpdateTrunkUpdateTrunkRequestDisasterRecoveryMethodEnum = "PUT"
+	UpdateTrunkUpdateTrunkRequestDisasterRecoveryMethodEnumDelete UpdateTrunkUpdateTrunkRequestDisasterRecoveryMethodEnum = "DELETE"
 )
 
-type UpdateTrunkRequestBodyUpdateTrunkRequest struct {
-	CnamLookupEnabled      *bool                                             `form:"name=CnamLookupEnabled"`
-	DisasterRecoveryMethod *UpdateTrunkRequestBodyDisasterRecoveryMethodEnum `form:"name=DisasterRecoveryMethod"`
-	DisasterRecoveryURL    *string                                           `form:"name=DisasterRecoveryUrl"`
-	DomainName             *string                                           `form:"name=DomainName"`
-	FriendlyName           *string                                           `form:"name=FriendlyName"`
-	Secure                 *bool                                             `form:"name=Secure"`
-	TransferCallerID       *shared.TrunkEnumTransferCallerIDEnum             `form:"name=TransferCallerId"`
-	TransferMode           *shared.TrunkEnumTransferSettingEnum              `form:"name=TransferMode"`
+type UpdateTrunkUpdateTrunkRequest struct {
+	CnamLookupEnabled      *bool                                                    `form:"name=CnamLookupEnabled"`
+	DisasterRecoveryMethod *UpdateTrunkUpdateTrunkRequestDisasterRecoveryMethodEnum `form:"name=DisasterRecoveryMethod"`
+	DisasterRecoveryURL    *string                                                  `form:"name=DisasterRecoveryUrl"`
+	DomainName             *string                                                  `form:"name=DomainName"`
+	FriendlyName           *string                                                  `form:"name=FriendlyName"`
+	Secure                 *bool                                                    `form:"name=Secure"`
+	TransferCallerID       *shared.TrunkEnumTransferCallerIDEnum                    `form:"name=TransferCallerId"`
+	TransferMode           *shared.TrunkEnumTransferSettingEnum                     `form:"name=TransferMode"`
 }
 
 type UpdateTrunkSecurity struct {
@@ -41,7 +41,7 @@ type UpdateTrunkSecurity struct {
 type UpdateTrunkRequest struct {
 	ServerURL  *string
 	PathParams UpdateTrunkPathParams
-	Request    *UpdateTrunkRequestBodyUpdateTrunkRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateTrunkUpdateTrunkRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateTrunkSecurity
 }
 

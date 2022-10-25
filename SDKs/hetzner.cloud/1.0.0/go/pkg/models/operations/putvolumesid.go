@@ -4,18 +4,18 @@ type PutVolumesIDPathParams struct {
 	ID string `pathParam:"style=simple,explode=false,name=id"`
 }
 
-type PutVolumesIDRequestBodyLabels struct {
+type PutVolumesIDUpdateVolumeRequestLabels struct {
 	Labelkey *string `json:"labelkey,omitempty"`
 }
 
-type PutVolumesIDRequestBodyUpdateVolumeRequest struct {
-	Labels *PutVolumesIDRequestBodyLabels `json:"labels,omitempty"`
-	Name   string                         `json:"name"`
+type PutVolumesIDUpdateVolumeRequest struct {
+	Labels *PutVolumesIDUpdateVolumeRequestLabels `json:"labels,omitempty"`
+	Name   string                                 `json:"name"`
 }
 
 type PutVolumesIDRequest struct {
 	PathParams PutVolumesIDPathParams
-	Request    *PutVolumesIDRequestBodyUpdateVolumeRequest `request:"mediaType=application/json"`
+	Request    *PutVolumesIDUpdateVolumeRequest `request:"mediaType=application/json"`
 }
 
 type PutVolumesID200ApplicationJSONVolumeLocation struct {

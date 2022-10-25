@@ -13,7 +13,7 @@ type UpdateVerificationPathParams struct {
 	Sid        string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
-type UpdateVerificationRequestBodyUpdateVerificationRequest struct {
+type UpdateVerificationUpdateVerificationRequest struct {
 	Status shared.VerificationEnumStatusEnum `form:"name=Status"`
 }
 
@@ -24,7 +24,7 @@ type UpdateVerificationSecurity struct {
 type UpdateVerificationRequest struct {
 	ServerURL  *string
 	PathParams UpdateVerificationPathParams
-	Request    *UpdateVerificationRequestBodyUpdateVerificationRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateVerificationUpdateVerificationRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateVerificationSecurity
 }
 

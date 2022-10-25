@@ -29,7 +29,7 @@ class AddProjectSecurity:
 @dataclass
 class AddProjectRequest:
     query_params: AddProjectQueryParams = field(default=None)
-    request: Optional[bytes] = field(default=None, metadata={'request': { 'media_type': 'application/x-yaml' }})
+    request: Optional[str] = field(default=None, metadata={'request': { 'media_type': 'application/x-yaml' }})
     security: AddProjectSecurity = field(default=None)
     
 

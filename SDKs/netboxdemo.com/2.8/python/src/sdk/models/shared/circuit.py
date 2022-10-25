@@ -29,7 +29,7 @@ class CircuitStatusValueEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class CircuitStatusStatus:
+class CircuitStatus:
     label: CircuitStatusLabelEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label' }})
     value: CircuitStatusValueEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
     
@@ -47,7 +47,7 @@ class Circuit:
     install_date: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'install_date', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     last_updated: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'last_updated', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     provider: nestedprovider.NestedProvider = field(default=None, metadata={'dataclasses_json': { 'field_name': 'provider' }})
-    status: Optional[CircuitStatusStatus] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    status: Optional[CircuitStatus] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
     tags: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
     tenant: Optional[nestedtenant.NestedTenant] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tenant' }})
     termination_a: Optional[circuitcircuittermination.CircuitCircuitTermination] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'termination_a' }})

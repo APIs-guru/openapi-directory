@@ -33,7 +33,7 @@ class ListDeploymentRequest:
 
 @dataclass_json
 @dataclass
-class ListDeployment200ApplicationJSONMeta:
+class ListDeploymentListDeploymentResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -45,14 +45,14 @@ class ListDeployment200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListDeployment200ApplicationJSONListDeploymentResponse:
+class ListDeploymentListDeploymentResponse:
     deployments: Optional[List[shared.ServerlessV1ServiceEnvironmentDeployment]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'deployments' }})
-    meta: Optional[ListDeployment200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+    meta: Optional[ListDeploymentListDeploymentResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     
 
 @dataclass
 class ListDeploymentResponse:
     content_type: str = field(default=None)
-    list_deployment_response: Optional[ListDeployment200ApplicationJSONListDeploymentResponse] = field(default=None)
+    list_deployment_response: Optional[ListDeploymentListDeploymentResponse] = field(default=None)
     status_code: int = field(default=None)
     

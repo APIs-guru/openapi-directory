@@ -28,7 +28,7 @@ class ListMediaProcessorRequest:
 
 @dataclass_json
 @dataclass
-class ListMediaProcessor200ApplicationJSONMeta:
+class ListMediaProcessorListMediaProcessorResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -40,14 +40,14 @@ class ListMediaProcessor200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListMediaProcessor200ApplicationJSONListMediaProcessorResponse:
+class ListMediaProcessorListMediaProcessorResponse:
     media_processors: Optional[List[shared.MediaV1MediaProcessor]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'media_processors' }})
-    meta: Optional[ListMediaProcessor200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+    meta: Optional[ListMediaProcessorListMediaProcessorResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     
 
 @dataclass
 class ListMediaProcessorResponse:
     content_type: str = field(default=None)
-    list_media_processor_response: Optional[ListMediaProcessor200ApplicationJSONListMediaProcessorResponse] = field(default=None)
+    list_media_processor_response: Optional[ListMediaProcessorListMediaProcessorResponse] = field(default=None)
     status_code: int = field(default=None)
     

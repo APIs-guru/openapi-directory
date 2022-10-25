@@ -26,7 +26,7 @@ class ListConnectionPolicyRequest:
 
 @dataclass_json
 @dataclass
-class ListConnectionPolicy200ApplicationJSONMeta:
+class ListConnectionPolicyListConnectionPolicyResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -38,14 +38,14 @@ class ListConnectionPolicy200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListConnectionPolicy200ApplicationJSONListConnectionPolicyResponse:
+class ListConnectionPolicyListConnectionPolicyResponse:
     connection_policies: Optional[List[shared.VoiceV1ConnectionPolicy]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'connection_policies' }})
-    meta: Optional[ListConnectionPolicy200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+    meta: Optional[ListConnectionPolicyListConnectionPolicyResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     
 
 @dataclass
 class ListConnectionPolicyResponse:
     content_type: str = field(default=None)
-    list_connection_policy_response: Optional[ListConnectionPolicy200ApplicationJSONListConnectionPolicyResponse] = field(default=None)
+    list_connection_policy_response: Optional[ListConnectionPolicyListConnectionPolicyResponse] = field(default=None)
     status_code: int = field(default=None)
     

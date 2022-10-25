@@ -27,7 +27,7 @@ type ListWebhookRequest struct {
 	Security    ListWebhookSecurity
 }
 
-type ListWebhook200ApplicationJSONMeta struct {
+type ListWebhookListWebhookResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -37,13 +37,13 @@ type ListWebhook200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListWebhook200ApplicationJSONListWebhookResponse struct {
-	Meta     *ListWebhook200ApplicationJSONMeta `json:"meta,omitempty"`
-	Webhooks []shared.VerifyV2ServiceWebhook    `json:"webhooks,omitempty"`
+type ListWebhookListWebhookResponse struct {
+	Meta     *ListWebhookListWebhookResponseMeta `json:"meta,omitempty"`
+	Webhooks []shared.VerifyV2ServiceWebhook     `json:"webhooks,omitempty"`
 }
 
 type ListWebhookResponse struct {
 	ContentType         string
-	ListWebhookResponse *ListWebhook200ApplicationJSONListWebhookResponse
+	ListWebhookResponse *ListWebhookListWebhookResponse
 	StatusCode          int64
 }

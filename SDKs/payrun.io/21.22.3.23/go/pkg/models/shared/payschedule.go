@@ -1,21 +1,21 @@
 package shared
 
-type PaySchedulePaySchedulePayFrequencyPayFrequencyEnum string
+type PaySchedulePaySchedulePayFrequencyEnum string
 
 const (
-	PaySchedulePaySchedulePayFrequencyPayFrequencyEnumWeekly     PaySchedulePaySchedulePayFrequencyPayFrequencyEnum = "Weekly"
-	PaySchedulePaySchedulePayFrequencyPayFrequencyEnumMonthly    PaySchedulePaySchedulePayFrequencyPayFrequencyEnum = "Monthly"
-	PaySchedulePaySchedulePayFrequencyPayFrequencyEnumTwoWeekly  PaySchedulePaySchedulePayFrequencyPayFrequencyEnum = "TwoWeekly"
-	PaySchedulePaySchedulePayFrequencyPayFrequencyEnumFourWeekly PaySchedulePaySchedulePayFrequencyPayFrequencyEnum = "FourWeekly"
-	PaySchedulePaySchedulePayFrequencyPayFrequencyEnumYearly     PaySchedulePaySchedulePayFrequencyPayFrequencyEnum = "Yearly"
+	PaySchedulePaySchedulePayFrequencyEnumWeekly     PaySchedulePaySchedulePayFrequencyEnum = "Weekly"
+	PaySchedulePaySchedulePayFrequencyEnumMonthly    PaySchedulePaySchedulePayFrequencyEnum = "Monthly"
+	PaySchedulePaySchedulePayFrequencyEnumTwoWeekly  PaySchedulePaySchedulePayFrequencyEnum = "TwoWeekly"
+	PaySchedulePaySchedulePayFrequencyEnumFourWeekly PaySchedulePaySchedulePayFrequencyEnum = "FourWeekly"
+	PaySchedulePaySchedulePayFrequencyEnumYearly     PaySchedulePaySchedulePayFrequencyEnum = "Yearly"
 )
 
-type PaySchedulePaySchedulePaySchedule struct {
-	MetaData     map[string]interface{}                              `json:"MetaData,omitempty"`
-	Name         *string                                             `json:"Name,omitempty"`
-	PayFrequency *PaySchedulePaySchedulePayFrequencyPayFrequencyEnum `json:"PayFrequency,omitempty"`
+type PaySchedulePaySchedule struct {
+	MetaData     map[string]interface{}                  `json:"MetaData,omitempty"`
+	Name         *string                                 `json:"Name,omitempty"`
+	PayFrequency *PaySchedulePaySchedulePayFrequencyEnum `json:"PayFrequency,omitempty"`
 }
 
 type PaySchedule struct {
-	PaySchedule *PaySchedulePaySchedulePaySchedule `json:"PaySchedule,omitempty"`
+	PaySchedule *PaySchedulePaySchedule `json:"PaySchedule,omitempty"`
 }

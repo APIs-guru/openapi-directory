@@ -8,7 +8,7 @@ var CreateSinkServers = []string{
 	"https://events.twilio.com",
 }
 
-type CreateSinkRequestBodyCreateSinkRequest struct {
+type CreateSinkCreateSinkRequest struct {
 	Description       string                      `form:"name=Description"`
 	SinkConfiguration interface{}                 `form:"name=SinkConfiguration"`
 	SinkType          shared.SinkEnumSinkTypeEnum `form:"name=SinkType"`
@@ -20,7 +20,7 @@ type CreateSinkSecurity struct {
 
 type CreateSinkRequest struct {
 	ServerURL *string
-	Request   *CreateSinkRequestBodyCreateSinkRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request   *CreateSinkCreateSinkRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security  CreateSinkSecurity
 }
 

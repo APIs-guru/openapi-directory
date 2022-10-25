@@ -1,88 +1,59 @@
 package operations
 
-type PostServersRequestBodyFirewalls struct {
+type PostServersCreateServerRequestFirewalls struct {
 	Firewall *int64 `json:"firewall,omitempty"`
 }
 
-type PostServersRequestBodyCreateServerRequest struct {
-	Automount        *bool                             `json:"automount,omitempty"`
-	Datacenter       *string                           `json:"datacenter,omitempty"`
-	Firewalls        []PostServersRequestBodyFirewalls `json:"firewalls,omitempty"`
-	Image            string                            `json:"image"`
-	Labels           map[string]interface{}            `json:"labels,omitempty"`
-	Location         *string                           `json:"location,omitempty"`
-	Name             string                            `json:"name"`
-	Networks         []int64                           `json:"networks,omitempty"`
-	ServerType       string                            `json:"server_type"`
-	SSHKeys          []string                          `json:"ssh_keys,omitempty"`
-	StartAfterCreate *bool                             `json:"start_after_create,omitempty"`
-	UserData         *string                           `json:"user_data,omitempty"`
-	Volumes          []int64                           `json:"volumes,omitempty"`
+type PostServersCreateServerRequest struct {
+	Automount        *bool                                     `json:"automount,omitempty"`
+	Datacenter       *string                                   `json:"datacenter,omitempty"`
+	Firewalls        []PostServersCreateServerRequestFirewalls `json:"firewalls,omitempty"`
+	Image            string                                    `json:"image"`
+	Labels           map[string]interface{}                    `json:"labels,omitempty"`
+	Location         *string                                   `json:"location,omitempty"`
+	Name             string                                    `json:"name"`
+	Networks         []int64                                   `json:"networks,omitempty"`
+	ServerType       string                                    `json:"server_type"`
+	SSHKeys          []string                                  `json:"ssh_keys,omitempty"`
+	StartAfterCreate *bool                                     `json:"start_after_create,omitempty"`
+	UserData         *string                                   `json:"user_data,omitempty"`
+	Volumes          []int64                                   `json:"volumes,omitempty"`
 }
 
 type PostServersRequest struct {
-	Request *PostServersRequestBodyCreateServerRequest `request:"mediaType=application/json"`
+	Request *PostServersCreateServerRequest `request:"mediaType=application/json"`
 }
 
-type PostServers201ApplicationJSONActionError struct {
+type PostServersCreateServerResponseActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
 }
 
-type PostServers201ApplicationJSONActionResources struct {
+type PostServersCreateServerResponseActionResources struct {
 	ID   int64  `json:"id"`
 	Type string `json:"type"`
 }
 
-type PostServers201ApplicationJSONActionStatusEnum string
+type PostServersCreateServerResponseActionStatusEnum string
 
 const (
-	PostServers201ApplicationJSONActionStatusEnumSuccess PostServers201ApplicationJSONActionStatusEnum = "success"
-	PostServers201ApplicationJSONActionStatusEnumRunning PostServers201ApplicationJSONActionStatusEnum = "running"
-	PostServers201ApplicationJSONActionStatusEnumError   PostServers201ApplicationJSONActionStatusEnum = "error"
+	PostServersCreateServerResponseActionStatusEnumSuccess PostServersCreateServerResponseActionStatusEnum = "success"
+	PostServersCreateServerResponseActionStatusEnumRunning PostServersCreateServerResponseActionStatusEnum = "running"
+	PostServersCreateServerResponseActionStatusEnumError   PostServersCreateServerResponseActionStatusEnum = "error"
 )
 
-type PostServers201ApplicationJSONActionAction struct {
-	Command   string                                         `json:"command"`
-	Error     PostServers201ApplicationJSONActionError       `json:"error"`
-	Finished  string                                         `json:"finished"`
-	ID        int64                                          `json:"id"`
-	Progress  float64                                        `json:"progress"`
-	Resources []PostServers201ApplicationJSONActionResources `json:"resources"`
-	Started   string                                         `json:"started"`
-	Status    PostServers201ApplicationJSONActionStatusEnum  `json:"status"`
+type PostServersCreateServerResponseAction struct {
+	Command   string                                           `json:"command"`
+	Error     PostServersCreateServerResponseActionError       `json:"error"`
+	Finished  string                                           `json:"finished"`
+	ID        int64                                            `json:"id"`
+	Progress  float64                                          `json:"progress"`
+	Resources []PostServersCreateServerResponseActionResources `json:"resources"`
+	Started   string                                           `json:"started"`
+	Status    PostServersCreateServerResponseActionStatusEnum  `json:"status"`
 }
 
-type PostServers201ApplicationJSONNextActionsError struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
-type PostServers201ApplicationJSONNextActionsResources struct {
-	ID   int64  `json:"id"`
-	Type string `json:"type"`
-}
-
-type PostServers201ApplicationJSONNextActionsStatusEnum string
-
-const (
-	PostServers201ApplicationJSONNextActionsStatusEnumSuccess PostServers201ApplicationJSONNextActionsStatusEnum = "success"
-	PostServers201ApplicationJSONNextActionsStatusEnumRunning PostServers201ApplicationJSONNextActionsStatusEnum = "running"
-	PostServers201ApplicationJSONNextActionsStatusEnumError   PostServers201ApplicationJSONNextActionsStatusEnum = "error"
-)
-
-type PostServers201ApplicationJSONNextActionsAction struct {
-	Command   string                                              `json:"command"`
-	Error     PostServers201ApplicationJSONNextActionsError       `json:"error"`
-	Finished  string                                              `json:"finished"`
-	ID        int64                                               `json:"id"`
-	Progress  float64                                             `json:"progress"`
-	Resources []PostServers201ApplicationJSONNextActionsResources `json:"resources"`
-	Started   string                                              `json:"started"`
-	Status    PostServers201ApplicationJSONNextActionsStatusEnum  `json:"status"`
-}
-
-type PostServers201ApplicationJSONServerDatacenterLocation struct {
+type PostServersCreateServerResponseServerDatacenterLocation struct {
 	City        string  `json:"city"`
 	Country     string  `json:"country"`
 	Description string  `json:"description"`
@@ -93,247 +64,247 @@ type PostServers201ApplicationJSONServerDatacenterLocation struct {
 	NetworkZone string  `json:"network_zone"`
 }
 
-type PostServers201ApplicationJSONServerDatacenterServerTypes struct {
+type PostServersCreateServerResponseServerDatacenterServerTypes struct {
 	Available             []float64 `json:"available"`
 	AvailableForMigration []float64 `json:"available_for_migration"`
 	Supported             []float64 `json:"supported"`
 }
 
-type PostServers201ApplicationJSONServerDatacenter struct {
-	Description string                                                   `json:"description"`
-	ID          int64                                                    `json:"id"`
-	Location    PostServers201ApplicationJSONServerDatacenterLocation    `json:"location"`
-	Name        string                                                   `json:"name"`
-	ServerTypes PostServers201ApplicationJSONServerDatacenterServerTypes `json:"server_types"`
+type PostServersCreateServerResponseServerDatacenter struct {
+	Description string                                                     `json:"description"`
+	ID          int64                                                      `json:"id"`
+	Location    PostServersCreateServerResponseServerDatacenterLocation    `json:"location"`
+	Name        string                                                     `json:"name"`
+	ServerTypes PostServersCreateServerResponseServerDatacenterServerTypes `json:"server_types"`
 }
 
-type PostServers201ApplicationJSONServerImageCreatedFrom struct {
+type PostServersCreateServerResponseServerImageCreatedFrom struct {
 	ID   int64  `json:"id"`
 	Name string `json:"name"`
 }
 
-type PostServers201ApplicationJSONServerImageOsFlavorEnum string
+type PostServersCreateServerResponseServerImageOsFlavorEnum string
 
 const (
-	PostServers201ApplicationJSONServerImageOsFlavorEnumUbuntu  PostServers201ApplicationJSONServerImageOsFlavorEnum = "ubuntu"
-	PostServers201ApplicationJSONServerImageOsFlavorEnumCentos  PostServers201ApplicationJSONServerImageOsFlavorEnum = "centos"
-	PostServers201ApplicationJSONServerImageOsFlavorEnumDebian  PostServers201ApplicationJSONServerImageOsFlavorEnum = "debian"
-	PostServers201ApplicationJSONServerImageOsFlavorEnumFedora  PostServers201ApplicationJSONServerImageOsFlavorEnum = "fedora"
-	PostServers201ApplicationJSONServerImageOsFlavorEnumUnknown PostServers201ApplicationJSONServerImageOsFlavorEnum = "unknown"
+	PostServersCreateServerResponseServerImageOsFlavorEnumUbuntu  PostServersCreateServerResponseServerImageOsFlavorEnum = "ubuntu"
+	PostServersCreateServerResponseServerImageOsFlavorEnumCentos  PostServersCreateServerResponseServerImageOsFlavorEnum = "centos"
+	PostServersCreateServerResponseServerImageOsFlavorEnumDebian  PostServersCreateServerResponseServerImageOsFlavorEnum = "debian"
+	PostServersCreateServerResponseServerImageOsFlavorEnumFedora  PostServersCreateServerResponseServerImageOsFlavorEnum = "fedora"
+	PostServersCreateServerResponseServerImageOsFlavorEnumUnknown PostServersCreateServerResponseServerImageOsFlavorEnum = "unknown"
 )
 
-type PostServers201ApplicationJSONServerImageProtection struct {
+type PostServersCreateServerResponseServerImageProtection struct {
 	Delete bool `json:"delete"`
 }
 
-type PostServers201ApplicationJSONServerImageStatusEnum string
+type PostServersCreateServerResponseServerImageStatusEnum string
 
 const (
-	PostServers201ApplicationJSONServerImageStatusEnumAvailable   PostServers201ApplicationJSONServerImageStatusEnum = "available"
-	PostServers201ApplicationJSONServerImageStatusEnumCreating    PostServers201ApplicationJSONServerImageStatusEnum = "creating"
-	PostServers201ApplicationJSONServerImageStatusEnumUnavailable PostServers201ApplicationJSONServerImageStatusEnum = "unavailable"
+	PostServersCreateServerResponseServerImageStatusEnumAvailable   PostServersCreateServerResponseServerImageStatusEnum = "available"
+	PostServersCreateServerResponseServerImageStatusEnumCreating    PostServersCreateServerResponseServerImageStatusEnum = "creating"
+	PostServersCreateServerResponseServerImageStatusEnumUnavailable PostServersCreateServerResponseServerImageStatusEnum = "unavailable"
 )
 
-type PostServers201ApplicationJSONServerImageTypeEnum string
+type PostServersCreateServerResponseServerImageTypeEnum string
 
 const (
-	PostServers201ApplicationJSONServerImageTypeEnumSystem    PostServers201ApplicationJSONServerImageTypeEnum = "system"
-	PostServers201ApplicationJSONServerImageTypeEnumApp       PostServers201ApplicationJSONServerImageTypeEnum = "app"
-	PostServers201ApplicationJSONServerImageTypeEnumSnapshot  PostServers201ApplicationJSONServerImageTypeEnum = "snapshot"
-	PostServers201ApplicationJSONServerImageTypeEnumBackup    PostServers201ApplicationJSONServerImageTypeEnum = "backup"
-	PostServers201ApplicationJSONServerImageTypeEnumTemporary PostServers201ApplicationJSONServerImageTypeEnum = "temporary"
+	PostServersCreateServerResponseServerImageTypeEnumSystem    PostServersCreateServerResponseServerImageTypeEnum = "system"
+	PostServersCreateServerResponseServerImageTypeEnumApp       PostServersCreateServerResponseServerImageTypeEnum = "app"
+	PostServersCreateServerResponseServerImageTypeEnumSnapshot  PostServersCreateServerResponseServerImageTypeEnum = "snapshot"
+	PostServersCreateServerResponseServerImageTypeEnumBackup    PostServersCreateServerResponseServerImageTypeEnum = "backup"
+	PostServersCreateServerResponseServerImageTypeEnumTemporary PostServersCreateServerResponseServerImageTypeEnum = "temporary"
 )
 
-type PostServers201ApplicationJSONServerImage struct {
-	BoundTo     int64                                                `json:"bound_to"`
-	BuildID     *string                                              `json:"build_id,omitempty"`
-	Created     string                                               `json:"created"`
-	CreatedFrom PostServers201ApplicationJSONServerImageCreatedFrom  `json:"created_from"`
-	Deleted     string                                               `json:"deleted"`
-	Deprecated  string                                               `json:"deprecated"`
-	Description string                                               `json:"description"`
-	DiskSize    float64                                              `json:"disk_size"`
-	ID          int64                                                `json:"id"`
-	ImageSize   float64                                              `json:"image_size"`
-	Labels      map[string]string                                    `json:"labels"`
-	Name        string                                               `json:"name"`
-	OsFlavor    PostServers201ApplicationJSONServerImageOsFlavorEnum `json:"os_flavor"`
-	OsVersion   string                                               `json:"os_version"`
-	Protection  PostServers201ApplicationJSONServerImageProtection   `json:"protection"`
-	RapidDeploy *bool                                                `json:"rapid_deploy,omitempty"`
-	Status      PostServers201ApplicationJSONServerImageStatusEnum   `json:"status"`
-	Type        PostServers201ApplicationJSONServerImageTypeEnum     `json:"type"`
+type PostServersCreateServerResponseServerImage struct {
+	BoundTo     int64                                                  `json:"bound_to"`
+	BuildID     *string                                                `json:"build_id,omitempty"`
+	Created     string                                                 `json:"created"`
+	CreatedFrom PostServersCreateServerResponseServerImageCreatedFrom  `json:"created_from"`
+	Deleted     string                                                 `json:"deleted"`
+	Deprecated  string                                                 `json:"deprecated"`
+	Description string                                                 `json:"description"`
+	DiskSize    float64                                                `json:"disk_size"`
+	ID          int64                                                  `json:"id"`
+	ImageSize   float64                                                `json:"image_size"`
+	Labels      map[string]string                                      `json:"labels"`
+	Name        string                                                 `json:"name"`
+	OsFlavor    PostServersCreateServerResponseServerImageOsFlavorEnum `json:"os_flavor"`
+	OsVersion   string                                                 `json:"os_version"`
+	Protection  PostServersCreateServerResponseServerImageProtection   `json:"protection"`
+	RapidDeploy *bool                                                  `json:"rapid_deploy,omitempty"`
+	Status      PostServersCreateServerResponseServerImageStatusEnum   `json:"status"`
+	Type        PostServersCreateServerResponseServerImageTypeEnum     `json:"type"`
 }
 
-type PostServers201ApplicationJSONServerIsoTypeEnum string
+type PostServersCreateServerResponseServerIsoTypeEnum string
 
 const (
-	PostServers201ApplicationJSONServerIsoTypeEnumPublic  PostServers201ApplicationJSONServerIsoTypeEnum = "public"
-	PostServers201ApplicationJSONServerIsoTypeEnumPrivate PostServers201ApplicationJSONServerIsoTypeEnum = "private"
+	PostServersCreateServerResponseServerIsoTypeEnumPublic  PostServersCreateServerResponseServerIsoTypeEnum = "public"
+	PostServersCreateServerResponseServerIsoTypeEnumPrivate PostServersCreateServerResponseServerIsoTypeEnum = "private"
 )
 
-type PostServers201ApplicationJSONServerIso struct {
-	Deprecated  string                                         `json:"deprecated"`
-	Description string                                         `json:"description"`
-	ID          int64                                          `json:"id"`
-	Name        string                                         `json:"name"`
-	Type        PostServers201ApplicationJSONServerIsoTypeEnum `json:"type"`
+type PostServersCreateServerResponseServerIso struct {
+	Deprecated  string                                           `json:"deprecated"`
+	Description string                                           `json:"description"`
+	ID          int64                                            `json:"id"`
+	Name        string                                           `json:"name"`
+	Type        PostServersCreateServerResponseServerIsoTypeEnum `json:"type"`
 }
 
-type PostServers201ApplicationJSONServerPlacementGroupTypeEnum string
+type PostServersCreateServerResponseServerPlacementGroupNullableTypeEnum string
 
 const (
-	PostServers201ApplicationJSONServerPlacementGroupTypeEnumSpread PostServers201ApplicationJSONServerPlacementGroupTypeEnum = "spread"
+	PostServersCreateServerResponseServerPlacementGroupNullableTypeEnumSpread PostServersCreateServerResponseServerPlacementGroupNullableTypeEnum = "spread"
 )
 
-type PostServers201ApplicationJSONServerPlacementGroupPlacementGroupNullable struct {
-	Created string                                                    `json:"created"`
-	ID      int64                                                     `json:"id"`
-	Labels  map[string]string                                         `json:"labels"`
-	Name    string                                                    `json:"name"`
-	Servers []int64                                                   `json:"servers"`
-	Type    PostServers201ApplicationJSONServerPlacementGroupTypeEnum `json:"type"`
+type PostServersCreateServerResponseServerPlacementGroupNullable struct {
+	Created string                                                              `json:"created"`
+	ID      int64                                                               `json:"id"`
+	Labels  map[string]string                                                   `json:"labels"`
+	Name    string                                                              `json:"name"`
+	Servers []int64                                                             `json:"servers"`
+	Type    PostServersCreateServerResponseServerPlacementGroupNullableTypeEnum `json:"type"`
 }
 
-type PostServers201ApplicationJSONServerPrivateNet struct {
+type PostServersCreateServerResponseServerPrivateNet struct {
 	AliasIps   []string `json:"alias_ips,omitempty"`
 	IP         *string  `json:"ip,omitempty"`
 	MacAddress *string  `json:"mac_address,omitempty"`
 	Network    *int64   `json:"network,omitempty"`
 }
 
-type PostServers201ApplicationJSONServerProtection struct {
+type PostServersCreateServerResponseServerProtection struct {
 	Delete  bool `json:"delete"`
 	Rebuild bool `json:"rebuild"`
 }
 
-type PostServers201ApplicationJSONServerPublicNetFirewallsStatusEnum string
+type PostServersCreateServerResponseServerPublicNetServerPublicNetFirewallStatusEnum string
 
 const (
-	PostServers201ApplicationJSONServerPublicNetFirewallsStatusEnumApplied PostServers201ApplicationJSONServerPublicNetFirewallsStatusEnum = "applied"
-	PostServers201ApplicationJSONServerPublicNetFirewallsStatusEnumPending PostServers201ApplicationJSONServerPublicNetFirewallsStatusEnum = "pending"
+	PostServersCreateServerResponseServerPublicNetServerPublicNetFirewallStatusEnumApplied PostServersCreateServerResponseServerPublicNetServerPublicNetFirewallStatusEnum = "applied"
+	PostServersCreateServerResponseServerPublicNetServerPublicNetFirewallStatusEnumPending PostServersCreateServerResponseServerPublicNetServerPublicNetFirewallStatusEnum = "pending"
 )
 
-type PostServers201ApplicationJSONServerPublicNetFirewallsServerPublicNetFirewall struct {
-	ID     *int64                                                           `json:"id,omitempty"`
-	Status *PostServers201ApplicationJSONServerPublicNetFirewallsStatusEnum `json:"status,omitempty"`
+type PostServersCreateServerResponseServerPublicNetServerPublicNetFirewall struct {
+	ID     *int64                                                                           `json:"id,omitempty"`
+	Status *PostServersCreateServerResponseServerPublicNetServerPublicNetFirewallStatusEnum `json:"status,omitempty"`
 }
 
-type PostServers201ApplicationJSONServerPublicNetIpv4 struct {
+type PostServersCreateServerResponseServerPublicNetIpv4 struct {
 	Blocked bool   `json:"blocked"`
 	DNSPtr  string `json:"dns_ptr"`
 	IP      string `json:"ip"`
 }
 
-type PostServers201ApplicationJSONServerPublicNetIpv6DNSPtr struct {
+type PostServersCreateServerResponseServerPublicNetIpv6DNSPtr struct {
 	DNSPtr string `json:"dns_ptr"`
 	IP     string `json:"ip"`
 }
 
-type PostServers201ApplicationJSONServerPublicNetIpv6 struct {
-	Blocked bool                                                     `json:"blocked"`
-	DNSPtr  []PostServers201ApplicationJSONServerPublicNetIpv6DNSPtr `json:"dns_ptr"`
-	IP      string                                                   `json:"ip"`
+type PostServersCreateServerResponseServerPublicNetIpv6 struct {
+	Blocked bool                                                       `json:"blocked"`
+	DNSPtr  []PostServersCreateServerResponseServerPublicNetIpv6DNSPtr `json:"dns_ptr"`
+	IP      string                                                     `json:"ip"`
 }
 
-type PostServers201ApplicationJSONServerPublicNet struct {
-	Firewalls   []PostServers201ApplicationJSONServerPublicNetFirewallsServerPublicNetFirewall `json:"firewalls,omitempty"`
-	FloatingIps []int64                                                                        `json:"floating_ips"`
-	Ipv4        PostServers201ApplicationJSONServerPublicNetIpv4                               `json:"ipv4"`
-	Ipv6        PostServers201ApplicationJSONServerPublicNetIpv6                               `json:"ipv6"`
+type PostServersCreateServerResponseServerPublicNet struct {
+	Firewalls   []PostServersCreateServerResponseServerPublicNetServerPublicNetFirewall `json:"firewalls,omitempty"`
+	FloatingIps []int64                                                                 `json:"floating_ips"`
+	Ipv4        PostServersCreateServerResponseServerPublicNetIpv4                      `json:"ipv4"`
+	Ipv6        PostServersCreateServerResponseServerPublicNetIpv6                      `json:"ipv6"`
 }
 
-type PostServers201ApplicationJSONServerServerTypeCPUTypeEnum string
+type PostServersCreateServerResponseServerServerTypeCPUTypeEnum string
 
 const (
-	PostServers201ApplicationJSONServerServerTypeCPUTypeEnumShared    PostServers201ApplicationJSONServerServerTypeCPUTypeEnum = "shared"
-	PostServers201ApplicationJSONServerServerTypeCPUTypeEnumDedicated PostServers201ApplicationJSONServerServerTypeCPUTypeEnum = "dedicated"
+	PostServersCreateServerResponseServerServerTypeCPUTypeEnumShared    PostServersCreateServerResponseServerServerTypeCPUTypeEnum = "shared"
+	PostServersCreateServerResponseServerServerTypeCPUTypeEnumDedicated PostServersCreateServerResponseServerServerTypeCPUTypeEnum = "dedicated"
 )
 
-type PostServers201ApplicationJSONServerServerTypePricesPriceHourly struct {
+type PostServersCreateServerResponseServerServerTypePricesPriceHourly struct {
 	Gross string `json:"gross"`
 	Net   string `json:"net"`
 }
 
-type PostServers201ApplicationJSONServerServerTypePricesPriceMonthly struct {
+type PostServersCreateServerResponseServerServerTypePricesPriceMonthly struct {
 	Gross string `json:"gross"`
 	Net   string `json:"net"`
 }
 
-type PostServers201ApplicationJSONServerServerTypePrices struct {
-	Location     string                                                          `json:"location"`
-	PriceHourly  PostServers201ApplicationJSONServerServerTypePricesPriceHourly  `json:"price_hourly"`
-	PriceMonthly PostServers201ApplicationJSONServerServerTypePricesPriceMonthly `json:"price_monthly"`
+type PostServersCreateServerResponseServerServerTypePrices struct {
+	Location     string                                                            `json:"location"`
+	PriceHourly  PostServersCreateServerResponseServerServerTypePricesPriceHourly  `json:"price_hourly"`
+	PriceMonthly PostServersCreateServerResponseServerServerTypePricesPriceMonthly `json:"price_monthly"`
 }
 
-type PostServers201ApplicationJSONServerServerTypeStorageTypeEnum string
+type PostServersCreateServerResponseServerServerTypeStorageTypeEnum string
 
 const (
-	PostServers201ApplicationJSONServerServerTypeStorageTypeEnumLocal   PostServers201ApplicationJSONServerServerTypeStorageTypeEnum = "local"
-	PostServers201ApplicationJSONServerServerTypeStorageTypeEnumNetwork PostServers201ApplicationJSONServerServerTypeStorageTypeEnum = "network"
+	PostServersCreateServerResponseServerServerTypeStorageTypeEnumLocal   PostServersCreateServerResponseServerServerTypeStorageTypeEnum = "local"
+	PostServersCreateServerResponseServerServerTypeStorageTypeEnumNetwork PostServersCreateServerResponseServerServerTypeStorageTypeEnum = "network"
 )
 
-type PostServers201ApplicationJSONServerServerType struct {
-	Cores       float64                                                      `json:"cores"`
-	CPUType     PostServers201ApplicationJSONServerServerTypeCPUTypeEnum     `json:"cpu_type"`
-	Deprecated  bool                                                         `json:"deprecated"`
-	Description string                                                       `json:"description"`
-	Disk        float64                                                      `json:"disk"`
-	ID          int64                                                        `json:"id"`
-	Memory      float64                                                      `json:"memory"`
-	Name        string                                                       `json:"name"`
-	Prices      []PostServers201ApplicationJSONServerServerTypePrices        `json:"prices"`
-	StorageType PostServers201ApplicationJSONServerServerTypeStorageTypeEnum `json:"storage_type"`
+type PostServersCreateServerResponseServerServerType struct {
+	Cores       float64                                                        `json:"cores"`
+	CPUType     PostServersCreateServerResponseServerServerTypeCPUTypeEnum     `json:"cpu_type"`
+	Deprecated  bool                                                           `json:"deprecated"`
+	Description string                                                         `json:"description"`
+	Disk        float64                                                        `json:"disk"`
+	ID          int64                                                          `json:"id"`
+	Memory      float64                                                        `json:"memory"`
+	Name        string                                                         `json:"name"`
+	Prices      []PostServersCreateServerResponseServerServerTypePrices        `json:"prices"`
+	StorageType PostServersCreateServerResponseServerServerTypeStorageTypeEnum `json:"storage_type"`
 }
 
-type PostServers201ApplicationJSONServerStatusEnum string
+type PostServersCreateServerResponseServerStatusEnum string
 
 const (
-	PostServers201ApplicationJSONServerStatusEnumRunning      PostServers201ApplicationJSONServerStatusEnum = "running"
-	PostServers201ApplicationJSONServerStatusEnumInitializing PostServers201ApplicationJSONServerStatusEnum = "initializing"
-	PostServers201ApplicationJSONServerStatusEnumStarting     PostServers201ApplicationJSONServerStatusEnum = "starting"
-	PostServers201ApplicationJSONServerStatusEnumStopping     PostServers201ApplicationJSONServerStatusEnum = "stopping"
-	PostServers201ApplicationJSONServerStatusEnumOff          PostServers201ApplicationJSONServerStatusEnum = "off"
-	PostServers201ApplicationJSONServerStatusEnumDeleting     PostServers201ApplicationJSONServerStatusEnum = "deleting"
-	PostServers201ApplicationJSONServerStatusEnumMigrating    PostServers201ApplicationJSONServerStatusEnum = "migrating"
-	PostServers201ApplicationJSONServerStatusEnumRebuilding   PostServers201ApplicationJSONServerStatusEnum = "rebuilding"
-	PostServers201ApplicationJSONServerStatusEnumUnknown      PostServers201ApplicationJSONServerStatusEnum = "unknown"
+	PostServersCreateServerResponseServerStatusEnumRunning      PostServersCreateServerResponseServerStatusEnum = "running"
+	PostServersCreateServerResponseServerStatusEnumInitializing PostServersCreateServerResponseServerStatusEnum = "initializing"
+	PostServersCreateServerResponseServerStatusEnumStarting     PostServersCreateServerResponseServerStatusEnum = "starting"
+	PostServersCreateServerResponseServerStatusEnumStopping     PostServersCreateServerResponseServerStatusEnum = "stopping"
+	PostServersCreateServerResponseServerStatusEnumOff          PostServersCreateServerResponseServerStatusEnum = "off"
+	PostServersCreateServerResponseServerStatusEnumDeleting     PostServersCreateServerResponseServerStatusEnum = "deleting"
+	PostServersCreateServerResponseServerStatusEnumMigrating    PostServersCreateServerResponseServerStatusEnum = "migrating"
+	PostServersCreateServerResponseServerStatusEnumRebuilding   PostServersCreateServerResponseServerStatusEnum = "rebuilding"
+	PostServersCreateServerResponseServerStatusEnumUnknown      PostServersCreateServerResponseServerStatusEnum = "unknown"
 )
 
-type PostServers201ApplicationJSONServer struct {
-	BackupWindow    string                                                                   `json:"backup_window"`
-	Created         string                                                                   `json:"created"`
-	Datacenter      PostServers201ApplicationJSONServerDatacenter                            `json:"datacenter"`
-	ID              int64                                                                    `json:"id"`
-	Image           PostServers201ApplicationJSONServerImage                                 `json:"image"`
-	IncludedTraffic float64                                                                  `json:"included_traffic"`
-	IngoingTraffic  float64                                                                  `json:"ingoing_traffic"`
-	Iso             PostServers201ApplicationJSONServerIso                                   `json:"iso"`
-	Labels          map[string]string                                                        `json:"labels"`
-	LoadBalancers   []int64                                                                  `json:"load_balancers,omitempty"`
-	Locked          bool                                                                     `json:"locked"`
-	Name            string                                                                   `json:"name"`
-	OutgoingTraffic float64                                                                  `json:"outgoing_traffic"`
-	PlacementGroup  *PostServers201ApplicationJSONServerPlacementGroupPlacementGroupNullable `json:"placement_group,omitempty"`
-	PrimaryDiskSize float64                                                                  `json:"primary_disk_size"`
-	PrivateNet      []PostServers201ApplicationJSONServerPrivateNet                          `json:"private_net"`
-	Protection      PostServers201ApplicationJSONServerProtection                            `json:"protection"`
-	PublicNet       PostServers201ApplicationJSONServerPublicNet                             `json:"public_net"`
-	RescueEnabled   bool                                                                     `json:"rescue_enabled"`
-	ServerType      PostServers201ApplicationJSONServerServerType                            `json:"server_type"`
-	Status          PostServers201ApplicationJSONServerStatusEnum                            `json:"status"`
-	Volumes         []int64                                                                  `json:"volumes,omitempty"`
+type PostServersCreateServerResponseServer struct {
+	BackupWindow    string                                                       `json:"backup_window"`
+	Created         string                                                       `json:"created"`
+	Datacenter      PostServersCreateServerResponseServerDatacenter              `json:"datacenter"`
+	ID              int64                                                        `json:"id"`
+	Image           PostServersCreateServerResponseServerImage                   `json:"image"`
+	IncludedTraffic float64                                                      `json:"included_traffic"`
+	IngoingTraffic  float64                                                      `json:"ingoing_traffic"`
+	Iso             PostServersCreateServerResponseServerIso                     `json:"iso"`
+	Labels          map[string]string                                            `json:"labels"`
+	LoadBalancers   []int64                                                      `json:"load_balancers,omitempty"`
+	Locked          bool                                                         `json:"locked"`
+	Name            string                                                       `json:"name"`
+	OutgoingTraffic float64                                                      `json:"outgoing_traffic"`
+	PlacementGroup  *PostServersCreateServerResponseServerPlacementGroupNullable `json:"placement_group,omitempty"`
+	PrimaryDiskSize float64                                                      `json:"primary_disk_size"`
+	PrivateNet      []PostServersCreateServerResponseServerPrivateNet            `json:"private_net"`
+	Protection      PostServersCreateServerResponseServerProtection              `json:"protection"`
+	PublicNet       PostServersCreateServerResponseServerPublicNet               `json:"public_net"`
+	RescueEnabled   bool                                                         `json:"rescue_enabled"`
+	ServerType      PostServersCreateServerResponseServerServerType              `json:"server_type"`
+	Status          PostServersCreateServerResponseServerStatusEnum              `json:"status"`
+	Volumes         []int64                                                      `json:"volumes,omitempty"`
 }
 
-type PostServers201ApplicationJSONCreateServerResponse struct {
-	Action       PostServers201ApplicationJSONActionAction        `json:"action"`
-	NextActions  []PostServers201ApplicationJSONNextActionsAction `json:"next_actions"`
-	RootPassword string                                           `json:"root_password"`
-	Server       PostServers201ApplicationJSONServer              `json:"server"`
+type PostServersCreateServerResponse struct {
+	Action       PostServersCreateServerResponseAction   `json:"action"`
+	NextActions  []PostServersCreateServerResponseAction `json:"next_actions"`
+	RootPassword string                                  `json:"root_password"`
+	Server       PostServersCreateServerResponseServer   `json:"server"`
 }
 
 type PostServersResponse struct {
 	ContentType          string
-	CreateServerResponse *PostServers201ApplicationJSONCreateServerResponse
+	CreateServerResponse *PostServersCreateServerResponse
 	StatusCode           int64
 }

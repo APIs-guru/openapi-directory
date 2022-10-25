@@ -32,7 +32,7 @@ class ListEnvironmentRequest:
 
 @dataclass_json
 @dataclass
-class ListEnvironment200ApplicationJSONMeta:
+class ListEnvironmentListEnvironmentResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -44,14 +44,14 @@ class ListEnvironment200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListEnvironment200ApplicationJSONListEnvironmentResponse:
+class ListEnvironmentListEnvironmentResponse:
     environments: Optional[List[shared.ServerlessV1ServiceEnvironment]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'environments' }})
-    meta: Optional[ListEnvironment200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+    meta: Optional[ListEnvironmentListEnvironmentResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     
 
 @dataclass
 class ListEnvironmentResponse:
     content_type: str = field(default=None)
-    list_environment_response: Optional[ListEnvironment200ApplicationJSONListEnvironmentResponse] = field(default=None)
+    list_environment_response: Optional[ListEnvironmentListEnvironmentResponse] = field(default=None)
     status_code: int = field(default=None)
     

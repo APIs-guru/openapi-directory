@@ -13,7 +13,7 @@ type UpdateMessagingConfigurationPathParams struct {
 	ServiceSid string `pathParam:"style=simple,explode=false,name=ServiceSid"`
 }
 
-type UpdateMessagingConfigurationRequestBodyUpdateMessagingConfigurationRequest struct {
+type UpdateMessagingConfigurationUpdateMessagingConfigurationRequest struct {
 	MessagingServiceSid string `form:"name=MessagingServiceSid"`
 }
 
@@ -24,7 +24,7 @@ type UpdateMessagingConfigurationSecurity struct {
 type UpdateMessagingConfigurationRequest struct {
 	ServerURL  *string
 	PathParams UpdateMessagingConfigurationPathParams
-	Request    *UpdateMessagingConfigurationRequestBodyUpdateMessagingConfigurationRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateMessagingConfigurationUpdateMessagingConfigurationRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateMessagingConfigurationSecurity
 }
 

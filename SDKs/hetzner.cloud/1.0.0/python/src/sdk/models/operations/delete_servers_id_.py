@@ -34,7 +34,7 @@ class DeleteServersID200ApplicationJSONActionStatusEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class DeleteServersID200ApplicationJSONActionAction:
+class DeleteServersID200ApplicationJSONAction:
     command: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'command' }})
     error: DeleteServersID200ApplicationJSONActionError = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
     finished: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'finished' }})
@@ -48,7 +48,7 @@ class DeleteServersID200ApplicationJSONActionAction:
 @dataclass_json
 @dataclass
 class DeleteServersID200ApplicationJSON:
-    action: Optional[DeleteServersID200ApplicationJSONActionAction] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'action' }})
+    action: Optional[DeleteServersID200ApplicationJSONAction] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'action' }})
     
 
 @dataclass

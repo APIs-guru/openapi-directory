@@ -5,7 +5,7 @@ import dateutil.parser
 from typing import Any,Enum,List,Optional
 from dataclasses_json import dataclass_json
 
-class WritableDeviceTypeSubdeviceRoleParentChildStatusEnum(str, Enum):
+class WritableDeviceTypeParentChildStatusEnum(str, Enum):
     PARENT = "parent"
     CHILD = "child"
 
@@ -27,7 +27,7 @@ class WritableDeviceType:
     part_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'part_number' }})
     rear_image: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rear_image' }})
     slug: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'slug' }})
-    subdevice_role: Optional[WritableDeviceTypeSubdeviceRoleParentChildStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'subdevice_role' }})
+    subdevice_role: Optional[WritableDeviceTypeParentChildStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'subdevice_role' }})
     tags: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
     u_height: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'u_height' }})
     

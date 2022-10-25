@@ -87,7 +87,7 @@ func (s *SDK) AddFieldsToTemplate(ctx context.Context, request operations.AddFie
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.AddFieldsToTemplate200ApplicationJSONAddFieldsTemplateResponse
+			var out *operations.AddFieldsToTemplateAddFieldsTemplateResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -97,7 +97,7 @@ func (s *SDK) AddFieldsToTemplate(ctx context.Context, request operations.AddFie
 	case httpRes.StatusCode == 422:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.AddFieldsToTemplate200ApplicationJSONAddFieldsTemplateResponse
+			var out *operations.AddFieldsToTemplateAddFieldsTemplateResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -145,7 +145,7 @@ func (s *SDK) BatchGeneratePdfV1(ctx context.Context, request operations.BatchGe
 	case httpRes.StatusCode == 201:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out []operations.BatchGeneratePdfV1201ApplicationJSONCreateSubmissionResponse
+			var out []operations.BatchGeneratePdfV1CreateSubmissionResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -223,7 +223,7 @@ func (s *SDK) BatchGeneratePdfs(ctx context.Context, request operations.BatchGen
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.BatchGeneratePdfs200ApplicationJSONCreateSubmissionBatchResponse
+			var out *operations.BatchGeneratePdfsCreateSubmissionBatchResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -233,7 +233,7 @@ func (s *SDK) BatchGeneratePdfs(ctx context.Context, request operations.BatchGen
 	case httpRes.StatusCode == 201:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.BatchGeneratePdfs200ApplicationJSONCreateSubmissionBatchResponse
+			var out *operations.BatchGeneratePdfsCreateSubmissionBatchResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -301,7 +301,7 @@ func (s *SDK) CombinePdfs(ctx context.Context, request operations.CombinePdfsReq
 	case httpRes.StatusCode == 201:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.CombinePdfs201ApplicationJSONCreateCombinedSubmissionResponse
+			var out *operations.CombinePdfsCreateCombinedSubmissionResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -379,7 +379,7 @@ func (s *SDK) CombineSubmissions(ctx context.Context, request operations.Combine
 	case httpRes.StatusCode == 201:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.CombineSubmissions201ApplicationJSONCreateCombinedSubmissionResponse
+			var out *operations.CombineSubmissionsCreateCombinedSubmissionResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -454,7 +454,7 @@ func (s *SDK) CopyTemplate(ctx context.Context, request operations.CopyTemplateR
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.CopyTemplate200ApplicationJSONTemplate
+			var out *operations.CopyTemplateTemplate
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -512,7 +512,7 @@ func (s *SDK) CreateCustomFileFromUpload(ctx context.Context, request operations
 	case httpRes.StatusCode == 201:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.CreateCustomFileFromUpload201ApplicationJSONCreateCustomFileResponse
+			var out *operations.CreateCustomFileFromUploadCreateCustomFileResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -561,7 +561,7 @@ func (s *SDK) CreateDataRequestToken(ctx context.Context, request operations.Cre
 	case httpRes.StatusCode == 201:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.CreateDataRequestToken201ApplicationJSONCreateSubmissionDataRequestTokenResponse
+			var out *operations.CreateDataRequestTokenCreateSubmissionDataRequestTokenResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -619,7 +619,7 @@ func (s *SDK) CreateFolder(ctx context.Context, request operations.CreateFolderR
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.CreateFolder200ApplicationJSONFolder
+			var out *operations.CreateFolderFolder
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -649,7 +649,7 @@ func (s *SDK) CreateFolder(ctx context.Context, request operations.CreateFolderR
 	case httpRes.StatusCode == 422:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.CreateFolder200ApplicationJSONFolder
+			var out *operations.CreateFolderFolder
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -697,7 +697,7 @@ func (s *SDK) CreateHTMLTemplate(ctx context.Context, request operations.CreateH
 	case httpRes.StatusCode == 201:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.CreateHTMLTemplate201ApplicationJSONPendingTemplate
+			var out *operations.CreateHTMLTemplatePendingTemplate
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -755,7 +755,7 @@ func (s *SDK) CreatePdfTemplate(ctx context.Context, request operations.CreatePd
 	case httpRes.StatusCode == 201:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.CreatePdfTemplate201ApplicationJSONPendingTemplate
+			var out *operations.CreatePdfTemplatePendingTemplate
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -813,7 +813,7 @@ func (s *SDK) CreatePdfTemplateFromUpload(ctx context.Context, request operation
 	case httpRes.StatusCode == 201:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.CreatePdfTemplateFromUpload201ApplicationJSONPendingTemplate
+			var out *operations.CreatePdfTemplateFromUploadPendingTemplate
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -862,7 +862,7 @@ func (s *SDK) DeleteFolder(ctx context.Context, request operations.DeleteFolderR
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.DeleteFolder200ApplicationJSONFolder
+			var out *operations.DeleteFolderFolder
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -931,7 +931,7 @@ func (s *SDK) ExpireCombinedSubmission(ctx context.Context, request operations.E
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ExpireCombinedSubmission200ApplicationJSONCombinedSubmission
+			var out *operations.ExpireCombinedSubmissionCombinedSubmission
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -1078,7 +1078,7 @@ func (s *SDK) GeneratePdf(ctx context.Context, request operations.GeneratePdfReq
 	case httpRes.StatusCode == 201:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.GeneratePdf201ApplicationJSONCreateSubmissionResponse
+			var out *operations.GeneratePdfCreateSubmissionResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -1147,7 +1147,7 @@ func (s *SDK) GetCombinedSubmission(ctx context.Context, request operations.GetC
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.GetCombinedSubmission200ApplicationJSONCombinedSubmission
+			var out *operations.GetCombinedSubmissionCombinedSubmission
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -1265,7 +1265,7 @@ func (s *SDK) GetPresignURL(ctx context.Context, request operations.GetPresignUR
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.GetPresignURL200ApplicationJSONUploadPresign
+			var out *operations.GetPresignURLUploadPresign
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -1377,7 +1377,7 @@ func (s *SDK) GetSubmissionBatch(ctx context.Context, request operations.GetSubm
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.GetSubmissionBatch200ApplicationJSONSubmissionBatch
+			var out *operations.GetSubmissionBatchSubmissionBatch
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -1436,7 +1436,7 @@ func (s *SDK) GetTemplate(ctx context.Context, request operations.GetTemplateReq
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.GetTemplate200ApplicationJSONTemplate
+			var out *operations.GetTemplateTemplate
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -1495,7 +1495,7 @@ func (s *SDK) GetTemplateSchema(ctx context.Context, request operations.GetTempl
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.GetTemplateSchema200ApplicationJSONTemplateSchema
+			var out *operations.GetTemplateSchemaTemplateSchema
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -1556,7 +1556,7 @@ func (s *SDK) ListFolders(ctx context.Context, request operations.ListFoldersReq
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out []operations.ListFolders200ApplicationJSONFolder
+			var out []operations.ListFoldersFolder
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -1607,7 +1607,7 @@ func (s *SDK) ListTemplates(ctx context.Context, request operations.ListTemplate
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out []operations.ListTemplates200ApplicationJSONTemplate
+			var out []operations.ListTemplatesTemplate
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -1675,7 +1675,7 @@ func (s *SDK) MoveFolderToFolder(ctx context.Context, request operations.MoveFol
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.MoveFolderToFolder200ApplicationJSONFolder
+			var out *operations.MoveFolderToFolderFolder
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -1743,7 +1743,7 @@ func (s *SDK) MoveTemplateToFolder(ctx context.Context, request operations.MoveT
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.MoveTemplateToFolder200ApplicationJSONTemplate
+			var out *operations.MoveTemplateToFolderTemplate
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -1843,7 +1843,7 @@ func (s *SDK) TestAuthentication(ctx context.Context, request operations.TestAut
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.TestAuthentication200ApplicationJSONAuthenticationSuccessResponse
+			var out *operations.TestAuthenticationAuthenticationSuccessResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -1901,7 +1901,7 @@ func (s *SDK) UpdateDataRequest(ctx context.Context, request operations.UpdateDa
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.UpdateDataRequest200ApplicationJSONUpdateDataRequestResponse
+			var out *operations.UpdateDataRequestUpdateDataRequestResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -1979,7 +1979,7 @@ func (s *SDK) UpdateTemplate(ctx context.Context, request operations.UpdateTempl
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.UpdateTemplate200ApplicationJSONUpdateTemplateResponse
+			var out *operations.UpdateTemplateUpdateTemplateResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}

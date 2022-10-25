@@ -13,7 +13,7 @@ class CreateIncomingPhoneNumberAssignedAddOnPathParams:
     
 
 @dataclass
-class CreateIncomingPhoneNumberAssignedAddOnRequestBodyCreateIncomingPhoneNumberAssignedAddOnRequest:
+class CreateIncomingPhoneNumberAssignedAddOnCreateIncomingPhoneNumberAssignedAddOnRequest:
     installed_add_on_sid: str = field(default=None, metadata={'form': { 'field_name': 'InstalledAddOnSid' }})
     
 
@@ -26,7 +26,7 @@ class CreateIncomingPhoneNumberAssignedAddOnSecurity:
 class CreateIncomingPhoneNumberAssignedAddOnRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateIncomingPhoneNumberAssignedAddOnPathParams = field(default=None)
-    request: Optional[CreateIncomingPhoneNumberAssignedAddOnRequestBodyCreateIncomingPhoneNumberAssignedAddOnRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateIncomingPhoneNumberAssignedAddOnCreateIncomingPhoneNumberAssignedAddOnRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateIncomingPhoneNumberAssignedAddOnSecurity = field(default=None)
     
 

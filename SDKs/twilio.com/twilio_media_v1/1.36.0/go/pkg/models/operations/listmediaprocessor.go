@@ -24,7 +24,7 @@ type ListMediaProcessorRequest struct {
 	Security    ListMediaProcessorSecurity
 }
 
-type ListMediaProcessor200ApplicationJSONMeta struct {
+type ListMediaProcessorListMediaProcessorResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -34,13 +34,13 @@ type ListMediaProcessor200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListMediaProcessor200ApplicationJSONListMediaProcessorResponse struct {
-	MediaProcessors []shared.MediaV1MediaProcessor            `json:"media_processors,omitempty"`
-	Meta            *ListMediaProcessor200ApplicationJSONMeta `json:"meta,omitempty"`
+type ListMediaProcessorListMediaProcessorResponse struct {
+	MediaProcessors []shared.MediaV1MediaProcessor                    `json:"media_processors,omitempty"`
+	Meta            *ListMediaProcessorListMediaProcessorResponseMeta `json:"meta,omitempty"`
 }
 
 type ListMediaProcessorResponse struct {
 	ContentType                string
-	ListMediaProcessorResponse *ListMediaProcessor200ApplicationJSONListMediaProcessorResponse
+	ListMediaProcessorResponse *ListMediaProcessorListMediaProcessorResponse
 	StatusCode                 int64
 }

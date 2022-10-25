@@ -19,7 +19,7 @@ class GetTransactionsByIDRequest:
 
 @dataclass_json
 @dataclass
-class GetTransactionsByID200ApplicationJSONCardRelatedCard:
+class GetTransactionsByIDTransactionRelatedCard:
     alias: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'alias' }})
     card_id: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cardId' }})
     emboss_business_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'embossBusinessName' }})
@@ -31,7 +31,7 @@ class GetTransactionsByID200ApplicationJSONCardRelatedCard:
 
 @dataclass_json
 @dataclass
-class GetTransactionsByID200ApplicationJSONFxTradeDetailsFxTrade:
+class GetTransactionsByIDTransactionFxTrade:
     buy_amount: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'buyAmount' }})
     buy_currency: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'buyCurrency' }})
     fixed_side: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'fixedSide' }})
@@ -42,7 +42,7 @@ class GetTransactionsByID200ApplicationJSONFxTradeDetailsFxTrade:
 
 @dataclass_json
 @dataclass
-class GetTransactionsByID200ApplicationJSONRelatedParty1Account:
+class GetTransactionsByIDTransactionRelatedPartyRelatedPartyFireAccountAccount:
     account_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'accountNumber' }})
     alias: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'alias' }})
     bic: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'bic' }})
@@ -50,20 +50,20 @@ class GetTransactionsByID200ApplicationJSONRelatedParty1Account:
     id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     nsc: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nsc' }})
     
-class GetTransactionsByID200ApplicationJSONRelatedParty1TypeEnum(str, Enum):
+class GetTransactionsByIDTransactionRelatedPartyRelatedPartyFireAccountTypeEnum(str, Enum):
     FIRE_ACCOUNT = "FIRE_ACCOUNT"
 
 
 @dataclass_json
 @dataclass
-class GetTransactionsByID200ApplicationJSONRelatedParty1RelatedPartyFireAccount:
-    account: Optional[GetTransactionsByID200ApplicationJSONRelatedParty1Account] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'account' }})
-    type: Optional[GetTransactionsByID200ApplicationJSONRelatedParty1TypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+class GetTransactionsByIDTransactionRelatedPartyRelatedPartyFireAccount:
+    account: Optional[GetTransactionsByIDTransactionRelatedPartyRelatedPartyFireAccountAccount] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'account' }})
+    type: Optional[GetTransactionsByIDTransactionRelatedPartyRelatedPartyFireAccountTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     
 
 @dataclass_json
 @dataclass
-class GetTransactionsByID200ApplicationJSONRelatedParty2Account:
+class GetTransactionsByIDTransactionRelatedPartyRelatedPartyExternalAccountAccount:
     account_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'accountNumber' }})
     alias: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'alias' }})
     bic: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'bic' }})
@@ -71,20 +71,20 @@ class GetTransactionsByID200ApplicationJSONRelatedParty2Account:
     id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     nsc: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nsc' }})
     
-class GetTransactionsByID200ApplicationJSONRelatedParty2TypeEnum(str, Enum):
+class GetTransactionsByIDTransactionRelatedPartyRelatedPartyExternalAccountTypeEnum(str, Enum):
     EXTERNAL_ACCOUNT = "EXTERNAL_ACCOUNT"
 
 
 @dataclass_json
 @dataclass
-class GetTransactionsByID200ApplicationJSONRelatedParty2RelatedPartyExternalAccount:
-    account: Optional[GetTransactionsByID200ApplicationJSONRelatedParty2Account] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'account' }})
-    type: Optional[GetTransactionsByID200ApplicationJSONRelatedParty2TypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+class GetTransactionsByIDTransactionRelatedPartyRelatedPartyExternalAccount:
+    account: Optional[GetTransactionsByIDTransactionRelatedPartyRelatedPartyExternalAccountAccount] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'account' }})
+    type: Optional[GetTransactionsByIDTransactionRelatedPartyRelatedPartyExternalAccountTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     
 
 @dataclass_json
 @dataclass
-class GetTransactionsByID200ApplicationJSONRelatedParty3Account:
+class GetTransactionsByIDTransactionRelatedPartyRelatedPartyPayeeAccount:
     account_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'accountNumber' }})
     alias: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'alias' }})
     bic: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'bic' }})
@@ -92,20 +92,20 @@ class GetTransactionsByID200ApplicationJSONRelatedParty3Account:
     id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     nsc: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nsc' }})
     
-class GetTransactionsByID200ApplicationJSONRelatedParty3TypeEnum(str, Enum):
+class GetTransactionsByIDTransactionRelatedPartyRelatedPartyPayeeTypeEnum(str, Enum):
     WITHDRAWAL_ACCOUNT = "WITHDRAWAL_ACCOUNT"
 
 
 @dataclass_json
 @dataclass
-class GetTransactionsByID200ApplicationJSONRelatedParty3RelatedPartyPayee:
-    account: Optional[GetTransactionsByID200ApplicationJSONRelatedParty3Account] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'account' }})
-    type: Optional[GetTransactionsByID200ApplicationJSONRelatedParty3TypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+class GetTransactionsByIDTransactionRelatedPartyRelatedPartyPayee:
+    account: Optional[GetTransactionsByIDTransactionRelatedPartyRelatedPartyPayeeAccount] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'account' }})
+    type: Optional[GetTransactionsByIDTransactionRelatedPartyRelatedPartyPayeeTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     
 
 @dataclass_json
 @dataclass
-class GetTransactionsByID200ApplicationJSONRelatedParty4CardMerchant:
+class GetTransactionsByIDTransactionRelatedPartyRelatedPartyCardPaymentCardMerchant:
     acquirer_id_de32: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'acquirerIdDe32' }})
     additional_amt_de54: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'additionalAmtDe54' }})
     additional_data_de124: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'additionalDataDe124' }})
@@ -136,30 +136,30 @@ class GetTransactionsByID200ApplicationJSONRelatedParty4CardMerchant:
     txn_stat_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'txnStatCode' }})
     txn_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'txnType' }})
     
-class GetTransactionsByID200ApplicationJSONRelatedParty4TypeEnum(str, Enum):
+class GetTransactionsByIDTransactionRelatedPartyRelatedPartyCardPaymentTypeEnum(str, Enum):
     CARD_MERCHANT = "CARD_MERCHANT"
     CARD_ATM = "CARD_ATM"
 
 
 @dataclass_json
 @dataclass
-class GetTransactionsByID200ApplicationJSONRelatedParty4RelatedPartyCardPayment:
-    card_merchant: Optional[GetTransactionsByID200ApplicationJSONRelatedParty4CardMerchant] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cardMerchant' }})
-    type: Optional[GetTransactionsByID200ApplicationJSONRelatedParty4TypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+class GetTransactionsByIDTransactionRelatedPartyRelatedPartyCardPayment:
+    card_merchant: Optional[GetTransactionsByIDTransactionRelatedPartyRelatedPartyCardPaymentCardMerchant] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cardMerchant' }})
+    type: Optional[GetTransactionsByIDTransactionRelatedPartyRelatedPartyCardPaymentTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     
 
 @dataclass_json
 @dataclass
-class GetTransactionsByID200ApplicationJSONTransaction:
+class GetTransactionsByIDTransaction:
     amount_after_charges: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'amountAfterCharges' }})
     amount_before_charges: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'amountBeforeCharges' }})
     balance: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'balance' }})
-    card: Optional[GetTransactionsByID200ApplicationJSONCardRelatedCard] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'card' }})
+    card: Optional[GetTransactionsByIDTransactionRelatedCard] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'card' }})
     currency: Optional[shared.OneaccountsGetResponses200ContentApplication1jsonSchemaPropertiesAccountsItemsPropertiesCurrency] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'currency' }})
     date: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'date', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     date_acknowledged: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dateAcknowledged', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     fee_amount: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'feeAmount' }})
-    fx_trade_details: Optional[GetTransactionsByID200ApplicationJSONFxTradeDetailsFxTrade] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'fxTradeDetails' }})
+    fx_trade_details: Optional[GetTransactionsByIDTransactionFxTrade] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'fxTradeDetails' }})
     ican: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ican' }})
     my_ref: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'myRef' }})
     payment_request_public_code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'paymentRequestPublicCode' }})
@@ -174,5 +174,5 @@ class GetTransactionsByID200ApplicationJSONTransaction:
 class GetTransactionsByIDResponse:
     content_type: str = field(default=None)
     status_code: int = field(default=None)
-    transaction: Optional[GetTransactionsByID200ApplicationJSONTransaction] = field(default=None)
+    transaction: Optional[GetTransactionsByIDTransaction] = field(default=None)
     

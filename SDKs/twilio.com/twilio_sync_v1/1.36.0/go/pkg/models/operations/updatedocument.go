@@ -17,7 +17,7 @@ type UpdateDocumentHeaders struct {
 	IfMatch *string `header:"name=If-Match"`
 }
 
-type UpdateDocumentRequestBodyUpdateDocumentRequest struct {
+type UpdateDocumentUpdateDocumentRequest struct {
 	Data *interface{} `form:"name=Data"`
 	TTL  *int64       `form:"name=Ttl"`
 }
@@ -30,7 +30,7 @@ type UpdateDocumentRequest struct {
 	ServerURL  *string
 	PathParams UpdateDocumentPathParams
 	Headers    UpdateDocumentHeaders
-	Request    *UpdateDocumentRequestBodyUpdateDocumentRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateDocumentUpdateDocumentRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateDocumentSecurity
 }
 

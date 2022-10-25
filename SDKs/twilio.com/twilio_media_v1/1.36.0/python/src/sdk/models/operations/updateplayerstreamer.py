@@ -12,7 +12,7 @@ class UpdatePlayerStreamerPathParams:
     
 
 @dataclass
-class UpdatePlayerStreamerRequestBodyUpdatePlayerStreamerRequest:
+class UpdatePlayerStreamerUpdatePlayerStreamerRequest:
     status: shared.PlayerStreamerEnumUpdateStatusEnum = field(default=None, metadata={'form': { 'field_name': 'Status' }})
     
 
@@ -25,7 +25,7 @@ class UpdatePlayerStreamerSecurity:
 class UpdatePlayerStreamerRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdatePlayerStreamerPathParams = field(default=None)
-    request: Optional[UpdatePlayerStreamerRequestBodyUpdatePlayerStreamerRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdatePlayerStreamerUpdatePlayerStreamerRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdatePlayerStreamerSecurity = field(default=None)
     
 

@@ -8,7 +8,7 @@ var CreateUnderstandAssistantServers = []string{
 	"https://preview.twilio.com",
 }
 
-type CreateUnderstandAssistantRequestBodyCreateUnderstandAssistantRequest struct {
+type CreateUnderstandAssistantCreateUnderstandAssistantRequest struct {
 	CallbackEvents    *string      `form:"name=CallbackEvents"`
 	CallbackURL       *string      `form:"name=CallbackUrl"`
 	FallbackActions   *interface{} `form:"name=FallbackActions"`
@@ -25,7 +25,7 @@ type CreateUnderstandAssistantSecurity struct {
 
 type CreateUnderstandAssistantRequest struct {
 	ServerURL *string
-	Request   *CreateUnderstandAssistantRequestBodyCreateUnderstandAssistantRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request   *CreateUnderstandAssistantCreateUnderstandAssistantRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security  CreateUnderstandAssistantSecurity
 }
 

@@ -23,7 +23,7 @@ type ListFleetRequest struct {
 	Security    ListFleetSecurity
 }
 
-type ListFleet200ApplicationJSONMeta struct {
+type ListFleetListFleetResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -33,13 +33,13 @@ type ListFleet200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListFleet200ApplicationJSONListFleetResponse struct {
-	Fleets []shared.SupersimV1Fleet         `json:"fleets,omitempty"`
-	Meta   *ListFleet200ApplicationJSONMeta `json:"meta,omitempty"`
+type ListFleetListFleetResponse struct {
+	Fleets []shared.SupersimV1Fleet        `json:"fleets,omitempty"`
+	Meta   *ListFleetListFleetResponseMeta `json:"meta,omitempty"`
 }
 
 type ListFleetResponse struct {
 	ContentType       string
-	ListFleetResponse *ListFleet200ApplicationJSONListFleetResponse
+	ListFleetResponse *ListFleetListFleetResponse
 	StatusCode        int64
 }

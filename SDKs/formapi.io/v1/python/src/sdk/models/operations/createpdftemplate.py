@@ -27,7 +27,7 @@ class CreatePdfTemplateRequest:
     request: CreatePdfTemplateRequestBody = field(default=None, metadata={'request': { 'media_type': 'multipart/form-data' }})
     security: CreatePdfTemplateSecurity = field(default=None)
     
-class CreatePdfTemplate201ApplicationJSONExpirationIntervalEnum(str, Enum):
+class CreatePdfTemplatePendingTemplateExpirationIntervalEnum(str, Enum):
     MINUTES = "minutes"
     HOURS = "hours"
     DAYS = "days"
@@ -35,11 +35,11 @@ class CreatePdfTemplate201ApplicationJSONExpirationIntervalEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class CreatePdfTemplate201ApplicationJSONPendingTemplate:
+class CreatePdfTemplatePendingTemplate:
     allow_additional_properties: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'allow_additional_properties' }})
     description: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
     editable_submissions: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'editable_submissions' }})
-    expiration_interval: Optional[CreatePdfTemplate201ApplicationJSONExpirationIntervalEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'expiration_interval' }})
+    expiration_interval: Optional[CreatePdfTemplatePendingTemplateExpirationIntervalEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'expiration_interval' }})
     expire_after: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'expire_after' }})
     expire_submissions: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'expire_submissions' }})
     id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
@@ -60,5 +60,5 @@ class CreatePdfTemplateResponse:
     content_type: str = field(default=None)
     status_code: int = field(default=None)
     authentication_error: Optional[shared.AuthenticationError] = field(default=None)
-    pending_template: Optional[CreatePdfTemplate201ApplicationJSONPendingTemplate] = field(default=None)
+    pending_template: Optional[CreatePdfTemplatePendingTemplate] = field(default=None)
     

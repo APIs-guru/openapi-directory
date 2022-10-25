@@ -12,7 +12,7 @@ class UpdateRoomRecordingRulePathParams:
     
 
 @dataclass
-class UpdateRoomRecordingRuleRequestBodyUpdateRoomRecordingRuleRequest:
+class UpdateRoomRecordingRuleUpdateRoomRecordingRuleRequest:
     rules: Optional[Any] = field(default=None, metadata={'form': { 'field_name': 'Rules' }})
     
 
@@ -25,7 +25,7 @@ class UpdateRoomRecordingRuleSecurity:
 class UpdateRoomRecordingRuleRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateRoomRecordingRulePathParams = field(default=None)
-    request: Optional[UpdateRoomRecordingRuleRequestBodyUpdateRoomRecordingRuleRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateRoomRecordingRuleUpdateRoomRecordingRuleRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateRoomRecordingRuleSecurity = field(default=None)
     
 

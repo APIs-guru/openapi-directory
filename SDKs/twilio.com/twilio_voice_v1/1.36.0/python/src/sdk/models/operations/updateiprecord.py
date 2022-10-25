@@ -12,7 +12,7 @@ class UpdateIPRecordPathParams:
     
 
 @dataclass
-class UpdateIPRecordRequestBodyUpdateIPRecordRequest:
+class UpdateIPRecordUpdateIPRecordRequest:
     friendly_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
     
 
@@ -25,7 +25,7 @@ class UpdateIPRecordSecurity:
 class UpdateIPRecordRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateIPRecordPathParams = field(default=None)
-    request: Optional[UpdateIPRecordRequestBodyUpdateIPRecordRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateIPRecordUpdateIPRecordRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateIPRecordSecurity = field(default=None)
     
 

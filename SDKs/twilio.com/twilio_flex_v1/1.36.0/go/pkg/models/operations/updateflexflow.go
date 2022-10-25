@@ -12,7 +12,7 @@ type UpdateFlexFlowPathParams struct {
 	Sid string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
-type UpdateFlexFlowRequestBodyUpdateFlexFlowRequest struct {
+type UpdateFlexFlowUpdateFlexFlowRequest struct {
 	ChannelType                  *shared.FlexFlowEnumChannelTypeEnum     `form:"name=ChannelType"`
 	ChatServiceSid               *string                                 `form:"name=ChatServiceSid"`
 	ContactIdentity              *string                                 `form:"name=ContactIdentity"`
@@ -39,7 +39,7 @@ type UpdateFlexFlowSecurity struct {
 type UpdateFlexFlowRequest struct {
 	ServerURL  *string
 	PathParams UpdateFlexFlowPathParams
-	Request    *UpdateFlexFlowRequestBodyUpdateFlexFlowRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateFlexFlowUpdateFlexFlowRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateFlexFlowSecurity
 }
 

@@ -28,7 +28,7 @@ type ListRecordingTranscriptionRequest struct {
 	Security    ListRecordingTranscriptionSecurity
 }
 
-type ListRecordingTranscription200ApplicationJSONListRecordingTranscriptionResponse struct {
+type ListRecordingTranscriptionListRecordingTranscriptionResponse struct {
 	End             *int64                                                  `json:"end,omitempty"`
 	FirstPageURI    *string                                                 `json:"first_page_uri,omitempty"`
 	NextPageURI     *string                                                 `json:"next_page_uri,omitempty"`
@@ -42,6 +42,6 @@ type ListRecordingTranscription200ApplicationJSONListRecordingTranscriptionRespo
 
 type ListRecordingTranscriptionResponse struct {
 	ContentType                        string
-	ListRecordingTranscriptionResponse *ListRecordingTranscription200ApplicationJSONListRecordingTranscriptionResponse
+	ListRecordingTranscriptionResponse *ListRecordingTranscriptionListRecordingTranscriptionResponse
 	StatusCode                         int64
 }

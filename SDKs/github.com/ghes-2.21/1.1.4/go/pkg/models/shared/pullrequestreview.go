@@ -17,7 +17,7 @@ type PullRequestReviewLinks struct {
 	PullRequest PullRequestReviewLinksPullRequest `json:"pull_request"`
 }
 
-type PullRequestReviewUserSimpleUser struct {
+type PullRequestReviewSimpleUser struct {
 	AvatarURL         string  `json:"avatar_url"`
 	EventsURL         string  `json:"events_url"`
 	FollowersURL      string  `json:"followers_url"`
@@ -40,17 +40,17 @@ type PullRequestReviewUserSimpleUser struct {
 }
 
 type PullRequestReview struct {
-	Links             PullRequestReviewLinks          `json:"_links"`
-	AuthorAssociation AuthorAssociationEnum           `json:"author_association"`
-	Body              string                          `json:"body"`
-	BodyHTML          *string                         `json:"body_html,omitempty"`
-	BodyText          *string                         `json:"body_text,omitempty"`
-	CommitID          string                          `json:"commit_id"`
-	HTMLURL           string                          `json:"html_url"`
-	ID                int64                           `json:"id"`
-	NodeID            string                          `json:"node_id"`
-	PullRequestURL    string                          `json:"pull_request_url"`
-	State             string                          `json:"state"`
-	SubmittedAt       *time.Time                      `json:"submitted_at,omitempty"`
-	User              PullRequestReviewUserSimpleUser `json:"user"`
+	Links             PullRequestReviewLinks      `json:"_links"`
+	AuthorAssociation AuthorAssociationEnum       `json:"author_association"`
+	Body              string                      `json:"body"`
+	BodyHTML          *string                     `json:"body_html,omitempty"`
+	BodyText          *string                     `json:"body_text,omitempty"`
+	CommitID          string                      `json:"commit_id"`
+	HTMLURL           string                      `json:"html_url"`
+	ID                int64                       `json:"id"`
+	NodeID            string                      `json:"node_id"`
+	PullRequestURL    string                      `json:"pull_request_url"`
+	State             string                      `json:"state"`
+	SubmittedAt       *time.Time                  `json:"submitted_at,omitempty"`
+	User              PullRequestReviewSimpleUser `json:"user"`
 }

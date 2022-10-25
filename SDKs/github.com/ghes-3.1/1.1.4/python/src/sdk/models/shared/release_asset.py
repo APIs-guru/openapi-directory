@@ -12,7 +12,7 @@ class ReleaseAssetStateEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class ReleaseAssetUploaderSimpleUser:
+class ReleaseAssetSimpleUser:
     avatar_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'avatar_url' }})
     events_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'events_url' }})
     followers_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'followers_url' }})
@@ -48,6 +48,6 @@ class ReleaseAsset:
     size: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'size' }})
     state: ReleaseAssetStateEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'state' }})
     updated_at: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updated_at', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    uploader: ReleaseAssetUploaderSimpleUser = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uploader' }})
+    uploader: ReleaseAssetSimpleUser = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uploader' }})
     url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'url' }})
     

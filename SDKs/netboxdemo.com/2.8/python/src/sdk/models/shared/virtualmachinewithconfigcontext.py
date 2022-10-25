@@ -32,7 +32,7 @@ class VirtualMachineWithConfigContextStatusValueEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class VirtualMachineWithConfigContextStatusStatus:
+class VirtualMachineWithConfigContextStatus:
     label: VirtualMachineWithConfigContextStatusLabelEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label' }})
     value: VirtualMachineWithConfigContextStatusValueEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
     
@@ -57,7 +57,7 @@ class VirtualMachineWithConfigContext:
     primary_ip6: Optional[nestedipaddress.NestedIPAddress] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'primary_ip6' }})
     role: Optional[nesteddevicerole.NestedDeviceRole] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'role' }})
     site: Optional[nestedsite.NestedSite] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'site' }})
-    status: Optional[VirtualMachineWithConfigContextStatusStatus] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    status: Optional[VirtualMachineWithConfigContextStatus] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
     tags: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
     tenant: Optional[nestedtenant.NestedTenant] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tenant' }})
     vcpus: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'vcpus' }})

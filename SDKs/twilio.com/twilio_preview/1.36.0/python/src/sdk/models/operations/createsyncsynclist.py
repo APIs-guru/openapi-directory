@@ -12,7 +12,7 @@ class CreateSyncSyncListPathParams:
     
 
 @dataclass
-class CreateSyncSyncListRequestBodyCreateSyncSyncListRequest:
+class CreateSyncSyncListCreateSyncSyncListRequest:
     unique_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'UniqueName' }})
     
 
@@ -25,7 +25,7 @@ class CreateSyncSyncListSecurity:
 class CreateSyncSyncListRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateSyncSyncListPathParams = field(default=None)
-    request: Optional[CreateSyncSyncListRequestBodyCreateSyncSyncListRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateSyncSyncListCreateSyncSyncListRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateSyncSyncListSecurity = field(default=None)
     
 

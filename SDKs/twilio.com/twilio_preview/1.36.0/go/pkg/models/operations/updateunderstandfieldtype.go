@@ -13,7 +13,7 @@ type UpdateUnderstandFieldTypePathParams struct {
 	Sid          string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
-type UpdateUnderstandFieldTypeRequestBodyUpdateUnderstandFieldTypeRequest struct {
+type UpdateUnderstandFieldTypeUpdateUnderstandFieldTypeRequest struct {
 	FriendlyName *string `form:"name=FriendlyName"`
 	UniqueName   *string `form:"name=UniqueName"`
 }
@@ -25,7 +25,7 @@ type UpdateUnderstandFieldTypeSecurity struct {
 type UpdateUnderstandFieldTypeRequest struct {
 	ServerURL  *string
 	PathParams UpdateUnderstandFieldTypePathParams
-	Request    *UpdateUnderstandFieldTypeRequestBodyUpdateUnderstandFieldTypeRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateUnderstandFieldTypeUpdateUnderstandFieldTypeRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateUnderstandFieldTypeSecurity
 }
 

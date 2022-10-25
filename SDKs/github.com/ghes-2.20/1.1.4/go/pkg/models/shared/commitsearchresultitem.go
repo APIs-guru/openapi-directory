@@ -4,7 +4,7 @@ import (
 	"time"
 )
 
-type CommitSearchResultItemAuthorSimpleUser struct {
+type CommitSearchResultItemSimpleUser struct {
 	AvatarURL         string  `json:"avatar_url"`
 	EventsURL         string  `json:"events_url"`
 	FollowersURL      string  `json:"followers_url"`
@@ -32,7 +32,7 @@ type CommitSearchResultItemCommitAuthor struct {
 	Name  string    `json:"name"`
 }
 
-type CommitSearchResultItemCommitCommitterGitUser struct {
+type CommitSearchResultItemCommitGitUser struct {
 	Date  *string `json:"date,omitempty"`
 	Email *string `json:"email,omitempty"`
 	Name  *string `json:"name,omitempty"`
@@ -44,16 +44,16 @@ type CommitSearchResultItemCommitTree struct {
 }
 
 type CommitSearchResultItemCommit struct {
-	Author       CommitSearchResultItemCommitAuthor           `json:"author"`
-	CommentCount int64                                        `json:"comment_count"`
-	Committer    CommitSearchResultItemCommitCommitterGitUser `json:"committer"`
-	Message      string                                       `json:"message"`
-	Tree         CommitSearchResultItemCommitTree             `json:"tree"`
-	URL          string                                       `json:"url"`
-	Verification *Verification                                `json:"verification,omitempty"`
+	Author       CommitSearchResultItemCommitAuthor  `json:"author"`
+	CommentCount int64                               `json:"comment_count"`
+	Committer    CommitSearchResultItemCommitGitUser `json:"committer"`
+	Message      string                              `json:"message"`
+	Tree         CommitSearchResultItemCommitTree    `json:"tree"`
+	URL          string                              `json:"url"`
+	Verification *Verification                       `json:"verification,omitempty"`
 }
 
-type CommitSearchResultItemCommitterGitUser struct {
+type CommitSearchResultItemGitUser struct {
 	Date  *string `json:"date,omitempty"`
 	Email *string `json:"email,omitempty"`
 	Name  *string `json:"name,omitempty"`
@@ -66,16 +66,16 @@ type CommitSearchResultItemParents struct {
 }
 
 type CommitSearchResultItem struct {
-	Author      CommitSearchResultItemAuthorSimpleUser `json:"author"`
-	CommentsURL string                                 `json:"comments_url"`
-	Commit      CommitSearchResultItemCommit           `json:"commit"`
-	Committer   CommitSearchResultItemCommitterGitUser `json:"committer"`
-	HTMLURL     string                                 `json:"html_url"`
-	NodeID      string                                 `json:"node_id"`
-	Parents     []CommitSearchResultItemParents        `json:"parents"`
-	Repository  MinimalRepository                      `json:"repository"`
-	Score       float64                                `json:"score"`
-	Sha         string                                 `json:"sha"`
-	TextMatches []SearchResultTextMatches              `json:"text_matches,omitempty"`
-	URL         string                                 `json:"url"`
+	Author      CommitSearchResultItemSimpleUser `json:"author"`
+	CommentsURL string                           `json:"comments_url"`
+	Commit      CommitSearchResultItemCommit     `json:"commit"`
+	Committer   CommitSearchResultItemGitUser    `json:"committer"`
+	HTMLURL     string                           `json:"html_url"`
+	NodeID      string                           `json:"node_id"`
+	Parents     []CommitSearchResultItemParents  `json:"parents"`
+	Repository  MinimalRepository                `json:"repository"`
+	Score       float64                          `json:"score"`
+	Sha         string                           `json:"sha"`
+	TextMatches []SearchResultTextMatches        `json:"text_matches,omitempty"`
+	URL         string                           `json:"url"`
 }

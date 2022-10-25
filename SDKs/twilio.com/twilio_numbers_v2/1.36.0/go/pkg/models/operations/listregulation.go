@@ -25,7 +25,7 @@ type ListRegulationRequest struct {
 	Security    ListRegulationSecurity
 }
 
-type ListRegulation200ApplicationJSONMeta struct {
+type ListRegulationListRegulationResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -35,13 +35,13 @@ type ListRegulation200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListRegulation200ApplicationJSONListRegulationResponse struct {
-	Meta    *ListRegulation200ApplicationJSONMeta            `json:"meta,omitempty"`
+type ListRegulationListRegulationResponse struct {
+	Meta    *ListRegulationListRegulationResponseMeta        `json:"meta,omitempty"`
 	Results []shared.NumbersV2RegulatoryComplianceRegulation `json:"results,omitempty"`
 }
 
 type ListRegulationResponse struct {
 	ContentType            string
-	ListRegulationResponse *ListRegulation200ApplicationJSONListRegulationResponse
+	ListRegulationResponse *ListRegulationListRegulationResponse
 	StatusCode             int64
 }

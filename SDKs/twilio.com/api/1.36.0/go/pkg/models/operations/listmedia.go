@@ -32,7 +32,7 @@ type ListMediaRequest struct {
 	Security    ListMediaSecurity
 }
 
-type ListMedia200ApplicationJSONListMediaResponse struct {
+type ListMediaListMediaResponse struct {
 	End             *int64                               `json:"end,omitempty"`
 	FirstPageURI    *string                              `json:"first_page_uri,omitempty"`
 	MediaList       []shared.APIV2010AccountMessageMedia `json:"media_list,omitempty"`
@@ -46,6 +46,6 @@ type ListMedia200ApplicationJSONListMediaResponse struct {
 
 type ListMediaResponse struct {
 	ContentType       string
-	ListMediaResponse *ListMedia200ApplicationJSONListMediaResponse
+	ListMediaResponse *ListMediaListMediaResponse
 	StatusCode        int64
 }

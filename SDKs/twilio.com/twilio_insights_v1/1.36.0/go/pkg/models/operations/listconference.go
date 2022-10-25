@@ -32,7 +32,7 @@ type ListConferenceRequest struct {
 	Security    ListConferenceSecurity
 }
 
-type ListConference200ApplicationJSONMeta struct {
+type ListConferenceListConferenceResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -42,13 +42,13 @@ type ListConference200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListConference200ApplicationJSONListConferenceResponse struct {
-	Conferences []shared.InsightsV1Conference         `json:"conferences,omitempty"`
-	Meta        *ListConference200ApplicationJSONMeta `json:"meta,omitempty"`
+type ListConferenceListConferenceResponse struct {
+	Conferences []shared.InsightsV1Conference             `json:"conferences,omitempty"`
+	Meta        *ListConferenceListConferenceResponseMeta `json:"meta,omitempty"`
 }
 
 type ListConferenceResponse struct {
 	ContentType            string
-	ListConferenceResponse *ListConference200ApplicationJSONListConferenceResponse
+	ListConferenceResponse *ListConferenceListConferenceResponse
 	StatusCode             int64
 }

@@ -12,7 +12,7 @@ class CreateCustomerProfileChannelEndpointAssignmentPathParams:
     
 
 @dataclass
-class CreateCustomerProfileChannelEndpointAssignmentRequestBodyCreateCustomerProfileChannelEndpointAssignmentRequest:
+class CreateCustomerProfileChannelEndpointAssignmentCreateCustomerProfileChannelEndpointAssignmentRequest:
     channel_endpoint_sid: str = field(default=None, metadata={'form': { 'field_name': 'ChannelEndpointSid' }})
     channel_endpoint_type: str = field(default=None, metadata={'form': { 'field_name': 'ChannelEndpointType' }})
     
@@ -26,7 +26,7 @@ class CreateCustomerProfileChannelEndpointAssignmentSecurity:
 class CreateCustomerProfileChannelEndpointAssignmentRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateCustomerProfileChannelEndpointAssignmentPathParams = field(default=None)
-    request: Optional[CreateCustomerProfileChannelEndpointAssignmentRequestBodyCreateCustomerProfileChannelEndpointAssignmentRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateCustomerProfileChannelEndpointAssignmentCreateCustomerProfileChannelEndpointAssignmentRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateCustomerProfileChannelEndpointAssignmentSecurity = field(default=None)
     
 

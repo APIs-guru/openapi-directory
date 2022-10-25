@@ -7,7 +7,7 @@ CREATE_DIALING_PERMISSIONS_COUNTRY_BULK_UPDATE_SERVERS = [
 
 
 @dataclass
-class CreateDialingPermissionsCountryBulkUpdateRequestBodyCreateDialingPermissionsCountryBulkUpdateRequest:
+class CreateDialingPermissionsCountryBulkUpdateCreateDialingPermissionsCountryBulkUpdateRequest:
     update_request: str = field(default=None, metadata={'form': { 'field_name': 'UpdateRequest' }})
     
 
@@ -19,7 +19,7 @@ class CreateDialingPermissionsCountryBulkUpdateSecurity:
 @dataclass
 class CreateDialingPermissionsCountryBulkUpdateRequest:
     server_url: Optional[str] = field(default=None)
-    request: Optional[CreateDialingPermissionsCountryBulkUpdateRequestBodyCreateDialingPermissionsCountryBulkUpdateRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateDialingPermissionsCountryBulkUpdateCreateDialingPermissionsCountryBulkUpdateRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateDialingPermissionsCountryBulkUpdateSecurity = field(default=None)
     
 

@@ -47,18 +47,18 @@ class GetLoadBalancersIDActionsRequest:
 
 @dataclass_json
 @dataclass
-class GetLoadBalancersIDActions200ApplicationJSONActionsError:
+class GetLoadBalancersIDActionsActionsResponseActionError:
     code: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'code' }})
     message: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'message' }})
     
 
 @dataclass_json
 @dataclass
-class GetLoadBalancersIDActions200ApplicationJSONActionsResources:
+class GetLoadBalancersIDActionsActionsResponseActionResources:
     id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     type: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     
-class GetLoadBalancersIDActions200ApplicationJSONActionsStatusEnum(str, Enum):
+class GetLoadBalancersIDActionsActionsResponseActionStatusEnum(str, Enum):
     SUCCESS = "success"
     RUNNING = "running"
     ERROR = "error"
@@ -66,20 +66,20 @@ class GetLoadBalancersIDActions200ApplicationJSONActionsStatusEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class GetLoadBalancersIDActions200ApplicationJSONActionsAction:
+class GetLoadBalancersIDActionsActionsResponseAction:
     command: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'command' }})
-    error: GetLoadBalancersIDActions200ApplicationJSONActionsError = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
+    error: GetLoadBalancersIDActionsActionsResponseActionError = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
     finished: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'finished' }})
     id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     progress: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'progress' }})
-    resources: List[GetLoadBalancersIDActions200ApplicationJSONActionsResources] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resources' }})
+    resources: List[GetLoadBalancersIDActionsActionsResponseActionResources] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resources' }})
     started: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'started' }})
-    status: GetLoadBalancersIDActions200ApplicationJSONActionsStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    status: GetLoadBalancersIDActionsActionsResponseActionStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
     
 
 @dataclass_json
 @dataclass
-class GetLoadBalancersIDActions200ApplicationJSONMetaPagination:
+class GetLoadBalancersIDActionsActionsResponseMetaPagination:
     last_page: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'last_page' }})
     next_page: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page' }})
     page: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'page' }})
@@ -90,20 +90,20 @@ class GetLoadBalancersIDActions200ApplicationJSONMetaPagination:
 
 @dataclass_json
 @dataclass
-class GetLoadBalancersIDActions200ApplicationJSONMeta:
-    pagination: GetLoadBalancersIDActions200ApplicationJSONMetaPagination = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pagination' }})
+class GetLoadBalancersIDActionsActionsResponseMeta:
+    pagination: GetLoadBalancersIDActionsActionsResponseMetaPagination = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pagination' }})
     
 
 @dataclass_json
 @dataclass
-class GetLoadBalancersIDActions200ApplicationJSONActionsResponse:
-    actions: List[GetLoadBalancersIDActions200ApplicationJSONActionsAction] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'actions' }})
-    meta: Optional[GetLoadBalancersIDActions200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+class GetLoadBalancersIDActionsActionsResponse:
+    actions: List[GetLoadBalancersIDActionsActionsResponseAction] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'actions' }})
+    meta: Optional[GetLoadBalancersIDActionsActionsResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     
 
 @dataclass
 class GetLoadBalancersIDActionsResponse:
-    actions_response: Optional[GetLoadBalancersIDActions200ApplicationJSONActionsResponse] = field(default=None)
+    actions_response: Optional[GetLoadBalancersIDActionsActionsResponse] = field(default=None)
     content_type: str = field(default=None)
     status_code: int = field(default=None)
     

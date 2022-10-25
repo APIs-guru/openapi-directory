@@ -1246,7 +1246,7 @@ func (s *SDK) ListDocument(ctx context.Context, request operations.ListDocumentR
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListDocument200ApplicationJSONListDocumentResponse
+			var out *operations.ListDocumentListDocumentResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -1291,7 +1291,7 @@ func (s *SDK) ListDocumentPermission(ctx context.Context, request operations.Lis
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListDocumentPermission200ApplicationJSONListDocumentPermissionResponse
+			var out *operations.ListDocumentPermissionListDocumentPermissionResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -1336,7 +1336,7 @@ func (s *SDK) ListService(ctx context.Context, request operations.ListServiceReq
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListService200ApplicationJSONListServiceResponse
+			var out *operations.ListServiceListServiceResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -1381,7 +1381,7 @@ func (s *SDK) ListSyncList(ctx context.Context, request operations.ListSyncListR
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListSyncList200ApplicationJSONListSyncListResponse
+			var out *operations.ListSyncListListSyncListResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -1426,7 +1426,7 @@ func (s *SDK) ListSyncListItem(ctx context.Context, request operations.ListSyncL
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListSyncListItem200ApplicationJSONListSyncListItemResponse
+			var out *operations.ListSyncListItemListSyncListItemResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -1471,7 +1471,7 @@ func (s *SDK) ListSyncListPermission(ctx context.Context, request operations.Lis
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListSyncListPermission200ApplicationJSONListSyncListPermissionResponse
+			var out *operations.ListSyncListPermissionListSyncListPermissionResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -1516,7 +1516,7 @@ func (s *SDK) ListSyncMap(ctx context.Context, request operations.ListSyncMapReq
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListSyncMap200ApplicationJSONListSyncMapResponse
+			var out *operations.ListSyncMapListSyncMapResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -1561,7 +1561,7 @@ func (s *SDK) ListSyncMapItem(ctx context.Context, request operations.ListSyncMa
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListSyncMapItem200ApplicationJSONListSyncMapItemResponse
+			var out *operations.ListSyncMapItemListSyncMapItemResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -1606,7 +1606,7 @@ func (s *SDK) ListSyncMapPermission(ctx context.Context, request operations.List
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListSyncMapPermission200ApplicationJSONListSyncMapPermissionResponse
+			var out *operations.ListSyncMapPermissionListSyncMapPermissionResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -1651,7 +1651,7 @@ func (s *SDK) ListSyncStream(ctx context.Context, request operations.ListSyncStr
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListSyncStream200ApplicationJSONListSyncStreamResponse
+			var out *operations.ListSyncStreamListSyncStreamResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}

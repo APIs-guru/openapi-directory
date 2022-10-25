@@ -7,16 +7,16 @@ const (
 	NestedInterfaceConnectionStatusLabelEnumConnected    NestedInterfaceConnectionStatusLabelEnum = "Connected"
 )
 
-type NestedInterfaceConnectionStatusConnectionStatus struct {
+type NestedInterfaceConnectionStatus struct {
 	Label NestedInterfaceConnectionStatusLabelEnum `json:"label"`
 	Value bool                                     `json:"value"`
 }
 
 type NestedInterface struct {
-	Cable            *int64                                           `json:"cable,omitempty"`
-	ConnectionStatus *NestedInterfaceConnectionStatusConnectionStatus `json:"connection_status,omitempty"`
-	Device           *NestedDevice                                    `json:"device,omitempty"`
-	ID               *int64                                           `json:"id,omitempty"`
-	Name             string                                           `json:"name"`
-	URL              *string                                          `json:"url,omitempty"`
+	Cable            *int64                           `json:"cable,omitempty"`
+	ConnectionStatus *NestedInterfaceConnectionStatus `json:"connection_status,omitempty"`
+	Device           *NestedDevice                    `json:"device,omitempty"`
+	ID               *int64                           `json:"id,omitempty"`
+	Name             string                           `json:"name"`
+	URL              *string                          `json:"url,omitempty"`
 }

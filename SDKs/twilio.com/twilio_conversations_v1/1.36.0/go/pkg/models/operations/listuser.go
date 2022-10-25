@@ -22,7 +22,7 @@ type ListUserRequest struct {
 	Security    ListUserSecurity
 }
 
-type ListUser200ApplicationJSONMeta struct {
+type ListUserListUserResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -32,13 +32,13 @@ type ListUser200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListUser200ApplicationJSONListUserResponse struct {
-	Meta  *ListUser200ApplicationJSONMeta `json:"meta,omitempty"`
-	Users []shared.ConversationsV1User    `json:"users,omitempty"`
+type ListUserListUserResponse struct {
+	Meta  *ListUserListUserResponseMeta `json:"meta,omitempty"`
+	Users []shared.ConversationsV1User  `json:"users,omitempty"`
 }
 
 type ListUserResponse struct {
 	ContentType      string
-	ListUserResponse *ListUser200ApplicationJSONListUserResponse
+	ListUserResponse *ListUserListUserResponse
 	StatusCode       int64
 }

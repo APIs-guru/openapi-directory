@@ -12,7 +12,7 @@ type CreateSubscribedEventPathParams struct {
 	SubscriptionSid string `pathParam:"style=simple,explode=false,name=SubscriptionSid"`
 }
 
-type CreateSubscribedEventRequestBodyCreateSubscribedEventRequest struct {
+type CreateSubscribedEventCreateSubscribedEventRequest struct {
 	SchemaVersion *int64 `form:"name=SchemaVersion"`
 	Type          string `form:"name=Type"`
 }
@@ -24,7 +24,7 @@ type CreateSubscribedEventSecurity struct {
 type CreateSubscribedEventRequest struct {
 	ServerURL  *string
 	PathParams CreateSubscribedEventPathParams
-	Request    *CreateSubscribedEventRequestBodyCreateSubscribedEventRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateSubscribedEventCreateSubscribedEventRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateSubscribedEventSecurity
 }
 

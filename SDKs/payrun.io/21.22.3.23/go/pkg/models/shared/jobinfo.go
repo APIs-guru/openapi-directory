@@ -4,33 +4,33 @@ import (
 	"time"
 )
 
-type JobInfoJobInfoErrorsErrors struct {
+type JobInfoJobInfoErrors struct {
 	Error []string `json:"Error,omitempty"`
 }
 
-type JobInfoJobInfoJobStatusJobStatusEnum string
+type JobInfoJobInfoJobStatusEnum string
 
 const (
-	JobInfoJobInfoJobStatusJobStatusEnumNew        JobInfoJobInfoJobStatusJobStatusEnum = "New"
-	JobInfoJobInfoJobStatusJobStatusEnumPending    JobInfoJobInfoJobStatusJobStatusEnum = "Pending"
-	JobInfoJobInfoJobStatusJobStatusEnumInProgress JobInfoJobInfoJobStatusJobStatusEnum = "InProgress"
-	JobInfoJobInfoJobStatusJobStatusEnumSuccess    JobInfoJobInfoJobStatusJobStatusEnum = "Success"
-	JobInfoJobInfoJobStatusJobStatusEnumFailed     JobInfoJobInfoJobStatusJobStatusEnum = "Failed"
-	JobInfoJobInfoJobStatusJobStatusEnumOnHold     JobInfoJobInfoJobStatusJobStatusEnum = "OnHold"
+	JobInfoJobInfoJobStatusEnumNew        JobInfoJobInfoJobStatusEnum = "New"
+	JobInfoJobInfoJobStatusEnumPending    JobInfoJobInfoJobStatusEnum = "Pending"
+	JobInfoJobInfoJobStatusEnumInProgress JobInfoJobInfoJobStatusEnum = "InProgress"
+	JobInfoJobInfoJobStatusEnumSuccess    JobInfoJobInfoJobStatusEnum = "Success"
+	JobInfoJobInfoJobStatusEnumFailed     JobInfoJobInfoJobStatusEnum = "Failed"
+	JobInfoJobInfoJobStatusEnumOnHold     JobInfoJobInfoJobStatusEnum = "OnHold"
 )
 
-type JobInfoJobInfoJobInfo struct {
-	Created     *time.Time                            `json:"Created,omitempty"`
-	EmployerKey *string                               `json:"EmployerKey,omitempty"`
-	Errors      *JobInfoJobInfoErrorsErrors           `json:"Errors,omitempty"`
-	HoldingDate *time.Time                            `json:"HoldingDate,omitempty"`
-	JobID       *string                               `json:"JobId,omitempty"`
-	JobStatus   *JobInfoJobInfoJobStatusJobStatusEnum `json:"JobStatus,omitempty"`
-	JobType     *string                               `json:"JobType,omitempty"`
-	LastUpdated *time.Time                            `json:"LastUpdated,omitempty"`
-	Progress    *float64                              `json:"Progress,omitempty"`
+type JobInfoJobInfo struct {
+	Created     *time.Time                   `json:"Created,omitempty"`
+	EmployerKey *string                      `json:"EmployerKey,omitempty"`
+	Errors      *JobInfoJobInfoErrors        `json:"Errors,omitempty"`
+	HoldingDate *time.Time                   `json:"HoldingDate,omitempty"`
+	JobID       *string                      `json:"JobId,omitempty"`
+	JobStatus   *JobInfoJobInfoJobStatusEnum `json:"JobStatus,omitempty"`
+	JobType     *string                      `json:"JobType,omitempty"`
+	LastUpdated *time.Time                   `json:"LastUpdated,omitempty"`
+	Progress    *float64                     `json:"Progress,omitempty"`
 }
 
 type JobInfo struct {
-	JobInfo *JobInfoJobInfoJobInfo `json:"JobInfo,omitempty"`
+	JobInfo *JobInfoJobInfo `json:"JobInfo,omitempty"`
 }

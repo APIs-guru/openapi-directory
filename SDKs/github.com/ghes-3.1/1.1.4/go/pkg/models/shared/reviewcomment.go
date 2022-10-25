@@ -24,7 +24,7 @@ const (
 	ReviewCommentStartSideEnumRight ReviewCommentStartSideEnum = "RIGHT"
 )
 
-type ReviewCommentUserSimpleUser struct {
+type ReviewCommentSimpleUser struct {
 	AvatarURL         string  `json:"avatar_url"`
 	EventsURL         string  `json:"events_url"`
 	FollowersURL      string  `json:"followers_url"`
@@ -73,5 +73,5 @@ type ReviewComment struct {
 	StartSide           *ReviewCommentStartSideEnum `json:"start_side,omitempty"`
 	UpdatedAt           time.Time                   `json:"updated_at"`
 	URL                 string                      `json:"url"`
-	User                ReviewCommentUserSimpleUser `json:"user"`
+	User                ReviewCommentSimpleUser     `json:"user"`
 }

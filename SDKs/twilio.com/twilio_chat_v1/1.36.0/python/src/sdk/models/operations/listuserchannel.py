@@ -33,7 +33,7 @@ class ListUserChannelRequest:
 
 @dataclass_json
 @dataclass
-class ListUserChannel200ApplicationJSONMeta:
+class ListUserChannelListUserChannelResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -45,14 +45,14 @@ class ListUserChannel200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListUserChannel200ApplicationJSONListUserChannelResponse:
+class ListUserChannelListUserChannelResponse:
     channels: Optional[List[shared.ChatV1ServiceUserUserChannel]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'channels' }})
-    meta: Optional[ListUserChannel200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+    meta: Optional[ListUserChannelListUserChannelResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     
 
 @dataclass
 class ListUserChannelResponse:
     content_type: str = field(default=None)
-    list_user_channel_response: Optional[ListUserChannel200ApplicationJSONListUserChannelResponse] = field(default=None)
+    list_user_channel_response: Optional[ListUserChannelListUserChannelResponse] = field(default=None)
     status_code: int = field(default=None)
     

@@ -1,74 +1,74 @@
 package operations
 
-type GetUsers200ApplicationJSONMobileApplicationDetailsOsEnum string
+type GetUsersUserMobileApplicationOsEnum string
 
 const (
-	GetUsers200ApplicationJSONMobileApplicationDetailsOsEnumAndroid GetUsers200ApplicationJSONMobileApplicationDetailsOsEnum = "Android"
-	GetUsers200ApplicationJSONMobileApplicationDetailsOsEnumIos     GetUsers200ApplicationJSONMobileApplicationDetailsOsEnum = "IOS"
-	GetUsers200ApplicationJSONMobileApplicationDetailsOsEnumOther   GetUsers200ApplicationJSONMobileApplicationDetailsOsEnum = "OTHER"
+	GetUsersUserMobileApplicationOsEnumAndroid GetUsersUserMobileApplicationOsEnum = "Android"
+	GetUsersUserMobileApplicationOsEnumIos     GetUsersUserMobileApplicationOsEnum = "IOS"
+	GetUsersUserMobileApplicationOsEnumOther   GetUsersUserMobileApplicationOsEnum = "OTHER"
 )
 
-type GetUsers200ApplicationJSONMobileApplicationDetailsDeviceNameEnum string
+type GetUsersUserMobileApplicationDeviceNameEnum string
 
 const (
-	GetUsers200ApplicationJSONMobileApplicationDetailsDeviceNameEnumIPhone  GetUsers200ApplicationJSONMobileApplicationDetailsDeviceNameEnum = "iPhone"
-	GetUsers200ApplicationJSONMobileApplicationDetailsDeviceNameEnumAndroid GetUsers200ApplicationJSONMobileApplicationDetailsDeviceNameEnum = "Android"
-	GetUsers200ApplicationJSONMobileApplicationDetailsDeviceNameEnumOther   GetUsers200ApplicationJSONMobileApplicationDetailsDeviceNameEnum = "Other"
+	GetUsersUserMobileApplicationDeviceNameEnumIPhone  GetUsersUserMobileApplicationDeviceNameEnum = "iPhone"
+	GetUsersUserMobileApplicationDeviceNameEnumAndroid GetUsersUserMobileApplicationDeviceNameEnum = "Android"
+	GetUsersUserMobileApplicationDeviceNameEnumOther   GetUsersUserMobileApplicationDeviceNameEnum = "Other"
 )
 
-type GetUsers200ApplicationJSONMobileApplicationDetailsStatusEnum string
+type GetUsersUserMobileApplicationStatusEnum string
 
 const (
-	GetUsers200ApplicationJSONMobileApplicationDetailsStatusEnumLive    GetUsers200ApplicationJSONMobileApplicationDetailsStatusEnum = "LIVE"
-	GetUsers200ApplicationJSONMobileApplicationDetailsStatusEnumClosed  GetUsers200ApplicationJSONMobileApplicationDetailsStatusEnum = "CLOSED"
-	GetUsers200ApplicationJSONMobileApplicationDetailsStatusEnumLocked  GetUsers200ApplicationJSONMobileApplicationDetailsStatusEnum = "LOCKED"
-	GetUsers200ApplicationJSONMobileApplicationDetailsStatusEnumSmsSent GetUsers200ApplicationJSONMobileApplicationDetailsStatusEnum = "SMS_SENT"
+	GetUsersUserMobileApplicationStatusEnumLive    GetUsersUserMobileApplicationStatusEnum = "LIVE"
+	GetUsersUserMobileApplicationStatusEnumClosed  GetUsersUserMobileApplicationStatusEnum = "CLOSED"
+	GetUsersUserMobileApplicationStatusEnumLocked  GetUsersUserMobileApplicationStatusEnum = "LOCKED"
+	GetUsersUserMobileApplicationStatusEnumSmsSent GetUsersUserMobileApplicationStatusEnum = "SMS_SENT"
 )
 
-type GetUsers200ApplicationJSONMobileApplicationDetailsMobileApplication struct {
-	Os                  *GetUsers200ApplicationJSONMobileApplicationDetailsOsEnum         `json:"OS,omitempty"`
-	BusinessUserID      *int64                                                            `json:"businessUserId,omitempty"`
-	ClientID            *string                                                           `json:"clientID,omitempty"`
-	DeviceName          *GetUsers200ApplicationJSONMobileApplicationDetailsDeviceNameEnum `json:"deviceName,omitempty"`
-	DeviceOsVersion     *string                                                           `json:"deviceOSVersion,omitempty"`
-	MobileApplicationID *int64                                                            `json:"mobileApplicationId,omitempty"`
-	Status              *GetUsers200ApplicationJSONMobileApplicationDetailsStatusEnum     `json:"status,omitempty"`
+type GetUsersUserMobileApplication struct {
+	Os                  *GetUsersUserMobileApplicationOsEnum         `json:"OS,omitempty"`
+	BusinessUserID      *int64                                       `json:"businessUserId,omitempty"`
+	ClientID            *string                                      `json:"clientID,omitempty"`
+	DeviceName          *GetUsersUserMobileApplicationDeviceNameEnum `json:"deviceName,omitempty"`
+	DeviceOsVersion     *string                                      `json:"deviceOSVersion,omitempty"`
+	MobileApplicationID *int64                                       `json:"mobileApplicationId,omitempty"`
+	Status              *GetUsersUserMobileApplicationStatusEnum     `json:"status,omitempty"`
 }
 
-type GetUsers200ApplicationJSONRoleEnum string
+type GetUsersUserRoleEnum string
 
 const (
-	GetUsers200ApplicationJSONRoleEnumAdmin    GetUsers200ApplicationJSONRoleEnum = "ADMIN"
-	GetUsers200ApplicationJSONRoleEnumFullUser GetUsers200ApplicationJSONRoleEnum = "FULL_USER"
-	GetUsers200ApplicationJSONRoleEnumReadOnly GetUsers200ApplicationJSONRoleEnum = "READ_ONLY"
-	GetUsers200ApplicationJSONRoleEnumCardOnly GetUsers200ApplicationJSONRoleEnum = "CARD_ONLY"
+	GetUsersUserRoleEnumAdmin    GetUsersUserRoleEnum = "ADMIN"
+	GetUsersUserRoleEnumFullUser GetUsersUserRoleEnum = "FULL_USER"
+	GetUsersUserRoleEnumReadOnly GetUsersUserRoleEnum = "READ_ONLY"
+	GetUsersUserRoleEnumCardOnly GetUsersUserRoleEnum = "CARD_ONLY"
 )
 
-type GetUsers200ApplicationJSONStatusEnum string
+type GetUsersUserStatusEnum string
 
 const (
-	GetUsers200ApplicationJSONStatusEnumLive        GetUsers200ApplicationJSONStatusEnum = "LIVE"
-	GetUsers200ApplicationJSONStatusEnumClosed      GetUsers200ApplicationJSONStatusEnum = "CLOSED"
-	GetUsers200ApplicationJSONStatusEnumFrozen      GetUsers200ApplicationJSONStatusEnum = "FROZEN"
-	GetUsers200ApplicationJSONStatusEnumInviteSent  GetUsers200ApplicationJSONStatusEnum = "INVITE_SENT"
-	GetUsers200ApplicationJSONStatusEnumSmsCodeSent GetUsers200ApplicationJSONStatusEnum = "SMS_CODE_SENT"
+	GetUsersUserStatusEnumLive        GetUsersUserStatusEnum = "LIVE"
+	GetUsersUserStatusEnumClosed      GetUsersUserStatusEnum = "CLOSED"
+	GetUsersUserStatusEnumFrozen      GetUsersUserStatusEnum = "FROZEN"
+	GetUsersUserStatusEnumInviteSent  GetUsersUserStatusEnum = "INVITE_SENT"
+	GetUsersUserStatusEnumSmsCodeSent GetUsersUserStatusEnum = "SMS_CODE_SENT"
 )
 
-type GetUsers200ApplicationJSONUser struct {
-	EmailAddress             *string                                                              `json:"emailAddress,omitempty"`
-	FirstName                *string                                                              `json:"firstName,omitempty"`
-	ID                       *int64                                                               `json:"id,omitempty"`
-	LastName                 *string                                                              `json:"lastName,omitempty"`
-	Lastlogin                *string                                                              `json:"lastlogin,omitempty"`
-	MobileApplicationDetails *GetUsers200ApplicationJSONMobileApplicationDetailsMobileApplication `json:"mobileApplicationDetails,omitempty"`
-	MobileNumber             *string                                                              `json:"mobileNumber,omitempty"`
-	Role                     *GetUsers200ApplicationJSONRoleEnum                                  `json:"role,omitempty"`
-	Status                   *GetUsers200ApplicationJSONStatusEnum                                `json:"status,omitempty"`
-	UserCvl                  *string                                                              `json:"userCvl,omitempty"`
+type GetUsersUser struct {
+	EmailAddress             *string                        `json:"emailAddress,omitempty"`
+	FirstName                *string                        `json:"firstName,omitempty"`
+	ID                       *int64                         `json:"id,omitempty"`
+	LastName                 *string                        `json:"lastName,omitempty"`
+	Lastlogin                *string                        `json:"lastlogin,omitempty"`
+	MobileApplicationDetails *GetUsersUserMobileApplication `json:"mobileApplicationDetails,omitempty"`
+	MobileNumber             *string                        `json:"mobileNumber,omitempty"`
+	Role                     *GetUsersUserRoleEnum          `json:"role,omitempty"`
+	Status                   *GetUsersUserStatusEnum        `json:"status,omitempty"`
+	UserCvl                  *string                        `json:"userCvl,omitempty"`
 }
 
 type GetUsersResponse struct {
 	ContentType string
 	StatusCode  int64
-	Users       []GetUsers200ApplicationJSONUser
+	Users       []GetUsersUser
 }

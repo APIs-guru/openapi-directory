@@ -27,7 +27,7 @@ type ListMessagingConfigurationRequest struct {
 	Security    ListMessagingConfigurationSecurity
 }
 
-type ListMessagingConfiguration200ApplicationJSONMeta struct {
+type ListMessagingConfigurationListMessagingConfigurationResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -37,13 +37,13 @@ type ListMessagingConfiguration200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListMessagingConfiguration200ApplicationJSONListMessagingConfigurationResponse struct {
-	MessagingConfigurations []shared.VerifyV2ServiceMessagingConfiguration    `json:"messaging_configurations,omitempty"`
-	Meta                    *ListMessagingConfiguration200ApplicationJSONMeta `json:"meta,omitempty"`
+type ListMessagingConfigurationListMessagingConfigurationResponse struct {
+	MessagingConfigurations []shared.VerifyV2ServiceMessagingConfiguration                    `json:"messaging_configurations,omitempty"`
+	Meta                    *ListMessagingConfigurationListMessagingConfigurationResponseMeta `json:"meta,omitempty"`
 }
 
 type ListMessagingConfigurationResponse struct {
 	ContentType                        string
-	ListMessagingConfigurationResponse *ListMessagingConfiguration200ApplicationJSONListMessagingConfigurationResponse
+	ListMessagingConfigurationResponse *ListMessagingConfigurationListMessagingConfigurationResponse
 	StatusCode                         int64
 }

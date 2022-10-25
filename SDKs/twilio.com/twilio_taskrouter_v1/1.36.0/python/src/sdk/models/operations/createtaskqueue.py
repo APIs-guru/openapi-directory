@@ -12,7 +12,7 @@ class CreateTaskQueuePathParams:
     
 
 @dataclass
-class CreateTaskQueueRequestBodyCreateTaskQueueRequest:
+class CreateTaskQueueCreateTaskQueueRequest:
     assignment_activity_sid: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'AssignmentActivitySid' }})
     friendly_name: str = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
     max_reserved_workers: Optional[int] = field(default=None, metadata={'form': { 'field_name': 'MaxReservedWorkers' }})
@@ -30,7 +30,7 @@ class CreateTaskQueueSecurity:
 class CreateTaskQueueRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateTaskQueuePathParams = field(default=None)
-    request: Optional[CreateTaskQueueRequestBodyCreateTaskQueueRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateTaskQueueCreateTaskQueueRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateTaskQueueSecurity = field(default=None)
     
 

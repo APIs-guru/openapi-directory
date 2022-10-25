@@ -12,7 +12,7 @@ class CreateBundleCopyPathParams:
     
 
 @dataclass
-class CreateBundleCopyRequestBodyCreateBundleCopyRequest:
+class CreateBundleCopyCreateBundleCopyRequest:
     friendly_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
     
 
@@ -25,7 +25,7 @@ class CreateBundleCopySecurity:
 class CreateBundleCopyRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateBundleCopyPathParams = field(default=None)
-    request: Optional[CreateBundleCopyRequestBodyCreateBundleCopyRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateBundleCopyCreateBundleCopyRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateBundleCopySecurity = field(default=None)
     
 

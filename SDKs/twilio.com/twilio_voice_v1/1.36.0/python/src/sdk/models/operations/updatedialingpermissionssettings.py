@@ -7,7 +7,7 @@ UPDATE_DIALING_PERMISSIONS_SETTINGS_SERVERS = [
 
 
 @dataclass
-class UpdateDialingPermissionsSettingsRequestBodyUpdateDialingPermissionsSettingsRequest:
+class UpdateDialingPermissionsSettingsUpdateDialingPermissionsSettingsRequest:
     dialing_permissions_inheritance: Optional[bool] = field(default=None, metadata={'form': { 'field_name': 'DialingPermissionsInheritance' }})
     
 
@@ -19,7 +19,7 @@ class UpdateDialingPermissionsSettingsSecurity:
 @dataclass
 class UpdateDialingPermissionsSettingsRequest:
     server_url: Optional[str] = field(default=None)
-    request: Optional[UpdateDialingPermissionsSettingsRequestBodyUpdateDialingPermissionsSettingsRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateDialingPermissionsSettingsUpdateDialingPermissionsSettingsRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateDialingPermissionsSettingsSecurity = field(default=None)
     
 

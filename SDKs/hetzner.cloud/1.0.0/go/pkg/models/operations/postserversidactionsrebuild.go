@@ -4,13 +4,13 @@ type PostServersIDActionsRebuildPathParams struct {
 	ID int64 `pathParam:"style=simple,explode=false,name=id"`
 }
 
-type PostServersIDActionsRebuildRequestBodyRebuildServerRequest struct {
+type PostServersIDActionsRebuildRebuildServerRequest struct {
 	Image string `json:"image"`
 }
 
 type PostServersIDActionsRebuildRequest struct {
 	PathParams PostServersIDActionsRebuildPathParams
-	Request    *PostServersIDActionsRebuildRequestBodyRebuildServerRequest `request:"mediaType=application/json"`
+	Request    *PostServersIDActionsRebuildRebuildServerRequest `request:"mediaType=application/json"`
 }
 
 type PostServersIDActionsRebuild201ApplicationJSONActionError struct {
@@ -31,7 +31,7 @@ const (
 	PostServersIDActionsRebuild201ApplicationJSONActionStatusEnumError   PostServersIDActionsRebuild201ApplicationJSONActionStatusEnum = "error"
 )
 
-type PostServersIDActionsRebuild201ApplicationJSONActionAction struct {
+type PostServersIDActionsRebuild201ApplicationJSONAction struct {
 	Command   string                                                         `json:"command"`
 	Error     PostServersIDActionsRebuild201ApplicationJSONActionError       `json:"error"`
 	Finished  string                                                         `json:"finished"`
@@ -43,8 +43,8 @@ type PostServersIDActionsRebuild201ApplicationJSONActionAction struct {
 }
 
 type PostServersIDActionsRebuild201ApplicationJSON struct {
-	Action       *PostServersIDActionsRebuild201ApplicationJSONActionAction `json:"action,omitempty"`
-	RootPassword *string                                                    `json:"root_password,omitempty"`
+	Action       *PostServersIDActionsRebuild201ApplicationJSONAction `json:"action,omitempty"`
+	RootPassword *string                                              `json:"root_password,omitempty"`
 }
 
 type PostServersIDActionsRebuildResponse struct {

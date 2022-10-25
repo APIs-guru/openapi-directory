@@ -13,7 +13,7 @@ type UpdateSyncMapPathParams struct {
 	Sid        string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
-type UpdateSyncMapRequestBodyUpdateSyncMapRequest struct {
+type UpdateSyncMapUpdateSyncMapRequest struct {
 	CollectionTTL *int64 `form:"name=CollectionTtl"`
 	TTL           *int64 `form:"name=Ttl"`
 }
@@ -25,7 +25,7 @@ type UpdateSyncMapSecurity struct {
 type UpdateSyncMapRequest struct {
 	ServerURL  *string
 	PathParams UpdateSyncMapPathParams
-	Request    *UpdateSyncMapRequestBodyUpdateSyncMapRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateSyncMapUpdateSyncMapRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateSyncMapSecurity
 }
 

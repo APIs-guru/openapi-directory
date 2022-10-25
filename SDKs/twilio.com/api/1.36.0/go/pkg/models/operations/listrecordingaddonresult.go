@@ -28,7 +28,7 @@ type ListRecordingAddOnResultRequest struct {
 	Security    ListRecordingAddOnResultSecurity
 }
 
-type ListRecordingAddOnResult200ApplicationJSONListRecordingAddOnResultResponse struct {
+type ListRecordingAddOnResultListRecordingAddOnResultResponse struct {
 	AddOnResults    []shared.APIV2010AccountRecordingRecordingAddOnResult `json:"add_on_results,omitempty"`
 	End             *int64                                                `json:"end,omitempty"`
 	FirstPageURI    *string                                               `json:"first_page_uri,omitempty"`
@@ -42,6 +42,6 @@ type ListRecordingAddOnResult200ApplicationJSONListRecordingAddOnResultResponse 
 
 type ListRecordingAddOnResultResponse struct {
 	ContentType                      string
-	ListRecordingAddOnResultResponse *ListRecordingAddOnResult200ApplicationJSONListRecordingAddOnResultResponse
+	ListRecordingAddOnResultResponse *ListRecordingAddOnResultListRecordingAddOnResultResponse
 	StatusCode                       int64
 }

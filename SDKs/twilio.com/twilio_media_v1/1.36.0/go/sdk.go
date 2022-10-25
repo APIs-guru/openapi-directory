@@ -437,7 +437,7 @@ func (s *SDK) ListMediaProcessor(ctx context.Context, request operations.ListMed
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListMediaProcessor200ApplicationJSONListMediaProcessorResponse
+			var out *operations.ListMediaProcessorListMediaProcessorResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -482,7 +482,7 @@ func (s *SDK) ListMediaRecording(ctx context.Context, request operations.ListMed
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListMediaRecording200ApplicationJSONListMediaRecordingResponse
+			var out *operations.ListMediaRecordingListMediaRecordingResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -527,7 +527,7 @@ func (s *SDK) ListPlayerStreamer(ctx context.Context, request operations.ListPla
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListPlayerStreamer200ApplicationJSONListPlayerStreamerResponse
+			var out *operations.ListPlayerStreamerListPlayerStreamerResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}

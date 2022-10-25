@@ -2,12 +2,12 @@ from dataclasses import dataclass, field
 from typing import Enum,List,Optional
 from dataclasses_json import dataclass_json
 
-class WritableVirtualMachineInterfaceModeModeEnum(str, Enum):
+class WritableVirtualMachineInterfaceModeEnum(str, Enum):
     ACCESS = "access"
     TAGGED = "tagged"
     TAGGED_ALL = "tagged-all"
 
-class WritableVirtualMachineInterfaceTypeTypeEnum(str, Enum):
+class WritableVirtualMachineInterfaceTypeEnum(str, Enum):
     VIRTUAL = "virtual"
     LAG = "lag"
     ONE_HUNDREDBASE_TX = "100base-tx"
@@ -89,12 +89,12 @@ class WritableVirtualMachineInterface:
     enabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'enabled' }})
     id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     mac_address: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'mac_address' }})
-    mode: Optional[WritableVirtualMachineInterfaceModeModeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'mode' }})
+    mode: Optional[WritableVirtualMachineInterfaceModeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'mode' }})
     mtu: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'mtu' }})
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
     tagged_vlans: Optional[List[int]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tagged_vlans' }})
     tags: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
-    type: WritableVirtualMachineInterfaceTypeTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    type: WritableVirtualMachineInterfaceTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     untagged_vlan: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'untagged_vlan' }})
     virtual_machine: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'virtual_machine' }})
     

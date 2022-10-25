@@ -5,18 +5,18 @@ import dateutil.parser
 from typing import Any,Enum,List,Optional
 from dataclasses_json import dataclass_json
 
-class WritableRackOuterUnitOuterUnitEnum(str, Enum):
+class WritableRackOuterUnitEnum(str, Enum):
     MM = "mm"
     IN = "in"
 
-class WritableRackStatusStatusEnum(str, Enum):
+class WritableRackStatusEnum(str, Enum):
     RESERVED = "reserved"
     AVAILABLE = "available"
     PLANNED = "planned"
     ACTIVE = "active"
     DEPRECATED = "deprecated"
 
-class WritableRackTypeTypeEnum(str, Enum):
+class WritableRackTypeEnum(str, Enum):
     TWO_POST_FRAME = "2-post-frame"
     FOUR_POST_FRAME = "4-post-frame"
     FOUR_POST_CABINET = "4-post-cabinet"
@@ -40,16 +40,16 @@ class WritableRack:
     last_updated: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'last_updated', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
     outer_depth: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'outer_depth' }})
-    outer_unit: Optional[WritableRackOuterUnitOuterUnitEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'outer_unit' }})
+    outer_unit: Optional[WritableRackOuterUnitEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'outer_unit' }})
     outer_width: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'outer_width' }})
     powerfeed_count: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'powerfeed_count' }})
     role: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'role' }})
     serial: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'serial' }})
     site: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'site' }})
-    status: Optional[WritableRackStatusStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    status: Optional[WritableRackStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
     tags: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
     tenant: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tenant' }})
-    type: Optional[WritableRackTypeTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    type: Optional[WritableRackTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     u_height: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'u_height' }})
     width: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'width' }})
     

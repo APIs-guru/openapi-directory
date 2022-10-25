@@ -17,7 +17,7 @@ class PowerOutletTemplateFeedLegValueEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class PowerOutletTemplateFeedLegFeedLeg:
+class PowerOutletTemplateFeedLeg:
     label: PowerOutletTemplateFeedLegLabelEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label' }})
     value: PowerOutletTemplateFeedLegValueEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
     
@@ -160,7 +160,7 @@ class PowerOutletTemplateTypeValueEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class PowerOutletTemplateTypeType:
+class PowerOutletTemplateType:
     label: PowerOutletTemplateTypeLabelEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label' }})
     value: PowerOutletTemplateTypeValueEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
     
@@ -169,9 +169,9 @@ class PowerOutletTemplateTypeType:
 @dataclass
 class PowerOutletTemplate:
     device_type: nesteddevicetype.NestedDeviceType = field(default=None, metadata={'dataclasses_json': { 'field_name': 'device_type' }})
-    feed_leg: Optional[PowerOutletTemplateFeedLegFeedLeg] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'feed_leg' }})
+    feed_leg: Optional[PowerOutletTemplateFeedLeg] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'feed_leg' }})
     id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
     power_port: Optional[nestedpowerporttemplate.NestedPowerPortTemplate] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'power_port' }})
-    type: Optional[PowerOutletTemplateTypeType] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    type: Optional[PowerOutletTemplateType] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     

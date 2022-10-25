@@ -13,7 +13,7 @@ class UpdateRoomParticipantPathParams:
     
 
 @dataclass
-class UpdateRoomParticipantRequestBodyUpdateRoomParticipantRequest:
+class UpdateRoomParticipantUpdateRoomParticipantRequest:
     status: Optional[shared.RoomParticipantEnumStatusEnum] = field(default=None, metadata={'form': { 'field_name': 'Status' }})
     
 
@@ -26,7 +26,7 @@ class UpdateRoomParticipantSecurity:
 class UpdateRoomParticipantRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateRoomParticipantPathParams = field(default=None)
-    request: Optional[UpdateRoomParticipantRequestBodyUpdateRoomParticipantRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateRoomParticipantUpdateRoomParticipantRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateRoomParticipantSecurity = field(default=None)
     
 

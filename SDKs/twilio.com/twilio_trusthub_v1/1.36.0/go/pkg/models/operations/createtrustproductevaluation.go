@@ -12,7 +12,7 @@ type CreateTrustProductEvaluationPathParams struct {
 	TrustProductSid string `pathParam:"style=simple,explode=false,name=TrustProductSid"`
 }
 
-type CreateTrustProductEvaluationRequestBodyCreateTrustProductEvaluationRequest struct {
+type CreateTrustProductEvaluationCreateTrustProductEvaluationRequest struct {
 	PolicySid string `form:"name=PolicySid"`
 }
 
@@ -23,7 +23,7 @@ type CreateTrustProductEvaluationSecurity struct {
 type CreateTrustProductEvaluationRequest struct {
 	ServerURL  *string
 	PathParams CreateTrustProductEvaluationPathParams
-	Request    *CreateTrustProductEvaluationRequestBodyCreateTrustProductEvaluationRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateTrustProductEvaluationCreateTrustProductEvaluationRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateTrustProductEvaluationSecurity
 }
 

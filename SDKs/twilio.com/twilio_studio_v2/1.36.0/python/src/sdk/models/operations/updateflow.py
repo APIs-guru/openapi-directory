@@ -12,7 +12,7 @@ class UpdateFlowPathParams:
     
 
 @dataclass
-class UpdateFlowRequestBodyUpdateFlowRequest:
+class UpdateFlowUpdateFlowRequest:
     commit_message: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'CommitMessage' }})
     definition: Optional[Any] = field(default=None, metadata={'form': { 'field_name': 'Definition' }})
     friendly_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
@@ -28,7 +28,7 @@ class UpdateFlowSecurity:
 class UpdateFlowRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateFlowPathParams = field(default=None)
-    request: Optional[UpdateFlowRequestBodyUpdateFlowRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateFlowUpdateFlowRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateFlowSecurity = field(default=None)
     
 

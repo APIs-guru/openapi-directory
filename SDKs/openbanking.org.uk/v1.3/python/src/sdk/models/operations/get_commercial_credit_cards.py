@@ -16,95 +16,95 @@ class GetCommercialCreditCardsHeaders:
 class GetCommercialCreditCardsRequest:
     headers: GetCommercialCreditCardsHeaders = field(default=None)
     
-class GetCommercialCreditCards400ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnum(str, Enum):
+class GetCommercialCreditCards400ErrorObjectDescriptionEnum(str, Enum):
     YOU_HAVE_SENT_A_REQUEST_WHICH_COULD_NOT_BE_UNDERSTOOD_ = "You have sent a request which could not be understood."
 
-class GetCommercialCreditCards400ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnum(str, Enum):
+class GetCommercialCreditCards400ErrorObjectStatusEnum(str, Enum):
     FOUR_HUNDRED = "400"
 
-class GetCommercialCreditCards400ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnum(str, Enum):
+class GetCommercialCreditCards400ErrorObjectTitleEnum(str, Enum):
     BAD_REQUEST = "Bad request"
 
 
 @dataclass_json
 @dataclass
-class GetCommercialCreditCards400ApplicationPrsOpenbankingOpendataV13PlusJSON400ErrorObject:
-    description: GetCommercialCreditCards400ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    status: GetCommercialCreditCards400ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
-    title: GetCommercialCreditCards400ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'title' }})
+class GetCommercialCreditCards400ErrorObject:
+    description: GetCommercialCreditCards400ErrorObjectDescriptionEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
+    status: GetCommercialCreditCards400ErrorObjectStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    title: GetCommercialCreditCards400ErrorObjectTitleEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'title' }})
     
-class GetCommercialCreditCards408ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnum(str, Enum):
+class GetCommercialCreditCards408ErrorObjectDescriptionEnum(str, Enum):
     YOUR_CLIENT_HAS_FAILED_TO_SUBMIT_A_REQUEST_AND_A_TIMEOUT_HAS_OCCURRED_ = "Your client has failed to submit a request, and a timeout has occurred."
 
-class GetCommercialCreditCards408ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnum(str, Enum):
+class GetCommercialCreditCards408ErrorObjectStatusEnum(str, Enum):
     FOUR_HUNDRED_AND_EIGHT = "408"
 
-class GetCommercialCreditCards408ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnum(str, Enum):
+class GetCommercialCreditCards408ErrorObjectTitleEnum(str, Enum):
     CLIENT_TIMEOUT = "Client timeout"
 
 
 @dataclass_json
 @dataclass
-class GetCommercialCreditCards408ApplicationPrsOpenbankingOpendataV13PlusJSON408ErrorObject:
-    description: GetCommercialCreditCards408ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    status: GetCommercialCreditCards408ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
-    title: GetCommercialCreditCards408ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'title' }})
+class GetCommercialCreditCards408ErrorObject:
+    description: GetCommercialCreditCards408ErrorObjectDescriptionEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
+    status: GetCommercialCreditCards408ErrorObjectStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    title: GetCommercialCreditCards408ErrorObjectTitleEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'title' }})
     
-class GetCommercialCreditCards429ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnum(str, Enum):
+class GetCommercialCreditCards429ErrorObjectDescriptionEnum(str, Enum):
     YOU_HAVE_REQUESTED_THIS_RESOURCE_TOO_OFTEN_SLOW_DOWN_ = "You have requested this resource too often. Slow down."
 
-class GetCommercialCreditCards429ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnum(str, Enum):
+class GetCommercialCreditCards429ErrorObjectStatusEnum(str, Enum):
     FOUR_HUNDRED_AND_TWENTY_NINE = "429"
 
-class GetCommercialCreditCards429ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnum(str, Enum):
+class GetCommercialCreditCards429ErrorObjectTitleEnum(str, Enum):
     TOO_MANY_REQUESTS = "Too many requests"
 
 
 @dataclass_json
 @dataclass
-class GetCommercialCreditCards429ApplicationPrsOpenbankingOpendataV13PlusJSON429ErrorObject:
-    description: GetCommercialCreditCards429ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    status: GetCommercialCreditCards429ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
-    title: GetCommercialCreditCards429ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'title' }})
+class GetCommercialCreditCards429ErrorObject:
+    description: GetCommercialCreditCards429ErrorObjectDescriptionEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
+    status: GetCommercialCreditCards429ErrorObjectStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    title: GetCommercialCreditCards429ErrorObjectTitleEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'title' }})
     
-class GetCommercialCreditCards500ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnum(str, Enum):
+class GetCommercialCreditCards500ErrorObjectDescriptionEnum(str, Enum):
     AN_ERROR_OCCURRED_ON_THE_SERVER_NO_FURTHER_INFORMATION_IS_AVAILABLE_ = "An error occurred on the server. No further information is available."
 
-class GetCommercialCreditCards500ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnum(str, Enum):
+class GetCommercialCreditCards500ErrorObjectStatusEnum(str, Enum):
     FIVE_HUNDRED = "500"
 
-class GetCommercialCreditCards500ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnum(str, Enum):
+class GetCommercialCreditCards500ErrorObjectTitleEnum(str, Enum):
     INTERNAL_SERVER_ERROR = "Internal server error"
 
 
 @dataclass_json
 @dataclass
-class GetCommercialCreditCards500ApplicationPrsOpenbankingOpendataV13PlusJSON500ErrorObject:
-    description: GetCommercialCreditCards500ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    status: GetCommercialCreditCards500ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
-    title: GetCommercialCreditCards500ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'title' }})
+class GetCommercialCreditCards500ErrorObject:
+    description: GetCommercialCreditCards500ErrorObjectDescriptionEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
+    status: GetCommercialCreditCards500ErrorObjectStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    title: GetCommercialCreditCards500ErrorObjectTitleEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'title' }})
     
-class GetCommercialCreditCards503ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnum(str, Enum):
+class GetCommercialCreditCards503ErrorObjectDescriptionEnum(str, Enum):
     THE_SERVICE_IS_TEMPORARILY_UNAVAILABLE_ = "The service is temporarily unavailable."
 
-class GetCommercialCreditCards503ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnum(str, Enum):
+class GetCommercialCreditCards503ErrorObjectStatusEnum(str, Enum):
     FIVE_HUNDRED_AND_THREE = "503"
 
-class GetCommercialCreditCards503ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnum(str, Enum):
+class GetCommercialCreditCards503ErrorObjectTitleEnum(str, Enum):
     SERVICE_TEMPORARILY_UNAVAILABLE = "Service temporarily unavailable"
 
 
 @dataclass_json
 @dataclass
-class GetCommercialCreditCards503ApplicationPrsOpenbankingOpendataV13PlusJSON503ErrorObject:
-    description: GetCommercialCreditCards503ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    status: GetCommercialCreditCards503ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
-    title: GetCommercialCreditCards503ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'title' }})
+class GetCommercialCreditCards503ErrorObject:
+    description: GetCommercialCreditCards503ErrorObjectDescriptionEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
+    status: GetCommercialCreditCards503ErrorObjectStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    title: GetCommercialCreditCards503ErrorObjectTitleEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'title' }})
     
 
 @dataclass_json
 @dataclass
-class GetCommercialCreditCardsDefaultApplicationPrsOpenbankingOpendataV13PlusJSONErrorObject:
+class GetCommercialCreditCardsErrorObject:
     description: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
     status: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
     title: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'title' }})
@@ -399,23 +399,23 @@ class GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSONDat
     product_url: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ProductURL' }})
     tsand_cs: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TsandCs' }})
     
-class GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaAgreementEnum(str, Enum):
+class GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaDataAgreementEnum(str, Enum):
     USE_OF_THE_AP_IS_AND_ANY_RELATED_DATA_WILL_BE_SUBJECT_TO_THE_TERMS_OF_THE_OPEN_LICENCE_AND_SUBJECT_TO_TERMS_AND_CONDITIONS = "Use of the APIs and any related data will be subject to the terms of the Open Licence and subject to terms and conditions"
 
-class GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaLicenseEnum(str, Enum):
+class GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaDataLicenseEnum(str, Enum):
     HTTPS_WWW_OPENBANKING_ORG_UK_OPEN_LICENCE = "https://www.openbanking.org.uk/open-licence"
 
-class GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaTermsOfUseEnum(str, Enum):
+class GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaDataTermsOfUseEnum(str, Enum):
     HTTPS_WWW_OPENBANKING_ORG_UK_TERMS = "https://www.openbanking.org.uk/terms"
 
 
 @dataclass_json
 @dataclass
-class GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaMetaData:
-    agreement: GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaAgreementEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Agreement' }})
+class GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaData:
+    agreement: GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaDataAgreementEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Agreement' }})
     last_updated: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'LastUpdated', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    license: GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaLicenseEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'License' }})
-    terms_of_use: GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaTermsOfUseEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TermsOfUse' }})
+    license: GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaDataLicenseEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'License' }})
+    terms_of_use: GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaDataTermsOfUseEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TermsOfUse' }})
     total_results: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TotalResults' }})
     
 
@@ -423,18 +423,18 @@ class GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSONMet
 @dataclass
 class GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSON:
     data: List[GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSONData] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'data' }})
-    meta: GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaMetaData = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+    meta: GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaData = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     
 
 @dataclass
 class GetCommercialCreditCardsResponse:
-    four_hundred_error_object: Optional[GetCommercialCreditCards400ApplicationPrsOpenbankingOpendataV13PlusJSON400ErrorObject] = field(default=None)
-    four_hundred_and_eight_error_object: Optional[GetCommercialCreditCards408ApplicationPrsOpenbankingOpendataV13PlusJSON408ErrorObject] = field(default=None)
-    four_hundred_and_twenty_nine_error_object: Optional[GetCommercialCreditCards429ApplicationPrsOpenbankingOpendataV13PlusJSON429ErrorObject] = field(default=None)
-    five_hundred_error_object: Optional[GetCommercialCreditCards500ApplicationPrsOpenbankingOpendataV13PlusJSON500ErrorObject] = field(default=None)
-    five_hundred_and_three_error_object: Optional[GetCommercialCreditCards503ApplicationPrsOpenbankingOpendataV13PlusJSON503ErrorObject] = field(default=None)
+    four_hundred_error_object: Optional[GetCommercialCreditCards400ErrorObject] = field(default=None)
+    four_hundred_and_eight_error_object: Optional[GetCommercialCreditCards408ErrorObject] = field(default=None)
+    four_hundred_and_twenty_nine_error_object: Optional[GetCommercialCreditCards429ErrorObject] = field(default=None)
+    five_hundred_error_object: Optional[GetCommercialCreditCards500ErrorObject] = field(default=None)
+    five_hundred_and_three_error_object: Optional[GetCommercialCreditCards503ErrorObject] = field(default=None)
     content_type: str = field(default=None)
-    error_object: Optional[GetCommercialCreditCardsDefaultApplicationPrsOpenbankingOpendataV13PlusJSONErrorObject] = field(default=None)
+    error_object: Optional[GetCommercialCreditCardsErrorObject] = field(default=None)
     get_commercial_credit_cards_200_application_prs_openbanking_opendata_v1_3_plus_json_object: Optional[GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSON] = field(default=None)
     headers: dict[str, List[str]] = field(default=None)
     status_code: int = field(default=None)

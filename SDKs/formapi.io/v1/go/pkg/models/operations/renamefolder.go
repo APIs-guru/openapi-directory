@@ -8,7 +8,7 @@ type RenameFolderPathParams struct {
 	FolderID string `pathParam:"style=simple,explode=false,name=folder_id"`
 }
 
-type RenameFolderRequestBodyRenameFolderData struct {
+type RenameFolderRenameFolderData struct {
 	Name string `json:"name"`
 }
 
@@ -18,7 +18,7 @@ type RenameFolderSecurity struct {
 
 type RenameFolderRequest struct {
 	PathParams RenameFolderPathParams
-	Request    RenameFolderRequestBodyRenameFolderData `request:"mediaType=application/json"`
+	Request    RenameFolderRenameFolderData `request:"mediaType=application/json"`
 	Security   RenameFolderSecurity
 }
 

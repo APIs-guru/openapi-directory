@@ -33,7 +33,7 @@ class ListSipIPAccessControlListMappingRequest:
 
 @dataclass_json
 @dataclass
-class ListSipIPAccessControlListMapping200ApplicationJSONListSipIPAccessControlListMappingResponse:
+class ListSipIPAccessControlListMappingListSipIPAccessControlListMappingResponse:
     end: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'end' }})
     first_page_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_uri' }})
     ip_access_control_list_mappings: Optional[List[shared.APIV2010AccountSipSipDomainSipIPAccessControlListMapping]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ip_access_control_list_mappings' }})
@@ -48,6 +48,6 @@ class ListSipIPAccessControlListMapping200ApplicationJSONListSipIPAccessControlL
 @dataclass
 class ListSipIPAccessControlListMappingResponse:
     content_type: str = field(default=None)
-    list_sip_ip_access_control_list_mapping_response: Optional[ListSipIPAccessControlListMapping200ApplicationJSONListSipIPAccessControlListMappingResponse] = field(default=None)
+    list_sip_ip_access_control_list_mapping_response: Optional[ListSipIPAccessControlListMappingListSipIPAccessControlListMappingResponse] = field(default=None)
     status_code: int = field(default=None)
     

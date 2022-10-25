@@ -8,41 +8,41 @@ type PostLoadBalancersIDActionsDisablePublicInterfaceRequest struct {
 	PathParams PostLoadBalancersIDActionsDisablePublicInterfacePathParams
 }
 
-type PostLoadBalancersIDActionsDisablePublicInterface201ApplicationJSONActionError struct {
+type PostLoadBalancersIDActionsDisablePublicInterfaceActionResponseActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
 }
 
-type PostLoadBalancersIDActionsDisablePublicInterface201ApplicationJSONActionResources struct {
+type PostLoadBalancersIDActionsDisablePublicInterfaceActionResponseActionResources struct {
 	ID   int64  `json:"id"`
 	Type string `json:"type"`
 }
 
-type PostLoadBalancersIDActionsDisablePublicInterface201ApplicationJSONActionStatusEnum string
+type PostLoadBalancersIDActionsDisablePublicInterfaceActionResponseActionStatusEnum string
 
 const (
-	PostLoadBalancersIDActionsDisablePublicInterface201ApplicationJSONActionStatusEnumSuccess PostLoadBalancersIDActionsDisablePublicInterface201ApplicationJSONActionStatusEnum = "success"
-	PostLoadBalancersIDActionsDisablePublicInterface201ApplicationJSONActionStatusEnumRunning PostLoadBalancersIDActionsDisablePublicInterface201ApplicationJSONActionStatusEnum = "running"
-	PostLoadBalancersIDActionsDisablePublicInterface201ApplicationJSONActionStatusEnumError   PostLoadBalancersIDActionsDisablePublicInterface201ApplicationJSONActionStatusEnum = "error"
+	PostLoadBalancersIDActionsDisablePublicInterfaceActionResponseActionStatusEnumSuccess PostLoadBalancersIDActionsDisablePublicInterfaceActionResponseActionStatusEnum = "success"
+	PostLoadBalancersIDActionsDisablePublicInterfaceActionResponseActionStatusEnumRunning PostLoadBalancersIDActionsDisablePublicInterfaceActionResponseActionStatusEnum = "running"
+	PostLoadBalancersIDActionsDisablePublicInterfaceActionResponseActionStatusEnumError   PostLoadBalancersIDActionsDisablePublicInterfaceActionResponseActionStatusEnum = "error"
 )
 
-type PostLoadBalancersIDActionsDisablePublicInterface201ApplicationJSONActionAction struct {
-	Command   string                                                                              `json:"command"`
-	Error     PostLoadBalancersIDActionsDisablePublicInterface201ApplicationJSONActionError       `json:"error"`
-	Finished  string                                                                              `json:"finished"`
-	ID        int64                                                                               `json:"id"`
-	Progress  float64                                                                             `json:"progress"`
-	Resources []PostLoadBalancersIDActionsDisablePublicInterface201ApplicationJSONActionResources `json:"resources"`
-	Started   string                                                                              `json:"started"`
-	Status    PostLoadBalancersIDActionsDisablePublicInterface201ApplicationJSONActionStatusEnum  `json:"status"`
+type PostLoadBalancersIDActionsDisablePublicInterfaceActionResponseAction struct {
+	Command   string                                                                          `json:"command"`
+	Error     PostLoadBalancersIDActionsDisablePublicInterfaceActionResponseActionError       `json:"error"`
+	Finished  string                                                                          `json:"finished"`
+	ID        int64                                                                           `json:"id"`
+	Progress  float64                                                                         `json:"progress"`
+	Resources []PostLoadBalancersIDActionsDisablePublicInterfaceActionResponseActionResources `json:"resources"`
+	Started   string                                                                          `json:"started"`
+	Status    PostLoadBalancersIDActionsDisablePublicInterfaceActionResponseActionStatusEnum  `json:"status"`
 }
 
-type PostLoadBalancersIDActionsDisablePublicInterface201ApplicationJSONActionResponse struct {
-	Action PostLoadBalancersIDActionsDisablePublicInterface201ApplicationJSONActionAction `json:"action"`
+type PostLoadBalancersIDActionsDisablePublicInterfaceActionResponse struct {
+	Action PostLoadBalancersIDActionsDisablePublicInterfaceActionResponseAction `json:"action"`
 }
 
 type PostLoadBalancersIDActionsDisablePublicInterfaceResponse struct {
-	ActionResponse *PostLoadBalancersIDActionsDisablePublicInterface201ApplicationJSONActionResponse
+	ActionResponse *PostLoadBalancersIDActionsDisablePublicInterfaceActionResponse
 	ContentType    string
 	StatusCode     int64
 }

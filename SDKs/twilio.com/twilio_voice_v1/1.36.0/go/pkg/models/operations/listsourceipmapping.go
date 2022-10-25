@@ -22,7 +22,7 @@ type ListSourceIPMappingRequest struct {
 	Security    ListSourceIPMappingSecurity
 }
 
-type ListSourceIPMapping200ApplicationJSONMeta struct {
+type ListSourceIPMappingListSourceIPMappingResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -32,13 +32,13 @@ type ListSourceIPMapping200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListSourceIPMapping200ApplicationJSONListSourceIPMappingResponse struct {
-	Meta             *ListSourceIPMapping200ApplicationJSONMeta `json:"meta,omitempty"`
-	SourceIPMappings []shared.VoiceV1SourceIPMapping            `json:"source_ip_mappings,omitempty"`
+type ListSourceIPMappingListSourceIPMappingResponse struct {
+	Meta             *ListSourceIPMappingListSourceIPMappingResponseMeta `json:"meta,omitempty"`
+	SourceIPMappings []shared.VoiceV1SourceIPMapping                     `json:"source_ip_mappings,omitempty"`
 }
 
 type ListSourceIPMappingResponse struct {
 	ContentType                 string
-	ListSourceIPMappingResponse *ListSourceIPMapping200ApplicationJSONListSourceIPMappingResponse
+	ListSourceIPMappingResponse *ListSourceIPMappingListSourceIPMappingResponse
 	StatusCode                  int64
 }

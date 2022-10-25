@@ -5,7 +5,7 @@ import dateutil.parser
 from typing import Any,Enum,List,Optional
 from dataclasses_json import dataclass_json
 
-class WritableVirtualMachineWithConfigContextStatusStatusEnum(str, Enum):
+class WritableVirtualMachineWithConfigContextStatusEnum(str, Enum):
     OFFLINE = "offline"
     ACTIVE = "active"
     PLANNED = "planned"
@@ -34,7 +34,7 @@ class WritableVirtualMachineWithConfigContext:
     primary_ip6: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'primary_ip6' }})
     role: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'role' }})
     site: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'site' }})
-    status: Optional[WritableVirtualMachineWithConfigContextStatusStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    status: Optional[WritableVirtualMachineWithConfigContextStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
     tags: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
     tenant: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tenant' }})
     vcpus: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'vcpus' }})

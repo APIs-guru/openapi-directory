@@ -10,7 +10,7 @@ UPDATE_TRUNK_SERVERS = [
 class UpdateTrunkPathParams:
     sid: str = field(default=None, metadata={'path_param': { 'field_name': 'Sid', 'style': 'simple', 'explode': False }})
     
-class UpdateTrunkRequestBodyDisasterRecoveryMethodEnum(str, Enum):
+class UpdateTrunkUpdateTrunkRequestDisasterRecoveryMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -20,9 +20,9 @@ class UpdateTrunkRequestBodyDisasterRecoveryMethodEnum(str, Enum):
 
 
 @dataclass
-class UpdateTrunkRequestBodyUpdateTrunkRequest:
+class UpdateTrunkUpdateTrunkRequest:
     cnam_lookup_enabled: Optional[bool] = field(default=None, metadata={'form': { 'field_name': 'CnamLookupEnabled' }})
-    disaster_recovery_method: Optional[UpdateTrunkRequestBodyDisasterRecoveryMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'DisasterRecoveryMethod' }})
+    disaster_recovery_method: Optional[UpdateTrunkUpdateTrunkRequestDisasterRecoveryMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'DisasterRecoveryMethod' }})
     disaster_recovery_url: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'DisasterRecoveryUrl' }})
     domain_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'DomainName' }})
     friendly_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
@@ -40,7 +40,7 @@ class UpdateTrunkSecurity:
 class UpdateTrunkRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateTrunkPathParams = field(default=None)
-    request: Optional[UpdateTrunkRequestBodyUpdateTrunkRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateTrunkUpdateTrunkRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateTrunkSecurity = field(default=None)
     
 

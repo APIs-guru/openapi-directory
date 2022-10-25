@@ -13,7 +13,7 @@ class UpdateModelBuildPathParams:
     
 
 @dataclass
-class UpdateModelBuildRequestBodyUpdateModelBuildRequest:
+class UpdateModelBuildUpdateModelBuildRequest:
     unique_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'UniqueName' }})
     
 
@@ -26,7 +26,7 @@ class UpdateModelBuildSecurity:
 class UpdateModelBuildRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateModelBuildPathParams = field(default=None)
-    request: Optional[UpdateModelBuildRequestBodyUpdateModelBuildRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateModelBuildUpdateModelBuildRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateModelBuildSecurity = field(default=None)
     
 

@@ -8,7 +8,7 @@ var UpdateDialingPermissionsSettingsServers = []string{
 	"https://voice.twilio.com",
 }
 
-type UpdateDialingPermissionsSettingsRequestBodyUpdateDialingPermissionsSettingsRequest struct {
+type UpdateDialingPermissionsSettingsUpdateDialingPermissionsSettingsRequest struct {
 	DialingPermissionsInheritance *bool `form:"name=DialingPermissionsInheritance"`
 }
 
@@ -18,7 +18,7 @@ type UpdateDialingPermissionsSettingsSecurity struct {
 
 type UpdateDialingPermissionsSettingsRequest struct {
 	ServerURL *string
-	Request   *UpdateDialingPermissionsSettingsRequestBodyUpdateDialingPermissionsSettingsRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request   *UpdateDialingPermissionsSettingsUpdateDialingPermissionsSettingsRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security  UpdateDialingPermissionsSettingsSecurity
 }
 

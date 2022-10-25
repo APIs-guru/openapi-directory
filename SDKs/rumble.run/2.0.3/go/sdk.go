@@ -461,12 +461,12 @@ func (s *SDK) ExportAssetsCsv(ctx context.Context, request operations.ExportAsse
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `text/csv`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ExportAssetsCsv200TextCsvBinaryString = data
+			res.ExportAssetsCsv200TextCsvBinaryString = out
 		}
 	case httpRes.StatusCode == 401:
 	}
@@ -503,12 +503,12 @@ func (s *SDK) ExportAssetsCiscoCsv(ctx context.Context, request operations.Expor
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `text/csv`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ExportAssetsCiscoCsv200TextCsvBinaryString = data
+			res.ExportAssetsCiscoCsv200TextCsvBinaryString = out
 		}
 	case httpRes.StatusCode == 401:
 	}
@@ -629,12 +629,12 @@ func (s *SDK) ExportAssetsNmapXML(ctx context.Context, request operations.Export
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `text/xml`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ExportAssetsNmapXML200TextXMLBinaryString = data
+			res.ExportAssetsNmapXML200TextXMLBinaryString = out
 		}
 	case httpRes.StatusCode == 401:
 	}
@@ -755,12 +755,12 @@ func (s *SDK) ExportServicesCsv(ctx context.Context, request operations.ExportSe
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `text/csv`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ExportServicesCsv200TextCsvBinaryString = data
+			res.ExportServicesCsv200TextCsvBinaryString = out
 		}
 	case httpRes.StatusCode == 401:
 	}
@@ -879,12 +879,12 @@ func (s *SDK) ExportSitesCsv(ctx context.Context, request operations.ExportSites
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `text/csv`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ExportSitesCsv200TextCsvBinaryString = data
+			res.ExportSitesCsv200TextCsvBinaryString = out
 		}
 	case httpRes.StatusCode == 401:
 	}
@@ -1005,12 +1005,12 @@ func (s *SDK) ExportWirelessCsv(ctx context.Context, request operations.ExportWi
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `text/csv`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.ExportWirelessCsv200TextCsvBinaryString = data
+			res.ExportWirelessCsv200TextCsvBinaryString = out
 		}
 	case httpRes.StatusCode == 401:
 	}
@@ -1254,12 +1254,12 @@ func (s *SDK) GetAccountKey(ctx context.Context, request operations.GetAccountKe
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `*/*`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 401:
 	}
@@ -1334,12 +1334,12 @@ func (s *SDK) GetAccountLicense(ctx context.Context, request operations.GetAccou
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `*/*`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 401:
 	}
@@ -1374,12 +1374,12 @@ func (s *SDK) GetAccountOrganization(ctx context.Context, request operations.Get
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `*/*`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 401:
 	}
@@ -1540,12 +1540,12 @@ func (s *SDK) GetAccountUser(ctx context.Context, request operations.GetAccountU
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `*/*`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 401:
 	}
@@ -2185,12 +2185,12 @@ func (s *SDK) GetTaskChangeReport(ctx context.Context, request operations.GetTas
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `*/*`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 401:
 	case httpRes.StatusCode == 404:
@@ -2226,12 +2226,12 @@ func (s *SDK) GetTaskScanData(ctx context.Context, request operations.GetTaskSca
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `*/*`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 401:
 	case httpRes.StatusCode == 404:
@@ -2391,12 +2391,12 @@ func (s *SDK) HideTask(ctx context.Context, request operations.HideTaskRequest) 
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `*/*`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 401:
 	case httpRes.StatusCode == 404:
@@ -2797,12 +2797,12 @@ func (s *SDK) ResetAccountUserLockout(ctx context.Context, request operations.Re
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `*/*`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 401:
 	}
@@ -2837,12 +2837,12 @@ func (s *SDK) ResetAccountUserMfa(ctx context.Context, request operations.ResetA
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `*/*`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 401:
 	}
@@ -2877,12 +2877,12 @@ func (s *SDK) ResetAccountUserPassword(ctx context.Context, request operations.R
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `*/*`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 401:
 	}
@@ -3037,12 +3037,12 @@ func (s *SDK) SnowExportAssetsCsv(ctx context.Context, request operations.SnowEx
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `text/csv`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.SnowExportAssetsCsv200TextCsvBinaryString = data
+			res.SnowExportAssetsCsv200TextCsvBinaryString = out
 		}
 	case httpRes.StatusCode == 401:
 	}
@@ -3117,12 +3117,12 @@ func (s *SDK) SnowExportServicesCsv(ctx context.Context, request operations.Snow
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `text/csv`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.SnowExportServicesCsv200TextCsvBinaryString = data
+			res.SnowExportServicesCsv200TextCsvBinaryString = out
 		}
 	case httpRes.StatusCode == 401:
 	}
@@ -3241,12 +3241,12 @@ func (s *SDK) StopTask(ctx context.Context, request operations.StopTaskRequest) 
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `*/*`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 401:
 	case httpRes.StatusCode == 404:
@@ -3340,12 +3340,12 @@ func (s *SDK) UpdateAccountUser(ctx context.Context, request operations.UpdateAc
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `*/*`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		}
 	case httpRes.StatusCode == 401:
 	}

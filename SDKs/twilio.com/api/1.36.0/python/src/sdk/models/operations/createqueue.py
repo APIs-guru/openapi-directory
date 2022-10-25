@@ -12,7 +12,7 @@ class CreateQueuePathParams:
     
 
 @dataclass
-class CreateQueueRequestBodyCreateQueueRequest:
+class CreateQueueCreateQueueRequest:
     friendly_name: str = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
     max_size: Optional[int] = field(default=None, metadata={'form': { 'field_name': 'MaxSize' }})
     
@@ -26,7 +26,7 @@ class CreateQueueSecurity:
 class CreateQueueRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateQueuePathParams = field(default=None)
-    request: Optional[CreateQueueRequestBodyCreateQueueRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateQueueCreateQueueRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateQueueSecurity = field(default=None)
     
 

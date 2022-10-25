@@ -12,7 +12,7 @@ class CreatePhoneNumberPathParams:
     
 
 @dataclass
-class CreatePhoneNumberRequestBodyCreatePhoneNumberRequest:
+class CreatePhoneNumberCreatePhoneNumberRequest:
     phone_number_sid: str = field(default=None, metadata={'form': { 'field_name': 'PhoneNumberSid' }})
     
 
@@ -25,7 +25,7 @@ class CreatePhoneNumberSecurity:
 class CreatePhoneNumberRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreatePhoneNumberPathParams = field(default=None)
-    request: Optional[CreatePhoneNumberRequestBodyCreatePhoneNumberRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreatePhoneNumberCreatePhoneNumberRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreatePhoneNumberSecurity = field(default=None)
     
 

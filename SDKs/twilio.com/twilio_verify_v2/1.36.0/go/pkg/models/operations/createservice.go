@@ -8,7 +8,7 @@ var CreateServiceServers = []string{
 	"https://verify.twilio.com",
 }
 
-type CreateServiceRequestBodyCreateServiceRequest struct {
+type CreateServiceCreateServiceRequest struct {
 	CodeLength               *int64  `form:"name=CodeLength"`
 	CustomCodeEnabled        *bool   `form:"name=CustomCodeEnabled"`
 	DefaultTemplateSid       *string `form:"name=DefaultTemplateSid"`
@@ -34,7 +34,7 @@ type CreateServiceSecurity struct {
 
 type CreateServiceRequest struct {
 	ServerURL *string
-	Request   *CreateServiceRequestBodyCreateServiceRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request   *CreateServiceCreateServiceRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security  CreateServiceSecurity
 }
 

@@ -12,7 +12,7 @@ class UpdateBundlePathParams:
     
 
 @dataclass
-class UpdateBundleRequestBodyUpdateBundleRequest:
+class UpdateBundleUpdateBundleRequest:
     email: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Email' }})
     friendly_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
     status: Optional[shared.BundleEnumStatusEnum] = field(default=None, metadata={'form': { 'field_name': 'Status' }})
@@ -28,7 +28,7 @@ class UpdateBundleSecurity:
 class UpdateBundleRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateBundlePathParams = field(default=None)
-    request: Optional[UpdateBundleRequestBodyUpdateBundleRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateBundleUpdateBundleRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateBundleSecurity = field(default=None)
     
 

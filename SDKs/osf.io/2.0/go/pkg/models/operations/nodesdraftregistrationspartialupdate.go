@@ -9,34 +9,34 @@ type NodesDraftRegistrationsPartialUpdatePathParams struct {
 	NodeID  string `pathParam:"style=simple,explode=false,name=node_id"`
 }
 
-type NodesDraftRegistrationsPartialUpdateRequestBodyAttributesAttributes struct {
+type NodesDraftRegistrationsPartialUpdateDraftRegistrationAttributes struct {
 	DatetimeInitiated      time.Time `json:"datetime_initiated"`
 	DatetimeUpdated        time.Time `json:"datetime_updated"`
 	RegistrationMetadata   *string   `json:"registration_metadata,omitempty"`
 	RegistrationSupplement string    `json:"registration_supplement"`
 }
 
-type NodesDraftRegistrationsPartialUpdateRequestBodyLinksLinks struct {
+type NodesDraftRegistrationsPartialUpdateDraftRegistrationLinks struct {
 	HTML string `json:"html"`
 }
 
-type NodesDraftRegistrationsPartialUpdateRequestBodyRelationshipsRelationships struct {
+type NodesDraftRegistrationsPartialUpdateDraftRegistrationRelationships struct {
 	BranchedFrom       string `json:"branched_from"`
 	Initiator          string `json:"initiator"`
 	RegistrationSchema string `json:"registration_schema"`
 }
 
-type NodesDraftRegistrationsPartialUpdateRequestBodyDraftRegistration struct {
-	Attributes    NodesDraftRegistrationsPartialUpdateRequestBodyAttributesAttributes       `json:"attributes"`
-	ID            string                                                                    `json:"id"`
-	Links         NodesDraftRegistrationsPartialUpdateRequestBodyLinksLinks                 `json:"links"`
-	Relationships NodesDraftRegistrationsPartialUpdateRequestBodyRelationshipsRelationships `json:"relationships"`
-	Type          string                                                                    `json:"type"`
+type NodesDraftRegistrationsPartialUpdateDraftRegistration struct {
+	Attributes    NodesDraftRegistrationsPartialUpdateDraftRegistrationAttributes    `json:"attributes"`
+	ID            string                                                             `json:"id"`
+	Links         NodesDraftRegistrationsPartialUpdateDraftRegistrationLinks         `json:"links"`
+	Relationships NodesDraftRegistrationsPartialUpdateDraftRegistrationRelationships `json:"relationships"`
+	Type          string                                                             `json:"type"`
 }
 
 type NodesDraftRegistrationsPartialUpdateRequest struct {
 	PathParams NodesDraftRegistrationsPartialUpdatePathParams
-	Request    NodesDraftRegistrationsPartialUpdateRequestBodyDraftRegistration `request:"mediaType=application/json"`
+	Request    NodesDraftRegistrationsPartialUpdateDraftRegistration `request:"mediaType=application/json"`
 }
 
 type NodesDraftRegistrationsPartialUpdateResponse struct {

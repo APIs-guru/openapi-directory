@@ -7,7 +7,7 @@ from . import nestedinterface
 
 @dataclass_json
 @dataclass
-class InterfaceConnectionConnectionStatusConnectionStatus:
+class InterfaceConnectionConnectionStatus:
     label: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label' }})
     value: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
     
@@ -15,7 +15,7 @@ class InterfaceConnectionConnectionStatusConnectionStatus:
 @dataclass_json
 @dataclass
 class InterfaceConnection:
-    connection_status: Optional[InterfaceConnectionConnectionStatusConnectionStatus] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'connection_status' }})
+    connection_status: Optional[InterfaceConnectionConnectionStatus] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'connection_status' }})
     id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     interface_a: nestedinterface.NestedInterface = field(default=None, metadata={'dataclasses_json': { 'field_name': 'interface_a' }})
     interface_b: nestedinterface.NestedInterface = field(default=None, metadata={'dataclasses_json': { 'field_name': 'interface_b' }})

@@ -10,21 +10,21 @@ class PutVolumesIDPathParams:
 
 @dataclass_json
 @dataclass
-class PutVolumesIDRequestBodyLabels:
+class PutVolumesIDUpdateVolumeRequestLabels:
     labelkey: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'labelkey' }})
     
 
 @dataclass_json
 @dataclass
-class PutVolumesIDRequestBodyUpdateVolumeRequest:
-    labels: Optional[PutVolumesIDRequestBodyLabels] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'labels' }})
+class PutVolumesIDUpdateVolumeRequest:
+    labels: Optional[PutVolumesIDUpdateVolumeRequestLabels] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'labels' }})
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
     
 
 @dataclass
 class PutVolumesIDRequest:
     path_params: PutVolumesIDPathParams = field(default=None)
-    request: Optional[PutVolumesIDRequestBodyUpdateVolumeRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: Optional[PutVolumesIDUpdateVolumeRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass_json

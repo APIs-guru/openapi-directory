@@ -4,50 +4,50 @@ type PostNetworksIDActionsDeleteSubnetPathParams struct {
 	ID int64 `pathParam:"style=simple,explode=false,name=id"`
 }
 
-type PostNetworksIDActionsDeleteSubnetRequestBodyDeleteSubnetRequest struct {
+type PostNetworksIDActionsDeleteSubnetDeleteSubnetRequest struct {
 	IPRange string `json:"ip_range"`
 }
 
 type PostNetworksIDActionsDeleteSubnetRequest struct {
 	PathParams PostNetworksIDActionsDeleteSubnetPathParams
-	Request    *PostNetworksIDActionsDeleteSubnetRequestBodyDeleteSubnetRequest `request:"mediaType=application/json"`
+	Request    *PostNetworksIDActionsDeleteSubnetDeleteSubnetRequest `request:"mediaType=application/json"`
 }
 
-type PostNetworksIDActionsDeleteSubnet201ApplicationJSONActionError struct {
+type PostNetworksIDActionsDeleteSubnetActionResponseActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
 }
 
-type PostNetworksIDActionsDeleteSubnet201ApplicationJSONActionResources struct {
+type PostNetworksIDActionsDeleteSubnetActionResponseActionResources struct {
 	ID   int64  `json:"id"`
 	Type string `json:"type"`
 }
 
-type PostNetworksIDActionsDeleteSubnet201ApplicationJSONActionStatusEnum string
+type PostNetworksIDActionsDeleteSubnetActionResponseActionStatusEnum string
 
 const (
-	PostNetworksIDActionsDeleteSubnet201ApplicationJSONActionStatusEnumSuccess PostNetworksIDActionsDeleteSubnet201ApplicationJSONActionStatusEnum = "success"
-	PostNetworksIDActionsDeleteSubnet201ApplicationJSONActionStatusEnumRunning PostNetworksIDActionsDeleteSubnet201ApplicationJSONActionStatusEnum = "running"
-	PostNetworksIDActionsDeleteSubnet201ApplicationJSONActionStatusEnumError   PostNetworksIDActionsDeleteSubnet201ApplicationJSONActionStatusEnum = "error"
+	PostNetworksIDActionsDeleteSubnetActionResponseActionStatusEnumSuccess PostNetworksIDActionsDeleteSubnetActionResponseActionStatusEnum = "success"
+	PostNetworksIDActionsDeleteSubnetActionResponseActionStatusEnumRunning PostNetworksIDActionsDeleteSubnetActionResponseActionStatusEnum = "running"
+	PostNetworksIDActionsDeleteSubnetActionResponseActionStatusEnumError   PostNetworksIDActionsDeleteSubnetActionResponseActionStatusEnum = "error"
 )
 
-type PostNetworksIDActionsDeleteSubnet201ApplicationJSONActionAction struct {
-	Command   string                                                               `json:"command"`
-	Error     PostNetworksIDActionsDeleteSubnet201ApplicationJSONActionError       `json:"error"`
-	Finished  string                                                               `json:"finished"`
-	ID        int64                                                                `json:"id"`
-	Progress  float64                                                              `json:"progress"`
-	Resources []PostNetworksIDActionsDeleteSubnet201ApplicationJSONActionResources `json:"resources"`
-	Started   string                                                               `json:"started"`
-	Status    PostNetworksIDActionsDeleteSubnet201ApplicationJSONActionStatusEnum  `json:"status"`
+type PostNetworksIDActionsDeleteSubnetActionResponseAction struct {
+	Command   string                                                           `json:"command"`
+	Error     PostNetworksIDActionsDeleteSubnetActionResponseActionError       `json:"error"`
+	Finished  string                                                           `json:"finished"`
+	ID        int64                                                            `json:"id"`
+	Progress  float64                                                          `json:"progress"`
+	Resources []PostNetworksIDActionsDeleteSubnetActionResponseActionResources `json:"resources"`
+	Started   string                                                           `json:"started"`
+	Status    PostNetworksIDActionsDeleteSubnetActionResponseActionStatusEnum  `json:"status"`
 }
 
-type PostNetworksIDActionsDeleteSubnet201ApplicationJSONActionResponse struct {
-	Action PostNetworksIDActionsDeleteSubnet201ApplicationJSONActionAction `json:"action"`
+type PostNetworksIDActionsDeleteSubnetActionResponse struct {
+	Action PostNetworksIDActionsDeleteSubnetActionResponseAction `json:"action"`
 }
 
 type PostNetworksIDActionsDeleteSubnetResponse struct {
-	ActionResponse *PostNetworksIDActionsDeleteSubnet201ApplicationJSONActionResponse
+	ActionResponse *PostNetworksIDActionsDeleteSubnetActionResponse
 	ContentType    string
 	StatusCode     int64
 }

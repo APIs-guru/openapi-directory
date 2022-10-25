@@ -9,8 +9,12 @@ type PostMappingRequest struct {
 }
 
 type PostMappingResponse struct {
-	Body                 []byte
-	BulkMappingJobResult []interface{}
-	ContentType          string
-	StatusCode           int64
+	BulkMappingJobResult         []interface{}
+	ContentType                  string
+	PostMapping400WildcardString *string
+	PostMapping401WildcardString *string
+	PostMapping406WildcardString *string
+	PostMapping413WildcardString *string
+	PostMapping500WildcardString *string
+	StatusCode                   int64
 }

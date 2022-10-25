@@ -8,53 +8,53 @@ type GeneratePdfPathParams struct {
 	TemplateID string `pathParam:"style=simple,explode=false,name=template_id"`
 }
 
-type GeneratePdfRequestBodyDataRequestsAuthSecondFactorTypeEnum string
+type GeneratePdfSubmissionDataCreateSubmissionDataRequestDataAuthSecondFactorTypeEnum string
 
 const (
-	GeneratePdfRequestBodyDataRequestsAuthSecondFactorTypeEnumNone        GeneratePdfRequestBodyDataRequestsAuthSecondFactorTypeEnum = "none"
-	GeneratePdfRequestBodyDataRequestsAuthSecondFactorTypeEnumPhoneNumber GeneratePdfRequestBodyDataRequestsAuthSecondFactorTypeEnum = "phone_number"
-	GeneratePdfRequestBodyDataRequestsAuthSecondFactorTypeEnumTotp        GeneratePdfRequestBodyDataRequestsAuthSecondFactorTypeEnum = "totp"
-	GeneratePdfRequestBodyDataRequestsAuthSecondFactorTypeEnumMobilePush  GeneratePdfRequestBodyDataRequestsAuthSecondFactorTypeEnum = "mobile_push"
-	GeneratePdfRequestBodyDataRequestsAuthSecondFactorTypeEnumSecurityKey GeneratePdfRequestBodyDataRequestsAuthSecondFactorTypeEnum = "security_key"
-	GeneratePdfRequestBodyDataRequestsAuthSecondFactorTypeEnumFingerprint GeneratePdfRequestBodyDataRequestsAuthSecondFactorTypeEnum = "fingerprint"
+	GeneratePdfSubmissionDataCreateSubmissionDataRequestDataAuthSecondFactorTypeEnumNone        GeneratePdfSubmissionDataCreateSubmissionDataRequestDataAuthSecondFactorTypeEnum = "none"
+	GeneratePdfSubmissionDataCreateSubmissionDataRequestDataAuthSecondFactorTypeEnumPhoneNumber GeneratePdfSubmissionDataCreateSubmissionDataRequestDataAuthSecondFactorTypeEnum = "phone_number"
+	GeneratePdfSubmissionDataCreateSubmissionDataRequestDataAuthSecondFactorTypeEnumTotp        GeneratePdfSubmissionDataCreateSubmissionDataRequestDataAuthSecondFactorTypeEnum = "totp"
+	GeneratePdfSubmissionDataCreateSubmissionDataRequestDataAuthSecondFactorTypeEnumMobilePush  GeneratePdfSubmissionDataCreateSubmissionDataRequestDataAuthSecondFactorTypeEnum = "mobile_push"
+	GeneratePdfSubmissionDataCreateSubmissionDataRequestDataAuthSecondFactorTypeEnumSecurityKey GeneratePdfSubmissionDataCreateSubmissionDataRequestDataAuthSecondFactorTypeEnum = "security_key"
+	GeneratePdfSubmissionDataCreateSubmissionDataRequestDataAuthSecondFactorTypeEnumFingerprint GeneratePdfSubmissionDataCreateSubmissionDataRequestDataAuthSecondFactorTypeEnum = "fingerprint"
 )
 
-type GeneratePdfRequestBodyDataRequestsAuthTypeEnum string
+type GeneratePdfSubmissionDataCreateSubmissionDataRequestDataAuthTypeEnum string
 
 const (
-	GeneratePdfRequestBodyDataRequestsAuthTypeEnumNone        GeneratePdfRequestBodyDataRequestsAuthTypeEnum = "none"
-	GeneratePdfRequestBodyDataRequestsAuthTypeEnumPassword    GeneratePdfRequestBodyDataRequestsAuthTypeEnum = "password"
-	GeneratePdfRequestBodyDataRequestsAuthTypeEnumOauth       GeneratePdfRequestBodyDataRequestsAuthTypeEnum = "oauth"
-	GeneratePdfRequestBodyDataRequestsAuthTypeEnumEmailLink   GeneratePdfRequestBodyDataRequestsAuthTypeEnum = "email_link"
-	GeneratePdfRequestBodyDataRequestsAuthTypeEnumPhoneNumber GeneratePdfRequestBodyDataRequestsAuthTypeEnum = "phone_number"
-	GeneratePdfRequestBodyDataRequestsAuthTypeEnumLdap        GeneratePdfRequestBodyDataRequestsAuthTypeEnum = "ldap"
-	GeneratePdfRequestBodyDataRequestsAuthTypeEnumSaml        GeneratePdfRequestBodyDataRequestsAuthTypeEnum = "saml"
+	GeneratePdfSubmissionDataCreateSubmissionDataRequestDataAuthTypeEnumNone        GeneratePdfSubmissionDataCreateSubmissionDataRequestDataAuthTypeEnum = "none"
+	GeneratePdfSubmissionDataCreateSubmissionDataRequestDataAuthTypeEnumPassword    GeneratePdfSubmissionDataCreateSubmissionDataRequestDataAuthTypeEnum = "password"
+	GeneratePdfSubmissionDataCreateSubmissionDataRequestDataAuthTypeEnumOauth       GeneratePdfSubmissionDataCreateSubmissionDataRequestDataAuthTypeEnum = "oauth"
+	GeneratePdfSubmissionDataCreateSubmissionDataRequestDataAuthTypeEnumEmailLink   GeneratePdfSubmissionDataCreateSubmissionDataRequestDataAuthTypeEnum = "email_link"
+	GeneratePdfSubmissionDataCreateSubmissionDataRequestDataAuthTypeEnumPhoneNumber GeneratePdfSubmissionDataCreateSubmissionDataRequestDataAuthTypeEnum = "phone_number"
+	GeneratePdfSubmissionDataCreateSubmissionDataRequestDataAuthTypeEnumLdap        GeneratePdfSubmissionDataCreateSubmissionDataRequestDataAuthTypeEnum = "ldap"
+	GeneratePdfSubmissionDataCreateSubmissionDataRequestDataAuthTypeEnumSaml        GeneratePdfSubmissionDataCreateSubmissionDataRequestDataAuthTypeEnum = "saml"
 )
 
-type GeneratePdfRequestBodyDataRequestsCreateSubmissionDataRequestData struct {
-	AuthPhoneNumberHash  *string                                                     `json:"auth_phone_number_hash,omitempty"`
-	AuthProvider         *string                                                     `json:"auth_provider,omitempty"`
-	AuthSecondFactorType *GeneratePdfRequestBodyDataRequestsAuthSecondFactorTypeEnum `json:"auth_second_factor_type,omitempty"`
-	AuthSessionIDHash    *string                                                     `json:"auth_session_id_hash,omitempty"`
-	AuthSessionStartedAt *string                                                     `json:"auth_session_started_at,omitempty"`
-	AuthType             GeneratePdfRequestBodyDataRequestsAuthTypeEnum              `json:"auth_type"`
-	AuthUserIDHash       *string                                                     `json:"auth_user_id_hash,omitempty"`
-	AuthUsernameHash     *string                                                     `json:"auth_username_hash,omitempty"`
-	Email                string                                                      `json:"email"`
-	Fields               []string                                                    `json:"fields,omitempty"`
-	Metadata             map[string]interface{}                                      `json:"metadata,omitempty"`
-	Name                 *string                                                     `json:"name,omitempty"`
-	Order                *int64                                                      `json:"order,omitempty"`
+type GeneratePdfSubmissionDataCreateSubmissionDataRequestData struct {
+	AuthPhoneNumberHash  *string                                                                           `json:"auth_phone_number_hash,omitempty"`
+	AuthProvider         *string                                                                           `json:"auth_provider,omitempty"`
+	AuthSecondFactorType *GeneratePdfSubmissionDataCreateSubmissionDataRequestDataAuthSecondFactorTypeEnum `json:"auth_second_factor_type,omitempty"`
+	AuthSessionIDHash    *string                                                                           `json:"auth_session_id_hash,omitempty"`
+	AuthSessionStartedAt *string                                                                           `json:"auth_session_started_at,omitempty"`
+	AuthType             GeneratePdfSubmissionDataCreateSubmissionDataRequestDataAuthTypeEnum              `json:"auth_type"`
+	AuthUserIDHash       *string                                                                           `json:"auth_user_id_hash,omitempty"`
+	AuthUsernameHash     *string                                                                           `json:"auth_username_hash,omitempty"`
+	Email                string                                                                            `json:"email"`
+	Fields               []string                                                                          `json:"fields,omitempty"`
+	Metadata             map[string]interface{}                                                            `json:"metadata,omitempty"`
+	Name                 *string                                                                           `json:"name,omitempty"`
+	Order                *int64                                                                            `json:"order,omitempty"`
 }
 
-type GeneratePdfRequestBodySubmissionData struct {
-	CSS            *string                                                             `json:"css,omitempty"`
-	Data           map[string]interface{}                                              `json:"data"`
-	DataRequests   []GeneratePdfRequestBodyDataRequestsCreateSubmissionDataRequestData `json:"data_requests,omitempty"`
-	FieldOverrides map[string]interface{}                                              `json:"field_overrides,omitempty"`
-	HTML           *string                                                             `json:"html,omitempty"`
-	Metadata       map[string]interface{}                                              `json:"metadata,omitempty"`
-	Test           *bool                                                               `json:"test,omitempty"`
+type GeneratePdfSubmissionData struct {
+	CSS            *string                                                    `json:"css,omitempty"`
+	Data           map[string]interface{}                                     `json:"data"`
+	DataRequests   []GeneratePdfSubmissionDataCreateSubmissionDataRequestData `json:"data_requests,omitempty"`
+	FieldOverrides map[string]interface{}                                     `json:"field_overrides,omitempty"`
+	HTML           *string                                                    `json:"html,omitempty"`
+	Metadata       map[string]interface{}                                     `json:"metadata,omitempty"`
+	Test           *bool                                                      `json:"test,omitempty"`
 }
 
 type GeneratePdfSecurity struct {
@@ -63,28 +63,28 @@ type GeneratePdfSecurity struct {
 
 type GeneratePdfRequest struct {
 	PathParams GeneratePdfPathParams
-	Request    GeneratePdfRequestBodySubmissionData `request:"mediaType=application/json"`
+	Request    GeneratePdfSubmissionData `request:"mediaType=application/json"`
 	Security   GeneratePdfSecurity
 }
 
-type GeneratePdf201ApplicationJSONStatusEnum string
+type GeneratePdfCreateSubmissionResponseStatusEnum string
 
 const (
-	GeneratePdf201ApplicationJSONStatusEnumSuccess GeneratePdf201ApplicationJSONStatusEnum = "success"
-	GeneratePdf201ApplicationJSONStatusEnumError   GeneratePdf201ApplicationJSONStatusEnum = "error"
+	GeneratePdfCreateSubmissionResponseStatusEnumSuccess GeneratePdfCreateSubmissionResponseStatusEnum = "success"
+	GeneratePdfCreateSubmissionResponseStatusEnumError   GeneratePdfCreateSubmissionResponseStatusEnum = "error"
 )
 
-type GeneratePdf201ApplicationJSONCreateSubmissionResponse struct {
-	Errors     []string                                `json:"errors,omitempty"`
-	Status     GeneratePdf201ApplicationJSONStatusEnum `json:"status"`
-	Submission shared.Submission                       `json:"submission"`
+type GeneratePdfCreateSubmissionResponse struct {
+	Errors     []string                                      `json:"errors,omitempty"`
+	Status     GeneratePdfCreateSubmissionResponseStatusEnum `json:"status"`
+	Submission shared.Submission                             `json:"submission"`
 }
 
 type GeneratePdfResponse struct {
 	ContentType              string
 	StatusCode               int64
 	AuthenticationError      *shared.AuthenticationError
-	CreateSubmissionResponse *GeneratePdf201ApplicationJSONCreateSubmissionResponse
+	CreateSubmissionResponse *GeneratePdfCreateSubmissionResponse
 	Error                    *shared.Error
 	InvalidRequest           *shared.InvalidRequest
 }

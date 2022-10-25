@@ -29,7 +29,7 @@ type ListRecordingAddOnResultPayloadRequest struct {
 	Security    ListRecordingAddOnResultPayloadSecurity
 }
 
-type ListRecordingAddOnResultPayload200ApplicationJSONListRecordingAddOnResultPayloadResponse struct {
+type ListRecordingAddOnResultPayloadListRecordingAddOnResultPayloadResponse struct {
 	End             *int64                                                                           `json:"end,omitempty"`
 	FirstPageURI    *string                                                                          `json:"first_page_uri,omitempty"`
 	NextPageURI     *string                                                                          `json:"next_page_uri,omitempty"`
@@ -43,6 +43,6 @@ type ListRecordingAddOnResultPayload200ApplicationJSONListRecordingAddOnResultPa
 
 type ListRecordingAddOnResultPayloadResponse struct {
 	ContentType                             string
-	ListRecordingAddOnResultPayloadResponse *ListRecordingAddOnResultPayload200ApplicationJSONListRecordingAddOnResultPayloadResponse
+	ListRecordingAddOnResultPayloadResponse *ListRecordingAddOnResultPayloadListRecordingAddOnResultPayloadResponse
 	StatusCode                              int64
 }

@@ -4,7 +4,7 @@ from dataclasses import dataclass, field
 
 @dataclass
 class PostXmltojsonRequest:
-    request: bytes = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
+    request: str = field(default=None, metadata={'request': { 'media_type': 'text/xml' }})
     
 
 @dataclass

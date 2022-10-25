@@ -12,7 +12,7 @@ class CreateMessagingConfigurationPathParams:
     
 
 @dataclass
-class CreateMessagingConfigurationRequestBodyCreateMessagingConfigurationRequest:
+class CreateMessagingConfigurationCreateMessagingConfigurationRequest:
     country: str = field(default=None, metadata={'form': { 'field_name': 'Country' }})
     messaging_service_sid: str = field(default=None, metadata={'form': { 'field_name': 'MessagingServiceSid' }})
     
@@ -26,7 +26,7 @@ class CreateMessagingConfigurationSecurity:
 class CreateMessagingConfigurationRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateMessagingConfigurationPathParams = field(default=None)
-    request: Optional[CreateMessagingConfigurationRequestBodyCreateMessagingConfigurationRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateMessagingConfigurationCreateMessagingConfigurationRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateMessagingConfigurationSecurity = field(default=None)
     
 

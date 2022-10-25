@@ -8,7 +8,7 @@ var CreateConfigurationAddressServers = []string{
 	"https://conversations.twilio.com",
 }
 
-type CreateConfigurationAddressRequestBodyCreateConfigurationAddressRequest struct {
+type CreateConfigurationAddressCreateConfigurationAddressRequest struct {
 	Address                            string                                               `form:"name=Address"`
 	AutoCreationConversationServiceSid *string                                              `form:"name=AutoCreation.ConversationServiceSid"`
 	AutoCreationEnabled                *bool                                                `form:"name=AutoCreation.Enabled"`
@@ -28,7 +28,7 @@ type CreateConfigurationAddressSecurity struct {
 
 type CreateConfigurationAddressRequest struct {
 	ServerURL *string
-	Request   *CreateConfigurationAddressRequestBodyCreateConfigurationAddressRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request   *CreateConfigurationAddressCreateConfigurationAddressRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security  CreateConfigurationAddressSecurity
 }
 

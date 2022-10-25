@@ -37,7 +37,7 @@ class OpenSearchRequest:
 
 @dataclass
 class OpenSearchResponse:
-    body: bytes = field(default=None)
     content_type: str = field(default=None)
     status_code: int = field(default=None)
+    open_search_200_application_atom_plus_xml_string: Optional[str] = field(default=None)
     

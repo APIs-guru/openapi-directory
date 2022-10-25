@@ -12,7 +12,7 @@ type UpdateSyncServicePathParams struct {
 	Sid string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
-type UpdateSyncServiceRequestBodyUpdateSyncServiceRequest struct {
+type UpdateSyncServiceUpdateSyncServiceRequest struct {
 	ACLEnabled                  *bool   `form:"name=AclEnabled"`
 	FriendlyName                *string `form:"name=FriendlyName"`
 	ReachabilityWebhooksEnabled *bool   `form:"name=ReachabilityWebhooksEnabled"`
@@ -26,7 +26,7 @@ type UpdateSyncServiceSecurity struct {
 type UpdateSyncServiceRequest struct {
 	ServerURL  *string
 	PathParams UpdateSyncServicePathParams
-	Request    *UpdateSyncServiceRequestBodyUpdateSyncServiceRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateSyncServiceUpdateSyncServiceRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateSyncServiceSecurity
 }
 

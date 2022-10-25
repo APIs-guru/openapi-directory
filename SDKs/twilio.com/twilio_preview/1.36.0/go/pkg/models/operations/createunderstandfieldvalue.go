@@ -13,7 +13,7 @@ type CreateUnderstandFieldValuePathParams struct {
 	FieldTypeSid string `pathParam:"style=simple,explode=false,name=FieldTypeSid"`
 }
 
-type CreateUnderstandFieldValueRequestBodyCreateUnderstandFieldValueRequest struct {
+type CreateUnderstandFieldValueCreateUnderstandFieldValueRequest struct {
 	Language  string  `form:"name=Language"`
 	SynonymOf *string `form:"name=SynonymOf"`
 	Value     string  `form:"name=Value"`
@@ -26,7 +26,7 @@ type CreateUnderstandFieldValueSecurity struct {
 type CreateUnderstandFieldValueRequest struct {
 	ServerURL  *string
 	PathParams CreateUnderstandFieldValuePathParams
-	Request    *CreateUnderstandFieldValueRequestBodyCreateUnderstandFieldValueRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateUnderstandFieldValueCreateUnderstandFieldValueRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateUnderstandFieldValueSecurity
 }
 

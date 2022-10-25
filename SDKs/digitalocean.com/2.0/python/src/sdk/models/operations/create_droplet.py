@@ -6,7 +6,7 @@ from sdk.models import shared
 
 @dataclass_json
 @dataclass
-class CreateDropletRequestBody1:
+class CreateDropletRequestBodySingleDropletRequest:
     backups: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'backups' }})
     image: Any = field(default=None, metadata={'dataclasses_json': { 'field_name': 'image' }})
     ipv6: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ipv6' }})
@@ -24,7 +24,7 @@ class CreateDropletRequestBody1:
 
 @dataclass_json
 @dataclass
-class CreateDropletRequestBody2:
+class CreateDropletRequestBodyMultipleDropletRequest:
     backups: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'backups' }})
     image: Any = field(default=None, metadata={'dataclasses_json': { 'field_name': 'image' }})
     ipv6: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ipv6' }})

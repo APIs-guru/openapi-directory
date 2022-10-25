@@ -33,7 +33,7 @@ class ListSipAuthCallsIPAccessControlListMappingRequest:
 
 @dataclass_json
 @dataclass
-class ListSipAuthCallsIPAccessControlListMapping200ApplicationJSONListSipAuthCallsIPAccessControlListMappingResponse:
+class ListSipAuthCallsIPAccessControlListMappingListSipAuthCallsIPAccessControlListMappingResponse:
     contents: Optional[List[shared.APIV2010AccountSipSipDomainSipAuthSipAuthCallsSipAuthCallsIPAccessControlListMapping]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'contents' }})
     end: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'end' }})
     first_page_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_uri' }})
@@ -48,6 +48,6 @@ class ListSipAuthCallsIPAccessControlListMapping200ApplicationJSONListSipAuthCal
 @dataclass
 class ListSipAuthCallsIPAccessControlListMappingResponse:
     content_type: str = field(default=None)
-    list_sip_auth_calls_ip_access_control_list_mapping_response: Optional[ListSipAuthCallsIPAccessControlListMapping200ApplicationJSONListSipAuthCallsIPAccessControlListMappingResponse] = field(default=None)
+    list_sip_auth_calls_ip_access_control_list_mapping_response: Optional[ListSipAuthCallsIPAccessControlListMappingListSipAuthCallsIPAccessControlListMappingResponse] = field(default=None)
     status_code: int = field(default=None)
     

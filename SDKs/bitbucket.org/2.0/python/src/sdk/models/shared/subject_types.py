@@ -5,7 +5,7 @@ from dataclasses_json import dataclass_json
 
 @dataclass_json
 @dataclass
-class SubjectTypesRepositoryEventsLink:
+class SubjectTypesRepositoryLink:
     href: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'href' }})
     name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
     
@@ -13,12 +13,12 @@ class SubjectTypesRepositoryEventsLink:
 @dataclass_json
 @dataclass
 class SubjectTypesRepository:
-    events: Optional[SubjectTypesRepositoryEventsLink] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'events' }})
+    events: Optional[SubjectTypesRepositoryLink] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'events' }})
     
 
 @dataclass_json
 @dataclass
-class SubjectTypesTeamEventsLink:
+class SubjectTypesTeamLink:
     href: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'href' }})
     name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
     
@@ -26,12 +26,12 @@ class SubjectTypesTeamEventsLink:
 @dataclass_json
 @dataclass
 class SubjectTypesTeam:
-    events: Optional[SubjectTypesTeamEventsLink] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'events' }})
+    events: Optional[SubjectTypesTeamLink] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'events' }})
     
 
 @dataclass_json
 @dataclass
-class SubjectTypesUserEventsLink:
+class SubjectTypesUserLink:
     href: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'href' }})
     name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
     
@@ -39,7 +39,7 @@ class SubjectTypesUserEventsLink:
 @dataclass_json
 @dataclass
 class SubjectTypesUser:
-    events: Optional[SubjectTypesUserEventsLink] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'events' }})
+    events: Optional[SubjectTypesUserLink] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'events' }})
     
 
 @dataclass_json

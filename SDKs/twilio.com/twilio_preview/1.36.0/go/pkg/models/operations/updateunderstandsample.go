@@ -14,7 +14,7 @@ type UpdateUnderstandSamplePathParams struct {
 	TaskSid      string `pathParam:"style=simple,explode=false,name=TaskSid"`
 }
 
-type UpdateUnderstandSampleRequestBodyUpdateUnderstandSampleRequest struct {
+type UpdateUnderstandSampleUpdateUnderstandSampleRequest struct {
 	Language      *string `form:"name=Language"`
 	SourceChannel *string `form:"name=SourceChannel"`
 	TaggedText    *string `form:"name=TaggedText"`
@@ -27,7 +27,7 @@ type UpdateUnderstandSampleSecurity struct {
 type UpdateUnderstandSampleRequest struct {
 	ServerURL  *string
 	PathParams UpdateUnderstandSamplePathParams
-	Request    *UpdateUnderstandSampleRequestBodyUpdateUnderstandSampleRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateUnderstandSampleUpdateUnderstandSampleRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateUnderstandSampleSecurity
 }
 

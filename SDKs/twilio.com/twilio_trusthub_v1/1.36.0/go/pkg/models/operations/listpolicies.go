@@ -22,7 +22,7 @@ type ListPoliciesRequest struct {
 	Security    ListPoliciesSecurity
 }
 
-type ListPolicies200ApplicationJSONMeta struct {
+type ListPoliciesListPoliciesResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -32,13 +32,13 @@ type ListPolicies200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListPolicies200ApplicationJSONListPoliciesResponse struct {
-	Meta    *ListPolicies200ApplicationJSONMeta `json:"meta,omitempty"`
-	Results []shared.TrusthubV1Policies         `json:"results,omitempty"`
+type ListPoliciesListPoliciesResponse struct {
+	Meta    *ListPoliciesListPoliciesResponseMeta `json:"meta,omitempty"`
+	Results []shared.TrusthubV1Policies           `json:"results,omitempty"`
 }
 
 type ListPoliciesResponse struct {
 	ContentType          string
-	ListPoliciesResponse *ListPolicies200ApplicationJSONListPoliciesResponse
+	ListPoliciesResponse *ListPoliciesListPoliciesResponse
 	StatusCode           int64
 }

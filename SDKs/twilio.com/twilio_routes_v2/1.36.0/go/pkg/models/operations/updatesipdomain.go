@@ -12,7 +12,7 @@ type UpdateSipDomainPathParams struct {
 	SipDomain string `pathParam:"style=simple,explode=false,name=SipDomain"`
 }
 
-type UpdateSipDomainRequestBodyUpdateSipDomainRequest struct {
+type UpdateSipDomainUpdateSipDomainRequest struct {
 	FriendlyName *string `form:"name=FriendlyName"`
 	VoiceRegion  *string `form:"name=VoiceRegion"`
 }
@@ -24,7 +24,7 @@ type UpdateSipDomainSecurity struct {
 type UpdateSipDomainRequest struct {
 	ServerURL  *string
 	PathParams UpdateSipDomainPathParams
-	Request    *UpdateSipDomainRequestBodyUpdateSipDomainRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateSipDomainUpdateSipDomainRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateSipDomainSecurity
 }
 

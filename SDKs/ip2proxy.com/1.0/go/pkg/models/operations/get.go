@@ -19,7 +19,7 @@ type GetRequest struct {
 }
 
 type GetResponse struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+	ContentType          string
+	Get200TextHTMLString *string
+	StatusCode           int64
 }

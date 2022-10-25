@@ -1,27 +1,27 @@
 package shared
 
-type OnDemandPageBackgroundSizes struct {
+type OnDemandPagePictureSizes struct {
 	Height             float64 `json:"height"`
 	Link               string  `json:"link"`
 	LinkWithPlayButton *string `json:"link_with_play_button,omitempty"`
 	Width              float64 `json:"width"`
 }
 
-type OnDemandPageBackgroundTypeEnum string
+type OnDemandPagePictureTypeEnum string
 
 const (
-	OnDemandPageBackgroundTypeEnumCaution OnDemandPageBackgroundTypeEnum = "caution"
-	OnDemandPageBackgroundTypeEnumCustom  OnDemandPageBackgroundTypeEnum = "custom"
-	OnDemandPageBackgroundTypeEnumDefault OnDemandPageBackgroundTypeEnum = "default"
+	OnDemandPagePictureTypeEnumCaution OnDemandPagePictureTypeEnum = "caution"
+	OnDemandPagePictureTypeEnumCustom  OnDemandPagePictureTypeEnum = "custom"
+	OnDemandPagePictureTypeEnumDefault OnDemandPagePictureTypeEnum = "default"
 )
 
-type OnDemandPageBackgroundPicture struct {
-	Active      bool                           `json:"active"`
-	Link        *string                        `json:"link,omitempty"`
-	ResourceKey string                         `json:"resource_key"`
-	Sizes       []OnDemandPageBackgroundSizes  `json:"sizes"`
-	Type        OnDemandPageBackgroundTypeEnum `json:"type"`
-	URI         string                         `json:"uri"`
+type OnDemandPagePicture struct {
+	Active      bool                        `json:"active"`
+	Link        *string                     `json:"link,omitempty"`
+	ResourceKey string                      `json:"resource_key"`
+	Sizes       []OnDemandPagePictureSizes  `json:"sizes"`
+	Type        OnDemandPagePictureTypeEnum `json:"type"`
+	URI         string                      `json:"uri"`
 }
 
 type OnDemandPageColors struct {
@@ -125,30 +125,6 @@ type OnDemandPageMetadata struct {
 	Interactions PurchaseInteraction             `json:"interactions"`
 }
 
-type OnDemandPagePicturesSizes struct {
-	Height             float64 `json:"height"`
-	Link               string  `json:"link"`
-	LinkWithPlayButton *string `json:"link_with_play_button,omitempty"`
-	Width              float64 `json:"width"`
-}
-
-type OnDemandPagePicturesTypeEnum string
-
-const (
-	OnDemandPagePicturesTypeEnumCaution OnDemandPagePicturesTypeEnum = "caution"
-	OnDemandPagePicturesTypeEnumCustom  OnDemandPagePicturesTypeEnum = "custom"
-	OnDemandPagePicturesTypeEnumDefault OnDemandPagePicturesTypeEnum = "default"
-)
-
-type OnDemandPagePicturesPicture struct {
-	Active      bool                         `json:"active"`
-	Link        *string                      `json:"link,omitempty"`
-	ResourceKey string                       `json:"resource_key"`
-	Sizes       []OnDemandPagePicturesSizes  `json:"sizes"`
-	Type        OnDemandPagePicturesTypeEnum `json:"type"`
-	URI         string                       `json:"uri"`
-}
-
 type OnDemandPagePreorder struct {
 	Active      bool   `json:"active"`
 	CancelTime  string `json:"cancel_time"`
@@ -168,728 +144,704 @@ type OnDemandPageSubscription struct {
 	Price  map[string]interface{} `json:"price"`
 }
 
-type OnDemandPageThumbnailSizes struct {
-	Height             float64 `json:"height"`
-	Link               string  `json:"link"`
-	LinkWithPlayButton *string `json:"link_with_play_button,omitempty"`
-	Width              float64 `json:"width"`
-}
-
-type OnDemandPageThumbnailTypeEnum string
+type OnDemandPageVideoContextActionEnum string
 
 const (
-	OnDemandPageThumbnailTypeEnumCaution OnDemandPageThumbnailTypeEnum = "caution"
-	OnDemandPageThumbnailTypeEnumCustom  OnDemandPageThumbnailTypeEnum = "custom"
-	OnDemandPageThumbnailTypeEnumDefault OnDemandPageThumbnailTypeEnum = "default"
+	OnDemandPageVideoContextActionEnumAddedTo      OnDemandPageVideoContextActionEnum = "Added to"
+	OnDemandPageVideoContextActionEnumAppearanceBy OnDemandPageVideoContextActionEnum = "Appearance by"
+	OnDemandPageVideoContextActionEnumLikedBy      OnDemandPageVideoContextActionEnum = "Liked by"
+	OnDemandPageVideoContextActionEnumUploadedBy   OnDemandPageVideoContextActionEnum = "Uploaded by"
 )
 
-type OnDemandPageThumbnailPicture struct {
-	Active      bool                          `json:"active"`
-	Link        *string                       `json:"link,omitempty"`
-	ResourceKey string                        `json:"resource_key"`
-	Sizes       []OnDemandPageThumbnailSizes  `json:"sizes"`
-	Type        OnDemandPageThumbnailTypeEnum `json:"type"`
-	URI         string                        `json:"uri"`
+type OnDemandPageVideoContext struct {
+	Action       OnDemandPageVideoContextActionEnum `json:"action"`
+	Resource     map[string]interface{}             `json:"resource"`
+	ResourceType string                             `json:"resource_type"`
 }
 
-type OnDemandPageTrailerContextActionEnum string
+type OnDemandPageVideoLicenseEnum string
 
 const (
-	OnDemandPageTrailerContextActionEnumAddedTo      OnDemandPageTrailerContextActionEnum = "Added to"
-	OnDemandPageTrailerContextActionEnumAppearanceBy OnDemandPageTrailerContextActionEnum = "Appearance by"
-	OnDemandPageTrailerContextActionEnumLikedBy      OnDemandPageTrailerContextActionEnum = "Liked by"
-	OnDemandPageTrailerContextActionEnumUploadedBy   OnDemandPageTrailerContextActionEnum = "Uploaded by"
+	OnDemandPageVideoLicenseEnumBy     OnDemandPageVideoLicenseEnum = "by"
+	OnDemandPageVideoLicenseEnumByNc   OnDemandPageVideoLicenseEnum = "by-nc"
+	OnDemandPageVideoLicenseEnumByNcNd OnDemandPageVideoLicenseEnum = "by-nc-nd"
+	OnDemandPageVideoLicenseEnumByNcSa OnDemandPageVideoLicenseEnum = "by-nc-sa"
+	OnDemandPageVideoLicenseEnumByNd   OnDemandPageVideoLicenseEnum = "by-nd"
+	OnDemandPageVideoLicenseEnumBySa   OnDemandPageVideoLicenseEnum = "by-sa"
+	OnDemandPageVideoLicenseEnumCc0    OnDemandPageVideoLicenseEnum = "cc0"
 )
 
-type OnDemandPageTrailerContext struct {
-	Action       OnDemandPageTrailerContextActionEnum `json:"action"`
-	Resource     map[string]interface{}               `json:"resource"`
-	ResourceType string                               `json:"resource_type"`
-}
-
-type OnDemandPageTrailerLicenseEnum string
-
-const (
-	OnDemandPageTrailerLicenseEnumBy     OnDemandPageTrailerLicenseEnum = "by"
-	OnDemandPageTrailerLicenseEnumByNc   OnDemandPageTrailerLicenseEnum = "by-nc"
-	OnDemandPageTrailerLicenseEnumByNcNd OnDemandPageTrailerLicenseEnum = "by-nc-nd"
-	OnDemandPageTrailerLicenseEnumByNcSa OnDemandPageTrailerLicenseEnum = "by-nc-sa"
-	OnDemandPageTrailerLicenseEnumByNd   OnDemandPageTrailerLicenseEnum = "by-nd"
-	OnDemandPageTrailerLicenseEnumBySa   OnDemandPageTrailerLicenseEnum = "by-sa"
-	OnDemandPageTrailerLicenseEnumCc0    OnDemandPageTrailerLicenseEnum = "cc0"
-)
-
-type OnDemandPageTrailerMetadataConnectionsComments struct {
+type OnDemandPageVideoMetadataConnectionsComments struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
-type OnDemandPageTrailerMetadataConnectionsCredits struct {
+type OnDemandPageVideoMetadataConnectionsCredits struct {
 	Options []string `json:"options,omitempty"`
 	Total   *float64 `json:"total,omitempty"`
 	URI     *string  `json:"uri,omitempty"`
 }
 
-type OnDemandPageTrailerMetadataConnectionsLikes struct {
+type OnDemandPageVideoMetadataConnectionsLikes struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
-type OnDemandPageTrailerMetadataConnectionsOndemand struct {
+type OnDemandPageVideoMetadataConnectionsOndemand struct {
 	Options     []string `json:"options"`
 	ResourceKey string   `json:"resource_key"`
 	URI         string   `json:"uri"`
 }
 
-type OnDemandPageTrailerMetadataConnectionsPictures struct {
+type OnDemandPageVideoMetadataConnectionsPictures struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
-type OnDemandPageTrailerMetadataConnectionsPlayback struct {
+type OnDemandPageVideoMetadataConnectionsPlayback struct {
 	Options []string `json:"options"`
 	URI     string   `json:"uri"`
 }
 
-type OnDemandPageTrailerMetadataConnectionsRecommendations struct {
+type OnDemandPageVideoMetadataConnectionsRecommendations struct {
 	Options []string `json:"options,omitempty"`
 	URI     *string  `json:"uri,omitempty"`
 }
 
-type OnDemandPageTrailerMetadataConnectionsRelated struct {
+type OnDemandPageVideoMetadataConnectionsRelated struct {
 	Options []string `json:"options,omitempty"`
 	URI     *string  `json:"uri,omitempty"`
 }
 
-type OnDemandPageTrailerMetadataConnectionsSeason struct {
+type OnDemandPageVideoMetadataConnectionsSeason struct {
 	Name    string   `json:"name"`
 	Options []string `json:"options"`
 	URI     string   `json:"uri"`
 }
 
-type OnDemandPageTrailerMetadataConnectionsTexttracks struct {
+type OnDemandPageVideoMetadataConnectionsTexttracks struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
-type OnDemandPageTrailerMetadataConnectionsTrailer struct {
+type OnDemandPageVideoMetadataConnectionsTrailer struct {
 	Options     []string `json:"options"`
 	ResourceKey string   `json:"resource_key"`
 	URI         string   `json:"uri"`
 }
 
-type OnDemandPageTrailerMetadataConnectionsUsersWithAccess struct {
+type OnDemandPageVideoMetadataConnectionsUsersWithAccess struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
-type OnDemandPageTrailerMetadataConnectionsVersions struct {
+type OnDemandPageVideoMetadataConnectionsVersions struct {
 	CurrentURI *string  `json:"current_uri,omitempty"`
 	Options    []string `json:"options"`
 	Total      float64  `json:"total"`
 	URI        string   `json:"uri"`
 }
 
-type OnDemandPageTrailerMetadataConnections struct {
-	Comments        OnDemandPageTrailerMetadataConnectionsComments        `json:"comments"`
-	Credits         OnDemandPageTrailerMetadataConnectionsCredits         `json:"credits"`
-	Likes           OnDemandPageTrailerMetadataConnectionsLikes           `json:"likes"`
-	Ondemand        OnDemandPageTrailerMetadataConnectionsOndemand        `json:"ondemand"`
-	Pictures        OnDemandPageTrailerMetadataConnectionsPictures        `json:"pictures"`
-	Playback        OnDemandPageTrailerMetadataConnectionsPlayback        `json:"playback"`
-	Recommendations OnDemandPageTrailerMetadataConnectionsRecommendations `json:"recommendations"`
-	Related         OnDemandPageTrailerMetadataConnectionsRelated         `json:"related"`
-	Season          OnDemandPageTrailerMetadataConnectionsSeason          `json:"season"`
-	Texttracks      OnDemandPageTrailerMetadataConnectionsTexttracks      `json:"texttracks"`
-	Trailer         OnDemandPageTrailerMetadataConnectionsTrailer         `json:"trailer"`
-	UsersWithAccess OnDemandPageTrailerMetadataConnectionsUsersWithAccess `json:"users_with_access"`
-	Versions        OnDemandPageTrailerMetadataConnectionsVersions        `json:"versions"`
+type OnDemandPageVideoMetadataConnections struct {
+	Comments        OnDemandPageVideoMetadataConnectionsComments        `json:"comments"`
+	Credits         OnDemandPageVideoMetadataConnectionsCredits         `json:"credits"`
+	Likes           OnDemandPageVideoMetadataConnectionsLikes           `json:"likes"`
+	Ondemand        OnDemandPageVideoMetadataConnectionsOndemand        `json:"ondemand"`
+	Pictures        OnDemandPageVideoMetadataConnectionsPictures        `json:"pictures"`
+	Playback        OnDemandPageVideoMetadataConnectionsPlayback        `json:"playback"`
+	Recommendations OnDemandPageVideoMetadataConnectionsRecommendations `json:"recommendations"`
+	Related         OnDemandPageVideoMetadataConnectionsRelated         `json:"related"`
+	Season          OnDemandPageVideoMetadataConnectionsSeason          `json:"season"`
+	Texttracks      OnDemandPageVideoMetadataConnectionsTexttracks      `json:"texttracks"`
+	Trailer         OnDemandPageVideoMetadataConnectionsTrailer         `json:"trailer"`
+	UsersWithAccess OnDemandPageVideoMetadataConnectionsUsersWithAccess `json:"users_with_access"`
+	Versions        OnDemandPageVideoMetadataConnectionsVersions        `json:"versions"`
 }
 
-type OnDemandPageTrailerMetadataInteractionsBuyDownloadEnum string
+type OnDemandPageVideoMetadataInteractionsBuyDownloadEnum string
 
 const (
-	OnDemandPageTrailerMetadataInteractionsBuyDownloadEnumAvailable   OnDemandPageTrailerMetadataInteractionsBuyDownloadEnum = "available"
-	OnDemandPageTrailerMetadataInteractionsBuyDownloadEnumPurchased   OnDemandPageTrailerMetadataInteractionsBuyDownloadEnum = "purchased"
-	OnDemandPageTrailerMetadataInteractionsBuyDownloadEnumRestricted  OnDemandPageTrailerMetadataInteractionsBuyDownloadEnum = "restricted"
-	OnDemandPageTrailerMetadataInteractionsBuyDownloadEnumUnavailable OnDemandPageTrailerMetadataInteractionsBuyDownloadEnum = "unavailable"
+	OnDemandPageVideoMetadataInteractionsBuyDownloadEnumAvailable   OnDemandPageVideoMetadataInteractionsBuyDownloadEnum = "available"
+	OnDemandPageVideoMetadataInteractionsBuyDownloadEnumPurchased   OnDemandPageVideoMetadataInteractionsBuyDownloadEnum = "purchased"
+	OnDemandPageVideoMetadataInteractionsBuyDownloadEnumRestricted  OnDemandPageVideoMetadataInteractionsBuyDownloadEnum = "restricted"
+	OnDemandPageVideoMetadataInteractionsBuyDownloadEnumUnavailable OnDemandPageVideoMetadataInteractionsBuyDownloadEnum = "unavailable"
 )
 
-type OnDemandPageTrailerMetadataInteractionsBuyStreamEnum string
+type OnDemandPageVideoMetadataInteractionsBuyStreamEnum string
 
 const (
-	OnDemandPageTrailerMetadataInteractionsBuyStreamEnumAvailable   OnDemandPageTrailerMetadataInteractionsBuyStreamEnum = "available"
-	OnDemandPageTrailerMetadataInteractionsBuyStreamEnumPurchased   OnDemandPageTrailerMetadataInteractionsBuyStreamEnum = "purchased"
-	OnDemandPageTrailerMetadataInteractionsBuyStreamEnumRestricted  OnDemandPageTrailerMetadataInteractionsBuyStreamEnum = "restricted"
-	OnDemandPageTrailerMetadataInteractionsBuyStreamEnumUnavailable OnDemandPageTrailerMetadataInteractionsBuyStreamEnum = "unavailable"
+	OnDemandPageVideoMetadataInteractionsBuyStreamEnumAvailable   OnDemandPageVideoMetadataInteractionsBuyStreamEnum = "available"
+	OnDemandPageVideoMetadataInteractionsBuyStreamEnumPurchased   OnDemandPageVideoMetadataInteractionsBuyStreamEnum = "purchased"
+	OnDemandPageVideoMetadataInteractionsBuyStreamEnumRestricted  OnDemandPageVideoMetadataInteractionsBuyStreamEnum = "restricted"
+	OnDemandPageVideoMetadataInteractionsBuyStreamEnumUnavailable OnDemandPageVideoMetadataInteractionsBuyStreamEnum = "unavailable"
 )
 
-type OnDemandPageTrailerMetadataInteractionsBuy struct {
-	Currency     string                                                 `json:"currency"`
-	DisplayPrice string                                                 `json:"display_price"`
-	Download     OnDemandPageTrailerMetadataInteractionsBuyDownloadEnum `json:"download"`
-	Drm          bool                                                   `json:"drm"`
-	Link         string                                                 `json:"link"`
-	Price        float64                                                `json:"price"`
-	PurchaseTime string                                                 `json:"purchase_time"`
-	Stream       OnDemandPageTrailerMetadataInteractionsBuyStreamEnum   `json:"stream"`
-	URI          string                                                 `json:"uri"`
+type OnDemandPageVideoMetadataInteractionsBuy struct {
+	Currency     string                                               `json:"currency"`
+	DisplayPrice string                                               `json:"display_price"`
+	Download     OnDemandPageVideoMetadataInteractionsBuyDownloadEnum `json:"download"`
+	Drm          bool                                                 `json:"drm"`
+	Link         string                                               `json:"link"`
+	Price        float64                                              `json:"price"`
+	PurchaseTime string                                               `json:"purchase_time"`
+	Stream       OnDemandPageVideoMetadataInteractionsBuyStreamEnum   `json:"stream"`
+	URI          string                                               `json:"uri"`
 }
 
-type OnDemandPageTrailerMetadataInteractionsChannel struct {
+type OnDemandPageVideoMetadataInteractionsChannel struct {
 	Options []string `json:"options"`
 	URI     string   `json:"uri"`
 }
 
-type OnDemandPageTrailerMetadataInteractionsLike struct {
+type OnDemandPageVideoMetadataInteractionsLike struct {
 	Added     bool     `json:"added"`
 	AddedTime string   `json:"added_time"`
 	Options   []string `json:"options"`
 	URI       string   `json:"uri"`
 }
 
-type OnDemandPageTrailerMetadataInteractionsRentStreamEnum string
+type OnDemandPageVideoMetadataInteractionsRentStreamEnum string
 
 const (
-	OnDemandPageTrailerMetadataInteractionsRentStreamEnumAvailable   OnDemandPageTrailerMetadataInteractionsRentStreamEnum = "available"
-	OnDemandPageTrailerMetadataInteractionsRentStreamEnumPurchased   OnDemandPageTrailerMetadataInteractionsRentStreamEnum = "purchased"
-	OnDemandPageTrailerMetadataInteractionsRentStreamEnumRestricted  OnDemandPageTrailerMetadataInteractionsRentStreamEnum = "restricted"
-	OnDemandPageTrailerMetadataInteractionsRentStreamEnumUnavailable OnDemandPageTrailerMetadataInteractionsRentStreamEnum = "unavailable"
+	OnDemandPageVideoMetadataInteractionsRentStreamEnumAvailable   OnDemandPageVideoMetadataInteractionsRentStreamEnum = "available"
+	OnDemandPageVideoMetadataInteractionsRentStreamEnumPurchased   OnDemandPageVideoMetadataInteractionsRentStreamEnum = "purchased"
+	OnDemandPageVideoMetadataInteractionsRentStreamEnumRestricted  OnDemandPageVideoMetadataInteractionsRentStreamEnum = "restricted"
+	OnDemandPageVideoMetadataInteractionsRentStreamEnumUnavailable OnDemandPageVideoMetadataInteractionsRentStreamEnum = "unavailable"
 )
 
-type OnDemandPageTrailerMetadataInteractionsRent struct {
-	Currency     string                                                `json:"currency"`
-	DisplayPrice string                                                `json:"display_price"`
-	Drm          bool                                                  `json:"drm"`
-	ExpiresTime  string                                                `json:"expires_time"`
-	Link         string                                                `json:"link"`
-	Price        float64                                               `json:"price"`
-	PurchaseTime string                                                `json:"purchase_time"`
-	Stream       OnDemandPageTrailerMetadataInteractionsRentStreamEnum `json:"stream"`
-	URI          string                                                `json:"uri"`
+type OnDemandPageVideoMetadataInteractionsRent struct {
+	Currency     string                                              `json:"currency"`
+	DisplayPrice string                                              `json:"display_price"`
+	Drm          bool                                                `json:"drm"`
+	ExpiresTime  string                                              `json:"expires_time"`
+	Link         string                                              `json:"link"`
+	Price        float64                                             `json:"price"`
+	PurchaseTime string                                              `json:"purchase_time"`
+	Stream       OnDemandPageVideoMetadataInteractionsRentStreamEnum `json:"stream"`
+	URI          string                                              `json:"uri"`
 }
 
-type OnDemandPageTrailerMetadataInteractionsReport struct {
+type OnDemandPageVideoMetadataInteractionsReport struct {
 	Options []string `json:"options"`
 	Reason  []string `json:"reason"`
 	URI     string   `json:"uri"`
 }
 
-type OnDemandPageTrailerMetadataInteractionsSubscribe struct {
+type OnDemandPageVideoMetadataInteractionsSubscribe struct {
 	Drm          *bool   `json:"drm,omitempty"`
 	ExpiresTime  *string `json:"expires_time,omitempty"`
 	PurchaseTime *string `json:"purchase_time,omitempty"`
 	Stream       *string `json:"stream,omitempty"`
 }
 
-type OnDemandPageTrailerMetadataInteractionsWatched struct {
+type OnDemandPageVideoMetadataInteractionsWatched struct {
 	Added     bool     `json:"added"`
 	AddedTime string   `json:"added_time"`
 	Options   []string `json:"options"`
 	URI       string   `json:"uri"`
 }
 
-type OnDemandPageTrailerMetadataInteractionsWatchlater struct {
+type OnDemandPageVideoMetadataInteractionsWatchlater struct {
 	Added     bool     `json:"added"`
 	AddedTime string   `json:"added_time"`
 	Options   []string `json:"options"`
 	URI       string   `json:"uri"`
 }
 
-type OnDemandPageTrailerMetadataInteractions struct {
-	Buy        OnDemandPageTrailerMetadataInteractionsBuy        `json:"buy"`
-	Channel    OnDemandPageTrailerMetadataInteractionsChannel    `json:"channel"`
-	Like       OnDemandPageTrailerMetadataInteractionsLike       `json:"like"`
-	Rent       OnDemandPageTrailerMetadataInteractionsRent       `json:"rent"`
-	Report     OnDemandPageTrailerMetadataInteractionsReport     `json:"report"`
-	Subscribe  *OnDemandPageTrailerMetadataInteractionsSubscribe `json:"subscribe,omitempty"`
-	Watched    OnDemandPageTrailerMetadataInteractionsWatched    `json:"watched"`
-	Watchlater OnDemandPageTrailerMetadataInteractionsWatchlater `json:"watchlater"`
+type OnDemandPageVideoMetadataInteractions struct {
+	Buy        OnDemandPageVideoMetadataInteractionsBuy        `json:"buy"`
+	Channel    OnDemandPageVideoMetadataInteractionsChannel    `json:"channel"`
+	Like       OnDemandPageVideoMetadataInteractionsLike       `json:"like"`
+	Rent       OnDemandPageVideoMetadataInteractionsRent       `json:"rent"`
+	Report     OnDemandPageVideoMetadataInteractionsReport     `json:"report"`
+	Subscribe  *OnDemandPageVideoMetadataInteractionsSubscribe `json:"subscribe,omitempty"`
+	Watched    OnDemandPageVideoMetadataInteractionsWatched    `json:"watched"`
+	Watchlater OnDemandPageVideoMetadataInteractionsWatchlater `json:"watchlater"`
 }
 
-type OnDemandPageTrailerMetadata struct {
-	Connections  OnDemandPageTrailerMetadataConnections  `json:"connections"`
-	Interactions OnDemandPageTrailerMetadataInteractions `json:"interactions"`
+type OnDemandPageVideoMetadata struct {
+	Connections  OnDemandPageVideoMetadataConnections  `json:"connections"`
+	Interactions OnDemandPageVideoMetadataInteractions `json:"interactions"`
 }
 
-type OnDemandPageTrailerParentFolderMetadataConnectionsVideos struct {
+type OnDemandPageVideoProjectMetadataConnectionsVideos struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
-type OnDemandPageTrailerParentFolderMetadataConnections struct {
-	Videos OnDemandPageTrailerParentFolderMetadataConnectionsVideos `json:"videos"`
+type OnDemandPageVideoProjectMetadataConnections struct {
+	Videos OnDemandPageVideoProjectMetadataConnectionsVideos `json:"videos"`
 }
 
-type OnDemandPageTrailerParentFolderMetadata struct {
-	Connections OnDemandPageTrailerParentFolderMetadataConnections `json:"connections"`
+type OnDemandPageVideoProjectMetadata struct {
+	Connections OnDemandPageVideoProjectMetadataConnections `json:"connections"`
 }
 
-type OnDemandPageTrailerParentFolderProject struct {
-	CreatedTime  string                                  `json:"created_time"`
-	Metadata     OnDemandPageTrailerParentFolderMetadata `json:"metadata"`
-	ModifiedTime string                                  `json:"modified_time"`
-	Name         string                                  `json:"name"`
-	ResourceKey  string                                  `json:"resource_key"`
-	URI          string                                  `json:"uri"`
-	User         User                                    `json:"user"`
+type OnDemandPageVideoProject struct {
+	CreatedTime  string                           `json:"created_time"`
+	Metadata     OnDemandPageVideoProjectMetadata `json:"metadata"`
+	ModifiedTime string                           `json:"modified_time"`
+	Name         string                           `json:"name"`
+	ResourceKey  string                           `json:"resource_key"`
+	URI          string                           `json:"uri"`
+	User         User                             `json:"user"`
 }
 
-type OnDemandPageTrailerPrivacyCommentsEnum string
+type OnDemandPageVideoPrivacyCommentsEnum string
 
 const (
-	OnDemandPageTrailerPrivacyCommentsEnumAnybody  OnDemandPageTrailerPrivacyCommentsEnum = "anybody"
-	OnDemandPageTrailerPrivacyCommentsEnumContacts OnDemandPageTrailerPrivacyCommentsEnum = "contacts"
-	OnDemandPageTrailerPrivacyCommentsEnumNobody   OnDemandPageTrailerPrivacyCommentsEnum = "nobody"
+	OnDemandPageVideoPrivacyCommentsEnumAnybody  OnDemandPageVideoPrivacyCommentsEnum = "anybody"
+	OnDemandPageVideoPrivacyCommentsEnumContacts OnDemandPageVideoPrivacyCommentsEnum = "contacts"
+	OnDemandPageVideoPrivacyCommentsEnumNobody   OnDemandPageVideoPrivacyCommentsEnum = "nobody"
 )
 
-type OnDemandPageTrailerPrivacyEmbedEnum string
+type OnDemandPageVideoPrivacyEmbedEnum string
 
 const (
-	OnDemandPageTrailerPrivacyEmbedEnumPrivate OnDemandPageTrailerPrivacyEmbedEnum = "private"
-	OnDemandPageTrailerPrivacyEmbedEnumPublic  OnDemandPageTrailerPrivacyEmbedEnum = "public"
+	OnDemandPageVideoPrivacyEmbedEnumPrivate OnDemandPageVideoPrivacyEmbedEnum = "private"
+	OnDemandPageVideoPrivacyEmbedEnumPublic  OnDemandPageVideoPrivacyEmbedEnum = "public"
 )
 
-type OnDemandPageTrailerPrivacyViewEnum string
+type OnDemandPageVideoPrivacyViewEnum string
 
 const (
-	OnDemandPageTrailerPrivacyViewEnumAnybody  OnDemandPageTrailerPrivacyViewEnum = "anybody"
-	OnDemandPageTrailerPrivacyViewEnumContacts OnDemandPageTrailerPrivacyViewEnum = "contacts"
-	OnDemandPageTrailerPrivacyViewEnumDisable  OnDemandPageTrailerPrivacyViewEnum = "disable"
-	OnDemandPageTrailerPrivacyViewEnumNobody   OnDemandPageTrailerPrivacyViewEnum = "nobody"
-	OnDemandPageTrailerPrivacyViewEnumPassword OnDemandPageTrailerPrivacyViewEnum = "password"
-	OnDemandPageTrailerPrivacyViewEnumUnlisted OnDemandPageTrailerPrivacyViewEnum = "unlisted"
-	OnDemandPageTrailerPrivacyViewEnumUsers    OnDemandPageTrailerPrivacyViewEnum = "users"
+	OnDemandPageVideoPrivacyViewEnumAnybody  OnDemandPageVideoPrivacyViewEnum = "anybody"
+	OnDemandPageVideoPrivacyViewEnumContacts OnDemandPageVideoPrivacyViewEnum = "contacts"
+	OnDemandPageVideoPrivacyViewEnumDisable  OnDemandPageVideoPrivacyViewEnum = "disable"
+	OnDemandPageVideoPrivacyViewEnumNobody   OnDemandPageVideoPrivacyViewEnum = "nobody"
+	OnDemandPageVideoPrivacyViewEnumPassword OnDemandPageVideoPrivacyViewEnum = "password"
+	OnDemandPageVideoPrivacyViewEnumUnlisted OnDemandPageVideoPrivacyViewEnum = "unlisted"
+	OnDemandPageVideoPrivacyViewEnumUsers    OnDemandPageVideoPrivacyViewEnum = "users"
 )
 
-type OnDemandPageTrailerPrivacy struct {
-	Add      bool                                   `json:"add"`
-	Comments OnDemandPageTrailerPrivacyCommentsEnum `json:"comments"`
-	Download bool                                   `json:"download"`
-	Embed    OnDemandPageTrailerPrivacyEmbedEnum    `json:"embed"`
-	View     OnDemandPageTrailerPrivacyViewEnum     `json:"view"`
+type OnDemandPageVideoPrivacy struct {
+	Add      bool                                 `json:"add"`
+	Comments OnDemandPageVideoPrivacyCommentsEnum `json:"comments"`
+	Download bool                                 `json:"download"`
+	Embed    OnDemandPageVideoPrivacyEmbedEnum    `json:"embed"`
+	View     OnDemandPageVideoPrivacyViewEnum     `json:"view"`
 }
 
-type OnDemandPageTrailerSpatialDirectorTimeline struct {
+type OnDemandPageVideoSpatialDirectorTimeline struct {
 	Pitch    *float64 `json:"pitch,omitempty"`
 	Roll     *float64 `json:"roll,omitempty"`
 	TimeCode *float64 `json:"time_code,omitempty"`
 	Yaw      *float64 `json:"yaw,omitempty"`
 }
 
-type OnDemandPageTrailerSpatialProjectionEnum string
+type OnDemandPageVideoSpatialProjectionEnum string
 
 const (
-	OnDemandPageTrailerSpatialProjectionEnumCubical         OnDemandPageTrailerSpatialProjectionEnum = "cubical"
-	OnDemandPageTrailerSpatialProjectionEnumCylindrical     OnDemandPageTrailerSpatialProjectionEnum = "cylindrical"
-	OnDemandPageTrailerSpatialProjectionEnumDome            OnDemandPageTrailerSpatialProjectionEnum = "dome"
-	OnDemandPageTrailerSpatialProjectionEnumEquirectangular OnDemandPageTrailerSpatialProjectionEnum = "equirectangular"
-	OnDemandPageTrailerSpatialProjectionEnumPyramid         OnDemandPageTrailerSpatialProjectionEnum = "pyramid"
+	OnDemandPageVideoSpatialProjectionEnumCubical         OnDemandPageVideoSpatialProjectionEnum = "cubical"
+	OnDemandPageVideoSpatialProjectionEnumCylindrical     OnDemandPageVideoSpatialProjectionEnum = "cylindrical"
+	OnDemandPageVideoSpatialProjectionEnumDome            OnDemandPageVideoSpatialProjectionEnum = "dome"
+	OnDemandPageVideoSpatialProjectionEnumEquirectangular OnDemandPageVideoSpatialProjectionEnum = "equirectangular"
+	OnDemandPageVideoSpatialProjectionEnumPyramid         OnDemandPageVideoSpatialProjectionEnum = "pyramid"
 )
 
-type OnDemandPageTrailerSpatialStereoFormatEnum string
+type OnDemandPageVideoSpatialStereoFormatEnum string
 
 const (
-	OnDemandPageTrailerSpatialStereoFormatEnumLeftRight OnDemandPageTrailerSpatialStereoFormatEnum = "left-right"
-	OnDemandPageTrailerSpatialStereoFormatEnumMono      OnDemandPageTrailerSpatialStereoFormatEnum = "mono"
-	OnDemandPageTrailerSpatialStereoFormatEnumTopBottom OnDemandPageTrailerSpatialStereoFormatEnum = "top-bottom"
+	OnDemandPageVideoSpatialStereoFormatEnumLeftRight OnDemandPageVideoSpatialStereoFormatEnum = "left-right"
+	OnDemandPageVideoSpatialStereoFormatEnumMono      OnDemandPageVideoSpatialStereoFormatEnum = "mono"
+	OnDemandPageVideoSpatialStereoFormatEnumTopBottom OnDemandPageVideoSpatialStereoFormatEnum = "top-bottom"
 )
 
-type OnDemandPageTrailerSpatial struct {
-	DirectorTimeline []OnDemandPageTrailerSpatialDirectorTimeline `json:"director_timeline"`
-	FieldOfView      float64                                      `json:"field_of_view"`
-	Projection       OnDemandPageTrailerSpatialProjectionEnum     `json:"projection"`
-	StereoFormat     OnDemandPageTrailerSpatialStereoFormatEnum   `json:"stereo_format"`
+type OnDemandPageVideoSpatial struct {
+	DirectorTimeline []OnDemandPageVideoSpatialDirectorTimeline `json:"director_timeline"`
+	FieldOfView      float64                                    `json:"field_of_view"`
+	Projection       OnDemandPageVideoSpatialProjectionEnum     `json:"projection"`
+	StereoFormat     OnDemandPageVideoSpatialStereoFormatEnum   `json:"stereo_format"`
 }
 
-type OnDemandPageTrailerStats struct {
+type OnDemandPageVideoStats struct {
 	Plays float64 `json:"plays"`
 }
 
-type OnDemandPageTrailerStatusEnum string
+type OnDemandPageVideoStatusEnum string
 
 const (
-	OnDemandPageTrailerStatusEnumAvailable         OnDemandPageTrailerStatusEnum = "available"
-	OnDemandPageTrailerStatusEnumQuotaExceeded     OnDemandPageTrailerStatusEnum = "quota_exceeded"
-	OnDemandPageTrailerStatusEnumTotalCapExceeded  OnDemandPageTrailerStatusEnum = "total_cap_exceeded"
-	OnDemandPageTrailerStatusEnumTranscodeStarting OnDemandPageTrailerStatusEnum = "transcode_starting"
-	OnDemandPageTrailerStatusEnumTranscoding       OnDemandPageTrailerStatusEnum = "transcoding"
-	OnDemandPageTrailerStatusEnumTranscodingError  OnDemandPageTrailerStatusEnum = "transcoding_error"
-	OnDemandPageTrailerStatusEnumUnavailable       OnDemandPageTrailerStatusEnum = "unavailable"
-	OnDemandPageTrailerStatusEnumUploading         OnDemandPageTrailerStatusEnum = "uploading"
-	OnDemandPageTrailerStatusEnumUploadingError    OnDemandPageTrailerStatusEnum = "uploading_error"
+	OnDemandPageVideoStatusEnumAvailable         OnDemandPageVideoStatusEnum = "available"
+	OnDemandPageVideoStatusEnumQuotaExceeded     OnDemandPageVideoStatusEnum = "quota_exceeded"
+	OnDemandPageVideoStatusEnumTotalCapExceeded  OnDemandPageVideoStatusEnum = "total_cap_exceeded"
+	OnDemandPageVideoStatusEnumTranscodeStarting OnDemandPageVideoStatusEnum = "transcode_starting"
+	OnDemandPageVideoStatusEnumTranscoding       OnDemandPageVideoStatusEnum = "transcoding"
+	OnDemandPageVideoStatusEnumTranscodingError  OnDemandPageVideoStatusEnum = "transcoding_error"
+	OnDemandPageVideoStatusEnumUnavailable       OnDemandPageVideoStatusEnum = "unavailable"
+	OnDemandPageVideoStatusEnumUploading         OnDemandPageVideoStatusEnum = "uploading"
+	OnDemandPageVideoStatusEnumUploadingError    OnDemandPageVideoStatusEnum = "uploading_error"
 )
 
-type OnDemandPageTrailerTranscodeStatusEnum string
+type OnDemandPageVideoTranscodeStatusEnum string
 
 const (
-	OnDemandPageTrailerTranscodeStatusEnumComplete   OnDemandPageTrailerTranscodeStatusEnum = "complete"
-	OnDemandPageTrailerTranscodeStatusEnumError      OnDemandPageTrailerTranscodeStatusEnum = "error"
-	OnDemandPageTrailerTranscodeStatusEnumInProgress OnDemandPageTrailerTranscodeStatusEnum = "in_progress"
+	OnDemandPageVideoTranscodeStatusEnumComplete   OnDemandPageVideoTranscodeStatusEnum = "complete"
+	OnDemandPageVideoTranscodeStatusEnumError      OnDemandPageVideoTranscodeStatusEnum = "error"
+	OnDemandPageVideoTranscodeStatusEnumInProgress OnDemandPageVideoTranscodeStatusEnum = "in_progress"
 )
 
-type OnDemandPageTrailerTranscode struct {
-	Status *OnDemandPageTrailerTranscodeStatusEnum `json:"status,omitempty"`
+type OnDemandPageVideoTranscode struct {
+	Status *OnDemandPageVideoTranscodeStatusEnum `json:"status,omitempty"`
 }
 
-type OnDemandPageTrailerUploadApproachEnum string
+type OnDemandPageVideoUploadApproachEnum string
 
 const (
-	OnDemandPageTrailerUploadApproachEnumPost      OnDemandPageTrailerUploadApproachEnum = "post"
-	OnDemandPageTrailerUploadApproachEnumPull      OnDemandPageTrailerUploadApproachEnum = "pull"
-	OnDemandPageTrailerUploadApproachEnumStreaming OnDemandPageTrailerUploadApproachEnum = "streaming"
-	OnDemandPageTrailerUploadApproachEnumTus       OnDemandPageTrailerUploadApproachEnum = "tus"
+	OnDemandPageVideoUploadApproachEnumPost      OnDemandPageVideoUploadApproachEnum = "post"
+	OnDemandPageVideoUploadApproachEnumPull      OnDemandPageVideoUploadApproachEnum = "pull"
+	OnDemandPageVideoUploadApproachEnumStreaming OnDemandPageVideoUploadApproachEnum = "streaming"
+	OnDemandPageVideoUploadApproachEnumTus       OnDemandPageVideoUploadApproachEnum = "tus"
 )
 
-type OnDemandPageTrailerUploadStatusEnum string
+type OnDemandPageVideoUploadStatusEnum string
 
 const (
-	OnDemandPageTrailerUploadStatusEnumComplete   OnDemandPageTrailerUploadStatusEnum = "complete"
-	OnDemandPageTrailerUploadStatusEnumError      OnDemandPageTrailerUploadStatusEnum = "error"
-	OnDemandPageTrailerUploadStatusEnumInProgress OnDemandPageTrailerUploadStatusEnum = "in_progress"
+	OnDemandPageVideoUploadStatusEnumComplete   OnDemandPageVideoUploadStatusEnum = "complete"
+	OnDemandPageVideoUploadStatusEnumError      OnDemandPageVideoUploadStatusEnum = "error"
+	OnDemandPageVideoUploadStatusEnumInProgress OnDemandPageVideoUploadStatusEnum = "in_progress"
 )
 
-type OnDemandPageTrailerUpload struct {
-	Approach    *OnDemandPageTrailerUploadApproachEnum `json:"approach,omitempty"`
-	CompleteURI *string                                `json:"complete_uri,omitempty"`
-	Form        *string                                `json:"form,omitempty"`
-	Link        *string                                `json:"link,omitempty"`
-	RedirectURL *string                                `json:"redirect_url,omitempty"`
-	Size        *float64                               `json:"size,omitempty"`
-	Status      OnDemandPageTrailerUploadStatusEnum    `json:"status"`
-	UploadLink  *string                                `json:"upload_link,omitempty"`
+type OnDemandPageVideoUpload struct {
+	Approach    *OnDemandPageVideoUploadApproachEnum `json:"approach,omitempty"`
+	CompleteURI *string                              `json:"complete_uri,omitempty"`
+	Form        *string                              `json:"form,omitempty"`
+	Link        *string                              `json:"link,omitempty"`
+	RedirectURL *string                              `json:"redirect_url,omitempty"`
+	Size        *float64                             `json:"size,omitempty"`
+	Status      OnDemandPageVideoUploadStatusEnum    `json:"status"`
+	UploadLink  *string                              `json:"upload_link,omitempty"`
 }
 
-type OnDemandPageTrailerUserAccountEnum string
+type OnDemandPageVideoUserAccountEnum string
 
 const (
-	OnDemandPageTrailerUserAccountEnumBasic        OnDemandPageTrailerUserAccountEnum = "basic"
-	OnDemandPageTrailerUserAccountEnumBusiness     OnDemandPageTrailerUserAccountEnum = "business"
-	OnDemandPageTrailerUserAccountEnumLiveBusiness OnDemandPageTrailerUserAccountEnum = "live_business"
-	OnDemandPageTrailerUserAccountEnumLivePremium  OnDemandPageTrailerUserAccountEnum = "live_premium"
-	OnDemandPageTrailerUserAccountEnumLivePro      OnDemandPageTrailerUserAccountEnum = "live_pro"
-	OnDemandPageTrailerUserAccountEnumPlus         OnDemandPageTrailerUserAccountEnum = "plus"
-	OnDemandPageTrailerUserAccountEnumPro          OnDemandPageTrailerUserAccountEnum = "pro"
-	OnDemandPageTrailerUserAccountEnumProUnlimited OnDemandPageTrailerUserAccountEnum = "pro_unlimited"
-	OnDemandPageTrailerUserAccountEnumProducer     OnDemandPageTrailerUserAccountEnum = "producer"
+	OnDemandPageVideoUserAccountEnumBasic        OnDemandPageVideoUserAccountEnum = "basic"
+	OnDemandPageVideoUserAccountEnumBusiness     OnDemandPageVideoUserAccountEnum = "business"
+	OnDemandPageVideoUserAccountEnumLiveBusiness OnDemandPageVideoUserAccountEnum = "live_business"
+	OnDemandPageVideoUserAccountEnumLivePremium  OnDemandPageVideoUserAccountEnum = "live_premium"
+	OnDemandPageVideoUserAccountEnumLivePro      OnDemandPageVideoUserAccountEnum = "live_pro"
+	OnDemandPageVideoUserAccountEnumPlus         OnDemandPageVideoUserAccountEnum = "plus"
+	OnDemandPageVideoUserAccountEnumPro          OnDemandPageVideoUserAccountEnum = "pro"
+	OnDemandPageVideoUserAccountEnumProUnlimited OnDemandPageVideoUserAccountEnum = "pro_unlimited"
+	OnDemandPageVideoUserAccountEnumProducer     OnDemandPageVideoUserAccountEnum = "producer"
 )
 
-type OnDemandPageTrailerUserMetadataConnectionsAlbums struct {
+type OnDemandPageVideoUserMetadataConnectionsAlbums struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
-type OnDemandPageTrailerUserMetadataConnectionsAppearances struct {
+type OnDemandPageVideoUserMetadataConnectionsAppearances struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
-type OnDemandPageTrailerUserMetadataConnectionsBlock struct {
+type OnDemandPageVideoUserMetadataConnectionsBlock struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
-type OnDemandPageTrailerUserMetadataConnectionsCategories struct {
+type OnDemandPageVideoUserMetadataConnectionsCategories struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
-type OnDemandPageTrailerUserMetadataConnectionsChannels struct {
+type OnDemandPageVideoUserMetadataConnectionsChannels struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
-type OnDemandPageTrailerUserMetadataConnectionsFeed struct {
+type OnDemandPageVideoUserMetadataConnectionsFeed struct {
 	Options []string `json:"options"`
 	URI     string   `json:"uri"`
 }
 
-type OnDemandPageTrailerUserMetadataConnectionsFolders struct {
-	Options []string `json:"options"`
-	Total   float64  `json:"total"`
-	URI     string   `json:"uri"`
-}
-
-type OnDemandPageTrailerUserMetadataConnectionsFollowers struct {
+type OnDemandPageVideoUserMetadataConnectionsFolders struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
-type OnDemandPageTrailerUserMetadataConnectionsFollowing struct {
+type OnDemandPageVideoUserMetadataConnectionsFollowers struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
-type OnDemandPageTrailerUserMetadataConnectionsGroups struct {
+type OnDemandPageVideoUserMetadataConnectionsFollowing struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
-type OnDemandPageTrailerUserMetadataConnectionsLikes struct {
+type OnDemandPageVideoUserMetadataConnectionsGroups struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
-type OnDemandPageTrailerUserMetadataConnectionsModeratedChannels struct {
+type OnDemandPageVideoUserMetadataConnectionsLikes struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
-type OnDemandPageTrailerUserMetadataConnectionsPictures struct {
+type OnDemandPageVideoUserMetadataConnectionsModeratedChannels struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
-type OnDemandPageTrailerUserMetadataConnectionsPortfolios struct {
+type OnDemandPageVideoUserMetadataConnectionsPictures struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
-type OnDemandPageTrailerUserMetadataConnectionsRecommendedChannels struct {
+type OnDemandPageVideoUserMetadataConnectionsPortfolios struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
-type OnDemandPageTrailerUserMetadataConnectionsRecommendedUsers struct {
+type OnDemandPageVideoUserMetadataConnectionsRecommendedChannels struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
-type OnDemandPageTrailerUserMetadataConnectionsShared struct {
+type OnDemandPageVideoUserMetadataConnectionsRecommendedUsers struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
-type OnDemandPageTrailerUserMetadataConnectionsVideos struct {
+type OnDemandPageVideoUserMetadataConnectionsShared struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
-type OnDemandPageTrailerUserMetadataConnectionsWatchedVideos struct {
+type OnDemandPageVideoUserMetadataConnectionsVideos struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
-type OnDemandPageTrailerUserMetadataConnectionsWatchlater struct {
+type OnDemandPageVideoUserMetadataConnectionsWatchedVideos struct {
 	Options []string `json:"options"`
 	Total   float64  `json:"total"`
 	URI     string   `json:"uri"`
 }
 
-type OnDemandPageTrailerUserMetadataConnections struct {
-	Albums              OnDemandPageTrailerUserMetadataConnectionsAlbums              `json:"albums"`
-	Appearances         OnDemandPageTrailerUserMetadataConnectionsAppearances         `json:"appearances"`
-	Block               OnDemandPageTrailerUserMetadataConnectionsBlock               `json:"block"`
-	Categories          OnDemandPageTrailerUserMetadataConnectionsCategories          `json:"categories"`
-	Channels            OnDemandPageTrailerUserMetadataConnectionsChannels            `json:"channels"`
-	Feed                OnDemandPageTrailerUserMetadataConnectionsFeed                `json:"feed"`
-	Folders             OnDemandPageTrailerUserMetadataConnectionsFolders             `json:"folders"`
-	Followers           OnDemandPageTrailerUserMetadataConnectionsFollowers           `json:"followers"`
-	Following           OnDemandPageTrailerUserMetadataConnectionsFollowing           `json:"following"`
-	Groups              OnDemandPageTrailerUserMetadataConnectionsGroups              `json:"groups"`
-	Likes               OnDemandPageTrailerUserMetadataConnectionsLikes               `json:"likes"`
-	ModeratedChannels   OnDemandPageTrailerUserMetadataConnectionsModeratedChannels   `json:"moderated_channels"`
-	Pictures            OnDemandPageTrailerUserMetadataConnectionsPictures            `json:"pictures"`
-	Portfolios          OnDemandPageTrailerUserMetadataConnectionsPortfolios          `json:"portfolios"`
-	RecommendedChannels OnDemandPageTrailerUserMetadataConnectionsRecommendedChannels `json:"recommended_channels"`
-	RecommendedUsers    OnDemandPageTrailerUserMetadataConnectionsRecommendedUsers    `json:"recommended_users"`
-	Shared              OnDemandPageTrailerUserMetadataConnectionsShared              `json:"shared"`
-	Videos              OnDemandPageTrailerUserMetadataConnectionsVideos              `json:"videos"`
-	WatchedVideos       OnDemandPageTrailerUserMetadataConnectionsWatchedVideos       `json:"watched_videos"`
-	Watchlater          OnDemandPageTrailerUserMetadataConnectionsWatchlater          `json:"watchlater"`
+type OnDemandPageVideoUserMetadataConnectionsWatchlater struct {
+	Options []string `json:"options"`
+	Total   float64  `json:"total"`
+	URI     string   `json:"uri"`
 }
 
-type OnDemandPageTrailerUserMetadataInteractionsAddPrivacyUser struct {
+type OnDemandPageVideoUserMetadataConnections struct {
+	Albums              OnDemandPageVideoUserMetadataConnectionsAlbums              `json:"albums"`
+	Appearances         OnDemandPageVideoUserMetadataConnectionsAppearances         `json:"appearances"`
+	Block               OnDemandPageVideoUserMetadataConnectionsBlock               `json:"block"`
+	Categories          OnDemandPageVideoUserMetadataConnectionsCategories          `json:"categories"`
+	Channels            OnDemandPageVideoUserMetadataConnectionsChannels            `json:"channels"`
+	Feed                OnDemandPageVideoUserMetadataConnectionsFeed                `json:"feed"`
+	Folders             OnDemandPageVideoUserMetadataConnectionsFolders             `json:"folders"`
+	Followers           OnDemandPageVideoUserMetadataConnectionsFollowers           `json:"followers"`
+	Following           OnDemandPageVideoUserMetadataConnectionsFollowing           `json:"following"`
+	Groups              OnDemandPageVideoUserMetadataConnectionsGroups              `json:"groups"`
+	Likes               OnDemandPageVideoUserMetadataConnectionsLikes               `json:"likes"`
+	ModeratedChannels   OnDemandPageVideoUserMetadataConnectionsModeratedChannels   `json:"moderated_channels"`
+	Pictures            OnDemandPageVideoUserMetadataConnectionsPictures            `json:"pictures"`
+	Portfolios          OnDemandPageVideoUserMetadataConnectionsPortfolios          `json:"portfolios"`
+	RecommendedChannels OnDemandPageVideoUserMetadataConnectionsRecommendedChannels `json:"recommended_channels"`
+	RecommendedUsers    OnDemandPageVideoUserMetadataConnectionsRecommendedUsers    `json:"recommended_users"`
+	Shared              OnDemandPageVideoUserMetadataConnectionsShared              `json:"shared"`
+	Videos              OnDemandPageVideoUserMetadataConnectionsVideos              `json:"videos"`
+	WatchedVideos       OnDemandPageVideoUserMetadataConnectionsWatchedVideos       `json:"watched_videos"`
+	Watchlater          OnDemandPageVideoUserMetadataConnectionsWatchlater          `json:"watchlater"`
+}
+
+type OnDemandPageVideoUserMetadataInteractionsAddPrivacyUser struct {
 	Options []string `json:"options,omitempty"`
 	URI     *string  `json:"uri,omitempty"`
 }
 
-type OnDemandPageTrailerUserMetadataInteractionsBlock struct {
+type OnDemandPageVideoUserMetadataInteractionsBlock struct {
 	Added     bool     `json:"added"`
 	AddedTime string   `json:"added_time"`
 	Options   []string `json:"options"`
 	URI       string   `json:"uri"`
 }
 
-type OnDemandPageTrailerUserMetadataInteractionsFollow struct {
+type OnDemandPageVideoUserMetadataInteractionsFollow struct {
 	Added   bool     `json:"added"`
 	Options []string `json:"options"`
 	URI     string   `json:"uri"`
 }
 
-type OnDemandPageTrailerUserMetadataInteractionsReport struct {
+type OnDemandPageVideoUserMetadataInteractionsReport struct {
 	Options []string `json:"options"`
 	Reason  []string `json:"reason"`
 	URI     string   `json:"uri"`
 }
 
-type OnDemandPageTrailerUserMetadataInteractions struct {
-	AddPrivacyUser *OnDemandPageTrailerUserMetadataInteractionsAddPrivacyUser `json:"add_privacy_user,omitempty"`
-	Block          OnDemandPageTrailerUserMetadataInteractionsBlock           `json:"block"`
-	Follow         OnDemandPageTrailerUserMetadataInteractionsFollow          `json:"follow"`
-	Report         OnDemandPageTrailerUserMetadataInteractionsReport          `json:"report"`
+type OnDemandPageVideoUserMetadataInteractions struct {
+	AddPrivacyUser *OnDemandPageVideoUserMetadataInteractionsAddPrivacyUser `json:"add_privacy_user,omitempty"`
+	Block          OnDemandPageVideoUserMetadataInteractionsBlock           `json:"block"`
+	Follow         OnDemandPageVideoUserMetadataInteractionsFollow          `json:"follow"`
+	Report         OnDemandPageVideoUserMetadataInteractionsReport          `json:"report"`
 }
 
-type OnDemandPageTrailerUserMetadata struct {
-	Connections  OnDemandPageTrailerUserMetadataConnections  `json:"connections"`
-	Interactions OnDemandPageTrailerUserMetadataInteractions `json:"interactions"`
+type OnDemandPageVideoUserMetadata struct {
+	Connections  OnDemandPageVideoUserMetadataConnections  `json:"connections"`
+	Interactions OnDemandPageVideoUserMetadataInteractions `json:"interactions"`
 }
 
-type OnDemandPageTrailerUserPreferencesVideosPrivacyCommentsEnum string
+type OnDemandPageVideoUserPreferencesVideosPrivacyCommentsEnum string
 
 const (
-	OnDemandPageTrailerUserPreferencesVideosPrivacyCommentsEnumAnybody  OnDemandPageTrailerUserPreferencesVideosPrivacyCommentsEnum = "anybody"
-	OnDemandPageTrailerUserPreferencesVideosPrivacyCommentsEnumContacts OnDemandPageTrailerUserPreferencesVideosPrivacyCommentsEnum = "contacts"
-	OnDemandPageTrailerUserPreferencesVideosPrivacyCommentsEnumNobody   OnDemandPageTrailerUserPreferencesVideosPrivacyCommentsEnum = "nobody"
+	OnDemandPageVideoUserPreferencesVideosPrivacyCommentsEnumAnybody  OnDemandPageVideoUserPreferencesVideosPrivacyCommentsEnum = "anybody"
+	OnDemandPageVideoUserPreferencesVideosPrivacyCommentsEnumContacts OnDemandPageVideoUserPreferencesVideosPrivacyCommentsEnum = "contacts"
+	OnDemandPageVideoUserPreferencesVideosPrivacyCommentsEnumNobody   OnDemandPageVideoUserPreferencesVideosPrivacyCommentsEnum = "nobody"
 )
 
-type OnDemandPageTrailerUserPreferencesVideosPrivacyEmbedEnum string
+type OnDemandPageVideoUserPreferencesVideosPrivacyEmbedEnum string
 
 const (
-	OnDemandPageTrailerUserPreferencesVideosPrivacyEmbedEnumPrivate   OnDemandPageTrailerUserPreferencesVideosPrivacyEmbedEnum = "private"
-	OnDemandPageTrailerUserPreferencesVideosPrivacyEmbedEnumPublic    OnDemandPageTrailerUserPreferencesVideosPrivacyEmbedEnum = "public"
-	OnDemandPageTrailerUserPreferencesVideosPrivacyEmbedEnumWhitelist OnDemandPageTrailerUserPreferencesVideosPrivacyEmbedEnum = "whitelist"
+	OnDemandPageVideoUserPreferencesVideosPrivacyEmbedEnumPrivate   OnDemandPageVideoUserPreferencesVideosPrivacyEmbedEnum = "private"
+	OnDemandPageVideoUserPreferencesVideosPrivacyEmbedEnumPublic    OnDemandPageVideoUserPreferencesVideosPrivacyEmbedEnum = "public"
+	OnDemandPageVideoUserPreferencesVideosPrivacyEmbedEnumWhitelist OnDemandPageVideoUserPreferencesVideosPrivacyEmbedEnum = "whitelist"
 )
 
-type OnDemandPageTrailerUserPreferencesVideosPrivacyViewEnum string
+type OnDemandPageVideoUserPreferencesVideosPrivacyViewEnum string
 
 const (
-	OnDemandPageTrailerUserPreferencesVideosPrivacyViewEnumAnybody  OnDemandPageTrailerUserPreferencesVideosPrivacyViewEnum = "anybody"
-	OnDemandPageTrailerUserPreferencesVideosPrivacyViewEnumContacts OnDemandPageTrailerUserPreferencesVideosPrivacyViewEnum = "contacts"
-	OnDemandPageTrailerUserPreferencesVideosPrivacyViewEnumDisable  OnDemandPageTrailerUserPreferencesVideosPrivacyViewEnum = "disable"
-	OnDemandPageTrailerUserPreferencesVideosPrivacyViewEnumNobody   OnDemandPageTrailerUserPreferencesVideosPrivacyViewEnum = "nobody"
-	OnDemandPageTrailerUserPreferencesVideosPrivacyViewEnumPassword OnDemandPageTrailerUserPreferencesVideosPrivacyViewEnum = "password"
-	OnDemandPageTrailerUserPreferencesVideosPrivacyViewEnumUnlisted OnDemandPageTrailerUserPreferencesVideosPrivacyViewEnum = "unlisted"
-	OnDemandPageTrailerUserPreferencesVideosPrivacyViewEnumUsers    OnDemandPageTrailerUserPreferencesVideosPrivacyViewEnum = "users"
+	OnDemandPageVideoUserPreferencesVideosPrivacyViewEnumAnybody  OnDemandPageVideoUserPreferencesVideosPrivacyViewEnum = "anybody"
+	OnDemandPageVideoUserPreferencesVideosPrivacyViewEnumContacts OnDemandPageVideoUserPreferencesVideosPrivacyViewEnum = "contacts"
+	OnDemandPageVideoUserPreferencesVideosPrivacyViewEnumDisable  OnDemandPageVideoUserPreferencesVideosPrivacyViewEnum = "disable"
+	OnDemandPageVideoUserPreferencesVideosPrivacyViewEnumNobody   OnDemandPageVideoUserPreferencesVideosPrivacyViewEnum = "nobody"
+	OnDemandPageVideoUserPreferencesVideosPrivacyViewEnumPassword OnDemandPageVideoUserPreferencesVideosPrivacyViewEnum = "password"
+	OnDemandPageVideoUserPreferencesVideosPrivacyViewEnumUnlisted OnDemandPageVideoUserPreferencesVideosPrivacyViewEnum = "unlisted"
+	OnDemandPageVideoUserPreferencesVideosPrivacyViewEnumUsers    OnDemandPageVideoUserPreferencesVideosPrivacyViewEnum = "users"
 )
 
-type OnDemandPageTrailerUserPreferencesVideosPrivacy struct {
-	Add      *bool                                                        `json:"add,omitempty"`
-	Comments *OnDemandPageTrailerUserPreferencesVideosPrivacyCommentsEnum `json:"comments,omitempty"`
-	Download *bool                                                        `json:"download,omitempty"`
-	Embed    *OnDemandPageTrailerUserPreferencesVideosPrivacyEmbedEnum    `json:"embed,omitempty"`
-	View     *OnDemandPageTrailerUserPreferencesVideosPrivacyViewEnum     `json:"view,omitempty"`
+type OnDemandPageVideoUserPreferencesVideosPrivacy struct {
+	Add      *bool                                                      `json:"add,omitempty"`
+	Comments *OnDemandPageVideoUserPreferencesVideosPrivacyCommentsEnum `json:"comments,omitempty"`
+	Download *bool                                                      `json:"download,omitempty"`
+	Embed    *OnDemandPageVideoUserPreferencesVideosPrivacyEmbedEnum    `json:"embed,omitempty"`
+	View     *OnDemandPageVideoUserPreferencesVideosPrivacyViewEnum     `json:"view,omitempty"`
 }
 
-type OnDemandPageTrailerUserPreferencesVideos struct {
-	Privacy *OnDemandPageTrailerUserPreferencesVideosPrivacy `json:"privacy,omitempty"`
+type OnDemandPageVideoUserPreferencesVideos struct {
+	Privacy *OnDemandPageVideoUserPreferencesVideosPrivacy `json:"privacy,omitempty"`
 }
 
-type OnDemandPageTrailerUserPreferences struct {
-	Videos *OnDemandPageTrailerUserPreferencesVideos `json:"videos,omitempty"`
+type OnDemandPageVideoUserPreferences struct {
+	Videos *OnDemandPageVideoUserPreferencesVideos `json:"videos,omitempty"`
 }
 
-type OnDemandPageTrailerUserUploadQuotaLifetime struct {
+type OnDemandPageVideoUserUploadQuotaLifetime struct {
 	Free float64 `json:"free"`
 	Max  float64 `json:"max"`
 	Used float64 `json:"used"`
 }
 
-type OnDemandPageTrailerUserUploadQuotaPeriodic struct {
+type OnDemandPageVideoUserUploadQuotaPeriodic struct {
 	Free      float64 `json:"free"`
 	Max       float64 `json:"max"`
 	ResetDate string  `json:"reset_date"`
 	Used      float64 `json:"used"`
 }
 
-type OnDemandPageTrailerUserUploadQuotaSpaceShowingEnum string
+type OnDemandPageVideoUserUploadQuotaSpaceShowingEnum string
 
 const (
-	OnDemandPageTrailerUserUploadQuotaSpaceShowingEnumLifetime OnDemandPageTrailerUserUploadQuotaSpaceShowingEnum = "lifetime"
-	OnDemandPageTrailerUserUploadQuotaSpaceShowingEnumPeriodic OnDemandPageTrailerUserUploadQuotaSpaceShowingEnum = "periodic"
+	OnDemandPageVideoUserUploadQuotaSpaceShowingEnumLifetime OnDemandPageVideoUserUploadQuotaSpaceShowingEnum = "lifetime"
+	OnDemandPageVideoUserUploadQuotaSpaceShowingEnumPeriodic OnDemandPageVideoUserUploadQuotaSpaceShowingEnum = "periodic"
 )
 
-type OnDemandPageTrailerUserUploadQuotaSpace struct {
-	Free    float64                                            `json:"free"`
-	Max     float64                                            `json:"max"`
-	Showing OnDemandPageTrailerUserUploadQuotaSpaceShowingEnum `json:"showing"`
-	Used    float64                                            `json:"used"`
+type OnDemandPageVideoUserUploadQuotaSpace struct {
+	Free    float64                                          `json:"free"`
+	Max     float64                                          `json:"max"`
+	Showing OnDemandPageVideoUserUploadQuotaSpaceShowingEnum `json:"showing"`
+	Used    float64                                          `json:"used"`
 }
 
-type OnDemandPageTrailerUserUploadQuota struct {
-	Lifetime OnDemandPageTrailerUserUploadQuotaLifetime `json:"lifetime"`
-	Periodic OnDemandPageTrailerUserUploadQuotaPeriodic `json:"periodic"`
-	Space    OnDemandPageTrailerUserUploadQuotaSpace    `json:"space"`
+type OnDemandPageVideoUserUploadQuota struct {
+	Lifetime OnDemandPageVideoUserUploadQuotaLifetime `json:"lifetime"`
+	Periodic OnDemandPageVideoUserUploadQuotaPeriodic `json:"periodic"`
+	Space    OnDemandPageVideoUserUploadQuotaSpace    `json:"space"`
 }
 
-type OnDemandPageTrailerUserWebsites struct {
+type OnDemandPageVideoUserWebsites struct {
 	Description string `json:"description"`
 	Link        string `json:"link"`
 	Name        string `json:"name"`
 }
 
-type OnDemandPageTrailerUserUser struct {
-	Account       OnDemandPageTrailerUserAccountEnum  `json:"account"`
-	Bio           string                              `json:"bio"`
-	ContentFilter []string                            `json:"content_filter,omitempty"`
-	CreatedTime   string                              `json:"created_time"`
-	Email         *string                             `json:"email,omitempty"`
-	Link          string                              `json:"link"`
-	Location      string                              `json:"location"`
-	Metadata      OnDemandPageTrailerUserMetadata     `json:"metadata"`
-	Name          string                              `json:"name"`
-	Pictures      Picture                             `json:"pictures"`
-	Preferences   *OnDemandPageTrailerUserPreferences `json:"preferences,omitempty"`
-	ResourceKey   string                              `json:"resource_key"`
-	UploadQuota   OnDemandPageTrailerUserUploadQuota  `json:"upload_quota"`
-	URI           string                              `json:"uri"`
-	Websites      []OnDemandPageTrailerUserWebsites   `json:"websites"`
+type OnDemandPageVideoUser struct {
+	Account       OnDemandPageVideoUserAccountEnum  `json:"account"`
+	Bio           string                            `json:"bio"`
+	ContentFilter []string                          `json:"content_filter,omitempty"`
+	CreatedTime   string                            `json:"created_time"`
+	Email         *string                           `json:"email,omitempty"`
+	Link          string                            `json:"link"`
+	Location      string                            `json:"location"`
+	Metadata      OnDemandPageVideoUserMetadata     `json:"metadata"`
+	Name          string                            `json:"name"`
+	Pictures      Picture                           `json:"pictures"`
+	Preferences   *OnDemandPageVideoUserPreferences `json:"preferences,omitempty"`
+	ResourceKey   string                            `json:"resource_key"`
+	UploadQuota   OnDemandPageVideoUserUploadQuota  `json:"upload_quota"`
+	URI           string                            `json:"uri"`
+	Websites      []OnDemandPageVideoUserWebsites   `json:"websites"`
 }
 
-type OnDemandPageTrailerVideo struct {
-	Categories              []Category                              `json:"categories"`
-	ContentRating           []string                                `json:"content_rating"`
-	Context                 OnDemandPageTrailerContext              `json:"context"`
-	CreatedTime             string                                  `json:"created_time"`
-	Description             string                                  `json:"description"`
-	Duration                float64                                 `json:"duration"`
-	Embed                   EmbedSettings                           `json:"embed"`
-	Height                  float64                                 `json:"height"`
-	Language                string                                  `json:"language"`
-	LastUserActionEventDate *string                                 `json:"last_user_action_event_date,omitempty"`
-	License                 OnDemandPageTrailerLicenseEnum          `json:"license"`
-	Link                    string                                  `json:"link"`
-	Metadata                OnDemandPageTrailerMetadata             `json:"metadata"`
-	ModifiedTime            string                                  `json:"modified_time"`
-	Name                    string                                  `json:"name"`
-	ParentFolder            *OnDemandPageTrailerParentFolderProject `json:"parent_folder,omitempty"`
-	Password                *string                                 `json:"password,omitempty"`
-	Pictures                Picture                                 `json:"pictures"`
-	Privacy                 OnDemandPageTrailerPrivacy              `json:"privacy"`
-	ReleaseTime             string                                  `json:"release_time"`
-	ResourceKey             string                                  `json:"resource_key"`
-	Spatial                 OnDemandPageTrailerSpatial              `json:"spatial"`
-	Stats                   OnDemandPageTrailerStats                `json:"stats"`
-	Status                  OnDemandPageTrailerStatusEnum           `json:"status"`
-	Tags                    []Tag                                   `json:"tags"`
-	Transcode               OnDemandPageTrailerTranscode            `json:"transcode"`
-	Upload                  OnDemandPageTrailerUpload               `json:"upload"`
-	URI                     string                                  `json:"uri"`
-	User                    OnDemandPageTrailerUserUser             `json:"user"`
-	Width                   float64                                 `json:"width"`
+type OnDemandPageVideo struct {
+	Categories              []Category                   `json:"categories"`
+	ContentRating           []string                     `json:"content_rating"`
+	Context                 OnDemandPageVideoContext     `json:"context"`
+	CreatedTime             string                       `json:"created_time"`
+	Description             string                       `json:"description"`
+	Duration                float64                      `json:"duration"`
+	Embed                   EmbedSettings                `json:"embed"`
+	Height                  float64                      `json:"height"`
+	Language                string                       `json:"language"`
+	LastUserActionEventDate *string                      `json:"last_user_action_event_date,omitempty"`
+	License                 OnDemandPageVideoLicenseEnum `json:"license"`
+	Link                    string                       `json:"link"`
+	Metadata                OnDemandPageVideoMetadata    `json:"metadata"`
+	ModifiedTime            string                       `json:"modified_time"`
+	Name                    string                       `json:"name"`
+	ParentFolder            *OnDemandPageVideoProject    `json:"parent_folder,omitempty"`
+	Password                *string                      `json:"password,omitempty"`
+	Pictures                Picture                      `json:"pictures"`
+	Privacy                 OnDemandPageVideoPrivacy     `json:"privacy"`
+	ReleaseTime             string                       `json:"release_time"`
+	ResourceKey             string                       `json:"resource_key"`
+	Spatial                 OnDemandPageVideoSpatial     `json:"spatial"`
+	Stats                   OnDemandPageVideoStats       `json:"stats"`
+	Status                  OnDemandPageVideoStatusEnum  `json:"status"`
+	Tags                    []Tag                        `json:"tags"`
+	Transcode               OnDemandPageVideoTranscode   `json:"transcode"`
+	Upload                  OnDemandPageVideoUpload      `json:"upload"`
+	URI                     string                       `json:"uri"`
+	User                    OnDemandPageVideoUser        `json:"user"`
+	Width                   float64                      `json:"width"`
 }
 
 type OnDemandPageTypeEnum string
@@ -1174,7 +1126,7 @@ type OnDemandPageUserWebsites struct {
 	Name        string `json:"name"`
 }
 
-type OnDemandPageUserUser struct {
+type OnDemandPageUser struct {
 	Account       OnDemandPageUserAccountEnum  `json:"account"`
 	Bio           string                       `json:"bio"`
 	ContentFilter []string                     `json:"content_filter,omitempty"`
@@ -1193,30 +1145,30 @@ type OnDemandPageUserUser struct {
 }
 
 type OnDemandPage struct {
-	Background    OnDemandPageBackgroundPicture `json:"background"`
-	Colors        OnDemandPageColors            `json:"colors"`
-	ContentRating []string                      `json:"content_rating"`
-	CreatedTime   *string                       `json:"created_time,omitempty"`
-	Description   string                        `json:"description"`
-	DomainLink    string                        `json:"domain_link"`
-	Episodes      OnDemandPageEpisodes          `json:"episodes"`
-	Film          *Video                        `json:"film,omitempty"`
-	Genres        []OnDemandGenre               `json:"genres"`
-	Link          string                        `json:"link"`
-	Metadata      OnDemandPageMetadata          `json:"metadata"`
-	ModifiedTime  *string                       `json:"modified_time,omitempty"`
-	Name          string                        `json:"name"`
-	Pictures      OnDemandPagePicturesPicture   `json:"pictures"`
-	Preorder      OnDemandPagePreorder          `json:"preorder"`
-	Published     OnDemandPagePublished         `json:"published"`
-	Rating        float64                       `json:"rating"`
-	ResourceKey   string                        `json:"resource_key"`
-	Sku           *string                       `json:"sku,omitempty"`
-	Subscription  OnDemandPageSubscription      `json:"subscription"`
-	Theme         string                        `json:"theme"`
-	Thumbnail     OnDemandPageThumbnailPicture  `json:"thumbnail"`
-	Trailer       OnDemandPageTrailerVideo      `json:"trailer"`
-	Type          OnDemandPageTypeEnum          `json:"type"`
-	URI           string                        `json:"uri"`
-	User          OnDemandPageUserUser          `json:"user"`
+	Background    OnDemandPagePicture      `json:"background"`
+	Colors        OnDemandPageColors       `json:"colors"`
+	ContentRating []string                 `json:"content_rating"`
+	CreatedTime   *string                  `json:"created_time,omitempty"`
+	Description   string                   `json:"description"`
+	DomainLink    string                   `json:"domain_link"`
+	Episodes      OnDemandPageEpisodes     `json:"episodes"`
+	Film          *Video                   `json:"film,omitempty"`
+	Genres        []OnDemandGenre          `json:"genres"`
+	Link          string                   `json:"link"`
+	Metadata      OnDemandPageMetadata     `json:"metadata"`
+	ModifiedTime  *string                  `json:"modified_time,omitempty"`
+	Name          string                   `json:"name"`
+	Pictures      OnDemandPagePicture      `json:"pictures"`
+	Preorder      OnDemandPagePreorder     `json:"preorder"`
+	Published     OnDemandPagePublished    `json:"published"`
+	Rating        float64                  `json:"rating"`
+	ResourceKey   string                   `json:"resource_key"`
+	Sku           *string                  `json:"sku,omitempty"`
+	Subscription  OnDemandPageSubscription `json:"subscription"`
+	Theme         string                   `json:"theme"`
+	Thumbnail     OnDemandPagePicture      `json:"thumbnail"`
+	Trailer       OnDemandPageVideo        `json:"trailer"`
+	Type          OnDemandPageTypeEnum     `json:"type"`
+	URI           string                   `json:"uri"`
+	User          OnDemandPageUser         `json:"user"`
 }

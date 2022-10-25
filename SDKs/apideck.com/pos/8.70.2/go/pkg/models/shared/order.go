@@ -76,16 +76,16 @@ type OrderFulfillmentsPickupDetails struct {
 	ScheduleType          *OrderFulfillmentsPickupDetailsScheduleTypeEnum      `json:"schedule_type,omitempty"`
 }
 
-type OrderFulfillmentsStatusFulfillmentStatusEnum string
+type OrderFulfillmentsFulfillmentStatusEnum string
 
 const (
-	OrderFulfillmentsStatusFulfillmentStatusEnumProposed  OrderFulfillmentsStatusFulfillmentStatusEnum = "proposed"
-	OrderFulfillmentsStatusFulfillmentStatusEnumReserved  OrderFulfillmentsStatusFulfillmentStatusEnum = "reserved"
-	OrderFulfillmentsStatusFulfillmentStatusEnumPrepared  OrderFulfillmentsStatusFulfillmentStatusEnum = "prepared"
-	OrderFulfillmentsStatusFulfillmentStatusEnumCompleted OrderFulfillmentsStatusFulfillmentStatusEnum = "completed"
-	OrderFulfillmentsStatusFulfillmentStatusEnumCancelled OrderFulfillmentsStatusFulfillmentStatusEnum = "cancelled"
-	OrderFulfillmentsStatusFulfillmentStatusEnumFailed    OrderFulfillmentsStatusFulfillmentStatusEnum = "failed"
-	OrderFulfillmentsStatusFulfillmentStatusEnumOther     OrderFulfillmentsStatusFulfillmentStatusEnum = "other"
+	OrderFulfillmentsFulfillmentStatusEnumProposed  OrderFulfillmentsFulfillmentStatusEnum = "proposed"
+	OrderFulfillmentsFulfillmentStatusEnumReserved  OrderFulfillmentsFulfillmentStatusEnum = "reserved"
+	OrderFulfillmentsFulfillmentStatusEnumPrepared  OrderFulfillmentsFulfillmentStatusEnum = "prepared"
+	OrderFulfillmentsFulfillmentStatusEnumCompleted OrderFulfillmentsFulfillmentStatusEnum = "completed"
+	OrderFulfillmentsFulfillmentStatusEnumCancelled OrderFulfillmentsFulfillmentStatusEnum = "cancelled"
+	OrderFulfillmentsFulfillmentStatusEnumFailed    OrderFulfillmentsFulfillmentStatusEnum = "failed"
+	OrderFulfillmentsFulfillmentStatusEnumOther     OrderFulfillmentsFulfillmentStatusEnum = "other"
 )
 
 type OrderFulfillmentsTypeEnum string
@@ -96,11 +96,11 @@ const (
 )
 
 type OrderFulfillments struct {
-	ID              *string                                       `json:"id,omitempty"`
-	PickupDetails   *OrderFulfillmentsPickupDetails               `json:"pickup_details,omitempty"`
-	ShipmentDetails map[string]interface{}                        `json:"shipment_details,omitempty"`
-	Status          *OrderFulfillmentsStatusFulfillmentStatusEnum `json:"status,omitempty"`
-	Type            *OrderFulfillmentsTypeEnum                    `json:"type,omitempty"`
+	ID              *string                                 `json:"id,omitempty"`
+	PickupDetails   *OrderFulfillmentsPickupDetails         `json:"pickup_details,omitempty"`
+	ShipmentDetails map[string]interface{}                  `json:"shipment_details,omitempty"`
+	Status          *OrderFulfillmentsFulfillmentStatusEnum `json:"status,omitempty"`
+	Type            *OrderFulfillmentsTypeEnum              `json:"type,omitempty"`
 }
 
 type OrderLineItems struct {
@@ -117,16 +117,16 @@ type OrderLineItems struct {
 	UnitPrice        *float64      `json:"unit_price,omitempty"`
 }
 
-type OrderPaymentStatusPosPaymentStatusEnum string
+type OrderPosPaymentStatusEnum string
 
 const (
-	OrderPaymentStatusPosPaymentStatusEnumOpen              OrderPaymentStatusPosPaymentStatusEnum = "open"
-	OrderPaymentStatusPosPaymentStatusEnumPaid              OrderPaymentStatusPosPaymentStatusEnum = "paid"
-	OrderPaymentStatusPosPaymentStatusEnumRefunded          OrderPaymentStatusPosPaymentStatusEnum = "refunded"
-	OrderPaymentStatusPosPaymentStatusEnumCredited          OrderPaymentStatusPosPaymentStatusEnum = "credited"
-	OrderPaymentStatusPosPaymentStatusEnumPartiallyPaid     OrderPaymentStatusPosPaymentStatusEnum = "partially_paid"
-	OrderPaymentStatusPosPaymentStatusEnumPartiallyRefunded OrderPaymentStatusPosPaymentStatusEnum = "partially_refunded"
-	OrderPaymentStatusPosPaymentStatusEnumUnknown           OrderPaymentStatusPosPaymentStatusEnum = "unknown"
+	OrderPosPaymentStatusEnumOpen              OrderPosPaymentStatusEnum = "open"
+	OrderPosPaymentStatusEnumPaid              OrderPosPaymentStatusEnum = "paid"
+	OrderPosPaymentStatusEnumRefunded          OrderPosPaymentStatusEnum = "refunded"
+	OrderPosPaymentStatusEnumCredited          OrderPosPaymentStatusEnum = "credited"
+	OrderPosPaymentStatusEnumPartiallyPaid     OrderPosPaymentStatusEnum = "partially_paid"
+	OrderPosPaymentStatusEnumPartiallyRefunded OrderPosPaymentStatusEnum = "partially_refunded"
+	OrderPosPaymentStatusEnumUnknown           OrderPosPaymentStatusEnum = "unknown"
 )
 
 type OrderPayments struct {
@@ -168,16 +168,16 @@ const (
 	OrderSourceEnumInvoice  OrderSourceEnum = "invoice"
 )
 
-type OrderStatusStatusEnum string
+type OrderStatusEnum string
 
 const (
-	OrderStatusStatusEnumOpen      OrderStatusStatusEnum = "open"
-	OrderStatusStatusEnumDraft     OrderStatusStatusEnum = "draft"
-	OrderStatusStatusEnumDelivered OrderStatusStatusEnum = "delivered"
-	OrderStatusStatusEnumDelayed   OrderStatusStatusEnum = "delayed"
-	OrderStatusStatusEnumVoided    OrderStatusStatusEnum = "voided"
-	OrderStatusStatusEnumCompleted OrderStatusStatusEnum = "completed"
-	OrderStatusStatusEnumHidden    OrderStatusStatusEnum = "hidden"
+	OrderStatusEnumOpen      OrderStatusEnum = "open"
+	OrderStatusEnumDraft     OrderStatusEnum = "draft"
+	OrderStatusEnumDelivered OrderStatusEnum = "delivered"
+	OrderStatusEnumDelayed   OrderStatusEnum = "delayed"
+	OrderStatusEnumVoided    OrderStatusEnum = "voided"
+	OrderStatusEnumCompleted OrderStatusEnum = "completed"
+	OrderStatusEnumHidden    OrderStatusEnum = "hidden"
 )
 
 type OrderTendersCardEntryMethodEnum string
@@ -233,46 +233,46 @@ type OrderTenders struct {
 }
 
 type Order struct {
-	ClosedDate         *time.Time                              `json:"closed_date,omitempty"`
-	CreatedAt          *time.Time                              `json:"created_at,omitempty"`
-	CreatedBy          *string                                 `json:"created_by,omitempty"`
-	Currency           *CurrencyEnum                           `json:"currency,omitempty"`
-	CustomerID         *string                                 `json:"customer_id,omitempty"`
-	Customers          []OrderCustomers                        `json:"customers,omitempty"`
-	Discounts          []OrderDiscounts                        `json:"discounts,omitempty"`
-	EmployeeID         *string                                 `json:"employee_id,omitempty"`
-	Fulfillments       []OrderFulfillments                     `json:"fulfillments,omitempty"`
-	ID                 *string                                 `json:"id,omitempty"`
-	IdempotencyKey     *string                                 `json:"idempotency_key,omitempty"`
-	LineItems          []OrderLineItems                        `json:"line_items,omitempty"`
-	LocationID         string                                  `json:"location_id"`
-	MerchantID         string                                  `json:"merchant_id"`
-	Note               *string                                 `json:"note,omitempty"`
-	OrderDate          *time.Time                              `json:"order_date,omitempty"`
-	OrderNumber        *string                                 `json:"order_number,omitempty"`
-	OrderTypeID        *string                                 `json:"order_type_id,omitempty"`
-	PaymentStatus      *OrderPaymentStatusPosPaymentStatusEnum `json:"payment_status,omitempty"`
-	Payments           []OrderPayments                         `json:"payments,omitempty"`
-	ReferenceID        *string                                 `json:"reference_id,omitempty"`
-	Refunded           *bool                                   `json:"refunded,omitempty"`
-	Refunds            []OrderRefunds                          `json:"refunds,omitempty"`
-	Seat               *string                                 `json:"seat,omitempty"`
-	ServiceCharges     []ServiceCharge                         `json:"service_charges,omitempty"`
-	Source             *OrderSourceEnum                        `json:"source,omitempty"`
-	Status             *OrderStatusStatusEnum                  `json:"status,omitempty"`
-	Table              *string                                 `json:"table,omitempty"`
-	Taxes              []interface{}                           `json:"taxes,omitempty"`
-	Tenders            []OrderTenders                          `json:"tenders,omitempty"`
-	Title              *string                                 `json:"title,omitempty"`
-	TotalAmount        *int64                                  `json:"total_amount,omitempty"`
-	TotalDiscount      *int64                                  `json:"total_discount,omitempty"`
-	TotalRefund        *int64                                  `json:"total_refund,omitempty"`
-	TotalServiceCharge *int64                                  `json:"total_service_charge,omitempty"`
-	TotalTax           *int64                                  `json:"total_tax,omitempty"`
-	TotalTip           *int64                                  `json:"total_tip,omitempty"`
-	UpdatedAt          *time.Time                              `json:"updated_at,omitempty"`
-	UpdatedBy          *string                                 `json:"updated_by,omitempty"`
-	Version            *string                                 `json:"version,omitempty"`
-	Voided             *bool                                   `json:"voided,omitempty"`
-	VoidedAt           *time.Time                              `json:"voided_at,omitempty"`
+	ClosedDate         *time.Time                 `json:"closed_date,omitempty"`
+	CreatedAt          *time.Time                 `json:"created_at,omitempty"`
+	CreatedBy          *string                    `json:"created_by,omitempty"`
+	Currency           *CurrencyEnum              `json:"currency,omitempty"`
+	CustomerID         *string                    `json:"customer_id,omitempty"`
+	Customers          []OrderCustomers           `json:"customers,omitempty"`
+	Discounts          []OrderDiscounts           `json:"discounts,omitempty"`
+	EmployeeID         *string                    `json:"employee_id,omitempty"`
+	Fulfillments       []OrderFulfillments        `json:"fulfillments,omitempty"`
+	ID                 *string                    `json:"id,omitempty"`
+	IdempotencyKey     *string                    `json:"idempotency_key,omitempty"`
+	LineItems          []OrderLineItems           `json:"line_items,omitempty"`
+	LocationID         string                     `json:"location_id"`
+	MerchantID         string                     `json:"merchant_id"`
+	Note               *string                    `json:"note,omitempty"`
+	OrderDate          *time.Time                 `json:"order_date,omitempty"`
+	OrderNumber        *string                    `json:"order_number,omitempty"`
+	OrderTypeID        *string                    `json:"order_type_id,omitempty"`
+	PaymentStatus      *OrderPosPaymentStatusEnum `json:"payment_status,omitempty"`
+	Payments           []OrderPayments            `json:"payments,omitempty"`
+	ReferenceID        *string                    `json:"reference_id,omitempty"`
+	Refunded           *bool                      `json:"refunded,omitempty"`
+	Refunds            []OrderRefunds             `json:"refunds,omitempty"`
+	Seat               *string                    `json:"seat,omitempty"`
+	ServiceCharges     []ServiceCharge            `json:"service_charges,omitempty"`
+	Source             *OrderSourceEnum           `json:"source,omitempty"`
+	Status             *OrderStatusEnum           `json:"status,omitempty"`
+	Table              *string                    `json:"table,omitempty"`
+	Taxes              []interface{}              `json:"taxes,omitempty"`
+	Tenders            []OrderTenders             `json:"tenders,omitempty"`
+	Title              *string                    `json:"title,omitempty"`
+	TotalAmount        *int64                     `json:"total_amount,omitempty"`
+	TotalDiscount      *int64                     `json:"total_discount,omitempty"`
+	TotalRefund        *int64                     `json:"total_refund,omitempty"`
+	TotalServiceCharge *int64                     `json:"total_service_charge,omitempty"`
+	TotalTax           *int64                     `json:"total_tax,omitempty"`
+	TotalTip           *int64                     `json:"total_tip,omitempty"`
+	UpdatedAt          *time.Time                 `json:"updated_at,omitempty"`
+	UpdatedBy          *string                    `json:"updated_by,omitempty"`
+	Version            *string                    `json:"version,omitempty"`
+	Voided             *bool                      `json:"voided,omitempty"`
+	VoidedAt           *time.Time                 `json:"voided_at,omitempty"`
 }

@@ -1,13 +1,13 @@
 package shared
 
-type DiscoveredParticipantCodeCodeEnum string
+type DiscoveredParticipantCodeEnum string
 
 const (
-	DiscoveredParticipantCodeCodeEnumOk  DiscoveredParticipantCodeCodeEnum = "OK"
-	DiscoveredParticipantCodeCodeEnumNok DiscoveredParticipantCodeCodeEnum = "NOK"
+	DiscoveredParticipantCodeEnumOk  DiscoveredParticipantCodeEnum = "OK"
+	DiscoveredParticipantCodeEnumNok DiscoveredParticipantCodeEnum = "NOK"
 )
 
 type DiscoveredParticipant struct {
-	Code  *DiscoveredParticipantCodeCodeEnum `json:"code,omitempty"`
-	Email *bool                              `json:"email,omitempty"`
+	Code  *DiscoveredParticipantCodeEnum `json:"code,omitempty"`
+	Email *bool                          `json:"email,omitempty"`
 }

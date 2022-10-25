@@ -15,7 +15,7 @@ class CreateConversationHeaders:
     
 
 @dataclass
-class CreateConversationRequestBodyCreateConversationRequest:
+class CreateConversationCreateConversationRequest:
     attributes: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Attributes' }})
     date_created: Optional[datetime] = field(default=None, metadata={'form': { 'field_name': 'DateCreated' }})
     date_updated: Optional[datetime] = field(default=None, metadata={'form': { 'field_name': 'DateUpdated' }})
@@ -36,7 +36,7 @@ class CreateConversationSecurity:
 class CreateConversationRequest:
     server_url: Optional[str] = field(default=None)
     headers: CreateConversationHeaders = field(default=None)
-    request: Optional[CreateConversationRequestBodyCreateConversationRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateConversationCreateConversationRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateConversationSecurity = field(default=None)
     
 

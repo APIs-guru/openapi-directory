@@ -13,7 +13,7 @@ class CreateInvitePathParams:
     
 
 @dataclass
-class CreateInviteRequestBodyCreateInviteRequest:
+class CreateInviteCreateInviteRequest:
     identity: str = field(default=None, metadata={'form': { 'field_name': 'Identity' }})
     role_sid: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'RoleSid' }})
     
@@ -27,7 +27,7 @@ class CreateInviteSecurity:
 class CreateInviteRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateInvitePathParams = field(default=None)
-    request: Optional[CreateInviteRequestBodyCreateInviteRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateInviteCreateInviteRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateInviteSecurity = field(default=None)
     
 

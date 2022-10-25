@@ -12,7 +12,7 @@ class CreateSyncStreamPathParams:
     
 
 @dataclass
-class CreateSyncStreamRequestBodyCreateSyncStreamRequest:
+class CreateSyncStreamCreateSyncStreamRequest:
     ttl: Optional[int] = field(default=None, metadata={'form': { 'field_name': 'Ttl' }})
     unique_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'UniqueName' }})
     
@@ -26,7 +26,7 @@ class CreateSyncStreamSecurity:
 class CreateSyncStreamRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateSyncStreamPathParams = field(default=None)
-    request: Optional[CreateSyncStreamRequestBodyCreateSyncStreamRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateSyncStreamCreateSyncStreamRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateSyncStreamSecurity = field(default=None)
     
 

@@ -29,7 +29,7 @@ class ListNetworkRequest:
 
 @dataclass_json
 @dataclass
-class ListNetwork200ApplicationJSONMeta:
+class ListNetworkListNetworkResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -41,14 +41,14 @@ class ListNetwork200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListNetwork200ApplicationJSONListNetworkResponse:
-    meta: Optional[ListNetwork200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+class ListNetworkListNetworkResponse:
+    meta: Optional[ListNetworkListNetworkResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     networks: Optional[List[shared.SupersimV1Network]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'networks' }})
     
 
 @dataclass
 class ListNetworkResponse:
     content_type: str = field(default=None)
-    list_network_response: Optional[ListNetwork200ApplicationJSONListNetworkResponse] = field(default=None)
+    list_network_response: Optional[ListNetworkListNetworkResponse] = field(default=None)
     status_code: int = field(default=None)
     

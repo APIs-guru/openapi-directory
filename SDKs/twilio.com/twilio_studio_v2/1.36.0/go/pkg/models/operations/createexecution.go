@@ -12,7 +12,7 @@ type CreateExecutionPathParams struct {
 	FlowSid string `pathParam:"style=simple,explode=false,name=FlowSid"`
 }
 
-type CreateExecutionRequestBodyCreateExecutionRequest struct {
+type CreateExecutionCreateExecutionRequest struct {
 	From       string       `form:"name=From"`
 	Parameters *interface{} `form:"name=Parameters"`
 	To         string       `form:"name=To"`
@@ -25,7 +25,7 @@ type CreateExecutionSecurity struct {
 type CreateExecutionRequest struct {
 	ServerURL  *string
 	PathParams CreateExecutionPathParams
-	Request    *CreateExecutionRequestBodyCreateExecutionRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateExecutionCreateExecutionRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateExecutionSecurity
 }
 

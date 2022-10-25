@@ -14,7 +14,7 @@ type UpdateChallengePathParams struct {
 	Sid        string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
-type UpdateChallengeRequestBodyUpdateChallengeRequest struct {
+type UpdateChallengeUpdateChallengeRequest struct {
 	AuthPayload *string      `form:"name=AuthPayload"`
 	Metadata    *interface{} `form:"name=Metadata"`
 }
@@ -26,7 +26,7 @@ type UpdateChallengeSecurity struct {
 type UpdateChallengeRequest struct {
 	ServerURL  *string
 	PathParams UpdateChallengePathParams
-	Request    *UpdateChallengeRequestBodyUpdateChallengeRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateChallengeUpdateChallengeRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateChallengeSecurity
 }
 

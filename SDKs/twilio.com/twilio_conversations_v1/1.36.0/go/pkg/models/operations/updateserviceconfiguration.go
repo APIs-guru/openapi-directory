@@ -12,7 +12,7 @@ type UpdateServiceConfigurationPathParams struct {
 	ChatServiceSid string `pathParam:"style=simple,explode=false,name=ChatServiceSid"`
 }
 
-type UpdateServiceConfigurationRequestBodyUpdateServiceConfigurationRequest struct {
+type UpdateServiceConfigurationUpdateServiceConfigurationRequest struct {
 	DefaultChatServiceRoleSid         *string `form:"name=DefaultChatServiceRoleSid"`
 	DefaultConversationCreatorRoleSid *string `form:"name=DefaultConversationCreatorRoleSid"`
 	DefaultConversationRoleSid        *string `form:"name=DefaultConversationRoleSid"`
@@ -26,7 +26,7 @@ type UpdateServiceConfigurationSecurity struct {
 type UpdateServiceConfigurationRequest struct {
 	ServerURL  *string
 	PathParams UpdateServiceConfigurationPathParams
-	Request    *UpdateServiceConfigurationRequestBodyUpdateServiceConfigurationRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateServiceConfigurationUpdateServiceConfigurationRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateServiceConfigurationSecurity
 }
 

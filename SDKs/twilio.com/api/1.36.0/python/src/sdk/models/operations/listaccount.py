@@ -28,7 +28,7 @@ class ListAccountRequest:
 
 @dataclass_json
 @dataclass
-class ListAccount200ApplicationJSONListAccountResponse:
+class ListAccountListAccountResponse:
     accounts: Optional[List[shared.APIV2010Account]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'accounts' }})
     end: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'end' }})
     first_page_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_uri' }})
@@ -43,6 +43,6 @@ class ListAccount200ApplicationJSONListAccountResponse:
 @dataclass
 class ListAccountResponse:
     content_type: str = field(default=None)
-    list_account_response: Optional[ListAccount200ApplicationJSONListAccountResponse] = field(default=None)
+    list_account_response: Optional[ListAccountListAccountResponse] = field(default=None)
     status_code: int = field(default=None)
     

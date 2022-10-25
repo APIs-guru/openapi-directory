@@ -27,7 +27,7 @@ type ListSessionRequest struct {
 	Security    ListSessionSecurity
 }
 
-type ListSession200ApplicationJSONMeta struct {
+type ListSessionListSessionResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -37,13 +37,13 @@ type ListSession200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListSession200ApplicationJSONListSessionResponse struct {
-	Meta     *ListSession200ApplicationJSONMeta `json:"meta,omitempty"`
-	Sessions []shared.ProxyV1ServiceSession     `json:"sessions,omitempty"`
+type ListSessionListSessionResponse struct {
+	Meta     *ListSessionListSessionResponseMeta `json:"meta,omitempty"`
+	Sessions []shared.ProxyV1ServiceSession      `json:"sessions,omitempty"`
 }
 
 type ListSessionResponse struct {
 	ContentType         string
-	ListSessionResponse *ListSession200ApplicationJSONListSessionResponse
+	ListSessionResponse *ListSessionListSessionResponse
 	StatusCode          int64
 }

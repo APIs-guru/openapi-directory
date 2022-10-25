@@ -27,7 +27,7 @@ type ListEntityRequest struct {
 	Security    ListEntitySecurity
 }
 
-type ListEntity200ApplicationJSONMeta struct {
+type ListEntityListEntityResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -37,13 +37,13 @@ type ListEntity200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListEntity200ApplicationJSONListEntityResponse struct {
+type ListEntityListEntityResponse struct {
 	Entities []shared.VerifyV2ServiceEntity    `json:"entities,omitempty"`
-	Meta     *ListEntity200ApplicationJSONMeta `json:"meta,omitempty"`
+	Meta     *ListEntityListEntityResponseMeta `json:"meta,omitempty"`
 }
 
 type ListEntityResponse struct {
 	ContentType        string
-	ListEntityResponse *ListEntity200ApplicationJSONListEntityResponse
+	ListEntityResponse *ListEntityListEntityResponse
 	StatusCode         int64
 }

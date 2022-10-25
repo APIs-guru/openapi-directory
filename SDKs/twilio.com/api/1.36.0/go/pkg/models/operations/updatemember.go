@@ -14,20 +14,20 @@ type UpdateMemberPathParams struct {
 	QueueSid   string `pathParam:"style=simple,explode=false,name=QueueSid"`
 }
 
-type UpdateMemberRequestBodyMethodEnum string
+type UpdateMemberUpdateMemberRequestMethodEnum string
 
 const (
-	UpdateMemberRequestBodyMethodEnumHead   UpdateMemberRequestBodyMethodEnum = "HEAD"
-	UpdateMemberRequestBodyMethodEnumGet    UpdateMemberRequestBodyMethodEnum = "GET"
-	UpdateMemberRequestBodyMethodEnumPost   UpdateMemberRequestBodyMethodEnum = "POST"
-	UpdateMemberRequestBodyMethodEnumPatch  UpdateMemberRequestBodyMethodEnum = "PATCH"
-	UpdateMemberRequestBodyMethodEnumPut    UpdateMemberRequestBodyMethodEnum = "PUT"
-	UpdateMemberRequestBodyMethodEnumDelete UpdateMemberRequestBodyMethodEnum = "DELETE"
+	UpdateMemberUpdateMemberRequestMethodEnumHead   UpdateMemberUpdateMemberRequestMethodEnum = "HEAD"
+	UpdateMemberUpdateMemberRequestMethodEnumGet    UpdateMemberUpdateMemberRequestMethodEnum = "GET"
+	UpdateMemberUpdateMemberRequestMethodEnumPost   UpdateMemberUpdateMemberRequestMethodEnum = "POST"
+	UpdateMemberUpdateMemberRequestMethodEnumPatch  UpdateMemberUpdateMemberRequestMethodEnum = "PATCH"
+	UpdateMemberUpdateMemberRequestMethodEnumPut    UpdateMemberUpdateMemberRequestMethodEnum = "PUT"
+	UpdateMemberUpdateMemberRequestMethodEnumDelete UpdateMemberUpdateMemberRequestMethodEnum = "DELETE"
 )
 
-type UpdateMemberRequestBodyUpdateMemberRequest struct {
-	Method *UpdateMemberRequestBodyMethodEnum `form:"name=Method"`
-	URL    string                             `form:"name=Url"`
+type UpdateMemberUpdateMemberRequest struct {
+	Method *UpdateMemberUpdateMemberRequestMethodEnum `form:"name=Method"`
+	URL    string                                     `form:"name=Url"`
 }
 
 type UpdateMemberSecurity struct {
@@ -37,7 +37,7 @@ type UpdateMemberSecurity struct {
 type UpdateMemberRequest struct {
 	ServerURL  *string
 	PathParams UpdateMemberPathParams
-	Request    *UpdateMemberRequestBodyUpdateMemberRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateMemberUpdateMemberRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateMemberSecurity
 }
 

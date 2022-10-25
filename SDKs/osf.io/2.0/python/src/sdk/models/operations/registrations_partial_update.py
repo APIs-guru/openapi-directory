@@ -10,7 +10,7 @@ from dataclasses_json import dataclass_json
 class RegistrationsPartialUpdatePathParams:
     registration_id: str = field(default=None, metadata={'path_param': { 'field_name': 'registration_id', 'style': 'simple', 'explode': False }})
     
-class RegistrationsPartialUpdateRequestBodyAttributesCategoryEnum(str, Enum):
+class RegistrationsPartialUpdateRegistrationAttributesCategoryEnum(str, Enum):
     ANALYSIS = "analysis"
     COMMUNICATION = "communication"
     DATA = "data"
@@ -25,8 +25,8 @@ class RegistrationsPartialUpdateRequestBodyAttributesCategoryEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class RegistrationsPartialUpdateRequestBodyAttributesAttributes:
-    category: Optional[RegistrationsPartialUpdateRequestBodyAttributesCategoryEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'category' }})
+class RegistrationsPartialUpdateRegistrationAttributes:
+    category: Optional[RegistrationsPartialUpdateRegistrationAttributesCategoryEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'category' }})
     collection: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'collection' }})
     current_user_can_comment: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'current_user_can_comment' }})
     current_user_permissions: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'current_user_permissions' }})
@@ -55,14 +55,14 @@ class RegistrationsPartialUpdateRequestBodyAttributesAttributes:
 
 @dataclass_json
 @dataclass
-class RegistrationsPartialUpdateRequestBodyLinksLinks:
+class RegistrationsPartialUpdateRegistrationLinks:
     html: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'html' }})
     self: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'self' }})
     
 
 @dataclass_json
 @dataclass
-class RegistrationsPartialUpdateRequestBodyRelationshipsRelationships:
+class RegistrationsPartialUpdateRegistrationRelationships:
     affiliated_institutions: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'affiliated_institutions' }})
     children: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'children' }})
     citation: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'citation' }})
@@ -85,18 +85,18 @@ class RegistrationsPartialUpdateRequestBodyRelationshipsRelationships:
 
 @dataclass_json
 @dataclass
-class RegistrationsPartialUpdateRequestBodyRegistration:
-    attributes: RegistrationsPartialUpdateRequestBodyAttributesAttributes = field(default=None, metadata={'dataclasses_json': { 'field_name': 'attributes' }})
+class RegistrationsPartialUpdateRegistration:
+    attributes: RegistrationsPartialUpdateRegistrationAttributes = field(default=None, metadata={'dataclasses_json': { 'field_name': 'attributes' }})
     id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    links: RegistrationsPartialUpdateRequestBodyLinksLinks = field(default=None, metadata={'dataclasses_json': { 'field_name': 'links' }})
-    relationships: RegistrationsPartialUpdateRequestBodyRelationshipsRelationships = field(default=None, metadata={'dataclasses_json': { 'field_name': 'relationships' }})
+    links: RegistrationsPartialUpdateRegistrationLinks = field(default=None, metadata={'dataclasses_json': { 'field_name': 'links' }})
+    relationships: RegistrationsPartialUpdateRegistrationRelationships = field(default=None, metadata={'dataclasses_json': { 'field_name': 'relationships' }})
     type: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     
 
 @dataclass
 class RegistrationsPartialUpdateRequest:
     path_params: RegistrationsPartialUpdatePathParams = field(default=None)
-    request: RegistrationsPartialUpdateRequestBodyRegistration = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: RegistrationsPartialUpdateRegistration = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass

@@ -131,7 +131,7 @@ class SDK:
         res = operations.ListFaxResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListFax200ApplicationJSONListFaxResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListFaxListFaxResponse])
                 res.list_fax_response = out
 
         return res
@@ -156,7 +156,7 @@ class SDK:
         res = operations.ListFaxMediaResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListFaxMedia200ApplicationJSONListFaxMediaResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListFaxMediaListFaxMediaResponse])
                 res.list_fax_media_response = out
 
         return res

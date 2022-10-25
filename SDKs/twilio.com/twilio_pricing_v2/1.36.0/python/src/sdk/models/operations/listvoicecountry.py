@@ -26,7 +26,7 @@ class ListVoiceCountryRequest:
 
 @dataclass_json
 @dataclass
-class ListVoiceCountry200ApplicationJSONMeta:
+class ListVoiceCountryListVoiceCountryResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -38,14 +38,14 @@ class ListVoiceCountry200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListVoiceCountry200ApplicationJSONListVoiceCountryResponse:
+class ListVoiceCountryListVoiceCountryResponse:
     countries: Optional[List[shared.PricingV2VoiceVoiceCountry]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'countries' }})
-    meta: Optional[ListVoiceCountry200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+    meta: Optional[ListVoiceCountryListVoiceCountryResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     
 
 @dataclass
 class ListVoiceCountryResponse:
     content_type: str = field(default=None)
-    list_voice_country_response: Optional[ListVoiceCountry200ApplicationJSONListVoiceCountryResponse] = field(default=None)
+    list_voice_country_response: Optional[ListVoiceCountryListVoiceCountryResponse] = field(default=None)
     status_code: int = field(default=None)
     

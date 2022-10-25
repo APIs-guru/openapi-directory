@@ -23,7 +23,7 @@ type ListEventTypeRequest struct {
 	Security    ListEventTypeSecurity
 }
 
-type ListEventType200ApplicationJSONMeta struct {
+type ListEventTypeListEventTypeResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -33,13 +33,13 @@ type ListEventType200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListEventType200ApplicationJSONListEventTypeResponse struct {
-	Meta  *ListEventType200ApplicationJSONMeta `json:"meta,omitempty"`
-	Types []shared.EventsV1EventType           `json:"types,omitempty"`
+type ListEventTypeListEventTypeResponse struct {
+	Meta  *ListEventTypeListEventTypeResponseMeta `json:"meta,omitempty"`
+	Types []shared.EventsV1EventType              `json:"types,omitempty"`
 }
 
 type ListEventTypeResponse struct {
 	ContentType           string
-	ListEventTypeResponse *ListEventType200ApplicationJSONListEventTypeResponse
+	ListEventTypeResponse *ListEventTypeListEventTypeResponse
 	StatusCode            int64
 }

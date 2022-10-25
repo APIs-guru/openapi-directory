@@ -26,7 +26,7 @@ type ListAccountUsageRecordRequest struct {
 	Security    ListAccountUsageRecordSecurity
 }
 
-type ListAccountUsageRecord200ApplicationJSONMeta struct {
+type ListAccountUsageRecordListAccountUsageRecordResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -36,13 +36,13 @@ type ListAccountUsageRecord200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListAccountUsageRecord200ApplicationJSONListAccountUsageRecordResponse struct {
-	Meta         *ListAccountUsageRecord200ApplicationJSONMeta `json:"meta,omitempty"`
-	UsageRecords []shared.WirelessV1AccountUsageRecord         `json:"usage_records,omitempty"`
+type ListAccountUsageRecordListAccountUsageRecordResponse struct {
+	Meta         *ListAccountUsageRecordListAccountUsageRecordResponseMeta `json:"meta,omitempty"`
+	UsageRecords []shared.WirelessV1AccountUsageRecord                     `json:"usage_records,omitempty"`
 }
 
 type ListAccountUsageRecordResponse struct {
 	ContentType                    string
-	ListAccountUsageRecordResponse *ListAccountUsageRecord200ApplicationJSONListAccountUsageRecordResponse
+	ListAccountUsageRecordResponse *ListAccountUsageRecordListAccountUsageRecordResponse
 	StatusCode                     int64
 }

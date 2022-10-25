@@ -34,7 +34,7 @@ class ListServiceConversationMessageReceiptRequest:
 
 @dataclass_json
 @dataclass
-class ListServiceConversationMessageReceipt200ApplicationJSONMeta:
+class ListServiceConversationMessageReceiptListServiceConversationMessageReceiptResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -46,14 +46,14 @@ class ListServiceConversationMessageReceipt200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListServiceConversationMessageReceipt200ApplicationJSONListServiceConversationMessageReceiptResponse:
+class ListServiceConversationMessageReceiptListServiceConversationMessageReceiptResponse:
     delivery_receipts: Optional[List[shared.ConversationsV1ServiceServiceConversationServiceConversationMessageServiceConversationMessageReceipt]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'delivery_receipts' }})
-    meta: Optional[ListServiceConversationMessageReceipt200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+    meta: Optional[ListServiceConversationMessageReceiptListServiceConversationMessageReceiptResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     
 
 @dataclass
 class ListServiceConversationMessageReceiptResponse:
     content_type: str = field(default=None)
-    list_service_conversation_message_receipt_response: Optional[ListServiceConversationMessageReceipt200ApplicationJSONListServiceConversationMessageReceiptResponse] = field(default=None)
+    list_service_conversation_message_receipt_response: Optional[ListServiceConversationMessageReceiptListServiceConversationMessageReceiptResponse] = field(default=None)
     status_code: int = field(default=None)
     

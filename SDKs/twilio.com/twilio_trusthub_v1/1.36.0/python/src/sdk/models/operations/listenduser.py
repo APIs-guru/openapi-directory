@@ -26,7 +26,7 @@ class ListEndUserRequest:
 
 @dataclass_json
 @dataclass
-class ListEndUser200ApplicationJSONMeta:
+class ListEndUserListEndUserResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -38,14 +38,14 @@ class ListEndUser200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListEndUser200ApplicationJSONListEndUserResponse:
-    meta: Optional[ListEndUser200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+class ListEndUserListEndUserResponse:
+    meta: Optional[ListEndUserListEndUserResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     results: Optional[List[shared.TrusthubV1EndUser]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'results' }})
     
 
 @dataclass
 class ListEndUserResponse:
     content_type: str = field(default=None)
-    list_end_user_response: Optional[ListEndUser200ApplicationJSONListEndUserResponse] = field(default=None)
+    list_end_user_response: Optional[ListEndUserListEndUserResponse] = field(default=None)
     status_code: int = field(default=None)
     

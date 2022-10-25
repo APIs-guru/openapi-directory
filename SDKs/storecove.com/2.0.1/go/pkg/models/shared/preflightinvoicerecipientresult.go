@@ -1,12 +1,12 @@
 package shared
 
-type PreflightInvoiceRecipientResultCodeResultCodeEnum string
+type PreflightInvoiceRecipientResultResultCodeEnum string
 
 const (
-	PreflightInvoiceRecipientResultCodeResultCodeEnumOk  PreflightInvoiceRecipientResultCodeResultCodeEnum = "ok"
-	PreflightInvoiceRecipientResultCodeResultCodeEnumNok PreflightInvoiceRecipientResultCodeResultCodeEnum = "nok"
+	PreflightInvoiceRecipientResultResultCodeEnumOk  PreflightInvoiceRecipientResultResultCodeEnum = "ok"
+	PreflightInvoiceRecipientResultResultCodeEnumNok PreflightInvoiceRecipientResultResultCodeEnum = "nok"
 )
 
 type PreflightInvoiceRecipientResult struct {
-	Code *PreflightInvoiceRecipientResultCodeResultCodeEnum `json:"code,omitempty"`
+	Code *PreflightInvoiceRecipientResultResultCodeEnum `json:"code,omitempty"`
 }

@@ -12,7 +12,7 @@ class UpdateAccountPathParams:
     
 
 @dataclass
-class UpdateAccountRequestBodyUpdateAccountRequest:
+class UpdateAccountUpdateAccountRequest:
     friendly_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
     status: Optional[shared.AccountEnumStatusEnum] = field(default=None, metadata={'form': { 'field_name': 'Status' }})
     
@@ -26,7 +26,7 @@ class UpdateAccountSecurity:
 class UpdateAccountRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateAccountPathParams = field(default=None)
-    request: Optional[UpdateAccountRequestBodyUpdateAccountRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateAccountUpdateAccountRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateAccountSecurity = field(default=None)
     
 

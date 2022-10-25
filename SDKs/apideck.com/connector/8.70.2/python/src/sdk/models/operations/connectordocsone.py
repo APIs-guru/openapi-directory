@@ -28,11 +28,11 @@ class ConnectorDocsOneRequest:
 
 @dataclass
 class ConnectorDocsOneResponse:
-    body: bytes = field(default=None)
     content_type: str = field(default=None)
     not_found_response: Optional[shared.NotFoundResponse] = field(default=None)
     payment_required_response: Optional[shared.PaymentRequiredResponse] = field(default=None)
     status_code: int = field(default=None)
     unauthorized_response: Optional[shared.UnauthorizedResponse] = field(default=None)
     unexpected_error_response: Optional[shared.UnexpectedErrorResponse] = field(default=None)
+    connector_docs_one_200_text_markdown_markdown_string: Optional[str] = field(default=None)
     

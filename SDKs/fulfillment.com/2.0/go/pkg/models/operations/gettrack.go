@@ -13,86 +13,86 @@ type GetTrackRequest struct {
 	QueryParams GetTrackQueryParams
 }
 
-type GetTrack200ApplicationJSONOriginGeometryTypeEnum string
+type GetTrackTrackingResponseFeatureGeometryTypeEnum string
 
 const (
-	GetTrack200ApplicationJSONOriginGeometryTypeEnumPoint           GetTrack200ApplicationJSONOriginGeometryTypeEnum = "Point"
-	GetTrack200ApplicationJSONOriginGeometryTypeEnumLineString      GetTrack200ApplicationJSONOriginGeometryTypeEnum = "LineString"
-	GetTrack200ApplicationJSONOriginGeometryTypeEnumPolygon         GetTrack200ApplicationJSONOriginGeometryTypeEnum = "Polygon"
-	GetTrack200ApplicationJSONOriginGeometryTypeEnumMultiPoint      GetTrack200ApplicationJSONOriginGeometryTypeEnum = "MultiPoint"
-	GetTrack200ApplicationJSONOriginGeometryTypeEnumMultiLineString GetTrack200ApplicationJSONOriginGeometryTypeEnum = "MultiLineString"
-	GetTrack200ApplicationJSONOriginGeometryTypeEnumMultiPolygon    GetTrack200ApplicationJSONOriginGeometryTypeEnum = "MultiPolygon"
+	GetTrackTrackingResponseFeatureGeometryTypeEnumPoint           GetTrackTrackingResponseFeatureGeometryTypeEnum = "Point"
+	GetTrackTrackingResponseFeatureGeometryTypeEnumLineString      GetTrackTrackingResponseFeatureGeometryTypeEnum = "LineString"
+	GetTrackTrackingResponseFeatureGeometryTypeEnumPolygon         GetTrackTrackingResponseFeatureGeometryTypeEnum = "Polygon"
+	GetTrackTrackingResponseFeatureGeometryTypeEnumMultiPoint      GetTrackTrackingResponseFeatureGeometryTypeEnum = "MultiPoint"
+	GetTrackTrackingResponseFeatureGeometryTypeEnumMultiLineString GetTrackTrackingResponseFeatureGeometryTypeEnum = "MultiLineString"
+	GetTrackTrackingResponseFeatureGeometryTypeEnumMultiPolygon    GetTrackTrackingResponseFeatureGeometryTypeEnum = "MultiPolygon"
 )
 
-type GetTrack200ApplicationJSONOriginGeometryGeometry struct {
-	Coordinates interface{}                                      `json:"coordinates"`
-	Type        GetTrack200ApplicationJSONOriginGeometryTypeEnum `json:"type"`
+type GetTrackTrackingResponseFeatureGeometry struct {
+	Coordinates interface{}                                     `json:"coordinates"`
+	Type        GetTrackTrackingResponseFeatureGeometryTypeEnum `json:"type"`
 }
 
-type GetTrack200ApplicationJSONOriginProperties struct {
+type GetTrackTrackingResponseFeatureProperties struct {
 	Name *string `json:"name,omitempty"`
 }
 
-type GetTrack200ApplicationJSONOriginTypeEnum string
+type GetTrackTrackingResponseFeatureTypeEnum string
 
 const (
-	GetTrack200ApplicationJSONOriginTypeEnumFeature GetTrack200ApplicationJSONOriginTypeEnum = "Feature"
+	GetTrackTrackingResponseFeatureTypeEnumFeature GetTrackTrackingResponseFeatureTypeEnum = "Feature"
 )
 
-type GetTrack200ApplicationJSONOriginFeature struct {
+type GetTrackTrackingResponseFeature struct {
 	Bbox       []interface{}                                                                                  `json:"bbox,omitempty"`
 	Centerline *shared.OnetrackGetResponses200ContentApplication1jsonSchemaPropertiesOriginPropertiesGeometry `json:"centerline,omitempty"`
-	Geometry   GetTrack200ApplicationJSONOriginGeometryGeometry                                               `json:"geometry"`
+	Geometry   GetTrackTrackingResponseFeatureGeometry                                                        `json:"geometry"`
 	ID         *int64                                                                                         `json:"id,omitempty"`
-	Properties GetTrack200ApplicationJSONOriginProperties                                                     `json:"properties"`
+	Properties GetTrackTrackingResponseFeatureProperties                                                      `json:"properties"`
 	Title      *string                                                                                        `json:"title,omitempty"`
-	Type       GetTrack200ApplicationJSONOriginTypeEnum                                                       `json:"type"`
+	Type       GetTrackTrackingResponseFeatureTypeEnum                                                        `json:"type"`
 }
 
-type GetTrack200ApplicationJSONTrackedEventsEventSourceEnum string
+type GetTrackTrackingResponseTrackingEventV2EventSourceEnum string
 
 const (
-	GetTrack200ApplicationJSONTrackedEventsEventSourceEnumCarrier  GetTrack200ApplicationJSONTrackedEventsEventSourceEnum = "carrier"
-	GetTrack200ApplicationJSONTrackedEventsEventSourceEnumInternal GetTrack200ApplicationJSONTrackedEventsEventSourceEnum = "internal"
+	GetTrackTrackingResponseTrackingEventV2EventSourceEnumCarrier  GetTrackTrackingResponseTrackingEventV2EventSourceEnum = "carrier"
+	GetTrackTrackingResponseTrackingEventV2EventSourceEnumInternal GetTrackTrackingResponseTrackingEventV2EventSourceEnum = "internal"
 )
 
-type GetTrack200ApplicationJSONTrackedEventsTrackingEventV2 struct {
+type GetTrackTrackingResponseTrackingEventV2 struct {
 	EventCategory     *string                                                                      `json:"eventCategory,omitempty"`
 	EventCategoryCode *int64                                                                       `json:"eventCategoryCode,omitempty"`
 	EventDateTime     *time.Time                                                                   `json:"eventDateTime,omitempty"`
 	EventLocation     *shared.OnetrackGetResponses200ContentApplication1jsonSchemaPropertiesOrigin `json:"eventLocation,omitempty"`
-	EventSource       *GetTrack200ApplicationJSONTrackedEventsEventSourceEnum                      `json:"eventSource,omitempty"`
+	EventSource       *GetTrackTrackingResponseTrackingEventV2EventSourceEnum                      `json:"eventSource,omitempty"`
 	EventStatus       *string                                                                      `json:"eventStatus,omitempty"`
 }
 
-type GetTrack200ApplicationJSONTrackingNumberCarrierCarrierSimpleV2 struct {
+type GetTrackTrackingResponseTrackingNumberV2CarrierSimpleV2 struct {
 	ID int64 `json:"id"`
 }
 
-type GetTrack200ApplicationJSONTrackingNumberTrackingNumberV2 struct {
-	BarcodeScanValue *string                                                         `json:"barcodeScanValue,omitempty"`
-	Carrier          *GetTrack200ApplicationJSONTrackingNumberCarrierCarrierSimpleV2 `json:"carrier,omitempty"`
-	Value            *string                                                         `json:"value,omitempty"`
+type GetTrackTrackingResponseTrackingNumberV2 struct {
+	BarcodeScanValue *string                                                  `json:"barcodeScanValue,omitempty"`
+	Carrier          *GetTrackTrackingResponseTrackingNumberV2CarrierSimpleV2 `json:"carrier,omitempty"`
+	Value            *string                                                  `json:"value,omitempty"`
 }
 
-type GetTrack200ApplicationJSONTrackingResponse struct {
+type GetTrackTrackingResponse struct {
 	Destination          *shared.OnetrackGetResponses200ContentApplication1jsonSchemaPropertiesOrigin `json:"destination,omitempty"`
 	FdcOrderID           *int64                                                                       `json:"fdcOrderId,omitempty"`
 	FirstCheckedDateTime *time.Time                                                                   `json:"firstCheckedDateTime,omitempty"`
 	FirstTransitEvent    *time.Time                                                                   `json:"firstTransitEvent,omitempty"`
 	LastCheckedDateTime  *time.Time                                                                   `json:"lastCheckedDateTime,omitempty"`
 	LastUpdatedDateTime  *time.Time                                                                   `json:"lastUpdatedDateTime,omitempty"`
-	Origin               *GetTrack200ApplicationJSONOriginFeature                                     `json:"origin,omitempty"`
+	Origin               *GetTrackTrackingResponseFeature                                             `json:"origin,omitempty"`
 	Status               *string                                                                      `json:"status,omitempty"`
 	StatusCategoryCode   *int64                                                                       `json:"statusCategoryCode,omitempty"`
 	StatusDateTime       *time.Time                                                                   `json:"statusDateTime,omitempty"`
 	StatusMessage        *string                                                                      `json:"statusMessage,omitempty"`
-	TrackedEvents        []GetTrack200ApplicationJSONTrackedEventsTrackingEventV2                     `json:"trackedEvents,omitempty"`
-	TrackingNumber       *GetTrack200ApplicationJSONTrackingNumberTrackingNumberV2                    `json:"trackingNumber,omitempty"`
+	TrackedEvents        []GetTrackTrackingResponseTrackingEventV2                                    `json:"trackedEvents,omitempty"`
+	TrackingNumber       *GetTrackTrackingResponseTrackingNumberV2                                    `json:"trackingNumber,omitempty"`
 }
 
 type GetTrackResponse struct {
 	ContentType      string
 	StatusCode       int64
-	TrackingResponse *GetTrack200ApplicationJSONTrackingResponse
+	TrackingResponse *GetTrackTrackingResponse
 }

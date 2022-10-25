@@ -1,20 +1,20 @@
 package shared
 
-type UserUserPermissionsPermission struct {
+type UserUserPermission struct {
 	Permission []interface{} `json:"Permission,omitempty"`
 }
 
-type UserUserRolesRoles struct {
+type UserUserRoles struct {
 	Role []string `json:"Role,omitempty"`
 }
 
-type UserUserUser struct {
-	MetaData       map[string]interface{}         `json:"MetaData,omitempty"`
-	Permissions    *UserUserPermissionsPermission `json:"Permissions,omitempty"`
-	Roles          *UserUserRolesRoles            `json:"Roles,omitempty"`
-	UserIdentifier *string                        `json:"UserIdentifier,omitempty"`
+type UserUser struct {
+	MetaData       map[string]interface{} `json:"MetaData,omitempty"`
+	Permissions    *UserUserPermission    `json:"Permissions,omitempty"`
+	Roles          *UserUserRoles         `json:"Roles,omitempty"`
+	UserIdentifier *string                `json:"UserIdentifier,omitempty"`
 }
 
 type User struct {
-	User *UserUserUser `json:"User,omitempty"`
+	User *UserUser `json:"User,omitempty"`
 }

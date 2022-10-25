@@ -12,7 +12,7 @@ class UpdateDefaultsPathParams:
     
 
 @dataclass
-class UpdateDefaultsRequestBodyUpdateDefaultsRequest:
+class UpdateDefaultsUpdateDefaultsRequest:
     defaults: Optional[Any] = field(default=None, metadata={'form': { 'field_name': 'Defaults' }})
     
 
@@ -25,7 +25,7 @@ class UpdateDefaultsSecurity:
 class UpdateDefaultsRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateDefaultsPathParams = field(default=None)
-    request: Optional[UpdateDefaultsRequestBodyUpdateDefaultsRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateDefaultsUpdateDefaultsRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateDefaultsSecurity = field(default=None)
     
 

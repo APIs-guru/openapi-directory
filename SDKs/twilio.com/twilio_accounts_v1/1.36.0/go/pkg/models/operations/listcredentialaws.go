@@ -22,7 +22,7 @@ type ListCredentialAwsRequest struct {
 	Security    ListCredentialAwsSecurity
 }
 
-type ListCredentialAws200ApplicationJSONMeta struct {
+type ListCredentialAwsListCredentialAwsResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -32,13 +32,13 @@ type ListCredentialAws200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListCredentialAws200ApplicationJSONListCredentialAwsResponse struct {
-	Credentials []shared.AccountsV1CredentialCredentialAws `json:"credentials,omitempty"`
-	Meta        *ListCredentialAws200ApplicationJSONMeta   `json:"meta,omitempty"`
+type ListCredentialAwsListCredentialAwsResponse struct {
+	Credentials []shared.AccountsV1CredentialCredentialAws      `json:"credentials,omitempty"`
+	Meta        *ListCredentialAwsListCredentialAwsResponseMeta `json:"meta,omitempty"`
 }
 
 type ListCredentialAwsResponse struct {
 	ContentType               string
-	ListCredentialAwsResponse *ListCredentialAws200ApplicationJSONListCredentialAwsResponse
+	ListCredentialAwsResponse *ListCredentialAwsListCredentialAwsResponse
 	StatusCode                int64
 }

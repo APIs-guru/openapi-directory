@@ -47,7 +47,7 @@ class PostServersIDActionsEnableRescue201ApplicationJSONActionStatusEnum(str, En
 
 @dataclass_json
 @dataclass
-class PostServersIDActionsEnableRescue201ApplicationJSONActionAction:
+class PostServersIDActionsEnableRescue201ApplicationJSONAction:
     command: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'command' }})
     error: PostServersIDActionsEnableRescue201ApplicationJSONActionError = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
     finished: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'finished' }})
@@ -61,7 +61,7 @@ class PostServersIDActionsEnableRescue201ApplicationJSONActionAction:
 @dataclass_json
 @dataclass
 class PostServersIDActionsEnableRescue201ApplicationJSON:
-    action: Optional[PostServersIDActionsEnableRescue201ApplicationJSONActionAction] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'action' }})
+    action: Optional[PostServersIDActionsEnableRescue201ApplicationJSONAction] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'action' }})
     root_password: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'root_password' }})
     
 

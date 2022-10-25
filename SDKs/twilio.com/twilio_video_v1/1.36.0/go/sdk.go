@@ -981,7 +981,7 @@ func (s *SDK) ListComposition(ctx context.Context, request operations.ListCompos
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListComposition200ApplicationJSONListCompositionResponse
+			var out *operations.ListCompositionListCompositionResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -1026,7 +1026,7 @@ func (s *SDK) ListCompositionHook(ctx context.Context, request operations.ListCo
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListCompositionHook200ApplicationJSONListCompositionHookResponse
+			var out *operations.ListCompositionHookListCompositionHookResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -1071,7 +1071,7 @@ func (s *SDK) ListRecording(ctx context.Context, request operations.ListRecordin
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListRecording200ApplicationJSONListRecordingResponse
+			var out *operations.ListRecordingListRecordingResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -1116,7 +1116,7 @@ func (s *SDK) ListRoom(ctx context.Context, request operations.ListRoomRequest) 
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListRoom200ApplicationJSONListRoomResponse
+			var out *operations.ListRoomListRoomResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -1161,7 +1161,7 @@ func (s *SDK) ListRoomParticipant(ctx context.Context, request operations.ListRo
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListRoomParticipant200ApplicationJSONListRoomParticipantResponse
+			var out *operations.ListRoomParticipantListRoomParticipantResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -1206,7 +1206,7 @@ func (s *SDK) ListRoomParticipantPublishedTrack(ctx context.Context, request ope
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListRoomParticipantPublishedTrack200ApplicationJSONListRoomParticipantPublishedTrackResponse
+			var out *operations.ListRoomParticipantPublishedTrackListRoomParticipantPublishedTrackResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -1251,7 +1251,7 @@ func (s *SDK) ListRoomParticipantSubscribedTrack(ctx context.Context, request op
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListRoomParticipantSubscribedTrack200ApplicationJSONListRoomParticipantSubscribedTrackResponse
+			var out *operations.ListRoomParticipantSubscribedTrackListRoomParticipantSubscribedTrackResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -1296,7 +1296,7 @@ func (s *SDK) ListRoomRecording(ctx context.Context, request operations.ListRoom
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListRoomRecording200ApplicationJSONListRoomRecordingResponse
+			var out *operations.ListRoomRecordingListRoomRecordingResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}

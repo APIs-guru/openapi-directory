@@ -21,7 +21,7 @@ class CreateMessageHeaders:
     
 
 @dataclass
-class CreateMessageRequestBodyCreateMessageRequest:
+class CreateMessageCreateMessageRequest:
     attributes: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Attributes' }})
     body: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Body' }})
     date_created: Optional[datetime] = field(default=None, metadata={'form': { 'field_name': 'DateCreated' }})
@@ -41,7 +41,7 @@ class CreateMessageRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateMessagePathParams = field(default=None)
     headers: CreateMessageHeaders = field(default=None)
-    request: Optional[CreateMessageRequestBodyCreateMessageRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateMessageCreateMessageRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateMessageSecurity = field(default=None)
     
 

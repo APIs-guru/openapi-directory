@@ -7,7 +7,7 @@ CREATE_CUSTOMER_PROFILE_SERVERS = [
 
 
 @dataclass
-class CreateCustomerProfileRequestBodyCreateCustomerProfileRequest:
+class CreateCustomerProfileCreateCustomerProfileRequest:
     email: str = field(default=None, metadata={'form': { 'field_name': 'Email' }})
     friendly_name: str = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
     policy_sid: str = field(default=None, metadata={'form': { 'field_name': 'PolicySid' }})
@@ -22,7 +22,7 @@ class CreateCustomerProfileSecurity:
 @dataclass
 class CreateCustomerProfileRequest:
     server_url: Optional[str] = field(default=None)
-    request: Optional[CreateCustomerProfileRequestBodyCreateCustomerProfileRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateCustomerProfileCreateCustomerProfileRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateCustomerProfileSecurity = field(default=None)
     
 

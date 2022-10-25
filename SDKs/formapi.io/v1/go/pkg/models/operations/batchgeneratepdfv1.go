@@ -18,24 +18,24 @@ type BatchGeneratePdfV1Request struct {
 	Security   BatchGeneratePdfV1Security
 }
 
-type BatchGeneratePdfV1201ApplicationJSONStatusEnum string
+type BatchGeneratePdfV1CreateSubmissionResponseStatusEnum string
 
 const (
-	BatchGeneratePdfV1201ApplicationJSONStatusEnumSuccess BatchGeneratePdfV1201ApplicationJSONStatusEnum = "success"
-	BatchGeneratePdfV1201ApplicationJSONStatusEnumError   BatchGeneratePdfV1201ApplicationJSONStatusEnum = "error"
+	BatchGeneratePdfV1CreateSubmissionResponseStatusEnumSuccess BatchGeneratePdfV1CreateSubmissionResponseStatusEnum = "success"
+	BatchGeneratePdfV1CreateSubmissionResponseStatusEnumError   BatchGeneratePdfV1CreateSubmissionResponseStatusEnum = "error"
 )
 
-type BatchGeneratePdfV1201ApplicationJSONCreateSubmissionResponse struct {
-	Errors     []string                                       `json:"errors,omitempty"`
-	Status     BatchGeneratePdfV1201ApplicationJSONStatusEnum `json:"status"`
-	Submission shared.Submission                              `json:"submission"`
+type BatchGeneratePdfV1CreateSubmissionResponse struct {
+	Errors     []string                                             `json:"errors,omitempty"`
+	Status     BatchGeneratePdfV1CreateSubmissionResponseStatusEnum `json:"status"`
+	Submission shared.Submission                                    `json:"submission"`
 }
 
 type BatchGeneratePdfV1Response struct {
 	ContentType               string
 	StatusCode                int64
 	AuthenticationError       *shared.AuthenticationError
-	CreateSubmissionResponses []BatchGeneratePdfV1201ApplicationJSONCreateSubmissionResponse
+	CreateSubmissionResponses []BatchGeneratePdfV1CreateSubmissionResponse
 	Error                     *shared.Error
 	InvalidRequests           []shared.InvalidRequest
 }

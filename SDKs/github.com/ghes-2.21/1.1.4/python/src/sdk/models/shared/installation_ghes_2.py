@@ -27,7 +27,7 @@ class InstallationGhes2RepositorySelectionEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class InstallationGhes2SuspendedBySimpleUser:
+class InstallationGhes2SimpleUser:
     avatar_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'avatar_url' }})
     events_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'events_url' }})
     followers_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'followers_url' }})
@@ -66,7 +66,7 @@ class InstallationGhes2:
     repository_selection: InstallationGhes2RepositorySelectionEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'repository_selection' }})
     single_file_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'single_file_name' }})
     suspended_at: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'suspended_at', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    suspended_by: Optional[InstallationGhes2SuspendedBySimpleUser] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'suspended_by' }})
+    suspended_by: Optional[InstallationGhes2SimpleUser] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'suspended_by' }})
     target_id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'target_id' }})
     target_type: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'target_type' }})
     updated_at: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updated_at', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})

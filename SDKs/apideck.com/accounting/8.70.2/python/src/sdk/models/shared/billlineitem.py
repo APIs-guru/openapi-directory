@@ -5,7 +5,7 @@ from . import linkedinvoiceitem
 from . import linkedledgeraccount
 from . import linkedtaxrate
 
-class BillLineItemTypeTypeEnum(str, Enum):
+class BillLineItemTypeEnum(str, Enum):
     EXPENSE_ITEM = "expense_item"
     EXPENSE_ACCOUNT = "expense_account"
 
@@ -26,7 +26,7 @@ class BillLineItem:
     tax_amount: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tax_amount' }})
     tax_rate: Optional[linkedtaxrate.LinkedTaxRate] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tax_rate' }})
     total_amount: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total_amount' }})
-    type: Optional[BillLineItemTypeTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    type: Optional[BillLineItemTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     unit_of_measure: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'unit_of_measure' }})
     unit_price: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'unit_price' }})
     

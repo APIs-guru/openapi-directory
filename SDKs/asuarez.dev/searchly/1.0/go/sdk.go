@@ -103,7 +103,8 @@ func (s *SDK) SrcSearchlyAPIV1ControllersSimilarityByContent(ctx context.Context
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			out := string(data)
+			res.SrcSearchlyAPIV1ControllersSimilarityByContentDefaultApplicationTextString = &out
 		}
 	}
 
@@ -154,7 +155,8 @@ func (s *SDK) SrcSearchlyAPIV1ControllersSimilarityBySong(ctx context.Context, r
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			out := string(data)
+			res.SrcSearchlyAPIV1ControllersSimilarityBySongDefaultApplicationTextString = &out
 		}
 	}
 
@@ -205,7 +207,8 @@ func (s *SDK) SrcSearchlyAPIV1ControllersSongSearch(ctx context.Context, request
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			out := string(data)
+			res.SrcSearchlyAPIV1ControllersSongSearchDefaultApplicationTextString = &out
 		}
 	}
 

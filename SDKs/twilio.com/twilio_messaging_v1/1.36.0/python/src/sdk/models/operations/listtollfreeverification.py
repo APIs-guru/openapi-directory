@@ -28,7 +28,7 @@ class ListTollfreeVerificationRequest:
 
 @dataclass_json
 @dataclass
-class ListTollfreeVerification200ApplicationJSONMeta:
+class ListTollfreeVerificationListTollfreeVerificationResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -40,14 +40,14 @@ class ListTollfreeVerification200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListTollfreeVerification200ApplicationJSONListTollfreeVerificationResponse:
-    meta: Optional[ListTollfreeVerification200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+class ListTollfreeVerificationListTollfreeVerificationResponse:
+    meta: Optional[ListTollfreeVerificationListTollfreeVerificationResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     verifications: Optional[List[shared.MessagingV1TollfreeVerification]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'verifications' }})
     
 
 @dataclass
 class ListTollfreeVerificationResponse:
     content_type: str = field(default=None)
-    list_tollfree_verification_response: Optional[ListTollfreeVerification200ApplicationJSONListTollfreeVerificationResponse] = field(default=None)
+    list_tollfree_verification_response: Optional[ListTollfreeVerificationListTollfreeVerificationResponse] = field(default=None)
     status_code: int = field(default=None)
     

@@ -45,36 +45,36 @@ type GetLoadBalancersIDActionsRequest struct {
 	QueryParams GetLoadBalancersIDActionsQueryParams
 }
 
-type GetLoadBalancersIDActions200ApplicationJSONActionsError struct {
+type GetLoadBalancersIDActionsActionsResponseActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
 }
 
-type GetLoadBalancersIDActions200ApplicationJSONActionsResources struct {
+type GetLoadBalancersIDActionsActionsResponseActionResources struct {
 	ID   int64  `json:"id"`
 	Type string `json:"type"`
 }
 
-type GetLoadBalancersIDActions200ApplicationJSONActionsStatusEnum string
+type GetLoadBalancersIDActionsActionsResponseActionStatusEnum string
 
 const (
-	GetLoadBalancersIDActions200ApplicationJSONActionsStatusEnumSuccess GetLoadBalancersIDActions200ApplicationJSONActionsStatusEnum = "success"
-	GetLoadBalancersIDActions200ApplicationJSONActionsStatusEnumRunning GetLoadBalancersIDActions200ApplicationJSONActionsStatusEnum = "running"
-	GetLoadBalancersIDActions200ApplicationJSONActionsStatusEnumError   GetLoadBalancersIDActions200ApplicationJSONActionsStatusEnum = "error"
+	GetLoadBalancersIDActionsActionsResponseActionStatusEnumSuccess GetLoadBalancersIDActionsActionsResponseActionStatusEnum = "success"
+	GetLoadBalancersIDActionsActionsResponseActionStatusEnumRunning GetLoadBalancersIDActionsActionsResponseActionStatusEnum = "running"
+	GetLoadBalancersIDActionsActionsResponseActionStatusEnumError   GetLoadBalancersIDActionsActionsResponseActionStatusEnum = "error"
 )
 
-type GetLoadBalancersIDActions200ApplicationJSONActionsAction struct {
-	Command   string                                                        `json:"command"`
-	Error     GetLoadBalancersIDActions200ApplicationJSONActionsError       `json:"error"`
-	Finished  string                                                        `json:"finished"`
-	ID        int64                                                         `json:"id"`
-	Progress  float64                                                       `json:"progress"`
-	Resources []GetLoadBalancersIDActions200ApplicationJSONActionsResources `json:"resources"`
-	Started   string                                                        `json:"started"`
-	Status    GetLoadBalancersIDActions200ApplicationJSONActionsStatusEnum  `json:"status"`
+type GetLoadBalancersIDActionsActionsResponseAction struct {
+	Command   string                                                    `json:"command"`
+	Error     GetLoadBalancersIDActionsActionsResponseActionError       `json:"error"`
+	Finished  string                                                    `json:"finished"`
+	ID        int64                                                     `json:"id"`
+	Progress  float64                                                   `json:"progress"`
+	Resources []GetLoadBalancersIDActionsActionsResponseActionResources `json:"resources"`
+	Started   string                                                    `json:"started"`
+	Status    GetLoadBalancersIDActionsActionsResponseActionStatusEnum  `json:"status"`
 }
 
-type GetLoadBalancersIDActions200ApplicationJSONMetaPagination struct {
+type GetLoadBalancersIDActionsActionsResponseMetaPagination struct {
 	LastPage     float64 `json:"last_page"`
 	NextPage     float64 `json:"next_page"`
 	Page         float64 `json:"page"`
@@ -83,17 +83,17 @@ type GetLoadBalancersIDActions200ApplicationJSONMetaPagination struct {
 	TotalEntries float64 `json:"total_entries"`
 }
 
-type GetLoadBalancersIDActions200ApplicationJSONMeta struct {
-	Pagination GetLoadBalancersIDActions200ApplicationJSONMetaPagination `json:"pagination"`
+type GetLoadBalancersIDActionsActionsResponseMeta struct {
+	Pagination GetLoadBalancersIDActionsActionsResponseMetaPagination `json:"pagination"`
 }
 
-type GetLoadBalancersIDActions200ApplicationJSONActionsResponse struct {
-	Actions []GetLoadBalancersIDActions200ApplicationJSONActionsAction `json:"actions"`
-	Meta    *GetLoadBalancersIDActions200ApplicationJSONMeta           `json:"meta,omitempty"`
+type GetLoadBalancersIDActionsActionsResponse struct {
+	Actions []GetLoadBalancersIDActionsActionsResponseAction `json:"actions"`
+	Meta    *GetLoadBalancersIDActionsActionsResponseMeta    `json:"meta,omitempty"`
 }
 
 type GetLoadBalancersIDActionsResponse struct {
-	ActionsResponse *GetLoadBalancersIDActions200ApplicationJSONActionsResponse
+	ActionsResponse *GetLoadBalancersIDActionsActionsResponse
 	ContentType     string
 	StatusCode      int64
 }

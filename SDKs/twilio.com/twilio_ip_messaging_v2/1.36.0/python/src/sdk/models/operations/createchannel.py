@@ -20,7 +20,7 @@ class CreateChannelHeaders:
     
 
 @dataclass
-class CreateChannelRequestBodyCreateChannelRequest:
+class CreateChannelCreateChannelRequest:
     attributes: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Attributes' }})
     created_by: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'CreatedBy' }})
     date_created: Optional[datetime] = field(default=None, metadata={'form': { 'field_name': 'DateCreated' }})
@@ -40,7 +40,7 @@ class CreateChannelRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateChannelPathParams = field(default=None)
     headers: CreateChannelHeaders = field(default=None)
-    request: Optional[CreateChannelRequestBodyCreateChannelRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateChannelCreateChannelRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateChannelSecurity = field(default=None)
     
 

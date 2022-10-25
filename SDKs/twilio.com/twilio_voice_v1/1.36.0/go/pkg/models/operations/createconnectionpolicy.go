@@ -8,7 +8,7 @@ var CreateConnectionPolicyServers = []string{
 	"https://voice.twilio.com",
 }
 
-type CreateConnectionPolicyRequestBodyCreateConnectionPolicyRequest struct {
+type CreateConnectionPolicyCreateConnectionPolicyRequest struct {
 	FriendlyName *string `form:"name=FriendlyName"`
 }
 
@@ -18,7 +18,7 @@ type CreateConnectionPolicySecurity struct {
 
 type CreateConnectionPolicyRequest struct {
 	ServerURL *string
-	Request   *CreateConnectionPolicyRequestBodyCreateConnectionPolicyRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request   *CreateConnectionPolicyCreateConnectionPolicyRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security  CreateConnectionPolicySecurity
 }
 

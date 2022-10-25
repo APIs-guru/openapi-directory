@@ -13,9 +13,9 @@ type AppsCreateFromManifestRequest struct {
 }
 
 type AppsCreateFromManifestResponse struct {
-	ContentType                                    string
-	StatusCode                                     int64
-	AppsCreateFromManifest201ApplicationJSONObject map[string]interface{}
-	BasicError                                     *shared.BasicError
-	ValidationErrorSimple                          *shared.ValidationErrorSimple
+	ContentType           string
+	GitHubApp             map[string]interface{}
+	StatusCode            int64
+	BasicError            *shared.BasicError
+	ValidationErrorSimple *shared.ValidationErrorSimple
 }

@@ -35,7 +35,7 @@ class ListTaskQueueRequest:
 
 @dataclass_json
 @dataclass
-class ListTaskQueue200ApplicationJSONMeta:
+class ListTaskQueueListTaskQueueResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -47,14 +47,14 @@ class ListTaskQueue200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListTaskQueue200ApplicationJSONListTaskQueueResponse:
-    meta: Optional[ListTaskQueue200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+class ListTaskQueueListTaskQueueResponse:
+    meta: Optional[ListTaskQueueListTaskQueueResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     task_queues: Optional[List[shared.TaskrouterV1WorkspaceTaskQueue]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'task_queues' }})
     
 
 @dataclass
 class ListTaskQueueResponse:
     content_type: str = field(default=None)
-    list_task_queue_response: Optional[ListTaskQueue200ApplicationJSONListTaskQueueResponse] = field(default=None)
+    list_task_queue_response: Optional[ListTaskQueueListTaskQueueResponse] = field(default=None)
     status_code: int = field(default=None)
     

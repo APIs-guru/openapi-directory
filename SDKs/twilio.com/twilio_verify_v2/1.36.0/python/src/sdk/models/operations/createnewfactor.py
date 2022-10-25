@@ -13,7 +13,7 @@ class CreateNewFactorPathParams:
     
 
 @dataclass
-class CreateNewFactorRequestBodyCreateNewFactorRequest:
+class CreateNewFactorCreateNewFactorRequest:
     binding_alg: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Binding.Alg' }})
     binding_public_key: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Binding.PublicKey' }})
     binding_secret: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Binding.Secret' }})
@@ -39,7 +39,7 @@ class CreateNewFactorSecurity:
 class CreateNewFactorRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateNewFactorPathParams = field(default=None)
-    request: Optional[CreateNewFactorRequestBodyCreateNewFactorRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateNewFactorCreateNewFactorRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateNewFactorSecurity = field(default=None)
     
 

@@ -28,7 +28,7 @@ type ListChannelWebhookRequest struct {
 	Security    ListChannelWebhookSecurity
 }
 
-type ListChannelWebhook200ApplicationJSONMeta struct {
+type ListChannelWebhookListChannelWebhookResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -38,13 +38,13 @@ type ListChannelWebhook200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListChannelWebhook200ApplicationJSONListChannelWebhookResponse struct {
-	Meta     *ListChannelWebhook200ApplicationJSONMeta   `json:"meta,omitempty"`
-	Webhooks []shared.ChatV2ServiceChannelChannelWebhook `json:"webhooks,omitempty"`
+type ListChannelWebhookListChannelWebhookResponse struct {
+	Meta     *ListChannelWebhookListChannelWebhookResponseMeta `json:"meta,omitempty"`
+	Webhooks []shared.ChatV2ServiceChannelChannelWebhook       `json:"webhooks,omitempty"`
 }
 
 type ListChannelWebhookResponse struct {
 	ContentType                string
-	ListChannelWebhookResponse *ListChannelWebhook200ApplicationJSONListChannelWebhookResponse
+	ListChannelWebhookResponse *ListChannelWebhookListChannelWebhookResponse
 	StatusCode                 int64
 }

@@ -7,7 +7,7 @@ CREATE_MARKETPLACE_INSTALLED_ADD_ON_SERVERS = [
 
 
 @dataclass
-class CreateMarketplaceInstalledAddOnRequestBodyCreateMarketplaceInstalledAddOnRequest:
+class CreateMarketplaceInstalledAddOnCreateMarketplaceInstalledAddOnRequest:
     accept_terms_of_service: bool = field(default=None, metadata={'form': { 'field_name': 'AcceptTermsOfService' }})
     available_add_on_sid: str = field(default=None, metadata={'form': { 'field_name': 'AvailableAddOnSid' }})
     configuration: Optional[Any] = field(default=None, metadata={'form': { 'field_name': 'Configuration' }})
@@ -22,7 +22,7 @@ class CreateMarketplaceInstalledAddOnSecurity:
 @dataclass
 class CreateMarketplaceInstalledAddOnRequest:
     server_url: Optional[str] = field(default=None)
-    request: Optional[CreateMarketplaceInstalledAddOnRequestBodyCreateMarketplaceInstalledAddOnRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateMarketplaceInstalledAddOnCreateMarketplaceInstalledAddOnRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateMarketplaceInstalledAddOnSecurity = field(default=None)
     
 

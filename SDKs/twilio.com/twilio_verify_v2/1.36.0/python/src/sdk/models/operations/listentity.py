@@ -32,7 +32,7 @@ class ListEntityRequest:
 
 @dataclass_json
 @dataclass
-class ListEntity200ApplicationJSONMeta:
+class ListEntityListEntityResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -44,14 +44,14 @@ class ListEntity200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListEntity200ApplicationJSONListEntityResponse:
+class ListEntityListEntityResponse:
     entities: Optional[List[shared.VerifyV2ServiceEntity]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'entities' }})
-    meta: Optional[ListEntity200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+    meta: Optional[ListEntityListEntityResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     
 
 @dataclass
 class ListEntityResponse:
     content_type: str = field(default=None)
-    list_entity_response: Optional[ListEntity200ApplicationJSONListEntityResponse] = field(default=None)
+    list_entity_response: Optional[ListEntityListEntityResponse] = field(default=None)
     status_code: int = field(default=None)
     

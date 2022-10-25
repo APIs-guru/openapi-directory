@@ -32,7 +32,7 @@ class ListModelBuildRequest:
 
 @dataclass_json
 @dataclass
-class ListModelBuild200ApplicationJSONMeta:
+class ListModelBuildListModelBuildResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -44,14 +44,14 @@ class ListModelBuild200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListModelBuild200ApplicationJSONListModelBuildResponse:
-    meta: Optional[ListModelBuild200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+class ListModelBuildListModelBuildResponse:
+    meta: Optional[ListModelBuildListModelBuildResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     model_builds: Optional[List[shared.AutopilotV1AssistantModelBuild]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'model_builds' }})
     
 
 @dataclass
 class ListModelBuildResponse:
     content_type: str = field(default=None)
-    list_model_build_response: Optional[ListModelBuild200ApplicationJSONListModelBuildResponse] = field(default=None)
+    list_model_build_response: Optional[ListModelBuildListModelBuildResponse] = field(default=None)
     status_code: int = field(default=None)
     

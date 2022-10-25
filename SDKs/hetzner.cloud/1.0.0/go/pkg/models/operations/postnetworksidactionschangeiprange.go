@@ -4,50 +4,50 @@ type PostNetworksIDActionsChangeIPRangePathParams struct {
 	ID int64 `pathParam:"style=simple,explode=false,name=id"`
 }
 
-type PostNetworksIDActionsChangeIPRangeRequestBodyChangeIPRangeRequest struct {
+type PostNetworksIDActionsChangeIPRangeChangeIPRangeRequest struct {
 	IPRange string `json:"ip_range"`
 }
 
 type PostNetworksIDActionsChangeIPRangeRequest struct {
 	PathParams PostNetworksIDActionsChangeIPRangePathParams
-	Request    *PostNetworksIDActionsChangeIPRangeRequestBodyChangeIPRangeRequest `request:"mediaType=application/json"`
+	Request    *PostNetworksIDActionsChangeIPRangeChangeIPRangeRequest `request:"mediaType=application/json"`
 }
 
-type PostNetworksIDActionsChangeIPRange201ApplicationJSONActionError struct {
+type PostNetworksIDActionsChangeIPRangeActionResponseActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
 }
 
-type PostNetworksIDActionsChangeIPRange201ApplicationJSONActionResources struct {
+type PostNetworksIDActionsChangeIPRangeActionResponseActionResources struct {
 	ID   int64  `json:"id"`
 	Type string `json:"type"`
 }
 
-type PostNetworksIDActionsChangeIPRange201ApplicationJSONActionStatusEnum string
+type PostNetworksIDActionsChangeIPRangeActionResponseActionStatusEnum string
 
 const (
-	PostNetworksIDActionsChangeIPRange201ApplicationJSONActionStatusEnumSuccess PostNetworksIDActionsChangeIPRange201ApplicationJSONActionStatusEnum = "success"
-	PostNetworksIDActionsChangeIPRange201ApplicationJSONActionStatusEnumRunning PostNetworksIDActionsChangeIPRange201ApplicationJSONActionStatusEnum = "running"
-	PostNetworksIDActionsChangeIPRange201ApplicationJSONActionStatusEnumError   PostNetworksIDActionsChangeIPRange201ApplicationJSONActionStatusEnum = "error"
+	PostNetworksIDActionsChangeIPRangeActionResponseActionStatusEnumSuccess PostNetworksIDActionsChangeIPRangeActionResponseActionStatusEnum = "success"
+	PostNetworksIDActionsChangeIPRangeActionResponseActionStatusEnumRunning PostNetworksIDActionsChangeIPRangeActionResponseActionStatusEnum = "running"
+	PostNetworksIDActionsChangeIPRangeActionResponseActionStatusEnumError   PostNetworksIDActionsChangeIPRangeActionResponseActionStatusEnum = "error"
 )
 
-type PostNetworksIDActionsChangeIPRange201ApplicationJSONActionAction struct {
-	Command   string                                                                `json:"command"`
-	Error     PostNetworksIDActionsChangeIPRange201ApplicationJSONActionError       `json:"error"`
-	Finished  string                                                                `json:"finished"`
-	ID        int64                                                                 `json:"id"`
-	Progress  float64                                                               `json:"progress"`
-	Resources []PostNetworksIDActionsChangeIPRange201ApplicationJSONActionResources `json:"resources"`
-	Started   string                                                                `json:"started"`
-	Status    PostNetworksIDActionsChangeIPRange201ApplicationJSONActionStatusEnum  `json:"status"`
+type PostNetworksIDActionsChangeIPRangeActionResponseAction struct {
+	Command   string                                                            `json:"command"`
+	Error     PostNetworksIDActionsChangeIPRangeActionResponseActionError       `json:"error"`
+	Finished  string                                                            `json:"finished"`
+	ID        int64                                                             `json:"id"`
+	Progress  float64                                                           `json:"progress"`
+	Resources []PostNetworksIDActionsChangeIPRangeActionResponseActionResources `json:"resources"`
+	Started   string                                                            `json:"started"`
+	Status    PostNetworksIDActionsChangeIPRangeActionResponseActionStatusEnum  `json:"status"`
 }
 
-type PostNetworksIDActionsChangeIPRange201ApplicationJSONActionResponse struct {
-	Action PostNetworksIDActionsChangeIPRange201ApplicationJSONActionAction `json:"action"`
+type PostNetworksIDActionsChangeIPRangeActionResponse struct {
+	Action PostNetworksIDActionsChangeIPRangeActionResponseAction `json:"action"`
 }
 
 type PostNetworksIDActionsChangeIPRangeResponse struct {
-	ActionResponse *PostNetworksIDActionsChangeIPRange201ApplicationJSONActionResponse
+	ActionResponse *PostNetworksIDActionsChangeIPRangeActionResponse
 	ContentType    string
 	StatusCode     int64
 }

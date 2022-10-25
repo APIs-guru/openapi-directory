@@ -41,7 +41,7 @@ class ListTaskRequest:
 
 @dataclass_json
 @dataclass
-class ListTask200ApplicationJSONMeta:
+class ListTaskListTaskResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -53,14 +53,14 @@ class ListTask200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListTask200ApplicationJSONListTaskResponse:
-    meta: Optional[ListTask200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+class ListTaskListTaskResponse:
+    meta: Optional[ListTaskListTaskResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     tasks: Optional[List[shared.TaskrouterV1WorkspaceTask]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tasks' }})
     
 
 @dataclass
 class ListTaskResponse:
     content_type: str = field(default=None)
-    list_task_response: Optional[ListTask200ApplicationJSONListTaskResponse] = field(default=None)
+    list_task_response: Optional[ListTaskListTaskResponse] = field(default=None)
     status_code: int = field(default=None)
     

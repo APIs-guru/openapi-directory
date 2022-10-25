@@ -4,7 +4,7 @@ import (
 	"time"
 )
 
-type CreateAPIApplicationRequestBodyNewAPIApplication struct {
+type CreateAPIApplicationNewAPIApplication struct {
 	ApplicationName                  *string    `json:"applicationName,omitempty"`
 	Enabled                          *bool      `json:"enabled,omitempty"`
 	Expiry                           *time.Time `json:"expiry,omitempty"`
@@ -15,10 +15,10 @@ type CreateAPIApplicationRequestBodyNewAPIApplication struct {
 }
 
 type CreateAPIApplicationRequest struct {
-	Request CreateAPIApplicationRequestBodyNewAPIApplication `request:"mediaType=application/json"`
+	Request CreateAPIApplicationNewAPIApplication `request:"mediaType=application/json"`
 }
 
-type CreateAPIApplication200ApplicationJSONAPIApplication struct {
+type CreateAPIApplicationAPIApplication struct {
 	ApplicationID                    *int64     `json:"applicationId,omitempty"`
 	ClientID                         *string    `json:"clientId,omitempty"`
 	ClientKey                        *string    `json:"clientKey,omitempty"`
@@ -31,7 +31,7 @@ type CreateAPIApplication200ApplicationJSONAPIApplication struct {
 }
 
 type CreateAPIApplicationResponse struct {
-	APIApplication *CreateAPIApplication200ApplicationJSONAPIApplication
+	APIApplication *CreateAPIApplicationAPIApplication
 	ContentType    string
 	StatusCode     int64
 }

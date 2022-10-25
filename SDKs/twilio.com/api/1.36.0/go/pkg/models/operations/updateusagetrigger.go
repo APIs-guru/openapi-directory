@@ -13,21 +13,21 @@ type UpdateUsageTriggerPathParams struct {
 	Sid        string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
-type UpdateUsageTriggerRequestBodyCallbackMethodEnum string
+type UpdateUsageTriggerUpdateUsageTriggerRequestCallbackMethodEnum string
 
 const (
-	UpdateUsageTriggerRequestBodyCallbackMethodEnumHead   UpdateUsageTriggerRequestBodyCallbackMethodEnum = "HEAD"
-	UpdateUsageTriggerRequestBodyCallbackMethodEnumGet    UpdateUsageTriggerRequestBodyCallbackMethodEnum = "GET"
-	UpdateUsageTriggerRequestBodyCallbackMethodEnumPost   UpdateUsageTriggerRequestBodyCallbackMethodEnum = "POST"
-	UpdateUsageTriggerRequestBodyCallbackMethodEnumPatch  UpdateUsageTriggerRequestBodyCallbackMethodEnum = "PATCH"
-	UpdateUsageTriggerRequestBodyCallbackMethodEnumPut    UpdateUsageTriggerRequestBodyCallbackMethodEnum = "PUT"
-	UpdateUsageTriggerRequestBodyCallbackMethodEnumDelete UpdateUsageTriggerRequestBodyCallbackMethodEnum = "DELETE"
+	UpdateUsageTriggerUpdateUsageTriggerRequestCallbackMethodEnumHead   UpdateUsageTriggerUpdateUsageTriggerRequestCallbackMethodEnum = "HEAD"
+	UpdateUsageTriggerUpdateUsageTriggerRequestCallbackMethodEnumGet    UpdateUsageTriggerUpdateUsageTriggerRequestCallbackMethodEnum = "GET"
+	UpdateUsageTriggerUpdateUsageTriggerRequestCallbackMethodEnumPost   UpdateUsageTriggerUpdateUsageTriggerRequestCallbackMethodEnum = "POST"
+	UpdateUsageTriggerUpdateUsageTriggerRequestCallbackMethodEnumPatch  UpdateUsageTriggerUpdateUsageTriggerRequestCallbackMethodEnum = "PATCH"
+	UpdateUsageTriggerUpdateUsageTriggerRequestCallbackMethodEnumPut    UpdateUsageTriggerUpdateUsageTriggerRequestCallbackMethodEnum = "PUT"
+	UpdateUsageTriggerUpdateUsageTriggerRequestCallbackMethodEnumDelete UpdateUsageTriggerUpdateUsageTriggerRequestCallbackMethodEnum = "DELETE"
 )
 
-type UpdateUsageTriggerRequestBodyUpdateUsageTriggerRequest struct {
-	CallbackMethod *UpdateUsageTriggerRequestBodyCallbackMethodEnum `form:"name=CallbackMethod"`
-	CallbackURL    *string                                          `form:"name=CallbackUrl"`
-	FriendlyName   *string                                          `form:"name=FriendlyName"`
+type UpdateUsageTriggerUpdateUsageTriggerRequest struct {
+	CallbackMethod *UpdateUsageTriggerUpdateUsageTriggerRequestCallbackMethodEnum `form:"name=CallbackMethod"`
+	CallbackURL    *string                                                        `form:"name=CallbackUrl"`
+	FriendlyName   *string                                                        `form:"name=FriendlyName"`
 }
 
 type UpdateUsageTriggerSecurity struct {
@@ -37,7 +37,7 @@ type UpdateUsageTriggerSecurity struct {
 type UpdateUsageTriggerRequest struct {
 	ServerURL  *string
 	PathParams UpdateUsageTriggerPathParams
-	Request    *UpdateUsageTriggerRequestBodyUpdateUsageTriggerRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateUsageTriggerUpdateUsageTriggerRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateUsageTriggerSecurity
 }
 

@@ -12,7 +12,7 @@ type UpdateRoomRecordingRulePathParams struct {
 	RoomSid string `pathParam:"style=simple,explode=false,name=RoomSid"`
 }
 
-type UpdateRoomRecordingRuleRequestBodyUpdateRoomRecordingRuleRequest struct {
+type UpdateRoomRecordingRuleUpdateRoomRecordingRuleRequest struct {
 	Rules *interface{} `form:"name=Rules"`
 }
 
@@ -23,7 +23,7 @@ type UpdateRoomRecordingRuleSecurity struct {
 type UpdateRoomRecordingRuleRequest struct {
 	ServerURL  *string
 	PathParams UpdateRoomRecordingRulePathParams
-	Request    *UpdateRoomRecordingRuleRequestBodyUpdateRoomRecordingRuleRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateRoomRecordingRuleUpdateRoomRecordingRuleRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateRoomRecordingRuleSecurity
 }
 

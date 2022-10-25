@@ -34,7 +34,7 @@ class ListUserBindingRequest:
 
 @dataclass_json
 @dataclass
-class ListUserBinding200ApplicationJSONMeta:
+class ListUserBindingListUserBindingResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -46,14 +46,14 @@ class ListUserBinding200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListUserBinding200ApplicationJSONListUserBindingResponse:
+class ListUserBindingListUserBindingResponse:
     bindings: Optional[List[shared.ChatV2ServiceUserUserBinding]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'bindings' }})
-    meta: Optional[ListUserBinding200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+    meta: Optional[ListUserBindingListUserBindingResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     
 
 @dataclass
 class ListUserBindingResponse:
     content_type: str = field(default=None)
-    list_user_binding_response: Optional[ListUserBinding200ApplicationJSONListUserBindingResponse] = field(default=None)
+    list_user_binding_response: Optional[ListUserBindingListUserBindingResponse] = field(default=None)
     status_code: int = field(default=None)
     

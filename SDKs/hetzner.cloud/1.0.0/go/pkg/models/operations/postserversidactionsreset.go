@@ -8,41 +8,41 @@ type PostServersIDActionsResetRequest struct {
 	PathParams PostServersIDActionsResetPathParams
 }
 
-type PostServersIDActionsReset201ApplicationJSONActionError struct {
+type PostServersIDActionsResetActionResponseActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
 }
 
-type PostServersIDActionsReset201ApplicationJSONActionResources struct {
+type PostServersIDActionsResetActionResponseActionResources struct {
 	ID   int64  `json:"id"`
 	Type string `json:"type"`
 }
 
-type PostServersIDActionsReset201ApplicationJSONActionStatusEnum string
+type PostServersIDActionsResetActionResponseActionStatusEnum string
 
 const (
-	PostServersIDActionsReset201ApplicationJSONActionStatusEnumSuccess PostServersIDActionsReset201ApplicationJSONActionStatusEnum = "success"
-	PostServersIDActionsReset201ApplicationJSONActionStatusEnumRunning PostServersIDActionsReset201ApplicationJSONActionStatusEnum = "running"
-	PostServersIDActionsReset201ApplicationJSONActionStatusEnumError   PostServersIDActionsReset201ApplicationJSONActionStatusEnum = "error"
+	PostServersIDActionsResetActionResponseActionStatusEnumSuccess PostServersIDActionsResetActionResponseActionStatusEnum = "success"
+	PostServersIDActionsResetActionResponseActionStatusEnumRunning PostServersIDActionsResetActionResponseActionStatusEnum = "running"
+	PostServersIDActionsResetActionResponseActionStatusEnumError   PostServersIDActionsResetActionResponseActionStatusEnum = "error"
 )
 
-type PostServersIDActionsReset201ApplicationJSONActionAction struct {
-	Command   string                                                       `json:"command"`
-	Error     PostServersIDActionsReset201ApplicationJSONActionError       `json:"error"`
-	Finished  string                                                       `json:"finished"`
-	ID        int64                                                        `json:"id"`
-	Progress  float64                                                      `json:"progress"`
-	Resources []PostServersIDActionsReset201ApplicationJSONActionResources `json:"resources"`
-	Started   string                                                       `json:"started"`
-	Status    PostServersIDActionsReset201ApplicationJSONActionStatusEnum  `json:"status"`
+type PostServersIDActionsResetActionResponseAction struct {
+	Command   string                                                   `json:"command"`
+	Error     PostServersIDActionsResetActionResponseActionError       `json:"error"`
+	Finished  string                                                   `json:"finished"`
+	ID        int64                                                    `json:"id"`
+	Progress  float64                                                  `json:"progress"`
+	Resources []PostServersIDActionsResetActionResponseActionResources `json:"resources"`
+	Started   string                                                   `json:"started"`
+	Status    PostServersIDActionsResetActionResponseActionStatusEnum  `json:"status"`
 }
 
-type PostServersIDActionsReset201ApplicationJSONActionResponse struct {
-	Action PostServersIDActionsReset201ApplicationJSONActionAction `json:"action"`
+type PostServersIDActionsResetActionResponse struct {
+	Action PostServersIDActionsResetActionResponseAction `json:"action"`
 }
 
 type PostServersIDActionsResetResponse struct {
-	ActionResponse *PostServersIDActionsReset201ApplicationJSONActionResponse
+	ActionResponse *PostServersIDActionsResetActionResponse
 	ContentType    string
 	StatusCode     int64
 }

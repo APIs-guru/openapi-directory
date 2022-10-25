@@ -2,7 +2,7 @@ from dataclasses import dataclass, field
 from typing import Enum,Optional
 from dataclasses_json import dataclass_json
 
-class WritableInterfaceTemplateTypeTypeEnum(str, Enum):
+class WritableInterfaceTemplateTypeEnum(str, Enum):
     VIRTUAL = "virtual"
     LAG = "lag"
     ONE_HUNDREDBASE_TX = "100base-tx"
@@ -84,5 +84,5 @@ class WritableInterfaceTemplate:
     id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     mgmt_only: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'mgmt_only' }})
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    type: WritableInterfaceTemplateTypeTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    type: WritableInterfaceTemplateTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     

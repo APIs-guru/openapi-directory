@@ -13,7 +13,7 @@ class CreateVariablePathParams:
     
 
 @dataclass
-class CreateVariableRequestBodyCreateVariableRequest:
+class CreateVariableCreateVariableRequest:
     key: str = field(default=None, metadata={'form': { 'field_name': 'Key' }})
     value: str = field(default=None, metadata={'form': { 'field_name': 'Value' }})
     
@@ -27,7 +27,7 @@ class CreateVariableSecurity:
 class CreateVariableRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateVariablePathParams = field(default=None)
-    request: Optional[CreateVariableRequestBodyCreateVariableRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateVariableCreateVariableRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateVariableSecurity = field(default=None)
     
 

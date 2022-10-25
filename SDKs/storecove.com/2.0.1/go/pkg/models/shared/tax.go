@@ -1,39 +1,39 @@
 package shared
 
-type TaxCategoryTaxCategoryEnum string
+type TaxTaxCategoryEnum string
 
 const (
-	TaxCategoryTaxCategoryEnumStandard              TaxCategoryTaxCategoryEnum = "standard"
-	TaxCategoryTaxCategoryEnumZeroRated             TaxCategoryTaxCategoryEnum = "zero_rated"
-	TaxCategoryTaxCategoryEnumReverseCharge         TaxCategoryTaxCategoryEnum = "reverse_charge"
-	TaxCategoryTaxCategoryEnumIntraCommunity        TaxCategoryTaxCategoryEnum = "intra_community"
-	TaxCategoryTaxCategoryEnumExempt                TaxCategoryTaxCategoryEnum = "exempt"
-	TaxCategoryTaxCategoryEnumExport                TaxCategoryTaxCategoryEnum = "export"
-	TaxCategoryTaxCategoryEnumOutsideScope          TaxCategoryTaxCategoryEnum = "outside_scope"
-	TaxCategoryTaxCategoryEnumRegulation33Exempt    TaxCategoryTaxCategoryEnum = "regulation33_exempt"
-	TaxCategoryTaxCategoryEnumNonregulation33Exempt TaxCategoryTaxCategoryEnum = "nonregulation33_exempt"
-	TaxCategoryTaxCategoryEnumDeemedSupply          TaxCategoryTaxCategoryEnum = "deemed_supply"
-	TaxCategoryTaxCategoryEnumSrcaS                 TaxCategoryTaxCategoryEnum = "srca_s"
-	TaxCategoryTaxCategoryEnumSrcaC                 TaxCategoryTaxCategoryEnum = "srca_c"
-	TaxCategoryTaxCategoryEnumNotRegistered         TaxCategoryTaxCategoryEnum = "not_registered"
-	TaxCategoryTaxCategoryEnumSalesTax              TaxCategoryTaxCategoryEnum = "sales_tax"
-	TaxCategoryTaxCategoryEnumSalesTaxWork          TaxCategoryTaxCategoryEnum = "sales_tax_work"
-	TaxCategoryTaxCategoryEnumServiceTax            TaxCategoryTaxCategoryEnum = "service_tax"
-	TaxCategoryTaxCategoryEnumServiceTaxImport      TaxCategoryTaxCategoryEnum = "service_tax_import"
-	TaxCategoryTaxCategoryEnumSalesToExportMarket   TaxCategoryTaxCategoryEnum = "sales_to_export_market"
-	TaxCategoryTaxCategoryEnumSalesToSpecialArea    TaxCategoryTaxCategoryEnum = "sales_to_special_area"
-	TaxCategoryTaxCategoryEnumSalesToDesignatedArea TaxCategoryTaxCategoryEnum = "sales_to_designated_area"
-	TaxCategoryTaxCategoryEnumExemptionScheduleA    TaxCategoryTaxCategoryEnum = "exemption_schedule_a"
-	TaxCategoryTaxCategoryEnumExemptionScheduleB    TaxCategoryTaxCategoryEnum = "exemption_schedule_b"
-	TaxCategoryTaxCategoryEnumExemptionScheduleCa   TaxCategoryTaxCategoryEnum = "exemption_schedule_c_a"
-	TaxCategoryTaxCategoryEnumExemptionScheduleCb   TaxCategoryTaxCategoryEnum = "exemption_schedule_c_b"
-	TaxCategoryTaxCategoryEnumExemptionScheduleCc   TaxCategoryTaxCategoryEnum = "exemption_schedule_c_c"
-	TaxCategoryTaxCategoryEnumExemptionServiceTax   TaxCategoryTaxCategoryEnum = "exemption_service_tax"
+	TaxTaxCategoryEnumStandard              TaxTaxCategoryEnum = "standard"
+	TaxTaxCategoryEnumZeroRated             TaxTaxCategoryEnum = "zero_rated"
+	TaxTaxCategoryEnumReverseCharge         TaxTaxCategoryEnum = "reverse_charge"
+	TaxTaxCategoryEnumIntraCommunity        TaxTaxCategoryEnum = "intra_community"
+	TaxTaxCategoryEnumExempt                TaxTaxCategoryEnum = "exempt"
+	TaxTaxCategoryEnumExport                TaxTaxCategoryEnum = "export"
+	TaxTaxCategoryEnumOutsideScope          TaxTaxCategoryEnum = "outside_scope"
+	TaxTaxCategoryEnumRegulation33Exempt    TaxTaxCategoryEnum = "regulation33_exempt"
+	TaxTaxCategoryEnumNonregulation33Exempt TaxTaxCategoryEnum = "nonregulation33_exempt"
+	TaxTaxCategoryEnumDeemedSupply          TaxTaxCategoryEnum = "deemed_supply"
+	TaxTaxCategoryEnumSrcaS                 TaxTaxCategoryEnum = "srca_s"
+	TaxTaxCategoryEnumSrcaC                 TaxTaxCategoryEnum = "srca_c"
+	TaxTaxCategoryEnumNotRegistered         TaxTaxCategoryEnum = "not_registered"
+	TaxTaxCategoryEnumSalesTax              TaxTaxCategoryEnum = "sales_tax"
+	TaxTaxCategoryEnumSalesTaxWork          TaxTaxCategoryEnum = "sales_tax_work"
+	TaxTaxCategoryEnumServiceTax            TaxTaxCategoryEnum = "service_tax"
+	TaxTaxCategoryEnumServiceTaxImport      TaxTaxCategoryEnum = "service_tax_import"
+	TaxTaxCategoryEnumSalesToExportMarket   TaxTaxCategoryEnum = "sales_to_export_market"
+	TaxTaxCategoryEnumSalesToSpecialArea    TaxTaxCategoryEnum = "sales_to_special_area"
+	TaxTaxCategoryEnumSalesToDesignatedArea TaxTaxCategoryEnum = "sales_to_designated_area"
+	TaxTaxCategoryEnumExemptionScheduleA    TaxTaxCategoryEnum = "exemption_schedule_a"
+	TaxTaxCategoryEnumExemptionScheduleB    TaxTaxCategoryEnum = "exemption_schedule_b"
+	TaxTaxCategoryEnumExemptionScheduleCa   TaxTaxCategoryEnum = "exemption_schedule_c_a"
+	TaxTaxCategoryEnumExemptionScheduleCb   TaxTaxCategoryEnum = "exemption_schedule_c_b"
+	TaxTaxCategoryEnumExemptionScheduleCc   TaxTaxCategoryEnum = "exemption_schedule_c_c"
+	TaxTaxCategoryEnumExemptionServiceTax   TaxTaxCategoryEnum = "exemption_service_tax"
 )
 
 type Tax struct {
-	Amount     *float64                    `json:"amount,omitempty"`
-	Category   *TaxCategoryTaxCategoryEnum `json:"category,omitempty"`
-	Country    CountryEnum                 `json:"country"`
-	Percentage *float64                    `json:"percentage,omitempty"`
+	Amount     *float64            `json:"amount,omitempty"`
+	Category   *TaxTaxCategoryEnum `json:"category,omitempty"`
+	Country    CountryEnum         `json:"country"`
+	Percentage *float64            `json:"percentage,omitempty"`
 }

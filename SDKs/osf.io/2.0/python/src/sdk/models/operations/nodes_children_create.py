@@ -10,7 +10,7 @@ from dataclasses_json import dataclass_json
 class NodesChildrenCreatePathParams:
     node_id: str = field(default=None, metadata={'path_param': { 'field_name': 'node_id', 'style': 'simple', 'explode': False }})
     
-class NodesChildrenCreateRequestBodyAttributesCategoryEnum(str, Enum):
+class NodesChildrenCreateNodeAttributesCategoryEnum(str, Enum):
     ANALYSIS = "analysis"
     COMMUNICATION = "communication"
     DATA = "data"
@@ -25,8 +25,8 @@ class NodesChildrenCreateRequestBodyAttributesCategoryEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class NodesChildrenCreateRequestBodyAttributesAttributes:
-    category: NodesChildrenCreateRequestBodyAttributesCategoryEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'category' }})
+class NodesChildrenCreateNodeAttributes:
+    category: NodesChildrenCreateNodeAttributesCategoryEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'category' }})
     collection: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'collection' }})
     current_user_can_comment: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'current_user_can_comment' }})
     current_user_permissions: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'current_user_permissions' }})
@@ -46,14 +46,14 @@ class NodesChildrenCreateRequestBodyAttributesAttributes:
 
 @dataclass_json
 @dataclass
-class NodesChildrenCreateRequestBodyLinksLinks:
+class NodesChildrenCreateNodeLinks:
     html: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'html' }})
     self: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'self' }})
     
 
 @dataclass_json
 @dataclass
-class NodesChildrenCreateRequestBodyRelationshipsRelationships:
+class NodesChildrenCreateNodeRelationships:
     affiliated_institutions: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'affiliated_institutions' }})
     children: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'children' }})
     citation: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'citation' }})
@@ -79,18 +79,18 @@ class NodesChildrenCreateRequestBodyRelationshipsRelationships:
 
 @dataclass_json
 @dataclass
-class NodesChildrenCreateRequestBodyNode:
-    attributes: NodesChildrenCreateRequestBodyAttributesAttributes = field(default=None, metadata={'dataclasses_json': { 'field_name': 'attributes' }})
+class NodesChildrenCreateNode:
+    attributes: NodesChildrenCreateNodeAttributes = field(default=None, metadata={'dataclasses_json': { 'field_name': 'attributes' }})
     id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    links: Optional[NodesChildrenCreateRequestBodyLinksLinks] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'links' }})
-    relationships: Optional[NodesChildrenCreateRequestBodyRelationshipsRelationships] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'relationships' }})
+    links: Optional[NodesChildrenCreateNodeLinks] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'links' }})
+    relationships: Optional[NodesChildrenCreateNodeRelationships] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'relationships' }})
     type: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     
 
 @dataclass
 class NodesChildrenCreateRequest:
     path_params: NodesChildrenCreatePathParams = field(default=None)
-    request: NodesChildrenCreateRequestBodyNode = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: NodesChildrenCreateNode = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass

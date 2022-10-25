@@ -12,7 +12,7 @@ class UpdateSinkPathParams:
     
 
 @dataclass
-class UpdateSinkRequestBodyUpdateSinkRequest:
+class UpdateSinkUpdateSinkRequest:
     description: str = field(default=None, metadata={'form': { 'field_name': 'Description' }})
     
 
@@ -25,7 +25,7 @@ class UpdateSinkSecurity:
 class UpdateSinkRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateSinkPathParams = field(default=None)
-    request: Optional[UpdateSinkRequestBodyUpdateSinkRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateSinkUpdateSinkRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateSinkSecurity = field(default=None)
     
 

@@ -12,7 +12,7 @@ type CreateUnderstandQueryPathParams struct {
 	AssistantSid string `pathParam:"style=simple,explode=false,name=AssistantSid"`
 }
 
-type CreateUnderstandQueryRequestBodyCreateUnderstandQueryRequest struct {
+type CreateUnderstandQueryCreateUnderstandQueryRequest struct {
 	Field      *string `form:"name=Field"`
 	Language   string  `form:"name=Language"`
 	ModelBuild *string `form:"name=ModelBuild"`
@@ -27,7 +27,7 @@ type CreateUnderstandQuerySecurity struct {
 type CreateUnderstandQueryRequest struct {
 	ServerURL  *string
 	PathParams CreateUnderstandQueryPathParams
-	Request    *CreateUnderstandQueryRequestBodyCreateUnderstandQueryRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateUnderstandQueryCreateUnderstandQueryRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateUnderstandQuerySecurity
 }
 

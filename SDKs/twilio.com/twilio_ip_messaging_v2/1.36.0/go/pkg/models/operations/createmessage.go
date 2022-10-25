@@ -18,7 +18,7 @@ type CreateMessageHeaders struct {
 	XTwilioWebhookEnabled *shared.MessageEnumWebhookEnabledTypeEnum `header:"name=X-Twilio-Webhook-Enabled"`
 }
 
-type CreateMessageRequestBodyCreateMessageRequest struct {
+type CreateMessageCreateMessageRequest struct {
 	Attributes    *string    `form:"name=Attributes"`
 	Body          *string    `form:"name=Body"`
 	DateCreated   *time.Time `form:"name=DateCreated"`
@@ -36,7 +36,7 @@ type CreateMessageRequest struct {
 	ServerURL  *string
 	PathParams CreateMessagePathParams
 	Headers    CreateMessageHeaders
-	Request    *CreateMessageRequestBodyCreateMessageRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateMessageCreateMessageRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateMessageSecurity
 }
 

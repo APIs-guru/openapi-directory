@@ -7,7 +7,7 @@ from . import invoicedata
 from . import invoicerecipient
 from . import routing
 
-class InvoiceSubmissionModeModeEnum(str, Enum):
+class InvoiceSubmissionModeEnum(str, Enum):
     DIRECT = "direct"
 
 
@@ -24,7 +24,7 @@ class InvoiceSubmission:
     invoice_recipient: Optional[invoicerecipient.InvoiceRecipient] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'invoiceRecipient' }})
     legal_entity_id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'legalEntityId' }})
     legal_supplier_id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'legalSupplierId' }})
-    mode: Optional[InvoiceSubmissionModeModeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'mode' }})
+    mode: Optional[InvoiceSubmissionModeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'mode' }})
     routing: Optional[routing.Routing] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'routing' }})
     supplier_id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'supplierId' }})
     

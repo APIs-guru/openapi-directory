@@ -2,7 +2,7 @@ from dataclasses import dataclass, field
 from typing import Enum,Optional
 from dataclasses_json import dataclass_json
 
-class WritablePowerPortTemplateTypeTypeEnum(str, Enum):
+class WritablePowerPortTemplateTypeEnum(str, Enum):
     IEC_60320_C6 = "iec-60320-c6"
     IEC_60320_C8 = "iec-60320-c8"
     IEC_60320_C14 = "iec-60320-c14"
@@ -79,5 +79,5 @@ class WritablePowerPortTemplate:
     id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     maximum_draw: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'maximum_draw' }})
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    type: Optional[WritablePowerPortTemplateTypeTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    type: Optional[WritablePowerPortTemplateTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     

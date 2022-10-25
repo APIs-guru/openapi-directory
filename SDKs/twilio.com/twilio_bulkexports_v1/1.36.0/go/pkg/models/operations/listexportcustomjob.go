@@ -27,7 +27,7 @@ type ListExportCustomJobRequest struct {
 	Security    ListExportCustomJobSecurity
 }
 
-type ListExportCustomJob200ApplicationJSONMeta struct {
+type ListExportCustomJobListExportCustomJobResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -37,13 +37,13 @@ type ListExportCustomJob200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListExportCustomJob200ApplicationJSONListExportCustomJobResponse struct {
-	Jobs []shared.BulkexportsV1ExportExportCustomJob `json:"jobs,omitempty"`
-	Meta *ListExportCustomJob200ApplicationJSONMeta  `json:"meta,omitempty"`
+type ListExportCustomJobListExportCustomJobResponse struct {
+	Jobs []shared.BulkexportsV1ExportExportCustomJob         `json:"jobs,omitempty"`
+	Meta *ListExportCustomJobListExportCustomJobResponseMeta `json:"meta,omitempty"`
 }
 
 type ListExportCustomJobResponse struct {
 	ContentType                 string
-	ListExportCustomJobResponse *ListExportCustomJob200ApplicationJSONListExportCustomJobResponse
+	ListExportCustomJobResponse *ListExportCustomJobListExportCustomJobResponse
 	StatusCode                  int64
 }

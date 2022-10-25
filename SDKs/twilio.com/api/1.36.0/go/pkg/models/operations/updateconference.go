@@ -13,21 +13,21 @@ type UpdateConferencePathParams struct {
 	Sid        string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
-type UpdateConferenceRequestBodyAnnounceMethodEnum string
+type UpdateConferenceUpdateConferenceRequestAnnounceMethodEnum string
 
 const (
-	UpdateConferenceRequestBodyAnnounceMethodEnumHead   UpdateConferenceRequestBodyAnnounceMethodEnum = "HEAD"
-	UpdateConferenceRequestBodyAnnounceMethodEnumGet    UpdateConferenceRequestBodyAnnounceMethodEnum = "GET"
-	UpdateConferenceRequestBodyAnnounceMethodEnumPost   UpdateConferenceRequestBodyAnnounceMethodEnum = "POST"
-	UpdateConferenceRequestBodyAnnounceMethodEnumPatch  UpdateConferenceRequestBodyAnnounceMethodEnum = "PATCH"
-	UpdateConferenceRequestBodyAnnounceMethodEnumPut    UpdateConferenceRequestBodyAnnounceMethodEnum = "PUT"
-	UpdateConferenceRequestBodyAnnounceMethodEnumDelete UpdateConferenceRequestBodyAnnounceMethodEnum = "DELETE"
+	UpdateConferenceUpdateConferenceRequestAnnounceMethodEnumHead   UpdateConferenceUpdateConferenceRequestAnnounceMethodEnum = "HEAD"
+	UpdateConferenceUpdateConferenceRequestAnnounceMethodEnumGet    UpdateConferenceUpdateConferenceRequestAnnounceMethodEnum = "GET"
+	UpdateConferenceUpdateConferenceRequestAnnounceMethodEnumPost   UpdateConferenceUpdateConferenceRequestAnnounceMethodEnum = "POST"
+	UpdateConferenceUpdateConferenceRequestAnnounceMethodEnumPatch  UpdateConferenceUpdateConferenceRequestAnnounceMethodEnum = "PATCH"
+	UpdateConferenceUpdateConferenceRequestAnnounceMethodEnumPut    UpdateConferenceUpdateConferenceRequestAnnounceMethodEnum = "PUT"
+	UpdateConferenceUpdateConferenceRequestAnnounceMethodEnumDelete UpdateConferenceUpdateConferenceRequestAnnounceMethodEnum = "DELETE"
 )
 
-type UpdateConferenceRequestBodyUpdateConferenceRequest struct {
-	AnnounceMethod *UpdateConferenceRequestBodyAnnounceMethodEnum `form:"name=AnnounceMethod"`
-	AnnounceURL    *string                                        `form:"name=AnnounceUrl"`
-	Status         *shared.ConferenceEnumUpdateStatusEnum         `form:"name=Status"`
+type UpdateConferenceUpdateConferenceRequest struct {
+	AnnounceMethod *UpdateConferenceUpdateConferenceRequestAnnounceMethodEnum `form:"name=AnnounceMethod"`
+	AnnounceURL    *string                                                    `form:"name=AnnounceUrl"`
+	Status         *shared.ConferenceEnumUpdateStatusEnum                     `form:"name=Status"`
 }
 
 type UpdateConferenceSecurity struct {
@@ -37,7 +37,7 @@ type UpdateConferenceSecurity struct {
 type UpdateConferenceRequest struct {
 	ServerURL  *string
 	PathParams UpdateConferencePathParams
-	Request    *UpdateConferenceRequestBodyUpdateConferenceRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateConferenceUpdateConferenceRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateConferenceSecurity
 }
 

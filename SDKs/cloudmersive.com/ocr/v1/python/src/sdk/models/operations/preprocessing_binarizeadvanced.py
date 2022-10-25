@@ -26,9 +26,10 @@ class PreprocessingBinarizeAdvancedRequest:
 
 @dataclass
 class PreprocessingBinarizeAdvancedResponse:
-    body: bytes = field(default=None)
     content_type: str = field(default=None)
     preprocessing_binarize_advanced_200_application_json_byte_string: Optional[str] = field(default=None)
+    preprocessing_binarize_advanced_200_application_xml_byte_string: Optional[str] = field(default=None)
     preprocessing_binarize_advanced_200_text_json_byte_string: Optional[str] = field(default=None)
+    preprocessing_binarize_advanced_200_text_xml_byte_string: Optional[str] = field(default=None)
     status_code: int = field(default=None)
     

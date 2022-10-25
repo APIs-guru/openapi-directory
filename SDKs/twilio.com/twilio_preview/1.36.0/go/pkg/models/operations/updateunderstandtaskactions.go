@@ -13,7 +13,7 @@ type UpdateUnderstandTaskActionsPathParams struct {
 	TaskSid      string `pathParam:"style=simple,explode=false,name=TaskSid"`
 }
 
-type UpdateUnderstandTaskActionsRequestBodyUpdateUnderstandTaskActionsRequest struct {
+type UpdateUnderstandTaskActionsUpdateUnderstandTaskActionsRequest struct {
 	Actions *interface{} `form:"name=Actions"`
 }
 
@@ -24,7 +24,7 @@ type UpdateUnderstandTaskActionsSecurity struct {
 type UpdateUnderstandTaskActionsRequest struct {
 	ServerURL  *string
 	PathParams UpdateUnderstandTaskActionsPathParams
-	Request    *UpdateUnderstandTaskActionsRequestBodyUpdateUnderstandTaskActionsRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateUnderstandTaskActionsUpdateUnderstandTaskActionsRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateUnderstandTaskActionsSecurity
 }
 

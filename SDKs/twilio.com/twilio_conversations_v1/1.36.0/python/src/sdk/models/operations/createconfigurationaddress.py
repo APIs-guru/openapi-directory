@@ -7,7 +7,7 @@ CREATE_CONFIGURATION_ADDRESS_SERVERS = [
 
 
 @dataclass
-class CreateConfigurationAddressRequestBodyCreateConfigurationAddressRequest:
+class CreateConfigurationAddressCreateConfigurationAddressRequest:
     address: str = field(default=None, metadata={'form': { 'field_name': 'Address' }})
     auto_creation_conversation_service_sid: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'AutoCreation.ConversationServiceSid' }})
     auto_creation_enabled: Optional[bool] = field(default=None, metadata={'form': { 'field_name': 'AutoCreation.Enabled' }})
@@ -29,7 +29,7 @@ class CreateConfigurationAddressSecurity:
 @dataclass
 class CreateConfigurationAddressRequest:
     server_url: Optional[str] = field(default=None)
-    request: Optional[CreateConfigurationAddressRequestBodyCreateConfigurationAddressRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateConfigurationAddressCreateConfigurationAddressRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateConfigurationAddressSecurity = field(default=None)
     
 

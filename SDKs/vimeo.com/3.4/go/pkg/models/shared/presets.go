@@ -333,7 +333,7 @@ type PresetsUserWebsites struct {
 	Name        string `json:"name"`
 }
 
-type PresetsUserUser struct {
+type PresetsUser struct {
 	Account       PresetsUserAccountEnum  `json:"account"`
 	Bio           string                  `json:"bio"`
 	ContentFilter []string                `json:"content_filter,omitempty"`
@@ -356,5 +356,5 @@ type Presets struct {
 	Name     string          `json:"name"`
 	Settings PresetsSettings `json:"settings"`
 	URI      string          `json:"uri"`
-	User     PresetsUserUser `json:"user"`
+	User     PresetsUser     `json:"user"`
 }

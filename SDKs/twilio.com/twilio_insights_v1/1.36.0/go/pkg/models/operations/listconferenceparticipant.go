@@ -30,7 +30,7 @@ type ListConferenceParticipantRequest struct {
 	Security    ListConferenceParticipantSecurity
 }
 
-type ListConferenceParticipant200ApplicationJSONMeta struct {
+type ListConferenceParticipantListConferenceParticipantResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -40,13 +40,13 @@ type ListConferenceParticipant200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListConferenceParticipant200ApplicationJSONListConferenceParticipantResponse struct {
-	Meta         *ListConferenceParticipant200ApplicationJSONMeta   `json:"meta,omitempty"`
-	Participants []shared.InsightsV1ConferenceConferenceParticipant `json:"participants,omitempty"`
+type ListConferenceParticipantListConferenceParticipantResponse struct {
+	Meta         *ListConferenceParticipantListConferenceParticipantResponseMeta `json:"meta,omitempty"`
+	Participants []shared.InsightsV1ConferenceConferenceParticipant              `json:"participants,omitempty"`
 }
 
 type ListConferenceParticipantResponse struct {
 	ContentType                       string
-	ListConferenceParticipantResponse *ListConferenceParticipant200ApplicationJSONListConferenceParticipantResponse
+	ListConferenceParticipantResponse *ListConferenceParticipantListConferenceParticipantResponse
 	StatusCode                        int64
 }

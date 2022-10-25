@@ -18,7 +18,7 @@ type CreateMemberHeaders struct {
 	XTwilioWebhookEnabled *shared.MemberEnumWebhookEnabledTypeEnum `header:"name=X-Twilio-Webhook-Enabled"`
 }
 
-type CreateMemberRequestBodyCreateMemberRequest struct {
+type CreateMemberCreateMemberRequest struct {
 	Attributes               *string    `form:"name=Attributes"`
 	DateCreated              *time.Time `form:"name=DateCreated"`
 	DateUpdated              *time.Time `form:"name=DateUpdated"`
@@ -36,7 +36,7 @@ type CreateMemberRequest struct {
 	ServerURL  *string
 	PathParams CreateMemberPathParams
 	Headers    CreateMemberHeaders
-	Request    *CreateMemberRequestBodyCreateMemberRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateMemberCreateMemberRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateMemberSecurity
 }
 

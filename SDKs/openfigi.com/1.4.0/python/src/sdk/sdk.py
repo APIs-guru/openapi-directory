@@ -41,10 +41,10 @@ class SDK:
                 res.get_mapping_values_key_200_application_json_object = out
         elif r.status_code == 400:
             if utils.match_content_type(content_type, "*/*"):
-                res.body = r.content
+                res.get_mapping_values_key_400_wildcard_string = r.content
         elif r.status_code == 500:
             if utils.match_content_type(content_type, "*/*"):
-                res.body = r.content
+                res.get_mapping_values_key_500_wildcard_string = r.content
 
         return res
 
@@ -72,19 +72,19 @@ class SDK:
                 res.bulk_mapping_job_result = out
         elif r.status_code == 400:
             if utils.match_content_type(content_type, "*/*"):
-                res.body = r.content
+                res.post_mapping_400_wildcard_string = r.content
         elif r.status_code == 401:
             if utils.match_content_type(content_type, "*/*"):
-                res.body = r.content
+                res.post_mapping_401_wildcard_string = r.content
         elif r.status_code == 406:
             if utils.match_content_type(content_type, "*/*"):
-                res.body = r.content
+                res.post_mapping_406_wildcard_string = r.content
         elif r.status_code == 413:
             if utils.match_content_type(content_type, "*/*"):
-                res.body = r.content
+                res.post_mapping_413_wildcard_string = r.content
         elif r.status_code == 500:
             if utils.match_content_type(content_type, "*/*"):
-                res.body = r.content
+                res.post_mapping_500_wildcard_string = r.content
 
         return res
 

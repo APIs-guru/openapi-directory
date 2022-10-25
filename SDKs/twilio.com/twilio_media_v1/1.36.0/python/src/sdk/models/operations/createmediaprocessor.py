@@ -5,7 +5,7 @@ CREATE_MEDIA_PROCESSOR_SERVERS = [
 	"https://media.twilio.com",
 ]
 
-class CreateMediaProcessorRequestBodyStatusCallbackMethodEnum(str, Enum):
+class CreateMediaProcessorCreateMediaProcessorRequestStatusCallbackMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -15,13 +15,13 @@ class CreateMediaProcessorRequestBodyStatusCallbackMethodEnum(str, Enum):
 
 
 @dataclass
-class CreateMediaProcessorRequestBodyCreateMediaProcessorRequest:
+class CreateMediaProcessorCreateMediaProcessorRequest:
     extension: str = field(default=None, metadata={'form': { 'field_name': 'Extension' }})
     extension_context: str = field(default=None, metadata={'form': { 'field_name': 'ExtensionContext' }})
     extension_environment: Optional[Any] = field(default=None, metadata={'form': { 'field_name': 'ExtensionEnvironment' }})
     max_duration: Optional[int] = field(default=None, metadata={'form': { 'field_name': 'MaxDuration' }})
     status_callback: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'StatusCallback' }})
-    status_callback_method: Optional[CreateMediaProcessorRequestBodyStatusCallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'StatusCallbackMethod' }})
+    status_callback_method: Optional[CreateMediaProcessorCreateMediaProcessorRequestStatusCallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'StatusCallbackMethod' }})
     
 
 @dataclass
@@ -32,7 +32,7 @@ class CreateMediaProcessorSecurity:
 @dataclass
 class CreateMediaProcessorRequest:
     server_url: Optional[str] = field(default=None)
-    request: Optional[CreateMediaProcessorRequestBodyCreateMediaProcessorRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateMediaProcessorCreateMediaProcessorRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateMediaProcessorSecurity = field(default=None)
     
 

@@ -4,13 +4,13 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-type CreateFolderRequestBodyFolder struct {
+type CreateFolderCreateFolderDataFolder struct {
 	Name           string  `json:"name"`
 	ParentFolderID *string `json:"parent_folder_id,omitempty"`
 }
 
-type CreateFolderRequestBodyCreateFolderData struct {
-	Folder CreateFolderRequestBodyFolder `json:"folder"`
+type CreateFolderCreateFolderData struct {
+	Folder CreateFolderCreateFolderDataFolder `json:"folder"`
 }
 
 type CreateFolderSecurity struct {
@@ -18,11 +18,11 @@ type CreateFolderSecurity struct {
 }
 
 type CreateFolderRequest struct {
-	Request  CreateFolderRequestBodyCreateFolderData `request:"mediaType=application/json"`
+	Request  CreateFolderCreateFolderData `request:"mediaType=application/json"`
 	Security CreateFolderSecurity
 }
 
-type CreateFolder200ApplicationJSONFolder struct {
+type CreateFolderFolder struct {
 	ID             *string `json:"id,omitempty"`
 	Name           *string `json:"name,omitempty"`
 	ParentFolderID *string `json:"parent_folder_id,omitempty"`
@@ -34,5 +34,5 @@ type CreateFolderResponse struct {
 	StatusCode          int64
 	AuthenticationError *shared.AuthenticationError
 	Error               *shared.Error
-	Folder              *CreateFolder200ApplicationJSONFolder
+	Folder              *CreateFolderFolder
 }

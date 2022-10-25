@@ -9,7 +9,7 @@ class OneaccountsGetResponses200ContentApplication1jsonSchemaPropertiesAccountsI
 
 @dataclass_json
 @dataclass
-class OneaccountsGetResponses200ContentApplication1jsonSchemaPropertiesAccountsItemsCurrencyCurrency:
+class OneaccountsGetResponses200ContentApplication1jsonSchemaPropertiesAccountsItemsCurrency:
     code: Optional[OneaccountsGetResponses200ContentApplication1jsonSchemaPropertiesAccountsItemsCurrencyCodeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'code' }})
     description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
     
@@ -27,7 +27,7 @@ class OneaccountsGetResponses200ContentApplication1jsonSchemaPropertiesAccountsI
     ciban: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ciban' }})
     cnsc: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cnsc' }})
     colour: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'colour' }})
-    currency: Optional[OneaccountsGetResponses200ContentApplication1jsonSchemaPropertiesAccountsItemsCurrencyCurrency] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'currency' }})
+    currency: Optional[OneaccountsGetResponses200ContentApplication1jsonSchemaPropertiesAccountsItemsCurrency] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'currency' }})
     default_account: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'defaultAccount' }})
     direct_debits_allowed: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'directDebitsAllowed' }})
     ican: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ican' }})

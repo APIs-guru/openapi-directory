@@ -22,7 +22,7 @@ class VlanStatusValueEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class VlanStatusStatus:
+class VlanStatus:
     label: VlanStatusLabelEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label' }})
     value: VlanStatusValueEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
     
@@ -41,7 +41,7 @@ class Vlan:
     prefix_count: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'prefix_count' }})
     role: Optional[nestedrole.NestedRole] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'role' }})
     site: Optional[nestedsite.NestedSite] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'site' }})
-    status: Optional[VlanStatusStatus] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    status: Optional[VlanStatus] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
     tags: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
     tenant: Optional[nestedtenant.NestedTenant] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tenant' }})
     vid: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'vid' }})

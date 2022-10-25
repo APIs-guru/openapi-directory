@@ -26,7 +26,7 @@ class ListByocTrunkRequest:
 
 @dataclass_json
 @dataclass
-class ListByocTrunk200ApplicationJSONMeta:
+class ListByocTrunkListByocTrunkResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -38,14 +38,14 @@ class ListByocTrunk200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListByocTrunk200ApplicationJSONListByocTrunkResponse:
+class ListByocTrunkListByocTrunkResponse:
     byoc_trunks: Optional[List[shared.VoiceV1ByocTrunk]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'byoc_trunks' }})
-    meta: Optional[ListByocTrunk200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+    meta: Optional[ListByocTrunkListByocTrunkResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     
 
 @dataclass
 class ListByocTrunkResponse:
     content_type: str = field(default=None)
-    list_byoc_trunk_response: Optional[ListByocTrunk200ApplicationJSONListByocTrunkResponse] = field(default=None)
+    list_byoc_trunk_response: Optional[ListByocTrunkListByocTrunkResponse] = field(default=None)
     status_code: int = field(default=None)
     

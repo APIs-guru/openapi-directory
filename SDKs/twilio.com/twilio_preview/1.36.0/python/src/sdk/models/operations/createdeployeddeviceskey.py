@@ -12,7 +12,7 @@ class CreateDeployedDevicesKeyPathParams:
     
 
 @dataclass
-class CreateDeployedDevicesKeyRequestBodyCreateDeployedDevicesKeyRequest:
+class CreateDeployedDevicesKeyCreateDeployedDevicesKeyRequest:
     device_sid: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'DeviceSid' }})
     friendly_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
     
@@ -26,7 +26,7 @@ class CreateDeployedDevicesKeySecurity:
 class CreateDeployedDevicesKeyRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateDeployedDevicesKeyPathParams = field(default=None)
-    request: Optional[CreateDeployedDevicesKeyRequestBodyCreateDeployedDevicesKeyRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateDeployedDevicesKeyCreateDeployedDevicesKeyRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateDeployedDevicesKeySecurity = field(default=None)
     
 

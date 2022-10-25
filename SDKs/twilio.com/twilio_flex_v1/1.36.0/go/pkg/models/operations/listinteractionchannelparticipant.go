@@ -28,7 +28,7 @@ type ListInteractionChannelParticipantRequest struct {
 	Security    ListInteractionChannelParticipantSecurity
 }
 
-type ListInteractionChannelParticipant200ApplicationJSONMeta struct {
+type ListInteractionChannelParticipantListInteractionChannelParticipantResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -38,13 +38,13 @@ type ListInteractionChannelParticipant200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListInteractionChannelParticipant200ApplicationJSONListInteractionChannelParticipantResponse struct {
-	Meta         *ListInteractionChannelParticipant200ApplicationJSONMeta                  `json:"meta,omitempty"`
-	Participants []shared.FlexV1InteractionInteractionChannelInteractionChannelParticipant `json:"participants,omitempty"`
+type ListInteractionChannelParticipantListInteractionChannelParticipantResponse struct {
+	Meta         *ListInteractionChannelParticipantListInteractionChannelParticipantResponseMeta `json:"meta,omitempty"`
+	Participants []shared.FlexV1InteractionInteractionChannelInteractionChannelParticipant       `json:"participants,omitempty"`
 }
 
 type ListInteractionChannelParticipantResponse struct {
 	ContentType                               string
-	ListInteractionChannelParticipantResponse *ListInteractionChannelParticipant200ApplicationJSONListInteractionChannelParticipantResponse
+	ListInteractionChannelParticipantResponse *ListInteractionChannelParticipantListInteractionChannelParticipantResponse
 	StatusCode                                int64
 }

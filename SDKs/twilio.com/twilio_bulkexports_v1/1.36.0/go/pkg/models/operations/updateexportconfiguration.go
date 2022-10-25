@@ -12,7 +12,7 @@ type UpdateExportConfigurationPathParams struct {
 	ResourceType string `pathParam:"style=simple,explode=false,name=ResourceType"`
 }
 
-type UpdateExportConfigurationRequestBodyUpdateExportConfigurationRequest struct {
+type UpdateExportConfigurationUpdateExportConfigurationRequest struct {
 	Enabled       *bool   `form:"name=Enabled"`
 	WebhookMethod *string `form:"name=WebhookMethod"`
 	WebhookURL    *string `form:"name=WebhookUrl"`
@@ -25,7 +25,7 @@ type UpdateExportConfigurationSecurity struct {
 type UpdateExportConfigurationRequest struct {
 	ServerURL  *string
 	PathParams UpdateExportConfigurationPathParams
-	Request    *UpdateExportConfigurationRequestBodyUpdateExportConfigurationRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateExportConfigurationUpdateExportConfigurationRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateExportConfigurationSecurity
 }
 

@@ -35,7 +35,7 @@ type ListApps200ApplicationJSONAppsDomains struct {
 	Spec     *shared.Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecPropertiesDomainsItems `json:"spec,omitempty"`
 }
 
-type ListApps200ApplicationJSONAppsRegionGeographicalInformationAboutAnAppOrigin struct {
+type ListApps200ApplicationJSONAppsGeographicalInformationAboutAnAppOrigin struct {
 	Continent   *string  `json:"continent,omitempty"`
 	DataCenters []string `json:"data_centers,omitempty"`
 	Default     *bool    `json:"default,omitempty"`
@@ -58,7 +58,7 @@ type ListApps200ApplicationJSONApps struct {
 	LiveURL                 *string                                                                                                                                   `json:"live_url,omitempty"`
 	LiveURLBase             *string                                                                                                                                   `json:"live_url_base,omitempty"`
 	OwnerUUID               *string                                                                                                                                   `json:"owner_uuid,omitempty"`
-	Region                  *ListApps200ApplicationJSONAppsRegionGeographicalInformationAboutAnAppOrigin                                                              `json:"region,omitempty"`
+	Region                  *ListApps200ApplicationJSONAppsGeographicalInformationAboutAnAppOrigin                                                                    `json:"region,omitempty"`
 	Spec                    shared.Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpec `json:"spec"`
 	TierSlug                *string                                                                                                                                   `json:"tier_slug,omitempty"`
 	UpdatedAt               *time.Time                                                                                                                                `json:"updated_at,omitempty"`

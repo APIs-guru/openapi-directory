@@ -12,7 +12,7 @@ class UpdateUnderstandAssistantFallbackActionsPathParams:
     
 
 @dataclass
-class UpdateUnderstandAssistantFallbackActionsRequestBodyUpdateUnderstandAssistantFallbackActionsRequest:
+class UpdateUnderstandAssistantFallbackActionsUpdateUnderstandAssistantFallbackActionsRequest:
     fallback_actions: Optional[Any] = field(default=None, metadata={'form': { 'field_name': 'FallbackActions' }})
     
 
@@ -25,7 +25,7 @@ class UpdateUnderstandAssistantFallbackActionsSecurity:
 class UpdateUnderstandAssistantFallbackActionsRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateUnderstandAssistantFallbackActionsPathParams = field(default=None)
-    request: Optional[UpdateUnderstandAssistantFallbackActionsRequestBodyUpdateUnderstandAssistantFallbackActionsRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateUnderstandAssistantFallbackActionsUpdateUnderstandAssistantFallbackActionsRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateUnderstandAssistantFallbackActionsSecurity = field(default=None)
     
 

@@ -4,50 +4,50 @@ type PostFloatingIpsIDActionsChangeProtectionPathParams struct {
 	ID int64 `pathParam:"style=simple,explode=false,name=id"`
 }
 
-type PostFloatingIpsIDActionsChangeProtectionRequestBodyChangeProtectionRequest struct {
+type PostFloatingIpsIDActionsChangeProtectionChangeProtectionRequest struct {
 	Delete *bool `json:"delete,omitempty"`
 }
 
 type PostFloatingIpsIDActionsChangeProtectionRequest struct {
 	PathParams PostFloatingIpsIDActionsChangeProtectionPathParams
-	Request    *PostFloatingIpsIDActionsChangeProtectionRequestBodyChangeProtectionRequest `request:"mediaType=application/json"`
+	Request    *PostFloatingIpsIDActionsChangeProtectionChangeProtectionRequest `request:"mediaType=application/json"`
 }
 
-type PostFloatingIpsIDActionsChangeProtection201ApplicationJSONActionError struct {
+type PostFloatingIpsIDActionsChangeProtectionActionResponseActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
 }
 
-type PostFloatingIpsIDActionsChangeProtection201ApplicationJSONActionResources struct {
+type PostFloatingIpsIDActionsChangeProtectionActionResponseActionResources struct {
 	ID   int64  `json:"id"`
 	Type string `json:"type"`
 }
 
-type PostFloatingIpsIDActionsChangeProtection201ApplicationJSONActionStatusEnum string
+type PostFloatingIpsIDActionsChangeProtectionActionResponseActionStatusEnum string
 
 const (
-	PostFloatingIpsIDActionsChangeProtection201ApplicationJSONActionStatusEnumSuccess PostFloatingIpsIDActionsChangeProtection201ApplicationJSONActionStatusEnum = "success"
-	PostFloatingIpsIDActionsChangeProtection201ApplicationJSONActionStatusEnumRunning PostFloatingIpsIDActionsChangeProtection201ApplicationJSONActionStatusEnum = "running"
-	PostFloatingIpsIDActionsChangeProtection201ApplicationJSONActionStatusEnumError   PostFloatingIpsIDActionsChangeProtection201ApplicationJSONActionStatusEnum = "error"
+	PostFloatingIpsIDActionsChangeProtectionActionResponseActionStatusEnumSuccess PostFloatingIpsIDActionsChangeProtectionActionResponseActionStatusEnum = "success"
+	PostFloatingIpsIDActionsChangeProtectionActionResponseActionStatusEnumRunning PostFloatingIpsIDActionsChangeProtectionActionResponseActionStatusEnum = "running"
+	PostFloatingIpsIDActionsChangeProtectionActionResponseActionStatusEnumError   PostFloatingIpsIDActionsChangeProtectionActionResponseActionStatusEnum = "error"
 )
 
-type PostFloatingIpsIDActionsChangeProtection201ApplicationJSONActionAction struct {
-	Command   string                                                                      `json:"command"`
-	Error     PostFloatingIpsIDActionsChangeProtection201ApplicationJSONActionError       `json:"error"`
-	Finished  string                                                                      `json:"finished"`
-	ID        int64                                                                       `json:"id"`
-	Progress  float64                                                                     `json:"progress"`
-	Resources []PostFloatingIpsIDActionsChangeProtection201ApplicationJSONActionResources `json:"resources"`
-	Started   string                                                                      `json:"started"`
-	Status    PostFloatingIpsIDActionsChangeProtection201ApplicationJSONActionStatusEnum  `json:"status"`
+type PostFloatingIpsIDActionsChangeProtectionActionResponseAction struct {
+	Command   string                                                                  `json:"command"`
+	Error     PostFloatingIpsIDActionsChangeProtectionActionResponseActionError       `json:"error"`
+	Finished  string                                                                  `json:"finished"`
+	ID        int64                                                                   `json:"id"`
+	Progress  float64                                                                 `json:"progress"`
+	Resources []PostFloatingIpsIDActionsChangeProtectionActionResponseActionResources `json:"resources"`
+	Started   string                                                                  `json:"started"`
+	Status    PostFloatingIpsIDActionsChangeProtectionActionResponseActionStatusEnum  `json:"status"`
 }
 
-type PostFloatingIpsIDActionsChangeProtection201ApplicationJSONActionResponse struct {
-	Action PostFloatingIpsIDActionsChangeProtection201ApplicationJSONActionAction `json:"action"`
+type PostFloatingIpsIDActionsChangeProtectionActionResponse struct {
+	Action PostFloatingIpsIDActionsChangeProtectionActionResponseAction `json:"action"`
 }
 
 type PostFloatingIpsIDActionsChangeProtectionResponse struct {
-	ActionResponse *PostFloatingIpsIDActionsChangeProtection201ApplicationJSONActionResponse
+	ActionResponse *PostFloatingIpsIDActionsChangeProtectionActionResponse
 	ContentType    string
 	StatusCode     int64
 }

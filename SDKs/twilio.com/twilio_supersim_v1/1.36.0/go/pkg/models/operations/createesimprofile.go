@@ -8,21 +8,21 @@ var CreateEsimProfileServers = []string{
 	"https://supersim.twilio.com",
 }
 
-type CreateEsimProfileRequestBodyCallbackMethodEnum string
+type CreateEsimProfileCreateEsimProfileRequestCallbackMethodEnum string
 
 const (
-	CreateEsimProfileRequestBodyCallbackMethodEnumHead   CreateEsimProfileRequestBodyCallbackMethodEnum = "HEAD"
-	CreateEsimProfileRequestBodyCallbackMethodEnumGet    CreateEsimProfileRequestBodyCallbackMethodEnum = "GET"
-	CreateEsimProfileRequestBodyCallbackMethodEnumPost   CreateEsimProfileRequestBodyCallbackMethodEnum = "POST"
-	CreateEsimProfileRequestBodyCallbackMethodEnumPatch  CreateEsimProfileRequestBodyCallbackMethodEnum = "PATCH"
-	CreateEsimProfileRequestBodyCallbackMethodEnumPut    CreateEsimProfileRequestBodyCallbackMethodEnum = "PUT"
-	CreateEsimProfileRequestBodyCallbackMethodEnumDelete CreateEsimProfileRequestBodyCallbackMethodEnum = "DELETE"
+	CreateEsimProfileCreateEsimProfileRequestCallbackMethodEnumHead   CreateEsimProfileCreateEsimProfileRequestCallbackMethodEnum = "HEAD"
+	CreateEsimProfileCreateEsimProfileRequestCallbackMethodEnumGet    CreateEsimProfileCreateEsimProfileRequestCallbackMethodEnum = "GET"
+	CreateEsimProfileCreateEsimProfileRequestCallbackMethodEnumPost   CreateEsimProfileCreateEsimProfileRequestCallbackMethodEnum = "POST"
+	CreateEsimProfileCreateEsimProfileRequestCallbackMethodEnumPatch  CreateEsimProfileCreateEsimProfileRequestCallbackMethodEnum = "PATCH"
+	CreateEsimProfileCreateEsimProfileRequestCallbackMethodEnumPut    CreateEsimProfileCreateEsimProfileRequestCallbackMethodEnum = "PUT"
+	CreateEsimProfileCreateEsimProfileRequestCallbackMethodEnumDelete CreateEsimProfileCreateEsimProfileRequestCallbackMethodEnum = "DELETE"
 )
 
-type CreateEsimProfileRequestBodyCreateEsimProfileRequest struct {
-	CallbackMethod *CreateEsimProfileRequestBodyCallbackMethodEnum `form:"name=CallbackMethod"`
-	CallbackURL    *string                                         `form:"name=CallbackUrl"`
-	Eid            *string                                         `form:"name=Eid"`
+type CreateEsimProfileCreateEsimProfileRequest struct {
+	CallbackMethod *CreateEsimProfileCreateEsimProfileRequestCallbackMethodEnum `form:"name=CallbackMethod"`
+	CallbackURL    *string                                                      `form:"name=CallbackUrl"`
+	Eid            *string                                                      `form:"name=Eid"`
 }
 
 type CreateEsimProfileSecurity struct {
@@ -31,7 +31,7 @@ type CreateEsimProfileSecurity struct {
 
 type CreateEsimProfileRequest struct {
 	ServerURL *string
-	Request   *CreateEsimProfileRequestBodyCreateEsimProfileRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request   *CreateEsimProfileCreateEsimProfileRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security  CreateEsimProfileSecurity
 }
 

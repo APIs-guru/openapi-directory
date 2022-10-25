@@ -10,7 +10,7 @@ from dataclasses_json import dataclass_json
 class NodesForksCreatePathParams:
     node_id: str = field(default=None, metadata={'path_param': { 'field_name': 'node_id', 'style': 'simple', 'explode': False }})
     
-class NodesForksCreateRequestBodyAttributesCategoryEnum(str, Enum):
+class NodesForksCreateNodeAttributesCategoryEnum(str, Enum):
     ANALYSIS = "analysis"
     COMMUNICATION = "communication"
     DATA = "data"
@@ -25,8 +25,8 @@ class NodesForksCreateRequestBodyAttributesCategoryEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class NodesForksCreateRequestBodyAttributesAttributes:
-    category: NodesForksCreateRequestBodyAttributesCategoryEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'category' }})
+class NodesForksCreateNodeAttributes:
+    category: NodesForksCreateNodeAttributesCategoryEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'category' }})
     collection: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'collection' }})
     current_user_can_comment: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'current_user_can_comment' }})
     current_user_permissions: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'current_user_permissions' }})
@@ -46,14 +46,14 @@ class NodesForksCreateRequestBodyAttributesAttributes:
 
 @dataclass_json
 @dataclass
-class NodesForksCreateRequestBodyLinksLinks:
+class NodesForksCreateNodeLinks:
     html: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'html' }})
     self: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'self' }})
     
 
 @dataclass_json
 @dataclass
-class NodesForksCreateRequestBodyRelationshipsRelationships:
+class NodesForksCreateNodeRelationships:
     affiliated_institutions: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'affiliated_institutions' }})
     children: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'children' }})
     citation: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'citation' }})
@@ -79,18 +79,18 @@ class NodesForksCreateRequestBodyRelationshipsRelationships:
 
 @dataclass_json
 @dataclass
-class NodesForksCreateRequestBodyNode:
-    attributes: NodesForksCreateRequestBodyAttributesAttributes = field(default=None, metadata={'dataclasses_json': { 'field_name': 'attributes' }})
+class NodesForksCreateNode:
+    attributes: NodesForksCreateNodeAttributes = field(default=None, metadata={'dataclasses_json': { 'field_name': 'attributes' }})
     id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    links: Optional[NodesForksCreateRequestBodyLinksLinks] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'links' }})
-    relationships: Optional[NodesForksCreateRequestBodyRelationshipsRelationships] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'relationships' }})
+    links: Optional[NodesForksCreateNodeLinks] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'links' }})
+    relationships: Optional[NodesForksCreateNodeRelationships] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'relationships' }})
     type: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     
 
 @dataclass
 class NodesForksCreateRequest:
     path_params: NodesForksCreatePathParams = field(default=None)
-    request: NodesForksCreateRequestBodyNode = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: NodesForksCreateNode = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass

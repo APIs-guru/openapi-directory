@@ -12,7 +12,7 @@ type CreateActivityPathParams struct {
 	WorkspaceSid string `pathParam:"style=simple,explode=false,name=WorkspaceSid"`
 }
 
-type CreateActivityRequestBodyCreateActivityRequest struct {
+type CreateActivityCreateActivityRequest struct {
 	Available    *bool  `form:"name=Available"`
 	FriendlyName string `form:"name=FriendlyName"`
 }
@@ -24,7 +24,7 @@ type CreateActivitySecurity struct {
 type CreateActivityRequest struct {
 	ServerURL  *string
 	PathParams CreateActivityPathParams
-	Request    *CreateActivityRequestBodyCreateActivityRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateActivityCreateActivityRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateActivitySecurity
 }
 

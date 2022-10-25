@@ -31,35 +31,35 @@ class GetOrdersRequest:
 
 @dataclass_json
 @dataclass
-class GetOrders404ApplicationJSONErrorStandardV2:
+class GetOrdersErrorStandardV2:
     message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'message' }})
     
 
 @dataclass_json
 @dataclass
-class GetOrders200ApplicationJSON2CurrentStatusStatusActionRequiredBy:
+class GetOrders200ApplicationJSONOrderResponseV2StatusEventV2StatusTypeV2ActionRequiredBy:
     id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
     
 
 @dataclass_json
 @dataclass
-class GetOrders200ApplicationJSON2CurrentStatusStatusStage:
+class GetOrders200ApplicationJSONOrderResponseV2StatusEventV2StatusTypeV2Stage:
     code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'code' }})
     name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
     
 
 @dataclass_json
 @dataclass
-class GetOrders200ApplicationJSON2CurrentStatusStatusState:
+class GetOrders200ApplicationJSONOrderResponseV2StatusEventV2StatusTypeV2State:
     code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'code' }})
     name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
     
 
 @dataclass_json
 @dataclass
-class GetOrders200ApplicationJSON2CurrentStatusStatusStatusTypeV2:
-    action_required_by: Optional[GetOrders200ApplicationJSON2CurrentStatusStatusActionRequiredBy] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'actionRequiredBy' }})
+class GetOrders200ApplicationJSONOrderResponseV2StatusEventV2StatusTypeV2:
+    action_required_by: Optional[GetOrders200ApplicationJSONOrderResponseV2StatusEventV2StatusTypeV2ActionRequiredBy] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'actionRequiredBy' }})
     code: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'code' }})
     detail: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'detail' }})
     detail_code: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'detailCode' }})
@@ -67,23 +67,23 @@ class GetOrders200ApplicationJSON2CurrentStatusStatusStatusTypeV2:
     is_closed: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'isClosed' }})
     name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
     reason: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'reason' }})
-    stage: GetOrders200ApplicationJSON2CurrentStatusStatusStage = field(default=None, metadata={'dataclasses_json': { 'field_name': 'stage' }})
-    state: GetOrders200ApplicationJSON2CurrentStatusStatusState = field(default=None, metadata={'dataclasses_json': { 'field_name': 'state' }})
+    stage: GetOrders200ApplicationJSONOrderResponseV2StatusEventV2StatusTypeV2Stage = field(default=None, metadata={'dataclasses_json': { 'field_name': 'stage' }})
+    state: GetOrders200ApplicationJSONOrderResponseV2StatusEventV2StatusTypeV2State = field(default=None, metadata={'dataclasses_json': { 'field_name': 'state' }})
     
 
 @dataclass_json
 @dataclass
-class GetOrders200ApplicationJSON2CurrentStatusStatusEventV2:
+class GetOrders200ApplicationJSONOrderResponseV2StatusEventV2:
     created_by: Optional[shared.OnereturnsGetResponses200ContentApplication1jsonSchemaPropertiesDataItemsPropertiesUpdatedBy] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'createdBy' }})
     date: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'date', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     reason: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'reason' }})
-    status: Optional[GetOrders200ApplicationJSON2CurrentStatusStatusStatusTypeV2] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    status: Optional[GetOrders200ApplicationJSONOrderResponseV2StatusEventV2StatusTypeV2] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
     
 
 @dataclass_json
 @dataclass
-class GetOrders200ApplicationJSON2LineItemsInventoryDetails:
+class GetOrders200ApplicationJSONOrderResponseV2LineItemsResponseV2InventoryDetails:
     expiration_date: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'expirationDate', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     lot_num: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lotNum' }})
     quantity: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'quantity' }})
@@ -92,7 +92,7 @@ class GetOrders200ApplicationJSON2LineItemsInventoryDetails:
 
 @dataclass_json
 @dataclass
-class GetOrders200ApplicationJSON2LineItemsLineDetails:
+class GetOrders200ApplicationJSONOrderResponseV2LineItemsResponseV2LineDetails:
     description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
     external_sku: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'externalSku' }})
     id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
@@ -102,7 +102,7 @@ class GetOrders200ApplicationJSON2LineItemsLineDetails:
 
 @dataclass_json
 @dataclass
-class GetOrders200ApplicationJSON2LineItemsRequestedSkuData:
+class GetOrders200ApplicationJSONOrderResponseV2LineItemsResponseV2RequestedSkuData:
     declared_value: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'declaredValue' }})
     id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     quantity: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'quantity' }})
@@ -111,23 +111,23 @@ class GetOrders200ApplicationJSON2LineItemsRequestedSkuData:
 
 @dataclass_json
 @dataclass
-class GetOrders200ApplicationJSON2LineItemsLineItemsResponseV2:
+class GetOrders200ApplicationJSONOrderResponseV2LineItemsResponseV2:
     id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    inventory_details: Optional[List[GetOrders200ApplicationJSON2LineItemsInventoryDetails]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'inventoryDetails' }})
-    line_details: Optional[GetOrders200ApplicationJSON2LineItemsLineDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lineDetails' }})
-    requested_sku_data: Optional[GetOrders200ApplicationJSON2LineItemsRequestedSkuData] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'requestedSkuData' }})
+    inventory_details: Optional[List[GetOrders200ApplicationJSONOrderResponseV2LineItemsResponseV2InventoryDetails]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'inventoryDetails' }})
+    line_details: Optional[GetOrders200ApplicationJSONOrderResponseV2LineItemsResponseV2LineDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lineDetails' }})
+    requested_sku_data: Optional[GetOrders200ApplicationJSONOrderResponseV2LineItemsResponseV2RequestedSkuData] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'requestedSkuData' }})
     
 
 @dataclass_json
 @dataclass
-class GetOrders200ApplicationJSON2MerchantMerchantV2:
+class GetOrders200ApplicationJSONOrderResponseV2MerchantV2:
     id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
     
 
 @dataclass_json
 @dataclass
-class GetOrders200ApplicationJSON2OriginalConsigneeIsoIsoCountryV2:
+class GetOrders200ApplicationJSONOrderResponseV2ConsigneeV2IsoCountryV2:
     id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     iso2: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'iso2' }})
     name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
@@ -135,7 +135,7 @@ class GetOrders200ApplicationJSON2OriginalConsigneeIsoIsoCountryV2:
 
 @dataclass_json
 @dataclass
-class GetOrders200ApplicationJSON2OriginalConsigneeConsigneeV2:
+class GetOrders200ApplicationJSONOrderResponseV2ConsigneeV2:
     address1: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'address1' }})
     address2: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'address2' }})
     address_locality: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'addressLocality' }})
@@ -145,7 +145,7 @@ class GetOrders200ApplicationJSON2OriginalConsigneeConsigneeV2:
     email: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'email' }})
     first_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'firstName' }})
     id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    iso: Optional[GetOrders200ApplicationJSON2OriginalConsigneeIsoIsoCountryV2] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'iso' }})
+    iso: Optional[GetOrders200ApplicationJSONOrderResponseV2ConsigneeV2IsoCountryV2] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'iso' }})
     last_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lastName' }})
     phone: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'phone' }})
     postal_code: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'postalCode' }})
@@ -155,13 +155,13 @@ class GetOrders200ApplicationJSON2OriginalConsigneeConsigneeV2:
 
 @dataclass_json
 @dataclass
-class GetOrders200ApplicationJSON2ParentOrder:
+class GetOrders200ApplicationJSONOrderResponseV2ParentOrder:
     id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     
 
 @dataclass_json
 @dataclass
-class GetOrders200ApplicationJSON2TrackingNumbersCarrierCarrierHydratedV2:
+class GetOrders200ApplicationJSONOrderResponseV2TrackingNumbersCarrierHydratedV2:
     can_reprint_postage: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'canReprintPostage' }})
     enabled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'enabled' }})
     id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
@@ -174,41 +174,41 @@ class GetOrders200ApplicationJSON2TrackingNumbersCarrierCarrierHydratedV2:
 
 @dataclass_json
 @dataclass
-class GetOrders200ApplicationJSON2TrackingNumbers:
-    carrier: Optional[GetOrders200ApplicationJSON2TrackingNumbersCarrierCarrierHydratedV2] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'carrier' }})
+class GetOrders200ApplicationJSONOrderResponseV2TrackingNumbers:
+    carrier: Optional[GetOrders200ApplicationJSONOrderResponseV2TrackingNumbersCarrierHydratedV2] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'carrier' }})
     
 
 @dataclass_json
 @dataclass
-class GetOrders200ApplicationJSON2WarehouseWarehouseV2:
+class GetOrders200ApplicationJSONOrderResponseV2WarehouseV2:
     id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     
 
 @dataclass_json
 @dataclass
-class GetOrders200ApplicationJSON2:
-    current_status: GetOrders200ApplicationJSON2CurrentStatusStatusEventV2 = field(default=None, metadata={'dataclasses_json': { 'field_name': 'currentStatus' }})
+class GetOrders200ApplicationJSONOrderResponseV2:
+    current_status: GetOrders200ApplicationJSONOrderResponseV2StatusEventV2 = field(default=None, metadata={'dataclasses_json': { 'field_name': 'currentStatus' }})
     depart_date: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'departDate', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     dispatch_date: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'dispatchDate', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     integrator: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'integrator' }})
-    line_items: Optional[List[GetOrders200ApplicationJSON2LineItemsLineItemsResponseV2]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lineItems' }})
-    merchant: GetOrders200ApplicationJSON2MerchantMerchantV2 = field(default=None, metadata={'dataclasses_json': { 'field_name': 'merchant' }})
+    line_items: Optional[List[GetOrders200ApplicationJSONOrderResponseV2LineItemsResponseV2]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lineItems' }})
+    merchant: GetOrders200ApplicationJSONOrderResponseV2MerchantV2 = field(default=None, metadata={'dataclasses_json': { 'field_name': 'merchant' }})
     merchant_order_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'merchantOrderId' }})
     merchant_shipping_method: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'merchantShippingMethod' }})
-    original_consignee: GetOrders200ApplicationJSON2OriginalConsigneeConsigneeV2 = field(default=None, metadata={'dataclasses_json': { 'field_name': 'originalConsignee' }})
-    parent_order: Optional[GetOrders200ApplicationJSON2ParentOrder] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'parentOrder' }})
+    original_consignee: GetOrders200ApplicationJSONOrderResponseV2ConsigneeV2 = field(default=None, metadata={'dataclasses_json': { 'field_name': 'originalConsignee' }})
+    parent_order: Optional[GetOrders200ApplicationJSONOrderResponseV2ParentOrder] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'parentOrder' }})
     purchase_order_num: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'purchaseOrderNum' }})
     recorded_on: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'recordedOn', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    tracking_numbers: Optional[List[GetOrders200ApplicationJSON2TrackingNumbers]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'trackingNumbers' }})
+    tracking_numbers: Optional[List[GetOrders200ApplicationJSONOrderResponseV2TrackingNumbers]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'trackingNumbers' }})
     validated_consignee: shared.OneordersPostResponses201ContentApplication1jsonSchemaPropertiesOriginalConsignee = field(default=None, metadata={'dataclasses_json': { 'field_name': 'validatedConsignee' }})
-    warehouse: Optional[GetOrders200ApplicationJSON2WarehouseWarehouseV2] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'warehouse' }})
+    warehouse: Optional[GetOrders200ApplicationJSONOrderResponseV2WarehouseV2] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'warehouse' }})
     
 
 @dataclass
 class GetOrdersResponse:
     content_type: str = field(default=None)
-    error_standard_v2: Optional[GetOrders404ApplicationJSONErrorStandardV2] = field(default=None)
+    error_standard_v2: Optional[GetOrdersErrorStandardV2] = field(default=None)
     order_response_one_of_v2: Optional[Any] = field(default=None)
     status_code: int = field(default=None)
     

@@ -22,7 +22,7 @@ type ListEndUserTypeRequest struct {
 	Security    ListEndUserTypeSecurity
 }
 
-type ListEndUserType200ApplicationJSONMeta struct {
+type ListEndUserTypeListEndUserTypeResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -32,13 +32,13 @@ type ListEndUserType200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListEndUserType200ApplicationJSONListEndUserTypeResponse struct {
+type ListEndUserTypeListEndUserTypeResponse struct {
 	EndUserTypes []shared.NumbersV2RegulatoryComplianceEndUserType `json:"end_user_types,omitempty"`
-	Meta         *ListEndUserType200ApplicationJSONMeta            `json:"meta,omitempty"`
+	Meta         *ListEndUserTypeListEndUserTypeResponseMeta       `json:"meta,omitempty"`
 }
 
 type ListEndUserTypeResponse struct {
 	ContentType             string
-	ListEndUserTypeResponse *ListEndUserType200ApplicationJSONListEndUserTypeResponse
+	ListEndUserTypeResponse *ListEndUserTypeListEndUserTypeResponse
 	StatusCode              int64
 }

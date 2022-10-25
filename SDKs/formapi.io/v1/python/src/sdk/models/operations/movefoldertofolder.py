@@ -11,7 +11,7 @@ class MoveFolderToFolderPathParams:
 
 @dataclass_json
 @dataclass
-class MoveFolderToFolderRequestBodyMoveFolderData:
+class MoveFolderToFolderMoveFolderData:
     parent_folder_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'parent_folder_id' }})
     
 
@@ -23,13 +23,13 @@ class MoveFolderToFolderSecurity:
 @dataclass
 class MoveFolderToFolderRequest:
     path_params: MoveFolderToFolderPathParams = field(default=None)
-    request: MoveFolderToFolderRequestBodyMoveFolderData = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: MoveFolderToFolderMoveFolderData = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     security: MoveFolderToFolderSecurity = field(default=None)
     
 
 @dataclass_json
 @dataclass
-class MoveFolderToFolder200ApplicationJSONFolder:
+class MoveFolderToFolderFolder:
     id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
     parent_folder_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'parent_folder_id' }})
@@ -42,5 +42,5 @@ class MoveFolderToFolderResponse:
     status_code: int = field(default=None)
     authentication_error: Optional[shared.AuthenticationError] = field(default=None)
     error: Optional[shared.Error] = field(default=None)
-    folder: Optional[MoveFolderToFolder200ApplicationJSONFolder] = field(default=None)
+    folder: Optional[MoveFolderToFolderFolder] = field(default=None)
     

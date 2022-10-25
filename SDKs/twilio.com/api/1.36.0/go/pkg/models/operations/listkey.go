@@ -27,7 +27,7 @@ type ListKeyRequest struct {
 	Security    ListKeySecurity
 }
 
-type ListKey200ApplicationJSONListKeyResponse struct {
+type ListKeyListKeyResponse struct {
 	End             *int64                      `json:"end,omitempty"`
 	FirstPageURI    *string                     `json:"first_page_uri,omitempty"`
 	Keys            []shared.APIV2010AccountKey `json:"keys,omitempty"`
@@ -41,6 +41,6 @@ type ListKey200ApplicationJSONListKeyResponse struct {
 
 type ListKeyResponse struct {
 	ContentType     string
-	ListKeyResponse *ListKey200ApplicationJSONListKeyResponse
+	ListKeyResponse *ListKeyListKeyResponse
 	StatusCode      int64
 }

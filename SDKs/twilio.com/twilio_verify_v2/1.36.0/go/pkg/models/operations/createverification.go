@@ -12,7 +12,7 @@ type CreateVerificationPathParams struct {
 	ServiceSid string `pathParam:"style=simple,explode=false,name=ServiceSid"`
 }
 
-type CreateVerificationRequestBodyCreateVerificationRequest struct {
+type CreateVerificationCreateVerificationRequest struct {
 	Amount                      *string      `form:"name=Amount"`
 	AppHash                     *string      `form:"name=AppHash"`
 	Channel                     string       `form:"name=Channel"`
@@ -36,7 +36,7 @@ type CreateVerificationSecurity struct {
 type CreateVerificationRequest struct {
 	ServerURL  *string
 	PathParams CreateVerificationPathParams
-	Request    *CreateVerificationRequestBodyCreateVerificationRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateVerificationCreateVerificationRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateVerificationSecurity
 }
 

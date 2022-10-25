@@ -12,7 +12,7 @@ type CreateCustomerProfileEntityAssignmentPathParams struct {
 	CustomerProfileSid string `pathParam:"style=simple,explode=false,name=CustomerProfileSid"`
 }
 
-type CreateCustomerProfileEntityAssignmentRequestBodyCreateCustomerProfileEntityAssignmentRequest struct {
+type CreateCustomerProfileEntityAssignmentCreateCustomerProfileEntityAssignmentRequest struct {
 	ObjectSid string `form:"name=ObjectSid"`
 }
 
@@ -23,7 +23,7 @@ type CreateCustomerProfileEntityAssignmentSecurity struct {
 type CreateCustomerProfileEntityAssignmentRequest struct {
 	ServerURL  *string
 	PathParams CreateCustomerProfileEntityAssignmentPathParams
-	Request    *CreateCustomerProfileEntityAssignmentRequestBodyCreateCustomerProfileEntityAssignmentRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateCustomerProfileEntityAssignmentCreateCustomerProfileEntityAssignmentRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateCustomerProfileEntityAssignmentSecurity
 }
 

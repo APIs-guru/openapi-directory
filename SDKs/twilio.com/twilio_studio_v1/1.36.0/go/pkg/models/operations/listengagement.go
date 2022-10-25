@@ -27,7 +27,7 @@ type ListEngagementRequest struct {
 	Security    ListEngagementSecurity
 }
 
-type ListEngagement200ApplicationJSONMeta struct {
+type ListEngagementListEngagementResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -37,13 +37,13 @@ type ListEngagement200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListEngagement200ApplicationJSONListEngagementResponse struct {
-	Engagements []shared.StudioV1FlowEngagement       `json:"engagements,omitempty"`
-	Meta        *ListEngagement200ApplicationJSONMeta `json:"meta,omitempty"`
+type ListEngagementListEngagementResponse struct {
+	Engagements []shared.StudioV1FlowEngagement           `json:"engagements,omitempty"`
+	Meta        *ListEngagementListEngagementResponseMeta `json:"meta,omitempty"`
 }
 
 type ListEngagementResponse struct {
 	ContentType            string
-	ListEngagementResponse *ListEngagement200ApplicationJSONListEngagementResponse
+	ListEngagementResponse *ListEngagementListEngagementResponse
 	StatusCode             int64
 }

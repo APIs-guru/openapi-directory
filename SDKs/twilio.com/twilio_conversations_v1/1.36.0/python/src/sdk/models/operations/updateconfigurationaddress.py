@@ -12,7 +12,7 @@ class UpdateConfigurationAddressPathParams:
     
 
 @dataclass
-class UpdateConfigurationAddressRequestBodyUpdateConfigurationAddressRequest:
+class UpdateConfigurationAddressUpdateConfigurationAddressRequest:
     auto_creation_conversation_service_sid: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'AutoCreation.ConversationServiceSid' }})
     auto_creation_enabled: Optional[bool] = field(default=None, metadata={'form': { 'field_name': 'AutoCreation.Enabled' }})
     auto_creation_studio_flow_sid: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'AutoCreation.StudioFlowSid' }})
@@ -33,7 +33,7 @@ class UpdateConfigurationAddressSecurity:
 class UpdateConfigurationAddressRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateConfigurationAddressPathParams = field(default=None)
-    request: Optional[UpdateConfigurationAddressRequestBodyUpdateConfigurationAddressRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateConfigurationAddressUpdateConfigurationAddressRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateConfigurationAddressSecurity = field(default=None)
     
 

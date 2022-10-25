@@ -12,7 +12,7 @@ type UpdateRecordingPathParams struct {
 	TrunkSid string `pathParam:"style=simple,explode=false,name=TrunkSid"`
 }
 
-type UpdateRecordingRequestBodyUpdateRecordingRequest struct {
+type UpdateRecordingUpdateRecordingRequest struct {
 	Mode *shared.RecordingEnumRecordingModeEnum `form:"name=Mode"`
 	Trim *shared.RecordingEnumRecordingTrimEnum `form:"name=Trim"`
 }
@@ -24,7 +24,7 @@ type UpdateRecordingSecurity struct {
 type UpdateRecordingRequest struct {
 	ServerURL  *string
 	PathParams UpdateRecordingPathParams
-	Request    *UpdateRecordingRequestBodyUpdateRecordingRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateRecordingUpdateRecordingRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateRecordingSecurity
 }
 

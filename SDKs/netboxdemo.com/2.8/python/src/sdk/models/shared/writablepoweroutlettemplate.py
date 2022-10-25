@@ -2,12 +2,12 @@ from dataclasses import dataclass, field
 from typing import Enum,Optional
 from dataclasses_json import dataclass_json
 
-class WritablePowerOutletTemplateFeedLegFeedLegEnum(str, Enum):
+class WritablePowerOutletTemplateFeedLegEnum(str, Enum):
     A = "A"
     B = "B"
     C = "C"
 
-class WritablePowerOutletTemplateTypeTypeEnum(str, Enum):
+class WritablePowerOutletTemplateTypeEnum(str, Enum):
     IEC_60320_C5 = "iec-60320-c5"
     IEC_60320_C7 = "iec-60320-c7"
     IEC_60320_C13 = "iec-60320-c13"
@@ -80,9 +80,9 @@ class WritablePowerOutletTemplateTypeTypeEnum(str, Enum):
 @dataclass
 class WritablePowerOutletTemplate:
     device_type: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'device_type' }})
-    feed_leg: Optional[WritablePowerOutletTemplateFeedLegFeedLegEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'feed_leg' }})
+    feed_leg: Optional[WritablePowerOutletTemplateFeedLegEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'feed_leg' }})
     id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
     power_port: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'power_port' }})
-    type: Optional[WritablePowerOutletTemplateTypeTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    type: Optional[WritablePowerOutletTemplateTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     

@@ -8,28 +8,28 @@ var CreateCompositionHookServers = []string{
 	"https://video.twilio.com",
 }
 
-type CreateCompositionHookRequestBodyStatusCallbackMethodEnum string
+type CreateCompositionHookCreateCompositionHookRequestStatusCallbackMethodEnum string
 
 const (
-	CreateCompositionHookRequestBodyStatusCallbackMethodEnumHead   CreateCompositionHookRequestBodyStatusCallbackMethodEnum = "HEAD"
-	CreateCompositionHookRequestBodyStatusCallbackMethodEnumGet    CreateCompositionHookRequestBodyStatusCallbackMethodEnum = "GET"
-	CreateCompositionHookRequestBodyStatusCallbackMethodEnumPost   CreateCompositionHookRequestBodyStatusCallbackMethodEnum = "POST"
-	CreateCompositionHookRequestBodyStatusCallbackMethodEnumPatch  CreateCompositionHookRequestBodyStatusCallbackMethodEnum = "PATCH"
-	CreateCompositionHookRequestBodyStatusCallbackMethodEnumPut    CreateCompositionHookRequestBodyStatusCallbackMethodEnum = "PUT"
-	CreateCompositionHookRequestBodyStatusCallbackMethodEnumDelete CreateCompositionHookRequestBodyStatusCallbackMethodEnum = "DELETE"
+	CreateCompositionHookCreateCompositionHookRequestStatusCallbackMethodEnumHead   CreateCompositionHookCreateCompositionHookRequestStatusCallbackMethodEnum = "HEAD"
+	CreateCompositionHookCreateCompositionHookRequestStatusCallbackMethodEnumGet    CreateCompositionHookCreateCompositionHookRequestStatusCallbackMethodEnum = "GET"
+	CreateCompositionHookCreateCompositionHookRequestStatusCallbackMethodEnumPost   CreateCompositionHookCreateCompositionHookRequestStatusCallbackMethodEnum = "POST"
+	CreateCompositionHookCreateCompositionHookRequestStatusCallbackMethodEnumPatch  CreateCompositionHookCreateCompositionHookRequestStatusCallbackMethodEnum = "PATCH"
+	CreateCompositionHookCreateCompositionHookRequestStatusCallbackMethodEnumPut    CreateCompositionHookCreateCompositionHookRequestStatusCallbackMethodEnum = "PUT"
+	CreateCompositionHookCreateCompositionHookRequestStatusCallbackMethodEnumDelete CreateCompositionHookCreateCompositionHookRequestStatusCallbackMethodEnum = "DELETE"
 )
 
-type CreateCompositionHookRequestBodyCreateCompositionHookRequest struct {
-	AudioSources         []string                                                  `form:"name=AudioSources"`
-	AudioSourcesExcluded []string                                                  `form:"name=AudioSourcesExcluded"`
-	Enabled              *bool                                                     `form:"name=Enabled"`
-	Format               *shared.CompositionHookEnumFormatEnum                     `form:"name=Format"`
-	FriendlyName         string                                                    `form:"name=FriendlyName"`
-	Resolution           *string                                                   `form:"name=Resolution"`
-	StatusCallback       *string                                                   `form:"name=StatusCallback"`
-	StatusCallbackMethod *CreateCompositionHookRequestBodyStatusCallbackMethodEnum `form:"name=StatusCallbackMethod"`
-	Trim                 *bool                                                     `form:"name=Trim"`
-	VideoLayout          *interface{}                                              `form:"name=VideoLayout"`
+type CreateCompositionHookCreateCompositionHookRequest struct {
+	AudioSources         []string                                                                   `form:"name=AudioSources"`
+	AudioSourcesExcluded []string                                                                   `form:"name=AudioSourcesExcluded"`
+	Enabled              *bool                                                                      `form:"name=Enabled"`
+	Format               *shared.CompositionHookEnumFormatEnum                                      `form:"name=Format"`
+	FriendlyName         string                                                                     `form:"name=FriendlyName"`
+	Resolution           *string                                                                    `form:"name=Resolution"`
+	StatusCallback       *string                                                                    `form:"name=StatusCallback"`
+	StatusCallbackMethod *CreateCompositionHookCreateCompositionHookRequestStatusCallbackMethodEnum `form:"name=StatusCallbackMethod"`
+	Trim                 *bool                                                                      `form:"name=Trim"`
+	VideoLayout          *interface{}                                                               `form:"name=VideoLayout"`
 }
 
 type CreateCompositionHookSecurity struct {
@@ -38,7 +38,7 @@ type CreateCompositionHookSecurity struct {
 
 type CreateCompositionHookRequest struct {
 	ServerURL *string
-	Request   *CreateCompositionHookRequestBodyCreateCompositionHookRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request   *CreateCompositionHookCreateCompositionHookRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security  CreateCompositionHookSecurity
 }
 

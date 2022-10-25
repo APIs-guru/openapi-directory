@@ -5,41 +5,41 @@ type NodesContributorsPartialUpdatePathParams struct {
 	UserID string `pathParam:"style=simple,explode=false,name=user_id"`
 }
 
-type NodesContributorsPartialUpdateRequestBodyAttributesPermissionEnum string
+type NodesContributorsPartialUpdateContributorAttributesPermissionEnum string
 
 const (
-	NodesContributorsPartialUpdateRequestBodyAttributesPermissionEnumRead  NodesContributorsPartialUpdateRequestBodyAttributesPermissionEnum = "read"
-	NodesContributorsPartialUpdateRequestBodyAttributesPermissionEnumWrite NodesContributorsPartialUpdateRequestBodyAttributesPermissionEnum = "write"
-	NodesContributorsPartialUpdateRequestBodyAttributesPermissionEnumAdmin NodesContributorsPartialUpdateRequestBodyAttributesPermissionEnum = "admin"
+	NodesContributorsPartialUpdateContributorAttributesPermissionEnumRead  NodesContributorsPartialUpdateContributorAttributesPermissionEnum = "read"
+	NodesContributorsPartialUpdateContributorAttributesPermissionEnumWrite NodesContributorsPartialUpdateContributorAttributesPermissionEnum = "write"
+	NodesContributorsPartialUpdateContributorAttributesPermissionEnumAdmin NodesContributorsPartialUpdateContributorAttributesPermissionEnum = "admin"
 )
 
-type NodesContributorsPartialUpdateRequestBodyAttributesAttributes struct {
+type NodesContributorsPartialUpdateContributorAttributes struct {
 	Bibliographic           *bool                                                              `json:"bibliographic,omitempty"`
 	Index                   *int64                                                             `json:"index,omitempty"`
-	Permission              *NodesContributorsPartialUpdateRequestBodyAttributesPermissionEnum `json:"permission,omitempty"`
+	Permission              *NodesContributorsPartialUpdateContributorAttributesPermissionEnum `json:"permission,omitempty"`
 	UnregisteredContributor *string                                                            `json:"unregistered_contributor,omitempty"`
 }
 
-type NodesContributorsPartialUpdateRequestBodyLinksLinks struct {
+type NodesContributorsPartialUpdateContributorLinks struct {
 	Self *string `json:"self,omitempty"`
 }
 
-type NodesContributorsPartialUpdateRequestBodyRelationshipsRelationships struct {
+type NodesContributorsPartialUpdateContributorRelationships struct {
 	Node string `json:"node"`
 	User string `json:"user"`
 }
 
-type NodesContributorsPartialUpdateRequestBodyContributor struct {
-	Attributes    *NodesContributorsPartialUpdateRequestBodyAttributesAttributes      `json:"attributes,omitempty"`
-	ID            *string                                                             `json:"id,omitempty"`
-	Links         *NodesContributorsPartialUpdateRequestBodyLinksLinks                `json:"links,omitempty"`
-	Relationships NodesContributorsPartialUpdateRequestBodyRelationshipsRelationships `json:"relationships"`
-	Type          string                                                              `json:"type"`
+type NodesContributorsPartialUpdateContributor struct {
+	Attributes    *NodesContributorsPartialUpdateContributorAttributes   `json:"attributes,omitempty"`
+	ID            *string                                                `json:"id,omitempty"`
+	Links         *NodesContributorsPartialUpdateContributorLinks        `json:"links,omitempty"`
+	Relationships NodesContributorsPartialUpdateContributorRelationships `json:"relationships"`
+	Type          string                                                 `json:"type"`
 }
 
 type NodesContributorsPartialUpdateRequest struct {
 	PathParams NodesContributorsPartialUpdatePathParams
-	Request    NodesContributorsPartialUpdateRequestBodyContributor `request:"mediaType=application/json"`
+	Request    NodesContributorsPartialUpdateContributor `request:"mediaType=application/json"`
 }
 
 type NodesContributorsPartialUpdateResponse struct {

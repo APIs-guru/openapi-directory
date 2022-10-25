@@ -9,7 +9,8 @@ type GetIPIpv4TxtRequest struct {
 }
 
 type GetIPIpv4TxtResponse struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+	ContentType          string
+	DateTimeTextResponse *string
+	ErrorTextResponse    *string
+	StatusCode           int64
 }

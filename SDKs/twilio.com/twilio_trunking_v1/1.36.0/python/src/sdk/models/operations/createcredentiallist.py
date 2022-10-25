@@ -12,7 +12,7 @@ class CreateCredentialListPathParams:
     
 
 @dataclass
-class CreateCredentialListRequestBodyCreateCredentialListRequest:
+class CreateCredentialListCreateCredentialListRequest:
     credential_list_sid: str = field(default=None, metadata={'form': { 'field_name': 'CredentialListSid' }})
     
 
@@ -25,7 +25,7 @@ class CreateCredentialListSecurity:
 class CreateCredentialListRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateCredentialListPathParams = field(default=None)
-    request: Optional[CreateCredentialListRequestBodyCreateCredentialListRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateCredentialListCreateCredentialListRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateCredentialListSecurity = field(default=None)
     
 

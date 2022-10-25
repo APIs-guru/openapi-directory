@@ -12,7 +12,7 @@ class CreateUsAppToPersonPathParams:
     
 
 @dataclass
-class CreateUsAppToPersonRequestBodyCreateUsAppToPersonRequest:
+class CreateUsAppToPersonCreateUsAppToPersonRequest:
     brand_registration_sid: str = field(default=None, metadata={'form': { 'field_name': 'BrandRegistrationSid' }})
     description: str = field(default=None, metadata={'form': { 'field_name': 'Description' }})
     has_embedded_links: bool = field(default=None, metadata={'form': { 'field_name': 'HasEmbeddedLinks' }})
@@ -30,7 +30,7 @@ class CreateUsAppToPersonSecurity:
 class CreateUsAppToPersonRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateUsAppToPersonPathParams = field(default=None)
-    request: Optional[CreateUsAppToPersonRequestBodyCreateUsAppToPersonRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateUsAppToPersonCreateUsAppToPersonRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateUsAppToPersonSecurity = field(default=None)
     
 

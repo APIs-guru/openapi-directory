@@ -81,12 +81,12 @@ func (s *SDK) GetWaybackV1Available(ctx context.Context, request operations.GetW
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/javascript`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.AvailabilityResults
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -98,12 +98,12 @@ func (s *SDK) GetWaybackV1Available(ctx context.Context, request operations.GetW
 	default:
 		switch {
 		case utils.MatchContentType(contentType, `application/javascript`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.Error
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {

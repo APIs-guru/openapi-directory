@@ -13,7 +13,7 @@ type CreateSipAuthRegistrationsCredentialListMappingPathParams struct {
 	DomainSid  string `pathParam:"style=simple,explode=false,name=DomainSid"`
 }
 
-type CreateSipAuthRegistrationsCredentialListMappingRequestBodyCreateSipAuthRegistrationsCredentialListMappingRequest struct {
+type CreateSipAuthRegistrationsCredentialListMappingCreateSipAuthRegistrationsCredentialListMappingRequest struct {
 	CredentialListSid string `form:"name=CredentialListSid"`
 }
 
@@ -24,7 +24,7 @@ type CreateSipAuthRegistrationsCredentialListMappingSecurity struct {
 type CreateSipAuthRegistrationsCredentialListMappingRequest struct {
 	ServerURL  *string
 	PathParams CreateSipAuthRegistrationsCredentialListMappingPathParams
-	Request    *CreateSipAuthRegistrationsCredentialListMappingRequestBodyCreateSipAuthRegistrationsCredentialListMappingRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateSipAuthRegistrationsCredentialListMappingCreateSipAuthRegistrationsCredentialListMappingRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateSipAuthRegistrationsCredentialListMappingSecurity
 }
 

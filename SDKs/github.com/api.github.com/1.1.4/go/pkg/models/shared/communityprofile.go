@@ -4,24 +4,19 @@ import (
 	"time"
 )
 
-type CommunityProfileFilesCodeOfConductCodeOfConductSimple struct {
+type CommunityProfileFilesCodeOfConductSimple struct {
 	HTMLURL string `json:"html_url"`
 	Key     string `json:"key"`
 	Name    string `json:"name"`
 	URL     string `json:"url"`
 }
 
-type CommunityProfileFilesContributingCommunityHealthFile struct {
+type CommunityProfileFilesCommunityHealthFile struct {
 	HTMLURL string `json:"html_url"`
 	URL     string `json:"url"`
 }
 
-type CommunityProfileFilesIssueTemplateCommunityHealthFile struct {
-	HTMLURL string `json:"html_url"`
-	URL     string `json:"url"`
-}
-
-type CommunityProfileFilesLicenseLicenseSimple struct {
+type CommunityProfileFilesLicenseSimple struct {
 	HTMLURL *string `json:"html_url,omitempty"`
 	Key     string  `json:"key"`
 	Name    string  `json:"name"`
@@ -30,23 +25,13 @@ type CommunityProfileFilesLicenseLicenseSimple struct {
 	URL     string  `json:"url"`
 }
 
-type CommunityProfileFilesPullRequestTemplateCommunityHealthFile struct {
-	HTMLURL string `json:"html_url"`
-	URL     string `json:"url"`
-}
-
-type CommunityProfileFilesReadmeCommunityHealthFile struct {
-	HTMLURL string `json:"html_url"`
-	URL     string `json:"url"`
-}
-
 type CommunityProfileFiles struct {
-	CodeOfConduct       CommunityProfileFilesCodeOfConductCodeOfConductSimple       `json:"code_of_conduct"`
-	Contributing        CommunityProfileFilesContributingCommunityHealthFile        `json:"contributing"`
-	IssueTemplate       CommunityProfileFilesIssueTemplateCommunityHealthFile       `json:"issue_template"`
-	License             CommunityProfileFilesLicenseLicenseSimple                   `json:"license"`
-	PullRequestTemplate CommunityProfileFilesPullRequestTemplateCommunityHealthFile `json:"pull_request_template"`
-	Readme              CommunityProfileFilesReadmeCommunityHealthFile              `json:"readme"`
+	CodeOfConduct       CommunityProfileFilesCodeOfConductSimple `json:"code_of_conduct"`
+	Contributing        CommunityProfileFilesCommunityHealthFile `json:"contributing"`
+	IssueTemplate       CommunityProfileFilesCommunityHealthFile `json:"issue_template"`
+	License             CommunityProfileFilesLicenseSimple       `json:"license"`
+	PullRequestTemplate CommunityProfileFilesCommunityHealthFile `json:"pull_request_template"`
+	Readme              CommunityProfileFilesCommunityHealthFile `json:"readme"`
 }
 
 type CommunityProfile struct {

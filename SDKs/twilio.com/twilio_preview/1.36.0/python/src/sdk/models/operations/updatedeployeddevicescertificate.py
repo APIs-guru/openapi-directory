@@ -13,7 +13,7 @@ class UpdateDeployedDevicesCertificatePathParams:
     
 
 @dataclass
-class UpdateDeployedDevicesCertificateRequestBodyUpdateDeployedDevicesCertificateRequest:
+class UpdateDeployedDevicesCertificateUpdateDeployedDevicesCertificateRequest:
     device_sid: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'DeviceSid' }})
     friendly_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
     
@@ -27,7 +27,7 @@ class UpdateDeployedDevicesCertificateSecurity:
 class UpdateDeployedDevicesCertificateRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateDeployedDevicesCertificatePathParams = field(default=None)
-    request: Optional[UpdateDeployedDevicesCertificateRequestBodyUpdateDeployedDevicesCertificateRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateDeployedDevicesCertificateUpdateDeployedDevicesCertificateRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateDeployedDevicesCertificateSecurity = field(default=None)
     
 

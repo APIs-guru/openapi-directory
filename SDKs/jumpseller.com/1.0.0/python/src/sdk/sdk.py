@@ -36,8 +36,7 @@ class SDK:
         res = operations.DeleteCategoriesIDJSONResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.delete_categories_id_json_200_application_json_string = out
+                res.delete_categories_id_json_200_application_json_string = r.content
         elif r.status_code == 404:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[Any])
@@ -62,8 +61,7 @@ class SDK:
         res = operations.DeleteCheckoutCustomFieldsIDJSONResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.delete_checkout_custom_fields_id_json_200_application_json_string = out
+                res.delete_checkout_custom_fields_id_json_200_application_json_string = r.content
         elif r.status_code == 404:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[Any])
@@ -88,8 +86,7 @@ class SDK:
         res = operations.DeleteCustomFieldsIDJSONResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.delete_custom_fields_id_json_200_application_json_string = out
+                res.delete_custom_fields_id_json_200_application_json_string = r.content
         elif r.status_code == 404:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[Any])
@@ -114,8 +111,7 @@ class SDK:
         res = operations.DeleteCustomFieldsIDSelectOptionsCustomFieldSelectOptionIDJSONResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.delete_custom_fields_id_select_options_custom_field_select_option_id_json_200_application_json_string = out
+                res.delete_custom_fields_id_select_options_custom_field_select_option_id_json_200_application_json_string = r.content
         elif r.status_code == 404:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[Any])
@@ -147,8 +143,7 @@ class SDK:
         res = operations.DeleteCustomerCategoriesIDCustomersJSONResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.delete_customer_categories_id_customers_json_200_application_json_string = out
+                res.delete_customer_categories_id_customers_json_200_application_json_string = r.content
         elif r.status_code == 404:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[Any])
@@ -173,8 +168,7 @@ class SDK:
         res = operations.DeleteCustomerCategoriesIDJSONResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.delete_customer_categories_id_json_200_application_json_string = out
+                res.delete_customer_categories_id_json_200_application_json_string = r.content
         elif r.status_code == 404:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[Any])
@@ -199,8 +193,7 @@ class SDK:
         res = operations.DeleteCustomersIDFieldsFieldIDResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.delete_customers_id_fields_field_id_200_application_json_string = out
+                res.delete_customers_id_fields_field_id_200_application_json_string = r.content
         elif r.status_code == 404:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[Any])
@@ -225,8 +218,7 @@ class SDK:
         res = operations.DeleteCustomersIDJSONResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.delete_customers_id_json_200_application_json_string = out
+                res.delete_customers_id_json_200_application_json_string = r.content
         elif r.status_code == 404:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[Any])
@@ -251,8 +243,7 @@ class SDK:
         res = operations.DeleteHooksIDJSONResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.delete_hooks_id_json_200_application_json_string = out
+                res.delete_hooks_id_json_200_application_json_string = r.content
         elif r.status_code == 404:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[Any])
@@ -277,8 +268,7 @@ class SDK:
         res = operations.DeleteJsappsCodeJSONResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.delete_jsapps_code_json_200_application_json_string = out
+                res.delete_jsapps_code_json_200_application_json_string = r.content
         elif r.status_code == 404:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[Any])
@@ -303,8 +293,7 @@ class SDK:
         res = operations.DeletePagesIDJSONResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.delete_pages_id_json_200_application_json_string = out
+                res.delete_pages_id_json_200_application_json_string = r.content
         elif r.status_code == 404:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[Any])
@@ -329,8 +318,7 @@ class SDK:
         res = operations.DeleteProductsIDAttachmentsAttachmentIDJSONResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.delete_products_id_attachments_attachment_id_json_200_application_json_string = out
+                res.delete_products_id_attachments_attachment_id_json_200_application_json_string = r.content
         elif r.status_code == 404:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[Any])
@@ -355,8 +343,7 @@ class SDK:
         res = operations.DeleteProductsIDDigitalProductsDigitalProductIDJSONResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.delete_products_id_digital_products_digital_product_id_json_200_application_json_string = out
+                res.delete_products_id_digital_products_digital_product_id_json_200_application_json_string = r.content
         elif r.status_code == 404:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[Any])
@@ -381,8 +368,7 @@ class SDK:
         res = operations.DeleteProductsIDImagesImageIDJSONResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.delete_products_id_images_image_id_json_200_application_json_string = out
+                res.delete_products_id_images_image_id_json_200_application_json_string = r.content
         elif r.status_code == 404:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[Any])
@@ -407,8 +393,7 @@ class SDK:
         res = operations.DeleteProductsIDJSONResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.delete_products_id_json_200_application_json_string = out
+                res.delete_products_id_json_200_application_json_string = r.content
         elif r.status_code == 404:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[Any])
@@ -433,8 +418,7 @@ class SDK:
         res = operations.DeleteProductsIDOptionsOptionIDJSONResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.delete_products_id_options_option_id_json_200_application_json_string = out
+                res.delete_products_id_options_option_id_json_200_application_json_string = r.content
         elif r.status_code == 404:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[Any])
@@ -459,8 +443,7 @@ class SDK:
         res = operations.DeleteProductsIDOptionsOptionIDValuesValueIDJSONResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.delete_products_id_options_option_id_values_value_id_json_200_application_json_string = out
+                res.delete_products_id_options_option_id_values_value_id_json_200_application_json_string = r.content
         elif r.status_code == 404:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[Any])
@@ -511,8 +494,7 @@ class SDK:
         res = operations.DeletePromotionsIDJSONResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.delete_promotions_id_json_200_application_json_string = out
+                res.delete_promotions_id_json_200_application_json_string = r.content
         elif r.status_code == 404:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[Any])
@@ -537,8 +519,7 @@ class SDK:
         res = operations.DeleteShippingMethodsIDJSONResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[str])
-                res.delete_shipping_methods_id_json_200_application_json_string = out
+                res.delete_shipping_methods_id_json_200_application_json_string = r.content
         elif r.status_code == 404:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[Any])

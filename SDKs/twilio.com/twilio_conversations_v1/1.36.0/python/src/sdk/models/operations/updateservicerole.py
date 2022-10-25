@@ -13,7 +13,7 @@ class UpdateServiceRolePathParams:
     
 
 @dataclass
-class UpdateServiceRoleRequestBodyUpdateServiceRoleRequest:
+class UpdateServiceRoleUpdateServiceRoleRequest:
     permission: List[str] = field(default=None, metadata={'form': { 'field_name': 'Permission' }})
     
 
@@ -26,7 +26,7 @@ class UpdateServiceRoleSecurity:
 class UpdateServiceRoleRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateServiceRolePathParams = field(default=None)
-    request: Optional[UpdateServiceRoleRequestBodyUpdateServiceRoleRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateServiceRoleUpdateServiceRoleRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateServiceRoleSecurity = field(default=None)
     
 

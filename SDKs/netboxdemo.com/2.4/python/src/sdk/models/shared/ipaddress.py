@@ -13,14 +13,14 @@ from . import nestedvrf
 
 @dataclass_json
 @dataclass
-class IPAddressRoleRole:
+class IPAddressRole:
     label: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label' }})
     value: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
     
 
 @dataclass_json
 @dataclass
-class IPAddressStatusStatus:
+class IPAddressStatus:
     label: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label' }})
     value: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
     
@@ -38,8 +38,8 @@ class IPAddress:
     last_updated: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'last_updated', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     nat_inside: Optional[nestedipaddress.NestedIPAddress] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nat_inside' }})
     nat_outside: Optional[nestedipaddress.NestedIPAddress] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'nat_outside' }})
-    role: Optional[IPAddressRoleRole] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'role' }})
-    status: Optional[IPAddressStatusStatus] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    role: Optional[IPAddressRole] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'role' }})
+    status: Optional[IPAddressStatus] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
     tags: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
     tenant: Optional[nestedtenant.NestedTenant] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tenant' }})
     vrf: Optional[nestedvrf.NestedVrf] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'vrf' }})

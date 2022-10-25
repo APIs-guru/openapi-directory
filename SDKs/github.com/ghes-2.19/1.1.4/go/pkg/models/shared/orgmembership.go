@@ -19,7 +19,7 @@ const (
 	OrgMembershipStateEnumPending OrgMembershipStateEnum = "pending"
 )
 
-type OrgMembershipUserSimpleUser struct {
+type OrgMembershipSimpleUser struct {
 	AvatarURL         string  `json:"avatar_url"`
 	EventsURL         string  `json:"events_url"`
 	FollowersURL      string  `json:"followers_url"`
@@ -42,11 +42,11 @@ type OrgMembershipUserSimpleUser struct {
 }
 
 type OrgMembership struct {
-	Organization    OrganizationSimple          `json:"organization"`
-	OrganizationURL string                      `json:"organization_url"`
-	Permissions     *OrgMembershipPermissions   `json:"permissions,omitempty"`
-	Role            OrgMembershipRoleEnum       `json:"role"`
-	State           OrgMembershipStateEnum      `json:"state"`
-	URL             string                      `json:"url"`
-	User            OrgMembershipUserSimpleUser `json:"user"`
+	Organization    OrganizationSimple        `json:"organization"`
+	OrganizationURL string                    `json:"organization_url"`
+	Permissions     *OrgMembershipPermissions `json:"permissions,omitempty"`
+	Role            OrgMembershipRoleEnum     `json:"role"`
+	State           OrgMembershipStateEnum    `json:"state"`
+	URL             string                    `json:"url"`
+	User            OrgMembershipSimpleUser   `json:"user"`
 }

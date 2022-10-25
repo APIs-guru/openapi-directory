@@ -4,40 +4,40 @@ import (
 	"time"
 )
 
-type CisTransactionCisTransactionCisMessageTypeCisMessageTypeEnum string
+type CisTransactionCisTransactionCisMessageTypeEnum string
 
 const (
-	CisTransactionCisTransactionCisMessageTypeCisMessageTypeEnumVerification CisTransactionCisTransactionCisMessageTypeCisMessageTypeEnum = "Verification"
-	CisTransactionCisTransactionCisMessageTypeCisMessageTypeEnumReturn       CisTransactionCisTransactionCisMessageTypeCisMessageTypeEnum = "Return"
+	CisTransactionCisTransactionCisMessageTypeEnumVerification CisTransactionCisTransactionCisMessageTypeEnum = "Verification"
+	CisTransactionCisTransactionCisMessageTypeEnumReturn       CisTransactionCisTransactionCisMessageTypeEnum = "Return"
 )
 
-type CisTransactionCisTransactionEmployerCoreEmployerCore struct {
+type CisTransactionCisTransactionEmployerCore struct {
 	AtHref  *string `json:"@href,omitempty"`
 	AtRel   *string `json:"@rel,omitempty"`
 	AtTitle *string `json:"@title,omitempty"`
 }
 
-type CisTransactionCisTransactionTransactionStatusTransactionStatusEnum string
+type CisTransactionCisTransactionTransactionStatusEnum string
 
 const (
-	CisTransactionCisTransactionTransactionStatusTransactionStatusEnumNew                  CisTransactionCisTransactionTransactionStatusTransactionStatusEnum = "New"
-	CisTransactionCisTransactionTransactionStatusTransactionStatusEnumRequestGenerated     CisTransactionCisTransactionTransactionStatusTransactionStatusEnum = "RequestGenerated"
-	CisTransactionCisTransactionTransactionStatusTransactionStatusEnumCompletedWithError   CisTransactionCisTransactionTransactionStatusTransactionStatusEnum = "CompletedWithError"
-	CisTransactionCisTransactionTransactionStatusTransactionStatusEnumCompletedWithSuccess CisTransactionCisTransactionTransactionStatusTransactionStatusEnum = "CompletedWithSuccess"
-	CisTransactionCisTransactionTransactionStatusTransactionStatusEnumTimeOut              CisTransactionCisTransactionTransactionStatusTransactionStatusEnum = "TimeOut"
+	CisTransactionCisTransactionTransactionStatusEnumNew                  CisTransactionCisTransactionTransactionStatusEnum = "New"
+	CisTransactionCisTransactionTransactionStatusEnumRequestGenerated     CisTransactionCisTransactionTransactionStatusEnum = "RequestGenerated"
+	CisTransactionCisTransactionTransactionStatusEnumCompletedWithError   CisTransactionCisTransactionTransactionStatusEnum = "CompletedWithError"
+	CisTransactionCisTransactionTransactionStatusEnumCompletedWithSuccess CisTransactionCisTransactionTransactionStatusEnum = "CompletedWithSuccess"
+	CisTransactionCisTransactionTransactionStatusEnumTimeOut              CisTransactionCisTransactionTransactionStatusEnum = "TimeOut"
 )
 
-type CisTransactionCisTransactionCisTransaction struct {
-	CisMessageType    *CisTransactionCisTransactionCisMessageTypeCisMessageTypeEnum       `json:"CisMessageType,omitempty"`
-	EmployerCore      *CisTransactionCisTransactionEmployerCoreEmployerCore               `json:"EmployerCore,omitempty"`
-	RequestData       *string                                                             `json:"RequestData,omitempty"`
-	ResponseData      *string                                                             `json:"ResponseData,omitempty"`
-	TaxYear           *int32                                                              `json:"TaxYear,omitempty"`
-	Timestamp         *time.Time                                                          `json:"Timestamp,omitempty"`
-	TransactionStatus *CisTransactionCisTransactionTransactionStatusTransactionStatusEnum `json:"TransactionStatus,omitempty"`
-	TransmissionDate  *time.Time                                                          `json:"TransmissionDate,omitempty"`
+type CisTransactionCisTransaction struct {
+	CisMessageType    *CisTransactionCisTransactionCisMessageTypeEnum    `json:"CisMessageType,omitempty"`
+	EmployerCore      *CisTransactionCisTransactionEmployerCore          `json:"EmployerCore,omitempty"`
+	RequestData       *string                                            `json:"RequestData,omitempty"`
+	ResponseData      *string                                            `json:"ResponseData,omitempty"`
+	TaxYear           *int32                                             `json:"TaxYear,omitempty"`
+	Timestamp         *time.Time                                         `json:"Timestamp,omitempty"`
+	TransactionStatus *CisTransactionCisTransactionTransactionStatusEnum `json:"TransactionStatus,omitempty"`
+	TransmissionDate  *time.Time                                         `json:"TransmissionDate,omitempty"`
 }
 
 type CisTransaction struct {
-	CisTransaction *CisTransactionCisTransactionCisTransaction `json:"CisTransaction,omitempty"`
+	CisTransaction *CisTransactionCisTransaction `json:"CisTransaction,omitempty"`
 }

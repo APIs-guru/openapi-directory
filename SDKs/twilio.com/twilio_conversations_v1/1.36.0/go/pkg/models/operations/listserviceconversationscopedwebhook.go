@@ -28,7 +28,7 @@ type ListServiceConversationScopedWebhookRequest struct {
 	Security    ListServiceConversationScopedWebhookSecurity
 }
 
-type ListServiceConversationScopedWebhook200ApplicationJSONMeta struct {
+type ListServiceConversationScopedWebhookListServiceConversationScopedWebhookResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -38,13 +38,13 @@ type ListServiceConversationScopedWebhook200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListServiceConversationScopedWebhook200ApplicationJSONListServiceConversationScopedWebhookResponse struct {
-	Meta     *ListServiceConversationScopedWebhook200ApplicationJSONMeta                        `json:"meta,omitempty"`
-	Webhooks []shared.ConversationsV1ServiceServiceConversationServiceConversationScopedWebhook `json:"webhooks,omitempty"`
+type ListServiceConversationScopedWebhookListServiceConversationScopedWebhookResponse struct {
+	Meta     *ListServiceConversationScopedWebhookListServiceConversationScopedWebhookResponseMeta `json:"meta,omitempty"`
+	Webhooks []shared.ConversationsV1ServiceServiceConversationServiceConversationScopedWebhook    `json:"webhooks,omitempty"`
 }
 
 type ListServiceConversationScopedWebhookResponse struct {
 	ContentType                                  string
-	ListServiceConversationScopedWebhookResponse *ListServiceConversationScopedWebhook200ApplicationJSONListServiceConversationScopedWebhookResponse
+	ListServiceConversationScopedWebhookResponse *ListServiceConversationScopedWebhookListServiceConversationScopedWebhookResponse
 	StatusCode                                   int64
 }

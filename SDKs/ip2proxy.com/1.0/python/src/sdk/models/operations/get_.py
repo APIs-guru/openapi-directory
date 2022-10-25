@@ -21,7 +21,7 @@ class GetRequest:
 
 @dataclass
 class GetResponse:
-    body: bytes = field(default=None)
     content_type: str = field(default=None)
+    get_200_text_html_string: Optional[str] = field(default=None)
     status_code: int = field(default=None)
     

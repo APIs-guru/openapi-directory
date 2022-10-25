@@ -33,7 +33,7 @@ class ListCompositionHookRequest:
 
 @dataclass_json
 @dataclass
-class ListCompositionHook200ApplicationJSONMeta:
+class ListCompositionHookListCompositionHookResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -45,14 +45,14 @@ class ListCompositionHook200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListCompositionHook200ApplicationJSONListCompositionHookResponse:
+class ListCompositionHookListCompositionHookResponse:
     composition_hooks: Optional[List[shared.VideoV1CompositionHook]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'composition_hooks' }})
-    meta: Optional[ListCompositionHook200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+    meta: Optional[ListCompositionHookListCompositionHookResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     
 
 @dataclass
 class ListCompositionHookResponse:
     content_type: str = field(default=None)
-    list_composition_hook_response: Optional[ListCompositionHook200ApplicationJSONListCompositionHookResponse] = field(default=None)
+    list_composition_hook_response: Optional[ListCompositionHookListCompositionHookResponse] = field(default=None)
     status_code: int = field(default=None)
     

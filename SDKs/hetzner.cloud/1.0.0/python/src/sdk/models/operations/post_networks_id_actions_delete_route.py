@@ -10,7 +10,7 @@ class PostNetworksIDActionsDeleteRoutePathParams:
 
 @dataclass_json
 @dataclass
-class PostNetworksIDActionsDeleteRouteRequestBodyAddDeleteRouteRequest:
+class PostNetworksIDActionsDeleteRouteAddDeleteRouteRequest:
     destination: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'destination' }})
     gateway: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'gateway' }})
     
@@ -18,23 +18,23 @@ class PostNetworksIDActionsDeleteRouteRequestBodyAddDeleteRouteRequest:
 @dataclass
 class PostNetworksIDActionsDeleteRouteRequest:
     path_params: PostNetworksIDActionsDeleteRoutePathParams = field(default=None)
-    request: Optional[PostNetworksIDActionsDeleteRouteRequestBodyAddDeleteRouteRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: Optional[PostNetworksIDActionsDeleteRouteAddDeleteRouteRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass_json
 @dataclass
-class PostNetworksIDActionsDeleteRoute201ApplicationJSONActionError:
+class PostNetworksIDActionsDeleteRouteActionResponseActionError:
     code: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'code' }})
     message: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'message' }})
     
 
 @dataclass_json
 @dataclass
-class PostNetworksIDActionsDeleteRoute201ApplicationJSONActionResources:
+class PostNetworksIDActionsDeleteRouteActionResponseActionResources:
     id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     type: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     
-class PostNetworksIDActionsDeleteRoute201ApplicationJSONActionStatusEnum(str, Enum):
+class PostNetworksIDActionsDeleteRouteActionResponseActionStatusEnum(str, Enum):
     SUCCESS = "success"
     RUNNING = "running"
     ERROR = "error"
@@ -42,26 +42,26 @@ class PostNetworksIDActionsDeleteRoute201ApplicationJSONActionStatusEnum(str, En
 
 @dataclass_json
 @dataclass
-class PostNetworksIDActionsDeleteRoute201ApplicationJSONActionAction:
+class PostNetworksIDActionsDeleteRouteActionResponseAction:
     command: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'command' }})
-    error: PostNetworksIDActionsDeleteRoute201ApplicationJSONActionError = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
+    error: PostNetworksIDActionsDeleteRouteActionResponseActionError = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
     finished: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'finished' }})
     id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     progress: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'progress' }})
-    resources: List[PostNetworksIDActionsDeleteRoute201ApplicationJSONActionResources] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resources' }})
+    resources: List[PostNetworksIDActionsDeleteRouteActionResponseActionResources] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resources' }})
     started: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'started' }})
-    status: PostNetworksIDActionsDeleteRoute201ApplicationJSONActionStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    status: PostNetworksIDActionsDeleteRouteActionResponseActionStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
     
 
 @dataclass_json
 @dataclass
-class PostNetworksIDActionsDeleteRoute201ApplicationJSONActionResponse:
-    action: PostNetworksIDActionsDeleteRoute201ApplicationJSONActionAction = field(default=None, metadata={'dataclasses_json': { 'field_name': 'action' }})
+class PostNetworksIDActionsDeleteRouteActionResponse:
+    action: PostNetworksIDActionsDeleteRouteActionResponseAction = field(default=None, metadata={'dataclasses_json': { 'field_name': 'action' }})
     
 
 @dataclass
 class PostNetworksIDActionsDeleteRouteResponse:
-    action_response: Optional[PostNetworksIDActionsDeleteRoute201ApplicationJSONActionResponse] = field(default=None)
+    action_response: Optional[PostNetworksIDActionsDeleteRouteActionResponse] = field(default=None)
     content_type: str = field(default=None)
     status_code: int = field(default=None)
     

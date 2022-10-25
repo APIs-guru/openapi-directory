@@ -13,7 +13,7 @@ class CreateMemberPathParams:
     
 
 @dataclass
-class CreateMemberRequestBodyCreateMemberRequest:
+class CreateMemberCreateMemberRequest:
     identity: str = field(default=None, metadata={'form': { 'field_name': 'Identity' }})
     role_sid: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'RoleSid' }})
     
@@ -27,7 +27,7 @@ class CreateMemberSecurity:
 class CreateMemberRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateMemberPathParams = field(default=None)
-    request: Optional[CreateMemberRequestBodyCreateMemberRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateMemberCreateMemberRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateMemberSecurity = field(default=None)
     
 

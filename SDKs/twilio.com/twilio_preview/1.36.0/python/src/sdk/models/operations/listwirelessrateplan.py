@@ -26,7 +26,7 @@ class ListWirelessRatePlanRequest:
 
 @dataclass_json
 @dataclass
-class ListWirelessRatePlan200ApplicationJSONMeta:
+class ListWirelessRatePlanListWirelessRatePlanResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -38,14 +38,14 @@ class ListWirelessRatePlan200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListWirelessRatePlan200ApplicationJSONListWirelessRatePlanResponse:
-    meta: Optional[ListWirelessRatePlan200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+class ListWirelessRatePlanListWirelessRatePlanResponse:
+    meta: Optional[ListWirelessRatePlanListWirelessRatePlanResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     rate_plans: Optional[List[shared.PreviewWirelessRatePlan]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rate_plans' }})
     
 
 @dataclass
 class ListWirelessRatePlanResponse:
     content_type: str = field(default=None)
-    list_wireless_rate_plan_response: Optional[ListWirelessRatePlan200ApplicationJSONListWirelessRatePlanResponse] = field(default=None)
+    list_wireless_rate_plan_response: Optional[ListWirelessRatePlanListWirelessRatePlanResponse] = field(default=None)
     status_code: int = field(default=None)
     

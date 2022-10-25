@@ -32,7 +32,7 @@ class ListSyncDocumentRequest:
 
 @dataclass_json
 @dataclass
-class ListSyncDocument200ApplicationJSONMeta:
+class ListSyncDocumentListSyncDocumentResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -44,14 +44,14 @@ class ListSyncDocument200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListSyncDocument200ApplicationJSONListSyncDocumentResponse:
+class ListSyncDocumentListSyncDocumentResponse:
     documents: Optional[List[shared.PreviewSyncServiceDocument]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'documents' }})
-    meta: Optional[ListSyncDocument200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+    meta: Optional[ListSyncDocumentListSyncDocumentResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     
 
 @dataclass
 class ListSyncDocumentResponse:
     content_type: str = field(default=None)
-    list_sync_document_response: Optional[ListSyncDocument200ApplicationJSONListSyncDocumentResponse] = field(default=None)
+    list_sync_document_response: Optional[ListSyncDocumentListSyncDocumentResponse] = field(default=None)
     status_code: int = field(default=None)
     

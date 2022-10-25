@@ -13,7 +13,7 @@ type UpdateCallFeedbackPathParams struct {
 	CallSid    string `pathParam:"style=simple,explode=false,name=CallSid"`
 }
 
-type UpdateCallFeedbackRequestBodyUpdateCallFeedbackRequest struct {
+type UpdateCallFeedbackUpdateCallFeedbackRequest struct {
 	Issue        []shared.CallFeedbackEnumIssuesEnum `form:"name=Issue"`
 	QualityScore *int64                              `form:"name=QualityScore"`
 }
@@ -25,7 +25,7 @@ type UpdateCallFeedbackSecurity struct {
 type UpdateCallFeedbackRequest struct {
 	ServerURL  *string
 	PathParams UpdateCallFeedbackPathParams
-	Request    *UpdateCallFeedbackRequestBodyUpdateCallFeedbackRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateCallFeedbackUpdateCallFeedbackRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateCallFeedbackSecurity
 }
 

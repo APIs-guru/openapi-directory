@@ -12,7 +12,7 @@ type CreateUnderstandModelBuildPathParams struct {
 	AssistantSid string `pathParam:"style=simple,explode=false,name=AssistantSid"`
 }
 
-type CreateUnderstandModelBuildRequestBodyCreateUnderstandModelBuildRequest struct {
+type CreateUnderstandModelBuildCreateUnderstandModelBuildRequest struct {
 	StatusCallback *string `form:"name=StatusCallback"`
 	UniqueName     *string `form:"name=UniqueName"`
 }
@@ -24,7 +24,7 @@ type CreateUnderstandModelBuildSecurity struct {
 type CreateUnderstandModelBuildRequest struct {
 	ServerURL  *string
 	PathParams CreateUnderstandModelBuildPathParams
-	Request    *CreateUnderstandModelBuildRequestBodyCreateUnderstandModelBuildRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateUnderstandModelBuildCreateUnderstandModelBuildRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateUnderstandModelBuildSecurity
 }
 

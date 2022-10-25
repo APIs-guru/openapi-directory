@@ -15,18 +15,18 @@ class PostLoadBalancersIDActionsEnablePublicInterfaceRequest:
 
 @dataclass_json
 @dataclass
-class PostLoadBalancersIDActionsEnablePublicInterface201ApplicationJSONActionError:
+class PostLoadBalancersIDActionsEnablePublicInterfaceActionResponseActionError:
     code: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'code' }})
     message: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'message' }})
     
 
 @dataclass_json
 @dataclass
-class PostLoadBalancersIDActionsEnablePublicInterface201ApplicationJSONActionResources:
+class PostLoadBalancersIDActionsEnablePublicInterfaceActionResponseActionResources:
     id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     type: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     
-class PostLoadBalancersIDActionsEnablePublicInterface201ApplicationJSONActionStatusEnum(str, Enum):
+class PostLoadBalancersIDActionsEnablePublicInterfaceActionResponseActionStatusEnum(str, Enum):
     SUCCESS = "success"
     RUNNING = "running"
     ERROR = "error"
@@ -34,26 +34,26 @@ class PostLoadBalancersIDActionsEnablePublicInterface201ApplicationJSONActionSta
 
 @dataclass_json
 @dataclass
-class PostLoadBalancersIDActionsEnablePublicInterface201ApplicationJSONActionAction:
+class PostLoadBalancersIDActionsEnablePublicInterfaceActionResponseAction:
     command: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'command' }})
-    error: PostLoadBalancersIDActionsEnablePublicInterface201ApplicationJSONActionError = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
+    error: PostLoadBalancersIDActionsEnablePublicInterfaceActionResponseActionError = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
     finished: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'finished' }})
     id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     progress: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'progress' }})
-    resources: List[PostLoadBalancersIDActionsEnablePublicInterface201ApplicationJSONActionResources] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resources' }})
+    resources: List[PostLoadBalancersIDActionsEnablePublicInterfaceActionResponseActionResources] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resources' }})
     started: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'started' }})
-    status: PostLoadBalancersIDActionsEnablePublicInterface201ApplicationJSONActionStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    status: PostLoadBalancersIDActionsEnablePublicInterfaceActionResponseActionStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
     
 
 @dataclass_json
 @dataclass
-class PostLoadBalancersIDActionsEnablePublicInterface201ApplicationJSONActionResponse:
-    action: PostLoadBalancersIDActionsEnablePublicInterface201ApplicationJSONActionAction = field(default=None, metadata={'dataclasses_json': { 'field_name': 'action' }})
+class PostLoadBalancersIDActionsEnablePublicInterfaceActionResponse:
+    action: PostLoadBalancersIDActionsEnablePublicInterfaceActionResponseAction = field(default=None, metadata={'dataclasses_json': { 'field_name': 'action' }})
     
 
 @dataclass
 class PostLoadBalancersIDActionsEnablePublicInterfaceResponse:
-    action_response: Optional[PostLoadBalancersIDActionsEnablePublicInterface201ApplicationJSONActionResponse] = field(default=None)
+    action_response: Optional[PostLoadBalancersIDActionsEnablePublicInterfaceActionResponse] = field(default=None)
     content_type: str = field(default=None)
     status_code: int = field(default=None)
     

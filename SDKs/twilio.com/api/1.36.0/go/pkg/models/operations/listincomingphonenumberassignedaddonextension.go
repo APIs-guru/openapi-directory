@@ -29,7 +29,7 @@ type ListIncomingPhoneNumberAssignedAddOnExtensionRequest struct {
 	Security    ListIncomingPhoneNumberAssignedAddOnExtensionSecurity
 }
 
-type ListIncomingPhoneNumberAssignedAddOnExtension200ApplicationJSONListIncomingPhoneNumberAssignedAddOnExtensionResponse struct {
+type ListIncomingPhoneNumberAssignedAddOnExtensionListIncomingPhoneNumberAssignedAddOnExtensionResponse struct {
 	End             *int64                                                                                                               `json:"end,omitempty"`
 	Extensions      []shared.APIV2010AccountIncomingPhoneNumberIncomingPhoneNumberAssignedAddOnIncomingPhoneNumberAssignedAddOnExtension `json:"extensions,omitempty"`
 	FirstPageURI    *string                                                                                                              `json:"first_page_uri,omitempty"`
@@ -43,6 +43,6 @@ type ListIncomingPhoneNumberAssignedAddOnExtension200ApplicationJSONListIncoming
 
 type ListIncomingPhoneNumberAssignedAddOnExtensionResponse struct {
 	ContentType                                           string
-	ListIncomingPhoneNumberAssignedAddOnExtensionResponse *ListIncomingPhoneNumberAssignedAddOnExtension200ApplicationJSONListIncomingPhoneNumberAssignedAddOnExtensionResponse
+	ListIncomingPhoneNumberAssignedAddOnExtensionResponse *ListIncomingPhoneNumberAssignedAddOnExtensionListIncomingPhoneNumberAssignedAddOnExtensionResponse
 	StatusCode                                            int64
 }

@@ -13,7 +13,7 @@ type CreateInteractionChannelParticipantPathParams struct {
 	InteractionSid string `pathParam:"style=simple,explode=false,name=InteractionSid"`
 }
 
-type CreateInteractionChannelParticipantRequestBodyCreateInteractionChannelParticipantRequest struct {
+type CreateInteractionChannelParticipantCreateInteractionChannelParticipantRequest struct {
 	MediaProperties interface{}                                      `form:"name=MediaProperties"`
 	Type            shared.InteractionChannelParticipantEnumTypeEnum `form:"name=Type"`
 }
@@ -25,7 +25,7 @@ type CreateInteractionChannelParticipantSecurity struct {
 type CreateInteractionChannelParticipantRequest struct {
 	ServerURL  *string
 	PathParams CreateInteractionChannelParticipantPathParams
-	Request    *CreateInteractionChannelParticipantRequestBodyCreateInteractionChannelParticipantRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateInteractionChannelParticipantCreateInteractionChannelParticipantRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateInteractionChannelParticipantSecurity
 }
 

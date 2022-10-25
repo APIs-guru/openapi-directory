@@ -12,7 +12,7 @@ class CreateUnderstandFieldTypePathParams:
     
 
 @dataclass
-class CreateUnderstandFieldTypeRequestBodyCreateUnderstandFieldTypeRequest:
+class CreateUnderstandFieldTypeCreateUnderstandFieldTypeRequest:
     friendly_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
     unique_name: str = field(default=None, metadata={'form': { 'field_name': 'UniqueName' }})
     
@@ -26,7 +26,7 @@ class CreateUnderstandFieldTypeSecurity:
 class CreateUnderstandFieldTypeRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateUnderstandFieldTypePathParams = field(default=None)
-    request: Optional[CreateUnderstandFieldTypeRequestBodyCreateUnderstandFieldTypeRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateUnderstandFieldTypeCreateUnderstandFieldTypeRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateUnderstandFieldTypeSecurity = field(default=None)
     
 

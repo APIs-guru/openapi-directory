@@ -12,7 +12,7 @@ type CreateUnderstandTaskPathParams struct {
 	AssistantSid string `pathParam:"style=simple,explode=false,name=AssistantSid"`
 }
 
-type CreateUnderstandTaskRequestBodyCreateUnderstandTaskRequest struct {
+type CreateUnderstandTaskCreateUnderstandTaskRequest struct {
 	Actions      *interface{} `form:"name=Actions"`
 	ActionsURL   *string      `form:"name=ActionsUrl"`
 	FriendlyName *string      `form:"name=FriendlyName"`
@@ -26,7 +26,7 @@ type CreateUnderstandTaskSecurity struct {
 type CreateUnderstandTaskRequest struct {
 	ServerURL  *string
 	PathParams CreateUnderstandTaskPathParams
-	Request    *CreateUnderstandTaskRequestBodyCreateUnderstandTaskRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateUnderstandTaskCreateUnderstandTaskRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateUnderstandTaskSecurity
 }
 

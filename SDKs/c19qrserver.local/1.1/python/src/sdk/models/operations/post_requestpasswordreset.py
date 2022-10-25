@@ -6,13 +6,13 @@ from sdk.models import shared
 
 @dataclass_json
 @dataclass
-class PostRequestPasswordResetRequestBodySample:
+class PostRequestPasswordResetSample:
     email: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'email' }})
     
 
 @dataclass
 class PostRequestPasswordResetRequest:
-    request: PostRequestPasswordResetRequestBodySample = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: PostRequestPasswordResetSample = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass

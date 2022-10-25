@@ -36,7 +36,7 @@ class ConsolePortTemplateTypeValueEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class ConsolePortTemplateTypeType:
+class ConsolePortTemplateType:
     label: ConsolePortTemplateTypeLabelEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label' }})
     value: ConsolePortTemplateTypeValueEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
     
@@ -47,5 +47,5 @@ class ConsolePortTemplate:
     device_type: nesteddevicetype.NestedDeviceType = field(default=None, metadata={'dataclasses_json': { 'field_name': 'device_type' }})
     id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    type: Optional[ConsolePortTemplateTypeType] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    type: Optional[ConsolePortTemplateType] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     

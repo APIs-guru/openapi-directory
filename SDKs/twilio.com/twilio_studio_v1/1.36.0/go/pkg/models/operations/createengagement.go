@@ -12,7 +12,7 @@ type CreateEngagementPathParams struct {
 	FlowSid string `pathParam:"style=simple,explode=false,name=FlowSid"`
 }
 
-type CreateEngagementRequestBodyCreateEngagementRequest struct {
+type CreateEngagementCreateEngagementRequest struct {
 	From       string       `form:"name=From"`
 	Parameters *interface{} `form:"name=Parameters"`
 	To         string       `form:"name=To"`
@@ -25,7 +25,7 @@ type CreateEngagementSecurity struct {
 type CreateEngagementRequest struct {
 	ServerURL  *string
 	PathParams CreateEngagementPathParams
-	Request    *CreateEngagementRequestBodyCreateEngagementRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateEngagementCreateEngagementRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateEngagementSecurity
 }
 

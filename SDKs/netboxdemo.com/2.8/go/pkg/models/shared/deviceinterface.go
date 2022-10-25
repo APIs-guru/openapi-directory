@@ -7,7 +7,7 @@ const (
 	DeviceInterfaceConnectionStatusLabelEnumConnected    DeviceInterfaceConnectionStatusLabelEnum = "Connected"
 )
 
-type DeviceInterfaceConnectionStatusConnectionStatus struct {
+type DeviceInterfaceConnectionStatus struct {
 	Label DeviceInterfaceConnectionStatusLabelEnum `json:"label"`
 	Value bool                                     `json:"value"`
 }
@@ -28,7 +28,7 @@ const (
 	DeviceInterfaceModeValueEnumTaggedAll DeviceInterfaceModeValueEnum = "tagged-all"
 )
 
-type DeviceInterfaceModeMode struct {
+type DeviceInterfaceMode struct {
 	Label DeviceInterfaceModeLabelEnum `json:"label"`
 	Value DeviceInterfaceModeValueEnum `json:"value"`
 }
@@ -187,29 +187,29 @@ const (
 	DeviceInterfaceTypeValueEnumOther                            DeviceInterfaceTypeValueEnum = "other"
 )
 
-type DeviceInterfaceTypeType struct {
+type DeviceInterfaceType struct {
 	Label DeviceInterfaceTypeLabelEnum `json:"label"`
 	Value DeviceInterfaceTypeValueEnum `json:"value"`
 }
 
 type DeviceInterface struct {
-	Cable                 *NestedCable                                     `json:"cable,omitempty"`
-	ConnectedEndpoint     map[string]string                                `json:"connected_endpoint,omitempty"`
-	ConnectedEndpointType *string                                          `json:"connected_endpoint_type,omitempty"`
-	ConnectionStatus      *DeviceInterfaceConnectionStatusConnectionStatus `json:"connection_status,omitempty"`
-	CountIpaddresses      *int64                                           `json:"count_ipaddresses,omitempty"`
-	Description           *string                                          `json:"description,omitempty"`
-	Device                NestedDevice                                     `json:"device"`
-	Enabled               *bool                                            `json:"enabled,omitempty"`
-	ID                    *int64                                           `json:"id,omitempty"`
-	Lag                   *NestedInterface                                 `json:"lag,omitempty"`
-	MacAddress            *string                                          `json:"mac_address,omitempty"`
-	MgmtOnly              *bool                                            `json:"mgmt_only,omitempty"`
-	Mode                  *DeviceInterfaceModeMode                         `json:"mode,omitempty"`
-	Mtu                   *int64                                           `json:"mtu,omitempty"`
-	Name                  string                                           `json:"name"`
-	TaggedVlans           []NestedVlan                                     `json:"tagged_vlans,omitempty"`
-	Tags                  []string                                         `json:"tags,omitempty"`
-	Type                  DeviceInterfaceTypeType                          `json:"type"`
-	UntaggedVlan          *NestedVlan                                      `json:"untagged_vlan,omitempty"`
+	Cable                 *NestedCable                     `json:"cable,omitempty"`
+	ConnectedEndpoint     map[string]string                `json:"connected_endpoint,omitempty"`
+	ConnectedEndpointType *string                          `json:"connected_endpoint_type,omitempty"`
+	ConnectionStatus      *DeviceInterfaceConnectionStatus `json:"connection_status,omitempty"`
+	CountIpaddresses      *int64                           `json:"count_ipaddresses,omitempty"`
+	Description           *string                          `json:"description,omitempty"`
+	Device                NestedDevice                     `json:"device"`
+	Enabled               *bool                            `json:"enabled,omitempty"`
+	ID                    *int64                           `json:"id,omitempty"`
+	Lag                   *NestedInterface                 `json:"lag,omitempty"`
+	MacAddress            *string                          `json:"mac_address,omitempty"`
+	MgmtOnly              *bool                            `json:"mgmt_only,omitempty"`
+	Mode                  *DeviceInterfaceMode             `json:"mode,omitempty"`
+	Mtu                   *int64                           `json:"mtu,omitempty"`
+	Name                  string                           `json:"name"`
+	TaggedVlans           []NestedVlan                     `json:"tagged_vlans,omitempty"`
+	Tags                  []string                         `json:"tags,omitempty"`
+	Type                  DeviceInterfaceType              `json:"type"`
+	UntaggedVlan          *NestedVlan                      `json:"untagged_vlan,omitempty"`
 }

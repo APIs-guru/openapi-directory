@@ -27,7 +27,7 @@ type ListCompositionRequest struct {
 	Security    ListCompositionSecurity
 }
 
-type ListComposition200ApplicationJSONMeta struct {
+type ListCompositionListCompositionResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -37,13 +37,13 @@ type ListComposition200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListComposition200ApplicationJSONListCompositionResponse struct {
-	Compositions []shared.VideoV1Composition            `json:"compositions,omitempty"`
-	Meta         *ListComposition200ApplicationJSONMeta `json:"meta,omitempty"`
+type ListCompositionListCompositionResponse struct {
+	Compositions []shared.VideoV1Composition                 `json:"compositions,omitempty"`
+	Meta         *ListCompositionListCompositionResponseMeta `json:"meta,omitempty"`
 }
 
 type ListCompositionResponse struct {
 	ContentType             string
-	ListCompositionResponse *ListComposition200ApplicationJSONListCompositionResponse
+	ListCompositionResponse *ListCompositionListCompositionResponse
 	StatusCode              int64
 }

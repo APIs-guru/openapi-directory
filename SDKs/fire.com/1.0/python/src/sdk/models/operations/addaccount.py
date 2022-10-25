@@ -3,22 +3,22 @@ from typing import Enum,Optional
 from dataclasses_json import dataclass_json
 from sdk.models import shared
 
-class AddAccountRequestBodyCurrencyEnum(str, Enum):
+class AddAccountNewAccountCurrencyEnum(str, Enum):
     EUR = "EUR"
     GBP = "GBP"
 
 
 @dataclass_json
 @dataclass
-class AddAccountRequestBodyNewAccount:
+class AddAccountNewAccount:
     accept_fees_and_charges: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'acceptFeesAndCharges' }})
     account_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'accountName' }})
-    currency: Optional[AddAccountRequestBodyCurrencyEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'currency' }})
+    currency: Optional[AddAccountNewAccountCurrencyEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'currency' }})
     
 
 @dataclass
 class AddAccountRequest:
-    request: AddAccountRequestBodyNewAccount = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: AddAccountNewAccount = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass

@@ -166,7 +166,7 @@ class SDK:
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
                 res.get_alerts_200_application_sarif_plus_json_object = out
             if utils.match_content_type(content_type, "text/csv"):
-                res.body = r.content
+                res.get_alerts_200_text_csv_string = r.content
 
         return res
 

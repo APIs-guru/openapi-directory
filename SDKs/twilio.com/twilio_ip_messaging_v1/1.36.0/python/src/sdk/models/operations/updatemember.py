@@ -14,7 +14,7 @@ class UpdateMemberPathParams:
     
 
 @dataclass
-class UpdateMemberRequestBodyUpdateMemberRequest:
+class UpdateMemberUpdateMemberRequest:
     last_consumed_message_index: Optional[int] = field(default=None, metadata={'form': { 'field_name': 'LastConsumedMessageIndex' }})
     role_sid: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'RoleSid' }})
     
@@ -28,7 +28,7 @@ class UpdateMemberSecurity:
 class UpdateMemberRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateMemberPathParams = field(default=None)
-    request: Optional[UpdateMemberRequestBodyUpdateMemberRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateMemberUpdateMemberRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateMemberSecurity = field(default=None)
     
 

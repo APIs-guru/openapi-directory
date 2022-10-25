@@ -13,7 +13,7 @@ class UpdateRateLimitPathParams:
     
 
 @dataclass
-class UpdateRateLimitRequestBodyUpdateRateLimitRequest:
+class UpdateRateLimitUpdateRateLimitRequest:
     description: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Description' }})
     
 
@@ -26,7 +26,7 @@ class UpdateRateLimitSecurity:
 class UpdateRateLimitRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateRateLimitPathParams = field(default=None)
-    request: Optional[UpdateRateLimitRequestBodyUpdateRateLimitRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateRateLimitUpdateRateLimitRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateRateLimitSecurity = field(default=None)
     
 

@@ -12,7 +12,7 @@ class UpdateExportConfigurationPathParams:
     
 
 @dataclass
-class UpdateExportConfigurationRequestBodyUpdateExportConfigurationRequest:
+class UpdateExportConfigurationUpdateExportConfigurationRequest:
     enabled: Optional[bool] = field(default=None, metadata={'form': { 'field_name': 'Enabled' }})
     webhook_method: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'WebhookMethod' }})
     webhook_url: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'WebhookUrl' }})
@@ -27,7 +27,7 @@ class UpdateExportConfigurationSecurity:
 class UpdateExportConfigurationRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateExportConfigurationPathParams = field(default=None)
-    request: Optional[UpdateExportConfigurationRequestBodyUpdateExportConfigurationRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateExportConfigurationUpdateExportConfigurationRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateExportConfigurationSecurity = field(default=None)
     
 

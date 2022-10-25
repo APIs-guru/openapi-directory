@@ -5,7 +5,7 @@ CREATE_PLAYER_STREAMER_SERVERS = [
 	"https://media.twilio.com",
 ]
 
-class CreatePlayerStreamerRequestBodyStatusCallbackMethodEnum(str, Enum):
+class CreatePlayerStreamerCreatePlayerStreamerRequestStatusCallbackMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -15,10 +15,10 @@ class CreatePlayerStreamerRequestBodyStatusCallbackMethodEnum(str, Enum):
 
 
 @dataclass
-class CreatePlayerStreamerRequestBodyCreatePlayerStreamerRequest:
+class CreatePlayerStreamerCreatePlayerStreamerRequest:
     max_duration: Optional[int] = field(default=None, metadata={'form': { 'field_name': 'MaxDuration' }})
     status_callback: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'StatusCallback' }})
-    status_callback_method: Optional[CreatePlayerStreamerRequestBodyStatusCallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'StatusCallbackMethod' }})
+    status_callback_method: Optional[CreatePlayerStreamerCreatePlayerStreamerRequestStatusCallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'StatusCallbackMethod' }})
     video: Optional[bool] = field(default=None, metadata={'form': { 'field_name': 'Video' }})
     
 
@@ -30,7 +30,7 @@ class CreatePlayerStreamerSecurity:
 @dataclass
 class CreatePlayerStreamerRequest:
     server_url: Optional[str] = field(default=None)
-    request: Optional[CreatePlayerStreamerRequestBodyCreatePlayerStreamerRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreatePlayerStreamerCreatePlayerStreamerRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreatePlayerStreamerSecurity = field(default=None)
     
 

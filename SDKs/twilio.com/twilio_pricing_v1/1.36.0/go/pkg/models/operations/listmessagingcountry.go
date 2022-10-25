@@ -22,7 +22,7 @@ type ListMessagingCountryRequest struct {
 	Security    ListMessagingCountrySecurity
 }
 
-type ListMessagingCountry200ApplicationJSONMeta struct {
+type ListMessagingCountryListMessagingCountryResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -32,13 +32,13 @@ type ListMessagingCountry200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListMessagingCountry200ApplicationJSONListMessagingCountryResponse struct {
-	Countries []shared.PricingV1MessagingMessagingCountry `json:"countries,omitempty"`
-	Meta      *ListMessagingCountry200ApplicationJSONMeta `json:"meta,omitempty"`
+type ListMessagingCountryListMessagingCountryResponse struct {
+	Countries []shared.PricingV1MessagingMessagingCountry           `json:"countries,omitempty"`
+	Meta      *ListMessagingCountryListMessagingCountryResponseMeta `json:"meta,omitempty"`
 }
 
 type ListMessagingCountryResponse struct {
 	ContentType                  string
-	ListMessagingCountryResponse *ListMessagingCountry200ApplicationJSONListMessagingCountryResponse
+	ListMessagingCountryResponse *ListMessagingCountryListMessagingCountryResponse
 	StatusCode                   int64
 }

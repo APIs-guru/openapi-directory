@@ -29,7 +29,7 @@ type ListTaskReservationRequest struct {
 	Security    ListTaskReservationSecurity
 }
 
-type ListTaskReservation200ApplicationJSONMeta struct {
+type ListTaskReservationListTaskReservationResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -39,13 +39,13 @@ type ListTaskReservation200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListTaskReservation200ApplicationJSONListTaskReservationResponse struct {
-	Meta         *ListTaskReservation200ApplicationJSONMeta        `json:"meta,omitempty"`
-	Reservations []shared.TaskrouterV1WorkspaceTaskTaskReservation `json:"reservations,omitempty"`
+type ListTaskReservationListTaskReservationResponse struct {
+	Meta         *ListTaskReservationListTaskReservationResponseMeta `json:"meta,omitempty"`
+	Reservations []shared.TaskrouterV1WorkspaceTaskTaskReservation   `json:"reservations,omitempty"`
 }
 
 type ListTaskReservationResponse struct {
 	ContentType                 string
-	ListTaskReservationResponse *ListTaskReservation200ApplicationJSONListTaskReservationResponse
+	ListTaskReservationResponse *ListTaskReservationListTaskReservationResponse
 	StatusCode                  int64
 }

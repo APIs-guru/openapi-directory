@@ -12,7 +12,7 @@ type CreateUserPathParams struct {
 	ServiceSid string `pathParam:"style=simple,explode=false,name=ServiceSid"`
 }
 
-type CreateUserRequestBodyCreateUserRequest struct {
+type CreateUserCreateUserRequest struct {
 	Attributes   *string `form:"name=Attributes"`
 	FriendlyName *string `form:"name=FriendlyName"`
 	Identity     string  `form:"name=Identity"`
@@ -26,7 +26,7 @@ type CreateUserSecurity struct {
 type CreateUserRequest struct {
 	ServerURL  *string
 	PathParams CreateUserPathParams
-	Request    *CreateUserRequestBodyCreateUserRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateUserCreateUserRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateUserSecurity
 }
 

@@ -33,7 +33,7 @@ class ListIncomingPhoneNumberAssignedAddOnRequest:
 
 @dataclass_json
 @dataclass
-class ListIncomingPhoneNumberAssignedAddOn200ApplicationJSONListIncomingPhoneNumberAssignedAddOnResponse:
+class ListIncomingPhoneNumberAssignedAddOnListIncomingPhoneNumberAssignedAddOnResponse:
     assigned_add_ons: Optional[List[shared.APIV2010AccountIncomingPhoneNumberIncomingPhoneNumberAssignedAddOn]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'assigned_add_ons' }})
     end: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'end' }})
     first_page_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_uri' }})
@@ -48,6 +48,6 @@ class ListIncomingPhoneNumberAssignedAddOn200ApplicationJSONListIncomingPhoneNum
 @dataclass
 class ListIncomingPhoneNumberAssignedAddOnResponse:
     content_type: str = field(default=None)
-    list_incoming_phone_number_assigned_add_on_response: Optional[ListIncomingPhoneNumberAssignedAddOn200ApplicationJSONListIncomingPhoneNumberAssignedAddOnResponse] = field(default=None)
+    list_incoming_phone_number_assigned_add_on_response: Optional[ListIncomingPhoneNumberAssignedAddOnListIncomingPhoneNumberAssignedAddOnResponse] = field(default=None)
     status_code: int = field(default=None)
     

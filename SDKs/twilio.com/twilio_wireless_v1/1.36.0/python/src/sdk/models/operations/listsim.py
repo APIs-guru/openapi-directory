@@ -31,7 +31,7 @@ class ListSimRequest:
 
 @dataclass_json
 @dataclass
-class ListSim200ApplicationJSONMeta:
+class ListSimListSimResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -43,14 +43,14 @@ class ListSim200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListSim200ApplicationJSONListSimResponse:
-    meta: Optional[ListSim200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+class ListSimListSimResponse:
+    meta: Optional[ListSimListSimResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     sims: Optional[List[shared.WirelessV1Sim]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sims' }})
     
 
 @dataclass
 class ListSimResponse:
     content_type: str = field(default=None)
-    list_sim_response: Optional[ListSim200ApplicationJSONListSimResponse] = field(default=None)
+    list_sim_response: Optional[ListSimListSimResponse] = field(default=None)
     status_code: int = field(default=None)
     

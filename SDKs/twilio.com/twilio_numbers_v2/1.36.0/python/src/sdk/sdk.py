@@ -511,7 +511,7 @@ class SDK:
         res = operations.ListBundleResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListBundle200ApplicationJSONListBundleResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListBundleListBundleResponse])
                 res.list_bundle_response = out
 
         return res
@@ -536,7 +536,7 @@ class SDK:
         res = operations.ListBundleCopyResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListBundleCopy200ApplicationJSONListBundleCopyResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListBundleCopyListBundleCopyResponse])
                 res.list_bundle_copy_response = out
 
         return res
@@ -561,7 +561,7 @@ class SDK:
         res = operations.ListEndUserResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListEndUser200ApplicationJSONListEndUserResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListEndUserListEndUserResponse])
                 res.list_end_user_response = out
 
         return res
@@ -586,7 +586,7 @@ class SDK:
         res = operations.ListEndUserTypeResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListEndUserType200ApplicationJSONListEndUserTypeResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListEndUserTypeListEndUserTypeResponse])
                 res.list_end_user_type_response = out
 
         return res
@@ -611,7 +611,7 @@ class SDK:
         res = operations.ListEvaluationResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListEvaluation200ApplicationJSONListEvaluationResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListEvaluationListEvaluationResponse])
                 res.list_evaluation_response = out
 
         return res
@@ -636,7 +636,7 @@ class SDK:
         res = operations.ListItemAssignmentResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListItemAssignment200ApplicationJSONListItemAssignmentResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListItemAssignmentListItemAssignmentResponse])
                 res.list_item_assignment_response = out
 
         return res
@@ -661,7 +661,7 @@ class SDK:
         res = operations.ListRegulationResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListRegulation200ApplicationJSONListRegulationResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListRegulationListRegulationResponse])
                 res.list_regulation_response = out
 
         return res
@@ -686,7 +686,7 @@ class SDK:
         res = operations.ListSupportingDocumentResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListSupportingDocument200ApplicationJSONListSupportingDocumentResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListSupportingDocumentListSupportingDocumentResponse])
                 res.list_supporting_document_response = out
 
         return res
@@ -711,7 +711,7 @@ class SDK:
         res = operations.ListSupportingDocumentTypeResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListSupportingDocumentType200ApplicationJSONListSupportingDocumentTypeResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListSupportingDocumentTypeListSupportingDocumentTypeResponse])
                 res.list_supporting_document_type_response = out
 
         return res

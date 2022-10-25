@@ -7,7 +7,7 @@ from dataclasses_json import dataclass_json
 from . import address
 from . import currency_enum
 
-class LocationStatusStatusEnum(str, Enum):
+class LocationStatusEnum(str, Enum):
     ACTIVE = "active"
     INACTIVE = "inactive"
     OTHER = "other"
@@ -24,7 +24,7 @@ class Location:
     id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     merchant_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'merchant_id' }})
     name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    status: Optional[LocationStatusStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    status: Optional[LocationStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
     updated_at: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updated_at', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     updated_by: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updated_by' }})
     

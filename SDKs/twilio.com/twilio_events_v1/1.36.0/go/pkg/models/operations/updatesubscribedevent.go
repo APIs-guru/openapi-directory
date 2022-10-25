@@ -13,7 +13,7 @@ type UpdateSubscribedEventPathParams struct {
 	Type            string `pathParam:"style=simple,explode=false,name=Type"`
 }
 
-type UpdateSubscribedEventRequestBodyUpdateSubscribedEventRequest struct {
+type UpdateSubscribedEventUpdateSubscribedEventRequest struct {
 	SchemaVersion *int64 `form:"name=SchemaVersion"`
 }
 
@@ -24,7 +24,7 @@ type UpdateSubscribedEventSecurity struct {
 type UpdateSubscribedEventRequest struct {
 	ServerURL  *string
 	PathParams UpdateSubscribedEventPathParams
-	Request    *UpdateSubscribedEventRequestBodyUpdateSubscribedEventRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateSubscribedEventUpdateSubscribedEventRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateSubscribedEventSecurity
 }
 

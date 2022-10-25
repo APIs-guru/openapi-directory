@@ -17,7 +17,7 @@ type GetTemplateSchemaRequest struct {
 	Security   GetTemplateSchemaSecurity
 }
 
-type GetTemplateSchema200ApplicationJSONTemplateSchema struct {
+type GetTemplateSchemaTemplateSchema struct {
 	DollarSchema         *string                `json:"$schema,omitempty"`
 	AdditionalProperties *bool                  `json:"additionalProperties,omitempty"`
 	Definitions          map[string]interface{} `json:"definitions,omitempty"`
@@ -34,5 +34,5 @@ type GetTemplateSchemaResponse struct {
 	StatusCode          int64
 	AuthenticationError *shared.AuthenticationError
 	Error               *shared.Error
-	TemplateSchema      *GetTemplateSchema200ApplicationJSONTemplateSchema
+	TemplateSchema      *GetTemplateSchemaTemplateSchema
 }

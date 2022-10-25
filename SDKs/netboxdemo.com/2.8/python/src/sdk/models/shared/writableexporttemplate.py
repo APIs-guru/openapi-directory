@@ -2,7 +2,7 @@ from dataclasses import dataclass, field
 from typing import Enum,Optional
 from dataclasses_json import dataclass_json
 
-class WritableExportTemplateTemplateLanguageTemplateLanguageEnum(str, Enum):
+class WritableExportTemplateTemplateLanguageEnum(str, Enum):
     DJANGO = "django"
     JINJA2 = "jinja2"
 
@@ -17,5 +17,5 @@ class WritableExportTemplate:
     mime_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'mime_type' }})
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
     template_code: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'template_code' }})
-    template_language: Optional[WritableExportTemplateTemplateLanguageTemplateLanguageEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'template_language' }})
+    template_language: Optional[WritableExportTemplateTemplateLanguageEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'template_language' }})
     

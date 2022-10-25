@@ -4,12 +4,12 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-type PostRequestPasswordResetRequestBodySample struct {
+type PostRequestPasswordResetSample struct {
 	Email *string `json:"email,omitempty"`
 }
 
 type PostRequestPasswordResetRequest struct {
-	Request PostRequestPasswordResetRequestBodySample `request:"mediaType=application/json"`
+	Request PostRequestPasswordResetSample `request:"mediaType=application/json"`
 }
 
 type PostRequestPasswordResetResponse struct {

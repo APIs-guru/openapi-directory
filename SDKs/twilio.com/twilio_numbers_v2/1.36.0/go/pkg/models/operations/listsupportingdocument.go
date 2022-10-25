@@ -22,7 +22,7 @@ type ListSupportingDocumentRequest struct {
 	Security    ListSupportingDocumentSecurity
 }
 
-type ListSupportingDocument200ApplicationJSONMeta struct {
+type ListSupportingDocumentListSupportingDocumentResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -32,13 +32,13 @@ type ListSupportingDocument200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListSupportingDocument200ApplicationJSONListSupportingDocumentResponse struct {
-	Meta    *ListSupportingDocument200ApplicationJSONMeta            `json:"meta,omitempty"`
-	Results []shared.NumbersV2RegulatoryComplianceSupportingDocument `json:"results,omitempty"`
+type ListSupportingDocumentListSupportingDocumentResponse struct {
+	Meta    *ListSupportingDocumentListSupportingDocumentResponseMeta `json:"meta,omitempty"`
+	Results []shared.NumbersV2RegulatoryComplianceSupportingDocument  `json:"results,omitempty"`
 }
 
 type ListSupportingDocumentResponse struct {
 	ContentType                    string
-	ListSupportingDocumentResponse *ListSupportingDocument200ApplicationJSONListSupportingDocumentResponse
+	ListSupportingDocumentResponse *ListSupportingDocumentListSupportingDocumentResponse
 	StatusCode                     int64
 }

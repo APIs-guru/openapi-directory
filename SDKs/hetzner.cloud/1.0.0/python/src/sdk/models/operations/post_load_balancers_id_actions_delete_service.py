@@ -22,18 +22,18 @@ class PostLoadBalancersIDActionsDeleteServiceRequest:
 
 @dataclass_json
 @dataclass
-class PostLoadBalancersIDActionsDeleteService201ApplicationJSONActionError:
+class PostLoadBalancersIDActionsDeleteServiceActionResponseActionError:
     code: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'code' }})
     message: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'message' }})
     
 
 @dataclass_json
 @dataclass
-class PostLoadBalancersIDActionsDeleteService201ApplicationJSONActionResources:
+class PostLoadBalancersIDActionsDeleteServiceActionResponseActionResources:
     id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     type: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     
-class PostLoadBalancersIDActionsDeleteService201ApplicationJSONActionStatusEnum(str, Enum):
+class PostLoadBalancersIDActionsDeleteServiceActionResponseActionStatusEnum(str, Enum):
     SUCCESS = "success"
     RUNNING = "running"
     ERROR = "error"
@@ -41,26 +41,26 @@ class PostLoadBalancersIDActionsDeleteService201ApplicationJSONActionStatusEnum(
 
 @dataclass_json
 @dataclass
-class PostLoadBalancersIDActionsDeleteService201ApplicationJSONActionAction:
+class PostLoadBalancersIDActionsDeleteServiceActionResponseAction:
     command: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'command' }})
-    error: PostLoadBalancersIDActionsDeleteService201ApplicationJSONActionError = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
+    error: PostLoadBalancersIDActionsDeleteServiceActionResponseActionError = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
     finished: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'finished' }})
     id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     progress: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'progress' }})
-    resources: List[PostLoadBalancersIDActionsDeleteService201ApplicationJSONActionResources] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resources' }})
+    resources: List[PostLoadBalancersIDActionsDeleteServiceActionResponseActionResources] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resources' }})
     started: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'started' }})
-    status: PostLoadBalancersIDActionsDeleteService201ApplicationJSONActionStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    status: PostLoadBalancersIDActionsDeleteServiceActionResponseActionStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
     
 
 @dataclass_json
 @dataclass
-class PostLoadBalancersIDActionsDeleteService201ApplicationJSONActionResponse:
-    action: PostLoadBalancersIDActionsDeleteService201ApplicationJSONActionAction = field(default=None, metadata={'dataclasses_json': { 'field_name': 'action' }})
+class PostLoadBalancersIDActionsDeleteServiceActionResponse:
+    action: PostLoadBalancersIDActionsDeleteServiceActionResponseAction = field(default=None, metadata={'dataclasses_json': { 'field_name': 'action' }})
     
 
 @dataclass
 class PostLoadBalancersIDActionsDeleteServiceResponse:
-    action_response: Optional[PostLoadBalancersIDActionsDeleteService201ApplicationJSONActionResponse] = field(default=None)
+    action_response: Optional[PostLoadBalancersIDActionsDeleteServiceActionResponse] = field(default=None)
     content_type: str = field(default=None)
     status_code: int = field(default=None)
     

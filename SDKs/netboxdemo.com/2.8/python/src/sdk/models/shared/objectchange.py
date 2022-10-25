@@ -19,7 +19,7 @@ class ObjectChangeActionValueEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class ObjectChangeActionAction:
+class ObjectChangeAction:
     label: ObjectChangeActionLabelEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label' }})
     value: ObjectChangeActionValueEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
     
@@ -27,7 +27,7 @@ class ObjectChangeActionAction:
 @dataclass_json
 @dataclass
 class ObjectChange:
-    action: Optional[ObjectChangeActionAction] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'action' }})
+    action: Optional[ObjectChangeAction] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'action' }})
     changed_object: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'changed_object' }})
     changed_object_id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'changed_object_id' }})
     changed_object_type: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'changed_object_type' }})

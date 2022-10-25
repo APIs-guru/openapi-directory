@@ -13,7 +13,7 @@ type UpdatePhoneNumberPathParams struct {
 	Sid        string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
-type UpdatePhoneNumberRequestBodyUpdatePhoneNumberRequest struct {
+type UpdatePhoneNumberUpdatePhoneNumberRequest struct {
 	IsReserved *bool `form:"name=IsReserved"`
 }
 
@@ -24,7 +24,7 @@ type UpdatePhoneNumberSecurity struct {
 type UpdatePhoneNumberRequest struct {
 	ServerURL  *string
 	PathParams UpdatePhoneNumberPathParams
-	Request    *UpdatePhoneNumberRequestBodyUpdatePhoneNumberRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdatePhoneNumberUpdatePhoneNumberRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdatePhoneNumberSecurity
 }
 

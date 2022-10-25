@@ -17,7 +17,7 @@ type UpdateSyncDocumentHeaders struct {
 	IfMatch *string `header:"name=If-Match"`
 }
 
-type UpdateSyncDocumentRequestBodyUpdateSyncDocumentRequest struct {
+type UpdateSyncDocumentUpdateSyncDocumentRequest struct {
 	Data interface{} `form:"name=Data"`
 }
 
@@ -29,7 +29,7 @@ type UpdateSyncDocumentRequest struct {
 	ServerURL  *string
 	PathParams UpdateSyncDocumentPathParams
 	Headers    UpdateSyncDocumentHeaders
-	Request    *UpdateSyncDocumentRequestBodyUpdateSyncDocumentRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateSyncDocumentUpdateSyncDocumentRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateSyncDocumentSecurity
 }
 

@@ -1,23 +1,23 @@
 package operations
 
-type PostFloatingIpsRequestBodyTypeEnum string
+type PostFloatingIpsCreateFloatingIPRequestTypeEnum string
 
 const (
-	PostFloatingIpsRequestBodyTypeEnumIpv4 PostFloatingIpsRequestBodyTypeEnum = "ipv4"
-	PostFloatingIpsRequestBodyTypeEnumIpv6 PostFloatingIpsRequestBodyTypeEnum = "ipv6"
+	PostFloatingIpsCreateFloatingIPRequestTypeEnumIpv4 PostFloatingIpsCreateFloatingIPRequestTypeEnum = "ipv4"
+	PostFloatingIpsCreateFloatingIPRequestTypeEnumIpv6 PostFloatingIpsCreateFloatingIPRequestTypeEnum = "ipv6"
 )
 
-type PostFloatingIpsRequestBodyCreateFloatingIPRequest struct {
-	Description  *string                            `json:"description,omitempty"`
-	HomeLocation *string                            `json:"home_location,omitempty"`
-	Labels       map[string]interface{}             `json:"labels,omitempty"`
-	Name         *string                            `json:"name,omitempty"`
-	Server       *int64                             `json:"server,omitempty"`
-	Type         PostFloatingIpsRequestBodyTypeEnum `json:"type"`
+type PostFloatingIpsCreateFloatingIPRequest struct {
+	Description  *string                                        `json:"description,omitempty"`
+	HomeLocation *string                                        `json:"home_location,omitempty"`
+	Labels       map[string]interface{}                         `json:"labels,omitempty"`
+	Name         *string                                        `json:"name,omitempty"`
+	Server       *int64                                         `json:"server,omitempty"`
+	Type         PostFloatingIpsCreateFloatingIPRequestTypeEnum `json:"type"`
 }
 
 type PostFloatingIpsRequest struct {
-	Request *PostFloatingIpsRequestBodyCreateFloatingIPRequest `request:"mediaType=application/json"`
+	Request *PostFloatingIpsCreateFloatingIPRequest `request:"mediaType=application/json"`
 }
 
 type PostFloatingIps201ApplicationJSONActionError struct {
@@ -38,7 +38,7 @@ const (
 	PostFloatingIps201ApplicationJSONActionStatusEnumError   PostFloatingIps201ApplicationJSONActionStatusEnum = "error"
 )
 
-type PostFloatingIps201ApplicationJSONActionAction struct {
+type PostFloatingIps201ApplicationJSONAction struct {
 	Command   string                                             `json:"command"`
 	Error     PostFloatingIps201ApplicationJSONActionError       `json:"error"`
 	Finished  string                                             `json:"finished"`
@@ -92,8 +92,8 @@ type PostFloatingIps201ApplicationJSONFloatingIP struct {
 }
 
 type PostFloatingIps201ApplicationJSON struct {
-	Action     *PostFloatingIps201ApplicationJSONActionAction `json:"action,omitempty"`
-	FloatingIP PostFloatingIps201ApplicationJSONFloatingIP    `json:"floating_ip"`
+	Action     *PostFloatingIps201ApplicationJSONAction    `json:"action,omitempty"`
+	FloatingIP PostFloatingIps201ApplicationJSONFloatingIP `json:"floating_ip"`
 }
 
 type PostFloatingIpsResponse struct {

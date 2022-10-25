@@ -14,41 +14,41 @@ type PostLoadBalancersIDActionsAttachToNetworkRequest struct {
 	Request    *PostLoadBalancersIDActionsAttachToNetworkRequestBody `request:"mediaType=application/json"`
 }
 
-type PostLoadBalancersIDActionsAttachToNetwork201ApplicationJSONActionError struct {
+type PostLoadBalancersIDActionsAttachToNetworkActionResponseActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
 }
 
-type PostLoadBalancersIDActionsAttachToNetwork201ApplicationJSONActionResources struct {
+type PostLoadBalancersIDActionsAttachToNetworkActionResponseActionResources struct {
 	ID   int64  `json:"id"`
 	Type string `json:"type"`
 }
 
-type PostLoadBalancersIDActionsAttachToNetwork201ApplicationJSONActionStatusEnum string
+type PostLoadBalancersIDActionsAttachToNetworkActionResponseActionStatusEnum string
 
 const (
-	PostLoadBalancersIDActionsAttachToNetwork201ApplicationJSONActionStatusEnumSuccess PostLoadBalancersIDActionsAttachToNetwork201ApplicationJSONActionStatusEnum = "success"
-	PostLoadBalancersIDActionsAttachToNetwork201ApplicationJSONActionStatusEnumRunning PostLoadBalancersIDActionsAttachToNetwork201ApplicationJSONActionStatusEnum = "running"
-	PostLoadBalancersIDActionsAttachToNetwork201ApplicationJSONActionStatusEnumError   PostLoadBalancersIDActionsAttachToNetwork201ApplicationJSONActionStatusEnum = "error"
+	PostLoadBalancersIDActionsAttachToNetworkActionResponseActionStatusEnumSuccess PostLoadBalancersIDActionsAttachToNetworkActionResponseActionStatusEnum = "success"
+	PostLoadBalancersIDActionsAttachToNetworkActionResponseActionStatusEnumRunning PostLoadBalancersIDActionsAttachToNetworkActionResponseActionStatusEnum = "running"
+	PostLoadBalancersIDActionsAttachToNetworkActionResponseActionStatusEnumError   PostLoadBalancersIDActionsAttachToNetworkActionResponseActionStatusEnum = "error"
 )
 
-type PostLoadBalancersIDActionsAttachToNetwork201ApplicationJSONActionAction struct {
-	Command   string                                                                       `json:"command"`
-	Error     PostLoadBalancersIDActionsAttachToNetwork201ApplicationJSONActionError       `json:"error"`
-	Finished  string                                                                       `json:"finished"`
-	ID        int64                                                                        `json:"id"`
-	Progress  float64                                                                      `json:"progress"`
-	Resources []PostLoadBalancersIDActionsAttachToNetwork201ApplicationJSONActionResources `json:"resources"`
-	Started   string                                                                       `json:"started"`
-	Status    PostLoadBalancersIDActionsAttachToNetwork201ApplicationJSONActionStatusEnum  `json:"status"`
+type PostLoadBalancersIDActionsAttachToNetworkActionResponseAction struct {
+	Command   string                                                                   `json:"command"`
+	Error     PostLoadBalancersIDActionsAttachToNetworkActionResponseActionError       `json:"error"`
+	Finished  string                                                                   `json:"finished"`
+	ID        int64                                                                    `json:"id"`
+	Progress  float64                                                                  `json:"progress"`
+	Resources []PostLoadBalancersIDActionsAttachToNetworkActionResponseActionResources `json:"resources"`
+	Started   string                                                                   `json:"started"`
+	Status    PostLoadBalancersIDActionsAttachToNetworkActionResponseActionStatusEnum  `json:"status"`
 }
 
-type PostLoadBalancersIDActionsAttachToNetwork201ApplicationJSONActionResponse struct {
-	Action PostLoadBalancersIDActionsAttachToNetwork201ApplicationJSONActionAction `json:"action"`
+type PostLoadBalancersIDActionsAttachToNetworkActionResponse struct {
+	Action PostLoadBalancersIDActionsAttachToNetworkActionResponseAction `json:"action"`
 }
 
 type PostLoadBalancersIDActionsAttachToNetworkResponse struct {
-	ActionResponse *PostLoadBalancersIDActionsAttachToNetwork201ApplicationJSONActionResponse
+	ActionResponse *PostLoadBalancersIDActionsAttachToNetworkActionResponse
 	ContentType    string
 	StatusCode     int64
 }

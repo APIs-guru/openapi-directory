@@ -7,7 +7,7 @@ const (
 	PowerOutletConnectionStatusLabelEnumConnected    PowerOutletConnectionStatusLabelEnum = "Connected"
 )
 
-type PowerOutletConnectionStatusConnectionStatus struct {
+type PowerOutletConnectionStatus struct {
 	Label PowerOutletConnectionStatusLabelEnum `json:"label"`
 	Value bool                                 `json:"value"`
 }
@@ -28,7 +28,7 @@ const (
 	PowerOutletFeedLegValueEnumC PowerOutletFeedLegValueEnum = "C"
 )
 
-type PowerOutletFeedLegFeedLeg struct {
+type PowerOutletFeedLeg struct {
 	Label PowerOutletFeedLegLabelEnum `json:"label"`
 	Value PowerOutletFeedLegValueEnum `json:"value"`
 }
@@ -175,22 +175,22 @@ const (
 	PowerOutletTypeValueEnumHdotCx         PowerOutletTypeValueEnum = "hdot-cx"
 )
 
-type PowerOutletTypeType struct {
+type PowerOutletType struct {
 	Label PowerOutletTypeLabelEnum `json:"label"`
 	Value PowerOutletTypeValueEnum `json:"value"`
 }
 
 type PowerOutlet struct {
-	Cable                 *NestedCable                                 `json:"cable,omitempty"`
-	ConnectedEndpoint     map[string]string                            `json:"connected_endpoint,omitempty"`
-	ConnectedEndpointType *string                                      `json:"connected_endpoint_type,omitempty"`
-	ConnectionStatus      *PowerOutletConnectionStatusConnectionStatus `json:"connection_status,omitempty"`
-	Description           *string                                      `json:"description,omitempty"`
-	Device                NestedDevice                                 `json:"device"`
-	FeedLeg               *PowerOutletFeedLegFeedLeg                   `json:"feed_leg,omitempty"`
-	ID                    *int64                                       `json:"id,omitempty"`
-	Name                  string                                       `json:"name"`
-	PowerPort             *NestedPowerPort                             `json:"power_port,omitempty"`
-	Tags                  []string                                     `json:"tags,omitempty"`
-	Type                  *PowerOutletTypeType                         `json:"type,omitempty"`
+	Cable                 *NestedCable                 `json:"cable,omitempty"`
+	ConnectedEndpoint     map[string]string            `json:"connected_endpoint,omitempty"`
+	ConnectedEndpointType *string                      `json:"connected_endpoint_type,omitempty"`
+	ConnectionStatus      *PowerOutletConnectionStatus `json:"connection_status,omitempty"`
+	Description           *string                      `json:"description,omitempty"`
+	Device                NestedDevice                 `json:"device"`
+	FeedLeg               *PowerOutletFeedLeg          `json:"feed_leg,omitempty"`
+	ID                    *int64                       `json:"id,omitempty"`
+	Name                  string                       `json:"name"`
+	PowerPort             *NestedPowerPort             `json:"power_port,omitempty"`
+	Tags                  []string                     `json:"tags,omitempty"`
+	Type                  *PowerOutletType             `json:"type,omitempty"`
 }

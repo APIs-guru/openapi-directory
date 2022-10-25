@@ -1,25 +1,25 @@
 package operations
 
-type SvgconvertRequestBodyFile struct {
+type SvgconvertFileToConvertFile struct {
 	Content []byte `multipartForm:"content"`
 	File    string `multipartForm:"name=file"`
 }
 
-type SvgconvertRequestBodyFileToConvert struct {
-	File *SvgconvertRequestBodyFile `multipartForm:"file"`
+type SvgconvertFileToConvert struct {
+	File *SvgconvertFileToConvertFile `multipartForm:"file"`
 }
 
 type SvgconvertRequest struct {
-	Request SvgconvertRequestBodyFileToConvert `request:"mediaType=multipart/form-data"`
+	Request SvgconvertFileToConvert `request:"mediaType=multipart/form-data"`
 }
 
-type Svgconvert200ApplicationJSONFileURL struct {
+type SvgconvertFileURL struct {
 	BlobName *string `json:"blob_name,omitempty"`
 	BlobURL  *string `json:"blob_url,omitempty"`
 }
 
 type SvgconvertResponse struct {
 	ContentType string
-	FileURL     *Svgconvert200ApplicationJSONFileURL
+	FileURL     *SvgconvertFileURL
 	StatusCode  int64
 }

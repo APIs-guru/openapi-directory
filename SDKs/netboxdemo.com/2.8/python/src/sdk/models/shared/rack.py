@@ -20,7 +20,7 @@ class RackOuterUnitValueEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class RackOuterUnitOuterUnit:
+class RackOuterUnit:
     label: RackOuterUnitLabelEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label' }})
     value: RackOuterUnitValueEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
     
@@ -41,7 +41,7 @@ class RackStatusValueEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class RackStatusStatus:
+class RackStatus:
     label: RackStatusLabelEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label' }})
     value: RackStatusValueEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
     
@@ -62,7 +62,7 @@ class RackTypeValueEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class RackTypeType:
+class RackType:
     label: RackTypeLabelEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label' }})
     value: RackTypeValueEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
     
@@ -75,7 +75,7 @@ class RackWidthLabelEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class RackWidthWidth:
+class RackWidth:
     label: RackWidthLabelEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label' }})
     value: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
     
@@ -96,16 +96,16 @@ class Rack:
     last_updated: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'last_updated', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
     outer_depth: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'outer_depth' }})
-    outer_unit: Optional[RackOuterUnitOuterUnit] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'outer_unit' }})
+    outer_unit: Optional[RackOuterUnit] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'outer_unit' }})
     outer_width: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'outer_width' }})
     powerfeed_count: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'powerfeed_count' }})
     role: Optional[nestedrackrole.NestedRackRole] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'role' }})
     serial: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'serial' }})
     site: nestedsite.NestedSite = field(default=None, metadata={'dataclasses_json': { 'field_name': 'site' }})
-    status: Optional[RackStatusStatus] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    status: Optional[RackStatus] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
     tags: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
     tenant: Optional[nestedtenant.NestedTenant] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tenant' }})
-    type: Optional[RackTypeType] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    type: Optional[RackType] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     u_height: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'u_height' }})
-    width: Optional[RackWidthWidth] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'width' }})
+    width: Optional[RackWidth] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'width' }})
     

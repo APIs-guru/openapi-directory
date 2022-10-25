@@ -1,24 +1,24 @@
 package shared
 
-type ErrorModelErrorModelErrorCategoryErrorCategoryEnum string
+type ErrorModelErrorModelErrorCategoryEnum string
 
 const (
-	ErrorModelErrorModelErrorCategoryErrorCategoryEnumGeneral           ErrorModelErrorModelErrorCategoryErrorCategoryEnum = "General"
-	ErrorModelErrorModelErrorCategoryErrorCategoryEnumNotFound          ErrorModelErrorModelErrorCategoryErrorCategoryEnum = "NotFound"
-	ErrorModelErrorModelErrorCategoryErrorCategoryEnumNotAuthorised     ErrorModelErrorModelErrorCategoryErrorCategoryEnum = "NotAuthorised"
-	ErrorModelErrorModelErrorCategoryErrorCategoryEnumValidationFailure ErrorModelErrorModelErrorCategoryErrorCategoryEnum = "ValidationFailure"
+	ErrorModelErrorModelErrorCategoryEnumGeneral           ErrorModelErrorModelErrorCategoryEnum = "General"
+	ErrorModelErrorModelErrorCategoryEnumNotFound          ErrorModelErrorModelErrorCategoryEnum = "NotFound"
+	ErrorModelErrorModelErrorCategoryEnumNotAuthorised     ErrorModelErrorModelErrorCategoryEnum = "NotAuthorised"
+	ErrorModelErrorModelErrorCategoryEnumValidationFailure ErrorModelErrorModelErrorCategoryEnum = "ValidationFailure"
 )
 
-type ErrorModelErrorModelErrorsErrors struct {
+type ErrorModelErrorModelErrors struct {
 	Error []string `json:"Error,omitempty"`
 }
 
-type ErrorModelErrorModelErrorModel struct {
-	Description   *string                                             `json:"Description,omitempty"`
-	ErrorCategory *ErrorModelErrorModelErrorCategoryErrorCategoryEnum `json:"ErrorCategory,omitempty"`
-	Errors        *ErrorModelErrorModelErrorsErrors                   `json:"Errors,omitempty"`
+type ErrorModelErrorModel struct {
+	Description   *string                                `json:"Description,omitempty"`
+	ErrorCategory *ErrorModelErrorModelErrorCategoryEnum `json:"ErrorCategory,omitempty"`
+	Errors        *ErrorModelErrorModelErrors            `json:"Errors,omitempty"`
 }
 
 type ErrorModel struct {
-	ErrorModel *ErrorModelErrorModelErrorModel `json:"ErrorModel,omitempty"`
+	ErrorModel *ErrorModelErrorModel `json:"ErrorModel,omitempty"`
 }

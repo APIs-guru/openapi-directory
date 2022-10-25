@@ -12,7 +12,7 @@ type UpdateServicePathParams struct {
 	Sid string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
-type UpdateServiceRequestBodyUpdateServiceRequest struct {
+type UpdateServiceUpdateServiceRequest struct {
 	CallbackURL             *string                                        `form:"name=CallbackUrl"`
 	ChatInstanceSid         *string                                        `form:"name=ChatInstanceSid"`
 	DefaultTTL              *int64                                         `form:"name=DefaultTtl"`
@@ -30,7 +30,7 @@ type UpdateServiceSecurity struct {
 type UpdateServiceRequest struct {
 	ServerURL  *string
 	PathParams UpdateServicePathParams
-	Request    *UpdateServiceRequestBodyUpdateServiceRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateServiceUpdateServiceRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateServiceSecurity
 }
 

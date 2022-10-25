@@ -12,7 +12,7 @@ class CreateChannelPathParams:
     
 
 @dataclass
-class CreateChannelRequestBodyCreateChannelRequest:
+class CreateChannelCreateChannelRequest:
     attributes: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Attributes' }})
     friendly_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
     type: Optional[shared.ChannelEnumChannelTypeEnum] = field(default=None, metadata={'form': { 'field_name': 'Type' }})
@@ -28,7 +28,7 @@ class CreateChannelSecurity:
 class CreateChannelRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateChannelPathParams = field(default=None)
-    request: Optional[CreateChannelRequestBodyCreateChannelRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateChannelCreateChannelRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateChannelSecurity = field(default=None)
     
 

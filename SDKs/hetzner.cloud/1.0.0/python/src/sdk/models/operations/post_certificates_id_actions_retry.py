@@ -15,18 +15,18 @@ class PostCertificatesIDActionsRetryRequest:
 
 @dataclass_json
 @dataclass
-class PostCertificatesIDActionsRetry201ApplicationJSONActionError:
+class PostCertificatesIDActionsRetryActionResponseActionError:
     code: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'code' }})
     message: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'message' }})
     
 
 @dataclass_json
 @dataclass
-class PostCertificatesIDActionsRetry201ApplicationJSONActionResources:
+class PostCertificatesIDActionsRetryActionResponseActionResources:
     id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     type: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     
-class PostCertificatesIDActionsRetry201ApplicationJSONActionStatusEnum(str, Enum):
+class PostCertificatesIDActionsRetryActionResponseActionStatusEnum(str, Enum):
     SUCCESS = "success"
     RUNNING = "running"
     ERROR = "error"
@@ -34,26 +34,26 @@ class PostCertificatesIDActionsRetry201ApplicationJSONActionStatusEnum(str, Enum
 
 @dataclass_json
 @dataclass
-class PostCertificatesIDActionsRetry201ApplicationJSONActionAction:
+class PostCertificatesIDActionsRetryActionResponseAction:
     command: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'command' }})
-    error: PostCertificatesIDActionsRetry201ApplicationJSONActionError = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
+    error: PostCertificatesIDActionsRetryActionResponseActionError = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
     finished: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'finished' }})
     id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     progress: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'progress' }})
-    resources: List[PostCertificatesIDActionsRetry201ApplicationJSONActionResources] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resources' }})
+    resources: List[PostCertificatesIDActionsRetryActionResponseActionResources] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resources' }})
     started: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'started' }})
-    status: PostCertificatesIDActionsRetry201ApplicationJSONActionStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    status: PostCertificatesIDActionsRetryActionResponseActionStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
     
 
 @dataclass_json
 @dataclass
-class PostCertificatesIDActionsRetry201ApplicationJSONActionResponse:
-    action: PostCertificatesIDActionsRetry201ApplicationJSONActionAction = field(default=None, metadata={'dataclasses_json': { 'field_name': 'action' }})
+class PostCertificatesIDActionsRetryActionResponse:
+    action: PostCertificatesIDActionsRetryActionResponseAction = field(default=None, metadata={'dataclasses_json': { 'field_name': 'action' }})
     
 
 @dataclass
 class PostCertificatesIDActionsRetryResponse:
-    action_response: Optional[PostCertificatesIDActionsRetry201ApplicationJSONActionResponse] = field(default=None)
+    action_response: Optional[PostCertificatesIDActionsRetryActionResponse] = field(default=None)
     content_type: str = field(default=None)
     status_code: int = field(default=None)
     

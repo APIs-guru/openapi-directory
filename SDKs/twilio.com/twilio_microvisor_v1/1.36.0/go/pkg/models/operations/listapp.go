@@ -22,7 +22,7 @@ type ListAppRequest struct {
 	Security    ListAppSecurity
 }
 
-type ListApp200ApplicationJSONMeta struct {
+type ListAppListAppResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -32,13 +32,13 @@ type ListApp200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListApp200ApplicationJSONListAppResponse struct {
-	Apps []shared.MicrovisorV1App       `json:"apps,omitempty"`
-	Meta *ListApp200ApplicationJSONMeta `json:"meta,omitempty"`
+type ListAppListAppResponse struct {
+	Apps []shared.MicrovisorV1App    `json:"apps,omitempty"`
+	Meta *ListAppListAppResponseMeta `json:"meta,omitempty"`
 }
 
 type ListAppResponse struct {
 	ContentType     string
-	ListAppResponse *ListApp200ApplicationJSONListAppResponse
+	ListAppResponse *ListAppListAppResponse
 	StatusCode      int64
 }

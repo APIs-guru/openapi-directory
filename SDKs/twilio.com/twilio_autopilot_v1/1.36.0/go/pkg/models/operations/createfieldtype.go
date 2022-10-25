@@ -12,7 +12,7 @@ type CreateFieldTypePathParams struct {
 	AssistantSid string `pathParam:"style=simple,explode=false,name=AssistantSid"`
 }
 
-type CreateFieldTypeRequestBodyCreateFieldTypeRequest struct {
+type CreateFieldTypeCreateFieldTypeRequest struct {
 	FriendlyName *string `form:"name=FriendlyName"`
 	UniqueName   string  `form:"name=UniqueName"`
 }
@@ -24,7 +24,7 @@ type CreateFieldTypeSecurity struct {
 type CreateFieldTypeRequest struct {
 	ServerURL  *string
 	PathParams CreateFieldTypePathParams
-	Request    *CreateFieldTypeRequestBodyCreateFieldTypeRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateFieldTypeCreateFieldTypeRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateFieldTypeSecurity
 }
 

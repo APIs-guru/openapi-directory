@@ -46,7 +46,7 @@ type ListAvailablePhoneNumberMachineToMachineRequest struct {
 	Security    ListAvailablePhoneNumberMachineToMachineSecurity
 }
 
-type ListAvailablePhoneNumberMachineToMachine200ApplicationJSONListAvailablePhoneNumberMachineToMachineResponse struct {
+type ListAvailablePhoneNumberMachineToMachineListAvailablePhoneNumberMachineToMachineResponse struct {
 	AvailablePhoneNumbers []shared.APIV2010AccountAvailablePhoneNumberCountryAvailablePhoneNumberMachineToMachine `json:"available_phone_numbers,omitempty"`
 	End                   *int64                                                                                  `json:"end,omitempty"`
 	FirstPageURI          *string                                                                                 `json:"first_page_uri,omitempty"`
@@ -60,6 +60,6 @@ type ListAvailablePhoneNumberMachineToMachine200ApplicationJSONListAvailablePhon
 
 type ListAvailablePhoneNumberMachineToMachineResponse struct {
 	ContentType                                      string
-	ListAvailablePhoneNumberMachineToMachineResponse *ListAvailablePhoneNumberMachineToMachine200ApplicationJSONListAvailablePhoneNumberMachineToMachineResponse
+	ListAvailablePhoneNumberMachineToMachineResponse *ListAvailablePhoneNumberMachineToMachineListAvailablePhoneNumberMachineToMachineResponse
 	StatusCode                                       int64
 }

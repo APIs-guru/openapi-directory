@@ -8,22 +8,22 @@ var CreatePlayerStreamerServers = []string{
 	"https://media.twilio.com",
 }
 
-type CreatePlayerStreamerRequestBodyStatusCallbackMethodEnum string
+type CreatePlayerStreamerCreatePlayerStreamerRequestStatusCallbackMethodEnum string
 
 const (
-	CreatePlayerStreamerRequestBodyStatusCallbackMethodEnumHead   CreatePlayerStreamerRequestBodyStatusCallbackMethodEnum = "HEAD"
-	CreatePlayerStreamerRequestBodyStatusCallbackMethodEnumGet    CreatePlayerStreamerRequestBodyStatusCallbackMethodEnum = "GET"
-	CreatePlayerStreamerRequestBodyStatusCallbackMethodEnumPost   CreatePlayerStreamerRequestBodyStatusCallbackMethodEnum = "POST"
-	CreatePlayerStreamerRequestBodyStatusCallbackMethodEnumPatch  CreatePlayerStreamerRequestBodyStatusCallbackMethodEnum = "PATCH"
-	CreatePlayerStreamerRequestBodyStatusCallbackMethodEnumPut    CreatePlayerStreamerRequestBodyStatusCallbackMethodEnum = "PUT"
-	CreatePlayerStreamerRequestBodyStatusCallbackMethodEnumDelete CreatePlayerStreamerRequestBodyStatusCallbackMethodEnum = "DELETE"
+	CreatePlayerStreamerCreatePlayerStreamerRequestStatusCallbackMethodEnumHead   CreatePlayerStreamerCreatePlayerStreamerRequestStatusCallbackMethodEnum = "HEAD"
+	CreatePlayerStreamerCreatePlayerStreamerRequestStatusCallbackMethodEnumGet    CreatePlayerStreamerCreatePlayerStreamerRequestStatusCallbackMethodEnum = "GET"
+	CreatePlayerStreamerCreatePlayerStreamerRequestStatusCallbackMethodEnumPost   CreatePlayerStreamerCreatePlayerStreamerRequestStatusCallbackMethodEnum = "POST"
+	CreatePlayerStreamerCreatePlayerStreamerRequestStatusCallbackMethodEnumPatch  CreatePlayerStreamerCreatePlayerStreamerRequestStatusCallbackMethodEnum = "PATCH"
+	CreatePlayerStreamerCreatePlayerStreamerRequestStatusCallbackMethodEnumPut    CreatePlayerStreamerCreatePlayerStreamerRequestStatusCallbackMethodEnum = "PUT"
+	CreatePlayerStreamerCreatePlayerStreamerRequestStatusCallbackMethodEnumDelete CreatePlayerStreamerCreatePlayerStreamerRequestStatusCallbackMethodEnum = "DELETE"
 )
 
-type CreatePlayerStreamerRequestBodyCreatePlayerStreamerRequest struct {
-	MaxDuration          *int64                                                   `form:"name=MaxDuration"`
-	StatusCallback       *string                                                  `form:"name=StatusCallback"`
-	StatusCallbackMethod *CreatePlayerStreamerRequestBodyStatusCallbackMethodEnum `form:"name=StatusCallbackMethod"`
-	Video                *bool                                                    `form:"name=Video"`
+type CreatePlayerStreamerCreatePlayerStreamerRequest struct {
+	MaxDuration          *int64                                                                   `form:"name=MaxDuration"`
+	StatusCallback       *string                                                                  `form:"name=StatusCallback"`
+	StatusCallbackMethod *CreatePlayerStreamerCreatePlayerStreamerRequestStatusCallbackMethodEnum `form:"name=StatusCallbackMethod"`
+	Video                *bool                                                                    `form:"name=Video"`
 }
 
 type CreatePlayerStreamerSecurity struct {
@@ -32,7 +32,7 @@ type CreatePlayerStreamerSecurity struct {
 
 type CreatePlayerStreamerRequest struct {
 	ServerURL *string
-	Request   *CreatePlayerStreamerRequestBodyCreatePlayerStreamerRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request   *CreatePlayerStreamerCreatePlayerStreamerRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security  CreatePlayerStreamerSecurity
 }
 

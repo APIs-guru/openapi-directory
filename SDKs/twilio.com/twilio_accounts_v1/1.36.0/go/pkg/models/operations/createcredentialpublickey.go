@@ -8,7 +8,7 @@ var CreateCredentialPublicKeyServers = []string{
 	"https://accounts.twilio.com",
 }
 
-type CreateCredentialPublicKeyRequestBodyCreateCredentialPublicKeyRequest struct {
+type CreateCredentialPublicKeyCreateCredentialPublicKeyRequest struct {
 	AccountSid   *string `form:"name=AccountSid"`
 	FriendlyName *string `form:"name=FriendlyName"`
 	PublicKey    string  `form:"name=PublicKey"`
@@ -20,7 +20,7 @@ type CreateCredentialPublicKeySecurity struct {
 
 type CreateCredentialPublicKeyRequest struct {
 	ServerURL *string
-	Request   *CreateCredentialPublicKeyRequestBodyCreateCredentialPublicKeyRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request   *CreateCredentialPublicKeyCreateCredentialPublicKeyRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security  CreateCredentialPublicKeySecurity
 }
 

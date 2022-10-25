@@ -28,7 +28,7 @@ type ListBucketRequest struct {
 	Security    ListBucketSecurity
 }
 
-type ListBucket200ApplicationJSONMeta struct {
+type ListBucketListBucketResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -38,13 +38,13 @@ type ListBucket200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListBucket200ApplicationJSONListBucketResponse struct {
+type ListBucketListBucketResponse struct {
 	Buckets []shared.VerifyV2ServiceRateLimitBucket `json:"buckets,omitempty"`
-	Meta    *ListBucket200ApplicationJSONMeta       `json:"meta,omitempty"`
+	Meta    *ListBucketListBucketResponseMeta       `json:"meta,omitempty"`
 }
 
 type ListBucketResponse struct {
 	ContentType        string
-	ListBucketResponse *ListBucket200ApplicationJSONListBucketResponse
+	ListBucketResponse *ListBucketListBucketResponse
 	StatusCode         int64
 }

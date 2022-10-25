@@ -4,7 +4,7 @@ import (
 	"time"
 )
 
-type CommitCommentUserSimpleUser struct {
+type CommitCommentSimpleUser struct {
 	AvatarURL         string  `json:"avatar_url"`
 	EventsURL         string  `json:"events_url"`
 	FollowersURL      string  `json:"followers_url"`
@@ -27,18 +27,18 @@ type CommitCommentUserSimpleUser struct {
 }
 
 type CommitComment struct {
-	AuthorAssociation AuthorAssociationEnum       `json:"author_association"`
-	Body              string                      `json:"body"`
-	CommitID          string                      `json:"commit_id"`
-	CreatedAt         time.Time                   `json:"created_at"`
-	HTMLURL           string                      `json:"html_url"`
-	ID                int64                       `json:"id"`
-	Line              int64                       `json:"line"`
-	NodeID            string                      `json:"node_id"`
-	Path              string                      `json:"path"`
-	Position          int64                       `json:"position"`
-	Reactions         *ReactionRollup             `json:"reactions,omitempty"`
-	UpdatedAt         time.Time                   `json:"updated_at"`
-	URL               string                      `json:"url"`
-	User              CommitCommentUserSimpleUser `json:"user"`
+	AuthorAssociation AuthorAssociationEnum   `json:"author_association"`
+	Body              string                  `json:"body"`
+	CommitID          string                  `json:"commit_id"`
+	CreatedAt         time.Time               `json:"created_at"`
+	HTMLURL           string                  `json:"html_url"`
+	ID                int64                   `json:"id"`
+	Line              int64                   `json:"line"`
+	NodeID            string                  `json:"node_id"`
+	Path              string                  `json:"path"`
+	Position          int64                   `json:"position"`
+	Reactions         *ReactionRollup         `json:"reactions,omitempty"`
+	UpdatedAt         time.Time               `json:"updated_at"`
+	URL               string                  `json:"url"`
+	User              CommitCommentSimpleUser `json:"user"`
 }

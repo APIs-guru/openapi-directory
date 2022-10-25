@@ -13,7 +13,7 @@ class UpdateOutgoingCallerIDPathParams:
     
 
 @dataclass
-class UpdateOutgoingCallerIDRequestBodyUpdateOutgoingCallerIDRequest:
+class UpdateOutgoingCallerIDUpdateOutgoingCallerIDRequest:
     friendly_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
     
 
@@ -26,7 +26,7 @@ class UpdateOutgoingCallerIDSecurity:
 class UpdateOutgoingCallerIDRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateOutgoingCallerIDPathParams = field(default=None)
-    request: Optional[UpdateOutgoingCallerIDRequestBodyUpdateOutgoingCallerIDRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateOutgoingCallerIDUpdateOutgoingCallerIDRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateOutgoingCallerIDSecurity = field(default=None)
     
 

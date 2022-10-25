@@ -29,7 +29,7 @@ type ListMessageRequest struct {
 	Security    ListMessageSecurity
 }
 
-type ListMessage200ApplicationJSONMeta struct {
+type ListMessageListMessageResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -39,13 +39,13 @@ type ListMessage200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListMessage200ApplicationJSONListMessageResponse struct {
+type ListMessageListMessageResponse struct {
 	Messages []shared.IPMessagingV1ServiceChannelMessage `json:"messages,omitempty"`
-	Meta     *ListMessage200ApplicationJSONMeta          `json:"meta,omitempty"`
+	Meta     *ListMessageListMessageResponseMeta         `json:"meta,omitempty"`
 }
 
 type ListMessageResponse struct {
 	ContentType         string
-	ListMessageResponse *ListMessage200ApplicationJSONListMessageResponse
+	ListMessageResponse *ListMessageListMessageResponse
 	StatusCode          int64
 }

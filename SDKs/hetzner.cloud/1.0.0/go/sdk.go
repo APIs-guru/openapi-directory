@@ -388,7 +388,7 @@ func (s *SDK) GetActions(ctx context.Context, request operations.GetActionsReque
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.GetActions200ApplicationJSONActionsResponse
+			var out *operations.GetActionsActionsResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -427,7 +427,7 @@ func (s *SDK) GetActionsID(ctx context.Context, request operations.GetActionsIDR
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.GetActionsID200ApplicationJSONActionResponse
+			var out *operations.GetActionsIDActionResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -468,7 +468,7 @@ func (s *SDK) GetCertificates(ctx context.Context, request operations.GetCertifi
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.GetCertificates200ApplicationJSONCertificatesResponse
+			var out *operations.GetCertificatesCertificatesResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -507,7 +507,7 @@ func (s *SDK) GetCertificatesID(ctx context.Context, request operations.GetCerti
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.GetCertificatesID200ApplicationJSONCertificateResponse
+			var out *operations.GetCertificatesIDCertificateResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -548,7 +548,7 @@ func (s *SDK) GetCertificatesIDActions(ctx context.Context, request operations.G
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.GetCertificatesIDActions200ApplicationJSONActionsResponse
+			var out *operations.GetCertificatesIDActionsActionsResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -587,7 +587,7 @@ func (s *SDK) GetCertificatesIDActionsActionID(ctx context.Context, request oper
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.GetCertificatesIDActionsActionID200ApplicationJSONActionResponse
+			var out *operations.GetCertificatesIDActionsActionIDActionResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -708,7 +708,7 @@ func (s *SDK) GetFirewalls(ctx context.Context, request operations.GetFirewallsR
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.GetFirewalls200ApplicationJSONFirewallsResponse
+			var out *operations.GetFirewallsFirewallsResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -747,7 +747,7 @@ func (s *SDK) GetFirewallsID(ctx context.Context, request operations.GetFirewall
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.GetFirewallsID200ApplicationJSONFirewallResponse
+			var out *operations.GetFirewallsIDFirewallResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -788,7 +788,7 @@ func (s *SDK) GetFirewallsIDActions(ctx context.Context, request operations.GetF
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.GetFirewallsIDActions200ApplicationJSONActionsResponse
+			var out *operations.GetFirewallsIDActionsActionsResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -827,7 +827,7 @@ func (s *SDK) GetFirewallsIDActionsActionID(ctx context.Context, request operati
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.GetFirewallsIDActionsActionID200ApplicationJSONActionResponse
+			var out *operations.GetFirewallsIDActionsActionIDActionResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -987,7 +987,7 @@ func (s *SDK) GetFloatingIpsIDActionsActionID(ctx context.Context, request opera
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.GetFloatingIpsIDActionsActionID200ApplicationJSONActionResponse
+			var out *operations.GetFloatingIpsIDActionsActionIDActionResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -1108,7 +1108,7 @@ func (s *SDK) GetImagesIDActions(ctx context.Context, request operations.GetImag
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.GetImagesIDActions200ApplicationJSONActionsResponse
+			var out *operations.GetImagesIDActionsActionsResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -1147,7 +1147,7 @@ func (s *SDK) GetImagesIDActionsActionID(ctx context.Context, request operations
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.GetImagesIDActionsActionID200ApplicationJSONActionResponse
+			var out *operations.GetImagesIDActionsActionIDActionResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -1428,7 +1428,7 @@ func (s *SDK) GetLoadBalancersIDActions(ctx context.Context, request operations.
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.GetLoadBalancersIDActions200ApplicationJSONActionsResponse
+			var out *operations.GetLoadBalancersIDActionsActionsResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -1467,7 +1467,7 @@ func (s *SDK) GetLoadBalancersIDActionsActionID(ctx context.Context, request ope
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.GetLoadBalancersIDActionsActionID200ApplicationJSONActionResponse
+			var out *operations.GetLoadBalancersIDActionsActionIDActionResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -1709,7 +1709,7 @@ func (s *SDK) GetNetworksIDActions(ctx context.Context, request operations.GetNe
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.GetNetworksIDActions200ApplicationJSONActionsResponse
+			var out *operations.GetNetworksIDActionsActionsResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -1748,7 +1748,7 @@ func (s *SDK) GetNetworksIDActionsActionID(ctx context.Context, request operatio
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.GetNetworksIDActionsActionID200ApplicationJSONActionResponse
+			var out *operations.GetNetworksIDActionsActionIDActionResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -1789,7 +1789,7 @@ func (s *SDK) GetPlacementGroups(ctx context.Context, request operations.GetPlac
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.GetPlacementGroups200ApplicationJSONPlacementGroupsResponse
+			var out *operations.GetPlacementGroupsPlacementGroupsResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -1828,7 +1828,7 @@ func (s *SDK) GetPlacementGroupsID(ctx context.Context, request operations.GetPl
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.GetPlacementGroupsID200ApplicationJSONPlacementGroupResponse
+			var out *operations.GetPlacementGroupsIDPlacementGroupResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -2070,7 +2070,7 @@ func (s *SDK) GetServersIDActions(ctx context.Context, request operations.GetSer
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.GetServersIDActions200ApplicationJSONActionsResponse
+			var out *operations.GetServersIDActionsActionsResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -2109,7 +2109,7 @@ func (s *SDK) GetServersIDActionsActionID(ctx context.Context, request operation
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.GetServersIDActionsActionID200ApplicationJSONActionResponse
+			var out *operations.GetServersIDActionsActionIDActionResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -2351,7 +2351,7 @@ func (s *SDK) GetVolumesIDActions(ctx context.Context, request operations.GetVol
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.GetVolumesIDActions200ApplicationJSONActionsResponse
+			var out *operations.GetVolumesIDActionsActionsResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -2390,7 +2390,7 @@ func (s *SDK) GetVolumesIDActionsActionID(ctx context.Context, request operation
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.GetVolumesIDActionsActionID200ApplicationJSONActionResponse
+			var out *operations.GetVolumesIDActionsActionIDActionResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -2435,7 +2435,7 @@ func (s *SDK) PostCertificates(ctx context.Context, request operations.PostCerti
 	case httpRes.StatusCode == 201:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.PostCertificates201ApplicationJSONCreateCertificateResponse
+			var out *operations.PostCertificatesCreateCertificateResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -2474,7 +2474,7 @@ func (s *SDK) PostCertificatesIDActionsRetry(ctx context.Context, request operat
 	case httpRes.StatusCode == 201:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.PostCertificatesIDActionsRetry201ApplicationJSONActionResponse
+			var out *operations.PostCertificatesIDActionsRetryActionResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -2519,7 +2519,7 @@ func (s *SDK) PostFirewalls(ctx context.Context, request operations.PostFirewall
 	case httpRes.StatusCode == 201:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.PostFirewalls201ApplicationJSONCreateFirewallResponse
+			var out *operations.PostFirewallsCreateFirewallResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -2564,7 +2564,7 @@ func (s *SDK) PostFirewallsIDActionsApplyToResources(ctx context.Context, reques
 	case httpRes.StatusCode == 201:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.PostFirewallsIDActionsApplyToResources201ApplicationJSONActionsResponse
+			var out *operations.PostFirewallsIDActionsApplyToResourcesActionsResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -2609,7 +2609,7 @@ func (s *SDK) PostFirewallsIDActionsRemoveFromResources(ctx context.Context, req
 	case httpRes.StatusCode == 201:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.PostFirewallsIDActionsRemoveFromResources201ApplicationJSONActionsResponse
+			var out *operations.PostFirewallsIDActionsRemoveFromResourcesActionsResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -2654,7 +2654,7 @@ func (s *SDK) PostFirewallsIDActionsSetRules(ctx context.Context, request operat
 	case httpRes.StatusCode == 201:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.PostFirewallsIDActionsSetRules201ApplicationJSONActionsResponse
+			var out *operations.PostFirewallsIDActionsSetRulesActionsResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -2744,7 +2744,7 @@ func (s *SDK) PostFloatingIpsIDActionsAssign(ctx context.Context, request operat
 	case httpRes.StatusCode == 201:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.PostFloatingIpsIDActionsAssign201ApplicationJSONActionResponse
+			var out *operations.PostFloatingIpsIDActionsAssignActionResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -2789,7 +2789,7 @@ func (s *SDK) PostFloatingIpsIDActionsChangeDNSPtr(ctx context.Context, request 
 	case httpRes.StatusCode == 201:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.PostFloatingIpsIDActionsChangeDNSPtr201ApplicationJSONActionResponse
+			var out *operations.PostFloatingIpsIDActionsChangeDNSPtrActionResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -2834,7 +2834,7 @@ func (s *SDK) PostFloatingIpsIDActionsChangeProtection(ctx context.Context, requ
 	case httpRes.StatusCode == 201:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.PostFloatingIpsIDActionsChangeProtection201ApplicationJSONActionResponse
+			var out *operations.PostFloatingIpsIDActionsChangeProtectionActionResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -2873,7 +2873,7 @@ func (s *SDK) PostFloatingIpsIDActionsUnassign(ctx context.Context, request oper
 	case httpRes.StatusCode == 201:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.PostFloatingIpsIDActionsUnassign201ApplicationJSONActionResponse
+			var out *operations.PostFloatingIpsIDActionsUnassignActionResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -2918,7 +2918,7 @@ func (s *SDK) PostImagesIDActionsChangeProtection(ctx context.Context, request o
 	case httpRes.StatusCode == 201:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.PostImagesIDActionsChangeProtection201ApplicationJSONActionResponse
+			var out *operations.PostImagesIDActionsChangeProtectionActionResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -3008,7 +3008,7 @@ func (s *SDK) PostLoadBalancersIDActionsAddService(ctx context.Context, request 
 	case httpRes.StatusCode == 201:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.PostLoadBalancersIDActionsAddService201ApplicationJSONActionResponse
+			var out *operations.PostLoadBalancersIDActionsAddServiceActionResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -3053,7 +3053,7 @@ func (s *SDK) PostLoadBalancersIDActionsAddTarget(ctx context.Context, request o
 	case httpRes.StatusCode == 201:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.PostLoadBalancersIDActionsAddTarget201ApplicationJSONActionResponse
+			var out *operations.PostLoadBalancersIDActionsAddTargetActionResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -3098,7 +3098,7 @@ func (s *SDK) PostLoadBalancersIDActionsAttachToNetwork(ctx context.Context, req
 	case httpRes.StatusCode == 201:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.PostLoadBalancersIDActionsAttachToNetwork201ApplicationJSONActionResponse
+			var out *operations.PostLoadBalancersIDActionsAttachToNetworkActionResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -3143,7 +3143,7 @@ func (s *SDK) PostLoadBalancersIDActionsChangeAlgorithm(ctx context.Context, req
 	case httpRes.StatusCode == 201:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.PostLoadBalancersIDActionsChangeAlgorithm201ApplicationJSONActionResponse
+			var out *operations.PostLoadBalancersIDActionsChangeAlgorithmActionResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -3188,7 +3188,7 @@ func (s *SDK) PostLoadBalancersIDActionsChangeDNSPtr(ctx context.Context, reques
 	case httpRes.StatusCode == 201:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.PostLoadBalancersIDActionsChangeDNSPtr201ApplicationJSONActionResponse
+			var out *operations.PostLoadBalancersIDActionsChangeDNSPtrActionResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -3233,7 +3233,7 @@ func (s *SDK) PostLoadBalancersIDActionsChangeProtection(ctx context.Context, re
 	case httpRes.StatusCode == 201:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.PostLoadBalancersIDActionsChangeProtection201ApplicationJSONActionResponse
+			var out *operations.PostLoadBalancersIDActionsChangeProtectionActionResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -3278,7 +3278,7 @@ func (s *SDK) PostLoadBalancersIDActionsChangeType(ctx context.Context, request 
 	case httpRes.StatusCode == 201:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.PostLoadBalancersIDActionsChangeType201ApplicationJSONActionResponse
+			var out *operations.PostLoadBalancersIDActionsChangeTypeActionResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -3323,7 +3323,7 @@ func (s *SDK) PostLoadBalancersIDActionsDeleteService(ctx context.Context, reque
 	case httpRes.StatusCode == 201:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.PostLoadBalancersIDActionsDeleteService201ApplicationJSONActionResponse
+			var out *operations.PostLoadBalancersIDActionsDeleteServiceActionResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -3368,7 +3368,7 @@ func (s *SDK) PostLoadBalancersIDActionsDetachFromNetwork(ctx context.Context, r
 	case httpRes.StatusCode == 201:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.PostLoadBalancersIDActionsDetachFromNetwork201ApplicationJSONActionResponse
+			var out *operations.PostLoadBalancersIDActionsDetachFromNetworkActionResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -3407,7 +3407,7 @@ func (s *SDK) PostLoadBalancersIDActionsDisablePublicInterface(ctx context.Conte
 	case httpRes.StatusCode == 201:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.PostLoadBalancersIDActionsDisablePublicInterface201ApplicationJSONActionResponse
+			var out *operations.PostLoadBalancersIDActionsDisablePublicInterfaceActionResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -3446,7 +3446,7 @@ func (s *SDK) PostLoadBalancersIDActionsEnablePublicInterface(ctx context.Contex
 	case httpRes.StatusCode == 201:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.PostLoadBalancersIDActionsEnablePublicInterface201ApplicationJSONActionResponse
+			var out *operations.PostLoadBalancersIDActionsEnablePublicInterfaceActionResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -3491,7 +3491,7 @@ func (s *SDK) PostLoadBalancersIDActionsRemoveTarget(ctx context.Context, reques
 	case httpRes.StatusCode == 201:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.PostLoadBalancersIDActionsRemoveTarget201ApplicationJSONActionResponse
+			var out *operations.PostLoadBalancersIDActionsRemoveTargetActionResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -3536,7 +3536,7 @@ func (s *SDK) PostLoadBalancersIDActionsUpdateService(ctx context.Context, reque
 	case httpRes.StatusCode == 201:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.PostLoadBalancersIDActionsUpdateService201ApplicationJSONActionResponse
+			var out *operations.PostLoadBalancersIDActionsUpdateServiceActionResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -3626,7 +3626,7 @@ func (s *SDK) PostNetworksIDActionsAddRoute(ctx context.Context, request operati
 	case httpRes.StatusCode == 201:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.PostNetworksIDActionsAddRoute201ApplicationJSONActionResponse
+			var out *operations.PostNetworksIDActionsAddRouteActionResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -3671,7 +3671,7 @@ func (s *SDK) PostNetworksIDActionsAddSubnet(ctx context.Context, request operat
 	case httpRes.StatusCode == 201:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.PostNetworksIDActionsAddSubnet201ApplicationJSONActionResponse
+			var out *operations.PostNetworksIDActionsAddSubnetActionResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -3716,7 +3716,7 @@ func (s *SDK) PostNetworksIDActionsChangeIPRange(ctx context.Context, request op
 	case httpRes.StatusCode == 201:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.PostNetworksIDActionsChangeIPRange201ApplicationJSONActionResponse
+			var out *operations.PostNetworksIDActionsChangeIPRangeActionResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -3761,7 +3761,7 @@ func (s *SDK) PostNetworksIDActionsChangeProtection(ctx context.Context, request
 	case httpRes.StatusCode == 201:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.PostNetworksIDActionsChangeProtection201ApplicationJSONActionResponse
+			var out *operations.PostNetworksIDActionsChangeProtectionActionResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -3806,7 +3806,7 @@ func (s *SDK) PostNetworksIDActionsDeleteRoute(ctx context.Context, request oper
 	case httpRes.StatusCode == 201:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.PostNetworksIDActionsDeleteRoute201ApplicationJSONActionResponse
+			var out *operations.PostNetworksIDActionsDeleteRouteActionResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -3851,7 +3851,7 @@ func (s *SDK) PostNetworksIDActionsDeleteSubnet(ctx context.Context, request ope
 	case httpRes.StatusCode == 201:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.PostNetworksIDActionsDeleteSubnet201ApplicationJSONActionResponse
+			var out *operations.PostNetworksIDActionsDeleteSubnetActionResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -3896,7 +3896,7 @@ func (s *SDK) PostPlacementGroups(ctx context.Context, request operations.PostPl
 	case httpRes.StatusCode == 201:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.PostPlacementGroups201ApplicationJSONCreatePlacementGroupResponse
+			var out *operations.PostPlacementGroupsCreatePlacementGroupResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -3941,7 +3941,7 @@ func (s *SDK) PostServers(ctx context.Context, request operations.PostServersReq
 	case httpRes.StatusCode == 201:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.PostServers201ApplicationJSONCreateServerResponse
+			var out *operations.PostServersCreateServerResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -3986,7 +3986,7 @@ func (s *SDK) PostServersIDActionsAddToPlacementGroup(ctx context.Context, reque
 	case httpRes.StatusCode == 201:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.PostServersIDActionsAddToPlacementGroup201ApplicationJSONActionResponse
+			var out *operations.PostServersIDActionsAddToPlacementGroupActionResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -4031,7 +4031,7 @@ func (s *SDK) PostServersIDActionsAttachIso(ctx context.Context, request operati
 	case httpRes.StatusCode == 201:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.PostServersIDActionsAttachIso201ApplicationJSONActionResponse
+			var out *operations.PostServersIDActionsAttachIsoActionResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -4076,7 +4076,7 @@ func (s *SDK) PostServersIDActionsAttachToNetwork(ctx context.Context, request o
 	case httpRes.StatusCode == 201:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.PostServersIDActionsAttachToNetwork201ApplicationJSONActionResponse
+			var out *operations.PostServersIDActionsAttachToNetworkActionResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -4121,7 +4121,7 @@ func (s *SDK) PostServersIDActionsChangeAliasIps(ctx context.Context, request op
 	case httpRes.StatusCode == 201:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.PostServersIDActionsChangeAliasIps201ApplicationJSONActionResponse
+			var out *operations.PostServersIDActionsChangeAliasIpsActionResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -4166,7 +4166,7 @@ func (s *SDK) PostServersIDActionsChangeDNSPtr(ctx context.Context, request oper
 	case httpRes.StatusCode == 201:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.PostServersIDActionsChangeDNSPtr201ApplicationJSONActionResponse
+			var out *operations.PostServersIDActionsChangeDNSPtrActionResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -4211,7 +4211,7 @@ func (s *SDK) PostServersIDActionsChangeProtection(ctx context.Context, request 
 	case httpRes.StatusCode == 201:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.PostServersIDActionsChangeProtection201ApplicationJSONActionResponse
+			var out *operations.PostServersIDActionsChangeProtectionActionResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -4256,7 +4256,7 @@ func (s *SDK) PostServersIDActionsChangeType(ctx context.Context, request operat
 	case httpRes.StatusCode == 201:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.PostServersIDActionsChangeType201ApplicationJSONActionResponse
+			var out *operations.PostServersIDActionsChangeTypeActionResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -4346,7 +4346,7 @@ func (s *SDK) PostServersIDActionsDetachFromNetwork(ctx context.Context, request
 	case httpRes.StatusCode == 201:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.PostServersIDActionsDetachFromNetwork201ApplicationJSONActionResponse
+			var out *operations.PostServersIDActionsDetachFromNetworkActionResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -4385,7 +4385,7 @@ func (s *SDK) PostServersIDActionsDetachIso(ctx context.Context, request operati
 	case httpRes.StatusCode == 201:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.PostServersIDActionsDetachIso201ApplicationJSONActionResponse
+			var out *operations.PostServersIDActionsDetachIsoActionResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -4424,7 +4424,7 @@ func (s *SDK) PostServersIDActionsDisableBackup(ctx context.Context, request ope
 	case httpRes.StatusCode == 201:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.PostServersIDActionsDisableBackup201ApplicationJSONActionResponse
+			var out *operations.PostServersIDActionsDisableBackupActionResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -4463,7 +4463,7 @@ func (s *SDK) PostServersIDActionsDisableRescue(ctx context.Context, request ope
 	case httpRes.StatusCode == 201:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.PostServersIDActionsDisableRescue201ApplicationJSONActionResponse
+			var out *operations.PostServersIDActionsDisableRescueActionResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -4502,7 +4502,7 @@ func (s *SDK) PostServersIDActionsEnableBackup(ctx context.Context, request oper
 	case httpRes.StatusCode == 201:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.PostServersIDActionsEnableBackup201ApplicationJSONActionResponse
+			var out *operations.PostServersIDActionsEnableBackupActionResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -4586,7 +4586,7 @@ func (s *SDK) PostServersIDActionsPoweroff(ctx context.Context, request operatio
 	case httpRes.StatusCode == 201:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.PostServersIDActionsPoweroff201ApplicationJSONActionResponse
+			var out *operations.PostServersIDActionsPoweroffActionResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -4625,7 +4625,7 @@ func (s *SDK) PostServersIDActionsPoweron(ctx context.Context, request operation
 	case httpRes.StatusCode == 201:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.PostServersIDActionsPoweron201ApplicationJSONActionResponse
+			var out *operations.PostServersIDActionsPoweronActionResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -4664,7 +4664,7 @@ func (s *SDK) PostServersIDActionsReboot(ctx context.Context, request operations
 	case httpRes.StatusCode == 201:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.PostServersIDActionsReboot201ApplicationJSONActionResponse
+			var out *operations.PostServersIDActionsRebootActionResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -4748,7 +4748,7 @@ func (s *SDK) PostServersIDActionsRemoveFromPlacementGroup(ctx context.Context, 
 	case httpRes.StatusCode == 201:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.PostServersIDActionsRemoveFromPlacementGroup201ApplicationJSONActionResponse
+			var out *operations.PostServersIDActionsRemoveFromPlacementGroupActionResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -4826,7 +4826,7 @@ func (s *SDK) PostServersIDActionsReset(ctx context.Context, request operations.
 	case httpRes.StatusCode == 201:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.PostServersIDActionsReset201ApplicationJSONActionResponse
+			var out *operations.PostServersIDActionsResetActionResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -4904,7 +4904,7 @@ func (s *SDK) PostServersIDActionsShutdown(ctx context.Context, request operatio
 	case httpRes.StatusCode == 201:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.PostServersIDActionsShutdown201ApplicationJSONActionResponse
+			var out *operations.PostServersIDActionsShutdownActionResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -5039,7 +5039,7 @@ func (s *SDK) PostVolumesIDActionsAttach(ctx context.Context, request operations
 	case httpRes.StatusCode == 201:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.PostVolumesIDActionsAttach201ApplicationJSONActionResponse
+			var out *operations.PostVolumesIDActionsAttachActionResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -5084,7 +5084,7 @@ func (s *SDK) PostVolumesIDActionsChangeProtection(ctx context.Context, request 
 	case httpRes.StatusCode == 201:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.PostVolumesIDActionsChangeProtection201ApplicationJSONActionResponse
+			var out *operations.PostVolumesIDActionsChangeProtectionActionResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -5123,7 +5123,7 @@ func (s *SDK) PostVolumesIDActionsDetach(ctx context.Context, request operations
 	case httpRes.StatusCode == 201:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.PostVolumesIDActionsDetach201ApplicationJSONActionResponse
+			var out *operations.PostVolumesIDActionsDetachActionResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -5168,7 +5168,7 @@ func (s *SDK) PostVolumesIDActionsResize(ctx context.Context, request operations
 	case httpRes.StatusCode == 201:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.PostVolumesIDActionsResize201ApplicationJSONActionResponse
+			var out *operations.PostVolumesIDActionsResizeActionResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -5213,7 +5213,7 @@ func (s *SDK) PutCertificatesID(ctx context.Context, request operations.PutCerti
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.PutCertificatesID200ApplicationJSONCertificateResponse
+			var out *operations.PutCertificatesIDCertificateResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -5258,7 +5258,7 @@ func (s *SDK) PutFirewallsID(ctx context.Context, request operations.PutFirewall
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.PutFirewallsID200ApplicationJSONFirewallResponse
+			var out *operations.PutFirewallsIDFirewallResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -5483,7 +5483,7 @@ func (s *SDK) PutPlacementGroupsID(ctx context.Context, request operations.PutPl
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.PutPlacementGroupsID200ApplicationJSONPlacementGroupResponse
+			var out *operations.PutPlacementGroupsIDPlacementGroupResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}

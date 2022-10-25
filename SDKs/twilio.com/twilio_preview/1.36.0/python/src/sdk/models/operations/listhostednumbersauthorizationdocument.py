@@ -28,7 +28,7 @@ class ListHostedNumbersAuthorizationDocumentRequest:
 
 @dataclass_json
 @dataclass
-class ListHostedNumbersAuthorizationDocument200ApplicationJSONMeta:
+class ListHostedNumbersAuthorizationDocumentListHostedNumbersAuthorizationDocumentResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -40,14 +40,14 @@ class ListHostedNumbersAuthorizationDocument200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListHostedNumbersAuthorizationDocument200ApplicationJSONListHostedNumbersAuthorizationDocumentResponse:
+class ListHostedNumbersAuthorizationDocumentListHostedNumbersAuthorizationDocumentResponse:
     items: Optional[List[shared.PreviewHostedNumbersAuthorizationDocument]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'items' }})
-    meta: Optional[ListHostedNumbersAuthorizationDocument200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+    meta: Optional[ListHostedNumbersAuthorizationDocumentListHostedNumbersAuthorizationDocumentResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     
 
 @dataclass
 class ListHostedNumbersAuthorizationDocumentResponse:
     content_type: str = field(default=None)
-    list_hosted_numbers_authorization_document_response: Optional[ListHostedNumbersAuthorizationDocument200ApplicationJSONListHostedNumbersAuthorizationDocumentResponse] = field(default=None)
+    list_hosted_numbers_authorization_document_response: Optional[ListHostedNumbersAuthorizationDocumentListHostedNumbersAuthorizationDocumentResponse] = field(default=None)
     status_code: int = field(default=None)
     

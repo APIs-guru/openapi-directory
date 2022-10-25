@@ -8,7 +8,7 @@ var UpdateConfigurationServers = []string{
 	"https://conversations.twilio.com",
 }
 
-type UpdateConfigurationRequestBodyUpdateConfigurationRequest struct {
+type UpdateConfigurationUpdateConfigurationRequest struct {
 	DefaultChatServiceSid      *string `form:"name=DefaultChatServiceSid"`
 	DefaultClosedTimer         *string `form:"name=DefaultClosedTimer"`
 	DefaultInactiveTimer       *string `form:"name=DefaultInactiveTimer"`
@@ -21,7 +21,7 @@ type UpdateConfigurationSecurity struct {
 
 type UpdateConfigurationRequest struct {
 	ServerURL *string
-	Request   *UpdateConfigurationRequestBodyUpdateConfigurationRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request   *UpdateConfigurationUpdateConfigurationRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security  UpdateConfigurationSecurity
 }
 

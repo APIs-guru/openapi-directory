@@ -13,7 +13,7 @@ type CreateVariablePathParams struct {
 	ServiceSid     string `pathParam:"style=simple,explode=false,name=ServiceSid"`
 }
 
-type CreateVariableRequestBodyCreateVariableRequest struct {
+type CreateVariableCreateVariableRequest struct {
 	Key   string `form:"name=Key"`
 	Value string `form:"name=Value"`
 }
@@ -25,7 +25,7 @@ type CreateVariableSecurity struct {
 type CreateVariableRequest struct {
 	ServerURL  *string
 	PathParams CreateVariablePathParams
-	Request    *CreateVariableRequestBodyCreateVariableRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateVariableCreateVariableRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateVariableSecurity
 }
 

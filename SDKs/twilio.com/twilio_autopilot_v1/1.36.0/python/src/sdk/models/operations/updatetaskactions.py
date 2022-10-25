@@ -13,7 +13,7 @@ class UpdateTaskActionsPathParams:
     
 
 @dataclass
-class UpdateTaskActionsRequestBodyUpdateTaskActionsRequest:
+class UpdateTaskActionsUpdateTaskActionsRequest:
     actions: Optional[Any] = field(default=None, metadata={'form': { 'field_name': 'Actions' }})
     
 
@@ -26,7 +26,7 @@ class UpdateTaskActionsSecurity:
 class UpdateTaskActionsRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateTaskActionsPathParams = field(default=None)
-    request: Optional[UpdateTaskActionsRequestBodyUpdateTaskActionsRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateTaskActionsUpdateTaskActionsRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateTaskActionsSecurity = field(default=None)
     
 

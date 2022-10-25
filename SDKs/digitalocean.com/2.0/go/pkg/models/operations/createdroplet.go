@@ -4,7 +4,7 @@ import (
 	"openapi/pkg/models/shared"
 )
 
-type CreateDropletRequestBody1 struct {
+type CreateDropletRequestBodySingleDropletRequest struct {
 	Backups           *bool         `json:"backups,omitempty"`
 	Image             interface{}   `json:"image"`
 	Ipv6              *bool         `json:"ipv6,omitempty"`
@@ -20,7 +20,7 @@ type CreateDropletRequestBody1 struct {
 	WithDropletAgent  *bool         `json:"with_droplet_agent,omitempty"`
 }
 
-type CreateDropletRequestBody2 struct {
+type CreateDropletRequestBodyMultipleDropletRequest struct {
 	Backups           *bool         `json:"backups,omitempty"`
 	Image             interface{}   `json:"image"`
 	Ipv6              *bool         `json:"ipv6,omitempty"`

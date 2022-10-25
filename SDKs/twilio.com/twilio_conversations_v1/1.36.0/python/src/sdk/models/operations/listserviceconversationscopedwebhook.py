@@ -33,7 +33,7 @@ class ListServiceConversationScopedWebhookRequest:
 
 @dataclass_json
 @dataclass
-class ListServiceConversationScopedWebhook200ApplicationJSONMeta:
+class ListServiceConversationScopedWebhookListServiceConversationScopedWebhookResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -45,14 +45,14 @@ class ListServiceConversationScopedWebhook200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListServiceConversationScopedWebhook200ApplicationJSONListServiceConversationScopedWebhookResponse:
-    meta: Optional[ListServiceConversationScopedWebhook200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+class ListServiceConversationScopedWebhookListServiceConversationScopedWebhookResponse:
+    meta: Optional[ListServiceConversationScopedWebhookListServiceConversationScopedWebhookResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     webhooks: Optional[List[shared.ConversationsV1ServiceServiceConversationServiceConversationScopedWebhook]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'webhooks' }})
     
 
 @dataclass
 class ListServiceConversationScopedWebhookResponse:
     content_type: str = field(default=None)
-    list_service_conversation_scoped_webhook_response: Optional[ListServiceConversationScopedWebhook200ApplicationJSONListServiceConversationScopedWebhookResponse] = field(default=None)
+    list_service_conversation_scoped_webhook_response: Optional[ListServiceConversationScopedWebhookListServiceConversationScopedWebhookResponse] = field(default=None)
     status_code: int = field(default=None)
     

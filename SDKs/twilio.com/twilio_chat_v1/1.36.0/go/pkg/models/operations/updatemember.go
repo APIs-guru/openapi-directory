@@ -14,7 +14,7 @@ type UpdateMemberPathParams struct {
 	Sid        string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
-type UpdateMemberRequestBodyUpdateMemberRequest struct {
+type UpdateMemberUpdateMemberRequest struct {
 	LastConsumedMessageIndex *int64  `form:"name=LastConsumedMessageIndex"`
 	RoleSid                  *string `form:"name=RoleSid"`
 }
@@ -26,7 +26,7 @@ type UpdateMemberSecurity struct {
 type UpdateMemberRequest struct {
 	ServerURL  *string
 	PathParams UpdateMemberPathParams
-	Request    *UpdateMemberRequestBodyUpdateMemberRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateMemberUpdateMemberRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateMemberSecurity
 }
 

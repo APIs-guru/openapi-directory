@@ -12,7 +12,7 @@ type CreateQueuePathParams struct {
 	AccountSid string `pathParam:"style=simple,explode=false,name=AccountSid"`
 }
 
-type CreateQueueRequestBodyCreateQueueRequest struct {
+type CreateQueueCreateQueueRequest struct {
 	FriendlyName string `form:"name=FriendlyName"`
 	MaxSize      *int64 `form:"name=MaxSize"`
 }
@@ -24,7 +24,7 @@ type CreateQueueSecurity struct {
 type CreateQueueRequest struct {
 	ServerURL  *string
 	PathParams CreateQueuePathParams
-	Request    *CreateQueueRequestBodyCreateQueueRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateQueueCreateQueueRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateQueueSecurity
 }
 

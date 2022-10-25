@@ -5,7 +5,7 @@ CREATE_COMMAND_SERVERS = [
 	"https://wireless.twilio.com",
 ]
 
-class CreateCommandRequestBodyCallbackMethodEnum(str, Enum):
+class CreateCommandCreateCommandRequestCallbackMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -15,8 +15,8 @@ class CreateCommandRequestBodyCallbackMethodEnum(str, Enum):
 
 
 @dataclass
-class CreateCommandRequestBodyCreateCommandRequest:
-    callback_method: Optional[CreateCommandRequestBodyCallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'CallbackMethod' }})
+class CreateCommandCreateCommandRequest:
+    callback_method: Optional[CreateCommandCreateCommandRequestCallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'CallbackMethod' }})
     callback_url: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'CallbackUrl' }})
     command: str = field(default=None, metadata={'form': { 'field_name': 'Command' }})
     command_mode: Optional[shared.CommandEnumCommandModeEnum] = field(default=None, metadata={'form': { 'field_name': 'CommandMode' }})
@@ -33,7 +33,7 @@ class CreateCommandSecurity:
 @dataclass
 class CreateCommandRequest:
     server_url: Optional[str] = field(default=None)
-    request: Optional[CreateCommandRequestBodyCreateCommandRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateCommandCreateCommandRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateCommandSecurity = field(default=None)
     
 

@@ -24,11 +24,11 @@ type ConnectorDocsOneRequest struct {
 }
 
 type ConnectorDocsOneResponse struct {
-	Body                    []byte
-	ContentType             string
-	NotFoundResponse        *shared.NotFoundResponse
-	PaymentRequiredResponse *shared.PaymentRequiredResponse
-	StatusCode              int64
-	UnauthorizedResponse    *shared.UnauthorizedResponse
-	UnexpectedErrorResponse *shared.UnexpectedErrorResponse
+	ContentType                                   string
+	NotFoundResponse                              *shared.NotFoundResponse
+	PaymentRequiredResponse                       *shared.PaymentRequiredResponse
+	StatusCode                                    int64
+	UnauthorizedResponse                          *shared.UnauthorizedResponse
+	UnexpectedErrorResponse                       *shared.UnexpectedErrorResponse
+	ConnectorDocsOne200TextMarkdownMarkdownString *string
 }

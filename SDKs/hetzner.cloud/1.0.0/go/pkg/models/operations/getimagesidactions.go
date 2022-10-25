@@ -45,36 +45,36 @@ type GetImagesIDActionsRequest struct {
 	QueryParams GetImagesIDActionsQueryParams
 }
 
-type GetImagesIDActions200ApplicationJSONActionsError struct {
+type GetImagesIDActionsActionsResponseActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
 }
 
-type GetImagesIDActions200ApplicationJSONActionsResources struct {
+type GetImagesIDActionsActionsResponseActionResources struct {
 	ID   int64  `json:"id"`
 	Type string `json:"type"`
 }
 
-type GetImagesIDActions200ApplicationJSONActionsStatusEnum string
+type GetImagesIDActionsActionsResponseActionStatusEnum string
 
 const (
-	GetImagesIDActions200ApplicationJSONActionsStatusEnumSuccess GetImagesIDActions200ApplicationJSONActionsStatusEnum = "success"
-	GetImagesIDActions200ApplicationJSONActionsStatusEnumRunning GetImagesIDActions200ApplicationJSONActionsStatusEnum = "running"
-	GetImagesIDActions200ApplicationJSONActionsStatusEnumError   GetImagesIDActions200ApplicationJSONActionsStatusEnum = "error"
+	GetImagesIDActionsActionsResponseActionStatusEnumSuccess GetImagesIDActionsActionsResponseActionStatusEnum = "success"
+	GetImagesIDActionsActionsResponseActionStatusEnumRunning GetImagesIDActionsActionsResponseActionStatusEnum = "running"
+	GetImagesIDActionsActionsResponseActionStatusEnumError   GetImagesIDActionsActionsResponseActionStatusEnum = "error"
 )
 
-type GetImagesIDActions200ApplicationJSONActionsAction struct {
-	Command   string                                                 `json:"command"`
-	Error     GetImagesIDActions200ApplicationJSONActionsError       `json:"error"`
-	Finished  string                                                 `json:"finished"`
-	ID        int64                                                  `json:"id"`
-	Progress  float64                                                `json:"progress"`
-	Resources []GetImagesIDActions200ApplicationJSONActionsResources `json:"resources"`
-	Started   string                                                 `json:"started"`
-	Status    GetImagesIDActions200ApplicationJSONActionsStatusEnum  `json:"status"`
+type GetImagesIDActionsActionsResponseAction struct {
+	Command   string                                             `json:"command"`
+	Error     GetImagesIDActionsActionsResponseActionError       `json:"error"`
+	Finished  string                                             `json:"finished"`
+	ID        int64                                              `json:"id"`
+	Progress  float64                                            `json:"progress"`
+	Resources []GetImagesIDActionsActionsResponseActionResources `json:"resources"`
+	Started   string                                             `json:"started"`
+	Status    GetImagesIDActionsActionsResponseActionStatusEnum  `json:"status"`
 }
 
-type GetImagesIDActions200ApplicationJSONMetaPagination struct {
+type GetImagesIDActionsActionsResponseMetaPagination struct {
 	LastPage     float64 `json:"last_page"`
 	NextPage     float64 `json:"next_page"`
 	Page         float64 `json:"page"`
@@ -83,17 +83,17 @@ type GetImagesIDActions200ApplicationJSONMetaPagination struct {
 	TotalEntries float64 `json:"total_entries"`
 }
 
-type GetImagesIDActions200ApplicationJSONMeta struct {
-	Pagination GetImagesIDActions200ApplicationJSONMetaPagination `json:"pagination"`
+type GetImagesIDActionsActionsResponseMeta struct {
+	Pagination GetImagesIDActionsActionsResponseMetaPagination `json:"pagination"`
 }
 
-type GetImagesIDActions200ApplicationJSONActionsResponse struct {
-	Actions []GetImagesIDActions200ApplicationJSONActionsAction `json:"actions"`
-	Meta    *GetImagesIDActions200ApplicationJSONMeta           `json:"meta,omitempty"`
+type GetImagesIDActionsActionsResponse struct {
+	Actions []GetImagesIDActionsActionsResponseAction `json:"actions"`
+	Meta    *GetImagesIDActionsActionsResponseMeta    `json:"meta,omitempty"`
 }
 
 type GetImagesIDActionsResponse struct {
-	ActionsResponse *GetImagesIDActions200ApplicationJSONActionsResponse
+	ActionsResponse *GetImagesIDActionsActionsResponse
 	ContentType     string
 	StatusCode      int64
 }

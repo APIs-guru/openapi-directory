@@ -18,7 +18,7 @@ class PosPaymentCardDetails:
 
 @dataclass_json
 @dataclass
-class PosPaymentCashCashDetails:
+class PosPaymentCashDetails:
     amount: Optional[Any] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'amount' }})
     charge_back_amount: Optional[Any] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'charge_back_amount' }})
     
@@ -54,7 +54,7 @@ class PosPaymentSourceEnum(str, Enum):
     EXTERNAL = "external"
     OTHER = "other"
 
-class PosPaymentStatusStatusEnum(str, Enum):
+class PosPaymentStatusEnum(str, Enum):
     APPROVED = "approved"
     PENDING = "pending"
     COMPLETED = "completed"
@@ -62,7 +62,7 @@ class PosPaymentStatusStatusEnum(str, Enum):
     FAILED = "failed"
     OTHER = "other"
 
-class PosPaymentWalletStatusEnum(str, Enum):
+class PosPaymentWalletDetailsStatusEnum(str, Enum):
     AUTHORIZED = "authorized"
     CAPTURED = "captured"
     VOIDED = "voided"
@@ -72,8 +72,8 @@ class PosPaymentWalletStatusEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class PosPaymentWalletWalletDetails:
-    status: Optional[PosPaymentWalletStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+class PosPaymentWalletDetails:
+    status: Optional[PosPaymentWalletDetailsStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
     
 
 @dataclass_json
@@ -84,7 +84,7 @@ class PosPayment:
     approved: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'approved' }})
     bank_account: Optional[posbankaccount.PosBankAccount] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'bank_account' }})
     card_details: Optional[PosPaymentCardDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'card_details' }})
-    cash: Optional[PosPaymentCashCashDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cash' }})
+    cash: Optional[PosPaymentCashDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cash' }})
     change_back_cash_amount: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'change_back_cash_amount' }})
     created_at: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'created_at', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     created_by: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'created_by' }})
@@ -104,12 +104,12 @@ class PosPayment:
     service_charges: Optional[List[servicecharge.ServiceCharge]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'service_charges' }})
     source: Optional[PosPaymentSourceEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'source' }})
     source_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'source_id' }})
-    status: Optional[PosPaymentStatusStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    status: Optional[PosPaymentStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
     tax: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tax' }})
     tender_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tender_id' }})
     tip: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tip' }})
     total: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
     updated_at: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updated_at', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     updated_by: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updated_by' }})
-    wallet: Optional[PosPaymentWalletWalletDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'wallet' }})
+    wallet: Optional[PosPaymentWalletDetails] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'wallet' }})
     

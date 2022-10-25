@@ -18,7 +18,7 @@ const (
 	CableLengthUnitValueEnumIn CableLengthUnitValueEnum = "in"
 )
 
-type CableLengthUnitLengthUnit struct {
+type CableLengthUnit struct {
 	Label CableLengthUnitLabelEnum `json:"label"`
 	Value CableLengthUnitValueEnum `json:"value"`
 }
@@ -39,48 +39,48 @@ const (
 	CableStatusValueEnumDecommissioning CableStatusValueEnum = "decommissioning"
 )
 
-type CableStatusStatus struct {
+type CableStatus struct {
 	Label CableStatusLabelEnum `json:"label"`
 	Value CableStatusValueEnum `json:"value"`
 }
 
-type CableTypeTypeEnum string
+type CableTypeEnum string
 
 const (
-	CableTypeTypeEnumCat3       CableTypeTypeEnum = "cat3"
-	CableTypeTypeEnumCat5       CableTypeTypeEnum = "cat5"
-	CableTypeTypeEnumCat5e      CableTypeTypeEnum = "cat5e"
-	CableTypeTypeEnumCat6       CableTypeTypeEnum = "cat6"
-	CableTypeTypeEnumCat6a      CableTypeTypeEnum = "cat6a"
-	CableTypeTypeEnumCat7       CableTypeTypeEnum = "cat7"
-	CableTypeTypeEnumDacActive  CableTypeTypeEnum = "dac-active"
-	CableTypeTypeEnumDacPassive CableTypeTypeEnum = "dac-passive"
-	CableTypeTypeEnumMrj21Trunk CableTypeTypeEnum = "mrj21-trunk"
-	CableTypeTypeEnumCoaxial    CableTypeTypeEnum = "coaxial"
-	CableTypeTypeEnumMmf        CableTypeTypeEnum = "mmf"
-	CableTypeTypeEnumMmfOm1     CableTypeTypeEnum = "mmf-om1"
-	CableTypeTypeEnumMmfOm2     CableTypeTypeEnum = "mmf-om2"
-	CableTypeTypeEnumMmfOm3     CableTypeTypeEnum = "mmf-om3"
-	CableTypeTypeEnumMmfOm4     CableTypeTypeEnum = "mmf-om4"
-	CableTypeTypeEnumSmf        CableTypeTypeEnum = "smf"
-	CableTypeTypeEnumSmfOs1     CableTypeTypeEnum = "smf-os1"
-	CableTypeTypeEnumSmfOs2     CableTypeTypeEnum = "smf-os2"
-	CableTypeTypeEnumAoc        CableTypeTypeEnum = "aoc"
-	CableTypeTypeEnumPower      CableTypeTypeEnum = "power"
+	CableTypeEnumCat3       CableTypeEnum = "cat3"
+	CableTypeEnumCat5       CableTypeEnum = "cat5"
+	CableTypeEnumCat5e      CableTypeEnum = "cat5e"
+	CableTypeEnumCat6       CableTypeEnum = "cat6"
+	CableTypeEnumCat6a      CableTypeEnum = "cat6a"
+	CableTypeEnumCat7       CableTypeEnum = "cat7"
+	CableTypeEnumDacActive  CableTypeEnum = "dac-active"
+	CableTypeEnumDacPassive CableTypeEnum = "dac-passive"
+	CableTypeEnumMrj21Trunk CableTypeEnum = "mrj21-trunk"
+	CableTypeEnumCoaxial    CableTypeEnum = "coaxial"
+	CableTypeEnumMmf        CableTypeEnum = "mmf"
+	CableTypeEnumMmfOm1     CableTypeEnum = "mmf-om1"
+	CableTypeEnumMmfOm2     CableTypeEnum = "mmf-om2"
+	CableTypeEnumMmfOm3     CableTypeEnum = "mmf-om3"
+	CableTypeEnumMmfOm4     CableTypeEnum = "mmf-om4"
+	CableTypeEnumSmf        CableTypeEnum = "smf"
+	CableTypeEnumSmfOs1     CableTypeEnum = "smf-os1"
+	CableTypeEnumSmfOs2     CableTypeEnum = "smf-os2"
+	CableTypeEnumAoc        CableTypeEnum = "aoc"
+	CableTypeEnumPower      CableTypeEnum = "power"
 )
 
 type Cable struct {
-	Color            *string                    `json:"color,omitempty"`
-	ID               *int64                     `json:"id,omitempty"`
-	Label            *string                    `json:"label,omitempty"`
-	Length           *int64                     `json:"length,omitempty"`
-	LengthUnit       *CableLengthUnitLengthUnit `json:"length_unit,omitempty"`
-	Status           *CableStatusStatus         `json:"status,omitempty"`
-	TerminationA     map[string]string          `json:"termination_a,omitempty"`
-	TerminationAID   int64                      `json:"termination_a_id"`
-	TerminationAType string                     `json:"termination_a_type"`
-	TerminationB     map[string]string          `json:"termination_b,omitempty"`
-	TerminationBID   int64                      `json:"termination_b_id"`
-	TerminationBType string                     `json:"termination_b_type"`
-	Type             *CableTypeTypeEnum         `json:"type,omitempty"`
+	Color            *string           `json:"color,omitempty"`
+	ID               *int64            `json:"id,omitempty"`
+	Label            *string           `json:"label,omitempty"`
+	Length           *int64            `json:"length,omitempty"`
+	LengthUnit       *CableLengthUnit  `json:"length_unit,omitempty"`
+	Status           *CableStatus      `json:"status,omitempty"`
+	TerminationA     map[string]string `json:"termination_a,omitempty"`
+	TerminationAID   int64             `json:"termination_a_id"`
+	TerminationAType string            `json:"termination_a_type"`
+	TerminationB     map[string]string `json:"termination_b,omitempty"`
+	TerminationBID   int64             `json:"termination_b_id"`
+	TerminationBType string            `json:"termination_b_type"`
+	Type             *CableTypeEnum    `json:"type,omitempty"`
 }

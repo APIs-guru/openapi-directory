@@ -12,7 +12,7 @@ class UpdateRatePlanPathParams:
     
 
 @dataclass
-class UpdateRatePlanRequestBodyUpdateRatePlanRequest:
+class UpdateRatePlanUpdateRatePlanRequest:
     friendly_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
     unique_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'UniqueName' }})
     
@@ -26,7 +26,7 @@ class UpdateRatePlanSecurity:
 class UpdateRatePlanRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateRatePlanPathParams = field(default=None)
-    request: Optional[UpdateRatePlanRequestBodyUpdateRatePlanRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateRatePlanUpdateRatePlanRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateRatePlanSecurity = field(default=None)
     
 

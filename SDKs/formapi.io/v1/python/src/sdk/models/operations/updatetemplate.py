@@ -7,7 +7,7 @@ from dataclasses_json import dataclass_json
 class UpdateTemplatePathParams:
     template_id: str = field(default=None, metadata={'path_param': { 'field_name': 'template_id', 'style': 'simple', 'explode': False }})
     
-class UpdateTemplateRequestBodyTemplateExpirationIntervalEnum(str, Enum):
+class UpdateTemplateUpdateTemplateDataTemplateDataExpirationIntervalEnum(str, Enum):
     MINUTES = "minutes"
     HOURS = "hours"
     DAYS = "days"
@@ -15,11 +15,11 @@ class UpdateTemplateRequestBodyTemplateExpirationIntervalEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class UpdateTemplateRequestBodyTemplateTemplateData:
+class UpdateTemplateUpdateTemplateDataTemplateData:
     allow_additional_properties: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'allow_additional_properties' }})
     description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
     editable_submissions: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'editable_submissions' }})
-    expiration_interval: Optional[UpdateTemplateRequestBodyTemplateExpirationIntervalEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'expiration_interval' }})
+    expiration_interval: Optional[UpdateTemplateUpdateTemplateDataTemplateDataExpirationIntervalEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'expiration_interval' }})
     expire_after: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'expire_after' }})
     expire_submissions: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'expire_submissions' }})
     footer_html: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'footer_html' }})
@@ -36,8 +36,8 @@ class UpdateTemplateRequestBodyTemplateTemplateData:
 
 @dataclass_json
 @dataclass
-class UpdateTemplateRequestBodyUpdateTemplateData:
-    template: UpdateTemplateRequestBodyTemplateTemplateData = field(default=None, metadata={'dataclasses_json': { 'field_name': 'template' }})
+class UpdateTemplateUpdateTemplateData:
+    template: UpdateTemplateUpdateTemplateDataTemplateData = field(default=None, metadata={'dataclasses_json': { 'field_name': 'template' }})
     
 
 @dataclass
@@ -48,24 +48,24 @@ class UpdateTemplateSecurity:
 @dataclass
 class UpdateTemplateRequest:
     path_params: UpdateTemplatePathParams = field(default=None)
-    request: UpdateTemplateRequestBodyUpdateTemplateData = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: UpdateTemplateUpdateTemplateData = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     security: UpdateTemplateSecurity = field(default=None)
     
-class UpdateTemplate200ApplicationJSONStatusEnum(str, Enum):
+class UpdateTemplateUpdateTemplateResponseStatusEnum(str, Enum):
     SUCCESS = "success"
     ERROR = "error"
 
 
 @dataclass_json
 @dataclass
-class UpdateTemplate200ApplicationJSONUpdateTemplateResponse:
+class UpdateTemplateUpdateTemplateResponse:
     errors: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'errors' }})
-    status: UpdateTemplate200ApplicationJSONStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    status: UpdateTemplateUpdateTemplateResponseStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
     
 
 @dataclass
 class UpdateTemplateResponse:
     content_type: str = field(default=None)
     status_code: int = field(default=None)
-    update_template_response: Optional[UpdateTemplate200ApplicationJSONUpdateTemplateResponse] = field(default=None)
+    update_template_response: Optional[UpdateTemplateUpdateTemplateResponse] = field(default=None)
     

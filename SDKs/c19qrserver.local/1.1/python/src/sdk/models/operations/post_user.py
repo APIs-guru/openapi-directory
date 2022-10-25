@@ -6,7 +6,7 @@ from sdk.models import shared
 
 @dataclass_json
 @dataclass
-class PostUserRequestBodySample:
+class PostUserSample:
     admin: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'admin' }})
     email: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'email' }})
     name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
@@ -15,7 +15,7 @@ class PostUserRequestBodySample:
 
 @dataclass
 class PostUserRequest:
-    request: PostUserRequestBodySample = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: PostUserSample = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass

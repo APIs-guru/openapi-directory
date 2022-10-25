@@ -6,7 +6,7 @@ from . import delivery
 from . import tax
 from . import tax
 
-class InvoiceLineQuantityUnitCodeQuantityUnitCodeEnum(str, Enum):
+class InvoiceLineQuantityUnitCodeEnum(str, Enum):
     TEN = "10"
     ELEVEN = "11"
     THIRTEEN = "13"
@@ -2502,7 +2502,7 @@ class InvoiceLine:
     name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
     order_line_reference_line_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'orderLineReferenceLineId' }})
     quantity: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'quantity' }})
-    quantity_unit_code: Optional[InvoiceLineQuantityUnitCodeQuantityUnitCodeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'quantityUnitCode' }})
+    quantity_unit_code: Optional[InvoiceLineQuantityUnitCodeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'quantityUnitCode' }})
     sellers_item_identification: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sellersItemIdentification' }})
     standard_item_identification: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'standardItemIdentification' }})
     standard_item_identification_scheme_agency_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'standardItemIdentificationSchemeAgencyId' }})

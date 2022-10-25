@@ -34,7 +34,7 @@ class ListServiceBindingRequest:
 
 @dataclass_json
 @dataclass
-class ListServiceBinding200ApplicationJSONMeta:
+class ListServiceBindingListServiceBindingResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -46,14 +46,14 @@ class ListServiceBinding200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListServiceBinding200ApplicationJSONListServiceBindingResponse:
+class ListServiceBindingListServiceBindingResponse:
     bindings: Optional[List[shared.ConversationsV1ServiceServiceBinding]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'bindings' }})
-    meta: Optional[ListServiceBinding200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+    meta: Optional[ListServiceBindingListServiceBindingResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     
 
 @dataclass
 class ListServiceBindingResponse:
     content_type: str = field(default=None)
-    list_service_binding_response: Optional[ListServiceBinding200ApplicationJSONListServiceBindingResponse] = field(default=None)
+    list_service_binding_response: Optional[ListServiceBindingListServiceBindingResponse] = field(default=None)
     status_code: int = field(default=None)
     

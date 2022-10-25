@@ -15,7 +15,7 @@ type UpdateServiceUserConversationPathParams struct {
 	UserSid         string `pathParam:"style=simple,explode=false,name=UserSid"`
 }
 
-type UpdateServiceUserConversationRequestBodyUpdateServiceUserConversationRequest struct {
+type UpdateServiceUserConversationUpdateServiceUserConversationRequest struct {
 	LastReadMessageIndex *int64                                                   `form:"name=LastReadMessageIndex"`
 	LastReadTimestamp    *time.Time                                               `form:"name=LastReadTimestamp"`
 	NotificationLevel    *shared.ServiceUserConversationEnumNotificationLevelEnum `form:"name=NotificationLevel"`
@@ -28,7 +28,7 @@ type UpdateServiceUserConversationSecurity struct {
 type UpdateServiceUserConversationRequest struct {
 	ServerURL  *string
 	PathParams UpdateServiceUserConversationPathParams
-	Request    *UpdateServiceUserConversationRequestBodyUpdateServiceUserConversationRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateServiceUserConversationUpdateServiceUserConversationRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateServiceUserConversationSecurity
 }
 

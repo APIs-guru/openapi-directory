@@ -7,7 +7,7 @@ CREATE_FLOW_SERVERS = [
 
 
 @dataclass
-class CreateFlowRequestBodyCreateFlowRequest:
+class CreateFlowCreateFlowRequest:
     commit_message: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'CommitMessage' }})
     definition: Any = field(default=None, metadata={'form': { 'field_name': 'Definition' }})
     friendly_name: str = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
@@ -22,7 +22,7 @@ class CreateFlowSecurity:
 @dataclass
 class CreateFlowRequest:
     server_url: Optional[str] = field(default=None)
-    request: Optional[CreateFlowRequestBodyCreateFlowRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateFlowCreateFlowRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateFlowSecurity = field(default=None)
     
 

@@ -4,7 +4,7 @@ import (
 	"time"
 )
 
-type IssueCommentUserSimpleUser struct {
+type IssueCommentSimpleUser struct {
 	AvatarURL         string  `json:"avatar_url"`
 	EventsURL         string  `json:"events_url"`
 	FollowersURL      string  `json:"followers_url"`
@@ -27,18 +27,18 @@ type IssueCommentUserSimpleUser struct {
 }
 
 type IssueComment struct {
-	AuthorAssociation     AuthorAssociationEnum      `json:"author_association"`
-	Body                  *string                    `json:"body,omitempty"`
-	BodyHTML              *string                    `json:"body_html,omitempty"`
-	BodyText              *string                    `json:"body_text,omitempty"`
-	CreatedAt             time.Time                  `json:"created_at"`
-	HTMLURL               string                     `json:"html_url"`
-	ID                    int64                      `json:"id"`
-	IssueURL              string                     `json:"issue_url"`
-	NodeID                string                     `json:"node_id"`
-	PerformedViaGithubApp map[string]interface{}     `json:"performed_via_github_app,omitempty"`
-	Reactions             *ReactionRollup            `json:"reactions,omitempty"`
-	UpdatedAt             time.Time                  `json:"updated_at"`
-	URL                   string                     `json:"url"`
-	User                  IssueCommentUserSimpleUser `json:"user"`
+	AuthorAssociation     AuthorAssociationEnum  `json:"author_association"`
+	Body                  *string                `json:"body,omitempty"`
+	BodyHTML              *string                `json:"body_html,omitempty"`
+	BodyText              *string                `json:"body_text,omitempty"`
+	CreatedAt             time.Time              `json:"created_at"`
+	HTMLURL               string                 `json:"html_url"`
+	ID                    int64                  `json:"id"`
+	IssueURL              string                 `json:"issue_url"`
+	NodeID                string                 `json:"node_id"`
+	PerformedViaGithubApp map[string]interface{} `json:"performed_via_github_app,omitempty"`
+	Reactions             *ReactionRollup        `json:"reactions,omitempty"`
+	UpdatedAt             time.Time              `json:"updated_at"`
+	URL                   string                 `json:"url"`
+	User                  IssueCommentSimpleUser `json:"user"`
 }

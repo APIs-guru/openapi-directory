@@ -30,7 +30,7 @@ type ListUnderstandQueryRequest struct {
 	Security    ListUnderstandQuerySecurity
 }
 
-type ListUnderstandQuery200ApplicationJSONMeta struct {
+type ListUnderstandQueryListUnderstandQueryResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -40,13 +40,13 @@ type ListUnderstandQuery200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListUnderstandQuery200ApplicationJSONListUnderstandQueryResponse struct {
-	Meta    *ListUnderstandQuery200ApplicationJSONMeta `json:"meta,omitempty"`
-	Queries []shared.PreviewUnderstandAssistantQuery   `json:"queries,omitempty"`
+type ListUnderstandQueryListUnderstandQueryResponse struct {
+	Meta    *ListUnderstandQueryListUnderstandQueryResponseMeta `json:"meta,omitempty"`
+	Queries []shared.PreviewUnderstandAssistantQuery            `json:"queries,omitempty"`
 }
 
 type ListUnderstandQueryResponse struct {
 	ContentType                 string
-	ListUnderstandQueryResponse *ListUnderstandQuery200ApplicationJSONListUnderstandQueryResponse
+	ListUnderstandQueryResponse *ListUnderstandQueryListUnderstandQueryResponse
 	StatusCode                  int64
 }

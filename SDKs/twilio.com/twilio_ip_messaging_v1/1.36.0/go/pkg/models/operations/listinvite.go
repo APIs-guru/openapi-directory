@@ -29,7 +29,7 @@ type ListInviteRequest struct {
 	Security    ListInviteSecurity
 }
 
-type ListInvite200ApplicationJSONMeta struct {
+type ListInviteListInviteResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -39,13 +39,13 @@ type ListInvite200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListInvite200ApplicationJSONListInviteResponse struct {
+type ListInviteListInviteResponse struct {
 	Invites []shared.IPMessagingV1ServiceChannelInvite `json:"invites,omitempty"`
-	Meta    *ListInvite200ApplicationJSONMeta          `json:"meta,omitempty"`
+	Meta    *ListInviteListInviteResponseMeta          `json:"meta,omitempty"`
 }
 
 type ListInviteResponse struct {
 	ContentType        string
-	ListInviteResponse *ListInvite200ApplicationJSONListInviteResponse
+	ListInviteResponse *ListInviteListInviteResponse
 	StatusCode         int64
 }

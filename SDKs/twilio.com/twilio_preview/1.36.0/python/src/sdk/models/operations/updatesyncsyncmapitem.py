@@ -19,7 +19,7 @@ class UpdateSyncSyncMapItemHeaders:
     
 
 @dataclass
-class UpdateSyncSyncMapItemRequestBodyUpdateSyncSyncMapItemRequest:
+class UpdateSyncSyncMapItemUpdateSyncSyncMapItemRequest:
     data: Any = field(default=None, metadata={'form': { 'field_name': 'Data' }})
     
 
@@ -33,7 +33,7 @@ class UpdateSyncSyncMapItemRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateSyncSyncMapItemPathParams = field(default=None)
     headers: UpdateSyncSyncMapItemHeaders = field(default=None)
-    request: Optional[UpdateSyncSyncMapItemRequestBodyUpdateSyncSyncMapItemRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateSyncSyncMapItemUpdateSyncSyncMapItemRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateSyncSyncMapItemSecurity = field(default=None)
     
 

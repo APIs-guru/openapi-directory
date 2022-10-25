@@ -8,38 +8,38 @@ var CreateFleetServers = []string{
 	"https://supersim.twilio.com",
 }
 
-type CreateFleetRequestBodyIPCommandsMethodEnum string
+type CreateFleetCreateFleetRequestIPCommandsMethodEnum string
 
 const (
-	CreateFleetRequestBodyIPCommandsMethodEnumHead   CreateFleetRequestBodyIPCommandsMethodEnum = "HEAD"
-	CreateFleetRequestBodyIPCommandsMethodEnumGet    CreateFleetRequestBodyIPCommandsMethodEnum = "GET"
-	CreateFleetRequestBodyIPCommandsMethodEnumPost   CreateFleetRequestBodyIPCommandsMethodEnum = "POST"
-	CreateFleetRequestBodyIPCommandsMethodEnumPatch  CreateFleetRequestBodyIPCommandsMethodEnum = "PATCH"
-	CreateFleetRequestBodyIPCommandsMethodEnumPut    CreateFleetRequestBodyIPCommandsMethodEnum = "PUT"
-	CreateFleetRequestBodyIPCommandsMethodEnumDelete CreateFleetRequestBodyIPCommandsMethodEnum = "DELETE"
+	CreateFleetCreateFleetRequestIPCommandsMethodEnumHead   CreateFleetCreateFleetRequestIPCommandsMethodEnum = "HEAD"
+	CreateFleetCreateFleetRequestIPCommandsMethodEnumGet    CreateFleetCreateFleetRequestIPCommandsMethodEnum = "GET"
+	CreateFleetCreateFleetRequestIPCommandsMethodEnumPost   CreateFleetCreateFleetRequestIPCommandsMethodEnum = "POST"
+	CreateFleetCreateFleetRequestIPCommandsMethodEnumPatch  CreateFleetCreateFleetRequestIPCommandsMethodEnum = "PATCH"
+	CreateFleetCreateFleetRequestIPCommandsMethodEnumPut    CreateFleetCreateFleetRequestIPCommandsMethodEnum = "PUT"
+	CreateFleetCreateFleetRequestIPCommandsMethodEnumDelete CreateFleetCreateFleetRequestIPCommandsMethodEnum = "DELETE"
 )
 
-type CreateFleetRequestBodySmsCommandsMethodEnum string
+type CreateFleetCreateFleetRequestSmsCommandsMethodEnum string
 
 const (
-	CreateFleetRequestBodySmsCommandsMethodEnumHead   CreateFleetRequestBodySmsCommandsMethodEnum = "HEAD"
-	CreateFleetRequestBodySmsCommandsMethodEnumGet    CreateFleetRequestBodySmsCommandsMethodEnum = "GET"
-	CreateFleetRequestBodySmsCommandsMethodEnumPost   CreateFleetRequestBodySmsCommandsMethodEnum = "POST"
-	CreateFleetRequestBodySmsCommandsMethodEnumPatch  CreateFleetRequestBodySmsCommandsMethodEnum = "PATCH"
-	CreateFleetRequestBodySmsCommandsMethodEnumPut    CreateFleetRequestBodySmsCommandsMethodEnum = "PUT"
-	CreateFleetRequestBodySmsCommandsMethodEnumDelete CreateFleetRequestBodySmsCommandsMethodEnum = "DELETE"
+	CreateFleetCreateFleetRequestSmsCommandsMethodEnumHead   CreateFleetCreateFleetRequestSmsCommandsMethodEnum = "HEAD"
+	CreateFleetCreateFleetRequestSmsCommandsMethodEnumGet    CreateFleetCreateFleetRequestSmsCommandsMethodEnum = "GET"
+	CreateFleetCreateFleetRequestSmsCommandsMethodEnumPost   CreateFleetCreateFleetRequestSmsCommandsMethodEnum = "POST"
+	CreateFleetCreateFleetRequestSmsCommandsMethodEnumPatch  CreateFleetCreateFleetRequestSmsCommandsMethodEnum = "PATCH"
+	CreateFleetCreateFleetRequestSmsCommandsMethodEnumPut    CreateFleetCreateFleetRequestSmsCommandsMethodEnum = "PUT"
+	CreateFleetCreateFleetRequestSmsCommandsMethodEnumDelete CreateFleetCreateFleetRequestSmsCommandsMethodEnum = "DELETE"
 )
 
-type CreateFleetRequestBodyCreateFleetRequest struct {
-	DataEnabled          *bool                                        `form:"name=DataEnabled"`
-	DataLimit            *int64                                       `form:"name=DataLimit"`
-	IPCommandsMethod     *CreateFleetRequestBodyIPCommandsMethodEnum  `form:"name=IpCommandsMethod"`
-	IPCommandsURL        *string                                      `form:"name=IpCommandsUrl"`
-	NetworkAccessProfile string                                       `form:"name=NetworkAccessProfile"`
-	SmsCommandsEnabled   *bool                                        `form:"name=SmsCommandsEnabled"`
-	SmsCommandsMethod    *CreateFleetRequestBodySmsCommandsMethodEnum `form:"name=SmsCommandsMethod"`
-	SmsCommandsURL       *string                                      `form:"name=SmsCommandsUrl"`
-	UniqueName           *string                                      `form:"name=UniqueName"`
+type CreateFleetCreateFleetRequest struct {
+	DataEnabled          *bool                                               `form:"name=DataEnabled"`
+	DataLimit            *int64                                              `form:"name=DataLimit"`
+	IPCommandsMethod     *CreateFleetCreateFleetRequestIPCommandsMethodEnum  `form:"name=IpCommandsMethod"`
+	IPCommandsURL        *string                                             `form:"name=IpCommandsUrl"`
+	NetworkAccessProfile string                                              `form:"name=NetworkAccessProfile"`
+	SmsCommandsEnabled   *bool                                               `form:"name=SmsCommandsEnabled"`
+	SmsCommandsMethod    *CreateFleetCreateFleetRequestSmsCommandsMethodEnum `form:"name=SmsCommandsMethod"`
+	SmsCommandsURL       *string                                             `form:"name=SmsCommandsUrl"`
+	UniqueName           *string                                             `form:"name=UniqueName"`
 }
 
 type CreateFleetSecurity struct {
@@ -48,7 +48,7 @@ type CreateFleetSecurity struct {
 
 type CreateFleetRequest struct {
 	ServerURL *string
-	Request   *CreateFleetRequestBodyCreateFleetRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request   *CreateFleetCreateFleetRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security  CreateFleetSecurity
 }
 

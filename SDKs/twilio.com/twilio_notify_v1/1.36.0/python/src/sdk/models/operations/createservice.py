@@ -7,7 +7,7 @@ CREATE_SERVICE_SERVERS = [
 
 
 @dataclass
-class CreateServiceRequestBodyCreateServiceRequest:
+class CreateServiceCreateServiceRequest:
     alexa_skill_id: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'AlexaSkillId' }})
     apn_credential_sid: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'ApnCredentialSid' }})
     default_alexa_notification_protocol_version: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'DefaultAlexaNotificationProtocolVersion' }})
@@ -32,7 +32,7 @@ class CreateServiceSecurity:
 @dataclass
 class CreateServiceRequest:
     server_url: Optional[str] = field(default=None)
-    request: Optional[CreateServiceRequestBodyCreateServiceRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateServiceCreateServiceRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateServiceSecurity = field(default=None)
     
 

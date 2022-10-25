@@ -12,7 +12,7 @@ class CreateEnvironmentPathParams:
     
 
 @dataclass
-class CreateEnvironmentRequestBodyCreateEnvironmentRequest:
+class CreateEnvironmentCreateEnvironmentRequest:
     domain_suffix: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'DomainSuffix' }})
     unique_name: str = field(default=None, metadata={'form': { 'field_name': 'UniqueName' }})
     
@@ -26,7 +26,7 @@ class CreateEnvironmentSecurity:
 class CreateEnvironmentRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateEnvironmentPathParams = field(default=None)
-    request: Optional[CreateEnvironmentRequestBodyCreateEnvironmentRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateEnvironmentCreateEnvironmentRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateEnvironmentSecurity = field(default=None)
     
 

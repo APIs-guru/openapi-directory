@@ -39,11 +39,11 @@ class GetBatchesRequest:
 
 @dataclass_json
 @dataclass
-class GetBatches200ApplicationJSONItemsResult:
+class GetBatchesBatchItemsBatchItemResult:
     code: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'code' }})
     message: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'message' }})
     
-class GetBatches200ApplicationJSONItemsStatusEnum(str, Enum):
+class GetBatchesBatchItemsBatchItemStatusEnum(str, Enum):
     SUBMITTED = "SUBMITTED"
     REMOVED = "REMOVED"
     SUCCEEDED = "SUCCEEDED"
@@ -52,7 +52,7 @@ class GetBatches200ApplicationJSONItemsStatusEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class GetBatches200ApplicationJSONItemsBatchItem:
+class GetBatchesBatchItemsBatchItem:
     amount: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'amount' }})
     amount_after_charges: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'amountAfterCharges' }})
     batch_item_uuid: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'batchItemUuid' }})
@@ -63,21 +63,21 @@ class GetBatches200ApplicationJSONItemsBatchItem:
     last_updated: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lastUpdated', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     ref: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ref' }})
     ref_id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'refId' }})
-    result: Optional[GetBatches200ApplicationJSONItemsResult] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'result' }})
-    status: Optional[GetBatches200ApplicationJSONItemsStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    result: Optional[GetBatchesBatchItemsBatchItemResult] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'result' }})
+    status: Optional[GetBatchesBatchItemsBatchItemStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
     tax_amount: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'taxAmount' }})
     
 
 @dataclass_json
 @dataclass
-class GetBatches200ApplicationJSONBatchItems:
-    items: Optional[List[GetBatches200ApplicationJSONItemsBatchItem]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'items' }})
+class GetBatchesBatchItems:
+    items: Optional[List[GetBatchesBatchItemsBatchItem]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'items' }})
     total: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total' }})
     
 
 @dataclass
 class GetBatchesResponse:
-    batch_items: Optional[GetBatches200ApplicationJSONBatchItems] = field(default=None)
+    batch_items: Optional[GetBatchesBatchItems] = field(default=None)
     content_type: str = field(default=None)
     status_code: int = field(default=None)
     

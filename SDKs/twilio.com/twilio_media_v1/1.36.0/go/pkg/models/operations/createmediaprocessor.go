@@ -8,24 +8,24 @@ var CreateMediaProcessorServers = []string{
 	"https://media.twilio.com",
 }
 
-type CreateMediaProcessorRequestBodyStatusCallbackMethodEnum string
+type CreateMediaProcessorCreateMediaProcessorRequestStatusCallbackMethodEnum string
 
 const (
-	CreateMediaProcessorRequestBodyStatusCallbackMethodEnumHead   CreateMediaProcessorRequestBodyStatusCallbackMethodEnum = "HEAD"
-	CreateMediaProcessorRequestBodyStatusCallbackMethodEnumGet    CreateMediaProcessorRequestBodyStatusCallbackMethodEnum = "GET"
-	CreateMediaProcessorRequestBodyStatusCallbackMethodEnumPost   CreateMediaProcessorRequestBodyStatusCallbackMethodEnum = "POST"
-	CreateMediaProcessorRequestBodyStatusCallbackMethodEnumPatch  CreateMediaProcessorRequestBodyStatusCallbackMethodEnum = "PATCH"
-	CreateMediaProcessorRequestBodyStatusCallbackMethodEnumPut    CreateMediaProcessorRequestBodyStatusCallbackMethodEnum = "PUT"
-	CreateMediaProcessorRequestBodyStatusCallbackMethodEnumDelete CreateMediaProcessorRequestBodyStatusCallbackMethodEnum = "DELETE"
+	CreateMediaProcessorCreateMediaProcessorRequestStatusCallbackMethodEnumHead   CreateMediaProcessorCreateMediaProcessorRequestStatusCallbackMethodEnum = "HEAD"
+	CreateMediaProcessorCreateMediaProcessorRequestStatusCallbackMethodEnumGet    CreateMediaProcessorCreateMediaProcessorRequestStatusCallbackMethodEnum = "GET"
+	CreateMediaProcessorCreateMediaProcessorRequestStatusCallbackMethodEnumPost   CreateMediaProcessorCreateMediaProcessorRequestStatusCallbackMethodEnum = "POST"
+	CreateMediaProcessorCreateMediaProcessorRequestStatusCallbackMethodEnumPatch  CreateMediaProcessorCreateMediaProcessorRequestStatusCallbackMethodEnum = "PATCH"
+	CreateMediaProcessorCreateMediaProcessorRequestStatusCallbackMethodEnumPut    CreateMediaProcessorCreateMediaProcessorRequestStatusCallbackMethodEnum = "PUT"
+	CreateMediaProcessorCreateMediaProcessorRequestStatusCallbackMethodEnumDelete CreateMediaProcessorCreateMediaProcessorRequestStatusCallbackMethodEnum = "DELETE"
 )
 
-type CreateMediaProcessorRequestBodyCreateMediaProcessorRequest struct {
-	Extension            string                                                   `form:"name=Extension"`
-	ExtensionContext     string                                                   `form:"name=ExtensionContext"`
-	ExtensionEnvironment *interface{}                                             `form:"name=ExtensionEnvironment"`
-	MaxDuration          *int64                                                   `form:"name=MaxDuration"`
-	StatusCallback       *string                                                  `form:"name=StatusCallback"`
-	StatusCallbackMethod *CreateMediaProcessorRequestBodyStatusCallbackMethodEnum `form:"name=StatusCallbackMethod"`
+type CreateMediaProcessorCreateMediaProcessorRequest struct {
+	Extension            string                                                                   `form:"name=Extension"`
+	ExtensionContext     string                                                                   `form:"name=ExtensionContext"`
+	ExtensionEnvironment *interface{}                                                             `form:"name=ExtensionEnvironment"`
+	MaxDuration          *int64                                                                   `form:"name=MaxDuration"`
+	StatusCallback       *string                                                                  `form:"name=StatusCallback"`
+	StatusCallbackMethod *CreateMediaProcessorCreateMediaProcessorRequestStatusCallbackMethodEnum `form:"name=StatusCallbackMethod"`
 }
 
 type CreateMediaProcessorSecurity struct {
@@ -34,7 +34,7 @@ type CreateMediaProcessorSecurity struct {
 
 type CreateMediaProcessorRequest struct {
 	ServerURL *string
-	Request   *CreateMediaProcessorRequestBodyCreateMediaProcessorRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request   *CreateMediaProcessorCreateMediaProcessorRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security  CreateMediaProcessorSecurity
 }
 

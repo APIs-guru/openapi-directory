@@ -16,7 +16,7 @@ class OnereturnsPutResponses201ContentApplication1jsonSchemaItems:
 
 @dataclass_json
 @dataclass
-class OnereturnsPutResponses201ContentApplication1jsonSchemaRecipientIsoIsoCountryV2:
+class OnereturnsPutResponses201ContentApplication1jsonSchemaConsigneeV2IsoCountryV2:
     id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     iso2: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'iso2' }})
     name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
@@ -24,7 +24,7 @@ class OnereturnsPutResponses201ContentApplication1jsonSchemaRecipientIsoIsoCount
 
 @dataclass_json
 @dataclass
-class OnereturnsPutResponses201ContentApplication1jsonSchemaRecipientConsigneeV2:
+class OnereturnsPutResponses201ContentApplication1jsonSchemaConsigneeV2:
     address1: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'address1' }})
     address2: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'address2' }})
     address_locality: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'addressLocality' }})
@@ -34,7 +34,7 @@ class OnereturnsPutResponses201ContentApplication1jsonSchemaRecipientConsigneeV2
     email: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'email' }})
     first_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'firstName' }})
     id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    iso: Optional[OnereturnsPutResponses201ContentApplication1jsonSchemaRecipientIsoIsoCountryV2] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'iso' }})
+    iso: Optional[OnereturnsPutResponses201ContentApplication1jsonSchemaConsigneeV2IsoCountryV2] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'iso' }})
     last_name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'lastName' }})
     phone: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'phone' }})
     postal_code: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'postalCode' }})
@@ -47,6 +47,6 @@ class OnereturnsPutResponses201ContentApplication1jsonSchemaRecipientConsigneeV2
 class OnereturnsPutResponses201ContentApplication1jsonSchema:
     items: List[OnereturnsPutResponses201ContentApplication1jsonSchemaItems] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'items' }})
     merchant_order_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'merchantOrderId' }})
-    recipient: OnereturnsPutResponses201ContentApplication1jsonSchemaRecipientConsigneeV2 = field(default=None, metadata={'dataclasses_json': { 'field_name': 'recipient' }})
+    recipient: OnereturnsPutResponses201ContentApplication1jsonSchemaConsigneeV2 = field(default=None, metadata={'dataclasses_json': { 'field_name': 'recipient' }})
     rma_number: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rmaNumber' }})
     

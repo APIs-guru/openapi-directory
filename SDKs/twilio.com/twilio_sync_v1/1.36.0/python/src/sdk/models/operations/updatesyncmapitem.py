@@ -19,7 +19,7 @@ class UpdateSyncMapItemHeaders:
     
 
 @dataclass
-class UpdateSyncMapItemRequestBodyUpdateSyncMapItemRequest:
+class UpdateSyncMapItemUpdateSyncMapItemRequest:
     collection_ttl: Optional[int] = field(default=None, metadata={'form': { 'field_name': 'CollectionTtl' }})
     data: Optional[Any] = field(default=None, metadata={'form': { 'field_name': 'Data' }})
     item_ttl: Optional[int] = field(default=None, metadata={'form': { 'field_name': 'ItemTtl' }})
@@ -36,7 +36,7 @@ class UpdateSyncMapItemRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateSyncMapItemPathParams = field(default=None)
     headers: UpdateSyncMapItemHeaders = field(default=None)
-    request: Optional[UpdateSyncMapItemRequestBodyUpdateSyncMapItemRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateSyncMapItemUpdateSyncMapItemRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateSyncMapItemSecurity = field(default=None)
     
 

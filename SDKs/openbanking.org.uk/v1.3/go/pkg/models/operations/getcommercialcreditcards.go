@@ -13,127 +13,127 @@ type GetCommercialCreditCardsRequest struct {
 	Headers GetCommercialCreditCardsHeaders
 }
 
-type GetCommercialCreditCards400ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnum string
+type GetCommercialCreditCards400ErrorObjectDescriptionEnum string
 
 const (
-	GetCommercialCreditCards400ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnumYouHaveSentARequestWhichCouldNotBeUnderstood GetCommercialCreditCards400ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnum = "You have sent a request which could not be understood."
+	GetCommercialCreditCards400ErrorObjectDescriptionEnumYouHaveSentARequestWhichCouldNotBeUnderstood GetCommercialCreditCards400ErrorObjectDescriptionEnum = "You have sent a request which could not be understood."
 )
 
-type GetCommercialCreditCards400ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnum string
+type GetCommercialCreditCards400ErrorObjectStatusEnum string
 
 const (
-	GetCommercialCreditCards400ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnumFourHundred GetCommercialCreditCards400ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnum = "400"
+	GetCommercialCreditCards400ErrorObjectStatusEnumFourHundred GetCommercialCreditCards400ErrorObjectStatusEnum = "400"
 )
 
-type GetCommercialCreditCards400ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnum string
+type GetCommercialCreditCards400ErrorObjectTitleEnum string
 
 const (
-	GetCommercialCreditCards400ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnumBadRequest GetCommercialCreditCards400ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnum = "Bad request"
+	GetCommercialCreditCards400ErrorObjectTitleEnumBadRequest GetCommercialCreditCards400ErrorObjectTitleEnum = "Bad request"
 )
 
-type GetCommercialCreditCards400ApplicationPrsOpenbankingOpendataV13PlusJSON400ErrorObject struct {
-	Description GetCommercialCreditCards400ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnum `json:"description"`
-	Status      GetCommercialCreditCards400ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnum      `json:"status"`
-	Title       GetCommercialCreditCards400ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnum       `json:"title"`
+type GetCommercialCreditCards400ErrorObject struct {
+	Description GetCommercialCreditCards400ErrorObjectDescriptionEnum `json:"description"`
+	Status      GetCommercialCreditCards400ErrorObjectStatusEnum      `json:"status"`
+	Title       GetCommercialCreditCards400ErrorObjectTitleEnum       `json:"title"`
 }
 
-type GetCommercialCreditCards408ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnum string
+type GetCommercialCreditCards408ErrorObjectDescriptionEnum string
 
 const (
-	GetCommercialCreditCards408ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnumYourClientHasFailedToSubmitARequestAndATimeoutHasOccurred GetCommercialCreditCards408ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnum = "Your client has failed to submit a request, and a timeout has occurred."
+	GetCommercialCreditCards408ErrorObjectDescriptionEnumYourClientHasFailedToSubmitARequestAndATimeoutHasOccurred GetCommercialCreditCards408ErrorObjectDescriptionEnum = "Your client has failed to submit a request, and a timeout has occurred."
 )
 
-type GetCommercialCreditCards408ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnum string
+type GetCommercialCreditCards408ErrorObjectStatusEnum string
 
 const (
-	GetCommercialCreditCards408ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnumFourHundredAndEight GetCommercialCreditCards408ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnum = "408"
+	GetCommercialCreditCards408ErrorObjectStatusEnumFourHundredAndEight GetCommercialCreditCards408ErrorObjectStatusEnum = "408"
 )
 
-type GetCommercialCreditCards408ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnum string
+type GetCommercialCreditCards408ErrorObjectTitleEnum string
 
 const (
-	GetCommercialCreditCards408ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnumClientTimeout GetCommercialCreditCards408ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnum = "Client timeout"
+	GetCommercialCreditCards408ErrorObjectTitleEnumClientTimeout GetCommercialCreditCards408ErrorObjectTitleEnum = "Client timeout"
 )
 
-type GetCommercialCreditCards408ApplicationPrsOpenbankingOpendataV13PlusJSON408ErrorObject struct {
-	Description GetCommercialCreditCards408ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnum `json:"description"`
-	Status      GetCommercialCreditCards408ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnum      `json:"status"`
-	Title       GetCommercialCreditCards408ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnum       `json:"title"`
+type GetCommercialCreditCards408ErrorObject struct {
+	Description GetCommercialCreditCards408ErrorObjectDescriptionEnum `json:"description"`
+	Status      GetCommercialCreditCards408ErrorObjectStatusEnum      `json:"status"`
+	Title       GetCommercialCreditCards408ErrorObjectTitleEnum       `json:"title"`
 }
 
-type GetCommercialCreditCards429ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnum string
+type GetCommercialCreditCards429ErrorObjectDescriptionEnum string
 
 const (
-	GetCommercialCreditCards429ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnumYouHaveRequestedThisResourceTooOftenSlowDown GetCommercialCreditCards429ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnum = "You have requested this resource too often. Slow down."
+	GetCommercialCreditCards429ErrorObjectDescriptionEnumYouHaveRequestedThisResourceTooOftenSlowDown GetCommercialCreditCards429ErrorObjectDescriptionEnum = "You have requested this resource too often. Slow down."
 )
 
-type GetCommercialCreditCards429ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnum string
+type GetCommercialCreditCards429ErrorObjectStatusEnum string
 
 const (
-	GetCommercialCreditCards429ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnumFourHundredAndTwentyNine GetCommercialCreditCards429ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnum = "429"
+	GetCommercialCreditCards429ErrorObjectStatusEnumFourHundredAndTwentyNine GetCommercialCreditCards429ErrorObjectStatusEnum = "429"
 )
 
-type GetCommercialCreditCards429ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnum string
+type GetCommercialCreditCards429ErrorObjectTitleEnum string
 
 const (
-	GetCommercialCreditCards429ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnumTooManyRequests GetCommercialCreditCards429ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnum = "Too many requests"
+	GetCommercialCreditCards429ErrorObjectTitleEnumTooManyRequests GetCommercialCreditCards429ErrorObjectTitleEnum = "Too many requests"
 )
 
-type GetCommercialCreditCards429ApplicationPrsOpenbankingOpendataV13PlusJSON429ErrorObject struct {
-	Description GetCommercialCreditCards429ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnum `json:"description"`
-	Status      GetCommercialCreditCards429ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnum      `json:"status"`
-	Title       GetCommercialCreditCards429ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnum       `json:"title"`
+type GetCommercialCreditCards429ErrorObject struct {
+	Description GetCommercialCreditCards429ErrorObjectDescriptionEnum `json:"description"`
+	Status      GetCommercialCreditCards429ErrorObjectStatusEnum      `json:"status"`
+	Title       GetCommercialCreditCards429ErrorObjectTitleEnum       `json:"title"`
 }
 
-type GetCommercialCreditCards500ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnum string
+type GetCommercialCreditCards500ErrorObjectDescriptionEnum string
 
 const (
-	GetCommercialCreditCards500ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnumAnErrorOccurredOnTheServerNoFurtherInformationIsAvailable GetCommercialCreditCards500ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnum = "An error occurred on the server. No further information is available."
+	GetCommercialCreditCards500ErrorObjectDescriptionEnumAnErrorOccurredOnTheServerNoFurtherInformationIsAvailable GetCommercialCreditCards500ErrorObjectDescriptionEnum = "An error occurred on the server. No further information is available."
 )
 
-type GetCommercialCreditCards500ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnum string
+type GetCommercialCreditCards500ErrorObjectStatusEnum string
 
 const (
-	GetCommercialCreditCards500ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnumFiveHundred GetCommercialCreditCards500ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnum = "500"
+	GetCommercialCreditCards500ErrorObjectStatusEnumFiveHundred GetCommercialCreditCards500ErrorObjectStatusEnum = "500"
 )
 
-type GetCommercialCreditCards500ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnum string
+type GetCommercialCreditCards500ErrorObjectTitleEnum string
 
 const (
-	GetCommercialCreditCards500ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnumInternalServerError GetCommercialCreditCards500ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnum = "Internal server error"
+	GetCommercialCreditCards500ErrorObjectTitleEnumInternalServerError GetCommercialCreditCards500ErrorObjectTitleEnum = "Internal server error"
 )
 
-type GetCommercialCreditCards500ApplicationPrsOpenbankingOpendataV13PlusJSON500ErrorObject struct {
-	Description GetCommercialCreditCards500ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnum `json:"description"`
-	Status      GetCommercialCreditCards500ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnum      `json:"status"`
-	Title       GetCommercialCreditCards500ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnum       `json:"title"`
+type GetCommercialCreditCards500ErrorObject struct {
+	Description GetCommercialCreditCards500ErrorObjectDescriptionEnum `json:"description"`
+	Status      GetCommercialCreditCards500ErrorObjectStatusEnum      `json:"status"`
+	Title       GetCommercialCreditCards500ErrorObjectTitleEnum       `json:"title"`
 }
 
-type GetCommercialCreditCards503ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnum string
+type GetCommercialCreditCards503ErrorObjectDescriptionEnum string
 
 const (
-	GetCommercialCreditCards503ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnumTheServiceIsTemporarilyUnavailable GetCommercialCreditCards503ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnum = "The service is temporarily unavailable."
+	GetCommercialCreditCards503ErrorObjectDescriptionEnumTheServiceIsTemporarilyUnavailable GetCommercialCreditCards503ErrorObjectDescriptionEnum = "The service is temporarily unavailable."
 )
 
-type GetCommercialCreditCards503ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnum string
+type GetCommercialCreditCards503ErrorObjectStatusEnum string
 
 const (
-	GetCommercialCreditCards503ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnumFiveHundredAndThree GetCommercialCreditCards503ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnum = "503"
+	GetCommercialCreditCards503ErrorObjectStatusEnumFiveHundredAndThree GetCommercialCreditCards503ErrorObjectStatusEnum = "503"
 )
 
-type GetCommercialCreditCards503ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnum string
+type GetCommercialCreditCards503ErrorObjectTitleEnum string
 
 const (
-	GetCommercialCreditCards503ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnumServiceTemporarilyUnavailable GetCommercialCreditCards503ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnum = "Service temporarily unavailable"
+	GetCommercialCreditCards503ErrorObjectTitleEnumServiceTemporarilyUnavailable GetCommercialCreditCards503ErrorObjectTitleEnum = "Service temporarily unavailable"
 )
 
-type GetCommercialCreditCards503ApplicationPrsOpenbankingOpendataV13PlusJSON503ErrorObject struct {
-	Description GetCommercialCreditCards503ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnum `json:"description"`
-	Status      GetCommercialCreditCards503ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnum      `json:"status"`
-	Title       GetCommercialCreditCards503ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnum       `json:"title"`
+type GetCommercialCreditCards503ErrorObject struct {
+	Description GetCommercialCreditCards503ErrorObjectDescriptionEnum `json:"description"`
+	Status      GetCommercialCreditCards503ErrorObjectStatusEnum      `json:"status"`
+	Title       GetCommercialCreditCards503ErrorObjectTitleEnum       `json:"title"`
 }
 
-type GetCommercialCreditCardsDefaultApplicationPrsOpenbankingOpendataV13PlusJSONErrorObject struct {
+type GetCommercialCreditCardsErrorObject struct {
 	Description string `json:"description"`
 	Status      string `json:"status"`
 	Title       string `json:"title"`
@@ -447,45 +447,45 @@ type GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSONData
 	TsandCs                   []string                                                                                        `json:"TsandCs"`
 }
 
-type GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaAgreementEnum string
+type GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaDataAgreementEnum string
 
 const (
-	GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaAgreementEnumUseOfTheApIsAndAnyRelatedDataWillBeSubjectToTheTermsOfTheOpenLicenceAndSubjectToTermsAndConditions GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaAgreementEnum = "Use of the APIs and any related data will be subject to the terms of the Open Licence and subject to terms and conditions"
+	GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaDataAgreementEnumUseOfTheApIsAndAnyRelatedDataWillBeSubjectToTheTermsOfTheOpenLicenceAndSubjectToTermsAndConditions GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaDataAgreementEnum = "Use of the APIs and any related data will be subject to the terms of the Open Licence and subject to terms and conditions"
 )
 
-type GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaLicenseEnum string
+type GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaDataLicenseEnum string
 
 const (
-	GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaLicenseEnumHTTPSWwwOpenbankingOrgUkOpenLicence GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaLicenseEnum = "https://www.openbanking.org.uk/open-licence"
+	GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaDataLicenseEnumHTTPSWwwOpenbankingOrgUkOpenLicence GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaDataLicenseEnum = "https://www.openbanking.org.uk/open-licence"
 )
 
-type GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaTermsOfUseEnum string
+type GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaDataTermsOfUseEnum string
 
 const (
-	GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaTermsOfUseEnumHTTPSWwwOpenbankingOrgUkTerms GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaTermsOfUseEnum = "https://www.openbanking.org.uk/terms"
+	GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaDataTermsOfUseEnumHTTPSWwwOpenbankingOrgUkTerms GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaDataTermsOfUseEnum = "https://www.openbanking.org.uk/terms"
 )
 
-type GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaMetaData struct {
-	Agreement    GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaAgreementEnum  `json:"Agreement"`
-	LastUpdated  time.Time                                                                                 `json:"LastUpdated"`
-	License      GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaLicenseEnum    `json:"License"`
-	TermsOfUse   GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaTermsOfUseEnum `json:"TermsOfUse"`
-	TotalResults int64                                                                                     `json:"TotalResults"`
+type GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaData struct {
+	Agreement    GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaDataAgreementEnum  `json:"Agreement"`
+	LastUpdated  time.Time                                                                                     `json:"LastUpdated"`
+	License      GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaDataLicenseEnum    `json:"License"`
+	TermsOfUse   GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaDataTermsOfUseEnum `json:"TermsOfUse"`
+	TotalResults int64                                                                                         `json:"TotalResults"`
 }
 
 type GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSON struct {
-	Data []GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSONData       `json:"data"`
-	Meta GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaMetaData `json:"meta"`
+	Data []GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSONData   `json:"data"`
+	Meta GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaData `json:"meta"`
 }
 
 type GetCommercialCreditCardsResponse struct {
-	FourHundredErrorObject                                                        *GetCommercialCreditCards400ApplicationPrsOpenbankingOpendataV13PlusJSON400ErrorObject
-	FourHundredAndEightErrorObject                                                *GetCommercialCreditCards408ApplicationPrsOpenbankingOpendataV13PlusJSON408ErrorObject
-	FourHundredAndTwentyNineErrorObject                                           *GetCommercialCreditCards429ApplicationPrsOpenbankingOpendataV13PlusJSON429ErrorObject
-	FiveHundredErrorObject                                                        *GetCommercialCreditCards500ApplicationPrsOpenbankingOpendataV13PlusJSON500ErrorObject
-	FiveHundredAndThreeErrorObject                                                *GetCommercialCreditCards503ApplicationPrsOpenbankingOpendataV13PlusJSON503ErrorObject
+	FourHundredErrorObject                                                        *GetCommercialCreditCards400ErrorObject
+	FourHundredAndEightErrorObject                                                *GetCommercialCreditCards408ErrorObject
+	FourHundredAndTwentyNineErrorObject                                           *GetCommercialCreditCards429ErrorObject
+	FiveHundredErrorObject                                                        *GetCommercialCreditCards500ErrorObject
+	FiveHundredAndThreeErrorObject                                                *GetCommercialCreditCards503ErrorObject
 	ContentType                                                                   string
-	ErrorObject                                                                   *GetCommercialCreditCardsDefaultApplicationPrsOpenbankingOpendataV13PlusJSONErrorObject
+	ErrorObject                                                                   *GetCommercialCreditCardsErrorObject
 	GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSONObject *GetCommercialCreditCards200ApplicationPrsOpenbankingOpendataV13PlusJSON
 	Headers                                                                       map[string][]string
 	StatusCode                                                                    int64

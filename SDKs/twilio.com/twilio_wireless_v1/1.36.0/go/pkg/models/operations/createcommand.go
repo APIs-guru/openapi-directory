@@ -8,25 +8,25 @@ var CreateCommandServers = []string{
 	"https://wireless.twilio.com",
 }
 
-type CreateCommandRequestBodyCallbackMethodEnum string
+type CreateCommandCreateCommandRequestCallbackMethodEnum string
 
 const (
-	CreateCommandRequestBodyCallbackMethodEnumHead   CreateCommandRequestBodyCallbackMethodEnum = "HEAD"
-	CreateCommandRequestBodyCallbackMethodEnumGet    CreateCommandRequestBodyCallbackMethodEnum = "GET"
-	CreateCommandRequestBodyCallbackMethodEnumPost   CreateCommandRequestBodyCallbackMethodEnum = "POST"
-	CreateCommandRequestBodyCallbackMethodEnumPatch  CreateCommandRequestBodyCallbackMethodEnum = "PATCH"
-	CreateCommandRequestBodyCallbackMethodEnumPut    CreateCommandRequestBodyCallbackMethodEnum = "PUT"
-	CreateCommandRequestBodyCallbackMethodEnumDelete CreateCommandRequestBodyCallbackMethodEnum = "DELETE"
+	CreateCommandCreateCommandRequestCallbackMethodEnumHead   CreateCommandCreateCommandRequestCallbackMethodEnum = "HEAD"
+	CreateCommandCreateCommandRequestCallbackMethodEnumGet    CreateCommandCreateCommandRequestCallbackMethodEnum = "GET"
+	CreateCommandCreateCommandRequestCallbackMethodEnumPost   CreateCommandCreateCommandRequestCallbackMethodEnum = "POST"
+	CreateCommandCreateCommandRequestCallbackMethodEnumPatch  CreateCommandCreateCommandRequestCallbackMethodEnum = "PATCH"
+	CreateCommandCreateCommandRequestCallbackMethodEnumPut    CreateCommandCreateCommandRequestCallbackMethodEnum = "PUT"
+	CreateCommandCreateCommandRequestCallbackMethodEnumDelete CreateCommandCreateCommandRequestCallbackMethodEnum = "DELETE"
 )
 
-type CreateCommandRequestBodyCreateCommandRequest struct {
-	CallbackMethod           *CreateCommandRequestBodyCallbackMethodEnum `form:"name=CallbackMethod"`
-	CallbackURL              *string                                     `form:"name=CallbackUrl"`
-	Command                  string                                      `form:"name=Command"`
-	CommandMode              *shared.CommandEnumCommandModeEnum          `form:"name=CommandMode"`
-	DeliveryReceiptRequested *bool                                       `form:"name=DeliveryReceiptRequested"`
-	IncludeSid               *string                                     `form:"name=IncludeSid"`
-	Sim                      *string                                     `form:"name=Sim"`
+type CreateCommandCreateCommandRequest struct {
+	CallbackMethod           *CreateCommandCreateCommandRequestCallbackMethodEnum `form:"name=CallbackMethod"`
+	CallbackURL              *string                                              `form:"name=CallbackUrl"`
+	Command                  string                                               `form:"name=Command"`
+	CommandMode              *shared.CommandEnumCommandModeEnum                   `form:"name=CommandMode"`
+	DeliveryReceiptRequested *bool                                                `form:"name=DeliveryReceiptRequested"`
+	IncludeSid               *string                                              `form:"name=IncludeSid"`
+	Sim                      *string                                              `form:"name=Sim"`
 }
 
 type CreateCommandSecurity struct {
@@ -35,7 +35,7 @@ type CreateCommandSecurity struct {
 
 type CreateCommandRequest struct {
 	ServerURL *string
-	Request   *CreateCommandRequestBodyCreateCommandRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request   *CreateCommandCreateCommandRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security  CreateCommandSecurity
 }
 

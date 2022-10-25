@@ -5,7 +5,7 @@ CREATE_COMPOSITION_HOOK_SERVERS = [
 	"https://video.twilio.com",
 ]
 
-class CreateCompositionHookRequestBodyStatusCallbackMethodEnum(str, Enum):
+class CreateCompositionHookCreateCompositionHookRequestStatusCallbackMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -15,7 +15,7 @@ class CreateCompositionHookRequestBodyStatusCallbackMethodEnum(str, Enum):
 
 
 @dataclass
-class CreateCompositionHookRequestBodyCreateCompositionHookRequest:
+class CreateCompositionHookCreateCompositionHookRequest:
     audio_sources: Optional[List[str]] = field(default=None, metadata={'form': { 'field_name': 'AudioSources' }})
     audio_sources_excluded: Optional[List[str]] = field(default=None, metadata={'form': { 'field_name': 'AudioSourcesExcluded' }})
     enabled: Optional[bool] = field(default=None, metadata={'form': { 'field_name': 'Enabled' }})
@@ -23,7 +23,7 @@ class CreateCompositionHookRequestBodyCreateCompositionHookRequest:
     friendly_name: str = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
     resolution: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Resolution' }})
     status_callback: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'StatusCallback' }})
-    status_callback_method: Optional[CreateCompositionHookRequestBodyStatusCallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'StatusCallbackMethod' }})
+    status_callback_method: Optional[CreateCompositionHookCreateCompositionHookRequestStatusCallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'StatusCallbackMethod' }})
     trim: Optional[bool] = field(default=None, metadata={'form': { 'field_name': 'Trim' }})
     video_layout: Optional[Any] = field(default=None, metadata={'form': { 'field_name': 'VideoLayout' }})
     
@@ -36,7 +36,7 @@ class CreateCompositionHookSecurity:
 @dataclass
 class CreateCompositionHookRequest:
     server_url: Optional[str] = field(default=None)
-    request: Optional[CreateCompositionHookRequestBodyCreateCompositionHookRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateCompositionHookCreateCompositionHookRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateCompositionHookSecurity = field(default=None)
     
 

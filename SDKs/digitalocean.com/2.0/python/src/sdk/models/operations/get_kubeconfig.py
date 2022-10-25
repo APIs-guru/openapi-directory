@@ -30,10 +30,10 @@ class GetKubeconfig401ApplicationJSON:
 
 @dataclass
 class GetKubeconfigResponse:
-    body: bytes = field(default=None)
     content_type: str = field(default=None)
     headers: dict[str, List[str]] = field(default=None)
     status_code: int = field(default=None)
+    get_kubeconfig_200_application_yaml_string: Optional[str] = field(default=None)
     get_kubeconfig_401_application_json_object: Optional[GetKubeconfig401ApplicationJSON] = field(default=None)
     onev2_11_clicks_get_responses_401_content_application_1json_schema: Optional[shared.Onev211ClicksGetResponses401ContentApplication1jsonSchema] = field(default=None)
     

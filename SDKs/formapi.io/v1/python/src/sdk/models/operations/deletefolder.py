@@ -22,7 +22,7 @@ class DeleteFolderRequest:
 
 @dataclass_json
 @dataclass
-class DeleteFolder200ApplicationJSONFolder:
+class DeleteFolderFolder:
     id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
     parent_folder_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'parent_folder_id' }})
@@ -35,5 +35,5 @@ class DeleteFolderResponse:
     status_code: int = field(default=None)
     authentication_error: Optional[shared.AuthenticationError] = field(default=None)
     error: Optional[shared.Error] = field(default=None)
-    folder: Optional[DeleteFolder200ApplicationJSONFolder] = field(default=None)
+    folder: Optional[DeleteFolderFolder] = field(default=None)
     

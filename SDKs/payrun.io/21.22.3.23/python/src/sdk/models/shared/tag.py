@@ -8,7 +8,7 @@ from dataclasses_json import dataclass_json
 
 @dataclass_json
 @dataclass
-class TagTagTaggedItemTaggedItem:
+class TagTagTaggedItem:
     at_href: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': '@href' }})
     at_rel: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': '@rel' }})
     at_title: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': '@title' }})
@@ -16,14 +16,14 @@ class TagTagTaggedItemTaggedItem:
 
 @dataclass_json
 @dataclass
-class TagTagTag:
+class TagTag:
     created: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Created', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    tagged_item: Optional[TagTagTaggedItemTaggedItem] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TaggedItem' }})
+    tagged_item: Optional[TagTagTaggedItem] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TaggedItem' }})
     text: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Text' }})
     
 
 @dataclass_json
 @dataclass
 class Tag:
-    tag: Optional[TagTagTag] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Tag' }})
+    tag: Optional[TagTag] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Tag' }})
     

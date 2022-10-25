@@ -34,7 +34,7 @@ class ListMessageInteractionRequest:
 
 @dataclass_json
 @dataclass
-class ListMessageInteraction200ApplicationJSONMeta:
+class ListMessageInteractionListMessageInteractionResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -46,14 +46,14 @@ class ListMessageInteraction200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListMessageInteraction200ApplicationJSONListMessageInteractionResponse:
+class ListMessageInteractionListMessageInteractionResponse:
     interactions: Optional[List[shared.ProxyV1ServiceSessionParticipantMessageInteraction]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'interactions' }})
-    meta: Optional[ListMessageInteraction200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+    meta: Optional[ListMessageInteractionListMessageInteractionResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     
 
 @dataclass
 class ListMessageInteractionResponse:
     content_type: str = field(default=None)
-    list_message_interaction_response: Optional[ListMessageInteraction200ApplicationJSONListMessageInteractionResponse] = field(default=None)
+    list_message_interaction_response: Optional[ListMessageInteractionListMessageInteractionResponse] = field(default=None)
     status_code: int = field(default=None)
     

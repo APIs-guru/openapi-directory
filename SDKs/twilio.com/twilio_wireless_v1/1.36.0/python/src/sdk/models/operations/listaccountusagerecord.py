@@ -32,7 +32,7 @@ class ListAccountUsageRecordRequest:
 
 @dataclass_json
 @dataclass
-class ListAccountUsageRecord200ApplicationJSONMeta:
+class ListAccountUsageRecordListAccountUsageRecordResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -44,14 +44,14 @@ class ListAccountUsageRecord200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListAccountUsageRecord200ApplicationJSONListAccountUsageRecordResponse:
-    meta: Optional[ListAccountUsageRecord200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+class ListAccountUsageRecordListAccountUsageRecordResponse:
+    meta: Optional[ListAccountUsageRecordListAccountUsageRecordResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     usage_records: Optional[List[shared.WirelessV1AccountUsageRecord]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'usage_records' }})
     
 
 @dataclass
 class ListAccountUsageRecordResponse:
     content_type: str = field(default=None)
-    list_account_usage_record_response: Optional[ListAccountUsageRecord200ApplicationJSONListAccountUsageRecordResponse] = field(default=None)
+    list_account_usage_record_response: Optional[ListAccountUsageRecordListAccountUsageRecordResponse] = field(default=None)
     status_code: int = field(default=None)
     

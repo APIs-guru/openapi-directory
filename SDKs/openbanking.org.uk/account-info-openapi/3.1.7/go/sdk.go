@@ -91,12 +91,12 @@ func (s *SDK) CreateAccountAccessConsents(ctx context.Context, request operation
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObReadConsentResponse1
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -117,12 +117,12 @@ func (s *SDK) CreateAccountAccessConsents(ctx context.Context, request operation
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObErrorResponse1
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -146,12 +146,12 @@ func (s *SDK) CreateAccountAccessConsents(ctx context.Context, request operation
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObErrorResponse1
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -184,12 +184,12 @@ func (s *SDK) CreateAccountAccessConsents(ctx context.Context, request operation
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObErrorResponse1
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -242,12 +242,12 @@ func (s *SDK) DeleteAccountAccessConsentsConsentID(ctx context.Context, request 
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObErrorResponse1
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -271,12 +271,12 @@ func (s *SDK) DeleteAccountAccessConsentsConsentID(ctx context.Context, request 
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObErrorResponse1
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -306,12 +306,12 @@ func (s *SDK) DeleteAccountAccessConsentsConsentID(ctx context.Context, request 
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObErrorResponse1
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -361,12 +361,12 @@ func (s *SDK) GetAccountAccessConsentsConsentID(ctx context.Context, request ope
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObReadConsentResponse1
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -387,12 +387,12 @@ func (s *SDK) GetAccountAccessConsentsConsentID(ctx context.Context, request ope
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObErrorResponse1
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -416,12 +416,12 @@ func (s *SDK) GetAccountAccessConsentsConsentID(ctx context.Context, request ope
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObErrorResponse1
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -451,12 +451,12 @@ func (s *SDK) GetAccountAccessConsentsConsentID(ctx context.Context, request ope
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObErrorResponse1
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -506,12 +506,12 @@ func (s *SDK) GetAccounts(ctx context.Context, request operations.GetAccountsReq
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObReadAccount6
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -532,12 +532,12 @@ func (s *SDK) GetAccounts(ctx context.Context, request operations.GetAccountsReq
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObErrorResponse1
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -561,12 +561,12 @@ func (s *SDK) GetAccounts(ctx context.Context, request operations.GetAccountsReq
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObErrorResponse1
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -596,12 +596,12 @@ func (s *SDK) GetAccounts(ctx context.Context, request operations.GetAccountsReq
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObErrorResponse1
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -651,12 +651,12 @@ func (s *SDK) GetAccountsAccountID(ctx context.Context, request operations.GetAc
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObReadAccount6
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -677,12 +677,12 @@ func (s *SDK) GetAccountsAccountID(ctx context.Context, request operations.GetAc
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObErrorResponse1
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -706,12 +706,12 @@ func (s *SDK) GetAccountsAccountID(ctx context.Context, request operations.GetAc
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObErrorResponse1
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -741,12 +741,12 @@ func (s *SDK) GetAccountsAccountID(ctx context.Context, request operations.GetAc
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObErrorResponse1
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -796,12 +796,12 @@ func (s *SDK) GetAccountsAccountIDBalances(ctx context.Context, request operatio
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObReadBalance1
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -822,12 +822,12 @@ func (s *SDK) GetAccountsAccountIDBalances(ctx context.Context, request operatio
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObErrorResponse1
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -851,12 +851,12 @@ func (s *SDK) GetAccountsAccountIDBalances(ctx context.Context, request operatio
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObErrorResponse1
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -886,12 +886,12 @@ func (s *SDK) GetAccountsAccountIDBalances(ctx context.Context, request operatio
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObErrorResponse1
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -941,12 +941,12 @@ func (s *SDK) GetAccountsAccountIDBeneficiaries(ctx context.Context, request ope
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObReadBeneficiary5
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -967,12 +967,12 @@ func (s *SDK) GetAccountsAccountIDBeneficiaries(ctx context.Context, request ope
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObErrorResponse1
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -996,12 +996,12 @@ func (s *SDK) GetAccountsAccountIDBeneficiaries(ctx context.Context, request ope
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObErrorResponse1
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -1034,12 +1034,12 @@ func (s *SDK) GetAccountsAccountIDBeneficiaries(ctx context.Context, request ope
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObErrorResponse1
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -1089,12 +1089,12 @@ func (s *SDK) GetAccountsAccountIDDirectDebits(ctx context.Context, request oper
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObReadDirectDebit2
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -1115,12 +1115,12 @@ func (s *SDK) GetAccountsAccountIDDirectDebits(ctx context.Context, request oper
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObErrorResponse1
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -1144,12 +1144,12 @@ func (s *SDK) GetAccountsAccountIDDirectDebits(ctx context.Context, request oper
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObErrorResponse1
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -1182,12 +1182,12 @@ func (s *SDK) GetAccountsAccountIDDirectDebits(ctx context.Context, request oper
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObErrorResponse1
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -1237,12 +1237,12 @@ func (s *SDK) GetAccountsAccountIDOffers(ctx context.Context, request operations
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObReadOffer1
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -1263,12 +1263,12 @@ func (s *SDK) GetAccountsAccountIDOffers(ctx context.Context, request operations
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObErrorResponse1
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -1292,12 +1292,12 @@ func (s *SDK) GetAccountsAccountIDOffers(ctx context.Context, request operations
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObErrorResponse1
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -1330,12 +1330,12 @@ func (s *SDK) GetAccountsAccountIDOffers(ctx context.Context, request operations
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObErrorResponse1
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -1385,12 +1385,12 @@ func (s *SDK) GetAccountsAccountIDParties(ctx context.Context, request operation
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObReadParty3
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -1411,12 +1411,12 @@ func (s *SDK) GetAccountsAccountIDParties(ctx context.Context, request operation
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObErrorResponse1
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -1440,12 +1440,12 @@ func (s *SDK) GetAccountsAccountIDParties(ctx context.Context, request operation
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObErrorResponse1
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -1478,12 +1478,12 @@ func (s *SDK) GetAccountsAccountIDParties(ctx context.Context, request operation
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObErrorResponse1
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -1533,12 +1533,12 @@ func (s *SDK) GetAccountsAccountIDParty(ctx context.Context, request operations.
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObReadParty2
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -1559,12 +1559,12 @@ func (s *SDK) GetAccountsAccountIDParty(ctx context.Context, request operations.
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObErrorResponse1
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -1588,12 +1588,12 @@ func (s *SDK) GetAccountsAccountIDParty(ctx context.Context, request operations.
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObErrorResponse1
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -1626,12 +1626,12 @@ func (s *SDK) GetAccountsAccountIDParty(ctx context.Context, request operations.
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObErrorResponse1
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -1681,12 +1681,12 @@ func (s *SDK) GetAccountsAccountIDProduct(ctx context.Context, request operation
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObReadProduct2
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -1707,12 +1707,12 @@ func (s *SDK) GetAccountsAccountIDProduct(ctx context.Context, request operation
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObErrorResponse1
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -1736,12 +1736,12 @@ func (s *SDK) GetAccountsAccountIDProduct(ctx context.Context, request operation
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObErrorResponse1
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -1774,12 +1774,12 @@ func (s *SDK) GetAccountsAccountIDProduct(ctx context.Context, request operation
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObErrorResponse1
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -1829,12 +1829,12 @@ func (s *SDK) GetAccountsAccountIDScheduledPayments(ctx context.Context, request
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObReadScheduledPayment3
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -1855,12 +1855,12 @@ func (s *SDK) GetAccountsAccountIDScheduledPayments(ctx context.Context, request
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObErrorResponse1
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -1884,12 +1884,12 @@ func (s *SDK) GetAccountsAccountIDScheduledPayments(ctx context.Context, request
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObErrorResponse1
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -1922,12 +1922,12 @@ func (s *SDK) GetAccountsAccountIDScheduledPayments(ctx context.Context, request
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObErrorResponse1
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -1977,12 +1977,12 @@ func (s *SDK) GetAccountsAccountIDStandingOrders(ctx context.Context, request op
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObReadStandingOrder6
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -2003,12 +2003,12 @@ func (s *SDK) GetAccountsAccountIDStandingOrders(ctx context.Context, request op
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObErrorResponse1
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -2032,12 +2032,12 @@ func (s *SDK) GetAccountsAccountIDStandingOrders(ctx context.Context, request op
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObErrorResponse1
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -2070,12 +2070,12 @@ func (s *SDK) GetAccountsAccountIDStandingOrders(ctx context.Context, request op
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObErrorResponse1
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -2127,12 +2127,12 @@ func (s *SDK) GetAccountsAccountIDStatements(ctx context.Context, request operat
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObReadStatement2
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -2153,12 +2153,12 @@ func (s *SDK) GetAccountsAccountIDStatements(ctx context.Context, request operat
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObErrorResponse1
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -2182,12 +2182,12 @@ func (s *SDK) GetAccountsAccountIDStatements(ctx context.Context, request operat
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObErrorResponse1
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -2220,12 +2220,12 @@ func (s *SDK) GetAccountsAccountIDStatements(ctx context.Context, request operat
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObErrorResponse1
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -2275,12 +2275,12 @@ func (s *SDK) GetAccountsAccountIDStatementsStatementID(ctx context.Context, req
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObReadStatement2
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -2301,12 +2301,12 @@ func (s *SDK) GetAccountsAccountIDStatementsStatementID(ctx context.Context, req
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObErrorResponse1
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -2330,12 +2330,12 @@ func (s *SDK) GetAccountsAccountIDStatementsStatementID(ctx context.Context, req
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObErrorResponse1
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -2368,12 +2368,12 @@ func (s *SDK) GetAccountsAccountIDStatementsStatementID(ctx context.Context, req
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObErrorResponse1
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -2423,12 +2423,12 @@ func (s *SDK) GetAccountsAccountIDStatementsStatementIDFile(ctx context.Context,
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out map[string]interface{}
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -2449,12 +2449,12 @@ func (s *SDK) GetAccountsAccountIDStatementsStatementIDFile(ctx context.Context,
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObErrorResponse1
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -2478,12 +2478,12 @@ func (s *SDK) GetAccountsAccountIDStatementsStatementIDFile(ctx context.Context,
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObErrorResponse1
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -2516,12 +2516,12 @@ func (s *SDK) GetAccountsAccountIDStatementsStatementIDFile(ctx context.Context,
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObErrorResponse1
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -2571,12 +2571,12 @@ func (s *SDK) GetAccountsAccountIDStatementsStatementIDTransactions(ctx context.
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObReadTransaction6
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -2597,12 +2597,12 @@ func (s *SDK) GetAccountsAccountIDStatementsStatementIDTransactions(ctx context.
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObErrorResponse1
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -2626,12 +2626,12 @@ func (s *SDK) GetAccountsAccountIDStatementsStatementIDTransactions(ctx context.
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObErrorResponse1
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -2664,12 +2664,12 @@ func (s *SDK) GetAccountsAccountIDStatementsStatementIDTransactions(ctx context.
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObErrorResponse1
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -2721,12 +2721,12 @@ func (s *SDK) GetAccountsAccountIDTransactions(ctx context.Context, request oper
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObReadTransaction6
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -2747,12 +2747,12 @@ func (s *SDK) GetAccountsAccountIDTransactions(ctx context.Context, request oper
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObErrorResponse1
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -2776,12 +2776,12 @@ func (s *SDK) GetAccountsAccountIDTransactions(ctx context.Context, request oper
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObErrorResponse1
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -2811,12 +2811,12 @@ func (s *SDK) GetAccountsAccountIDTransactions(ctx context.Context, request oper
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObErrorResponse1
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -2866,12 +2866,12 @@ func (s *SDK) GetBalances(ctx context.Context, request operations.GetBalancesReq
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObReadBalance1
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -2892,12 +2892,12 @@ func (s *SDK) GetBalances(ctx context.Context, request operations.GetBalancesReq
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObErrorResponse1
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -2921,12 +2921,12 @@ func (s *SDK) GetBalances(ctx context.Context, request operations.GetBalancesReq
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObErrorResponse1
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -2959,12 +2959,12 @@ func (s *SDK) GetBalances(ctx context.Context, request operations.GetBalancesReq
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObErrorResponse1
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -3014,12 +3014,12 @@ func (s *SDK) GetBeneficiaries(ctx context.Context, request operations.GetBenefi
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObReadBeneficiary5
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -3040,12 +3040,12 @@ func (s *SDK) GetBeneficiaries(ctx context.Context, request operations.GetBenefi
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObErrorResponse1
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -3069,12 +3069,12 @@ func (s *SDK) GetBeneficiaries(ctx context.Context, request operations.GetBenefi
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObErrorResponse1
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -3107,12 +3107,12 @@ func (s *SDK) GetBeneficiaries(ctx context.Context, request operations.GetBenefi
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObErrorResponse1
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -3162,12 +3162,12 @@ func (s *SDK) GetDirectDebits(ctx context.Context, request operations.GetDirectD
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObReadDirectDebit2
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -3188,12 +3188,12 @@ func (s *SDK) GetDirectDebits(ctx context.Context, request operations.GetDirectD
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObErrorResponse1
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -3217,12 +3217,12 @@ func (s *SDK) GetDirectDebits(ctx context.Context, request operations.GetDirectD
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObErrorResponse1
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -3255,12 +3255,12 @@ func (s *SDK) GetDirectDebits(ctx context.Context, request operations.GetDirectD
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObErrorResponse1
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -3310,12 +3310,12 @@ func (s *SDK) GetOffers(ctx context.Context, request operations.GetOffersRequest
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObReadOffer1
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -3336,12 +3336,12 @@ func (s *SDK) GetOffers(ctx context.Context, request operations.GetOffersRequest
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObErrorResponse1
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -3365,12 +3365,12 @@ func (s *SDK) GetOffers(ctx context.Context, request operations.GetOffersRequest
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObErrorResponse1
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -3403,12 +3403,12 @@ func (s *SDK) GetOffers(ctx context.Context, request operations.GetOffersRequest
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObErrorResponse1
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -3458,12 +3458,12 @@ func (s *SDK) GetParty(ctx context.Context, request operations.GetPartyRequest) 
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObReadParty2
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -3484,12 +3484,12 @@ func (s *SDK) GetParty(ctx context.Context, request operations.GetPartyRequest) 
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObErrorResponse1
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -3513,12 +3513,12 @@ func (s *SDK) GetParty(ctx context.Context, request operations.GetPartyRequest) 
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObErrorResponse1
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -3551,12 +3551,12 @@ func (s *SDK) GetParty(ctx context.Context, request operations.GetPartyRequest) 
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObErrorResponse1
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -3606,12 +3606,12 @@ func (s *SDK) GetProducts(ctx context.Context, request operations.GetProductsReq
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObReadProduct2
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -3632,12 +3632,12 @@ func (s *SDK) GetProducts(ctx context.Context, request operations.GetProductsReq
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObErrorResponse1
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -3661,12 +3661,12 @@ func (s *SDK) GetProducts(ctx context.Context, request operations.GetProductsReq
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObErrorResponse1
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -3699,12 +3699,12 @@ func (s *SDK) GetProducts(ctx context.Context, request operations.GetProductsReq
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObErrorResponse1
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -3754,12 +3754,12 @@ func (s *SDK) GetScheduledPayments(ctx context.Context, request operations.GetSc
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObReadScheduledPayment3
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -3780,12 +3780,12 @@ func (s *SDK) GetScheduledPayments(ctx context.Context, request operations.GetSc
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObErrorResponse1
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -3809,12 +3809,12 @@ func (s *SDK) GetScheduledPayments(ctx context.Context, request operations.GetSc
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObErrorResponse1
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -3847,12 +3847,12 @@ func (s *SDK) GetScheduledPayments(ctx context.Context, request operations.GetSc
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObErrorResponse1
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -3902,12 +3902,12 @@ func (s *SDK) GetStandingOrders(ctx context.Context, request operations.GetStand
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObReadStandingOrder6
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -3928,12 +3928,12 @@ func (s *SDK) GetStandingOrders(ctx context.Context, request operations.GetStand
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObErrorResponse1
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -3957,12 +3957,12 @@ func (s *SDK) GetStandingOrders(ctx context.Context, request operations.GetStand
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObErrorResponse1
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -3995,12 +3995,12 @@ func (s *SDK) GetStandingOrders(ctx context.Context, request operations.GetStand
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObErrorResponse1
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -4052,12 +4052,12 @@ func (s *SDK) GetStatements(ctx context.Context, request operations.GetStatement
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObReadStatement2
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -4078,12 +4078,12 @@ func (s *SDK) GetStatements(ctx context.Context, request operations.GetStatement
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObErrorResponse1
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -4107,12 +4107,12 @@ func (s *SDK) GetStatements(ctx context.Context, request operations.GetStatement
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObErrorResponse1
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -4145,12 +4145,12 @@ func (s *SDK) GetStatements(ctx context.Context, request operations.GetStatement
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObErrorResponse1
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -4202,12 +4202,12 @@ func (s *SDK) GetTransactions(ctx context.Context, request operations.GetTransac
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObReadTransaction6
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -4228,12 +4228,12 @@ func (s *SDK) GetTransactions(ctx context.Context, request operations.GetTransac
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObErrorResponse1
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -4257,12 +4257,12 @@ func (s *SDK) GetTransactions(ctx context.Context, request operations.GetTransac
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObErrorResponse1
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
@@ -4295,12 +4295,12 @@ func (s *SDK) GetTransactions(ctx context.Context, request operations.GetTransac
 
 		switch {
 		case utils.MatchContentType(contentType, `application/jose+jwe`):
-			data, err := io.ReadAll(httpRes.Body)
+			out, err := io.ReadAll(httpRes.Body)
 			if err != nil {
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			res.Body = out
 		case utils.MatchContentType(contentType, `application/json`):
 			var out *shared.ObErrorResponse1
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {

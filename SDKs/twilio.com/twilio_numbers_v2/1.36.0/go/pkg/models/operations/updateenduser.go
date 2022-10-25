@@ -12,7 +12,7 @@ type UpdateEndUserPathParams struct {
 	Sid string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
-type UpdateEndUserRequestBodyUpdateEndUserRequest struct {
+type UpdateEndUserUpdateEndUserRequest struct {
 	Attributes   *interface{} `form:"name=Attributes"`
 	FriendlyName *string      `form:"name=FriendlyName"`
 }
@@ -24,7 +24,7 @@ type UpdateEndUserSecurity struct {
 type UpdateEndUserRequest struct {
 	ServerURL  *string
 	PathParams UpdateEndUserPathParams
-	Request    *UpdateEndUserRequestBodyUpdateEndUserRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateEndUserUpdateEndUserRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateEndUserSecurity
 }
 

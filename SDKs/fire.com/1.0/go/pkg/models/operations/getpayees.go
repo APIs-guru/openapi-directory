@@ -5,42 +5,42 @@ import (
 	"time"
 )
 
-type GetPayees200ApplicationJSONCreatedByEnum string
+type GetPayeesPayeeCreatedByEnum string
 
 const (
-	GetPayees200ApplicationJSONCreatedByEnumCustomer        GetPayees200ApplicationJSONCreatedByEnum = "CUSTOMER"
-	GetPayees200ApplicationJSONCreatedByEnumLodgement       GetPayees200ApplicationJSONCreatedByEnum = "LODGEMENT"
-	GetPayees200ApplicationJSONCreatedByEnumDirectDebit     GetPayees200ApplicationJSONCreatedByEnum = "DIRECT DEBIT"
-	GetPayees200ApplicationJSONCreatedByEnumOpenBanking     GetPayees200ApplicationJSONCreatedByEnum = "OPEN BANKING"
-	GetPayees200ApplicationJSONCreatedByEnumFireOpenPayment GetPayees200ApplicationJSONCreatedByEnum = "FIRE OPEN PAYMENT"
-	GetPayees200ApplicationJSONCreatedByEnumFireDirect      GetPayees200ApplicationJSONCreatedByEnum = "FIRE DIRECT"
+	GetPayeesPayeeCreatedByEnumCustomer        GetPayeesPayeeCreatedByEnum = "CUSTOMER"
+	GetPayeesPayeeCreatedByEnumLodgement       GetPayeesPayeeCreatedByEnum = "LODGEMENT"
+	GetPayeesPayeeCreatedByEnumDirectDebit     GetPayeesPayeeCreatedByEnum = "DIRECT DEBIT"
+	GetPayeesPayeeCreatedByEnumOpenBanking     GetPayeesPayeeCreatedByEnum = "OPEN BANKING"
+	GetPayeesPayeeCreatedByEnumFireOpenPayment GetPayeesPayeeCreatedByEnum = "FIRE OPEN PAYMENT"
+	GetPayeesPayeeCreatedByEnumFireDirect      GetPayeesPayeeCreatedByEnum = "FIRE DIRECT"
 )
 
-type GetPayees200ApplicationJSONStatusEnum string
+type GetPayeesPayeeStatusEnum string
 
 const (
-	GetPayees200ApplicationJSONStatusEnumCreated  GetPayees200ApplicationJSONStatusEnum = "CREATED"
-	GetPayees200ApplicationJSONStatusEnumLive     GetPayees200ApplicationJSONStatusEnum = "LIVE"
-	GetPayees200ApplicationJSONStatusEnumClosed   GetPayees200ApplicationJSONStatusEnum = "CLOSED"
-	GetPayees200ApplicationJSONStatusEnumArchived GetPayees200ApplicationJSONStatusEnum = "ARCHIVED"
+	GetPayeesPayeeStatusEnumCreated  GetPayeesPayeeStatusEnum = "CREATED"
+	GetPayeesPayeeStatusEnumLive     GetPayeesPayeeStatusEnum = "LIVE"
+	GetPayeesPayeeStatusEnumClosed   GetPayeesPayeeStatusEnum = "CLOSED"
+	GetPayeesPayeeStatusEnumArchived GetPayeesPayeeStatusEnum = "ARCHIVED"
 )
 
-type GetPayees200ApplicationJSONPayee struct {
+type GetPayeesPayee struct {
 	AccountHolderName *string                                                                                                  `json:"accountHolderName,omitempty"`
 	AccountName       *string                                                                                                  `json:"accountName,omitempty"`
 	AccountNumber     *string                                                                                                  `json:"accountNumber,omitempty"`
 	Bic               *string                                                                                                  `json:"bic,omitempty"`
-	CreatedBy         *GetPayees200ApplicationJSONCreatedByEnum                                                                `json:"createdBy,omitempty"`
+	CreatedBy         *GetPayeesPayeeCreatedByEnum                                                                             `json:"createdBy,omitempty"`
 	Currency          *shared.OneaccountsGetResponses200ContentApplication1jsonSchemaPropertiesAccountsItemsPropertiesCurrency `json:"currency,omitempty"`
 	DateCreated       *time.Time                                                                                               `json:"dateCreated,omitempty"`
 	Iban              *string                                                                                                  `json:"iban,omitempty"`
 	ID                *int64                                                                                                   `json:"id,omitempty"`
 	Nsc               *string                                                                                                  `json:"nsc,omitempty"`
-	Status            *GetPayees200ApplicationJSONStatusEnum                                                                   `json:"status,omitempty"`
+	Status            *GetPayeesPayeeStatusEnum                                                                                `json:"status,omitempty"`
 }
 
 type GetPayeesResponse struct {
 	ContentType string
-	Payee       *GetPayees200ApplicationJSONPayee
+	Payee       *GetPayeesPayee
 	StatusCode  int64
 }

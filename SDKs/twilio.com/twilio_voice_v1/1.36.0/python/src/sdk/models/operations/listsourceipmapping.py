@@ -26,7 +26,7 @@ class ListSourceIPMappingRequest:
 
 @dataclass_json
 @dataclass
-class ListSourceIPMapping200ApplicationJSONMeta:
+class ListSourceIPMappingListSourceIPMappingResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -38,14 +38,14 @@ class ListSourceIPMapping200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListSourceIPMapping200ApplicationJSONListSourceIPMappingResponse:
-    meta: Optional[ListSourceIPMapping200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+class ListSourceIPMappingListSourceIPMappingResponse:
+    meta: Optional[ListSourceIPMappingListSourceIPMappingResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     source_ip_mappings: Optional[List[shared.VoiceV1SourceIPMapping]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'source_ip_mappings' }})
     
 
 @dataclass
 class ListSourceIPMappingResponse:
     content_type: str = field(default=None)
-    list_source_ip_mapping_response: Optional[ListSourceIPMapping200ApplicationJSONListSourceIPMappingResponse] = field(default=None)
+    list_source_ip_mapping_response: Optional[ListSourceIPMappingListSourceIPMappingResponse] = field(default=None)
     status_code: int = field(default=None)
     

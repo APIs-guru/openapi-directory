@@ -29,7 +29,7 @@ type ListMetricRequest struct {
 	Security    ListMetricSecurity
 }
 
-type ListMetric200ApplicationJSONMeta struct {
+type ListMetricListMetricResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -39,13 +39,13 @@ type ListMetric200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListMetric200ApplicationJSONListMetricResponse struct {
-	Meta    *ListMetric200ApplicationJSONMeta `json:"meta,omitempty"`
+type ListMetricListMetricResponse struct {
+	Meta    *ListMetricListMetricResponseMeta `json:"meta,omitempty"`
 	Metrics []shared.InsightsV1CallMetric     `json:"metrics,omitempty"`
 }
 
 type ListMetricResponse struct {
 	ContentType        string
-	ListMetricResponse *ListMetric200ApplicationJSONListMetricResponse
+	ListMetricResponse *ListMetricListMetricResponse
 	StatusCode         int64
 }

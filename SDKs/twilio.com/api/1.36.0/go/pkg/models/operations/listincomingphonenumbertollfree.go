@@ -31,7 +31,7 @@ type ListIncomingPhoneNumberTollFreeRequest struct {
 	Security    ListIncomingPhoneNumberTollFreeSecurity
 }
 
-type ListIncomingPhoneNumberTollFree200ApplicationJSONListIncomingPhoneNumberTollFreeResponse struct {
+type ListIncomingPhoneNumberTollFreeListIncomingPhoneNumberTollFreeResponse struct {
 	End                  *int64                                                                 `json:"end,omitempty"`
 	FirstPageURI         *string                                                                `json:"first_page_uri,omitempty"`
 	IncomingPhoneNumbers []shared.APIV2010AccountIncomingPhoneNumberIncomingPhoneNumberTollFree `json:"incoming_phone_numbers,omitempty"`
@@ -45,6 +45,6 @@ type ListIncomingPhoneNumberTollFree200ApplicationJSONListIncomingPhoneNumberTol
 
 type ListIncomingPhoneNumberTollFreeResponse struct {
 	ContentType                             string
-	ListIncomingPhoneNumberTollFreeResponse *ListIncomingPhoneNumberTollFree200ApplicationJSONListIncomingPhoneNumberTollFreeResponse
+	ListIncomingPhoneNumberTollFreeResponse *ListIncomingPhoneNumberTollFreeListIncomingPhoneNumberTollFreeResponse
 	StatusCode                              int64
 }

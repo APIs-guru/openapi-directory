@@ -19,7 +19,7 @@ class UpdateSyncSyncListItemHeaders:
     
 
 @dataclass
-class UpdateSyncSyncListItemRequestBodyUpdateSyncSyncListItemRequest:
+class UpdateSyncSyncListItemUpdateSyncSyncListItemRequest:
     data: Any = field(default=None, metadata={'form': { 'field_name': 'Data' }})
     
 
@@ -33,7 +33,7 @@ class UpdateSyncSyncListItemRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateSyncSyncListItemPathParams = field(default=None)
     headers: UpdateSyncSyncListItemHeaders = field(default=None)
-    request: Optional[UpdateSyncSyncListItemRequestBodyUpdateSyncSyncListItemRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateSyncSyncListItemUpdateSyncSyncListItemRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateSyncSyncListItemSecurity = field(default=None)
     
 

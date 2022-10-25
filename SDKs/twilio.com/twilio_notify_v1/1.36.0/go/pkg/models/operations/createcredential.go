@@ -8,7 +8,7 @@ var CreateCredentialServers = []string{
 	"https://notify.twilio.com",
 }
 
-type CreateCredentialRequestBodyCreateCredentialRequest struct {
+type CreateCredentialCreateCredentialRequest struct {
 	APIKey       *string                              `form:"name=ApiKey"`
 	Certificate  *string                              `form:"name=Certificate"`
 	FriendlyName *string                              `form:"name=FriendlyName"`
@@ -24,7 +24,7 @@ type CreateCredentialSecurity struct {
 
 type CreateCredentialRequest struct {
 	ServerURL *string
-	Request   *CreateCredentialRequestBodyCreateCredentialRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request   *CreateCredentialCreateCredentialRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security  CreateCredentialSecurity
 }
 

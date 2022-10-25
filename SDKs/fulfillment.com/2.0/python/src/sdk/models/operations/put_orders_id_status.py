@@ -11,15 +11,15 @@ class PutOrdersIDStatusPathParams:
 
 @dataclass_json
 @dataclass
-class PutOrdersIDStatusRequestBodyStatus:
+class PutOrdersIDStatusStatusTypeSimpleV2Status:
     code: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'code' }})
     
 
 @dataclass_json
 @dataclass
-class PutOrdersIDStatusRequestBodyStatusTypeSimpleV2:
+class PutOrdersIDStatusStatusTypeSimpleV2:
     reason: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'reason' }})
-    status: PutOrdersIDStatusRequestBodyStatus = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    status: PutOrdersIDStatusStatusTypeSimpleV2Status = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
     
 
 @dataclass
@@ -30,7 +30,7 @@ class PutOrdersIDStatusSecurity:
 @dataclass
 class PutOrdersIDStatusRequest:
     path_params: PutOrdersIDStatusPathParams = field(default=None)
-    request: PutOrdersIDStatusRequestBodyStatusTypeSimpleV2 = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: PutOrdersIDStatusStatusTypeSimpleV2 = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     security: PutOrdersIDStatusSecurity = field(default=None)
     
 

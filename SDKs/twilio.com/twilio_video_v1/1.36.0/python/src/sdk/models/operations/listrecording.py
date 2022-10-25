@@ -35,7 +35,7 @@ class ListRecordingRequest:
 
 @dataclass_json
 @dataclass
-class ListRecording200ApplicationJSONMeta:
+class ListRecordingListRecordingResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -47,14 +47,14 @@ class ListRecording200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListRecording200ApplicationJSONListRecordingResponse:
-    meta: Optional[ListRecording200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+class ListRecordingListRecordingResponse:
+    meta: Optional[ListRecordingListRecordingResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     recordings: Optional[List[shared.VideoV1Recording]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'recordings' }})
     
 
 @dataclass
 class ListRecordingResponse:
     content_type: str = field(default=None)
-    list_recording_response: Optional[ListRecording200ApplicationJSONListRecordingResponse] = field(default=None)
+    list_recording_response: Optional[ListRecordingListRecordingResponse] = field(default=None)
     status_code: int = field(default=None)
     

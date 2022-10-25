@@ -1,29 +1,29 @@
 package shared
 
-type WritableFrontPortTemplateTypeTypeEnum string
+type WritableFrontPortTemplateTypeEnum string
 
 const (
-	WritableFrontPortTemplateTypeTypeEnumEightp8c              WritableFrontPortTemplateTypeTypeEnum = "8p8c"
-	WritableFrontPortTemplateTypeTypeEnumOneHundredAndTenPunch WritableFrontPortTemplateTypeTypeEnum = "110-punch"
-	WritableFrontPortTemplateTypeTypeEnumBnc                   WritableFrontPortTemplateTypeTypeEnum = "bnc"
-	WritableFrontPortTemplateTypeTypeEnumMrj21                 WritableFrontPortTemplateTypeTypeEnum = "mrj21"
-	WritableFrontPortTemplateTypeTypeEnumFc                    WritableFrontPortTemplateTypeTypeEnum = "fc"
-	WritableFrontPortTemplateTypeTypeEnumLc                    WritableFrontPortTemplateTypeTypeEnum = "lc"
-	WritableFrontPortTemplateTypeTypeEnumLcApc                 WritableFrontPortTemplateTypeTypeEnum = "lc-apc"
-	WritableFrontPortTemplateTypeTypeEnumLsh                   WritableFrontPortTemplateTypeTypeEnum = "lsh"
-	WritableFrontPortTemplateTypeTypeEnumLshApc                WritableFrontPortTemplateTypeTypeEnum = "lsh-apc"
-	WritableFrontPortTemplateTypeTypeEnumMpo                   WritableFrontPortTemplateTypeTypeEnum = "mpo"
-	WritableFrontPortTemplateTypeTypeEnumMtrj                  WritableFrontPortTemplateTypeTypeEnum = "mtrj"
-	WritableFrontPortTemplateTypeTypeEnumSc                    WritableFrontPortTemplateTypeTypeEnum = "sc"
-	WritableFrontPortTemplateTypeTypeEnumScApc                 WritableFrontPortTemplateTypeTypeEnum = "sc-apc"
-	WritableFrontPortTemplateTypeTypeEnumSt                    WritableFrontPortTemplateTypeTypeEnum = "st"
+	WritableFrontPortTemplateTypeEnumEightp8c              WritableFrontPortTemplateTypeEnum = "8p8c"
+	WritableFrontPortTemplateTypeEnumOneHundredAndTenPunch WritableFrontPortTemplateTypeEnum = "110-punch"
+	WritableFrontPortTemplateTypeEnumBnc                   WritableFrontPortTemplateTypeEnum = "bnc"
+	WritableFrontPortTemplateTypeEnumMrj21                 WritableFrontPortTemplateTypeEnum = "mrj21"
+	WritableFrontPortTemplateTypeEnumFc                    WritableFrontPortTemplateTypeEnum = "fc"
+	WritableFrontPortTemplateTypeEnumLc                    WritableFrontPortTemplateTypeEnum = "lc"
+	WritableFrontPortTemplateTypeEnumLcApc                 WritableFrontPortTemplateTypeEnum = "lc-apc"
+	WritableFrontPortTemplateTypeEnumLsh                   WritableFrontPortTemplateTypeEnum = "lsh"
+	WritableFrontPortTemplateTypeEnumLshApc                WritableFrontPortTemplateTypeEnum = "lsh-apc"
+	WritableFrontPortTemplateTypeEnumMpo                   WritableFrontPortTemplateTypeEnum = "mpo"
+	WritableFrontPortTemplateTypeEnumMtrj                  WritableFrontPortTemplateTypeEnum = "mtrj"
+	WritableFrontPortTemplateTypeEnumSc                    WritableFrontPortTemplateTypeEnum = "sc"
+	WritableFrontPortTemplateTypeEnumScApc                 WritableFrontPortTemplateTypeEnum = "sc-apc"
+	WritableFrontPortTemplateTypeEnumSt                    WritableFrontPortTemplateTypeEnum = "st"
 )
 
 type WritableFrontPortTemplate struct {
-	DeviceType       int64                                 `json:"device_type"`
-	ID               *int64                                `json:"id,omitempty"`
-	Name             string                                `json:"name"`
-	RearPort         int64                                 `json:"rear_port"`
-	RearPortPosition *int64                                `json:"rear_port_position,omitempty"`
-	Type             WritableFrontPortTemplateTypeTypeEnum `json:"type"`
+	DeviceType       int64                             `json:"device_type"`
+	ID               *int64                            `json:"id,omitempty"`
+	Name             string                            `json:"name"`
+	RearPort         int64                             `json:"rear_port"`
+	RearPortPosition *int64                            `json:"rear_port_position,omitempty"`
+	Type             WritableFrontPortTemplateTypeEnum `json:"type"`
 }

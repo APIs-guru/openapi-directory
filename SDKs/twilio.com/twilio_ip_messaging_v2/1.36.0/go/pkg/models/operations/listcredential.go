@@ -22,7 +22,7 @@ type ListCredentialRequest struct {
 	Security    ListCredentialSecurity
 }
 
-type ListCredential200ApplicationJSONMeta struct {
+type ListCredentialListCredentialResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -32,13 +32,13 @@ type ListCredential200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListCredential200ApplicationJSONListCredentialResponse struct {
-	Credentials []shared.IPMessagingV2Credential      `json:"credentials,omitempty"`
-	Meta        *ListCredential200ApplicationJSONMeta `json:"meta,omitempty"`
+type ListCredentialListCredentialResponse struct {
+	Credentials []shared.IPMessagingV2Credential          `json:"credentials,omitempty"`
+	Meta        *ListCredentialListCredentialResponseMeta `json:"meta,omitempty"`
 }
 
 type ListCredentialResponse struct {
 	ContentType            string
-	ListCredentialResponse *ListCredential200ApplicationJSONListCredentialResponse
+	ListCredentialResponse *ListCredentialListCredentialResponse
 	StatusCode             int64
 }

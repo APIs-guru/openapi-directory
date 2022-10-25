@@ -807,7 +807,7 @@ class SDK:
         res = operations.ListCustomerProfileResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListCustomerProfile200ApplicationJSONListCustomerProfileResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListCustomerProfileListCustomerProfileResponse])
                 res.list_customer_profile_response = out
 
         return res
@@ -832,7 +832,7 @@ class SDK:
         res = operations.ListCustomerProfileChannelEndpointAssignmentResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListCustomerProfileChannelEndpointAssignment200ApplicationJSONListCustomerProfileChannelEndpointAssignmentResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListCustomerProfileChannelEndpointAssignmentListCustomerProfileChannelEndpointAssignmentResponse])
                 res.list_customer_profile_channel_endpoint_assignment_response = out
 
         return res
@@ -857,7 +857,7 @@ class SDK:
         res = operations.ListCustomerProfileEntityAssignmentResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListCustomerProfileEntityAssignment200ApplicationJSONListCustomerProfileEntityAssignmentResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListCustomerProfileEntityAssignmentListCustomerProfileEntityAssignmentResponse])
                 res.list_customer_profile_entity_assignment_response = out
 
         return res
@@ -882,7 +882,7 @@ class SDK:
         res = operations.ListCustomerProfileEvaluationResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListCustomerProfileEvaluation200ApplicationJSONListCustomerProfileEvaluationResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListCustomerProfileEvaluationListCustomerProfileEvaluationResponse])
                 res.list_customer_profile_evaluation_response = out
 
         return res
@@ -907,7 +907,7 @@ class SDK:
         res = operations.ListEndUserResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListEndUser200ApplicationJSONListEndUserResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListEndUserListEndUserResponse])
                 res.list_end_user_response = out
 
         return res
@@ -932,7 +932,7 @@ class SDK:
         res = operations.ListEndUserTypeResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListEndUserType200ApplicationJSONListEndUserTypeResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListEndUserTypeListEndUserTypeResponse])
                 res.list_end_user_type_response = out
 
         return res
@@ -957,7 +957,7 @@ class SDK:
         res = operations.ListPoliciesResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListPolicies200ApplicationJSONListPoliciesResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListPoliciesListPoliciesResponse])
                 res.list_policies_response = out
 
         return res
@@ -982,7 +982,7 @@ class SDK:
         res = operations.ListSupportingDocumentResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListSupportingDocument200ApplicationJSONListSupportingDocumentResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListSupportingDocumentListSupportingDocumentResponse])
                 res.list_supporting_document_response = out
 
         return res
@@ -1007,7 +1007,7 @@ class SDK:
         res = operations.ListSupportingDocumentTypeResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListSupportingDocumentType200ApplicationJSONListSupportingDocumentTypeResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListSupportingDocumentTypeListSupportingDocumentTypeResponse])
                 res.list_supporting_document_type_response = out
 
         return res
@@ -1032,7 +1032,7 @@ class SDK:
         res = operations.ListTrustProductResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListTrustProduct200ApplicationJSONListTrustProductResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListTrustProductListTrustProductResponse])
                 res.list_trust_product_response = out
 
         return res
@@ -1057,7 +1057,7 @@ class SDK:
         res = operations.ListTrustProductChannelEndpointAssignmentResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListTrustProductChannelEndpointAssignment200ApplicationJSONListTrustProductChannelEndpointAssignmentResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListTrustProductChannelEndpointAssignmentListTrustProductChannelEndpointAssignmentResponse])
                 res.list_trust_product_channel_endpoint_assignment_response = out
 
         return res
@@ -1082,7 +1082,7 @@ class SDK:
         res = operations.ListTrustProductEntityAssignmentResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListTrustProductEntityAssignment200ApplicationJSONListTrustProductEntityAssignmentResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListTrustProductEntityAssignmentListTrustProductEntityAssignmentResponse])
                 res.list_trust_product_entity_assignment_response = out
 
         return res
@@ -1107,7 +1107,7 @@ class SDK:
         res = operations.ListTrustProductEvaluationResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListTrustProductEvaluation200ApplicationJSONListTrustProductEvaluationResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListTrustProductEvaluationListTrustProductEvaluationResponse])
                 res.list_trust_product_evaluation_response = out
 
         return res

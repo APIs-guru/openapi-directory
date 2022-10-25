@@ -5,7 +5,7 @@ CREATE_FLEET_SERVERS = [
 	"https://supersim.twilio.com",
 ]
 
-class CreateFleetRequestBodyIPCommandsMethodEnum(str, Enum):
+class CreateFleetCreateFleetRequestIPCommandsMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -13,7 +13,7 @@ class CreateFleetRequestBodyIPCommandsMethodEnum(str, Enum):
     PUT = "PUT"
     DELETE = "DELETE"
 
-class CreateFleetRequestBodySmsCommandsMethodEnum(str, Enum):
+class CreateFleetCreateFleetRequestSmsCommandsMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -23,14 +23,14 @@ class CreateFleetRequestBodySmsCommandsMethodEnum(str, Enum):
 
 
 @dataclass
-class CreateFleetRequestBodyCreateFleetRequest:
+class CreateFleetCreateFleetRequest:
     data_enabled: Optional[bool] = field(default=None, metadata={'form': { 'field_name': 'DataEnabled' }})
     data_limit: Optional[int] = field(default=None, metadata={'form': { 'field_name': 'DataLimit' }})
-    ip_commands_method: Optional[CreateFleetRequestBodyIPCommandsMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'IpCommandsMethod' }})
+    ip_commands_method: Optional[CreateFleetCreateFleetRequestIPCommandsMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'IpCommandsMethod' }})
     ip_commands_url: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'IpCommandsUrl' }})
     network_access_profile: str = field(default=None, metadata={'form': { 'field_name': 'NetworkAccessProfile' }})
     sms_commands_enabled: Optional[bool] = field(default=None, metadata={'form': { 'field_name': 'SmsCommandsEnabled' }})
-    sms_commands_method: Optional[CreateFleetRequestBodySmsCommandsMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'SmsCommandsMethod' }})
+    sms_commands_method: Optional[CreateFleetCreateFleetRequestSmsCommandsMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'SmsCommandsMethod' }})
     sms_commands_url: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'SmsCommandsUrl' }})
     unique_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'UniqueName' }})
     
@@ -43,7 +43,7 @@ class CreateFleetSecurity:
 @dataclass
 class CreateFleetRequest:
     server_url: Optional[str] = field(default=None)
-    request: Optional[CreateFleetRequestBodyCreateFleetRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateFleetCreateFleetRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateFleetSecurity = field(default=None)
     
 

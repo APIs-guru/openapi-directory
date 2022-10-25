@@ -8,26 +8,26 @@ var CreateTrunkServers = []string{
 	"https://trunking.twilio.com",
 }
 
-type CreateTrunkRequestBodyDisasterRecoveryMethodEnum string
+type CreateTrunkCreateTrunkRequestDisasterRecoveryMethodEnum string
 
 const (
-	CreateTrunkRequestBodyDisasterRecoveryMethodEnumHead   CreateTrunkRequestBodyDisasterRecoveryMethodEnum = "HEAD"
-	CreateTrunkRequestBodyDisasterRecoveryMethodEnumGet    CreateTrunkRequestBodyDisasterRecoveryMethodEnum = "GET"
-	CreateTrunkRequestBodyDisasterRecoveryMethodEnumPost   CreateTrunkRequestBodyDisasterRecoveryMethodEnum = "POST"
-	CreateTrunkRequestBodyDisasterRecoveryMethodEnumPatch  CreateTrunkRequestBodyDisasterRecoveryMethodEnum = "PATCH"
-	CreateTrunkRequestBodyDisasterRecoveryMethodEnumPut    CreateTrunkRequestBodyDisasterRecoveryMethodEnum = "PUT"
-	CreateTrunkRequestBodyDisasterRecoveryMethodEnumDelete CreateTrunkRequestBodyDisasterRecoveryMethodEnum = "DELETE"
+	CreateTrunkCreateTrunkRequestDisasterRecoveryMethodEnumHead   CreateTrunkCreateTrunkRequestDisasterRecoveryMethodEnum = "HEAD"
+	CreateTrunkCreateTrunkRequestDisasterRecoveryMethodEnumGet    CreateTrunkCreateTrunkRequestDisasterRecoveryMethodEnum = "GET"
+	CreateTrunkCreateTrunkRequestDisasterRecoveryMethodEnumPost   CreateTrunkCreateTrunkRequestDisasterRecoveryMethodEnum = "POST"
+	CreateTrunkCreateTrunkRequestDisasterRecoveryMethodEnumPatch  CreateTrunkCreateTrunkRequestDisasterRecoveryMethodEnum = "PATCH"
+	CreateTrunkCreateTrunkRequestDisasterRecoveryMethodEnumPut    CreateTrunkCreateTrunkRequestDisasterRecoveryMethodEnum = "PUT"
+	CreateTrunkCreateTrunkRequestDisasterRecoveryMethodEnumDelete CreateTrunkCreateTrunkRequestDisasterRecoveryMethodEnum = "DELETE"
 )
 
-type CreateTrunkRequestBodyCreateTrunkRequest struct {
-	CnamLookupEnabled      *bool                                             `form:"name=CnamLookupEnabled"`
-	DisasterRecoveryMethod *CreateTrunkRequestBodyDisasterRecoveryMethodEnum `form:"name=DisasterRecoveryMethod"`
-	DisasterRecoveryURL    *string                                           `form:"name=DisasterRecoveryUrl"`
-	DomainName             *string                                           `form:"name=DomainName"`
-	FriendlyName           *string                                           `form:"name=FriendlyName"`
-	Secure                 *bool                                             `form:"name=Secure"`
-	TransferCallerID       *shared.TrunkEnumTransferCallerIDEnum             `form:"name=TransferCallerId"`
-	TransferMode           *shared.TrunkEnumTransferSettingEnum              `form:"name=TransferMode"`
+type CreateTrunkCreateTrunkRequest struct {
+	CnamLookupEnabled      *bool                                                    `form:"name=CnamLookupEnabled"`
+	DisasterRecoveryMethod *CreateTrunkCreateTrunkRequestDisasterRecoveryMethodEnum `form:"name=DisasterRecoveryMethod"`
+	DisasterRecoveryURL    *string                                                  `form:"name=DisasterRecoveryUrl"`
+	DomainName             *string                                                  `form:"name=DomainName"`
+	FriendlyName           *string                                                  `form:"name=FriendlyName"`
+	Secure                 *bool                                                    `form:"name=Secure"`
+	TransferCallerID       *shared.TrunkEnumTransferCallerIDEnum                    `form:"name=TransferCallerId"`
+	TransferMode           *shared.TrunkEnumTransferSettingEnum                     `form:"name=TransferMode"`
 }
 
 type CreateTrunkSecurity struct {
@@ -36,7 +36,7 @@ type CreateTrunkSecurity struct {
 
 type CreateTrunkRequest struct {
 	ServerURL *string
-	Request   *CreateTrunkRequestBodyCreateTrunkRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request   *CreateTrunkCreateTrunkRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security  CreateTrunkSecurity
 }
 

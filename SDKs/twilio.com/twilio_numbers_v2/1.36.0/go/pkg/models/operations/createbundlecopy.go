@@ -12,7 +12,7 @@ type CreateBundleCopyPathParams struct {
 	BundleSid string `pathParam:"style=simple,explode=false,name=BundleSid"`
 }
 
-type CreateBundleCopyRequestBodyCreateBundleCopyRequest struct {
+type CreateBundleCopyCreateBundleCopyRequest struct {
 	FriendlyName *string `form:"name=FriendlyName"`
 }
 
@@ -23,7 +23,7 @@ type CreateBundleCopySecurity struct {
 type CreateBundleCopyRequest struct {
 	ServerURL  *string
 	PathParams CreateBundleCopyPathParams
-	Request    *CreateBundleCopyRequestBodyCreateBundleCopyRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateBundleCopyCreateBundleCopyRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateBundleCopySecurity
 }
 

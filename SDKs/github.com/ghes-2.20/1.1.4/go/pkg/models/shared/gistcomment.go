@@ -4,7 +4,7 @@ import (
 	"time"
 )
 
-type GistCommentUserSimpleUser struct {
+type GistCommentSimpleUser struct {
 	AvatarURL         string  `json:"avatar_url"`
 	EventsURL         string  `json:"events_url"`
 	FollowersURL      string  `json:"followers_url"`
@@ -27,12 +27,12 @@ type GistCommentUserSimpleUser struct {
 }
 
 type GistComment struct {
-	AuthorAssociation AuthorAssociationEnum     `json:"author_association"`
-	Body              string                    `json:"body"`
-	CreatedAt         time.Time                 `json:"created_at"`
-	ID                int64                     `json:"id"`
-	NodeID            string                    `json:"node_id"`
-	UpdatedAt         time.Time                 `json:"updated_at"`
-	URL               string                    `json:"url"`
-	User              GistCommentUserSimpleUser `json:"user"`
+	AuthorAssociation AuthorAssociationEnum `json:"author_association"`
+	Body              string                `json:"body"`
+	CreatedAt         time.Time             `json:"created_at"`
+	ID                int64                 `json:"id"`
+	NodeID            string                `json:"node_id"`
+	UpdatedAt         time.Time             `json:"updated_at"`
+	URL               string                `json:"url"`
+	User              GistCommentSimpleUser `json:"user"`
 }

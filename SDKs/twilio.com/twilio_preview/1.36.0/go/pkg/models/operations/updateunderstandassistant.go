@@ -12,7 +12,7 @@ type UpdateUnderstandAssistantPathParams struct {
 	Sid string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
-type UpdateUnderstandAssistantRequestBodyUpdateUnderstandAssistantRequest struct {
+type UpdateUnderstandAssistantUpdateUnderstandAssistantRequest struct {
 	CallbackEvents    *string      `form:"name=CallbackEvents"`
 	CallbackURL       *string      `form:"name=CallbackUrl"`
 	FallbackActions   *interface{} `form:"name=FallbackActions"`
@@ -30,7 +30,7 @@ type UpdateUnderstandAssistantSecurity struct {
 type UpdateUnderstandAssistantRequest struct {
 	ServerURL  *string
 	PathParams UpdateUnderstandAssistantPathParams
-	Request    *UpdateUnderstandAssistantRequestBodyUpdateUnderstandAssistantRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateUnderstandAssistantUpdateUnderstandAssistantRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateUnderstandAssistantSecurity
 }
 

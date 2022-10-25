@@ -12,7 +12,7 @@ type UpdatePhoneNumberPathParams struct {
 	PhoneNumber string `pathParam:"style=simple,explode=false,name=PhoneNumber"`
 }
 
-type UpdatePhoneNumberRequestBodyUpdatePhoneNumberRequest struct {
+type UpdatePhoneNumberUpdatePhoneNumberRequest struct {
 	FriendlyName *string `form:"name=FriendlyName"`
 	VoiceRegion  *string `form:"name=VoiceRegion"`
 }
@@ -24,7 +24,7 @@ type UpdatePhoneNumberSecurity struct {
 type UpdatePhoneNumberRequest struct {
 	ServerURL  *string
 	PathParams UpdatePhoneNumberPathParams
-	Request    *UpdatePhoneNumberRequestBodyUpdatePhoneNumberRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdatePhoneNumberUpdatePhoneNumberRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdatePhoneNumberSecurity
 }
 

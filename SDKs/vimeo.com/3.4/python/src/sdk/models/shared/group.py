@@ -417,7 +417,7 @@ class GroupUserWebsites:
 
 @dataclass_json
 @dataclass
-class GroupUserUser:
+class GroupUser:
     account: GroupUserAccountEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'account' }})
     bio: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'bio' }})
     content_filter: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'content_filter' }})
@@ -448,5 +448,5 @@ class Group:
     privacy: GroupPrivacy = field(default=None, metadata={'dataclasses_json': { 'field_name': 'privacy' }})
     resource_key: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resource_key' }})
     uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
-    user: Optional[GroupUserUser] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'user' }})
+    user: Optional[GroupUser] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'user' }})
     

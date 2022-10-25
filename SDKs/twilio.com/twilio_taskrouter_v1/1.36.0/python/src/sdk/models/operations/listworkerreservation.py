@@ -34,7 +34,7 @@ class ListWorkerReservationRequest:
 
 @dataclass_json
 @dataclass
-class ListWorkerReservation200ApplicationJSONMeta:
+class ListWorkerReservationListWorkerReservationResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -46,14 +46,14 @@ class ListWorkerReservation200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListWorkerReservation200ApplicationJSONListWorkerReservationResponse:
-    meta: Optional[ListWorkerReservation200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+class ListWorkerReservationListWorkerReservationResponse:
+    meta: Optional[ListWorkerReservationListWorkerReservationResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     reservations: Optional[List[shared.TaskrouterV1WorkspaceWorkerWorkerReservation]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'reservations' }})
     
 
 @dataclass
 class ListWorkerReservationResponse:
     content_type: str = field(default=None)
-    list_worker_reservation_response: Optional[ListWorkerReservation200ApplicationJSONListWorkerReservationResponse] = field(default=None)
+    list_worker_reservation_response: Optional[ListWorkerReservationListWorkerReservationResponse] = field(default=None)
     status_code: int = field(default=None)
     

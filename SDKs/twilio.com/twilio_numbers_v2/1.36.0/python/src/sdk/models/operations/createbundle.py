@@ -7,7 +7,7 @@ CREATE_BUNDLE_SERVERS = [
 
 
 @dataclass
-class CreateBundleRequestBodyCreateBundleRequest:
+class CreateBundleCreateBundleRequest:
     email: str = field(default=None, metadata={'form': { 'field_name': 'Email' }})
     end_user_type: Optional[shared.BundleEnumEndUserTypeEnum] = field(default=None, metadata={'form': { 'field_name': 'EndUserType' }})
     friendly_name: str = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
@@ -25,7 +25,7 @@ class CreateBundleSecurity:
 @dataclass
 class CreateBundleRequest:
     server_url: Optional[str] = field(default=None)
-    request: Optional[CreateBundleRequestBodyCreateBundleRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateBundleCreateBundleRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateBundleSecurity = field(default=None)
     
 

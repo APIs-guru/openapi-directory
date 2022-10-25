@@ -12,7 +12,7 @@ type CreateShortCodePathParams struct {
 	ServiceSid string `pathParam:"style=simple,explode=false,name=ServiceSid"`
 }
 
-type CreateShortCodeRequestBodyCreateShortCodeRequest struct {
+type CreateShortCodeCreateShortCodeRequest struct {
 	ShortCodeSid string `form:"name=ShortCodeSid"`
 }
 
@@ -23,7 +23,7 @@ type CreateShortCodeSecurity struct {
 type CreateShortCodeRequest struct {
 	ServerURL  *string
 	PathParams CreateShortCodePathParams
-	Request    *CreateShortCodeRequestBodyCreateShortCodeRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateShortCodeCreateShortCodeRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateShortCodeSecurity
 }
 

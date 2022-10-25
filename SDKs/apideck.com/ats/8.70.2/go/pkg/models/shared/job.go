@@ -4,7 +4,7 @@ import (
 	"time"
 )
 
-type JobBranchBranch struct {
+type JobBranch struct {
 	ID   *string `json:"id,omitempty"`
 	Name *string `json:"name,omitempty"`
 }
@@ -41,7 +41,7 @@ type Job struct {
 	Addresses            []Address               `json:"addresses,omitempty"`
 	AvailableToEmployees *bool                   `json:"available_to_employees,omitempty"`
 	Blocks               []interface{}           `json:"blocks,omitempty"`
-	Branch               *JobBranchBranch        `json:"branch,omitempty"`
+	Branch               *JobBranch              `json:"branch,omitempty"`
 	Closing              *string                 `json:"closing,omitempty"`
 	ClosingDate          *time.Time              `json:"closing_date,omitempty"`
 	ClosingHTML          *string                 `json:"closing_html,omitempty"`

@@ -3,7 +3,7 @@ from typing import Enum,List,Optional
 from dataclasses_json import dataclass_json
 from . import nestedcable
 
-class WritableConsolePortTypeTypeEnum(str, Enum):
+class WritableConsolePortTypeEnum(str, Enum):
     DE_9 = "de-9"
     DB_25 = "db-25"
     RJ_11 = "rj-11"
@@ -31,5 +31,5 @@ class WritableConsolePort:
     id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
     tags: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
-    type: Optional[WritableConsolePortTypeTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    type: Optional[WritableConsolePortTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     

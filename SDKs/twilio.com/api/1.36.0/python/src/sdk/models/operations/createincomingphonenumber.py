@@ -10,7 +10,7 @@ CREATE_INCOMING_PHONE_NUMBER_SERVERS = [
 class CreateIncomingPhoneNumberPathParams:
     account_sid: str = field(default=None, metadata={'path_param': { 'field_name': 'AccountSid', 'style': 'simple', 'explode': False }})
     
-class CreateIncomingPhoneNumberRequestBodySmsFallbackMethodEnum(str, Enum):
+class CreateIncomingPhoneNumberCreateIncomingPhoneNumberRequestSmsFallbackMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -18,7 +18,7 @@ class CreateIncomingPhoneNumberRequestBodySmsFallbackMethodEnum(str, Enum):
     PUT = "PUT"
     DELETE = "DELETE"
 
-class CreateIncomingPhoneNumberRequestBodySmsMethodEnum(str, Enum):
+class CreateIncomingPhoneNumberCreateIncomingPhoneNumberRequestSmsMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -26,7 +26,7 @@ class CreateIncomingPhoneNumberRequestBodySmsMethodEnum(str, Enum):
     PUT = "PUT"
     DELETE = "DELETE"
 
-class CreateIncomingPhoneNumberRequestBodyStatusCallbackMethodEnum(str, Enum):
+class CreateIncomingPhoneNumberCreateIncomingPhoneNumberRequestStatusCallbackMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -34,7 +34,7 @@ class CreateIncomingPhoneNumberRequestBodyStatusCallbackMethodEnum(str, Enum):
     PUT = "PUT"
     DELETE = "DELETE"
 
-class CreateIncomingPhoneNumberRequestBodyVoiceFallbackMethodEnum(str, Enum):
+class CreateIncomingPhoneNumberCreateIncomingPhoneNumberRequestVoiceFallbackMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -42,7 +42,7 @@ class CreateIncomingPhoneNumberRequestBodyVoiceFallbackMethodEnum(str, Enum):
     PUT = "PUT"
     DELETE = "DELETE"
 
-class CreateIncomingPhoneNumberRequestBodyVoiceMethodEnum(str, Enum):
+class CreateIncomingPhoneNumberCreateIncomingPhoneNumberRequestVoiceMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -52,7 +52,7 @@ class CreateIncomingPhoneNumberRequestBodyVoiceMethodEnum(str, Enum):
 
 
 @dataclass
-class CreateIncomingPhoneNumberRequestBodyCreateIncomingPhoneNumberRequest:
+class CreateIncomingPhoneNumberCreateIncomingPhoneNumberRequest:
     address_sid: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'AddressSid' }})
     api_version: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'ApiVersion' }})
     area_code: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'AreaCode' }})
@@ -63,18 +63,18 @@ class CreateIncomingPhoneNumberRequestBodyCreateIncomingPhoneNumberRequest:
     identity_sid: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'IdentitySid' }})
     phone_number: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'PhoneNumber' }})
     sms_application_sid: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'SmsApplicationSid' }})
-    sms_fallback_method: Optional[CreateIncomingPhoneNumberRequestBodySmsFallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'SmsFallbackMethod' }})
+    sms_fallback_method: Optional[CreateIncomingPhoneNumberCreateIncomingPhoneNumberRequestSmsFallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'SmsFallbackMethod' }})
     sms_fallback_url: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'SmsFallbackUrl' }})
-    sms_method: Optional[CreateIncomingPhoneNumberRequestBodySmsMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'SmsMethod' }})
+    sms_method: Optional[CreateIncomingPhoneNumberCreateIncomingPhoneNumberRequestSmsMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'SmsMethod' }})
     sms_url: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'SmsUrl' }})
     status_callback: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'StatusCallback' }})
-    status_callback_method: Optional[CreateIncomingPhoneNumberRequestBodyStatusCallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'StatusCallbackMethod' }})
+    status_callback_method: Optional[CreateIncomingPhoneNumberCreateIncomingPhoneNumberRequestStatusCallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'StatusCallbackMethod' }})
     trunk_sid: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'TrunkSid' }})
     voice_application_sid: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'VoiceApplicationSid' }})
     voice_caller_id_lookup: Optional[bool] = field(default=None, metadata={'form': { 'field_name': 'VoiceCallerIdLookup' }})
-    voice_fallback_method: Optional[CreateIncomingPhoneNumberRequestBodyVoiceFallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'VoiceFallbackMethod' }})
+    voice_fallback_method: Optional[CreateIncomingPhoneNumberCreateIncomingPhoneNumberRequestVoiceFallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'VoiceFallbackMethod' }})
     voice_fallback_url: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'VoiceFallbackUrl' }})
-    voice_method: Optional[CreateIncomingPhoneNumberRequestBodyVoiceMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'VoiceMethod' }})
+    voice_method: Optional[CreateIncomingPhoneNumberCreateIncomingPhoneNumberRequestVoiceMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'VoiceMethod' }})
     voice_receive_mode: Optional[shared.IncomingPhoneNumberEnumVoiceReceiveModeEnum] = field(default=None, metadata={'form': { 'field_name': 'VoiceReceiveMode' }})
     voice_url: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'VoiceUrl' }})
     
@@ -88,7 +88,7 @@ class CreateIncomingPhoneNumberSecurity:
 class CreateIncomingPhoneNumberRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateIncomingPhoneNumberPathParams = field(default=None)
-    request: Optional[CreateIncomingPhoneNumberRequestBodyCreateIncomingPhoneNumberRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateIncomingPhoneNumberCreateIncomingPhoneNumberRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateIncomingPhoneNumberSecurity = field(default=None)
     
 

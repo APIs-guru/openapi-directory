@@ -12,7 +12,7 @@ class CreateTrustProductChannelEndpointAssignmentPathParams:
     
 
 @dataclass
-class CreateTrustProductChannelEndpointAssignmentRequestBodyCreateTrustProductChannelEndpointAssignmentRequest:
+class CreateTrustProductChannelEndpointAssignmentCreateTrustProductChannelEndpointAssignmentRequest:
     channel_endpoint_sid: str = field(default=None, metadata={'form': { 'field_name': 'ChannelEndpointSid' }})
     channel_endpoint_type: str = field(default=None, metadata={'form': { 'field_name': 'ChannelEndpointType' }})
     
@@ -26,7 +26,7 @@ class CreateTrustProductChannelEndpointAssignmentSecurity:
 class CreateTrustProductChannelEndpointAssignmentRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateTrustProductChannelEndpointAssignmentPathParams = field(default=None)
-    request: Optional[CreateTrustProductChannelEndpointAssignmentRequestBodyCreateTrustProductChannelEndpointAssignmentRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateTrustProductChannelEndpointAssignmentCreateTrustProductChannelEndpointAssignmentRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateTrustProductChannelEndpointAssignmentSecurity = field(default=None)
     
 

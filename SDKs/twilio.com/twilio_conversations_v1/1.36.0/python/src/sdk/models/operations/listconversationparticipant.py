@@ -32,7 +32,7 @@ class ListConversationParticipantRequest:
 
 @dataclass_json
 @dataclass
-class ListConversationParticipant200ApplicationJSONMeta:
+class ListConversationParticipantListConversationParticipantResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -44,14 +44,14 @@ class ListConversationParticipant200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListConversationParticipant200ApplicationJSONListConversationParticipantResponse:
-    meta: Optional[ListConversationParticipant200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+class ListConversationParticipantListConversationParticipantResponse:
+    meta: Optional[ListConversationParticipantListConversationParticipantResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     participants: Optional[List[shared.ConversationsV1ConversationConversationParticipant]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'participants' }})
     
 
 @dataclass
 class ListConversationParticipantResponse:
     content_type: str = field(default=None)
-    list_conversation_participant_response: Optional[ListConversationParticipant200ApplicationJSONListConversationParticipantResponse] = field(default=None)
+    list_conversation_participant_response: Optional[ListConversationParticipantListConversationParticipantResponse] = field(default=None)
     status_code: int = field(default=None)
     

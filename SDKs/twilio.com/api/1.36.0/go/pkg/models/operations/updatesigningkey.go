@@ -13,7 +13,7 @@ type UpdateSigningKeyPathParams struct {
 	Sid        string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
-type UpdateSigningKeyRequestBodyUpdateSigningKeyRequest struct {
+type UpdateSigningKeyUpdateSigningKeyRequest struct {
 	FriendlyName *string `form:"name=FriendlyName"`
 }
 
@@ -24,7 +24,7 @@ type UpdateSigningKeySecurity struct {
 type UpdateSigningKeyRequest struct {
 	ServerURL  *string
 	PathParams UpdateSigningKeyPathParams
-	Request    *UpdateSigningKeyRequestBodyUpdateSigningKeyRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateSigningKeyUpdateSigningKeyRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateSigningKeySecurity
 }
 

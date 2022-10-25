@@ -408,7 +408,8 @@ func (s *SDK) ConnectorDocsOne(ctx context.Context, request operations.Connector
 				return nil, fmt.Errorf("error reading response body: %w", err)
 			}
 
-			res.Body = data
+			out := string(data)
+			res.ConnectorDocsOne200TextMarkdownMarkdownString = &out
 		}
 	case httpRes.StatusCode == 401:
 		switch {

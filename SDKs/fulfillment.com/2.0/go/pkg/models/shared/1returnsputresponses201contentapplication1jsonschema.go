@@ -9,13 +9,13 @@ type OnereturnsPutResponses201ContentApplication1jsonSchemaItems struct {
 	Sku              string `json:"sku"`
 }
 
-type OnereturnsPutResponses201ContentApplication1jsonSchemaRecipientIsoIsoCountryV2 struct {
+type OnereturnsPutResponses201ContentApplication1jsonSchemaConsigneeV2IsoCountryV2 struct {
 	ID   *int64  `json:"id,omitempty"`
 	Iso2 *string `json:"iso2,omitempty"`
 	Name *string `json:"name,omitempty"`
 }
 
-type OnereturnsPutResponses201ContentApplication1jsonSchemaRecipientConsigneeV2 struct {
+type OnereturnsPutResponses201ContentApplication1jsonSchemaConsigneeV2 struct {
 	Address1        string                                                                                        `json:"address1"`
 	Address2        *string                                                                                       `json:"address2,omitempty"`
 	AddressLocality string                                                                                        `json:"addressLocality"`
@@ -25,7 +25,7 @@ type OnereturnsPutResponses201ContentApplication1jsonSchemaRecipientConsigneeV2 
 	Email           *string                                                                                       `json:"email,omitempty"`
 	FirstName       string                                                                                        `json:"firstName"`
 	ID              int64                                                                                         `json:"id"`
-	Iso             *OnereturnsPutResponses201ContentApplication1jsonSchemaRecipientIsoIsoCountryV2               `json:"iso,omitempty"`
+	Iso             *OnereturnsPutResponses201ContentApplication1jsonSchemaConsigneeV2IsoCountryV2                `json:"iso,omitempty"`
 	LastName        string                                                                                        `json:"lastName"`
 	Phone           *string                                                                                       `json:"phone,omitempty"`
 	PostalCode      string                                                                                        `json:"postalCode"`
@@ -34,8 +34,8 @@ type OnereturnsPutResponses201ContentApplication1jsonSchemaRecipientConsigneeV2 
 }
 
 type OnereturnsPutResponses201ContentApplication1jsonSchema struct {
-	Items           []OnereturnsPutResponses201ContentApplication1jsonSchemaItems              `json:"items"`
-	MerchantOrderID *string                                                                    `json:"merchantOrderId,omitempty"`
-	Recipient       OnereturnsPutResponses201ContentApplication1jsonSchemaRecipientConsigneeV2 `json:"recipient"`
-	RmaNumber       string                                                                     `json:"rmaNumber"`
+	Items           []OnereturnsPutResponses201ContentApplication1jsonSchemaItems     `json:"items"`
+	MerchantOrderID *string                                                           `json:"merchantOrderId,omitempty"`
+	Recipient       OnereturnsPutResponses201ContentApplication1jsonSchemaConsigneeV2 `json:"recipient"`
+	RmaNumber       string                                                            `json:"rmaNumber"`
 }

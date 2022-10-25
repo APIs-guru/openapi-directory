@@ -30,7 +30,7 @@ class ListMediaRecordingRequest:
 
 @dataclass_json
 @dataclass
-class ListMediaRecording200ApplicationJSONMeta:
+class ListMediaRecordingListMediaRecordingResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -42,14 +42,14 @@ class ListMediaRecording200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListMediaRecording200ApplicationJSONListMediaRecordingResponse:
+class ListMediaRecordingListMediaRecordingResponse:
     media_recordings: Optional[List[shared.MediaV1MediaRecording]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'media_recordings' }})
-    meta: Optional[ListMediaRecording200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+    meta: Optional[ListMediaRecordingListMediaRecordingResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     
 
 @dataclass
 class ListMediaRecordingResponse:
     content_type: str = field(default=None)
-    list_media_recording_response: Optional[ListMediaRecording200ApplicationJSONListMediaRecordingResponse] = field(default=None)
+    list_media_recording_response: Optional[ListMediaRecordingListMediaRecordingResponse] = field(default=None)
     status_code: int = field(default=None)
     

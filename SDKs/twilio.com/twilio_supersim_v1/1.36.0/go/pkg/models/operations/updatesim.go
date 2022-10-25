@@ -12,24 +12,24 @@ type UpdateSimPathParams struct {
 	Sid string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
-type UpdateSimRequestBodyCallbackMethodEnum string
+type UpdateSimUpdateSimRequestCallbackMethodEnum string
 
 const (
-	UpdateSimRequestBodyCallbackMethodEnumHead   UpdateSimRequestBodyCallbackMethodEnum = "HEAD"
-	UpdateSimRequestBodyCallbackMethodEnumGet    UpdateSimRequestBodyCallbackMethodEnum = "GET"
-	UpdateSimRequestBodyCallbackMethodEnumPost   UpdateSimRequestBodyCallbackMethodEnum = "POST"
-	UpdateSimRequestBodyCallbackMethodEnumPatch  UpdateSimRequestBodyCallbackMethodEnum = "PATCH"
-	UpdateSimRequestBodyCallbackMethodEnumPut    UpdateSimRequestBodyCallbackMethodEnum = "PUT"
-	UpdateSimRequestBodyCallbackMethodEnumDelete UpdateSimRequestBodyCallbackMethodEnum = "DELETE"
+	UpdateSimUpdateSimRequestCallbackMethodEnumHead   UpdateSimUpdateSimRequestCallbackMethodEnum = "HEAD"
+	UpdateSimUpdateSimRequestCallbackMethodEnumGet    UpdateSimUpdateSimRequestCallbackMethodEnum = "GET"
+	UpdateSimUpdateSimRequestCallbackMethodEnumPost   UpdateSimUpdateSimRequestCallbackMethodEnum = "POST"
+	UpdateSimUpdateSimRequestCallbackMethodEnumPatch  UpdateSimUpdateSimRequestCallbackMethodEnum = "PATCH"
+	UpdateSimUpdateSimRequestCallbackMethodEnumPut    UpdateSimUpdateSimRequestCallbackMethodEnum = "PUT"
+	UpdateSimUpdateSimRequestCallbackMethodEnumDelete UpdateSimUpdateSimRequestCallbackMethodEnum = "DELETE"
 )
 
-type UpdateSimRequestBodyUpdateSimRequest struct {
-	AccountSid     *string                                 `form:"name=AccountSid"`
-	CallbackMethod *UpdateSimRequestBodyCallbackMethodEnum `form:"name=CallbackMethod"`
-	CallbackURL    *string                                 `form:"name=CallbackUrl"`
-	Fleet          *string                                 `form:"name=Fleet"`
-	Status         *shared.SimEnumStatusUpdateEnum         `form:"name=Status"`
-	UniqueName     *string                                 `form:"name=UniqueName"`
+type UpdateSimUpdateSimRequest struct {
+	AccountSid     *string                                      `form:"name=AccountSid"`
+	CallbackMethod *UpdateSimUpdateSimRequestCallbackMethodEnum `form:"name=CallbackMethod"`
+	CallbackURL    *string                                      `form:"name=CallbackUrl"`
+	Fleet          *string                                      `form:"name=Fleet"`
+	Status         *shared.SimEnumStatusUpdateEnum              `form:"name=Status"`
+	UniqueName     *string                                      `form:"name=UniqueName"`
 }
 
 type UpdateSimSecurity struct {
@@ -39,7 +39,7 @@ type UpdateSimSecurity struct {
 type UpdateSimRequest struct {
 	ServerURL  *string
 	PathParams UpdateSimPathParams
-	Request    *UpdateSimRequestBodyUpdateSimRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateSimUpdateSimRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateSimSecurity
 }
 

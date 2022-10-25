@@ -10,30 +10,30 @@ class PostServersIDActionsDetachFromNetworkPathParams:
 
 @dataclass_json
 @dataclass
-class PostServersIDActionsDetachFromNetworkRequestBodyDetachFromNetworkRequest:
+class PostServersIDActionsDetachFromNetworkDetachFromNetworkRequest:
     network: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'network' }})
     
 
 @dataclass
 class PostServersIDActionsDetachFromNetworkRequest:
     path_params: PostServersIDActionsDetachFromNetworkPathParams = field(default=None)
-    request: Optional[PostServersIDActionsDetachFromNetworkRequestBodyDetachFromNetworkRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: Optional[PostServersIDActionsDetachFromNetworkDetachFromNetworkRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass_json
 @dataclass
-class PostServersIDActionsDetachFromNetwork201ApplicationJSONActionError:
+class PostServersIDActionsDetachFromNetworkActionResponseActionError:
     code: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'code' }})
     message: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'message' }})
     
 
 @dataclass_json
 @dataclass
-class PostServersIDActionsDetachFromNetwork201ApplicationJSONActionResources:
+class PostServersIDActionsDetachFromNetworkActionResponseActionResources:
     id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     type: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     
-class PostServersIDActionsDetachFromNetwork201ApplicationJSONActionStatusEnum(str, Enum):
+class PostServersIDActionsDetachFromNetworkActionResponseActionStatusEnum(str, Enum):
     SUCCESS = "success"
     RUNNING = "running"
     ERROR = "error"
@@ -41,26 +41,26 @@ class PostServersIDActionsDetachFromNetwork201ApplicationJSONActionStatusEnum(st
 
 @dataclass_json
 @dataclass
-class PostServersIDActionsDetachFromNetwork201ApplicationJSONActionAction:
+class PostServersIDActionsDetachFromNetworkActionResponseAction:
     command: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'command' }})
-    error: PostServersIDActionsDetachFromNetwork201ApplicationJSONActionError = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
+    error: PostServersIDActionsDetachFromNetworkActionResponseActionError = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
     finished: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'finished' }})
     id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     progress: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'progress' }})
-    resources: List[PostServersIDActionsDetachFromNetwork201ApplicationJSONActionResources] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resources' }})
+    resources: List[PostServersIDActionsDetachFromNetworkActionResponseActionResources] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resources' }})
     started: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'started' }})
-    status: PostServersIDActionsDetachFromNetwork201ApplicationJSONActionStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    status: PostServersIDActionsDetachFromNetworkActionResponseActionStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
     
 
 @dataclass_json
 @dataclass
-class PostServersIDActionsDetachFromNetwork201ApplicationJSONActionResponse:
-    action: PostServersIDActionsDetachFromNetwork201ApplicationJSONActionAction = field(default=None, metadata={'dataclasses_json': { 'field_name': 'action' }})
+class PostServersIDActionsDetachFromNetworkActionResponse:
+    action: PostServersIDActionsDetachFromNetworkActionResponseAction = field(default=None, metadata={'dataclasses_json': { 'field_name': 'action' }})
     
 
 @dataclass
 class PostServersIDActionsDetachFromNetworkResponse:
-    action_response: Optional[PostServersIDActionsDetachFromNetwork201ApplicationJSONActionResponse] = field(default=None)
+    action_response: Optional[PostServersIDActionsDetachFromNetworkActionResponse] = field(default=None)
     content_type: str = field(default=None)
     status_code: int = field(default=None)
     

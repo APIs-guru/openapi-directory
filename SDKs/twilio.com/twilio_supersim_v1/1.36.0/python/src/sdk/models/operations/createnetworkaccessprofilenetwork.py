@@ -12,7 +12,7 @@ class CreateNetworkAccessProfileNetworkPathParams:
     
 
 @dataclass
-class CreateNetworkAccessProfileNetworkRequestBodyCreateNetworkAccessProfileNetworkRequest:
+class CreateNetworkAccessProfileNetworkCreateNetworkAccessProfileNetworkRequest:
     network: str = field(default=None, metadata={'form': { 'field_name': 'Network' }})
     
 
@@ -25,7 +25,7 @@ class CreateNetworkAccessProfileNetworkSecurity:
 class CreateNetworkAccessProfileNetworkRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateNetworkAccessProfileNetworkPathParams = field(default=None)
-    request: Optional[CreateNetworkAccessProfileNetworkRequestBodyCreateNetworkAccessProfileNetworkRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateNetworkAccessProfileNetworkCreateNetworkAccessProfileNetworkRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateNetworkAccessProfileNetworkSecurity = field(default=None)
     
 

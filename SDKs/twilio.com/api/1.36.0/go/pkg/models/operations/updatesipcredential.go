@@ -14,7 +14,7 @@ type UpdateSipCredentialPathParams struct {
 	Sid               string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
-type UpdateSipCredentialRequestBodyUpdateSipCredentialRequest struct {
+type UpdateSipCredentialUpdateSipCredentialRequest struct {
 	Password *string `form:"name=Password"`
 }
 
@@ -25,7 +25,7 @@ type UpdateSipCredentialSecurity struct {
 type UpdateSipCredentialRequest struct {
 	ServerURL  *string
 	PathParams UpdateSipCredentialPathParams
-	Request    *UpdateSipCredentialRequestBodyUpdateSipCredentialRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateSipCredentialUpdateSipCredentialRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateSipCredentialSecurity
 }
 

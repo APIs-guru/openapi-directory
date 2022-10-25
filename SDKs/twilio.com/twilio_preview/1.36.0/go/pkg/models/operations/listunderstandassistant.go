@@ -22,7 +22,7 @@ type ListUnderstandAssistantRequest struct {
 	Security    ListUnderstandAssistantSecurity
 }
 
-type ListUnderstandAssistant200ApplicationJSONMeta struct {
+type ListUnderstandAssistantListUnderstandAssistantResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -32,13 +32,13 @@ type ListUnderstandAssistant200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListUnderstandAssistant200ApplicationJSONListUnderstandAssistantResponse struct {
-	Assistants []shared.PreviewUnderstandAssistant            `json:"assistants,omitempty"`
-	Meta       *ListUnderstandAssistant200ApplicationJSONMeta `json:"meta,omitempty"`
+type ListUnderstandAssistantListUnderstandAssistantResponse struct {
+	Assistants []shared.PreviewUnderstandAssistant                         `json:"assistants,omitempty"`
+	Meta       *ListUnderstandAssistantListUnderstandAssistantResponseMeta `json:"meta,omitempty"`
 }
 
 type ListUnderstandAssistantResponse struct {
 	ContentType                     string
-	ListUnderstandAssistantResponse *ListUnderstandAssistant200ApplicationJSONListUnderstandAssistantResponse
+	ListUnderstandAssistantResponse *ListUnderstandAssistantListUnderstandAssistantResponse
 	StatusCode                      int64
 }

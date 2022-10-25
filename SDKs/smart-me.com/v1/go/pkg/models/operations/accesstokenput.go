@@ -18,8 +18,9 @@ type AccessTokenPutRequest struct {
 
 type AccessTokenPutResponse struct {
 	AccessTokenPut200ApplicationJSONString *string
+	AccessTokenPut200ApplicationXMLString  *string
 	AccessTokenPut200TextJSONString        *string
-	Body                                   []byte
+	AccessTokenPut200TextXMLString         *string
 	ContentType                            string
 	StatusCode                             int64
 }

@@ -32,7 +32,7 @@ class ListDialingPermissionsHrsPrefixesRequest:
 
 @dataclass_json
 @dataclass
-class ListDialingPermissionsHrsPrefixes200ApplicationJSONMeta:
+class ListDialingPermissionsHrsPrefixesListDialingPermissionsHrsPrefixesResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -44,14 +44,14 @@ class ListDialingPermissionsHrsPrefixes200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListDialingPermissionsHrsPrefixes200ApplicationJSONListDialingPermissionsHrsPrefixesResponse:
+class ListDialingPermissionsHrsPrefixesListDialingPermissionsHrsPrefixesResponse:
     content: Optional[List[shared.VoiceV1DialingPermissionsDialingPermissionsCountryDialingPermissionsHrsPrefixes]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'content' }})
-    meta: Optional[ListDialingPermissionsHrsPrefixes200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+    meta: Optional[ListDialingPermissionsHrsPrefixesListDialingPermissionsHrsPrefixesResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     
 
 @dataclass
 class ListDialingPermissionsHrsPrefixesResponse:
     content_type: str = field(default=None)
-    list_dialing_permissions_hrs_prefixes_response: Optional[ListDialingPermissionsHrsPrefixes200ApplicationJSONListDialingPermissionsHrsPrefixesResponse] = field(default=None)
+    list_dialing_permissions_hrs_prefixes_response: Optional[ListDialingPermissionsHrsPrefixesListDialingPermissionsHrsPrefixesResponse] = field(default=None)
     status_code: int = field(default=None)
     

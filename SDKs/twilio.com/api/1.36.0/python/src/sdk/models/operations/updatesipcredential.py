@@ -14,7 +14,7 @@ class UpdateSipCredentialPathParams:
     
 
 @dataclass
-class UpdateSipCredentialRequestBodyUpdateSipCredentialRequest:
+class UpdateSipCredentialUpdateSipCredentialRequest:
     password: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Password' }})
     
 
@@ -27,7 +27,7 @@ class UpdateSipCredentialSecurity:
 class UpdateSipCredentialRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateSipCredentialPathParams = field(default=None)
-    request: Optional[UpdateSipCredentialRequestBodyUpdateSipCredentialRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateSipCredentialUpdateSipCredentialRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateSipCredentialSecurity = field(default=None)
     
 

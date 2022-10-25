@@ -11,7 +11,7 @@ const (
 	IPAddressFamilyLabelEnumIPv6 IPAddressFamilyLabelEnum = "IPv6"
 )
 
-type IPAddressFamilyFamily struct {
+type IPAddressFamily struct {
 	Label IPAddressFamilyLabelEnum `json:"label"`
 	Value int64                    `json:"value"`
 }
@@ -42,7 +42,7 @@ const (
 	IPAddressRoleValueEnumCarp      IPAddressRoleValueEnum = "carp"
 )
 
-type IPAddressRoleRole struct {
+type IPAddressRole struct {
 	Label IPAddressRoleLabelEnum `json:"label"`
 	Value IPAddressRoleValueEnum `json:"value"`
 }
@@ -65,7 +65,7 @@ const (
 	IPAddressStatusValueEnumDhcp       IPAddressStatusValueEnum = "dhcp"
 )
 
-type IPAddressStatusStatus struct {
+type IPAddressStatus struct {
 	Label IPAddressStatusLabelEnum `json:"label"`
 	Value IPAddressStatusValueEnum `json:"value"`
 }
@@ -76,14 +76,14 @@ type IPAddress struct {
 	CustomFields map[string]interface{} `json:"custom_fields,omitempty"`
 	Description  *string                `json:"description,omitempty"`
 	DNSName      *string                `json:"dns_name,omitempty"`
-	Family       *IPAddressFamilyFamily `json:"family,omitempty"`
+	Family       *IPAddressFamily       `json:"family,omitempty"`
 	ID           *int64                 `json:"id,omitempty"`
 	Interface    *IPAddressInterface    `json:"interface,omitempty"`
 	LastUpdated  *time.Time             `json:"last_updated,omitempty"`
 	NatInside    *NestedIPAddress       `json:"nat_inside,omitempty"`
 	NatOutside   *NestedIPAddress       `json:"nat_outside,omitempty"`
-	Role         *IPAddressRoleRole     `json:"role,omitempty"`
-	Status       *IPAddressStatusStatus `json:"status,omitempty"`
+	Role         *IPAddressRole         `json:"role,omitempty"`
+	Status       *IPAddressStatus       `json:"status,omitempty"`
 	Tags         []string               `json:"tags,omitempty"`
 	Tenant       *NestedTenant          `json:"tenant,omitempty"`
 	Vrf          *NestedVrf             `json:"vrf,omitempty"`

@@ -16,95 +16,95 @@ class GetPersonalCurrentAccountsHeaders:
 class GetPersonalCurrentAccountsRequest:
     headers: GetPersonalCurrentAccountsHeaders = field(default=None)
     
-class GetPersonalCurrentAccounts400ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnum(str, Enum):
+class GetPersonalCurrentAccounts400ErrorObjectDescriptionEnum(str, Enum):
     YOU_HAVE_SENT_A_REQUEST_WHICH_COULD_NOT_BE_UNDERSTOOD_ = "You have sent a request which could not be understood."
 
-class GetPersonalCurrentAccounts400ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnum(str, Enum):
+class GetPersonalCurrentAccounts400ErrorObjectStatusEnum(str, Enum):
     FOUR_HUNDRED = "400"
 
-class GetPersonalCurrentAccounts400ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnum(str, Enum):
+class GetPersonalCurrentAccounts400ErrorObjectTitleEnum(str, Enum):
     BAD_REQUEST = "Bad request"
 
 
 @dataclass_json
 @dataclass
-class GetPersonalCurrentAccounts400ApplicationPrsOpenbankingOpendataV13PlusJSON400ErrorObject:
-    description: GetPersonalCurrentAccounts400ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    status: GetPersonalCurrentAccounts400ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
-    title: GetPersonalCurrentAccounts400ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'title' }})
+class GetPersonalCurrentAccounts400ErrorObject:
+    description: GetPersonalCurrentAccounts400ErrorObjectDescriptionEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
+    status: GetPersonalCurrentAccounts400ErrorObjectStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    title: GetPersonalCurrentAccounts400ErrorObjectTitleEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'title' }})
     
-class GetPersonalCurrentAccounts408ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnum(str, Enum):
+class GetPersonalCurrentAccounts408ErrorObjectDescriptionEnum(str, Enum):
     YOUR_CLIENT_HAS_FAILED_TO_SUBMIT_A_REQUEST_AND_A_TIMEOUT_HAS_OCCURRED_ = "Your client has failed to submit a request, and a timeout has occurred."
 
-class GetPersonalCurrentAccounts408ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnum(str, Enum):
+class GetPersonalCurrentAccounts408ErrorObjectStatusEnum(str, Enum):
     FOUR_HUNDRED_AND_EIGHT = "408"
 
-class GetPersonalCurrentAccounts408ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnum(str, Enum):
+class GetPersonalCurrentAccounts408ErrorObjectTitleEnum(str, Enum):
     CLIENT_TIMEOUT = "Client timeout"
 
 
 @dataclass_json
 @dataclass
-class GetPersonalCurrentAccounts408ApplicationPrsOpenbankingOpendataV13PlusJSON408ErrorObject:
-    description: GetPersonalCurrentAccounts408ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    status: GetPersonalCurrentAccounts408ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
-    title: GetPersonalCurrentAccounts408ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'title' }})
+class GetPersonalCurrentAccounts408ErrorObject:
+    description: GetPersonalCurrentAccounts408ErrorObjectDescriptionEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
+    status: GetPersonalCurrentAccounts408ErrorObjectStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    title: GetPersonalCurrentAccounts408ErrorObjectTitleEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'title' }})
     
-class GetPersonalCurrentAccounts429ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnum(str, Enum):
+class GetPersonalCurrentAccounts429ErrorObjectDescriptionEnum(str, Enum):
     YOU_HAVE_REQUESTED_THIS_RESOURCE_TOO_OFTEN_SLOW_DOWN_ = "You have requested this resource too often. Slow down."
 
-class GetPersonalCurrentAccounts429ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnum(str, Enum):
+class GetPersonalCurrentAccounts429ErrorObjectStatusEnum(str, Enum):
     FOUR_HUNDRED_AND_TWENTY_NINE = "429"
 
-class GetPersonalCurrentAccounts429ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnum(str, Enum):
+class GetPersonalCurrentAccounts429ErrorObjectTitleEnum(str, Enum):
     TOO_MANY_REQUESTS = "Too many requests"
 
 
 @dataclass_json
 @dataclass
-class GetPersonalCurrentAccounts429ApplicationPrsOpenbankingOpendataV13PlusJSON429ErrorObject:
-    description: GetPersonalCurrentAccounts429ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    status: GetPersonalCurrentAccounts429ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
-    title: GetPersonalCurrentAccounts429ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'title' }})
+class GetPersonalCurrentAccounts429ErrorObject:
+    description: GetPersonalCurrentAccounts429ErrorObjectDescriptionEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
+    status: GetPersonalCurrentAccounts429ErrorObjectStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    title: GetPersonalCurrentAccounts429ErrorObjectTitleEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'title' }})
     
-class GetPersonalCurrentAccounts500ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnum(str, Enum):
+class GetPersonalCurrentAccounts500ErrorObjectDescriptionEnum(str, Enum):
     AN_ERROR_OCCURRED_ON_THE_SERVER_NO_FURTHER_INFORMATION_IS_AVAILABLE_ = "An error occurred on the server. No further information is available."
 
-class GetPersonalCurrentAccounts500ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnum(str, Enum):
+class GetPersonalCurrentAccounts500ErrorObjectStatusEnum(str, Enum):
     FIVE_HUNDRED = "500"
 
-class GetPersonalCurrentAccounts500ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnum(str, Enum):
+class GetPersonalCurrentAccounts500ErrorObjectTitleEnum(str, Enum):
     INTERNAL_SERVER_ERROR = "Internal server error"
 
 
 @dataclass_json
 @dataclass
-class GetPersonalCurrentAccounts500ApplicationPrsOpenbankingOpendataV13PlusJSON500ErrorObject:
-    description: GetPersonalCurrentAccounts500ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    status: GetPersonalCurrentAccounts500ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
-    title: GetPersonalCurrentAccounts500ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'title' }})
+class GetPersonalCurrentAccounts500ErrorObject:
+    description: GetPersonalCurrentAccounts500ErrorObjectDescriptionEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
+    status: GetPersonalCurrentAccounts500ErrorObjectStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    title: GetPersonalCurrentAccounts500ErrorObjectTitleEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'title' }})
     
-class GetPersonalCurrentAccounts503ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnum(str, Enum):
+class GetPersonalCurrentAccounts503ErrorObjectDescriptionEnum(str, Enum):
     THE_SERVICE_IS_TEMPORARILY_UNAVAILABLE_ = "The service is temporarily unavailable."
 
-class GetPersonalCurrentAccounts503ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnum(str, Enum):
+class GetPersonalCurrentAccounts503ErrorObjectStatusEnum(str, Enum):
     FIVE_HUNDRED_AND_THREE = "503"
 
-class GetPersonalCurrentAccounts503ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnum(str, Enum):
+class GetPersonalCurrentAccounts503ErrorObjectTitleEnum(str, Enum):
     SERVICE_TEMPORARILY_UNAVAILABLE = "Service temporarily unavailable"
 
 
 @dataclass_json
 @dataclass
-class GetPersonalCurrentAccounts503ApplicationPrsOpenbankingOpendataV13PlusJSON503ErrorObject:
-    description: GetPersonalCurrentAccounts503ApplicationPrsOpenbankingOpendataV13PlusJSONDescriptionEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    status: GetPersonalCurrentAccounts503ApplicationPrsOpenbankingOpendataV13PlusJSONStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
-    title: GetPersonalCurrentAccounts503ApplicationPrsOpenbankingOpendataV13PlusJSONTitleEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'title' }})
+class GetPersonalCurrentAccounts503ErrorObject:
+    description: GetPersonalCurrentAccounts503ErrorObjectDescriptionEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
+    status: GetPersonalCurrentAccounts503ErrorObjectStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    title: GetPersonalCurrentAccounts503ErrorObjectTitleEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'title' }})
     
 
 @dataclass_json
 @dataclass
-class GetPersonalCurrentAccountsDefaultApplicationPrsOpenbankingOpendataV13PlusJSONErrorObject:
+class GetPersonalCurrentAccountsErrorObject:
     description: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
     status: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
     title: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'title' }})
@@ -1316,23 +1316,23 @@ class GetPersonalCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSOND
     product_url: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ProductURL' }})
     tsand_cs: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TsandCs' }})
     
-class GetPersonalCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaAgreementEnum(str, Enum):
+class GetPersonalCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaDataAgreementEnum(str, Enum):
     USE_OF_THE_AP_IS_AND_ANY_RELATED_DATA_WILL_BE_SUBJECT_TO_THE_TERMS_OF_THE_OPEN_LICENCE_AND_SUBJECT_TO_TERMS_AND_CONDITIONS = "Use of the APIs and any related data will be subject to the terms of the Open Licence and subject to terms and conditions"
 
-class GetPersonalCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaLicenseEnum(str, Enum):
+class GetPersonalCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaDataLicenseEnum(str, Enum):
     HTTPS_WWW_OPENBANKING_ORG_UK_OPEN_LICENCE = "https://www.openbanking.org.uk/open-licence"
 
-class GetPersonalCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaTermsOfUseEnum(str, Enum):
+class GetPersonalCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaDataTermsOfUseEnum(str, Enum):
     HTTPS_WWW_OPENBANKING_ORG_UK_TERMS = "https://www.openbanking.org.uk/terms"
 
 
 @dataclass_json
 @dataclass
-class GetPersonalCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaMetaData:
-    agreement: GetPersonalCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaAgreementEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Agreement' }})
+class GetPersonalCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaData:
+    agreement: GetPersonalCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaDataAgreementEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Agreement' }})
     last_updated: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'LastUpdated', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    license: GetPersonalCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaLicenseEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'License' }})
-    terms_of_use: GetPersonalCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaTermsOfUseEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TermsOfUse' }})
+    license: GetPersonalCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaDataLicenseEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'License' }})
+    terms_of_use: GetPersonalCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaDataTermsOfUseEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TermsOfUse' }})
     total_results: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'TotalResults' }})
     
 
@@ -1340,18 +1340,18 @@ class GetPersonalCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONM
 @dataclass
 class GetPersonalCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSON:
     data: List[GetPersonalCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONData] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'data' }})
-    meta: GetPersonalCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaMetaData = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+    meta: GetPersonalCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaData = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     
 
 @dataclass
 class GetPersonalCurrentAccountsResponse:
-    four_hundred_error_object: Optional[GetPersonalCurrentAccounts400ApplicationPrsOpenbankingOpendataV13PlusJSON400ErrorObject] = field(default=None)
-    four_hundred_and_eight_error_object: Optional[GetPersonalCurrentAccounts408ApplicationPrsOpenbankingOpendataV13PlusJSON408ErrorObject] = field(default=None)
-    four_hundred_and_twenty_nine_error_object: Optional[GetPersonalCurrentAccounts429ApplicationPrsOpenbankingOpendataV13PlusJSON429ErrorObject] = field(default=None)
-    five_hundred_error_object: Optional[GetPersonalCurrentAccounts500ApplicationPrsOpenbankingOpendataV13PlusJSON500ErrorObject] = field(default=None)
-    five_hundred_and_three_error_object: Optional[GetPersonalCurrentAccounts503ApplicationPrsOpenbankingOpendataV13PlusJSON503ErrorObject] = field(default=None)
+    four_hundred_error_object: Optional[GetPersonalCurrentAccounts400ErrorObject] = field(default=None)
+    four_hundred_and_eight_error_object: Optional[GetPersonalCurrentAccounts408ErrorObject] = field(default=None)
+    four_hundred_and_twenty_nine_error_object: Optional[GetPersonalCurrentAccounts429ErrorObject] = field(default=None)
+    five_hundred_error_object: Optional[GetPersonalCurrentAccounts500ErrorObject] = field(default=None)
+    five_hundred_and_three_error_object: Optional[GetPersonalCurrentAccounts503ErrorObject] = field(default=None)
     content_type: str = field(default=None)
-    error_object: Optional[GetPersonalCurrentAccountsDefaultApplicationPrsOpenbankingOpendataV13PlusJSONErrorObject] = field(default=None)
+    error_object: Optional[GetPersonalCurrentAccountsErrorObject] = field(default=None)
     get_personal_current_accounts_200_application_prs_openbanking_opendata_v1_3_plus_json_object: Optional[GetPersonalCurrentAccounts200ApplicationPrsOpenbankingOpendataV13PlusJSON] = field(default=None)
     headers: dict[str, List[str]] = field(default=None)
     status_code: int = field(default=None)

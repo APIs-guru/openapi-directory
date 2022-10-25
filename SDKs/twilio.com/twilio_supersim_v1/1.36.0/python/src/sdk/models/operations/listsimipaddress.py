@@ -32,7 +32,7 @@ class ListSimIPAddressRequest:
 
 @dataclass_json
 @dataclass
-class ListSimIPAddress200ApplicationJSONMeta:
+class ListSimIPAddressListSimIPAddressResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -44,14 +44,14 @@ class ListSimIPAddress200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListSimIPAddress200ApplicationJSONListSimIPAddressResponse:
+class ListSimIPAddressListSimIPAddressResponse:
     ip_addresses: Optional[List[shared.SupersimV1SimSimIPAddress]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ip_addresses' }})
-    meta: Optional[ListSimIPAddress200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+    meta: Optional[ListSimIPAddressListSimIPAddressResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     
 
 @dataclass
 class ListSimIPAddressResponse:
     content_type: str = field(default=None)
-    list_sim_ip_address_response: Optional[ListSimIPAddress200ApplicationJSONListSimIPAddressResponse] = field(default=None)
+    list_sim_ip_address_response: Optional[ListSimIPAddressListSimIPAddressResponse] = field(default=None)
     status_code: int = field(default=None)
     

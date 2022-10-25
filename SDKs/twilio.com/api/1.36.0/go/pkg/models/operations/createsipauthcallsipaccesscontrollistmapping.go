@@ -13,7 +13,7 @@ type CreateSipAuthCallsIPAccessControlListMappingPathParams struct {
 	DomainSid  string `pathParam:"style=simple,explode=false,name=DomainSid"`
 }
 
-type CreateSipAuthCallsIPAccessControlListMappingRequestBodyCreateSipAuthCallsIPAccessControlListMappingRequest struct {
+type CreateSipAuthCallsIPAccessControlListMappingCreateSipAuthCallsIPAccessControlListMappingRequest struct {
 	IPAccessControlListSid string `form:"name=IpAccessControlListSid"`
 }
 
@@ -24,7 +24,7 @@ type CreateSipAuthCallsIPAccessControlListMappingSecurity struct {
 type CreateSipAuthCallsIPAccessControlListMappingRequest struct {
 	ServerURL  *string
 	PathParams CreateSipAuthCallsIPAccessControlListMappingPathParams
-	Request    *CreateSipAuthCallsIPAccessControlListMappingRequestBodyCreateSipAuthCallsIPAccessControlListMappingRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateSipAuthCallsIPAccessControlListMappingCreateSipAuthCallsIPAccessControlListMappingRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateSipAuthCallsIPAccessControlListMappingSecurity
 }
 

@@ -13,7 +13,7 @@ type CreateStreamMessagePathParams struct {
 	StreamSid  string `pathParam:"style=simple,explode=false,name=StreamSid"`
 }
 
-type CreateStreamMessageRequestBodyCreateStreamMessageRequest struct {
+type CreateStreamMessageCreateStreamMessageRequest struct {
 	Data interface{} `form:"name=Data"`
 }
 
@@ -24,7 +24,7 @@ type CreateStreamMessageSecurity struct {
 type CreateStreamMessageRequest struct {
 	ServerURL  *string
 	PathParams CreateStreamMessagePathParams
-	Request    *CreateStreamMessageRequestBodyCreateStreamMessageRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateStreamMessageCreateStreamMessageRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateStreamMessageSecurity
 }
 

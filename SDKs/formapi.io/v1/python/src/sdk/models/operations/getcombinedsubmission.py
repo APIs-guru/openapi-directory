@@ -19,7 +19,7 @@ class GetCombinedSubmissionRequest:
     path_params: GetCombinedSubmissionPathParams = field(default=None)
     security: GetCombinedSubmissionSecurity = field(default=None)
     
-class GetCombinedSubmission200ApplicationJSONSourcePdfs1TypeEnum(str, Enum):
+class GetCombinedSubmissionCombinedSubmissionSourcePdfs1TypeEnum(str, Enum):
     SUBMISSION = "submission"
     COMBINED_SUBMISSION = "combined_submission"
     TEMPLATE = "template"
@@ -28,21 +28,21 @@ class GetCombinedSubmission200ApplicationJSONSourcePdfs1TypeEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class GetCombinedSubmission200ApplicationJSONSourcePdfs1:
+class GetCombinedSubmissionCombinedSubmissionSourcePdfs1:
     id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    type: GetCombinedSubmission200ApplicationJSONSourcePdfs1TypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    type: GetCombinedSubmissionCombinedSubmissionSourcePdfs1TypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     
-class GetCombinedSubmission200ApplicationJSONSourcePdfs2TypeEnum(str, Enum):
+class GetCombinedSubmissionCombinedSubmissionSourcePdfs2TypeEnum(str, Enum):
     URL = "url"
 
 
 @dataclass_json
 @dataclass
-class GetCombinedSubmission200ApplicationJSONSourcePdfs2:
-    type: GetCombinedSubmission200ApplicationJSONSourcePdfs2TypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+class GetCombinedSubmissionCombinedSubmissionSourcePdfs2:
+    type: GetCombinedSubmissionCombinedSubmissionSourcePdfs2TypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'url' }})
     
-class GetCombinedSubmission200ApplicationJSONStateEnum(str, Enum):
+class GetCombinedSubmissionCombinedSubmissionStateEnum(str, Enum):
     PENDING = "pending"
     PROCESSED = "processed"
     ERROR = "error"
@@ -50,7 +50,7 @@ class GetCombinedSubmission200ApplicationJSONStateEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class GetCombinedSubmission200ApplicationJSONCombinedSubmission:
+class GetCombinedSubmissionCombinedSubmission:
     actions: Optional[List[shared.CombinedSubmissionAction]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'actions' }})
     download_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'download_url' }})
     expired: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'expired' }})
@@ -59,7 +59,7 @@ class GetCombinedSubmission200ApplicationJSONCombinedSubmission:
     metadata: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'metadata' }})
     pdf_hash: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'pdf_hash' }})
     source_pdfs: List[Any] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'source_pdfs' }})
-    state: GetCombinedSubmission200ApplicationJSONStateEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'state' }})
+    state: GetCombinedSubmissionCombinedSubmissionStateEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'state' }})
     submission_ids: List[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'submission_ids' }})
     
 
@@ -68,6 +68,6 @@ class GetCombinedSubmissionResponse:
     content_type: str = field(default=None)
     status_code: int = field(default=None)
     authentication_error: Optional[shared.AuthenticationError] = field(default=None)
-    combined_submission: Optional[GetCombinedSubmission200ApplicationJSONCombinedSubmission] = field(default=None)
+    combined_submission: Optional[GetCombinedSubmissionCombinedSubmission] = field(default=None)
     error: Optional[shared.Error] = field(default=None)
     

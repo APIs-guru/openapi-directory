@@ -4,30 +4,30 @@ import (
 	"time"
 )
 
-type DpsJobInstructionDpsJobInstructionEmployerEmployer struct {
+type DpsJobInstructionDpsJobInstructionEmployer struct {
 	AtHref  *string `json:"@href,omitempty"`
 	AtRel   *string `json:"@rel,omitempty"`
 	AtTitle *string `json:"@title,omitempty"`
 }
 
-type DpsJobInstructionDpsJobInstructionMessageTypesType struct {
+type DpsJobInstructionDpsJobInstructionType struct {
 	Type []interface{} `json:"Type,omitempty"`
 }
 
-type DpsJobInstructionDpsJobInstructionMessagesToProcessMessage struct {
+type DpsJobInstructionDpsJobInstructionMessage struct {
 	Message []interface{} `json:"Message,omitempty"`
 }
 
-type DpsJobInstructionDpsJobInstructionDpsJobInstruction struct {
-	Apply             *bool                                                       `json:"Apply,omitempty"`
-	Employer          *DpsJobInstructionDpsJobInstructionEmployerEmployer         `json:"Employer,omitempty"`
-	FromDate          *time.Time                                                  `json:"FromDate,omitempty"`
-	HoldingDate       *time.Time                                                  `json:"HoldingDate,omitempty"`
-	MessageTypes      *DpsJobInstructionDpsJobInstructionMessageTypesType         `json:"MessageTypes,omitempty"`
-	MessagesToProcess *DpsJobInstructionDpsJobInstructionMessagesToProcessMessage `json:"MessagesToProcess,omitempty"`
-	Retrieve          *bool                                                       `json:"Retrieve,omitempty"`
+type DpsJobInstructionDpsJobInstruction struct {
+	Apply             *bool                                       `json:"Apply,omitempty"`
+	Employer          *DpsJobInstructionDpsJobInstructionEmployer `json:"Employer,omitempty"`
+	FromDate          *time.Time                                  `json:"FromDate,omitempty"`
+	HoldingDate       *time.Time                                  `json:"HoldingDate,omitempty"`
+	MessageTypes      *DpsJobInstructionDpsJobInstructionType     `json:"MessageTypes,omitempty"`
+	MessagesToProcess *DpsJobInstructionDpsJobInstructionMessage  `json:"MessagesToProcess,omitempty"`
+	Retrieve          *bool                                       `json:"Retrieve,omitempty"`
 }
 
 type DpsJobInstruction struct {
-	DpsJobInstruction *DpsJobInstructionDpsJobInstructionDpsJobInstruction `json:"DpsJobInstruction,omitempty"`
+	DpsJobInstruction *DpsJobInstructionDpsJobInstruction `json:"DpsJobInstruction,omitempty"`
 }

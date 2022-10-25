@@ -4,25 +4,25 @@ import (
 	"time"
 )
 
-type AuthenticateRequestBodyGrantTypeEnum string
+type AuthenticateAuthenticationGrantTypeEnum string
 
 const (
-	AuthenticateRequestBodyGrantTypeEnumAccessToken AuthenticateRequestBodyGrantTypeEnum = "AccessToken"
+	AuthenticateAuthenticationGrantTypeEnumAccessToken AuthenticateAuthenticationGrantTypeEnum = "AccessToken"
 )
 
-type AuthenticateRequestBodyAuthentication struct {
-	ClientID     *string                               `json:"clientId,omitempty"`
-	ClientSecret *string                               `json:"clientSecret,omitempty"`
-	GrantType    *AuthenticateRequestBodyGrantTypeEnum `json:"grantType,omitempty"`
-	Nonce        *int64                                `json:"nonce,omitempty"`
-	RefreshToken *string                               `json:"refreshToken,omitempty"`
+type AuthenticateAuthentication struct {
+	ClientID     *string                                  `json:"clientId,omitempty"`
+	ClientSecret *string                                  `json:"clientSecret,omitempty"`
+	GrantType    *AuthenticateAuthenticationGrantTypeEnum `json:"grantType,omitempty"`
+	Nonce        *int64                                   `json:"nonce,omitempty"`
+	RefreshToken *string                                  `json:"refreshToken,omitempty"`
 }
 
 type AuthenticateRequest struct {
-	Request AuthenticateRequestBodyAuthentication `request:"mediaType=application/json"`
+	Request AuthenticateAuthentication `request:"mediaType=application/json"`
 }
 
-type Authenticate200ApplicationJSONAccessToken struct {
+type AuthenticateAccessToken struct {
 	AccessToken      *string    `json:"accessToken,omitempty"`
 	APIApplicationID *int64     `json:"apiApplicationId,omitempty"`
 	BusinessID       *int64     `json:"businessId,omitempty"`
@@ -31,7 +31,7 @@ type Authenticate200ApplicationJSONAccessToken struct {
 }
 
 type AuthenticateResponse struct {
-	AccessToken *Authenticate200ApplicationJSONAccessToken
+	AccessToken *AuthenticateAccessToken
 	ContentType string
 	StatusCode  int64
 }

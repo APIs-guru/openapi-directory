@@ -18,7 +18,7 @@ class PowerFeedPhaseValueEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class PowerFeedPhasePhase:
+class PowerFeedPhase:
     label: PowerFeedPhaseLabelEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label' }})
     value: PowerFeedPhaseValueEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
     
@@ -37,7 +37,7 @@ class PowerFeedStatusValueEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class PowerFeedStatusStatus:
+class PowerFeedStatus:
     label: PowerFeedStatusLabelEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label' }})
     value: PowerFeedStatusValueEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
     
@@ -52,7 +52,7 @@ class PowerFeedSupplyValueEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class PowerFeedSupplySupply:
+class PowerFeedSupply:
     label: PowerFeedSupplyLabelEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label' }})
     value: PowerFeedSupplyValueEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
     
@@ -67,7 +67,7 @@ class PowerFeedTypeValueEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class PowerFeedTypeType:
+class PowerFeedType:
     label: PowerFeedTypeLabelEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label' }})
     value: PowerFeedTypeValueEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
     
@@ -83,12 +83,12 @@ class PowerFeed:
     last_updated: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'last_updated', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     max_utilization: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'max_utilization' }})
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    phase: Optional[PowerFeedPhasePhase] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'phase' }})
+    phase: Optional[PowerFeedPhase] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'phase' }})
     power_panel: nestedpowerpanel.NestedPowerPanel = field(default=None, metadata={'dataclasses_json': { 'field_name': 'power_panel' }})
     rack: Optional[nestedrack.NestedRack] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rack' }})
-    status: Optional[PowerFeedStatusStatus] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
-    supply: Optional[PowerFeedSupplySupply] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'supply' }})
+    status: Optional[PowerFeedStatus] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    supply: Optional[PowerFeedSupply] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'supply' }})
     tags: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
-    type: Optional[PowerFeedTypeType] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    type: Optional[PowerFeedType] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     voltage: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'voltage' }})
     

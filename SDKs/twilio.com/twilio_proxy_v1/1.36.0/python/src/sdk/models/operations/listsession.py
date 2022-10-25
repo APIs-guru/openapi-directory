@@ -32,7 +32,7 @@ class ListSessionRequest:
 
 @dataclass_json
 @dataclass
-class ListSession200ApplicationJSONMeta:
+class ListSessionListSessionResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -44,14 +44,14 @@ class ListSession200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListSession200ApplicationJSONListSessionResponse:
-    meta: Optional[ListSession200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+class ListSessionListSessionResponse:
+    meta: Optional[ListSessionListSessionResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     sessions: Optional[List[shared.ProxyV1ServiceSession]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sessions' }})
     
 
 @dataclass
 class ListSessionResponse:
     content_type: str = field(default=None)
-    list_session_response: Optional[ListSession200ApplicationJSONListSessionResponse] = field(default=None)
+    list_session_response: Optional[ListSessionListSessionResponse] = field(default=None)
     status_code: int = field(default=None)
     

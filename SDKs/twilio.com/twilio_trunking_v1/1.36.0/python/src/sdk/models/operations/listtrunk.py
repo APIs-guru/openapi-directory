@@ -26,7 +26,7 @@ class ListTrunkRequest:
 
 @dataclass_json
 @dataclass
-class ListTrunk200ApplicationJSONMeta:
+class ListTrunkListTrunkResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -38,14 +38,14 @@ class ListTrunk200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListTrunk200ApplicationJSONListTrunkResponse:
-    meta: Optional[ListTrunk200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+class ListTrunkListTrunkResponse:
+    meta: Optional[ListTrunkListTrunkResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     trunks: Optional[List[shared.TrunkingV1Trunk]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'trunks' }})
     
 
 @dataclass
 class ListTrunkResponse:
     content_type: str = field(default=None)
-    list_trunk_response: Optional[ListTrunk200ApplicationJSONListTrunkResponse] = field(default=None)
+    list_trunk_response: Optional[ListTrunkListTrunkResponse] = field(default=None)
     status_code: int = field(default=None)
     

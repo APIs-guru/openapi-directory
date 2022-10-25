@@ -12,7 +12,7 @@ class CreateReplaceItemsPathParams:
     
 
 @dataclass
-class CreateReplaceItemsRequestBodyCreateReplaceItemsRequest:
+class CreateReplaceItemsCreateReplaceItemsRequest:
     from_bundle_sid: str = field(default=None, metadata={'form': { 'field_name': 'FromBundleSid' }})
     
 
@@ -25,7 +25,7 @@ class CreateReplaceItemsSecurity:
 class CreateReplaceItemsRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateReplaceItemsPathParams = field(default=None)
-    request: Optional[CreateReplaceItemsRequestBodyCreateReplaceItemsRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateReplaceItemsCreateReplaceItemsRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateReplaceItemsSecurity = field(default=None)
     
 

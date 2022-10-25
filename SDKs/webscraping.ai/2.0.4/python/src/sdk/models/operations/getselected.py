@@ -20,9 +20,9 @@ class GetSelectedRequest:
 
 @dataclass
 class GetSelectedResponse:
-    body: bytes = field(default=None)
     content_type: str = field(default=None)
     error: Optional[shared.Error] = field(default=None)
     page_error: Optional[shared.PageError] = field(default=None)
     status_code: int = field(default=None)
+    get_selected_200_text_html_string: Optional[str] = field(default=None)
     

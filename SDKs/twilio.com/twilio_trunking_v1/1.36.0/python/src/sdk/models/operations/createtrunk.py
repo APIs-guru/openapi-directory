@@ -5,7 +5,7 @@ CREATE_TRUNK_SERVERS = [
 	"https://trunking.twilio.com",
 ]
 
-class CreateTrunkRequestBodyDisasterRecoveryMethodEnum(str, Enum):
+class CreateTrunkCreateTrunkRequestDisasterRecoveryMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -15,9 +15,9 @@ class CreateTrunkRequestBodyDisasterRecoveryMethodEnum(str, Enum):
 
 
 @dataclass
-class CreateTrunkRequestBodyCreateTrunkRequest:
+class CreateTrunkCreateTrunkRequest:
     cnam_lookup_enabled: Optional[bool] = field(default=None, metadata={'form': { 'field_name': 'CnamLookupEnabled' }})
-    disaster_recovery_method: Optional[CreateTrunkRequestBodyDisasterRecoveryMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'DisasterRecoveryMethod' }})
+    disaster_recovery_method: Optional[CreateTrunkCreateTrunkRequestDisasterRecoveryMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'DisasterRecoveryMethod' }})
     disaster_recovery_url: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'DisasterRecoveryUrl' }})
     domain_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'DomainName' }})
     friendly_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
@@ -34,7 +34,7 @@ class CreateTrunkSecurity:
 @dataclass
 class CreateTrunkRequest:
     server_url: Optional[str] = field(default=None)
-    request: Optional[CreateTrunkRequestBodyCreateTrunkRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateTrunkCreateTrunkRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateTrunkSecurity = field(default=None)
     
 

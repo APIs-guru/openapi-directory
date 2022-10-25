@@ -356,7 +356,7 @@ class OnDemandSeasonUserWebsites:
 
 @dataclass_json
 @dataclass
-class OnDemandSeasonUserUser:
+class OnDemandSeasonUser:
     account: OnDemandSeasonUserAccountEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'account' }})
     bio: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'bio' }})
     content_filter: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'content_filter' }})
@@ -384,5 +384,5 @@ class OnDemandSeason:
     resource_key: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resource_key' }})
     type: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     uri: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'uri' }})
-    user: OnDemandSeasonUserUser = field(default=None, metadata={'dataclasses_json': { 'field_name': 'user' }})
+    user: OnDemandSeasonUser = field(default=None, metadata={'dataclasses_json': { 'field_name': 'user' }})
     

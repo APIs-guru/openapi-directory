@@ -18,7 +18,7 @@ class UpdateTaskHeaders:
     
 
 @dataclass
-class UpdateTaskRequestBodyUpdateTaskRequest:
+class UpdateTaskUpdateTaskRequest:
     assignment_status: Optional[shared.TaskEnumStatusEnum] = field(default=None, metadata={'form': { 'field_name': 'AssignmentStatus' }})
     attributes: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Attributes' }})
     priority: Optional[int] = field(default=None, metadata={'form': { 'field_name': 'Priority' }})
@@ -36,7 +36,7 @@ class UpdateTaskRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateTaskPathParams = field(default=None)
     headers: UpdateTaskHeaders = field(default=None)
-    request: Optional[UpdateTaskRequestBodyUpdateTaskRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateTaskUpdateTaskRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateTaskSecurity = field(default=None)
     
 

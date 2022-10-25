@@ -12,7 +12,7 @@ type UpdateTrustProductPathParams struct {
 	Sid string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
-type UpdateTrustProductRequestBodyUpdateTrustProductRequest struct {
+type UpdateTrustProductUpdateTrustProductRequest struct {
 	Email          *string                            `form:"name=Email"`
 	FriendlyName   *string                            `form:"name=FriendlyName"`
 	Status         *shared.TrustProductEnumStatusEnum `form:"name=Status"`
@@ -26,7 +26,7 @@ type UpdateTrustProductSecurity struct {
 type UpdateTrustProductRequest struct {
 	ServerURL  *string
 	PathParams UpdateTrustProductPathParams
-	Request    *UpdateTrustProductRequestBodyUpdateTrustProductRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateTrustProductUpdateTrustProductRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateTrustProductSecurity
 }
 

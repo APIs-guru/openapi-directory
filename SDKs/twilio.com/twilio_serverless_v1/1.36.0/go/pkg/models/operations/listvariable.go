@@ -28,7 +28,7 @@ type ListVariableRequest struct {
 	Security    ListVariableSecurity
 }
 
-type ListVariable200ApplicationJSONMeta struct {
+type ListVariableListVariableResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -38,13 +38,13 @@ type ListVariable200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListVariable200ApplicationJSONListVariableResponse struct {
-	Meta      *ListVariable200ApplicationJSONMeta             `json:"meta,omitempty"`
+type ListVariableListVariableResponse struct {
+	Meta      *ListVariableListVariableResponseMeta           `json:"meta,omitempty"`
 	Variables []shared.ServerlessV1ServiceEnvironmentVariable `json:"variables,omitempty"`
 }
 
 type ListVariableResponse struct {
 	ContentType          string
-	ListVariableResponse *ListVariable200ApplicationJSONListVariableResponse
+	ListVariableResponse *ListVariableListVariableResponse
 	StatusCode           int64
 }

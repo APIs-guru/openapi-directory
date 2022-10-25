@@ -7,7 +7,7 @@ CREATE_HOSTED_NUMBERS_AUTHORIZATION_DOCUMENT_SERVERS = [
 
 
 @dataclass
-class CreateHostedNumbersAuthorizationDocumentRequestBodyCreateHostedNumbersAuthorizationDocumentRequest:
+class CreateHostedNumbersAuthorizationDocumentCreateHostedNumbersAuthorizationDocumentRequest:
     address_sid: str = field(default=None, metadata={'form': { 'field_name': 'AddressSid' }})
     cc_emails: Optional[List[str]] = field(default=None, metadata={'form': { 'field_name': 'CcEmails' }})
     contact_phone_number: str = field(default=None, metadata={'form': { 'field_name': 'ContactPhoneNumber' }})
@@ -24,7 +24,7 @@ class CreateHostedNumbersAuthorizationDocumentSecurity:
 @dataclass
 class CreateHostedNumbersAuthorizationDocumentRequest:
     server_url: Optional[str] = field(default=None)
-    request: Optional[CreateHostedNumbersAuthorizationDocumentRequestBodyCreateHostedNumbersAuthorizationDocumentRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateHostedNumbersAuthorizationDocumentCreateHostedNumbersAuthorizationDocumentRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateHostedNumbersAuthorizationDocumentSecurity = field(default=None)
     
 

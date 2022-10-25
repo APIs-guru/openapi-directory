@@ -8,7 +8,7 @@ var CreateSubscriptionServers = []string{
 	"https://events.twilio.com",
 }
 
-type CreateSubscriptionRequestBodyCreateSubscriptionRequest struct {
+type CreateSubscriptionCreateSubscriptionRequest struct {
 	Description string        `form:"name=Description"`
 	SinkSid     string        `form:"name=SinkSid"`
 	Types       []interface{} `form:"name=Types"`
@@ -20,7 +20,7 @@ type CreateSubscriptionSecurity struct {
 
 type CreateSubscriptionRequest struct {
 	ServerURL *string
-	Request   *CreateSubscriptionRequestBodyCreateSubscriptionRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request   *CreateSubscriptionCreateSubscriptionRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security  CreateSubscriptionSecurity
 }
 

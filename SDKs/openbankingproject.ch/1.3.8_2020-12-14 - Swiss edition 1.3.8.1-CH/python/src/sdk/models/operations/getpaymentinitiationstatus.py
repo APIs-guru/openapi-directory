@@ -42,7 +42,6 @@ class GetPaymentInitiationStatusRequest:
 
 @dataclass
 class GetPaymentInitiationStatusResponse:
-    body: bytes = field(default=None)
     content_type: str = field(default=None)
     error400_ng_pis: Optional[shared.Error400NgPis] = field(default=None)
     error400_pis: Optional[shared.Error400Pis] = field(default=None)
@@ -59,4 +58,5 @@ class GetPaymentInitiationStatusResponse:
     headers: dict[str, List[str]] = field(default=None)
     status_code: int = field(default=None)
     payment_initiation_status_response_200_json: Optional[shared.PaymentInitiationStatusResponse200JSON] = field(default=None)
+    payment_initiation_status_response_200_xml: Optional[str] = field(default=None)
     

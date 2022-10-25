@@ -33,7 +33,7 @@ class ListBrandVettingRequest:
 
 @dataclass_json
 @dataclass
-class ListBrandVetting200ApplicationJSONMeta:
+class ListBrandVettingListBrandVettingResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -45,14 +45,14 @@ class ListBrandVetting200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListBrandVetting200ApplicationJSONListBrandVettingResponse:
+class ListBrandVettingListBrandVettingResponse:
     data: Optional[List[shared.MessagingV1BrandRegistrationsBrandVetting]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'data' }})
-    meta: Optional[ListBrandVetting200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+    meta: Optional[ListBrandVettingListBrandVettingResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     
 
 @dataclass
 class ListBrandVettingResponse:
     content_type: str = field(default=None)
-    list_brand_vetting_response: Optional[ListBrandVetting200ApplicationJSONListBrandVettingResponse] = field(default=None)
+    list_brand_vetting_response: Optional[ListBrandVettingListBrandVettingResponse] = field(default=None)
     status_code: int = field(default=None)
     

@@ -12,7 +12,7 @@ type CreateSyncStreamPathParams struct {
 	ServiceSid string `pathParam:"style=simple,explode=false,name=ServiceSid"`
 }
 
-type CreateSyncStreamRequestBodyCreateSyncStreamRequest struct {
+type CreateSyncStreamCreateSyncStreamRequest struct {
 	TTL        *int64  `form:"name=Ttl"`
 	UniqueName *string `form:"name=UniqueName"`
 }
@@ -24,7 +24,7 @@ type CreateSyncStreamSecurity struct {
 type CreateSyncStreamRequest struct {
 	ServerURL  *string
 	PathParams CreateSyncStreamPathParams
-	Request    *CreateSyncStreamRequestBodyCreateSyncStreamRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateSyncStreamCreateSyncStreamRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateSyncStreamSecurity
 }
 

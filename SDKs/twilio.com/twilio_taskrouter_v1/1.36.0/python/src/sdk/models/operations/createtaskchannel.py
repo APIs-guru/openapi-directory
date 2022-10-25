@@ -12,7 +12,7 @@ class CreateTaskChannelPathParams:
     
 
 @dataclass
-class CreateTaskChannelRequestBodyCreateTaskChannelRequest:
+class CreateTaskChannelCreateTaskChannelRequest:
     channel_optimized_routing: Optional[bool] = field(default=None, metadata={'form': { 'field_name': 'ChannelOptimizedRouting' }})
     friendly_name: str = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
     unique_name: str = field(default=None, metadata={'form': { 'field_name': 'UniqueName' }})
@@ -27,7 +27,7 @@ class CreateTaskChannelSecurity:
 class CreateTaskChannelRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateTaskChannelPathParams = field(default=None)
-    request: Optional[CreateTaskChannelRequestBodyCreateTaskChannelRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateTaskChannelCreateTaskChannelRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateTaskChannelSecurity = field(default=None)
     
 

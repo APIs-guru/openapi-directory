@@ -27,7 +27,7 @@ class ListFlexFlowRequest:
 
 @dataclass_json
 @dataclass
-class ListFlexFlow200ApplicationJSONMeta:
+class ListFlexFlowListFlexFlowResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -39,14 +39,14 @@ class ListFlexFlow200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListFlexFlow200ApplicationJSONListFlexFlowResponse:
+class ListFlexFlowListFlexFlowResponse:
     flex_flows: Optional[List[shared.FlexV1FlexFlow]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'flex_flows' }})
-    meta: Optional[ListFlexFlow200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+    meta: Optional[ListFlexFlowListFlexFlowResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     
 
 @dataclass
 class ListFlexFlowResponse:
     content_type: str = field(default=None)
-    list_flex_flow_response: Optional[ListFlexFlow200ApplicationJSONListFlexFlowResponse] = field(default=None)
+    list_flex_flow_response: Optional[ListFlexFlowListFlexFlowResponse] = field(default=None)
     status_code: int = field(default=None)
     

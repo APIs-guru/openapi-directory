@@ -27,7 +27,7 @@ type ListSubscribedEventRequest struct {
 	Security    ListSubscribedEventSecurity
 }
 
-type ListSubscribedEvent200ApplicationJSONMeta struct {
+type ListSubscribedEventListSubscribedEventResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -37,13 +37,13 @@ type ListSubscribedEvent200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListSubscribedEvent200ApplicationJSONListSubscribedEventResponse struct {
-	Meta  *ListSubscribedEvent200ApplicationJSONMeta   `json:"meta,omitempty"`
-	Types []shared.EventsV1SubscriptionSubscribedEvent `json:"types,omitempty"`
+type ListSubscribedEventListSubscribedEventResponse struct {
+	Meta  *ListSubscribedEventListSubscribedEventResponseMeta `json:"meta,omitempty"`
+	Types []shared.EventsV1SubscriptionSubscribedEvent        `json:"types,omitempty"`
 }
 
 type ListSubscribedEventResponse struct {
 	ContentType                 string
-	ListSubscribedEventResponse *ListSubscribedEvent200ApplicationJSONListSubscribedEventResponse
+	ListSubscribedEventResponse *ListSubscribedEventListSubscribedEventResponse
 	StatusCode                  int64
 }

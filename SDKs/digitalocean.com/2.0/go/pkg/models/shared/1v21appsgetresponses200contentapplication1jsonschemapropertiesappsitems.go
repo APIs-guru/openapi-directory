@@ -25,7 +25,7 @@ type Onev21appsGetResponses200ContentApplication1jsonSchemaPropertiesAppsItemsDo
 	Spec     *Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecPropertiesDomainsItems `json:"spec,omitempty"`
 }
 
-type Onev21appsGetResponses200ContentApplication1jsonSchemaPropertiesAppsItemsRegionGeographicalInformationAboutAnAppOrigin struct {
+type Onev21appsGetResponses200ContentApplication1jsonSchemaPropertiesAppsItemsGeographicalInformationAboutAnAppOrigin struct {
 	Continent   *string  `json:"continent,omitempty"`
 	DataCenters []string `json:"data_centers,omitempty"`
 	Default     *bool    `json:"default,omitempty"`
@@ -48,7 +48,7 @@ type Onev21appsGetResponses200ContentApplication1jsonSchemaPropertiesAppsItems s
 	LiveURL                 *string                                                                                                                            `json:"live_url,omitempty"`
 	LiveURLBase             *string                                                                                                                            `json:"live_url_base,omitempty"`
 	OwnerUUID               *string                                                                                                                            `json:"owner_uuid,omitempty"`
-	Region                  *Onev21appsGetResponses200ContentApplication1jsonSchemaPropertiesAppsItemsRegionGeographicalInformationAboutAnAppOrigin            `json:"region,omitempty"`
+	Region                  *Onev21appsGetResponses200ContentApplication1jsonSchemaPropertiesAppsItemsGeographicalInformationAboutAnAppOrigin                  `json:"region,omitempty"`
 	Spec                    Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpec `json:"spec"`
 	TierSlug                *string                                                                                                                            `json:"tier_slug,omitempty"`
 	UpdatedAt               *time.Time                                                                                                                         `json:"updated_at,omitempty"`

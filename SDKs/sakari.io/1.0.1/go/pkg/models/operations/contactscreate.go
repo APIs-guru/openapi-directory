@@ -22,7 +22,7 @@ type ContactsCreateQueryParams struct {
 
 type ContactsCreateRequests struct {
 	ContactRequest *shared.ContactRequest `request:"mediaType=application/json"`
-	TextCsv        []byte                 `request:"mediaType=text/csv"`
+	String         *string                `request:"mediaType=text/csv"`
 }
 
 type ContactsCreateSecurity struct {

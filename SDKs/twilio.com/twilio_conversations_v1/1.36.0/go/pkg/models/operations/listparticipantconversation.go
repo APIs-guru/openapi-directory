@@ -24,7 +24,7 @@ type ListParticipantConversationRequest struct {
 	Security    ListParticipantConversationSecurity
 }
 
-type ListParticipantConversation200ApplicationJSONMeta struct {
+type ListParticipantConversationListParticipantConversationResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -34,13 +34,13 @@ type ListParticipantConversation200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListParticipantConversation200ApplicationJSONListParticipantConversationResponse struct {
-	Conversations []shared.ConversationsV1ParticipantConversation    `json:"conversations,omitempty"`
-	Meta          *ListParticipantConversation200ApplicationJSONMeta `json:"meta,omitempty"`
+type ListParticipantConversationListParticipantConversationResponse struct {
+	Conversations []shared.ConversationsV1ParticipantConversation                     `json:"conversations,omitempty"`
+	Meta          *ListParticipantConversationListParticipantConversationResponseMeta `json:"meta,omitempty"`
 }
 
 type ListParticipantConversationResponse struct {
 	ContentType                         string
-	ListParticipantConversationResponse *ListParticipantConversation200ApplicationJSONListParticipantConversationResponse
+	ListParticipantConversationResponse *ListParticipantConversationListParticipantConversationResponse
 	StatusCode                          int64
 }

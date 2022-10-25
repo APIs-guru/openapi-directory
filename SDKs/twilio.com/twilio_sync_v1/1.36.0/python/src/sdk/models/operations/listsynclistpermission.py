@@ -33,7 +33,7 @@ class ListSyncListPermissionRequest:
 
 @dataclass_json
 @dataclass
-class ListSyncListPermission200ApplicationJSONMeta:
+class ListSyncListPermissionListSyncListPermissionResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -45,14 +45,14 @@ class ListSyncListPermission200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListSyncListPermission200ApplicationJSONListSyncListPermissionResponse:
-    meta: Optional[ListSyncListPermission200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+class ListSyncListPermissionListSyncListPermissionResponse:
+    meta: Optional[ListSyncListPermissionListSyncListPermissionResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     permissions: Optional[List[shared.SyncV1ServiceSyncListSyncListPermission]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'permissions' }})
     
 
 @dataclass
 class ListSyncListPermissionResponse:
     content_type: str = field(default=None)
-    list_sync_list_permission_response: Optional[ListSyncListPermission200ApplicationJSONListSyncListPermissionResponse] = field(default=None)
+    list_sync_list_permission_response: Optional[ListSyncListPermissionListSyncListPermissionResponse] = field(default=None)
     status_code: int = field(default=None)
     

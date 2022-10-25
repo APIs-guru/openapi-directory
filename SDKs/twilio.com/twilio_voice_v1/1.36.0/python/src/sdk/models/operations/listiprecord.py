@@ -26,7 +26,7 @@ class ListIPRecordRequest:
 
 @dataclass_json
 @dataclass
-class ListIPRecord200ApplicationJSONMeta:
+class ListIPRecordListIPRecordResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -38,14 +38,14 @@ class ListIPRecord200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListIPRecord200ApplicationJSONListIPRecordResponse:
+class ListIPRecordListIPRecordResponse:
     ip_records: Optional[List[shared.VoiceV1IPRecord]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ip_records' }})
-    meta: Optional[ListIPRecord200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+    meta: Optional[ListIPRecordListIPRecordResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     
 
 @dataclass
 class ListIPRecordResponse:
     content_type: str = field(default=None)
-    list_ip_record_response: Optional[ListIPRecord200ApplicationJSONListIPRecordResponse] = field(default=None)
+    list_ip_record_response: Optional[ListIPRecordListIPRecordResponse] = field(default=None)
     status_code: int = field(default=None)
     

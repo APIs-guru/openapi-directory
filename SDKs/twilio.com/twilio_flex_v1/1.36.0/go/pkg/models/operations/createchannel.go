@@ -8,7 +8,7 @@ var CreateChannelServers = []string{
 	"https://flex-api.twilio.com",
 }
 
-type CreateChannelRequestBodyCreateChannelRequest struct {
+type CreateChannelCreateChannelRequest struct {
 	ChatFriendlyName     string  `form:"name=ChatFriendlyName"`
 	ChatUniqueName       *string `form:"name=ChatUniqueName"`
 	ChatUserFriendlyName string  `form:"name=ChatUserFriendlyName"`
@@ -27,7 +27,7 @@ type CreateChannelSecurity struct {
 
 type CreateChannelRequest struct {
 	ServerURL *string
-	Request   *CreateChannelRequestBodyCreateChannelRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request   *CreateChannelCreateChannelRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security  CreateChannelSecurity
 }
 

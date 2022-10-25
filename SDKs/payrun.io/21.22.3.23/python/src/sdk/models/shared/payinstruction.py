@@ -8,7 +8,7 @@ from dataclasses_json import dataclass_json
 
 @dataclass_json
 @dataclass
-class PayInstructionPayInstructionPayInstruction:
+class PayInstructionPayInstruction:
     description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'Description' }})
     end_date: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'EndDate', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     pay_line_tag: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PayLineTag' }})
@@ -18,5 +18,5 @@ class PayInstructionPayInstructionPayInstruction:
 @dataclass_json
 @dataclass
 class PayInstruction:
-    pay_instruction: Optional[PayInstructionPayInstructionPayInstruction] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PayInstruction' }})
+    pay_instruction: Optional[PayInstructionPayInstruction] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'PayInstruction' }})
     

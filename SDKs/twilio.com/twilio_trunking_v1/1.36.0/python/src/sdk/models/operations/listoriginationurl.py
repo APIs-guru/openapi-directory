@@ -32,7 +32,7 @@ class ListOriginationURLRequest:
 
 @dataclass_json
 @dataclass
-class ListOriginationURL200ApplicationJSONMeta:
+class ListOriginationURLListOriginationURLResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -44,14 +44,14 @@ class ListOriginationURL200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListOriginationURL200ApplicationJSONListOriginationURLResponse:
-    meta: Optional[ListOriginationURL200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+class ListOriginationURLListOriginationURLResponse:
+    meta: Optional[ListOriginationURLListOriginationURLResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     origination_urls: Optional[List[shared.TrunkingV1TrunkOriginationURL]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'origination_urls' }})
     
 
 @dataclass
 class ListOriginationURLResponse:
     content_type: str = field(default=None)
-    list_origination_url_response: Optional[ListOriginationURL200ApplicationJSONListOriginationURLResponse] = field(default=None)
+    list_origination_url_response: Optional[ListOriginationURLListOriginationURLResponse] = field(default=None)
     status_code: int = field(default=None)
     

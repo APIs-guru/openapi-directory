@@ -11,7 +11,7 @@ class CopyTemplatePathParams:
 
 @dataclass_json
 @dataclass
-class CopyTemplateRequestBodyCopyTemplateData:
+class CopyTemplateCopyTemplateData:
     name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
     parent_folder_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'parent_folder_id' }})
     
@@ -24,10 +24,10 @@ class CopyTemplateSecurity:
 @dataclass
 class CopyTemplateRequest:
     path_params: CopyTemplatePathParams = field(default=None)
-    request: Optional[CopyTemplateRequestBodyCopyTemplateData] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: Optional[CopyTemplateCopyTemplateData] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     security: CopyTemplateSecurity = field(default=None)
     
-class CopyTemplate200ApplicationJSONExpirationIntervalEnum(str, Enum):
+class CopyTemplateTemplateExpirationIntervalEnum(str, Enum):
     MINUTES = "minutes"
     HOURS = "hours"
     DAYS = "days"
@@ -35,12 +35,12 @@ class CopyTemplate200ApplicationJSONExpirationIntervalEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class CopyTemplate200ApplicationJSONTemplate:
+class CopyTemplateTemplate:
     allow_additional_properties: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'allow_additional_properties' }})
     description: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
     document_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'document_url' }})
     editable_submissions: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'editable_submissions' }})
-    expiration_interval: Optional[CopyTemplate200ApplicationJSONExpirationIntervalEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'expiration_interval' }})
+    expiration_interval: Optional[CopyTemplateTemplateExpirationIntervalEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'expiration_interval' }})
     expire_after: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'expire_after' }})
     expire_submissions: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'expire_submissions' }})
     id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
@@ -63,5 +63,5 @@ class CopyTemplateResponse:
     content_type: str = field(default=None)
     status_code: int = field(default=None)
     error: Optional[shared.Error] = field(default=None)
-    template: Optional[CopyTemplate200ApplicationJSONTemplate] = field(default=None)
+    template: Optional[CopyTemplateTemplate] = field(default=None)
     

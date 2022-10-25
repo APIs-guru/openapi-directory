@@ -7,22 +7,22 @@ from dataclasses_json import dataclass_json
 class PutImagesIDPathParams:
     id: int = field(default=None, metadata={'path_param': { 'field_name': 'id', 'style': 'simple', 'explode': False }})
     
-class PutImagesIDRequestBodyTypeEnum(str, Enum):
+class PutImagesIDUpdateImageRequestTypeEnum(str, Enum):
     SNAPSHOT = "snapshot"
 
 
 @dataclass_json
 @dataclass
-class PutImagesIDRequestBodyUpdateImageRequest:
+class PutImagesIDUpdateImageRequest:
     description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
     labels: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'labels' }})
-    type: Optional[PutImagesIDRequestBodyTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    type: Optional[PutImagesIDUpdateImageRequestTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     
 
 @dataclass
 class PutImagesIDRequest:
     path_params: PutImagesIDPathParams = field(default=None)
-    request: Optional[PutImagesIDRequestBodyUpdateImageRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: Optional[PutImagesIDUpdateImageRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass_json

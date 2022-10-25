@@ -17,7 +17,7 @@ class PrefixFamilyLabelEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class PrefixFamilyFamily:
+class PrefixFamily:
     label: PrefixFamilyLabelEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label' }})
     value: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
     
@@ -36,7 +36,7 @@ class PrefixStatusValueEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class PrefixStatusStatus:
+class PrefixStatus:
     label: PrefixStatusLabelEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label' }})
     value: PrefixStatusValueEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
     
@@ -47,14 +47,14 @@ class Prefix:
     created: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'created', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     custom_fields: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'custom_fields' }})
     description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
-    family: Optional[PrefixFamilyFamily] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'family' }})
+    family: Optional[PrefixFamily] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'family' }})
     id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     is_pool: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'is_pool' }})
     last_updated: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'last_updated', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     prefix: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'prefix' }})
     role: Optional[nestedrole.NestedRole] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'role' }})
     site: Optional[nestedsite.NestedSite] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'site' }})
-    status: Optional[PrefixStatusStatus] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    status: Optional[PrefixStatus] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
     tags: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
     tenant: Optional[nestedtenant.NestedTenant] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tenant' }})
     vlan: Optional[nestedvlan.NestedVlan] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'vlan' }})

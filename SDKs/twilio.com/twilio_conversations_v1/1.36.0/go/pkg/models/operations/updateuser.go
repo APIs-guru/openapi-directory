@@ -16,7 +16,7 @@ type UpdateUserHeaders struct {
 	XTwilioWebhookEnabled *shared.UserEnumWebhookEnabledTypeEnum `header:"name=X-Twilio-Webhook-Enabled"`
 }
 
-type UpdateUserRequestBodyUpdateUserRequest struct {
+type UpdateUserUpdateUserRequest struct {
 	Attributes   *string `form:"name=Attributes"`
 	FriendlyName *string `form:"name=FriendlyName"`
 	RoleSid      *string `form:"name=RoleSid"`
@@ -30,7 +30,7 @@ type UpdateUserRequest struct {
 	ServerURL  *string
 	PathParams UpdateUserPathParams
 	Headers    UpdateUserHeaders
-	Request    *UpdateUserRequestBodyUpdateUserRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateUserUpdateUserRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateUserSecurity
 }
 

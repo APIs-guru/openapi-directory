@@ -41,7 +41,7 @@ class ListRecordingRequest:
 
 @dataclass_json
 @dataclass
-class ListRecording200ApplicationJSONListRecordingResponse:
+class ListRecordingListRecordingResponse:
     end: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'end' }})
     first_page_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_uri' }})
     next_page_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_uri' }})
@@ -56,6 +56,6 @@ class ListRecording200ApplicationJSONListRecordingResponse:
 @dataclass
 class ListRecordingResponse:
     content_type: str = field(default=None)
-    list_recording_response: Optional[ListRecording200ApplicationJSONListRecordingResponse] = field(default=None)
+    list_recording_response: Optional[ListRecordingListRecordingResponse] = field(default=None)
     status_code: int = field(default=None)
     

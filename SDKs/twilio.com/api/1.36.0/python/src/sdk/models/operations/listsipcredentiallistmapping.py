@@ -33,7 +33,7 @@ class ListSipCredentialListMappingRequest:
 
 @dataclass_json
 @dataclass
-class ListSipCredentialListMapping200ApplicationJSONListSipCredentialListMappingResponse:
+class ListSipCredentialListMappingListSipCredentialListMappingResponse:
     credential_list_mappings: Optional[List[shared.APIV2010AccountSipSipDomainSipCredentialListMapping]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'credential_list_mappings' }})
     end: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'end' }})
     first_page_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_uri' }})
@@ -48,6 +48,6 @@ class ListSipCredentialListMapping200ApplicationJSONListSipCredentialListMapping
 @dataclass
 class ListSipCredentialListMappingResponse:
     content_type: str = field(default=None)
-    list_sip_credential_list_mapping_response: Optional[ListSipCredentialListMapping200ApplicationJSONListSipCredentialListMappingResponse] = field(default=None)
+    list_sip_credential_list_mapping_response: Optional[ListSipCredentialListMappingListSipCredentialListMappingResponse] = field(default=None)
     status_code: int = field(default=None)
     

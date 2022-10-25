@@ -38,15 +38,15 @@ const (
 	RearPortTemplateTypeValueEnumSt                    RearPortTemplateTypeValueEnum = "st"
 )
 
-type RearPortTemplateTypeType struct {
+type RearPortTemplateType struct {
 	Label RearPortTemplateTypeLabelEnum `json:"label"`
 	Value RearPortTemplateTypeValueEnum `json:"value"`
 }
 
 type RearPortTemplate struct {
-	DeviceType NestedDeviceType         `json:"device_type"`
-	ID         *int64                   `json:"id,omitempty"`
-	Name       string                   `json:"name"`
-	Positions  *int64                   `json:"positions,omitempty"`
-	Type       RearPortTemplateTypeType `json:"type"`
+	DeviceType NestedDeviceType     `json:"device_type"`
+	ID         *int64               `json:"id,omitempty"`
+	Name       string               `json:"name"`
+	Positions  *int64               `json:"positions,omitempty"`
+	Type       RearPortTemplateType `json:"type"`
 }

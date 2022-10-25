@@ -5,17 +5,17 @@ from dataclasses_json import dataclass_json
 
 @dataclass_json
 @dataclass
-class PostNetworksRequestBodyLabels:
+class PostNetworksCreateNetworkRequestLabels:
     labelkey: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'labelkey' }})
     
 
 @dataclass_json
 @dataclass
-class PostNetworksRequestBodyRoutes:
+class PostNetworksCreateNetworkRequestRoutes:
     destination: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'destination' }})
     gateway: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'gateway' }})
     
-class PostNetworksRequestBodySubnetsTypeEnum(str, Enum):
+class PostNetworksCreateNetworkRequestSubnetsTypeEnum(str, Enum):
     CLOUD = "cloud"
     SERVER = "server"
     VSWITCH = "vswitch"
@@ -23,25 +23,25 @@ class PostNetworksRequestBodySubnetsTypeEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class PostNetworksRequestBodySubnets:
+class PostNetworksCreateNetworkRequestSubnets:
     ip_range: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ip_range' }})
     network_zone: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'network_zone' }})
-    type: PostNetworksRequestBodySubnetsTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    type: PostNetworksCreateNetworkRequestSubnetsTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     
 
 @dataclass_json
 @dataclass
-class PostNetworksRequestBodyCreateNetworkRequest:
+class PostNetworksCreateNetworkRequest:
     ip_range: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ip_range' }})
-    labels: Optional[PostNetworksRequestBodyLabels] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'labels' }})
+    labels: Optional[PostNetworksCreateNetworkRequestLabels] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'labels' }})
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    routes: Optional[List[PostNetworksRequestBodyRoutes]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'routes' }})
-    subnets: Optional[List[PostNetworksRequestBodySubnets]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'subnets' }})
+    routes: Optional[List[PostNetworksCreateNetworkRequestRoutes]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'routes' }})
+    subnets: Optional[List[PostNetworksCreateNetworkRequestSubnets]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'subnets' }})
     
 
 @dataclass
 class PostNetworksRequest:
-    request: Optional[PostNetworksRequestBodyCreateNetworkRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: Optional[PostNetworksCreateNetworkRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass_json

@@ -27,7 +27,7 @@ type ListSipIPAccessControlListRequest struct {
 	Security    ListSipIPAccessControlListSecurity
 }
 
-type ListSipIPAccessControlList200ApplicationJSONListSipIPAccessControlListResponse struct {
+type ListSipIPAccessControlListListSipIPAccessControlListResponse struct {
 	End                  *int64                                            `json:"end,omitempty"`
 	FirstPageURI         *string                                           `json:"first_page_uri,omitempty"`
 	IPAccessControlLists []shared.APIV2010AccountSipSipIPAccessControlList `json:"ip_access_control_lists,omitempty"`
@@ -41,6 +41,6 @@ type ListSipIPAccessControlList200ApplicationJSONListSipIPAccessControlListRespo
 
 type ListSipIPAccessControlListResponse struct {
 	ContentType                        string
-	ListSipIPAccessControlListResponse *ListSipIPAccessControlList200ApplicationJSONListSipIPAccessControlListResponse
+	ListSipIPAccessControlListResponse *ListSipIPAccessControlListListSipIPAccessControlListResponse
 	StatusCode                         int64
 }

@@ -17,35 +17,35 @@ type GetTemplateRequest struct {
 	Security   GetTemplateSecurity
 }
 
-type GetTemplate200ApplicationJSONExpirationIntervalEnum string
+type GetTemplateTemplateExpirationIntervalEnum string
 
 const (
-	GetTemplate200ApplicationJSONExpirationIntervalEnumMinutes GetTemplate200ApplicationJSONExpirationIntervalEnum = "minutes"
-	GetTemplate200ApplicationJSONExpirationIntervalEnumHours   GetTemplate200ApplicationJSONExpirationIntervalEnum = "hours"
-	GetTemplate200ApplicationJSONExpirationIntervalEnumDays    GetTemplate200ApplicationJSONExpirationIntervalEnum = "days"
+	GetTemplateTemplateExpirationIntervalEnumMinutes GetTemplateTemplateExpirationIntervalEnum = "minutes"
+	GetTemplateTemplateExpirationIntervalEnumHours   GetTemplateTemplateExpirationIntervalEnum = "hours"
+	GetTemplateTemplateExpirationIntervalEnumDays    GetTemplateTemplateExpirationIntervalEnum = "days"
 )
 
-type GetTemplate200ApplicationJSONTemplate struct {
-	AllowAdditionalProperties bool                                                 `json:"allow_additional_properties"`
-	Description               string                                               `json:"description"`
-	DocumentURL               *string                                              `json:"document_url,omitempty"`
-	EditableSubmissions       bool                                                 `json:"editable_submissions"`
-	ExpirationInterval        *GetTemplate200ApplicationJSONExpirationIntervalEnum `json:"expiration_interval,omitempty"`
-	ExpireAfter               *float64                                             `json:"expire_after,omitempty"`
-	ExpireSubmissions         bool                                                 `json:"expire_submissions"`
-	ID                        string                                               `json:"id"`
-	Locked                    bool                                                 `json:"locked"`
-	Name                      string                                               `json:"name"`
-	PageDimensions            [][]float64                                          `json:"page_dimensions,omitempty"`
-	ParentFolderID            *string                                              `json:"parent_folder_id,omitempty"`
-	Path                      *string                                              `json:"path,omitempty"`
-	PermanentDocumentURL      *string                                              `json:"permanent_document_url,omitempty"`
-	PublicSubmissions         bool                                                 `json:"public_submissions"`
-	PublicWebForm             bool                                                 `json:"public_web_form"`
-	RedirectURL               string                                               `json:"redirect_url"`
-	SlackWebhookURL           string                                               `json:"slack_webhook_url"`
-	TemplateType              string                                               `json:"template_type"`
-	WebhookURL                string                                               `json:"webhook_url"`
+type GetTemplateTemplate struct {
+	AllowAdditionalProperties bool                                       `json:"allow_additional_properties"`
+	Description               string                                     `json:"description"`
+	DocumentURL               *string                                    `json:"document_url,omitempty"`
+	EditableSubmissions       bool                                       `json:"editable_submissions"`
+	ExpirationInterval        *GetTemplateTemplateExpirationIntervalEnum `json:"expiration_interval,omitempty"`
+	ExpireAfter               *float64                                   `json:"expire_after,omitempty"`
+	ExpireSubmissions         bool                                       `json:"expire_submissions"`
+	ID                        string                                     `json:"id"`
+	Locked                    bool                                       `json:"locked"`
+	Name                      string                                     `json:"name"`
+	PageDimensions            [][]float64                                `json:"page_dimensions,omitempty"`
+	ParentFolderID            *string                                    `json:"parent_folder_id,omitempty"`
+	Path                      *string                                    `json:"path,omitempty"`
+	PermanentDocumentURL      *string                                    `json:"permanent_document_url,omitempty"`
+	PublicSubmissions         bool                                       `json:"public_submissions"`
+	PublicWebForm             bool                                       `json:"public_web_form"`
+	RedirectURL               string                                     `json:"redirect_url"`
+	SlackWebhookURL           string                                     `json:"slack_webhook_url"`
+	TemplateType              string                                     `json:"template_type"`
+	WebhookURL                string                                     `json:"webhook_url"`
 }
 
 type GetTemplateResponse struct {
@@ -53,5 +53,5 @@ type GetTemplateResponse struct {
 	StatusCode          int64
 	AuthenticationError *shared.AuthenticationError
 	Error               *shared.Error
-	Template            *GetTemplate200ApplicationJSONTemplate
+	Template            *GetTemplateTemplate
 }

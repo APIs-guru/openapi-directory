@@ -11,7 +11,7 @@ class UpdateUsageTriggerPathParams:
     account_sid: str = field(default=None, metadata={'path_param': { 'field_name': 'AccountSid', 'style': 'simple', 'explode': False }})
     sid: str = field(default=None, metadata={'path_param': { 'field_name': 'Sid', 'style': 'simple', 'explode': False }})
     
-class UpdateUsageTriggerRequestBodyCallbackMethodEnum(str, Enum):
+class UpdateUsageTriggerUpdateUsageTriggerRequestCallbackMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -21,8 +21,8 @@ class UpdateUsageTriggerRequestBodyCallbackMethodEnum(str, Enum):
 
 
 @dataclass
-class UpdateUsageTriggerRequestBodyUpdateUsageTriggerRequest:
-    callback_method: Optional[UpdateUsageTriggerRequestBodyCallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'CallbackMethod' }})
+class UpdateUsageTriggerUpdateUsageTriggerRequest:
+    callback_method: Optional[UpdateUsageTriggerUpdateUsageTriggerRequestCallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'CallbackMethod' }})
     callback_url: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'CallbackUrl' }})
     friendly_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
     
@@ -36,7 +36,7 @@ class UpdateUsageTriggerSecurity:
 class UpdateUsageTriggerRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateUsageTriggerPathParams = field(default=None)
-    request: Optional[UpdateUsageTriggerRequestBodyUpdateUsageTriggerRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateUsageTriggerUpdateUsageTriggerRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateUsageTriggerSecurity = field(default=None)
     
 

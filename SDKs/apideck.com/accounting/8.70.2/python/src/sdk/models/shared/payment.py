@@ -8,7 +8,7 @@ from . import linkedledgeraccount
 from . import currency_enum
 from . import linkedcustomer
 
-class PaymentAllocationsTypeAllocationTypeEnum(str, Enum):
+class PaymentAllocationsAllocationTypeEnum(str, Enum):
     INVOICE = "invoice"
     ORDER = "order"
     EXPENSE = "expense"
@@ -23,15 +23,15 @@ class PaymentAllocations:
     amount: Optional[float] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'amount' }})
     code: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'code' }})
     id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    type: Optional[PaymentAllocationsTypeAllocationTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    type: Optional[PaymentAllocationsAllocationTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     
-class PaymentStatusPaymentStatusEnum(str, Enum):
+class PaymentPaymentStatusEnum(str, Enum):
     AUTHORISED = "authorised"
     PAID = "paid"
     VOIDED = "voided"
     DELETED = "deleted"
 
-class PaymentTypePaymentTypeEnum(str, Enum):
+class PaymentPaymentTypeEnum(str, Enum):
     ACCOUNTS_RECEIVABLE = "accounts_receivable"
     ACCOUNTS_PAYABLE = "accounts_payable"
     ACCOUNTS_RECEIVABLE_CREDIT = "accounts_receivable_credit"
@@ -62,10 +62,10 @@ class Payment:
     reconciled: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'reconciled' }})
     reference: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'reference' }})
     row_version: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'row_version' }})
-    status: Optional[PaymentStatusPaymentStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    status: Optional[PaymentPaymentStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
     total_amount: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'total_amount' }})
     transaction_date: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'transaction_date', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
-    type: Optional[PaymentTypePaymentTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    type: Optional[PaymentPaymentTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     updated_at: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updated_at', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     updated_by: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updated_by' }})
     

@@ -142,16 +142,16 @@ const (
 	PowerPortTemplateTypeValueEnumItaO           PowerPortTemplateTypeValueEnum = "ita-o"
 )
 
-type PowerPortTemplateTypeType struct {
+type PowerPortTemplateType struct {
 	Label PowerPortTemplateTypeLabelEnum `json:"label"`
 	Value PowerPortTemplateTypeValueEnum `json:"value"`
 }
 
 type PowerPortTemplate struct {
-	AllocatedDraw *int64                     `json:"allocated_draw,omitempty"`
-	DeviceType    NestedDeviceType           `json:"device_type"`
-	ID            *int64                     `json:"id,omitempty"`
-	MaximumDraw   *int64                     `json:"maximum_draw,omitempty"`
-	Name          string                     `json:"name"`
-	Type          *PowerPortTemplateTypeType `json:"type,omitempty"`
+	AllocatedDraw *int64                 `json:"allocated_draw,omitempty"`
+	DeviceType    NestedDeviceType       `json:"device_type"`
+	ID            *int64                 `json:"id,omitempty"`
+	MaximumDraw   *int64                 `json:"maximum_draw,omitempty"`
+	Name          string                 `json:"name"`
+	Type          *PowerPortTemplateType `json:"type,omitempty"`
 }

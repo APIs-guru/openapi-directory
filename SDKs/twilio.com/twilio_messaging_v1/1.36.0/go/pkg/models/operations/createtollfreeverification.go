@@ -8,7 +8,7 @@ var CreateTollfreeVerificationServers = []string{
 	"https://messaging.twilio.com",
 }
 
-type CreateTollfreeVerificationRequestBodyCreateTollfreeVerificationRequest struct {
+type CreateTollfreeVerificationCreateTollfreeVerificationRequest struct {
 	AdditionalInformation       *string                                      `form:"name=AdditionalInformation"`
 	BusinessCity                *string                                      `form:"name=BusinessCity"`
 	BusinessContactEmail        *string                                      `form:"name=BusinessContactEmail"`
@@ -39,7 +39,7 @@ type CreateTollfreeVerificationSecurity struct {
 
 type CreateTollfreeVerificationRequest struct {
 	ServerURL *string
-	Request   *CreateTollfreeVerificationRequestBodyCreateTollfreeVerificationRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request   *CreateTollfreeVerificationCreateTollfreeVerificationRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security  CreateTollfreeVerificationSecurity
 }
 

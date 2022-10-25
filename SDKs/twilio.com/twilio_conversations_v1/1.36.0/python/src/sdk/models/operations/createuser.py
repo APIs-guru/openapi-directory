@@ -12,7 +12,7 @@ class CreateUserHeaders:
     
 
 @dataclass
-class CreateUserRequestBodyCreateUserRequest:
+class CreateUserCreateUserRequest:
     attributes: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Attributes' }})
     friendly_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
     identity: str = field(default=None, metadata={'form': { 'field_name': 'Identity' }})
@@ -28,7 +28,7 @@ class CreateUserSecurity:
 class CreateUserRequest:
     server_url: Optional[str] = field(default=None)
     headers: CreateUserHeaders = field(default=None)
-    request: Optional[CreateUserRequestBodyCreateUserRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateUserCreateUserRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateUserSecurity = field(default=None)
     
 

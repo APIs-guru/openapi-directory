@@ -7,7 +7,7 @@ CREATE_ACCOUNT_SERVERS = [
 
 
 @dataclass
-class CreateAccountRequestBodyCreateAccountRequest:
+class CreateAccountCreateAccountRequest:
     friendly_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
     
 
@@ -19,7 +19,7 @@ class CreateAccountSecurity:
 @dataclass
 class CreateAccountRequest:
     server_url: Optional[str] = field(default=None)
-    request: Optional[CreateAccountRequestBodyCreateAccountRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateAccountCreateAccountRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateAccountSecurity = field(default=None)
     
 

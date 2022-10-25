@@ -8,16 +8,16 @@ from dataclasses_json import dataclass_json
 
 @dataclass_json
 @dataclass
-class PackageVersionMetadataContainerContainerMetadata:
+class PackageVersionPackageVersionMetadataContainerMetadata:
     tags: List[Any] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
     
 
 @dataclass_json
 @dataclass
-class PackageVersionMetadataDockerDockerMetadata:
+class PackageVersionPackageVersionMetadataDockerMetadata:
     tag: Optional[List[Any]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tag' }})
     
-class PackageVersionMetadataPackageTypeEnum(str, Enum):
+class PackageVersionPackageVersionMetadataPackageTypeEnum(str, Enum):
     NPM = "npm"
     MAVEN = "maven"
     RUBYGEMS = "rubygems"
@@ -28,10 +28,10 @@ class PackageVersionMetadataPackageTypeEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class PackageVersionMetadataPackageVersionMetadata:
-    container: Optional[PackageVersionMetadataContainerContainerMetadata] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'container' }})
-    docker: Optional[PackageVersionMetadataDockerDockerMetadata] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'docker' }})
-    package_type: PackageVersionMetadataPackageTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'package_type' }})
+class PackageVersionPackageVersionMetadata:
+    container: Optional[PackageVersionPackageVersionMetadataContainerMetadata] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'container' }})
+    docker: Optional[PackageVersionPackageVersionMetadataDockerMetadata] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'docker' }})
+    package_type: PackageVersionPackageVersionMetadataPackageTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'package_type' }})
     
 
 @dataclass_json
@@ -43,7 +43,7 @@ class PackageVersion:
     html_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'html_url' }})
     id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     license: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'license' }})
-    metadata: Optional[PackageVersionMetadataPackageVersionMetadata] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'metadata' }})
+    metadata: Optional[PackageVersionPackageVersionMetadata] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'metadata' }})
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
     package_html_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'package_html_url' }})
     updated_at: datetime = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updated_at', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})

@@ -12,7 +12,7 @@ class CreateUnderstandQueryPathParams:
     
 
 @dataclass
-class CreateUnderstandQueryRequestBodyCreateUnderstandQueryRequest:
+class CreateUnderstandQueryCreateUnderstandQueryRequest:
     field: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Field' }})
     language: str = field(default=None, metadata={'form': { 'field_name': 'Language' }})
     model_build: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'ModelBuild' }})
@@ -29,7 +29,7 @@ class CreateUnderstandQuerySecurity:
 class CreateUnderstandQueryRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateUnderstandQueryPathParams = field(default=None)
-    request: Optional[CreateUnderstandQueryRequestBodyCreateUnderstandQueryRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateUnderstandQueryCreateUnderstandQueryRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateUnderstandQuerySecurity = field(default=None)
     
 

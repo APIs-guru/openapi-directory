@@ -7,7 +7,7 @@ UPDATE_ACCOUNT_SETTINGS_SERVERS = [
 
 
 @dataclass
-class UpdateAccountSettingsRequestBodyUpdateAccountSettingsRequest:
+class UpdateAccountSettingsUpdateAccountSettingsRequest:
     advanced_features: Optional[bool] = field(default=None, metadata={'form': { 'field_name': 'AdvancedFeatures' }})
     subaccount_sid: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'SubaccountSid' }})
     voice_trace: Optional[bool] = field(default=None, metadata={'form': { 'field_name': 'VoiceTrace' }})
@@ -21,7 +21,7 @@ class UpdateAccountSettingsSecurity:
 @dataclass
 class UpdateAccountSettingsRequest:
     server_url: Optional[str] = field(default=None)
-    request: Optional[UpdateAccountSettingsRequestBodyUpdateAccountSettingsRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateAccountSettingsUpdateAccountSettingsRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateAccountSettingsSecurity = field(default=None)
     
 

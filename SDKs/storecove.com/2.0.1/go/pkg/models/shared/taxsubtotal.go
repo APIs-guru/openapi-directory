@@ -1,39 +1,39 @@
 package shared
 
-type TaxSubtotalCategoryTaxCategoryEnum string
+type TaxSubtotalTaxCategoryEnum string
 
 const (
-	TaxSubtotalCategoryTaxCategoryEnumStandard              TaxSubtotalCategoryTaxCategoryEnum = "standard"
-	TaxSubtotalCategoryTaxCategoryEnumZeroRated             TaxSubtotalCategoryTaxCategoryEnum = "zero_rated"
-	TaxSubtotalCategoryTaxCategoryEnumReverseCharge         TaxSubtotalCategoryTaxCategoryEnum = "reverse_charge"
-	TaxSubtotalCategoryTaxCategoryEnumIntraCommunity        TaxSubtotalCategoryTaxCategoryEnum = "intra_community"
-	TaxSubtotalCategoryTaxCategoryEnumExempt                TaxSubtotalCategoryTaxCategoryEnum = "exempt"
-	TaxSubtotalCategoryTaxCategoryEnumExport                TaxSubtotalCategoryTaxCategoryEnum = "export"
-	TaxSubtotalCategoryTaxCategoryEnumOutsideScope          TaxSubtotalCategoryTaxCategoryEnum = "outside_scope"
-	TaxSubtotalCategoryTaxCategoryEnumRegulation33Exempt    TaxSubtotalCategoryTaxCategoryEnum = "regulation33_exempt"
-	TaxSubtotalCategoryTaxCategoryEnumNonregulation33Exempt TaxSubtotalCategoryTaxCategoryEnum = "nonregulation33_exempt"
-	TaxSubtotalCategoryTaxCategoryEnumDeemedSupply          TaxSubtotalCategoryTaxCategoryEnum = "deemed_supply"
-	TaxSubtotalCategoryTaxCategoryEnumSrcaS                 TaxSubtotalCategoryTaxCategoryEnum = "srca_s"
-	TaxSubtotalCategoryTaxCategoryEnumSrcaC                 TaxSubtotalCategoryTaxCategoryEnum = "srca_c"
-	TaxSubtotalCategoryTaxCategoryEnumNotRegistered         TaxSubtotalCategoryTaxCategoryEnum = "not_registered"
-	TaxSubtotalCategoryTaxCategoryEnumSalesTaxWork          TaxSubtotalCategoryTaxCategoryEnum = "sales_tax_work"
-	TaxSubtotalCategoryTaxCategoryEnumServiceTax            TaxSubtotalCategoryTaxCategoryEnum = "service_tax"
-	TaxSubtotalCategoryTaxCategoryEnumServiceTaxImport      TaxSubtotalCategoryTaxCategoryEnum = "service_tax_import"
-	TaxSubtotalCategoryTaxCategoryEnumSalesToExportMarket   TaxSubtotalCategoryTaxCategoryEnum = "sales_to_export_market"
-	TaxSubtotalCategoryTaxCategoryEnumSalesToSpecialArea    TaxSubtotalCategoryTaxCategoryEnum = "sales_to_special_area"
-	TaxSubtotalCategoryTaxCategoryEnumSalesToDesignatedArea TaxSubtotalCategoryTaxCategoryEnum = "sales_to_designated_area"
-	TaxSubtotalCategoryTaxCategoryEnumExemptionScheduleA    TaxSubtotalCategoryTaxCategoryEnum = "exemption_schedule_a"
-	TaxSubtotalCategoryTaxCategoryEnumExemptionScheduleB    TaxSubtotalCategoryTaxCategoryEnum = "exemption_schedule_b"
-	TaxSubtotalCategoryTaxCategoryEnumExemptionScheduleCa   TaxSubtotalCategoryTaxCategoryEnum = "exemption_schedule_c_a"
-	TaxSubtotalCategoryTaxCategoryEnumExemptionScheduleCb   TaxSubtotalCategoryTaxCategoryEnum = "exemption_schedule_c_b"
-	TaxSubtotalCategoryTaxCategoryEnumExemptionScheduleCc   TaxSubtotalCategoryTaxCategoryEnum = "exemption_schedule_c_c"
-	TaxSubtotalCategoryTaxCategoryEnumExemptionServiceTax   TaxSubtotalCategoryTaxCategoryEnum = "exemption_service_tax"
+	TaxSubtotalTaxCategoryEnumStandard              TaxSubtotalTaxCategoryEnum = "standard"
+	TaxSubtotalTaxCategoryEnumZeroRated             TaxSubtotalTaxCategoryEnum = "zero_rated"
+	TaxSubtotalTaxCategoryEnumReverseCharge         TaxSubtotalTaxCategoryEnum = "reverse_charge"
+	TaxSubtotalTaxCategoryEnumIntraCommunity        TaxSubtotalTaxCategoryEnum = "intra_community"
+	TaxSubtotalTaxCategoryEnumExempt                TaxSubtotalTaxCategoryEnum = "exempt"
+	TaxSubtotalTaxCategoryEnumExport                TaxSubtotalTaxCategoryEnum = "export"
+	TaxSubtotalTaxCategoryEnumOutsideScope          TaxSubtotalTaxCategoryEnum = "outside_scope"
+	TaxSubtotalTaxCategoryEnumRegulation33Exempt    TaxSubtotalTaxCategoryEnum = "regulation33_exempt"
+	TaxSubtotalTaxCategoryEnumNonregulation33Exempt TaxSubtotalTaxCategoryEnum = "nonregulation33_exempt"
+	TaxSubtotalTaxCategoryEnumDeemedSupply          TaxSubtotalTaxCategoryEnum = "deemed_supply"
+	TaxSubtotalTaxCategoryEnumSrcaS                 TaxSubtotalTaxCategoryEnum = "srca_s"
+	TaxSubtotalTaxCategoryEnumSrcaC                 TaxSubtotalTaxCategoryEnum = "srca_c"
+	TaxSubtotalTaxCategoryEnumNotRegistered         TaxSubtotalTaxCategoryEnum = "not_registered"
+	TaxSubtotalTaxCategoryEnumSalesTaxWork          TaxSubtotalTaxCategoryEnum = "sales_tax_work"
+	TaxSubtotalTaxCategoryEnumServiceTax            TaxSubtotalTaxCategoryEnum = "service_tax"
+	TaxSubtotalTaxCategoryEnumServiceTaxImport      TaxSubtotalTaxCategoryEnum = "service_tax_import"
+	TaxSubtotalTaxCategoryEnumSalesToExportMarket   TaxSubtotalTaxCategoryEnum = "sales_to_export_market"
+	TaxSubtotalTaxCategoryEnumSalesToSpecialArea    TaxSubtotalTaxCategoryEnum = "sales_to_special_area"
+	TaxSubtotalTaxCategoryEnumSalesToDesignatedArea TaxSubtotalTaxCategoryEnum = "sales_to_designated_area"
+	TaxSubtotalTaxCategoryEnumExemptionScheduleA    TaxSubtotalTaxCategoryEnum = "exemption_schedule_a"
+	TaxSubtotalTaxCategoryEnumExemptionScheduleB    TaxSubtotalTaxCategoryEnum = "exemption_schedule_b"
+	TaxSubtotalTaxCategoryEnumExemptionScheduleCa   TaxSubtotalTaxCategoryEnum = "exemption_schedule_c_a"
+	TaxSubtotalTaxCategoryEnumExemptionScheduleCb   TaxSubtotalTaxCategoryEnum = "exemption_schedule_c_b"
+	TaxSubtotalTaxCategoryEnumExemptionScheduleCc   TaxSubtotalTaxCategoryEnum = "exemption_schedule_c_c"
+	TaxSubtotalTaxCategoryEnumExemptionServiceTax   TaxSubtotalTaxCategoryEnum = "exemption_service_tax"
 )
 
 type TaxSubtotal struct {
-	Category      *TaxSubtotalCategoryTaxCategoryEnum `json:"category,omitempty"`
-	Country       *CountryEnum                        `json:"country,omitempty"`
-	Percentage    *float64                            `json:"percentage,omitempty"`
-	TaxAmount     *float64                            `json:"taxAmount,omitempty"`
-	TaxableAmount float64                             `json:"taxableAmount"`
+	Category      *TaxSubtotalTaxCategoryEnum `json:"category,omitempty"`
+	Country       *CountryEnum                `json:"country,omitempty"`
+	Percentage    *float64                    `json:"percentage,omitempty"`
+	TaxAmount     *float64                    `json:"taxAmount,omitempty"`
+	TaxableAmount float64                     `json:"taxableAmount"`
 }

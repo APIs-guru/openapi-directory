@@ -39,7 +39,7 @@ class ListMediaRequest:
 
 @dataclass_json
 @dataclass
-class ListMedia200ApplicationJSONListMediaResponse:
+class ListMediaListMediaResponse:
     end: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'end' }})
     first_page_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_uri' }})
     media_list: Optional[List[shared.APIV2010AccountMessageMedia]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'media_list' }})
@@ -54,6 +54,6 @@ class ListMedia200ApplicationJSONListMediaResponse:
 @dataclass
 class ListMediaResponse:
     content_type: str = field(default=None)
-    list_media_response: Optional[ListMedia200ApplicationJSONListMediaResponse] = field(default=None)
+    list_media_response: Optional[ListMediaListMediaResponse] = field(default=None)
     status_code: int = field(default=None)
     

@@ -7,7 +7,7 @@ CREATE_TOLLFREE_VERIFICATION_SERVERS = [
 
 
 @dataclass
-class CreateTollfreeVerificationRequestBodyCreateTollfreeVerificationRequest:
+class CreateTollfreeVerificationCreateTollfreeVerificationRequest:
     additional_information: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'AdditionalInformation' }})
     business_city: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'BusinessCity' }})
     business_contact_email: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'BusinessContactEmail' }})
@@ -40,7 +40,7 @@ class CreateTollfreeVerificationSecurity:
 @dataclass
 class CreateTollfreeVerificationRequest:
     server_url: Optional[str] = field(default=None)
-    request: Optional[CreateTollfreeVerificationRequestBodyCreateTollfreeVerificationRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateTollfreeVerificationCreateTollfreeVerificationRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateTollfreeVerificationSecurity = field(default=None)
     
 

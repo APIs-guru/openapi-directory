@@ -1,27 +1,27 @@
 package shared
 
-type CisLineTypeCisLineTypeNominalCodeNominalCode struct {
+type CisLineTypeCisLineTypeNominalCode struct {
 	AtHref  *string `json:"@href,omitempty"`
 	AtRel   *string `json:"@rel,omitempty"`
 	AtTitle *string `json:"@title,omitempty"`
 }
 
-type CisLineTypeCisLineTypeTaxTreatmentTaxTreatmentEnum string
+type CisLineTypeCisLineTypeTaxTreatmentEnum string
 
 const (
-	CisLineTypeCisLineTypeTaxTreatmentTaxTreatmentEnumTaxable    CisLineTypeCisLineTypeTaxTreatmentTaxTreatmentEnum = "Taxable"
-	CisLineTypeCisLineTypeTaxTreatmentTaxTreatmentEnumNonTaxable CisLineTypeCisLineTypeTaxTreatmentTaxTreatmentEnum = "NonTaxable"
-	CisLineTypeCisLineTypeTaxTreatmentTaxTreatmentEnumNotional   CisLineTypeCisLineTypeTaxTreatmentTaxTreatmentEnum = "Notional"
-	CisLineTypeCisLineTypeTaxTreatmentTaxTreatmentEnumMaterials  CisLineTypeCisLineTypeTaxTreatmentTaxTreatmentEnum = "Materials"
+	CisLineTypeCisLineTypeTaxTreatmentEnumTaxable    CisLineTypeCisLineTypeTaxTreatmentEnum = "Taxable"
+	CisLineTypeCisLineTypeTaxTreatmentEnumNonTaxable CisLineTypeCisLineTypeTaxTreatmentEnum = "NonTaxable"
+	CisLineTypeCisLineTypeTaxTreatmentEnumNotional   CisLineTypeCisLineTypeTaxTreatmentEnum = "Notional"
+	CisLineTypeCisLineTypeTaxTreatmentEnumMaterials  CisLineTypeCisLineTypeTaxTreatmentEnum = "Materials"
 )
 
-type CisLineTypeCisLineTypeCisLineType struct {
-	Description  *string                                             `json:"Description,omitempty"`
-	LineType     *string                                             `json:"LineType,omitempty"`
-	NominalCode  *CisLineTypeCisLineTypeNominalCodeNominalCode       `json:"NominalCode,omitempty"`
-	TaxTreatment *CisLineTypeCisLineTypeTaxTreatmentTaxTreatmentEnum `json:"TaxTreatment,omitempty"`
+type CisLineTypeCisLineType struct {
+	Description  *string                                 `json:"Description,omitempty"`
+	LineType     *string                                 `json:"LineType,omitempty"`
+	NominalCode  *CisLineTypeCisLineTypeNominalCode      `json:"NominalCode,omitempty"`
+	TaxTreatment *CisLineTypeCisLineTypeTaxTreatmentEnum `json:"TaxTreatment,omitempty"`
 }
 
 type CisLineType struct {
-	CisLineType *CisLineTypeCisLineTypeCisLineType `json:"CisLineType,omitempty"`
+	CisLineType *CisLineTypeCisLineType `json:"CisLineType,omitempty"`
 }

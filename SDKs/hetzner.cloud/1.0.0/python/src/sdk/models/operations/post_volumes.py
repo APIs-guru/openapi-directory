@@ -5,7 +5,7 @@ from dataclasses_json import dataclass_json
 
 @dataclass_json
 @dataclass
-class PostVolumesRequestBodyCreateVolumeRequest:
+class PostVolumesCreateVolumeRequest:
     automount: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'automount' }})
     format: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'format' }})
     labels: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'labels' }})
@@ -17,7 +17,7 @@ class PostVolumesRequestBodyCreateVolumeRequest:
 
 @dataclass
 class PostVolumesRequest:
-    request: Optional[PostVolumesRequestBodyCreateVolumeRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: Optional[PostVolumesCreateVolumeRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass_json
@@ -41,7 +41,7 @@ class PostVolumes201ApplicationJSONActionStatusEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class PostVolumes201ApplicationJSONActionAction:
+class PostVolumes201ApplicationJSONAction:
     command: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'command' }})
     error: PostVolumes201ApplicationJSONActionError = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
     finished: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'finished' }})
@@ -50,38 +50,6 @@ class PostVolumes201ApplicationJSONActionAction:
     resources: List[PostVolumes201ApplicationJSONActionResources] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resources' }})
     started: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'started' }})
     status: PostVolumes201ApplicationJSONActionStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
-    
-
-@dataclass_json
-@dataclass
-class PostVolumes201ApplicationJSONNextActionsError:
-    code: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'code' }})
-    message: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'message' }})
-    
-
-@dataclass_json
-@dataclass
-class PostVolumes201ApplicationJSONNextActionsResources:
-    id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    type: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
-    
-class PostVolumes201ApplicationJSONNextActionsStatusEnum(str, Enum):
-    SUCCESS = "success"
-    RUNNING = "running"
-    ERROR = "error"
-
-
-@dataclass_json
-@dataclass
-class PostVolumes201ApplicationJSONNextActionsAction:
-    command: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'command' }})
-    error: PostVolumes201ApplicationJSONNextActionsError = field(default=None, metadata={'dataclasses_json': { 'field_name': 'error' }})
-    finished: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'finished' }})
-    id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    progress: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'progress' }})
-    resources: List[PostVolumes201ApplicationJSONNextActionsResources] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'resources' }})
-    started: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'started' }})
-    status: PostVolumes201ApplicationJSONNextActionsStatusEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
     
 
 @dataclass_json
@@ -126,8 +94,8 @@ class PostVolumes201ApplicationJSONVolume:
 @dataclass_json
 @dataclass
 class PostVolumes201ApplicationJSON:
-    action: PostVolumes201ApplicationJSONActionAction = field(default=None, metadata={'dataclasses_json': { 'field_name': 'action' }})
-    next_actions: List[PostVolumes201ApplicationJSONNextActionsAction] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_actions' }})
+    action: PostVolumes201ApplicationJSONAction = field(default=None, metadata={'dataclasses_json': { 'field_name': 'action' }})
+    next_actions: List[PostVolumes201ApplicationJSONAction] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_actions' }})
     volume: PostVolumes201ApplicationJSONVolume = field(default=None, metadata={'dataclasses_json': { 'field_name': 'volume' }})
     
 

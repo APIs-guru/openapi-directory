@@ -39,7 +39,7 @@ class ListRoomRecordingRequest:
 
 @dataclass_json
 @dataclass
-class ListRoomRecording200ApplicationJSONMeta:
+class ListRoomRecordingListRoomRecordingResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -51,14 +51,14 @@ class ListRoomRecording200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListRoomRecording200ApplicationJSONListRoomRecordingResponse:
-    meta: Optional[ListRoomRecording200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+class ListRoomRecordingListRoomRecordingResponse:
+    meta: Optional[ListRoomRecordingListRoomRecordingResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     recordings: Optional[List[shared.VideoV1RoomRoomRecording]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'recordings' }})
     
 
 @dataclass
 class ListRoomRecordingResponse:
     content_type: str = field(default=None)
-    list_room_recording_response: Optional[ListRoomRecording200ApplicationJSONListRoomRecordingResponse] = field(default=None)
+    list_room_recording_response: Optional[ListRoomRecordingListRoomRecordingResponse] = field(default=None)
     status_code: int = field(default=None)
     

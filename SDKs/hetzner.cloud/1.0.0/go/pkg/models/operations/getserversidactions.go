@@ -45,36 +45,36 @@ type GetServersIDActionsRequest struct {
 	QueryParams GetServersIDActionsQueryParams
 }
 
-type GetServersIDActions200ApplicationJSONActionsError struct {
+type GetServersIDActionsActionsResponseActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
 }
 
-type GetServersIDActions200ApplicationJSONActionsResources struct {
+type GetServersIDActionsActionsResponseActionResources struct {
 	ID   int64  `json:"id"`
 	Type string `json:"type"`
 }
 
-type GetServersIDActions200ApplicationJSONActionsStatusEnum string
+type GetServersIDActionsActionsResponseActionStatusEnum string
 
 const (
-	GetServersIDActions200ApplicationJSONActionsStatusEnumSuccess GetServersIDActions200ApplicationJSONActionsStatusEnum = "success"
-	GetServersIDActions200ApplicationJSONActionsStatusEnumRunning GetServersIDActions200ApplicationJSONActionsStatusEnum = "running"
-	GetServersIDActions200ApplicationJSONActionsStatusEnumError   GetServersIDActions200ApplicationJSONActionsStatusEnum = "error"
+	GetServersIDActionsActionsResponseActionStatusEnumSuccess GetServersIDActionsActionsResponseActionStatusEnum = "success"
+	GetServersIDActionsActionsResponseActionStatusEnumRunning GetServersIDActionsActionsResponseActionStatusEnum = "running"
+	GetServersIDActionsActionsResponseActionStatusEnumError   GetServersIDActionsActionsResponseActionStatusEnum = "error"
 )
 
-type GetServersIDActions200ApplicationJSONActionsAction struct {
-	Command   string                                                  `json:"command"`
-	Error     GetServersIDActions200ApplicationJSONActionsError       `json:"error"`
-	Finished  string                                                  `json:"finished"`
-	ID        int64                                                   `json:"id"`
-	Progress  float64                                                 `json:"progress"`
-	Resources []GetServersIDActions200ApplicationJSONActionsResources `json:"resources"`
-	Started   string                                                  `json:"started"`
-	Status    GetServersIDActions200ApplicationJSONActionsStatusEnum  `json:"status"`
+type GetServersIDActionsActionsResponseAction struct {
+	Command   string                                              `json:"command"`
+	Error     GetServersIDActionsActionsResponseActionError       `json:"error"`
+	Finished  string                                              `json:"finished"`
+	ID        int64                                               `json:"id"`
+	Progress  float64                                             `json:"progress"`
+	Resources []GetServersIDActionsActionsResponseActionResources `json:"resources"`
+	Started   string                                              `json:"started"`
+	Status    GetServersIDActionsActionsResponseActionStatusEnum  `json:"status"`
 }
 
-type GetServersIDActions200ApplicationJSONMetaPagination struct {
+type GetServersIDActionsActionsResponseMetaPagination struct {
 	LastPage     float64 `json:"last_page"`
 	NextPage     float64 `json:"next_page"`
 	Page         float64 `json:"page"`
@@ -83,17 +83,17 @@ type GetServersIDActions200ApplicationJSONMetaPagination struct {
 	TotalEntries float64 `json:"total_entries"`
 }
 
-type GetServersIDActions200ApplicationJSONMeta struct {
-	Pagination GetServersIDActions200ApplicationJSONMetaPagination `json:"pagination"`
+type GetServersIDActionsActionsResponseMeta struct {
+	Pagination GetServersIDActionsActionsResponseMetaPagination `json:"pagination"`
 }
 
-type GetServersIDActions200ApplicationJSONActionsResponse struct {
-	Actions []GetServersIDActions200ApplicationJSONActionsAction `json:"actions"`
-	Meta    *GetServersIDActions200ApplicationJSONMeta           `json:"meta,omitempty"`
+type GetServersIDActionsActionsResponse struct {
+	Actions []GetServersIDActionsActionsResponseAction `json:"actions"`
+	Meta    *GetServersIDActionsActionsResponseMeta    `json:"meta,omitempty"`
 }
 
 type GetServersIDActionsResponse struct {
-	ActionsResponse *GetServersIDActions200ApplicationJSONActionsResponse
+	ActionsResponse *GetServersIDActionsActionsResponse
 	ContentType     string
 	StatusCode      int64
 }

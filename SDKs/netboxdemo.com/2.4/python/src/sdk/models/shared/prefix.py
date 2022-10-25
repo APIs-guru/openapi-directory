@@ -13,7 +13,7 @@ from . import nestedvrf
 
 @dataclass_json
 @dataclass
-class PrefixStatusStatus:
+class PrefixStatus:
     label: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label' }})
     value: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'value' }})
     
@@ -31,7 +31,7 @@ class Prefix:
     prefix: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'prefix' }})
     role: Optional[nestedrole.NestedRole] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'role' }})
     site: Optional[nestedsite.NestedSite] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'site' }})
-    status: Optional[PrefixStatusStatus] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    status: Optional[PrefixStatus] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
     tags: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tags' }})
     tenant: Optional[nestedtenant.NestedTenant] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tenant' }})
     vlan: Optional[nestedvlan.NestedVlan] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'vlan' }})

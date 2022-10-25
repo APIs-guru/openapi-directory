@@ -9,41 +9,41 @@ type GetNetworksIDActionsActionIDRequest struct {
 	PathParams GetNetworksIDActionsActionIDPathParams
 }
 
-type GetNetworksIDActionsActionID200ApplicationJSONActionError struct {
+type GetNetworksIDActionsActionIDActionResponseActionError struct {
 	Code    string `json:"code"`
 	Message string `json:"message"`
 }
 
-type GetNetworksIDActionsActionID200ApplicationJSONActionResources struct {
+type GetNetworksIDActionsActionIDActionResponseActionResources struct {
 	ID   int64  `json:"id"`
 	Type string `json:"type"`
 }
 
-type GetNetworksIDActionsActionID200ApplicationJSONActionStatusEnum string
+type GetNetworksIDActionsActionIDActionResponseActionStatusEnum string
 
 const (
-	GetNetworksIDActionsActionID200ApplicationJSONActionStatusEnumSuccess GetNetworksIDActionsActionID200ApplicationJSONActionStatusEnum = "success"
-	GetNetworksIDActionsActionID200ApplicationJSONActionStatusEnumRunning GetNetworksIDActionsActionID200ApplicationJSONActionStatusEnum = "running"
-	GetNetworksIDActionsActionID200ApplicationJSONActionStatusEnumError   GetNetworksIDActionsActionID200ApplicationJSONActionStatusEnum = "error"
+	GetNetworksIDActionsActionIDActionResponseActionStatusEnumSuccess GetNetworksIDActionsActionIDActionResponseActionStatusEnum = "success"
+	GetNetworksIDActionsActionIDActionResponseActionStatusEnumRunning GetNetworksIDActionsActionIDActionResponseActionStatusEnum = "running"
+	GetNetworksIDActionsActionIDActionResponseActionStatusEnumError   GetNetworksIDActionsActionIDActionResponseActionStatusEnum = "error"
 )
 
-type GetNetworksIDActionsActionID200ApplicationJSONActionAction struct {
-	Command   string                                                          `json:"command"`
-	Error     GetNetworksIDActionsActionID200ApplicationJSONActionError       `json:"error"`
-	Finished  string                                                          `json:"finished"`
-	ID        int64                                                           `json:"id"`
-	Progress  float64                                                         `json:"progress"`
-	Resources []GetNetworksIDActionsActionID200ApplicationJSONActionResources `json:"resources"`
-	Started   string                                                          `json:"started"`
-	Status    GetNetworksIDActionsActionID200ApplicationJSONActionStatusEnum  `json:"status"`
+type GetNetworksIDActionsActionIDActionResponseAction struct {
+	Command   string                                                      `json:"command"`
+	Error     GetNetworksIDActionsActionIDActionResponseActionError       `json:"error"`
+	Finished  string                                                      `json:"finished"`
+	ID        int64                                                       `json:"id"`
+	Progress  float64                                                     `json:"progress"`
+	Resources []GetNetworksIDActionsActionIDActionResponseActionResources `json:"resources"`
+	Started   string                                                      `json:"started"`
+	Status    GetNetworksIDActionsActionIDActionResponseActionStatusEnum  `json:"status"`
 }
 
-type GetNetworksIDActionsActionID200ApplicationJSONActionResponse struct {
-	Action GetNetworksIDActionsActionID200ApplicationJSONActionAction `json:"action"`
+type GetNetworksIDActionsActionIDActionResponse struct {
+	Action GetNetworksIDActionsActionIDActionResponseAction `json:"action"`
 }
 
 type GetNetworksIDActionsActionIDResponse struct {
-	ActionResponse *GetNetworksIDActionsActionID200ApplicationJSONActionResponse
+	ActionResponse *GetNetworksIDActionsActionIDActionResponse
 	ContentType    string
 	StatusCode     int64
 }

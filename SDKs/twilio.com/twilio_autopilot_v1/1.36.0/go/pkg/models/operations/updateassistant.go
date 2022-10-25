@@ -12,7 +12,7 @@ type UpdateAssistantPathParams struct {
 	Sid string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
-type UpdateAssistantRequestBodyUpdateAssistantRequest struct {
+type UpdateAssistantUpdateAssistantRequest struct {
 	CallbackEvents   *string      `form:"name=CallbackEvents"`
 	CallbackURL      *string      `form:"name=CallbackUrl"`
 	Defaults         *interface{} `form:"name=Defaults"`
@@ -30,7 +30,7 @@ type UpdateAssistantSecurity struct {
 type UpdateAssistantRequest struct {
 	ServerURL  *string
 	PathParams UpdateAssistantPathParams
-	Request    *UpdateAssistantRequestBodyUpdateAssistantRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateAssistantUpdateAssistantRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateAssistantSecurity
 }
 

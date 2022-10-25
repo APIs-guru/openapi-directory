@@ -27,7 +27,7 @@ type ListPhoneNumberRequest struct {
 	Security    ListPhoneNumberSecurity
 }
 
-type ListPhoneNumber200ApplicationJSONMeta struct {
+type ListPhoneNumberListPhoneNumberResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -37,13 +37,13 @@ type ListPhoneNumber200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListPhoneNumber200ApplicationJSONListPhoneNumberResponse struct {
-	Meta         *ListPhoneNumber200ApplicationJSONMeta `json:"meta,omitempty"`
-	PhoneNumbers []shared.TrunkingV1TrunkPhoneNumber    `json:"phone_numbers,omitempty"`
+type ListPhoneNumberListPhoneNumberResponse struct {
+	Meta         *ListPhoneNumberListPhoneNumberResponseMeta `json:"meta,omitempty"`
+	PhoneNumbers []shared.TrunkingV1TrunkPhoneNumber         `json:"phone_numbers,omitempty"`
 }
 
 type ListPhoneNumberResponse struct {
 	ContentType             string
-	ListPhoneNumberResponse *ListPhoneNumber200ApplicationJSONListPhoneNumberResponse
+	ListPhoneNumberResponse *ListPhoneNumberListPhoneNumberResponse
 	StatusCode              int64
 }

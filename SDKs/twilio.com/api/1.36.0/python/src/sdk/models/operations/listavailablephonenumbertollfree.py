@@ -51,7 +51,7 @@ class ListAvailablePhoneNumberTollFreeRequest:
 
 @dataclass_json
 @dataclass
-class ListAvailablePhoneNumberTollFree200ApplicationJSONListAvailablePhoneNumberTollFreeResponse:
+class ListAvailablePhoneNumberTollFreeListAvailablePhoneNumberTollFreeResponse:
     available_phone_numbers: Optional[List[shared.APIV2010AccountAvailablePhoneNumberCountryAvailablePhoneNumberTollFree]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'available_phone_numbers' }})
     end: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'end' }})
     first_page_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_uri' }})
@@ -66,6 +66,6 @@ class ListAvailablePhoneNumberTollFree200ApplicationJSONListAvailablePhoneNumber
 @dataclass
 class ListAvailablePhoneNumberTollFreeResponse:
     content_type: str = field(default=None)
-    list_available_phone_number_toll_free_response: Optional[ListAvailablePhoneNumberTollFree200ApplicationJSONListAvailablePhoneNumberTollFreeResponse] = field(default=None)
+    list_available_phone_number_toll_free_response: Optional[ListAvailablePhoneNumberTollFreeListAvailablePhoneNumberTollFreeResponse] = field(default=None)
     status_code: int = field(default=None)
     

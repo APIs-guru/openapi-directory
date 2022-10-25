@@ -14,7 +14,7 @@ class CreateNotificationPathParams:
     
 
 @dataclass
-class CreateNotificationRequestBodyCreateNotificationRequest:
+class CreateNotificationCreateNotificationRequest:
     ttl: Optional[int] = field(default=None, metadata={'form': { 'field_name': 'Ttl' }})
     
 
@@ -27,7 +27,7 @@ class CreateNotificationSecurity:
 class CreateNotificationRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateNotificationPathParams = field(default=None)
-    request: Optional[CreateNotificationRequestBodyCreateNotificationRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateNotificationCreateNotificationRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateNotificationSecurity = field(default=None)
     
 

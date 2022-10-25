@@ -13,7 +13,7 @@ class UpdateSyncListPathParams:
     
 
 @dataclass
-class UpdateSyncListRequestBodyUpdateSyncListRequest:
+class UpdateSyncListUpdateSyncListRequest:
     collection_ttl: Optional[int] = field(default=None, metadata={'form': { 'field_name': 'CollectionTtl' }})
     ttl: Optional[int] = field(default=None, metadata={'form': { 'field_name': 'Ttl' }})
     
@@ -27,7 +27,7 @@ class UpdateSyncListSecurity:
 class UpdateSyncListRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateSyncListPathParams = field(default=None)
-    request: Optional[UpdateSyncListRequestBodyUpdateSyncListRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateSyncListUpdateSyncListRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateSyncListSecurity = field(default=None)
     
 

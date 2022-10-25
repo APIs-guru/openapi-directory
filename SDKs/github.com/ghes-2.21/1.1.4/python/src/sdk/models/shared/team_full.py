@@ -9,7 +9,7 @@ from . import organization_full
 
 @dataclass_json
 @dataclass
-class TeamFullParentTeamSimple:
+class TeamFullTeamSimple:
     description: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
     html_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'html_url' }})
     id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
@@ -41,7 +41,7 @@ class TeamFull:
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
     node_id: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'node_id' }})
     organization: organization_full.OrganizationFull = field(default=None, metadata={'dataclasses_json': { 'field_name': 'organization' }})
-    parent: Optional[TeamFullParentTeamSimple] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'parent' }})
+    parent: Optional[TeamFullTeamSimple] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'parent' }})
     permission: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'permission' }})
     privacy: Optional[TeamFullPrivacyEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'privacy' }})
     repos_count: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'repos_count' }})

@@ -13,7 +13,7 @@ class CreateParticipantPathParams:
     
 
 @dataclass
-class CreateParticipantRequestBodyCreateParticipantRequest:
+class CreateParticipantCreateParticipantRequest:
     fail_on_participant_conflict: Optional[bool] = field(default=None, metadata={'form': { 'field_name': 'FailOnParticipantConflict' }})
     friendly_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
     identifier: str = field(default=None, metadata={'form': { 'field_name': 'Identifier' }})
@@ -30,7 +30,7 @@ class CreateParticipantSecurity:
 class CreateParticipantRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateParticipantPathParams = field(default=None)
-    request: Optional[CreateParticipantRequestBodyCreateParticipantRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateParticipantCreateParticipantRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateParticipantSecurity = field(default=None)
     
 

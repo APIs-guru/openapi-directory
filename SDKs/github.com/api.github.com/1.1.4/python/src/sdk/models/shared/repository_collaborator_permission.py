@@ -5,7 +5,7 @@ from dataclasses_json import dataclass_json
 
 @dataclass_json
 @dataclass
-class RepositoryCollaboratorPermissionUserSimpleUser:
+class RepositoryCollaboratorPermissionSimpleUser:
     avatar_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'avatar_url' }})
     events_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'events_url' }})
     followers_url: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'followers_url' }})
@@ -31,5 +31,5 @@ class RepositoryCollaboratorPermissionUserSimpleUser:
 @dataclass
 class RepositoryCollaboratorPermission:
     permission: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'permission' }})
-    user: RepositoryCollaboratorPermissionUserSimpleUser = field(default=None, metadata={'dataclasses_json': { 'field_name': 'user' }})
+    user: RepositoryCollaboratorPermissionSimpleUser = field(default=None, metadata={'dataclasses_json': { 'field_name': 'user' }})
     

@@ -10,7 +10,7 @@ from . import currency_enum
 from . import email
 from . import phonenumber
 
-class CustomerSupportCustomerStatusStatusEnum(str, Enum):
+class CustomerSupportCustomerStatusEnum(str, Enum):
     ACTIVE = "active"
     ARCHIVED = "archived"
     GDPR_ERASURE_REQUEST = "gdpr-erasure-request"
@@ -33,7 +33,7 @@ class CustomerSupportCustomer:
     last_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'last_name' }})
     notes: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'notes' }})
     phone_numbers: Optional[List[phonenumber.PhoneNumber]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'phone_numbers' }})
-    status: Optional[CustomerSupportCustomerStatusStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    status: Optional[CustomerSupportCustomerStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
     tax_number: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tax_number' }})
     updated_at: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updated_at', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     updated_by: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'updated_by' }})

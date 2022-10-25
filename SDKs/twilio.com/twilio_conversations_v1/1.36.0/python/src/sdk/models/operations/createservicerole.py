@@ -12,7 +12,7 @@ class CreateServiceRolePathParams:
     
 
 @dataclass
-class CreateServiceRoleRequestBodyCreateServiceRoleRequest:
+class CreateServiceRoleCreateServiceRoleRequest:
     friendly_name: str = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
     permission: List[str] = field(default=None, metadata={'form': { 'field_name': 'Permission' }})
     type: shared.ServiceRoleEnumRoleTypeEnum = field(default=None, metadata={'form': { 'field_name': 'Type' }})
@@ -27,7 +27,7 @@ class CreateServiceRoleSecurity:
 class CreateServiceRoleRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateServiceRolePathParams = field(default=None)
-    request: Optional[CreateServiceRoleRequestBodyCreateServiceRoleRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateServiceRoleCreateServiceRoleRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateServiceRoleSecurity = field(default=None)
     
 

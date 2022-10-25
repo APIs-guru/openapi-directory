@@ -12,7 +12,7 @@ class UpdateFlexFlowPathParams:
     
 
 @dataclass
-class UpdateFlexFlowRequestBodyUpdateFlexFlowRequest:
+class UpdateFlexFlowUpdateFlexFlowRequest:
     channel_type: Optional[shared.FlexFlowEnumChannelTypeEnum] = field(default=None, metadata={'form': { 'field_name': 'ChannelType' }})
     chat_service_sid: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'ChatServiceSid' }})
     contact_identity: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'ContactIdentity' }})
@@ -41,7 +41,7 @@ class UpdateFlexFlowSecurity:
 class UpdateFlexFlowRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateFlexFlowPathParams = field(default=None)
-    request: Optional[UpdateFlexFlowRequestBodyUpdateFlexFlowRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateFlexFlowUpdateFlexFlowRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateFlexFlowSecurity = field(default=None)
     
 

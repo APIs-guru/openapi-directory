@@ -38,16 +38,16 @@ const (
 	FrontPortTemplateTypeValueEnumSt                    FrontPortTemplateTypeValueEnum = "st"
 )
 
-type FrontPortTemplateTypeType struct {
+type FrontPortTemplateType struct {
 	Label FrontPortTemplateTypeLabelEnum `json:"label"`
 	Value FrontPortTemplateTypeValueEnum `json:"value"`
 }
 
 type FrontPortTemplate struct {
-	DeviceType       NestedDeviceType          `json:"device_type"`
-	ID               *int64                    `json:"id,omitempty"`
-	Name             string                    `json:"name"`
-	RearPort         NestedRearPortTemplate    `json:"rear_port"`
-	RearPortPosition *int64                    `json:"rear_port_position,omitempty"`
-	Type             FrontPortTemplateTypeType `json:"type"`
+	DeviceType       NestedDeviceType       `json:"device_type"`
+	ID               *int64                 `json:"id,omitempty"`
+	Name             string                 `json:"name"`
+	RearPort         NestedRearPortTemplate `json:"rear_port"`
+	RearPortPosition *int64                 `json:"rear_port_position,omitempty"`
+	Type             FrontPortTemplateType  `json:"type"`
 }

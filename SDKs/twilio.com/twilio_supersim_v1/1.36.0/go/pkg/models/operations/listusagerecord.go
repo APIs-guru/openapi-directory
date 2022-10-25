@@ -31,7 +31,7 @@ type ListUsageRecordRequest struct {
 	Security    ListUsageRecordSecurity
 }
 
-type ListUsageRecord200ApplicationJSONMeta struct {
+type ListUsageRecordListUsageRecordResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -41,13 +41,13 @@ type ListUsageRecord200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListUsageRecord200ApplicationJSONListUsageRecordResponse struct {
-	Meta         *ListUsageRecord200ApplicationJSONMeta `json:"meta,omitempty"`
-	UsageRecords []shared.SupersimV1UsageRecord         `json:"usage_records,omitempty"`
+type ListUsageRecordListUsageRecordResponse struct {
+	Meta         *ListUsageRecordListUsageRecordResponseMeta `json:"meta,omitempty"`
+	UsageRecords []shared.SupersimV1UsageRecord              `json:"usage_records,omitempty"`
 }
 
 type ListUsageRecordResponse struct {
 	ContentType             string
-	ListUsageRecordResponse *ListUsageRecord200ApplicationJSONListUsageRecordResponse
+	ListUsageRecordResponse *ListUsageRecordListUsageRecordResponse
 	StatusCode              int64
 }

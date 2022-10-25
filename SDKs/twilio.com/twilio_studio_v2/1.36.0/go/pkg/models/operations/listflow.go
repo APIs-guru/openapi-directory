@@ -22,7 +22,7 @@ type ListFlowRequest struct {
 	Security    ListFlowSecurity
 }
 
-type ListFlow200ApplicationJSONMeta struct {
+type ListFlowListFlowResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -32,13 +32,13 @@ type ListFlow200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListFlow200ApplicationJSONListFlowResponse struct {
-	Flows []shared.StudioV2Flow           `json:"flows,omitempty"`
-	Meta  *ListFlow200ApplicationJSONMeta `json:"meta,omitempty"`
+type ListFlowListFlowResponse struct {
+	Flows []shared.StudioV2Flow         `json:"flows,omitempty"`
+	Meta  *ListFlowListFlowResponseMeta `json:"meta,omitempty"`
 }
 
 type ListFlowResponse struct {
 	ContentType      string
-	ListFlowResponse *ListFlow200ApplicationJSONListFlowResponse
+	ListFlowResponse *ListFlowListFlowResponse
 	StatusCode       int64
 }

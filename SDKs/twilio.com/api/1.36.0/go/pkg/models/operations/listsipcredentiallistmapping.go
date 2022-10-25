@@ -28,7 +28,7 @@ type ListSipCredentialListMappingRequest struct {
 	Security    ListSipCredentialListMappingSecurity
 }
 
-type ListSipCredentialListMapping200ApplicationJSONListSipCredentialListMappingResponse struct {
+type ListSipCredentialListMappingListSipCredentialListMappingResponse struct {
 	CredentialListMappings []shared.APIV2010AccountSipSipDomainSipCredentialListMapping `json:"credential_list_mappings,omitempty"`
 	End                    *int64                                                       `json:"end,omitempty"`
 	FirstPageURI           *string                                                      `json:"first_page_uri,omitempty"`
@@ -42,6 +42,6 @@ type ListSipCredentialListMapping200ApplicationJSONListSipCredentialListMappingR
 
 type ListSipCredentialListMappingResponse struct {
 	ContentType                          string
-	ListSipCredentialListMappingResponse *ListSipCredentialListMapping200ApplicationJSONListSipCredentialListMappingResponse
+	ListSipCredentialListMappingResponse *ListSipCredentialListMappingListSipCredentialListMappingResponse
 	StatusCode                           int64
 }

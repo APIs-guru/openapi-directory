@@ -32,7 +32,7 @@ class ListUsAppToPersonRequest:
 
 @dataclass_json
 @dataclass
-class ListUsAppToPerson200ApplicationJSONMeta:
+class ListUsAppToPersonListUsAppToPersonResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -44,14 +44,14 @@ class ListUsAppToPerson200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListUsAppToPerson200ApplicationJSONListUsAppToPersonResponse:
+class ListUsAppToPersonListUsAppToPersonResponse:
     compliance: Optional[List[shared.MessagingV1ServiceUsAppToPerson]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'compliance' }})
-    meta: Optional[ListUsAppToPerson200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+    meta: Optional[ListUsAppToPersonListUsAppToPersonResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     
 
 @dataclass
 class ListUsAppToPersonResponse:
     content_type: str = field(default=None)
-    list_us_app_to_person_response: Optional[ListUsAppToPerson200ApplicationJSONListUsAppToPersonResponse] = field(default=None)
+    list_us_app_to_person_response: Optional[ListUsAppToPersonListUsAppToPersonResponse] = field(default=None)
     status_code: int = field(default=None)
     

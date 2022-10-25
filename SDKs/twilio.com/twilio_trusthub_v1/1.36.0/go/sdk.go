@@ -1405,7 +1405,7 @@ func (s *SDK) ListCustomerProfile(ctx context.Context, request operations.ListCu
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListCustomerProfile200ApplicationJSONListCustomerProfileResponse
+			var out *operations.ListCustomerProfileListCustomerProfileResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -1450,7 +1450,7 @@ func (s *SDK) ListCustomerProfileChannelEndpointAssignment(ctx context.Context, 
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListCustomerProfileChannelEndpointAssignment200ApplicationJSONListCustomerProfileChannelEndpointAssignmentResponse
+			var out *operations.ListCustomerProfileChannelEndpointAssignmentListCustomerProfileChannelEndpointAssignmentResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -1495,7 +1495,7 @@ func (s *SDK) ListCustomerProfileEntityAssignment(ctx context.Context, request o
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListCustomerProfileEntityAssignment200ApplicationJSONListCustomerProfileEntityAssignmentResponse
+			var out *operations.ListCustomerProfileEntityAssignmentListCustomerProfileEntityAssignmentResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -1540,7 +1540,7 @@ func (s *SDK) ListCustomerProfileEvaluation(ctx context.Context, request operati
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListCustomerProfileEvaluation200ApplicationJSONListCustomerProfileEvaluationResponse
+			var out *operations.ListCustomerProfileEvaluationListCustomerProfileEvaluationResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -1585,7 +1585,7 @@ func (s *SDK) ListEndUser(ctx context.Context, request operations.ListEndUserReq
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListEndUser200ApplicationJSONListEndUserResponse
+			var out *operations.ListEndUserListEndUserResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -1630,7 +1630,7 @@ func (s *SDK) ListEndUserType(ctx context.Context, request operations.ListEndUse
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListEndUserType200ApplicationJSONListEndUserTypeResponse
+			var out *operations.ListEndUserTypeListEndUserTypeResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -1675,7 +1675,7 @@ func (s *SDK) ListPolicies(ctx context.Context, request operations.ListPoliciesR
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListPolicies200ApplicationJSONListPoliciesResponse
+			var out *operations.ListPoliciesListPoliciesResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -1720,7 +1720,7 @@ func (s *SDK) ListSupportingDocument(ctx context.Context, request operations.Lis
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListSupportingDocument200ApplicationJSONListSupportingDocumentResponse
+			var out *operations.ListSupportingDocumentListSupportingDocumentResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -1765,7 +1765,7 @@ func (s *SDK) ListSupportingDocumentType(ctx context.Context, request operations
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListSupportingDocumentType200ApplicationJSONListSupportingDocumentTypeResponse
+			var out *operations.ListSupportingDocumentTypeListSupportingDocumentTypeResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -1810,7 +1810,7 @@ func (s *SDK) ListTrustProduct(ctx context.Context, request operations.ListTrust
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListTrustProduct200ApplicationJSONListTrustProductResponse
+			var out *operations.ListTrustProductListTrustProductResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -1855,7 +1855,7 @@ func (s *SDK) ListTrustProductChannelEndpointAssignment(ctx context.Context, req
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListTrustProductChannelEndpointAssignment200ApplicationJSONListTrustProductChannelEndpointAssignmentResponse
+			var out *operations.ListTrustProductChannelEndpointAssignmentListTrustProductChannelEndpointAssignmentResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -1900,7 +1900,7 @@ func (s *SDK) ListTrustProductEntityAssignment(ctx context.Context, request oper
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListTrustProductEntityAssignment200ApplicationJSONListTrustProductEntityAssignmentResponse
+			var out *operations.ListTrustProductEntityAssignmentListTrustProductEntityAssignmentResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -1945,7 +1945,7 @@ func (s *SDK) ListTrustProductEvaluation(ctx context.Context, request operations
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListTrustProductEvaluation200ApplicationJSONListTrustProductEvaluationResponse
+			var out *operations.ListTrustProductEvaluationListTrustProductEvaluationResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}

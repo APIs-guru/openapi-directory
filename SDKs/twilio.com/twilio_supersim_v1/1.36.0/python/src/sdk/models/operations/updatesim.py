@@ -10,7 +10,7 @@ UPDATE_SIM_SERVERS = [
 class UpdateSimPathParams:
     sid: str = field(default=None, metadata={'path_param': { 'field_name': 'Sid', 'style': 'simple', 'explode': False }})
     
-class UpdateSimRequestBodyCallbackMethodEnum(str, Enum):
+class UpdateSimUpdateSimRequestCallbackMethodEnum(str, Enum):
     HEAD = "HEAD"
     GET = "GET"
     POST = "POST"
@@ -20,9 +20,9 @@ class UpdateSimRequestBodyCallbackMethodEnum(str, Enum):
 
 
 @dataclass
-class UpdateSimRequestBodyUpdateSimRequest:
+class UpdateSimUpdateSimRequest:
     account_sid: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'AccountSid' }})
-    callback_method: Optional[UpdateSimRequestBodyCallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'CallbackMethod' }})
+    callback_method: Optional[UpdateSimUpdateSimRequestCallbackMethodEnum] = field(default=None, metadata={'form': { 'field_name': 'CallbackMethod' }})
     callback_url: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'CallbackUrl' }})
     fleet: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'Fleet' }})
     status: Optional[shared.SimEnumStatusUpdateEnum] = field(default=None, metadata={'form': { 'field_name': 'Status' }})
@@ -38,7 +38,7 @@ class UpdateSimSecurity:
 class UpdateSimRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateSimPathParams = field(default=None)
-    request: Optional[UpdateSimRequestBodyUpdateSimRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateSimUpdateSimRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateSimSecurity = field(default=None)
     
 

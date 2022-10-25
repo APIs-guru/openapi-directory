@@ -234,7 +234,7 @@ class SDK:
         res = operations.ListCallSummariesResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListCallSummaries200ApplicationJSONListCallSummariesResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListCallSummariesListCallSummariesResponse])
                 res.list_call_summaries_response = out
 
         return res
@@ -259,7 +259,7 @@ class SDK:
         res = operations.ListConferenceResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListConference200ApplicationJSONListConferenceResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListConferenceListConferenceResponse])
                 res.list_conference_response = out
 
         return res
@@ -284,7 +284,7 @@ class SDK:
         res = operations.ListConferenceParticipantResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListConferenceParticipant200ApplicationJSONListConferenceParticipantResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListConferenceParticipantListConferenceParticipantResponse])
                 res.list_conference_participant_response = out
 
         return res
@@ -309,7 +309,7 @@ class SDK:
         res = operations.ListEventResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListEvent200ApplicationJSONListEventResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListEventListEventResponse])
                 res.list_event_response = out
 
         return res
@@ -334,7 +334,7 @@ class SDK:
         res = operations.ListMetricResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListMetric200ApplicationJSONListMetricResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListMetricListMetricResponse])
                 res.list_metric_response = out
 
         return res
@@ -359,7 +359,7 @@ class SDK:
         res = operations.ListVideoParticipantSummaryResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListVideoParticipantSummary200ApplicationJSONListVideoParticipantSummaryResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListVideoParticipantSummaryListVideoParticipantSummaryResponse])
                 res.list_video_participant_summary_response = out
 
         return res
@@ -384,7 +384,7 @@ class SDK:
         res = operations.ListVideoRoomSummaryResponse(status_code=r.status_code, content_type=content_type)
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
-                out = utils.unmarshal_json(r.text, Optional[operations.ListVideoRoomSummary200ApplicationJSONListVideoRoomSummaryResponse])
+                out = utils.unmarshal_json(r.text, Optional[operations.ListVideoRoomSummaryListVideoRoomSummaryResponse])
                 res.list_video_room_summary_response = out
 
         return res

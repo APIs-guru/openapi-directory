@@ -13,7 +13,7 @@ type CreateSyncListItemPathParams struct {
 	ServiceSid string `pathParam:"style=simple,explode=false,name=ServiceSid"`
 }
 
-type CreateSyncListItemRequestBodyCreateSyncListItemRequest struct {
+type CreateSyncListItemCreateSyncListItemRequest struct {
 	CollectionTTL *int64      `form:"name=CollectionTtl"`
 	Data          interface{} `form:"name=Data"`
 	ItemTTL       *int64      `form:"name=ItemTtl"`
@@ -27,7 +27,7 @@ type CreateSyncListItemSecurity struct {
 type CreateSyncListItemRequest struct {
 	ServerURL  *string
 	PathParams CreateSyncListItemPathParams
-	Request    *CreateSyncListItemRequestBodyCreateSyncListItemRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateSyncListItemCreateSyncListItemRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateSyncListItemSecurity
 }
 

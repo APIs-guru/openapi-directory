@@ -154,19 +154,19 @@ class GetServers200ApplicationJSONServersIso:
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
     type: GetServers200ApplicationJSONServersIsoTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     
-class GetServers200ApplicationJSONServersPlacementGroupTypeEnum(str, Enum):
+class GetServers200ApplicationJSONServersPlacementGroupNullableTypeEnum(str, Enum):
     SPREAD = "spread"
 
 
 @dataclass_json
 @dataclass
-class GetServers200ApplicationJSONServersPlacementGroupPlacementGroupNullable:
+class GetServers200ApplicationJSONServersPlacementGroupNullable:
     created: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'created' }})
     id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     labels: dict[str, str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'labels' }})
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
     servers: List[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'servers' }})
-    type: GetServers200ApplicationJSONServersPlacementGroupTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    type: GetServers200ApplicationJSONServersPlacementGroupNullableTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     
 
 @dataclass_json
@@ -184,16 +184,16 @@ class GetServers200ApplicationJSONServersProtection:
     delete: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'delete' }})
     rebuild: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rebuild' }})
     
-class GetServers200ApplicationJSONServersPublicNetFirewallsStatusEnum(str, Enum):
+class GetServers200ApplicationJSONServersPublicNetServerPublicNetFirewallStatusEnum(str, Enum):
     APPLIED = "applied"
     PENDING = "pending"
 
 
 @dataclass_json
 @dataclass
-class GetServers200ApplicationJSONServersPublicNetFirewallsServerPublicNetFirewall:
+class GetServers200ApplicationJSONServersPublicNetServerPublicNetFirewall:
     id: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
-    status: Optional[GetServers200ApplicationJSONServersPublicNetFirewallsStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    status: Optional[GetServers200ApplicationJSONServersPublicNetServerPublicNetFirewallStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
     
 
 @dataclass_json
@@ -222,7 +222,7 @@ class GetServers200ApplicationJSONServersPublicNetIpv6:
 @dataclass_json
 @dataclass
 class GetServers200ApplicationJSONServersPublicNet:
-    firewalls: Optional[List[GetServers200ApplicationJSONServersPublicNetFirewallsServerPublicNetFirewall]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'firewalls' }})
+    firewalls: Optional[List[GetServers200ApplicationJSONServersPublicNetServerPublicNetFirewall]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'firewalls' }})
     floating_ips: List[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'floating_ips' }})
     ipv4: GetServers200ApplicationJSONServersPublicNetIpv4 = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ipv4' }})
     ipv6: GetServers200ApplicationJSONServersPublicNetIpv6 = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ipv6' }})
@@ -300,7 +300,7 @@ class GetServers200ApplicationJSONServers:
     locked: bool = field(default=None, metadata={'dataclasses_json': { 'field_name': 'locked' }})
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
     outgoing_traffic: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'outgoing_traffic' }})
-    placement_group: Optional[GetServers200ApplicationJSONServersPlacementGroupPlacementGroupNullable] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'placement_group' }})
+    placement_group: Optional[GetServers200ApplicationJSONServersPlacementGroupNullable] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'placement_group' }})
     primary_disk_size: float = field(default=None, metadata={'dataclasses_json': { 'field_name': 'primary_disk_size' }})
     private_net: List[GetServers200ApplicationJSONServersPrivateNet] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'private_net' }})
     protection: GetServers200ApplicationJSONServersProtection = field(default=None, metadata={'dataclasses_json': { 'field_name': 'protection' }})

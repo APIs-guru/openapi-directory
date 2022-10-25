@@ -13,7 +13,7 @@ type UpdateSipIPAccessControlListPathParams struct {
 	Sid        string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
-type UpdateSipIPAccessControlListRequestBodyUpdateSipIPAccessControlListRequest struct {
+type UpdateSipIPAccessControlListUpdateSipIPAccessControlListRequest struct {
 	FriendlyName string `form:"name=FriendlyName"`
 }
 
@@ -24,7 +24,7 @@ type UpdateSipIPAccessControlListSecurity struct {
 type UpdateSipIPAccessControlListRequest struct {
 	ServerURL  *string
 	PathParams UpdateSipIPAccessControlListPathParams
-	Request    *UpdateSipIPAccessControlListRequestBodyUpdateSipIPAccessControlListRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateSipIPAccessControlListUpdateSipIPAccessControlListRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateSipIPAccessControlListSecurity
 }
 

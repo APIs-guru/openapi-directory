@@ -551,7 +551,7 @@ func (s *SDK) ListExecution(ctx context.Context, request operations.ListExecutio
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListExecution200ApplicationJSONListExecutionResponse
+			var out *operations.ListExecutionListExecutionResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -596,7 +596,7 @@ func (s *SDK) ListExecutionStep(ctx context.Context, request operations.ListExec
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListExecutionStep200ApplicationJSONListExecutionStepResponse
+			var out *operations.ListExecutionStepListExecutionStepResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -641,7 +641,7 @@ func (s *SDK) ListFlow(ctx context.Context, request operations.ListFlowRequest) 
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListFlow200ApplicationJSONListFlowResponse
+			var out *operations.ListFlowListFlowResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}
@@ -686,7 +686,7 @@ func (s *SDK) ListFlowRevision(ctx context.Context, request operations.ListFlowR
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.ListFlowRevision200ApplicationJSONListFlowRevisionResponse
+			var out *operations.ListFlowRevisionListFlowRevisionResponse
 			if err := utils.UnmarshalJsonFromResponseBody(httpRes.Body, &out); err != nil {
 				return nil, err
 			}

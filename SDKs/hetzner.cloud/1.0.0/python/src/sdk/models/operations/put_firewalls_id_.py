@@ -10,7 +10,7 @@ class PutFirewallsIDPathParams:
 
 @dataclass_json
 @dataclass
-class PutFirewallsIDRequestBodyUpdateFirewallRequest:
+class PutFirewallsIDUpdateFirewallRequest:
     labels: Optional[dict[str, Any]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'labels' }})
     name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
     
@@ -18,54 +18,54 @@ class PutFirewallsIDRequestBodyUpdateFirewallRequest:
 @dataclass
 class PutFirewallsIDRequest:
     path_params: PutFirewallsIDPathParams = field(default=None)
-    request: Optional[PutFirewallsIDRequestBodyUpdateFirewallRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
+    request: Optional[PutFirewallsIDUpdateFirewallRequest] = field(default=None, metadata={'request': { 'media_type': 'application/json' }})
     
 
 @dataclass_json
 @dataclass
-class PutFirewallsID200ApplicationJSONFirewallAppliedToAppliedToResourcesServer:
+class PutFirewallsIDFirewallResponseFirewallAppliedToAppliedToResourcesServer:
     id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     
-class PutFirewallsID200ApplicationJSONFirewallAppliedToAppliedToResourcesTypeEnum(str, Enum):
+class PutFirewallsIDFirewallResponseFirewallAppliedToAppliedToResourcesTypeEnum(str, Enum):
     SERVER = "server"
 
 
 @dataclass_json
 @dataclass
-class PutFirewallsID200ApplicationJSONFirewallAppliedToAppliedToResources:
-    server: Optional[PutFirewallsID200ApplicationJSONFirewallAppliedToAppliedToResourcesServer] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'server' }})
-    type: Optional[PutFirewallsID200ApplicationJSONFirewallAppliedToAppliedToResourcesTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+class PutFirewallsIDFirewallResponseFirewallAppliedToAppliedToResources:
+    server: Optional[PutFirewallsIDFirewallResponseFirewallAppliedToAppliedToResourcesServer] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'server' }})
+    type: Optional[PutFirewallsIDFirewallResponseFirewallAppliedToAppliedToResourcesTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     
 
 @dataclass_json
 @dataclass
-class PutFirewallsID200ApplicationJSONFirewallAppliedToLabelSelector:
+class PutFirewallsIDFirewallResponseFirewallAppliedToLabelSelector:
     selector: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'selector' }})
     
 
 @dataclass_json
 @dataclass
-class PutFirewallsID200ApplicationJSONFirewallAppliedToServer:
+class PutFirewallsIDFirewallResponseFirewallAppliedToServer:
     id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     
-class PutFirewallsID200ApplicationJSONFirewallAppliedToTypeEnum(str, Enum):
+class PutFirewallsIDFirewallResponseFirewallAppliedToTypeEnum(str, Enum):
     SERVER = "server"
     LABEL_SELECTOR = "label_selector"
 
 
 @dataclass_json
 @dataclass
-class PutFirewallsID200ApplicationJSONFirewallAppliedTo:
-    applied_to_resources: Optional[List[PutFirewallsID200ApplicationJSONFirewallAppliedToAppliedToResources]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'applied_to_resources' }})
-    label_selector: Optional[PutFirewallsID200ApplicationJSONFirewallAppliedToLabelSelector] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label_selector' }})
-    server: Optional[PutFirewallsID200ApplicationJSONFirewallAppliedToServer] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'server' }})
-    type: PutFirewallsID200ApplicationJSONFirewallAppliedToTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+class PutFirewallsIDFirewallResponseFirewallAppliedTo:
+    applied_to_resources: Optional[List[PutFirewallsIDFirewallResponseFirewallAppliedToAppliedToResources]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'applied_to_resources' }})
+    label_selector: Optional[PutFirewallsIDFirewallResponseFirewallAppliedToLabelSelector] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'label_selector' }})
+    server: Optional[PutFirewallsIDFirewallResponseFirewallAppliedToServer] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'server' }})
+    type: PutFirewallsIDFirewallResponseFirewallAppliedToTypeEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     
-class PutFirewallsID200ApplicationJSONFirewallRulesDirectionEnum(str, Enum):
+class PutFirewallsIDFirewallResponseFirewallRuleDirectionEnum(str, Enum):
     IN = "in"
     OUT = "out"
 
-class PutFirewallsID200ApplicationJSONFirewallRulesProtocolEnum(str, Enum):
+class PutFirewallsIDFirewallResponseFirewallRuleProtocolEnum(str, Enum):
     TCP = "tcp"
     UDP = "udp"
     ICMP = "icmp"
@@ -75,35 +75,35 @@ class PutFirewallsID200ApplicationJSONFirewallRulesProtocolEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class PutFirewallsID200ApplicationJSONFirewallRulesRule:
+class PutFirewallsIDFirewallResponseFirewallRule:
     description: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'description' }})
     destination_ips: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'destination_ips' }})
-    direction: PutFirewallsID200ApplicationJSONFirewallRulesDirectionEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'direction' }})
+    direction: PutFirewallsIDFirewallResponseFirewallRuleDirectionEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'direction' }})
     port: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'port' }})
-    protocol: PutFirewallsID200ApplicationJSONFirewallRulesProtocolEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'protocol' }})
+    protocol: PutFirewallsIDFirewallResponseFirewallRuleProtocolEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'protocol' }})
     source_ips: Optional[List[str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'source_ips' }})
     
 
 @dataclass_json
 @dataclass
-class PutFirewallsID200ApplicationJSONFirewallFirewall:
-    applied_to: List[PutFirewallsID200ApplicationJSONFirewallAppliedTo] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'applied_to' }})
+class PutFirewallsIDFirewallResponseFirewall:
+    applied_to: List[PutFirewallsIDFirewallResponseFirewallAppliedTo] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'applied_to' }})
     created: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'created' }})
     id: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     labels: Optional[dict[str, str]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'labels' }})
     name: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
-    rules: List[PutFirewallsID200ApplicationJSONFirewallRulesRule] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rules' }})
+    rules: List[PutFirewallsIDFirewallResponseFirewallRule] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'rules' }})
     
 
 @dataclass_json
 @dataclass
-class PutFirewallsID200ApplicationJSONFirewallResponse:
-    firewall: PutFirewallsID200ApplicationJSONFirewallFirewall = field(default=None, metadata={'dataclasses_json': { 'field_name': 'firewall' }})
+class PutFirewallsIDFirewallResponse:
+    firewall: PutFirewallsIDFirewallResponseFirewall = field(default=None, metadata={'dataclasses_json': { 'field_name': 'firewall' }})
     
 
 @dataclass
 class PutFirewallsIDResponse:
     content_type: str = field(default=None)
-    firewall_response: Optional[PutFirewallsID200ApplicationJSONFirewallResponse] = field(default=None)
+    firewall_response: Optional[PutFirewallsIDFirewallResponse] = field(default=None)
     status_code: int = field(default=None)
     

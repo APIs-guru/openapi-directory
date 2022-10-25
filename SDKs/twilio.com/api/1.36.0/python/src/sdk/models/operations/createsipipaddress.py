@@ -13,7 +13,7 @@ class CreateSipIPAddressPathParams:
     
 
 @dataclass
-class CreateSipIPAddressRequestBodyCreateSipIPAddressRequest:
+class CreateSipIPAddressCreateSipIPAddressRequest:
     cidr_prefix_length: Optional[int] = field(default=None, metadata={'form': { 'field_name': 'CidrPrefixLength' }})
     friendly_name: str = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
     ip_address: str = field(default=None, metadata={'form': { 'field_name': 'IpAddress' }})
@@ -28,7 +28,7 @@ class CreateSipIPAddressSecurity:
 class CreateSipIPAddressRequest:
     server_url: Optional[str] = field(default=None)
     path_params: CreateSipIPAddressPathParams = field(default=None)
-    request: Optional[CreateSipIPAddressRequestBodyCreateSipIPAddressRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateSipIPAddressCreateSipIPAddressRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateSipIPAddressSecurity = field(default=None)
     
 

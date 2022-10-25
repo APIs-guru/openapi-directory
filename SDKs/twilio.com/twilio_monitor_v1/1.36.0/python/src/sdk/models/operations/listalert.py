@@ -32,7 +32,7 @@ class ListAlertRequest:
 
 @dataclass_json
 @dataclass
-class ListAlert200ApplicationJSONMeta:
+class ListAlertListAlertResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -44,14 +44,14 @@ class ListAlert200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListAlert200ApplicationJSONListAlertResponse:
+class ListAlertListAlertResponse:
     alerts: Optional[List[shared.MonitorV1Alert]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'alerts' }})
-    meta: Optional[ListAlert200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+    meta: Optional[ListAlertListAlertResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     
 
 @dataclass
 class ListAlertResponse:
     content_type: str = field(default=None)
-    list_alert_response: Optional[ListAlert200ApplicationJSONListAlertResponse] = field(default=None)
+    list_alert_response: Optional[ListAlertListAlertResponse] = field(default=None)
     status_code: int = field(default=None)
     

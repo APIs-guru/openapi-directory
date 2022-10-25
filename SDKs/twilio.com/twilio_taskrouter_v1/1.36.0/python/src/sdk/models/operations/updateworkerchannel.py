@@ -14,7 +14,7 @@ class UpdateWorkerChannelPathParams:
     
 
 @dataclass
-class UpdateWorkerChannelRequestBodyUpdateWorkerChannelRequest:
+class UpdateWorkerChannelUpdateWorkerChannelRequest:
     available: Optional[bool] = field(default=None, metadata={'form': { 'field_name': 'Available' }})
     capacity: Optional[int] = field(default=None, metadata={'form': { 'field_name': 'Capacity' }})
     
@@ -28,7 +28,7 @@ class UpdateWorkerChannelSecurity:
 class UpdateWorkerChannelRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateWorkerChannelPathParams = field(default=None)
-    request: Optional[UpdateWorkerChannelRequestBodyUpdateWorkerChannelRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateWorkerChannelUpdateWorkerChannelRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateWorkerChannelSecurity = field(default=None)
     
 

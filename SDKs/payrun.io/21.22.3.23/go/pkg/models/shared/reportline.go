@@ -4,7 +4,7 @@ import (
 	"time"
 )
 
-type ReportLineReportLineReportLine struct {
+type ReportLineReportLine struct {
 	Description *string    `json:"Description,omitempty"`
 	Generated   *time.Time `json:"Generated,omitempty"`
 	TaxMonth    *int32     `json:"TaxMonth,omitempty"`
@@ -13,5 +13,5 @@ type ReportLineReportLineReportLine struct {
 }
 
 type ReportLine struct {
-	ReportLine *ReportLineReportLineReportLine `json:"ReportLine,omitempty"`
+	ReportLine *ReportLineReportLine `json:"ReportLine,omitempty"`
 }

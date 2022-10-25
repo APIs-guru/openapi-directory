@@ -14,7 +14,7 @@ class UpdateSyncSyncMapPermissionPathParams:
     
 
 @dataclass
-class UpdateSyncSyncMapPermissionRequestBodyUpdateSyncSyncMapPermissionRequest:
+class UpdateSyncSyncMapPermissionUpdateSyncSyncMapPermissionRequest:
     manage: bool = field(default=None, metadata={'form': { 'field_name': 'Manage' }})
     read: bool = field(default=None, metadata={'form': { 'field_name': 'Read' }})
     write: bool = field(default=None, metadata={'form': { 'field_name': 'Write' }})
@@ -29,7 +29,7 @@ class UpdateSyncSyncMapPermissionSecurity:
 class UpdateSyncSyncMapPermissionRequest:
     server_url: Optional[str] = field(default=None)
     path_params: UpdateSyncSyncMapPermissionPathParams = field(default=None)
-    request: Optional[UpdateSyncSyncMapPermissionRequestBodyUpdateSyncSyncMapPermissionRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[UpdateSyncSyncMapPermissionUpdateSyncSyncMapPermissionRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: UpdateSyncSyncMapPermissionSecurity = field(default=None)
     
 

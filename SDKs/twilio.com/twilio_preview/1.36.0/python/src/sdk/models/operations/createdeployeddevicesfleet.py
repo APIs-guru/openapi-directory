@@ -7,7 +7,7 @@ CREATE_DEPLOYED_DEVICES_FLEET_SERVERS = [
 
 
 @dataclass
-class CreateDeployedDevicesFleetRequestBodyCreateDeployedDevicesFleetRequest:
+class CreateDeployedDevicesFleetCreateDeployedDevicesFleetRequest:
     friendly_name: Optional[str] = field(default=None, metadata={'form': { 'field_name': 'FriendlyName' }})
     
 
@@ -19,7 +19,7 @@ class CreateDeployedDevicesFleetSecurity:
 @dataclass
 class CreateDeployedDevicesFleetRequest:
     server_url: Optional[str] = field(default=None)
-    request: Optional[CreateDeployedDevicesFleetRequestBodyCreateDeployedDevicesFleetRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
+    request: Optional[CreateDeployedDevicesFleetCreateDeployedDevicesFleetRequest] = field(default=None, metadata={'request': { 'media_type': 'application/x-www-form-urlencoded' }})
     security: CreateDeployedDevicesFleetSecurity = field(default=None)
     
 

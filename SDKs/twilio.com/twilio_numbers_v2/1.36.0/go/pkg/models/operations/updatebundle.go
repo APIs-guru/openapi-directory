@@ -12,7 +12,7 @@ type UpdateBundlePathParams struct {
 	Sid string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
-type UpdateBundleRequestBodyUpdateBundleRequest struct {
+type UpdateBundleUpdateBundleRequest struct {
 	Email          *string                      `form:"name=Email"`
 	FriendlyName   *string                      `form:"name=FriendlyName"`
 	Status         *shared.BundleEnumStatusEnum `form:"name=Status"`
@@ -26,7 +26,7 @@ type UpdateBundleSecurity struct {
 type UpdateBundleRequest struct {
 	ServerURL  *string
 	PathParams UpdateBundlePathParams
-	Request    *UpdateBundleRequestBodyUpdateBundleRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *UpdateBundleUpdateBundleRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   UpdateBundleSecurity
 }
 

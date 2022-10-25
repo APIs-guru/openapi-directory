@@ -43,7 +43,7 @@ class ListConferenceRequest:
 
 @dataclass_json
 @dataclass
-class ListConference200ApplicationJSONListConferenceResponse:
+class ListConferenceListConferenceResponse:
     conferences: Optional[List[shared.APIV2010AccountConference]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'conferences' }})
     end: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'end' }})
     first_page_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_uri' }})
@@ -58,6 +58,6 @@ class ListConference200ApplicationJSONListConferenceResponse:
 @dataclass
 class ListConferenceResponse:
     content_type: str = field(default=None)
-    list_conference_response: Optional[ListConference200ApplicationJSONListConferenceResponse] = field(default=None)
+    list_conference_response: Optional[ListConferenceListConferenceResponse] = field(default=None)
     status_code: int = field(default=None)
     

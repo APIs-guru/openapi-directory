@@ -23,7 +23,7 @@ type ListVerificationTemplateRequest struct {
 	Security    ListVerificationTemplateSecurity
 }
 
-type ListVerificationTemplate200ApplicationJSONMeta struct {
+type ListVerificationTemplateListVerificationTemplateResponseMeta struct {
 	FirstPageURL    *string `json:"first_page_url,omitempty"`
 	Key             *string `json:"key,omitempty"`
 	NextPageURL     *string `json:"next_page_url,omitempty"`
@@ -33,13 +33,13 @@ type ListVerificationTemplate200ApplicationJSONMeta struct {
 	URL             *string `json:"url,omitempty"`
 }
 
-type ListVerificationTemplate200ApplicationJSONListVerificationTemplateResponse struct {
-	Meta      *ListVerificationTemplate200ApplicationJSONMeta `json:"meta,omitempty"`
-	Templates []shared.VerifyV2VerificationTemplate           `json:"templates,omitempty"`
+type ListVerificationTemplateListVerificationTemplateResponse struct {
+	Meta      *ListVerificationTemplateListVerificationTemplateResponseMeta `json:"meta,omitempty"`
+	Templates []shared.VerifyV2VerificationTemplate                         `json:"templates,omitempty"`
 }
 
 type ListVerificationTemplateResponse struct {
 	ContentType                      string
-	ListVerificationTemplateResponse *ListVerificationTemplate200ApplicationJSONListVerificationTemplateResponse
+	ListVerificationTemplateResponse *ListVerificationTemplateListVerificationTemplateResponse
 	StatusCode                       int64
 }

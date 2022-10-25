@@ -29,7 +29,7 @@ class ListRegulationRequest:
 
 @dataclass_json
 @dataclass
-class ListRegulation200ApplicationJSONMeta:
+class ListRegulationListRegulationResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -41,14 +41,14 @@ class ListRegulation200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListRegulation200ApplicationJSONListRegulationResponse:
-    meta: Optional[ListRegulation200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+class ListRegulationListRegulationResponse:
+    meta: Optional[ListRegulationListRegulationResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     results: Optional[List[shared.NumbersV2RegulatoryComplianceRegulation]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'results' }})
     
 
 @dataclass
 class ListRegulationResponse:
     content_type: str = field(default=None)
-    list_regulation_response: Optional[ListRegulation200ApplicationJSONListRegulationResponse] = field(default=None)
+    list_regulation_response: Optional[ListRegulationListRegulationResponse] = field(default=None)
     status_code: int = field(default=None)
     

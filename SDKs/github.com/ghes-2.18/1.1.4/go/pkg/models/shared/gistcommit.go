@@ -10,7 +10,7 @@ type GistCommitChangeStatus struct {
 	Total     *int64 `json:"total,omitempty"`
 }
 
-type GistCommitUserSimpleUser struct {
+type GistCommitSimpleUser struct {
 	AvatarURL         string  `json:"avatar_url"`
 	EventsURL         string  `json:"events_url"`
 	FollowersURL      string  `json:"followers_url"`
@@ -33,9 +33,9 @@ type GistCommitUserSimpleUser struct {
 }
 
 type GistCommit struct {
-	ChangeStatus GistCommitChangeStatus   `json:"change_status"`
-	CommittedAt  time.Time                `json:"committed_at"`
-	URL          string                   `json:"url"`
-	User         GistCommitUserSimpleUser `json:"user"`
-	Version      string                   `json:"version"`
+	ChangeStatus GistCommitChangeStatus `json:"change_status"`
+	CommittedAt  time.Time              `json:"committed_at"`
+	URL          string                 `json:"url"`
+	User         GistCommitSimpleUser   `json:"user"`
+	Version      string                 `json:"version"`
 }

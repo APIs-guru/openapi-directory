@@ -13,7 +13,7 @@ type CreateSessionPathParams struct {
 	ServiceSid string `pathParam:"style=simple,explode=false,name=ServiceSid"`
 }
 
-type CreateSessionRequestBodyCreateSessionRequest struct {
+type CreateSessionCreateSessionRequest struct {
 	DateExpiry                *time.Time                    `form:"name=DateExpiry"`
 	FailOnParticipantConflict *bool                         `form:"name=FailOnParticipantConflict"`
 	Mode                      *shared.SessionEnumModeEnum   `form:"name=Mode"`
@@ -30,7 +30,7 @@ type CreateSessionSecurity struct {
 type CreateSessionRequest struct {
 	ServerURL  *string
 	PathParams CreateSessionPathParams
-	Request    *CreateSessionRequestBodyCreateSessionRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Request    *CreateSessionCreateSessionRequest `request:"mediaType=application/x-www-form-urlencoded"`
 	Security   CreateSessionSecurity
 }
 

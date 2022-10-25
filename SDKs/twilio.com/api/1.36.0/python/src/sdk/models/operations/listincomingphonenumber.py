@@ -36,7 +36,7 @@ class ListIncomingPhoneNumberRequest:
 
 @dataclass_json
 @dataclass
-class ListIncomingPhoneNumber200ApplicationJSONListIncomingPhoneNumberResponse:
+class ListIncomingPhoneNumberListIncomingPhoneNumberResponse:
     end: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'end' }})
     first_page_uri: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_uri' }})
     incoming_phone_numbers: Optional[List[shared.APIV2010AccountIncomingPhoneNumber]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'incoming_phone_numbers' }})
@@ -51,6 +51,6 @@ class ListIncomingPhoneNumber200ApplicationJSONListIncomingPhoneNumberResponse:
 @dataclass
 class ListIncomingPhoneNumberResponse:
     content_type: str = field(default=None)
-    list_incoming_phone_number_response: Optional[ListIncomingPhoneNumber200ApplicationJSONListIncomingPhoneNumberResponse] = field(default=None)
+    list_incoming_phone_number_response: Optional[ListIncomingPhoneNumberListIncomingPhoneNumberResponse] = field(default=None)
     status_code: int = field(default=None)
     

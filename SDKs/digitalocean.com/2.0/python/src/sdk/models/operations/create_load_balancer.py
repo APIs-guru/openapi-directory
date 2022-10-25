@@ -6,17 +6,17 @@ from typing import Any,Enum,List,Optional
 from dataclasses_json import dataclass_json
 from sdk.models import shared
 
-class CreateLoadBalancerRequestBody1AlgorithmEnum(str, Enum):
+class CreateLoadBalancerRequestBodyAssignDropletsByIDAlgorithmEnum(str, Enum):
     ROUND_ROBIN = "round_robin"
     LEAST_CONNECTIONS = "least_connections"
 
-class CreateLoadBalancerRequestBody1ForwardingRulesEntryProtocolEnum(str, Enum):
+class CreateLoadBalancerRequestBodyAssignDropletsByIDForwardingRulesEntryProtocolEnum(str, Enum):
     HTTP = "http"
     HTTPS = "https"
     HTTP2 = "http2"
     TCP = "tcp"
 
-class CreateLoadBalancerRequestBody1ForwardingRulesTargetProtocolEnum(str, Enum):
+class CreateLoadBalancerRequestBodyAssignDropletsByIDForwardingRulesTargetProtocolEnum(str, Enum):
     HTTP = "http"
     HTTPS = "https"
     HTTP2 = "http2"
@@ -25,15 +25,15 @@ class CreateLoadBalancerRequestBody1ForwardingRulesTargetProtocolEnum(str, Enum)
 
 @dataclass_json
 @dataclass
-class CreateLoadBalancerRequestBody1ForwardingRules:
+class CreateLoadBalancerRequestBodyAssignDropletsByIDForwardingRules:
     certificate_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'certificate_id' }})
     entry_port: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'entry_port' }})
-    entry_protocol: CreateLoadBalancerRequestBody1ForwardingRulesEntryProtocolEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'entry_protocol' }})
+    entry_protocol: CreateLoadBalancerRequestBodyAssignDropletsByIDForwardingRulesEntryProtocolEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'entry_protocol' }})
     target_port: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'target_port' }})
-    target_protocol: CreateLoadBalancerRequestBody1ForwardingRulesTargetProtocolEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'target_protocol' }})
+    target_protocol: CreateLoadBalancerRequestBodyAssignDropletsByIDForwardingRulesTargetProtocolEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'target_protocol' }})
     tls_passthrough: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tls_passthrough' }})
     
-class CreateLoadBalancerRequestBody1HealthCheckProtocolEnum(str, Enum):
+class CreateLoadBalancerRequestBodyAssignDropletsByIDHealthCheckProtocolEnum(str, Enum):
     HTTP = "http"
     HTTPS = "https"
     TCP = "tcp"
@@ -41,69 +41,69 @@ class CreateLoadBalancerRequestBody1HealthCheckProtocolEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class CreateLoadBalancerRequestBody1HealthCheck:
+class CreateLoadBalancerRequestBodyAssignDropletsByIDHealthCheck:
     check_interval_seconds: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'check_interval_seconds' }})
     healthy_threshold: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'healthy_threshold' }})
     path: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'path' }})
     port: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'port' }})
-    protocol: Optional[CreateLoadBalancerRequestBody1HealthCheckProtocolEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'protocol' }})
+    protocol: Optional[CreateLoadBalancerRequestBodyAssignDropletsByIDHealthCheckProtocolEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'protocol' }})
     response_timeout_seconds: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'response_timeout_seconds' }})
     unhealthy_threshold: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'unhealthy_threshold' }})
     
-class CreateLoadBalancerRequestBody1SizeEnum(str, Enum):
+class CreateLoadBalancerRequestBodyAssignDropletsByIDSizeEnum(str, Enum):
     LB_SMALL = "lb-small"
     LB_MEDIUM = "lb-medium"
     LB_LARGE = "lb-large"
 
-class CreateLoadBalancerRequestBody1StatusEnum(str, Enum):
+class CreateLoadBalancerRequestBodyAssignDropletsByIDStatusEnum(str, Enum):
     NEW = "new"
     ACTIVE = "active"
     ERRORED = "errored"
 
-class CreateLoadBalancerRequestBody1StickySessionsTypeEnum(str, Enum):
+class CreateLoadBalancerRequestBodyAssignDropletsByIDStickySessionsTypeEnum(str, Enum):
     COOKIES = "cookies"
     NONE = "none"
 
 
 @dataclass_json
 @dataclass
-class CreateLoadBalancerRequestBody1StickySessions:
+class CreateLoadBalancerRequestBodyAssignDropletsByIDStickySessions:
     cookie_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cookie_name' }})
     cookie_ttl_seconds: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cookie_ttl_seconds' }})
-    type: Optional[CreateLoadBalancerRequestBody1StickySessionsTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    type: Optional[CreateLoadBalancerRequestBodyAssignDropletsByIDStickySessionsTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     
 
 @dataclass_json
 @dataclass
-class CreateLoadBalancerRequestBody1:
-    algorithm: Optional[CreateLoadBalancerRequestBody1AlgorithmEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'algorithm' }})
+class CreateLoadBalancerRequestBodyAssignDropletsByID:
+    algorithm: Optional[CreateLoadBalancerRequestBodyAssignDropletsByIDAlgorithmEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'algorithm' }})
     created_at: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'created_at', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     droplet_ids: List[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'droplet_ids' }})
     enable_backend_keepalive: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'enable_backend_keepalive' }})
     enable_proxy_protocol: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'enable_proxy_protocol' }})
-    forwarding_rules: List[CreateLoadBalancerRequestBody1ForwardingRules] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'forwarding_rules' }})
-    health_check: Optional[CreateLoadBalancerRequestBody1HealthCheck] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'health_check' }})
+    forwarding_rules: List[CreateLoadBalancerRequestBodyAssignDropletsByIDForwardingRules] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'forwarding_rules' }})
+    health_check: Optional[CreateLoadBalancerRequestBodyAssignDropletsByIDHealthCheck] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'health_check' }})
     id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     ip: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ip' }})
     name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
     redirect_http_to_https: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'redirect_http_to_https' }})
     region: shared.Onev21dropletsGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesDropletsItemsPropertiesImagePropertiesRegionsItemsEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'region' }})
-    size: Optional[CreateLoadBalancerRequestBody1SizeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'size' }})
-    status: Optional[CreateLoadBalancerRequestBody1StatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
-    sticky_sessions: Optional[CreateLoadBalancerRequestBody1StickySessions] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sticky_sessions' }})
+    size: Optional[CreateLoadBalancerRequestBodyAssignDropletsByIDSizeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'size' }})
+    status: Optional[CreateLoadBalancerRequestBodyAssignDropletsByIDStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    sticky_sessions: Optional[CreateLoadBalancerRequestBodyAssignDropletsByIDStickySessions] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sticky_sessions' }})
     vpc_uuid: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'vpc_uuid' }})
     
-class CreateLoadBalancerRequestBody2AlgorithmEnum(str, Enum):
+class CreateLoadBalancerRequestBodyAssignDropletsByTagAlgorithmEnum(str, Enum):
     ROUND_ROBIN = "round_robin"
     LEAST_CONNECTIONS = "least_connections"
 
-class CreateLoadBalancerRequestBody2ForwardingRulesEntryProtocolEnum(str, Enum):
+class CreateLoadBalancerRequestBodyAssignDropletsByTagForwardingRulesEntryProtocolEnum(str, Enum):
     HTTP = "http"
     HTTPS = "https"
     HTTP2 = "http2"
     TCP = "tcp"
 
-class CreateLoadBalancerRequestBody2ForwardingRulesTargetProtocolEnum(str, Enum):
+class CreateLoadBalancerRequestBodyAssignDropletsByTagForwardingRulesTargetProtocolEnum(str, Enum):
     HTTP = "http"
     HTTPS = "https"
     HTTP2 = "http2"
@@ -112,15 +112,15 @@ class CreateLoadBalancerRequestBody2ForwardingRulesTargetProtocolEnum(str, Enum)
 
 @dataclass_json
 @dataclass
-class CreateLoadBalancerRequestBody2ForwardingRules:
+class CreateLoadBalancerRequestBodyAssignDropletsByTagForwardingRules:
     certificate_id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'certificate_id' }})
     entry_port: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'entry_port' }})
-    entry_protocol: CreateLoadBalancerRequestBody2ForwardingRulesEntryProtocolEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'entry_protocol' }})
+    entry_protocol: CreateLoadBalancerRequestBodyAssignDropletsByTagForwardingRulesEntryProtocolEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'entry_protocol' }})
     target_port: int = field(default=None, metadata={'dataclasses_json': { 'field_name': 'target_port' }})
-    target_protocol: CreateLoadBalancerRequestBody2ForwardingRulesTargetProtocolEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'target_protocol' }})
+    target_protocol: CreateLoadBalancerRequestBodyAssignDropletsByTagForwardingRulesTargetProtocolEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'target_protocol' }})
     tls_passthrough: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tls_passthrough' }})
     
-class CreateLoadBalancerRequestBody2HealthCheckProtocolEnum(str, Enum):
+class CreateLoadBalancerRequestBodyAssignDropletsByTagHealthCheckProtocolEnum(str, Enum):
     HTTP = "http"
     HTTPS = "https"
     TCP = "tcp"
@@ -128,55 +128,55 @@ class CreateLoadBalancerRequestBody2HealthCheckProtocolEnum(str, Enum):
 
 @dataclass_json
 @dataclass
-class CreateLoadBalancerRequestBody2HealthCheck:
+class CreateLoadBalancerRequestBodyAssignDropletsByTagHealthCheck:
     check_interval_seconds: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'check_interval_seconds' }})
     healthy_threshold: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'healthy_threshold' }})
     path: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'path' }})
     port: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'port' }})
-    protocol: Optional[CreateLoadBalancerRequestBody2HealthCheckProtocolEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'protocol' }})
+    protocol: Optional[CreateLoadBalancerRequestBodyAssignDropletsByTagHealthCheckProtocolEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'protocol' }})
     response_timeout_seconds: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'response_timeout_seconds' }})
     unhealthy_threshold: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'unhealthy_threshold' }})
     
-class CreateLoadBalancerRequestBody2SizeEnum(str, Enum):
+class CreateLoadBalancerRequestBodyAssignDropletsByTagSizeEnum(str, Enum):
     LB_SMALL = "lb-small"
     LB_MEDIUM = "lb-medium"
     LB_LARGE = "lb-large"
 
-class CreateLoadBalancerRequestBody2StatusEnum(str, Enum):
+class CreateLoadBalancerRequestBodyAssignDropletsByTagStatusEnum(str, Enum):
     NEW = "new"
     ACTIVE = "active"
     ERRORED = "errored"
 
-class CreateLoadBalancerRequestBody2StickySessionsTypeEnum(str, Enum):
+class CreateLoadBalancerRequestBodyAssignDropletsByTagStickySessionsTypeEnum(str, Enum):
     COOKIES = "cookies"
     NONE = "none"
 
 
 @dataclass_json
 @dataclass
-class CreateLoadBalancerRequestBody2StickySessions:
+class CreateLoadBalancerRequestBodyAssignDropletsByTagStickySessions:
     cookie_name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cookie_name' }})
     cookie_ttl_seconds: Optional[int] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'cookie_ttl_seconds' }})
-    type: Optional[CreateLoadBalancerRequestBody2StickySessionsTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
+    type: Optional[CreateLoadBalancerRequestBodyAssignDropletsByTagStickySessionsTypeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'type' }})
     
 
 @dataclass_json
 @dataclass
-class CreateLoadBalancerRequestBody2:
-    algorithm: Optional[CreateLoadBalancerRequestBody2AlgorithmEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'algorithm' }})
+class CreateLoadBalancerRequestBodyAssignDropletsByTag:
+    algorithm: Optional[CreateLoadBalancerRequestBodyAssignDropletsByTagAlgorithmEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'algorithm' }})
     created_at: Optional[datetime] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'created_at', 'encoder': datetime.isoformat, 'decoder': dateutil.parser.isoparse, 'mm_field': fields.DateTime(format='iso') }})
     enable_backend_keepalive: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'enable_backend_keepalive' }})
     enable_proxy_protocol: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'enable_proxy_protocol' }})
-    forwarding_rules: List[CreateLoadBalancerRequestBody2ForwardingRules] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'forwarding_rules' }})
-    health_check: Optional[CreateLoadBalancerRequestBody2HealthCheck] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'health_check' }})
+    forwarding_rules: List[CreateLoadBalancerRequestBodyAssignDropletsByTagForwardingRules] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'forwarding_rules' }})
+    health_check: Optional[CreateLoadBalancerRequestBodyAssignDropletsByTagHealthCheck] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'health_check' }})
     id: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'id' }})
     ip: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ip' }})
     name: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'name' }})
     redirect_http_to_https: Optional[bool] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'redirect_http_to_https' }})
     region: shared.Onev21dropletsGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesDropletsItemsPropertiesImagePropertiesRegionsItemsEnum = field(default=None, metadata={'dataclasses_json': { 'field_name': 'region' }})
-    size: Optional[CreateLoadBalancerRequestBody2SizeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'size' }})
-    status: Optional[CreateLoadBalancerRequestBody2StatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
-    sticky_sessions: Optional[CreateLoadBalancerRequestBody2StickySessions] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sticky_sessions' }})
+    size: Optional[CreateLoadBalancerRequestBodyAssignDropletsByTagSizeEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'size' }})
+    status: Optional[CreateLoadBalancerRequestBodyAssignDropletsByTagStatusEnum] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'status' }})
+    sticky_sessions: Optional[CreateLoadBalancerRequestBodyAssignDropletsByTagStickySessions] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'sticky_sessions' }})
     tag: str = field(default=None, metadata={'dataclasses_json': { 'field_name': 'tag' }})
     vpc_uuid: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'vpc_uuid' }})
     

@@ -32,7 +32,7 @@ class ListIPAccessControlListRequest:
 
 @dataclass_json
 @dataclass
-class ListIPAccessControlList200ApplicationJSONMeta:
+class ListIPAccessControlListListIPAccessControlListResponseMeta:
     first_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'first_page_url' }})
     key: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'key' }})
     next_page_url: Optional[str] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'next_page_url' }})
@@ -44,14 +44,14 @@ class ListIPAccessControlList200ApplicationJSONMeta:
 
 @dataclass_json
 @dataclass
-class ListIPAccessControlList200ApplicationJSONListIPAccessControlListResponse:
+class ListIPAccessControlListListIPAccessControlListResponse:
     ip_access_control_lists: Optional[List[shared.TrunkingV1TrunkIPAccessControlList]] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'ip_access_control_lists' }})
-    meta: Optional[ListIPAccessControlList200ApplicationJSONMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
+    meta: Optional[ListIPAccessControlListListIPAccessControlListResponseMeta] = field(default=None, metadata={'dataclasses_json': { 'field_name': 'meta' }})
     
 
 @dataclass
 class ListIPAccessControlListResponse:
     content_type: str = field(default=None)
-    list_ip_access_control_list_response: Optional[ListIPAccessControlList200ApplicationJSONListIPAccessControlListResponse] = field(default=None)
+    list_ip_access_control_list_response: Optional[ListIPAccessControlListListIPAccessControlListResponse] = field(default=None)
     status_code: int = field(default=None)
     
