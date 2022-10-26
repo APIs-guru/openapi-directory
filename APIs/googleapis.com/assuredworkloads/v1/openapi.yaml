@@ -734,6 +734,10 @@ components:
             - AU_REGIONS_AND_US_SUPPORT
             - ASSURED_WORKLOADS_FOR_PARTNERS
           type: string
+        complianceStatus:
+          $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1WorkloadComplianceStatus"
+          description: Output only. Count of active Violations in the Workload.
+          readOnly: true
         compliantButDisallowedServices:
           description: Output only. Urls for services which are compliant for this Assured Workload, but which are currently disallowed by the ResourceUsageRestriction org policy. Invoke RestrictAllowedResources endpoint to allow your project developers to use these services in their environment."
           items:
@@ -797,6 +801,18 @@ components:
           $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1WorkloadSaaEnrollmentResponse"
           description: Output only. Represents the SAA enrollment response of the given workload. SAA enrollment response is queried during GetWorkload call. In failure cases, user friendly error message is shown in SAA details page.
           readOnly: true
+      type: object
+    GoogleCloudAssuredworkloadsV1WorkloadComplianceStatus:
+      description: Represents the Compliance Status of this workload
+      properties:
+        acknowledgedViolationCount:
+          description: Count of active Violations which are acknowledged in the Workload.
+          format: int32
+          type: integer
+        activeViolationCount:
+          description: Count of active Violations which haven't been acknowledged.
+          format: int32
+          type: integer
       type: object
     GoogleCloudAssuredworkloadsV1WorkloadKMSSettings:
       description: Settings specific to the Key Management Service. This message is deprecated. In order to create a Keyring, callers should specify, ENCRYPTION_KEYS_PROJECT or KEYRING in ResourceSettings.resource_type field.

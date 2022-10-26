@@ -53,6 +53,7 @@ tags:
   - name: productstatuses
   - name: promotions
   - name: pubsubnotificationsettings
+  - name: quotas
   - name: regionalinventory
   - name: regions
   - name: reports
@@ -5468,7 +5469,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Inserts a promotion for your Merchant Center account. If the promotion already exists, then it updates the promotion instead.
+      description: Inserts a promotion for your Merchant Center account. If the promotion already exists, then it updates the promotion instead. To [end or delete] (https://developers.google.com/shopping-content/guides/promotions#end_a_promotion) a promotion update the time period of the promotion to a time that has already passed.
       operationId: content.promotions.create
       parameters:
         - description: Required. The ID of the account that contains the collection.
@@ -5605,6 +5606,53 @@ paths:
             - https://www.googleapis.com/auth/content
       tags:
         - pubsubnotificationsettings
+  "/{merchantId}/quotas":
+    get:
+      description: Lists the quota limit and quota usage per method for your Merchant Center account.
+      operationId: content.quotas.list
+      parameters:
+        - description: Required. The ID of the account that has quota. This account must be an admin.
+          in: path
+          name: merchantId
+          required: true
+          schema:
+            type: string
+        - description: The maximum number of quotas to return in the response, used for paging. Defaults to 500; values above 1000 will be coerced to 1000.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Token (if provided) to retrieve the subsequent page. All other parameters must match the original call that provided the page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListMethodQuotasResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/content
+          Oauth2c:
+            - https://www.googleapis.com/auth/content
+      tags:
+        - quotas
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/{merchantId}/regions":
     get:
       description: Lists the regions in your Merchant Center account.
@@ -9471,6 +9519,18 @@ components:
           description: A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
           type: string
       type: object
+    ListMethodQuotasResponse:
+      description: Response message for the ListMethodQuotas method.
+      properties:
+        methodQuotas:
+          description: The current quota usage and limits per each method.
+          items:
+            $ref: "#/components/schemas/MethodQuota"
+          type: array
+        nextPageToken:
+          description: A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
+          type: string
+      type: object
     ListRegionsResponse:
       description: Response message for the `ListRegions` method.
       properties:
@@ -9718,6 +9778,21 @@ components:
           type: string
         reasonCode:
           description: Code of the rejection reason.
+          type: string
+      type: object
+    MethodQuota:
+      description: The quota information per method in the Content API.
+      properties:
+        method:
+          description: The method name, for example “products.list”. Method name does not contain version because quota can be shared between different API versions of the same method.
+          type: string
+        quotaLimit:
+          description: The current quota limit, for example the maximum number of calls for the method.
+          format: int64
+          type: string
+        quotaUsage:
+          description: The current quota usage, for example the number of calls for the method.
+          format: int64
           type: string
       type: object
     Metrics:
@@ -12379,7 +12454,7 @@ components:
           type: number
       type: object
     ProductView:
-      description: Product fields. Values are only set for fields requested explicitly in the request's search query.
+      description: Product fields. Values are only set for fields requested explicitly in the request's search query. Available only to selected merchants. Submit the [interest form](https://forms.gle/7Uy8htzAN8oNokz9A) to request access.
       properties:
         aggregatedDestinationStatus:
           description: Aggregated destination status.
@@ -13041,7 +13116,7 @@ components:
           description: Metrics requested by the merchant in the query. Metric values are only set for metrics requested explicitly in the query.
         productView:
           $ref: "#/components/schemas/ProductView"
-          description: Product fields requested by the merchant in the query. Field values are only set if the merchant queries `ProductView`. `product_view` field is available only to allowlisted users who can query the `ProductView` table.
+          description: Product fields requested by the merchant in the query. Field values are only set if the merchant queries `ProductView`. Available only to selected merchants. Submit the [interest form](https://forms.gle/7Uy8htzAN8oNokz9A) to request access.
         segments:
           $ref: "#/components/schemas/Segments"
           description: Segmentation dimensions requested by the merchant in the query. Dimension values are only set for dimensions requested explicitly in the query.

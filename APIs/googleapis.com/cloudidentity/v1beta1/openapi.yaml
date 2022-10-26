@@ -13,15 +13,17 @@ info:
   termsOfService: https://developers.google.com/terms/
   title: Cloud Identity API
   version: v1beta1
+  x-apiClientRegistration:
+    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
-    url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
+    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
-    - format: google
+    - format: openapi
       url: https://cloudidentity.googleapis.com/$discovery/rest?version=v1beta1
-      version: v1
+      version: "3.0"
   x-providerName: googleapis.com
   x-serviceName: cloudidentity
 externalDocs:
@@ -335,12 +337,12 @@ paths:
       description: Lists InboundSamlSsoProfiles for a customer.
       operationId: cloudidentity.inboundSamlSsoProfiles.list
       parameters:
-        - description: "A CEL expression to filter the results. The only currently-supported filter is filtering by customer. For example: `customer==customers/C0123abc`. Omitting the filter or specifying a filter of `customer==customers/my_customer` will return the profiles for the customer that the caller (authenticated user) belongs to."
+        - description: 'A [Common Expression Language](https://github.com/google/cel-spec) expression to filter the results. The only currently-supported filter is filtering by customer. For example: `customer=="customers/C0123abc"`. Omitting the filter or specifying a filter of `customer=="customers/my_customer"` will return the profiles for the customer that the caller (authenticated user) belongs to.'
           in: query
           name: filter
           schema:
             type: string
-        - description: The maximum number of InboundSamlSsoProfiles to return. The service may return fewer than this value. If omitted (or defaulted to zero) the server will use a sensible default. This default may change over time. The maximum allowed value is 100, though requests with page_size greater than that will be silently interpreted as having this maximum value. This may increase in the futue.
+        - description: The maximum number of InboundSamlSsoProfiles to return. The service may return fewer than this value. If omitted (or defaulted to zero) the server will use a sensible default. This default may change over time. The maximum allowed value is 100. Requests with page_size greater than that will be silently interpreted as having this maximum value.
           in: query
           name: pageSize
           schema:
@@ -1658,7 +1660,7 @@ components:
       description: The request for creating an IdpCredential with its associated payload. An InboundSamlSsoProfile can own up to 2 credentials.
       properties:
         pemData:
-          description: PEM encoded x509 certificate containing the public signing key.
+          description: PEM encoded x509 certificate containing the public key for verifying IdP signatures.
           type: string
       type: object
     AndroidAttributes:
@@ -2688,7 +2690,7 @@ components:
           type: array
       type: object
     IdpCredential:
-      description: The identity provider's credentials (for signing assertions, etc).
+      description: Credential for verifying signatures produced by the Identity Provider.
       properties:
         dsaKeyInfo:
           $ref: "#/components/schemas/DsaPublicKeyInfo"
@@ -3372,3 +3374,5 @@ components:
             https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
+source:
+  url: {}

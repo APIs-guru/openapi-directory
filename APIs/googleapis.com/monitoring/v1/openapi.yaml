@@ -1500,7 +1500,12 @@ components:
       type: object
     TableDisplayOptions:
       description: Table display options that can be reused.
-      properties: {}
+      properties:
+        shownColumns:
+          description: Optional. This field is unused and has been replaced by TimeSeriesTable.column_settings
+          items:
+            type: string
+          type: array
       type: object
     Text:
       description: A widget that displays textual content.
