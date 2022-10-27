@@ -1945,6 +1945,90 @@ components:
             - SPARK
           type: string
       type: object
+    GoogleCloudDataplexV1DataScanEvent:
+      description: These messages contain information about the execution of a datascan. The monitored resource is 'DataScan'
+      properties:
+        dataProfile:
+          $ref: "#/components/schemas/GoogleCloudDataplexV1DataScanEventDataProfileResult"
+          description: Data profile result for data profile type data scan.
+        dataQuality:
+          $ref: "#/components/schemas/GoogleCloudDataplexV1DataScanEventDataQualityResult"
+          description: Data quality result for data quality type data scan.
+        dataSource:
+          description: The data source of the data scan
+          type: string
+        endTime:
+          description: The time when the data scan job finished.
+          format: google-datetime
+          type: string
+        jobId:
+          description: The identifier of the specific data scan job this log entry is for.
+          type: string
+        message:
+          description: The message describing the data scan job event.
+          type: string
+        scope:
+          description: The scope of the data scan (e.g. full, incremental).
+          enum:
+            - SCOPE_UNSPECIFIED
+            - FULL
+            - INCREMENTAL
+          type: string
+        specVersion:
+          description: A version identifier of the spec which was used to execute this job.
+          type: string
+        startTime:
+          description: The time when the data scan job started to run.
+          format: google-datetime
+          type: string
+        state:
+          description: The status of the data scan job.
+          enum:
+            - STATE_UNSPECIFIED
+            - STARTED
+            - SUCCEEDED
+            - FAILED
+            - CANCELLED
+          type: string
+        trigger:
+          description: The trigger type of the data scan job.
+          enum:
+            - TRIGGER_UNSPECIFIED
+            - ON_DEMAND
+            - SCHEDULE
+          type: string
+        type:
+          description: The type of the data scan.
+          enum:
+            - SCAN_TYPE_UNSPECIFIED
+            - DATA_PROFILE
+            - DATA_QUALITY
+          type: string
+      type: object
+    GoogleCloudDataplexV1DataScanEventDataProfileResult:
+      description: Data profile result for data scan job.
+      properties:
+        rowCount:
+          description: The count of rows processed in the data scan job.
+          format: int64
+          type: string
+      type: object
+    GoogleCloudDataplexV1DataScanEventDataQualityResult:
+      description: Data quality result for data scan job.
+      properties:
+        dimensionPassed:
+          additionalProperties:
+            type: boolean
+          description: The result of each dimension for data quality result. The key of the map is the name of the dimension. The value is the bool value depicting whether the dimension result was pass or not.
+          type: object
+        passed:
+          description: Whether the data quality result was pass or not.
+          type: boolean
+        rowCount:
+          description: The count of rows processed in the data scan job.
+          format: int64
+          type: string
+      type: object
     GoogleCloudDataplexV1DiscoveryEvent:
       description: The payload associated with Discovery data processing.
       properties:

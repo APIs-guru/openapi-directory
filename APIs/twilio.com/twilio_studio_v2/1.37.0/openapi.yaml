@@ -291,7 +291,7 @@ paths:
         - sid
         - status
         - date_created
-      parent: /Flows
+      parent: /Flows/{Sid}
       pathType: list
   "/v2/Flows/{FlowSid}/Executions/{ExecutionSid}/Context":
     description: JSON context for executions
@@ -334,7 +334,7 @@ paths:
       defaultOutputProperties:
         - context
       mountName: execution_context
-      parent: /Flows/{FlowSid}/Executions
+      parent: /Flows/{FlowSid}/Executions/{Sid}
       pathType: instance
   "/v2/Flows/{FlowSid}/Executions/{ExecutionSid}/Steps":
     description: Individual steps within an execution
@@ -413,7 +413,7 @@ paths:
         - sid
         - name
         - date_created
-      parent: /Flows/{FlowSid}/Executions
+      parent: /Flows/{FlowSid}/Executions/{Sid}
       pathType: list
   "/v2/Flows/{FlowSid}/Executions/{ExecutionSid}/Steps/{Sid}":
     description: Individual steps within an execution
@@ -467,7 +467,7 @@ paths:
         - sid
         - name
         - date_created
-      parent: /Flows/{FlowSid}/Executions
+      parent: /Flows/{FlowSid}/Executions/{Sid}
       pathType: instance
   "/v2/Flows/{FlowSid}/Executions/{ExecutionSid}/Steps/{StepSid}/Context":
     description: JSON context for an individual step within an execution
@@ -520,7 +520,7 @@ paths:
       defaultOutputProperties:
         - context
       mountName: step_context
-      parent: /Flows/{FlowSid}/Executions/{ExecutionSid}/Steps
+      parent: /Flows/{FlowSid}/Executions/{ExecutionSid}/Steps/{Sid}
       pathType: instance
   "/v2/Flows/{FlowSid}/Executions/{Sid}":
     delete:
@@ -639,7 +639,7 @@ paths:
         - sid
         - status
         - date_created
-      parent: /Flows
+      parent: /Flows/{Sid}
       pathType: instance
   "/v2/Flows/{Sid}":
     delete:
@@ -810,7 +810,7 @@ paths:
         - friendly_name
         - status
         - revision
-      parent: /Flows
+      parent: /Flows/{Sid}
       pathType: list
   "/v2/Flows/{Sid}/Revisions/{Revision}":
     description: Studio flows revisions
@@ -853,7 +853,7 @@ paths:
         - friendly_name
         - status
         - revision
-      parent: /Flows
+      parent: /Flows/{Sid}
       pathType: instance
   "/v2/Flows/{Sid}/TestUsers":
     description: Test users of a flow
@@ -925,7 +925,7 @@ paths:
       className: flow_test_user
       defaultOutputProperties:
         - test_users
-      parent: /Flows
+      parent: /Flows/{Sid}
       pathType: instance
 components:
   schemas:

@@ -227,7 +227,7 @@ paths:
         - sid
         - unique_name
         - revision
-      parent: /Services
+      parent: /Services/{Sid}
       pathType: list
   "/v1/Services/{ServiceSid}/Documents/{DocumentSid}/Permissions":
     description: Sync document permissions
@@ -301,7 +301,7 @@ paths:
         - write
         - manage
       mountName: document_permissions
-      parent: /Services/{ServiceSid}/Documents
+      parent: /Services/{ServiceSid}/Documents/{Sid}
       pathType: list
   "/v1/Services/{ServiceSid}/Documents/{DocumentSid}/Permissions/{Identity}":
     delete:
@@ -429,7 +429,7 @@ paths:
         - write
         - manage
       mountName: document_permissions
-      parent: /Services/{ServiceSid}/Documents
+      parent: /Services/{ServiceSid}/Documents/{Sid}
       pathType: instance
   "/v1/Services/{ServiceSid}/Documents/{Sid}":
     delete:
@@ -534,7 +534,7 @@ paths:
         - sid
         - unique_name
         - revision
-      parent: /Services
+      parent: /Services/{Sid}
       pathType: instance
   "/v1/Services/{ServiceSid}/Lists":
     description: Sync list objects
@@ -638,7 +638,7 @@ paths:
         - unique_name
         - revision
       mountName: sync_lists
-      parent: /Services
+      parent: /Services/{Sid}
       pathType: list
   "/v1/Services/{ServiceSid}/Lists/{ListSid}/Items":
     description: Items in a sync list
@@ -775,7 +775,7 @@ paths:
         - revision
         - created_by
       mountName: sync_list_items
-      parent: /Services/{ServiceSid}/Lists
+      parent: /Services/{ServiceSid}/Lists/{Sid}
       pathType: list
   "/v1/Services/{ServiceSid}/Lists/{ListSid}/Items/{Index}":
     delete:
@@ -910,7 +910,7 @@ paths:
         - revision
         - created_by
       mountName: sync_list_items
-      parent: /Services/{ServiceSid}/Lists
+      parent: /Services/{ServiceSid}/Lists/{Sid}
       pathType: instance
   "/v1/Services/{ServiceSid}/Lists/{ListSid}/Permissions":
     description: Permissions for Sync list items
@@ -984,7 +984,7 @@ paths:
         - write
         - manage
       mountName: sync_list_permissions
-      parent: /Services/{ServiceSid}/Lists
+      parent: /Services/{ServiceSid}/Lists/{Sid}
       pathType: list
   "/v1/Services/{ServiceSid}/Lists/{ListSid}/Permissions/{Identity}":
     delete:
@@ -1112,7 +1112,7 @@ paths:
         - write
         - manage
       mountName: sync_list_permissions
-      parent: /Services/{ServiceSid}/Lists
+      parent: /Services/{ServiceSid}/Lists/{Sid}
       pathType: instance
   "/v1/Services/{ServiceSid}/Lists/{Sid}":
     delete:
@@ -1214,7 +1214,7 @@ paths:
         - unique_name
         - revision
       mountName: sync_lists
-      parent: /Services
+      parent: /Services/{Sid}
       pathType: instance
   "/v1/Services/{ServiceSid}/Maps":
     description: Sync map objects
@@ -1318,7 +1318,7 @@ paths:
         - unique_name
         - revision
       mountName: sync_maps
-      parent: /Services
+      parent: /Services/{Sid}
       pathType: list
   "/v1/Services/{ServiceSid}/Maps/{MapSid}/Items":
     description: Keys in a sync map
@@ -1459,7 +1459,7 @@ paths:
         - revision
         - created_by
       mountName: sync_map_items
-      parent: /Services/{ServiceSid}/Maps
+      parent: /Services/{ServiceSid}/Maps/{Sid}
       pathType: list
   "/v1/Services/{ServiceSid}/Maps/{MapSid}/Items/{Key}":
     delete:
@@ -1594,7 +1594,7 @@ paths:
         - revision
         - created_by
       mountName: sync_map_items
-      parent: /Services/{ServiceSid}/Maps
+      parent: /Services/{ServiceSid}/Maps/{Sid}
       pathType: instance
   "/v1/Services/{ServiceSid}/Maps/{MapSid}/Permissions":
     description: "TODO: Resource-level docs"
@@ -1668,7 +1668,7 @@ paths:
         - write
         - manage
       mountName: sync_map_permissions
-      parent: /Services/{ServiceSid}/Maps
+      parent: /Services/{ServiceSid}/Maps/{Sid}
       pathType: list
   "/v1/Services/{ServiceSid}/Maps/{MapSid}/Permissions/{Identity}":
     delete:
@@ -1796,7 +1796,7 @@ paths:
         - write
         - manage
       mountName: sync_map_permissions
-      parent: /Services/{ServiceSid}/Maps
+      parent: /Services/{ServiceSid}/Maps/{Sid}
       pathType: instance
   "/v1/Services/{ServiceSid}/Maps/{Sid}":
     delete:
@@ -1898,7 +1898,7 @@ paths:
         - unique_name
         - revision
       mountName: sync_maps
-      parent: /Services
+      parent: /Services/{Sid}
       pathType: instance
   "/v1/Services/{ServiceSid}/Streams":
     description: "TODO: Resource-level docs"
@@ -1999,7 +1999,7 @@ paths:
         - unique_name
         - created_by
       mountName: sync_streams
-      parent: /Services
+      parent: /Services/{Sid}
       pathType: list
   "/v1/Services/{ServiceSid}/Streams/{Sid}":
     delete:
@@ -2098,7 +2098,7 @@ paths:
         - unique_name
         - created_by
       mountName: sync_streams
-      parent: /Services
+      parent: /Services/{Sid}
       pathType: instance
   "/v1/Services/{ServiceSid}/Streams/{StreamSid}/Messages":
     description: "TODO: Resource-level docs"
@@ -2146,7 +2146,7 @@ paths:
       defaultOutputProperties:
         - sid
       mountName: stream_messages
-      parent: /Services/{ServiceSid}/Streams
+      parent: /Services/{ServiceSid}/Streams/{Sid}
       pathType: list
   "/v1/Services/{Sid}":
     delete:

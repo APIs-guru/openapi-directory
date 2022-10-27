@@ -222,7 +222,7 @@ paths:
       className: defaults
       defaultOutputProperties:
         - data
-      parent: /Assistants
+      parent: /Assistants/{Sid}
       pathType: instance
   "/v1/Assistants/{AssistantSid}/Dialogues":
     description: "TODO: Resource-level docs"
@@ -232,7 +232,7 @@ paths:
       defaultOutputProperties:
         - sid
         - data
-      parent: /Assistants
+      parent: /Assistants/{Sid}
       pathType: list
   "/v1/Assistants/{AssistantSid}/Dialogues/{Sid}":
     description: "TODO: Resource-level docs"
@@ -269,7 +269,7 @@ paths:
       defaultOutputProperties:
         - sid
         - data
-      parent: /Assistants
+      parent: /Assistants/{Sid}
       pathType: instance
   "/v1/Assistants/{AssistantSid}/FieldTypes":
     description: "TODO: Resource-level docs"
@@ -371,7 +371,7 @@ paths:
         - sid
         - unique_name
         - friendly_name
-      parent: /Assistants
+      parent: /Assistants/{Sid}
       pathType: list
   "/v1/Assistants/{AssistantSid}/FieldTypes/{FieldTypeSid}/FieldValues":
     description: "TODO: Resource-level docs"
@@ -494,7 +494,7 @@ paths:
         - sid
         - value
         - language
-      parent: /Assistants/{AssistantSid}/FieldTypes
+      parent: /Assistants/{AssistantSid}/FieldTypes/{Sid}
       pathType: list
   "/v1/Assistants/{AssistantSid}/FieldTypes/{FieldTypeSid}/FieldValues/{Sid}":
     delete:
@@ -567,7 +567,7 @@ paths:
         - sid
         - value
         - language
-      parent: /Assistants/{AssistantSid}/FieldTypes
+      parent: /Assistants/{AssistantSid}/FieldTypes/{Sid}
       pathType: instance
   "/v1/Assistants/{AssistantSid}/FieldTypes/{Sid}":
     delete:
@@ -668,7 +668,7 @@ paths:
         - sid
         - unique_name
         - friendly_name
-      parent: /Assistants
+      parent: /Assistants/{Sid}
       pathType: instance
   "/v1/Assistants/{AssistantSid}/ModelBuilds":
     description: "TODO: Resource-level docs"
@@ -770,7 +770,7 @@ paths:
         - unique_name
         - status
         - date_created
-      parent: /Assistants
+      parent: /Assistants/{Sid}
       pathType: list
   "/v1/Assistants/{AssistantSid}/ModelBuilds/{Sid}":
     delete:
@@ -869,7 +869,7 @@ paths:
         - unique_name
         - status
         - date_created
-      parent: /Assistants
+      parent: /Assistants/{Sid}
       pathType: instance
   "/v1/Assistants/{AssistantSid}/Queries":
     description: "TODO: Resource-level docs"
@@ -1002,7 +1002,7 @@ paths:
         - query
         - status
         - language
-      parent: /Assistants
+      parent: /Assistants/{Sid}
       pathType: list
   "/v1/Assistants/{AssistantSid}/Queries/{Sid}":
     delete:
@@ -1107,7 +1107,7 @@ paths:
         - query
         - status
         - language
-      parent: /Assistants
+      parent: /Assistants/{Sid}
       pathType: instance
   "/v1/Assistants/{AssistantSid}/StyleSheet":
     description: "TODO: Resource-level docs"
@@ -1167,7 +1167,7 @@ paths:
     x-twilio:
       defaultOutputProperties:
         - data
-      parent: /Assistants
+      parent: /Assistants/{Sid}
       pathType: instance
   "/v1/Assistants/{AssistantSid}/Tasks":
     description: "TODO: Resource-level docs"
@@ -1275,7 +1275,7 @@ paths:
         - sid
         - unique_name
         - friendly_name
-      parent: /Assistants
+      parent: /Assistants/{Sid}
       pathType: list
   "/v1/Assistants/{AssistantSid}/Tasks/{Sid}":
     delete:
@@ -1382,7 +1382,7 @@ paths:
         - sid
         - unique_name
         - friendly_name
-      parent: /Assistants
+      parent: /Assistants/{Sid}
       pathType: instance
   "/v1/Assistants/{AssistantSid}/Tasks/{TaskSid}/Actions":
     description: "TODO: Resource-level docs"
@@ -1456,7 +1456,7 @@ paths:
       defaultOutputProperties:
         - data
       mountName: task_actions
-      parent: /Assistants/{AssistantSid}/Tasks
+      parent: /Assistants/{AssistantSid}/Tasks/{Sid}
       pathType: instance
   "/v1/Assistants/{AssistantSid}/Tasks/{TaskSid}/Fields":
     description: "TODO: Resource-level docs"
@@ -1571,7 +1571,7 @@ paths:
         - sid
         - unique_name
         - field_type
-      parent: /Assistants/{AssistantSid}/Tasks
+      parent: /Assistants/{AssistantSid}/Tasks/{Sid}
       pathType: list
   "/v1/Assistants/{AssistantSid}/Tasks/{TaskSid}/Fields/{Sid}":
     delete:
@@ -1644,7 +1644,7 @@ paths:
         - sid
         - unique_name
         - field_type
-      parent: /Assistants/{AssistantSid}/Tasks
+      parent: /Assistants/{AssistantSid}/Tasks/{Sid}
       pathType: instance
   "/v1/Assistants/{AssistantSid}/Tasks/{TaskSid}/Samples":
     description: "TODO: Resource-level docs"
@@ -1768,7 +1768,7 @@ paths:
         - tagged_text
         - language
         - source_channel
-      parent: /Assistants/{AssistantSid}/Tasks
+      parent: /Assistants/{AssistantSid}/Tasks/{Sid}
       pathType: list
   "/v1/Assistants/{AssistantSid}/Tasks/{TaskSid}/Samples/{Sid}":
     delete:
@@ -1900,7 +1900,7 @@ paths:
         - tagged_text
         - language
         - source_channel
-      parent: /Assistants/{AssistantSid}/Tasks
+      parent: /Assistants/{AssistantSid}/Tasks/{Sid}
       pathType: instance
   "/v1/Assistants/{AssistantSid}/Tasks/{TaskSid}/Statistics":
     description: "TODO: Resource-level docs"
@@ -1938,7 +1938,7 @@ paths:
       defaultOutputProperties:
         - samples_count
         - fields_count
-      parent: /Assistants/{AssistantSid}/Tasks
+      parent: /Assistants/{AssistantSid}/Tasks/{Sid}
       pathType: instance
   "/v1/Assistants/{AssistantSid}/Webhooks":
     description: "TODO: Resource-level docs"
@@ -2051,7 +2051,7 @@ paths:
         - events
         - wehbook_url
         - webhook_method
-      parent: /Assistants
+      parent: /Assistants/{Sid}
       pathType: list
   "/v1/Assistants/{AssistantSid}/Webhooks/{Sid}":
     delete:
@@ -2161,7 +2161,7 @@ paths:
         - events
         - wehbook_url
         - webhook_method
-      parent: /Assistants
+      parent: /Assistants/{Sid}
       pathType: instance
   "/v1/Assistants/{Sid}":
     delete:

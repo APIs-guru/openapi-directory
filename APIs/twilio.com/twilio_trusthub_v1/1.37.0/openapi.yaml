@@ -267,7 +267,7 @@ paths:
       defaultOutputProperties:
         - sid
       mountName: customer_profiles_channel_endpoint_assignment
-      parent: /CustomerProfiles
+      parent: /CustomerProfiles/{Sid}
       pathType: list
   "/v1/CustomerProfiles/{CustomerProfileSid}/ChannelEndpointAssignments/{Sid}":
     delete:
@@ -339,7 +339,7 @@ paths:
       defaultOutputProperties:
         - sid
       mountName: customer_profiles_channel_endpoint_assignment
-      parent: /CustomerProfiles
+      parent: /CustomerProfiles/{Sid}
       pathType: instance
   "/v1/CustomerProfiles/{CustomerProfileSid}/EntityAssignments":
     description: "TODO: Resource-level docs"
@@ -447,7 +447,7 @@ paths:
       defaultOutputProperties:
         - sid
       mountName: customer_profiles_entity_assignments
-      parent: /CustomerProfiles
+      parent: /CustomerProfiles/{Sid}
       pathType: list
   "/v1/CustomerProfiles/{CustomerProfileSid}/EntityAssignments/{Sid}":
     delete:
@@ -520,7 +520,7 @@ paths:
       defaultOutputProperties:
         - sid
       mountName: customer_profiles_entity_assignments
-      parent: /CustomerProfiles
+      parent: /CustomerProfiles/{Sid}
       pathType: instance
   "/v1/CustomerProfiles/{CustomerProfileSid}/Evaluations":
     description: "TODO: Resource-level docs"
@@ -628,7 +628,7 @@ paths:
       defaultOutputProperties:
         - sid
       mountName: customer_profiles_evaluations
-      parent: /CustomerProfiles
+      parent: /CustomerProfiles/{Sid}
       pathType: list
   "/v1/CustomerProfiles/{CustomerProfileSid}/Evaluations/{Sid}":
     description: "TODO: Resource-level docs"
@@ -672,7 +672,7 @@ paths:
       defaultOutputProperties:
         - sid
       mountName: customer_profiles_evaluations
-      parent: /CustomerProfiles
+      parent: /CustomerProfiles/{Sid}
       pathType: instance
   "/v1/CustomerProfiles/{Sid}":
     delete:
@@ -1743,7 +1743,7 @@ paths:
       defaultOutputProperties:
         - sid
       mountName: trust_products_channel_endpoint_assignment
-      parent: /TrustProducts
+      parent: /TrustProducts/{Sid}
       pathType: list
   "/v1/TrustProducts/{TrustProductSid}/ChannelEndpointAssignments/{Sid}":
     delete:
@@ -1815,7 +1815,7 @@ paths:
       defaultOutputProperties:
         - sid
       mountName: trust_products_channel_endpoint_assignment
-      parent: /TrustProducts
+      parent: /TrustProducts/{Sid}
       pathType: instance
   "/v1/TrustProducts/{TrustProductSid}/EntityAssignments":
     description: "TODO: Resource-level docs"
@@ -1923,7 +1923,7 @@ paths:
       defaultOutputProperties:
         - sid
       mountName: trust_products_entity_assignments
-      parent: /TrustProducts
+      parent: /TrustProducts/{Sid}
       pathType: list
   "/v1/TrustProducts/{TrustProductSid}/EntityAssignments/{Sid}":
     delete:
@@ -1996,7 +1996,7 @@ paths:
       defaultOutputProperties:
         - sid
       mountName: trust_products_entity_assignments
-      parent: /TrustProducts
+      parent: /TrustProducts/{Sid}
       pathType: instance
   "/v1/TrustProducts/{TrustProductSid}/Evaluations":
     description: "TODO: Resource-level docs"
@@ -2104,7 +2104,7 @@ paths:
       defaultOutputProperties:
         - sid
       mountName: trust_products_evaluations
-      parent: /TrustProducts
+      parent: /TrustProducts/{Sid}
       pathType: list
   "/v1/TrustProducts/{TrustProductSid}/Evaluations/{Sid}":
     description: "TODO: Resource-level docs"
@@ -2148,7 +2148,7 @@ paths:
       defaultOutputProperties:
         - sid
       mountName: trust_products_evaluations
-      parent: /TrustProducts
+      parent: /TrustProducts/{Sid}
       pathType: instance
 components:
   schemas:

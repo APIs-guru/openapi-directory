@@ -216,7 +216,7 @@ paths:
       - url: https://preview.twilio.com
     x-twilio:
       defaultOutputProperties: []
-      parent: /Fleets
+      parent: /Fleets/{Sid}
       pathType: list
   "/DeployedDevices/Fleets/{FleetSid}/Certificates/{Sid}":
     delete:
@@ -326,7 +326,7 @@ paths:
       - url: https://preview.twilio.com
     x-twilio:
       defaultOutputProperties: []
-      parent: /Fleets
+      parent: /Fleets/{Sid}
       pathType: instance
   "/DeployedDevices/Fleets/{FleetSid}/Deployments":
     description: "TODO: Resource-level docs"
@@ -426,7 +426,7 @@ paths:
       - url: https://preview.twilio.com
     x-twilio:
       defaultOutputProperties: []
-      parent: /Fleets
+      parent: /Fleets/{Sid}
       pathType: list
   "/DeployedDevices/Fleets/{FleetSid}/Deployments/{Sid}":
     delete:
@@ -536,7 +536,7 @@ paths:
       - url: https://preview.twilio.com
     x-twilio:
       defaultOutputProperties: []
-      parent: /Fleets
+      parent: /Fleets/{Sid}
       pathType: instance
   "/DeployedDevices/Fleets/{FleetSid}/Devices":
     description: "TODO: Resource-level docs"
@@ -653,7 +653,7 @@ paths:
       - url: https://preview.twilio.com
     x-twilio:
       defaultOutputProperties: []
-      parent: /Fleets
+      parent: /Fleets/{Sid}
       pathType: list
   "/DeployedDevices/Fleets/{FleetSid}/Devices/{Sid}":
     delete:
@@ -760,7 +760,7 @@ paths:
       - url: https://preview.twilio.com
     x-twilio:
       defaultOutputProperties: []
-      parent: /Fleets
+      parent: /Fleets/{Sid}
       pathType: instance
   "/DeployedDevices/Fleets/{FleetSid}/Keys":
     description: "TODO: Resource-level docs"
@@ -868,7 +868,7 @@ paths:
       - url: https://preview.twilio.com
     x-twilio:
       defaultOutputProperties: []
-      parent: /Fleets
+      parent: /Fleets/{Sid}
       pathType: list
   "/DeployedDevices/Fleets/{FleetSid}/Keys/{Sid}":
     delete:
@@ -978,7 +978,7 @@ paths:
       - url: https://preview.twilio.com
     x-twilio:
       defaultOutputProperties: []
-      parent: /Fleets
+      parent: /Fleets/{Sid}
       pathType: instance
   "/DeployedDevices/Fleets/{Sid}":
     delete:
@@ -1366,7 +1366,7 @@ paths:
       - url: https://preview.twilio.com
     x-twilio:
       defaultOutputProperties: []
-      parent: /AuthorizationDocuments
+      parent: /AuthorizationDocuments/{Sid}
       pathType: list
   /HostedNumbers/HostedNumberOrders:
     description: "TODO: Resource-level docs"
@@ -1881,7 +1881,7 @@ paths:
       - url: https://preview.twilio.com
     x-twilio:
       defaultOutputProperties: []
-      parent: /Services
+      parent: /Services/{Sid}
       pathType: list
   "/Sync/Services/{ServiceSid}/Documents/{DocumentSid}/Permissions":
     description: "TODO: Resource-level docs"
@@ -1954,7 +1954,7 @@ paths:
     x-twilio:
       defaultOutputProperties: []
       mountName: document_permissions
-      parent: /Services/{ServiceSid}/Documents
+      parent: /Services/{ServiceSid}/Documents/{Sid}
       pathType: list
   "/Sync/Services/{ServiceSid}/Documents/{DocumentSid}/Permissions/{Identity}":
     delete:
@@ -2087,7 +2087,7 @@ paths:
     x-twilio:
       defaultOutputProperties: []
       mountName: document_permissions
-      parent: /Services/{ServiceSid}/Documents
+      parent: /Services/{ServiceSid}/Documents/{Sid}
       pathType: instance
   "/Sync/Services/{ServiceSid}/Documents/{Sid}":
     delete:
@@ -2197,7 +2197,7 @@ paths:
       - url: https://preview.twilio.com
     x-twilio:
       defaultOutputProperties: []
-      parent: /Services
+      parent: /Services/{Sid}
       pathType: instance
   "/Sync/Services/{ServiceSid}/Lists":
     description: "TODO: Resource-level docs"
@@ -2298,7 +2298,7 @@ paths:
     x-twilio:
       defaultOutputProperties: []
       mountName: sync_lists
-      parent: /Services
+      parent: /Services/{Sid}
       pathType: list
   "/Sync/Services/{ServiceSid}/Lists/{ListSid}/Items":
     description: "TODO: Resource-level docs"
@@ -2429,7 +2429,7 @@ paths:
     x-twilio:
       defaultOutputProperties: []
       mountName: sync_list_items
-      parent: /Services/{ServiceSid}/Lists
+      parent: /Services/{ServiceSid}/Lists/{Sid}
       pathType: list
   "/Sync/Services/{ServiceSid}/Lists/{ListSid}/Items/{Index}":
     delete:
@@ -2563,7 +2563,7 @@ paths:
     x-twilio:
       defaultOutputProperties: []
       mountName: sync_list_items
-      parent: /Services/{ServiceSid}/Lists
+      parent: /Services/{ServiceSid}/Lists/{Sid}
       pathType: instance
   "/Sync/Services/{ServiceSid}/Lists/{ListSid}/Permissions":
     description: "TODO: Resource-level docs"
@@ -2636,7 +2636,7 @@ paths:
     x-twilio:
       defaultOutputProperties: []
       mountName: sync_list_permissions
-      parent: /Services/{ServiceSid}/Lists
+      parent: /Services/{ServiceSid}/Lists/{Sid}
       pathType: list
   "/Sync/Services/{ServiceSid}/Lists/{ListSid}/Permissions/{Identity}":
     delete:
@@ -2769,7 +2769,7 @@ paths:
     x-twilio:
       defaultOutputProperties: []
       mountName: sync_list_permissions
-      parent: /Services/{ServiceSid}/Lists
+      parent: /Services/{ServiceSid}/Lists/{Sid}
       pathType: instance
   "/Sync/Services/{ServiceSid}/Lists/{Sid}":
     delete:
@@ -2834,7 +2834,7 @@ paths:
     x-twilio:
       defaultOutputProperties: []
       mountName: sync_lists
-      parent: /Services
+      parent: /Services/{Sid}
       pathType: instance
   "/Sync/Services/{ServiceSid}/Maps":
     description: "TODO: Resource-level docs"
@@ -2935,7 +2935,7 @@ paths:
     x-twilio:
       defaultOutputProperties: []
       mountName: sync_maps
-      parent: /Services
+      parent: /Services/{Sid}
       pathType: list
   "/Sync/Services/{ServiceSid}/Maps/{MapSid}/Items":
     description: "TODO: Resource-level docs"
@@ -3070,7 +3070,7 @@ paths:
     x-twilio:
       defaultOutputProperties: []
       mountName: sync_map_items
-      parent: /Services/{ServiceSid}/Maps
+      parent: /Services/{ServiceSid}/Maps/{Sid}
       pathType: list
   "/Sync/Services/{ServiceSid}/Maps/{MapSid}/Items/{Key}":
     delete:
@@ -3204,7 +3204,7 @@ paths:
     x-twilio:
       defaultOutputProperties: []
       mountName: sync_map_items
-      parent: /Services/{ServiceSid}/Maps
+      parent: /Services/{ServiceSid}/Maps/{Sid}
       pathType: instance
   "/Sync/Services/{ServiceSid}/Maps/{MapSid}/Permissions":
     description: "TODO: Resource-level docs"
@@ -3277,7 +3277,7 @@ paths:
     x-twilio:
       defaultOutputProperties: []
       mountName: sync_map_permissions
-      parent: /Services/{ServiceSid}/Maps
+      parent: /Services/{ServiceSid}/Maps/{Sid}
       pathType: list
   "/Sync/Services/{ServiceSid}/Maps/{MapSid}/Permissions/{Identity}":
     delete:
@@ -3410,7 +3410,7 @@ paths:
     x-twilio:
       defaultOutputProperties: []
       mountName: sync_map_permissions
-      parent: /Services/{ServiceSid}/Maps
+      parent: /Services/{ServiceSid}/Maps/{Sid}
       pathType: instance
   "/Sync/Services/{ServiceSid}/Maps/{Sid}":
     delete:
@@ -3475,7 +3475,7 @@ paths:
     x-twilio:
       defaultOutputProperties: []
       mountName: sync_maps
-      parent: /Services
+      parent: /Services/{Sid}
       pathType: instance
   "/Sync/Services/{Sid}":
     delete:
@@ -3637,7 +3637,7 @@ paths:
         - phone_number_sid
         - phone_number
         - url
-      parent: /BrandedChannels
+      parent: /BrandedChannels/{Sid}
       pathType: list
   "/TrustedComms/BrandedChannels/{Sid}":
     description: "TODO: Resource-level docs"
@@ -3906,7 +3906,7 @@ paths:
     x-twilio:
       className: available_add_on_extension
       defaultOutputProperties: []
-      parent: /AvailableAddOns
+      parent: /AvailableAddOns/{Sid}
       pathType: list
   "/marketplace/AvailableAddOns/{AvailableAddOnSid}/Extensions/{Sid}":
     description: "TODO: Resource-level docs"
@@ -3948,7 +3948,7 @@ paths:
     x-twilio:
       className: available_add_on_extension
       defaultOutputProperties: []
-      parent: /AvailableAddOns
+      parent: /AvailableAddOns/{Sid}
       pathType: instance
   "/marketplace/AvailableAddOns/{Sid}":
     description: "TODO: Resource-level docs"
@@ -4140,7 +4140,7 @@ paths:
     x-twilio:
       className: installed_add_on_extension
       defaultOutputProperties: []
-      parent: /InstalledAddOns
+      parent: /InstalledAddOns/{Sid}
       pathType: list
   "/marketplace/InstalledAddOns/{InstalledAddOnSid}/Extensions/{Sid}":
     description: "TODO: Resource-level docs"
@@ -4227,7 +4227,7 @@ paths:
     x-twilio:
       className: installed_add_on_extension
       defaultOutputProperties: []
-      parent: /InstalledAddOns
+      parent: /InstalledAddOns/{Sid}
       pathType: instance
   "/marketplace/InstalledAddOns/{Sid}":
     delete:
@@ -4421,7 +4421,7 @@ paths:
       - url: https://preview.twilio.com
     x-twilio:
       defaultOutputProperties: []
-      parent: /Assistants
+      parent: /Assistants/{Sid}
       pathType: list
   "/understand/Assistants/{AssistantSid}/Dialogues/{Sid}":
     description: "TODO: Resource-level docs"
@@ -4456,7 +4456,7 @@ paths:
       - url: https://preview.twilio.com
     x-twilio:
       defaultOutputProperties: []
-      parent: /Assistants
+      parent: /Assistants/{Sid}
       pathType: instance
   "/understand/Assistants/{AssistantSid}/FallbackActions":
     description: "TODO: Resource-level docs"
@@ -4517,7 +4517,7 @@ paths:
       className: assistant_fallback_actions
       defaultOutputProperties: []
       mountName: assistant_fallback_actions
-      parent: /Assistants
+      parent: /Assistants/{Sid}
       pathType: instance
   "/understand/Assistants/{AssistantSid}/FieldTypes":
     description: "TODO: Resource-level docs"
@@ -4616,7 +4616,7 @@ paths:
       - url: https://preview.twilio.com
     x-twilio:
       defaultOutputProperties: []
-      parent: /Assistants
+      parent: /Assistants/{Sid}
       pathType: list
   "/understand/Assistants/{AssistantSid}/FieldTypes/{FieldTypeSid}/FieldValues":
     description: "TODO: Resource-level docs"
@@ -4736,7 +4736,7 @@ paths:
       - url: https://preview.twilio.com
     x-twilio:
       defaultOutputProperties: []
-      parent: /Assistants/{AssistantSid}/FieldTypes
+      parent: /Assistants/{AssistantSid}/FieldTypes/{Sid}
       pathType: list
   "/understand/Assistants/{AssistantSid}/FieldTypes/{FieldTypeSid}/FieldValues/{Sid}":
     delete:
@@ -4806,7 +4806,7 @@ paths:
       - url: https://preview.twilio.com
     x-twilio:
       defaultOutputProperties: []
-      parent: /Assistants/{AssistantSid}/FieldTypes
+      parent: /Assistants/{AssistantSid}/FieldTypes/{Sid}
       pathType: instance
   "/understand/Assistants/{AssistantSid}/FieldTypes/{Sid}":
     delete:
@@ -4904,7 +4904,7 @@ paths:
       - url: https://preview.twilio.com
     x-twilio:
       defaultOutputProperties: []
-      parent: /Assistants
+      parent: /Assistants/{Sid}
       pathType: instance
   "/understand/Assistants/{AssistantSid}/InitiationActions":
     description: "TODO: Resource-level docs"
@@ -4965,7 +4965,7 @@ paths:
       className: assistant_initiation_actions
       defaultOutputProperties: []
       mountName: assistant_initiation_actions
-      parent: /Assistants
+      parent: /Assistants/{Sid}
       pathType: instance
   "/understand/Assistants/{AssistantSid}/ModelBuilds":
     description: "TODO: Resource-level docs"
@@ -5063,7 +5063,7 @@ paths:
       - url: https://preview.twilio.com
     x-twilio:
       defaultOutputProperties: []
-      parent: /Assistants
+      parent: /Assistants/{Sid}
       pathType: list
   "/understand/Assistants/{AssistantSid}/ModelBuilds/{Sid}":
     delete:
@@ -5158,7 +5158,7 @@ paths:
       - url: https://preview.twilio.com
     x-twilio:
       defaultOutputProperties: []
-      parent: /Assistants
+      parent: /Assistants/{Sid}
       pathType: instance
   "/understand/Assistants/{AssistantSid}/Queries":
     description: "TODO: Resource-level docs"
@@ -5282,7 +5282,7 @@ paths:
       - url: https://preview.twilio.com
     x-twilio:
       defaultOutputProperties: []
-      parent: /Assistants
+      parent: /Assistants/{Sid}
       pathType: list
   "/understand/Assistants/{AssistantSid}/Queries/{Sid}":
     delete:
@@ -5383,7 +5383,7 @@ paths:
       - url: https://preview.twilio.com
     x-twilio:
       defaultOutputProperties: []
-      parent: /Assistants
+      parent: /Assistants/{Sid}
       pathType: instance
   "/understand/Assistants/{AssistantSid}/StyleSheet":
     description: "TODO: Resource-level docs"
@@ -5442,7 +5442,7 @@ paths:
       - url: https://preview.twilio.com
     x-twilio:
       defaultOutputProperties: []
-      parent: /Assistants
+      parent: /Assistants/{Sid}
       pathType: instance
   "/understand/Assistants/{AssistantSid}/Tasks":
     description: "TODO: Resource-level docs"
@@ -5547,7 +5547,7 @@ paths:
       - url: https://preview.twilio.com
     x-twilio:
       defaultOutputProperties: []
-      parent: /Assistants
+      parent: /Assistants/{Sid}
       pathType: list
   "/understand/Assistants/{AssistantSid}/Tasks/{Sid}":
     delete:
@@ -5651,7 +5651,7 @@ paths:
       - url: https://preview.twilio.com
     x-twilio:
       defaultOutputProperties: []
-      parent: /Assistants
+      parent: /Assistants/{Sid}
       pathType: instance
   "/understand/Assistants/{AssistantSid}/Tasks/{TaskSid}/Actions":
     description: "TODO: Resource-level docs"
@@ -5724,7 +5724,7 @@ paths:
       className: task_actions
       defaultOutputProperties: []
       mountName: task_actions
-      parent: /Assistants/{AssistantSid}/Tasks
+      parent: /Assistants/{AssistantSid}/Tasks/{Sid}
       pathType: instance
   "/understand/Assistants/{AssistantSid}/Tasks/{TaskSid}/Fields":
     description: "TODO: Resource-level docs"
@@ -5836,7 +5836,7 @@ paths:
       - url: https://preview.twilio.com
     x-twilio:
       defaultOutputProperties: []
-      parent: /Assistants/{AssistantSid}/Tasks
+      parent: /Assistants/{AssistantSid}/Tasks/{Sid}
       pathType: list
   "/understand/Assistants/{AssistantSid}/Tasks/{TaskSid}/Fields/{Sid}":
     delete:
@@ -5906,7 +5906,7 @@ paths:
       - url: https://preview.twilio.com
     x-twilio:
       defaultOutputProperties: []
-      parent: /Assistants/{AssistantSid}/Tasks
+      parent: /Assistants/{AssistantSid}/Tasks/{Sid}
       pathType: instance
   "/understand/Assistants/{AssistantSid}/Tasks/{TaskSid}/Samples":
     description: "TODO: Resource-level docs"
@@ -6026,7 +6026,7 @@ paths:
       - url: https://preview.twilio.com
     x-twilio:
       defaultOutputProperties: []
-      parent: /Assistants/{AssistantSid}/Tasks
+      parent: /Assistants/{AssistantSid}/Tasks/{Sid}
       pathType: list
   "/understand/Assistants/{AssistantSid}/Tasks/{TaskSid}/Samples/{Sid}":
     delete:
@@ -6154,7 +6154,7 @@ paths:
       - url: https://preview.twilio.com
     x-twilio:
       defaultOutputProperties: []
-      parent: /Assistants/{AssistantSid}/Tasks
+      parent: /Assistants/{AssistantSid}/Tasks/{Sid}
       pathType: instance
   "/understand/Assistants/{AssistantSid}/Tasks/{TaskSid}/Statistics":
     description: "TODO: Resource-level docs"
@@ -6190,7 +6190,7 @@ paths:
     x-twilio:
       className: task_statistics
       defaultOutputProperties: []
-      parent: /Assistants/{AssistantSid}/Tasks
+      parent: /Assistants/{AssistantSid}/Tasks/{Sid}
       pathType: instance
   "/understand/Assistants/{Sid}":
     delete:
@@ -6895,7 +6895,7 @@ paths:
       - url: https://preview.twilio.com
     x-twilio:
       defaultOutputProperties: []
-      parent: /Sims
+      parent: /Sims/{Sid}
       pathType: instance
 components:
   schemas:

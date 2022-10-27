@@ -250,7 +250,7 @@ paths:
         - sid
         - friendly_name
         - phone_number
-      parent: /Services
+      parent: /Services/{Sid}
       pathType: list
   "/v1/Services/{ServiceSid}/PhoneNumbers/{Sid}":
     delete:
@@ -366,7 +366,7 @@ paths:
         - sid
         - friendly_name
         - phone_number
-      parent: /Services
+      parent: /Services/{Sid}
       pathType: instance
   "/v1/Services/{ServiceSid}/Sessions":
     description: "TODO: Resource-level docs"
@@ -492,7 +492,7 @@ paths:
         - unique_name
         - date_started
         - date_ended
-      parent: /Services
+      parent: /Services/{Sid}
       pathType: list
   "/v1/Services/{ServiceSid}/Sessions/{SessionSid}/Interactions":
     description: "TODO: Resource-level docs"
@@ -570,7 +570,7 @@ paths:
         - sid
         - type
         - data
-      parent: /Services/{ServiceSid}/Sessions
+      parent: /Services/{ServiceSid}/Sessions/{Sid}
       pathType: list
   "/v1/Services/{ServiceSid}/Sessions/{SessionSid}/Interactions/{Sid}":
     delete:
@@ -661,7 +661,7 @@ paths:
         - sid
         - type
         - data
-      parent: /Services/{ServiceSid}/Sessions
+      parent: /Services/{ServiceSid}/Sessions/{Sid}
       pathType: instance
   "/v1/Services/{ServiceSid}/Sessions/{SessionSid}/Participants":
     description: "TODO: Resource-level docs"
@@ -800,7 +800,7 @@ paths:
         - friendly_name
         - identifier
         - proxy_identifier
-      parent: /Services/{ServiceSid}/Sessions
+      parent: /Services/{ServiceSid}/Sessions/{Sid}
       pathType: list
   "/v1/Services/{ServiceSid}/Sessions/{SessionSid}/Participants/{ParticipantSid}/MessageInteractions":
     description: "TODO: Resource-level docs"
@@ -949,7 +949,7 @@ paths:
         - sid
         - type
         - data
-      parent: /Services/{ServiceSid}/Sessions/{SessionSid}/Participants
+      parent: /Services/{ServiceSid}/Sessions/{SessionSid}/Participants/{Sid}
       pathType: list
   "/v1/Services/{ServiceSid}/Sessions/{SessionSid}/Participants/{ParticipantSid}/MessageInteractions/{Sid}":
     description: "TODO: Resource-level docs"
@@ -1011,7 +1011,7 @@ paths:
         - sid
         - type
         - data
-      parent: /Services/{ServiceSid}/Sessions/{SessionSid}/Participants
+      parent: /Services/{ServiceSid}/Sessions/{SessionSid}/Participants/{Sid}
       pathType: instance
   "/v1/Services/{ServiceSid}/Sessions/{SessionSid}/Participants/{Sid}":
     delete:
@@ -1103,7 +1103,7 @@ paths:
         - friendly_name
         - identifier
         - proxy_identifier
-      parent: /Services/{ServiceSid}/Sessions
+      parent: /Services/{ServiceSid}/Sessions/{Sid}
       pathType: instance
   "/v1/Services/{ServiceSid}/Sessions/{Sid}":
     delete:
@@ -1228,7 +1228,7 @@ paths:
         - unique_name
         - date_started
         - date_ended
-      parent: /Services
+      parent: /Services/{Sid}
       pathType: instance
   "/v1/Services/{ServiceSid}/ShortCodes":
     description: "TODO: Resource-level docs"
@@ -1336,7 +1336,7 @@ paths:
         - sid
         - short_code
         - iso_country
-      parent: /Services
+      parent: /Services/{Sid}
       pathType: list
   "/v1/Services/{ServiceSid}/ShortCodes/{Sid}":
     delete:
@@ -1452,7 +1452,7 @@ paths:
         - sid
         - short_code
         - iso_country
-      parent: /Services
+      parent: /Services/{Sid}
       pathType: instance
   "/v1/Services/{Sid}":
     delete:

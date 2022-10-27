@@ -651,7 +651,7 @@ paths:
         - index
         - author
         - date_created
-      parent: /Conversations
+      parent: /Conversations/{Sid}
       pathType: list
   "/v1/Conversations/{ConversationSid}/Messages/{MessageSid}/Receipts":
     description: A Message Receipt resource represents a delivery/read receipt of a message in a conversation.
@@ -728,7 +728,7 @@ paths:
         - status
         - date_created
       mountName: delivery_receipts
-      parent: /Conversations/{ConversationSid}/Messages
+      parent: /Conversations/{ConversationSid}/Messages/{Sid}
       pathType: list
   "/v1/Conversations/{ConversationSid}/Messages/{MessageSid}/Receipts/{Sid}":
     description: A Message Receipt resource represents a delivery/read receipt of a message in a conversation.
@@ -780,7 +780,7 @@ paths:
         - status
         - date_created
       mountName: delivery_receipts
-      parent: /Conversations/{ConversationSid}/Messages
+      parent: /Conversations/{ConversationSid}/Messages/{Sid}
       pathType: instance
   "/v1/Conversations/{ConversationSid}/Messages/{Sid}":
     delete:
@@ -914,7 +914,7 @@ paths:
         - index
         - author
         - date_created
-      parent: /Conversations
+      parent: /Conversations/{Sid}
       pathType: instance
   "/v1/Conversations/{ConversationSid}/Participants":
     description: A Participant resource represents a member of the conversation.
@@ -1042,7 +1042,7 @@ paths:
       defaultOutputProperties:
         - sid
         - messaging_binding
-      parent: /Conversations
+      parent: /Conversations/{Sid}
       pathType: list
   "/v1/Conversations/{ConversationSid}/Participants/{Sid}":
     delete:
@@ -1181,7 +1181,7 @@ paths:
       defaultOutputProperties:
         - sid
         - messaging_binding
-      parent: /Conversations
+      parent: /Conversations/{Sid}
       pathType: instance
   "/v1/Conversations/{ConversationSid}/Webhooks":
     description: A Scoped Webhook resource manages a set of callback URLs and their configuration for receiving events specific to one conversation.
@@ -1306,7 +1306,7 @@ paths:
       defaultOutputProperties:
         - sid
         - target
-      parent: /Conversations
+      parent: /Conversations/{Sid}
       pathType: list
   "/v1/Conversations/{ConversationSid}/Webhooks/{Sid}":
     delete:
@@ -1432,7 +1432,7 @@ paths:
       defaultOutputProperties:
         - sid
         - target
-      parent: /Conversations
+      parent: /Conversations/{Sid}
       pathType: instance
   "/v1/Conversations/{Sid}":
     delete:
@@ -2206,7 +2206,7 @@ paths:
         - sid
         - endpoint
         - identity
-      parent: /Services
+      parent: /Services/{Sid}
       pathType: list
   "/v1/Services/{ChatServiceSid}/Bindings/{Sid}":
     delete:
@@ -2279,7 +2279,7 @@ paths:
         - sid
         - endpoint
         - identity
-      parent: /Services
+      parent: /Services/{Sid}
       pathType: instance
   "/v1/Services/{ChatServiceSid}/Configuration":
     description: A Service Configuration resource manages service-level settings applicable to the Conversation API.
@@ -2364,7 +2364,7 @@ paths:
     x-twilio:
       defaultOutputProperties:
         - chat_service_sid
-      parent: /Services
+      parent: /Services/{Sid}
       pathType: instance
   "/v1/Services/{ChatServiceSid}/Configuration/Notifications":
     description: A Service Notification resource manages a set of settings to determine push notification behavior at service level.
@@ -2687,7 +2687,7 @@ paths:
         - chat_service_sid
         - friendly_name
         - date_created
-      parent: /Services
+      parent: /Services/{Sid}
       pathType: list
   "/v1/Services/{ChatServiceSid}/Conversations/{ConversationSid}/Messages":
     description: A Service Message resource represents a message in a conversation within a specific service.
@@ -2835,7 +2835,7 @@ paths:
         - index
         - author
         - date_created
-      parent: /Services/{ChatServiceSid}/Conversations
+      parent: /Services/{ChatServiceSid}/Conversations/{Sid}
       pathType: list
   "/v1/Services/{ChatServiceSid}/Conversations/{ConversationSid}/Messages/{MessageSid}/Receipts":
     description: A Service Message Receipt resource represents a delivery/read receipt of a message in a conversation.
@@ -2921,7 +2921,7 @@ paths:
         - status
         - date_created
       mountName: delivery_receipts
-      parent: /Services/{ChatServiceSid}/Conversations/{ConversationSid}/Messages
+      parent: /Services/{ChatServiceSid}/Conversations/{ConversationSid}/Messages/{Sid}
       pathType: list
   "/v1/Services/{ChatServiceSid}/Conversations/{ConversationSid}/Messages/{MessageSid}/Receipts/{Sid}":
     description: A Service Message Receipt resource represents a delivery/read receipt of a message in a conversation.
@@ -2982,7 +2982,7 @@ paths:
         - status
         - date_created
       mountName: delivery_receipts
-      parent: /Services/{ChatServiceSid}/Conversations/{ConversationSid}/Messages
+      parent: /Services/{ChatServiceSid}/Conversations/{ConversationSid}/Messages/{Sid}
       pathType: instance
   "/v1/Services/{ChatServiceSid}/Conversations/{ConversationSid}/Messages/{Sid}":
     delete:
@@ -3143,7 +3143,7 @@ paths:
         - index
         - author
         - date_created
-      parent: /Services/{ChatServiceSid}/Conversations
+      parent: /Services/{ChatServiceSid}/Conversations/{Sid}
       pathType: instance
   "/v1/Services/{ChatServiceSid}/Conversations/{ConversationSid}/Participants":
     description: A Service Participant resource represents a member of the conversation within a specific service.
@@ -3289,7 +3289,7 @@ paths:
       defaultOutputProperties:
         - sid
         - messaging_binding
-      parent: /Services/{ChatServiceSid}/Conversations
+      parent: /Services/{ChatServiceSid}/Conversations/{Sid}
       pathType: list
   "/v1/Services/{ChatServiceSid}/Conversations/{ConversationSid}/Participants/{Sid}":
     delete:
@@ -3455,7 +3455,7 @@ paths:
       defaultOutputProperties:
         - sid
         - messaging_binding
-      parent: /Services/{ChatServiceSid}/Conversations
+      parent: /Services/{ChatServiceSid}/Conversations/{Sid}
       pathType: instance
   "/v1/Services/{ChatServiceSid}/Conversations/{ConversationSid}/Webhooks":
     description: A Conversation-scoped Webhook resource manages a set of callback URLs and their configuration for receiving events specific to one conversation.
@@ -3598,7 +3598,7 @@ paths:
       defaultOutputProperties:
         - sid
         - target
-      parent: /Services/{ChatServiceSid}/Conversations
+      parent: /Services/{ChatServiceSid}/Conversations/{Sid}
       pathType: list
   "/v1/Services/{ChatServiceSid}/Conversations/{ConversationSid}/Webhooks/{Sid}":
     delete:
@@ -3751,7 +3751,7 @@ paths:
       defaultOutputProperties:
         - sid
         - target
-      parent: /Services/{ChatServiceSid}/Conversations
+      parent: /Services/{ChatServiceSid}/Conversations/{Sid}
       pathType: instance
   "/v1/Services/{ChatServiceSid}/Conversations/{Sid}":
     delete:
@@ -3901,7 +3901,7 @@ paths:
         - chat_service_sid
         - friendly_name
         - date_created
-      parent: /Services
+      parent: /Services/{Sid}
       pathType: instance
   "/v1/Services/{ChatServiceSid}/ParticipantConversations":
     description: Service Participant Conversations resource represents a list of Conversations that this Participant belongs to belonging to a specific conversation service.
@@ -3980,7 +3980,7 @@ paths:
         - chat_service_sid
         - participant_sid
         - conversation_sid
-      parent: /Services
+      parent: /Services/{Sid}
       pathType: list
   "/v1/Services/{ChatServiceSid}/Roles":
     description: A Service Role resource represents a set of permissions granted to a user within a service or a conversation.
@@ -4096,7 +4096,7 @@ paths:
         - sid
         - friendly_name
         - type
-      parent: /Services
+      parent: /Services/{Sid}
       pathType: list
   "/v1/Services/{ChatServiceSid}/Roles/{Sid}":
     delete:
@@ -4216,7 +4216,7 @@ paths:
         - sid
         - friendly_name
         - type
-      parent: /Services
+      parent: /Services/{Sid}
       pathType: instance
   "/v1/Services/{ChatServiceSid}/Users":
     description: A Service User resource represents a conversation user belonging to a specific conversation service.
@@ -4338,7 +4338,7 @@ paths:
       defaultOutputProperties:
         - sid
         - identity
-      parent: /Services
+      parent: /Services/{Sid}
       pathType: list
   "/v1/Services/{ChatServiceSid}/Users/{Sid}":
     delete:
@@ -4465,7 +4465,7 @@ paths:
       defaultOutputProperties:
         - sid
         - identity
-      parent: /Services
+      parent: /Services/{Sid}
       pathType: instance
   "/v1/Services/{ChatServiceSid}/Users/{UserSid}/Conversations":
     description: A Service User Conversation resource represents a conversation of the user belonging to a specific conversation service.
@@ -4543,7 +4543,7 @@ paths:
         - friendly_name
         - date_created
       mountName: user_conversations
-      parent: /Services/{ChatServiceSid}/Users
+      parent: /Services/{ChatServiceSid}/Users/{Sid}
       pathType: list
   "/v1/Services/{ChatServiceSid}/Users/{UserSid}/Conversations/{ConversationSid}":
     delete:
@@ -4680,7 +4680,7 @@ paths:
         - friendly_name
         - date_created
       mountName: user_conversations
-      parent: /Services/{ChatServiceSid}/Users
+      parent: /Services/{ChatServiceSid}/Users/{Sid}
       pathType: instance
   "/v1/Services/{Sid}":
     delete:
@@ -5004,7 +5004,7 @@ paths:
         - friendly_name
         - date_created
       mountName: user_conversations
-      parent: /Users
+      parent: /Users/{Sid}
       pathType: list
   "/v1/Users/{UserSid}/Conversations/{ConversationSid}":
     delete:
@@ -5114,7 +5114,7 @@ paths:
         - friendly_name
         - date_created
       mountName: user_conversations
-      parent: /Users
+      parent: /Users/{Sid}
       pathType: instance
 components:
   schemas:

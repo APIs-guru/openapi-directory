@@ -305,7 +305,7 @@ paths:
     x-twilio:
       defaultOutputProperties: []
       mountName: bundle_copies
-      parent: /RegulatoryCompliance/Bundles
+      parent: /RegulatoryCompliance/Bundles/{Sid}
       pathType: list
   "/v2/RegulatoryCompliance/Bundles/{BundleSid}/Evaluations":
     description: "TODO: Resource-level docs"
@@ -396,7 +396,7 @@ paths:
     x-twilio:
       defaultOutputProperties:
         - sid
-      parent: /RegulatoryCompliance/Bundles
+      parent: /RegulatoryCompliance/Bundles/{Sid}
       pathType: list
   "/v2/RegulatoryCompliance/Bundles/{BundleSid}/Evaluations/{Sid}":
     description: "TODO: Resource-level docs"
@@ -438,7 +438,7 @@ paths:
     x-twilio:
       defaultOutputProperties:
         - sid
-      parent: /RegulatoryCompliance/Bundles
+      parent: /RegulatoryCompliance/Bundles/{Sid}
       pathType: instance
   "/v2/RegulatoryCompliance/Bundles/{BundleSid}/ItemAssignments":
     description: "TODO: Resource-level docs"
@@ -544,7 +544,7 @@ paths:
     x-twilio:
       defaultOutputProperties:
         - sid
-      parent: /RegulatoryCompliance/Bundles
+      parent: /RegulatoryCompliance/Bundles/{Sid}
       pathType: list
   "/v2/RegulatoryCompliance/Bundles/{BundleSid}/ItemAssignments/{Sid}":
     delete:
@@ -615,7 +615,7 @@ paths:
     x-twilio:
       defaultOutputProperties:
         - sid
-      parent: /RegulatoryCompliance/Bundles
+      parent: /RegulatoryCompliance/Bundles/{Sid}
       pathType: instance
   "/v2/RegulatoryCompliance/Bundles/{BundleSid}/ReplaceItems":
     description: "TODO: Resource-level docs"
@@ -663,7 +663,7 @@ paths:
     x-twilio:
       className: replace_items
       defaultOutputProperties: []
-      parent: /RegulatoryCompliance/Bundles
+      parent: /RegulatoryCompliance/Bundles/{Sid}
       pathType: list
   "/v2/RegulatoryCompliance/Bundles/{Sid}":
     delete:

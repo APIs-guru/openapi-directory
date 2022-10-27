@@ -281,7 +281,7 @@ paths:
         - resource_type
         - size
         - redirectTo
-      parent: /Exports
+      parent: /Exports/{ResourceType}
       pathType: list
   "/v1/Exports/{ResourceType}/Days/{Day}":
     description: "TODO: Resource-level docs"
@@ -322,7 +322,7 @@ paths:
         - resource_type
         - size
         - redirectTo
-      parent: /Exports
+      parent: /Exports/{ResourceType}
       pathType: instance
   "/v1/Exports/{ResourceType}/Jobs":
     description: "TODO: Resource-level docs"
@@ -447,7 +447,7 @@ paths:
         - webhook_method
         - webhook_url
       mountName: export_custom_jobs
-      parent: /Exports
+      parent: /Exports/{ResourceType}
       pathType: list
 components:
   schemas:

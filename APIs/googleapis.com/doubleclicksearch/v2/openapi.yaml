@@ -106,6 +106,11 @@ paths:
           name: criterionId
           schema:
             type: string
+        - description: Customer ID of a client account in the new Search Ads 360 experience.
+          in: query
+          name: customerId
+          schema:
+            type: string
       responses:
         "200":
           content:
@@ -310,6 +315,108 @@ paths:
             - https://www.googleapis.com/auth/doubleclicksearch
       tags:
         - conversion
+  "/doubleclicksearch/v2/customer/{customerId}/conversion":
+    get:
+      description: Retrieves a list of conversions from a DoubleClick Search engine account.
+      operationId: doubleclicksearch.conversion.GetCustomerId
+      parameters:
+        - description: Customer ID of a client account in the new Search Ads 360 experience.
+          in: path
+          name: customerId
+          required: true
+          schema:
+            type: string
+        - description: Last date (inclusive) on which to retrieve conversions. Format is yyyymmdd.
+          in: query
+          name: endDate
+          required: true
+          schema:
+            maximum: 99991231
+            minimum: 20091101
+            type: integer
+        - description: The number of conversions to return per call.
+          in: query
+          name: rowCount
+          required: true
+          schema:
+            maximum: 1000
+            minimum: 1
+            type: integer
+        - description: First date (inclusive) on which to retrieve conversions. Format is yyyymmdd.
+          in: query
+          name: startDate
+          required: true
+          schema:
+            maximum: 99991231
+            minimum: 20091101
+            type: integer
+        - description: The 0-based starting index for retrieving conversions results.
+          in: query
+          name: startRow
+          required: true
+          schema:
+            type: integer
+        - description: Numeric ID of the ad group.
+          in: query
+          name: adGroupId
+          schema:
+            type: string
+        - description: Numeric ID of the ad.
+          in: query
+          name: adId
+          schema:
+            type: string
+        - description: Numeric ID of the advertiser.
+          in: query
+          name: advertiserId
+          schema:
+            type: string
+        - description: Numeric ID of the agency.
+          in: query
+          name: agencyId
+          schema:
+            type: string
+        - description: Numeric ID of the campaign.
+          in: query
+          name: campaignId
+          schema:
+            type: string
+        - description: Numeric ID of the criterion.
+          in: query
+          name: criterionId
+          schema:
+            type: string
+        - description: Numeric ID of the engine account.
+          in: query
+          name: engineAccountId
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConversionList"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/doubleclicksearch
+          Oauth2c:
+            - https://www.googleapis.com/auth/doubleclicksearch
+      tags:
+        - conversion
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   /doubleclicksearch/v2/reports:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -548,6 +655,9 @@ components:
           description: The time by which all conversions have been uploaded, in epoch millis UTC.
           format: int64
           type: string
+        customerId:
+          description: Customer ID of a client account in the new Search Ads 360 experience.
+          type: string
         segmentationId:
           description: The numeric segmentation identifier (for example, DoubleClick Search Floodlight activity ID).
           format: int64
@@ -622,6 +732,9 @@ components:
           items:
             $ref: "#/components/schemas/CustomMetric"
           type: array
+        customerId:
+          description: Customer ID of a client account in the new Search Ads 360 experience.
+          type: string
         deviceType:
           description: The type of device on which the conversion occurred.
           type: string

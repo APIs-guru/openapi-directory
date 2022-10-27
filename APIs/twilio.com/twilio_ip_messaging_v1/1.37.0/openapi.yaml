@@ -436,7 +436,7 @@ paths:
         - sid
         - unique_name
         - friendly_name
-      parent: /Services
+      parent: /Services/{Sid}
       pathType: list
   "/v1/Services/{ServiceSid}/Channels/{ChannelSid}/Invites":
     description: "TODO: Resource-level docs"
@@ -566,7 +566,7 @@ paths:
         - sid
         - identity
         - date_created
-      parent: /Services/{ServiceSid}/Channels
+      parent: /Services/{ServiceSid}/Channels/{Sid}
       pathType: list
   "/v1/Services/{ServiceSid}/Channels/{ChannelSid}/Invites/{Sid}":
     delete:
@@ -651,7 +651,7 @@ paths:
         - sid
         - identity
         - date_created
-      parent: /Services/{ServiceSid}/Channels
+      parent: /Services/{ServiceSid}/Channels/{Sid}
       pathType: instance
   "/v1/Services/{ServiceSid}/Channels/{ChannelSid}/Members":
     description: "TODO: Resource-level docs"
@@ -781,7 +781,7 @@ paths:
         - sid
         - identity
         - date_created
-      parent: /Services/{ServiceSid}/Channels
+      parent: /Services/{ServiceSid}/Channels/{Sid}
       pathType: list
   "/v1/Services/{ServiceSid}/Channels/{ChannelSid}/Members/{Sid}":
     delete:
@@ -922,7 +922,7 @@ paths:
         - sid
         - identity
         - date_created
-      parent: /Services/{ServiceSid}/Channels
+      parent: /Services/{ServiceSid}/Channels/{Sid}
       pathType: instance
   "/v1/Services/{ServiceSid}/Channels/{ChannelSid}/Messages":
     description: "TODO: Resource-level docs"
@@ -1058,7 +1058,7 @@ paths:
         - from
         - to
         - date_created
-      parent: /Services/{ServiceSid}/Channels
+      parent: /Services/{ServiceSid}/Channels/{Sid}
       pathType: list
   "/v1/Services/{ServiceSid}/Channels/{ChannelSid}/Messages/{Sid}":
     delete:
@@ -1205,7 +1205,7 @@ paths:
         - from
         - to
         - date_created
-      parent: /Services/{ServiceSid}/Channels
+      parent: /Services/{ServiceSid}/Channels/{Sid}
       pathType: instance
   "/v1/Services/{ServiceSid}/Channels/{Sid}":
     delete:
@@ -1318,7 +1318,7 @@ paths:
         - sid
         - unique_name
         - friendly_name
-      parent: /Services
+      parent: /Services/{Sid}
       pathType: instance
   "/v1/Services/{ServiceSid}/Roles":
     description: "TODO: Resource-level docs"
@@ -1434,7 +1434,7 @@ paths:
         - sid
         - friendly_name
         - type
-      parent: /Services
+      parent: /Services/{Sid}
       pathType: list
   "/v1/Services/{ServiceSid}/Roles/{Sid}":
     delete:
@@ -1554,7 +1554,7 @@ paths:
         - sid
         - friendly_name
         - type
-      parent: /Services
+      parent: /Services/{Sid}
       pathType: instance
   "/v1/Services/{ServiceSid}/Users":
     description: "TODO: Resource-level docs"
@@ -1671,7 +1671,7 @@ paths:
         - sid
         - friendly_name
         - date_created
-      parent: /Services
+      parent: /Services/{Sid}
       pathType: list
   "/v1/Services/{ServiceSid}/Users/{Sid}":
     delete:
@@ -1787,7 +1787,7 @@ paths:
         - sid
         - friendly_name
         - date_created
-      parent: /Services
+      parent: /Services/{Sid}
       pathType: instance
   "/v1/Services/{ServiceSid}/Users/{UserSid}/Channels":
     description: "TODO: Resource-level docs"
@@ -1862,7 +1862,7 @@ paths:
         - channel_sid
         - status
       mountName: user_channels
-      parent: /Services/{ServiceSid}/Users
+      parent: /Services/{ServiceSid}/Users/{Sid}
       pathType: list
   "/v1/Services/{Sid}":
     delete:

@@ -551,7 +551,7 @@ paths:
         - friendly_name
         - target
         - enabled
-      parent: /ConnectionPolicies
+      parent: /ConnectionPolicies/{Sid}
       pathType: list
   "/v1/ConnectionPolicies/{ConnectionPolicySid}/Targets/{Sid}":
     delete:
@@ -682,7 +682,7 @@ paths:
         - friendly_name
         - target
         - enabled
-      parent: /ConnectionPolicies
+      parent: /ConnectionPolicies/{Sid}
       pathType: instance
   "/v1/ConnectionPolicies/{Sid}":
     delete:
@@ -1003,7 +1003,7 @@ paths:
       className: highrisk_special_prefix
       defaultOutputProperties:
         - prefix
-      parent: /DialingPermissions/Countries
+      parent: /DialingPermissions/Countries/{IsoCode}
       pathType: list
   /v1/IpRecords:
     description: IP Records hold information about the IP addresses and ranges ([CIDR](https://tools.ietf.org/html/rfc4632) blocks) that your traffic will be associated with.

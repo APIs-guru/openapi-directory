@@ -253,7 +253,7 @@ paths:
         - call_sid
         - account_sid
       mountName: conference_participants
-      parent: /Conferences
+      parent: /Conferences/{ConferenceSid}
       pathType: list
   "/v1/Conferences/{ConferenceSid}/Participants/{ParticipantSid}":
     description: "TODO: Resource-level docs"
@@ -309,7 +309,7 @@ paths:
         - call_sid
         - account_sid
       mountName: conference_participants
-      parent: /Conferences
+      parent: /Conferences/{ConferenceSid}
       pathType: instance
   /v1/Video/Rooms:
     description: "TODO: Resource-level docs"
@@ -494,7 +494,7 @@ paths:
     x-twilio:
       defaultOutputProperties:
         - participant_sid
-      parent: /Video/Rooms
+      parent: /Video/Rooms/{RoomSid}
       pathType: list
   "/v1/Video/Rooms/{RoomSid}/Participants/{ParticipantSid}":
     description: "TODO: Resource-level docs"
@@ -530,7 +530,7 @@ paths:
     x-twilio:
       defaultOutputProperties:
         - participant_sid
-      parent: /Video/Rooms
+      parent: /Video/Rooms/{RoomSid}
       pathType: instance
   /v1/Voice/Settings:
     description: "TODO: Resource-level docs"

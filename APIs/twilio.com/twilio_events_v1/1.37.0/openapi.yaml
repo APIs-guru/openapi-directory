@@ -127,7 +127,7 @@ paths:
         - id
         - schema_version
         - date_created
-      parent: /Schemas
+      parent: /Schemas/{Id}
       pathType: list
   "/v1/Schemas/{Id}/Versions/{SchemaVersion}":
     description: Version of the Schema
@@ -166,7 +166,7 @@ paths:
         - id
         - schema_version
         - date_created
-      parent: /Schemas
+      parent: /Schemas/{Id}
       pathType: instance
   /v1/Sinks:
     description: Sink destination to send events to
@@ -401,7 +401,7 @@ paths:
       defaultOutputProperties:
         - result
       mountName: sink_test
-      parent: /Sinks
+      parent: /Sinks/{Sid}
       pathType: list
   "/v1/Sinks/{Sid}/Validate":
     description: Validate sink
@@ -447,7 +447,7 @@ paths:
       defaultOutputProperties:
         - result
       mountName: sink_validate
-      parent: /Sinks
+      parent: /Sinks/{Sid}
       pathType: list
   /v1/Subscriptions:
     description: Subscription to send Event Types to a Sink
@@ -759,7 +759,7 @@ paths:
         - schema_version
         - account_sid
         - subscription_sid
-      parent: /Subscriptions
+      parent: /Subscriptions/{Sid}
       pathType: list
   "/v1/Subscriptions/{SubscriptionSid}/SubscribedEvents/{Type}":
     delete:
@@ -867,7 +867,7 @@ paths:
         - schema_version
         - account_sid
         - subscription_sid
-      parent: /Subscriptions
+      parent: /Subscriptions/{Sid}
       pathType: instance
   /v1/Types:
     description: Event Types available

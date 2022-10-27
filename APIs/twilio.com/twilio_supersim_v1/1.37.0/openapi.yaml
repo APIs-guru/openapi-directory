@@ -752,7 +752,7 @@ paths:
       className: network_access_profile_network
       defaultOutputProperties:
         - sid
-      parent: /NetworkAccessProfiles
+      parent: /NetworkAccessProfiles/{Sid}
       pathType: list
   "/v1/NetworkAccessProfiles/{NetworkAccessProfileSid}/Networks/{Sid}":
     delete:
@@ -821,7 +821,7 @@ paths:
       className: network_access_profile_network
       defaultOutputProperties:
         - sid
-      parent: /NetworkAccessProfiles
+      parent: /NetworkAccessProfiles/{Sid}
       pathType: instance
   "/v1/NetworkAccessProfiles/{Sid}":
     description: "TODO: Resource-level docs"
@@ -1318,7 +1318,7 @@ paths:
         - start_time
         - end_time
         - period_type
-      parent: /Sims
+      parent: /Sims/{Sid}
       pathType: list
   "/v1/Sims/{SimSid}/IpAddresses":
     description: IP Addresses for a Super SIM configured to use a VPN connection
@@ -1384,7 +1384,7 @@ paths:
         - ip_address
         - ip_address_version
       mountName: sim_ip_addresses
-      parent: /Sims
+      parent: /Sims/{Sid}
       pathType: list
   /v1/SmsCommands:
     description: Machine-to-machine SMS Commands sent to/from SIMs
