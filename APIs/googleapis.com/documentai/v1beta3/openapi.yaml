@@ -19,11 +19,12 @@ info:
   x-logo:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: google
+    - format: openapi
       url: https://documentai.googleapis.com/$discovery/rest?version=v1beta3
-      version: v1
+      version: "3.0"
   x-providerName: googleapis.com
   x-serviceName: documentai
+  x-preferred: true
 externalDocs:
   url: https://cloud.google.com/document-ai/docs/
 tags:
@@ -4347,16 +4348,13 @@ components:
       properties:
         humanReviewLabelingMetadata:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3HumanReviewLabelingMetadata"
-          description: Human review labeling config on the entity.
+          description: Human review labeling config on the property.
         humanReviewMetadata:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3HumanReviewValidationMetadata"
-          description: Human review config on the entity.
+          description: Human review config on the entity type.
         inactive:
           description: Whether the entity type should be considered as "inactive".
           type: boolean
-        schemaMutabilityMetadata:
-          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3SchemaMutabilityMetadata"
-          description: Schema mutability metadata on the entity.
       type: object
     GoogleCloudDocumentaiV1beta3FetchProcessorTypesResponse:
       description: Response message for fetch processor types.
@@ -4653,9 +4651,6 @@ components:
         inactive:
           description: Whether the property should be considered as "inactive".
           type: boolean
-        schemaMutabilityMetadata:
-          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3SchemaMutabilityMetadata"
-          description: Schema mutability metadata on the property.
       type: object
     GoogleCloudDocumentaiV1beta3RawDocument:
       description: Payload message of raw document content (bytes).
@@ -4737,18 +4732,6 @@ components:
             - REJECTED
             - SUCCEEDED
           type: string
-      type: object
-    GoogleCloudDocumentaiV1beta3SchemaMutabilityMetadata:
-      description: Metadata that specifies whether a label is editable and reasons why. These fields are read-only. Changing these fields has no impact on the backend.
-      properties:
-        editable:
-          description: Explicit flag that controls whether the label is editable.
-          type: boolean
-        processorVersions:
-          description: Full resource name of processor versions that contain this label. e.g. `projects/{project}/locations/{location}/processors/{processor}/processorVersions/{processorVersion}`
-          items:
-            type: string
-          type: array
       type: object
     GoogleCloudDocumentaiV1beta3SetDefaultProcessorVersionMetadata:
       description: The long running operation metadata for set default processor version method.

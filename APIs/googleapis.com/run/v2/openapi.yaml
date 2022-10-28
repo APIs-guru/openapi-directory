@@ -1056,7 +1056,7 @@ components:
           type: integer
         template:
           $ref: "#/components/schemas/GoogleCloudRunV2TaskTemplate"
-          description: Output only. Describes the task(s) that will be created when executing an execution.
+          description: Output only. The template used to create tasks for this execution.
           readOnly: true
         uid:
           description: Output only. Server assigned unique identifier for the Execution. The value is a UUID4 string and guaranteed to remain unchanged until the resource is deleted.

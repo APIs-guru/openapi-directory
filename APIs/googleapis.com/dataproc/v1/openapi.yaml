@@ -2239,53 +2239,6 @@ components:
           description: 'Optional. The zone where the Compute Engine cluster will be located. On a create request, it is required in the "global" region. If omitted in a non-global Dataproc region, the service will pick a zone in the corresponding Compute Engine region. On a get request, zone will always be present.A full URL, partial URI, or short name are valid. Examples: https://www.googleapis.com/compute/v1/projects/[project_id]/zones/[zone] projects/[project_id]/zones/[zone] us-central1-f'
           type: string
       type: object
-    GceNodePoolOperationMetadata:
-      description: Metadata describing the Compute Engine node pool operation.
-      properties:
-        clusterUuid:
-          description: Output only. Cluster UUID associated with the Compute Engine node pool operation.
-          readOnly: true
-          type: string
-        description:
-          description: Output only. Short description of operation.
-          readOnly: true
-          type: string
-        gceNodePoolId:
-          description: Output only. Compute Engine node pool ID for the operation.
-          readOnly: true
-          type: string
-        labels:
-          additionalProperties:
-            type: string
-          description: Output only. Labels associated with the operation
-          readOnly: true
-          type: object
-        operationType:
-          description: The operation type.
-          enum:
-            - GCE_NODE_POOL_OPERATION_TYPE_UNSPECIFIED
-            - CREATE
-            - UPDATE
-            - DELETE
-            - RESIZE
-          type: string
-        status:
-          $ref: "#/components/schemas/ClusterOperationStatus"
-          description: Output only. Current operation status.
-          readOnly: true
-        statusHistory:
-          description: Output only. The previous operation status.
-          items:
-            $ref: "#/components/schemas/ClusterOperationStatus"
-          readOnly: true
-          type: array
-        warnings:
-          description: Output only. Errors encountered during operation execution.
-          items:
-            type: string
-          readOnly: true
-          type: array
-      type: object
     GetIamPolicyRequest:
       description: Request message for GetIamPolicy method.
       properties:
@@ -3032,6 +2985,53 @@ components:
           description: "Required. The URI of a sole-tenant node group resource (https://cloud.google.com/compute/docs/reference/rest/v1/nodeGroups) that the cluster will be created on.A full URL, partial URI, or node group name are valid. Examples: https://www.googleapis.com/compute/v1/projects/[project_id]/zones/us-central1-a/nodeGroups/node-group-1 projects/[project_id]/zones/us-central1-a/nodeGroups/node-group-1 node-group-1"
           type: string
       type: object
+    NodeGroupOperationMetadata:
+      description: Metadata describing the node group operation.
+      properties:
+        clusterUuid:
+          description: Output only. Cluster UUID associated with the node group operation.
+          readOnly: true
+          type: string
+        description:
+          description: Output only. Short description of operation.
+          readOnly: true
+          type: string
+        labels:
+          additionalProperties:
+            type: string
+          description: Output only. Labels associated with the operation.
+          readOnly: true
+          type: object
+        nodeGroupId:
+          description: Output only. Node group ID for the operation.
+          readOnly: true
+          type: string
+        operationType:
+          description: The operation type.
+          enum:
+            - NODE_GROUP_OPERATION_TYPE_UNSPECIFIED
+            - CREATE
+            - UPDATE
+            - DELETE
+            - RESIZE
+          type: string
+        status:
+          $ref: "#/components/schemas/ClusterOperationStatus"
+          description: Output only. Current operation status.
+          readOnly: true
+        statusHistory:
+          description: Output only. The previous operation status.
+          items:
+            $ref: "#/components/schemas/ClusterOperationStatus"
+          readOnly: true
+          type: array
+        warnings:
+          description: Output only. Errors encountered during operation execution.
+          items:
+            type: string
+          readOnly: true
+          type: array
+      type: object
     NodeInitializationAction:
       description: Specifies an executable to run on a fully configured node and a timeout period for executable completion.
       properties:
@@ -3378,6 +3378,10 @@ components:
     RuntimeInfo:
       description: Runtime information about workload execution.
       properties:
+        approximateUsage:
+          $ref: "#/components/schemas/UsageMetrics"
+          description: Output only. Approximate workload resource usage calculated after workload finishes.
+          readOnly: true
         diagnosticOutputUri:
           description: Output only. A URI pointing to the location of the diagnostics tarball.
           readOnly: true
@@ -3826,6 +3830,18 @@ components:
         queryList:
           $ref: "#/components/schemas/QueryList"
           description: A list of queries.
+      type: object
+    UsageMetrics:
+      description: Usage metrics represent total resources consumed by a workload.
+      properties:
+        milliDcuSeconds:
+          description: Optional. DCU usage in milliDCU*seconds.
+          format: int64
+          type: string
+        shuffleStorageGbSeconds:
+          description: Optional. Shuffle storage usage in GB*Seconds
+          format: int64
+          type: string
       type: object
     ValueValidation:
       description: Validation based on a list of allowed values.

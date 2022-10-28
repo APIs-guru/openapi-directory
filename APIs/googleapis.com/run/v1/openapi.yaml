@@ -2373,7 +2373,7 @@ components:
           type: integer
         template:
           $ref: "#/components/schemas/TaskTemplateSpec"
-          description: Optional. Describes the task(s) that will be created when executing an execution.
+          description: Optional. The template used to create tasks for this execution.
       type: object
     ExecutionStatus:
       description: ExecutionStatus represents the current state of an Execution.
